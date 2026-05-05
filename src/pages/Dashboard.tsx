@@ -5,10 +5,7 @@ import { generateJoinCode, formatDate, timeAgo } from '../lib/utils'
 import toast from 'react-hot-toast'
 import type { User } from '@supabase/supabase-js'
 import type { Session } from '../types'
-import {
-  Plus, BookOpen, Clock, Users, ChevronRight,
-  LogOut, Monitor, Copy, Play, Square
-} from 'lucide-react'
+import { Plus, BookOpen, Clock, Monitor, ChevronRight, LogOut, Copy, Play, Square, Users } from 'lucide-react'
 
 const SUBJECTS = ['Python', 'Machine Learning', 'Data Analysis', 'Autodesk', 'Mathematics', 'Coding', 'Other']
 
@@ -23,16 +20,11 @@ export default function Dashboard({ user }: { user: User }) {
 
   const teacherName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Teacher'
 
-  useEffect(() => {
-    fetchSessions()
-  }, [])
+  useEffect(() => { fetchSessions() }, [])
 
   const fetchSessions = async () => {
     const { data, error } = await supabase
-      .from('sessions')
-      .select('*')
-      .eq('teacher_id', user.id)
-      .order('created_at', { ascending: false })
+      .from('sessions').select('*').eq('teacher_id', user.id).order('created_at', { ascending: false })
     if (!error) setSessions(data || [])
     setLoading(false)
   }
@@ -45,52 +37,39 @@ export default function Dashboard({ user }: { user: User }) {
     const { data, error } = await supabase
       .from('sessions')
       .insert({ teacher_id: user.id, title: title.trim(), subject, join_code: joinCode, status: 'active' })
-      .select()
-      .single()
-    if (error) {
-      toast.error('Failed to create session')
-    } else {
-      toast.success('Session created!')
-      navigate(`/session/${data.id}`)
-    }
+      .select().single()
+    if (error) { toast.error('Failed to create session') }
+    else { toast.success('Session created!'); navigate(`/session/${data.id}`) }
     setCreating(false)
   }
 
   const endSession = async (id: string, e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault(); e.stopPropagation()
     await supabase.from('sessions').update({ status: 'ended', ended_at: new Date().toISOString() }).eq('id', id)
     setSessions(prev => prev.map(s => s.id === id ? { ...s, status: 'ended' } : s))
     toast.success('Session ended')
   }
 
   const copyCode = (code: string, e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault(); e.stopPropagation()
     navigator.clipboard.writeText(code)
     toast.success('Join code copied!')
   }
 
-  const signOut = async () => {
-    await supabase.auth.signOut()
-    navigate('/')
-  }
+  const signOut = async () => { await supabase.auth.signOut(); navigate('/') }
 
   const activeSessions = sessions.filter(s => s.status === 'active')
   const pastSessions = sessions.filter(s => s.status === 'ended')
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-white via-[#f3fcf0] to-[#dcfce7]">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950 sticky top-0 z-10">
+      <header className="border-b border-green-100 bg-white/80 backdrop-blur sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm">N</div>
-            <span className="font-bold text-lg tracking-tight">NexaBoard</span>
-          </div>
+          <img src="/nexacore-logo.jpg" alt="NexaCore" className="h-9 object-contain" />
           <div className="flex items-center gap-4">
-            <span className="text-slate-400 text-sm">Welcome, {teacherName}</span>
-            <button onClick={signOut} className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm transition-colors">
+            <span className="text-[#6b7280] text-sm">Welcome, <span className="font-semibold text-[#1b2b4b]">{teacherName}</span></span>
+            <button onClick={signOut} className="flex items-center gap-1.5 text-[#6b7280] hover:text-[#1b2b4b] text-sm transition-colors">
               <LogOut size={15} /> Sign out
             </button>
           </div>
@@ -101,64 +80,56 @@ export default function Dashboard({ user }: { user: User }) {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-4 mb-10">
           {[
-            { label: 'Total Sessions', value: sessions.length, icon: BookOpen },
-            { label: 'Active Now', value: activeSessions.length, icon: Monitor },
-            { label: 'Past Sessions', value: pastSessions.length, icon: Clock },
-          ].map(({ label, value, icon: Icon }) => (
-            <div key={label} className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center">
-                <Icon size={20} className="text-blue-400" />
+            { label: 'Total Sessions', value: sessions.length, icon: BookOpen, color: 'from-[#5ab82e]/20 to-[#22c55e]/10', iconColor: 'text-[#5ab82e]' },
+            { label: 'Active Now', value: activeSessions.length, icon: Monitor, color: 'from-[#1b2b4b]/10 to-[#1b2b4b]/5', iconColor: 'text-[#1b2b4b]' },
+            { label: 'Past Sessions', value: pastSessions.length, icon: Clock, color: 'from-amber-100 to-amber-50', iconColor: 'text-amber-600' },
+          ].map(({ label, value, icon: Icon, color, iconColor }) => (
+            <div key={label} className="bg-white border border-green-100 rounded-xl p-5 flex items-center gap-4 shadow-sm">
+              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center`}>
+                <Icon size={20} className={iconColor} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-slate-100">{value}</p>
-                <p className="text-xs text-slate-400">{label}</p>
+                <p className="text-2xl font-bold text-[#1b2b4b]">{value}</p>
+                <p className="text-xs text-[#6b7280]">{label}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Create session */}
+        {/* Header row */}
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold">Sessions</h2>
-          <button
-            onClick={() => setShowCreate(!showCreate)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors"
-          >
+          <h2 className="text-xl font-bold text-[#1b2b4b]">Sessions</h2>
+          <button onClick={() => setShowCreate(!showCreate)}
+            className="flex items-center gap-2 px-4 py-2 bg-[#5ab82e] hover:bg-[#489f22] text-white rounded-lg text-sm font-semibold transition-colors shadow-md shadow-[#5ab82e]/20">
             <Plus size={16} /> New Session
           </button>
         </div>
 
+        {/* Create form */}
         {showCreate && (
-          <form onSubmit={createSession} className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-6">
-            <h3 className="font-semibold text-slate-200 mb-4">Create New Session</h3>
+          <form onSubmit={createSession} className="bg-white border border-green-200 rounded-xl p-6 mb-6 shadow-sm">
+            <h3 className="font-bold text-[#1b2b4b] mb-4">Create New Session</h3>
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">Session Title</label>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={e => setTitle(e.target.value)}
-                  placeholder="e.g. Python Basics — Functions"
-                  required
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
+                <label className="block text-sm font-semibold text-[#1b2b4b] mb-1.5">Session Title</label>
+                <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="e.g. Python Basics — Functions" required
+                  className="w-full bg-[#f3fcf0] border border-green-200 rounded-lg px-4 py-2.5 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#5ab82e]" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">Subject</label>
-                <select
-                  value={subject}
-                  onChange={e => setSubject(e.target.value)}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
+                <label className="block text-sm font-semibold text-[#1b2b4b] mb-1.5">Subject</label>
+                <select value={subject} onChange={e => setSubject(e.target.value)}
+                  className="w-full bg-[#f3fcf0] border border-green-200 rounded-lg px-4 py-2.5 text-sm text-[#1b2b4b] focus:outline-none focus:ring-2 focus:ring-[#5ab82e]">
                   {SUBJECTS.map(s => <option key={s}>{s}</option>)}
                 </select>
               </div>
             </div>
             <div className="flex gap-3">
-              <button type="submit" disabled={creating} className="px-5 py-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+              <button type="submit" disabled={creating}
+                className="px-5 py-2 bg-[#5ab82e] hover:bg-[#489f22] disabled:opacity-50 text-white rounded-lg text-sm font-semibold transition-colors flex items-center gap-2 shadow-sm">
                 <Play size={14} /> {creating ? 'Creating...' : 'Start Session'}
               </button>
-              <button type="button" onClick={() => setShowCreate(false)} className="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm transition-colors">
+              <button type="button" onClick={() => setShowCreate(false)}
+                className="px-5 py-2 bg-[#f3fcf0] hover:bg-green-100 text-[#6b7280] rounded-lg text-sm transition-colors border border-green-200">
                 Cancel
               </button>
             </div>
@@ -168,28 +139,28 @@ export default function Dashboard({ user }: { user: User }) {
         {/* Active sessions */}
         {activeSessions.length > 0 && (
           <div className="mb-8">
-            <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-3">Active Sessions</h3>
+            <h3 className="text-xs font-semibold text-[#6b7280] uppercase tracking-wider mb-3">Active Sessions</h3>
             <div className="space-y-3">
               {activeSessions.map(session => (
                 <Link key={session.id} to={`/session/${session.id}`}
-                  className="flex items-center justify-between bg-slate-900 border border-emerald-500/30 rounded-xl p-5 hover:border-emerald-500/60 transition-colors group">
+                  className="flex items-center justify-between bg-white border border-[#5ab82e]/30 rounded-xl p-5 hover:border-[#5ab82e] hover:shadow-md hover:shadow-green-50 transition-all group">
                   <div className="flex items-center gap-4">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#5ab82e] animate-pulse" />
                     <div>
-                      <p className="font-semibold text-slate-100">{session.title}</p>
-                      <p className="text-xs text-slate-400 mt-0.5">{session.subject} · Started {timeAgo(session.created_at)}</p>
+                      <p className="font-bold text-[#1b2b4b]">{session.title}</p>
+                      <p className="text-xs text-[#6b7280] mt-0.5">{session.subject} · Started {timeAgo(session.created_at)}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <button onClick={e => copyCode(session.join_code, e)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-mono transition-colors">
-                      <Copy size={12} /> {session.join_code}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#5ab82e] rounded-lg text-xs font-mono font-bold border border-green-200 transition-colors">
+                      <Copy size={11} /> {session.join_code}
                     </button>
                     <button onClick={e => endSession(session.id, e)}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg text-xs transition-colors">
-                      <Square size={12} /> End
+                      className="flex items-center gap-1 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg text-xs font-medium border border-red-100 transition-colors">
+                      <Square size={11} /> End
                     </button>
-                    <ChevronRight size={16} className="text-slate-500 group-hover:text-slate-300 group-hover:translate-x-0.5 transition-all" />
+                    <ChevronRight size={16} className="text-[#9ca3af] group-hover:text-[#5ab82e] group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </Link>
               ))}
@@ -200,19 +171,19 @@ export default function Dashboard({ user }: { user: User }) {
         {/* Past sessions */}
         {pastSessions.length > 0 && (
           <div>
-            <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-3">Past Sessions</h3>
+            <h3 className="text-xs font-semibold text-[#6b7280] uppercase tracking-wider mb-3">Past Sessions</h3>
             <div className="space-y-2">
               {pastSessions.map(session => (
-                <div key={session.id} className="flex items-center justify-between bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <div key={session.id} className="flex items-center justify-between bg-white border border-green-100 rounded-xl p-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-2 h-2 rounded-full bg-slate-600" />
+                    <div className="w-2 h-2 rounded-full bg-gray-300" />
                     <div>
-                      <p className="font-medium text-slate-300">{session.title}</p>
-                      <p className="text-xs text-slate-500 mt-0.5">{session.subject} · {formatDate(session.created_at)}</p>
+                      <p className="font-medium text-[#1b2b4b]">{session.title}</p>
+                      <p className="text-xs text-[#9ca3af] mt-0.5">{session.subject} · {formatDate(session.created_at)}</p>
                     </div>
                   </div>
-                  <span className="flex items-center gap-1.5 text-xs text-slate-500 px-2 py-1 bg-slate-800 rounded-lg">
-                    <Users size={12} /> Ended
+                  <span className="flex items-center gap-1.5 text-xs text-[#9ca3af] px-2 py-1 bg-[#f3fcf0] rounded-lg border border-green-100">
+                    <Users size={11} /> Ended
                   </span>
                 </div>
               ))}
@@ -221,10 +192,12 @@ export default function Dashboard({ user }: { user: User }) {
         )}
 
         {!loading && sessions.length === 0 && (
-          <div className="text-center py-20">
-            <Monitor size={48} className="text-slate-700 mx-auto mb-4" />
-            <h3 className="text-slate-400 font-medium mb-2">No sessions yet</h3>
-            <p className="text-slate-600 text-sm">Create your first session to start teaching</p>
+          <div className="text-center py-24">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#5ab82e]/20 to-[#22c55e]/10 flex items-center justify-center mx-auto mb-4">
+              <Monitor size={28} className="text-[#5ab82e]" />
+            </div>
+            <h3 className="text-[#1b2b4b] font-semibold mb-2">No sessions yet</h3>
+            <p className="text-[#9ca3af] text-sm">Create your first session to start teaching</p>
           </div>
         )}
       </main>

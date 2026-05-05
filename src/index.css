@@ -2,52 +2,35 @@
 
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
-  --color-nb-bg: #020617;
-  --color-nb-surface: #0f172a;
-  --color-nb-card: #1e293b;
-  --color-nb-border: #334155;
-  --color-nb-primary: #3b82f6;
-  --color-nb-primary-hover: #2563eb;
-  --color-nb-accent: #8b5cf6;
-  --color-nb-success: #10b981;
+  --color-nb-bg: #ffffff;
+  --color-nb-soft: #f3fcf0;
+  --color-nb-card: #ffffff;
+  --color-nb-border: #d1fae5;
+  --color-nb-primary: #5ab82e;
+  --color-nb-primary-hover: #489f22;
+  --color-nb-dark: #1b2b4b;
+  --color-nb-navy: #1b2b4b;
+  --color-nb-success: #22c55e;
   --color-nb-warning: #f59e0b;
   --color-nb-danger: #ef4444;
+  --color-nb-muted: #6b7280;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Inter', system-ui, sans-serif;
-  background: #020617;
-  color: #f8fafc;
+  background: #ffffff;
+  color: #1b2b4b;
   -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #1e293b;
-}
-::-webkit-scrollbar-thumb {
-  background: #475569;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f3fcf0; }
+::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #5ab82e; }
 
-.excalidraw-wrapper {
-  height: 100%;
-  width: 100%;
-}
-
-.excalidraw .App-menu_top .buttonList {
-  display: flex;
-}
+.excalidraw-wrapper { height: 100%; width: 100%; }
