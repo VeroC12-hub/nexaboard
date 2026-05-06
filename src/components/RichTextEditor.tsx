@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import Table from '@tiptap/extension-table'
+import { Table } from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
 import TableHeader from '@tiptap/extension-table-header'
 import TableCell from '@tiptap/extension-table-cell'
@@ -66,7 +66,7 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
       .on('broadcast', { event: 'notes_update' }, ({ payload }) => {
         if (!editor || isTeacher) return
         isRemoteUpdate.current = true
-        editor.commands.setContent(payload.content, false)
+        editor.commands.setContent(payload.content)
         isRemoteUpdate.current = false
       })
       .on('broadcast', { event: 'notes_sync_req' }, () => {
