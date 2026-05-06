@@ -34,3 +34,33 @@ html, body, #root {
 ::-webkit-scrollbar-thumb:hover { background: #5ab82e; }
 
 .excalidraw-wrapper { height: 100%; width: 100%; }
+
+/* TipTap rich text editor styles */
+.notes-editor .ProseMirror { outline: none; min-height: 60vh; }
+.notes-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+.notes-editor .ProseMirror h1 { font-size: 1.75rem; font-weight: 700; color: #1b2b4b; margin: 1.2rem 0 0.5rem; line-height: 1.2; }
+.notes-editor .ProseMirror h2 { font-size: 1.35rem; font-weight: 700; color: #1b2b4b; margin: 1rem 0 0.4rem; }
+.notes-editor .ProseMirror h3 { font-size: 1.1rem; font-weight: 600; color: #1b2b4b; margin: 0.8rem 0 0.3rem; }
+.notes-editor .ProseMirror p { margin: 0.4rem 0; line-height: 1.7; color: #374151; }
+.notes-editor .ProseMirror strong { color: #1b2b4b; }
+.notes-editor .ProseMirror ul { list-style: disc; padding-left: 1.4rem; margin: 0.4rem 0; }
+.notes-editor .ProseMirror ol { list-style: decimal; padding-left: 1.4rem; margin: 0.4rem 0; }
+.notes-editor .ProseMirror li { margin: 0.15rem 0; line-height: 1.6; }
+.notes-editor .ProseMirror blockquote { border-left: 3px solid #5ab82e; margin: 0.6rem 0; padding: 0.4rem 1rem; background: #f3fcf0; border-radius: 0 0.5rem 0.5rem 0; color: #6b7280; }
+.notes-editor .ProseMirror pre { background: #1b2b4b; color: #e5e7eb; padding: 1rem 1.2rem; border-radius: 0.75rem; font-size: 0.85rem; overflow-x: auto; margin: 0.6rem 0; }
+.notes-editor .ProseMirror code { background: #f3fcf0; border: 1px solid #d1fae5; color: #5ab82e; padding: 0.1em 0.4em; border-radius: 0.3rem; font-size: 0.875em; }
+.notes-editor .ProseMirror pre code { background: none; border: none; color: inherit; padding: 0; }
+.notes-editor .ProseMirror hr { border: none; border-top: 2px solid #d1fae5; margin: 1.2rem 0; }
+.notes-editor .ProseMirror img { max-width: 100%; height: auto; border-radius: 0.75rem; margin: 0.75rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: block; }
+.notes-editor .ProseMirror table { border-collapse: collapse; width: 100%; margin: 0.75rem 0; border-radius: 0.5rem; overflow: hidden; }
+.notes-editor .ProseMirror td, .notes-editor .ProseMirror th { border: 1px solid #d1fae5; padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; min-width: 60px; }
+.notes-editor .ProseMirror th { background: #f3fcf0; font-weight: 600; color: #1b2b4b; }
+.notes-editor .ProseMirror td { background: #fff; }
+.notes-editor .ProseMirror .selectedCell { background: #dcfce7 !important; }
+.notes-editor .ProseMirror .column-resize-handle { background: #5ab82e; width: 2px; position: absolute; right: -1px; top: 0; bottom: 0; pointer-events: none; }

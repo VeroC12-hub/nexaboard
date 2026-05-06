@@ -7,10 +7,11 @@ import Whiteboard from '../components/Whiteboard'
 import CodeEditor from '../components/CodeEditor'
 import ChatSidebar from '../components/ChatSidebar'
 import StudentList from '../components/StudentList'
+import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home } from 'lucide-react'
+import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home } from 'lucide-react'
 
-type Tab = 'whiteboard' | 'code'
+type Tab = 'whiteboard' | 'code' | 'notes'
 type SideTab = 'students' | 'chat'
 
 export default function Session({ user }: { user: User }) {
@@ -85,6 +86,10 @@ export default function Session({ user }: { user: User }) {
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'code' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
               <Code2 size={13} /> Code
             </button>
+            <button onClick={() => setTab('notes')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'notes' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
+              <FileText size={13} /> Notes
+            </button>
           </div>
 
           <div className="w-px h-5 bg-green-100" />
@@ -107,7 +112,9 @@ export default function Session({ user }: { user: User }) {
       {/* Main layout */}
       <div className="flex-1 flex min-h-0">
         <div className="flex-1 min-w-0">
-          {tab === 'whiteboard' ? <Whiteboard sessionId={id!} isTeacher canDraw /> : <CodeEditor />}
+          {tab === 'whiteboard' && <Whiteboard sessionId={id!} isTeacher canDraw />}
+          {tab === 'code' && <CodeEditor />}
+          {tab === 'notes' && <RichTextEditor sessionId={id!} isTeacher />}
         </div>
 
         {/* Sidebar */}
