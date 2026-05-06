@@ -15,12 +15,43 @@ import {
   Heading1, Heading2, Heading3,
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2,
-  TableRowsSplit, Columns2, Trash2,
+  Trash2, PlusSquare,
 } from 'lucide-react'
 
 interface Props {
   sessionId: string
   isTeacher: boolean
+}
+
+const GRID_SIZE = 8
+
+function TablePicker({ onPick }: { onPick: (rows: number, cols: number) => void }) {
+  const [hover, setHover] = useState({ r: 0, c: 0 })
+  return (
+    <div className="absolute top-full left-0 mt-1 z-30 bg-white border border-green-200 rounded-xl shadow-xl p-3 select-none">
+      <div className="text-[10px] text-[#9ca3af] text-center mb-2 font-medium">
+        {hover.r > 0 ? `${hover.r} × ${hover.c} table` : 'Hover to select size'}
+      </div>
+      <div className="flex flex-col gap-0.5">
+        {Array.from({ length: GRID_SIZE }, (_, r) => (
+          <div key={r} className="flex gap-0.5">
+            {Array.from({ length: GRID_SIZE }, (_, c) => (
+              <div
+                key={c}
+                onMouseEnter={() => setHover({ r: r + 1, c: c + 1 })}
+                onMouseDown={e => { e.preventDefault(); onPick(r + 1, c + 1) }}
+                className={`w-5 h-5 rounded-sm border transition-colors cursor-pointer ${
+                  r < hover.r && c < hover.c
+                    ? 'bg-[#5ab82e] border-[#5ab82e]'
+                    : 'bg-[#f3fcf0] border-green-200 hover:border-[#5ab82e]'
+                }`}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 export default function RichTextEditor({ sessionId, isTeacher }: Props) {
@@ -29,6 +60,7 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
   const isRemoteUpdate = useRef(false)
   const [showChartModal, setShowChartModal] = useState(false)
   const [showImageInput, setShowImageInput] = useState(false)
+  const [showTablePicker, setShowTablePicker] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
 
   const editor = useEditor({
@@ -83,6 +115,13 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
     return () => { supabase.removeChannel(channel) }
   }, [sessionId, editor, isTeacher])
 
+  // Close popups when clicking outside
+  useEffect(() => {
+    const close = () => { setShowTablePicker(false); setShowImageInput(false) }
+    document.addEventListener('mousedown', close)
+    return () => document.removeEventListener('mousedown', close)
+  }, [])
+
   const insertImage = () => {
     if (!imageUrl.trim() || !editor) return
     editor.chain().focus().setImage({ src: imageUrl.trim() }).run()
@@ -95,11 +134,14 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
     setShowChartModal(false)
   }
 
-  const insertTable = () => {
-    editor?.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
+  const handleTablePick = (rows: number, cols: number) => {
+    editor?.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run()
+    setShowTablePicker(false)
   }
 
   if (!editor) return null
+
+  const inTable = editor.isActive('table')
 
   const btn = (active: boolean, onClick: () => void, title: string, children: React.ReactNode) => (
     <button
@@ -115,68 +157,123 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      {/* Toolbar */}
       {isTeacher && (
-        <div className="flex items-center flex-wrap gap-0.5 px-3 py-2 border-b border-green-100 bg-white shrink-0">
-          {/* Headings */}
-          {btn(editor.isActive('heading', { level: 1 }), () => editor.chain().focus().toggleHeading({ level: 1 }).run(), 'Heading 1', <Heading1 size={15} />)}
-          {btn(editor.isActive('heading', { level: 2 }), () => editor.chain().focus().toggleHeading({ level: 2 }).run(), 'Heading 2', <Heading2 size={15} />)}
-          {btn(editor.isActive('heading', { level: 3 }), () => editor.chain().focus().toggleHeading({ level: 3 }).run(), 'Heading 3', <Heading3 size={15} />)}
-          {sep()}
+        <>
+          {/* Main toolbar */}
+          <div className="flex items-center flex-wrap gap-0.5 px-3 py-2 border-b border-green-100 bg-white shrink-0">
+            {btn(editor.isActive('heading', { level: 1 }), () => editor.chain().focus().toggleHeading({ level: 1 }).run(), 'Heading 1', <Heading1 size={15} />)}
+            {btn(editor.isActive('heading', { level: 2 }), () => editor.chain().focus().toggleHeading({ level: 2 }).run(), 'Heading 2', <Heading2 size={15} />)}
+            {btn(editor.isActive('heading', { level: 3 }), () => editor.chain().focus().toggleHeading({ level: 3 }).run(), 'Heading 3', <Heading3 size={15} />)}
+            {sep()}
 
-          {/* Formatting */}
-          {btn(editor.isActive('bold'), () => editor.chain().focus().toggleBold().run(), 'Bold (Ctrl+B)', <Bold size={15} />)}
-          {btn(editor.isActive('italic'), () => editor.chain().focus().toggleItalic().run(), 'Italic (Ctrl+I)', <Italic size={15} />)}
-          {btn(editor.isActive('underline'), () => editor.chain().focus().toggleUnderline().run(), 'Underline (Ctrl+U)', <UnderlineIcon size={15} />)}
-          {btn(editor.isActive('strike'), () => editor.chain().focus().toggleStrike().run(), 'Strikethrough', <Strikethrough size={15} />)}
-          {sep()}
+            {btn(editor.isActive('bold'), () => editor.chain().focus().toggleBold().run(), 'Bold (Ctrl+B)', <Bold size={15} />)}
+            {btn(editor.isActive('italic'), () => editor.chain().focus().toggleItalic().run(), 'Italic (Ctrl+I)', <Italic size={15} />)}
+            {btn(editor.isActive('underline'), () => editor.chain().focus().toggleUnderline().run(), 'Underline (Ctrl+U)', <UnderlineIcon size={15} />)}
+            {btn(editor.isActive('strike'), () => editor.chain().focus().toggleStrike().run(), 'Strikethrough', <Strikethrough size={15} />)}
+            {sep()}
 
-          {/* Lists */}
-          {btn(editor.isActive('bulletList'), () => editor.chain().focus().toggleBulletList().run(), 'Bullet List', <List size={15} />)}
-          {btn(editor.isActive('orderedList'), () => editor.chain().focus().toggleOrderedList().run(), 'Numbered List', <ListOrdered size={15} />)}
-          {btn(editor.isActive('blockquote'), () => editor.chain().focus().toggleBlockquote().run(), 'Quote', <Quote size={15} />)}
-          {btn(editor.isActive('codeBlock'), () => editor.chain().focus().toggleCodeBlock().run(), 'Code Block', <Code2 size={15} />)}
-          {btn(false, () => editor.chain().focus().setHorizontalRule().run(), 'Divider', <Minus size={15} />)}
-          {sep()}
+            {btn(editor.isActive('bulletList'), () => editor.chain().focus().toggleBulletList().run(), 'Bullet List', <List size={15} />)}
+            {btn(editor.isActive('orderedList'), () => editor.chain().focus().toggleOrderedList().run(), 'Numbered List', <ListOrdered size={15} />)}
+            {btn(editor.isActive('blockquote'), () => editor.chain().focus().toggleBlockquote().run(), 'Quote', <Quote size={15} />)}
+            {btn(editor.isActive('codeBlock'), () => editor.chain().focus().toggleCodeBlock().run(), 'Code Block', <Code2 size={15} />)}
+            {btn(false, () => editor.chain().focus().setHorizontalRule().run(), 'Divider', <Minus size={15} />)}
+            {sep()}
 
-          {/* Table */}
-          {btn(false, insertTable, 'Insert Table', <TableIcon size={15} />)}
-          {editor.isActive('table') && (
-            <>
-              {btn(false, () => editor.chain().focus().addRowAfter().run(), 'Add Row', <TableRowsSplit size={15} />)}
-              {btn(false, () => editor.chain().focus().addColumnAfter().run(), 'Add Column', <Columns2 size={15} />)}
-              {btn(false, () => editor.chain().focus().deleteTable().run(), 'Delete Table', <Trash2 size={15} />)}
-            </>
-          )}
-          {sep()}
+            {/* Table button with grid picker */}
+            <div className="relative" onMouseDown={e => e.stopPropagation()}>
+              <button
+                onMouseDown={e => { e.preventDefault(); setShowTablePicker(v => !v); setShowImageInput(false) }}
+                title="Insert Table — choose size"
+                className={`p-1.5 rounded transition-colors ${showTablePicker ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}
+              >
+                <TableIcon size={15} />
+              </button>
+              {showTablePicker && <TablePicker onPick={handleTablePick} />}
+            </div>
 
-          {/* Image */}
-          <div className="relative">
-            {btn(showImageInput, () => setShowImageInput(v => !v), 'Insert Image', <ImageIcon size={15} />)}
-            {showImageInput && (
-              <div className="absolute top-full left-0 mt-1 z-20 bg-white border border-green-200 rounded-xl shadow-lg p-3 w-72 flex gap-2">
-                <input
-                  autoFocus
-                  value={imageUrl}
-                  onChange={e => setImageUrl(e.target.value)}
-                  onKeyDown={e => { if (e.key === 'Enter') insertImage(); if (e.key === 'Escape') setShowImageInput(false) }}
-                  placeholder="Paste image URL..."
-                  className="flex-1 bg-[#f3fcf0] border border-green-200 rounded-lg px-3 py-1.5 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-1 focus:ring-[#5ab82e]"
-                />
-                <button onClick={insertImage}
-                  className="px-3 py-1.5 bg-[#5ab82e] hover:bg-[#489f22] text-white rounded-lg text-sm font-semibold transition-colors">
-                  Insert
-                </button>
-              </div>
-            )}
+            {sep()}
+
+            {/* Image */}
+            <div className="relative" onMouseDown={e => e.stopPropagation()}>
+              <button
+                onMouseDown={e => { e.preventDefault(); setShowImageInput(v => !v); setShowTablePicker(false) }}
+                title="Insert Image"
+                className={`p-1.5 rounded transition-colors ${showImageInput ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}
+              >
+                <ImageIcon size={15} />
+              </button>
+              {showImageInput && (
+                <div className="absolute top-full left-0 mt-1 z-30 bg-white border border-green-200 rounded-xl shadow-lg p-3 w-72 flex gap-2">
+                  <input
+                    autoFocus
+                    value={imageUrl}
+                    onChange={e => setImageUrl(e.target.value)}
+                    onKeyDown={e => { if (e.key === 'Enter') insertImage(); if (e.key === 'Escape') setShowImageInput(false) }}
+                    placeholder="Paste image URL..."
+                    className="flex-1 bg-[#f3fcf0] border border-green-200 rounded-lg px-3 py-1.5 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-1 focus:ring-[#5ab82e]"
+                  />
+                  <button onClick={insertImage}
+                    className="px-3 py-1.5 bg-[#5ab82e] hover:bg-[#489f22] text-white rounded-lg text-sm font-semibold transition-colors">
+                    Insert
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {btn(false, () => setShowChartModal(true), 'Insert Chart', <BarChart2 size={15} />)}
           </div>
 
-          {/* Chart */}
-          {btn(false, () => setShowChartModal(true), 'Insert Chart', <BarChart2 size={15} />)}
-        </div>
+          {/* Table controls — always visible when cursor is inside a table */}
+          {inTable && (
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#f3fcf0] border-b border-green-200 shrink-0">
+              <span className="text-[10px] font-semibold text-[#5ab82e] uppercase tracking-wider mr-1">Table:</span>
+              <button
+                onMouseDown={e => { e.preventDefault(); editor.chain().focus().addRowAfter().run() }}
+                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium"
+              >
+                <PlusSquare size={12} /> Add Row Below
+              </button>
+              <button
+                onMouseDown={e => { e.preventDefault(); editor.chain().focus().addRowBefore().run() }}
+                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium"
+              >
+                <PlusSquare size={12} /> Add Row Above
+              </button>
+              <button
+                onMouseDown={e => { e.preventDefault(); editor.chain().focus().addColumnAfter().run() }}
+                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium"
+              >
+                <PlusSquare size={12} /> Add Column Right
+              </button>
+              <button
+                onMouseDown={e => { e.preventDefault(); editor.chain().focus().addColumnBefore().run() }}
+                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium"
+              >
+                <PlusSquare size={12} /> Add Column Left
+              </button>
+              <button
+                onMouseDown={e => { e.preventDefault(); editor.chain().focus().deleteRow().run() }}
+                className="flex items-center gap-1 px-2.5 py-1 text-xs text-red-500 bg-white border border-red-100 rounded-lg hover:bg-red-50 transition-colors font-medium"
+              >
+                <Trash2 size={12} /> Delete Row
+              </button>
+              <button
+                onMouseDown={e => { e.preventDefault(); editor.chain().focus().deleteColumn().run() }}
+                className="flex items-center gap-1 px-2.5 py-1 text-xs text-red-500 bg-white border border-red-100 rounded-lg hover:bg-red-50 transition-colors font-medium"
+              >
+                <Trash2 size={12} /> Delete Column
+              </button>
+              <button
+                onMouseDown={e => { e.preventDefault(); editor.chain().focus().deleteTable().run() }}
+                className="flex items-center gap-1 px-2.5 py-1 text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors font-semibold ml-auto"
+              >
+                <Trash2 size={12} /> Delete Table
+              </button>
+            </div>
+          )}
+        </>
       )}
 
-      {/* Editor area */}
       <div className="flex-1 overflow-y-auto px-8 py-6">
         <div className="max-w-3xl mx-auto">
           <EditorContent editor={editor} className="notes-editor outline-none" />
