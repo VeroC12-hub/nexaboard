@@ -10,11 +10,12 @@ import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
 import { supabase } from '../lib/supabase'
 import ChartModal from './ChartModal'
+import DrawingModal from './DrawingModal'
 import {
   Bold, Italic, UnderlineIcon, Strikethrough,
   Heading1, Heading2, Heading3,
   List, ListOrdered, Quote, Code2, Minus,
-  Table as TableIcon, ImageIcon, BarChart2,
+  Table as TableIcon, ImageIcon, BarChart2, PenLine,
   Trash2, PlusSquare,
 } from 'lucide-react'
 
@@ -68,6 +69,7 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
   const lastBroadcast = useRef(0)
   const isRemoteUpdate = useRef(false)
   const [showChartModal, setShowChartModal] = useState(false)
+  const [showDrawingModal, setShowDrawingModal] = useState(false)
   const [showImageInput, setShowImageInput] = useState(false)
   const [showTablePicker, setShowTablePicker] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
@@ -145,6 +147,11 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
   const handleChartInsert = (dataUrl: string) => {
     editor?.chain().focus().setImage({ src: dataUrl }).run()
     setShowChartModal(false)
+  }
+
+  const handleDrawingInsert = (dataUrl: string) => {
+    editor?.chain().focus().setImage({ src: dataUrl }).run()
+    setShowDrawingModal(false)
   }
 
   const handleTablePick = (rows: number, cols: number) => {
@@ -234,6 +241,7 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
             </div>
 
             {btn(false, () => setShowChartModal(true), 'Insert Chart', <BarChart2 size={15} />)}
+          {btn(false, () => setShowDrawingModal(true), 'Draw & Shapes', <PenLine size={15} />)}
           </div>
 
           {/* Table controls — always visible when cursor is inside a table */}
@@ -295,6 +303,9 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
 
       {showChartModal && (
         <ChartModal onInsert={handleChartInsert} onClose={() => setShowChartModal(false)} />
+      )}
+      {showDrawingModal && (
+        <DrawingModal onInsert={handleDrawingInsert} onClose={() => setShowDrawingModal(false)} />
       )}
     </div>
   )
