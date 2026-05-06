@@ -54,6 +54,15 @@ function TablePicker({ onPick }: { onPick: (rows: number, cols: number) => void 
   )
 }
 
+const STORAGE_KEY = (sessionId: string) => `nexaboard_notes_${sessionId}`
+
+function loadSaved(sessionId: string) {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY(sessionId))
+    return raw ? JSON.parse(raw) : null
+  } catch { return null }
+}
+
 export default function RichTextEditor({ sessionId, isTeacher }: Props) {
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
   const lastBroadcast = useRef(0)
@@ -74,10 +83,13 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
       Image.configure({ inline: false, allowBase64: true }),
       Placeholder.configure({ placeholder: 'Start typing your notes here...' }),
     ],
+    content: loadSaved(sessionId) ?? undefined,
     editable: isTeacher,
     onUpdate: ({ editor }) => {
       if (!isTeacher || isRemoteUpdate.current) return
-      broadcastContent(editor.getJSON())
+      const content = editor.getJSON()
+      localStorage.setItem(STORAGE_KEY(sessionId), JSON.stringify(content))
+      broadcastContent(content)
     },
   })
 
@@ -99,6 +111,7 @@ export default function RichTextEditor({ sessionId, isTeacher }: Props) {
         if (!editor || isTeacher) return
         isRemoteUpdate.current = true
         editor.commands.setContent(payload.content)
+        localStorage.setItem(STORAGE_KEY(sessionId), JSON.stringify(payload.content))
         isRemoteUpdate.current = false
       })
       .on('broadcast', { event: 'notes_sync_req' }, () => {
