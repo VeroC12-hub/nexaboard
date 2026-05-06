@@ -14,7 +14,6 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const isBroadcasting = useRef(false)
   const lastBroadcast = useRef(0)
 
-  // Teacher is ALWAYS editable — only lock students without access
   const locked = !isTeacher && !canDraw
 
   useEffect(() => {
@@ -45,19 +44,18 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   return (
     <div className="h-full w-full relative">
       {locked && (
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-white/90 backdrop-blur border border-green-200 rounded-full px-4 py-1.5 text-xs text-[#6b7280] pointer-events-none shadow-sm">
-          View only — click "Request Board" to draw
-        </div>
+        <>
+          {/* Blocks all mouse interaction for students without board access */}
+          <div className="absolute inset-0 z-10" style={{ cursor: 'default' }} />
+          <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-white/90 backdrop-blur border border-green-200 rounded-full px-4 py-1.5 text-xs text-[#6b7280] pointer-events-none shadow-sm">
+            View only — click "Request Board" to draw
+          </div>
+        </>
       )}
-      {!locked && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-[#1b2b4b]/80 backdrop-blur text-white rounded-full px-4 py-1.5 text-xs pointer-events-none shadow-md animate-pulse">
-          ✏️ Click anywhere on the board to start drawing
-        </div>
-      )}
+      {/* viewModeEnabled is always false — no padlock ever shown */}
       <Excalidraw
         excalidrawAPI={api => { apiRef.current = api }}
-        viewModeEnabled={locked}
-        initialData={{ appState: { viewModeEnabled: locked } }}
+        viewModeEnabled={false}
         onChange={elements => { if (!locked) broadcastChange(elements) }}
         theme="light"
         UIOptions={{
