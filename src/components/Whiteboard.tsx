@@ -49,6 +49,11 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
           View only — click "Request Board" to draw
         </div>
       )}
+      {!locked && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-[#1b2b4b]/80 backdrop-blur text-white rounded-full px-4 py-1.5 text-xs pointer-events-none shadow-md animate-pulse">
+          ✏️ Click anywhere on the board to start drawing
+        </div>
+      )}
       <Excalidraw
         excalidrawAPI={api => { apiRef.current = api }}
         viewModeEnabled={locked}
