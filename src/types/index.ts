@@ -16,6 +16,7 @@ export interface Participant {
   name: string
   is_active: boolean
   has_board_access: boolean
+  has_code_access: boolean
   hand_raised: boolean
   joined_at: string
 }
@@ -35,6 +36,7 @@ export interface BoardRequest {
   session_id: string
   participant_id: string
   participant_name: string
+  request_type: 'board' | 'code'
   status: 'pending' | 'granted' | 'denied'
   created_at: string
 }

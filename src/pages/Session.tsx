@@ -113,7 +113,7 @@ export default function Session({ user }: { user: User }) {
       <div className="flex-1 flex min-h-0">
         <div className="flex-1 min-w-0 flex flex-col">
           <div className={tab === 'whiteboard' ? 'flex-1 min-h-0' : 'hidden'}><Whiteboard sessionId={id!} isTeacher canDraw /></div>
-          <div className={tab === 'code' ? 'flex-1 min-h-0' : 'hidden'}><CodeEditor /></div>
+          <div className={tab === 'code' ? 'flex-1 min-h-0' : 'hidden'}><CodeEditor sessionId={id!} isTeacher canEdit /></div>
           <div className={tab === 'notes' ? 'flex-1 min-h-0' : 'hidden'}><RichTextEditor sessionId={id!} isTeacher /></div>
         </div>
 
