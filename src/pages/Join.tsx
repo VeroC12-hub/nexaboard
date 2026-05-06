@@ -13,7 +13,7 @@ export default function Join() {
   const [step, setStep] = useState<'code' | 'name'>(code && code !== 'enter' ? 'name' : 'code')
   const [sessionInfo, setSessionInfo] = useState<{ id: string; title: string; subject: string } | null>(null)
 
-  useEffect(() => { if (joinCode.length === 6 && step === 'code') verifyCode() }, [joinCode])
+  useEffect(() => { if (joinCode.length === 6 && !sessionInfo) verifyCode() }, [joinCode])
 
   const verifyCode = async () => {
     setLoading(true)
