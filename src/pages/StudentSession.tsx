@@ -139,10 +139,10 @@ export default function StudentSession() {
 
       {/* Main layout */}
       <div className="flex-1 flex min-h-0">
-        <div className="flex-1 min-w-0">
-          {tab === 'whiteboard' && <Whiteboard sessionId={sessionId!} isTeacher={false} canDraw={canDraw} />}
-          {tab === 'code' && <CodeEditor />}
-          {tab === 'notes' && <RichTextEditor sessionId={sessionId!} isTeacher={false} />}
+        <div className="flex-1 min-w-0 flex flex-col">
+          <div className={tab === 'whiteboard' ? 'flex-1 min-h-0' : 'hidden'}><Whiteboard sessionId={sessionId!} isTeacher={false} canDraw={canDraw} /></div>
+          <div className={tab === 'code' ? 'flex-1 min-h-0' : 'hidden'}><CodeEditor /></div>
+          <div className={tab === 'notes' ? 'flex-1 min-h-0' : 'hidden'}><RichTextEditor sessionId={sessionId!} isTeacher={false} /></div>
         </div>
 
         {/* Chat sidebar */}
