@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Editor from '@monaco-editor/react'
-import { Play, Square, Trash2, ChevronDown, Lock, Code2 } from 'lucide-react'
+import { Play, Square, Trash2, ChevronDown, Lock, Code2, Users } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
 
@@ -25,6 +25,12 @@ const STARTERS: Record<string, string> = {
   typescript: `// TypeScript\ninterface Student { name: string; score: number }\n\nconst students: Student[] = [\n  { name: "Alice", score: 92 },\n  { name: "Bob", score: 85 },\n]\n\nconst avg = students.reduce((s, st) => s + st.score, 0) / students.length\nconsole.log("Average:", avg)\n`,
   sql: `-- SQL Example\nSELECT\n  subject,\n  COUNT(*) as sessions,\n  AVG(duration_minutes) as avg_duration\nFROM sessions\nGROUP BY subject\nORDER BY sessions DESC;\n`,
   json: `{\n  "lesson": "Python Basics",\n  "topics": ["variables", "loops", "functions"],\n  "difficulty": "beginner",\n  "students": 12\n}`,
+}
+
+interface StudentSnapshot {
+  name: string
+  code: string
+  lang: string
 }
 
 interface Props {
@@ -53,16 +59,24 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
   const [running, setRunning] = useState(false)
   const [pyStatus, setPyStatus] = useState<'idle' | 'loading' | 'ready'>('idle')
   const [requesting, setRequesting] = useState(false)
-  const [activeEditor, setActiveEditor] = useState<string | null>(null)
+  // Teacher: snapshots of each student's latest code, keyed by senderId
+  const [studentSnapshots, setStudentSnapshots] = useState<Map<string, StudentSnapshot>>(new Map())
+  // Teacher: which student is currently selected ('own' = teacher's own editor)
+  const [viewingId, setViewingId] = useState<string>('own')
+  const viewingIdRef = useRef<string>('own')
+  // Teacher's own code saved before switching to a student view
+  const teacherOwnRef = useRef<{ code: string; lang: string } | null>(null)
+
   const outputRef = useRef<HTMLDivElement>(null)
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
   const lastBroadcast = useRef(0)
   const isRemoteUpdate = useRef(false)
-  // Unique sender ID — used to filter own echo (Supabase sends broadcasts to the sender too)
   const myId = isTeacher ? 'teacher' : (participantId || 'anon')
 
   const canWrite = isTeacher || canEdit
   const locked = !canWrite
+  // Teacher is read-only while viewing a student
+  const viewingStudent = isTeacher && viewingId !== 'own'
 
   const broadcast = useCallback((newCode: string, newLang: string) => {
     const now = Date.now()
@@ -78,15 +92,30 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
     const channel = supabase
       .channel(`code:${sessionId}`)
       .on('broadcast', { event: 'code_update' }, ({ payload }) => {
-        // Ignore own echo
         if (payload.senderId === myId) return
-        isRemoteUpdate.current = true
-        setCode(payload.code)
-        setLang(payload.lang)
-        localStorage.setItem(storageKey, JSON.stringify({ code: payload.code, lang: payload.lang }))
-        isRemoteUpdate.current = false
-        // Teacher: show whose code they're viewing
-        if (isTeacher && payload.senderName) setActiveEditor(payload.senderName)
+
+        if (isTeacher) {
+          // Always keep the snapshot up to date
+          setStudentSnapshots(prev => {
+            const next = new Map(prev)
+            next.set(payload.senderId, { name: payload.senderName || 'Student', code: payload.code, lang: payload.lang })
+            return next
+          })
+          // Only update the editor if we're actively watching this student
+          if (viewingIdRef.current === payload.senderId) {
+            isRemoteUpdate.current = true
+            setCode(payload.code)
+            setLang(payload.lang)
+            isRemoteUpdate.current = false
+          }
+        } else {
+          // Student: receive teacher's broadcast
+          isRemoteUpdate.current = true
+          setCode(payload.code)
+          setLang(payload.lang)
+          localStorage.setItem(storageKey, JSON.stringify({ code: payload.code, lang: payload.lang }))
+          isRemoteUpdate.current = false
+        }
       })
       .on('broadcast', { event: 'code_output' }, ({ payload }) => {
         if (!isTeacher) setOutput(payload.output)
@@ -107,11 +136,38 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
     return () => { supabase.removeChannel(channel) }
   }, [sessionId, isTeacher, myId])
 
+  const switchView = (id: string) => {
+    if (id === viewingIdRef.current) return
+    viewingIdRef.current = id
+    setViewingId(id)
+
+    if (id === 'own') {
+      // Restore teacher's own code
+      if (teacherOwnRef.current) {
+        isRemoteUpdate.current = true
+        setCode(teacherOwnRef.current.code)
+        setLang(teacherOwnRef.current.lang)
+        isRemoteUpdate.current = false
+      }
+    } else {
+      // Save teacher's current code before switching
+      if (viewingIdRef.current !== id) teacherOwnRef.current = { code, lang }
+      teacherOwnRef.current = { code, lang }
+      const snap = studentSnapshots.get(id)
+      if (snap) {
+        isRemoteUpdate.current = true
+        setCode(snap.code)
+        setLang(snap.lang)
+        isRemoteUpdate.current = false
+      }
+    }
+  }
+
   const handleCodeChange = (v: string | undefined) => {
     if (isRemoteUpdate.current) return
     const val = v || ''
     setCode(val)
-    if (canWrite) {
+    if (canWrite && !viewingStudent) {
       localStorage.setItem(storageKey, JSON.stringify({ code: val, lang }))
       broadcast(val, lang)
     }
@@ -149,7 +205,6 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
     } catch (err) { result = `Failed to load Python runtime:\n${String(err)}` }
     setOutput(result)
     setRunning(false)
-    // broadcast output to students
     channelRef.current?.send({ type: 'broadcast', event: 'code_output', payload: { output: result } })
     setTimeout(() => outputRef.current?.scrollTo(0, outputRef.current.scrollHeight), 50)
   }
@@ -192,7 +247,7 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
       {/* Toolbar */}
       <div className="flex items-center gap-3 px-4 py-2 border-b border-slate-800 bg-slate-900 shrink-0">
         <div className="relative">
-          <select value={lang} onChange={e => changeLang(e.target.value)} disabled={locked}
+          <select value={lang} onChange={e => changeLang(e.target.value)} disabled={locked || viewingStudent}
             className="appearance-none bg-slate-800 border border-slate-700 rounded-lg pl-3 pr-8 py-1.5 text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50">
             {LANGS.map(l => <option key={l} value={l}>{l.charAt(0).toUpperCase() + l.slice(1)}</option>)}
           </select>
@@ -219,17 +274,36 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
           </div>
         )}
 
-        {isTeacher && activeEditor && (
-          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-500/10 border border-blue-500/30 rounded-lg text-xs text-blue-400 font-medium">
-            <Code2 size={10} /> Viewing: {activeEditor}
+        {/* Teacher: student selector */}
+        {isTeacher && studentSnapshots.size > 0 && (
+          <div className="relative">
+            <select
+              value={viewingId}
+              onChange={e => switchView(e.target.value)}
+              className="appearance-none bg-slate-800 border border-blue-500/40 rounded-lg pl-7 pr-8 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            >
+              <option value="own">My Code</option>
+              {Array.from(studentSnapshots.entries()).map(([id, snap]) => (
+                <option key={id} value={id}>{snap.name}</option>
+              ))}
+            </select>
+            <Users size={11} className="absolute left-2 top-1/2 -translate-y-1/2 text-blue-400 pointer-events-none" />
+            <ChevronDown size={11} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
           </div>
+        )}
+
+        {/* Viewing badge */}
+        {viewingStudent && (
+          <span className="text-xs text-blue-400/80 font-medium">
+            read-only
+          </span>
         )}
 
         <div className="ml-auto flex items-center gap-2">
           <button onClick={() => setOutput('')} className="p-1.5 text-slate-500 hover:text-slate-300 transition-colors" title="Clear output">
             <Trash2 size={14} />
           </button>
-          {canWrite && (
+          {(canWrite || viewingStudent) && (
             <button onClick={running ? undefined : runCode} disabled={running}
               className="flex items-center gap-1.5 px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white rounded-lg text-sm font-medium transition-colors">
               {running ? <><Square size={12} /> Running...</> : <><Play size={12} /> Run</>}
@@ -257,8 +331,8 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
             suggestOnTriggerCharacters: true,
             wordWrap: 'on',
             automaticLayout: true,
-            readOnly: locked,
-            readOnlyMessage: { value: 'Request code access from your teacher to edit' },
+            readOnly: locked || viewingStudent,
+            readOnlyMessage: { value: viewingStudent ? 'Viewing student code — switch to My Code to edit' : 'Request code access from your teacher to edit' },
           }}
         />
       </div>
