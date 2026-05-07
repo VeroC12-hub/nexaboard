@@ -289,7 +289,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   }, [myId])
 
   useEffect(() => {
-    const close = () => { setShowTablePicker(false); setShowImageInput(false) }
+    const close = () => { setShowTablePicker(false) }
     document.addEventListener('mousedown', close)
     return () => document.removeEventListener('mousedown', close)
   }, [])
@@ -460,7 +460,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
               <>
                 {sep()}
                 <div className="relative" onMouseDown={e => e.stopPropagation()}>
-                  <button onMouseDown={e => { e.preventDefault(); setShowTablePicker(v => !v); setShowImageInput(false) }}
+                  <button onMouseDown={e => { e.preventDefault(); setShowTablePicker(v => !v) }}
                     title="Insert Table"
                     className={`p-1.5 rounded transition-colors ${showTablePicker ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
                     <TableIcon size={15} />
