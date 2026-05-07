@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import type { Participant, BoardRequest } from '../types'
-import { Hand, Pencil, Code2, X, CheckCircle, UserCircle2 } from 'lucide-react'
+import { Hand, Pencil, Code2, X, CheckCircle, UserCircle2, UserMinus } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 interface Props { sessionId: string; isTeacher: boolean }
@@ -69,6 +69,12 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
   const denyRequest = async (requestId: string) => {
     await supabase.from('board_requests').update({ status: 'denied' }).eq('id', requestId)
     fetchRequests()
+  }
+
+  const removeStudent = async (participantId: string, name: string) => {
+    if (!window.confirm(`Remove ${name} from this session?`)) return
+    await supabase.from('session_participants').update({ is_active: false }).eq('id', participantId)
+    toast.success(`${name} removed`)
   }
 
   const RequestRow = ({ req, icon, onGrant }: { req: BoardRequest; icon: React.ReactNode; onGrant: () => void }) => (
@@ -179,6 +185,10 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
                     <Code2 size={9} /> Code
                   </button>
                 )}
+                <button onClick={() => removeStudent(p.id, p.name)} title="Remove from session"
+                  className="px-1.5 py-1 text-[10px] text-red-400 border border-red-100 bg-red-50 rounded hover:bg-red-100 hover:text-red-600 transition-colors">
+                  <UserMinus size={11} />
+                </button>
               </div>
             )}
           </div>

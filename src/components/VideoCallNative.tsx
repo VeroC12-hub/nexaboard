@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import {
   X, Maximize2, Minimize2, Mic, MicOff, Video, VideoOff,
-  PhoneOff, LayoutGrid, Users,
+  PhoneOff, LayoutGrid, Users, Minus, VolumeX,
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import toast from 'react-hot-toast'
 
-// Google STUN + Open Relay Project free TURN servers
 const ICE: RTCIceServer[] = [
   { urls: 'stun:stun.l.google.com:19302' },
   { urls: 'stun:stun1.l.google.com:19302' },
@@ -39,16 +39,23 @@ interface Props {
   onClose: () => void
 }
 
-type PeerState = { name: string; stream: MediaStream | null; state: string }
+type PeerState = { name: string; stream: MediaStream | null; state: string; muted: boolean }
 
 // ── Video tile ────────────────────────────────────────────────────────────────
-function VideoTile({ stream, muted = false, name, noVideo = false, state = '', className = '' }: {
+function VideoTile({ stream, muted = false, name, noVideo = false, state = '', className = '',
+  onMute, showMuteBtn = false }: {
   stream: MediaStream | null; muted?: boolean; name: string
   noVideo?: boolean; state?: string; className?: string
+  onMute?: () => void; showMuteBtn?: boolean
 }) {
   const ref = useRef<HTMLVideoElement>(null)
-  useEffect(() => { if (ref.current) ref.current.srcObject = stream }, [stream])
-  const showAvatar = noVideo || !stream
+  useEffect(() => {
+    const video = ref.current
+    if (!video) return
+    video.srcObject = stream
+    if (stream) video.play().catch(() => {})
+  }, [stream])
+  const showAvatar = noVideo || !stream || stream.getVideoTracks().length === 0
 
   return (
     <div className={`relative bg-gray-900 rounded-xl overflow-hidden flex items-center justify-center ${className}`}>
@@ -61,9 +68,17 @@ function VideoTile({ stream, muted = false, name, noVideo = false, state = '', c
       )}
       <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
         <span className="text-white text-xs bg-black/60 px-2 py-0.5 rounded-full truncate max-w-[70%]">{name}</span>
-        {state && state !== 'connected' && (
-          <span className="text-yellow-400 text-[10px] bg-black/60 px-1.5 py-0.5 rounded-full">{state}</span>
-        )}
+        <div className="flex items-center gap-1">
+          {state && state !== 'connected' && (
+            <span className="text-yellow-400 text-[10px] bg-black/60 px-1.5 py-0.5 rounded-full">{state}</span>
+          )}
+          {showMuteBtn && onMute && (
+            <button onClick={onMute} title="Mute participant"
+              className="w-6 h-6 rounded-full bg-black/60 hover:bg-red-500/80 flex items-center justify-center transition-colors">
+              <VolumeX size={11} className="text-white" />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )
@@ -77,23 +92,26 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const [videoOff, setVideoOff] = useState(false)
   const [hasCamera, setHasCamera] = useState(true)
   const [expanded, setExpanded] = useState(false)
+  const [minimized, setMinimized] = useState(false)
   const [viewMode, setViewMode] = useState<'grid' | 'speaker'>('grid')
   const [error, setError] = useState('')
 
   const localStreamRef = useRef<MediaStream | null>(null)
   const pcsRef = useRef(new Map<string, RTCPeerConnection>())
+  const chRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
 
   useEffect(() => {
     let mounted = true
     const pcs = pcsRef.current
     const iceBuf = new Map<string, RTCIceCandidateInit[]>()
-    let ch: ReturnType<typeof supabase.channel>
+    const peerStreams = new Map<string, MediaStream>()
+    let availCh: ReturnType<typeof supabase.channel> | null = null
 
-    // ── helpers ───────────────────────────────────────────────────────────────
+    // ── helpers ────────────────────────────────────────────────────────────────
     const setPeerState = (id: string, update: Partial<PeerState>) =>
       setPeers(prev => {
         const n = new Map(prev)
-        const cur = n.get(id) ?? { name: id, stream: null, state: 'connecting' }
+        const cur = n.get(id) ?? { name: id, stream: null, state: 'connecting', muted: false }
         n.set(id, { ...cur, ...update })
         return n
       })
@@ -102,6 +120,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       pcs.get(id)?.close()
       pcs.delete(id)
       iceBuf.delete(id)
+      peerStreams.delete(id)
       setPeers(prev => { const n = new Map(prev); n.delete(id); return n })
     }
 
@@ -116,47 +135,53 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       pcs.get(peerId)?.close()
       const pc = new RTCPeerConnection({ iceServers: ICE })
 
-      // Send our local tracks
+      // Create a stable MediaStream for this peer's incoming tracks
+      const remoteStream = new MediaStream()
+      peerStreams.set(peerId, remoteStream)
+
       localStreamRef.current?.getTracks().forEach(t => pc.addTrack(t, localStreamRef.current!))
 
-      // Incoming remote stream
+      // Add each incoming track to the peer's MediaStream
       pc.ontrack = e => {
         if (!mounted) return
-        setPeerState(peerId, { stream: e.streams[0] ?? null })
+        remoteStream.addTrack(e.track)
+        setPeerState(peerId, { stream: remoteStream })
       }
 
-      // Relay ICE candidates
       pc.onicecandidate = e => {
         if (!e.candidate) return
-        ch?.send({ type: 'broadcast', event: 'call_ice', payload: { from: userId, to: peerId, candidate: e.candidate.toJSON() } })
+        chRef.current?.send({
+          type: 'broadcast', event: 'call_ice',
+          payload: { from: userId, to: peerId, candidate: e.candidate.toJSON() },
+        })
       }
 
       pc.onconnectionstatechange = () => {
-        const s = pc.connectionState
         if (!mounted) return
-        setPeerState(peerId, { state: s })
-        if (s === 'failed' || s === 'closed') removePeer(peerId)
+        setPeerState(peerId, { state: pc.connectionState })
+        if (pc.connectionState === 'failed' || pc.connectionState === 'closed') removePeer(peerId)
       }
 
       pcs.set(peerId, pc)
-      setPeerState(peerId, { name: peerName, state: 'connecting' })
+      setPeerState(peerId, { name: peerName, stream: remoteStream, state: 'connecting', muted: false })
       return pc
     }
 
-    // Teacher creates and sends an offer to a specific student
     const makeOffer = async (peerId: string, peerName: string) => {
-      if (pcs.has(peerId)) return // already connecting / connected
+      if (pcs.has(peerId)) return
       const pc = buildPC(peerId, peerName)
       try {
         const offer = await pc.createOffer()
         await pc.setLocalDescription(offer)
-        ch.send({ type: 'broadcast', event: 'call_offer', payload: { from: userId, to: peerId, sdp: pc.localDescription } })
+        chRef.current?.send({
+          type: 'broadcast', event: 'call_offer',
+          payload: { from: userId, to: peerId, sdp: pc.localDescription },
+        })
       } catch { removePeer(peerId) }
     }
 
-    // ── main start ────────────────────────────────────────────────────────────
+    // ── start ─────────────────────────────────────────────────────────────────
     const start = async () => {
-      // 1. Acquire camera + mic; fall back to audio-only
       let stream: MediaStream | null = null
       try {
         stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
@@ -173,25 +198,26 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       localStreamRef.current = stream
       setLocalStream(stream)
 
-      // 2. Set up Supabase channel
-      //    • Presence — guarantees peer discovery (no missed messages)
-      //    • Broadcast — carries SDP offer/answer and ICE candidates
-      ch = supabase.channel(`call:${sessionId}`)
+      // Teacher tracks in a separate channel so students know a call is live
+      if (isTeacher) {
+        availCh = supabase.channel(`call_available:${sessionId}`)
+        availCh.subscribe(async (status) => {
+          if (status === 'SUBSCRIBED') await availCh!.track({ isTeacher: true })
+        })
+      }
+
+      const ch = supabase.channel(`call:${sessionId}`)
+      chRef.current = ch
 
       ch
-        // ── Presence: someone joined ──────────────────────────────────────────
         .on('presence', { event: 'join' }, ({ key, newPresences }) => {
           if (key === userId) return
-          const p = (newPresences as Array<{ name: string; isTeacher: boolean }>)[0]
+          const p = (newPresences as unknown as Array<{ name: string; isTeacher: boolean }>)[0]
           if (!p) return
-          // Only teacher creates offers
           if (isTeacher && !p.isTeacher) makeOffer(key, p.name)
         })
-
-        // ── Presence: someone left ────────────────────────────────────────────
         .on('presence', { event: 'leave' }, ({ key }) => removePeer(key as string))
 
-        // ── Student receives offer → sends answer ─────────────────────────────
         .on('broadcast', { event: 'call_offer' }, async ({ payload }) => {
           if (payload.to !== userId) return
           const pc = buildPC(payload.from, 'Teacher')
@@ -199,10 +225,11 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           flushIce(payload.from)
           const answer = await pc.createAnswer()
           await pc.setLocalDescription(answer)
-          ch.send({ type: 'broadcast', event: 'call_answer', payload: { from: userId, to: payload.from, sdp: pc.localDescription } })
+          ch.send({
+            type: 'broadcast', event: 'call_answer',
+            payload: { from: userId, to: payload.from, sdp: pc.localDescription },
+          })
         })
-
-        // ── Teacher receives answer ───────────────────────────────────────────
         .on('broadcast', { event: 'call_answer' }, async ({ payload }) => {
           if (payload.to !== userId) return
           const pc = pcs.get(payload.from)
@@ -211,25 +238,28 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             flushIce(payload.from)
           }
         })
-
-        // ── ICE relay ─────────────────────────────────────────────────────────
         .on('broadcast', { event: 'call_ice' }, ({ payload }) => {
           if (payload.to !== userId) return
           const pc = pcs.get(payload.from)
           if (pc?.remoteDescription) {
             pc.addIceCandidate(new RTCIceCandidate(payload.candidate)).catch(() => {})
           } else {
-            const buf = iceBuf.get(payload.from) ?? []; buf.push(payload.candidate); iceBuf.set(payload.from, buf)
+            const buf = iceBuf.get(payload.from) ?? []
+            buf.push(payload.candidate)
+            iceBuf.set(payload.from, buf)
           }
+        })
+        // Teacher can remotely mute a student
+        .on('broadcast', { event: 'call_remote_mute' }, ({ payload }) => {
+          if (payload.to !== userId) return
+          localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = false })
+          setAudioMuted(true)
+          toast('Teacher muted your microphone', { icon: '🔇' })
         })
 
         .subscribe(async (status) => {
           if (status !== 'SUBSCRIBED') return
-
-          // Track presence so everyone knows we're here
           await ch.track({ name: displayName, isTeacher })
-
-          // If teacher, make offers to anyone already present
           if (isTeacher) {
             const state = ch.presenceState<{ name: string; isTeacher: boolean }>()
             for (const [key, presences] of Object.entries(state)) {
@@ -245,16 +275,18 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
 
     return () => {
       mounted = false
-      ch?.untrack()
+      if (availCh) { availCh.untrack(); supabase.removeChannel(availCh) }
+      const ch = chRef.current
+      if (ch) { ch.untrack(); supabase.removeChannel(ch) }
+      chRef.current = null
       pcs.forEach(pc => pc.close())
       pcs.clear()
       localStreamRef.current?.getTracks().forEach(t => t.stop())
       localStreamRef.current = null
-      if (ch) supabase.removeChannel(ch)
     }
   }, [sessionId, isTeacher, userId, displayName])
 
-  // ── Controls ──────────────────────────────────────────────────────────────
+  // ── controls ──────────────────────────────────────────────────────────────
   const toggleAudio = () => {
     localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = audioMuted })
     setAudioMuted(v => !v)
@@ -264,12 +296,44 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     localStreamRef.current?.getVideoTracks().forEach(t => { t.enabled = videoOff })
     setVideoOff(v => !v)
   }
+  const mutePeer = (peerId: string) => {
+    chRef.current?.send({ type: 'broadcast', event: 'call_remote_mute', payload: { to: peerId } })
+    toast.success('Student muted')
+  }
 
-  // ── Layout ────────────────────────────────────────────────────────────────
+  // ── layout ────────────────────────────────────────────────────────────────
   const peersArr = Array.from(peers.entries())
   const total = peersArr.length + 1
   const gridCols = total <= 2 ? 'grid-cols-1' : total <= 4 ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-3'
 
+  // ── minimised pill ────────────────────────────────────────────────────────
+  if (minimized) {
+    return (
+      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-gray-900 rounded-full px-4 py-2.5 shadow-2xl border border-white/10">
+        <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse shrink-0" />
+        <span className="text-white text-sm font-semibold">Live</span>
+        <span className="text-white/50 text-xs flex items-center gap-1 shrink-0">
+          <Users size={11} /> {total}
+        </span>
+        <div className="w-px h-4 bg-white/20 mx-1 shrink-0" />
+        <button onClick={toggleAudio} title={audioMuted ? 'Unmute' : 'Mute'}
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors shrink-0
+            ${audioMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-white/10 hover:bg-white/20'}`}>
+          {audioMuted ? <MicOff size={14} className="text-white" /> : <Mic size={14} className="text-white" />}
+        </button>
+        <button onClick={() => setMinimized(false)} title="Expand call"
+          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors shrink-0">
+          <Video size={14} className="text-white" />
+        </button>
+        <button onClick={onClose} title="Leave call"
+          className="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center transition-colors shrink-0">
+          <PhoneOff size={14} className="text-white" />
+        </button>
+      </div>
+    )
+  }
+
+  // ── full panel ────────────────────────────────────────────────────────────
   const panelClass = expanded
     ? 'fixed inset-0 z-50 flex flex-col bg-gray-950'
     : 'fixed bottom-0 right-0 z-40 flex flex-col bg-gray-950 shadow-2xl rounded-tl-2xl overflow-hidden'
@@ -286,15 +350,20 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           <span className="flex items-center gap-1 text-white/40 text-xs"><Users size={11} /> {total}</span>
         </div>
         <div className="flex gap-1">
-          <button onClick={() => setViewMode(v => v === 'grid' ? 'speaker' : 'grid')} title="Toggle view"
+          <button onClick={() => setViewMode(v => v === 'grid' ? 'speaker' : 'grid')} title="Toggle layout"
             className="text-white/60 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors">
             <LayoutGrid size={14} />
           </button>
-          <button onClick={() => setExpanded(v => !v)}
+          <button onClick={() => setMinimized(true)} title="Minimise — call stays live"
+            className="text-white/60 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors">
+            <Minus size={15} />
+          </button>
+          <button onClick={() => setExpanded(v => !v)} title={expanded ? 'Exit full screen' : 'Full screen'}
             className="text-white/60 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors">
             {expanded ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
           </button>
-          <button onClick={onClose} className="text-white/60 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors">
+          <button onClick={onClose} title="Leave call"
+            className="text-white/60 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors">
             <X size={15} />
           </button>
         </div>
@@ -311,7 +380,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         <>
           {!hasCamera && (
             <div className="bg-amber-600/20 border-b border-amber-500/30 px-3 py-1 text-amber-400 text-xs text-center shrink-0">
-              No camera — audio only
+              No camera detected — audio only
             </div>
           )}
 
@@ -320,7 +389,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             <div className={`flex-1 min-h-0 p-2 grid gap-2 ${gridCols} content-start overflow-auto`}>
               <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="aspect-video" />
               {peersArr.map(([id, info]) => (
-                <VideoTile key={id} stream={info.stream} name={info.name} state={info.state} className="aspect-video" />
+                <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
+                  className="aspect-video" showMuteBtn={isTeacher} onMute={() => mutePeer(id)} />
               ))}
             </div>
           )}
@@ -330,13 +400,18 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             <div className="flex-1 min-h-0 flex flex-col gap-1.5 p-2 overflow-hidden">
               <div className="flex-1 min-h-0">
                 {peersArr[0]
-                  ? <VideoTile stream={peersArr[0][1].stream} name={peersArr[0][1].name} state={peersArr[0][1].state} className="h-full" />
+                  ? <VideoTile stream={peersArr[0][1].stream} name={peersArr[0][1].name}
+                      state={peersArr[0][1].state} className="h-full"
+                      showMuteBtn={isTeacher} onMute={() => mutePeer(peersArr[0][0])} />
                   : <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-full" />}
               </div>
               <div className="flex gap-1.5 shrink-0 overflow-x-auto pb-1">
-                {peersArr[0] && <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-20 w-28 shrink-0" />}
+                {peersArr[0] && (
+                  <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-20 w-28 shrink-0" />
+                )}
                 {peersArr.slice(1).map(([id, info]) => (
-                  <VideoTile key={id} stream={info.stream} name={info.name} state={info.state} className="h-20 w-28 shrink-0" />
+                  <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
+                    className="h-20 w-28 shrink-0" showMuteBtn={isTeacher} onMute={() => mutePeer(id)} />
                 ))}
               </div>
             </div>
@@ -344,7 +419,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
 
           {peersArr.length === 0 && (
             <div className="text-white/30 text-xs text-center py-1.5 shrink-0">
-              {isTeacher ? 'Waiting for students to join the call…' : 'Waiting for teacher…'}
+              {isTeacher ? 'Waiting for students to join the call…' : 'Connecting to teacher…'}
             </div>
           )}
 
@@ -355,6 +430,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
                 onClick: toggleAudio, active: audioMuted,
                 icon: audioMuted ? <MicOff size={20} className="text-white" /> : <Mic size={20} className="text-white" />,
                 label: audioMuted ? 'Unmute' : 'Mute',
+                disabled: false,
               },
               {
                 onClick: toggleVideo, active: videoOff, disabled: !hasCamera,

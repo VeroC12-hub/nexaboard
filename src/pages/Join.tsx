@@ -19,9 +19,26 @@ export default function Join() {
     setLoading(true)
     const { data, error } = await supabase.from('sessions').select('id, title, subject, status')
       .eq('join_code', joinCode.toUpperCase()).single()
+    if (error || !data) { setLoading(false); toast.error('Session not found'); return }
+    if (data.status === 'ended') { setLoading(false); toast.error('This session has ended'); return }
+
+    // If already joined from this device, auto-rejoin without showing name form
+    try {
+      const raw = localStorage.getItem(`nexaboard_participant_${data.id}`)
+      if (raw) {
+        const saved = JSON.parse(raw) as { id: string; name: string }
+        const { data: existing } = await supabase.from('session_participants').select('id').eq('id', saved.id).single()
+        if (existing) {
+          await supabase.from('session_participants').update({ is_active: true, name: saved.name }).eq('id', saved.id)
+          sessionStorage.setItem('nexaboard_participant_id', saved.id)
+          sessionStorage.setItem('nexaboard_participant_name', saved.name)
+          navigate(`/student/${data.id}`)
+          return
+        }
+      }
+    } catch { /* stale entry — fall through to name form */ }
+
     setLoading(false)
-    if (error || !data) { toast.error('Session not found'); return }
-    if (data.status === 'ended') { toast.error('This session has ended'); return }
     setSessionInfo(data); setStep('name')
   }
 

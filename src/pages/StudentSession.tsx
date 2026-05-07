@@ -7,7 +7,7 @@ import CodeEditor from '../components/CodeEditor'
 import ChatSidebar from '../components/ChatSidebar'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft, Video, VideoOff } from 'lucide-react'
+import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft, Video, VideoOff, LogOut } from 'lucide-react'
 import VideoCallNative from '../components/VideoCallNative'
 
 type Tab = 'whiteboard' | 'code' | 'notes'
@@ -22,6 +22,7 @@ export default function StudentSession() {
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [requesting, setRequesting] = useState(false)
   const [callOpen, setCallOpen] = useState(() => sessionStorage.getItem(`nexaboard_call_${sessionId}`) === 'true')
+  const [teacherInCall, setTeacherInCall] = useState(false)
 
   // Prefer sessionStorage (current tab), fall back to localStorage (new tab from share link)
   const participantId = (() => {
@@ -40,12 +41,34 @@ export default function StudentSession() {
 
   useEffect(() => { if (!participantId) { navigate('/'); return } fetchData() }, [sessionId, participantId])
 
+  // Watch whether the teacher has an active call
+  useEffect(() => {
+    if (!sessionId) return
+    const ch = supabase.channel(`call_available:${sessionId}`)
+    const check = () => {
+      const state = ch.presenceState()
+      const hasTeacher = Object.values(state).some(presences =>
+        (presences as Array<{ isTeacher?: boolean }>).some(p => p.isTeacher)
+      )
+      setTeacherInCall(hasTeacher)
+    }
+    ch.on('presence', { event: 'join' }, check)
+      .on('presence', { event: 'leave' }, check)
+      .subscribe(status => { if (status === 'SUBSCRIBED') check() })
+    return () => { supabase.removeChannel(ch) }
+  }, [sessionId])
+
   useEffect(() => {
     if (!participantId) return
     const channel = supabase.channel(`my_participant:${participantId}`)
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'session_participants', filter: `id=eq.${participantId}` },
         payload => {
           const updated = payload.new as Participant
+          if (!updated.is_active) {
+            toast('You have been removed from this session.', { icon: '🚫' })
+            navigate('/')
+            return
+          }
           const prev = participant
           setParticipant(updated)
           if (updated.has_board_access && !prev?.has_board_access) toast.success('You have board access! Start drawing.')
@@ -82,6 +105,17 @@ export default function StudentSession() {
     })
     toast.success('Board request sent to teacher!')
     setRequesting(false)
+  }
+
+  const leaveSession = async () => {
+    if (!window.confirm('Leave this session?')) return
+    if (participantId) {
+      await supabase.from('session_participants').update({ is_active: false }).eq('id', participantId)
+    }
+    sessionStorage.removeItem('nexaboard_participant_id')
+    sessionStorage.removeItem('nexaboard_participant_name')
+    sessionStorage.removeItem(`nexaboard_call_${sessionId}`)
+    navigate('/')
   }
 
   const raiseHand = async () => {
@@ -148,20 +182,26 @@ export default function StudentSession() {
             </button>
           )}
 
-          <button
-            onClick={() => {
-              const next = !callOpen
-              setCallOpen(next)
-              if (next) sessionStorage.setItem(`nexaboard_call_${sessionId}`, 'true')
-              else sessionStorage.removeItem(`nexaboard_call_${sessionId}`)
-            }}
-            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${callOpen ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'bg-[#f3fcf0] text-[#1b2b4b] border-green-200 hover:bg-green-100'}`}
-          >
-            {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'Leave Call' : 'Join Call'}
-          </button>
+          {teacherInCall || callOpen ? (
+            <button
+              onClick={() => {
+                const next = !callOpen
+                setCallOpen(next)
+                if (next) sessionStorage.setItem(`nexaboard_call_${sessionId}`, 'true')
+                else sessionStorage.removeItem(`nexaboard_call_${sessionId}`)
+              }}
+              className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${callOpen ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'bg-[#f3fcf0] text-[#1b2b4b] border-green-200 hover:bg-green-100'}`}
+            >
+              {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'Leave Call' : 'Join Call'}
+            </button>
+          ) : null}
           <button onClick={raiseHand}
             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${participant?.hand_raised ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-[#f3fcf0] text-[#6b7280] border-green-200 hover:text-[#1b2b4b]'}`}>
             <Hand size={11} /> {participant?.hand_raised ? 'Lower' : 'Raise Hand'}
+          </button>
+          <button onClick={leaveSession}
+            className="flex items-center gap-1 px-2.5 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg text-xs font-semibold border border-red-100 transition-colors">
+            <LogOut size={11} /> Leave
           </button>
         </div>
       </header>
