@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import {
   X, Maximize2, Minimize2, Mic, MicOff, Video, VideoOff,
-  PhoneOff, LayoutGrid, Users, Minus, VolumeX, Circle, Square, AlignLeft, Download, Monitor, MonitorOff,
+  PhoneOff, LayoutGrid, Users, Minus, VolumeX, Volume2, Circle, Square, AlignLeft, Download, Monitor, MonitorOff,
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
@@ -36,10 +36,10 @@ const getSR = (): SRCtor | undefined => {
 
 // ── Video tile ────────────────────────────────────────────────────────────────
 function VideoTile({ stream, muted = false, name, noVideo = false, state = '',
-  className = '', onMute, showMuteBtn = false }: {
+  className = '', onMute, onUnmute, showMuteBtn = false, peerMuted = false }: {
   stream: MediaStream | null; muted?: boolean; name: string
   noVideo?: boolean; state?: string; className?: string
-  onMute?: () => void; showMuteBtn?: boolean
+  onMute?: () => void; onUnmute?: () => void; showMuteBtn?: boolean; peerMuted?: boolean
 }) {
   const ref = useRef<HTMLVideoElement>(null)
   useEffect(() => {
@@ -72,12 +72,17 @@ function VideoTile({ stream, muted = false, name, noVideo = false, state = '',
           {state && state !== 'connected' && (
             <span className="text-yellow-400 text-[10px] bg-black/60 px-1.5 py-0.5 rounded-full">{state}</span>
           )}
-          {showMuteBtn && onMute && (
+          {showMuteBtn && (peerMuted ? (
+            <button onClick={onUnmute} title="Unmute participant"
+              className="w-6 h-6 rounded-full bg-green-600/80 hover:bg-green-500 flex items-center justify-center transition-colors">
+              <Volume2 size={11} className="text-white" />
+            </button>
+          ) : (
             <button onClick={onMute} title="Mute participant"
               className="w-6 h-6 rounded-full bg-black/60 hover:bg-red-500/80 flex items-center justify-center transition-colors">
               <VolumeX size={11} className="text-white" />
             </button>
-          )}
+          ))}
         </div>
       </div>
     </div>
@@ -126,6 +131,9 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
 
   // Teacher peer devices (callIds with isTeacher=true, for ctrl_sync filtering)
   const teacherCallIdsRef = useRef(new Set<string>())
+
+  // Teacher-muted peers (tracked on teacher side so button shows correct state)
+  const [mutedPeers, setMutedPeers] = useState(new Set<string>())
 
   // Call duration clock — starts when local stream is obtained
   const [callSeconds, setCallSeconds] = useState(0)
@@ -176,6 +184,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       pcs.get(id)?.close(); pcs.delete(id); iceBuf.delete(id)
       setPeers(prev => { const n = new Map(prev); n.delete(id); return n })
       setPeerScreenStreams(prev => { const n = new Map(prev); n.delete(id); return n })
+      setMutedPeers(prev => { const n = new Set(prev); n.delete(id); return n })
     }
 
     const flushIce = (id: string) => {
@@ -242,6 +251,20 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             }, 3000)
           }
         }
+      }
+
+      // Renegotiation: fires when a track is added to an established connection
+      // (e.g. student starts screen share). Guard prevents firing during initial setup.
+      pc.onnegotiationneeded = async () => {
+        if (pc.signalingState !== 'stable' || pc.connectionState === 'new' || pc.connectionState === 'connecting') return
+        try {
+          const offer = await pc.createOffer()
+          await pc.setLocalDescription(offer)
+          chRef.current?.send({
+            type: 'broadcast', event: 'call_offer',
+            payload: { from: callId, to: peerCallId, sdp: pc.localDescription, name: displayName },
+          })
+        } catch { /* connection may have closed */ }
       }
 
       pcs.set(peerCallId, pc)
@@ -317,7 +340,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         // ── Student/Teacher receives offer → sends answer ────────────────
         .on('broadcast', { event: 'call_offer' }, async ({ payload }) => {
           if (payload.to !== callId) return
-          const pc = buildPC(payload.from, payload.name ?? (isTeacher ? 'Student' : 'Teacher'))
+          // Reuse existing PC for renegotiation (e.g. remote peer added screen share track)
+          const pc = pcs.get(payload.from) ?? buildPC(payload.from, payload.name ?? (isTeacher ? 'Student' : 'Teacher'))
           await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp))
           flushIce(payload.from)
           const answer = await pc.createAnswer()
@@ -328,7 +352,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         .on('broadcast', { event: 'call_answer' }, async ({ payload }) => {
           if (payload.to !== callId) return
           const pc = pcs.get(payload.from)
-          if (pc && !pc.remoteDescription) {
+          if (pc) {
             await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp))
             flushIce(payload.from)
           }
@@ -343,12 +367,18 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             const buf = iceBuf.get(payload.from) ?? []; buf.push(payload.candidate); iceBuf.set(payload.from, buf)
           }
         })
-        // ── Remote mute (teacher → student) ─────────────────────────────
+        // ── Remote mute / unmute (teacher → student) ─────────────────────
         .on('broadcast', { event: 'call_remote_mute' }, ({ payload }) => {
           if (payload.to !== callId) return
           localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = false })
           setAudioMuted(true)
           toast('Teacher muted your microphone', { icon: '🔇' })
+        })
+        .on('broadcast', { event: 'call_remote_unmute' }, ({ payload }) => {
+          if (payload.to !== callId) return
+          localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = true })
+          setAudioMuted(false)
+          toast('Teacher unmuted your microphone', { icon: '🔊' })
         })
         // ── Screen share started (one at a time enforcement) ─────────────
         .on('broadcast', { event: 'screen_share_started' }, ({ payload }) => {
@@ -467,7 +497,13 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   }
   const mutePeer = (peerCallId: string) => {
     chRef.current?.send({ type: 'broadcast', event: 'call_remote_mute', payload: { to: peerCallId } })
+    setMutedPeers(prev => new Set([...prev, peerCallId]))
     toast.success('Student muted')
+  }
+  const unmutePeer = (peerCallId: string) => {
+    chRef.current?.send({ type: 'broadcast', event: 'call_remote_unmute', payload: { to: peerCallId } })
+    setMutedPeers(prev => { const n = new Set(prev); n.delete(peerCallId); return n })
+    toast.success('Student unmuted')
   }
 
   // ── Screen share ─────────────────────────────────────────────────────────
@@ -724,7 +760,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               {peersArr.map(([id, info]) => (
                 <>
                   <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
-                    className="aspect-video" showMuteBtn={isTeacher} onMute={() => mutePeer(id)} />
+                    className="aspect-video" showMuteBtn={isTeacher} onMute={() => mutePeer(id)}
+                    onUnmute={() => unmutePeer(id)} peerMuted={mutedPeers.has(id)} />
                   {/* Remote screen share tile */}
                   {peerScreenStreams.has(id) && (
                     <VideoTile key={`${id}-screen`} stream={peerScreenStreams.get(id)!}
@@ -742,14 +779,16 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               <div className="flex-1 min-h-0">
                 {peersArr[0]
                   ? <VideoTile stream={peersArr[0][1].stream} name={peersArr[0][1].name} state={peersArr[0][1].state}
-                      className="h-full" showMuteBtn={isTeacher} onMute={() => mutePeer(peersArr[0][0])} />
+                      className="h-full" showMuteBtn={isTeacher} onMute={() => mutePeer(peersArr[0][0])}
+                      onUnmute={() => unmutePeer(peersArr[0][0])} peerMuted={mutedPeers.has(peersArr[0][0])} />
                   : <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-full" />}
               </div>
               <div className="flex gap-1.5 shrink-0 overflow-x-auto pb-1">
                 {peersArr[0] && <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-20 w-28 shrink-0" />}
                 {peersArr.slice(1).map(([id, info]) => (
                   <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
-                    className="h-20 w-28 shrink-0" showMuteBtn={isTeacher} onMute={() => mutePeer(id)} />
+                    className="h-20 w-28 shrink-0" showMuteBtn={isTeacher} onMute={() => mutePeer(id)}
+                    onUnmute={() => unmutePeer(id)} peerMuted={mutedPeers.has(id)} />
                 ))}
               </div>
             </div>
