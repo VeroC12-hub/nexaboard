@@ -18,7 +18,7 @@ import {
   Heading1, Heading2, Heading3,
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
-  Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X,
+  Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X, Maximize2,
 } from 'lucide-react'
 
 // ── Document embed node ───────────────────────────────────────────────────────
@@ -47,6 +47,7 @@ const FILE_ICONS: Record<FileType, string> = {
 function DocumentEmbedView({ node, deleteNode }: { node: any; deleteNode: () => void }) {
   const { src, filename, fileType } = node.attrs as { src: string; filename: string; fileType: FileType }
   const embedUrl = getEmbedUrl(src, fileType)
+  const [fullscreen, setFullscreen] = useState(false)
 
   return (
     <NodeViewWrapper>
@@ -54,6 +55,10 @@ function DocumentEmbedView({ node, deleteNode }: { node: any; deleteNode: () => 
         <div className="flex items-center gap-2 px-3 py-2 bg-[#f3fcf0] border-b border-green-100">
           <span className="text-base leading-none">{FILE_ICONS[fileType]}</span>
           <span className="text-sm font-medium text-[#1b2b4b] flex-1 truncate">{filename}</span>
+          <button onClick={() => setFullscreen(true)}
+            className="flex items-center gap-1 text-xs text-[#1b2b4b] bg-white border border-green-200 hover:bg-green-50 px-2 py-0.5 rounded transition-colors font-medium">
+            <Maximize2 size={11} /> Expand
+          </button>
           <a href={src} target="_blank" rel="noreferrer"
             className="text-xs text-[#5ab82e] hover:underline px-2 py-0.5 rounded transition-colors">
             Open
@@ -63,9 +68,30 @@ function DocumentEmbedView({ node, deleteNode }: { node: any; deleteNode: () => 
             <X size={13} />
           </button>
         </div>
-        <iframe src={embedUrl} className="w-full border-0" style={{ height: 520 }}
+        <iframe src={embedUrl} className="w-full border-0" style={{ height: 480 }}
           title={filename} allow="fullscreen" />
       </div>
+
+      {fullscreen && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex flex-col" onClick={() => setFullscreen(false)}>
+          <div className="flex items-center gap-3 px-4 py-2 bg-[#1b2b4b] shrink-0" onClick={e => e.stopPropagation()}>
+            <span className="text-base leading-none">{FILE_ICONS[fileType]}</span>
+            <span className="text-sm font-medium text-white flex-1 truncate">{filename}</span>
+            <a href={src} target="_blank" rel="noreferrer"
+              className="text-xs text-[#5ab82e] hover:underline px-2 py-1 rounded transition-colors">
+              Open original
+            </a>
+            <button onClick={() => setFullscreen(false)}
+              className="p-1 text-white/70 hover:text-white transition-colors rounded">
+              <X size={16} />
+            </button>
+          </div>
+          <div className="flex-1 min-h-0" onClick={e => e.stopPropagation()}>
+            <iframe src={embedUrl} className="w-full h-full border-0"
+              title={filename} allow="fullscreen" />
+          </div>
+        </div>
+      )}
     </NodeViewWrapper>
   )
 }
