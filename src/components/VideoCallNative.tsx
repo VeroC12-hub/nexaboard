@@ -253,20 +253,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         }
       }
 
-      // Renegotiation: fires when a track is added to an established connection
-      // (e.g. student starts screen share). Guard prevents firing during initial setup.
-      pc.onnegotiationneeded = async () => {
-        if (pc.signalingState !== 'stable' || pc.connectionState === 'new' || pc.connectionState === 'connecting') return
-        try {
-          const offer = await pc.createOffer()
-          await pc.setLocalDescription(offer)
-          chRef.current?.send({
-            type: 'broadcast', event: 'call_offer',
-            payload: { from: callId, to: peerCallId, sdp: pc.localDescription, name: displayName },
-          })
-        } catch { /* connection may have closed */ }
-      }
-
       pcs.set(peerCallId, pc)
       setPeerState(peerCallId, { name: peerName, stream: remoteStream, state: 'connecting' })
       return pc
@@ -379,6 +365,12 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = true })
           setAudioMuted(false)
           toast('Teacher unmuted your microphone', { icon: '🔊' })
+        })
+        // ── Teacher ends call for everyone ───────────────────────────────
+        .on('broadcast', { event: 'call_end_all' }, ({ payload }) => {
+          if (payload.from === callId) return
+          toast(isTeacher ? 'Call ended by lead device' : 'Teacher ended the call', { icon: '📞' })
+          onClose()
         })
         // ── Screen share started (one at a time enforcement) ─────────────
         .on('broadcast', { event: 'screen_share_started' }, ({ payload }) => {
@@ -506,6 +498,25 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     toast.success('Student unmuted')
   }
 
+  const endCallForAll = () => {
+    if (!window.confirm('End the call for all students and devices?')) return
+    chRef.current?.send({ type: 'broadcast', event: 'call_end_all', payload: { from: callId } })
+    toast.success('Call ended for everyone')
+    onClose()
+  }
+
+  // Explicit renegotiation after track changes — more reliable than onnegotiationneeded
+  const renegotiate = async (pc: RTCPeerConnection, peerId: string) => {
+    try {
+      const offer = await pc.createOffer()
+      await pc.setLocalDescription(offer)
+      chRef.current?.send({
+        type: 'broadcast', event: 'call_offer',
+        payload: { from: callId, to: peerId, sdp: pc.localDescription, name: displayName },
+      })
+    } catch { /* peer may have disconnected */ }
+  }
+
   // ── Screen share ─────────────────────────────────────────────────────────
   const startScreenShare = async () => {
     // One-at-a-time: block if someone else is sharing
@@ -518,17 +529,20 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       const track = stream.getVideoTracks()[0]
       if (!track) return
 
+      // Add track and explicitly renegotiate each peer connection
+      const jobs: Promise<void>[] = []
       pcsRef.current.forEach((pc, peerId) => {
         const sender = pc.addTrack(track, stream)
         screenSendersRef.current.set(peerId, sender)
+        jobs.push(renegotiate(pc, peerId))
       })
+      await Promise.all(jobs)
 
       screenStreamRef.current = stream
       setScreenStream(stream)
       screenSharerCallIdRef.current = callId
       setScreenSharerCallId(callId)
 
-      // Announce to everyone
       chRef.current?.send({
         type: 'broadcast', event: 'screen_share_started',
         payload: { from: callId, name: displayName },
@@ -548,8 +562,11 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     screenSharerCallIdRef.current = null
     setScreenSharerCallId(null)
 
-    screenSendersRef.current.forEach((sender, peerId) => {
-      try { pcsRef.current.get(peerId)?.removeTrack(sender) } catch { }
+    screenSendersRef.current.forEach(async (sender, peerId) => {
+      const pc = pcsRef.current.get(peerId)
+      if (!pc) return
+      try { pc.removeTrack(sender) } catch { }
+      await renegotiate(pc, peerId)
     })
     screenSendersRef.current.clear()
 
@@ -864,6 +881,12 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               >
                 {screenStream ? <MonitorOff size={16} className="text-white" /> : <Monitor size={16} className="text-white" />}
               </CtrlBtn>
+              {/* End for all (teacher only) */}
+              {isTeacher && (
+                <CtrlBtn onClick={endCallForAll} active label="End Class" alwaysRed>
+                  <PhoneOff size={18} className="text-white" />
+                </CtrlBtn>
+              )}
               {/* Leave */}
               <CtrlBtn onClick={onClose} active label="Leave" alwaysRed>
                 <PhoneOff size={18} className="text-white" />
