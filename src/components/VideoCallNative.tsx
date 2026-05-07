@@ -111,6 +111,9 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const [audioMuted, setAudioMuted] = useState(false)
   const [videoOff, setVideoOff] = useState(false)
   const [hasCamera, setHasCamera] = useState(true)
+  // Refs mirror mute/video state so visibilitychange and restore handlers avoid stale closures
+  const audioMutedRef = useRef(false)
+  const videoOffRef = useRef(false)
   const [expanded, setExpanded] = useState(false)
   const [minimized, setMinimized] = useState(false)
   const [viewMode, setViewMode] = useState<'grid' | 'speaker'>('grid')
@@ -296,6 +299,13 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       if (!mounted) { stream!.getTracks().forEach(t => t.stop()); return }
       localStreamRef.current = stream
       setLocalStream(stream)
+      // Restore video-off state from previous session on this device (survives refresh).
+      // Only applies if the user previously turned the camera off in this session.
+      // Fresh join (no saved value) leaves camera on.
+      if (sessionStorage.getItem(`nexaboard_videooff_${sessionId}`) === '1') {
+        stream.getVideoTracks().forEach(t => { t.enabled = false })
+        setVideoOff(true); videoOffRef.current = true
+      }
 
       // Teacher signals call is active so students see the Join Call button
       if (isTeacher) {
@@ -367,13 +377,13 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         .on('broadcast', { event: 'call_remote_mute' }, ({ payload }) => {
           if (payload.to !== callId) return
           localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = false })
-          setAudioMuted(true)
+          setAudioMuted(true); audioMutedRef.current = true
           toast('Teacher muted your microphone', { icon: '🔇' })
         })
         .on('broadcast', { event: 'call_remote_unmute' }, ({ payload }) => {
           if (payload.to !== callId) return
           localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = true })
-          setAudioMuted(false)
+          setAudioMuted(false); audioMutedRef.current = false
           toast('Teacher unmuted your microphone', { icon: '🔊' })
         })
         // ── Teacher ends call for everyone ───────────────────────────────
@@ -405,16 +415,16 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           const action = payload.action as CtrlAction
           if (action === 'mute') {
             localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = false })
-            setAudioMuted(true)
+            setAudioMuted(true); audioMutedRef.current = true
           } else if (action === 'unmute') {
             localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = true })
-            setAudioMuted(false)
+            setAudioMuted(false); audioMutedRef.current = false
           } else if (action === 'video_off') {
             localStreamRef.current?.getVideoTracks().forEach(t => { t.enabled = false })
-            setVideoOff(true)
+            setVideoOff(true); videoOffRef.current = true
           } else if (action === 'video_on') {
             localStreamRef.current?.getVideoTracks().forEach(t => { t.enabled = true })
-            setVideoOff(false)
+            setVideoOff(false); videoOffRef.current = false
           } else if (action === 'record_on') {
             setRecording(true)  // indicator only — avoid duplicate recording files
           } else if (action === 'record_off') {
@@ -476,6 +486,27 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     }
   }, [])
 
+  // ── Re-enable tracks when browser tab regains visibility ─────────────────
+  // Some browsers (Chrome on mobile, battery-saver mode) pause MediaStream
+  // tracks when the tab is hidden. Re-enable them when focus returns.
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState !== 'visible' || !localStreamRef.current) return
+      if (!audioMutedRef.current) localStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true })
+      if (!videoOffRef.current) localStreamRef.current.getVideoTracks().forEach(t => { t.enabled = true })
+    }
+    document.addEventListener('visibilitychange', onVisible)
+    return () => document.removeEventListener('visibilitychange', onVisible)
+  }, [])
+
+  // ── Re-enable tracks when restoring from the minimised pill ──────────────
+  useEffect(() => {
+    if (!minimized && localStreamRef.current) {
+      if (!audioMutedRef.current) localStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true })
+      if (!videoOffRef.current) localStreamRef.current.getVideoTracks().forEach(t => { t.enabled = true })
+    }
+  }, [minimized])
+
   // ── Broadcast helper (teacher device sync) ────────────────────────────────
   const broadcastCtrl = (action: CtrlAction) => {
     if (!isTeacher) return
@@ -489,14 +520,17 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const toggleAudio = () => {
     const nextMuted = !audioMuted
     localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = !nextMuted })
-    setAudioMuted(nextMuted)
+    setAudioMuted(nextMuted); audioMutedRef.current = nextMuted
     broadcastCtrl(nextMuted ? 'mute' : 'unmute')
   }
   const toggleVideo = () => {
     if (!hasCamera) return
     const nextOff = !videoOff
     localStreamRef.current?.getVideoTracks().forEach(t => { t.enabled = !nextOff })
-    setVideoOff(nextOff)
+    setVideoOff(nextOff); videoOffRef.current = nextOff
+    // Persist so a page refresh keeps the camera off if the user turned it off
+    if (nextOff) sessionStorage.setItem(`nexaboard_videooff_${sessionId}`, '1')
+    else sessionStorage.removeItem(`nexaboard_videooff_${sessionId}`)
     broadcastCtrl(nextOff ? 'video_off' : 'video_on')
   }
   const mutePeer = (peerCallId: string) => {
