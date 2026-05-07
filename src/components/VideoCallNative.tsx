@@ -9,6 +9,9 @@ import toast from 'react-hot-toast'
 const ICE: RTCIceServer[] = [
   { urls: 'stun:stun.l.google.com:19302' },
   { urls: 'stun:stun1.l.google.com:19302' },
+  { urls: 'stun:stun2.l.google.com:19302' },
+  { urls: 'stun:stun3.l.google.com:19302' },
+  { urls: 'stun:stun4.l.google.com:19302' },
   { urls: 'turn:openrelay.metered.ca:80', username: 'openrelayproject', credential: 'openrelayproject' },
   { urls: 'turn:openrelay.metered.ca:443', username: 'openrelayproject', credential: 'openrelayproject' },
   { urls: 'turn:openrelay.metered.ca:80?transport=tcp', username: 'openrelayproject', credential: 'openrelayproject' },
@@ -215,10 +218,14 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
 
       pc.ontrack = e => {
         if (!mounted) return
-        // replaceTrack never fires ontrack again — screen share detection is handled via
-        // screen_share_started broadcast which promotes this same remoteStream into peerScreenStreams
         remoteStream.addTrack(e.track)
         setPeerState(peerCallId, { stream: remoteStream })
+
+        // If this peer was already screen sharing before this connection (re)established,
+        // re-promote the stream immediately without waiting for a new screen_share_started broadcast
+        if (screenSharersRef.current.has(peerCallId)) {
+          setPeerScreenStreams(prev => { const n = new Map(prev); n.set(peerCallId, remoteStream); return n })
+        }
 
         if (audioCtxRef.current && mixDestRef.current && !connectedStreamsRef.current.has(peerCallId)) {
           try {
@@ -236,13 +243,17 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         })
       }
 
+      let reconnectAttempt = 0
       pc.onconnectionstatechange = () => {
         if (!mounted) return
         const s = pc.connectionState
         setPeerState(peerCallId, { state: s })
+        if (s === 'connected') reconnectAttempt = 0
         if (s === 'failed' || s === 'closed') {
           removePeer(peerCallId)
           if (isTeacher && !teacherCallIdsRef.current.has(peerCallId)) {
+            reconnectAttempt++
+            const delay = Math.min(3000 * reconnectAttempt, 20000) // 3s, 6s, 9s … max 20s
             setTimeout(() => {
               if (!mounted) return
               const presenceState = chRef.current?.presenceState<{ callId: string }>() ?? {}
@@ -250,7 +261,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
                 list.some((p: { callId: string }) => p.callId === peerCallId)
               )
               if (stillPresent) makeOffer(peerCallId, peerName)
-            }, 3000)
+            }, delay)
           }
         }
       }
@@ -399,6 +410,18 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           const answer = await pc.createAnswer()
           await pc.setLocalDescription(answer)
           ch.send({ type: 'broadcast', event: 'call_answer', payload: { from: callId, to: payload.from, sdp: pc.localDescription } })
+
+          // If currently screen sharing, re-apply the screen track to this new/reconnected sender
+          // so the teacher sees the screen without needing a new screen_share_started broadcast
+          if (screenStreamRef.current) {
+            const screenTrack = screenStreamRef.current.getVideoTracks()[0]
+            if (screenTrack) {
+              setTimeout(() => {
+                const sender = pc.getSenders().find(s => s.track?.kind === 'video')
+                if (sender) { sender.replaceTrack(screenTrack).catch(() => {}); screenSendersRef.current.set(payload.from, sender) }
+              }, 500)
+            }
+          }
         })
         // ── Answer ───────────────────────────────────────────────────────────
         .on('broadcast', { event: 'call_answer' }, async ({ payload }) => {
