@@ -232,7 +232,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         await pc.setLocalDescription(offer)
         chRef.current?.send({
           type: 'broadcast', event: 'call_offer',
-          payload: { from: callId, to: peerCallId, sdp: pc.localDescription },
+          payload: { from: callId, to: peerCallId, sdp: pc.localDescription, name: displayName },
         })
       } catch { removePeer(peerCallId) }
     }
@@ -271,7 +271,10 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           const p = (newPresences as unknown as Array<{ name: string; isTeacher: boolean; callId: string }>)[0]
           if (!p || p.callId === callId) return
           if (p.isTeacher) teacherCallIdsRef.current.add(p.callId)
-          const shouldOffer = isTeacher ? !p.isTeacher : p.isTeacher
+          // Teacher always offers to students. Between two teacher devices, the lexically-higher
+          // callId makes the offer (tiebreaker prevents both sides from offering simultaneously).
+          // Students never make offers — they only answer. This eliminates WebRTC offer glare.
+          const shouldOffer = isTeacher ? (!p.isTeacher || callId > p.callId) : false
           if (shouldOffer) makeOffer(p.callId, p.name)
         })
         // ── Peer left ───────────────────────────────────────────────────────
@@ -290,7 +293,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         // ── Student/Teacher receives offer → sends answer ────────────────
         .on('broadcast', { event: 'call_offer' }, async ({ payload }) => {
           if (payload.to !== callId) return
-          const pc = buildPC(payload.from, isTeacher ? 'Student' : 'Teacher')
+          const pc = buildPC(payload.from, payload.name ?? (isTeacher ? 'Student' : 'Teacher'))
           await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp))
           flushIce(payload.from)
           const answer = await pc.createAnswer()
@@ -373,7 +376,10 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             const p = presences[0]
             if (!p || p.callId === callId) continue
             if (p.isTeacher) teacherCallIdsRef.current.add(p.callId)
-            const shouldOffer = isTeacher ? !p.isTeacher : p.isTeacher
+            // Teacher always offers to students. Between two teacher devices, the lexically-higher
+          // callId makes the offer (tiebreaker prevents both sides from offering simultaneously).
+          // Students never make offers — they only answer. This eliminates WebRTC offer glare.
+          const shouldOffer = isTeacher ? (!p.isTeacher || callId > p.callId) : false
             if (shouldOffer) makeOffer(p.callId, p.name)
           }
         })
