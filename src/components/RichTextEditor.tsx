@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, ReactNodeViewRenderer, NodeViewWrapper } from '@tiptap/react'
+import { Node, mergeAttributes } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import { Table } from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
@@ -17,16 +18,81 @@ import {
   Heading1, Heading2, Heading3,
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
-  Trash2, PlusSquare, Lock, FileText,
+  Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X,
 } from 'lucide-react'
 
-interface Props {
-  sessionId: string
-  isTeacher: boolean
-  canEdit?: boolean
-  participantId?: string | null
-  participantName?: string
+// ── Document embed node ───────────────────────────────────────────────────────
+
+type FileType = 'pdf' | 'word' | 'spreadsheet' | 'presentation'
+
+function getFileType(filename: string): FileType {
+  const ext = filename.split('.').pop()?.toLowerCase() ?? ''
+  if (ext === 'pdf') return 'pdf'
+  if (ext === 'doc' || ext === 'docx') return 'word'
+  if (ext === 'xls' || ext === 'xlsx') return 'spreadsheet'
+  if (ext === 'ppt' || ext === 'pptx') return 'presentation'
+  return 'pdf'
 }
+
+function getEmbedUrl(src: string, fileType: FileType): string {
+  if (fileType === 'pdf') return src
+  return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(src)}`
+}
+
+const FILE_ICONS: Record<FileType, string> = {
+  pdf: '📄', word: '📝', spreadsheet: '📊', presentation: '📑',
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function DocumentEmbedView({ node, deleteNode }: { node: any; deleteNode: () => void }) {
+  const { src, filename, fileType } = node.attrs as { src: string; filename: string; fileType: FileType }
+  const embedUrl = getEmbedUrl(src, fileType)
+
+  return (
+    <NodeViewWrapper>
+      <div className="my-3 border border-green-200 rounded-xl overflow-hidden select-none" contentEditable={false}>
+        <div className="flex items-center gap-2 px-3 py-2 bg-[#f3fcf0] border-b border-green-100">
+          <span className="text-base leading-none">{FILE_ICONS[fileType]}</span>
+          <span className="text-sm font-medium text-[#1b2b4b] flex-1 truncate">{filename}</span>
+          <a href={src} target="_blank" rel="noreferrer"
+            className="text-xs text-[#5ab82e] hover:underline px-2 py-0.5 rounded transition-colors">
+            Open
+          </a>
+          <button onClick={deleteNode}
+            className="p-0.5 text-[#9ca3af] hover:text-red-500 transition-colors rounded">
+            <X size={13} />
+          </button>
+        </div>
+        <iframe src={embedUrl} className="w-full border-0" style={{ height: 520 }}
+          title={filename} allow="fullscreen" />
+      </div>
+    </NodeViewWrapper>
+  )
+}
+
+const DocumentEmbed = Node.create({
+  name: 'documentEmbed',
+  group: 'block',
+  atom: true,
+
+  addAttributes() {
+    return {
+      src: { default: null },
+      filename: { default: '' },
+      fileType: { default: 'pdf' },
+    }
+  },
+
+  parseHTML() { return [{ tag: 'div[data-document-embed]' }] },
+
+  renderHTML({ HTMLAttributes }) {
+    return ['div', mergeAttributes(HTMLAttributes, { 'data-document-embed': '' })]
+  },
+
+  addNodeView() { return ReactNodeViewRenderer(DocumentEmbedView) },
+})
+
+// ── Table size picker ─────────────────────────────────────────────────────────
 
 const GRID_SIZE = 8
 
@@ -41,12 +107,9 @@ function TablePicker({ onPick }: { onPick: (rows: number, cols: number) => void 
         {Array.from({ length: GRID_SIZE }, (_, r) => (
           <div key={r} className="flex gap-0.5">
             {Array.from({ length: GRID_SIZE }, (_, c) => (
-              <div
-                key={c}
+              <div key={c}
                 onMouseEnter={() => setHover({ r: r + 1, c: c + 1 })}
                 onMouseDown={e => { e.preventDefault(); onPick(r + 1, c + 1) }}
-                onTouchStart={() => setHover({ r: r + 1, c: c + 1 })}
-                onTouchEnd={e => { e.preventDefault(); onPick(r + 1, c + 1) }}
                 className={`w-6 h-6 rounded-sm border transition-colors cursor-pointer ${
                   r < hover.r && c < hover.c
                     ? 'bg-[#5ab82e] border-[#5ab82e]'
@@ -59,6 +122,16 @@ function TablePicker({ onPick }: { onPick: (rows: number, cols: number) => void 
       </div>
     </div>
   )
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
+
+interface Props {
+  sessionId: string
+  isTeacher: boolean
+  canEdit?: boolean
+  participantId?: string | null
+  participantName?: string
 }
 
 const STORAGE_KEY = (sessionId: string) => `nexaboard_notes_${sessionId}`
@@ -74,12 +147,15 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
   const lastBroadcast = useRef(0)
   const isRemoteUpdate = useRef(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   const [showChartModal, setShowChartModal] = useState(false)
   const [showDrawingModal, setShowDrawingModal] = useState(false)
   const [showImageInput, setShowImageInput] = useState(false)
   const [showTablePicker, setShowTablePicker] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
   const [requesting, setRequesting] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [activeEditor, setActiveEditor] = useState<string | null>(null)
 
   const myId = isTeacher ? 'teacher' : (participantId || 'anon')
@@ -95,6 +171,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       TableCell,
       Image.configure({ inline: false, allowBase64: true }),
       Placeholder.configure({ placeholder: 'Start typing your notes here...' }),
+      DocumentEmbed,
     ],
     content: loadSaved(sessionId) ?? undefined,
     editable: canWrite,
@@ -106,18 +183,14 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     },
   })
 
-  // Sync editable state when access changes
-  useEffect(() => {
-    editor?.setEditable(canWrite)
-  }, [editor, canWrite])
+  useEffect(() => { editor?.setEditable(canWrite) }, [editor, canWrite])
 
   const broadcastContent = useCallback((content: object) => {
     const now = Date.now()
     if (now - lastBroadcast.current < 500) return
     lastBroadcast.current = now
     channelRef.current?.send({
-      type: 'broadcast',
-      event: 'notes_update',
+      type: 'broadcast', event: 'notes_update',
       payload: { content, senderId: myId, senderName: participantName || (isTeacher ? 'Teacher' : 'Student') },
     })
   }, [myId, participantName, isTeacher])
@@ -156,6 +229,51 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     return () => document.removeEventListener('mousedown', close)
   }, [])
 
+  // ── File upload ─────────────────────────────────────────────────────────────
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !editor) return
+    e.target.value = ''
+
+    const fileType = getFileType(file.name)
+    const supported = /\.(pdf|docx?|xlsx?|pptx?)$/i.test(file.name)
+    if (!supported) {
+      toast.error('Supported: PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx)')
+      return
+    }
+
+    const toastId = toast.loading(`Uploading ${file.name}…`)
+    setUploading(true)
+
+    try {
+      const path = `${sessionId}/${Date.now()}-${file.name.replace(/\s+/g, '_')}`
+      const { error: uploadError } = await supabase.storage
+        .from('session-files')
+        .upload(path, file, { upsert: true })
+
+      if (uploadError) throw uploadError
+
+      const { data: { publicUrl } } = supabase.storage.from('session-files').getPublicUrl(path)
+
+      editor.chain().focus().insertContent({
+        type: 'documentEmbed',
+        attrs: { src: publicUrl, filename: file.name, fileType },
+      }).run()
+
+      // Trigger a notes broadcast so all students see the embedded document
+      lastBroadcast.current = 0
+      broadcastContent(editor.getJSON())
+
+      toast.success(`${file.name} added to notes`, { id: toastId })
+    } catch (err) {
+      console.error(err)
+      toast.error('Upload failed — make sure the "session-files" storage bucket exists and is public', { id: toastId })
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  // ── Notes access request ────────────────────────────────────────────────────
   const requestNotesAccess = async () => {
     if (requesting || !participantId) return
     setRequesting(true)
@@ -181,8 +299,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const insertImage = () => {
     if (!imageUrl.trim() || !editor) return
     editor.chain().focus().setImage({ src: imageUrl.trim() }).run()
-    setImageUrl('')
-    setShowImageInput(false)
+    setImageUrl(''); setShowImageInput(false)
   }
 
   const handleChartInsert = (dataUrl: string) => {
@@ -205,11 +322,8 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const inTable = editor.isActive('table')
 
   const btn = (active: boolean, onClick: () => void, title: string, children: React.ReactNode) => (
-    <button
-      onMouseDown={e => { e.preventDefault(); onClick() }}
-      title={title}
-      className={`p-1.5 rounded transition-colors ${active ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}
-    >
+    <button onMouseDown={e => { e.preventDefault(); onClick() }} title={title}
+      className={`p-1.5 rounded transition-colors ${active ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
       {children}
     </button>
   )
@@ -218,6 +332,11 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
   return (
     <div className="h-full flex flex-col bg-white">
+      {/* Hidden file input */}
+      <input ref={fileInputRef} type="file"
+        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+        onChange={handleFileUpload} className="hidden" />
+
       {/* Toolbar — teacher and students with access */}
       {canWrite && (
         <>
@@ -238,38 +357,40 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
             {btn(false, () => editor.chain().focus().setHorizontalRule().run(), 'Divider', <Minus size={15} />)}
             {sep()}
 
+            {/* Open document file */}
+            <button
+              onMouseDown={e => { e.preventDefault(); fileInputRef.current?.click() }}
+              title="Open File — PDF, Word, Excel, PowerPoint"
+              disabled={uploading}
+              className="p-1.5 rounded transition-colors text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b] disabled:opacity-40"
+            >
+              {uploading ? <Loader2 size={15} className="animate-spin" /> : <FolderOpen size={15} />}
+            </button>
+
             {/* Teacher-only: table, image, chart, drawing */}
             {isTeacher && (
               <>
+                {sep()}
                 <div className="relative" onMouseDown={e => e.stopPropagation()}>
-                  <button
-                    onMouseDown={e => { e.preventDefault(); setShowTablePicker(v => !v); setShowImageInput(false) }}
+                  <button onMouseDown={e => { e.preventDefault(); setShowTablePicker(v => !v); setShowImageInput(false) }}
                     title="Insert Table"
-                    className={`p-1.5 rounded transition-colors ${showTablePicker ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}
-                  >
+                    className={`p-1.5 rounded transition-colors ${showTablePicker ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
                     <TableIcon size={15} />
                   </button>
                   {showTablePicker && <TablePicker onPick={handleTablePick} />}
                 </div>
-                {sep()}
                 <div className="relative" onMouseDown={e => e.stopPropagation()}>
-                  <button
-                    onMouseDown={e => { e.preventDefault(); setShowImageInput(v => !v); setShowTablePicker(false) }}
+                  <button onMouseDown={e => { e.preventDefault(); setShowImageInput(v => !v); setShowTablePicker(false) }}
                     title="Insert Image"
-                    className={`p-1.5 rounded transition-colors ${showImageInput ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}
-                  >
+                    className={`p-1.5 rounded transition-colors ${showImageInput ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
                     <ImageIcon size={15} />
                   </button>
                   {showImageInput && (
                     <div className="absolute top-full left-0 mt-1 z-30 bg-white border border-green-200 rounded-xl shadow-lg p-3 w-72 flex gap-2">
-                      <input
-                        autoFocus
-                        value={imageUrl}
-                        onChange={e => setImageUrl(e.target.value)}
+                      <input autoFocus value={imageUrl} onChange={e => setImageUrl(e.target.value)}
                         onKeyDown={e => { if (e.key === 'Enter') insertImage(); if (e.key === 'Escape') setShowImageInput(false) }}
                         placeholder="Paste image URL..."
-                        className="flex-1 bg-[#f3fcf0] border border-green-200 rounded-lg px-3 py-1.5 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-1 focus:ring-[#5ab82e]"
-                      />
+                        className="flex-1 bg-[#f3fcf0] border border-green-200 rounded-lg px-3 py-1.5 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-1 focus:ring-[#5ab82e]" />
                       <button onClick={insertImage}
                         className="px-3 py-1.5 bg-[#5ab82e] hover:bg-[#489f22] text-white rounded-lg text-sm font-semibold transition-colors">
                         Insert
@@ -282,7 +403,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
               </>
             )}
 
-            {/* Teacher: show who's currently editing */}
+            {/* Teacher: active editor indicator */}
             {isTeacher && activeEditor && (
               <div className="ml-auto flex items-center gap-1.5 px-2.5 py-1 bg-purple-500/10 border border-purple-500/30 rounded-lg text-xs text-purple-600 font-medium">
                 <FileText size={10} /> Editing: {activeEditor}
@@ -290,26 +411,21 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
             )}
           </div>
 
-          {/* Table controls */}
+          {/* Table controls (teacher only, when cursor is in a table) */}
           {inTable && isTeacher && (
             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#f3fcf0] border-b border-green-200 shrink-0">
               <span className="text-[10px] font-semibold text-[#5ab82e] uppercase tracking-wider mr-1">Table:</span>
-              <button onMouseDown={e => { e.preventDefault(); editor.chain().focus().addRowAfter().run() }}
-                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium">
-                <PlusSquare size={12} /> Add Row Below
-              </button>
-              <button onMouseDown={e => { e.preventDefault(); editor.chain().focus().addRowBefore().run() }}
-                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium">
-                <PlusSquare size={12} /> Add Row Above
-              </button>
-              <button onMouseDown={e => { e.preventDefault(); editor.chain().focus().addColumnAfter().run() }}
-                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium">
-                <PlusSquare size={12} /> Add Column Right
-              </button>
-              <button onMouseDown={e => { e.preventDefault(); editor.chain().focus().addColumnBefore().run() }}
-                className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium">
-                <PlusSquare size={12} /> Add Column Left
-              </button>
+              {[
+                ['Add Row Below', () => editor.chain().focus().addRowAfter().run()],
+                ['Add Row Above', () => editor.chain().focus().addRowBefore().run()],
+                ['Add Column Right', () => editor.chain().focus().addColumnAfter().run()],
+                ['Add Column Left', () => editor.chain().focus().addColumnBefore().run()],
+              ].map(([label, fn]) => (
+                <button key={label as string} onMouseDown={e => { e.preventDefault(); (fn as () => void)() }}
+                  className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium">
+                  <PlusSquare size={12} /> {label}
+                </button>
+              ))}
               <button onMouseDown={e => { e.preventDefault(); editor.chain().focus().deleteRow().run() }}
                 className="flex items-center gap-1 px-2.5 py-1 text-xs text-red-500 bg-white border border-red-100 rounded-lg hover:bg-red-50 transition-colors font-medium">
                 <Trash2 size={12} /> Delete Row
@@ -345,12 +461,8 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
         </div>
       </div>
 
-      {showChartModal && (
-        <ChartModal onInsert={handleChartInsert} onClose={() => setShowChartModal(false)} />
-      )}
-      {showDrawingModal && (
-        <DrawingModal onInsert={handleDrawingInsert} onClose={() => setShowDrawingModal(false)} />
-      )}
+      {showChartModal && <ChartModal onInsert={handleChartInsert} onClose={() => setShowChartModal(false)} />}
+      {showDrawingModal && <DrawingModal onInsert={handleDrawingInsert} onClose={() => setShowDrawingModal(false)} />}
     </div>
   )
 }
