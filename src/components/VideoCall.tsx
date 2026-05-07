@@ -30,16 +30,21 @@ export default function VideoCall({ roomName, displayName, onClose }: Props) {
         parentNode: containerRef.current,
         userInfo: { displayName },
         configOverwrite: {
-          startWithAudioMuted: true,
+          startWithAudioMuted: false,
           startWithVideoMuted: false,
           disableDeepLinking: true,
-          prejoinPageEnabled: false,
+          prejoinConfig: { enabled: false },
+          toolbarButtons: [
+            'microphone', 'camera', 'hangup',
+            'tileview', 'fullscreen', 'settings',
+          ],
+          disableThirdPartyRequests: true,
         },
         interfaceConfigOverwrite: {
           SHOW_JITSI_WATERMARK: false,
           SHOW_WATERMARK_FOR_GUESTS: false,
           MOBILE_APP_PROMO: false,
-          TOOLBAR_BUTTONS: ['microphone', 'camera', 'hangup', 'tileview', 'fullscreen'],
+          SHOW_PROMOTIONAL_CLOSE_PAGE: false,
         },
       })
     }
@@ -75,7 +80,7 @@ export default function VideoCall({ roomName, displayName, onClose }: Props) {
   const panelClass = expanded
     ? 'fixed inset-0 z-50 flex flex-col bg-[#1b2b4b]'
     : 'fixed bottom-0 right-0 z-40 flex flex-col bg-[#1b2b4b] shadow-2xl rounded-tl-2xl overflow-hidden'
-  const panelStyle = expanded ? {} : { width: 'min(380px, 100vw)', height: 'min(500px, 60vh)' }
+  const panelStyle = expanded ? {} : { width: 'min(420px, 100vw)', height: 'min(580px, 70vh)' }
 
   return (
     <div className={panelClass} style={panelStyle}>
