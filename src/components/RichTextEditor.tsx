@@ -92,6 +92,43 @@ const DocumentEmbed = Node.create({
   addNodeView() { return ReactNodeViewRenderer(DocumentEmbedView) },
 })
 
+// ── Document bar — chips listing embedded files ────────────────────────────────
+// Walks the Tiptap JSON to find documentEmbed nodes and renders quick-access chips.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function DocBar({ editor }: { editor: any }) {
+  const [docs, setDocs] = useState<{ src: string; filename: string; fileType: FileType }[]>([])
+
+  useEffect(() => {
+    if (!editor) return
+    const collect = () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const found: any[] = []
+      editor.state.doc.descendants((node: any) => {
+        if (node.type.name === 'documentEmbed') found.push(node.attrs)
+      })
+      setDocs(found)
+    }
+    collect()
+    editor.on('update', collect)
+    return () => editor.off('update', collect)
+  }, [editor])
+
+  if (docs.length === 0) return null
+
+  return (
+    <div className="flex items-center gap-2 px-4 py-1.5 border-b border-green-100 bg-[#f3fcf0] shrink-0 overflow-x-auto">
+      <span className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider shrink-0">Documents:</span>
+      {docs.map((d, i) => (
+        <a key={i} href={d.src} target="_blank" rel="noreferrer"
+          className="flex items-center gap-1.5 px-2.5 py-1 bg-white border border-green-200 rounded-lg text-xs text-[#1b2b4b] hover:bg-green-50 transition-colors shrink-0 font-medium">
+          <span>{FILE_ICONS[d.fileType]}</span>
+          <span className="max-w-[140px] truncate">{d.filename}</span>
+        </a>
+      ))}
+    </div>
+  )
+}
+
 // ── Table size picker ─────────────────────────────────────────────────────────
 
 const GRID_SIZE = 8
@@ -357,14 +394,15 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
             {btn(false, () => editor.chain().focus().setHorizontalRule().run(), 'Divider', <Minus size={15} />)}
             {sep()}
 
-            {/* Open document file */}
+            {/* Open document — prominent labeled button */}
             <button
               onMouseDown={e => { e.preventDefault(); fileInputRef.current?.click() }}
-              title="Open File — PDF, Word, Excel, PowerPoint"
               disabled={uploading}
-              className="p-1.5 rounded transition-colors text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b] disabled:opacity-40"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#1b2b4b] hover:bg-[#243660] disabled:opacity-40 text-white rounded-lg text-xs font-semibold transition-colors ml-1"
             >
-              {uploading ? <Loader2 size={15} className="animate-spin" /> : <FolderOpen size={15} />}
+              {uploading
+                ? <><Loader2 size={13} className="animate-spin" /> Uploading…</>
+                : <><FolderOpen size={13} /> Open Document</>}
             </button>
 
             {/* Teacher-only: table, image, chart, drawing */}
@@ -454,6 +492,9 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
           </button>
         </div>
       )}
+
+      {/* Document chips — always visible, extracted from editor content */}
+      <DocBar editor={editor} />
 
       <div className="flex-1 overflow-y-auto px-8 py-6">
         <div className="max-w-3xl mx-auto">
