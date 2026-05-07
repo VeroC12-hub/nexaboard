@@ -309,26 +309,37 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   // ── minimised pill ────────────────────────────────────────────────────────
   if (minimized) {
     return (
-      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-gray-900 rounded-full px-4 py-2.5 shadow-2xl border border-white/10">
-        <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse shrink-0" />
-        <span className="text-white text-sm font-semibold">Live</span>
-        <span className="text-white/50 text-xs flex items-center gap-1 shrink-0">
-          <Users size={11} /> {total}
-        </span>
-        <div className="w-px h-4 bg-white/20 mx-1 shrink-0" />
-        <button onClick={toggleAudio} title={audioMuted ? 'Unmute' : 'Mute'}
-          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors shrink-0
-            ${audioMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-white/10 hover:bg-white/20'}`}>
-          {audioMuted ? <MicOff size={14} className="text-white" /> : <Mic size={14} className="text-white" />}
+      <div className="fixed bottom-4 right-4 z-50 flex flex-col items-center gap-1.5">
+        {/* Tap the banner to re-open */}
+        <button
+          onClick={() => setMinimized(false)}
+          className="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 active:bg-gray-700 rounded-full px-4 py-2.5 shadow-2xl border border-white/10 transition-colors w-full"
+        >
+          <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse shrink-0" />
+          <span className="text-white text-sm font-semibold">Live Class</span>
+          <span className="text-white/50 text-xs flex items-center gap-1 shrink-0">
+            <Users size={11} /> {total}
+          </span>
+          <Maximize2 size={12} className="text-white/40 ml-auto shrink-0" />
         </button>
-        <button onClick={() => setMinimized(false)} title="Expand call"
-          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors shrink-0">
-          <Video size={14} className="text-white" />
-        </button>
-        <button onClick={onClose} title="Leave call"
-          className="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center transition-colors shrink-0">
-          <PhoneOff size={14} className="text-white" />
-        </button>
+
+        {/* Quick controls below the pill */}
+        <div className="flex items-center gap-2">
+          <button onClick={toggleAudio} title={audioMuted ? 'Unmute' : 'Mute'}
+            className={`w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-colors
+              ${audioMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-800 hover:bg-gray-700'}`}>
+            {audioMuted ? <MicOff size={15} className="text-white" /> : <Mic size={15} className="text-white" />}
+          </button>
+          <button onClick={toggleVideo} disabled={!hasCamera} title={videoOff ? 'Start video' : 'Stop video'}
+            className={`w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-colors
+              ${!hasCamera ? 'opacity-30 cursor-not-allowed bg-gray-800' : videoOff ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-800 hover:bg-gray-700'}`}>
+            {videoOff ? <VideoOff size={15} className="text-white" /> : <Video size={15} className="text-white" />}
+          </button>
+          <button onClick={onClose} title="Leave call"
+            className="w-9 h-9 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center shadow-lg transition-colors">
+            <PhoneOff size={15} className="text-white" />
+          </button>
+        </div>
       </div>
     )
   }
