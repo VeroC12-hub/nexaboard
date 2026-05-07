@@ -120,6 +120,10 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   // Teacher peer devices (callIds with isTeacher=true, for ctrl_sync filtering)
   const teacherCallIdsRef = useRef(new Set<string>())
 
+  // Call duration clock — starts when local stream is obtained
+  const [callSeconds, setCallSeconds] = useState(0)
+  const callTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
   // Recording
   const [recording, setRecording] = useState(false)
   const [recSeconds, setRecSeconds] = useState(0)
@@ -215,8 +219,22 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
 
       pc.onconnectionstatechange = () => {
         if (!mounted) return
-        setPeerState(peerCallId, { state: pc.connectionState })
-        if (pc.connectionState === 'failed' || pc.connectionState === 'closed') removePeer(peerCallId)
+        const s = pc.connectionState
+        setPeerState(peerCallId, { state: s })
+        if (s === 'failed' || s === 'closed') {
+          removePeer(peerCallId)
+          // Teacher re-offers to students that drop — check they're still in the channel first
+          if (isTeacher && !teacherCallIdsRef.current.has(peerCallId)) {
+            setTimeout(() => {
+              if (!mounted) return
+              const presenceState = chRef.current?.presenceState<{ callId: string }>() ?? {}
+              const stillPresent = Object.values(presenceState).some(list =>
+                list.some((p: { callId: string }) => p.callId === peerCallId)
+              )
+              if (stillPresent) makeOffer(peerCallId, peerName)
+            }, 3000)
+          }
+        }
       }
 
       pcs.set(peerCallId, pc)
@@ -271,10 +289,9 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           const p = (newPresences as unknown as Array<{ name: string; isTeacher: boolean; callId: string }>)[0]
           if (!p || p.callId === callId) return
           if (p.isTeacher) teacherCallIdsRef.current.add(p.callId)
-          // Teacher always offers to students. Between two teacher devices, the lexically-higher
-          // callId makes the offer (tiebreaker prevents both sides from offering simultaneously).
-          // Students never make offers — they only answer. This eliminates WebRTC offer glare.
-          const shouldOffer = isTeacher ? (!p.isTeacher || callId > p.callId) : false
+          // Teacher offers to students only. Teacher devices do NOT make WebRTC connections
+          // to each other — they sync via ctrl_sync broadcasts instead. Students never offer.
+          const shouldOffer = isTeacher && !p.isTeacher
           if (shouldOffer) makeOffer(p.callId, p.name)
         })
         // ── Peer left ───────────────────────────────────────────────────────
@@ -376,10 +393,9 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             const p = presences[0]
             if (!p || p.callId === callId) continue
             if (p.isTeacher) teacherCallIdsRef.current.add(p.callId)
-            // Teacher always offers to students. Between two teacher devices, the lexically-higher
-          // callId makes the offer (tiebreaker prevents both sides from offering simultaneously).
-          // Students never make offers — they only answer. This eliminates WebRTC offer glare.
-          const shouldOffer = isTeacher ? (!p.isTeacher || callId > p.callId) : false
+            // Teacher offers to students only. Teacher devices do NOT make WebRTC connections
+          // to each other — they sync via ctrl_sync broadcasts instead. Students never offer.
+          const shouldOffer = isTeacher && !p.isTeacher
             if (shouldOffer) makeOffer(p.callId, p.name)
           }
         })
@@ -399,9 +415,17 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     }
   }, [sessionId, isTeacher, userId, callId, displayName])
 
+  // ── Call duration clock ───────────────────────────────────────────────────
+  useEffect(() => {
+    if (!localStream) return
+    callTimerRef.current = setInterval(() => setCallSeconds(s => s + 1), 1000)
+    return () => { if (callTimerRef.current) clearInterval(callTimerRef.current) }
+  }, [!!localStream])
+
   // ── Cleanup recording / transcription on unmount ─────────────────────────
   useEffect(() => {
     return () => {
+      if (callTimerRef.current) clearInterval(callTimerRef.current)
       if (recTimerRef.current) clearInterval(recTimerRef.current)
       if (recorderRef.current?.state === 'recording') recorderRef.current.stop()
       audioCtxRef.current?.close()
@@ -599,8 +623,9 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             ? <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
             : <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse shrink-0" />}
           <span className="text-white text-sm font-semibold">Live Class</span>
+          <span className="text-green-400 text-xs font-mono shrink-0">{fmtTime(callSeconds)}</span>
           <span className="text-white/50 text-xs flex items-center gap-1 shrink-0"><Users size={11} /> {total}</span>
-          {recording && <span className="text-red-400 text-xs font-mono ml-1">{fmtTime(recSeconds)}</span>}
+          {recording && <span className="text-red-400 text-xs font-mono">{fmtTime(recSeconds)}</span>}
           <Maximize2 size={12} className="text-white/40 ml-auto shrink-0" />
         </button>
         <div className="flex items-center gap-2">
@@ -634,9 +659,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         <div className="flex items-center gap-2">
           <Video size={14} className="text-white/70" />
           <span className="text-white text-sm font-semibold">Live Class</span>
-          {recording
-            ? <><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /><span className="text-red-400 text-xs font-mono">{fmtTime(recSeconds)}</span></>
-            : <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />}
+          <span className="text-green-400 text-xs font-mono">{fmtTime(callSeconds)}</span>
+          {recording && <><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /><span className="text-red-400 text-xs font-mono">{fmtTime(recSeconds)}</span></>}
           <span className="flex items-center gap-1 text-white/40 text-xs"><Users size={11} /> {total}</span>
         </div>
         <div className="flex gap-1">
