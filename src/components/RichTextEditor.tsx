@@ -303,8 +303,9 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
       toast.success(`${file.name} added to notes`, { id: toastId })
     } catch (err) {
-      console.error(err)
-      toast.error('Upload failed — make sure the "session-files" storage bucket exists and is public', { id: toastId })
+      const msg = err instanceof Error ? err.message : String(err)
+      console.error('Upload error:', err)
+      toast.error(`Upload failed: ${msg}`, { id: toastId })
     } finally {
       setUploading(false)
     }
