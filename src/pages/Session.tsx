@@ -25,14 +25,26 @@ export default function Session({ user }: { user: User }) {
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [ending, setEnding] = useState(false)
   const [callOpen, setCallOpen] = useState(() => sessionStorage.getItem(`nexaboard_call_${id}`) === 'true')
+  // Prevents auto-rejoin after teacher explicitly leaves or is removed from the call
+  const [callManuallyLeft, setCallManuallyLeft] = useState(false)
 
   const teacherName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Teacher'
 
   useEffect(() => { if (id) fetchSession() }, [id])
 
-  // Auto-join call if already active on another teacher device
+  // Listen for session ending from another device → navigate away
   useEffect(() => {
-    if (!id || callOpen) return
+    if (!id) return
+    const ch = supabase.channel(`session_status_teacher:${id}`)
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'sessions', filter: `id=eq.${id}` },
+        payload => { if (payload.new.status === 'ended') navigate('/dashboard') })
+      .subscribe()
+    return () => { supabase.removeChannel(ch) }
+  }, [id])
+
+  // Auto-join call if already active on another teacher device (skipped if manually left)
+  useEffect(() => {
+    if (!id || callOpen || callManuallyLeft) return
     const ch = supabase.channel(`call_available:${id}`)
     const check = () => {
       const state = ch.presenceState()
@@ -48,7 +60,7 @@ export default function Session({ user }: { user: User }) {
       .on('presence', { event: 'join' }, check)
       .subscribe()
     return () => { supabase.removeChannel(ch) }
-  }, [id, callOpen])
+  }, [id, callOpen, callManuallyLeft])
 
   const fetchSession = async () => {
     const { data, error } = await supabase.from('sessions').select('*').eq('id', id).single()
@@ -129,12 +141,17 @@ export default function Session({ user }: { user: User }) {
             onClick={() => {
               const next = !callOpen
               setCallOpen(next)
-              if (next) sessionStorage.setItem(`nexaboard_call_${id}`, 'true')
-              else sessionStorage.removeItem(`nexaboard_call_${id}`)
+              if (next) {
+                setCallManuallyLeft(false)
+                sessionStorage.setItem(`nexaboard_call_${id}`, 'true')
+              } else {
+                setCallManuallyLeft(true)
+                sessionStorage.removeItem(`nexaboard_call_${id}`)
+              }
             }}
             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${callOpen ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] border-green-200'}`}
           >
-            {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'End Call' : 'Start Call'}
+            {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'Leave Call' : callManuallyLeft ? 'Rejoin Call' : 'Start Call'}
           </button>
           <button onClick={endSession} disabled={ending}
             className="flex items-center gap-1 px-2.5 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg text-xs font-semibold border border-red-100 transition-colors">
@@ -190,7 +207,7 @@ export default function Session({ user }: { user: User }) {
           isTeacher
           userId={user.id}
           displayName={teacherName}
-          onClose={() => { setCallOpen(false); sessionStorage.removeItem(`nexaboard_call_${id}`) }}
+          onClose={() => { setCallOpen(false); setCallManuallyLeft(true); sessionStorage.removeItem(`nexaboard_call_${id}`) }}
         />
       )}
     </div>

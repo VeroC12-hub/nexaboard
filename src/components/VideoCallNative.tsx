@@ -148,6 +148,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const screenPcsRef = useRef(new Map<string, RTCPeerConnection>())
 
   const teacherCallIdsRef = useRef(new Set<string>())
+  const [teacherDevices, setTeacherDevices] = useState<Map<string, string>>(new Map()) // callId → name
   const [mutedPeers, setMutedPeers] = useState(new Set<string>())
   const [callSeconds, setCallSeconds] = useState(0)
   const callTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -309,6 +310,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           if (!p || p.callId === callId) return
           if (p.isTeacher) {
             teacherCallIdsRef.current.add(p.callId)
+            setTeacherDevices(prev => { const n = new Map(prev); n.set(p.callId, p.name); return n })
             // If we're already screen sharing, send this late-joining teacher device a dedicated screen offer
             if (screenStreamRef.current && !screenPcsRef.current.has(p.callId)) {
               const track = screenStreamRef.current.getVideoTracks()[0]
@@ -342,6 +344,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           const p = (leftPresences as unknown as Array<{ callId: string }>)[0]
           if (!p) return
           teacherCallIdsRef.current.delete(p.callId)
+          setTeacherDevices(prev => { const n = new Map(prev); n.delete(p.callId); return n })
           screenSharersRef.current.delete(p.callId)
           if (screenSharerCallIdRef.current === p.callId) {
             screenSharerCallIdRef.current = null
@@ -445,6 +448,11 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           toast(isTeacher ? 'Call ended by lead device' : 'Teacher ended the call', { icon: '📞' })
           onClose()
         })
+        .on('broadcast', { event: 'call_device_remove' }, ({ payload }) => {
+          if (payload.to !== callId) return
+          toast('This device was removed from the call', { icon: '📵' })
+          onClose()
+        })
         // ── Screen share started ─────────────────────────────────────────────
         // replaceTrack swaps the track silently — no ontrack fires on the receiver.
         // Use this broadcast to promote the peer's existing stream into peerScreenStreams
@@ -477,7 +485,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           screenPcsRef.current.delete(payload.from)
         })
         .on('broadcast', { event: 'ctrl_sync' }, ({ payload }) => {
-          if (!isTeacher || payload.from === callId) return
+          // Only students apply ctrl_sync; teacher devices are independent
+          if (isTeacher || payload.from === callId) return
           if (!teacherCallIdsRef.current.has(payload.from)) return
           const action = payload.action as CtrlAction
           if (action === 'mute') {
@@ -600,6 +609,13 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     chRef.current?.send({ type: 'broadcast', event: 'call_remote_unmute', payload: { to: peerCallId } })
     setMutedPeers(prev => { const n = new Set(prev); n.delete(peerCallId); return n })
     toast.success('Student unmuted')
+  }
+
+  const removeDevice = (targetCallId: string) => {
+    chRef.current?.send({ type: 'broadcast', event: 'call_device_remove', payload: { to: targetCallId, from: callId } })
+    teacherCallIdsRef.current.delete(targetCallId)
+    setTeacherDevices(prev => { const n = new Map(prev); n.delete(targetCallId); return n })
+    screenPcsRef.current.get(targetCallId)?.close(); screenPcsRef.current.delete(targetCallId)
   }
 
   const endCallForAll = () => {
@@ -865,6 +881,22 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           </button>
         </div>
       </div>
+
+      {/* My Devices strip — only shown when other teacher devices are connected */}
+      {teacherDevices.size > 0 && (
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-900/60 border-b border-white/10 shrink-0 flex-wrap">
+          <span className="text-white/40 text-[10px] uppercase tracking-wider shrink-0">My devices:</span>
+          {Array.from(teacherDevices.entries()).map(([dId, dName]) => (
+            <div key={dId} className="flex items-center gap-1 bg-white/10 rounded-full px-2 py-0.5">
+              <span className="text-white/70 text-xs truncate max-w-[100px]">{dName}</span>
+              <button onClick={() => removeDevice(dId)} title="Remove this device from call"
+                className="text-white/40 hover:text-red-400 transition-colors ml-0.5">
+                <X size={10} />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {error ? (
         <div className="flex-1 flex items-center justify-center p-6 text-center">
