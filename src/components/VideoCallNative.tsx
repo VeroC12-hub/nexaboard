@@ -86,6 +86,17 @@ function VideoTile({ stream, muted = false, name, noVideo = false, state = '',
   )
 }
 
+// ── Audio-only element — survives minimize by living outside the panel ────────
+function AudioTrack({ stream }: { stream: MediaStream | null }) {
+  const ref = useRef<HTMLAudioElement>(null)
+  useEffect(() => {
+    if (!ref.current || !stream) return
+    ref.current.srcObject = stream
+    ref.current.play().catch(() => {})
+  }, [stream])
+  return <audio ref={ref} autoPlay />
+}
+
 // ── Format seconds as MM:SS ───────────────────────────────────────────────────
 const fmtTime = (s: number) =>
   `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`
@@ -777,35 +788,43 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   // Screen share streams that belong to teacher-to-teacher connections (no entry in peersArr)
   const orphanScreenStreams = Array.from(peerScreenStreams.entries()).filter(([id]) => !peers.has(id))
 
+  // Always-mounted audio elements so audio survives minimize
+  const audioTracks = peersArr.map(([id, info]) =>
+    info.stream ? <AudioTrack key={`audio-${id}`} stream={info.stream} /> : null
+  )
+
   if (minimized) {
     return (
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col items-center gap-1.5">
-        <button onClick={() => setMinimized(false)}
-          className="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 active:bg-gray-700 rounded-full px-4 py-2.5 shadow-2xl border border-white/10 transition-colors w-full">
-          {recording
-            ? <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
-            : <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse shrink-0" />}
-          <span className="text-white text-sm font-semibold">Live Class</span>
-          <span className="text-green-400 text-xs font-mono shrink-0">{fmtTime(callSeconds)}</span>
-          <span className="text-white/50 text-xs flex items-center gap-1 shrink-0"><Users size={11} /> {total}</span>
-          {recording && <span className="text-red-400 text-xs font-mono">{fmtTime(recSeconds)}</span>}
-          <Maximize2 size={12} className="text-white/40 ml-auto shrink-0" />
-        </button>
-        <div className="flex items-center gap-2">
-          <button onClick={toggleAudio}
-            className={`w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-colors ${audioMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-800 hover:bg-gray-700'}`}>
-            {audioMuted ? <MicOff size={15} className="text-white" /> : <Mic size={15} className="text-white" />}
+      <>
+        {audioTracks}
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-center gap-1.5">
+          <button onClick={() => setMinimized(false)}
+            className="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 active:bg-gray-700 rounded-full px-4 py-2.5 shadow-2xl border border-white/10 transition-colors w-full">
+            {recording
+              ? <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
+              : <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse shrink-0" />}
+            <span className="text-white text-sm font-semibold">Live Class</span>
+            <span className="text-green-400 text-xs font-mono shrink-0">{fmtTime(callSeconds)}</span>
+            <span className="text-white/50 text-xs flex items-center gap-1 shrink-0"><Users size={11} /> {total}</span>
+            {recording && <span className="text-red-400 text-xs font-mono">{fmtTime(recSeconds)}</span>}
+            <Maximize2 size={12} className="text-white/40 ml-auto shrink-0" />
           </button>
-          <button onClick={toggleVideo} disabled={!hasCamera}
-            className={`w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-colors ${!hasCamera ? 'opacity-30 cursor-not-allowed bg-gray-800' : videoOff ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-800 hover:bg-gray-700'}`}>
-            {videoOff ? <VideoOff size={15} className="text-white" /> : <Video size={15} className="text-white" />}
-          </button>
-          <button onClick={onClose}
-            className="w-9 h-9 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center shadow-lg transition-colors">
-            <PhoneOff size={15} className="text-white" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={toggleAudio}
+              className={`w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-colors ${audioMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-800 hover:bg-gray-700'}`}>
+              {audioMuted ? <MicOff size={15} className="text-white" /> : <Mic size={15} className="text-white" />}
+            </button>
+            <button onClick={toggleVideo} disabled={!hasCamera}
+              className={`w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-colors ${!hasCamera ? 'opacity-30 cursor-not-allowed bg-gray-800' : videoOff ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-800 hover:bg-gray-700'}`}>
+              {videoOff ? <VideoOff size={15} className="text-white" /> : <Video size={15} className="text-white" />}
+            </button>
+            <button onClick={onClose}
+              className="w-9 h-9 rounded-full bg-red-500 hover:bg-red-600 flex items-center justify-center shadow-lg transition-colors">
+              <PhoneOff size={15} className="text-white" />
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
@@ -815,6 +834,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const panelStyle = expanded ? {} : { width: 'min(460px, 100vw)', height: 'min(640px, 80vh)' }
 
   return (
+    <>
+      {audioTracks}
     <div className={panelClass} style={panelStyle}>
       {/* Title bar */}
       <div className="flex items-center justify-between px-4 py-2.5 shrink-0 bg-gray-900 border-b border-white/10">
@@ -877,7 +898,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               {peersArr.map(([id, info]) => {
                 const isSharing = peerScreenStreams.has(id)
                 return (
-                  <VideoTile key={id}
+                  <VideoTile key={id} muted
                     stream={isSharing ? peerScreenStreams.get(id)! : info.stream}
                     name={isSharing ? `${info.name}'s screen 🖥️` : info.name}
                     state={isSharing ? '' : info.state}
@@ -889,7 +910,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               })}
               {/* Teacher-to-teacher screen streams (no regular peer tile) */}
               {orphanScreenStreams.map(([id, stream]) => (
-                <VideoTile key={`screen-${id}`} stream={stream}
+                <VideoTile key={`screen-${id}`} stream={stream} muted
                   name={`${screenSharerName ?? 'Teacher'}'s screen 🖥️`}
                   className="aspect-video col-span-full border border-blue-500/40" />
               ))}
@@ -913,10 +934,10 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               <div className="flex-1 min-h-0 flex flex-col gap-1.5 p-2 overflow-hidden">
                 <div className="flex-1 min-h-0">
                   {mainStream
-                    ? <VideoTile stream={mainStream} muted={!!screenStream} name={mainName!}
+                    ? <VideoTile stream={mainStream} muted name={mainName!}
                         className="h-full border border-blue-500/30 rounded-xl" />
                     : peersArr[0]
-                      ? <VideoTile stream={peersArr[0][1].stream} name={peersArr[0][1].name} state={peersArr[0][1].state}
+                      ? <VideoTile stream={peersArr[0][1].stream} muted name={peersArr[0][1].name} state={peersArr[0][1].state}
                           className="h-full" showMuteBtn={isTeacher} onMute={() => mutePeer(peersArr[0][0])}
                           onUnmute={() => unmutePeer(peersArr[0][0])} peerMuted={mutedPeers.has(peersArr[0][0])} />
                       : <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-full" />}
@@ -924,7 +945,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
                 <div className="flex gap-1.5 shrink-0 overflow-x-auto pb-1">
                   <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-20 w-28 shrink-0" />
                   {peersArr.map(([id, info]) => (
-                    <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
+                    <VideoTile key={id} stream={info.stream} muted name={info.name} state={info.state}
                       className="h-20 w-28 shrink-0" showMuteBtn={isTeacher} onMute={() => mutePeer(id)}
                       onUnmute={() => unmutePeer(id)} peerMuted={mutedPeers.has(id)} />
                   ))}
@@ -1011,6 +1032,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         </>
       )}
     </div>
+    </>
   )
 }
 
