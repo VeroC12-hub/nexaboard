@@ -8,7 +8,7 @@ import ChatSidebar from '../components/ChatSidebar'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
 import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft, Video, VideoOff } from 'lucide-react'
-import VideoCall from '../components/VideoCall'
+import VideoCallNative from '../components/VideoCallNative'
 
 type Tab = 'whiteboard' | 'code' | 'notes'
 
@@ -175,11 +175,13 @@ export default function StudentSession() {
         </div>
 
         {/* Video call panel */}
-        {callOpen && session && (
-          <VideoCall
-            roomName={session.join_code}
+        {callOpen && participantId && (
+          <VideoCallNative
+            sessionId={sessionId!}
+            isTeacher={false}
+            userId={participantId}
             displayName={participantName}
-            onClose={() => setCallOpen(false)}
+            onClose={() => { setCallOpen(false); sessionStorage.removeItem(`nexaboard_call_${sessionId}`) }}
           />
         )}
 
