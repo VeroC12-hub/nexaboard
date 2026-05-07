@@ -30,6 +30,25 @@ export default function Session({ user }: { user: User }) {
 
   useEffect(() => { if (id) fetchSession() }, [id])
 
+  // Auto-join call if already active on another teacher device
+  useEffect(() => {
+    if (!id || callOpen) return
+    const ch = supabase.channel(`call_available:${id}`)
+    const check = () => {
+      const state = ch.presenceState()
+      const hasTeacher = Object.values(state).some(presences =>
+        (presences as Array<{ isTeacher?: boolean }>).some(p => p.isTeacher)
+      )
+      if (hasTeacher) {
+        setCallOpen(true)
+        sessionStorage.setItem(`nexaboard_call_${id}`, 'true')
+      }
+    }
+    ch.on('presence', { event: 'join' }, check)
+      .subscribe(status => { if (status === 'SUBSCRIBED') check() })
+    return () => { supabase.removeChannel(ch) }
+  }, [id, callOpen])
+
   const fetchSession = async () => {
     const { data, error } = await supabase.from('sessions').select('*').eq('id', id).single()
     if (error || !data) { navigate('/dashboard'); return }

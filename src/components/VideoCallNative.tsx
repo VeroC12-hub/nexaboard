@@ -296,7 +296,34 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         .on('presence', { event: 'join' }, ({ newPresences }) => {
           const p = (newPresences as unknown as Array<{ name: string; isTeacher: boolean; callId: string }>)[0]
           if (!p || p.callId === callId) return
-          if (p.isTeacher) teacherCallIdsRef.current.add(p.callId)
+          if (p.isTeacher) {
+            teacherCallIdsRef.current.add(p.callId)
+            // If we're already screen sharing, send this late-joining teacher device a dedicated screen offer
+            if (screenStreamRef.current && !screenPcsRef.current.has(p.callId)) {
+              const track = screenStreamRef.current.getVideoTracks()[0]
+              if (track) {
+                const screenPc = new RTCPeerConnection({ iceServers: ICE })
+                screenPc.addTrack(track, screenStreamRef.current)
+                screenPc.onicecandidate = e => {
+                  if (!e.candidate) return
+                  chRef.current?.send({
+                    type: 'broadcast', event: 'call_ice',
+                    payload: { from: callId, to: p.callId, candidate: e.candidate.toJSON(), isScreenShare: true },
+                  })
+                }
+                screenPcsRef.current.set(p.callId, screenPc)
+                screenPc.createOffer()
+                  .then(async offer => {
+                    await screenPc.setLocalDescription(offer)
+                    chRef.current?.send({
+                      type: 'broadcast', event: 'call_offer',
+                      payload: { from: callId, to: p.callId, sdp: screenPc.localDescription, name: displayName, isScreenShare: true },
+                    })
+                  })
+                  .catch(() => { screenPcsRef.current.delete(p.callId); screenPc.close() })
+              }
+            }
+          }
           const shouldOffer = isTeacher && !p.isTeacher
           if (shouldOffer) makeOffer(p.callId, p.name)
         })
@@ -317,6 +344,10 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           if (payload.to !== callId) return
 
           if (payload.isScreenShare) {
+            // Mark who is sharing so UI shows the banner on this device too
+            screenSharerCallIdRef.current = payload.from
+            setScreenSharerCallId(payload.from)
+            setScreenSharerName(payload.name ?? null)
             // Teacher-to-teacher dedicated screen share connection
             const screenPc = new RTCPeerConnection({ iceServers: ICE })
             screenPc.ontrack = e => {
