@@ -182,19 +182,25 @@ export default function StudentSession() {
             </button>
           )}
 
-          {teacherInCall || callOpen ? (
-            <button
-              onClick={() => {
-                const next = !callOpen
-                setCallOpen(next)
-                if (next) sessionStorage.setItem(`nexaboard_call_${sessionId}`, 'true')
-                else sessionStorage.removeItem(`nexaboard_call_${sessionId}`)
-              }}
-              className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${callOpen ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'bg-[#f3fcf0] text-[#1b2b4b] border-green-200 hover:bg-green-100'}`}
-            >
-              {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'Leave Call' : 'Join Call'}
-            </button>
-          ) : null}
+          <button
+            disabled={!teacherInCall && !callOpen}
+            onClick={() => {
+              const next = !callOpen
+              setCallOpen(next)
+              if (next) sessionStorage.setItem(`nexaboard_call_${sessionId}`, 'true')
+              else sessionStorage.removeItem(`nexaboard_call_${sessionId}`)
+            }}
+            title={!teacherInCall && !callOpen ? 'Teacher has not started a call yet' : ''}
+            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors
+              ${callOpen
+                ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]'
+                : teacherInCall
+                  ? 'bg-[#f3fcf0] text-[#1b2b4b] border-green-200 hover:bg-green-100'
+                  : 'bg-[#f3fcf0] text-[#9ca3af] border-green-100 cursor-not-allowed opacity-60'}`}
+          >
+            {callOpen ? <VideoOff size={12} /> : <Video size={12} />}
+            {callOpen ? 'Leave Call' : teacherInCall ? 'Join Call' : 'No Call'}
+          </button>
           <button onClick={raiseHand}
             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${participant?.hand_raised ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-[#f3fcf0] text-[#6b7280] border-green-200 hover:text-[#1b2b4b]'}`}>
             <Hand size={11} /> {participant?.hand_raised ? 'Lower' : 'Raise Hand'}
