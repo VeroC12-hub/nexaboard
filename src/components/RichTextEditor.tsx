@@ -47,7 +47,10 @@ const FILE_ICONS: Record<FileType, string> = {
 function DocumentEmbedView({ node, deleteNode }: { node: any; deleteNode: () => void }) {
   const { src, filename, fileType } = node.attrs as { src: string; filename: string; fileType: FileType }
   const embedUrl = getEmbedUrl(src, fileType)
-  const [fullscreen, setFullscreen] = useState(false)
+
+  const openFullscreen = () => {
+    window.dispatchEvent(new CustomEvent('doc-fullscreen', { detail: { src, filename, fileType, open: true } }))
+  }
 
   return (
     <NodeViewWrapper>
@@ -55,7 +58,7 @@ function DocumentEmbedView({ node, deleteNode }: { node: any; deleteNode: () => 
         <div className="flex items-center gap-2 px-3 py-2 bg-[#f3fcf0] border-b border-green-100">
           <span className="text-base leading-none">{FILE_ICONS[fileType]}</span>
           <span className="text-sm font-medium text-[#1b2b4b] flex-1 truncate">{filename}</span>
-          <button onClick={() => setFullscreen(true)}
+          <button onClick={openFullscreen}
             className="flex items-center gap-1 text-xs text-[#1b2b4b] bg-white border border-green-200 hover:bg-green-50 px-2 py-0.5 rounded transition-colors font-medium">
             <Maximize2 size={11} /> Expand
           </button>
@@ -71,27 +74,6 @@ function DocumentEmbedView({ node, deleteNode }: { node: any; deleteNode: () => 
         <iframe src={embedUrl} className="w-full border-0" style={{ height: 480 }}
           title={filename} allow="fullscreen" />
       </div>
-
-      {fullscreen && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex flex-col" onClick={() => setFullscreen(false)}>
-          <div className="flex items-center gap-3 px-4 py-2 bg-[#1b2b4b] shrink-0" onClick={e => e.stopPropagation()}>
-            <span className="text-base leading-none">{FILE_ICONS[fileType]}</span>
-            <span className="text-sm font-medium text-white flex-1 truncate">{filename}</span>
-            <a href={src} target="_blank" rel="noreferrer"
-              className="text-xs text-[#5ab82e] hover:underline px-2 py-1 rounded transition-colors">
-              Open original
-            </a>
-            <button onClick={() => setFullscreen(false)}
-              className="p-1 text-white/70 hover:text-white transition-colors rounded">
-              <X size={16} />
-            </button>
-          </div>
-          <div className="flex-1 min-h-0" onClick={e => e.stopPropagation()}>
-            <iframe src={embedUrl} className="w-full h-full border-0"
-              title={filename} allow="fullscreen" />
-          </div>
-        </div>
-      )}
     </NodeViewWrapper>
   )
 }
@@ -220,6 +202,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const [requesting, setRequesting] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [activeEditor, setActiveEditor] = useState<string | null>(null)
+  const [fullscreenDoc, setFullscreenDoc] = useState<{ src: string; filename: string; fileType: FileType } | null>(null)
 
   const myId = isTeacher ? 'teacher' : (participantId || 'anon')
   const canWrite = isTeacher || canEdit
@@ -277,6 +260,11 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
           payload: { content, senderId: myId, senderName: 'Teacher' },
         })
       })
+      .on('broadcast', { event: 'doc_fullscreen' }, ({ payload }) => {
+        if (payload.senderId === myId) return
+        if (payload.open) setFullscreenDoc({ src: payload.src, filename: payload.filename, fileType: payload.fileType })
+        else setFullscreenDoc(null)
+      })
       .subscribe((status) => {
         if (status === 'SUBSCRIBED') {
           channel.send({ type: 'broadcast', event: 'notes_sync_req', payload: {} })
@@ -285,6 +273,21 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
   }, [sessionId, editor, isTeacher, myId])
+
+  // Listen for local expand clicks from DocumentEmbedView (which can't access channelRef directly)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const { src, filename, fileType, open } = (e as CustomEvent).detail
+      if (open) setFullscreenDoc({ src, filename, fileType })
+      else setFullscreenDoc(null)
+      channelRef.current?.send({
+        type: 'broadcast', event: 'doc_fullscreen',
+        payload: { src, filename, fileType, open, senderId: myId },
+      })
+    }
+    window.addEventListener('doc-fullscreen', handler)
+    return () => window.removeEventListener('doc-fullscreen', handler)
+  }, [myId])
 
   useEffect(() => {
     const close = () => { setShowTablePicker(false); setShowImageInput(false) }
@@ -531,6 +534,42 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
       {showChartModal && <ChartModal onInsert={handleChartInsert} onClose={() => setShowChartModal(false)} />}
       {showDrawingModal && <DrawingModal onInsert={handleDrawingInsert} onClose={() => setShowDrawingModal(false)} />}
+
+      {fullscreenDoc && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-black/80">
+          <div className="flex items-center gap-3 px-4 py-2 bg-[#1b2b4b] shrink-0">
+            <span className="text-base leading-none">{FILE_ICONS[fullscreenDoc.fileType]}</span>
+            <span className="text-sm font-medium text-white flex-1 truncate">{fullscreenDoc.filename}</span>
+            <a href={fullscreenDoc.src} target="_blank" rel="noreferrer"
+              className="text-xs text-[#5ab82e] hover:underline px-2 py-1 rounded transition-colors">
+              Open original
+            </a>
+            {isTeacher && (
+              <button
+                onClick={() => {
+                  setFullscreenDoc(null)
+                  channelRef.current?.send({
+                    type: 'broadcast', event: 'doc_fullscreen',
+                    payload: { open: false, senderId: myId },
+                  })
+                }}
+                className="flex items-center gap-1 text-xs bg-red-500/20 hover:bg-red-500/30 text-red-300 px-2 py-1 rounded transition-colors">
+                <X size={12} /> Close for everyone
+              </button>
+            )}
+            {!isTeacher && (
+              <button onClick={() => setFullscreenDoc(null)}
+                className="p-1 text-white/70 hover:text-white transition-colors rounded">
+                <X size={16} />
+              </button>
+            )}
+          </div>
+          <div className="flex-1 min-h-0">
+            <iframe src={getEmbedUrl(fullscreenDoc.src, fullscreenDoc.fileType)}
+              className="w-full h-full border-0" title={fullscreenDoc.filename} allow="fullscreen" />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
