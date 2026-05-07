@@ -48,9 +48,6 @@ function VideoTile({ stream, muted = false, name, noVideo = false, state = '',
     v.srcObject = stream
     if (!stream) return
     v.play().catch(() => {})
-    // Audio tracks often arrive after the video track. The stream reference never changes
-    // (same MediaStream mutated in place), so this useEffect won't re-run for new tracks.
-    // Re-calling play() on addtrack ensures audio starts even when it lands late.
     const replay = () => v.play().catch(() => {})
     stream.addEventListener('addtrack', replay)
     return () => stream.removeEventListener('addtrack', replay)
@@ -95,7 +92,6 @@ const fmtTime = (s: number) =>
 
 // ── Main component ────────────────────────────────────────────────────────────
 export default function VideoCallNative({ sessionId, isTeacher, userId, displayName, onClose }: Props) {
-  // Per-tab/device unique call ID — lets the same teacher log in on 2 devices simultaneously
   const [callId] = useState(() => {
     const key = `nexaboard_callid_${sessionId}_${userId}`
     let id = sessionStorage.getItem(key)
@@ -111,7 +107,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const [audioMuted, setAudioMuted] = useState(false)
   const [videoOff, setVideoOff] = useState(false)
   const [hasCamera, setHasCamera] = useState(true)
-  // Refs mirror mute/video state so visibilitychange and restore handlers avoid stale closures
   const audioMutedRef = useRef(false)
   const videoOffRef = useRef(false)
   const [expanded, setExpanded] = useState(false)
@@ -129,26 +124,25 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const [screenSharerName, setScreenSharerName] = useState<string | null>(null)
   const screenSharerCallIdRef = useRef<string | null>(null)
 
-  // Peer screen share streams (second video track from remote peers)
+  // peerScreenStreams: keyed by peerCallId, holds the screen stream
+  // For replaceTrack peers this is the same MediaStream object as peers[id].stream
+  // For teacher-to-teacher it's a new MediaStream from the dedicated screen PC
   const [peerScreenStreams, setPeerScreenStreams] = useState(new Map<string, MediaStream>())
-  // Set of peerCallIds that have announced screen share via broadcast (for reliable ontrack detection)
   const screenSharersRef = useRef(new Set<string>())
 
-  // Teacher peer devices (callIds with isTeacher=true, for ctrl_sync filtering)
+  // Tracks remote streams by callId so screen_share_started can promote without stale closure
+  const remoteStreamsRef = useRef(new Map<string, MediaStream>())
+
+  // Dedicated peer connections for teacher-to-teacher screen share (screen track only)
+  const screenPcsRef = useRef(new Map<string, RTCPeerConnection>())
+
   const teacherCallIdsRef = useRef(new Set<string>())
-
-  // Teacher-muted peers (tracked on teacher side so button shows correct state)
   const [mutedPeers, setMutedPeers] = useState(new Set<string>())
-
-  // Call duration clock — starts when local stream is obtained
   const [callSeconds, setCallSeconds] = useState(0)
   const callTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // Recording
   const [recording, setRecording] = useState(false)
   const [recSeconds, setRecSeconds] = useState(0)
-
-  // Transcription
   const [transcribing, setTranscribing] = useState(false)
   const [transcript, setTranscript] = useState('')
   const [interimText, setInterimText] = useState('')
@@ -158,14 +152,12 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const pcsRef = useRef(new Map<string, RTCPeerConnection>())
   const chRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
 
-  // Recording refs
   const audioCtxRef = useRef<AudioContext | null>(null)
   const mixDestRef = useRef<MediaStreamAudioDestinationNode | null>(null)
   const connectedStreamsRef = useRef(new Set<string>())
   const recorderRef = useRef<MediaRecorder | null>(null)
   const recTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // Transcription refs
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null)
   const transcribingRef = useRef(false)
@@ -175,6 +167,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     let mounted = true
     const pcs = pcsRef.current
     const iceBuf = new Map<string, RTCIceCandidateInit[]>()
+    const screenIceBuf = new Map<string, RTCIceCandidateInit[]>()
     let availCh: ReturnType<typeof supabase.channel> | null = null
 
     const setPeerState = (id: string, update: Partial<PeerState>) =>
@@ -187,6 +180,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
 
     const removePeer = (id: string) => {
       pcs.get(id)?.close(); pcs.delete(id); iceBuf.delete(id)
+      remoteStreamsRef.current.delete(id)
+      screenPcsRef.current.get(id)?.close(); screenPcsRef.current.delete(id)
       setPeers(prev => { const n = new Map(prev); n.delete(id); return n })
       setPeerScreenStreams(prev => { const n = new Map(prev); n.delete(id); return n })
       setMutedPeers(prev => { const n = new Set(prev); n.delete(id); return n })
@@ -202,33 +197,17 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       pcs.get(peerCallId)?.close()
       const pc = new RTCPeerConnection({ iceServers: ICE })
       const remoteStream = new MediaStream()
+      remoteStreamsRef.current.set(peerCallId, remoteStream)
 
       localStreamRef.current?.getTracks().forEach(t => pc.addTrack(t, localStreamRef.current!))
 
       pc.ontrack = e => {
         if (!mounted) return
+        // replaceTrack never fires ontrack again — screen share detection is handled via
+        // screen_share_started broadcast which promotes this same remoteStream into peerScreenStreams
+        remoteStream.addTrack(e.track)
+        setPeerState(peerCallId, { stream: remoteStream })
 
-        // Detect screen share track: peer announced sharing (broadcast) OR
-        // camera video track is already in remoteStream (screen is always the 2nd video track)
-        const isScreenShare = e.track.kind === 'video' && (
-          screenSharersRef.current.has(peerCallId) ||
-          remoteStream.getVideoTracks().length > 0
-        )
-
-        if (isScreenShare) {
-          const ss = new MediaStream([e.track])
-          setPeerScreenStreams(prev => { const n = new Map(prev); n.set(peerCallId, ss); return n })
-          toast(`${peerName} is sharing their screen`, { icon: '🖥️', duration: 4000 })
-          e.track.onended = () => {
-            setPeerScreenStreams(prev => { const n = new Map(prev); n.delete(peerCallId); return n })
-            screenSharersRef.current.delete(peerCallId)
-          }
-        } else {
-          remoteStream.addTrack(e.track)
-          setPeerState(peerCallId, { stream: remoteStream })
-        }
-
-        // Auto-connect audio to active recording mix
         if (audioCtxRef.current && mixDestRef.current && !connectedStreamsRef.current.has(peerCallId)) {
           try {
             audioCtxRef.current.createMediaStreamSource(remoteStream).connect(mixDestRef.current)
@@ -251,7 +230,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         setPeerState(peerCallId, { state: s })
         if (s === 'failed' || s === 'closed') {
           removePeer(peerCallId)
-          // Teacher re-offers to students that drop — check they're still in the channel first
           if (isTeacher && !teacherCallIdsRef.current.has(peerCallId)) {
             setTimeout(() => {
               if (!mounted) return
@@ -299,15 +277,11 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       if (!mounted) { stream!.getTracks().forEach(t => t.stop()); return }
       localStreamRef.current = stream
       setLocalStream(stream)
-      // Restore video-off state from previous session on this device (survives refresh).
-      // Only applies if the user previously turned the camera off in this session.
-      // Fresh join (no saved value) leaves camera on.
       if (sessionStorage.getItem(`nexaboard_videooff_${sessionId}`) === '1') {
         stream.getVideoTracks().forEach(t => { t.enabled = false })
         setVideoOff(true); videoOffRef.current = true
       }
 
-      // Teacher signals call is active so students see the Join Call button
       if (isTeacher) {
         availCh = supabase.channel(`call_available:${sessionId}`)
         availCh.subscribe(async status => {
@@ -319,23 +293,18 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       chRef.current = ch
 
       ch
-        // ── Peer joined ─────────────────────────────────────────────────────
         .on('presence', { event: 'join' }, ({ newPresences }) => {
           const p = (newPresences as unknown as Array<{ name: string; isTeacher: boolean; callId: string }>)[0]
           if (!p || p.callId === callId) return
           if (p.isTeacher) teacherCallIdsRef.current.add(p.callId)
-          // Teacher offers to students only. Teacher devices do NOT make WebRTC connections
-          // to each other — they sync via ctrl_sync broadcasts instead. Students never offer.
           const shouldOffer = isTeacher && !p.isTeacher
           if (shouldOffer) makeOffer(p.callId, p.name)
         })
-        // ── Peer left ───────────────────────────────────────────────────────
         .on('presence', { event: 'leave' }, ({ leftPresences }) => {
           const p = (leftPresences as unknown as Array<{ callId: string }>)[0]
           if (!p) return
           teacherCallIdsRef.current.delete(p.callId)
           screenSharersRef.current.delete(p.callId)
-          // If the sharer leaves, clear screen share state
           if (screenSharerCallIdRef.current === p.callId) {
             screenSharerCallIdRef.current = null
             setScreenSharerCallId(null)
@@ -343,10 +312,42 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           }
           removePeer(p.callId)
         })
-        // ── Student/Teacher receives offer → sends answer ────────────────
+        // ── Offer ────────────────────────────────────────────────────────────
         .on('broadcast', { event: 'call_offer' }, async ({ payload }) => {
           if (payload.to !== callId) return
-          // Reuse existing PC for renegotiation (e.g. remote peer added screen share track)
+
+          if (payload.isScreenShare) {
+            // Teacher-to-teacher dedicated screen share connection
+            const screenPc = new RTCPeerConnection({ iceServers: ICE })
+            screenPc.ontrack = e => {
+              if (!mounted) return
+              const ss = new MediaStream([e.track])
+              setPeerScreenStreams(prev => { const n = new Map(prev); n.set(payload.from, ss); return n })
+              e.track.onended = () => {
+                setPeerScreenStreams(prev => { const n = new Map(prev); n.delete(payload.from); return n })
+              }
+            }
+            screenPc.onicecandidate = e => {
+              if (!e.candidate) return
+              chRef.current?.send({
+                type: 'broadcast', event: 'call_ice',
+                payload: { from: callId, to: payload.from, candidate: e.candidate.toJSON(), isScreenShare: true },
+              })
+            }
+            screenPcsRef.current.set(payload.from, screenPc)
+            await screenPc.setRemoteDescription(new RTCSessionDescription(payload.sdp))
+            ;(screenIceBuf.get(payload.from) ?? []).forEach(c =>
+              screenPc.addIceCandidate(new RTCIceCandidate(c)).catch(() => {}))
+            screenIceBuf.delete(payload.from)
+            const answer = await screenPc.createAnswer()
+            await screenPc.setLocalDescription(answer)
+            ch.send({
+              type: 'broadcast', event: 'call_answer',
+              payload: { from: callId, to: payload.from, sdp: screenPc.localDescription, isScreenShare: true },
+            })
+            return
+          }
+
           const pc = pcs.get(payload.from) ?? buildPC(payload.from, payload.name ?? (isTeacher ? 'Student' : 'Teacher'))
           await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp))
           flushIce(payload.from)
@@ -354,18 +355,30 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           await pc.setLocalDescription(answer)
           ch.send({ type: 'broadcast', event: 'call_answer', payload: { from: callId, to: payload.from, sdp: pc.localDescription } })
         })
-        // ── Caller receives answer ───────────────────────────────────────
+        // ── Answer ───────────────────────────────────────────────────────────
         .on('broadcast', { event: 'call_answer' }, async ({ payload }) => {
           if (payload.to !== callId) return
-          const pc = pcs.get(payload.from)
-          if (pc) {
-            await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp))
-            flushIce(payload.from)
+          if (payload.isScreenShare) {
+            const screenPc = screenPcsRef.current.get(payload.from)
+            if (screenPc) await screenPc.setRemoteDescription(new RTCSessionDescription(payload.sdp))
+            return
           }
+          const pc = pcs.get(payload.from)
+          if (pc) { await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp)); flushIce(payload.from) }
         })
-        // ── ICE relay ────────────────────────────────────────────────────
+        // ── ICE ──────────────────────────────────────────────────────────────
         .on('broadcast', { event: 'call_ice' }, ({ payload }) => {
           if (payload.to !== callId) return
+          if (payload.isScreenShare) {
+            const screenPc = screenPcsRef.current.get(payload.from)
+            if (screenPc?.remoteDescription) {
+              screenPc.addIceCandidate(new RTCIceCandidate(payload.candidate)).catch(() => {})
+            } else {
+              const buf = screenIceBuf.get(payload.from) ?? []
+              buf.push(payload.candidate); screenIceBuf.set(payload.from, buf)
+            }
+            return
+          }
           const pc = pcs.get(payload.from)
           if (pc?.remoteDescription) {
             pc.addIceCandidate(new RTCIceCandidate(payload.candidate)).catch(() => {})
@@ -373,7 +386,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             const buf = iceBuf.get(payload.from) ?? []; buf.push(payload.candidate); iceBuf.set(payload.from, buf)
           }
         })
-        // ── Remote mute / unmute (teacher → student) ─────────────────────
         .on('broadcast', { event: 'call_remote_mute' }, ({ payload }) => {
           if (payload.to !== callId) return
           localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = false })
@@ -386,29 +398,42 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           setAudioMuted(false); audioMutedRef.current = false
           toast('Teacher unmuted your microphone', { icon: '🔊' })
         })
-        // ── Teacher ends call for everyone ───────────────────────────────
         .on('broadcast', { event: 'call_end_all' }, ({ payload }) => {
           if (payload.from === callId) return
           toast(isTeacher ? 'Call ended by lead device' : 'Teacher ended the call', { icon: '📞' })
           onClose()
         })
-        // ── Screen share started (one at a time enforcement) ─────────────
+        // ── Screen share started ─────────────────────────────────────────────
+        // replaceTrack swaps the track silently — no ontrack fires on the receiver.
+        // Use this broadcast to promote the peer's existing stream into peerScreenStreams
+        // so the speaker view and grid can display it prominently.
         .on('broadcast', { event: 'screen_share_started' }, ({ payload }) => {
           if (payload.from === callId) return
           screenSharersRef.current.add(payload.from)
           screenSharerCallIdRef.current = payload.from
           setScreenSharerCallId(payload.from)
           setScreenSharerName(payload.name)
+          toast(`${payload.name} is sharing their screen`, { icon: '🖥️', duration: 4000 })
+
+          // For student↔teacher connections: the existing stream now carries screen data
+          const existingStream = remoteStreamsRef.current.get(payload.from)
+          if (existingStream) {
+            setPeerScreenStreams(prev => { const n = new Map(prev); n.set(payload.from, existingStream); return n })
+          }
+          // For teacher-to-teacher: no existing stream — the sharer will send a dedicated offer
         })
-        // ── Screen share stopped ─────────────────────────────────────────
+        // ── Screen share stopped ─────────────────────────────────────────────
         .on('broadcast', { event: 'screen_share_stopped' }, ({ payload }) => {
           screenSharersRef.current.delete(payload.from)
-          if (screenSharerCallIdRef.current !== payload.from) return
-          screenSharerCallIdRef.current = null
-          setScreenSharerCallId(null)
-          setScreenSharerName(null)
+          if (screenSharerCallIdRef.current === payload.from) {
+            screenSharerCallIdRef.current = null
+            setScreenSharerCallId(null)
+            setScreenSharerName(null)
+          }
+          setPeerScreenStreams(prev => { const n = new Map(prev); n.delete(payload.from); return n })
+          screenPcsRef.current.get(payload.from)?.close()
+          screenPcsRef.current.delete(payload.from)
         })
-        // ── Teacher device sync (mute/video/record/captions state) ────────
         .on('broadcast', { event: 'ctrl_sync' }, ({ payload }) => {
           if (!isTeacher || payload.from === callId) return
           if (!teacherCallIdsRef.current.has(payload.from)) return
@@ -426,7 +451,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             localStreamRef.current?.getVideoTracks().forEach(t => { t.enabled = true })
             setVideoOff(false); videoOffRef.current = false
           } else if (action === 'record_on') {
-            setRecording(true)  // indicator only — avoid duplicate recording files
+            setRecording(true)
           } else if (action === 'record_off') {
             setRecording(false)
           } else if (action === 'captions_on') {
@@ -444,9 +469,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             const p = presences[0]
             if (!p || p.callId === callId) continue
             if (p.isTeacher) teacherCallIdsRef.current.add(p.callId)
-            // Teacher offers to students only. Teacher devices do NOT make WebRTC connections
-          // to each other — they sync via ctrl_sync broadcasts instead. Students never offer.
-          const shouldOffer = isTeacher && !p.isTeacher
+            const shouldOffer = isTeacher && !p.isTeacher
             if (shouldOffer) makeOffer(p.callId, p.name)
           }
         })
@@ -461,19 +484,18 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       if (ch) { ch.untrack(); supabase.removeChannel(ch) }
       chRef.current = null
       pcs.forEach(pc => pc.close()); pcs.clear()
+      screenPcsRef.current.forEach(pc => pc.close()); screenPcsRef.current.clear()
       localStreamRef.current?.getTracks().forEach(t => t.stop())
       localStreamRef.current = null
     }
   }, [sessionId, isTeacher, userId, callId, displayName])
 
-  // ── Call duration clock ───────────────────────────────────────────────────
   useEffect(() => {
     if (!localStream) return
     callTimerRef.current = setInterval(() => setCallSeconds(s => s + 1), 1000)
     return () => { if (callTimerRef.current) clearInterval(callTimerRef.current) }
   }, [!!localStream])
 
-  // ── Cleanup recording / transcription on unmount ─────────────────────────
   useEffect(() => {
     return () => {
       if (callTimerRef.current) clearInterval(callTimerRef.current)
@@ -483,12 +505,10 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       transcribingRef.current = false
       recognitionRef.current?.abort()
       screenStreamRef.current?.getTracks().forEach(t => t.stop())
+      screenPcsRef.current.forEach(pc => pc.close())
     }
   }, [])
 
-  // ── Re-enable tracks when browser tab regains visibility ─────────────────
-  // Some browsers (Chrome on mobile, battery-saver mode) pause MediaStream
-  // tracks when the tab is hidden. Re-enable them when focus returns.
   useEffect(() => {
     const onVisible = () => {
       if (document.visibilityState !== 'visible' || !localStreamRef.current) return
@@ -499,7 +519,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     return () => document.removeEventListener('visibilitychange', onVisible)
   }, [])
 
-  // ── Re-enable tracks when restoring from the minimised pill ──────────────
   useEffect(() => {
     if (!minimized && localStreamRef.current) {
       if (!audioMutedRef.current) localStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true })
@@ -507,7 +526,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     }
   }, [minimized])
 
-  // ── Broadcast helper (teacher device sync) ────────────────────────────────
   const broadcastCtrl = (action: CtrlAction) => {
     if (!isTeacher) return
     chRef.current?.send({
@@ -516,7 +534,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     })
   }
 
-  // ── Media controls ────────────────────────────────────────────────────────
   const toggleAudio = () => {
     const nextMuted = !audioMuted
     localStreamRef.current?.getAudioTracks().forEach(t => { t.enabled = !nextMuted })
@@ -528,7 +545,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     const nextOff = !videoOff
     localStreamRef.current?.getVideoTracks().forEach(t => { t.enabled = !nextOff })
     setVideoOff(nextOff); videoOffRef.current = nextOff
-    // Persist so a page refresh keeps the camera off if the user turned it off
     if (nextOff) sessionStorage.setItem(`nexaboard_videooff_${sessionId}`, '1')
     else sessionStorage.removeItem(`nexaboard_videooff_${sessionId}`)
     broadcastCtrl(nextOff ? 'video_off' : 'video_on')
@@ -551,9 +567,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     onClose()
   }
 
-  // ── Screen share ─────────────────────────────────────────────────────────
-  // Uses sender.replaceTrack() — no SDP renegotiation needed.
-  // The receiver sees the screen inside their existing camera video tile automatically.
+  // ── Screen share ──────────────────────────────────────────────────────────────
   const startScreenShare = async () => {
     if (screenSharerCallIdRef.current && screenSharerCallIdRef.current !== callId) {
       toast.error(`${screenSharerName ?? 'Someone'} is already sharing their screen`)
@@ -564,7 +578,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       const track = stream.getVideoTracks()[0]
       if (!track) return
 
-      // Swap the camera video sender for the screen track on every peer connection
+      // Replace camera track on every student connection (replaceTrack — no SDP exchange)
       pcsRef.current.forEach((pc, peerId) => {
         const sender = pc.getSenders().find(s => s.track?.kind === 'video')
         if (sender) { sender.replaceTrack(track); screenSendersRef.current.set(peerId, sender) }
@@ -578,6 +592,32 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       chRef.current?.send({
         type: 'broadcast', event: 'screen_share_started',
         payload: { from: callId, name: displayName },
+      })
+
+      // Teacher-to-teacher: create a dedicated screen-only WebRTC connection for each other teacher device
+      // (no regular peer connection exists between teacher devices)
+      teacherCallIdsRef.current.forEach(async teacherCallId => {
+        const screenPc = new RTCPeerConnection({ iceServers: ICE })
+        screenPc.addTrack(track, stream)
+        screenPc.onicecandidate = e => {
+          if (!e.candidate) return
+          chRef.current?.send({
+            type: 'broadcast', event: 'call_ice',
+            payload: { from: callId, to: teacherCallId, candidate: e.candidate.toJSON(), isScreenShare: true },
+          })
+        }
+        screenPcsRef.current.set(teacherCallId, screenPc)
+        try {
+          const offer = await screenPc.createOffer()
+          await screenPc.setLocalDescription(offer)
+          chRef.current?.send({
+            type: 'broadcast', event: 'call_offer',
+            payload: { from: callId, to: teacherCallId, sdp: screenPc.localDescription, name: displayName, isScreenShare: true },
+          })
+        } catch {
+          screenPcsRef.current.delete(teacherCallId)
+          screenPc.close()
+        }
       })
 
       track.onended = () => stopScreenShare()
@@ -594,21 +634,21 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     screenSharerCallIdRef.current = null
     setScreenSharerCallId(null)
 
-    // Restore camera track (null if no camera — stops sending video)
     const cameraTrack = localStreamRef.current?.getVideoTracks()[0] ?? null
     screenSendersRef.current.forEach(sender => {
       try { sender.replaceTrack(cameraTrack) } catch { }
     })
     screenSendersRef.current.clear()
 
-    chRef.current?.send({
-      type: 'broadcast', event: 'screen_share_stopped',
-      payload: { from: callId },
-    })
+    // Close teacher-to-teacher screen share connections
+    screenPcsRef.current.forEach(pc => pc.close())
+    screenPcsRef.current.clear()
+
+    chRef.current?.send({ type: 'broadcast', event: 'screen_share_stopped', payload: { from: callId } })
     toast('Screen sharing stopped', { icon: '🖥️' })
   }
 
-  // ── Recording ─────────────────────────────────────────────────────────────
+  // ── Recording ─────────────────────────────────────────────────────────────────
   const startRecording = () => {
     const ctx = new AudioContext()
     const dest = ctx.createMediaStreamDestination()
@@ -656,7 +696,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     toast('Recording saved — check your downloads', { icon: '💾' })
   }
 
-  // ── Transcription ─────────────────────────────────────────────────────────
   const startTranscription = () => {
     const SR = getSR()
     if (!SR) { toast.error('Live captions require Chrome or Edge'); return }
@@ -671,7 +710,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       if (fin) setTranscript(prev => prev + fin + ' ')
       setInterimText(interim)
     }
-    rec.onerror = () => { /* silently ignore no-speech / network errors */ }
+    rec.onerror = () => { }
     rec.onend = () => { if (transcribingRef.current) rec.start() }
     rec.start()
     recognitionRef.current = rec
@@ -698,13 +737,15 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     URL.revokeObjectURL(url)
   }
 
-  // ── Layout ────────────────────────────────────────────────────────────────
+  // ── Layout ────────────────────────────────────────────────────────────────────
   const peersArr = Array.from(peers.entries())
   const total = peersArr.length + 1
   const gridCols = total <= 2 ? 'grid-cols-1' : total <= 4 ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-3'
   const someoneElseSharing = !!(screenSharerCallId && screenSharerCallId !== callId)
 
-  // ── Minimised pill ────────────────────────────────────────────────────────
+  // Screen share streams that belong to teacher-to-teacher connections (no entry in peersArr)
+  const orphanScreenStreams = Array.from(peerScreenStreams.entries()).filter(([id]) => !peers.has(id))
+
   if (minimized) {
     return (
       <div className="fixed bottom-4 right-4 z-50 flex flex-col items-center gap-1.5">
@@ -737,7 +778,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     )
   }
 
-  // ── Full panel ────────────────────────────────────────────────────────────
   const panelClass = expanded
     ? 'fixed inset-0 z-50 flex flex-col bg-gray-950'
     : 'fixed bottom-0 right-0 z-40 flex flex-col bg-gray-950 shadow-2xl rounded-tl-2xl overflow-hidden'
@@ -759,7 +799,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             className="text-white/60 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors">
             <LayoutGrid size={14} />
           </button>
-          <button onClick={() => setMinimized(true)} title="Minimise — call stays live"
+          <button onClick={() => setMinimized(true)} title="Minimise"
             className="text-white/60 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors">
             <Minus size={15} />
           </button>
@@ -789,7 +829,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             </div>
           )}
 
-          {/* Someone else is sharing their screen */}
           {someoneElseSharing && (
             <div className="bg-blue-900/40 border-b border-blue-500/30 px-3 py-1 text-blue-300 text-xs text-center shrink-0 flex items-center justify-center gap-1.5">
               <Monitor size={11} />
@@ -797,35 +836,48 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             </div>
           )}
 
-          {/* Video grid */}
+          {/* Grid view */}
           {viewMode === 'grid' && (
             <div className={`flex-1 min-h-0 p-2 grid gap-2 ${gridCols} content-start overflow-auto`}>
               <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="aspect-video" />
-              {/* Local screen share */}
               {screenStream && (
-                <VideoTile stream={screenStream} muted name="Your screen" className="aspect-video col-span-full border border-blue-500/40" />
+                <VideoTile stream={screenStream} muted name="Your screen 🖥️" className="aspect-video col-span-full border border-blue-500/40" />
               )}
-              {peersArr.map(([id, info]) => (
-                <>
-                  <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
-                    className="aspect-video" showMuteBtn={isTeacher} onMute={() => mutePeer(id)}
-                    onUnmute={() => unmutePeer(id)} peerMuted={mutedPeers.has(id)} />
-                  {/* Remote screen share tile */}
-                  {peerScreenStreams.has(id) && (
-                    <VideoTile key={`${id}-screen`} stream={peerScreenStreams.get(id)!}
-                      name={`${info.name}'s screen`}
-                      className="aspect-video col-span-full border border-blue-500/40" />
-                  )}
-                </>
+              {peersArr.map(([id, info]) => {
+                const isSharing = peerScreenStreams.has(id)
+                return (
+                  <VideoTile key={id}
+                    stream={isSharing ? peerScreenStreams.get(id)! : info.stream}
+                    name={isSharing ? `${info.name}'s screen 🖥️` : info.name}
+                    state={isSharing ? '' : info.state}
+                    className={`aspect-video ${isSharing ? 'col-span-full border border-blue-500/40' : ''}`}
+                    showMuteBtn={isTeacher && !isSharing}
+                    onMute={() => mutePeer(id)} onUnmute={() => unmutePeer(id)}
+                    peerMuted={mutedPeers.has(id)} />
+                )
+              })}
+              {/* Teacher-to-teacher screen streams (no regular peer tile) */}
+              {orphanScreenStreams.map(([id, stream]) => (
+                <VideoTile key={`screen-${id}`} stream={stream}
+                  name={`${screenSharerName ?? 'Teacher'}'s screen 🖥️`}
+                  className="aspect-video col-span-full border border-blue-500/40" />
               ))}
             </div>
           )}
 
-          {/* Speaker view — screen shares take over the main area */}
+          {/* Speaker view */}
           {viewMode === 'speaker' && (() => {
+            // Find any peer sharing their screen
             const remoteSS = peersArr.find(([id]) => peerScreenStreams.has(id))
-            const mainStream = screenStream ?? (remoteSS ? peerScreenStreams.get(remoteSS[0])! : null)
-            const mainName = screenStream ? 'Your screen' : (remoteSS ? `${remoteSS[1].name}'s screen` : null)
+            // Also check teacher-to-teacher screen streams
+            const teacherSS = !remoteSS && orphanScreenStreams.length > 0 ? orphanScreenStreams[0] : null
+            const mainStream = screenStream
+              ?? (remoteSS ? peerScreenStreams.get(remoteSS[0])! : null)
+              ?? (teacherSS ? teacherSS[1] : null)
+            const mainName = screenStream ? 'Your screen 🖥️'
+              : remoteSS ? `${remoteSS[1].name}'s screen 🖥️`
+              : teacherSS ? `${screenSharerName ?? 'Teacher'}'s screen 🖥️`
+              : null
             return (
               <div className="flex-1 min-h-0 flex flex-col gap-1.5 p-2 overflow-hidden">
                 <div className="flex-1 min-h-0">
@@ -845,12 +897,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
                       className="h-20 w-28 shrink-0" showMuteBtn={isTeacher} onMute={() => mutePeer(id)}
                       onUnmute={() => unmutePeer(id)} peerMuted={mutedPeers.has(id)} />
                   ))}
-                  {/* Extra screen share thumbnails when multiple shares exist */}
-                  {screenStream && remoteSS && (
-                    <VideoTile stream={peerScreenStreams.get(remoteSS[0])!}
-                      name={`${remoteSS[1].name}'s screen`}
-                      className="h-20 w-36 shrink-0 border border-blue-500/30" />
-                  )}
                 </div>
               </div>
             )
@@ -862,7 +908,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             </div>
           )}
 
-          {/* Live transcript panel */}
           {showTranscript && (
             <div className="bg-black/50 border-t border-white/10 shrink-0 max-h-28 flex flex-col">
               <div className="flex items-center justify-between px-3 py-1 border-b border-white/10">
@@ -889,23 +934,19 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             </div>
           )}
 
-          {/* Controls — primary row */}
+          {/* Controls */}
           <div className="shrink-0 bg-gray-900 border-t border-white/10 px-3 pt-2.5 pb-1">
             <div className="flex items-center justify-center gap-3">
-              {/* Mute */}
               <CtrlBtn onClick={toggleAudio} active={audioMuted} label={audioMuted ? 'Unmute' : 'Mute'}>
                 {audioMuted ? <MicOff size={18} className="text-white" /> : <Mic size={18} className="text-white" />}
               </CtrlBtn>
-              {/* Video */}
               <CtrlBtn onClick={toggleVideo} active={videoOff} disabled={!hasCamera} label={videoOff ? 'Start Video' : 'Stop Video'}>
                 {videoOff ? <VideoOff size={18} className="text-white" /> : <Video size={18} className="text-white" />}
               </CtrlBtn>
-              {/* Record */}
               <CtrlBtn onClick={recording ? stopRecording : startRecording} active={recording}
                 label={recording ? fmtTime(recSeconds) : 'Record'}>
                 {recording ? <Square size={16} className="text-white" /> : <Circle size={16} className="text-white" />}
               </CtrlBtn>
-              {/* Captions */}
               <CtrlBtn
                 onClick={() => {
                   if (transcribing) { stopTranscription(); setShowTranscript(s => !s) }
@@ -917,7 +958,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               >
                 <AlignLeft size={16} className="text-white" />
               </CtrlBtn>
-              {/* Screen share — disabled while someone else is sharing */}
               <CtrlBtn
                 onClick={screenStream ? stopScreenShare : startScreenShare}
                 active={!!screenStream}
@@ -926,13 +966,11 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               >
                 {screenStream ? <MonitorOff size={16} className="text-white" /> : <Monitor size={16} className="text-white" />}
               </CtrlBtn>
-              {/* End for all (teacher only) */}
               {isTeacher && (
                 <CtrlBtn onClick={endCallForAll} active label="End Class" alwaysRed>
                   <PhoneOff size={18} className="text-white" />
                 </CtrlBtn>
               )}
-              {/* Leave */}
               <CtrlBtn onClick={onClose} active label="Leave" alwaysRed>
                 <PhoneOff size={18} className="text-white" />
               </CtrlBtn>
@@ -945,7 +983,6 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   )
 }
 
-// ── Small control button helper ────────────────────────────────────────────
 function CtrlBtn({ onClick, active = false, disabled = false, alwaysRed = false, label, children }: {
   onClick: () => void; active?: boolean; disabled?: boolean; alwaysRed?: boolean; label: string; children: React.ReactNode
 }) {
