@@ -73,6 +73,7 @@ export default function StudentSession() {
           setParticipant(updated)
           if (updated.has_board_access && !prev?.has_board_access) toast.success('You have board access! Start drawing.')
           if (updated.has_code_access && !prev?.has_code_access) toast.success('You have code access! Start coding.')
+          if (updated.has_notes_access && !prev?.has_notes_access) toast.success('You have notes access! Start writing.')
         })
       .subscribe()
     const sessionChannel = supabase.channel(`session_status:${sessionId}`)
@@ -217,7 +218,7 @@ export default function StudentSession() {
         <div className="flex-1 min-w-0 flex flex-col">
           <div className={tab === 'whiteboard' ? 'flex-1 min-h-0' : 'hidden'}><Whiteboard sessionId={sessionId!} isTeacher={false} canDraw={canDraw} /></div>
           <div className={tab === 'code' ? 'flex-1 min-h-0' : 'hidden'}><CodeEditor sessionId={sessionId!} isTeacher={false} canEdit={participant?.has_code_access ?? false} participantId={participantId} participantName={participantName} /></div>
-          <div className={tab === 'notes' ? 'flex-1 min-h-0' : 'hidden'}><RichTextEditor sessionId={sessionId!} isTeacher={false} /></div>
+          <div className={tab === 'notes' ? 'flex-1 min-h-0' : 'hidden'}><RichTextEditor sessionId={sessionId!} isTeacher={false} canEdit={participant?.has_notes_access ?? false} participantId={participantId} participantName={participantName} /></div>
         </div>
 
         {/* Video call panel */}

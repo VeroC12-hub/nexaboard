@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import type { Participant, BoardRequest } from '../types'
-import { Hand, Pencil, Code2, X, CheckCircle, UserCircle2, UserMinus } from 'lucide-react'
+import { Hand, Pencil, Code2, X, CheckCircle, UserCircle2, UserMinus, FileText } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 interface Props { sessionId: string; isTeacher: boolean }
@@ -79,6 +79,7 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
 
   const boardRequests = requests.filter(r => r.request_type === 'board' || !r.request_type)
   const codeRequests = requests.filter(r => r.request_type === 'code')
+  const notesRequests = requests.filter(r => r.request_type === 'notes')
   const raisedHands = participants.filter(p => p.hand_raised)
 
   const lowerHand = async (participantId: string, name: string) => {
@@ -112,6 +113,19 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
   const revokeCodeAccess = async (participantId: string) => {
     await supabase.from('session_participants').update({ has_code_access: false }).eq('id', participantId)
     toast.success('Code access revoked'); fetchParticipants()
+  }
+
+  const grantNotesAccess = async (participantId: string, participantName: string) => {
+    await supabase.from('session_participants').update({ has_notes_access: true }).eq('id', participantId)
+    await supabase.from('board_requests').update({ status: 'granted' })
+      .eq('session_id', sessionId).eq('participant_id', participantId).eq('request_type', 'notes').eq('status', 'pending')
+    toast.success(`Notes access given to ${participantName}`)
+    fetchParticipants(); fetchRequests()
+  }
+
+  const revokeNotesAccess = async (participantId: string) => {
+    await supabase.from('session_participants').update({ has_notes_access: false }).eq('id', participantId)
+    toast.success('Notes access revoked'); fetchParticipants()
   }
 
   const denyRequest = async (requestId: string) => {
@@ -198,6 +212,21 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
         </div>
       )}
 
+      {/* ── Notes requests ───────────────────────────────────────────────── */}
+      {isTeacher && notesRequests.length > 0 && (
+        <div className="mb-4">
+          <div className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <FileText size={12} /> Notes Requests ({notesRequests.length})
+          </div>
+          <div className="space-y-2">
+            {notesRequests.map(req => (
+              <RequestRow key={req.id} req={req} icon={<FileText size={12} className="text-purple-500" />}
+                onGrant={() => grantNotesAccess(req.participant_id, req.participant_name)} />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* ── Student list ─────────────────────────────────────────────────── */}
       <div className="text-xs font-semibold text-[#9ca3af] uppercase tracking-wider mb-2">
         Students ({participants.length})
@@ -229,6 +258,11 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
                   {p.has_code_access && (
                     <span className="text-[10px] text-blue-500 flex items-center gap-1 font-medium">
                       <Code2 size={9} /> Code
+                    </span>
+                  )}
+                  {p.has_notes_access && (
+                    <span className="text-[10px] text-purple-500 flex items-center gap-1 font-medium">
+                      <FileText size={9} /> Notes
                     </span>
                   )}
                 </div>
@@ -265,6 +299,17 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
                   <button onClick={() => grantCodeAccess(p.id, p.name)}
                     className="px-2 py-1 text-[10px] text-blue-500 border border-blue-200 bg-blue-50 rounded hover:bg-blue-100 transition-colors flex items-center gap-1">
                     <Code2 size={9} /> Code
+                  </button>
+                )}
+                {p.has_notes_access ? (
+                  <button onClick={() => revokeNotesAccess(p.id)}
+                    className="px-2 py-1 text-[10px] text-red-500 border border-red-200 bg-red-50 rounded hover:bg-red-100 transition-colors">
+                    -Notes
+                  </button>
+                ) : (
+                  <button onClick={() => grantNotesAccess(p.id, p.name)}
+                    className="px-2 py-1 text-[10px] text-purple-500 border border-purple-200 bg-purple-50 rounded hover:bg-purple-100 transition-colors flex items-center gap-1">
+                    <FileText size={9} /> Notes
                   </button>
                 )}
                 <button onClick={() => removeStudent(p.id, p.name)} title="Remove from session"
