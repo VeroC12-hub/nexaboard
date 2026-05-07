@@ -26,10 +26,12 @@ interface Props {
 type PeerState = { name: string; stream: MediaStream | null; state: string }
 
 // Helper to get browser SpeechRecognition (Chrome / Edge)
-type SRCtor = new () => SpeechRecognition
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SRCtor = new () => any
 const getSR = (): SRCtor | undefined => {
-  const w = window as Record<string, unknown>
-  return (w['SpeechRecognition'] ?? w['webkitSpeechRecognition']) as SRCtor | undefined
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const w = window as any
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition
 }
 
 // ── Video tile ────────────────────────────────────────────────────────────────
@@ -129,7 +131,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const recTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   // Transcription refs
-  const recognitionRef = useRef<SpeechRecognition | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recognitionRef = useRef<any>(null)
   const transcribingRef = useRef(false)
 
   // ── WebRTC setup ─────────────────────────────────────────────────────────────

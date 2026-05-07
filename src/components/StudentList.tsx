@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import type { Participant, BoardRequest } from '../types'
 import { Hand, Pencil, Code2, X, CheckCircle, UserCircle2, UserMinus } from 'lucide-react'
@@ -6,20 +6,64 @@ import toast from 'react-hot-toast'
 
 interface Props { sessionId: string; isTeacher: boolean }
 
+// Short two-tone beep using Web Audio API — no sound file needed
+function playHandRaisedSound() {
+  try {
+    const ctx = new AudioContext()
+    const play = (freq: number, start: number, dur: number) => {
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+      osc.connect(gain); gain.connect(ctx.destination)
+      osc.frequency.value = freq
+      gain.gain.setValueAtTime(0.25, ctx.currentTime + start)
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur)
+      osc.start(ctx.currentTime + start)
+      osc.stop(ctx.currentTime + start + dur)
+    }
+    play(660, 0, 0.15)
+    play(880, 0.18, 0.15)
+    setTimeout(() => ctx.close(), 600)
+  } catch { /* AudioContext blocked (e.g. no user gesture) — silent fallback */ }
+}
+
 export default function StudentList({ sessionId, isTeacher }: Props) {
   const [participants, setParticipants] = useState<Participant[]>([])
   const [requests, setRequests] = useState<BoardRequest[]>([])
+  const participantsRef = useRef<Participant[]>([])
+
+  // Keep ref in sync so realtime callbacks can read latest state without stale closures
+  useEffect(() => { participantsRef.current = participants }, [participants])
 
   useEffect(() => {
     fetchParticipants(); fetchRequests()
+
     const partChannel = supabase.channel(`participants:${sessionId}`)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'session_participants', filter: `session_id=eq.${sessionId}` },
-        () => fetchParticipants()).subscribe()
+        (payload) => {
+          // Detect hand-raise transitions for the teacher
+          if (isTeacher && payload.eventType === 'UPDATE') {
+            const updated = payload.new as Participant
+            const prev = participantsRef.current.find(p => p.id === updated.id)
+            if (prev && !prev.hand_raised && updated.hand_raised) {
+              playHandRaisedSound()
+              toast(`${updated.name} raised their hand`, {
+                icon: '✋',
+                duration: 8000,
+                style: { background: '#fffbeb', color: '#92400e', border: '1px solid #fcd34d' },
+              })
+            }
+          }
+          fetchParticipants()
+        })
+      .subscribe()
+
     const reqChannel = supabase.channel(`requests:${sessionId}`)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'board_requests', filter: `session_id=eq.${sessionId}` },
-        () => fetchRequests()).subscribe()
+        () => fetchRequests())
+      .subscribe()
+
     return () => { supabase.removeChannel(partChannel); supabase.removeChannel(reqChannel) }
-  }, [sessionId])
+  }, [sessionId, isTeacher])
 
   const fetchParticipants = async () => {
     const { data } = await supabase.from('session_participants').select('*')
@@ -35,6 +79,12 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
 
   const boardRequests = requests.filter(r => r.request_type === 'board' || !r.request_type)
   const codeRequests = requests.filter(r => r.request_type === 'code')
+  const raisedHands = participants.filter(p => p.hand_raised)
+
+  const lowerHand = async (participantId: string, name: string) => {
+    await supabase.from('session_participants').update({ hand_raised: false }).eq('id', participantId)
+    toast(`${name}'s hand lowered`, { icon: '👇' })
+  }
 
   const grantBoardAccess = async (participantId: string, participantName: string) => {
     await supabase.from('session_participants').update({ has_board_access: false }).eq('session_id', sessionId)
@@ -56,14 +106,12 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
 
   const revokeBoardAccess = async (participantId: string) => {
     await supabase.from('session_participants').update({ has_board_access: false }).eq('id', participantId)
-    toast.success('Board access revoked')
-    fetchParticipants()
+    toast.success('Board access revoked'); fetchParticipants()
   }
 
   const revokeCodeAccess = async (participantId: string) => {
     await supabase.from('session_participants').update({ has_code_access: false }).eq('id', participantId)
-    toast.success('Code access revoked')
-    fetchParticipants()
+    toast.success('Code access revoked'); fetchParticipants()
   }
 
   const denyRequest = async (requestId: string) => {
@@ -96,7 +144,31 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
 
   return (
     <div className="h-full overflow-y-auto p-3 bg-white">
-      {/* Board requests */}
+
+      {/* ── Raised hands ────────────────────────────────────────────────── */}
+      {isTeacher && raisedHands.length > 0 && (
+        <div className="mb-4">
+          <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <Hand size={12} className="animate-bounce" /> Raised Hands ({raisedHands.length})
+          </div>
+          <div className="space-y-1.5">
+            {raisedHands.map(p => (
+              <div key={p.id} className="flex items-center justify-between bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">✋</span>
+                  <span className="text-sm text-amber-800 font-semibold">{p.name}</span>
+                </div>
+                <button onClick={() => lowerHand(p.id, p.name)}
+                  className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-amber-700 bg-white border border-amber-300 rounded-lg hover:bg-amber-100 transition-colors">
+                  <Hand size={10} /> Lower
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── Board requests ───────────────────────────────────────────────── */}
       {isTeacher && boardRequests.length > 0 && (
         <div className="mb-4">
           <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
@@ -111,7 +183,7 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
         </div>
       )}
 
-      {/* Code requests */}
+      {/* ── Code requests ────────────────────────────────────────────────── */}
       {isTeacher && codeRequests.length > 0 && (
         <div className="mb-4">
           <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
@@ -126,6 +198,7 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
         </div>
       )}
 
+      {/* ── Student list ─────────────────────────────────────────────────── */}
       <div className="text-xs font-semibold text-[#9ca3af] uppercase tracking-wider mb-2">
         Students ({participants.length})
       </div>
@@ -134,14 +207,19 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
           <div className="text-xs text-[#9ca3af] py-6 text-center">Waiting for students to join...</div>
         )}
         {participants.map(p => (
-          <div key={p.id} className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-[#f3fcf0] transition-colors group">
+          <div key={p.id} className={`flex items-center justify-between py-2 px-2 rounded-lg transition-colors group
+            ${p.hand_raised ? 'bg-amber-50 hover:bg-amber-100' : 'hover:bg-[#f3fcf0]'}`}>
             <div className="flex items-center gap-2.5">
               <div className="relative">
                 <UserCircle2 size={20} className={p.has_board_access ? 'text-[#5ab82e]' : 'text-[#9ca3af]'} />
-                <div className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-white ${p.hand_raised ? 'bg-amber-400' : 'bg-[#5ab82e]'}`} />
+                <div className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-white
+                  ${p.hand_raised ? 'bg-amber-400 animate-pulse' : 'bg-[#5ab82e]'}`} />
               </div>
               <div>
-                <div className="text-sm text-[#1b2b4b] font-semibold">{p.name}</div>
+                <div className="text-sm text-[#1b2b4b] font-semibold flex items-center gap-1">
+                  {p.name}
+                  {p.hand_raised && <span className="text-base leading-none">✋</span>}
+                </div>
                 <div className="flex items-center gap-2">
                   {p.has_board_access && (
                     <span className="text-[10px] text-[#5ab82e] flex items-center gap-1 font-medium">
@@ -153,16 +231,20 @@ export default function StudentList({ sessionId, isTeacher }: Props) {
                       <Code2 size={9} /> Code
                     </span>
                   )}
-                  {p.hand_raised && (
-                    <span className="text-[10px] text-amber-500 flex items-center gap-1 font-medium">
-                      <Hand size={9} /> Hand raised
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
+
             {isTeacher && (
               <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                {/* Lower hand — always show if hand raised */}
+                {p.hand_raised && (
+                  <button onClick={() => lowerHand(p.id, p.name)}
+                    className="px-2 py-1 text-[10px] font-semibold text-amber-700 border border-amber-300 bg-amber-100 rounded hover:bg-amber-200 transition-colors flex items-center gap-1"
+                    style={{ opacity: 1 }}>
+                    <Hand size={9} /> Lower
+                  </button>
+                )}
                 {p.has_board_access ? (
                   <button onClick={() => revokeBoardAccess(p.id)}
                     className="px-2 py-1 text-[10px] text-red-500 border border-red-200 bg-red-50 rounded hover:bg-red-100 transition-colors">
