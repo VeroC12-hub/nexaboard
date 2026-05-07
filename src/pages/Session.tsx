@@ -24,7 +24,7 @@ export default function Session({ user }: { user: User }) {
   const [sideTab, setSideTab] = useState<SideTab>('students')
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [ending, setEnding] = useState(false)
-  const [callOpen, setCallOpen] = useState(false)
+  const [callOpen, setCallOpen] = useState(() => sessionStorage.getItem(`nexaboard_call_${id}`) === 'true')
 
   const teacherName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Teacher'
 
@@ -106,7 +106,12 @@ export default function Session({ user }: { user: User }) {
             Share
           </button>
           <button
-            onClick={() => setCallOpen(v => !v)}
+            onClick={() => {
+              const next = !callOpen
+              setCallOpen(next)
+              if (next) sessionStorage.setItem(`nexaboard_call_${id}`, 'true')
+              else sessionStorage.removeItem(`nexaboard_call_${id}`)
+            }}
             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${callOpen ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] border-green-200'}`}
           >
             {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'End Call' : 'Start Call'}

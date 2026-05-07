@@ -29,11 +29,34 @@ export default function Join() {
     e.preventDefault()
     if (!name.trim() || !sessionInfo) return
     setLoading(true)
+
+    // Check if this device already has a participant slot for this session
+    try {
+      const raw = localStorage.getItem(`nexaboard_participant_${sessionInfo.id}`)
+      if (raw) {
+        const saved = JSON.parse(raw) as { id: string }
+        const { data: existing } = await supabase
+          .from('session_participants').select('id').eq('id', saved.id).single()
+        if (existing) {
+          // Reuse the existing row — update name in case they changed it, mark active
+          await supabase.from('session_participants')
+            .update({ is_active: true, name: name.trim() }).eq('id', saved.id)
+          sessionStorage.setItem('nexaboard_participant_id', saved.id)
+          sessionStorage.setItem('nexaboard_participant_name', name.trim())
+          localStorage.setItem(`nexaboard_participant_${sessionInfo.id}`, JSON.stringify({ id: saved.id, name: name.trim() }))
+          navigate(`/student/${sessionInfo.id}`)
+          return
+        }
+      }
+    } catch { /* stale entry — fall through to create a new row */ }
+
+    // First time joining this session on this device
     const { data, error } = await supabase.from('session_participants')
       .insert({ session_id: sessionInfo.id, name: name.trim(), is_active: true }).select().single()
-    if (error) { toast.error('Failed to join session'); setLoading(false); return }
+    if (error || !data) { toast.error('Failed to join session'); setLoading(false); return }
     sessionStorage.setItem('nexaboard_participant_id', data.id)
     sessionStorage.setItem('nexaboard_participant_name', name.trim())
+    localStorage.setItem(`nexaboard_participant_${sessionInfo.id}`, JSON.stringify({ id: data.id, name: name.trim() }))
     navigate(`/student/${sessionInfo.id}`)
   }
 

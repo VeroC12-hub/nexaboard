@@ -21,9 +21,21 @@ export default function StudentSession() {
   const [tab, setTab] = useState<Tab>('whiteboard')
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [requesting, setRequesting] = useState(false)
-  const [callOpen, setCallOpen] = useState(false)
+  const [callOpen, setCallOpen] = useState(() => sessionStorage.getItem(`nexaboard_call_${sessionId}`) === 'true')
 
-  const participantId = sessionStorage.getItem('nexaboard_participant_id')
+  // Prefer sessionStorage (current tab), fall back to localStorage (new tab from share link)
+  const participantId = (() => {
+    const fromSession = sessionStorage.getItem('nexaboard_participant_id')
+    if (fromSession) return fromSession
+    try {
+      const raw = localStorage.getItem(`nexaboard_participant_${sessionId}`)
+      if (!raw) return null
+      const { id, name: savedName } = JSON.parse(raw) as { id: string; name: string }
+      sessionStorage.setItem('nexaboard_participant_id', id)
+      if (savedName) sessionStorage.setItem('nexaboard_participant_name', savedName)
+      return id
+    } catch { return null }
+  })()
   const participantName = sessionStorage.getItem('nexaboard_participant_name') || 'Student'
 
   useEffect(() => { if (!participantId) { navigate('/'); return } fetchData() }, [sessionId, participantId])
@@ -137,7 +149,12 @@ export default function StudentSession() {
           )}
 
           <button
-            onClick={() => setCallOpen(v => !v)}
+            onClick={() => {
+              const next = !callOpen
+              setCallOpen(next)
+              if (next) sessionStorage.setItem(`nexaboard_call_${sessionId}`, 'true')
+              else sessionStorage.removeItem(`nexaboard_call_${sessionId}`)
+            }}
             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${callOpen ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'bg-[#f3fcf0] text-[#1b2b4b] border-green-200 hover:bg-green-100'}`}
           >
             {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'Leave Call' : 'Join Call'}
