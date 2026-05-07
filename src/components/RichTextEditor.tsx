@@ -193,12 +193,11 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const lastBroadcast = useRef(0)
   const isRemoteUpdate = useRef(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const imageInputRef = useRef<HTMLInputElement>(null)
 
   const [showChartModal, setShowChartModal] = useState(false)
   const [showDrawingModal, setShowDrawingModal] = useState(false)
-  const [showImageInput, setShowImageInput] = useState(false)
   const [showTablePicker, setShowTablePicker] = useState(false)
-  const [imageUrl, setImageUrl] = useState('')
   const [requesting, setRequesting] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [activeEditor, setActiveEditor] = useState<string | null>(null)
@@ -363,10 +362,28 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     setRequesting(false)
   }
 
-  const insertImage = () => {
-    if (!imageUrl.trim() || !editor) return
-    editor.chain().focus().setImage({ src: imageUrl.trim() }).run()
-    setImageUrl(''); setShowImageInput(false)
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !editor) return
+    e.target.value = ''
+    if (!/\.(png|jpe?g|gif|webp|svg)$/i.test(file.name)) {
+      toast.error('Supported image formats: PNG, JPG, GIF, WebP, SVG')
+      return
+    }
+    const toastId = toast.loading(`Uploading ${file.name}…`)
+    try {
+      const path = `${sessionId}/img-${Date.now()}-${file.name.replace(/\s+/g, '_')}`
+      const { error } = await supabase.storage.from('session-files').upload(path, file, { upsert: true })
+      if (error) throw error
+      const { data: { publicUrl } } = supabase.storage.from('session-files').getPublicUrl(path)
+      editor.chain().focus().setImage({ src: publicUrl }).run()
+      lastBroadcast.current = 0
+      broadcastContent(editor.getJSON())
+      toast.success('Image inserted', { id: toastId })
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      toast.error(`Image upload failed: ${msg}`, { id: toastId })
+    }
   }
 
   const handleChartInsert = (dataUrl: string) => {
@@ -399,10 +416,13 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
   return (
     <div className="h-full flex flex-col bg-white">
-      {/* Hidden file input */}
+      {/* Hidden file inputs */}
       <input ref={fileInputRef} type="file"
         accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
         onChange={handleFileUpload} className="hidden" />
+      <input ref={imageInputRef} type="file"
+        accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml"
+        onChange={handleImageUpload} className="hidden" />
 
       {/* Toolbar — teacher and students with access */}
       {canWrite && (
@@ -447,25 +467,11 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
                   </button>
                   {showTablePicker && <TablePicker onPick={handleTablePick} />}
                 </div>
-                <div className="relative" onMouseDown={e => e.stopPropagation()}>
-                  <button onMouseDown={e => { e.preventDefault(); setShowImageInput(v => !v); setShowTablePicker(false) }}
-                    title="Insert Image"
-                    className={`p-1.5 rounded transition-colors ${showImageInput ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
-                    <ImageIcon size={15} />
-                  </button>
-                  {showImageInput && (
-                    <div className="absolute top-full left-0 mt-1 z-30 bg-white border border-green-200 rounded-xl shadow-lg p-3 w-72 flex gap-2">
-                      <input autoFocus value={imageUrl} onChange={e => setImageUrl(e.target.value)}
-                        onKeyDown={e => { if (e.key === 'Enter') insertImage(); if (e.key === 'Escape') setShowImageInput(false) }}
-                        placeholder="Paste image URL..."
-                        className="flex-1 bg-[#f3fcf0] border border-green-200 rounded-lg px-3 py-1.5 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-1 focus:ring-[#5ab82e]" />
-                      <button onClick={insertImage}
-                        className="px-3 py-1.5 bg-[#5ab82e] hover:bg-[#489f22] text-white rounded-lg text-sm font-semibold transition-colors">
-                        Insert
-                      </button>
-                    </div>
-                  )}
-                </div>
+                <button onMouseDown={e => { e.preventDefault(); imageInputRef.current?.click() }}
+                  title="Insert Image"
+                  className="p-1.5 rounded transition-colors text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]">
+                  <ImageIcon size={15} />
+                </button>
                 {btn(false, () => setShowChartModal(true), 'Insert Chart', <BarChart2 size={15} />)}
                 {btn(false, () => setShowDrawingModal(true), 'Draw & Shapes', <PenLine size={15} />)}
               </>
