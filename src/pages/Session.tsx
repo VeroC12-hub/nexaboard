@@ -44,8 +44,9 @@ export default function Session({ user }: { user: User }) {
         sessionStorage.setItem(`nexaboard_call_${id}`, 'true')
       }
     }
-    ch.on('presence', { event: 'join' }, check)
-      .subscribe(status => { if (status === 'SUBSCRIBED') check() })
+    ch.on('presence', { event: 'sync' }, check)
+      .on('presence', { event: 'join' }, check)
+      .subscribe()
     return () => { supabase.removeChannel(ch) }
   }, [id, callOpen])
 
