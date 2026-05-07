@@ -128,6 +128,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
 
   // Peer screen share streams (second video track from remote peers)
   const [peerScreenStreams, setPeerScreenStreams] = useState(new Map<string, MediaStream>())
+  // Set of peerCallIds that have announced screen share via broadcast (for reliable ontrack detection)
+  const screenSharersRef = useRef(new Set<string>())
 
   // Teacher peer devices (callIds with isTeacher=true, for ctrl_sync filtering)
   const teacherCallIdsRef = useRef(new Set<string>())
@@ -203,13 +205,20 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       pc.ontrack = e => {
         if (!mounted) return
 
-        // If this peer's stream already has a video track and this new track is also video,
-        // it's a screen share track — put it in a separate stream
-        if (e.track.kind === 'video' && remoteStream.getVideoTracks().length > 0) {
+        // Detect screen share track: peer announced sharing (broadcast) OR
+        // camera video track is already in remoteStream (screen is always the 2nd video track)
+        const isScreenShare = e.track.kind === 'video' && (
+          screenSharersRef.current.has(peerCallId) ||
+          remoteStream.getVideoTracks().length > 0
+        )
+
+        if (isScreenShare) {
           const ss = new MediaStream([e.track])
           setPeerScreenStreams(prev => { const n = new Map(prev); n.set(peerCallId, ss); return n })
+          toast(`${peerName} is sharing their screen`, { icon: '🖥️', duration: 4000 })
           e.track.onended = () => {
             setPeerScreenStreams(prev => { const n = new Map(prev); n.delete(peerCallId); return n })
+            screenSharersRef.current.delete(peerCallId)
           }
         } else {
           remoteStream.addTrack(e.track)
@@ -315,6 +324,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           const p = (leftPresences as unknown as Array<{ callId: string }>)[0]
           if (!p) return
           teacherCallIdsRef.current.delete(p.callId)
+          screenSharersRef.current.delete(p.callId)
           // If the sharer leaves, clear screen share state
           if (screenSharerCallIdRef.current === p.callId) {
             screenSharerCallIdRef.current = null
@@ -375,12 +385,14 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
         // ── Screen share started (one at a time enforcement) ─────────────
         .on('broadcast', { event: 'screen_share_started' }, ({ payload }) => {
           if (payload.from === callId) return
+          screenSharersRef.current.add(payload.from)
           screenSharerCallIdRef.current = payload.from
           setScreenSharerCallId(payload.from)
           setScreenSharerName(payload.name)
         })
         // ── Screen share stopped ─────────────────────────────────────────
         .on('broadcast', { event: 'screen_share_stopped' }, ({ payload }) => {
+          screenSharersRef.current.delete(payload.from)
           if (screenSharerCallIdRef.current !== payload.from) return
           screenSharerCallIdRef.current = null
           setScreenSharerCallId(null)
@@ -790,26 +802,40 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             </div>
           )}
 
-          {/* Speaker view */}
-          {viewMode === 'speaker' && (
-            <div className="flex-1 min-h-0 flex flex-col gap-1.5 p-2 overflow-hidden">
-              <div className="flex-1 min-h-0">
-                {peersArr[0]
-                  ? <VideoTile stream={peersArr[0][1].stream} name={peersArr[0][1].name} state={peersArr[0][1].state}
-                      className="h-full" showMuteBtn={isTeacher} onMute={() => mutePeer(peersArr[0][0])}
-                      onUnmute={() => unmutePeer(peersArr[0][0])} peerMuted={mutedPeers.has(peersArr[0][0])} />
-                  : <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-full" />}
+          {/* Speaker view — screen shares take over the main area */}
+          {viewMode === 'speaker' && (() => {
+            const remoteSS = peersArr.find(([id]) => peerScreenStreams.has(id))
+            const mainStream = screenStream ?? (remoteSS ? peerScreenStreams.get(remoteSS[0])! : null)
+            const mainName = screenStream ? 'Your screen' : (remoteSS ? `${remoteSS[1].name}'s screen` : null)
+            return (
+              <div className="flex-1 min-h-0 flex flex-col gap-1.5 p-2 overflow-hidden">
+                <div className="flex-1 min-h-0">
+                  {mainStream
+                    ? <VideoTile stream={mainStream} muted={!!screenStream} name={mainName!}
+                        className="h-full border border-blue-500/30 rounded-xl" />
+                    : peersArr[0]
+                      ? <VideoTile stream={peersArr[0][1].stream} name={peersArr[0][1].name} state={peersArr[0][1].state}
+                          className="h-full" showMuteBtn={isTeacher} onMute={() => mutePeer(peersArr[0][0])}
+                          onUnmute={() => unmutePeer(peersArr[0][0])} peerMuted={mutedPeers.has(peersArr[0][0])} />
+                      : <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-full" />}
+                </div>
+                <div className="flex gap-1.5 shrink-0 overflow-x-auto pb-1">
+                  <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-20 w-28 shrink-0" />
+                  {peersArr.map(([id, info]) => (
+                    <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
+                      className="h-20 w-28 shrink-0" showMuteBtn={isTeacher} onMute={() => mutePeer(id)}
+                      onUnmute={() => unmutePeer(id)} peerMuted={mutedPeers.has(id)} />
+                  ))}
+                  {/* Extra screen share thumbnails when multiple shares exist */}
+                  {screenStream && remoteSS && (
+                    <VideoTile stream={peerScreenStreams.get(remoteSS[0])!}
+                      name={`${remoteSS[1].name}'s screen`}
+                      className="h-20 w-36 shrink-0 border border-blue-500/30" />
+                  )}
+                </div>
               </div>
-              <div className="flex gap-1.5 shrink-0 overflow-x-auto pb-1">
-                {peersArr[0] && <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="h-20 w-28 shrink-0" />}
-                {peersArr.slice(1).map(([id, info]) => (
-                  <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
-                    className="h-20 w-28 shrink-0" showMuteBtn={isTeacher} onMute={() => mutePeer(id)}
-                    onUnmute={() => unmutePeer(id)} peerMuted={mutedPeers.has(id)} />
-                ))}
-              </div>
-            </div>
-          )}
+            )
+          })()}
 
           {peersArr.length === 0 && (
             <div className="text-white/30 text-xs text-center py-1.5 shrink-0">
