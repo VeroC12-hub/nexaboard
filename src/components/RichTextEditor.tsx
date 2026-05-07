@@ -41,7 +41,9 @@ function TablePicker({ onPick }: { onPick: (rows: number, cols: number) => void 
                 key={c}
                 onMouseEnter={() => setHover({ r: r + 1, c: c + 1 })}
                 onMouseDown={e => { e.preventDefault(); onPick(r + 1, c + 1) }}
-                className={`w-5 h-5 rounded-sm border transition-colors cursor-pointer ${
+                onTouchStart={() => setHover({ r: r + 1, c: c + 1 })}
+                onTouchEnd={e => { e.preventDefault(); onPick(r + 1, c + 1) }}
+                className={`w-6 h-6 rounded-sm border transition-colors cursor-pointer ${
                   r < hover.r && c < hover.c
                     ? 'bg-[#5ab82e] border-[#5ab82e]'
                     : 'bg-[#f3fcf0] border-green-200 hover:border-[#5ab82e]'

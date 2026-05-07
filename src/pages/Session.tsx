@@ -9,7 +9,8 @@ import ChatSidebar from '../components/ChatSidebar'
 import StudentList from '../components/StudentList'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home } from 'lucide-react'
+import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff } from 'lucide-react'
+import VideoCall from '../components/VideoCall'
 
 type Tab = 'whiteboard' | 'code' | 'notes'
 type SideTab = 'students' | 'chat'
@@ -23,6 +24,7 @@ export default function Session({ user }: { user: User }) {
   const [sideTab, setSideTab] = useState<SideTab>('students')
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [ending, setEnding] = useState(false)
+  const [callOpen, setCallOpen] = useState(false)
 
   const teacherName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Teacher'
 
@@ -103,6 +105,12 @@ export default function Session({ user }: { user: User }) {
             className="px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#6b7280] hover:text-[#1b2b4b] rounded-lg text-xs border border-green-200 transition-colors hidden sm:block">
             Share
           </button>
+          <button
+            onClick={() => setCallOpen(v => !v)}
+            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${callOpen ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] border-green-200'}`}
+          >
+            {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'End Call' : 'Start Call'}
+          </button>
           <button onClick={endSession} disabled={ending}
             className="flex items-center gap-1 px-2.5 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg text-xs font-semibold border border-red-100 transition-colors">
             <Square size={11} /> End
@@ -150,6 +158,14 @@ export default function Session({ user }: { user: User }) {
           )}
         </div>
       </div>
+
+      {callOpen && session && (
+        <VideoCall
+          roomName={session.join_code}
+          displayName={teacherName}
+          onClose={() => setCallOpen(false)}
+        />
+      )}
     </div>
   )
 }

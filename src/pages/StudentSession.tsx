@@ -7,7 +7,8 @@ import CodeEditor from '../components/CodeEditor'
 import ChatSidebar from '../components/ChatSidebar'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft } from 'lucide-react'
+import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft, Video, VideoOff } from 'lucide-react'
+import VideoCall from '../components/VideoCall'
 
 type Tab = 'whiteboard' | 'code' | 'notes'
 
@@ -20,6 +21,7 @@ export default function StudentSession() {
   const [tab, setTab] = useState<Tab>('whiteboard')
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [requesting, setRequesting] = useState(false)
+  const [callOpen, setCallOpen] = useState(false)
 
   const participantId = sessionStorage.getItem('nexaboard_participant_id')
   const participantName = sessionStorage.getItem('nexaboard_participant_name') || 'Student'
@@ -134,6 +136,12 @@ export default function StudentSession() {
             </button>
           )}
 
+          <button
+            onClick={() => setCallOpen(v => !v)}
+            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${callOpen ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'bg-[#f3fcf0] text-[#1b2b4b] border-green-200 hover:bg-green-100'}`}
+          >
+            {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'Leave Call' : 'Join Call'}
+          </button>
           <button onClick={raiseHand}
             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${participant?.hand_raised ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-[#f3fcf0] text-[#6b7280] border-green-200 hover:text-[#1b2b4b]'}`}>
             <Hand size={11} /> {participant?.hand_raised ? 'Lower' : 'Raise Hand'}
@@ -148,6 +156,15 @@ export default function StudentSession() {
           <div className={tab === 'code' ? 'flex-1 min-h-0' : 'hidden'}><CodeEditor sessionId={sessionId!} isTeacher={false} canEdit={participant?.has_code_access ?? false} participantId={participantId} participantName={participantName} /></div>
           <div className={tab === 'notes' ? 'flex-1 min-h-0' : 'hidden'}><RichTextEditor sessionId={sessionId!} isTeacher={false} /></div>
         </div>
+
+        {/* Video call panel */}
+        {callOpen && session && (
+          <VideoCall
+            roomName={session.join_code}
+            displayName={participantName}
+            onClose={() => setCallOpen(false)}
+          />
+        )}
 
         {/* Chat sidebar */}
         <div className={`flex flex-col border-l border-green-100 bg-white transition-all duration-200 shrink-0 ${sidebarOpen ? 'w-64' : 'w-10'}`}>
