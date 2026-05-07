@@ -551,21 +551,10 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     onClose()
   }
 
-  // Explicit renegotiation after track changes — more reliable than onnegotiationneeded
-  const renegotiate = async (pc: RTCPeerConnection, peerId: string) => {
-    try {
-      const offer = await pc.createOffer()
-      await pc.setLocalDescription(offer)
-      chRef.current?.send({
-        type: 'broadcast', event: 'call_offer',
-        payload: { from: callId, to: peerId, sdp: pc.localDescription, name: displayName },
-      })
-    } catch { /* peer may have disconnected */ }
-  }
-
   // ── Screen share ─────────────────────────────────────────────────────────
+  // Uses sender.replaceTrack() — no SDP renegotiation needed.
+  // The receiver sees the screen inside their existing camera video tile automatically.
   const startScreenShare = async () => {
-    // One-at-a-time: block if someone else is sharing
     if (screenSharerCallIdRef.current && screenSharerCallIdRef.current !== callId) {
       toast.error(`${screenSharerName ?? 'Someone'} is already sharing their screen`)
       return
@@ -575,14 +564,11 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       const track = stream.getVideoTracks()[0]
       if (!track) return
 
-      // Add track and explicitly renegotiate each peer connection
-      const jobs: Promise<void>[] = []
+      // Swap the camera video sender for the screen track on every peer connection
       pcsRef.current.forEach((pc, peerId) => {
-        const sender = pc.addTrack(track, stream)
-        screenSendersRef.current.set(peerId, sender)
-        jobs.push(renegotiate(pc, peerId))
+        const sender = pc.getSenders().find(s => s.track?.kind === 'video')
+        if (sender) { sender.replaceTrack(track); screenSendersRef.current.set(peerId, sender) }
       })
-      await Promise.all(jobs)
 
       screenStreamRef.current = stream
       setScreenStream(stream)
@@ -608,11 +594,10 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     screenSharerCallIdRef.current = null
     setScreenSharerCallId(null)
 
-    screenSendersRef.current.forEach(async (sender, peerId) => {
-      const pc = pcsRef.current.get(peerId)
-      if (!pc) return
-      try { pc.removeTrack(sender) } catch { }
-      await renegotiate(pc, peerId)
+    // Restore camera track (null if no camera — stops sending video)
+    const cameraTrack = localStreamRef.current?.getVideoTracks()[0] ?? null
+    screenSendersRef.current.forEach(sender => {
+      try { sender.replaceTrack(cameraTrack) } catch { }
     })
     screenSendersRef.current.clear()
 
