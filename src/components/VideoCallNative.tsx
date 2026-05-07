@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import {
   X, Maximize2, Minimize2, Mic, MicOff, Video, VideoOff,
-  PhoneOff, LayoutGrid, Users, Minus, VolumeX, Circle, Square, AlignLeft, Download,
+  PhoneOff, LayoutGrid, Users, Minus, VolumeX, Circle, Square, AlignLeft, Download, Monitor, MonitorOff,
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
@@ -101,6 +101,11 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const [minimized, setMinimized] = useState(false)
   const [viewMode, setViewMode] = useState<'grid' | 'speaker'>('grid')
   const [error, setError] = useState('')
+
+  // Screen share
+  const [screenStream, setScreenStream] = useState<MediaStream | null>(null)
+  const screenStreamRef = useRef<MediaStream | null>(null)
+  const screenSendersRef = useRef<Map<string, RTCRtpSender>>(new Map())
 
   // Recording
   const [recording, setRecording] = useState(false)
@@ -321,6 +326,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       audioCtxRef.current?.close()
       transcribingRef.current = false
       recognitionRef.current?.abort()
+      screenStreamRef.current?.getTracks().forEach(t => t.stop())
     }
   }, [])
 
@@ -337,6 +343,43 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
   const mutePeer = (peerCallId: string) => {
     chRef.current?.send({ type: 'broadcast', event: 'call_remote_mute', payload: { to: peerCallId } })
     toast.success('Student muted')
+  }
+
+  // ── Screen share ─────────────────────────────────────────────────────────
+  const startScreenShare = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false })
+      const track = stream.getVideoTracks()[0]
+      if (!track) return
+
+      // Add the screen track to every existing peer connection
+      pcsRef.current.forEach((pc, peerId) => {
+        const sender = pc.addTrack(track, stream)
+        screenSendersRef.current.set(peerId, sender)
+      })
+
+      screenStreamRef.current = stream
+      setScreenStream(stream)
+
+      // When the user stops sharing via the browser's native stop button
+      track.onended = () => stopScreenShare()
+      toast.success('Screen sharing started')
+    } catch {
+      toast.error('Could not start screen share')
+    }
+  }
+
+  const stopScreenShare = () => {
+    screenStreamRef.current?.getTracks().forEach(t => t.stop())
+    screenStreamRef.current = null
+    setScreenStream(null)
+
+    // Remove the screen track sender from every peer connection
+    screenSendersRef.current.forEach((sender, peerId) => {
+      try { pcsRef.current.get(peerId)?.removeTrack(sender) } catch { }
+    })
+    screenSendersRef.current.clear()
+    toast('Screen sharing stopped', { icon: '🖥️' })
   }
 
   // ── Recording ─────────────────────────────────────────────────────────────
@@ -519,6 +562,9 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           {viewMode === 'grid' && (
             <div className={`flex-1 min-h-0 p-2 grid gap-2 ${gridCols} content-start overflow-auto`}>
               <VideoTile stream={localStream} muted name={`${displayName} (you)`} noVideo={videoOff} className="aspect-video" />
+              {screenStream && (
+                <VideoTile stream={screenStream} muted name="Your screen" className="aspect-video col-span-full border border-blue-500/40" />
+              )}
               {peersArr.map(([id, info]) => (
                 <VideoTile key={id} stream={info.stream} name={info.name} state={info.state}
                   className="aspect-video" showMuteBtn={isTeacher} onMute={() => mutePeer(id)} />
@@ -602,9 +648,17 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
                   else { startTranscription(); setShowTranscript(true) }
                 }}
                 active={transcribing}
-                label={transcribing ? 'Captions' : 'Captions'}
+                label="Captions"
               >
                 <AlignLeft size={16} className="text-white" />
+              </CtrlBtn>
+              {/* Screen share */}
+              <CtrlBtn
+                onClick={screenStream ? stopScreenShare : startScreenShare}
+                active={!!screenStream}
+                label={screenStream ? 'Stop Share' : 'Share'}
+              >
+                {screenStream ? <MonitorOff size={16} className="text-white" /> : <Monitor size={16} className="text-white" />}
               </CtrlBtn>
               {/* Leave */}
               <CtrlBtn onClick={onClose} active label="Leave" alwaysRed>
