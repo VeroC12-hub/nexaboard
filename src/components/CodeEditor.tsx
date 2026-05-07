@@ -53,10 +53,13 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
   const [running, setRunning] = useState(false)
   const [pyStatus, setPyStatus] = useState<'idle' | 'loading' | 'ready'>('idle')
   const [requesting, setRequesting] = useState(false)
+  const [activeEditor, setActiveEditor] = useState<string | null>(null)
   const outputRef = useRef<HTMLDivElement>(null)
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
   const lastBroadcast = useRef(0)
   const isRemoteUpdate = useRef(false)
+  // Unique sender ID — used to filter own echo (Supabase sends broadcasts to the sender too)
+  const myId = isTeacher ? 'teacher' : (participantId || 'anon')
 
   const canWrite = isTeacher || canEdit
   const locked = !canWrite
@@ -67,27 +70,33 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
     lastBroadcast.current = now
     channelRef.current?.send({
       type: 'broadcast', event: 'code_update',
-      payload: { code: newCode, lang: newLang },
+      payload: { code: newCode, lang: newLang, senderId: myId, senderName: participantName || (isTeacher ? 'Teacher' : 'Student') },
     })
-  }, [])
+  }, [myId, participantName, isTeacher])
 
   useEffect(() => {
     const channel = supabase
       .channel(`code:${sessionId}`)
       .on('broadcast', { event: 'code_update' }, ({ payload }) => {
-        if (isTeacher) return
+        // Ignore own echo
+        if (payload.senderId === myId) return
         isRemoteUpdate.current = true
         setCode(payload.code)
         setLang(payload.lang)
         localStorage.setItem(storageKey, JSON.stringify({ code: payload.code, lang: payload.lang }))
         isRemoteUpdate.current = false
+        // Teacher: show whose code they're viewing
+        if (isTeacher && payload.senderName) setActiveEditor(payload.senderName)
       })
       .on('broadcast', { event: 'code_output' }, ({ payload }) => {
         if (!isTeacher) setOutput(payload.output)
       })
       .on('broadcast', { event: 'code_sync_req' }, () => {
         if (!isTeacher) return
-        channel.send({ type: 'broadcast', event: 'code_update', payload: { code, lang } })
+        channel.send({
+          type: 'broadcast', event: 'code_update',
+          payload: { code, lang, senderId: myId, senderName: 'Teacher' },
+        })
       })
       .subscribe((status) => {
         if (status === 'SUBSCRIBED') {
@@ -96,13 +105,13 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
       })
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
-  }, [sessionId, isTeacher])
+  }, [sessionId, isTeacher, myId])
 
   const handleCodeChange = (v: string | undefined) => {
     if (isRemoteUpdate.current) return
     const val = v || ''
     setCode(val)
-    if (isTeacher) {
+    if (canWrite) {
       localStorage.setItem(storageKey, JSON.stringify({ code: val, lang }))
       broadcast(val, lang)
     }
@@ -207,6 +216,12 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
               className="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-600/30 rounded-lg transition-colors disabled:opacity-50">
               <Code2 size={11} /> {requesting ? 'Requested...' : 'Request Code Access'}
             </button>
+          </div>
+        )}
+
+        {isTeacher && activeEditor && (
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-500/10 border border-blue-500/30 rounded-lg text-xs text-blue-400 font-medium">
+            <Code2 size={10} /> Viewing: {activeEditor}
           </div>
         )}
 
