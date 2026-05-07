@@ -18,7 +18,7 @@ export default function StudentSession() {
   const [participant, setParticipant] = useState<Participant | null>(null)
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<Tab>('whiteboard')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [requesting, setRequesting] = useState(false)
 
   const participantId = sessionStorage.getItem('nexaboard_participant_id')
@@ -89,52 +89,54 @@ export default function StudentSession() {
   return (
     <div className="h-screen flex flex-col bg-white overflow-hidden">
       {/* Top bar */}
-      <header className="flex items-center gap-3 px-4 py-2 border-b border-green-100 bg-white shrink-0 shadow-sm">
-        <img src="/nexacore-logo.jpg" alt="NexaCore" className="h-7 object-contain" />
-        <div className="w-px h-4 bg-green-100" />
-        <div>
-          <span className="font-bold text-sm text-[#1b2b4b]">{session?.title}</span>
-          <span className="ml-2 text-xs text-[#9ca3af]">{session?.subject}</span>
-        </div>
-        <div className="flex items-center gap-1.5 ml-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#5ab82e] animate-pulse" />
-          <span className="text-xs text-[#5ab82e] font-semibold">Live</span>
-        </div>
-
-        <div className="ml-auto flex items-center gap-2">
-          <span className="text-xs text-[#6b7280]">
-            Joined as <span className="text-[#1b2b4b] font-semibold">{participantName}</span>
+      <header className="flex flex-col sm:flex-row sm:items-center gap-2 px-3 py-2 border-b border-green-100 bg-white shrink-0 shadow-sm">
+        {/* Row 1: logo + title + live */}
+        <div className="flex items-center gap-2 min-w-0">
+          <img src="/nexacore-logo.jpg" alt="NexaCore" className="h-6 object-contain shrink-0" />
+          <div className="w-px h-4 bg-green-100 shrink-0" />
+          <div className="min-w-0">
+            <span className="font-bold text-sm text-[#1b2b4b] truncate block">{session?.title}</span>
+          </div>
+          <div className="flex items-center gap-1 shrink-0">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#5ab82e] animate-pulse" />
+            <span className="text-xs text-[#5ab82e] font-semibold">Live</span>
+          </div>
+          <span className="text-xs text-[#6b7280] ml-1 hidden sm:block">
+            as <span className="text-[#1b2b4b] font-semibold">{participantName}</span>
           </span>
+        </div>
 
+        {/* Row 2 (mobile) / rest of row (desktop): tabs + actions */}
+        <div className="flex items-center gap-2 sm:ml-auto flex-wrap">
           <div className="flex items-center bg-[#f3fcf0] border border-green-200 rounded-lg p-0.5 gap-0.5">
             <button onClick={() => setTab('whiteboard')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'whiteboard' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
+              className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'whiteboard' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
               <Monitor size={13} /> Board
             </button>
             <button onClick={() => setTab('code')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'code' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
+              className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'code' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
               <Code2 size={13} /> Code
             </button>
             <button onClick={() => setTab('notes')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'notes' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
+              className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'notes' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
               <FileText size={13} /> Notes
             </button>
           </div>
 
           {canDraw ? (
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#5ab82e]/10 text-[#5ab82e] rounded-lg text-xs font-semibold border border-[#5ab82e]/30">
+            <div className="flex items-center gap-1 px-2.5 py-1.5 bg-[#5ab82e]/10 text-[#5ab82e] rounded-lg text-xs font-semibold border border-[#5ab82e]/30">
               <Pencil size={11} /> Drawing
             </div>
           ) : (
             <button onClick={requestBoardAccess} disabled={requesting}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#6b7280] hover:text-[#5ab82e] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
-              <Pencil size={11} /> {requesting ? 'Requested...' : 'Request Board'}
+              className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#6b7280] hover:text-[#5ab82e] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
+              <Pencil size={11} /> {requesting ? 'Sent...' : 'Request Board'}
             </button>
           )}
 
           <button onClick={raiseHand}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${participant?.hand_raised ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-[#f3fcf0] text-[#6b7280] border-green-200 hover:text-[#1b2b4b]'}`}>
-            <Hand size={11} /> {participant?.hand_raised ? 'Lower Hand' : 'Raise Hand'}
+            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${participant?.hand_raised ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-[#f3fcf0] text-[#6b7280] border-green-200 hover:text-[#1b2b4b]'}`}>
+            <Hand size={11} /> {participant?.hand_raised ? 'Lower' : 'Raise Hand'}
           </button>
         </div>
       </header>

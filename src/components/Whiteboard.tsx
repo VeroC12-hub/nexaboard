@@ -29,6 +29,16 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
 
   const locked = !isTeacher && !canDraw
 
+  // Keep refs in sync so touch handlers always read current values
+  const lockedRef = useRef(locked)
+  const colorRef = useRef(color)
+  const sizeRef = useRef(size)
+  const toolRef = useRef(tool)
+  useEffect(() => { lockedRef.current = locked }, [locked])
+  useEffect(() => { colorRef.current = color }, [color])
+  useEffect(() => { sizeRef.current = size }, [size])
+  useEffect(() => { toolRef.current = tool }, [tool])
+
   const redraw = useCallback(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -110,7 +120,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     })
   }, [])
 
-  const getPos = (e: React.MouseEvent<HTMLCanvasElement>): Point => {
+  // ── Mouse events ────────────────────────────────────────────────────────────
+  const getMousePos = (e: React.MouseEvent<HTMLCanvasElement>): Point => {
     const rect = canvasRef.current!.getBoundingClientRect()
     return { x: e.clientX - rect.left, y: e.clientY - rect.top }
   }
@@ -118,14 +129,14 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const onMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (locked) return
     isDrawing.current = true
-    const stroke: Stroke = { points: [getPos(e)], color, width: size, tool }
+    const stroke: Stroke = { points: [getMousePos(e)], color, width: size, tool }
     currentStroke.current = stroke
     allStrokes.current = [...allStrokes.current, stroke]
   }
 
   const onMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isDrawing.current || !currentStroke.current || locked) return
-    currentStroke.current.points.push(getPos(e))
+    currentStroke.current.points.push(getMousePos(e))
     redraw()
     broadcastStrokes()
   }
@@ -135,6 +146,55 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     isDrawing.current = false
     currentStroke.current = null
   }
+
+  // ── Touch events (passive: false to allow preventDefault) ───────────────────
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const getPos = (touch: Touch): Point => {
+      const rect = canvas.getBoundingClientRect()
+      return { x: touch.clientX - rect.left, y: touch.clientY - rect.top }
+    }
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (lockedRef.current) return
+      e.preventDefault()
+      const point = getPos(e.touches[0])
+      isDrawing.current = true
+      const stroke: Stroke = {
+        points: [point],
+        color: colorRef.current,
+        width: sizeRef.current,
+        tool: toolRef.current,
+      }
+      currentStroke.current = stroke
+      allStrokes.current = [...allStrokes.current, stroke]
+    }
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDrawing.current || !currentStroke.current || lockedRef.current) return
+      e.preventDefault()
+      currentStroke.current.points.push(getPos(e.touches[0]))
+      redraw()
+      broadcastStrokes()
+    }
+
+    const onTouchEnd = () => {
+      if (isDrawing.current) broadcastStrokes()
+      isDrawing.current = false
+      currentStroke.current = null
+    }
+
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false })
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false })
+    canvas.addEventListener('touchend', onTouchEnd)
+    return () => {
+      canvas.removeEventListener('touchstart', onTouchStart)
+      canvas.removeEventListener('touchmove', onTouchMove)
+      canvas.removeEventListener('touchend', onTouchEnd)
+    }
+  }, [redraw, broadcastStrokes])
 
   const clearBoard = () => {
     allStrokes.current = []
@@ -146,7 +206,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     <div className="h-full w-full flex flex-col">
       {/* Toolbar — only for users who can draw */}
       {!locked && (
-        <div className="flex items-center gap-2 px-4 py-2 border-b border-green-100 bg-white shrink-0 flex-wrap">
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-green-100 bg-white shrink-0 flex-wrap">
           <div className="flex items-center bg-[#f3fcf0] rounded-lg p-0.5 gap-0.5 border border-green-200">
             <button
               onClick={() => setTool('pen')}
@@ -164,21 +224,21 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
             </button>
           </div>
 
-          <div className="w-px h-5 bg-green-100" />
+          <div className="w-px h-5 bg-green-100 hidden sm:block" />
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 flex-wrap">
             {COLORS.map(c => (
               <button
                 key={c}
                 onClick={() => { setColor(c); setTool('pen') }}
                 title={c}
-                className={`w-6 h-6 rounded-full border-2 transition-all hover:scale-110 ${color === c && tool === 'pen' ? 'border-[#5ab82e] scale-110' : 'border-gray-200'}`}
+                className={`w-7 h-7 rounded-full border-2 transition-all hover:scale-110 ${color === c && tool === 'pen' ? 'border-[#5ab82e] scale-110' : 'border-gray-200'}`}
                 style={{ backgroundColor: c }}
               />
             ))}
           </div>
 
-          <div className="w-px h-5 bg-green-100" />
+          <div className="w-px h-5 bg-green-100 hidden sm:block" />
 
           <div className="flex items-center gap-1">
             {SIZES.map(s => (
@@ -195,12 +255,12 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
 
           {isTeacher && (
             <>
-              <div className="w-px h-5 bg-green-100" />
+              <div className="w-px h-5 bg-green-100 hidden sm:block" />
               <button
                 onClick={clearBoard}
                 className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-red-100"
               >
-                <Trash2 size={13} /> Clear Board
+                <Trash2 size={13} /> Clear
               </button>
             </>
           )}
@@ -210,8 +270,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       {/* Drawing canvas */}
       <div ref={containerRef} className="flex-1 relative overflow-hidden bg-white">
         {locked && (
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-white/90 backdrop-blur border border-green-200 rounded-full px-4 py-1.5 text-xs text-[#6b7280] pointer-events-none shadow-sm">
-            View only — click "Request Board" to draw
+          <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-white/90 backdrop-blur border border-green-200 rounded-full px-4 py-1.5 text-xs text-[#6b7280] pointer-events-none shadow-sm whitespace-nowrap">
+            View only — tap "Request Board" to draw
           </div>
         )}
         <canvas
@@ -224,6 +284,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
             position: 'absolute',
             top: 0,
             left: 0,
+            touchAction: 'none',
             cursor: locked ? 'default' : tool === 'eraser' ? 'cell' : 'crosshair',
           }}
         />
