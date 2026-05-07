@@ -46,7 +46,14 @@ function VideoTile({ stream, muted = false, name, noVideo = false, state = '',
     const v = ref.current
     if (!v) return
     v.srcObject = stream
-    if (stream) v.play().catch(() => {})
+    if (!stream) return
+    v.play().catch(() => {})
+    // Audio tracks often arrive after the video track. The stream reference never changes
+    // (same MediaStream mutated in place), so this useEffect won't re-run for new tracks.
+    // Re-calling play() on addtrack ensures audio starts even when it lands late.
+    const replay = () => v.play().catch(() => {})
+    stream.addEventListener('addtrack', replay)
+    return () => stream.removeEventListener('addtrack', replay)
   }, [stream])
   const showAvatar = noVideo || !stream || stream.getVideoTracks().length === 0
 
