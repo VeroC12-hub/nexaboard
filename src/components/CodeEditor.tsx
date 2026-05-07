@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Editor from '@monaco-editor/react'
-import { Play, Square, Trash2, ChevronDown, Lock, Code2, Users } from 'lucide-react'
+import { Play, Square, Trash2, ChevronDown, Lock, Code2, Users, Radio } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
 
@@ -135,6 +135,26 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
   }, [sessionId, isTeacher, myId])
+
+  // Copy the currently-viewed student's code into the teacher's own editor and broadcast to all
+  const showToClass = () => {
+    const snap = studentSnapshots.get(viewingId)
+    if (!snap) return
+    // Switch back to own mode with the student's code loaded
+    viewingIdRef.current = 'own'
+    setViewingId('own')
+    setCode(snap.code)
+    setLang(snap.lang)
+    setOutput('')
+    localStorage.setItem(storageKey, JSON.stringify({ code: snap.code, lang: snap.lang }))
+    // Broadcast to all students immediately
+    lastBroadcast.current = 0 // bypass throttle for this intentional action
+    channelRef.current?.send({
+      type: 'broadcast', event: 'code_update',
+      payload: { code: snap.code, lang: snap.lang, senderId: myId, senderName: 'Teacher' },
+    })
+    toast.success(`${snap.name}'s code shown to the class`)
+  }
 
   const switchView = (id: string) => {
     if (id === viewingIdRef.current) return
@@ -292,11 +312,12 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
           </div>
         )}
 
-        {/* Viewing badge */}
+        {/* Show to Class button — visible when teacher is viewing a student */}
         {viewingStudent && (
-          <span className="text-xs text-blue-400/80 font-medium">
-            read-only
-          </span>
+          <button onClick={showToClass}
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-600/30 rounded-lg text-xs font-semibold transition-colors">
+            <Radio size={11} /> Show to Class
+          </button>
         )}
 
         <div className="ml-auto flex items-center gap-2">
