@@ -453,13 +453,13 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
           {inTable && isTeacher && (
             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#f3fcf0] border-b border-green-200 shrink-0">
               <span className="text-[10px] font-semibold text-[#5ab82e] uppercase tracking-wider mr-1">Table:</span>
-              {[
+              {([
                 ['Add Row Below', () => editor.chain().focus().addRowAfter().run()],
                 ['Add Row Above', () => editor.chain().focus().addRowBefore().run()],
                 ['Add Column Right', () => editor.chain().focus().addColumnAfter().run()],
                 ['Add Column Left', () => editor.chain().focus().addColumnBefore().run()],
-              ].map(([label, fn]) => (
-                <button key={label as string} onMouseDown={e => { e.preventDefault(); (fn as () => void)() }}
+              ] as [string, () => void][]).map(([label, fn]) => (
+                <button key={label} onMouseDown={e => { e.preventDefault(); fn() }}
                   className="flex items-center gap-1 px-2.5 py-1 text-xs text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors font-medium">
                   <PlusSquare size={12} /> {label}
                 </button>
