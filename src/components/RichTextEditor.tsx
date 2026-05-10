@@ -9,6 +9,8 @@ import TableCell from '@tiptap/extension-table-cell'
 import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
+import TextStyle from '@tiptap/extension-text-style'
+import Color from '@tiptap/extension-color'
 import { supabase } from '../lib/supabase'
 import ChartModal from './ChartModal'
 import DrawingModal from './DrawingModal'
@@ -19,7 +21,73 @@ import {
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
   Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X, Maximize2,
+  Volume2, VolumeX, Palette,
 } from 'lucide-react'
+
+// ── Preset colour swatches ────────────────────────────────────────────────────
+const PRESET_COLORS = [
+  { hex: '#000000', label: 'Black' },
+  { hex: '#ffffff', label: 'White' },
+  { hex: '#6b7280', label: 'Gray' },
+  { hex: '#ef4444', label: 'Red' },
+  { hex: '#f97316', label: 'Orange' },
+  { hex: '#eab308', label: 'Yellow' },
+  { hex: '#22c55e', label: 'Green' },
+  { hex: '#3b82f6', label: 'Blue' },
+  { hex: '#8b5cf6', label: 'Purple' },
+  { hex: '#ec4899', label: 'Pink' },
+  { hex: '#1b2b4b', label: 'Navy' },
+  { hex: '#5ab82e', label: 'Brand green' },
+]
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function ColorPicker({ editor, onClose }: { editor: any; onClose: () => void }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const customRef = useRef<HTMLInputElement>(null)
+  const current = editor.getAttributes('textStyle').color as string | undefined
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose()
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [onClose])
+
+  const setColor = (hex: string) => {
+    editor.chain().focus().setColor(hex).run()
+    onClose()
+  }
+  const removeColor = () => {
+    editor.chain().focus().unsetColor().run()
+    onClose()
+  }
+
+  return (
+    <div ref={ref}
+      className="absolute top-full left-0 mt-1 z-40 bg-white border border-green-200 rounded-xl shadow-xl p-3 w-52"
+      onMouseDown={e => e.preventDefault()}>
+      <div className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider mb-2">Text colour</div>
+      <div className="grid grid-cols-6 gap-1.5 mb-2">
+        {PRESET_COLORS.map(({ hex, label }) => (
+          <button key={hex} title={label} onClick={() => setColor(hex)}
+            className={`w-6 h-6 rounded-md border-2 transition-all hover:scale-110 ${current === hex ? 'border-[#5ab82e] scale-110' : 'border-transparent hover:border-[#5ab82e]/50'}`}
+            style={{ backgroundColor: hex, boxShadow: hex === '#ffffff' ? 'inset 0 0 0 1px #e5e7eb' : undefined }} />
+        ))}
+      </div>
+      <div className="flex items-center gap-2 pt-2 border-t border-green-100">
+        <label className="text-[10px] text-[#6b7280] font-medium shrink-0">Custom:</label>
+        <input ref={customRef} type="color" defaultValue={current ?? '#000000'}
+          className="w-8 h-6 rounded cursor-pointer border border-green-200 p-0 bg-transparent"
+          onChange={e => editor.chain().focus().setColor(e.target.value).run()} />
+        <button onClick={removeColor}
+          className="ml-auto text-[10px] text-[#6b7280] hover:text-red-500 transition-colors font-medium">
+          Remove
+        </button>
+      </div>
+    </div>
+  )
+}
 
 // ── Document embed node ───────────────────────────────────────────────────────
 
@@ -198,10 +266,12 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const [showChartModal, setShowChartModal] = useState(false)
   const [showDrawingModal, setShowDrawingModal] = useState(false)
   const [showTablePicker, setShowTablePicker] = useState(false)
+  const [showColorPicker, setShowColorPicker] = useState(false)
   const [requesting, setRequesting] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [activeEditor, setActiveEditor] = useState<string | null>(null)
   const [fullscreenDoc, setFullscreenDoc] = useState<{ src: string; filename: string; fileType: FileType } | null>(null)
+  const [speaking, setSpeaking] = useState(false)
 
   const myId = isTeacher ? 'teacher' : (participantId || 'anon')
   const canWrite = isTeacher || canEdit
@@ -210,6 +280,8 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
       Underline,
+      TextStyle,
+      Color,
       Table.configure({ resizable: true }),
       TableRow,
       TableHeader,
@@ -386,6 +458,32 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     }
   }
 
+  // ── Text-to-speech ──────────────────────────────────────────────────────────
+  const speakContent = () => {
+    if (!editor) return
+    if (!('speechSynthesis' in window)) { toast.error('Text-to-speech not supported in this browser'); return }
+    window.speechSynthesis.cancel()
+    const { from, to, empty } = editor.state.selection
+    let text = ''
+    if (!empty) {
+      editor.state.doc.nodesBetween(from, to, (node: { isText: boolean; text?: string }) => {
+        if (node.isText) text += node.text ?? ''
+      })
+    } else {
+      text = editor.getText()
+    }
+    if (!text.trim()) { toast('Nothing to read', { icon: '🔇' }); return }
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.onend = () => setSpeaking(false)
+    utterance.onerror = () => setSpeaking(false)
+    window.speechSynthesis.speak(utterance)
+    setSpeaking(true)
+  }
+
+  const stopSpeaking = () => { window.speechSynthesis.cancel(); setSpeaking(false) }
+
+  useEffect(() => { return () => window.speechSynthesis?.cancel() }, [])
+
   const handleChartInsert = (dataUrl: string) => {
     editor?.chain().focus().setImage({ src: dataUrl }).run()
     setShowChartModal(false)
@@ -436,6 +534,16 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
             {btn(editor.isActive('italic'), () => editor.chain().focus().toggleItalic().run(), 'Italic', <Italic size={15} />)}
             {btn(editor.isActive('underline'), () => editor.chain().focus().toggleUnderline().run(), 'Underline', <UnderlineIcon size={15} />)}
             {btn(editor.isActive('strike'), () => editor.chain().focus().toggleStrike().run(), 'Strikethrough', <Strikethrough size={15} />)}
+            {/* Colour picker */}
+            <div className="relative">
+              <button onMouseDown={e => { e.preventDefault(); setShowColorPicker(v => !v) }} title="Text colour"
+                className={`p-1.5 rounded transition-colors flex flex-col items-center gap-0.5 ${showColorPicker ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
+                <Palette size={14} />
+                <span className="w-3.5 h-1 rounded-full"
+                  style={{ backgroundColor: (editor.getAttributes('textStyle').color as string | undefined) ?? '#000000' }} />
+              </button>
+              {showColorPicker && <ColorPicker editor={editor} onClose={() => setShowColorPicker(false)} />}
+            </div>
             {sep()}
             {btn(editor.isActive('bulletList'), () => editor.chain().focus().toggleBulletList().run(), 'Bullet List', <List size={15} />)}
             {btn(editor.isActive('orderedList'), () => editor.chain().focus().toggleOrderedList().run(), 'Numbered List', <ListOrdered size={15} />)}
@@ -476,6 +584,16 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
                 {btn(false, () => setShowDrawingModal(true), 'Draw & Shapes', <PenLine size={15} />)}
               </>
             )}
+
+            {sep()}
+            {/* Text-to-speech */}
+            <button
+              onMouseDown={e => { e.preventDefault(); speaking ? stopSpeaking() : speakContent() }}
+              title={speaking ? 'Stop reading' : 'Read notes aloud (select text to read a section)'}
+              className={`flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${speaking ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b] border-green-200'}`}>
+              {speaking ? <VolumeX size={13} /> : <Volume2 size={13} />}
+              {speaking ? 'Stop' : 'Read'}
+            </button>
 
             {/* Teacher: active editor indicator */}
             {isTeacher && activeEditor && (
