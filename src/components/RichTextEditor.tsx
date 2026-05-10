@@ -597,26 +597,6 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
             {btn(editor.isActive('italic'), () => editor.chain().focus().toggleItalic().run(), 'Italic', <Italic size={15} />)}
             {btn(editor.isActive('underline'), () => editor.chain().focus().toggleUnderline().run(), 'Underline', <UnderlineIcon size={15} />)}
             {btn(editor.isActive('strike'), () => editor.chain().focus().toggleStrike().run(), 'Strikethrough', <Strikethrough size={15} />)}
-            {/* Colour picker */}
-            <div className="relative">
-              <button onMouseDown={e => { e.preventDefault(); setShowColorPicker(v => !v) }} title="Text colour"
-                className={`p-1.5 rounded transition-colors flex flex-col items-center gap-0.5 ${showColorPicker ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
-                <Palette size={14} />
-                <span className="w-3.5 h-1 rounded-full"
-                  style={{ backgroundColor: (editor.getAttributes('textStyle').color as string | undefined) ?? '#000000' }} />
-              </button>
-              {showColorPicker && <ColorPicker editor={editor} onClose={() => setShowColorPicker(false)} />}
-            </div>
-            {/* Highlighter */}
-            <div className="relative">
-              <button onMouseDown={e => { e.preventDefault(); setShowHighlightPicker(v => !v) }} title="Highlight text"
-                className={`p-1.5 rounded transition-colors flex flex-col items-center gap-0.5 ${showHighlightPicker || editor.isActive('highlight') ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
-                <Highlighter size={14} />
-                <span className="w-3.5 h-1 rounded-sm"
-                  style={{ backgroundColor: (editor.getAttributes('highlight').color as string | undefined) ?? '#fef08a' }} />
-              </button>
-              {showHighlightPicker && <HighlightPicker editor={editor} onClose={() => setShowHighlightPicker(false)} />}
-            </div>
             {sep()}
             {btn(editor.isActive('bulletList'), () => editor.chain().focus().toggleBulletList().run(), 'Bullet List', <List size={15} />)}
             {btn(editor.isActive('orderedList'), () => editor.chain().focus().toggleOrderedList().run(), 'Numbered List', <ListOrdered size={15} />)}
@@ -658,16 +638,6 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
               </>
             )}
 
-            {sep()}
-            {/* Text-to-speech */}
-            <button
-              onMouseDown={e => { e.preventDefault(); speaking ? stopSpeaking() : speakContent() }}
-              title={speaking ? 'Stop reading' : 'Read notes aloud (select text to read a section)'}
-              className={`flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${speaking ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b] border-green-200'}`}>
-              {speaking ? <VolumeX size={13} /> : <Volume2 size={13} />}
-              {speaking ? 'Stop' : 'Read'}
-            </button>
-
             {/* Teacher: active editor indicator */}
             {isTeacher && activeEditor && (
               <div className="ml-auto flex items-center gap-1.5 px-2.5 py-1 bg-purple-500/10 border border-purple-500/30 rounded-lg text-xs text-purple-600 font-medium">
@@ -707,6 +677,48 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
           )}
         </>
       )}
+
+      {/* ── Formatting tools row — colour, highlight, TTS (always visible) ─── */}
+      <div className="flex items-center gap-2 px-3 py-1.5 border-b border-green-100 bg-[#fafffe] shrink-0 flex-wrap">
+        {/* Font colour */}
+        {canWrite && (
+          <div className="relative">
+            <button onMouseDown={e => { e.preventDefault(); setShowColorPicker(v => !v) }}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${showColorPicker ? 'bg-[#5ab82e] text-white border-[#5ab82e]' : 'text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]'}`}>
+              <Palette size={13} />
+              <span>Text Colour</span>
+              <span className="w-4 h-1.5 rounded-sm ml-0.5"
+                style={{ backgroundColor: (editor.getAttributes('textStyle').color as string | undefined) ?? '#000000' }} />
+            </button>
+            {showColorPicker && <ColorPicker editor={editor} onClose={() => setShowColorPicker(false)} />}
+          </div>
+        )}
+
+        {/* Highlighter */}
+        {canWrite && (
+          <div className="relative">
+            <button onMouseDown={e => { e.preventDefault(); setShowHighlightPicker(v => !v) }}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${showHighlightPicker || editor.isActive('highlight') ? 'bg-[#5ab82e] text-white border-[#5ab82e]' : 'text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]'}`}>
+              <Highlighter size={13} />
+              <span>Highlight</span>
+              <span className="w-4 h-1.5 rounded-sm ml-0.5"
+                style={{ backgroundColor: (editor.getAttributes('highlight').color as string | undefined) ?? '#fef08a' }} />
+            </button>
+            {showHighlightPicker && <HighlightPicker editor={editor} onClose={() => setShowHighlightPicker(false)} />}
+          </div>
+        )}
+
+        {canWrite && <div className="w-px h-5 bg-green-100" />}
+
+        {/* Text-to-speech — available to everyone */}
+        <button
+          onMouseDown={e => { e.preventDefault(); speaking ? stopSpeaking() : speakContent() }}
+          title={speaking ? 'Stop reading' : 'Select text to read just that part, or read the whole document'}
+          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${speaking ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]'}`}>
+          {speaking ? <VolumeX size={13} /> : <Volume2 size={13} />}
+          {speaking ? 'Stop Reading' : 'Read Aloud'}
+        </button>
+      </div>
 
       {/* Student view-only bar */}
       {!isTeacher && !canEdit && (
