@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useBlocker } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import type { Session, Participant } from '../types'
 import Whiteboard from '../components/Whiteboard'
@@ -38,6 +38,19 @@ export default function StudentSession() {
     } catch { return null }
   })()
   const participantName = sessionStorage.getItem('nexaboard_participant_name') || 'Student'
+
+  // Block in-app navigation while call is active
+  const blocker = useBlocker(({ currentLocation, nextLocation }) =>
+    callOpen && currentLocation.pathname !== nextLocation.pathname
+  )
+
+  // Block browser refresh / tab close while call is active
+  useEffect(() => {
+    if (!callOpen) return
+    const onUnload = (e: BeforeUnloadEvent) => { e.preventDefault(); e.returnValue = '' }
+    window.addEventListener('beforeunload', onUnload)
+    return () => window.removeEventListener('beforeunload', onUnload)
+  }, [callOpen])
 
   useEffect(() => { if (!participantId) { navigate('/'); return } fetchData() }, [sessionId, participantId])
 
@@ -230,6 +243,25 @@ export default function StudentSession() {
             displayName={participantName}
             onClose={() => { setCallOpen(false); sessionStorage.removeItem(`nexaboard_call_${sessionId}`) }}
           />
+        )}
+
+        {blocker.state === 'blocked' && (
+          <div className="fixed inset-0 bg-black/60 z-[200] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+              <h3 className="text-[#1b2b4b] font-bold text-base mb-2">Leave while in a call?</h3>
+              <p className="text-[#6b7280] text-sm mb-5">You are in a live call. Leaving this page will disconnect you from the call.</p>
+              <div className="flex gap-2">
+                <button onClick={() => blocker.reset()}
+                  className="flex-1 px-4 py-2 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-xl text-sm font-semibold border border-green-200 transition-colors">
+                  Stay in call
+                </button>
+                <button onClick={() => blocker.proceed()}
+                  className="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-semibold transition-colors">
+                  Leave anyway
+                </button>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Chat sidebar */}

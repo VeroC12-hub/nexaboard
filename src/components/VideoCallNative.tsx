@@ -275,6 +275,20 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       if (pcs.has(peerCallId)) return
       const pc = buildPC(peerCallId, peerName)
       try {
+        // If this device is screen sharing, apply the screen track immediately on the new connection
+        // so the peer sees the screen from the first frame instead of the camera.
+        if (screenStreamRef.current) {
+          const screenTrack = screenStreamRef.current.getVideoTracks()[0]
+          if (screenTrack) {
+            const sender = pc.getSenders().find(s => s.track?.kind === 'video')
+            if (sender) { sender.replaceTrack(screenTrack).catch(() => {}); screenSendersRef.current.set(peerCallId, sender) }
+            // Re-announce so the newly connected peer populates screenSharersRef
+            chRef.current?.send({
+              type: 'broadcast', event: 'screen_share_started',
+              payload: { from: callId, name: displayName },
+            })
+          }
+        }
         const offer = await pc.createOffer()
         await pc.setLocalDescription(offer)
         chRef.current?.send({
@@ -411,15 +425,21 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           await pc.setLocalDescription(answer)
           ch.send({ type: 'broadcast', event: 'call_answer', payload: { from: callId, to: payload.from, sdp: pc.localDescription } })
 
-          // If currently screen sharing, re-apply the screen track to this new/reconnected sender
-          // so the teacher sees the screen without needing a new screen_share_started broadcast
+          // If this device is screen sharing, apply the screen track immediately on this new connection.
+          // Calling replaceTrack before ICE completes means the RTP session starts sending screen
+          // data from frame one — no camera flash, no delayed reveal.
+          // Re-broadcasting screen_share_started ensures the other end populates screenSharersRef
+          // so ontrack promotes the stream into peerScreenStreams even if the broadcast arrives
+          // before the WebRTC connection is established.
           if (screenStreamRef.current) {
             const screenTrack = screenStreamRef.current.getVideoTracks()[0]
             if (screenTrack) {
-              setTimeout(() => {
-                const sender = pc.getSenders().find(s => s.track?.kind === 'video')
-                if (sender) { sender.replaceTrack(screenTrack).catch(() => {}); screenSendersRef.current.set(payload.from, sender) }
-              }, 500)
+              const sender = pc.getSenders().find(s => s.track?.kind === 'video')
+              if (sender) { sender.replaceTrack(screenTrack).catch(() => {}); screenSendersRef.current.set(payload.from, sender) }
+              chRef.current?.send({
+                type: 'broadcast', event: 'screen_share_started',
+                payload: { from: callId, name: displayName },
+              })
             }
           }
         })
@@ -583,14 +603,43 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     }
   }, [])
 
+  // Keep mobile browser audio alive when the tab goes to the background.
+  // A silent oscillator prevents iOS/Android from suspending the audio session.
   useEffect(() => {
-    const onVisible = () => {
-      if (document.visibilityState !== 'visible' || !localStreamRef.current) return
-      if (!audioMutedRef.current) localStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true })
-      if (!videoOffRef.current) localStreamRef.current.getVideoTracks().forEach(t => { t.enabled = true })
+    let ctx: AudioContext | null = null
+    let osc: OscillatorNode | null = null
+    try {
+      ctx = new AudioContext()
+      const gain = ctx.createGain()
+      gain.gain.value = 0 // completely inaudible
+      osc = ctx.createOscillator()
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.start()
+    } catch { }
+
+    const onVisibility = () => {
+      if (!localStreamRef.current) return
+      if (document.visibilityState === 'visible') {
+        // Resume AudioContext if suspended (required on iOS after background)
+        ctx?.resume().catch(() => {})
+        // Re-enable tracks in case the OS muted them while backgrounded
+        if (!audioMutedRef.current) localStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true })
+        if (!videoOffRef.current) localStreamRef.current.getVideoTracks().forEach(t => { t.enabled = true })
+      } else {
+        // Page going to background — explicitly keep audio enabled so it isn't gated by browser
+        if (!audioMutedRef.current) localStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true })
+      }
     }
-    document.addEventListener('visibilitychange', onVisible)
-    return () => document.removeEventListener('visibilitychange', onVisible)
+
+    document.addEventListener('visibilitychange', onVisibility)
+    // pagehide fires on mobile when the page is being suspended (bfcache)
+    window.addEventListener('pagehide', onVisibility)
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility)
+      window.removeEventListener('pagehide', onVisibility)
+      try { osc?.stop(); ctx?.close() } catch { }
+    }
   }, [])
 
   useEffect(() => {
