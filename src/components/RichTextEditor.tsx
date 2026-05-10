@@ -679,7 +679,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       )}
 
       {/* ── Formatting tools row — colour, highlight, TTS (always visible) ─── */}
-      <div className="flex items-center gap-2 px-3 py-1.5 border-b border-green-100 bg-[#fafffe] shrink-0 flex-wrap">
+      <div className="flex items-center gap-2 px-3 py-1.5 border-b border-green-200 bg-[#f3fcf0] shrink-0 flex-wrap">
         {/* Font colour */}
         {canWrite && (
           <div className="relative">
