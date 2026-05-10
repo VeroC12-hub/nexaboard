@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate, useBlocker } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import type { User } from '@supabase/supabase-js'
 import type { Session as SessionType } from '../types'
@@ -29,11 +29,6 @@ export default function Session({ user }: { user: User }) {
   const [callManuallyLeft, setCallManuallyLeft] = useState(false)
 
   const teacherName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Teacher'
-
-  // Block in-app navigation while call is active
-  const blocker = useBlocker(({ currentLocation, nextLocation }) =>
-    callOpen && currentLocation.pathname !== nextLocation.pathname
-  )
 
   // Block browser refresh / tab close while call is active
   useEffect(() => {
@@ -110,7 +105,12 @@ export default function Session({ user }: { user: User }) {
       <header className="flex flex-col sm:flex-row sm:items-center gap-2 px-3 py-2 border-b border-green-100 bg-white shrink-0 shadow-sm">
         {/* Row 1: logo + title */}
         <div className="flex items-center gap-2 min-w-0">
-          <button onClick={() => navigate('/dashboard')} className="text-[#9ca3af] hover:text-[#1b2b4b] transition-colors shrink-0">
+          <button
+            onClick={() => {
+              if (callOpen && !window.confirm('You are in a live call. Leaving will disconnect students from the call. Leave anyway?')) return
+              navigate('/dashboard')
+            }}
+            className="text-[#9ca3af] hover:text-[#1b2b4b] transition-colors shrink-0">
             <Home size={16} />
           </button>
           <div className="w-px h-4 bg-green-100 shrink-0" />
@@ -224,24 +224,6 @@ export default function Session({ user }: { user: User }) {
         />
       )}
 
-      {blocker.state === 'blocked' && (
-        <div className="fixed inset-0 bg-black/60 z-[200] flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
-            <h3 className="text-[#1b2b4b] font-bold text-base mb-2">Leave while in a call?</h3>
-            <p className="text-[#6b7280] text-sm mb-5">Students are still in the live call. Leaving this page will disconnect everyone from the call.</p>
-            <div className="flex gap-2">
-              <button onClick={() => blocker.reset()}
-                className="flex-1 px-4 py-2 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-xl text-sm font-semibold border border-green-200 transition-colors">
-                Stay in call
-              </button>
-              <button onClick={() => blocker.proceed()}
-                className="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-semibold transition-colors">
-                Leave anyway
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
