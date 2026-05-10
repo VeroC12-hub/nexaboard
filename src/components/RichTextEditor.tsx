@@ -11,6 +11,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
 import TextStyle from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
+import Highlight from '@tiptap/extension-highlight'
 import { supabase } from '../lib/supabase'
 import ChartModal from './ChartModal'
 import DrawingModal from './DrawingModal'
@@ -21,7 +22,7 @@ import {
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
   Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X, Maximize2,
-  Volume2, VolumeX, Palette,
+  Volume2, VolumeX, Palette, Highlighter,
 } from 'lucide-react'
 
 // ── Preset colour swatches ────────────────────────────────────────────────────
@@ -81,6 +82,66 @@ function ColorPicker({ editor, onClose }: { editor: any; onClose: () => void }) 
           className="w-8 h-6 rounded cursor-pointer border border-green-200 p-0 bg-transparent"
           onChange={e => editor.chain().focus().setColor(e.target.value).run()} />
         <button onClick={removeColor}
+          className="ml-auto text-[10px] text-[#6b7280] hover:text-red-500 transition-colors font-medium">
+          Remove
+        </button>
+      </div>
+    </div>
+  )
+}
+
+// ── Highlight picker ──────────────────────────────────────────────────────────
+const HIGHLIGHT_COLORS = [
+  { hex: '#fef08a', label: 'Yellow' },
+  { hex: '#bbf7d0', label: 'Green' },
+  { hex: '#bfdbfe', label: 'Blue' },
+  { hex: '#fecaca', label: 'Red' },
+  { hex: '#fed7aa', label: 'Orange' },
+  { hex: '#e9d5ff', label: 'Purple' },
+  { hex: '#fbcfe8', label: 'Pink' },
+  { hex: '#e5e7eb', label: 'Gray' },
+]
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function HighlightPicker({ editor, onClose }: { editor: any; onClose: () => void }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const current = editor.getAttributes('highlight').color as string | undefined
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose()
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [onClose])
+
+  const setHighlight = (hex: string) => {
+    editor.chain().focus().setHighlight({ color: hex }).run()
+    onClose()
+  }
+  const removeHighlight = () => {
+    editor.chain().focus().unsetHighlight().run()
+    onClose()
+  }
+
+  return (
+    <div ref={ref}
+      className="absolute top-full left-0 mt-1 z-40 bg-white border border-green-200 rounded-xl shadow-xl p-3 w-44"
+      onMouseDown={e => e.preventDefault()}>
+      <div className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider mb-2">Highlight</div>
+      <div className="grid grid-cols-4 gap-1.5 mb-2">
+        {HIGHLIGHT_COLORS.map(({ hex, label }) => (
+          <button key={hex} title={label} onClick={() => setHighlight(hex)}
+            className={`w-7 h-7 rounded-md border-2 transition-all hover:scale-110 ${current === hex ? 'border-[#5ab82e] scale-110' : 'border-transparent hover:border-[#5ab82e]/50'}`}
+            style={{ backgroundColor: hex }} />
+        ))}
+      </div>
+      <div className="flex items-center gap-2 pt-2 border-t border-green-100">
+        <label className="text-[10px] text-[#6b7280] font-medium shrink-0">Custom:</label>
+        <input type="color" defaultValue={current ?? '#fef08a'}
+          className="w-8 h-6 rounded cursor-pointer border border-green-200 p-0 bg-transparent"
+          onChange={e => editor.chain().focus().setHighlight({ color: e.target.value }).run()} />
+        <button onClick={removeHighlight}
           className="ml-auto text-[10px] text-[#6b7280] hover:text-red-500 transition-colors font-medium">
           Remove
         </button>
@@ -267,6 +328,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const [showDrawingModal, setShowDrawingModal] = useState(false)
   const [showTablePicker, setShowTablePicker] = useState(false)
   const [showColorPicker, setShowColorPicker] = useState(false)
+  const [showHighlightPicker, setShowHighlightPicker] = useState(false)
   const [requesting, setRequesting] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [activeEditor, setActiveEditor] = useState<string | null>(null)
@@ -282,6 +344,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       Underline,
       TextStyle,
       Color,
+      Highlight.configure({ multicolor: true }),
       Table.configure({ resizable: true }),
       TableRow,
       TableHeader,
@@ -543,6 +606,16 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
                   style={{ backgroundColor: (editor.getAttributes('textStyle').color as string | undefined) ?? '#000000' }} />
               </button>
               {showColorPicker && <ColorPicker editor={editor} onClose={() => setShowColorPicker(false)} />}
+            </div>
+            {/* Highlighter */}
+            <div className="relative">
+              <button onMouseDown={e => { e.preventDefault(); setShowHighlightPicker(v => !v) }} title="Highlight text"
+                className={`p-1.5 rounded transition-colors flex flex-col items-center gap-0.5 ${showHighlightPicker || editor.isActive('highlight') ? 'bg-[#5ab82e] text-white' : 'text-[#6b7280] hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'}`}>
+                <Highlighter size={14} />
+                <span className="w-3.5 h-1 rounded-sm"
+                  style={{ backgroundColor: (editor.getAttributes('highlight').color as string | undefined) ?? '#fef08a' }} />
+              </button>
+              {showHighlightPicker && <HighlightPicker editor={editor} onClose={() => setShowHighlightPicker(false)} />}
             </div>
             {sep()}
             {btn(editor.isActive('bulletList'), () => editor.chain().focus().toggleBulletList().run(), 'Bullet List', <List size={15} />)}
