@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
 import { useEditor, EditorContent, ReactNodeViewRenderer, NodeViewWrapper } from '@tiptap/react'
-import { Node, mergeAttributes } from '@tiptap/core'
+import { Node as TiptapNode, mergeAttributes } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import { Table } from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
@@ -9,7 +9,7 @@ import TableCell from '@tiptap/extension-table-cell'
 import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
-import TextStyle from '@tiptap/extension-text-style'
+import { TextStyle } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import { supabase } from '../lib/supabase'
@@ -207,7 +207,7 @@ function DocumentEmbedView({ node, deleteNode }: { node: any; deleteNode: () => 
   )
 }
 
-const DocumentEmbed = Node.create({
+const DocumentEmbed = TiptapNode.create({
   name: 'documentEmbed',
   group: 'block',
   atom: true,
