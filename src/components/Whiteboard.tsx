@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback, useState, useMemo } from 'react'
 import { supabase } from '../lib/supabase'
-import { Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, Eye } from 'lucide-react'
+import { Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, ChevronUp } from 'lucide-react'
 import MathModal from './MathModal'
 import { renderMath } from '../lib/math'
 
@@ -42,6 +42,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const [editingMath, setEditingMath] = useState<MathItem | null>(null)
   // Students follow the teacher's scroll position until they scroll themselves.
   const [following, setFollowing] = useState(!isTeacher)
+  // Which way the "back to live" arrow points once a student has scrolled off.
+  const [teacherAbove, setTeacherAbove] = useState(false)
 
   const locked = !isTeacher && !canDraw
 
@@ -151,10 +153,16 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       return
     }
     if (!el) return
-    // A follow-scroll lands exactly on the teacher's position; anything else is the
-    // student scrolling by hand, which hands their view back to them.
-    if (Math.abs(el.scrollTop - followTarget(el)) < 4) return
-    setFollowing(false)
+    const target = followTarget(el)
+    // A follow-scroll lands exactly on the teacher's position. So does a student who
+    // scrolls back onto it by hand, which quietly puts them back on live.
+    if (Math.abs(el.scrollTop - target) < 4) {
+      if (!followingRef.current) setFollowing(true)
+      return
+    }
+    // Anything else is the student scrolling away, which hands their view back to them.
+    if (followingRef.current) setFollowing(false)
+    setTeacherAbove(target < el.scrollTop)
   }, [isTeacher])
 
   // ── Realtime sync ───────────────────────────────────────────────────────────
@@ -183,7 +191,12 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
           setBoardHeight(payload.boardHeight)
         }
         teacherScrollTop.current = payload.scrollTop ?? 0
-        if (!followingRef.current) return
+        if (!followingRef.current) {
+          // Keep the arrow pointing the right way as the teacher moves around.
+          const el = containerRef.current
+          if (el) setTeacherAbove(followTarget(el) < el.scrollTop)
+          return
+        }
         scrollToTeacher()
       })
       .on('broadcast', { event: 'wb_clear' }, () => {
@@ -503,34 +516,34 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
 
       {locked && (
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-white/90 backdrop-blur border border-green-200 rounded-full px-4 py-1.5 text-xs text-[#6b7280] pointer-events-none shadow-sm whitespace-nowrap">
-          View only — tap "Request Board" to draw. Scroll for more.
+          View only. Tap "Request Board" to draw.
         </div>
       )}
 
-      {/* Students: follow the teacher down the board, or scroll on their own */}
-      {!isTeacher && (
-        following ? (
-          <div className={`absolute ${locked ? 'top-12' : 'top-3'} left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 bg-[#f3fcf0]/95 backdrop-blur border border-green-200 rounded-full px-3 py-1 text-[11px] font-semibold text-[#5ab82e] pointer-events-none shadow-sm whitespace-nowrap`}>
-            <Eye size={11} /> Following teacher
-          </div>
-        ) : (
-          <button
-            onClick={() => { setFollowing(true); followingRef.current = true; scrollToTeacher() }}
-            className={`absolute ${locked ? 'top-12' : 'top-3'} left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 bg-[#1b2b4b] text-white rounded-full px-3 py-1.5 text-[11px] font-semibold shadow-md hover:bg-[#243660] transition-colors whitespace-nowrap`}
-          >
-            <Eye size={11} /> Jump to teacher
-          </button>
-        )
+      {/*
+        Students follow the teacher silently. Nothing is shown until they scroll off
+        on their own, and then one arrow takes them back to the live position.
+      */}
+      {!isTeacher && !following && (
+        <button
+          onClick={() => { setFollowing(true); followingRef.current = true; scrollToTeacher() }}
+          title="Back to what the teacher is writing"
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-[#5ab82e] text-white shadow-lg ring-4 ring-[#5ab82e]/20 hover:bg-[#489f22] transition-colors"
+        >
+          {teacherAbove ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
+        </button>
       )}
 
-      {/* Jump down a screenful — always reachable, including for students */}
-      <button
-        onClick={scrollDown}
-        title="Scroll down"
-        className="absolute bottom-4 right-4 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-white border border-green-200 text-[#6b7280] shadow-md hover:bg-[#f3fcf0] hover:text-[#1b2b4b] transition-colors"
-      >
-        <ChevronDown size={16} />
-      </button>
+      {/* Teacher: jump down a screenful */}
+      {isTeacher && (
+        <button
+          onClick={scrollDown}
+          title="Scroll down"
+          className="absolute bottom-4 right-4 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-white border border-green-200 text-[#6b7280] shadow-md hover:bg-[#f3fcf0] hover:text-[#1b2b4b] transition-colors"
+        >
+          <ChevronDown size={16} />
+        </button>
+      )}
 
       {showMathModal && (
         <MathModal
