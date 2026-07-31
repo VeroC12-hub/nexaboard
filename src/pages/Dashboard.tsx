@@ -33,14 +33,28 @@ export default function Dashboard({ user }: { user: User }) {
     e.preventDefault()
     if (!title.trim()) return
     setCreating(true)
-    const joinCode = generateJoinCode()
-    const { data, error } = await supabase
-      .from('sessions')
-      .insert({ teacher_id: user.id, title: title.trim(), subject, join_code: joinCode, status: 'active' })
-      .select().single()
-    if (error) { toast.error('Failed to create session') }
-    else { toast.success('Session created!'); navigate(`/session/${data.id}`) }
-    setCreating(false)
+    try {
+      // Retry on duplicate join_code (unique violation); surface any other error.
+      let lastError: { message?: string; code?: string } | null = null
+      for (let attempt = 0; attempt < 4; attempt++) {
+        const joinCode = generateJoinCode()
+        const { data, error } = await supabase
+          .from('sessions')
+          .insert({ teacher_id: user.id, title: title.trim(), subject, join_code: joinCode, status: 'active' })
+          .select().single()
+        if (!error && data) {
+          toast.success('Session created!')
+          navigate(`/session/${data.id}`)
+          return
+        }
+        lastError = error
+        if (error?.code !== '23505') break // not a code collision — don't retry
+      }
+      console.error('Create session failed:', lastError)
+      toast.error(lastError?.message ? `Couldn’t create session: ${lastError.message}` : 'Failed to create session')
+    } finally {
+      setCreating(false)
+    }
   }
 
   const endSession = async (id: string, e: React.MouseEvent) => {

@@ -60,7 +60,8 @@ export default function StudentSession() {
       )
       setTeacherInCall(hasTeacher)
     }
-    ch.on('presence', { event: 'join' }, check)
+    ch.on('presence', { event: 'sync' }, check)
+      .on('presence', { event: 'join' }, check)
       .on('presence', { event: 'leave' }, check)
       .subscribe(status => { if (status === 'SUBSCRIBED') check() })
     return () => { supabase.removeChannel(ch) }

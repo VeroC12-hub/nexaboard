@@ -282,6 +282,9 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           if (screenTrack) {
             const sender = pc.getSenders().find(s => s.track?.kind === 'video')
             if (sender) { sender.replaceTrack(screenTrack).catch(() => {}); screenSendersRef.current.set(peerCallId, sender) }
+            // No camera track to swap (teacher has no/denied webcam) — add the screen as a
+            // new track. The offer created below will include it automatically.
+            else { screenSendersRef.current.set(peerCallId, pc.addTrack(screenTrack, screenStreamRef.current)) }
             // Re-announce so the newly connected peer populates screenSharersRef
             chRef.current?.send({
               type: 'broadcast', event: 'screen_share_started',
@@ -708,10 +711,25 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       const track = stream.getVideoTracks()[0]
       if (!track) return
 
-      // Replace camera track on every student connection (replaceTrack — no SDP exchange)
-      pcsRef.current.forEach((pc, peerId) => {
+      // Push the screen track onto every existing student connection.
+      // If a camera video sender exists, swap it in place (replaceTrack — no SDP exchange).
+      // If the teacher has no camera (no video sender at all), add the screen as a new track
+      // and renegotiate — otherwise students would never receive the screen.
+      pcsRef.current.forEach(async (pc, peerId) => {
         const sender = pc.getSenders().find(s => s.track?.kind === 'video')
-        if (sender) { sender.replaceTrack(track); screenSendersRef.current.set(peerId, sender) }
+        if (sender) {
+          sender.replaceTrack(track); screenSendersRef.current.set(peerId, sender)
+        } else {
+          screenSendersRef.current.set(peerId, pc.addTrack(track, stream))
+          try {
+            const offer = await pc.createOffer()
+            await pc.setLocalDescription(offer)
+            chRef.current?.send({
+              type: 'broadcast', event: 'call_offer',
+              payload: { from: callId, to: peerId, sdp: pc.localDescription, name: displayName },
+            })
+          } catch { /* renegotiation failed — peer will retry on reconnect */ }
+        }
       })
 
       screenStreamRef.current = stream
@@ -765,8 +783,27 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     setScreenSharerCallId(null)
 
     const cameraTrack = localStreamRef.current?.getVideoTracks()[0] ?? null
-    screenSendersRef.current.forEach(sender => {
-      try { sender.replaceTrack(cameraTrack) } catch { }
+    screenSendersRef.current.forEach((sender, peerId) => {
+      try {
+        if (cameraTrack) {
+          // Swap the camera back in — no renegotiation needed
+          sender.replaceTrack(cameraTrack)
+        } else {
+          // No camera: the screen track was added via addTrack, so remove it and renegotiate
+          // (leaving a null-track sender would make the next share add a duplicate sender)
+          const pc = pcsRef.current.get(peerId)
+          if (pc) {
+            pc.removeTrack(sender)
+            pc.createOffer().then(async offer => {
+              await pc.setLocalDescription(offer)
+              chRef.current?.send({
+                type: 'broadcast', event: 'call_offer',
+                payload: { from: callId, to: peerId, sdp: pc.localDescription, name: displayName },
+              })
+            }).catch(() => {})
+          }
+        }
+      } catch { }
     })
     screenSendersRef.current.clear()
 
@@ -990,6 +1027,15 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
               <Monitor size={11} />
               <span>{screenSharerName ?? 'Someone'} is sharing their screen</span>
             </div>
+          )}
+
+          {/* Prominent teacher CTA — the obvious way to teach a desktop app (Civil 3D, AutoCAD…) live */}
+          {isTeacher && !screenStream && !someoneElseSharing && (
+            <button onClick={startScreenShare}
+              className="mx-2 mt-2 shrink-0 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white text-sm font-semibold transition-colors shadow-sm">
+              <Monitor size={15} />
+              Share my screen — Civil 3D, AutoCAD, any app
+            </button>
           )}
 
           {/* Grid view */}
