@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "katex/dist/katex.min.css";
 
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
@@ -64,3 +65,24 @@ html, body, #root {
 .notes-editor .ProseMirror td { background: #fff; }
 .notes-editor .ProseMirror .selectedCell { background: #dcfce7 !important; }
 .notes-editor .ProseMirror .column-resize-handle { background: #5ab82e; width: 2px; position: absolute; right: -1px; top: 0; bottom: 0; pointer-events: none; }
+
+/* Maths equations (KaTeX) */
+.math-node { color: #1b2b4b; border-radius: 0.375rem; transition: background-color 0.15s, box-shadow 0.15s; }
+.math-editable { cursor: pointer; }
+.math-editable:hover { background: #f3fcf0; box-shadow: 0 0 0 2px #d1fae5; }
+.math-inline-wrapper { display: inline; }
+.math-inline { display: inline-block; padding: 0 0.15em; vertical-align: baseline; }
+.math-block-wrapper { margin: 0.9rem 0; }
+.math-block { display: block; padding: 0.5rem 0.75rem; text-align: center; overflow-x: auto; overflow-y: hidden; }
+.notes-editor .ProseMirror .ProseMirror-selectednode .math-node { background: #dcfce7; box-shadow: 0 0 0 2px #5ab82e; }
+.math-error { color: #ef4444; font-family: ui-monospace, monospace; font-size: 0.85em; background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.3rem; padding: 0.05em 0.35em; }
+
+/* Equations placed on the whiteboard */
+.board-equation { color: #1b2b4b; line-height: 1.2; }
+.board-equation .katex-display { margin: 0; }
+.board-equation .katex { font-size: 1.4em; }
+
+/* Equation editor: preview panel and palette buttons */
+.math-preview .katex-display { margin: 0; }
+.math-btn .katex { font-size: 1em; line-height: 1.2; }
+.math-btn .katex-display { margin: 0; }

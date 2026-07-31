@@ -8,13 +8,19 @@ import TableHeader from '@tiptap/extension-table-header'
 import TableCell from '@tiptap/extension-table-cell'
 import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
-import Underline from '@tiptap/extension-underline'
 import { TextStyle } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import { supabase } from '../lib/supabase'
+import { apsTranslate, apsStatus } from '../lib/aps'
+import { dwgConvertStart, dwgConvertStatus } from '../lib/dwgConvert'
 import ChartModal from './ChartModal'
 import DrawingModal from './DrawingModal'
+import CadViewer from './CadViewer'
+import DxfViewer from './DxfViewer'
+import MathModal from './MathModal'
+import { MathInline, MathBlock, MathTrailingParagraph } from './MathNodes'
+import type { MathEditDetail } from '../lib/math'
 import toast from 'react-hot-toast'
 import {
   Bold, Italic, UnderlineIcon, Strikethrough,
@@ -22,7 +28,7 @@ import {
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
   Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X, Maximize2,
-  Volume2, VolumeX, Palette, Highlighter,
+  Volume2, VolumeX, Palette, Highlighter, Sigma,
 } from 'lucide-react'
 
 // ── Preset colour swatches ────────────────────────────────────────────────────
@@ -229,6 +235,124 @@ const DocumentEmbed = TiptapNode.create({
   addNodeView() { return ReactNodeViewRenderer(DocumentEmbedView) },
 })
 
+// ── CAD embed node (DXF in-browser, or DWG via APS / CloudConvert) ─────────────
+// kind 'dxf'         → renders instantly client-side
+// kind 'dwg'         → APS SVF2 translation (poll apsStatus on the URN)
+// kind 'dwg-convert' → CloudConvert DWG→DXF (poll dwgConvertStatus on the jobId → DXF url)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function CadEmbedView({ node, deleteNode, editor }: { node: any; deleteNode: () => void; editor: any }) {
+  const { filename, urn, src, kind, jobId } = node.attrs as { filename: string; urn: string; src: string; kind: string; jobId: string }
+  const isDxf = kind === 'dxf'
+  const isConvert = kind === 'dwg-convert'
+  const [ready, setReady] = useState(isDxf)
+  const [failed, setFailed] = useState(false)
+  const [progress, setProgress] = useState('Preparing…')
+  // For the CloudConvert path, the viewable output is a DXF url produced once conversion finishes.
+  const [convertedDxf, setConvertedDxf] = useState('')
+
+  useEffect(() => {
+    if (isDxf) return
+    let stop = false
+
+    const pollAps = async () => {
+      try {
+        const r = await apsStatus(urn)
+        if (stop) return
+        if (r.status === 'success') { setReady(true); return }
+        if (r.status === 'failed' || r.status === 'timeout') { setFailed(true); return }
+        if (r.progress) setProgress(r.progress)
+        setTimeout(pollAps, 4000)
+      } catch { if (!stop) setTimeout(pollAps, 6000) }
+    }
+
+    const pollConvert = async () => {
+      try {
+        const r = await dwgConvertStatus(jobId, filename)
+        if (stop) return
+        if (r.status === 'finished' && r.dxfUrl) { setConvertedDxf(r.dxfUrl); setReady(true); return }
+        if (r.status === 'error' || r.error) { setFailed(true); return }
+        setProgress('converting…')
+        setTimeout(pollConvert, 4000)
+      } catch { if (!stop) setTimeout(pollConvert, 6000) }
+    }
+
+    if (isConvert && jobId) pollConvert()
+    else if (urn) pollAps()
+    return () => { stop = true }
+  }, [urn, jobId, isDxf, isConvert, filename])
+
+  const openFullscreen = () => {
+    // DXF and converted-DWG both open in the client-side DXF viewer; native DWG opens in APS.
+    const detail = isConvert
+      ? { kind: 'dxf', src: convertedDxf, urn: '', filename, open: true }
+      : { kind: kind || 'dwg', src, urn, filename, open: true }
+    window.dispatchEvent(new CustomEvent('cad-fullscreen', { detail }))
+  }
+
+  return (
+    <NodeViewWrapper>
+      <div className="my-3 border border-blue-200 rounded-xl overflow-hidden select-none bg-[#f4f8ff]" contentEditable={false}>
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-blue-100">
+          <span className="text-base leading-none">📐</span>
+          <span className="text-sm font-medium text-[#1b2b4b] flex-1 truncate">{filename}</span>
+          {ready ? (
+            <button onClick={openFullscreen}
+              className="flex items-center gap-1 text-xs text-white bg-blue-600 hover:bg-blue-500 px-2.5 py-1 rounded transition-colors font-medium">
+              <Maximize2 size={11} /> Open drawing
+            </button>
+          ) : failed ? (
+            <span className="text-xs text-red-500 font-medium">Couldn’t process this drawing</span>
+          ) : (
+            <span className="flex items-center gap-1.5 text-xs text-blue-600 font-medium">
+              <Loader2 size={12} className="animate-spin" /> {isConvert ? 'Converting…' : `Rendering… ${progress}`}
+            </span>
+          )}
+          {editor?.isEditable && (
+            <button onClick={deleteNode}
+              className="p-0.5 text-[#9ca3af] hover:text-red-500 transition-colors rounded">
+              <X size={13} />
+            </button>
+          )}
+        </div>
+        <div className="px-3 py-2 text-xs text-[#6b7280]">
+          {ready
+            ? 'CAD drawing ready — click “Open drawing” to view, zoom and pan.'
+            : failed
+              ? 'Could not process this drawing. The file may be corrupt or an unsupported CAD version.'
+              : isConvert
+                ? 'Converting this DWG to a viewable drawing. This can take a minute.'
+                : 'Autodesk is preparing a viewable version of this CAD file. This can take a minute for large drawings.'}
+        </div>
+      </div>
+    </NodeViewWrapper>
+  )
+}
+
+const CadEmbed = TiptapNode.create({
+  name: 'cadEmbed',
+  group: 'block',
+  atom: true,
+
+  addAttributes() {
+    return {
+      src: { default: null },
+      filename: { default: '' },
+      urn: { default: '' },
+      jobId: { default: '' },
+      status: { default: 'translating' },
+      kind: { default: 'dwg' },
+    }
+  },
+
+  parseHTML() { return [{ tag: 'div[data-cad-embed]' }] },
+
+  renderHTML({ HTMLAttributes }) {
+    return ['div', mergeAttributes(HTMLAttributes, { 'data-cad-embed': '' })]
+  },
+
+  addNodeView() { return ReactNodeViewRenderer(CadEmbedView) },
+})
+
 // ── Document bar — chips listing embedded files ────────────────────────────────
 // Walks the Tiptap JSON to find documentEmbed nodes and renders quick-access chips.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -326,6 +450,8 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
   const [showChartModal, setShowChartModal] = useState(false)
   const [showDrawingModal, setShowDrawingModal] = useState(false)
+  const [mathEdit, setMathEdit] = useState<MathEditDetail | null>(null)
+  const [showMathModal, setShowMathModal] = useState(false)
   const [showTablePicker, setShowTablePicker] = useState(false)
   const [showColorPicker, setShowColorPicker] = useState(false)
   const [showHighlightPicker, setShowHighlightPicker] = useState(false)
@@ -333,6 +459,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const [uploading, setUploading] = useState(false)
   const [activeEditor, setActiveEditor] = useState<string | null>(null)
   const [fullscreenDoc, setFullscreenDoc] = useState<{ src: string; filename: string; fileType: FileType } | null>(null)
+  const [fullscreenCad, setFullscreenCad] = useState<{ urn: string; src: string; kind: string; filename: string } | null>(null)
   const [speaking, setSpeaking] = useState(false)
 
   const myId = isTeacher ? 'teacher' : (participantId || 'anon')
@@ -341,7 +468,6 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
-      Underline,
       TextStyle,
       Color,
       Highlight.configure({ multicolor: true }),
@@ -352,6 +478,10 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       Image.configure({ inline: false, allowBase64: true }),
       Placeholder.configure({ placeholder: 'Start typing your notes here...' }),
       DocumentEmbed,
+      CadEmbed,
+      MathInline,
+      MathBlock,
+      MathTrailingParagraph,
     ],
     content: loadSaved(sessionId) ?? undefined,
     editable: canWrite,
@@ -399,6 +529,11 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
         if (payload.open) setFullscreenDoc({ src: payload.src, filename: payload.filename, fileType: payload.fileType })
         else setFullscreenDoc(null)
       })
+      .on('broadcast', { event: 'cad_fullscreen' }, ({ payload }) => {
+        if (payload.senderId === myId) return
+        if (payload.open) setFullscreenCad({ urn: payload.urn, src: payload.src, kind: payload.kind || 'dwg', filename: payload.filename })
+        else setFullscreenCad(null)
+      })
       .subscribe((status) => {
         if (status === 'SUBSCRIBED') {
           channel.send({ type: 'broadcast', event: 'notes_sync_req', payload: {} })
@@ -423,11 +558,61 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     return () => window.removeEventListener('doc-fullscreen', handler)
   }, [myId])
 
+  // Listen for local "open drawing" clicks from CadEmbedView, broadcast to students
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const { urn, src, kind, filename, open } = (e as CustomEvent).detail
+      if (open) setFullscreenCad({ urn, src, kind: kind || 'dwg', filename })
+      else setFullscreenCad(null)
+      channelRef.current?.send({
+        type: 'broadcast', event: 'cad_fullscreen',
+        payload: { urn, src, kind, filename, open, senderId: myId },
+      })
+    }
+    window.addEventListener('cad-fullscreen', handler)
+    return () => window.removeEventListener('cad-fullscreen', handler)
+  }, [myId])
+
   useEffect(() => {
     const close = () => { setShowTablePicker(false) }
     document.addEventListener('mousedown', close)
     return () => document.removeEventListener('mousedown', close)
   }, [])
+
+  // Clicking an equation in the document opens the equation editor
+  useEffect(() => {
+    const handler = (e: Event) => setMathEdit((e as CustomEvent).detail as MathEditDetail)
+    window.addEventListener('math-edit', handler)
+    return () => window.removeEventListener('math-edit', handler)
+  }, [])
+
+  // Ctrl/Cmd+M inserts a new equation
+  useEffect(() => {
+    if (!canWrite) return
+    const handler = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'm') {
+        e.preventDefault()
+        setShowMathModal(true)
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [canWrite])
+
+  const insertEquation = (latex: string, display: boolean) => {
+    if (!editor) return
+    editor.chain().focus().insertContent(
+      display
+        ? { type: 'mathBlock', attrs: { latex } }
+        : { type: 'mathInline', attrs: { latex } },
+    ).run()
+    // insertContent leaves the new atom node selected — typing would replace it,
+    // so drop a text cursor just after the equation instead.
+    editor.commands.setTextSelection(editor.state.selection.to + 1)
+    setShowMathModal(false)
+    lastBroadcast.current = 0
+    if (editor) broadcastContent(editor.getJSON())
+  }
 
   // ── File upload ─────────────────────────────────────────────────────────────
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -435,10 +620,20 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     if (!file || !editor) return
     e.target.value = ''
 
+    // DXF renders in the browser with no Autodesk account; DWG goes through APS translation
+    if (/\.dxf$/i.test(file.name)) {
+      await handleDxfUpload(file)
+      return
+    }
+    if (/\.dwg$/i.test(file.name)) {
+      await handleCadUpload(file)
+      return
+    }
+
     const fileType = getFileType(file.name)
     const supported = /\.(pdf|docx?|xlsx?|pptx?)$/i.test(file.name)
     if (!supported) {
-      toast.error('Supported: PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx)')
+      toast.error('Supported: PDF, Word, Excel, PowerPoint, CAD (.dwg/.dxf)')
       return
     }
 
@@ -469,6 +664,90 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       const msg = err instanceof Error ? err.message : String(err)
       console.error('Upload error:', err)
       toast.error(`Upload failed: ${msg}`, { id: toastId })
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  // ── CAD upload (DWG/DXF → Autodesk Viewer) ───────────────────────────────────
+  const handleCadUpload = async (file: File) => {
+    if (!editor) return
+    if (!isTeacher) { toast.error('Only the teacher can add CAD drawings'); return }
+
+    const toastId = toast.loading(`Uploading ${file.name}…`)
+    setUploading(true)
+    try {
+      const path = `${sessionId}/cad-${Date.now()}-${file.name.replace(/\s+/g, '_')}`
+      const { error: uploadError } = await supabase.storage
+        .from('session-files')
+        .upload(path, file, { upsert: true })
+      if (uploadError) throw uploadError
+
+      const { data: { publicUrl } } = supabase.storage.from('session-files').getPublicUrl(path)
+
+      toast.loading('Preparing 2D/3D view… this can take a minute', { id: toastId })
+
+      // Prefer the Autodesk Viewer (best fidelity). If APS isn't configured, fall back to
+      // CloudConvert DWG→DXF (no Autodesk account). If neither is set up, tell the user.
+      const aps = await apsTranslate(publicUrl, file.name)
+      if (aps.urn) {
+        editor.chain().focus().insertContent({
+          type: 'cadEmbed',
+          attrs: { src: publicUrl, filename: file.name, urn: aps.urn, status: 'translating', kind: 'dwg' },
+        }).run()
+      } else {
+        const conv = await dwgConvertStart(publicUrl, file.name)
+        if (conv.jobId) {
+          editor.chain().focus().insertContent({
+            type: 'cadEmbed',
+            attrs: { src: publicUrl, filename: file.name, jobId: conv.jobId, status: 'converting', kind: 'dwg-convert' },
+          }).run()
+        } else if (aps.error === 'not_configured' && conv.error === 'not_configured') {
+          toast.error('DWG viewing isn’t set up yet — add an APS or CloudConvert key.', { id: toastId })
+          return
+        } else {
+          throw new Error(conv.error || aps.error || 'could not start DWG processing')
+        }
+      }
+
+      lastBroadcast.current = 0
+      broadcastContent(editor.getJSON())
+      toast.success(`${file.name} added — preparing in the notes`, { id: toastId })
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      console.error('CAD upload error:', err)
+      toast.error(`CAD upload failed: ${msg}`, { id: toastId })
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  // ── DXF upload (renders in-browser, no Autodesk account) ─────────────────────
+  const handleDxfUpload = async (file: File) => {
+    if (!editor) return
+    const toastId = toast.loading(`Uploading ${file.name}…`)
+    setUploading(true)
+    try {
+      const path = `${sessionId}/dxf-${Date.now()}-${file.name.replace(/\s+/g, '_')}`
+      const { error: uploadError } = await supabase.storage
+        .from('session-files')
+        .upload(path, file, { upsert: true })
+      if (uploadError) throw uploadError
+
+      const { data: { publicUrl } } = supabase.storage.from('session-files').getPublicUrl(path)
+
+      editor.chain().focus().insertContent({
+        type: 'cadEmbed',
+        attrs: { src: publicUrl, filename: file.name, urn: '', status: 'ready', kind: 'dxf' },
+      }).run()
+
+      lastBroadcast.current = 0
+      broadcastContent(editor.getJSON())
+      toast.success(`${file.name} added to notes`, { id: toastId })
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      console.error('DXF upload error:', err)
+      toast.error(`DXF upload failed: ${msg}`, { id: toastId })
     } finally {
       setUploading(false)
     }
@@ -579,7 +858,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     <div className="h-full flex flex-col bg-white">
       {/* Hidden file inputs */}
       <input ref={fileInputRef} type="file"
-        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.dwg,.dxf"
         onChange={handleFileUpload} className="hidden" />
       <input ref={imageInputRef} type="file"
         accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml"
@@ -609,6 +888,9 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
             <button
               onMouseDown={e => { e.preventDefault(); fileInputRef.current?.click() }}
               disabled={uploading}
+              title={isTeacher
+                ? 'Open a document or CAD drawing — PDF, Word, Excel, PowerPoint, AutoCAD/Civil 3D (.dwg, .dxf)'
+                : 'Open a document — PDF, Word, Excel, PowerPoint'}
               className="flex items-center gap-1.5 px-3 py-1.5 bg-[#1b2b4b] hover:bg-[#243660] disabled:opacity-40 text-white rounded-lg text-xs font-semibold transition-colors ml-1"
             >
               {uploading
@@ -708,6 +990,17 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
           </div>
         )}
 
+        {/* Equation editor — anyone who can write in the notes */}
+        {canWrite && (
+          <button
+            onMouseDown={e => { e.preventDefault(); setShowMathModal(true) }}
+            title="Insert a maths equation (Ctrl+M) — or type $x^2$ inline, $$…$$ on its own line"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]">
+            <Sigma size={13} />
+            <span>Equation</span>
+          </button>
+        )}
+
         {canWrite && <div className="w-px h-5 bg-green-100" />}
 
         {/* Text-to-speech — available to everyone */}
@@ -744,6 +1037,33 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       {showChartModal && <ChartModal onInsert={handleChartInsert} onClose={() => setShowChartModal(false)} />}
       {showDrawingModal && <DrawingModal onInsert={handleDrawingInsert} onClose={() => setShowDrawingModal(false)} />}
 
+      {showMathModal && (
+        <MathModal
+          onInsert={insertEquation}
+          onClose={() => setShowMathModal(false)}
+        />
+      )}
+
+      {mathEdit && (
+        <MathModal
+          initialLatex={mathEdit.latex}
+          initialDisplay={mathEdit.display}
+          onInsert={(latex, display) => {
+            mathEdit.apply(latex, display)
+            setMathEdit(null)
+            lastBroadcast.current = 0
+            if (editor) broadcastContent(editor.getJSON())
+          }}
+          onDelete={() => {
+            mathEdit.remove()
+            setMathEdit(null)
+            lastBroadcast.current = 0
+            if (editor) broadcastContent(editor.getJSON())
+          }}
+          onClose={() => setMathEdit(null)}
+        />
+      )}
+
       {fullscreenDoc && (
         <div className="fixed inset-0 z-50 flex flex-col bg-black/80">
           <div className="flex items-center gap-3 px-4 py-2 bg-[#1b2b4b] shrink-0">
@@ -776,6 +1096,38 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
           <div className="flex-1 min-h-0">
             <iframe src={getEmbedUrl(fullscreenDoc.src, fullscreenDoc.fileType)}
               className="w-full h-full border-0" title={fullscreenDoc.filename} allow="fullscreen" />
+          </div>
+        </div>
+      )}
+
+      {fullscreenCad && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-black/90">
+          <div className="flex items-center gap-3 px-4 py-2 bg-[#1b2b4b] shrink-0">
+            <span className="text-base leading-none">📐</span>
+            <span className="text-sm font-medium text-white flex-1 truncate">{fullscreenCad.filename}</span>
+            {isTeacher ? (
+              <button
+                onClick={() => {
+                  setFullscreenCad(null)
+                  channelRef.current?.send({
+                    type: 'broadcast', event: 'cad_fullscreen',
+                    payload: { open: false, senderId: myId },
+                  })
+                }}
+                className="flex items-center gap-1 text-xs bg-red-500/20 hover:bg-red-500/30 text-red-300 px-2 py-1 rounded transition-colors">
+                <X size={12} /> Close for everyone
+              </button>
+            ) : (
+              <button onClick={() => setFullscreenCad(null)}
+                className="p-1 text-white/70 hover:text-white transition-colors rounded">
+                <X size={16} />
+              </button>
+            )}
+          </div>
+          <div className="flex-1 min-h-0">
+            {fullscreenCad.kind === 'dxf'
+              ? <DxfViewer src={fullscreenCad.src} />
+              : <CadViewer urn={fullscreenCad.urn} />}
           </div>
         </div>
       )}
