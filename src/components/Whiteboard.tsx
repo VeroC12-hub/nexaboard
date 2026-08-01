@@ -1407,13 +1407,6 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
             }}
           />
 
-          {imageItems.map(item => (
-            <BoardImage key={item.id} item={item} locked={locked} scale={scale}
-              onMove={(x, y) => updateImage(item.id, { x, y })}
-              onResize={width => updateImage(item.id, { width })}
-              onDelete={() => deleteImage(item.id)} />
-          ))}
-
           <div className="absolute inset-0" style={{ zIndex: objectsOnTop ? 20 : 12, pointerEvents: 'none' }}>
           {textItems.map(item => (
             <BoardText key={item.id} item={item} locked={locked} scale={scale}
