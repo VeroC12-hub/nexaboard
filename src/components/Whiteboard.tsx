@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import {
   Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, ChevronUp,
   LineChart, BarChart2, ImageIcon, Undo2, Redo2, Minus as LineIcon, ArrowRight,
-  Square, Circle, Grid3x3, Compass, Type, Highlighter, Files,
+  Square, Circle, Grid3x3, Compass, Type, Highlighter, Files, MousePointer2, Crosshair,
 } from 'lucide-react'
 import MathModal from './MathModal'
 import GraphModal from './GraphModal'
@@ -14,7 +14,7 @@ import {
   BOARD_WIDTH, GROW_STEP, GROW_MARGIN, DEFAULT_BOARD_HEIGHT,
   drawBackground, drawStroke, shapeReadout, loadLesson, saveLessonSlice,
   parseBoardState, emptyBoard, emptyPage, activePage,
-  strokeHitsPoint, constrainPoint,
+  strokeHitsPoint, constrainPoint, strokeBounds, translateStroke,
   type Point, type Stroke, type MathItem, type ImageItem, type Background,
   type ShapeKind, type PenTool, type BoardState, type BoardPage, type TextItem,
 } from '../lib/board'
@@ -26,7 +26,7 @@ interface Props {
   canDraw: boolean
 }
 
-type Tool = PenTool | 'eraser' | 'pan' | 'text' | ShapeKind
+type Tool = PenTool | 'eraser' | 'pan' | 'text' | 'select' | 'laser' | ShapeKind
 
 const COLORS = ['#1b2b4b', '#ef4444', '#3b82f6', '#5ab82e', '#f59e0b', '#8b5cf6', '#000000']
 const SIZES = [2, 5, 12]
@@ -52,6 +52,7 @@ type Action =
   | { kind: 'math'; item: MathItem }
   | { kind: 'image'; item: ImageItem }
   | { kind: 'text'; item: TextItem }
+  | { kind: 'move'; ids: string[]; dx: number; dy: number }
 
 export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -86,6 +87,9 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const [editingMath, setEditingMath] = useState<MathItem | null>(null)
   const [following, setFollowing] = useState(!isTeacher)
   const [teacherAbove, setTeacherAbove] = useState(false)
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
+  /** Where other people are pointing, keyed by who. Never saved. */
+  const [laserDots, setLaserDots] = useState<Record<string, { x: number; y: number; color: string }>>({})
   const [readout, setReadout] = useState<string | null>(null)
   const [canUndo, setCanUndo] = useState(false)
   const [canRedo, setCanRedo] = useState(false)
@@ -113,6 +117,13 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const textItemsRef = useRef(textItems)
   const pagesRef = useRef(pages)
   const activePageIdRef = useRef(activePageId)
+  const selectedIdsRef = useRef(selectedIds)
+  /** Rubber-band rectangle while lassoing, in board units. */
+  const lasso = useRef<{ from: Point; to: Point } | null>(null)
+  const moveOrigin = useRef<Point | null>(null)
+  const moveTotal = useRef({ dx: 0, dy: 0 })
+  const laserTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
+  const lastLaserSent = useRef(0)
   const followingRef = useRef(following)
   const teacherScrollTop = useRef(0)
   const lastViewBroadcast = useRef(0)
@@ -128,6 +139,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   useEffect(() => { pagesRef.current = pages }, [pages])
   useEffect(() => { activePageIdRef.current = activePageId }, [activePageId])
   useEffect(() => { followingRef.current = following }, [following])
+  useEffect(() => { selectedIdsRef.current = selectedIds }, [selectedIds])
 
   /**
    * Pixels per board unit for this screen. The ref is for drawing and pointer
@@ -146,6 +158,36 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     const scale = scaleRef.current
     drawBackground(ctx, backgroundRef.current, canvas.width, canvas.height, scale)
     for (const stroke of allStrokes.current) drawStroke(ctx, stroke, scale)
+
+    // Selection outlines and the lasso sit above the ink.
+    const chosen = selectedIdsRef.current
+    if (chosen.length) {
+      ctx.save()
+      ctx.strokeStyle = '#5ab82e'
+      ctx.lineWidth = 1.5
+      ctx.setLineDash([6, 4])
+      for (const stroke of allStrokes.current) {
+        if (!chosen.includes(stroke.id)) continue
+        const b = strokeBounds(stroke)
+        ctx.strokeRect(b.x * scale, b.y * scale, b.w * scale, b.h * scale)
+      }
+      ctx.restore()
+    }
+    if (lasso.current) {
+      const { from, to } = lasso.current
+      ctx.save()
+      ctx.strokeStyle = '#1b2b4b'
+      ctx.fillStyle = 'rgba(90,184,46,0.10)'
+      ctx.lineWidth = 1
+      ctx.setLineDash([5, 4])
+      const x = Math.min(from.x, to.x) * scale
+      const y = Math.min(from.y, to.y) * scale
+      const w = Math.abs(to.x - from.x) * scale
+      const h = Math.abs(to.y - from.y) * scale
+      ctx.fillRect(x, y, w, h)
+      ctx.strokeRect(x, y, w, h)
+      ctx.restore()
+    }
   }, [])
 
   const fitCanvas = useCallback(() => {
@@ -262,6 +304,32 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     return () => { cancelled = true }
   }, [sessionId, openPage])
 
+  // ── Laser pointer ───────────────────────────────────────────────────────────
+  const showLaser = useCallback((who: string, dot: { x: number; y: number; color: string } | null) => {
+    setLaserDots(prev => {
+      if (!dot) { const next = { ...prev }; delete next[who]; return next }
+      return { ...prev, [who]: dot }
+    })
+    clearTimeout(laserTimers.current[who])
+    if (dot) {
+      laserTimers.current[who] = setTimeout(() => {
+        setLaserDots(prev => { const next = { ...prev }; delete next[who]; return next })
+      }, 1200)
+    }
+  }, [])
+
+  const pointLaser = (point: Point) => {
+    showLaser(myId, { x: point.x, y: point.y, color: colorRef.current })
+    // eslint-disable-next-line react-hooks/purity -- pointer handler, not render
+    const now = Date.now()
+    if (now - lastLaserSent.current < 50) return
+    lastLaserSent.current = now
+    channelRef.current?.send({
+      type: 'broadcast', event: 'wb_laser',
+      payload: { by: myId, x: point.x, y: point.y, color: colorRef.current },
+    })
+  }
+
   // ── Live sync ───────────────────────────────────────────────────────────────
   const scrollToTeacher = useCallback(() => {
     const el = containerRef.current
@@ -311,6 +379,16 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         if (!stroke) return
         stroke.points.push(...(payload.points as Point[]))
         redraw()
+      })
+      .on('broadcast', { event: 'wb_stroke_set' }, ({ payload }) => {
+        const incoming = payload.strokes as Stroke[]
+        const byId = new Map(incoming.map(s => [s.id, s]))
+        allStrokes.current = allStrokes.current.map(s => byId.get(s.id) ?? s)
+        redraw()
+      })
+      .on('broadcast', { event: 'wb_laser' }, ({ payload }) => {
+        if (payload.by === myId) return
+        showLaser(payload.by, { x: payload.x, y: payload.y, color: payload.color })
       })
       .on('broadcast', { event: 'wb_remove' }, ({ payload }) => {
         const ids = new Set(payload.ids as string[])
@@ -390,7 +468,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       })
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
-  }, [sessionId, loaded, isTeacher, myId, redraw, snapshot, scrollToTeacher, openPage])
+  }, [sessionId, loaded, isTeacher, myId, redraw, snapshot, scrollToTeacher, openPage, showLaser])
 
   // ── Text on the board ───────────────────────────────────────────────────────
   const commitText = (items: TextItem[], record?: TextItem) => {
@@ -410,6 +488,101 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
 
   const deleteText = (id: string) =>
     commitText(textItemsRef.current.filter(t => t.id !== id))
+
+  // ── Select, move and delete ─────────────────────────────────────────────────
+  const commitStrokeChanges = (changed: Stroke[]) => {
+    channelRef.current?.send({ type: 'broadcast', event: 'wb_stroke_set', payload: { strokes: changed } })
+    redraw()
+    scheduleSave()
+  }
+
+  const moveSelection = (dx: number, dy: number) => {
+    const chosen = new Set(selectedIdsRef.current)
+    if (!chosen.size) return
+    allStrokes.current = allStrokes.current.map(s =>
+      chosen.has(s.id) ? translateStroke(s, dx, dy) : s)
+    redraw()
+  }
+
+  const deleteSelection = useCallback(() => {
+    const ids = selectedIdsRef.current
+    if (!ids.length) return
+    for (const id of ids) {
+      const stroke = allStrokes.current.find(s => s.id === id)
+      if (stroke) {
+        undoneStrokes.current.set(id, stroke)
+        undoStack.current.push({ kind: 'erase', id })
+      }
+    }
+    redoStack.current = []
+    refreshUndoFlags()
+    allStrokes.current = allStrokes.current.filter(s => !ids.includes(s.id))
+    channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids } })
+    setSelectedIds([]); selectedIdsRef.current = []
+    redraw()
+    scheduleSave()
+  }, [redraw, scheduleSave])
+
+  const beginSelect = (point: Point) => {
+    const tolerance = 8
+    const hit = [...allStrokes.current].reverse().find(s => strokeHitsPoint(s, point, tolerance))
+    if (hit && selectedIdsRef.current.includes(hit.id)) {
+      // Grabbing something already selected drags the whole selection.
+      moveOrigin.current = point
+      moveTotal.current = { dx: 0, dy: 0 }
+      return
+    }
+    if (hit) {
+      setSelectedIds([hit.id]); selectedIdsRef.current = [hit.id]
+      moveOrigin.current = point
+      moveTotal.current = { dx: 0, dy: 0 }
+      redraw()
+      return
+    }
+    // Empty space starts a lasso.
+    setSelectedIds([]); selectedIdsRef.current = []
+    lasso.current = { from: point, to: point }
+    redraw()
+  }
+
+  const extendSelect = (point: Point) => {
+    if (moveOrigin.current) {
+      const dx = point.x - moveOrigin.current.x
+      const dy = point.y - moveOrigin.current.y
+      moveOrigin.current = point
+      moveTotal.current = { dx: moveTotal.current.dx + dx, dy: moveTotal.current.dy + dy }
+      moveSelection(dx, dy)
+      return
+    }
+    if (lasso.current) { lasso.current.to = point; redraw() }
+  }
+
+  const endSelect = () => {
+    if (moveOrigin.current) {
+      moveOrigin.current = null
+      const { dx, dy } = moveTotal.current
+      if (dx || dy) {
+        const ids = selectedIdsRef.current
+        undoStack.current.push({ kind: 'move', ids: [...ids], dx, dy })
+        redoStack.current = []
+        refreshUndoFlags()
+        commitStrokeChanges(allStrokes.current.filter(s => ids.includes(s.id)))
+      }
+      return
+    }
+    if (!lasso.current) return
+    const { from, to } = lasso.current
+    const left = Math.min(from.x, to.x), right = Math.max(from.x, to.x)
+    const top = Math.min(from.y, to.y), bottom = Math.max(from.y, to.y)
+    lasso.current = null
+    const inside = allStrokes.current.filter(stroke => {
+      const b = strokeBounds(stroke)
+      return b.x >= left && b.y >= top && b.x + b.w <= right && b.y + b.h <= bottom
+    })
+    const ids = inside.map(s => s.id)
+    setSelectedIds(ids); selectedIdsRef.current = ids
+    redraw()
+  }
 
   // ── Drawing input ───────────────────────────────────────────────────────────
   /** Screen position to board units. getBoundingClientRect already allows for scroll. */
@@ -550,16 +723,22 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     if (locked || tool === 'pan') return
     const point = toBoard(e.clientX, e.clientY)
     if (tool === 'text') { addTextAt(point); return }
+    if (tool === 'laser') { isDrawing.current = true; pointLaser(point); return }
+    if (tool === 'select') { isDrawing.current = true; beginSelect(point); return }
     if (tool === 'eraser') { isDrawing.current = true; eraseAt(point); return }
     beginStroke(point)
   }
   const onMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isDrawing.current || locked) return
     const point = toBoard(e.clientX, e.clientY)
+    if (toolRef.current === 'laser') { pointLaser(point); return }
+    if (toolRef.current === 'select') { extendSelect(point); return }
     if (toolRef.current === 'eraser') { eraseAt(point); return }
     extendStroke(point, e.shiftKey)
   }
   const onMouseUp = () => {
+    if (toolRef.current === 'laser') { isDrawing.current = false; return }
+    if (toolRef.current === 'select') { isDrawing.current = false; endSelect(); return }
     if (toolRef.current === 'eraser') { isDrawing.current = false; return }
     if (isDrawing.current) endStroke()
   }
@@ -615,6 +794,16 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         redraw()
       }
       redoStack.current.push(action)
+    } else if (action.kind === 'move') {
+      redoStack.current.push(action)
+      const ids = new Set(action.ids)
+      allStrokes.current = allStrokes.current.map(s =>
+        ids.has(s.id) ? translateStroke(s, -action.dx, -action.dy) : s)
+      channelRef.current?.send({
+        type: 'broadcast', event: 'wb_stroke_set',
+        payload: { strokes: allStrokes.current.filter(s => ids.has(s.id)) },
+      })
+      redraw()
     } else if (action.kind === 'text') {
       redoStack.current.push(action)
       const next = textItemsRef.current.filter(t => t.id !== action.item.id)
@@ -657,6 +846,16 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids: [action.id] } })
       redraw()
       undoStack.current.push(action)
+    } else if (action.kind === 'move') {
+      const ids = new Set(action.ids)
+      allStrokes.current = allStrokes.current.map(s =>
+        ids.has(s.id) ? translateStroke(s, action.dx, action.dy) : s)
+      channelRef.current?.send({
+        type: 'broadcast', event: 'wb_stroke_set',
+        payload: { strokes: allStrokes.current.filter(s => ids.has(s.id)) },
+      })
+      redraw()
+      undoStack.current.push(action)
     } else if (action.kind === 'text') {
       const next = [...textItemsRef.current, action.item]
       setTextItems(next); textItemsRef.current = next
@@ -688,6 +887,25 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [locked, undo, redo])
+
+  // Delete removes what is selected; Escape lets it go.
+  useEffect(() => {
+    if (locked) return
+    const handler = (e: KeyboardEvent) => {
+      const el = document.activeElement
+      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) return
+      if (e.key === 'Delete' || e.key === 'Backspace') {
+        if (!selectedIdsRef.current.length) return
+        e.preventDefault()
+        deleteSelection()
+      } else if (e.key === 'Escape') {
+        setSelectedIds([]); selectedIdsRef.current = []
+        redraw()
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [locked, deleteSelection, redraw])
 
   // ── Board furniture ─────────────────────────────────────────────────────────
   const clearBoard = () => {
@@ -922,6 +1140,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
             {toolButton(tool === 'highlighter', () => setTool('highlighter'), 'Highlighter', <Highlighter size={15} />)}
             {toolButton(tool === 'eraser', () => setTool('eraser'), 'Eraser: rub over a stroke to lift it', <Eraser size={15} />)}
             {toolButton(tool === 'text', () => setTool('text'), 'Text: click the board and type', <Type size={15} />)}
+            {toolButton(tool === 'select', () => setTool('select'), 'Select: click a stroke, or drag a box round several', <MousePointer2 size={15} />)}
+            {toolButton(tool === 'laser', () => setTool('laser'), 'Laser pointer: point without leaving a mark', <Crosshair size={15} />)}
             {toolButton(tool === 'pan', () => setTool('pan'), 'Scroll the board with your finger or mouse', <Hand size={15} />)}
           </div>
 
@@ -1088,9 +1308,34 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
               onDelete={() => deleteMath(item.id)} />
           ))}
 
+          {/* Laser dots: pure presence, never drawn into the board */}
+          {Object.entries(laserDots).map(([who, dot]) => (
+            <div key={who} className="absolute pointer-events-none z-30"
+              style={{ left: dot.x * scale - 9, top: dot.y * scale - 9 }}>
+              <div className="w-[18px] h-[18px] rounded-full"
+                style={{ backgroundColor: dot.color, boxShadow: `0 0 12px 6px ${dot.color}66`, opacity: 0.85 }} />
+            </div>
+          ))}
+
           {showProtractor && !locked && <Protractor />}
         </div>
       </div>
+
+      {selectedIds.length > 0 && !locked && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-2 rounded-xl bg-[#1b2b4b] text-white shadow-lg">
+          <span className="text-xs font-semibold">
+            {selectedIds.length} selected
+          </span>
+          <button onClick={deleteSelection}
+            className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-red-500/20 text-red-200 hover:bg-red-500/30 text-xs font-semibold transition-colors">
+            <Trash2 size={12} /> Delete
+          </button>
+          <button onClick={() => { setSelectedIds([]); selectedIdsRef.current = []; redraw() }}
+            className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold transition-colors">
+            Done
+          </button>
+        </div>
+      )}
 
       {/* Length and angle while a shape is being dragged out */}
       {readout && (
