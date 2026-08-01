@@ -30,7 +30,7 @@ import {
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
   Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X, Maximize2,
-  Volume2, VolumeX, Palette, Highlighter, Sigma, LineChart,
+  Volume2, VolumeX, Palette, Highlighter, Sigma, LineChart, Printer, Check, AlertTriangle,
 } from 'lucide-react'
 
 // ── Preset colour swatches ────────────────────────────────────────────────────
@@ -432,18 +432,28 @@ interface Props {
   canEdit?: boolean
   participantId?: string | null
   participantName?: string
+  /**
+   * Set to a student's id to open their own private notes instead of the class
+   * notes: separate channel, separate storage, and always writable by its owner.
+   */
+  notesKey?: string
 }
 
-const STORAGE_KEY = (sessionId: string) => `nexaboard_notes_${sessionId}`
+const STORAGE_KEY = (sessionId: string, notesKey?: string) =>
+  `nexaboard_notes_${sessionId}${notesKey ? `_${notesKey}` : ''}`
 
-function loadSaved(sessionId: string) {
+function loadSaved(sessionId: string, notesKey?: string) {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY(sessionId))
+    const raw = localStorage.getItem(STORAGE_KEY(sessionId, notesKey))
     return raw ? JSON.parse(raw) : null
   } catch { return null }
 }
 
-export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, participantId, participantName }: Props) {
+export default function RichTextEditor({
+  sessionId, isTeacher, canEdit = false, participantId, participantName, notesKey,
+}: Props) {
+  /** Private notes belong to one student: their own channel, their own storage. */
+  const personal = !!notesKey
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
   const lastBroadcast = useRef(0)
   const isRemoteUpdate = useRef(false)
@@ -464,9 +474,11 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const [fullscreenDoc, setFullscreenDoc] = useState<{ src: string; filename: string; fileType: FileType } | null>(null)
   const [fullscreenCad, setFullscreenCad] = useState<{ urn: string; src: string; kind: string; filename: string } | null>(null)
   const [speaking, setSpeaking] = useState(false)
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'failed'>('idle')
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   const myId = isTeacher ? 'teacher' : (participantId || 'anon')
-  const canWrite = isTeacher || canEdit
+  const canWrite = personal || isTeacher || canEdit
 
   // Paste and drop reach the editor before `insertImageBlob` exists, so they go
   // through a ref that is filled in once the handler is defined below.
@@ -496,7 +508,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       MathBlock,
       MathTrailingParagraph,
     ],
-    content: loadSaved(sessionId) ?? undefined,
+    content: loadSaved(sessionId, notesKey) ?? undefined,
     editable: canWrite,
     editorProps: {
       // Copy a graph, chart or diagram from anywhere and paste it straight in.
@@ -518,7 +530,10 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     onUpdate: ({ editor }) => {
       if (isRemoteUpdate.current || !canWrite) return
       const content = editor.getJSON()
-      if (isTeacher) {
+      if (personal) {
+        // A student's own notes are theirs; keep them on their device.
+        localStorage.setItem(STORAGE_KEY(sessionId, notesKey), JSON.stringify(content))
+      } else if (isTeacher) {
         localStorage.setItem(STORAGE_KEY(sessionId), JSON.stringify(content))
         scheduleNotesSave(content)
       }
@@ -531,10 +546,15 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const notesSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const notesSaveWarned = useRef(false)
   const scheduleNotesSave = useCallback((content: object) => {
-    if (!isTeacher) return
+    if (!isTeacher || personal) return
     if (notesSaveTimer.current) clearTimeout(notesSaveTimer.current)
+    setSaveState('saving')
     notesSaveTimer.current = setTimeout(() => {
-      saveLessonSlice(sessionId, { notes: content }).catch(err => {
+      saveLessonSlice(sessionId, { notes: content })
+        .then(() => { setSaveState('saved'); setSaveError(null) })
+        .catch(err => {
+        setSaveState('failed')
+        setSaveError(err instanceof Error ? err.message : String(err))
         console.error('Could not save the notes:', err)
         // Say so once. Silently losing a lesson is far worse than one warning.
         if (!notesSaveWarned.current) {
@@ -546,7 +566,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
         }
       })
     }, 2500)
-  }, [isTeacher, sessionId])
+  }, [isTeacher, personal, sessionId])
 
   useEffect(() => () => { if (notesSaveTimer.current) clearTimeout(notesSaveTimer.current) }, [])
 
@@ -555,6 +575,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   useEffect(() => {
     if (!editor) return
     let cancelled = false
+    if (personal) return
     loadLesson(sessionId).then(lesson => {
       if (cancelled || !lesson?.notes) return
       // Never clobber something the teacher has already started typing here.
@@ -564,7 +585,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       isRemoteUpdate.current = false
     }).catch(() => {})
     return () => { cancelled = true }
-  }, [editor, sessionId, isTeacher])
+  }, [editor, sessionId, personal, isTeacher])
 
   useEffect(() => { editor?.setEditable(canWrite) }, [editor, canWrite])
 
@@ -580,12 +601,12 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
   useEffect(() => {
     const channel = supabase
-      .channel(`notes:${sessionId}`)
+      .channel(personal ? `notes:${sessionId}:${notesKey}` : `notes:${sessionId}`)
       .on('broadcast', { event: 'notes_update' }, ({ payload }) => {
         if (!editor || payload.senderId === myId) return
         isRemoteUpdate.current = true
         editor.commands.setContent(payload.content)
-        localStorage.setItem(STORAGE_KEY(sessionId), JSON.stringify(payload.content))
+        localStorage.setItem(STORAGE_KEY(sessionId, notesKey), JSON.stringify(payload.content))
         isRemoteUpdate.current = false
         if (isTeacher && payload.senderName) setActiveEditor(payload.senderName)
       })
@@ -614,7 +635,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       })
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
-  }, [sessionId, editor, isTeacher, myId])
+  }, [sessionId, personal, notesKey, editor, isTeacher, myId])
 
   // Listen for local expand clicks from DocumentEmbedView (which can't access channelRef directly)
   useEffect(() => {
@@ -897,6 +918,17 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
   const stopSpeaking = () => { window.speechSynthesis.cancel(); setSpeaking(false) }
 
+  /** Hand the lesson out: print CSS hides the app so only the notes come through. */
+  const printNotes = () => {
+    document.body.classList.add('printing-notes')
+    const done = () => {
+      document.body.classList.remove('printing-notes')
+      window.removeEventListener('afterprint', done)
+    }
+    window.addEventListener('afterprint', done)
+    window.print()
+  }
+
   useEffect(() => { return () => window.speechSynthesis?.cancel() }, [])
 
   /**
@@ -1135,6 +1167,31 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
         )}
 
         {canWrite && <div className="w-px h-5 bg-green-100" />}
+
+        <button
+          onMouseDown={e => { e.preventDefault(); printNotes() }}
+          title="Print these notes, or save them as a PDF to hand out"
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]">
+          <Printer size={13} /> Print / PDF
+        </button>
+
+        {isTeacher && !personal && saveState !== 'idle' && (
+          <span
+            title={saveError ?? (saveState === 'saved' ? 'These notes are stored and will survive a refresh' : undefined)}
+            className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
+              saveState === 'failed'
+                ? 'bg-red-50 text-red-600 border-red-200'
+                : saveState === 'saved'
+                  ? 'bg-[#f3fcf0] text-[#5ab82e] border-green-200'
+                  : 'bg-white text-[#9ca3af] border-green-200'
+            }`}>
+            {saveState === 'failed'
+              ? <><AlertTriangle size={10} /> Not saving</>
+              : saveState === 'saved'
+                ? <><Check size={10} /> Saved</>
+                : 'Saving…'}
+          </span>
+        )}
 
         {/* Text-to-speech — available to everyone */}
         <button

@@ -86,3 +86,21 @@ html, body, #root {
 .math-preview .katex-display { margin: 0; }
 .math-btn .katex { font-size: 1em; line-height: 1.2; }
 .math-btn .katex-display { margin: 0; }
+
+/* Printing the notes: strip the app so only the lesson comes out on paper */
+@media print {
+  body.printing-notes * { visibility: hidden; }
+  body.printing-notes .notes-editor,
+  body.printing-notes .notes-editor * { visibility: visible; }
+  body.printing-notes .notes-editor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  body.printing-notes .notes-editor .ProseMirror { min-height: 0; }
+  /* Keep equations, tables and pictures from being split across a page break */
+  body.printing-notes .math-block-wrapper,
+  body.printing-notes .notes-editor img,
+  body.printing-notes .notes-editor table { break-inside: avoid; }
+}

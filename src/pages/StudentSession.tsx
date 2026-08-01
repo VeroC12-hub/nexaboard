@@ -11,7 +11,7 @@ import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, Ch
 import VideoCallNative from '../components/VideoCallNative'
 import ClassQuestion from '../components/ClassQuestion'
 
-type Tab = 'whiteboard' | 'mywork' | 'code' | 'notes'
+type Tab = 'whiteboard' | 'mywork' | 'code' | 'notes' | 'mynotes'
 
 export default function StudentSession() {
   const { sessionId } = useParams<{ sessionId: string }>()
@@ -188,6 +188,10 @@ export default function StudentSession() {
               className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'mywork' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
               <PenSquare size={13} /> My Work
             </button>
+            <button onClick={() => setTab('mynotes')}
+              className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'mynotes' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
+              <FileText size={13} /> My Notes
+            </button>
             <button onClick={() => setTab('code')}
               className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'code' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
               <Code2 size={13} /> Code
@@ -251,6 +255,11 @@ export default function StudentSession() {
           <div className={tab === 'whiteboard' ? 'flex-1 min-h-0' : 'hidden'}><Whiteboard sessionId={sessionId!} isTeacher={false} canDraw={canDraw} /></div>
           <div className={tab === 'mywork' ? 'flex-1 min-h-0' : 'hidden'}>
             <Whiteboard sessionId={sessionId!} isTeacher={false} canDraw boardKey={participantId ?? 'anon'} />
+          </div>
+          <div className={tab === 'mynotes' ? 'flex-1 min-h-0' : 'hidden'}>
+            <RichTextEditor sessionId={sessionId!} isTeacher={false}
+              participantId={participantId} participantName={participantName}
+              notesKey={participantId ?? 'anon'} />
           </div>
           <div className={tab === 'code' ? 'flex-1 min-h-0' : 'hidden'}><CodeEditor sessionId={sessionId!} isTeacher={false} canEdit={participant?.has_code_access ?? false} participantId={participantId} participantName={participantName} /></div>
           <div className={tab === 'notes' ? 'flex-1 min-h-0' : 'hidden'}><RichTextEditor sessionId={sessionId!} isTeacher={false} canEdit={participant?.has_notes_access ?? false} participantId={participantId} participantName={participantName} /></div>

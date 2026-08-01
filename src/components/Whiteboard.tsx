@@ -65,6 +65,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
   /** A personal board belongs to one student: no class follow, no lesson save. */
   const personal = !!boardKey
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const bgCanvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
@@ -107,6 +108,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
   const [saveError, setSaveError] = useState<string | null>(null)
 
   const locked = !isTeacher && !canDraw
+  /** Select and pan are for handling things; every other tool is for marking them. */
+  const objectsOnTop = tool === 'select' || tool === 'pan'
   const myId = useMemo(() => (isTeacher ? 'teacher' : `s-${crypto.randomUUID().slice(0, 8)}`), [isTeacher])
 
   // Undo and redo only ever touch this user's own work, so one student cannot
@@ -174,7 +177,13 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     const scale = scaleRef.current
-    drawBackground(ctx, backgroundRef.current, canvas.width, canvas.height, scale)
+
+    // Paper goes on its own canvas underneath the pictures; ink stays on this
+    // one, which is transparent, so a line drawn over a graph shows on top of it.
+    const bg = bgCanvasRef.current?.getContext('2d')
+    if (bg) drawBackground(bg, backgroundRef.current, canvas.width, canvas.height, scale)
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     for (const stroke of allStrokes.current) drawStroke(ctx, stroke, scale)
 
     // Selection outlines and the lasso sit above the ink.
@@ -216,8 +225,13 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
     if (!width) return
     scaleRef.current = width / BOARD_WIDTH
     setScale(scaleRef.current)
+    const height = Math.round(boardHeightRef.current * scaleRef.current)
     canvas.width = width
-    canvas.height = Math.round(boardHeightRef.current * scaleRef.current)
+    canvas.height = height
+    if (bgCanvasRef.current) {
+      bgCanvasRef.current.width = width
+      bgCanvasRef.current.height = height
+    }
     redraw()
   }, [redraw])
 
@@ -1363,6 +1377,22 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
 
       <div ref={containerRef} onScroll={onScroll} className="flex-1 overflow-y-auto overflow-x-hidden bg-white">
         <div className="relative" style={{ height: Math.round(boardHeight * scale) }}>
+          <canvas ref={bgCanvasRef} style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }} />
+
+          {/*
+            Pictures sit under the ink while you are drawing, so lines and
+            highlighter go over a graph rather than behind it. With the select
+            tool they come to the front again so they can be moved and resized.
+          */}
+          <div className="absolute inset-0" style={{ zIndex: objectsOnTop ? 20 : 1 }}>
+            {imageItems.map(item => (
+              <BoardImage key={item.id} item={item} locked={locked} scale={scale}
+                onMove={(x, y) => updateImage(item.id, { x, y })}
+                onResize={width => updateImage(item.id, { width })}
+                onDelete={() => deleteImage(item.id)} />
+            ))}
+          </div>
+
           <canvas
             ref={canvasRef}
             onMouseDown={onMouseDown}
@@ -1370,7 +1400,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
             onMouseUp={onMouseUp}
             onMouseLeave={() => { if (toolRef.current === 'laser') stopLaser(); onMouseUp() }}
             style={{
-              position: 'absolute', top: 0, left: 0,
+              position: 'absolute', top: 0, left: 0, zIndex: 10,
+              pointerEvents: objectsOnTop && tool === 'pan' ? 'none' : 'auto',
               touchAction: locked || tool === 'pan' ? 'pan-y' : 'none',
               cursor: locked ? 'default' : tool === 'pan' ? 'grab' : tool === 'eraser' ? 'cell' : 'crosshair',
             }}
@@ -1383,6 +1414,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
               onDelete={() => deleteImage(item.id)} />
           ))}
 
+          <div className="absolute inset-0" style={{ zIndex: objectsOnTop ? 20 : 12 }}>
           {textItems.map(item => (
             <BoardText key={item.id} item={item} locked={locked} scale={scale}
               editing={editingText === item.id}
@@ -1410,6 +1442,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
                 style={{ backgroundColor: dot.color, boxShadow: `0 0 12px 6px ${dot.color}66`, opacity: 0.85 }} />
             </div>
           ))}
+
+          </div>
 
           {showProtractor && !locked && <Protractor />}
         </div>
