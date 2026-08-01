@@ -8,9 +8,10 @@ import CodeEditor from '../components/CodeEditor'
 import ChatSidebar from '../components/ChatSidebar'
 import StudentList from '../components/StudentList'
 import ClassQuestion from '../components/ClassQuestion'
+import StudentWorkPanel from '../components/StudentWorkPanel'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff, HelpCircle } from 'lucide-react'
+import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff, HelpCircle, PenSquare } from 'lucide-react'
 import VideoCallNative from '../components/VideoCallNative'
 
 type Tab = 'whiteboard' | 'code' | 'notes'
@@ -24,6 +25,7 @@ export default function Session({ user }: { user: User }) {
   const [tab, setTab] = useState<Tab>('whiteboard')
   const [sideTab, setSideTab] = useState<SideTab>('students')
   const [askOpen, setAskOpen] = useState(false)
+  const [workOpen, setWorkOpen] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [ending, setEnding] = useState(false)
   const [callOpen, setCallOpen] = useState(() => sessionStorage.getItem(`nexaboard_call_${id}`) === 'true')
@@ -144,6 +146,11 @@ export default function Session({ user }: { user: User }) {
             </button>
           </div>
 
+          <button onClick={() => setWorkOpen(true)}
+            title="Look at what each student is working on"
+            className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
+            <PenSquare size={12} /> Student Work
+          </button>
           <button onClick={() => setAskOpen(true)}
             title="Ask the class a question and see their answers"
             className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
@@ -220,6 +227,8 @@ export default function Session({ user }: { user: User }) {
           )}
         </div>
       </div>
+
+      {workOpen && <StudentWorkPanel sessionId={id!} onClose={() => setWorkOpen(false)} />}
 
       {askOpen && (
         <ClassQuestion

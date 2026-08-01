@@ -25,6 +25,12 @@ interface Props {
   sessionId: string
   isTeacher: boolean
   canDraw: boolean
+  /**
+   * Set to a student's id to open their personal working board instead of the
+   * class board. Each one is its own realtime channel, so a whole class can work
+   * side by side without treading on the shared board or each other.
+   */
+  boardKey?: string
 }
 
 type Tool = PenTool | 'eraser' | 'pan' | 'text' | 'select' | 'laser' | ShapeKind
@@ -55,7 +61,9 @@ type Action =
   | { kind: 'text'; item: TextItem }
   | { kind: 'move'; ids: string[]; dx: number; dy: number }
 
-export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
+export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: Props) {
+  /** A personal board belongs to one student: no class follow, no lesson save. */
+  const personal = !!boardKey
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
@@ -86,7 +94,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const [showProtractor, setShowProtractor] = useState(false)
   const [showBackgroundMenu, setShowBackgroundMenu] = useState(false)
   const [editingMath, setEditingMath] = useState<MathItem | null>(null)
-  const [following, setFollowing] = useState(!isTeacher)
+  const [following, setFollowing] = useState(!isTeacher && !boardKey)
   const [teacherAbove, setTeacherAbove] = useState(false)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   /** Where other people are pointing, keyed by who. Never saved. */
@@ -128,13 +136,19 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const moveTotal = useRef({ dx: 0, dy: 0 })
   const laserTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
   const lastLaserSent = useRef(0)
+  const lastLaserPoint = useRef<Point | null>(null)
+  const laserHeartbeat = useRef<ReturnType<typeof setInterval> | null>(null)
+  const stopLaserRef = useRef<(() => void) | null>(null)
   const followingRef = useRef(following)
   const teacherScrollTop = useRef(0)
   const lastViewBroadcast = useRef(0)
   useEffect(() => { lockedRef.current = locked }, [locked])
   useEffect(() => { colorRef.current = color }, [color])
   useEffect(() => { sizeRef.current = size }, [size])
-  useEffect(() => { toolRef.current = tool }, [tool])
+  useEffect(() => {
+    toolRef.current = tool
+    if (tool !== 'laser') stopLaserRef.current?.()
+  }, [tool])
   useEffect(() => { boardHeightRef.current = boardHeight }, [boardHeight])
   useEffect(() => { backgroundRef.current = background }, [background])
   useEffect(() => { mathItemsRef.current = mathItems }, [mathItems])
@@ -275,7 +289,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
 
   /** Only the teacher writes, and only after things settle, to keep writes cheap. */
   const scheduleSave = useCallback(() => {
-    if (!isTeacher) return
+    if (!isTeacher || personal) return
     if (saveTimer.current) clearTimeout(saveTimer.current)
     setSaveState('saving')
     saveTimer.current = setTimeout(() => {
@@ -287,7 +301,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
           setSaveError(err instanceof Error ? err.message : String(err))
         })
     }, 2500)
-  }, [isTeacher, sessionId, snapshot])
+  }, [isTeacher, personal, sessionId, snapshot])
 
   useEffect(() => () => { if (saveTimer.current) clearTimeout(saveTimer.current) }, [])
 
@@ -303,7 +317,13 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const [loaded, setLoaded] = useState(false)
   useEffect(() => {
     let cancelled = false
-    loadLesson(sessionId).then(lesson => {
+    // A personal board starts blank and lives only for the lesson, so there is
+    // nothing to fetch. Both paths settle asynchronously so neither sets state
+    // straight from the effect body.
+    const source = personal
+      ? Promise.resolve(null)
+      : loadLesson(sessionId)
+    source.then(lesson => {
       if (cancelled) return
       const board = lesson?.board ? parseBoardState(lesson.board) : emptyBoard()
       setPages(board.pages)
@@ -318,33 +338,65 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       setLoaded(true)
     })
     return () => { cancelled = true }
-  }, [sessionId, openPage])
+  }, [sessionId, personal, openPage])
 
   // ── Laser pointer ───────────────────────────────────────────────────────────
-  const showLaser = useCallback((who: string, dot: { x: number; y: number; color: string } | null) => {
+  const showLaser = useCallback((
+    who: string,
+    dot: { x: number; y: number; color: string } | null,
+    hold = false,
+  ) => {
     setLaserDots(prev => {
       if (!dot) { const next = { ...prev }; delete next[who]; return next }
       return { ...prev, [who]: dot }
     })
     clearTimeout(laserTimers.current[who])
-    if (dot) {
+    // Your own dot stays put for as long as you are pointing. Only dots arriving
+    // over the wire time out, in case the sender disconnects mid-point.
+    if (dot && !hold) {
       laserTimers.current[who] = setTimeout(() => {
         setLaserDots(prev => { const next = { ...prev }; delete next[who]; return next })
-      }, 1200)
+      }, 2000)
     }
   }, [])
 
-  const pointLaser = (point: Point) => {
-    showLaser(myId, { x: point.x, y: point.y, color: colorRef.current })
-    // eslint-disable-next-line react-hooks/purity -- pointer handler, not render
-    const now = Date.now()
-    if (now - lastLaserSent.current < 50) return
-    lastLaserSent.current = now
+  const sendLaser = (point: Point) => {
     channelRef.current?.send({
       type: 'broadcast', event: 'wb_laser',
       payload: { by: myId, x: point.x, y: point.y, color: colorRef.current },
     })
   }
+
+  const pointLaser = (point: Point) => {
+    showLaser(myId, { x: point.x, y: point.y, color: colorRef.current }, true)
+    lastLaserPoint.current = point
+    // eslint-disable-next-line react-hooks/purity -- pointer handler, not render
+    const now = Date.now()
+    if (now - lastLaserSent.current < 50) return
+    lastLaserSent.current = now
+    sendLaser(point)
+
+    // Resting on one spot sends nothing, so without a heartbeat the class would
+    // watch the dot vanish while it is still being pointed at.
+    if (laserHeartbeat.current) return
+    laserHeartbeat.current = setInterval(() => {
+      if (lastLaserPoint.current) sendLaser(lastLaserPoint.current)
+    }, 700)
+  }
+
+  /** Stop pointing: clear locally and tell everyone else at once. */
+  const stopLaser = useCallback(() => {
+    if (laserHeartbeat.current) {
+      clearInterval(laserHeartbeat.current)
+      laserHeartbeat.current = null
+    }
+    lastLaserPoint.current = null
+    showLaser(myId, null)
+    channelRef.current?.send({ type: 'broadcast', event: 'wb_laser', payload: { by: myId, off: true } })
+  }, [myId, showLaser])
+
+  useEffect(() => { stopLaserRef.current = stopLaser }, [stopLaser])
+  useEffect(() => () => { if (laserHeartbeat.current) clearInterval(laserHeartbeat.current) }, [])
 
   // ── Live sync ───────────────────────────────────────────────────────────────
   const scrollToTeacher = useCallback(() => {
@@ -357,6 +409,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     Math.max(0, Math.min(teacherScrollTop.current, el.scrollHeight - el.clientHeight))
 
   const onScroll = useCallback(() => {
+    if (personal) return
     const el = containerRef.current
     if (isTeacher) {
       const now = Date.now()
@@ -375,12 +428,12 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     }
     if (followingRef.current) setFollowing(false)
     setTeacherAbove(followTarget(el) < el.scrollTop)
-  }, [isTeacher])
+  }, [isTeacher, personal])
 
   useEffect(() => {
     if (!loaded) return
     const channel = supabase
-      .channel(`whiteboard:${sessionId}`)
+      .channel(personal ? `personal:${sessionId}:${boardKey}` : `whiteboard:${sessionId}`)
       // A stroke begins: everyone gets the opening points straight away.
       .on('broadcast', { event: 'wb_stroke_add' }, ({ payload }) => {
         if (payload.stroke.by === myId) return
@@ -404,6 +457,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       })
       .on('broadcast', { event: 'wb_laser' }, ({ payload }) => {
         if (payload.by === myId) return
+        if (payload.off) { showLaser(payload.by, null); return }
         showLaser(payload.by, { x: payload.x, y: payload.y, color: payload.color })
       })
       .on('broadcast', { event: 'wb_remove' }, ({ payload }) => {
@@ -470,7 +524,11 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         textItemsRef.current = payload.items ?? []
       })
       .on('broadcast', { event: 'wb_sync_req' }, () => {
-        if (!isTeacher) return
+        // Whoever owns the board answers: the teacher on the class board, and the
+        // student on their own working board. Otherwise a teacher opening a
+        // student's board mid-lesson would find it blank.
+        const owner = personal ? canDraw : isTeacher
+        if (!owner) return
         channel.send({ type: 'broadcast', event: 'wb_snapshot', payload: { board: snapshot() } })
         channel.send({
           type: 'broadcast', event: 'wb_view',
@@ -484,7 +542,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       })
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
-  }, [sessionId, loaded, isTeacher, myId, redraw, snapshot, scrollToTeacher, openPage, showLaser])
+  }, [sessionId, personal, boardKey, canDraw, loaded, isTeacher, myId, redraw, snapshot, scrollToTeacher, openPage, showLaser])
 
   // ── Text on the board ───────────────────────────────────────────────────────
   const commitText = (items: TextItem[], record?: TextItem) => {
@@ -745,6 +803,9 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     beginStroke(point)
   }
   const onMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    // The laser tracks the cursor the moment it is chosen: needing to hold the
+    // button down made it feel like nothing was happening.
+    if (toolRef.current === 'laser' && !locked) { pointLaser(toBoard(e.clientX, e.clientY)); return }
     if (!isDrawing.current || locked) return
     const point = toBoard(e.clientX, e.clientY)
     if (toolRef.current === 'laser') { pointLaser(point); return }
@@ -1281,7 +1342,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         <span className="ml-auto text-[10px] text-[#9ca3af] shrink-0 hidden md:block">
           {pages.length} {pages.length === 1 ? 'page' : 'pages'} in this lesson
         </span>
-        {isTeacher && saveState !== 'idle' && (
+        {isTeacher && !personal && saveState !== 'idle' && (
           <span
             title={saveError ?? (saveState === 'saved' ? 'This lesson is stored and will survive a refresh' : undefined)}
             className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold shrink-0 border ${
@@ -1307,7 +1368,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
             onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
             onMouseUp={onMouseUp}
-            onMouseLeave={onMouseUp}
+            onMouseLeave={() => { if (toolRef.current === 'laser') stopLaser(); onMouseUp() }}
             style={{
               position: 'absolute', top: 0, left: 0,
               touchAction: locked || tool === 'pan' ? 'pan-y' : 'none',
@@ -1383,7 +1444,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         </div>
       )}
 
-      {!isTeacher && !following && (
+      {!isTeacher && !personal && !following && (
         <button
           onClick={() => { setFollowing(true); followingRef.current = true; scrollToTeacher() }}
           title="Back to what the teacher is writing"
@@ -1392,7 +1453,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         </button>
       )}
 
-      {isTeacher && (
+      {(isTeacher || personal) && (
         <button onClick={scrollDown} title="Scroll down"
           className="absolute bottom-4 right-4 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-white border border-green-200 text-[#6b7280] shadow-md hover:bg-[#f3fcf0] hover:text-[#1b2b4b] transition-colors">
           <ChevronDown size={16} />
