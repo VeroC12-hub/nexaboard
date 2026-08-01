@@ -529,12 +529,21 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   // Notes are saved to the lesson row as well as localStorage, so they survive a
   // refresh on any device and absent students can read them afterwards.
   const notesSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const notesSaveWarned = useRef(false)
   const scheduleNotesSave = useCallback((content: object) => {
     if (!isTeacher) return
     if (notesSaveTimer.current) clearTimeout(notesSaveTimer.current)
     notesSaveTimer.current = setTimeout(() => {
       saveLessonSlice(sessionId, { notes: content }).catch(err => {
         console.error('Could not save the notes:', err)
+        // Say so once. Silently losing a lesson is far worse than one warning.
+        if (!notesSaveWarned.current) {
+          notesSaveWarned.current = true
+          toast.error(
+            `These notes are not being saved. ${err instanceof Error ? err.message : ''}`,
+            { duration: 8000 },
+          )
+        }
       })
     }, 2500)
   }, [isTeacher, sessionId])

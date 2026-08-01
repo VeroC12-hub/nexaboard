@@ -155,20 +155,40 @@ export async function loadLesson(sessionId: string): Promise<LessonState | null>
   return data.whiteboard_state as LessonState
 }
 
+/** Thrown when a save is accepted by the API but changes nothing. */
+export class NotSavedError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'NotSavedError'
+  }
+}
+
 /**
  * Merge one slice of the lesson into the stored blob. Read-modify-write is fine
  * here: only the teacher's client ever saves.
+ *
+ * The `select` matters. A blocked update returns success with zero rows and no
+ * error, so without asking for the affected row back there is no way to tell a
+ * real save from a silent no-op, and the lesson would look saved when it was
+ * never written.
  */
 export async function saveLessonSlice(
   sessionId: string,
   slice: Partial<LessonState>,
 ): Promise<void> {
   const current = (await loadLesson(sessionId)) ?? {}
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from('sessions')
     .update({ whiteboard_state: { ...current, ...slice } })
     .eq('id', sessionId)
+    .select('id')
+
   if (error) throw error
+  if (!data || data.length === 0) {
+    throw new NotSavedError(
+      'The lesson was not written. The session may have ended, or you may not be signed in as its teacher.',
+    )
+  }
 }
 
 // ── Drawing ───────────────────────────────────────────────────────────────────

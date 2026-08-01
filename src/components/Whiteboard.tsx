@@ -4,6 +4,7 @@ import {
   Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, ChevronUp,
   LineChart, BarChart2, ImageIcon, Undo2, Redo2, Minus as LineIcon, ArrowRight,
   Square, Circle, Grid3x3, Compass, Type, Highlighter, Files, MousePointer2, Crosshair,
+  Check, AlertTriangle,
 } from 'lucide-react'
 import MathModal from './MathModal'
 import GraphModal from './GraphModal'
@@ -93,6 +94,9 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const [readout, setReadout] = useState<string | null>(null)
   const [canUndo, setCanUndo] = useState(false)
   const [canRedo, setCanRedo] = useState(false)
+  /** What the teacher is told about whether this lesson is actually being stored. */
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'failed'>('idle')
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   const locked = !isTeacher && !canDraw
   const myId = useMemo(() => (isTeacher ? 'teacher' : `s-${crypto.randomUUID().slice(0, 8)}`), [isTeacher])
@@ -273,14 +277,26 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const scheduleSave = useCallback(() => {
     if (!isTeacher) return
     if (saveTimer.current) clearTimeout(saveTimer.current)
+    setSaveState('saving')
     saveTimer.current = setTimeout(() => {
-      saveLessonSlice(sessionId, { board: snapshot() }).catch(err => {
-        console.error('Could not save the board:', err)
-      })
+      saveLessonSlice(sessionId, { board: snapshot() })
+        .then(() => { setSaveState('saved'); setSaveError(null) })
+        .catch(err => {
+          console.error('Could not save the board:', err)
+          setSaveState('failed')
+          setSaveError(err instanceof Error ? err.message : String(err))
+        })
     }, 2500)
   }, [isTeacher, sessionId, snapshot])
 
   useEffect(() => () => { if (saveTimer.current) clearTimeout(saveTimer.current) }, [])
+
+  const warnedRef = useRef(false)
+  useEffect(() => {
+    if (saveState !== 'failed' || warnedRef.current) return
+    warnedRef.current = true
+    toast.error(`This lesson is not being saved. ${saveError ?? ''}`, { duration: 8000 })
+  }, [saveState, saveError])
 
   // Load whatever was saved before anyone joins the live channel, so a refresh or
   // a late arrival still sees the lesson.
@@ -1262,9 +1278,26 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
             <Plus size={12} /> New page
           </button>
         )}
-        <span className="ml-auto text-[10px] text-[#9ca3af] shrink-0 hidden sm:block">
+        <span className="ml-auto text-[10px] text-[#9ca3af] shrink-0 hidden md:block">
           {pages.length} {pages.length === 1 ? 'page' : 'pages'} in this lesson
         </span>
+        {isTeacher && saveState !== 'idle' && (
+          <span
+            title={saveError ?? (saveState === 'saved' ? 'This lesson is stored and will survive a refresh' : undefined)}
+            className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold shrink-0 border ${
+              saveState === 'failed'
+                ? 'bg-red-50 text-red-600 border-red-200'
+                : saveState === 'saved'
+                  ? 'bg-[#f3fcf0] text-[#5ab82e] border-green-200'
+                  : 'bg-white text-[#9ca3af] border-green-200'
+            }`}>
+            {saveState === 'failed'
+              ? <><AlertTriangle size={10} /> Not saving</>
+              : saveState === 'saved'
+                ? <><Check size={10} /> Saved</>
+                : 'Saving…'}
+          </span>
+        )}
       </div>
 
       <div ref={containerRef} onScroll={onScroll} className="flex-1 overflow-y-auto overflow-x-hidden bg-white">
