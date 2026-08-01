@@ -13,7 +13,7 @@ export const GROW_STEP = 700
 export const GROW_MARGIN = 280
 
 export type Point = { x: number; y: number }
-export type PenTool = 'pen' | 'eraser'
+export type PenTool = 'pen' | 'highlighter'
 export type ShapeKind = 'line' | 'arrow' | 'rect' | 'circle'
 
 export interface Stroke {
@@ -46,45 +46,93 @@ export interface ImageItem {
   width: number
 }
 
+export interface TextItem {
+  id: string
+  by: string
+  text: string
+  x: number
+  y: number
+  /** Font size in board units. */
+  size: number
+  color: string
+  bold: boolean
+}
+
 export type Background = 'plain' | 'grid' | 'graph' | 'lined'
 
-export interface BoardState {
-  version: 2
+/** One board. A lesson holds several, so filling one does not destroy the last. */
+export interface BoardPage {
+  id: string
+  name: string
   strokes: Stroke[]
   mathItems: MathItem[]
   imageItems: ImageItem[]
+  textItems: TextItem[]
   boardHeight: number
   background: Background
 }
 
-export const emptyBoard = (): BoardState => ({
-  version: 2,
+export interface BoardState {
+  version: 3
+  pages: BoardPage[]
+  activePageId: string
+}
+
+export const emptyPage = (name = 'Page 1'): BoardPage => ({
+  id: crypto.randomUUID(),
+  name,
   strokes: [],
   mathItems: [],
   imageItems: [],
+  textItems: [],
   boardHeight: DEFAULT_BOARD_HEIGHT,
   background: 'plain',
 })
 
-/**
- * Accept whatever is in the database. Anything without a version is from before
- * board units existed, and its pixel coordinates would be meaningless now, so it
- * is dropped rather than drawn in the wrong place.
- */
-export function parseBoardState(raw: unknown): BoardState {
-  const base = emptyBoard()
-  if (!raw || typeof raw !== 'object') return base
-  const value = raw as Partial<BoardState>
-  if (value.version !== 2) return base
+export const emptyBoard = (): BoardState => {
+  const page = emptyPage()
+  return { version: 3, pages: [page], activePageId: page.id }
+}
+
+/** Fill in anything a stored page is missing, so older saves still open. */
+function normalisePage(raw: Partial<BoardPage>, index: number): BoardPage {
   return {
-    version: 2,
-    strokes: Array.isArray(value.strokes) ? value.strokes : [],
-    mathItems: Array.isArray(value.mathItems) ? value.mathItems : [],
-    imageItems: Array.isArray(value.imageItems) ? value.imageItems : [],
-    boardHeight: typeof value.boardHeight === 'number' ? value.boardHeight : DEFAULT_BOARD_HEIGHT,
-    background: value.background ?? 'plain',
+    id: raw.id ?? crypto.randomUUID(),
+    name: raw.name ?? `Page ${index + 1}`,
+    strokes: Array.isArray(raw.strokes) ? raw.strokes : [],
+    mathItems: Array.isArray(raw.mathItems) ? raw.mathItems : [],
+    imageItems: Array.isArray(raw.imageItems) ? raw.imageItems : [],
+    textItems: Array.isArray(raw.textItems) ? raw.textItems : [],
+    boardHeight: typeof raw.boardHeight === 'number' ? raw.boardHeight : DEFAULT_BOARD_HEIGHT,
+    background: raw.background ?? 'plain',
   }
 }
+
+/**
+ * Accept whatever is in the database. Version 2 was a single board and becomes
+ * page one. Anything older used raw pixel coordinates that would render in the
+ * wrong place, so it is dropped rather than shown wrongly.
+ */
+export function parseBoardState(raw: unknown): BoardState {
+  if (!raw || typeof raw !== 'object') return emptyBoard()
+  const value = raw as { version?: number; pages?: Partial<BoardPage>[]; activePageId?: string } & Partial<BoardPage>
+
+  if (value.version === 3 && Array.isArray(value.pages) && value.pages.length) {
+    const pages = value.pages.map((p, i) => normalisePage(p, i))
+    const active = pages.some(p => p.id === value.activePageId) ? value.activePageId! : pages[0].id
+    return { version: 3, pages, activePageId: active }
+  }
+
+  if (value.version === 2) {
+    const page = normalisePage({ ...value, name: 'Page 1' }, 0)
+    return { version: 3, pages: [page], activePageId: page.id }
+  }
+
+  return emptyBoard()
+}
+
+export const activePage = (state: BoardState): BoardPage =>
+  state.pages.find(p => p.id === state.activePageId) ?? state.pages[0]
 
 // ── Persistence ───────────────────────────────────────────────────────────────
 // Board and notes share the existing `sessions.whiteboard_state` jsonb column, so
@@ -175,12 +223,13 @@ export function drawStroke(ctx: CanvasRenderingContext2D, stroke: Stroke, scale:
   ctx.lineWidth = Math.max(0.5, stroke.width * scale)
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
-  if (stroke.tool === 'eraser') {
-    ctx.globalCompositeOperation = 'destination-out'
-    ctx.strokeStyle = 'rgba(0,0,0,1)'
-  } else {
-    ctx.globalCompositeOperation = 'source-over'
-    ctx.strokeStyle = stroke.color
+  ctx.globalCompositeOperation = 'source-over'
+  ctx.strokeStyle = stroke.color
+  // A highlighter lays down translucent ink so the work underneath still reads.
+  if (stroke.tool === 'highlighter') {
+    ctx.globalAlpha = 0.35
+    ctx.lineWidth = Math.max(0.5, stroke.width * scale * 3)
+    ctx.lineCap = 'butt'
   }
 
   const x = (i: number) => p[i].x * scale
@@ -227,6 +276,89 @@ export function drawStroke(ctx: CanvasRenderingContext2D, stroke: Stroke, scale:
     }
   }
   ctx.restore()
+}
+
+// ── Hit testing ───────────────────────────────────────────────────────────────
+
+/** Shortest distance from a point to a line segment, in board units. */
+function distanceToSegment(p: Point, a: Point, b: Point): number {
+  const dx = b.x - a.x
+  const dy = b.y - a.y
+  const lengthSq = dx * dx + dy * dy
+  if (lengthSq === 0) return Math.hypot(p.x - a.x, p.y - a.y)
+  let t = ((p.x - a.x) * dx + (p.y - a.y) * dy) / lengthSq
+  t = Math.max(0, Math.min(1, t))
+  return Math.hypot(p.x - (a.x + t * dx), p.y - (a.y + t * dy))
+}
+
+/**
+ * Is this point close enough to the stroke to count as touching it? Used by the
+ * eraser and by tap-to-select, so both behave the same way.
+ */
+export function strokeHitsPoint(stroke: Stroke, point: Point, tolerance: number): boolean {
+  const reach = tolerance + stroke.width / 2
+  const p = stroke.points
+  if (!p.length) return false
+  if (p.length === 1) return Math.hypot(point.x - p[0].x, point.y - p[0].y) <= reach
+
+  if (stroke.shape === 'rect') {
+    const [a, b] = p
+    const left = Math.min(a.x, b.x), right = Math.max(a.x, b.x)
+    const top = Math.min(a.y, b.y), bottom = Math.max(a.y, b.y)
+    const corners: Point[] = [
+      { x: left, y: top }, { x: right, y: top }, { x: right, y: bottom }, { x: left, y: bottom },
+    ]
+    for (let i = 0; i < 4; i++) {
+      if (distanceToSegment(point, corners[i], corners[(i + 1) % 4]) <= reach) return true
+    }
+    return false
+  }
+
+  if (stroke.shape === 'circle') {
+    const radius = Math.hypot(p[1].x - p[0].x, p[1].y - p[0].y)
+    return Math.abs(Math.hypot(point.x - p[0].x, point.y - p[0].y) - radius) <= reach
+  }
+
+  for (let i = 1; i < p.length; i++) {
+    if (distanceToSegment(point, p[i - 1], p[i]) <= reach) return true
+  }
+  return false
+}
+
+/** Bounding box of a stroke, for drawing selection handles. */
+export function strokeBounds(stroke: Stroke): { x: number; y: number; w: number; h: number } {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity
+  const consider = (x: number, y: number) => {
+    if (x < minX) minX = x
+    if (x > maxX) maxX = x
+    if (y < minY) minY = y
+    if (y > maxY) maxY = y
+  }
+  if (stroke.shape === 'circle' && stroke.points.length > 1) {
+    const r = Math.hypot(stroke.points[1].x - stroke.points[0].x, stroke.points[1].y - stroke.points[0].y)
+    consider(stroke.points[0].x - r, stroke.points[0].y - r)
+    consider(stroke.points[0].x + r, stroke.points[0].y + r)
+  } else {
+    for (const p of stroke.points) consider(p.x, p.y)
+  }
+  const pad = stroke.width
+  return { x: minX - pad, y: minY - pad, w: maxX - minX + pad * 2, h: maxY - minY + pad * 2 }
+}
+
+/** Move every point of a stroke, used when dragging a selection. */
+export function translateStroke(stroke: Stroke, dx: number, dy: number): Stroke {
+  return { ...stroke, points: stroke.points.map(p => ({ x: p.x + dx, y: p.y + dy })) }
+}
+
+/** Snap a dragged shape to horizontal, vertical or 45 degrees. */
+export function constrainPoint(from: Point, to: Point): Point {
+  const dx = to.x - from.x
+  const dy = to.y - from.y
+  const angle = Math.atan2(dy, dx)
+  const step = Math.PI / 4
+  const snapped = Math.round(angle / step) * step
+  const length = Math.hypot(dx, dy)
+  return { x: from.x + length * Math.cos(snapped), y: from.y + length * Math.sin(snapped) }
 }
 
 /** Length and angle readout shown while a shape is being dragged out. */

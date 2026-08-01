@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import {
   Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, ChevronUp,
   LineChart, BarChart2, ImageIcon, Undo2, Redo2, Minus as LineIcon, ArrowRight,
-  Square, Circle, Grid3x3, Compass,
+  Square, Circle, Grid3x3, Compass, Type, Highlighter, Files,
 } from 'lucide-react'
 import MathModal from './MathModal'
 import GraphModal from './GraphModal'
@@ -13,9 +13,10 @@ import { renderMath } from '../lib/math'
 import {
   BOARD_WIDTH, GROW_STEP, GROW_MARGIN, DEFAULT_BOARD_HEIGHT,
   drawBackground, drawStroke, shapeReadout, loadLesson, saveLessonSlice,
-  parseBoardState, emptyBoard,
+  parseBoardState, emptyBoard, emptyPage, activePage,
+  strokeHitsPoint, constrainPoint,
   type Point, type Stroke, type MathItem, type ImageItem, type Background,
-  type ShapeKind, type PenTool, type BoardState,
+  type ShapeKind, type PenTool, type BoardState, type BoardPage, type TextItem,
 } from '../lib/board'
 import toast from 'react-hot-toast'
 
@@ -25,7 +26,7 @@ interface Props {
   canDraw: boolean
 }
 
-type Tool = PenTool | 'pan' | ShapeKind
+type Tool = PenTool | 'eraser' | 'pan' | 'text' | ShapeKind
 
 const COLORS = ['#1b2b4b', '#ef4444', '#3b82f6', '#5ab82e', '#f59e0b', '#8b5cf6', '#000000']
 const SIZES = [2, 5, 12]
@@ -47,8 +48,10 @@ const BACKGROUNDS: [Background, string][] = [
 /** One undoable thing this user did. */
 type Action =
   | { kind: 'stroke'; id: string }
+  | { kind: 'erase'; id: string }
   | { kind: 'math'; item: MathItem }
   | { kind: 'image'; item: ImageItem }
+  | { kind: 'text'; item: TextItem }
 
 export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -70,6 +73,11 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const [background, setBackground] = useState<Background>('plain')
   const [mathItems, setMathItems] = useState<MathItem[]>([])
   const [imageItems, setImageItems] = useState<ImageItem[]>([])
+  const [textItems, setTextItems] = useState<TextItem[]>([])
+  /** Every page in the lesson. The one being drawn on is held in the state above. */
+  const [pages, setPages] = useState<BoardPage[]>([])
+  const [activePageId, setActivePageId] = useState('')
+  const [editingText, setEditingText] = useState<string | null>(null)
   const [showMathModal, setShowMathModal] = useState(false)
   const [showGraphModal, setShowGraphModal] = useState(false)
   const [showChartModal, setShowChartModal] = useState(false)
@@ -102,6 +110,9 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const backgroundRef = useRef(background)
   const mathItemsRef = useRef(mathItems)
   const imageItemsRef = useRef(imageItems)
+  const textItemsRef = useRef(textItems)
+  const pagesRef = useRef(pages)
+  const activePageIdRef = useRef(activePageId)
   const followingRef = useRef(following)
   const teacherScrollTop = useRef(0)
   const lastViewBroadcast = useRef(0)
@@ -113,6 +124,9 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   useEffect(() => { backgroundRef.current = background }, [background])
   useEffect(() => { mathItemsRef.current = mathItems }, [mathItems])
   useEffect(() => { imageItemsRef.current = imageItems }, [imageItems])
+  useEffect(() => { textItemsRef.current = textItems }, [textItems])
+  useEffect(() => { pagesRef.current = pages }, [pages])
+  useEffect(() => { activePageIdRef.current = activePageId }, [activePageId])
   useEffect(() => { followingRef.current = following }, [following])
 
   /**
@@ -169,14 +183,49 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
 
   // ── Saving the lesson ───────────────────────────────────────────────────────
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const snapshot = useCallback((): BoardState => ({
-    version: 2,
-    strokes: allStrokes.current,
-    mathItems: mathItemsRef.current,
-    imageItems: imageItemsRef.current,
-    boardHeight: boardHeightRef.current,
-    background: backgroundRef.current,
-  }), [])
+  /** The page currently being drawn on, built from the live working state. */
+  const currentPage = useCallback((): BoardPage => {
+    const existing = pagesRef.current.find(p => p.id === activePageIdRef.current)
+    return {
+      id: activePageIdRef.current,
+      name: existing?.name ?? 'Page 1',
+      strokes: allStrokes.current,
+      mathItems: mathItemsRef.current,
+      imageItems: imageItemsRef.current,
+      textItems: textItemsRef.current,
+      boardHeight: boardHeightRef.current,
+      background: backgroundRef.current,
+    }
+  }, [])
+
+  const snapshot = useCallback((): BoardState => {
+    const live = currentPage()
+    const pages = pagesRef.current.length
+      ? pagesRef.current.map(p => (p.id === live.id ? live : p))
+      : [live]
+    return { version: 3, pages, activePageId: live.id }
+  }, [currentPage])
+
+  /** Replace the working state with a page's contents. */
+  const openPage = useCallback((page: BoardPage) => {
+    allStrokes.current = page.strokes
+    boardHeightRef.current = page.boardHeight
+    backgroundRef.current = page.background
+    mathItemsRef.current = page.mathItems
+    imageItemsRef.current = page.imageItems
+    textItemsRef.current = page.textItems
+    activePageIdRef.current = page.id
+    setMathItems(page.mathItems)
+    setImageItems(page.imageItems)
+    setTextItems(page.textItems)
+    setBoardHeight(page.boardHeight)
+    setBackground(page.background)
+    setActivePageId(page.id)
+    undoStack.current = []
+    redoStack.current = []
+    refreshUndoFlags()
+    requestAnimationFrame(() => fitCanvas())
+  }, [fitCanvas])
 
   /** Only the teacher writes, and only after things settle, to keep writes cheap. */
   const scheduleSave = useCallback(() => {
@@ -199,18 +248,19 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     loadLesson(sessionId).then(lesson => {
       if (cancelled) return
       const board = lesson?.board ? parseBoardState(lesson.board) : emptyBoard()
-      allStrokes.current = board.strokes
-      boardHeightRef.current = board.boardHeight
-      backgroundRef.current = board.background
-      setMathItems(board.mathItems)
-      setImageItems(board.imageItems)
-      setBoardHeight(board.boardHeight)
-      setBackground(board.background)
+      setPages(board.pages)
+      pagesRef.current = board.pages
+      openPage(activePage(board))
       setLoaded(true)
-      fitCanvas()
-    }).catch(() => setLoaded(true))
+    }).catch(() => {
+      const board = emptyBoard()
+      setPages(board.pages)
+      pagesRef.current = board.pages
+      openPage(board.pages[0])
+      setLoaded(true)
+    })
     return () => { cancelled = true }
-  }, [sessionId, fitCanvas])
+  }, [sessionId, openPage])
 
   // ── Live sync ───────────────────────────────────────────────────────────────
   const scrollToTeacher = useCallback(() => {
@@ -310,14 +360,20 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       .on('broadcast', { event: 'wb_snapshot' }, ({ payload }) => {
         // A peer's live state is newer than what came out of the database.
         const board = parseBoardState(payload.board)
-        allStrokes.current = board.strokes
-        boardHeightRef.current = Math.max(board.boardHeight, boardHeightRef.current)
-        backgroundRef.current = board.background
-        setMathItems(board.mathItems)
-        setImageItems(board.imageItems)
-        setBoardHeight(boardHeightRef.current)
-        setBackground(board.background)
-        redraw()
+        setPages(board.pages)
+        pagesRef.current = board.pages
+        openPage(activePage(board))
+      })
+      // The teacher turning to another page takes the class with them.
+      .on('broadcast', { event: 'wb_page' }, ({ payload }) => {
+        const board = parseBoardState(payload.board)
+        setPages(board.pages)
+        pagesRef.current = board.pages
+        openPage(activePage(board))
+      })
+      .on('broadcast', { event: 'wb_text' }, ({ payload }) => {
+        setTextItems(payload.items ?? [])
+        textItemsRef.current = payload.items ?? []
       })
       .on('broadcast', { event: 'wb_sync_req' }, () => {
         if (!isTeacher) return
@@ -334,7 +390,26 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       })
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
-  }, [sessionId, loaded, isTeacher, myId, redraw, snapshot, scrollToTeacher])
+  }, [sessionId, loaded, isTeacher, myId, redraw, snapshot, scrollToTeacher, openPage])
+
+  // ── Text on the board ───────────────────────────────────────────────────────
+  const commitText = (items: TextItem[], record?: TextItem) => {
+    setTextItems(items)
+    textItemsRef.current = items
+    channelRef.current?.send({ type: 'broadcast', event: 'wb_text', payload: { items } })
+    if (record) {
+      undoStack.current.push({ kind: 'text', item: record })
+      redoStack.current = []
+      refreshUndoFlags()
+    }
+    scheduleSave()
+  }
+
+  const updateText = (id: string, patch: Partial<TextItem>) =>
+    commitText(textItemsRef.current.map(t => (t.id === id ? { ...t, ...patch } : t)))
+
+  const deleteText = (id: string) =>
+    commitText(textItemsRef.current.filter(t => t.id !== id))
 
   // ── Drawing input ───────────────────────────────────────────────────────────
   /** Screen position to board units. getBoundingClientRect already allows for scroll. */
@@ -355,7 +430,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       points: [point],
       color: colorRef.current,
       width: sizeRef.current,
-      tool: active === 'eraser' ? 'eraser' : 'pen',
+      tool: active === 'highlighter' ? 'highlighter' : 'pen',
       ...(isShape(active) ? { shape: active } : {}),
     }
     currentStroke.current = stroke
@@ -364,12 +439,13 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     isDrawing.current = true
   }
 
-  const extendStroke = (point: Point) => {
+  const extendStroke = (point: Point, constrain = false) => {
     const stroke = currentStroke.current
     if (!stroke) return
     if (stroke.shape) {
-      // A shape is defined by two points: drag moves the second one.
-      stroke.points[1] = point
+      // A shape is defined by two points: drag moves the second one. Holding
+      // shift snaps it to horizontal, vertical or 45 degrees.
+      stroke.points[1] = constrain ? constrainPoint(stroke.points[0], point) : point
       setReadout(shapeReadout(stroke.shape, stroke.points[0], point))
     } else {
       stroke.points.push(point)
@@ -378,6 +454,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     redraw()
 
     // Freehand streams its new points; shapes are cheap enough to resend whole.
+    // eslint-disable-next-line react-hooks/purity -- pointer handler, not render
     const now = Date.now()
     if (now - lastPointBroadcast.current < 60) return
     lastPointBroadcast.current = now
@@ -437,15 +514,55 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     scheduleSave()
   }
 
+  /**
+   * The eraser lifts whole strokes rather than painting over them. Scrubbing out
+   * pixels used to punch holes in the squared and graph paper, and left an
+   * ever-growing pile of eraser strokes in the saved lesson.
+   */
+  const eraseAt = (point: Point) => {
+    const tolerance = Math.max(6, sizeRef.current * 2)
+    const hit = allStrokes.current.filter(s => strokeHitsPoint(s, point, tolerance))
+    if (!hit.length) return
+    const ids = hit.map(s => s.id)
+    for (const stroke of hit) {
+      undoneStrokes.current.set(stroke.id, stroke)
+      undoStack.current.push({ kind: 'erase', id: stroke.id })
+    }
+    redoStack.current = []
+    refreshUndoFlags()
+    allStrokes.current = allStrokes.current.filter(s => !ids.includes(s.id))
+    channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids } })
+    redraw()
+    scheduleSave()
+  }
+
+  const addTextAt = (point: Point) => {
+    const item: TextItem = {
+      id: crypto.randomUUID(), by: myId, text: '',
+      x: point.x, y: point.y, size: 26, color: colorRef.current, bold: false,
+    }
+    commitText([...textItemsRef.current, item], item)
+    setEditingText(item.id)
+    setTool('pen')
+  }
+
   const onMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (locked || tool === 'pan') return
-    beginStroke(toBoard(e.clientX, e.clientY))
+    const point = toBoard(e.clientX, e.clientY)
+    if (tool === 'text') { addTextAt(point); return }
+    if (tool === 'eraser') { isDrawing.current = true; eraseAt(point); return }
+    beginStroke(point)
   }
   const onMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isDrawing.current || locked) return
-    extendStroke(toBoard(e.clientX, e.clientY))
+    const point = toBoard(e.clientX, e.clientY)
+    if (toolRef.current === 'eraser') { eraseAt(point); return }
+    extendStroke(point, e.shiftKey)
   }
-  const onMouseUp = () => { if (isDrawing.current) endStroke() }
+  const onMouseUp = () => {
+    if (toolRef.current === 'eraser') { isDrawing.current = false; return }
+    if (isDrawing.current) endStroke()
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -453,13 +570,18 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     const onTouchStart = (e: TouchEvent) => {
       if (lockedRef.current || toolRef.current === 'pan' || e.touches.length > 1) return
       e.preventDefault()
-      beginStroke(toBoard(e.touches[0].clientX, e.touches[0].clientY))
+      const sp = toBoard(e.touches[0].clientX, e.touches[0].clientY)
+      if (toolRef.current === 'text') { addTextAt(sp); return }
+      if (toolRef.current === 'eraser') { isDrawing.current = true; eraseAt(sp); return }
+      beginStroke(sp)
     }
     const onTouchMove = (e: TouchEvent) => {
       if (!isDrawing.current || lockedRef.current) return
       if (e.touches.length > 1) { isDrawing.current = false; currentStroke.current = null; return }
       e.preventDefault()
-      extendStroke(toBoard(e.touches[0].clientX, e.touches[0].clientY))
+      const tp = toBoard(e.touches[0].clientX, e.touches[0].clientY)
+      if (toolRef.current === 'eraser') { eraseAt(tp); return }
+      extendStroke(tp)
     }
     const onTouchEnd = () => { if (isDrawing.current) endStroke() }
     canvas.addEventListener('touchstart', onTouchStart, { passive: false })
@@ -484,6 +606,20 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       if (stroke) undoneStrokes.current.set(action.id, stroke)
       channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids: [action.id] } })
       redraw()
+    } else if (action.kind === 'erase') {
+      // Undoing an erase puts the stroke back where it was.
+      const stroke = undoneStrokes.current.get(action.id)
+      if (stroke) {
+        allStrokes.current = [...allStrokes.current, stroke]
+        channelRef.current?.send({ type: 'broadcast', event: 'wb_restore', payload: { by: myId, stroke } })
+        redraw()
+      }
+      redoStack.current.push(action)
+    } else if (action.kind === 'text') {
+      redoStack.current.push(action)
+      const next = textItemsRef.current.filter(t => t.id !== action.item.id)
+      setTextItems(next); textItemsRef.current = next
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_text', payload: { items: next } })
     } else if (action.kind === 'math') {
       redoStack.current.push(action)
       const next = mathItemsRef.current.filter(m => m.id !== action.item.id)
@@ -497,7 +633,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     }
     refreshUndoFlags()
     scheduleSave()
-  }, [redraw, scheduleSave])
+  }, [myId, redraw, scheduleSave])
 
   /** Strokes taken off the board by undo, kept so redo can put them back. */
   const undoneStrokes = useRef(new Map<string, Stroke>())
@@ -513,6 +649,18 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         channelRef.current?.send({ type: 'broadcast', event: 'wb_restore', payload: { by: myId, stroke } })
         redraw()
       }
+      undoStack.current.push(action)
+    } else if (action.kind === 'erase') {
+      const stroke = allStrokes.current.find(s => s.id === action.id)
+      if (stroke) undoneStrokes.current.set(action.id, stroke)
+      allStrokes.current = allStrokes.current.filter(s => s.id !== action.id)
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids: [action.id] } })
+      redraw()
+      undoStack.current.push(action)
+    } else if (action.kind === 'text') {
+      const next = [...textItemsRef.current, action.item]
+      setTextItems(next); textItemsRef.current = next
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_text', payload: { items: next } })
       undoStack.current.push(action)
     } else if (action.kind === 'math') {
       const next = [...mathItemsRef.current, action.item]
@@ -547,6 +695,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     allStrokes.current = []
     setMathItems([]); mathItemsRef.current = []
     setImageItems([]); imageItemsRef.current = []
+    setTextItems([]); textItemsRef.current = []
     undoStack.current = []; redoStack.current = []
     refreshUndoFlags()
     redraw()
@@ -583,6 +732,61 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     const el = containerRef.current
     if (!el) return
     el.scrollTo({ top: el.scrollTop + el.clientHeight * 0.85, behavior: 'smooth' })
+  }
+
+  // ── Pages ───────────────────────────────────────────────────────────────────
+  /** Fold the live working state back into the page list. */
+  const syncPages = useCallback((): BoardPage[] => {
+    const live = currentPage()
+    const next = pagesRef.current.length
+      ? pagesRef.current.map(p => (p.id === live.id ? live : p))
+      : [live]
+    pagesRef.current = next
+    setPages(next)
+    return next
+  }, [currentPage])
+
+  const broadcastPages = (list: BoardPage[], activeId: string) => {
+    channelRef.current?.send({
+      type: 'broadcast', event: 'wb_page',
+      payload: { board: { version: 3, pages: list, activePageId: activeId } },
+    })
+  }
+
+  const goToPage = (id: string) => {
+    if (id === activePageIdRef.current) return
+    const list = syncPages()
+    const target = list.find(p => p.id === id)
+    if (!target) return
+    openPage(target)
+    broadcastPages(list, id)
+    scheduleSave()
+  }
+
+  const addPage = () => {
+    const list = syncPages()
+    const page = emptyPage(`Page ${list.length + 1}`)
+    // A new page keeps the paper you were already using.
+    page.background = backgroundRef.current
+    const next = [...list, page]
+    pagesRef.current = next
+    setPages(next)
+    openPage(page)
+    broadcastPages(next, page.id)
+    scheduleSave()
+  }
+
+  const deletePage = (id: string) => {
+    const list = syncPages()
+    if (list.length <= 1) { toast.error('A lesson needs at least one page'); return }
+    if (!window.confirm('Delete this page for everyone?')) return
+    const index = list.findIndex(p => p.id === id)
+    const next = list.filter(p => p.id !== id)
+    pagesRef.current = next
+    setPages(next)
+    openPage(next[Math.max(0, index - 1)])
+    broadcastPages(next, next[Math.max(0, index - 1)].id)
+    scheduleSave()
   }
 
   // ── Equations ───────────────────────────────────────────────────────────────
@@ -715,7 +919,9 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         <div className="flex items-center gap-2 px-3 py-2 border-b border-green-100 bg-white shrink-0 flex-wrap">
           <div className="flex items-center bg-[#f3fcf0] rounded-lg p-0.5 gap-0.5 border border-green-200">
             {toolButton(tool === 'pen', () => setTool('pen'), 'Pen', <Pencil size={15} />)}
-            {toolButton(tool === 'eraser', () => setTool('eraser'), 'Eraser', <Eraser size={15} />)}
+            {toolButton(tool === 'highlighter', () => setTool('highlighter'), 'Highlighter', <Highlighter size={15} />)}
+            {toolButton(tool === 'eraser', () => setTool('eraser'), 'Eraser: rub over a stroke to lift it', <Eraser size={15} />)}
+            {toolButton(tool === 'text', () => setTool('text'), 'Text: click the board and type', <Type size={15} />)}
             {toolButton(tool === 'pan', () => setTool('pan'), 'Scroll the board with your finger or mouse', <Hand size={15} />)}
           </div>
 
@@ -811,6 +1017,36 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         </div>
       )}
 
+      {/* Pages: fill one board, start the next, and flip back whenever you like */}
+      <div className="flex items-center gap-1.5 px-3 py-1.5 border-b border-green-100 bg-[#f9fef6] shrink-0 overflow-x-auto">
+        <Files size={12} className="text-[#9ca3af] shrink-0" />
+        {pages.map((page, i) => (
+          <button key={page.id} onClick={() => !locked && goToPage(page.id)}
+            title={locked ? page.name : `Go to ${page.name}`}
+            className={`group flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors shrink-0 ${
+              page.id === activePageId
+                ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]'
+                : 'bg-white text-[#6b7280] border-green-200 hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'
+            }`}>
+            {i + 1}
+            {!locked && pages.length > 1 && page.id === activePageId && (
+              <span onClick={e => { e.stopPropagation(); deletePage(page.id) }}
+                title="Delete this page"
+                className="ml-0.5 text-white/60 hover:text-red-300"><X size={11} /></span>
+            )}
+          </button>
+        ))}
+        {!locked && (
+          <button onClick={addPage} title="Start a new page"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-[#5ab82e] bg-white border border-green-200 hover:bg-[#f3fcf0] transition-colors shrink-0">
+            <Plus size={12} /> New page
+          </button>
+        )}
+        <span className="ml-auto text-[10px] text-[#9ca3af] shrink-0 hidden sm:block">
+          {pages.length} {pages.length === 1 ? 'page' : 'pages'} in this lesson
+        </span>
+      </div>
+
       <div ref={containerRef} onScroll={onScroll} className="flex-1 overflow-y-auto overflow-x-hidden bg-white">
         <div className="relative" style={{ height: Math.round(boardHeight * scale) }}>
           <canvas
@@ -831,6 +1067,17 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
               onMove={(x, y) => updateImage(item.id, { x, y })}
               onResize={width => updateImage(item.id, { width })}
               onDelete={() => deleteImage(item.id)} />
+          ))}
+
+          {textItems.map(item => (
+            <BoardText key={item.id} item={item} locked={locked} scale={scale}
+              editing={editingText === item.id}
+              onEdit={() => setEditingText(item.id)}
+              onDone={() => setEditingText(null)}
+              onChange={text => updateText(item.id, { text })}
+              onMove={(x, y) => updateText(item.id, { x, y })}
+              onResize={delta => updateText(item.id, { size: Math.min(90, Math.max(12, item.size + delta)) })}
+              onDelete={() => { setEditingText(null); deleteText(item.id) }} />
           ))}
 
           {mathItems.map(item => (
@@ -892,6 +1139,140 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       {showChartModal && (
         <ChartModal onInsert={dataUrl => { setShowChartModal(false); void placeDataUrl(dataUrl, 'chart') }}
           onClose={() => setShowChartModal(false)} />
+      )}
+    </div>
+  )
+}
+
+// ── Typed text sitting on the board ───────────────────────────────────────────
+
+interface BoardTextProps {
+  item: TextItem
+  locked: boolean
+  scale: number
+  editing: boolean
+  onEdit: () => void
+  onDone: () => void
+  onChange: (text: string) => void
+  onMove: (x: number, y: number) => void
+  onResize: (delta: number) => void
+  onDelete: () => void
+}
+
+function BoardText({
+  item, locked, scale, editing, onEdit, onDone, onChange, onMove, onResize, onDelete,
+}: BoardTextProps) {
+  const dragOffset = useRef<Point | null>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const [dragging, setDragging] = useState(false)
+  /** Set once the box has really had the caret, so a stray blur cannot bin it. */
+  const hasFocused = useRef(false)
+
+  useEffect(() => {
+    if (!editing) return
+    // Focus on the next frame: the click that created this box is still in
+    // flight, and the canvas would otherwise take focus straight back.
+    const id = requestAnimationFrame(() => {
+      const el = inputRef.current
+      if (!el) return
+      el.focus()
+      el.setSelectionRange(el.value.length, el.value.length)
+      hasFocused.current = true
+    })
+    return () => cancelAnimationFrame(id)
+  }, [editing])
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (locked || editing) return
+    if ((e.target as HTMLElement).closest('[data-text-control]')) return
+    e.preventDefault(); e.stopPropagation()
+    const rect = e.currentTarget.getBoundingClientRect()
+    dragOffset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+    setDragging(true)
+  }
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragOffset.current) return
+    const parent = (e.currentTarget as HTMLElement).offsetParent as HTMLElement | null
+    if (!parent) return
+    const rect = parent.getBoundingClientRect()
+    onMove(
+      Math.max(0, (e.clientX - rect.left - dragOffset.current.x) / scale),
+      Math.max(0, (e.clientY - rect.top - dragOffset.current.y) / scale),
+    )
+  }
+
+  const endDrag = (e: React.PointerEvent) => {
+    dragOffset.current = null
+    setDragging(false)
+    ;(e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId)
+  }
+
+  // An empty box the teacher actually typed nothing into was a mis-click, so it
+  // removes itself. A blur before the caret ever arrived is ignored.
+  const finish = () => {
+    if (!hasFocused.current) return
+    if (!item.text.trim()) onDelete()
+    else onDone()
+  }
+
+  const fontSize = item.size * scale
+  const shared: React.CSSProperties = {
+    fontSize,
+    color: item.color,
+    fontWeight: item.bold ? 700 : 400,
+    lineHeight: 1.25,
+    fontFamily: 'Inter, system-ui, sans-serif',
+  }
+
+  return (
+    <div
+      className={`group absolute ${locked ? '' : editing ? '' : 'cursor-move'} ${dragging || editing ? 'z-20' : 'z-10'}`}
+      style={{ left: item.x * scale, top: item.y * scale, touchAction: 'none' }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+      onDoubleClick={() => { if (!locked) onEdit() }}
+    >
+      {editing ? (
+        <textarea
+          ref={inputRef}
+          value={item.text}
+          onChange={e => onChange(e.target.value)}
+          onBlur={finish}
+          onKeyDown={e => {
+            if (e.key === 'Escape') { e.preventDefault(); finish() }
+            // Enter commits; Shift+Enter starts a new line.
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); finish() }
+          }}
+          rows={1}
+          placeholder="Type…"
+          spellCheck={false}
+          className="bg-white/95 border border-[#5ab82e] rounded-lg px-2 py-1 outline-none resize-none shadow-sm min-w-[160px]"
+          style={{ ...shared, width: `${Math.max(160, item.text.length * fontSize * 0.62)}px` }}
+        />
+      ) : (
+        <div
+          className={`px-2 py-1 rounded-lg whitespace-pre-wrap ${locked ? '' : 'hover:bg-[#f3fcf0]/80 hover:ring-1 hover:ring-[#5ab82e]'}`}
+          style={shared}
+        >
+          {item.text}
+        </div>
+      )}
+
+      {!locked && !editing && (
+        <div className="absolute -top-3 right-0 hidden group-hover:flex items-center gap-0.5 bg-white border border-green-200 rounded-lg shadow-sm px-0.5 py-0.5">
+          <button data-text-control onClick={() => onResize(-4)} title="Smaller"
+            className="p-1 text-[#6b7280] hover:text-[#1b2b4b] hover:bg-[#f3fcf0] rounded transition-colors"><Minus size={11} /></button>
+          <button data-text-control onClick={() => onResize(4)} title="Bigger"
+            className="p-1 text-[#6b7280] hover:text-[#1b2b4b] hover:bg-[#f3fcf0] rounded transition-colors"><Plus size={11} /></button>
+          <button data-text-control onClick={onEdit} title="Edit text"
+            className="p-1 text-[#6b7280] hover:text-[#5ab82e] hover:bg-[#f3fcf0] rounded transition-colors"><Pencil size={11} /></button>
+          <button data-text-control onClick={onDelete} title="Remove text"
+            className="p-1 text-[#9ca3af] hover:text-red-500 hover:bg-red-50 rounded transition-colors"><X size={11} /></button>
+        </div>
       )}
     </div>
   )
