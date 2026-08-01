@@ -1,8 +1,11 @@
 import { useEffect, useRef, useCallback, useState, useMemo } from 'react'
 import { supabase } from '../lib/supabase'
-import { Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, ChevronUp } from 'lucide-react'
+import { Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, ChevronUp, LineChart, BarChart2, ImageIcon } from 'lucide-react'
 import MathModal from './MathModal'
+import GraphModal from './GraphModal'
+import ChartModal from './ChartModal'
 import { renderMath } from '../lib/math'
+import toast from 'react-hot-toast'
 
 interface Props {
   sessionId: string
@@ -15,6 +18,8 @@ type Tool = 'pen' | 'eraser' | 'pan'
 type Stroke = { points: Point[]; color: string; width: number; tool: 'pen' | 'eraser' }
 /** An equation placed on the board, positioned in board pixels. */
 type MathItem = { id: string; latex: string; x: number; y: number; scale: number }
+/** A graph, chart or pasted picture placed on the board. */
+type ImageItem = { id: string; src: string; x: number; y: number; width: number }
 
 const COLORS = ['#1b2b4b', '#ef4444', '#3b82f6', '#5ab82e', '#f59e0b', '#8b5cf6', '#000000']
 const SIZES = [2, 5, 12]
@@ -27,6 +32,7 @@ const GROW_MARGIN = 320
 export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const imageInputRef = useRef<HTMLInputElement>(null)
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
   const isDrawing = useRef(false)
   const currentStroke = useRef<Stroke | null>(null)
@@ -38,7 +44,10 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const [tool, setTool] = useState<Tool>('pen')
   const [boardHeight, setBoardHeight] = useState(MIN_BOARD_HEIGHT)
   const [mathItems, setMathItems] = useState<MathItem[]>([])
+  const [imageItems, setImageItems] = useState<ImageItem[]>([])
   const [showMathModal, setShowMathModal] = useState(false)
+  const [showGraphModal, setShowGraphModal] = useState(false)
+  const [showChartModal, setShowChartModal] = useState(false)
   const [editingMath, setEditingMath] = useState<MathItem | null>(null)
   // Students follow the teacher's scroll position until they scroll themselves.
   const [following, setFollowing] = useState(!isTeacher)
@@ -54,6 +63,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const toolRef = useRef(tool)
   const boardHeightRef = useRef(boardHeight)
   const mathItemsRef = useRef(mathItems)
+  const imageItemsRef = useRef(imageItems)
   const followingRef = useRef(following)
   const teacherScrollTop = useRef(0)
   const lastViewBroadcast = useRef(0)
@@ -63,6 +73,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   useEffect(() => { toolRef.current = tool }, [tool])
   useEffect(() => { boardHeightRef.current = boardHeight }, [boardHeight])
   useEffect(() => { mathItemsRef.current = mathItems }, [mathItems])
+  useEffect(() => { imageItemsRef.current = imageItems }, [imageItems])
   useEffect(() => { followingRef.current = following }, [following])
 
   const redraw = useCallback(() => {
@@ -184,6 +195,13 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
           setBoardHeight(payload.boardHeight)
         }
       })
+      .on('broadcast', { event: 'wb_images' }, ({ payload }) => {
+        setImageItems(payload.items ?? [])
+        if (payload.boardHeight && payload.boardHeight > boardHeightRef.current) {
+          boardHeightRef.current = payload.boardHeight
+          setBoardHeight(payload.boardHeight)
+        }
+      })
       .on('broadcast', { event: 'wb_view' }, ({ payload }) => {
         if (isTeacher) return
         if (payload.boardHeight && payload.boardHeight > boardHeightRef.current) {
@@ -202,6 +220,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       .on('broadcast', { event: 'wb_clear' }, () => {
         allStrokes.current = []
         setMathItems([])
+        setImageItems([])
         redraw()
       })
       .on('broadcast', { event: 'wb_sync_req' }, () => {
@@ -215,6 +234,12 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
           channel.send({
             type: 'broadcast', event: 'wb_math',
             payload: { items: mathItemsRef.current, boardHeight: boardHeightRef.current },
+          })
+        }
+        if (imageItemsRef.current.length > 0) {
+          channel.send({
+            type: 'broadcast', event: 'wb_images',
+            payload: { items: imageItemsRef.current, boardHeight: boardHeightRef.current },
           })
         }
         // Land a student who just joined on the part of the board being taught.
@@ -388,8 +413,98 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     commitMath(mathItemsRef.current.filter(m => m.id !== id))
   }
 
+  // ── Graphs, charts and pasted pictures ──────────────────────────────────────
+  const commitImages = (items: ImageItem[]) => {
+    setImageItems(items)
+    imageItemsRef.current = items
+    channelRef.current?.send({
+      type: 'broadcast',
+      event: 'wb_images',
+      payload: { items, boardHeight: boardHeightRef.current },
+    })
+  }
+
+  const placeImage = (src: string, width = 420) => {
+    const el = containerRef.current
+    const top = el?.scrollTop ?? 0
+    // Cascade anything already dropped on this screenful so items do not land
+    // exactly on top of each other.
+    const nearby = imageItemsRef.current.filter(
+      m => m.y > top && m.y < top + (el?.clientHeight ?? 600),
+    ).length
+    commitImages([
+      ...imageItemsRef.current,
+      { id: crypto.randomUUID(), src, x: 60 + nearby * 28, y: top + 70 + nearby * 28, width },
+    ])
+  }
+
+  /**
+   * Board items are broadcast in full on every change, so a base64 picture would
+   * be re-sent on each nudge. Upload it once and share the URL instead, falling
+   * back to inline data only if storage is unavailable.
+   */
+  const uploadAndPlace = useCallback(async (blob: Blob, name: string, fallbackDataUrl?: string) => {
+    const toastId = toast.loading('Adding to board…')
+    try {
+      const ext = (blob.type.split('/')[1] || 'png').replace('+xml', '')
+      const path = `${sessionId}/board-${Date.now()}-${name}.${ext}`
+      const { error } = await supabase.storage.from('session-files')
+        .upload(path, blob, { upsert: true, contentType: blob.type || 'image/png' })
+      if (error) throw error
+      const { data: { publicUrl } } = supabase.storage.from('session-files').getPublicUrl(path)
+      placeImage(publicUrl)
+      toast.success('Added to board', { id: toastId })
+    } catch (err) {
+      if (fallbackDataUrl) {
+        placeImage(fallbackDataUrl)
+        toast.success('Added to board', { id: toastId })
+        return
+      }
+      const msg = err instanceof Error ? err.message : String(err)
+      toast.error(`Could not add image: ${msg}`, { id: toastId })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId])
+
+  const placeDataUrl = async (dataUrl: string, name: string) => {
+    try {
+      const blob = await (await fetch(dataUrl)).blob()
+      await uploadAndPlace(blob, name, dataUrl)
+    } catch {
+      placeImage(dataUrl)
+    }
+  }
+
+  // Paste a graph, chart or screenshot straight onto the board
+  useEffect(() => {
+    if (locked) return
+    const handler = (e: ClipboardEvent) => {
+      const files = Array.from(e.clipboardData?.files ?? []).filter(f => f.type.startsWith('image/'))
+      if (!files.length) return
+      e.preventDefault()
+      files.forEach(file => { void uploadAndPlace(file, 'pasted') })
+    }
+    window.addEventListener('paste', handler)
+    return () => window.removeEventListener('paste', handler)
+  }, [locked, uploadAndPlace])
+
+  const updateImage = (id: string, patch: Partial<ImageItem>) => {
+    commitImages(imageItemsRef.current.map(m => (m.id === id ? { ...m, ...patch } : m)))
+  }
+
+  const deleteImage = (id: string) => {
+    commitImages(imageItemsRef.current.filter(m => m.id !== id))
+  }
+
   return (
     <div className="h-full w-full flex flex-col relative">
+      <input ref={imageInputRef} type="file" accept="image/*" className="hidden"
+        onChange={e => {
+          const file = e.target.files?.[0]
+          e.target.value = ''
+          if (file) void uploadAndPlace(file, 'image')
+        }} />
+
       {/* Toolbar — only for users who can draw */}
       {!locked && (
         <div className="flex items-center gap-2 px-3 py-2 border-b border-green-100 bg-white shrink-0 flex-wrap">
@@ -457,6 +572,30 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
           </button>
 
           <button
+            onClick={() => setShowGraphModal(true)}
+            title="Plot a function such as y = x² or y = sin(x)"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors"
+          >
+            <LineChart size={13} /> Graph
+          </button>
+
+          <button
+            onClick={() => setShowChartModal(true)}
+            title="Build a bar, line or pie chart from data"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors"
+          >
+            <BarChart2 size={13} /> Chart
+          </button>
+
+          <button
+            onClick={() => imageInputRef.current?.click()}
+            title="Put a picture on the board. You can also just paste one with Ctrl+V"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors"
+          >
+            <ImageIcon size={13} /> Image
+          </button>
+
+          <button
             onClick={addSpace}
             title="Add more space at the bottom of the board"
             className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#6b7280] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] hover:text-[#1b2b4b] transition-colors"
@@ -499,6 +638,17 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
               cursor: locked ? 'default' : tool === 'pan' ? 'grab' : tool === 'eraser' ? 'cell' : 'crosshair',
             }}
           />
+
+          {imageItems.map(item => (
+            <BoardImage
+              key={item.id}
+              item={item}
+              locked={locked}
+              onMove={(x, y) => updateImage(item.id, { x, y })}
+              onResize={width => updateImage(item.id, { width })}
+              onDelete={() => deleteImage(item.id)}
+            />
+          ))}
 
           {mathItems.map(item => (
             <BoardEquation
@@ -553,6 +703,20 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         />
       )}
 
+      {showGraphModal && (
+        <GraphModal
+          onInsert={dataUrl => { setShowGraphModal(false); void placeDataUrl(dataUrl, 'graph') }}
+          onClose={() => setShowGraphModal(false)}
+        />
+      )}
+
+      {showChartModal && (
+        <ChartModal
+          onInsert={dataUrl => { setShowChartModal(false); void placeDataUrl(dataUrl, 'chart') }}
+          onClose={() => setShowChartModal(false)}
+        />
+      )}
+
       {editingMath && (
         <MathModal
           initialLatex={editingMath.latex}
@@ -561,6 +725,93 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
           onDelete={() => { deleteMath(editingMath.id); setEditingMath(null) }}
           onClose={() => setEditingMath(null)}
         />
+      )}
+    </div>
+  )
+}
+
+// ── A graph, chart or picture sitting on the board ────────────────────────────
+
+interface BoardImageProps {
+  item: ImageItem
+  locked: boolean
+  onMove: (x: number, y: number) => void
+  onResize: (width: number) => void
+  onDelete: () => void
+}
+
+function BoardImage({ item, locked, onMove, onResize, onDelete }: BoardImageProps) {
+  const dragOffset = useRef<Point | null>(null)
+  const resizeStart = useRef<{ x: number; width: number } | null>(null)
+  const [active, setActive] = useState(false)
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (locked) return
+    if ((e.target as HTMLElement).closest('[data-img-control]')) return
+    e.preventDefault()
+    e.stopPropagation()
+    const rect = e.currentTarget.getBoundingClientRect()
+    dragOffset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+    setActive(true)
+  }
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (resizeStart.current) {
+      onResize(Math.max(80, resizeStart.current.width + (e.clientX - resizeStart.current.x)))
+      return
+    }
+    if (!dragOffset.current) return
+    const parent = (e.currentTarget as HTMLElement).offsetParent as HTMLElement | null
+    if (!parent) return
+    const parentRect = parent.getBoundingClientRect()
+    onMove(
+      Math.max(0, e.clientX - parentRect.left - dragOffset.current.x),
+      Math.max(0, e.clientY - parentRect.top - dragOffset.current.y),
+    )
+  }
+
+  const endDrag = (e: React.PointerEvent) => {
+    dragOffset.current = null
+    resizeStart.current = null
+    setActive(false)
+    ;(e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId)
+  }
+
+  const startResize = (e: React.PointerEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    resizeStart.current = { x: e.clientX, width: item.width }
+    ;(e.currentTarget.parentElement as HTMLElement)?.setPointerCapture?.(e.pointerId)
+    setActive(true)
+  }
+
+  return (
+    <div
+      className={`group absolute select-none ${locked ? '' : 'cursor-move'} ${active ? 'z-20' : 'z-10'}`}
+      style={{ left: item.x, top: item.y, width: item.width, touchAction: 'none' }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+    >
+      <img
+        src={item.src}
+        alt=""
+        draggable={false}
+        className={`w-full h-auto rounded-lg bg-white shadow-sm ${locked ? '' : 'group-hover:ring-2 group-hover:ring-[#5ab82e]'}`}
+      />
+
+      {!locked && (
+        <>
+          <button data-img-control onClick={onDelete} title="Remove from board"
+            className="absolute -top-2 -right-2 hidden group-hover:flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-200 text-[#9ca3af] hover:text-red-500 shadow-sm transition-colors">
+            <X size={12} />
+          </button>
+          {/* Drag this corner to resize */}
+          <div data-img-control onPointerDown={startResize} title="Drag to resize"
+            className="absolute -bottom-1.5 -right-1.5 hidden group-hover:block w-4 h-4 rounded-sm bg-[#5ab82e] border-2 border-white shadow cursor-nwse-resize" />
+        </>
       )}
     </div>
   )

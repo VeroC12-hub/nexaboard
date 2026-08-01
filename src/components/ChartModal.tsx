@@ -2,10 +2,16 @@ import { useState, useRef, useEffect } from 'react'
 import {
   Chart, CategoryScale, LinearScale, BarElement, LineElement,
   PointElement, ArcElement, Title, Tooltip, Legend,
+  BarController, LineController, PieController,
 } from 'chart.js'
 import { Plus, Trash2, X, BarChart2, LineChart, PieChart } from 'lucide-react'
 
-Chart.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, ArcElement, Title, Tooltip, Legend)
+// The controllers matter as much as the elements: without them Chart.js throws
+// "bar is not a registered controller" the moment a chart is built.
+Chart.register(
+  CategoryScale, LinearScale, BarElement, LineElement, PointElement, ArcElement,
+  BarController, LineController, PieController, Title, Tooltip, Legend,
+)
 
 interface Props {
   onInsert: (dataUrl: string) => void

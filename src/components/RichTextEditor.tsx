@@ -18,6 +18,7 @@ import ChartModal from './ChartModal'
 import DrawingModal from './DrawingModal'
 import CadViewer from './CadViewer'
 import DxfViewer from './DxfViewer'
+import GraphModal from './GraphModal'
 import MathModal from './MathModal'
 import { MathInline, MathBlock, MathTrailingParagraph } from './MathNodes'
 import type { MathEditDetail } from '../lib/math'
@@ -28,7 +29,7 @@ import {
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
   Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X, Maximize2,
-  Volume2, VolumeX, Palette, Highlighter, Sigma,
+  Volume2, VolumeX, Palette, Highlighter, Sigma, LineChart,
 } from 'lucide-react'
 
 // ── Preset colour swatches ────────────────────────────────────────────────────
@@ -449,6 +450,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
   const imageInputRef = useRef<HTMLInputElement>(null)
 
   const [showChartModal, setShowChartModal] = useState(false)
+  const [showGraphModal, setShowGraphModal] = useState(false)
   const [showDrawingModal, setShowDrawingModal] = useState(false)
   const [mathEdit, setMathEdit] = useState<MathEditDetail | null>(null)
   const [showMathModal, setShowMathModal] = useState(false)
@@ -464,6 +466,16 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
   const myId = isTeacher ? 'teacher' : (participantId || 'anon')
   const canWrite = isTeacher || canEdit
+
+  // Paste and drop reach the editor before `insertImageBlob` exists, so they go
+  // through a ref that is filled in once the handler is defined below.
+  const insertImageRef = useRef<((blob: Blob, name: string) => void) | null>(null)
+
+  /** Pull image files out of a paste or drop, ignoring anything else. */
+  const imageFilesFrom = (data: DataTransfer | null): File[] => {
+    if (!data) return []
+    return Array.from(data.files).filter(f => f.type.startsWith('image/'))
+  }
 
   const editor = useEditor({
     extensions: [
@@ -485,6 +497,23 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     ],
     content: loadSaved(sessionId) ?? undefined,
     editable: canWrite,
+    editorProps: {
+      // Copy a graph, chart or diagram from anywhere and paste it straight in.
+      handlePaste: (_view, event) => {
+        const files = imageFilesFrom(event.clipboardData)
+        if (!files.length) return false
+        event.preventDefault()
+        files.forEach(file => insertImageRef.current?.(file, 'pasted'))
+        return true
+      },
+      handleDrop: (_view, event) => {
+        const files = imageFilesFrom((event as DragEvent).dataTransfer)
+        if (!files.length) return false
+        event.preventDefault()
+        files.forEach(file => insertImageRef.current?.(file, 'dropped'))
+        return true
+      },
+    },
     onUpdate: ({ editor }) => {
       if (isRemoteUpdate.current || !canWrite) return
       const content = editor.getJSON()
@@ -826,14 +855,63 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
 
   useEffect(() => { return () => window.speechSynthesis?.cancel() }, [])
 
+  /**
+   * Put an image into the notes. Uploading to storage keeps the document JSON
+   * small, which matters because the whole document is broadcast on every edit;
+   * if storage is unavailable we still embed the image inline rather than lose it.
+   */
+  const insertImageBlob = useCallback(async (blob: Blob, name: string, fallbackDataUrl?: string) => {
+    if (!editor || !canWrite) return
+    const toastId = toast.loading('Adding image…')
+    try {
+      const ext = (blob.type.split('/')[1] || 'png').replace('+xml', '')
+      const path = `${sessionId}/img-${Date.now()}-${name}.${ext}`
+      const { error } = await supabase.storage.from('session-files')
+        .upload(path, blob, { upsert: true, contentType: blob.type || 'image/png' })
+      if (error) throw error
+      const { data: { publicUrl } } = supabase.storage.from('session-files').getPublicUrl(path)
+      editor.chain().focus().setImage({ src: publicUrl }).run()
+      toast.success('Image added', { id: toastId })
+    } catch (err) {
+      if (!fallbackDataUrl) {
+        const msg = err instanceof Error ? err.message : String(err)
+        toast.error(`Could not add image: ${msg}`, { id: toastId })
+        return
+      }
+      editor.chain().focus().setImage({ src: fallbackDataUrl }).run()
+      toast.success('Image added', { id: toastId })
+    }
+    lastBroadcast.current = 0
+    broadcastContent(editor.getJSON())
+  }, [editor, canWrite, sessionId, broadcastContent])
+
+  useEffect(() => {
+    insertImageRef.current = (blob, name) => { void insertImageBlob(blob, name) }
+  }, [insertImageBlob])
+
+  /** Charts, graphs and drawings arrive as PNG data URLs from their editors. */
+  const insertDataUrl = async (dataUrl: string, name: string) => {
+    try {
+      const blob = await (await fetch(dataUrl)).blob()
+      await insertImageBlob(blob, name, dataUrl)
+    } catch {
+      await insertImageBlob(new Blob(), name, dataUrl)
+    }
+  }
+
   const handleChartInsert = (dataUrl: string) => {
-    editor?.chain().focus().setImage({ src: dataUrl }).run()
     setShowChartModal(false)
+    void insertDataUrl(dataUrl, 'chart')
+  }
+
+  const handleGraphInsert = (dataUrl: string) => {
+    setShowGraphModal(false)
+    void insertDataUrl(dataUrl, 'graph')
   }
 
   const handleDrawingInsert = (dataUrl: string) => {
-    editor?.chain().focus().setImage({ src: dataUrl }).run()
     setShowDrawingModal(false)
+    void insertDataUrl(dataUrl, 'drawing')
   }
 
   const handleTablePick = (rows: number, cols: number) => {
@@ -994,10 +1072,21 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
         {canWrite && (
           <button
             onMouseDown={e => { e.preventDefault(); setShowMathModal(true) }}
-            title="Insert a maths equation (Ctrl+M) — or type $x^2$ inline, $$…$$ on its own line"
+            title="Insert a maths equation (Ctrl+M). You can also type $x^2$ inline, or $$…$$ on its own line"
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]">
             <Sigma size={13} />
             <span>Equation</span>
+          </button>
+        )}
+
+        {/* Function grapher — anyone who can write in the notes */}
+        {canWrite && (
+          <button
+            onMouseDown={e => { e.preventDefault(); setShowGraphModal(true) }}
+            title="Plot a function such as y = x² or y = sin(x)"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]">
+            <LineChart size={13} />
+            <span>Graph</span>
           </button>
         )}
 
@@ -1035,6 +1124,7 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
       </div>
 
       {showChartModal && <ChartModal onInsert={handleChartInsert} onClose={() => setShowChartModal(false)} />}
+      {showGraphModal && <GraphModal onInsert={handleGraphInsert} onClose={() => setShowGraphModal(false)} />}
       {showDrawingModal && <DrawingModal onInsert={handleDrawingInsert} onClose={() => setShowDrawingModal(false)} />}
 
       {showMathModal && (
