@@ -7,8 +7,9 @@ import CodeEditor from '../components/CodeEditor'
 import ChatSidebar from '../components/ChatSidebar'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft, Video, VideoOff, LogOut } from 'lucide-react'
+import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft, Video, VideoOff, LogOut, HelpCircle } from 'lucide-react'
 import VideoCallNative from '../components/VideoCallNative'
+import ClassQuestion from '../components/ClassQuestion'
 
 type Tab = 'whiteboard' | 'code' | 'notes'
 
@@ -38,6 +39,8 @@ export default function StudentSession() {
     } catch { return null }
   })()
   const participantName = sessionStorage.getItem('nexaboard_participant_name') || 'Student'
+  const [askOpen, setAskOpen] = useState(false)
+  const [unseenQuestion, setUnseenQuestion] = useState(false)
 
   // Block browser refresh / tab close while call is active
   useEffect(() => {
@@ -48,6 +51,16 @@ export default function StudentSession() {
   }, [callOpen])
 
   useEffect(() => { if (!participantId) { navigate('/'); return } fetchData() }, [sessionId, participantId])
+
+  // Pop the question up as soon as the teacher asks, otherwise a student sitting
+  // on the board tab would never know one had been set.
+  useEffect(() => {
+    const channel = supabase
+      .channel(`questions:${sessionId}`)
+      .on('broadcast', { event: 'q_ask' }, () => { setAskOpen(true); setUnseenQuestion(true) })
+      .subscribe()
+    return () => { supabase.removeChannel(channel) }
+  }, [sessionId])
 
   // Watch whether the teacher has an active call
   useEffect(() => {
@@ -181,6 +194,12 @@ export default function StudentSession() {
             </button>
           </div>
 
+          <button onClick={() => { setAskOpen(true); setUnseenQuestion(false) }}
+            title="Questions from your teacher"
+            className={`relative flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${unseenQuestion ? 'bg-[#5ab82e] text-white border-[#5ab82e]' : 'bg-[#f3fcf0] hover:bg-green-100 text-[#6b7280] hover:text-[#1b2b4b] border-green-200'}`}>
+            <HelpCircle size={11} /> Question
+          </button>
+
           {canDraw ? (
             <div className="flex items-center gap-1 px-2.5 py-1.5 bg-[#5ab82e]/10 text-[#5ab82e] rounded-lg text-xs font-semibold border border-[#5ab82e]/30">
               <Pencil size={11} /> Drawing
@@ -231,6 +250,16 @@ export default function StudentSession() {
         </div>
 
         {/* Video call panel */}
+        {askOpen && (
+          <ClassQuestion
+            sessionId={sessionId!}
+            isTeacher={false}
+            participantId={participantId}
+            participantName={participantName}
+            onClose={() => { setAskOpen(false); setUnseenQuestion(false) }}
+          />
+        )}
+
         {callOpen && participantId && (
           <VideoCallNative
             sessionId={sessionId!}

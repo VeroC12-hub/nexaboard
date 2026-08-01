@@ -7,9 +7,10 @@ import Whiteboard from '../components/Whiteboard'
 import CodeEditor from '../components/CodeEditor'
 import ChatSidebar from '../components/ChatSidebar'
 import StudentList from '../components/StudentList'
+import ClassQuestion from '../components/ClassQuestion'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff } from 'lucide-react'
+import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff, HelpCircle } from 'lucide-react'
 import VideoCallNative from '../components/VideoCallNative'
 
 type Tab = 'whiteboard' | 'code' | 'notes'
@@ -22,6 +23,7 @@ export default function Session({ user }: { user: User }) {
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<Tab>('whiteboard')
   const [sideTab, setSideTab] = useState<SideTab>('students')
+  const [askOpen, setAskOpen] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [ending, setEnding] = useState(false)
   const [callOpen, setCallOpen] = useState(() => sessionStorage.getItem(`nexaboard_call_${id}`) === 'true')
@@ -142,6 +144,11 @@ export default function Session({ user }: { user: User }) {
             </button>
           </div>
 
+          <button onClick={() => setAskOpen(true)}
+            title="Ask the class a question and see their answers"
+            className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
+            <HelpCircle size={12} /> Ask
+          </button>
           <button onClick={copyCode}
             className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#5ab82e] font-mono font-bold rounded-lg text-xs border border-green-200 transition-colors">
             <Copy size={11} /> {session?.join_code}
@@ -213,6 +220,16 @@ export default function Session({ user }: { user: User }) {
           )}
         </div>
       </div>
+
+      {askOpen && (
+        <ClassQuestion
+          sessionId={id!}
+          isTeacher
+          participantId={null}
+          participantName={teacherName}
+          onClose={() => setAskOpen(false)}
+        />
+      )}
 
       {callOpen && (
         <VideoCallNative
