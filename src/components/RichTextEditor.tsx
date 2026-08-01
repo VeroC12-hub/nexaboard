@@ -22,6 +22,7 @@ import GraphModal from './GraphModal'
 import MathModal from './MathModal'
 import { MathInline, MathBlock, MathTrailingParagraph } from './MathNodes'
 import type { MathEditDetail } from '../lib/math'
+import { loadLesson, saveLessonSlice } from '../lib/board'
 import toast from 'react-hot-toast'
 import {
   Bold, Italic, UnderlineIcon, Strikethrough,
@@ -517,10 +518,44 @@ export default function RichTextEditor({ sessionId, isTeacher, canEdit = false, 
     onUpdate: ({ editor }) => {
       if (isRemoteUpdate.current || !canWrite) return
       const content = editor.getJSON()
-      if (isTeacher) localStorage.setItem(STORAGE_KEY(sessionId), JSON.stringify(content))
+      if (isTeacher) {
+        localStorage.setItem(STORAGE_KEY(sessionId), JSON.stringify(content))
+        scheduleNotesSave(content)
+      }
       broadcastContent(content)
     },
   })
+
+  // Notes are saved to the lesson row as well as localStorage, so they survive a
+  // refresh on any device and absent students can read them afterwards.
+  const notesSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const scheduleNotesSave = useCallback((content: object) => {
+    if (!isTeacher) return
+    if (notesSaveTimer.current) clearTimeout(notesSaveTimer.current)
+    notesSaveTimer.current = setTimeout(() => {
+      saveLessonSlice(sessionId, { notes: content }).catch(err => {
+        console.error('Could not save the notes:', err)
+      })
+    }, 2500)
+  }, [isTeacher, sessionId])
+
+  useEffect(() => () => { if (notesSaveTimer.current) clearTimeout(notesSaveTimer.current) }, [])
+
+  // Pull the saved notes in on load. localStorage already covers the teacher's own
+  // device; this is what gives students and other devices the lesson.
+  useEffect(() => {
+    if (!editor) return
+    let cancelled = false
+    loadLesson(sessionId).then(lesson => {
+      if (cancelled || !lesson?.notes) return
+      // Never clobber something the teacher has already started typing here.
+      if (!editor.isEmpty && isTeacher) return
+      isRemoteUpdate.current = true
+      editor.commands.setContent(lesson.notes as object)
+      isRemoteUpdate.current = false
+    }).catch(() => {})
+    return () => { cancelled = true }
+  }, [editor, sessionId, isTeacher])
 
   useEffect(() => { editor?.setEditable(canWrite) }, [editor, canWrite])
 

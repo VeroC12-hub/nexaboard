@@ -1,10 +1,22 @@
 import { useEffect, useRef, useCallback, useState, useMemo } from 'react'
 import { supabase } from '../lib/supabase'
-import { Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, ChevronUp, LineChart, BarChart2, ImageIcon } from 'lucide-react'
+import {
+  Pencil, Eraser, Trash2, Hand, Sigma, X, Plus, Minus, ChevronDown, ChevronUp,
+  LineChart, BarChart2, ImageIcon, Undo2, Redo2, Minus as LineIcon, ArrowRight,
+  Square, Circle, Grid3x3, Compass,
+} from 'lucide-react'
 import MathModal from './MathModal'
 import GraphModal from './GraphModal'
 import ChartModal from './ChartModal'
+import Protractor from './Protractor'
 import { renderMath } from '../lib/math'
+import {
+  BOARD_WIDTH, GROW_STEP, GROW_MARGIN, DEFAULT_BOARD_HEIGHT,
+  drawBackground, drawStroke, shapeReadout, loadLesson, saveLessonSlice,
+  parseBoardState, emptyBoard,
+  type Point, type Stroke, type MathItem, type ImageItem, type Background,
+  type ShapeKind, type PenTool, type BoardState,
+} from '../lib/board'
 import toast from 'react-hot-toast'
 
 interface Props {
@@ -13,55 +25,81 @@ interface Props {
   canDraw: boolean
 }
 
-type Point = { x: number; y: number }
-type Tool = 'pen' | 'eraser' | 'pan'
-type Stroke = { points: Point[]; color: string; width: number; tool: 'pen' | 'eraser' }
-/** An equation placed on the board, positioned in board pixels. */
-type MathItem = { id: string; latex: string; x: number; y: number; scale: number }
-/** A graph, chart or pasted picture placed on the board. */
-type ImageItem = { id: string; src: string; x: number; y: number; width: number }
+type Tool = PenTool | 'pan' | ShapeKind
 
 const COLORS = ['#1b2b4b', '#ef4444', '#3b82f6', '#5ab82e', '#f59e0b', '#8b5cf6', '#000000']
 const SIZES = [2, 5, 12]
 
-/** The board is always at least this tall, and grows as you draw near the bottom. */
-const MIN_BOARD_HEIGHT = 1600
-const GROW_STEP = 800
-const GROW_MARGIN = 320
+const SHAPE_TOOLS: [ShapeKind, React.ElementType, string][] = [
+  ['line', LineIcon, 'Straight line (ruler)'],
+  ['arrow', ArrowRight, 'Arrow'],
+  ['rect', Square, 'Rectangle'],
+  ['circle', Circle, 'Circle (compass): drag from the centre'],
+]
+
+const BACKGROUNDS: [Background, string][] = [
+  ['plain', 'Plain'],
+  ['grid', 'Squared'],
+  ['graph', 'Graph paper'],
+  ['lined', 'Ruled'],
+]
+
+/** One undoable thing this user did. */
+type Action =
+  | { kind: 'stroke'; id: string }
+  | { kind: 'math'; item: MathItem }
+  | { kind: 'image'; item: ImageItem }
 
 export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
+
   const isDrawing = useRef(false)
   const currentStroke = useRef<Stroke | null>(null)
+  /** How many points of the live stroke have already gone out on the wire. */
+  const sentPoints = useRef(0)
   const allStrokes = useRef<Stroke[]>([])
-  const lastBroadcast = useRef(0)
+  const lastPointBroadcast = useRef(0)
 
   const [color, setColor] = useState('#1b2b4b')
   const [size, setSize] = useState(2)
   const [tool, setTool] = useState<Tool>('pen')
-  const [boardHeight, setBoardHeight] = useState(MIN_BOARD_HEIGHT)
+  const [boardHeight, setBoardHeight] = useState(DEFAULT_BOARD_HEIGHT)
+  const [background, setBackground] = useState<Background>('plain')
   const [mathItems, setMathItems] = useState<MathItem[]>([])
   const [imageItems, setImageItems] = useState<ImageItem[]>([])
   const [showMathModal, setShowMathModal] = useState(false)
   const [showGraphModal, setShowGraphModal] = useState(false)
   const [showChartModal, setShowChartModal] = useState(false)
+  const [showProtractor, setShowProtractor] = useState(false)
+  const [showBackgroundMenu, setShowBackgroundMenu] = useState(false)
   const [editingMath, setEditingMath] = useState<MathItem | null>(null)
-  // Students follow the teacher's scroll position until they scroll themselves.
   const [following, setFollowing] = useState(!isTeacher)
-  // Which way the "back to live" arrow points once a student has scrolled off.
   const [teacherAbove, setTeacherAbove] = useState(false)
+  const [readout, setReadout] = useState<string | null>(null)
+  const [canUndo, setCanUndo] = useState(false)
+  const [canRedo, setCanRedo] = useState(false)
 
   const locked = !isTeacher && !canDraw
+  const myId = useMemo(() => (isTeacher ? 'teacher' : `s-${crypto.randomUUID().slice(0, 8)}`), [isTeacher])
 
-  // Keep refs in sync so touch handlers always read current values
+  // Undo and redo only ever touch this user's own work, so one student cannot
+  // wipe out another's, or the teacher's.
+  const undoStack = useRef<Action[]>([])
+  const redoStack = useRef<Action[]>([])
+  const refreshUndoFlags = () => {
+    setCanUndo(undoStack.current.length > 0)
+    setCanRedo(redoStack.current.length > 0)
+  }
+
   const lockedRef = useRef(locked)
   const colorRef = useRef(color)
   const sizeRef = useRef(size)
   const toolRef = useRef(tool)
   const boardHeightRef = useRef(boardHeight)
+  const backgroundRef = useRef(background)
   const mathItemsRef = useRef(mathItems)
   const imageItemsRef = useRef(imageItems)
   const followingRef = useRef(following)
@@ -72,45 +110,40 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   useEffect(() => { sizeRef.current = size }, [size])
   useEffect(() => { toolRef.current = tool }, [tool])
   useEffect(() => { boardHeightRef.current = boardHeight }, [boardHeight])
+  useEffect(() => { backgroundRef.current = background }, [background])
   useEffect(() => { mathItemsRef.current = mathItems }, [mathItems])
   useEffect(() => { imageItemsRef.current = imageItems }, [imageItems])
   useEffect(() => { followingRef.current = following }, [following])
 
+  /**
+   * Pixels per board unit for this screen. The ref is for drawing and pointer
+   * maths; the state copy is what positions the equations and pictures, so they
+   * follow along when the window is resized.
+   */
+  const scaleRef = useRef(1)
+  const [scale, setScale] = useState(1)
+
+  // ── Rendering ───────────────────────────────────────────────────────────────
   const redraw = useCallback(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    for (const stroke of allStrokes.current) {
-      if (stroke.points.length < 2) continue
-      ctx.save()
-      ctx.beginPath()
-      ctx.lineWidth = stroke.width
-      ctx.lineCap = 'round'
-      ctx.lineJoin = 'round'
-      if (stroke.tool === 'eraser') {
-        ctx.globalCompositeOperation = 'destination-out'
-        ctx.strokeStyle = 'rgba(0,0,0,1)'
-      } else {
-        ctx.globalCompositeOperation = 'source-over'
-        ctx.strokeStyle = stroke.color
-      }
-      ctx.moveTo(stroke.points[0].x, stroke.points[0].y)
-      for (let i = 1; i < stroke.points.length; i++) {
-        ctx.lineTo(stroke.points[i].x, stroke.points[i].y)
-      }
-      ctx.stroke()
-      ctx.restore()
-    }
+    const scale = scaleRef.current
+    drawBackground(ctx, backgroundRef.current, canvas.width, canvas.height, scale)
+    for (const stroke of allStrokes.current) drawStroke(ctx, stroke, scale)
   }, [])
 
   const fitCanvas = useCallback(() => {
     const canvas = canvasRef.current
     const container = containerRef.current
     if (!canvas || !container) return
-    canvas.width = container.clientWidth
-    canvas.height = boardHeightRef.current
+    const width = container.clientWidth
+    if (!width) return
+    scaleRef.current = width / BOARD_WIDTH
+    setScale(scaleRef.current)
+    canvas.width = width
+    canvas.height = Math.round(boardHeightRef.current * scaleRef.current)
     redraw()
   }, [redraw])
 
@@ -121,35 +154,74 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     return () => ro.disconnect()
   }, [fitCanvas])
 
-  // The board is a fixed-width, growing-height page — resizing the canvas wipes it,
-  // so every height change has to redraw.
-  useEffect(() => { fitCanvas() }, [boardHeight, fitCanvas])
+  useEffect(() => { fitCanvas() }, [boardHeight, background, fitCanvas])
 
-  /** Grow the page when a stroke reaches the bottom, so you can just keep writing. */
   const growIfNeeded = useCallback((y: number) => {
     if (y < boardHeightRef.current - GROW_MARGIN) return
     const next = boardHeightRef.current + GROW_STEP
     boardHeightRef.current = next
     setBoardHeight(next)
+    channelRef.current?.send({
+      type: 'broadcast', event: 'wb_meta',
+      payload: { boardHeight: next, background: backgroundRef.current },
+    })
   }, [])
 
-  /** Where the teacher is looking, clamped to how far this board can actually scroll. */
-  const followTarget = (el: HTMLDivElement) =>
-    Math.max(0, Math.min(teacherScrollTop.current, el.scrollHeight - el.clientHeight))
+  // ── Saving the lesson ───────────────────────────────────────────────────────
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const snapshot = useCallback((): BoardState => ({
+    version: 2,
+    strokes: allStrokes.current,
+    mathItems: mathItemsRef.current,
+    imageItems: imageItemsRef.current,
+    boardHeight: boardHeightRef.current,
+    background: backgroundRef.current,
+  }), [])
 
-  /** Move a student's view to wherever the teacher is looking. */
+  /** Only the teacher writes, and only after things settle, to keep writes cheap. */
+  const scheduleSave = useCallback(() => {
+    if (!isTeacher) return
+    if (saveTimer.current) clearTimeout(saveTimer.current)
+    saveTimer.current = setTimeout(() => {
+      saveLessonSlice(sessionId, { board: snapshot() }).catch(err => {
+        console.error('Could not save the board:', err)
+      })
+    }, 2500)
+  }, [isTeacher, sessionId, snapshot])
+
+  useEffect(() => () => { if (saveTimer.current) clearTimeout(saveTimer.current) }, [])
+
+  // Load whatever was saved before anyone joins the live channel, so a refresh or
+  // a late arrival still sees the lesson.
+  const [loaded, setLoaded] = useState(false)
+  useEffect(() => {
+    let cancelled = false
+    loadLesson(sessionId).then(lesson => {
+      if (cancelled) return
+      const board = lesson?.board ? parseBoardState(lesson.board) : emptyBoard()
+      allStrokes.current = board.strokes
+      boardHeightRef.current = board.boardHeight
+      backgroundRef.current = board.background
+      setMathItems(board.mathItems)
+      setImageItems(board.imageItems)
+      setBoardHeight(board.boardHeight)
+      setBackground(board.background)
+      setLoaded(true)
+      fitCanvas()
+    }).catch(() => setLoaded(true))
+    return () => { cancelled = true }
+  }, [sessionId, fitCanvas])
+
+  // ── Live sync ───────────────────────────────────────────────────────────────
   const scrollToTeacher = useCallback(() => {
     const el = containerRef.current
     if (!el) return
-    // Instant, not smooth: a smooth animation is throttled in background tabs and
-    // lags behind a teacher who keeps scrolling.
-    el.scrollTop = followTarget(el)
+    el.scrollTop = Math.max(0, Math.min(teacherScrollTop.current, el.scrollHeight - el.clientHeight))
   }, [])
 
-  /**
-   * The teacher's scroll position drives everyone else's, so students still see
-   * what is being written when it goes below the fold.
-   */
+  const followTarget = (el: HTMLDivElement) =>
+    Math.max(0, Math.min(teacherScrollTop.current, el.scrollHeight - el.clientHeight))
+
   const onScroll = useCallback(() => {
     const el = containerRef.current
     if (isTeacher) {
@@ -157,60 +229,69 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       if (now - lastViewBroadcast.current < 150) return
       lastViewBroadcast.current = now
       channelRef.current?.send({
-        type: 'broadcast',
-        event: 'wb_view',
-        payload: { scrollTop: el?.scrollTop ?? 0, boardHeight: boardHeightRef.current },
+        type: 'broadcast', event: 'wb_view',
+        payload: { scrollTop: el?.scrollTop ?? 0, viewHeight: el?.clientHeight ?? 0 },
       })
       return
     }
     if (!el) return
-    const target = followTarget(el)
-    // A follow-scroll lands exactly on the teacher's position. So does a student who
-    // scrolls back onto it by hand, which quietly puts them back on live.
-    if (Math.abs(el.scrollTop - target) < 4) {
+    if (Math.abs(el.scrollTop - followTarget(el)) < 4) {
       if (!followingRef.current) setFollowing(true)
       return
     }
-    // Anything else is the student scrolling away, which hands their view back to them.
     if (followingRef.current) setFollowing(false)
-    setTeacherAbove(target < el.scrollTop)
+    setTeacherAbove(followTarget(el) < el.scrollTop)
   }, [isTeacher])
 
-  // ── Realtime sync ───────────────────────────────────────────────────────────
   useEffect(() => {
+    if (!loaded) return
     const channel = supabase
       .channel(`whiteboard:${sessionId}`)
-      .on('broadcast', { event: 'wb_strokes' }, ({ payload }) => {
-        allStrokes.current = payload.strokes ?? []
-        if (payload.boardHeight && payload.boardHeight > boardHeightRef.current) {
-          boardHeightRef.current = payload.boardHeight
-          setBoardHeight(payload.boardHeight)
-        }
+      // A stroke begins: everyone gets the opening points straight away.
+      .on('broadcast', { event: 'wb_stroke_add' }, ({ payload }) => {
+        if (payload.stroke.by === myId) return
+        allStrokes.current = [...allStrokes.current, payload.stroke as Stroke]
         redraw()
       })
-      .on('broadcast', { event: 'wb_math' }, ({ payload }) => {
-        setMathItems(payload.items ?? [])
-        if (payload.boardHeight && payload.boardHeight > boardHeightRef.current) {
+      // Only the new points travel while a stroke is being drawn, so a long
+      // lesson does not rebroadcast the whole board on every movement.
+      .on('broadcast', { event: 'wb_stroke_points' }, ({ payload }) => {
+        if (payload.by === myId) return
+        const stroke = allStrokes.current.find(s => s.id === payload.id)
+        if (!stroke) return
+        stroke.points.push(...(payload.points as Point[]))
+        redraw()
+      })
+      .on('broadcast', { event: 'wb_remove' }, ({ payload }) => {
+        const ids = new Set(payload.ids as string[])
+        allStrokes.current = allStrokes.current.filter(s => !ids.has(s.id))
+        setMathItems(prev => prev.filter(m => !ids.has(m.id)))
+        setImageItems(prev => prev.filter(m => !ids.has(m.id)))
+        redraw()
+      })
+      .on('broadcast', { event: 'wb_restore' }, ({ payload }) => {
+        if (payload.by === myId) return
+        if (payload.stroke) allStrokes.current = [...allStrokes.current, payload.stroke as Stroke]
+        if (payload.math) setMathItems(prev => [...prev, payload.math as MathItem])
+        if (payload.image) setImageItems(prev => [...prev, payload.image as ImageItem])
+        redraw()
+      })
+      .on('broadcast', { event: 'wb_math' }, ({ payload }) => setMathItems(payload.items ?? []))
+      .on('broadcast', { event: 'wb_images' }, ({ payload }) => setImageItems(payload.items ?? []))
+      .on('broadcast', { event: 'wb_meta' }, ({ payload }) => {
+        if (typeof payload.boardHeight === 'number' && payload.boardHeight > boardHeightRef.current) {
           boardHeightRef.current = payload.boardHeight
           setBoardHeight(payload.boardHeight)
         }
-      })
-      .on('broadcast', { event: 'wb_images' }, ({ payload }) => {
-        setImageItems(payload.items ?? [])
-        if (payload.boardHeight && payload.boardHeight > boardHeightRef.current) {
-          boardHeightRef.current = payload.boardHeight
-          setBoardHeight(payload.boardHeight)
+        if (payload.background) {
+          backgroundRef.current = payload.background
+          setBackground(payload.background)
         }
       })
       .on('broadcast', { event: 'wb_view' }, ({ payload }) => {
         if (isTeacher) return
-        if (payload.boardHeight && payload.boardHeight > boardHeightRef.current) {
-          boardHeightRef.current = payload.boardHeight
-          setBoardHeight(payload.boardHeight)
-        }
         teacherScrollTop.current = payload.scrollTop ?? 0
         if (!followingRef.current) {
-          // Keep the arrow pointing the right way as the teacher moves around.
           const el = containerRef.current
           if (el) setTeacherAbove(followTarget(el) < el.scrollTop)
           return
@@ -221,142 +302,166 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         allStrokes.current = []
         setMathItems([])
         setImageItems([])
+        undoStack.current = []
+        redoStack.current = []
+        refreshUndoFlags()
+        redraw()
+      })
+      .on('broadcast', { event: 'wb_snapshot' }, ({ payload }) => {
+        // A peer's live state is newer than what came out of the database.
+        const board = parseBoardState(payload.board)
+        allStrokes.current = board.strokes
+        boardHeightRef.current = Math.max(board.boardHeight, boardHeightRef.current)
+        backgroundRef.current = board.background
+        setMathItems(board.mathItems)
+        setImageItems(board.imageItems)
+        setBoardHeight(boardHeightRef.current)
+        setBackground(board.background)
         redraw()
       })
       .on('broadcast', { event: 'wb_sync_req' }, () => {
-        if (allStrokes.current.length > 0) {
-          channel.send({
-            type: 'broadcast', event: 'wb_strokes',
-            payload: { strokes: allStrokes.current, boardHeight: boardHeightRef.current },
-          })
-        }
-        if (mathItemsRef.current.length > 0) {
-          channel.send({
-            type: 'broadcast', event: 'wb_math',
-            payload: { items: mathItemsRef.current, boardHeight: boardHeightRef.current },
-          })
-        }
-        if (imageItemsRef.current.length > 0) {
-          channel.send({
-            type: 'broadcast', event: 'wb_images',
-            payload: { items: imageItemsRef.current, boardHeight: boardHeightRef.current },
-          })
-        }
-        // Land a student who just joined on the part of the board being taught.
-        if (isTeacher) {
-          channel.send({
-            type: 'broadcast', event: 'wb_view',
-            payload: { scrollTop: containerRef.current?.scrollTop ?? 0, boardHeight: boardHeightRef.current },
-          })
-        }
+        if (!isTeacher) return
+        channel.send({ type: 'broadcast', event: 'wb_snapshot', payload: { board: snapshot() } })
+        channel.send({
+          type: 'broadcast', event: 'wb_view',
+          payload: { scrollTop: containerRef.current?.scrollTop ?? 0 },
+        })
       })
-      .subscribe((status) => {
+      .subscribe(status => {
         if (status === 'SUBSCRIBED') {
           channel.send({ type: 'broadcast', event: 'wb_sync_req', payload: {} })
         }
       })
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
-  }, [sessionId, redraw, isTeacher, scrollToTeacher])
+  }, [sessionId, loaded, isTeacher, myId, redraw, snapshot, scrollToTeacher])
 
-  const broadcastStrokes = useCallback(() => {
-    const now = Date.now()
-    if (now - lastBroadcast.current < 60) return
-    lastBroadcast.current = now
-    channelRef.current?.send({
-      type: 'broadcast',
-      event: 'wb_strokes',
-      payload: { strokes: allStrokes.current, boardHeight: boardHeightRef.current },
-    })
-  }, [])
-
-  const broadcastMath = useCallback((items: MathItem[]) => {
-    channelRef.current?.send({
-      type: 'broadcast',
-      event: 'wb_math',
-      payload: { items, boardHeight: boardHeightRef.current },
-    })
-  }, [])
-
-  // ── Mouse events ────────────────────────────────────────────────────────────
-  // getBoundingClientRect already accounts for scroll, so these are board coordinates.
-  const getMousePos = (e: React.MouseEvent<HTMLCanvasElement>): Point => {
+  // ── Drawing input ───────────────────────────────────────────────────────────
+  /** Screen position to board units. getBoundingClientRect already allows for scroll. */
+  const toBoard = (clientX: number, clientY: number): Point => {
     const rect = canvasRef.current!.getBoundingClientRect()
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top }
+    const scale = scaleRef.current || 1
+    return { x: (clientX - rect.left) / scale, y: (clientY - rect.top) / scale }
+  }
+
+  const isShape = (t: Tool): t is ShapeKind =>
+    t === 'line' || t === 'arrow' || t === 'rect' || t === 'circle'
+
+  const beginStroke = (point: Point) => {
+    const active = toolRef.current
+    const stroke: Stroke = {
+      id: crypto.randomUUID(),
+      by: myId,
+      points: [point],
+      color: colorRef.current,
+      width: sizeRef.current,
+      tool: active === 'eraser' ? 'eraser' : 'pen',
+      ...(isShape(active) ? { shape: active } : {}),
+    }
+    currentStroke.current = stroke
+    sentPoints.current = 0
+    allStrokes.current = [...allStrokes.current, stroke]
+    isDrawing.current = true
+  }
+
+  const extendStroke = (point: Point) => {
+    const stroke = currentStroke.current
+    if (!stroke) return
+    if (stroke.shape) {
+      // A shape is defined by two points: drag moves the second one.
+      stroke.points[1] = point
+      setReadout(shapeReadout(stroke.shape, stroke.points[0], point))
+    } else {
+      stroke.points.push(point)
+      growIfNeeded(point.y)
+    }
+    redraw()
+
+    // Freehand streams its new points; shapes are cheap enough to resend whole.
+    const now = Date.now()
+    if (now - lastPointBroadcast.current < 60) return
+    lastPointBroadcast.current = now
+    if (stroke.shape) {
+      channelRef.current?.send({
+        type: 'broadcast', event: 'wb_remove', payload: { ids: [stroke.id] },
+      })
+      channelRef.current?.send({
+        type: 'broadcast', event: 'wb_stroke_add', payload: { stroke: { ...stroke, by: '' } },
+      })
+      return
+    }
+    if (sentPoints.current === 0) {
+      channelRef.current?.send({
+        type: 'broadcast', event: 'wb_stroke_add',
+        payload: { stroke: { ...stroke, points: stroke.points.slice() } },
+      })
+    } else {
+      channelRef.current?.send({
+        type: 'broadcast', event: 'wb_stroke_points',
+        payload: { id: stroke.id, by: myId, points: stroke.points.slice(sentPoints.current) },
+      })
+    }
+    sentPoints.current = stroke.points.length
+  }
+
+  const endStroke = () => {
+    const stroke = currentStroke.current
+    isDrawing.current = false
+    currentStroke.current = null
+    setReadout(null)
+    if (!stroke) return
+
+    // A shape needs a second point; a tap that never moved leaves nothing behind.
+    if (stroke.shape && stroke.points.length < 2) {
+      allStrokes.current = allStrokes.current.filter(s => s.id !== stroke.id)
+      redraw()
+      return
+    }
+
+    if (stroke.shape) {
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids: [stroke.id] } })
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_stroke_add', payload: { stroke: { ...stroke, by: '' } } })
+      growIfNeeded(Math.max(stroke.points[0].y, stroke.points[1].y))
+    } else if (sentPoints.current === 0) {
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_stroke_add', payload: { stroke } })
+    } else if (stroke.points.length > sentPoints.current) {
+      channelRef.current?.send({
+        type: 'broadcast', event: 'wb_stroke_points',
+        payload: { id: stroke.id, by: myId, points: stroke.points.slice(sentPoints.current) },
+      })
+    }
+
+    undoStack.current.push({ kind: 'stroke', id: stroke.id })
+    redoStack.current = []
+    refreshUndoFlags()
+    scheduleSave()
   }
 
   const onMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (locked || tool === 'pan') return
-    isDrawing.current = true
-    const stroke: Stroke = { points: [getMousePos(e)], color, width: size, tool }
-    currentStroke.current = stroke
-    allStrokes.current = [...allStrokes.current, stroke]
+    beginStroke(toBoard(e.clientX, e.clientY))
   }
-
   const onMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (!isDrawing.current || !currentStroke.current || locked) return
-    const point = getMousePos(e)
-    currentStroke.current.points.push(point)
-    growIfNeeded(point.y)
-    redraw()
-    broadcastStrokes()
+    if (!isDrawing.current || locked) return
+    extendStroke(toBoard(e.clientX, e.clientY))
   }
+  const onMouseUp = () => { if (isDrawing.current) endStroke() }
 
-  const onMouseUp = () => {
-    if (isDrawing.current) {
-      lastBroadcast.current = 0
-      broadcastStrokes()
-    }
-    isDrawing.current = false
-    currentStroke.current = null
-  }
-
-  // ── Touch events (passive: false to allow preventDefault) ───────────────────
-  // One finger draws; two fingers (or the Pan tool) scroll the page.
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-
-    const getPos = (touch: Touch): Point => {
-      const rect = canvas.getBoundingClientRect()
-      return { x: touch.clientX - rect.left, y: touch.clientY - rect.top }
-    }
-
     const onTouchStart = (e: TouchEvent) => {
       if (lockedRef.current || toolRef.current === 'pan' || e.touches.length > 1) return
       e.preventDefault()
-      const point = getPos(e.touches[0])
-      isDrawing.current = true
-      const stroke: Stroke = {
-        points: [point],
-        color: colorRef.current,
-        width: sizeRef.current,
-        tool: toolRef.current === 'eraser' ? 'eraser' : 'pen',
-      }
-      currentStroke.current = stroke
-      allStrokes.current = [...allStrokes.current, stroke]
+      beginStroke(toBoard(e.touches[0].clientX, e.touches[0].clientY))
     }
-
     const onTouchMove = (e: TouchEvent) => {
-      if (!isDrawing.current || !currentStroke.current || lockedRef.current) return
+      if (!isDrawing.current || lockedRef.current) return
       if (e.touches.length > 1) { isDrawing.current = false; currentStroke.current = null; return }
       e.preventDefault()
-      const point = getPos(e.touches[0])
-      currentStroke.current.points.push(point)
-      growIfNeeded(point.y)
-      redraw()
-      broadcastStrokes()
+      extendStroke(toBoard(e.touches[0].clientX, e.touches[0].clientY))
     }
-
-    const onTouchEnd = () => {
-      if (isDrawing.current) {
-        lastBroadcast.current = 0
-        broadcastStrokes()
-      }
-      isDrawing.current = false
-      currentStroke.current = null
-    }
-
+    const onTouchEnd = () => { if (isDrawing.current) endStroke() }
     canvas.addEventListener('touchstart', onTouchStart, { passive: false })
     canvas.addEventListener('touchmove', onTouchMove, { passive: false })
     canvas.addEventListener('touchend', onTouchEnd)
@@ -365,22 +470,113 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
       canvas.removeEventListener('touchmove', onTouchMove)
       canvas.removeEventListener('touchend', onTouchEnd)
     }
-  }, [redraw, broadcastStrokes, growIfNeeded])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
+  // ── Undo and redo ───────────────────────────────────────────────────────────
+  const undo = useCallback(() => {
+    const action = undoStack.current.pop()
+    if (!action) return
+    if (action.kind === 'stroke') {
+      const stroke = allStrokes.current.find(s => s.id === action.id)
+      if (stroke) redoStack.current.push({ kind: 'stroke', id: action.id })
+      allStrokes.current = allStrokes.current.filter(s => s.id !== action.id)
+      if (stroke) undoneStrokes.current.set(action.id, stroke)
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids: [action.id] } })
+      redraw()
+    } else if (action.kind === 'math') {
+      redoStack.current.push(action)
+      const next = mathItemsRef.current.filter(m => m.id !== action.item.id)
+      setMathItems(next); mathItemsRef.current = next
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids: [action.item.id] } })
+    } else {
+      redoStack.current.push(action)
+      const next = imageItemsRef.current.filter(m => m.id !== action.item.id)
+      setImageItems(next); imageItemsRef.current = next
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_remove', payload: { ids: [action.item.id] } })
+    }
+    refreshUndoFlags()
+    scheduleSave()
+  }, [redraw, scheduleSave])
+
+  /** Strokes taken off the board by undo, kept so redo can put them back. */
+  const undoneStrokes = useRef(new Map<string, Stroke>())
+
+  const redo = useCallback(() => {
+    const action = redoStack.current.pop()
+    if (!action) return
+    if (action.kind === 'stroke') {
+      const stroke = undoneStrokes.current.get(action.id)
+      if (stroke) {
+        allStrokes.current = [...allStrokes.current, stroke]
+        undoneStrokes.current.delete(action.id)
+        channelRef.current?.send({ type: 'broadcast', event: 'wb_restore', payload: { by: myId, stroke } })
+        redraw()
+      }
+      undoStack.current.push(action)
+    } else if (action.kind === 'math') {
+      const next = [...mathItemsRef.current, action.item]
+      setMathItems(next); mathItemsRef.current = next
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_restore', payload: { by: myId, math: action.item } })
+      undoStack.current.push(action)
+    } else {
+      const next = [...imageItemsRef.current, action.item]
+      setImageItems(next); imageItemsRef.current = next
+      channelRef.current?.send({ type: 'broadcast', event: 'wb_restore', payload: { by: myId, image: action.item } })
+      undoStack.current.push(action)
+    }
+    refreshUndoFlags()
+    scheduleSave()
+  }, [myId, redraw, scheduleSave])
+
+  useEffect(() => {
+    if (locked) return
+    const handler = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey)) return
+      const key = e.key.toLowerCase()
+      if (key === 'z' && !e.shiftKey) { e.preventDefault(); undo() }
+      else if ((key === 'z' && e.shiftKey) || key === 'y') { e.preventDefault(); redo() }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [locked, undo, redo])
+
+  // ── Board furniture ─────────────────────────────────────────────────────────
   const clearBoard = () => {
+    if (!window.confirm('Clear the whole board for everyone? This cannot be undone.')) return
     allStrokes.current = []
-    setMathItems([])
+    setMathItems([]); mathItemsRef.current = []
+    setImageItems([]); imageItemsRef.current = []
+    undoStack.current = []; redoStack.current = []
+    refreshUndoFlags()
     redraw()
     channelRef.current?.send({ type: 'broadcast', event: 'wb_clear', payload: {} })
+    scheduleSave()
+  }
+
+  const changeBackground = (next: Background) => {
+    backgroundRef.current = next
+    setBackground(next)
+    setShowBackgroundMenu(false)
+    channelRef.current?.send({
+      type: 'broadcast', event: 'wb_meta',
+      payload: { background: next, boardHeight: boardHeightRef.current },
+    })
+    scheduleSave()
   }
 
   const addSpace = () => {
     const next = boardHeightRef.current + GROW_STEP
     boardHeightRef.current = next
     setBoardHeight(next)
-    containerRef.current?.scrollTo({ top: next, behavior: 'smooth' })
-    lastBroadcast.current = 0
-    broadcastStrokes()
+    channelRef.current?.send({
+      type: 'broadcast', event: 'wb_meta',
+      payload: { boardHeight: next, background: backgroundRef.current },
+    })
+    requestAnimationFrame(() => {
+      containerRef.current?.scrollTo({ top: containerRef.current.scrollHeight, behavior: 'smooth' })
+    })
+    scheduleSave()
   }
 
   const scrollDown = () => {
@@ -390,59 +586,61 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
   }
 
   // ── Equations ───────────────────────────────────────────────────────────────
-  const commitMath = (items: MathItem[]) => {
+  const commitMath = (items: MathItem[], record?: MathItem) => {
     setMathItems(items)
     mathItemsRef.current = items
-    broadcastMath(items)
+    channelRef.current?.send({ type: 'broadcast', event: 'wb_math', payload: { items } })
+    if (record) {
+      undoStack.current.push({ kind: 'math', item: record })
+      redoStack.current = []
+      refreshUndoFlags()
+    }
+    scheduleSave()
   }
 
   const insertMath = (latex: string) => {
     const el = containerRef.current
-    // Drop it near the top-left of whatever the user is currently looking at.
-    const x = 60
-    const y = (el?.scrollTop ?? 0) + 80
-    commitMath([...mathItemsRef.current, { id: crypto.randomUUID(), latex, x, y, scale: 1 }])
+    const scale = scaleRef.current || 1
+    const item: MathItem = {
+      id: crypto.randomUUID(), by: myId, latex,
+      x: 60, y: (el?.scrollTop ?? 0) / scale + 70, scale: 1,
+    }
+    commitMath([...mathItemsRef.current, item], item)
     setShowMathModal(false)
   }
 
-  const updateMath = (id: string, patch: Partial<MathItem>) => {
+  const updateMath = (id: string, patch: Partial<MathItem>) =>
     commitMath(mathItemsRef.current.map(m => (m.id === id ? { ...m, ...patch } : m)))
-  }
 
-  const deleteMath = (id: string) => {
+  const deleteMath = (id: string) =>
     commitMath(mathItemsRef.current.filter(m => m.id !== id))
-  }
 
-  // ── Graphs, charts and pasted pictures ──────────────────────────────────────
-  const commitImages = (items: ImageItem[]) => {
+  // ── Graphs, charts and pictures ─────────────────────────────────────────────
+  const commitImages = (items: ImageItem[], record?: ImageItem) => {
     setImageItems(items)
     imageItemsRef.current = items
-    channelRef.current?.send({
-      type: 'broadcast',
-      event: 'wb_images',
-      payload: { items, boardHeight: boardHeightRef.current },
-    })
+    channelRef.current?.send({ type: 'broadcast', event: 'wb_images', payload: { items } })
+    if (record) {
+      undoStack.current.push({ kind: 'image', item: record })
+      redoStack.current = []
+      refreshUndoFlags()
+    }
+    scheduleSave()
   }
 
   const placeImage = (src: string, width = 420) => {
     const el = containerRef.current
-    const top = el?.scrollTop ?? 0
-    // Cascade anything already dropped on this screenful so items do not land
-    // exactly on top of each other.
-    const nearby = imageItemsRef.current.filter(
-      m => m.y > top && m.y < top + (el?.clientHeight ?? 600),
-    ).length
-    commitImages([
-      ...imageItemsRef.current,
-      { id: crypto.randomUUID(), src, x: 60 + nearby * 28, y: top + 70 + nearby * 28, width },
-    ])
+    const scale = scaleRef.current || 1
+    const top = (el?.scrollTop ?? 0) / scale
+    const viewHeight = (el?.clientHeight ?? 600) / scale
+    const nearby = imageItemsRef.current.filter(m => m.y > top && m.y < top + viewHeight).length
+    const item: ImageItem = {
+      id: crypto.randomUUID(), by: myId, src,
+      x: 60 + nearby * 26, y: top + 70 + nearby * 26, width,
+    }
+    commitImages([...imageItemsRef.current, item], item)
   }
 
-  /**
-   * Board items are broadcast in full on every change, so a base64 picture would
-   * be re-sent on each nudge. Upload it once and share the URL instead, falling
-   * back to inline data only if storage is unavailable.
-   */
   const uploadAndPlace = useCallback(async (blob: Blob, name: string, fallbackDataUrl?: string) => {
     const toastId = toast.loading('Adding to board…')
     try {
@@ -460,22 +658,19 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         toast.success('Added to board', { id: toastId })
         return
       }
-      const msg = err instanceof Error ? err.message : String(err)
-      toast.error(`Could not add image: ${msg}`, { id: toastId })
+      toast.error(`Could not add image: ${err instanceof Error ? err.message : String(err)}`, { id: toastId })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId])
 
   const placeDataUrl = async (dataUrl: string, name: string) => {
     try {
-      const blob = await (await fetch(dataUrl)).blob()
-      await uploadAndPlace(blob, name, dataUrl)
+      await uploadAndPlace(await (await fetch(dataUrl)).blob(), name, dataUrl)
     } catch {
       placeImage(dataUrl)
     }
   }
 
-  // Paste a graph, chart or screenshot straight onto the board
   useEffect(() => {
     if (locked) return
     const handler = (e: ClipboardEvent) => {
@@ -488,13 +683,24 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
     return () => window.removeEventListener('paste', handler)
   }, [locked, uploadAndPlace])
 
-  const updateImage = (id: string, patch: Partial<ImageItem>) => {
+  const updateImage = (id: string, patch: Partial<ImageItem>) =>
     commitImages(imageItemsRef.current.map(m => (m.id === id ? { ...m, ...patch } : m)))
-  }
 
-  const deleteImage = (id: string) => {
+  const deleteImage = (id: string) =>
     commitImages(imageItemsRef.current.filter(m => m.id !== id))
-  }
+
+  useEffect(() => {
+    const close = () => setShowBackgroundMenu(false)
+    document.addEventListener('mousedown', close)
+    return () => document.removeEventListener('mousedown', close)
+  }, [])
+
+  const toolButton = (active: boolean, onClick: () => void, title: string, icon: React.ReactNode) => (
+    <button onClick={onClick} title={title}
+      className={`p-2 rounded-md transition-colors ${active ? 'bg-[#5ab82e] text-white shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
+      {icon}
+    </button>
+  )
 
   return (
     <div className="h-full w-full flex flex-col relative">
@@ -505,57 +711,33 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
           if (file) void uploadAndPlace(file, 'image')
         }} />
 
-      {/* Toolbar — only for users who can draw */}
       {!locked && (
         <div className="flex items-center gap-2 px-3 py-2 border-b border-green-100 bg-white shrink-0 flex-wrap">
           <div className="flex items-center bg-[#f3fcf0] rounded-lg p-0.5 gap-0.5 border border-green-200">
-            <button
-              onClick={() => setTool('pen')}
-              title="Pen"
-              className={`p-2 rounded-md transition-colors ${tool === 'pen' ? 'bg-[#5ab82e] text-white shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}
-            >
-              <Pencil size={15} />
-            </button>
-            <button
-              onClick={() => setTool('eraser')}
-              title="Eraser"
-              className={`p-2 rounded-md transition-colors ${tool === 'eraser' ? 'bg-[#1b2b4b] text-white shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}
-            >
-              <Eraser size={15} />
-            </button>
-            <button
-              onClick={() => setTool('pan')}
-              title="Scroll the board with your finger or mouse"
-              className={`p-2 rounded-md transition-colors ${tool === 'pan' ? 'bg-[#1b2b4b] text-white shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}
-            >
-              <Hand size={15} />
-            </button>
+            {toolButton(tool === 'pen', () => setTool('pen'), 'Pen', <Pencil size={15} />)}
+            {toolButton(tool === 'eraser', () => setTool('eraser'), 'Eraser', <Eraser size={15} />)}
+            {toolButton(tool === 'pan', () => setTool('pan'), 'Scroll the board with your finger or mouse', <Hand size={15} />)}
           </div>
 
-          <div className="w-px h-5 bg-green-100 hidden sm:block" />
+          {/* Straight edge, arrow, box and compass */}
+          <div className="flex items-center bg-[#f3fcf0] rounded-lg p-0.5 gap-0.5 border border-green-200">
+            {SHAPE_TOOLS.map(([kind, Icon, title]) =>
+              <span key={kind}>{toolButton(tool === kind, () => setTool(kind), title, <Icon size={15} />)}</span>)}
+          </div>
 
           <div className="flex items-center gap-1.5 flex-wrap">
             {COLORS.map(c => (
-              <button
-                key={c}
-                onClick={() => { setColor(c); setTool('pen') }}
+              <button key={c} onClick={() => { setColor(c); if (tool === 'eraser' || tool === 'pan') setTool('pen') }}
                 title={c}
-                className={`w-7 h-7 rounded-full border-2 transition-all hover:scale-110 ${color === c && tool === 'pen' ? 'border-[#5ab82e] scale-110' : 'border-gray-200'}`}
-                style={{ backgroundColor: c }}
-              />
+                className={`w-7 h-7 rounded-full border-2 transition-all hover:scale-110 ${color === c && tool !== 'eraser' ? 'border-[#5ab82e] scale-110' : 'border-gray-200'}`}
+                style={{ backgroundColor: c }} />
             ))}
           </div>
 
-          <div className="w-px h-5 bg-green-100 hidden sm:block" />
-
           <div className="flex items-center gap-1">
             {SIZES.map(s => (
-              <button
-                key={s}
-                onClick={() => setSize(s)}
-                title={`Size ${s}`}
-                className={`flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${size === s ? 'bg-[#f3fcf0] ring-1 ring-[#5ab82e]' : 'hover:bg-[#f3fcf0]'}`}
-              >
+              <button key={s} onClick={() => setSize(s)} title={`Size ${s}`}
+                className={`flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${size === s ? 'bg-[#f3fcf0] ring-1 ring-[#5ab82e]' : 'hover:bg-[#f3fcf0]'}`}>
                 <div className="rounded-full bg-[#1b2b4b]" style={{ width: s * 2.2, height: s * 2.2 }} />
               </button>
             ))}
@@ -563,67 +745,74 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
 
           <div className="w-px h-5 bg-green-100 hidden sm:block" />
 
-          <button
-            onClick={() => setShowMathModal(true)}
-            title="Type a maths equation onto the board"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors"
-          >
+          <div className="flex items-center bg-[#f3fcf0] rounded-lg p-0.5 gap-0.5 border border-green-200">
+            <button onClick={undo} disabled={!canUndo} title="Undo (Ctrl+Z)"
+              className="p-2 rounded-md text-[#6b7280] hover:text-[#1b2b4b] disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+              <Undo2 size={15} />
+            </button>
+            <button onClick={redo} disabled={!canRedo} title="Redo (Ctrl+Shift+Z)"
+              className="p-2 rounded-md text-[#6b7280] hover:text-[#1b2b4b] disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+              <Redo2 size={15} />
+            </button>
+          </div>
+
+          <button onClick={() => setShowMathModal(true)} title="Type a maths equation onto the board"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors">
             <Sigma size={13} /> Equation
           </button>
-
-          <button
-            onClick={() => setShowGraphModal(true)}
-            title="Plot a function such as y = x² or y = sin(x)"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors"
-          >
+          <button onClick={() => setShowGraphModal(true)} title="Plot a function such as y = x² or y = sin(x)"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors">
             <LineChart size={13} /> Graph
           </button>
-
-          <button
-            onClick={() => setShowChartModal(true)}
-            title="Build a bar, line or pie chart from data"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors"
-          >
+          <button onClick={() => setShowChartModal(true)} title="Build a bar, line or pie chart from data"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors">
             <BarChart2 size={13} /> Chart
           </button>
-
-          <button
-            onClick={() => imageInputRef.current?.click()}
-            title="Put a picture on the board. You can also just paste one with Ctrl+V"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors"
-          >
+          <button onClick={() => imageInputRef.current?.click()} title="Put a picture on the board. You can also just paste one with Ctrl+V"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors">
             <ImageIcon size={13} /> Image
           </button>
 
-          <button
-            onClick={addSpace}
-            title="Add more space at the bottom of the board"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#6b7280] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] hover:text-[#1b2b4b] transition-colors"
-          >
+          <button onClick={() => setShowProtractor(v => !v)} title="Show a protractor you can drag and turn"
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold rounded-lg border transition-colors ${showProtractor ? 'bg-[#5ab82e] text-white border-[#5ab82e]' : 'text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]'}`}>
+            <Compass size={13} /> Protractor
+          </button>
+
+          {/* Paper type */}
+          <div className="relative" onMouseDown={e => e.stopPropagation()}>
+            <button onClick={() => setShowBackgroundMenu(v => !v)} title="Change the paper"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#1b2b4b] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] transition-colors">
+              <Grid3x3 size={13} /> Paper
+            </button>
+            {/* Anchored right: this button sits near the end of a wide toolbar */}
+            {showBackgroundMenu && (
+              <div className="absolute top-full right-0 mt-1 z-40 bg-white border border-green-200 rounded-xl shadow-xl p-1.5 w-40">
+                {BACKGROUNDS.map(([value, label]) => (
+                  <button key={value} onClick={() => changeBackground(value)}
+                    className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${background === value ? 'bg-[#5ab82e] text-white' : 'text-[#1b2b4b] hover:bg-[#f3fcf0]'}`}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <button onClick={addSpace} title="Add more space at the bottom of the board"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[#6b7280] bg-white border border-green-200 rounded-lg hover:bg-[#f3fcf0] hover:text-[#1b2b4b] transition-colors">
             <Plus size={13} /> Add Space
           </button>
 
           {isTeacher && (
-            <>
-              <div className="w-px h-5 bg-green-100 hidden sm:block" />
-              <button
-                onClick={clearBoard}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-red-100"
-              >
-                <Trash2 size={13} /> Clear
-              </button>
-            </>
+            <button onClick={clearBoard}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-red-100">
+              <Trash2 size={13} /> Clear
+            </button>
           )}
         </div>
       )}
 
-      {/* Scrollable board page */}
-      <div
-        ref={containerRef}
-        onScroll={onScroll}
-        className="flex-1 overflow-y-auto overflow-x-hidden bg-white"
-      >
-        <div className="relative" style={{ height: boardHeight }}>
+      <div ref={containerRef} onScroll={onScroll} className="flex-1 overflow-y-auto overflow-x-hidden bg-white">
+        <div className="relative" style={{ height: Math.round(boardHeight * scale) }}>
           <canvas
             ref={canvasRef}
             onMouseDown={onMouseDown}
@@ -631,38 +820,37 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
             onMouseUp={onMouseUp}
             onMouseLeave={onMouseUp}
             style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
+              position: 'absolute', top: 0, left: 0,
               touchAction: locked || tool === 'pan' ? 'pan-y' : 'none',
               cursor: locked ? 'default' : tool === 'pan' ? 'grab' : tool === 'eraser' ? 'cell' : 'crosshair',
             }}
           />
 
           {imageItems.map(item => (
-            <BoardImage
-              key={item.id}
-              item={item}
-              locked={locked}
+            <BoardImage key={item.id} item={item} locked={locked} scale={scale}
               onMove={(x, y) => updateImage(item.id, { x, y })}
               onResize={width => updateImage(item.id, { width })}
-              onDelete={() => deleteImage(item.id)}
-            />
+              onDelete={() => deleteImage(item.id)} />
           ))}
 
           {mathItems.map(item => (
-            <BoardEquation
-              key={item.id}
-              item={item}
-              locked={locked}
+            <BoardEquation key={item.id} item={item} locked={locked} scale={scale}
               onMove={(x, y) => updateMath(item.id, { x, y })}
               onScale={delta => updateMath(item.id, { scale: Math.min(3, Math.max(0.6, item.scale + delta)) })}
               onEdit={() => setEditingMath(item)}
-              onDelete={() => deleteMath(item.id)}
-            />
+              onDelete={() => deleteMath(item.id)} />
           ))}
+
+          {showProtractor && !locked && <Protractor />}
         </div>
       </div>
+
+      {/* Length and angle while a shape is being dragged out */}
+      {readout && (
+        <div className="absolute bottom-4 left-4 z-20 px-3 py-1.5 rounded-lg bg-[#1b2b4b] text-white text-xs font-mono shadow-lg pointer-events-none">
+          {readout}
+        </div>
+      )}
 
       {locked && (
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-white/90 backdrop-blur border border-green-200 rounded-full px-4 py-1.5 text-xs text-[#6b7280] pointer-events-none shadow-sm whitespace-nowrap">
@@ -670,61 +858,40 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
         </div>
       )}
 
-      {/*
-        Students follow the teacher silently. Nothing is shown until they scroll off
-        on their own, and then one arrow takes them back to the live position.
-      */}
       {!isTeacher && !following && (
         <button
           onClick={() => { setFollowing(true); followingRef.current = true; scrollToTeacher() }}
           title="Back to what the teacher is writing"
-          className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-[#5ab82e] text-white shadow-lg ring-4 ring-[#5ab82e]/20 hover:bg-[#489f22] transition-colors"
-        >
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-[#5ab82e] text-white shadow-lg ring-4 ring-[#5ab82e]/20 hover:bg-[#489f22] transition-colors">
           {teacherAbove ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
         </button>
       )}
 
-      {/* Teacher: jump down a screenful */}
       {isTeacher && (
-        <button
-          onClick={scrollDown}
-          title="Scroll down"
-          className="absolute bottom-4 right-4 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-white border border-green-200 text-[#6b7280] shadow-md hover:bg-[#f3fcf0] hover:text-[#1b2b4b] transition-colors"
-        >
+        <button onClick={scrollDown} title="Scroll down"
+          className="absolute bottom-4 right-4 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-white border border-green-200 text-[#6b7280] shadow-md hover:bg-[#f3fcf0] hover:text-[#1b2b4b] transition-colors">
           <ChevronDown size={16} />
         </button>
       )}
 
       {showMathModal && (
-        <MathModal
-          showModeToggle={false}
-          onInsert={latex => insertMath(latex)}
-          onClose={() => setShowMathModal(false)}
-        />
+        <MathModal showModeToggle={false} onInsert={latex => insertMath(latex)} onClose={() => setShowMathModal(false)} />
       )}
-
-      {showGraphModal && (
-        <GraphModal
-          onInsert={dataUrl => { setShowGraphModal(false); void placeDataUrl(dataUrl, 'graph') }}
-          onClose={() => setShowGraphModal(false)}
-        />
-      )}
-
-      {showChartModal && (
-        <ChartModal
-          onInsert={dataUrl => { setShowChartModal(false); void placeDataUrl(dataUrl, 'chart') }}
-          onClose={() => setShowChartModal(false)}
-        />
-      )}
-
       {editingMath && (
         <MathModal
           initialLatex={editingMath.latex}
           showModeToggle={false}
           onInsert={latex => { updateMath(editingMath.id, { latex }); setEditingMath(null) }}
           onDelete={() => { deleteMath(editingMath.id); setEditingMath(null) }}
-          onClose={() => setEditingMath(null)}
-        />
+          onClose={() => setEditingMath(null)} />
+      )}
+      {showGraphModal && (
+        <GraphModal onInsert={dataUrl => { setShowGraphModal(false); void placeDataUrl(dataUrl, 'graph') }}
+          onClose={() => setShowGraphModal(false)} />
+      )}
+      {showChartModal && (
+        <ChartModal onInsert={dataUrl => { setShowChartModal(false); void placeDataUrl(dataUrl, 'chart') }}
+          onClose={() => setShowChartModal(false)} />
       )}
     </div>
   )
@@ -735,12 +902,13 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw }: Props) {
 interface BoardImageProps {
   item: ImageItem
   locked: boolean
+  scale: number
   onMove: (x: number, y: number) => void
   onResize: (width: number) => void
   onDelete: () => void
 }
 
-function BoardImage({ item, locked, onMove, onResize, onDelete }: BoardImageProps) {
+function BoardImage({ item, locked, scale, onMove, onResize, onDelete }: BoardImageProps) {
   const dragOffset = useRef<Point | null>(null)
   const resizeStart = useRef<{ x: number; width: number } | null>(null)
   const [active, setActive] = useState(false)
@@ -748,8 +916,7 @@ function BoardImage({ item, locked, onMove, onResize, onDelete }: BoardImageProp
   const onPointerDown = (e: React.PointerEvent) => {
     if (locked) return
     if ((e.target as HTMLElement).closest('[data-img-control]')) return
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault(); e.stopPropagation()
     const rect = e.currentTarget.getBoundingClientRect()
     dragOffset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
@@ -758,16 +925,16 @@ function BoardImage({ item, locked, onMove, onResize, onDelete }: BoardImageProp
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (resizeStart.current) {
-      onResize(Math.max(80, resizeStart.current.width + (e.clientX - resizeStart.current.x)))
+      onResize(Math.max(60, resizeStart.current.width + (e.clientX - resizeStart.current.x) / scale))
       return
     }
     if (!dragOffset.current) return
     const parent = (e.currentTarget as HTMLElement).offsetParent as HTMLElement | null
     if (!parent) return
-    const parentRect = parent.getBoundingClientRect()
+    const rect = parent.getBoundingClientRect()
     onMove(
-      Math.max(0, e.clientX - parentRect.left - dragOffset.current.x),
-      Math.max(0, e.clientY - parentRect.top - dragOffset.current.y),
+      Math.max(0, (e.clientX - rect.left - dragOffset.current.x) / scale),
+      Math.max(0, (e.clientY - rect.top - dragOffset.current.y) / scale),
     )
   }
 
@@ -779,8 +946,7 @@ function BoardImage({ item, locked, onMove, onResize, onDelete }: BoardImageProp
   }
 
   const startResize = (e: React.PointerEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault(); e.stopPropagation()
     resizeStart.current = { x: e.clientX, width: item.width }
     ;(e.currentTarget.parentElement as HTMLElement)?.setPointerCapture?.(e.pointerId)
     setActive(true)
@@ -789,26 +955,20 @@ function BoardImage({ item, locked, onMove, onResize, onDelete }: BoardImageProp
   return (
     <div
       className={`group absolute select-none ${locked ? '' : 'cursor-move'} ${active ? 'z-20' : 'z-10'}`}
-      style={{ left: item.x, top: item.y, width: item.width, touchAction: 'none' }}
+      style={{ left: item.x * scale, top: item.y * scale, width: item.width * scale, touchAction: 'none' }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
     >
-      <img
-        src={item.src}
-        alt=""
-        draggable={false}
-        className={`w-full h-auto rounded-lg bg-white shadow-sm ${locked ? '' : 'group-hover:ring-2 group-hover:ring-[#5ab82e]'}`}
-      />
-
+      <img src={item.src} alt="" draggable={false}
+        className={`w-full h-auto rounded-lg bg-white shadow-sm ${locked ? '' : 'group-hover:ring-2 group-hover:ring-[#5ab82e]'}`} />
       {!locked && (
         <>
           <button data-img-control onClick={onDelete} title="Remove from board"
             className="absolute -top-2 -right-2 hidden group-hover:flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-200 text-[#9ca3af] hover:text-red-500 shadow-sm transition-colors">
             <X size={12} />
           </button>
-          {/* Drag this corner to resize */}
           <div data-img-control onPointerDown={startResize} title="Drag to resize"
             className="absolute -bottom-1.5 -right-1.5 hidden group-hover:block w-4 h-4 rounded-sm bg-[#5ab82e] border-2 border-white shadow cursor-nwse-resize" />
         </>
@@ -822,23 +982,22 @@ function BoardImage({ item, locked, onMove, onResize, onDelete }: BoardImageProp
 interface EquationProps {
   item: MathItem
   locked: boolean
+  scale: number
   onMove: (x: number, y: number) => void
   onScale: (delta: number) => void
   onEdit: () => void
   onDelete: () => void
 }
 
-function BoardEquation({ item, locked, onMove, onScale, onEdit, onDelete }: EquationProps) {
+function BoardEquation({ item, locked, scale, onMove, onScale, onEdit, onDelete }: EquationProps) {
   const { html, error } = useMemo(() => renderMath(item.latex, true), [item.latex])
   const dragOffset = useRef<Point | null>(null)
   const [dragging, setDragging] = useState(false)
 
   const onPointerDown = (e: React.PointerEvent) => {
     if (locked) return
-    // Let the control buttons handle their own clicks.
     if ((e.target as HTMLElement).closest('[data-eq-control]')) return
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault(); e.stopPropagation()
     const rect = e.currentTarget.getBoundingClientRect()
     dragOffset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
@@ -849,10 +1008,10 @@ function BoardEquation({ item, locked, onMove, onScale, onEdit, onDelete }: Equa
     if (!dragOffset.current) return
     const parent = (e.currentTarget as HTMLElement).offsetParent as HTMLElement | null
     if (!parent) return
-    const parentRect = parent.getBoundingClientRect()
+    const rect = parent.getBoundingClientRect()
     onMove(
-      Math.max(0, e.clientX - parentRect.left - dragOffset.current.x),
-      Math.max(0, e.clientY - parentRect.top - dragOffset.current.y),
+      Math.max(0, (e.clientX - rect.left - dragOffset.current.x) / scale),
+      Math.max(0, (e.clientY - rect.top - dragOffset.current.y) / scale),
     )
   }
 
@@ -866,40 +1025,29 @@ function BoardEquation({ item, locked, onMove, onScale, onEdit, onDelete }: Equa
   return (
     <div
       className={`group absolute select-none ${locked ? '' : 'cursor-move'} ${dragging ? 'z-20' : 'z-10'}`}
-      style={{ left: item.x, top: item.y, touchAction: 'none' }}
+      style={{ left: item.x * scale, top: item.y * scale, touchAction: 'none' }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
       onDoubleClick={() => { if (!locked) onEdit() }}
     >
-      <div
-        className={`board-equation px-2 py-1 rounded-lg transition-colors ${locked ? '' : 'hover:bg-[#f3fcf0]/90 hover:ring-1 hover:ring-[#5ab82e]'}`}
-        style={{ fontSize: `${item.scale}rem` }}
-      >
-        {error
-          ? <span className="math-error">{item.latex}</span>
+      <div className={`board-equation px-2 py-1 rounded-lg transition-colors ${locked ? '' : 'hover:bg-[#f3fcf0]/90 hover:ring-1 hover:ring-[#5ab82e]'}`}
+        style={{ fontSize: `${item.scale * scale}rem` }}>
+        {error ? <span className="math-error">{item.latex}</span>
           : <span dangerouslySetInnerHTML={{ __html: html }} />}
       </div>
 
       {!locked && (
         <div className="absolute -top-3 right-0 hidden group-hover:flex items-center gap-0.5 bg-white border border-green-200 rounded-lg shadow-sm px-0.5 py-0.5">
           <button data-eq-control onClick={() => onScale(-0.2)} title="Smaller"
-            className="p-1 text-[#6b7280] hover:text-[#1b2b4b] hover:bg-[#f3fcf0] rounded transition-colors">
-            <Minus size={11} />
-          </button>
+            className="p-1 text-[#6b7280] hover:text-[#1b2b4b] hover:bg-[#f3fcf0] rounded transition-colors"><Minus size={11} /></button>
           <button data-eq-control onClick={() => onScale(0.2)} title="Bigger"
-            className="p-1 text-[#6b7280] hover:text-[#1b2b4b] hover:bg-[#f3fcf0] rounded transition-colors">
-            <Plus size={11} />
-          </button>
+            className="p-1 text-[#6b7280] hover:text-[#1b2b4b] hover:bg-[#f3fcf0] rounded transition-colors"><Plus size={11} /></button>
           <button data-eq-control onClick={onEdit} title="Edit equation"
-            className="p-1 text-[#6b7280] hover:text-[#5ab82e] hover:bg-[#f3fcf0] rounded transition-colors">
-            <Pencil size={11} />
-          </button>
+            className="p-1 text-[#6b7280] hover:text-[#5ab82e] hover:bg-[#f3fcf0] rounded transition-colors"><Pencil size={11} /></button>
           <button data-eq-control onClick={onDelete} title="Remove equation"
-            className="p-1 text-[#9ca3af] hover:text-red-500 hover:bg-red-50 rounded transition-colors">
-            <X size={11} />
-          </button>
+            className="p-1 text-[#9ca3af] hover:text-red-500 hover:bg-red-50 rounded transition-colors"><X size={11} /></button>
         </div>
       )}
     </div>
