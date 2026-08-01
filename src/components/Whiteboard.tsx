@@ -1384,7 +1384,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
             highlighter go over a graph rather than behind it. With the select
             tool they come to the front again so they can be moved and resized.
           */}
-          <div className="absolute inset-0" style={{ zIndex: objectsOnTop ? 20 : 1 }}>
+          <div className="absolute inset-0" style={{ zIndex: objectsOnTop ? 20 : 1, pointerEvents: 'none' }}>
             {imageItems.map(item => (
               <BoardImage key={item.id} item={item} locked={locked} scale={scale}
                 onMove={(x, y) => updateImage(item.id, { x, y })}
@@ -1414,7 +1414,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
               onDelete={() => deleteImage(item.id)} />
           ))}
 
-          <div className="absolute inset-0" style={{ zIndex: objectsOnTop ? 20 : 12 }}>
+          <div className="absolute inset-0" style={{ zIndex: objectsOnTop ? 20 : 12, pointerEvents: 'none' }}>
           {textItems.map(item => (
             <BoardText key={item.id} item={item} locked={locked} scale={scale}
               editing={editingText === item.id}
@@ -1602,7 +1602,7 @@ function BoardText({
   return (
     <div
       className={`group absolute ${locked ? '' : editing ? '' : 'cursor-move'} ${dragging || editing ? 'z-20' : 'z-10'}`}
-      style={{ left: item.x * scale, top: item.y * scale, touchAction: 'none' }}
+      style={{ left: item.x * scale, top: item.y * scale, touchAction: 'none', pointerEvents: 'auto' }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
@@ -1709,7 +1709,7 @@ function BoardImage({ item, locked, scale, onMove, onResize, onDelete }: BoardIm
   return (
     <div
       className={`group absolute select-none ${locked ? '' : 'cursor-move'} ${active ? 'z-20' : 'z-10'}`}
-      style={{ left: item.x * scale, top: item.y * scale, width: item.width * scale, touchAction: 'none' }}
+      style={{ left: item.x * scale, top: item.y * scale, width: item.width * scale, touchAction: 'none', pointerEvents: 'auto' }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
@@ -1779,7 +1779,7 @@ function BoardEquation({ item, locked, scale, onMove, onScale, onEdit, onDelete 
   return (
     <div
       className={`group absolute select-none ${locked ? '' : 'cursor-move'} ${dragging ? 'z-20' : 'z-10'}`}
-      style={{ left: item.x * scale, top: item.y * scale, touchAction: 'none' }}
+      style={{ left: item.x * scale, top: item.y * scale, touchAction: 'none', pointerEvents: 'auto' }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
