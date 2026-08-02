@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { X, Sigma, Trash2, CornerDownLeft } from 'lucide-react'
-import { renderMath, MATH_GROUPS, MATH_TEMPLATES, type MathItem } from '../lib/math'
+import { renderMath, normaliseMathPaste, MATH_GROUPS, MATH_TEMPLATES, type MathItem } from '../lib/math'
 
 interface Props {
   /** Existing LaTeX when editing, empty when inserting a new equation. */
@@ -159,9 +159,23 @@ export default function MathModal({
             ref={inputRef}
             value={latex}
             onChange={e => setLatex(e.target.value)}
-            rows={2}
+            onPaste={e => {
+              // Working copied out of a chat or a PDF arrives with characters KaTeX
+              // cannot read. Clean it up and keep the line breaks, so a whole
+              // solution can go up in one go instead of equation by equation.
+              const text = e.clipboardData.getData('text/plain')
+              if (!text) return
+              e.preventDefault()
+              const el = e.currentTarget
+              const start = el.selectionStart ?? latex.length
+              const end = el.selectionEnd ?? start
+              const cleaned = normaliseMathPaste(text)
+              setLatex(latex.slice(0, start) + cleaned + latex.slice(end))
+              pendingCaret.current = start + cleaned.length
+            }}
+            rows={4}
             spellCheck={false}
-            placeholder="e.g.  x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}"
+            placeholder={'One line, or paste a whole working out:\nA = A_1 + A_2 - A_3 - A_4\nA = 72000 + 22619.47 - 7853.98 - 4800\nA = 81965.49'}
             className="w-full px-3 py-2 rounded-lg border border-green-200 bg-[#f9fef6] font-mono text-sm text-[#1b2b4b] outline-none focus:border-[#5ab82e] focus:bg-white resize-none"
           />
         </div>
@@ -204,7 +218,7 @@ export default function MathModal({
         {/* Footer */}
         <div className="flex items-center gap-2 px-4 py-3 border-t border-green-100 bg-[#f9fef6] shrink-0">
           <span className="text-[10px] text-[#9ca3af] hidden sm:flex items-center gap-1">
-            <CornerDownLeft size={11} /> Ctrl+Enter to insert
+            <CornerDownLeft size={11} /> Ctrl+Enter to insert. Several lines are lined up on their equals sign.
           </span>
           {onDelete && (
             <button onClick={onDelete}

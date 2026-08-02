@@ -14,9 +14,84 @@ export interface RenderResult {
  * `error` message so the caller can show the raw source instead of blowing up
  * the whole editor.
  */
+// Zero-width and non-breaking characters that copy along with chat text.
+const INVISIBLE = new RegExp('[\\u200B-\\u200D\\uFEFF\\u2060]', 'g')
+const NBSP = new RegExp('\\u00A0', 'g')
+
+const SUBSCRIPTS = '₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎'
+const SUPERSCRIPTS = '⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾'
+const SCRIPT_VALUES = '0123456789+-=()'
+
+/**
+ * Clean up maths pasted from somewhere else. Text copied out of a chat or a PDF
+ * arrives full of characters KaTeX cannot read: real subscript glyphs, a minus
+ * sign that is not a hyphen, times and divide signs. Convert them rather than
+ * making the teacher retype the whole thing.
+ */
+export function normaliseMathPaste(text: string): string {
+  let out = ''
+  for (const ch of text) {
+    const sub = SUBSCRIPTS.indexOf(ch)
+    if (sub !== -1) { out += `_${SCRIPT_VALUES[sub]}`; continue }
+    const sup = SUPERSCRIPTS.indexOf(ch)
+    if (sup !== -1) { out += `^${SCRIPT_VALUES[sup]}`; continue }
+    out += ch
+  }
+  return out
+    // Chat and PDF copies are littered with invisible characters. KaTeX has no
+    // glyph for them and complains, so they go first.
+    .replace(INVISIBLE, '')
+    .replace(NBSP, ' ')
+    // A chat often breaks a subscript onto its own line: "A" then "1".
+    // Pull a lone digit or index back onto the line above.
+    .replace(/\n[ \t]*([0-9]{1,2})[ \t]*(?=\n|$)/g, '_$1')
+    .replace(/−/g, '-')       // real minus sign
+    .replace(/[×]/g, '\\times')
+    .replace(/[÷]/g, '\\div')
+    .replace(/±/g, '\\pm')
+    .replace(/≈/g, '\\approx')
+    .replace(/≠/g, '\\neq')
+    .replace(/≤/g, '\\leq')
+    .replace(/≥/g, '\\geq')
+    .replace(/√/g, '\\sqrt')
+    .replace(/π/g, '\\pi')
+    .replace(/∑/g, '\\sum')
+    .replace(/∫/g, '\\int')
+    .replace(/∞/g, '\\infty')
+    .replace(/°/g, '^\\circ')
+    // Thousands separators would otherwise break the parse: 72,000 -> 72000
+    .replace(/(\d),(\d{3})\b/g, '$1$2')
+    // Collapse the blank lines a chat paste leaves behind
+    .replace(/\n{2,}/g, '\n')
+    .split('\n').map(line => line.trim()).filter(Boolean)
+    // A wrapped equation continues on the next line. Anything starting with an
+    // operator belongs to the line above, not to a new line of working.
+    .reduce<string[]>((lines, line) => {
+      if (lines.length && /^[+\-*/=×÷]/.test(line)) lines[lines.length - 1] += ` ${line}`
+      else lines.push(line)
+      return lines
+    }, [])
+    .join('\n')
+}
+
+/**
+ * Several lines become one aligned block, so a whole piece of working can go up
+ * at once instead of one equation at a time. Lines are lined up on their `=`.
+ */
+function buildAligned(source: string): string {
+  const lines = source.split('\n').map(l => l.trim()).filter(Boolean)
+  if (lines.length < 2) return source
+  const rows = lines.map(line =>
+    line.includes('&') ? line : line.replace('=', '&='),
+  )
+  return `\\begin{aligned}${rows.join(' \\\\ ')}\\end{aligned}`
+}
+
 export function renderMath(latex: string, displayMode = false): RenderResult {
-  const source = latex.trim()
-  if (!source) return { html: '', error: null }
+  const trimmed = latex.trim()
+  if (!trimmed) return { html: '', error: null }
+  // Multi-line input is laid out as an aligned block rather than rejected.
+  const source = trimmed.includes('\n') ? buildAligned(trimmed) : trimmed
   try {
     const html = katex.renderToString(source, {
       displayMode,
