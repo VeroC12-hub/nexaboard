@@ -30,7 +30,7 @@ import {
   List, ListOrdered, Quote, Code2, Minus,
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
   Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X, Maximize2,
-  Volume2, VolumeX, Palette, Highlighter, Sigma, LineChart, Printer, Check, AlertTriangle,
+  Volume2, VolumeX, Palette, Highlighter, Sigma, LineChart, Printer, Check, AlertTriangle, Files,
 } from 'lucide-react'
 
 // ── Preset colour swatches ────────────────────────────────────────────────────
@@ -442,11 +442,54 @@ interface Props {
 const STORAGE_KEY = (sessionId: string, notesKey?: string) =>
   `nexaboard_notes_${sessionId}${notesKey ? `_${notesKey}` : ''}`
 
-function loadSaved(sessionId: string, notesKey?: string) {
+/** One page of notes. A lesson holds several, the way the board does. */
+interface NotePage {
+  id: string
+  name: string
+  content: unknown
+}
+
+interface NotesDoc {
+  version: 2
+  pages: NotePage[]
+  activePageId: string
+}
+
+const emptyNotePage = (name = 'Page 1'): NotePage =>
+  ({ id: crypto.randomUUID(), name, content: null })
+
+const emptyNotesDoc = (): NotesDoc => {
+  const page = emptyNotePage()
+  return { version: 2, pages: [page], activePageId: page.id }
+}
+
+/**
+ * Read whatever is stored. Notes used to be a single Tiptap document with no
+ * wrapper, so anything without a version becomes page one rather than being lost.
+ */
+function parseNotesDoc(raw: unknown): NotesDoc {
+  if (!raw || typeof raw !== 'object') return emptyNotesDoc()
+  const value = raw as Partial<NotesDoc>
+  if (value.version === 2 && Array.isArray(value.pages) && value.pages.length) {
+    const pages = value.pages.map((p, i) => ({
+      id: p.id ?? crypto.randomUUID(),
+      name: p.name ?? `Page ${i + 1}`,
+      content: p.content ?? null,
+    }))
+    const active = pages.some(p => p.id === value.activePageId) ? value.activePageId! : pages[0].id
+    return { version: 2, pages, activePageId: active }
+  }
+  // An older single document: keep it as the first page.
+  const page = emptyNotePage()
+  page.content = raw
+  return { version: 2, pages: [page], activePageId: page.id }
+}
+
+function loadSaved(sessionId: string, notesKey?: string): NotesDoc {
   try {
     const raw = localStorage.getItem(STORAGE_KEY(sessionId, notesKey))
-    return raw ? JSON.parse(raw) : null
-  } catch { return null }
+    return raw ? parseNotesDoc(JSON.parse(raw)) : emptyNotesDoc()
+  } catch { return emptyNotesDoc() }
 }
 
 export default function RichTextEditor({
@@ -457,6 +500,8 @@ export default function RichTextEditor({
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
   const lastBroadcast = useRef(0)
   const isRemoteUpdate = useRef(false)
+  const pagesRef = useRef<NotePage[]>([])
+  const activePageIdRef = useRef('')
   const fileInputRef = useRef<HTMLInputElement>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
 
@@ -474,6 +519,8 @@ export default function RichTextEditor({
   const [fullscreenDoc, setFullscreenDoc] = useState<{ src: string; filename: string; fileType: FileType } | null>(null)
   const [fullscreenCad, setFullscreenCad] = useState<{ urn: string; src: string; kind: string; filename: string } | null>(null)
   const [speaking, setSpeaking] = useState(false)
+  const [pages, setPages] = useState<NotePage[]>([])
+  const [activePageId, setActivePageId] = useState('')
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'failed'>('idle')
   const [saveError, setSaveError] = useState<string | null>(null)
 
@@ -508,7 +555,7 @@ export default function RichTextEditor({
       MathBlock,
       MathTrailingParagraph,
     ],
-    content: loadSaved(sessionId, notesKey) ?? undefined,
+    content: undefined,
     editable: canWrite,
     editorProps: {
       // Copy a graph, chart or diagram from anywhere and paste it straight in.
@@ -530,16 +577,90 @@ export default function RichTextEditor({
     onUpdate: ({ editor }) => {
       if (isRemoteUpdate.current || !canWrite) return
       const content = editor.getJSON()
+      const doc = docWithLivePage(content)
       if (personal) {
         // A student's own notes are theirs; keep them on their device.
-        localStorage.setItem(STORAGE_KEY(sessionId, notesKey), JSON.stringify(content))
+        localStorage.setItem(STORAGE_KEY(sessionId, notesKey), JSON.stringify(doc))
       } else if (isTeacher) {
-        localStorage.setItem(STORAGE_KEY(sessionId), JSON.stringify(content))
-        scheduleNotesSave(content)
+        localStorage.setItem(STORAGE_KEY(sessionId), JSON.stringify(doc))
+        scheduleNotesSave(doc)
       }
-      broadcastContent(content)
+      // Students follow the page the teacher is on, so send the whole document.
+      broadcastContent(doc)
     },
   })
+
+
+  /** Fold what is in the editor right now back into the page list. */
+  const docWithLivePage = useCallback((content: unknown): NotesDoc => {
+    const list = pagesRef.current.length ? pagesRef.current : [emptyNotePage()]
+    const activeId = activePageIdRef.current || list[0].id
+    const pages = list.map(p => (p.id === activeId ? { ...p, content } : p))
+    pagesRef.current = pages
+    return { version: 2, pages, activePageId: activeId }
+  }, [])
+
+  const goToNotePage = (id: string) => {
+    if (!editor || id === activePageIdRef.current) return
+    const doc = docWithLivePage(editor.getJSON())
+    const target = doc.pages.find(p => p.id === id)
+    if (!target) return
+    showPageRef.current?.(target)
+    persistDoc({ ...doc, activePageId: id })
+  }
+
+  const addNotePage = () => {
+    if (!editor) return
+    const doc = docWithLivePage(editor.getJSON())
+    const page = emptyNotePage(`Page ${doc.pages.length + 1}`)
+    const next = [...doc.pages, page]
+    showPageRef.current?.(page)
+    persistDoc({ version: 2, pages: next, activePageId: page.id })
+  }
+
+  const deleteNotePage = (id: string) => {
+    if (!editor) return
+    const doc = docWithLivePage(editor.getJSON())
+    if (doc.pages.length <= 1) { toast.error('Notes need at least one page'); return }
+    if (!window.confirm('Delete this page of notes?')) return
+    const index = doc.pages.findIndex(p => p.id === id)
+    const next = doc.pages.filter(p => p.id !== id)
+    const fallback = next[Math.max(0, index - 1)]
+    showPageRef.current?.(fallback)
+    persistDoc({ version: 2, pages: next, activePageId: fallback.id })
+  }
+
+  const showPageRef = useRef<((page: NotePage) => void) | null>(null)
+
+  /** Put a page's content into the editor without echoing it back out. */
+  const showPage = useCallback((page: NotePage) => {
+    if (!editor) return
+    isRemoteUpdate.current = true
+    editor.commands.setContent((page.content as object) ?? '')
+    isRemoteUpdate.current = false
+    activePageIdRef.current = page.id
+    setActivePageId(page.id)
+  }, [editor])
+
+  useEffect(() => { showPageRef.current = showPage }, [showPage])
+
+  const applyDoc = useCallback((doc: NotesDoc) => {
+    pagesRef.current = doc.pages
+    setPages(doc.pages)
+    const active = doc.pages.find(p => p.id === doc.activePageId) ?? doc.pages[0]
+    showPage(active)
+  }, [showPage])
+
+  // Open whatever was stored once the editor exists.
+  const applyDocRef = useRef<((doc: NotesDoc) => void) | null>(null)
+  const openedRef = useRef(false)
+  useEffect(() => { applyDocRef.current = applyDoc }, [applyDoc])
+
+  useEffect(() => {
+    if (!editor || openedRef.current) return
+    openedRef.current = true
+    applyDoc(loadSaved(sessionId, notesKey))
+  }, [editor, sessionId, notesKey, applyDoc])
 
   // Notes are saved to the lesson row as well as localStorage, so they survive a
   // refresh on any device and absent students can read them afterwards.
@@ -580,9 +701,7 @@ export default function RichTextEditor({
       if (cancelled || !lesson?.notes) return
       // Never clobber something the teacher has already started typing here.
       if (!editor.isEmpty && isTeacher) return
-      isRemoteUpdate.current = true
-      editor.commands.setContent(lesson.notes as object)
-      isRemoteUpdate.current = false
+      applyDocRef.current?.(parseNotesDoc(lesson.notes))
     }).catch(() => {})
     return () => { cancelled = true }
   }, [editor, sessionId, personal, isTeacher])
@@ -599,15 +718,24 @@ export default function RichTextEditor({
     })
   }, [myId, participantName, isTeacher])
 
+  /** Save the live page, switch, and tell everyone else. */
+  const persistDoc = (doc: NotesDoc) => {
+    pagesRef.current = doc.pages
+    setPages(doc.pages)
+    const store = personal ? STORAGE_KEY(sessionId, notesKey) : STORAGE_KEY(sessionId)
+    localStorage.setItem(store, JSON.stringify(doc))
+    if (isTeacher && !personal) scheduleNotesSave(doc)
+    broadcastContent(doc)
+  }
+
   useEffect(() => {
     const channel = supabase
       .channel(personal ? `notes:${sessionId}:${notesKey}` : `notes:${sessionId}`)
       .on('broadcast', { event: 'notes_update' }, ({ payload }) => {
         if (!editor || payload.senderId === myId) return
-        isRemoteUpdate.current = true
-        editor.commands.setContent(payload.content)
-        localStorage.setItem(STORAGE_KEY(sessionId, notesKey), JSON.stringify(payload.content))
-        isRemoteUpdate.current = false
+        const doc = parseNotesDoc(payload.content)
+        applyDocRef.current?.(doc)
+        localStorage.setItem(STORAGE_KEY(sessionId, notesKey), JSON.stringify(doc))
         if (isTeacher && payload.senderName) setActiveEditor(payload.senderName)
       })
       .on('broadcast', { event: 'notes_sync_req' }, () => {
@@ -1216,6 +1344,36 @@ export default function RichTextEditor({
       )}
 
       {/* Document chips — always visible, extracted from editor content */}
+      {/* Pages, like the board: fill one, start the next, flip back any time */}
+      <div className="flex items-center gap-1.5 px-4 py-1.5 border-b border-green-100 bg-[#f9fef6] shrink-0 overflow-x-auto">
+        <Files size={12} className="text-[#9ca3af] shrink-0" />
+        {pages.map((page, i) => (
+          <button key={page.id} onClick={() => goToNotePage(page.id)}
+            title={`Go to ${page.name}`}
+            className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors shrink-0 ${
+              page.id === activePageId
+                ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]'
+                : 'bg-white text-[#6b7280] border-green-200 hover:bg-[#f3fcf0] hover:text-[#1b2b4b]'
+            }`}>
+            {i + 1}
+            {canWrite && pages.length > 1 && page.id === activePageId && (
+              <span onClick={e => { e.stopPropagation(); deleteNotePage(page.id) }}
+                title="Delete this page"
+                className="ml-0.5 text-white/60 hover:text-red-300"><X size={11} /></span>
+            )}
+          </button>
+        ))}
+        {canWrite && (
+          <button onClick={addNotePage} title="Start a new page of notes"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-[#5ab82e] bg-white border border-green-200 hover:bg-[#f3fcf0] transition-colors shrink-0">
+            <PlusSquare size={12} /> New page
+          </button>
+        )}
+        <span className="ml-auto text-[10px] text-[#9ca3af] shrink-0 hidden md:block">
+          {pages.length} {pages.length === 1 ? 'page' : 'pages'}
+        </span>
+      </div>
+
       <DocBar editor={editor} />
 
       <div className="flex-1 overflow-y-auto px-8 py-6">
