@@ -110,7 +110,7 @@ export default function MathModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onMouseDown={onClose}>
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden border border-green-200"
+        className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[92vh] flex flex-col overflow-hidden border border-green-200"
         onMouseDown={e => e.stopPropagation()}
         onKeyDown={onKeyDown}
       >
@@ -138,7 +138,12 @@ export default function MathModal({
         </div>
 
         {/* Live preview */}
-        <div className="px-4 py-4 border-b border-green-100 shrink-0 min-h-[92px] flex flex-col justify-center">
+        {/*
+          Capped and scrollable. A long multi-line equation used to grow the
+          preview until it pushed Insert out of the modal, where it could not be
+          reached or scrolled to.
+        */}
+        <div className="px-4 py-4 border-b border-green-100 shrink-0 min-h-[92px] max-h-[34vh] overflow-y-auto">
           <div className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider mb-2">Preview</div>
           {latex.trim() === '' ? (
             <div className="text-sm text-[#9ca3af] italic">
@@ -194,7 +199,7 @@ export default function MathModal({
           ))}
         </div>
 
-        <div className="flex-1 min-h-0 overflow-y-auto px-4 py-3">
+        <div className="flex-1 min-h-[60px] overflow-y-auto px-4 py-3">
           <div className="flex flex-wrap gap-1.5">
             {activeGroup.items.map(item => (
               <SymbolButton key={item.title + item.latex} item={item} onPick={insertSnippet} />
