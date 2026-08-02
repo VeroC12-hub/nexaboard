@@ -145,6 +145,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
   const followingRef = useRef(following)
   const teacherScrollTop = useRef(0)
   const lastViewBroadcast = useRef(0)
+  const syncRetry = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const gotSnapshot = useRef(false)
   useEffect(() => { lockedRef.current = locked }, [locked])
   useEffect(() => { colorRef.current = color }, [color])
   useEffect(() => { sizeRef.current = size }, [size])
@@ -298,6 +300,9 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
     undoStack.current = []
     redoStack.current = []
     refreshUndoFlags()
+    // Size and paint straight away. Waiting on requestAnimationFrame left the
+    // board blank whenever the tab was not in the foreground.
+    fitCanvas()
     requestAnimationFrame(() => fitCanvas())
   }, [fitCanvas])
 
@@ -520,6 +525,8 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
         redraw()
       })
       .on('broadcast', { event: 'wb_snapshot' }, ({ payload }) => {
+        gotSnapshot.current = true
+        if (syncRetry.current) clearTimeout(syncRetry.current)
         // A peer's live state is newer than what came out of the database.
         const board = parseBoardState(payload.board)
         setPages(board.pages)
@@ -550,12 +557,24 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
         })
       })
       .subscribe(status => {
-        if (status === 'SUBSCRIBED') {
+        if (status !== 'SUBSCRIBED') return
+        // A single request is lost if the other side subscribes a moment later,
+        // which is exactly what happens when a teacher opens a student's board
+        // mid-lesson. Keep asking until an answer arrives.
+        let tries = 0
+        const ask = () => {
+          if (gotSnapshot.current || tries >= 5) return
+          tries++
           channel.send({ type: 'broadcast', event: 'wb_sync_req', payload: {} })
+          syncRetry.current = setTimeout(ask, 700)
         }
+        ask()
       })
     channelRef.current = channel
-    return () => { supabase.removeChannel(channel) }
+    return () => {
+      if (syncRetry.current) clearTimeout(syncRetry.current)
+      supabase.removeChannel(channel)
+    }
   }, [sessionId, personal, boardKey, canDraw, loaded, isTeacher, myId, redraw, snapshot, scrollToTeacher, openPage, showLaser])
 
   // ── Text on the board ───────────────────────────────────────────────────────
