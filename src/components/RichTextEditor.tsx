@@ -517,6 +517,8 @@ export default function RichTextEditor({
   const [uploading, setUploading] = useState(false)
   const [activeEditor, setActiveEditor] = useState<string | null>(null)
   const [fullscreenDoc, setFullscreenDoc] = useState<{ src: string; filename: string; fileType: FileType } | null>(null)
+  /** Every document in these notes, so the viewer can switch between them. */
+  const [openDocs, setOpenDocs] = useState<{ src: string; filename: string; fileType: FileType }[]>([])
   const [fullscreenCad, setFullscreenCad] = useState<{ urn: string; src: string; kind: string; filename: string } | null>(null)
   const [speaking, setSpeaking] = useState(false)
   const [pages, setPages] = useState<NotePage[]>([])
@@ -801,6 +803,22 @@ export default function RichTextEditor({
     return () => document.removeEventListener('mousedown', close)
   }, [])
 
+  useEffect(() => {
+    if (!editor) return
+    const collect = () => {
+      const found: { src: string; filename: string; fileType: FileType }[] = []
+      editor.state.doc.descendants((node: { type: { name: string }; attrs: Record<string, unknown> }) => {
+        if (node.type.name === 'documentEmbed') {
+          found.push(node.attrs as unknown as { src: string; filename: string; fileType: FileType })
+        }
+      })
+      setOpenDocs(found)
+    }
+    collect()
+    editor.on('update', collect)
+    return () => { editor.off('update', collect) }
+  }, [editor])
+
   // Clicking an equation in the document opens the equation editor
   useEffect(() => {
     const handler = (e: Event) => setMathEdit((e as CustomEvent).detail as MathEditDetail)
@@ -838,9 +856,15 @@ export default function RichTextEditor({
 
   // ── File upload ─────────────────────────────────────────────────────────────
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file || !editor) return
+    const chosen = Array.from(e.target.files ?? [])
+    if (!chosen.length || !editor) return
     e.target.value = ''
+    // Pick a textbook and a worksheet together and get both, one after the other.
+    for (const each of chosen) await openOneFile(each)
+  }
+
+  const openOneFile = async (file: File) => {
+    if (!editor) return
 
     // DXF renders in the browser with no Autodesk account; DWG goes through APS translation
     if (/\.dxf$/i.test(file.name)) {
@@ -999,9 +1023,14 @@ export default function RichTextEditor({
   }
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file || !editor) return
+    const chosen = Array.from(e.target.files ?? [])
+    if (!chosen.length || !editor) return
     e.target.value = ''
+    for (const file of chosen) await insertOneImage(file)
+  }
+
+  const insertOneImage = async (file: File) => {
+    if (!editor) return
     if (!/\.(png|jpe?g|gif|webp|svg)$/i.test(file.name)) {
       toast.error('Supported image formats: PNG, JPG, GIF, WebP, SVG')
       return
@@ -1139,10 +1168,10 @@ export default function RichTextEditor({
   return (
     <div className="h-full flex flex-col bg-white">
       {/* Hidden file inputs */}
-      <input ref={fileInputRef} type="file"
+      <input ref={fileInputRef} type="file" multiple
         accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.dwg,.dxf"
         onChange={handleFileUpload} className="hidden" />
-      <input ref={imageInputRef} type="file"
+      <input ref={imageInputRef} type="file" multiple
         accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml"
         onChange={handleImageUpload} className="hidden" />
 
@@ -1415,9 +1444,28 @@ export default function RichTextEditor({
 
       {fullscreenDoc && (
         <div className="fixed inset-0 z-50 flex flex-col bg-black/80">
-          <div className="flex items-center gap-3 px-4 py-2 bg-[#1b2b4b] shrink-0">
-            <span className="text-base leading-none">{FILE_ICONS[fullscreenDoc.fileType]}</span>
-            <span className="text-sm font-medium text-white flex-1 truncate">{fullscreenDoc.filename}</span>
+          <div className="flex items-center gap-2 px-3 py-2 bg-[#1b2b4b] shrink-0 overflow-x-auto">
+            {/* One tab per open document: switch without closing and reopening */}
+            {openDocs.length > 1 ? (
+              openDocs.map(doc => (
+                <button key={doc.src} onClick={() => setFullscreenDoc(doc)}
+                  title={doc.filename}
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium shrink-0 max-w-[200px] transition-colors ${
+                    doc.src === fullscreenDoc.src
+                      ? 'bg-white text-[#1b2b4b]'
+                      : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
+                  }`}>
+                  <span className="leading-none">{FILE_ICONS[doc.fileType]}</span>
+                  <span className="truncate">{doc.filename}</span>
+                </button>
+              ))
+            ) : (
+              <>
+                <span className="text-base leading-none">{FILE_ICONS[fullscreenDoc.fileType]}</span>
+                <span className="text-sm font-medium text-white flex-1 truncate">{fullscreenDoc.filename}</span>
+              </>
+            )}
+            <span className="flex-1" />
             <a href={fullscreenDoc.src} target="_blank" rel="noreferrer"
               className="text-xs text-[#5ab82e] hover:underline px-2 py-1 rounded transition-colors">
               Open original
