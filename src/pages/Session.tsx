@@ -11,7 +11,7 @@ import ClassQuestion from '../components/ClassQuestion'
 import StudentWorkPanel from '../components/StudentWorkPanel'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff, HelpCircle, PenSquare } from 'lucide-react'
+import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff, HelpCircle, PenSquare, RotateCcw } from 'lucide-react'
 import VideoCallNative from '../components/VideoCallNative'
 
 type Tab = 'whiteboard' | 'code' | 'notes'
@@ -28,6 +28,7 @@ export default function Session({ user }: { user: User }) {
   const [workOpen, setWorkOpen] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768)
   const [ending, setEnding] = useState(false)
+  const [resuming, setResuming] = useState(false)
   const [callOpen, setCallOpen] = useState(() => sessionStorage.getItem(`nexaboard_call_${id}`) === 'true')
   // Prevents auto-rejoin after teacher explicitly leaves or is removed from the call
   const [callManuallyLeft, setCallManuallyLeft] = useState(false)
@@ -44,12 +45,18 @@ export default function Session({ user }: { user: User }) {
 
   useEffect(() => { if (id) fetchSession() }, [id])
 
-  // Listen for session ending from another device → navigate away
+  // Follow the session status when it changes on another device.
+  // Ended elsewhere → leave. Resumed elsewhere → stay and catch up, so a teacher
+  // who reopened the class on their phone doesn't get thrown out on their laptop.
   useEffect(() => {
     if (!id) return
     const ch = supabase.channel(`session_status_teacher:${id}`)
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'sessions', filter: `id=eq.${id}` },
-        payload => { if (payload.new.status === 'ended') navigate('/dashboard') })
+        payload => {
+          const status = payload.new.status as SessionType['status']
+          if (status === 'ended') navigate('/dashboard')
+          else setSession(prev => prev ? { ...prev, status, ended_at: null } : prev)
+        })
       .subscribe()
     return () => { supabase.removeChannel(ch) }
   }, [id])
@@ -97,6 +104,24 @@ export default function Session({ user }: { user: User }) {
     navigate('/dashboard')
   }
 
+  /**
+   * Reopen an ended class. The board, notes and code are already in
+   * whiteboard_state, so nothing needs restoring. Flipping the status back to
+   * active is what lets students read the row again under RLS and rejoin on the
+   * same code. Participants stay inactive until they actually come back.
+   */
+  const resumeSession = async () => {
+    setResuming(true)
+    const { error } = await supabase
+      .from('sessions').update({ status: 'active', ended_at: null }).eq('id', id)
+    setResuming(false)
+    if (error) { toast.error(`Couldn’t resume: ${error.message}`); return }
+    setSession(prev => prev ? { ...prev, status: 'active', ended_at: null } : prev)
+    toast.success('Class resumed. Students can rejoin on the same code.')
+  }
+
+  const isLive = session?.status === 'active'
+
   if (loading) return (
     <div className="flex items-center justify-center min-h-screen bg-[#f3fcf0]">
       <div className="w-8 h-8 border-2 border-[#5ab82e] border-t-transparent rounded-full animate-spin" />
@@ -124,8 +149,10 @@ export default function Session({ user }: { user: User }) {
             <span className="font-bold text-sm text-[#1b2b4b] truncate block">{session?.title}</span>
           </div>
           <div className="flex items-center gap-1 shrink-0">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#5ab82e] animate-pulse" />
-            <span className="text-xs text-[#5ab82e] font-semibold">Live</span>
+            <div className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-[#5ab82e] animate-pulse' : 'bg-[#9ca3af]'}`} />
+            <span className={`text-xs font-semibold ${isLive ? 'text-[#5ab82e]' : 'text-[#9ca3af]'}`}>
+              {isLive ? 'Live' : 'Ended'}
+            </span>
           </div>
         </div>
 
@@ -156,6 +183,8 @@ export default function Session({ user }: { user: User }) {
             className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
             <HelpCircle size={12} /> Ask
           </button>
+          {/* The code and the call only mean anything while the class is open. */}
+          {isLive && <>
           <button onClick={copyCode}
             className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#5ab82e] font-mono font-bold rounded-lg text-xs border border-green-200 transition-colors">
             <Copy size={11} /> {session?.join_code}
@@ -180,10 +209,20 @@ export default function Session({ user }: { user: User }) {
           >
             {callOpen ? <VideoOff size={12} /> : <Video size={12} />} {callOpen ? 'Leave Call' : callManuallyLeft ? 'Rejoin Call' : 'Start Call'}
           </button>
-          <button onClick={endSession} disabled={ending}
-            className="flex items-center gap-1 px-2.5 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg text-xs font-semibold border border-red-100 transition-colors">
-            <Square size={11} /> End
-          </button>
+          </>}
+
+          {isLive ? (
+            <button onClick={endSession} disabled={ending}
+              className="flex items-center gap-1 px-2.5 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg text-xs font-semibold border border-red-100 transition-colors">
+              <Square size={11} /> End
+            </button>
+          ) : (
+            <button onClick={resumeSession} disabled={resuming}
+              title="Reopen this class so students can rejoin on the same code"
+              className="flex items-center gap-1 px-2.5 py-1.5 bg-[#5ab82e] hover:bg-[#489f22] disabled:opacity-50 text-white rounded-lg text-xs font-semibold border border-[#5ab82e] transition-colors shadow-sm">
+              <RotateCcw size={11} /> {resuming ? 'Resuming…' : 'Resume class'}
+            </button>
+          )}
         </div>
       </header>
 

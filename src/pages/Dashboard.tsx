@@ -5,7 +5,7 @@ import { generateJoinCode, formatDate, timeAgo } from '../lib/utils'
 import toast from 'react-hot-toast'
 import type { User } from '@supabase/supabase-js'
 import type { Session } from '../types'
-import { Plus, BookOpen, Clock, Monitor, ChevronRight, LogOut, Copy, Play, Square, Users } from 'lucide-react'
+import { Plus, BookOpen, Clock, Monitor, ChevronRight, LogOut, Copy, Play, Square, RotateCcw } from 'lucide-react'
 
 const SUBJECTS = ['Python', 'Machine Learning', 'Data Analysis', 'Autodesk', 'Mathematics', 'Coding', 'Other']
 
@@ -62,6 +62,20 @@ export default function Dashboard({ user }: { user: User }) {
     await supabase.from('sessions').update({ status: 'ended', ended_at: new Date().toISOString() }).eq('id', id)
     setSessions(prev => prev.map(s => s.id === id ? { ...s, status: 'ended' } : s))
     toast.success('Session ended')
+  }
+
+  /**
+   * Reopen a past class. Everything taught in it is already saved in
+   * whiteboard_state, so this restores nothing. It reopens the row to students
+   * under RLS and puts the same join code back in service.
+   */
+  const resumeSession = async (id: string, e: React.MouseEvent) => {
+    e.preventDefault(); e.stopPropagation()
+    const { error } = await supabase
+      .from('sessions').update({ status: 'active', ended_at: null }).eq('id', id)
+    if (error) { toast.error(`Couldn’t resume: ${error.message}`); return }
+    toast.success('Class resumed on the same join code')
+    navigate(`/session/${id}`)
   }
 
   const copyCode = (code: string, e: React.MouseEvent) => {
@@ -185,10 +199,12 @@ export default function Dashboard({ user }: { user: User }) {
         {/* Past sessions */}
         {pastSessions.length > 0 && (
           <div>
-            <h3 className="text-xs font-semibold text-[#6b7280] uppercase tracking-wider mb-3">Past Sessions</h3>
+            <h3 className="text-xs font-semibold text-[#6b7280] uppercase tracking-wider mb-1">Past Sessions</h3>
+            <p className="text-xs text-[#9ca3af] mb-3">Open one to look back over the board and notes, or resume it to teach again on the same code.</p>
             <div className="space-y-2">
               {pastSessions.map(session => (
-                <div key={session.id} className="flex items-center justify-between bg-white border border-green-100 rounded-xl p-4">
+                <Link key={session.id} to={`/session/${session.id}`}
+                  className="flex items-center justify-between bg-white border border-green-100 rounded-xl p-4 hover:border-[#5ab82e]/40 hover:shadow-sm transition-all group">
                   <div className="flex items-center gap-4">
                     <div className="w-2 h-2 rounded-full bg-gray-300" />
                     <div>
@@ -196,10 +212,15 @@ export default function Dashboard({ user }: { user: User }) {
                       <p className="text-xs text-[#9ca3af] mt-0.5">{session.subject} · {formatDate(session.created_at)}</p>
                     </div>
                   </div>
-                  <span className="flex items-center gap-1.5 text-xs text-[#9ca3af] px-2 py-1 bg-[#f3fcf0] rounded-lg border border-green-100">
-                    <Users size={11} /> Ended
-                  </span>
-                </div>
+                  <div className="flex items-center gap-2">
+                    <button onClick={e => resumeSession(session.id, e)}
+                      title="Reopen this class so students can rejoin on the same code"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#f3fcf0] hover:bg-[#5ab82e] hover:text-white text-[#5ab82e] rounded-lg text-xs font-semibold border border-green-200 hover:border-[#5ab82e] transition-colors">
+                      <RotateCcw size={11} /> Resume
+                    </button>
+                    <ChevronRight size={16} className="text-[#9ca3af] group-hover:text-[#5ab82e] group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
