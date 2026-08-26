@@ -6,7 +6,7 @@
 
 type Token =
   | { kind: 'num'; value: number }
-  | { kind: 'var' }
+  | { kind: 'var'; name: string }
   | { kind: 'fn'; name: string }
   | { kind: 'op'; name: string }
   | { kind: 'lparen' }
@@ -37,7 +37,7 @@ const OPS: Record<string, { prec: number; rightAssoc?: boolean }> = {
 
 class ParseError extends Error {}
 
-function tokenise(input: string): Token[] {
+function tokenise(input: string, vars: readonly string[]): Token[] {
   const src = input.toLowerCase().replace(/\s+/g, '')
   const tokens: Token[] = []
   let i = 0
@@ -65,13 +65,13 @@ function tokenise(input: string): Token[] {
       let name = match[0]
       // Greedily match the longest known name, so `sinx` reads as sin(x) and
       // `xy` does not swallow a function name that is not there.
-      while (name.length > 1 && !(name in FUNCTIONS) && !(name in CONSTANTS) && name !== 'x') {
+      while (name.length > 1 && !(name in FUNCTIONS) && !(name in CONSTANTS) && !vars.includes(name)) {
         name = name.slice(0, -1)
       }
       if (afterValue()) tokens.push({ kind: 'op', name: '*' })
       if (name in FUNCTIONS) tokens.push({ kind: 'fn', name })
       else if (name in CONSTANTS) tokens.push({ kind: 'num', value: CONSTANTS[name] })
-      else if (name === 'x') tokens.push({ kind: 'var' })
+      else if (vars.includes(name)) tokens.push({ kind: 'var', name })
       else throw new ParseError(`unknown name "${name}"`)
       i += name.length
       continue
@@ -155,25 +155,40 @@ function toRpn(tokens: Token[]): Token[] {
 }
 
 export interface CompiledExpression {
-  /** Evaluate at x. Returns NaN where the function is undefined. */
-  eval: (x: number) => number
+  /**
+   * Evaluate at x, and at y for a surface. Returns NaN where the function is
+   * undefined. A two dimensional graph never passes y, and its expressions
+   * cannot name y, so the extra argument costs it nothing.
+   */
+  eval: (x: number, y?: number) => number
+  /** Which of the allowed variables the expression actually uses. */
+  uses: readonly string[]
 }
 
 /**
- * Parse `y = ...` into something plottable. Throws a readable message on bad
+ * Parse an expression into something plottable. Throws a readable message on bad
  * input so the graph editor can show it rather than silently drawing nothing.
+ *
+ * `vars` is the set of names the expression may use: ['x'] for a curve, and
+ * ['x', 'y'] for a surface. Anything outside it stays an unknown name, so a two
+ * dimensional graph still rejects a stray y exactly as it did before.
  */
-export function compile(source: string): CompiledExpression {
-  const body = source.replace(/^\s*y\s*=/i, '').trim()
+export function compile(source: string, vars: readonly string[] = ['x']): CompiledExpression {
+  // Strip a leading "y =" or "z =", but only when that letter is not itself one
+  // of the variables: on a surface, y is data rather than the name of the result.
+  const body = source.replace(/^\s*([a-z])\s*=/i, (whole, letter: string) =>
+    vars.includes(letter.toLowerCase()) ? whole : '').trim()
   if (!body) throw new ParseError('nothing to plot')
-  const rpn = toRpn(tokenise(body))
+  const rpn = toRpn(tokenise(body, vars))
   if (!rpn.length) throw new ParseError('nothing to plot')
 
-  const evaluate = (x: number): number => {
+  const uses = [...new Set(rpn.filter(t => t.kind === 'var').map(t => (t as { name: string }).name))]
+
+  const evaluate = (x: number, y = 0): number => {
     const stack: number[] = []
     for (const token of rpn) {
       if (token.kind === 'num') { stack.push(token.value); continue }
-      if (token.kind === 'var') { stack.push(x); continue }
+      if (token.kind === 'var') { stack.push(token.name === 'y' ? y : x); continue }
       if (token.kind === 'fn') {
         const a = stack.pop()
         if (a === undefined) return NaN
@@ -204,17 +219,17 @@ export function compile(source: string): CompiledExpression {
   }
 
   // Fail fast on structurally broken input rather than at draw time.
-  const probe = evaluate(1)
-  if (Number.isNaN(probe) && Number.isNaN(evaluate(0.5)) && Number.isNaN(evaluate(2))) {
+  const probe = evaluate(1, 1)
+  if (Number.isNaN(probe) && Number.isNaN(evaluate(0.5, 0.5)) && Number.isNaN(evaluate(2, 2))) {
     throw new ParseError('could not evaluate this expression')
   }
 
-  return { eval: evaluate }
+  return { eval: evaluate, uses }
 }
 
 /** Validate without throwing. Returns null when fine, or a message to show. */
-export function checkExpression(source: string): string | null {
-  try { compile(source); return null } catch (err) {
+export function checkExpression(source: string, vars: readonly string[] = ['x']): string | null {
+  try { compile(source, vars); return null } catch (err) {
     return err instanceof Error ? err.message : 'invalid expression'
   }
 }
@@ -264,22 +279,31 @@ const NUMBER = /-?\d*\.?\d+(?:[eE][+-]?\d+)?/g
  * work. Anything that is not a number is ignored, which lets a header row like
  * "x y" sit at the top harmlessly.
  */
-export function parsePoints(text: string): { points: PlotPoint[]; error: string | null } {
-  const points: PlotPoint[] = []
+export function parseTuples(text: string, size: number): { rows: number[][]; error: string | null } {
+  const rows: number[][] = []
   const lines = text.split(/\r?\n/)
+  // Worded per size, because "an odd number of values" is the natural way to say
+  // it for pairs and means nothing for triples.
+  const complaint = size === 2
+    ? 'has an odd number of values, so a point is missing its pair'
+    : `does not have a multiple of ${size} values, so a point is missing a coordinate`
   for (let i = 0; i < lines.length; i++) {
     const found = lines[i].match(NUMBER)
     if (!found) continue
-    if (found.length % 2 !== 0) {
-      return { points, error: `Line ${i + 1} has an odd number of values, so a point is missing its pair.` }
+    if (found.length % size !== 0) {
+      return { rows, error: `Line ${i + 1} ${complaint}.` }
     }
-    for (let j = 0; j < found.length; j += 2) {
-      const x = parseFloat(found[j])
-      const y = parseFloat(found[j + 1])
-      if (Number.isFinite(x) && Number.isFinite(y)) points.push({ x, y })
+    for (let j = 0; j < found.length; j += size) {
+      const group = found.slice(j, j + size).map(parseFloat)
+      if (group.every(Number.isFinite)) rows.push(group)
     }
   }
-  return { points, error: null }
+  return { rows, error: null }
+}
+
+export function parsePoints(text: string): { points: PlotPoint[]; error: string | null } {
+  const { rows, error } = parseTuples(text, 2)
+  return { points: rows.map(([x, y]) => ({ x, y })), error }
 }
 
 /** The x window that just contains every point, with a little air either side. */
@@ -312,7 +336,7 @@ export interface PlotOptions {
 }
 
 /** A tick step that lands on 1, 2 or 5 times a power of ten. */
-function niceStep(span: number, targetTicks: number): number {
+export function niceStep(span: number, targetTicks: number): number {
   const raw = span / Math.max(1, targetTicks)
   const magnitude = Math.pow(10, Math.floor(Math.log10(raw)))
   const scaled = raw / magnitude
@@ -320,7 +344,7 @@ function niceStep(span: number, targetTicks: number): number {
   return step * magnitude
 }
 
-function formatTick(value: number, step: number): string {
+export function formatTick(value: number, step: number): string {
   if (Math.abs(value) < step / 1000) return '0'
   const decimals = Math.max(0, -Math.floor(Math.log10(step)))
   const text = value.toFixed(Math.min(decimals, 6))
