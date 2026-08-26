@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
-import { X, Plus, Trash2, LineChart, RotateCcw } from 'lucide-react'
-import { drawPlot, autoYRange, checkExpression, type PlotSeries } from '../lib/plot'
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import { X, Plus, Trash2, LineChart, RotateCcw, Crosshair } from 'lucide-react'
+import { drawPlot, autoYRange, autoXRange, checkExpression, parsePoints, type PlotSeries } from '../lib/plot'
 
 interface Props {
   onInsert: (dataUrl: string) => void
@@ -24,12 +24,44 @@ const EXAMPLES: { label: string; expression: string }[] = [
   { label: 'Circle (upper half)', expression: 'sqrt(9 - x^2)' },
 ]
 
+const POINTS_PLACEHOLDER = ['1, 2', '2, 4.5', '3, 9'].join('\n')
+
 const WIDTH = 640
 const HEIGHT = 440
 
+type Join = 'none' | 'line' | 'smooth'
+
+/**
+ * What the panel is editing.
+ *
+ * A point row keeps the raw text the teacher typed, not the parsed points, so
+ * a half finished line survives a re-render. Parsing happens on the way to the
+ * canvas, which keeps plot.ts free of any notion of a text box.
+ */
+type Row =
+  | { kind: 'function'; expression: string; color: string }
+  | { kind: 'points'; text: string; label: string; color: string; join: Join; markers: boolean }
+
 export default function GraphModal({ onInsert, onClose }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [series, setSeries] = useState<PlotSeries[]>([{ expression: 'x^2', color: CURVE_COLORS[0] }])
+  const [rows, setRows] = useState<Row[]>([{ kind: 'function', expression: 'x^2', color: CURVE_COLORS[0] }])
+
+  const parsed = useMemo(
+    () => rows.map(r => (r.kind === 'points' ? parsePoints(r.text) : null)),
+    [rows])
+
+  const series = useMemo<PlotSeries[]>(
+    () => rows.map((r, i) => r.kind === 'function'
+      ? { kind: 'function', expression: r.expression, color: r.color }
+      : {
+          kind: 'points',
+          points: parsed[i]?.points ?? [],
+          color: r.color,
+          join: r.join,
+          markers: r.markers,
+          label: r.label,
+        }),
+    [rows, parsed])
   const [title, setTitle] = useState('')
   const [xLabel, setXLabel] = useState('x')
   const [yLabel, setYLabel] = useState('y')
@@ -92,17 +124,36 @@ export default function GraphModal({ onInsert, onClose }: Props) {
 
   useEffect(() => { render() }, [render])
 
-  const updateSeries = (i: number, expression: string) =>
-    setSeries(prev => prev.map((s, idx) => (idx === i ? { ...s, expression } : s)))
+  const patchRow = (i: number, patch: Partial<Row>) =>
+    setRows(prev => prev.map((r, idx) => (idx === i ? { ...r, ...patch } as Row : r)))
 
-  const addSeries = () =>
-    setSeries(prev => [...prev, { expression: '', color: CURVE_COLORS[prev.length % CURVE_COLORS.length] }])
+  const addFunction = () =>
+    setRows(prev => [...prev, { kind: 'function', expression: '', color: CURVE_COLORS[prev.length % CURVE_COLORS.length] }])
 
-  const removeSeries = (i: number) => setSeries(prev => prev.filter((_, idx) => idx !== i))
+  const addPoints = () =>
+    setRows(prev => [...prev, {
+      kind: 'points', text: '', label: '', join: 'line', markers: true,
+      color: CURVE_COLORS[prev.length % CURVE_COLORS.length],
+    }])
+
+  const removeRow = (i: number) => setRows(prev => prev.filter((_, idx) => idx !== i))
 
   const resetView = () => {
     setXMin('-10'); setXMax('10'); setAutoY(true)
   }
+
+  /** Frame the readings, for when the points sit nowhere near -10 to 10. */
+  const fitToData = () => {
+    const fit = autoXRange(series)
+    if (!fit) return
+    const tidy = (n: number) => {
+      const text = n.toFixed(2)
+      return text.includes('.') ? text.replace(/\.?0+$/, '') : text
+    }
+    setXMin(tidy(fit.xMin)); setXMax(tidy(fit.xMax)); setAutoY(true)
+  }
+
+  const hasPoints = series.some(s => s.kind === 'points' && s.points.length > 0)
 
   const insert = () => {
     const canvas = canvasRef.current
@@ -120,9 +171,9 @@ export default function GraphModal({ onInsert, onClose }: Props) {
         {/* Header */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-green-100 bg-[#f3fcf0] shrink-0">
           <LineChart size={16} className="text-[#5ab82e]" />
-          <span className="font-bold text-sm text-[#1b2b4b]">Graph a function</span>
+          <span className="font-bold text-sm text-[#1b2b4b]">Graph</span>
           <span className="text-[11px] text-[#6b7280] hidden sm:inline">
-            Type in terms of x, for example 3x^2 + 2x - 1, sin(x), 1/x
+            An equation in x, or your own table of points
           </span>
           <button onClick={onClose} className="ml-auto p-1 text-[#9ca3af] hover:text-[#1b2b4b] transition-colors rounded">
             <X size={16} />
@@ -135,32 +186,85 @@ export default function GraphModal({ onInsert, onClose }: Props) {
           <div className="w-full lg:w-80 shrink-0 border-t lg:border-t-0 lg:border-r border-green-100 overflow-y-auto p-4 flex flex-col gap-4">
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider">Functions</label>
-                <button onClick={addSeries} className="flex items-center gap-1 text-xs text-[#5ab82e] hover:text-[#489f22] font-medium">
-                  <Plus size={12} /> Add
-                </button>
+                <label className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider">Curves</label>
+                <div className="flex items-center gap-2">
+                  <button onClick={addFunction} className="flex items-center gap-1 text-xs text-[#5ab82e] hover:text-[#489f22] font-medium">
+                    <Plus size={12} /> Equation
+                  </button>
+                  <button onClick={addPoints} className="flex items-center gap-1 text-xs text-[#5ab82e] hover:text-[#489f22] font-medium">
+                    <Plus size={12} /> Points
+                  </button>
+                </div>
               </div>
               <div className="space-y-1.5">
-                {series.map((s, i) => {
-                  const problem = s.expression.trim() ? checkExpression(s.expression) : null
+                {rows.map((r, i) => {
+                  if (r.kind === 'function') {
+                    const problem = r.expression.trim() ? checkExpression(r.expression) : null
+                    return (
+                      <div key={i}>
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: r.color }} />
+                          <span className="text-xs text-[#6b7280] font-mono shrink-0">y =</span>
+                          <input
+                            value={r.expression}
+                            onChange={e => patchRow(i, { expression: e.target.value })}
+                            spellCheck={false}
+                            placeholder="x^2"
+                            className={`flex-1 min-w-0 bg-[#f9fef6] border rounded-lg px-2 py-1.5 font-mono text-sm text-[#1b2b4b] outline-none focus:bg-white ${problem ? 'border-red-300 focus:border-red-400' : 'border-green-200 focus:border-[#5ab82e]'}`}
+                          />
+                          <button onClick={() => removeRow(i)} disabled={rows.length <= 1}
+                            className="text-red-400 hover:text-red-600 disabled:opacity-25 disabled:cursor-not-allowed shrink-0">
+                            <Trash2 size={13} />
+                          </button>
+                        </div>
+                        {problem && <div className="text-[10px] text-red-500 ml-[4.2rem] mt-0.5">{problem}</div>}
+                      </div>
+                    )
+                  }
+
+                  const result = parsed[i]
+                  const count = result?.points.length ?? 0
                   return (
-                    <div key={i}>
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
-                        <span className="text-xs text-[#6b7280] font-mono shrink-0">y =</span>
+                    <div key={i} className="rounded-lg border border-green-200 bg-[#f9fef6] p-2">
+                      <div className="flex items-center gap-1.5 mb-1.5">
+                        <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: r.color }} />
                         <input
-                          value={s.expression}
-                          onChange={e => updateSeries(i, e.target.value)}
-                          spellCheck={false}
-                          placeholder="x^2"
-                          className={`flex-1 min-w-0 bg-[#f9fef6] border rounded-lg px-2 py-1.5 font-mono text-sm text-[#1b2b4b] outline-none focus:bg-white ${problem ? 'border-red-300 focus:border-red-400' : 'border-green-200 focus:border-[#5ab82e]'}`}
+                          value={r.label}
+                          onChange={e => patchRow(i, { label: e.target.value })}
+                          placeholder="Points"
+                          className="flex-1 min-w-0 bg-white border border-green-200 rounded px-2 py-1 text-xs text-[#1b2b4b] outline-none focus:border-[#5ab82e]"
                         />
-                        <button onClick={() => removeSeries(i)} disabled={series.length <= 1}
+                        <button onClick={() => removeRow(i)} disabled={rows.length <= 1}
                           className="text-red-400 hover:text-red-600 disabled:opacity-25 disabled:cursor-not-allowed shrink-0">
                           <Trash2 size={13} />
                         </button>
                       </div>
-                      {problem && <div className="text-[10px] text-red-500 ml-[4.2rem] mt-0.5">{problem}</div>}
+                      <textarea
+                        value={r.text}
+                        onChange={e => patchRow(i, { text: e.target.value })}
+                        spellCheck={false}
+                        rows={5}
+                        placeholder={POINTS_PLACEHOLDER}
+                        className="w-full bg-white border border-green-200 rounded-lg px-2 py-1.5 font-mono text-xs text-[#1b2b4b] outline-none focus:border-[#5ab82e] resize-y"
+                      />
+                      <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                        <select value={r.join} onChange={e => patchRow(i, { join: e.target.value as Join })}
+                          className="bg-white border border-green-200 rounded px-1.5 py-1 text-[11px] text-[#1b2b4b] outline-none focus:border-[#5ab82e]">
+                          <option value="none">Points only</option>
+                          <option value="line">Join with lines</option>
+                          <option value="smooth">Smooth curve</option>
+                        </select>
+                        <label className="flex items-center gap-1 text-[11px] text-[#6b7280] cursor-pointer">
+                          <input type="checkbox" checked={r.markers}
+                            onChange={e => patchRow(i, { markers: e.target.checked })}
+                            className="accent-[#5ab82e]" />
+                          Show points
+                        </label>
+                        <span className="ml-auto text-[10px] text-[#9ca3af]">
+                          {count} {count === 1 ? 'point' : 'points'}
+                        </span>
+                      </div>
+                      {result?.error && <div className="text-[10px] text-red-500 mt-0.5">{result.error}</div>}
                     </div>
                   )
                 })}
@@ -171,9 +275,17 @@ export default function GraphModal({ onInsert, onClose }: Props) {
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider">Range</label>
-                <button onClick={resetView} className="flex items-center gap-1 text-[10px] text-[#6b7280] hover:text-[#1b2b4b] font-medium">
-                  <RotateCcw size={10} /> Reset
-                </button>
+                <div className="flex items-center gap-2">
+                  {hasPoints && (
+                    <button onClick={fitToData} title="Frame the graph around the points"
+                      className="flex items-center gap-1 text-[10px] text-[#5ab82e] hover:text-[#489f22] font-medium">
+                      <Crosshair size={10} /> Fit to data
+                    </button>
+                  )}
+                  <button onClick={resetView} className="flex items-center gap-1 text-[10px] text-[#6b7280] hover:text-[#1b2b4b] font-medium">
+                    <RotateCcw size={10} /> Reset
+                  </button>
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-1.5">
                 <label className="text-[10px] text-[#6b7280]">x from
@@ -228,7 +340,7 @@ export default function GraphModal({ onInsert, onClose }: Props) {
               <div className="flex flex-wrap gap-1">
                 {EXAMPLES.map(ex => (
                   <button key={ex.label} title={ex.label}
-                    onClick={() => setSeries([{ expression: ex.expression, color: CURVE_COLORS[0] }])}
+                    onClick={() => setRows([{ kind: 'function', expression: ex.expression, color: CURVE_COLORS[0] }])}
                     className="px-2 py-1 rounded-lg border border-green-200 bg-white text-[11px] font-mono text-[#1b2b4b] hover:bg-[#f3fcf0] hover:border-[#5ab82e] transition-colors">
                     {ex.expression}
                   </button>

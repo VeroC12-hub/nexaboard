@@ -6,7 +6,7 @@ import { Table } from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
 import TableHeader from '@tiptap/extension-table-header'
 import TableCell from '@tiptap/extension-table-cell'
-import Image from '@tiptap/extension-image'
+import { NotesImage } from './NotesImage'
 import Placeholder from '@tiptap/extension-placeholder'
 import { TextStyle } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
@@ -31,6 +31,7 @@ import {
   Table as TableIcon, ImageIcon, BarChart2, PenLine,
   Trash2, PlusSquare, Lock, FileText, FolderOpen, Loader2, X, Maximize2,
   Volume2, VolumeX, Palette, Highlighter, Sigma, LineChart, Printer, Check, AlertTriangle, Files,
+  ChevronUp, ChevronDown,
 } from 'lucide-react'
 
 // ── Preset colour swatches ────────────────────────────────────────────────────
@@ -526,6 +527,18 @@ export default function RichTextEditor({
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'failed'>('idle')
   const [saveError, setSaveError] = useState<string | null>(null)
 
+  // ── Follow the teacher's scroll ─────────────────────────────────────────────
+  // Students start pinned to the teacher's position and stay there until they
+  // scroll away themselves, at which point a button offers the way back. Private
+  // notes never follow anyone: they are the student's own page.
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const teacherRatio = useRef(0)
+  const lastViewBroadcast = useRef(0)
+  const [following, setFollowing] = useState(!isTeacher && !notesKey)
+  const [teacherAbove, setTeacherAbove] = useState(false)
+  const followingRef = useRef(following)
+  useEffect(() => { followingRef.current = following }, [following])
+
   const myId = isTeacher ? 'teacher' : (participantId || 'anon')
   const canWrite = personal || isTeacher || canEdit
 
@@ -549,7 +562,7 @@ export default function RichTextEditor({
       TableRow,
       TableHeader,
       TableCell,
-      Image.configure({ inline: false, allowBase64: true }),
+      NotesImage.configure({ inline: false, allowBase64: true }),
       Placeholder.configure({ placeholder: 'Start typing your notes here...' }),
       DocumentEmbed,
       CadEmbed,
@@ -710,6 +723,61 @@ export default function RichTextEditor({
 
   useEffect(() => { editor?.setEditable(canWrite) }, [editor, canWrite])
 
+  /**
+   * Where the teacher is, as a fraction of the scrollable range rather than a
+   * pixel offset.
+   *
+   * The board can send raw pixels because it is one fixed coordinate space. Notes
+   * cannot: the same document reflows, so a paragraph that runs to two lines on
+   * the teacher's laptop runs to six on a student's phone, and the document is
+   * far taller there. A pixel offset would land the class in the wrong paragraph
+   * on every narrow screen. A fraction survives the reflow.
+   */
+  const followTarget = (el: HTMLDivElement) => {
+    const max = el.scrollHeight - el.clientHeight
+    if (max <= 0) return 0
+    return Math.max(0, Math.min(max, teacherRatio.current * max))
+  }
+
+  const scrollToTeacher = useCallback(() => {
+    const el = scrollRef.current
+    if (el) el.scrollTop = followTarget(el)
+  }, [])
+
+  const onScroll = useCallback(() => {
+    if (personal) return
+    const el = scrollRef.current
+    if (!el) return
+    if (isTeacher) {
+      const now = Date.now()
+      if (now - lastViewBroadcast.current < 150) return
+      lastViewBroadcast.current = now
+      const max = el.scrollHeight - el.clientHeight
+      channelRef.current?.send({
+        type: 'broadcast', event: 'notes_view',
+        payload: { ratio: max > 0 ? el.scrollTop / max : 0 },
+      })
+      return
+    }
+    // A student who scrolls away stops following; landing back on the teacher's
+    // position resumes it, so there is no state to remember to switch off.
+    if (Math.abs(el.scrollTop - followTarget(el)) < 4) {
+      if (!followingRef.current) setFollowing(true)
+      return
+    }
+    if (followingRef.current) setFollowing(false)
+    setTeacherAbove(followTarget(el) < el.scrollTop)
+  }, [isTeacher, personal])
+
+  // Resizing or rotating reflows the text to a new height, moving where the
+  // teacher's fraction lands. Re-pin anyone still following.
+  useEffect(() => {
+    if (isTeacher || personal) return
+    const onResize = () => { if (followingRef.current) scrollToTeacher() }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [isTeacher, personal, scrollToTeacher])
+
   const broadcastContent = useCallback((content: object) => {
     const now = Date.now()
     if (now - lastBroadcast.current < 500) return
@@ -739,6 +807,19 @@ export default function RichTextEditor({
         applyDocRef.current?.(doc)
         localStorage.setItem(STORAGE_KEY(sessionId, notesKey), JSON.stringify(doc))
         if (isTeacher && payload.senderName) setActiveEditor(payload.senderName)
+        // The teacher typing changes how tall the document is, which moves where
+        // their position lands. Re-pin once the new content has been laid out.
+        if (!isTeacher && followingRef.current) requestAnimationFrame(scrollToTeacher)
+      })
+      .on('broadcast', { event: 'notes_view' }, ({ payload }) => {
+        if (isTeacher) return
+        teacherRatio.current = payload.ratio ?? 0
+        if (!followingRef.current) {
+          const el = scrollRef.current
+          if (el) setTeacherAbove(followTarget(el) < el.scrollTop)
+          return
+        }
+        scrollToTeacher()
       })
       .on('broadcast', { event: 'notes_sync_req' }, () => {
         if (!editor || !isTeacher) return
@@ -746,6 +827,14 @@ export default function RichTextEditor({
         channel.send({
           type: 'broadcast', event: 'notes_update',
           payload: { content, senderId: myId, senderName: 'Teacher' },
+        })
+        // Someone arriving late needs the position as well as the content,
+        // otherwise they follow from the top until the teacher next scrolls.
+        const el = scrollRef.current
+        const max = el ? el.scrollHeight - el.clientHeight : 0
+        channel.send({
+          type: 'broadcast', event: 'notes_view',
+          payload: { ratio: el && max > 0 ? el.scrollTop / max : 0 },
         })
       })
       .on('broadcast', { event: 'doc_fullscreen' }, ({ payload }) => {
@@ -765,7 +854,7 @@ export default function RichTextEditor({
       })
     channelRef.current = channel
     return () => { supabase.removeChannel(channel) }
-  }, [sessionId, personal, notesKey, editor, isTeacher, myId])
+  }, [sessionId, personal, notesKey, editor, isTeacher, myId, scrollToTeacher])
 
   // Listen for local expand clicks from DocumentEmbedView (which can't access channelRef directly)
   useEffect(() => {
@@ -1166,7 +1255,7 @@ export default function RichTextEditor({
   const sep = () => <div className="w-px h-5 bg-green-100 mx-0.5" />
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full flex flex-col bg-white relative">
       {/* Hidden file inputs */}
       <input ref={fileInputRef} type="file" multiple
         accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.dwg,.dxf"
@@ -1405,11 +1494,20 @@ export default function RichTextEditor({
 
       <DocBar editor={editor} />
 
-      <div className="flex-1 overflow-y-auto px-8 py-6">
+      <div ref={scrollRef} onScroll={onScroll} className="flex-1 overflow-y-auto px-8 py-6 relative">
         <div className="max-w-3xl mx-auto">
           <EditorContent editor={editor} className="notes-editor outline-none" />
         </div>
       </div>
+
+      {!isTeacher && !personal && !following && (
+        <button
+          onClick={() => { setFollowing(true); followingRef.current = true; scrollToTeacher() }}
+          title="Back to what the teacher is writing"
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-[#5ab82e] text-white shadow-lg ring-4 ring-[#5ab82e]/20 hover:bg-[#489f22] transition-colors">
+          {teacherAbove ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
+        </button>
+      )}
 
       {showChartModal && <ChartModal onInsert={handleChartInsert} onClose={() => setShowChartModal(false)} />}
       {showGraphModal && <GraphModal onInsert={handleGraphInsert} onClose={() => setShowGraphModal(false)} />}

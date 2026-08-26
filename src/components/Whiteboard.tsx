@@ -418,14 +418,24 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
   useEffect(() => () => { if (laserHeartbeat.current) clearInterval(laserHeartbeat.current) }, [])
 
   // ── Live sync ───────────────────────────────────────────────────────────────
+  /**
+   * The teacher's position, in board units, converted to this screen's pixels.
+   *
+   * The board is drawn at scale = containerWidth / BOARD_WIDTH, so the same
+   * lesson is roughly two and a half times taller on a 1530px laptop than on a
+   * 614px phone. Sending raw scrollTop therefore put the class at a different
+   * place on the board on every screen size, the same bug that stroke
+   * coordinates already had. Board units cross the wire; pixels stay local.
+   */
+  const followTarget = (el: HTMLDivElement) => {
+    const px = teacherScrollTop.current * (scaleRef.current || 1)
+    return Math.max(0, Math.min(px, el.scrollHeight - el.clientHeight))
+  }
+
   const scrollToTeacher = useCallback(() => {
     const el = containerRef.current
-    if (!el) return
-    el.scrollTop = Math.max(0, Math.min(teacherScrollTop.current, el.scrollHeight - el.clientHeight))
+    if (el) el.scrollTop = followTarget(el)
   }, [])
-
-  const followTarget = (el: HTMLDivElement) =>
-    Math.max(0, Math.min(teacherScrollTop.current, el.scrollHeight - el.clientHeight))
 
   const onScroll = useCallback(() => {
     if (personal) return
@@ -434,9 +444,10 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
       const now = Date.now()
       if (now - lastViewBroadcast.current < 150) return
       lastViewBroadcast.current = now
+      const s = scaleRef.current || 1
       channelRef.current?.send({
         type: 'broadcast', event: 'wb_view',
-        payload: { scrollTop: el?.scrollTop ?? 0, viewHeight: el?.clientHeight ?? 0 },
+        payload: { scrollTop: (el?.scrollTop ?? 0) / s, viewHeight: (el?.clientHeight ?? 0) / s },
       })
       return
     }
@@ -448,6 +459,13 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
     if (followingRef.current) setFollowing(false)
     setTeacherAbove(followTarget(el) < el.scrollTop)
   }, [isTeacher, personal])
+
+  // Turning the phone sideways changes the scale, so the teacher's position now
+  // lands on a different pixel. Re-pin anyone still following.
+  useEffect(() => {
+    if (isTeacher || personal || !following) return
+    scrollToTeacher()
+  }, [scale, boardHeight, isTeacher, personal, following, scrollToTeacher])
 
   useEffect(() => {
     if (!loaded) return
@@ -553,7 +571,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
         channel.send({ type: 'broadcast', event: 'wb_snapshot', payload: { board: snapshot() } })
         channel.send({
           type: 'broadcast', event: 'wb_view',
-          payload: { scrollTop: containerRef.current?.scrollTop ?? 0 },
+          payload: { scrollTop: (containerRef.current?.scrollTop ?? 0) / (scaleRef.current || 1) },
         })
       })
       .subscribe(status => {
@@ -1678,6 +1696,20 @@ function BoardImage({ item, locked, scale, onMove, onResize, onDelete }: BoardIm
   const dragOffset = useRef<Point | null>(null)
   const resizeStart = useRef<{ x: number; width: number } | null>(null)
   const [active, setActive] = useState(false)
+  const wrapRef = useRef<HTMLDivElement>(null)
+
+  // A tablet has no hover, so hover-only controls meant a teacher on a touch
+  // screen could drag a picture but never resize or remove it. Tapping picks the
+  // picture and keeps the controls up until something else is tapped.
+  const [picked, setPicked] = useState(false)
+  useEffect(() => {
+    if (!picked) return
+    const away = (e: PointerEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) setPicked(false)
+    }
+    document.addEventListener('pointerdown', away)
+    return () => document.removeEventListener('pointerdown', away)
+  }, [picked])
 
   const onPointerDown = (e: React.PointerEvent) => {
     if (locked) return
@@ -1687,6 +1719,7 @@ function BoardImage({ item, locked, scale, onMove, onResize, onDelete }: BoardIm
     dragOffset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
     setActive(true)
+    setPicked(true)
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
@@ -1720,7 +1753,8 @@ function BoardImage({ item, locked, scale, onMove, onResize, onDelete }: BoardIm
 
   return (
     <div
-      className={`group absolute select-none ${locked ? '' : 'cursor-move'} ${active ? 'z-20' : 'z-10'}`}
+      ref={wrapRef}
+      className={`group absolute select-none ${locked ? '' : 'cursor-move'} ${active || picked ? 'z-20' : 'z-10'}`}
       style={{ left: item.x * scale, top: item.y * scale, width: item.width * scale, touchAction: 'none', pointerEvents: 'auto' }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -1732,11 +1766,11 @@ function BoardImage({ item, locked, scale, onMove, onResize, onDelete }: BoardIm
       {!locked && (
         <>
           <button data-img-control onClick={onDelete} title="Remove from board"
-            className="absolute -top-2 -right-2 hidden group-hover:flex items-center justify-center w-6 h-6 rounded-full bg-white border border-green-200 text-[#9ca3af] hover:text-red-500 shadow-sm transition-colors">
+            className={`absolute -top-2 -right-2 ${picked ? 'flex' : 'hidden group-hover:flex'} items-center justify-center w-6 h-6 rounded-full bg-white border border-green-200 text-[#9ca3af] hover:text-red-500 shadow-sm transition-colors`}>
             <X size={12} />
           </button>
           <div data-img-control onPointerDown={startResize} title="Drag to resize"
-            className="absolute -bottom-1.5 -right-1.5 hidden group-hover:block w-4 h-4 rounded-sm bg-[#5ab82e] border-2 border-white shadow cursor-nwse-resize" />
+            className={`absolute -bottom-1.5 -right-1.5 ${picked ? 'block' : 'hidden group-hover:block'} w-4 h-4 rounded-sm bg-[#5ab82e] border-2 border-white shadow cursor-nwse-resize`} />
         </>
       )}
     </div>

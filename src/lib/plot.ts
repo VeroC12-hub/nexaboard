@@ -221,9 +221,80 @@ export function checkExpression(source: string): string | null {
 
 // ── Renderer ──────────────────────────────────────────────────────────────────
 
-export interface PlotSeries {
+export interface PlotPoint {
+  x: number
+  y: number
+}
+
+/** A curve worked out from an equation. */
+export interface FunctionSeries {
+  kind: 'function'
   expression: string
   color: string
+}
+
+/**
+ * A curve read straight off a list of points, for when there is no equation:
+ * a table of readings, an experiment, a survey.
+ *
+ * The points are drawn in the order they were given rather than sorted by x, so
+ * a closed shape or a path that doubles back survives. A table of readings is
+ * normally entered in order anyway.
+ */
+export interface PointSeries {
+  kind: 'points'
+  points: PlotPoint[]
+  color: string
+  /** Straight segments, a smooth curve through them, or nothing joining them. */
+  join: 'none' | 'line' | 'smooth'
+  /** A marker at each reading. */
+  markers: boolean
+  label?: string
+}
+
+export type PlotSeries = FunctionSeries | PointSeries
+
+const NUMBER = /-?\d*\.?\d+(?:[eE][+-]?\d+)?/g
+
+/**
+ * Read points out of whatever the teacher typed.
+ *
+ * Accepts a pair per line ("1, 2", "(1,2)", "1 2") and several pairs on one
+ * line, so both a column pasted from a spreadsheet and "(1,2) (3,4) (5,6)"
+ * work. Anything that is not a number is ignored, which lets a header row like
+ * "x y" sit at the top harmlessly.
+ */
+export function parsePoints(text: string): { points: PlotPoint[]; error: string | null } {
+  const points: PlotPoint[] = []
+  const lines = text.split(/\r?\n/)
+  for (let i = 0; i < lines.length; i++) {
+    const found = lines[i].match(NUMBER)
+    if (!found) continue
+    if (found.length % 2 !== 0) {
+      return { points, error: `Line ${i + 1} has an odd number of values, so a point is missing its pair.` }
+    }
+    for (let j = 0; j < found.length; j += 2) {
+      const x = parseFloat(found[j])
+      const y = parseFloat(found[j + 1])
+      if (Number.isFinite(x) && Number.isFinite(y)) points.push({ x, y })
+    }
+  }
+  return { points, error: null }
+}
+
+/** The x window that just contains every point, with a little air either side. */
+export function autoXRange(series: PlotSeries[]): { xMin: number; xMax: number } | null {
+  const xs: number[] = []
+  for (const s of series) {
+    if (s.kind !== 'points') continue
+    for (const p of s.points) if (Number.isFinite(p.x)) xs.push(p.x)
+  }
+  if (!xs.length) return null
+  let lo = Math.min(...xs)
+  let hi = Math.max(...xs)
+  if (hi === lo) { lo -= 1; hi += 1 }
+  const pad = (hi - lo) * 0.08
+  return { xMin: lo - pad, xMax: hi + pad }
 }
 
 export interface PlotRange {
@@ -264,6 +335,13 @@ function formatTick(value: number, step: number): string {
 export function autoYRange(series: PlotSeries[], xMin: number, xMax: number): { yMin: number; yMax: number } {
   const samples: number[] = []
   for (const s of series) {
+    if (s.kind === 'points') {
+      // Only what is actually on screen, so narrowing x also tightens y.
+      for (const p of s.points) {
+        if (p.x >= xMin && p.x <= xMax && Number.isFinite(p.y)) samples.push(p.y)
+      }
+      continue
+    }
     let compiled: CompiledExpression
     try { compiled = compile(s.expression) } catch { continue }
     for (let i = 0; i <= 400; i++) {
@@ -286,6 +364,56 @@ export function autoYRange(series: PlotSeries[], xMin: number, xMax: number): { 
   if (lo > 0 && lo < (hi - lo) * 0.5) lo = 0
   if (hi < 0 && -hi < (hi - lo) * 0.5) hi = 0
   return { yMin: lo, yMax: hi }
+}
+
+/** Draw one set of readings: the joining line, then a marker on each point. */
+function drawPointSeries(
+  ctx: CanvasRenderingContext2D,
+  s: PointSeries,
+  toPxX: (x: number) => number,
+  toPxY: (y: number) => number,
+) {
+  if (!s.points.length) return
+  const px = s.points.map(p => ({ x: toPxX(p.x), y: toPxY(p.y) }))
+
+  if (s.join !== 'none' && px.length > 1) {
+    ctx.strokeStyle = s.color
+    ctx.lineWidth = 2.25
+    ctx.lineJoin = 'round'
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(px[0].x, px[0].y)
+    if (s.join === 'line') {
+      for (let i = 1; i < px.length; i++) ctx.lineTo(px[i].x, px[i].y)
+    } else {
+      // Catmull-Rom through every reading, written as the beziers canvas draws.
+      // It passes through the points rather than near them, which matters when
+      // the class is reading values back off the curve.
+      for (let i = 0; i < px.length - 1; i++) {
+        const p0 = i > 0 ? px[i - 1] : px[i]
+        const p1 = px[i]
+        const p2 = px[i + 1]
+        const p3 = i + 2 < px.length ? px[i + 2] : p2
+        ctx.bezierCurveTo(
+          p1.x + (p2.x - p0.x) / 6, p1.y + (p2.y - p0.y) / 6,
+          p2.x - (p3.x - p1.x) / 6, p2.y - (p3.y - p1.y) / 6,
+          p2.x, p2.y,
+        )
+      }
+    }
+    ctx.stroke()
+  }
+
+  if (!s.markers) return
+  ctx.lineWidth = 1.5
+  ctx.strokeStyle = '#ffffff'
+  ctx.fillStyle = s.color
+  for (const p of px) {
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.stroke()
+  }
 }
 
 /** Draw the graph onto a canvas. Returns an error message for any bad series. */
@@ -368,21 +496,28 @@ export function drawPlot(
   const jumpLimit = plotH * 0.6
 
   for (const s of series) {
-    if (!s.expression.trim()) continue
-    let compiled: CompiledExpression
-    try {
-      compiled = compile(s.expression)
-    } catch (err) {
-      if (!firstError) firstError = err instanceof Error ? err.message : 'invalid expression'
-      continue
-    }
-
     // Clip first, then build the path: starting a new path after clipping would
     // throw the curve away.
     ctx.save()
     ctx.beginPath()
     ctx.rect(pad.left, pad.top, plotW, plotH)
     ctx.clip()
+
+    if (s.kind === 'points') {
+      drawPointSeries(ctx, s, toPxX, toPxY)
+      ctx.restore()
+      continue
+    }
+
+    if (!s.expression.trim()) { ctx.restore(); continue }
+    let compiled: CompiledExpression
+    try {
+      compiled = compile(s.expression)
+    } catch (err) {
+      if (!firstError) firstError = err instanceof Error ? err.message : 'invalid expression'
+      ctx.restore()
+      continue
+    }
 
     ctx.strokeStyle = s.color
     ctx.lineWidth = 2.25
@@ -438,23 +573,39 @@ export function drawPlot(
   }
 
   // Legend
-  const drawn = series.filter(s => s.expression.trim() && !checkExpression(s.expression))
+  const drawn = series.filter(s =>
+    s.kind === 'points'
+      ? s.points.length > 0
+      : s.expression.trim() && !checkExpression(s.expression))
   if (drawn.length > 1) {
     ctx.font = '11px Inter, system-ui, sans-serif'
     ctx.textAlign = 'left'
     ctx.textBaseline = 'middle'
     let ly = pad.top + 10
     for (const s of drawn) {
-      const label = `y = ${s.expression.replace(/^\s*y\s*=/i, '').trim()}`
+      const label = s.kind === 'points'
+        ? (s.label?.trim() || 'Points')
+        : `y = ${s.expression.replace(/^\s*y\s*=/i, '').trim()}`
       const w = ctx.measureText(label).width + 34
       ctx.fillStyle = 'rgba(255,255,255,0.85)'
       ctx.fillRect(pad.left + plotW - w - 6, ly - 8, w, 16)
-      ctx.strokeStyle = s.color
-      ctx.lineWidth = 2.5
-      ctx.beginPath()
-      ctx.moveTo(pad.left + plotW - w, ly)
-      ctx.lineTo(pad.left + plotW - w + 14, ly)
-      ctx.stroke()
+      // Match the swatch to what is actually on the graph, so a scatter with no
+      // joining line is not advertised in the key as a line.
+      const joined = s.kind !== 'points' || s.join !== 'none'
+      if (joined) {
+        ctx.strokeStyle = s.color
+        ctx.lineWidth = 2.5
+        ctx.beginPath()
+        ctx.moveTo(pad.left + plotW - w, ly)
+        ctx.lineTo(pad.left + plotW - w + 14, ly)
+        ctx.stroke()
+      }
+      if (s.kind === 'points' && s.markers) {
+        ctx.fillStyle = s.color
+        ctx.beginPath()
+        ctx.arc(pad.left + plotW - w + 7, ly, 3.5, 0, Math.PI * 2)
+        ctx.fill()
+      }
       ctx.fillStyle = '#1b2b4b'
       ctx.fillText(label, pad.left + plotW - w + 18, ly)
       ly += 18
