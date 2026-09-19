@@ -295,6 +295,20 @@
 .gm-icon:active { transform: scale(0.94); }
 .gm-icon.is-on { border-color: var(--right); }
 
+/* Muted is the state worth shouting about, so it is the one that gets words
+   and a colour. A game making no sound looks broken, and the control that
+   fixes it has to look like the answer rather than like decoration. */
+.gm-icon.is-muted {
+  width: auto;
+  gap: 7px;
+  padding: 0 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--nx-red-text);
+  border-color: var(--nx-red);
+  background: var(--nx-red-soft);
+}
+
 /* ── the generated games, in their frame ──────────────────────────────────────
 
    The game is a canvas in a sandboxed iframe, so the layout's only job here is

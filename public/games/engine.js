@@ -75,6 +75,8 @@
         ask: round.ask, phase: phase, roundIndex: roundIndex, right: right,
         items: round.items.length, inBasket: inBasket, placed: placed,
         ready: round.ready ? !!round.ready() : true,
+        /* For testing the spoken nudge, which is otherwise invisible. */
+        nudged: nudged, quietFor: Math.round(now - lastTouch), builds: builds,
         truth: round.check ? !!round.check() : null,
         values: round.items.map(function (it) { return it.value }),
         /* Where things actually are, so a test can put a finger on one. */
@@ -153,6 +155,14 @@
   var beamTilt = 0
   /** What the face is doing: 'idle', 'happy' or 'sad'. */
   var mood = 'idle'
+  /** Briefly lit after the question is replayed, so the press is acknowledged. */
+  var replayLit = 0
+  /** When the child last did anything, for the nudge. */
+  var lastTouch = 0
+  /** Whether this round has already nudged, so it happens once and not on a loop. */
+  var nudged = false
+  /** How many rounds have been built, so a test can see one being rebuilt. */
+  var builds = 0
 
   /* ── small helpers ───────────────────────────────────────────────────────── */
 
@@ -661,16 +671,42 @@
         g.stroke()
       }
       g.globalAlpha = 1
-      /* Reeds at the near edge, so the water has a bank. */
-      g.strokeStyle = '#4f7a2a'
-      g.lineWidth = 4
-      for (var rd = 0; rd < 14; rd++) {
-        var rx = fixed(rd * 23, w)
-        var rh = h * (0.05 + fixed(rd * 7, 0.05))
+
+      if (s.props === 'water') {
+        /* Reeds at the near edge, so the river has a bank. */
+        g.strokeStyle = '#4f7a2a'
+        g.lineWidth = 4
+        for (var rd = 0; rd < 14; rd++) {
+          var rx = fixed(rd * 23, w)
+          var rh = h * (0.05 + fixed(rd * 7, 0.05))
+          g.beginPath()
+          g.moveTo(rx, h)
+          g.quadraticCurveTo(rx + 8, h - rh * 0.6, rx + 3, h - rh)
+          g.stroke()
+        }
+      } else {
+        /* A beach. Reeds do not grow on one, and drawing them there was the
+           water branch being shared by two places that only look alike from a
+           distance. Foam where the sea meets the sand, and shells on it. */
+        g.strokeStyle = 'rgba(255,255,255,0.75)'
+        g.lineWidth = 5
         g.beginPath()
-        g.moveTo(rx, h)
-        g.quadraticCurveTo(rx + 8, h - rh * 0.6, rx + 3, h - rh)
+        for (var fx = 0; fx <= w; fx += w / 24) {
+          var fy = hy + h * 0.035 + Math.sin(fx / w * 7) * h * 0.008
+          if (fx === 0) g.moveTo(fx, fy)
+          else g.lineTo(fx, fy)
+        }
         g.stroke()
+
+        for (var sh = 0; sh < 12; sh++) {
+          var shx = fixed(sh * 43, w)
+          var shy = hy + h * 0.08 + fixed(sh * 17, (h - hy) * 0.7)
+          var shr = 3 + fixed(sh * 5, 4)
+          g.fillStyle = sh % 3 === 0 ? 'rgba(232,103,79,0.5)' : 'rgba(255,255,255,0.6)'
+          g.beginPath()
+          g.ellipse(shx, shy, shr, shr * 0.7, fixed(sh, 3), 0, Math.PI * 2)
+          g.fill()
+        }
       }
 
     } else if (s.props === 'board') {
@@ -2033,7 +2069,15 @@
     return false
   }
 
-  function nextRound() {
+  /**
+   * `quiet` when something else is about to speak.
+   *
+   * The opening of a game says what the game is and then asks the first
+   * question. Without this the round spoke its question immediately, the
+   * intro cancelled it a moment later, and a child heard half a word before
+   * being told something else.
+   */
+  function nextRound(quiet) {
     phase = 'play'
     sparks = []
     mood = 'idle'
@@ -2042,9 +2086,12 @@
     round = make()
     dress()
     expose()
+    lastTouch = now
+    nudged = false
+    builds++
     audio.duck(true)
     setTimeout(function () { audio.duck(false) }, 3200)
-    say(round.ask)
+    if (!quiet) say(round.ask)
   }
 
   function finish(correct) {
@@ -2094,6 +2141,15 @@
       mood = right === 0 ? 'idle' : 'happy'
       audio.play('finish')
       audio.stopMusic()
+      /* The score screen is two numbers, which is exactly what this learner
+         cannot read. Said out loud it is the only part of the ending they can
+         actually receive. */
+      audio.duck(true)
+      say(right === spec.rounds
+        ? 'You got them all. Well done.'
+        : right === 0
+          ? 'That one was hard. Let us try another.'
+          : 'You got ' + right + ' out of ' + spec.rounds + '.')
       post({ type: 'done', right: right, rounds: spec.rounds })
       return
     }
@@ -2191,6 +2247,20 @@
         return
       }
       finish(!!(round.check && round.check()))
+      return
+    }
+
+    /* Hear it again.
+
+       Checked before everything else, because it is the way out of the state
+       where nothing else on the screen can be understood. */
+    var ar = askRect()
+    if (ar && p.x >= ar.x && p.x <= ar.x + ar.w && p.y >= ar.y && p.y <= ar.y + ar.h) {
+      replayLit = 1
+      audio.play('tap')
+      audio.duck(true)
+      setTimeout(function () { audio.duck(false) }, 3000)
+      say(round.ask)
       return
     }
 
@@ -2307,6 +2377,7 @@
        honest moment to start one, and the music starts with it rather than at
        load where it would be silently blocked. */
     if (audio.touched() && audio.isOn()) audio.startMusic()
+    lastTouch = now
 
     /**
      * Capture the pointer, but never at the cost of the tap.
@@ -2343,25 +2414,83 @@
     return lines
   }
 
-  function drawAsk() {
+  /**
+   * Where the question sits, so it can be pressed as well as read.
+   *
+   * A separate function because the bar is now a control, and a control whose
+   * drawn position and whose hit area are worked out in two places will
+   * eventually disagree.
+   */
+  function askRect() {
+    if (!round || !round.ask) return null
     var size = clamp(Math.min(W, H) * 0.055, 17, 30)
     ctx.font = '700 ' + size + 'px system-ui, sans-serif'
+    var lines = wrapText(round.ask, W * 0.9)
+    var pad = size * 0.5
+    return {
+      x: W * 0.04, y: Math.max(H * 0.02, 8),
+      w: W * 0.92, h: lines.length * size * 1.22 + pad * 1.4,
+      size: size, lines: lines, pad: pad,
+    }
+  }
+
+  /**
+   * The question, drawn, and a speaker saying it can be heard again.
+   *
+   * This is the single most important control in a game for a child who cannot
+   * read. The question was spoken once, at the start of the round, and a four
+   * year old who was still looking at the last verdict, or whose brother said
+   * something, had no way back to it: the words are right there on screen and
+   * they cannot read them. Everything else in the round is unusable after
+   * that.
+   */
+  function drawAsk() {
+    var a = askRect()
+    if (!a) return
+    ctx.font = '700 ' + a.size + 'px system-ui, sans-serif'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'top'
 
-    var lines = wrapText(round.ask, W * 0.9)
-    var pad = size * 0.5
-    var boxH = lines.length * size * 1.22 + pad * 1.4
-
-    ctx.fillStyle = 'rgba(255,255,255,0.86)'
-    roundRect(W * 0.04, Math.max(H * 0.02, 8), W * 0.92, boxH, 14)
+    ctx.fillStyle = 'rgba(255,255,255,0.9)'
+    roundRect(a.x, a.y, a.w, a.h, 14)
     ctx.fill()
 
     ctx.fillStyle = '#14243a'
-    for (var i = 0; i < lines.length; i++) {
-      ctx.fillText(lines[i], W / 2, Math.max(H * 0.02, 8) + pad * 0.7 + i * size * 1.22)
+    for (var i = 0; i < a.lines.length; i++) {
+      ctx.fillText(lines_(a, i), W / 2, a.y + a.pad * 0.7 + i * a.size * 1.22)
     }
+
+    /* A speaker at the end of the bar. Drawn rather than written, because the
+       one person who needs it is the one who cannot read a label. */
+    var sr = a.size * 0.62
+    var sx = a.x + a.w - sr * 2.1
+    var sy = a.y + a.h / 2
+    ctx.save()
+    ctx.translate(sx, sy)
+    ctx.fillStyle = replayLit > 0 ? '#0e8348' : '#46536b'
+    ctx.beginPath()
+    ctx.moveTo(-sr * 0.75, -sr * 0.3)
+    ctx.lineTo(-sr * 0.3, -sr * 0.3)
+    ctx.lineTo(sr * 0.1, -sr * 0.72)
+    ctx.lineTo(sr * 0.1, sr * 0.72)
+    ctx.lineTo(-sr * 0.3, sr * 0.3)
+    ctx.lineTo(-sr * 0.75, sr * 0.3)
+    ctx.closePath()
+    ctx.fill()
+    ctx.strokeStyle = replayLit > 0 ? '#0e8348' : '#46536b'
+    ctx.lineWidth = Math.max(2, sr * 0.16)
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.arc(sr * 0.2, 0, sr * 0.55, -0.9, 0.9)
+    ctx.moveTo(sr * 0.2 + sr * 0.85, -sr * 0.5)
+    ctx.arc(sr * 0.2, 0, sr * 0.88, -0.8, 0.8)
+    ctx.stroke()
+    ctx.restore()
+    if (replayLit > 0) replayLit = Math.max(0, replayLit - 0.04)
   }
+
+  /** The wrapped lines, kept with the rect so both agree. */
+  function lines_(a, i) { return a.lines[i] }
 
   /**
    * The furniture each verb plays on.
@@ -2840,6 +2969,25 @@
 
     if (!spec || !round) return
 
+    /**
+     * A child who has gone quiet gets asked again, once.
+     *
+     * This is what a teacher does. A four year old who did not catch the
+     * question cannot read it and will not think to press anything: they sit
+     * there, and to the app that is indistinguishable from thinking. Ten
+     * seconds of nothing is long enough to be stuck and short enough to still
+     * be in the room.
+     *
+     * Once per round, never on a loop, because a phrase repeating every ten
+     * seconds is what makes an adult take the phone away.
+     */
+    if (phase === 'play' && !nudged && lastTouch && now - lastTouch > 10000) {
+      nudged = true
+      audio.duck(true)
+      setTimeout(function () { audio.duck(false) }, 3000)
+      say(round.ask)
+    }
+
     try {
       for (var i = 0; i < round.items.length; i++) move(round.items[i], dt)
 
@@ -2998,7 +3146,17 @@
     if (audio.isOn()) audio.startMusic()
     wait.className = 'gone'
     fit()
-    nextRound()
+    /* What this game is, before the first question. A child who cannot read
+       the title has no other way to know what they have just been given, and
+       "let us fill the basket" is the difference between a screen of things
+       and a thing to do. The round is built silently and the two lines are
+       spoken in order. */
+    nextRound(!!spec.intro)
+    if (spec.intro) {
+      var opening = spec.intro
+      say(opening)
+      setTimeout(function () { if (round) say(round.ask) }, 2800)
+    }
   })
 
   fit()

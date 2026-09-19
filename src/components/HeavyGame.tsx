@@ -304,13 +304,23 @@ function Session({
               phone with no speech synthesis had sound it could not turn off.
 
               It says "sound" rather than "voice" for the same reason. */}
+          {/* Says so in words when it is off.
+
+              It was a bare bell with a line through it and nothing else. A
+              muted game is indistinguishable from a broken one, and the person
+              looking at it has no reason to think a small grey symbol is the
+              thing to press: the first report of this was "I am still not
+              hearing anything", from a game that was working exactly as
+              configured.
+
+              On, it stays a symbol, because there is nothing to fix. */}
           <button
-            className={`gm-icon${sound ? ' is-on' : ''}`}
+            className={`gm-icon${sound ? ' is-on' : ' is-muted'}`}
             aria-label={sound ? 'Turn the sound off' : 'Turn the sound on'}
             aria-pressed={sound}
-            title={sound ? 'Sound on' : 'Sound off'}
+            title={sound ? 'Sound on' : 'Sound is off. Press to turn it on.'}
             onClick={() => onVoice(!sound)}>
-            {sound ? '🔔' : '🔕'}
+            {sound ? '🔔' : <><span aria-hidden>🔕</span> Sound is off</>}
           </button>
           <button className="gm-quiet" onClick={onRead}>For the grown up</button>
         </span>
