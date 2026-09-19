@@ -77,7 +77,20 @@ export default function HeavyGame({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [stage, year, accuracy, topicTitle, learnerId, nth])
 
-  const [voice, setVoice] = useState(() => canSpeak() && voiceOn())
+  /**
+   * One switch, two capabilities.
+   *
+   * This used to be `canSpeak() && voiceOn()`, which quietly tied the game's
+   * own sound to whether the device could do text to speech. Those are
+   * unrelated: a phone with no speech synthesis should still click when you
+   * tap and chime when you are right. On such a device the whole game fell
+   * silent, and nothing on screen explained why.
+   *
+   * So the switch is the preference alone, and speaking is the preference plus
+   * the device being able to. A parent still presses one button.
+   */
+  const [sound, setSound] = useState(() => voiceOn())
+  const voice = sound && canSpeak()
 
   /* Once per game, so the next one is a shape they have not just had. */
   useEffect(() => {
@@ -104,7 +117,8 @@ export default function HeavyGame({
       topicTitle={topicTitle}
       learnerId={learnerId}
       voice={voice}
-      onVoice={next => { setVoice(next); setVoiceOn(next); if (!next) stop() }}
+      sound={sound}
+      onVoice={next => { setSound(next); setVoiceOn(next); if (!next) stop() }}
       onAnother={() => { stop(); setNth(n => n + 1) }}
       onAttempt={onAttempt}
       onDone={onDone}
@@ -116,7 +130,7 @@ export default function HeavyGame({
 
 /** One game, from loading it to finishing it. Remounted for the next one. */
 function Session({
-  spec, topicId, topicTitle, learnerId, voice, onVoice, onAnother,
+  spec, topicId, topicTitle, learnerId, voice, sound, onVoice, onAnother,
   onAttempt, onDone, onRead, onSimple,
 }: {
   spec: GameSpec
@@ -124,7 +138,10 @@ function Session({
   topicTitle: string
   /** Used only to write down how this game went. Never sent to the frame. */
   learnerId: string
+  /** Whether to speak: the preference, and a device that can. */
   voice: boolean
+  /** Whether to make any noise at all: the preference alone. */
+  sound: boolean
   onVoice: (on: boolean) => void
   onAnother: () => void
   onAttempt: (a: Attempt) => void
@@ -202,6 +219,18 @@ function Session({
   const speaking = useRef(voice)
   useEffect(() => { speaking.current = voice }, [voice])
 
+  /* Read through a ref for the same reason as the voice: the frame's `ready`
+     arrives from a listener set up once, and must see the current preference
+     rather than the one that existed when it was attached. */
+  const making = useRef(sound)
+  useEffect(() => { making.current = sound }, [sound])
+
+  /* Pressing mute during a game has to reach the frame, which is making its
+     own sound and cannot see the app's state. */
+  useEffect(() => {
+    frame.current?.contentWindow?.postMessage({ nx: 1, type: 'sound', on: sound }, '*')
+  }, [sound])
+
   useEffect(() => {
     function onMessage(e: MessageEvent) {
       /* The only check here that means anything. The frame has an opaque
@@ -219,6 +248,11 @@ function Session({
           setLate(false)
           /* The spec, and nothing else. No learner, no record, no session. */
           frame.current.contentWindow?.postMessage({ nx: 1, type: 'setup', spec }, '*')
+          /* And whether it may make a noise. The frame has its own effects and
+             music now, and the app owns the one switch that turns all of it
+             off along with the speech. */
+          frame.current.contentWindow?.postMessage(
+            { nx: 1, type: 'sound', on: making.current }, '*')
           break
         case 'say':
           /* The app owns the voice, so there is one voice and one mute switch
@@ -262,16 +296,22 @@ function Session({
             onClick={onAnother}>
             🎲
           </button>
-          {canSpeak() && (
-            <button
-              className={`gm-icon${voice ? ' is-on' : ''}`}
-              aria-label={voice ? 'Turn the voice off' : 'Turn the voice on'}
-              aria-pressed={voice}
-              title={voice ? 'Voice on' : 'Voice off'}
-              onClick={() => onVoice(!voice)}>
-              {voice ? '🔔' : '🔕'}
-            </button>
-          )}
+          {/* Always shown.
+
+              It used to be hidden unless the device could do text to speech,
+              which was right when it only controlled the voice and wrong now
+              that it controls the clicks, the chimes and the music too: a
+              phone with no speech synthesis had sound it could not turn off.
+
+              It says "sound" rather than "voice" for the same reason. */}
+          <button
+            className={`gm-icon${sound ? ' is-on' : ''}`}
+            aria-label={sound ? 'Turn the sound off' : 'Turn the sound on'}
+            aria-pressed={sound}
+            title={sound ? 'Sound on' : 'Sound off'}
+            onClick={() => onVoice(!sound)}>
+            {sound ? '🔔' : '🔕'}
+          </button>
           <button className="gm-quiet" onClick={onRead}>For the grown up</button>
         </span>
       </div>

@@ -170,97 +170,648 @@
     return clamp(m, 3, spec && spec.tiny ? 6 : 9)
   }
 
+  /* ── sound ───────────────────────────────────────────────────────────────── */
+
+  /**
+   * Everything the game makes a noise with, synthesised rather than loaded.
+   *
+   * ── Why there are no audio files ───────────────────────────────────────────
+   *
+   * A set of sound effects is a megabyte, and this platform is for a child on
+   * a shared phone on metered mobile data. Every sound here is a few
+   * oscillators and an envelope, which costs nothing to download, works
+   * offline, and cannot fail to load halfway through a game.
+   *
+   * ── The one rule about the wrong answer ────────────────────────────────────
+   *
+   * It is not a buzzer. Every instinct says to make failure sound like
+   * failure, and for a four year old who already suspects they are bad at
+   * numbers, an ugly noise is a punishment that teaches them to stop playing.
+   * A wrong answer here is two soft notes falling a tone, at half the volume
+   * of a right one. It says "not that one", not "you are wrong".
+   *
+   * ── The switch ─────────────────────────────────────────────────────────────
+   *
+   * The app owns the voice preference and the mute button, so the frame is
+   * told rather than deciding. One switch turns off speech, effects and music
+   * together, because a parent who wants quiet wants quiet, not a menu.
+   */
+  var audio = (function () {
+    var ctx2 = null
+    var master = null
+    var musicGain = null
+    var on = true
+    var musicTimer = null
+    var musicStep = 0
+    /**
+     * Whether anybody has touched this frame yet.
+     *
+     * A browser refuses to start an AudioContext until the user has made a
+     * gesture, and a *sandboxed* frame does not inherit the gesture the parent
+     * page received: tapping "Play a game" in the app does not count, only
+     * touching the game itself does.
+     *
+     * Without this the music tried to start the moment a spec arrived, every
+     * attempt was refused, and the console filled with the same warning
+     * sixteen times while the game sat there silent. Guarding here rather than
+     * at each call site means no future caller can make the same mistake.
+     */
+    var gestured = false
+
+    /* A major pentatonic, which has no interval in it that can sound wrong
+       against any other. That is the whole reason for choosing it: notes get
+       played in a loop for eight rounds and must never grate. */
+    var SCALE = [523.25, 587.33, 659.25, 783.99, 880.00]
+    var LOW = [130.81, 146.83, 164.81, 196.00, 220.00]
+
+    /**
+     * Built on the first gesture, never at load.
+     *
+     * A browser starts an AudioContext suspended until the user has touched
+     * something, so making one at load only produces a console warning and a
+     * context that has to be resumed anyway.
+     */
+    function wake() {
+      /* Nothing before a gesture. Creating a context here would be refused and
+         would only produce a warning, and playing into it would be silent. */
+      if (!gestured) return null
+      if (!ctx2) {
+        var Ctor = window.AudioContext || window.webkitAudioContext
+        if (!Ctor) return null
+        try {
+          ctx2 = new Ctor()
+        } catch (e) {
+          /* No audio available. Everything below becomes a no-op and the game
+             plays exactly as it did before, which is the safe direction. */
+          return null
+        }
+        master = ctx2.createGain()
+        master.gain.value = on ? 0.9 : 0
+        master.connect(ctx2.destination)
+        musicGain = ctx2.createGain()
+        musicGain.gain.value = 0.16
+        musicGain.connect(master)
+      }
+      if (ctx2.state === 'suspended') ctx2.resume()
+      return ctx2
+    }
+
+    /**
+     * One note.
+     *
+     * An attack and a decay rather than a flat gate, because a square edge on
+     * a gain is audible as a click and a game makes hundreds of these.
+     */
+    function note(freq, at, len, vol, shape, to) {
+      var c = ctx2
+      if (!c) return
+      var osc = c.createOscillator()
+      var g = c.createGain()
+      osc.type = shape || 'sine'
+      osc.frequency.setValueAtTime(freq, at)
+      g.gain.setValueAtTime(0, at)
+      g.gain.linearRampToValueAtTime(vol, at + 0.012)
+      g.gain.exponentialRampToValueAtTime(0.0001, at + len)
+      osc.connect(g)
+      g.connect(to || master)
+      osc.start(at)
+      osc.stop(at + len + 0.02)
+    }
+
+    /** A short noise burst, for thuds and landings. */
+    function thud(at, vol) {
+      var c = ctx2
+      if (!c) return
+      var len = 0.16
+      var buf = c.createBuffer(1, Math.ceil(c.sampleRate * len), c.sampleRate)
+      var d = buf.getChannelData(0)
+      for (var i = 0; i < d.length; i++) {
+        /* Decaying noise. Sounds like something soft landing on something
+           solid, which is what putting a mango in a basket is. */
+        d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3)
+      }
+      var src = c.createBufferSource()
+      src.buffer = buf
+      var lp = c.createBiquadFilter()
+      lp.type = 'lowpass'
+      lp.frequency.value = 900
+      var g = c.createGain()
+      g.gain.value = vol
+      src.connect(lp); lp.connect(g); g.connect(master)
+      src.start(at)
+    }
+
+    return {
+      /**
+       * Called from the first pointer down, which is the gesture that allows
+       * audio at all. Everything else refuses to build a context until this
+       * has happened at least once.
+       */
+      touched: function () {
+        gestured = true
+        return wake()
+      },
+
+      wake: wake,
+
+      set: function (want) {
+        on = !!want
+        if (master && ctx2) {
+          master.gain.setTargetAtTime(on ? 0.9 : 0, ctx2.currentTime, 0.02)
+        }
+        if (!on) this.stopMusic()
+      },
+
+      isOn: function () { return on },
+
+      play: function (what) {
+        if (!on || !wake()) return
+        var t = ctx2.currentTime
+
+        if (what === 'tap') {
+          note(SCALE[2], t, 0.09, 0.10, 'sine')
+
+        } else if (what === 'lift') {
+          note(SCALE[1], t, 0.10, 0.09, 'triangle')
+          note(SCALE[3], t + 0.04, 0.10, 0.07, 'triangle')
+
+        } else if (what === 'drop') {
+          thud(t, 0.35)
+          note(LOW[2], t, 0.14, 0.10, 'sine')
+
+        } else if (what === 'right') {
+          /* Three notes rising. Warm, not shrill: triangle rather than square,
+             and the top note is the quietest so it lifts rather than stabs. */
+          note(SCALE[0], t, 0.20, 0.22, 'triangle')
+          note(SCALE[2], t + 0.09, 0.20, 0.20, 'triangle')
+          note(SCALE[4], t + 0.18, 0.34, 0.17, 'triangle')
+
+        } else if (what === 'wrong') {
+          /* Two soft notes falling a tone, at half the volume of a right
+             answer. Never a buzzer. See the note at the top of this block. */
+          note(SCALE[1], t, 0.16, 0.10, 'sine')
+          note(SCALE[0], t + 0.13, 0.26, 0.09, 'sine')
+
+        } else if (what === 'finish') {
+          /* The end of a whole set, so it may be a little more than a round. */
+          var run = [SCALE[0], SCALE[2], SCALE[3], SCALE[4], SCALE[4] * 1.5]
+          for (var i = 0; i < run.length; i++) {
+            note(run[i], t + i * 0.11, 0.3, 0.18, 'triangle')
+          }
+        }
+      },
+
+      /**
+       * A very sparse loop under the game.
+       *
+       * One note every second and a half, from a pentatonic scale, at a
+       * sixth of the volume of the effects. Deliberately almost nothing: a
+       * tune loops eight times in one game and a child hears it every day, so
+       * anything with a melody in it becomes torture by the third sitting.
+       * This is closer to a room tone than to music.
+       */
+      startMusic: function () {
+        if (!on || !wake() || musicTimer) return
+        var self = this
+        var step = function () {
+          if (!on || !ctx2) return
+          var t = ctx2.currentTime
+          /* A slow walk rather than a tune, so there is no phrase to learn
+             and nothing to get stuck in anybody's head. */
+          musicStep = (musicStep + 1 + Math.floor(Math.random() * 2)) % LOW.length
+          note(LOW[musicStep] * 2, t, 1.6, 0.05, 'sine', musicGain)
+          if (Math.random() < 0.4) {
+            note(LOW[(musicStep + 2) % LOW.length] * 4, t + 0.3, 1.1, 0.025, 'sine', musicGain)
+          }
+          musicTimer = setTimeout(step, 1500 + Math.random() * 900)
+        }
+        musicTimer = setTimeout(step, 400)
+        void self
+      },
+
+      stopMusic: function () {
+        if (musicTimer) { clearTimeout(musicTimer); musicTimer = null }
+      },
+
+      /**
+       * Duck the music while something is being said.
+       *
+       * A spoken question competing with even a quiet note is a spoken
+       * question a four year old does not catch.
+       */
+      duck: function (down) {
+        if (!musicGain || !ctx2) return
+        musicGain.gain.setTargetAtTime(down ? 0.03 : 0.16, ctx2.currentTime, 0.15)
+      },
+    }
+  }())
+
   /* ── the scenes ──────────────────────────────────────────────────────────── */
 
   /**
    * Places a Ghanaian child has been.
    *
-   * Two colours and a horizon each, drawn rather than loaded. A scene is the
-   * cheapest variety in the whole system: it changes how a game feels and
-   * costs no bytes and no time.
+   * ── Why this was redone ────────────────────────────────────────────────────
+   *
+   * The first version was a two stop sky, a flat rectangle of ground, and
+   * props drawn in black at 22% opacity. That last part is the whole story: a
+   * market was five translucent grey boxes, so every scene came out looking
+   * like a faint shadow of a place rather than a place. A child opening a game
+   * saw an empty brown field with three beige lumps on it.
+   *
+   * These have real colour, a far layer and a near layer so there is depth,
+   * and something alive in each one.
+   *
+   * ── Why it costs nothing ───────────────────────────────────────────────────
+   *
+   * The backdrop never moves, so it is painted once onto an offscreen canvas
+   * and copied in with a single `drawImage` each frame. That is cheaper than
+   * the old translucent rectangles were, and it is what makes it affordable to
+   * draw a proper market instead of five boxes. Repainted only when the size
+   * changes or the scene does.
    */
   var SCENES = {
-    market: { sky: ['#ffd89b', '#ff9a6c'], ground: '#b4622f', horizon: 0.62, props: 'stalls' },
-    farm: { sky: ['#bfe6ff', '#8fd18a'], ground: '#6b8f3a', horizon: 0.66, props: 'rows' },
-    road: { sky: ['#cfe4f7', '#9bb6cc'], ground: '#5d6370', horizon: 0.70, props: 'road' },
-    river: { sky: ['#cbeeff', '#7ec7e8'], ground: '#2f7f9e', horizon: 0.64, props: 'water' },
-    school: { sky: ['#f2ead6', '#dcd0b4'], ground: '#8b7350', horizon: 0.68, props: 'board' },
-    yard: { sky: ['#ffe9c4', '#f2c58a'], ground: '#a9793f', horizon: 0.66, props: 'tree' },
-    beach: { sky: ['#ffeec2', '#ffd08a'], ground: '#e8cf9a', horizon: 0.63, props: 'water' },
-    night: { sky: ['#1b2a4a', '#2c3f6b'], ground: '#243049', horizon: 0.68, props: 'stars' },
+    market: {
+      sky: ['#ffd89b', '#ff9a6c'], ground: '#c47a43', far: '#a85f36', horizon: 0.62,
+      props: 'stalls',
+    },
+    farm: {
+      sky: ['#bfe6ff', '#8fd18a'], ground: '#7ba648', far: '#5d8a34', horizon: 0.66,
+      props: 'rows',
+    },
+    road: {
+      sky: ['#cfe4f7', '#9bb6cc'], ground: '#7d8494', far: '#5d6370', horizon: 0.70,
+      props: 'road',
+    },
+    river: {
+      sky: ['#cbeeff', '#7ec7e8'], ground: '#3d93b4', far: '#2f7f9e', horizon: 0.64,
+      props: 'water',
+    },
+    school: {
+      sky: ['#f2ead6', '#dcd0b4'], ground: '#a68a60', far: '#8b7350', horizon: 0.68,
+      props: 'board',
+    },
+    yard: {
+      sky: ['#ffe9c4', '#f2c58a'], ground: '#bf8e4e', far: '#a9793f', horizon: 0.66,
+      props: 'tree',
+    },
+    beach: {
+      sky: ['#ffeec2', '#ffd08a'], ground: '#f0dcae', far: '#3d9fc4', horizon: 0.63,
+      props: 'sea',
+    },
+    night: {
+      sky: ['#16233f', '#2c3f6b'], ground: '#2b3853', far: '#1d2740', horizon: 0.68,
+      props: 'stars',
+    },
   }
 
   function scene() { return SCENES[spec && spec.scene] || SCENES.yard }
 
-  function drawScene() {
-    var s = scene()
-    var hy = H * s.horizon
+  /** The painted backdrop, and what it was painted for. */
+  var backdrop = null
+  var backdropFor = ''
 
-    var sky = ctx.createLinearGradient(0, 0, 0, hy)
+  /** Stable pseudo randomness, so a scene looks the same every time it paints. */
+  function fixed(i, n) { return ((i * 9301 + 49297) % 233280) / 233280 * n }
+
+  /**
+   * Paint one scene into a context. Called once per size, never per frame.
+   *
+   * Everything here is drawn rather than loaded, so a new scene costs a few
+   * lines and no bytes over the wire, which is the whole reason a game on a
+   * Ghanaian phone can have eight of them.
+   */
+  function paintScene(g, w, h) {
+    var s = scene()
+    var hy = h * s.horizon
+
+    var sky = g.createLinearGradient(0, 0, 0, hy)
     sky.addColorStop(0, s.sky[0])
     sky.addColorStop(1, s.sky[1])
-    ctx.fillStyle = sky
-    ctx.fillRect(0, 0, W, hy)
+    g.fillStyle = sky
+    g.fillRect(0, 0, w, hy)
 
-    ctx.fillStyle = s.ground
-    ctx.fillRect(0, hy, W, H - hy)
+    /* The ground, darker at the horizon and warmer close up, so it reads as a
+       surface going away from you rather than as a filled rectangle. */
+    var gr = g.createLinearGradient(0, hy, 0, h)
+    gr.addColorStop(0, s.far)
+    gr.addColorStop(1, s.ground)
+    g.fillStyle = gr
+    g.fillRect(0, hy, w, h - hy)
 
-    ctx.save()
-    ctx.globalAlpha = 0.22
-    ctx.fillStyle = '#000'
+    /* Something in the sky, in every scene but the ones that own it. */
+    if (s.props !== 'stars' && s.props !== 'board') {
+      g.save()
+      g.globalAlpha = 0.5
+      g.fillStyle = '#fff'
+      for (var c = 0; c < 3; c++) {
+        var cx = fixed(c * 7 + 3, w)
+        var cy = hy * (0.14 + fixed(c * 13, 0.3))
+        var cr = h * (0.035 + fixed(c * 5, 0.025))
+        g.beginPath()
+        g.arc(cx, cy, cr, 0, Math.PI * 2)
+        g.arc(cx + cr * 0.9, cy + cr * 0.1, cr * 0.78, 0, Math.PI * 2)
+        g.arc(cx - cr * 0.85, cy + cr * 0.15, cr * 0.62, 0, Math.PI * 2)
+        g.fill()
+      }
+      g.restore()
+    }
 
     if (s.props === 'stalls') {
+      /* A market: stalls with striped awnings, and baskets in front of them.
+         Striped because every market awning in Ghana is, and because stripes
+         are the cheapest way to make a flat shape read as cloth. */
+      var stripe = ['#d6402e', '#f2b517', '#0f8a4d', '#2d7ff9', '#e8674f']
       for (var i = 0; i < 5; i++) {
-        var x = (i + 0.5) * (W / 5)
-        ctx.fillRect(x - W * 0.06, hy - H * 0.10, W * 0.12, H * 0.10)
+        var x = (i + 0.5) * (w / 5)
+        var sw = w * 0.15, sh = h * 0.13
+        var top = hy - sh
+
+        /* The stall behind, in shadow. */
+        g.fillStyle = 'rgba(70,40,15,0.30)'
+        g.fillRect(x - sw / 2 + 6, top + 8, sw, sh)
+
+        /* Posts. */
+        g.fillStyle = '#7a5230'
+        g.fillRect(x - sw / 2, top, 7, sh)
+        g.fillRect(x + sw / 2 - 7, top, 7, sh)
+
+        /* The awning, as a scalloped band of stripes. */
+        var bands = 5
+        for (var b = 0; b < bands; b++) {
+          g.fillStyle = b % 2 ? '#fff8ec' : stripe[i % stripe.length]
+          g.fillRect(x - sw / 2 + (sw / bands) * b, top - h * 0.035, sw / bands, h * 0.035)
+        }
+        /* Scallops along its edge. */
+        g.fillStyle = stripe[i % stripe.length]
+        for (var sc = 0; sc < bands; sc++) {
+          g.beginPath()
+          g.arc(x - sw / 2 + (sw / bands) * (sc + 0.5), top, sw / bands / 2, 0, Math.PI)
+          g.fill()
+        }
+
+        /* A basket of something on the counter. */
+        g.fillStyle = '#9c6b3f'
+        g.beginPath()
+        g.moveTo(x - sw * 0.22, hy - 4)
+        g.lineTo(x + sw * 0.22, hy - 4)
+        g.lineTo(x + sw * 0.15, hy - h * 0.045)
+        g.lineTo(x - sw * 0.15, hy - h * 0.045)
+        g.closePath()
+        g.fill()
+        g.fillStyle = stripe[(i + 2) % stripe.length]
+        g.beginPath()
+        g.ellipse(x, hy - h * 0.045, sw * 0.16, h * 0.012, 0, 0, Math.PI * 2)
+        g.fill()
       }
+
     } else if (s.props === 'rows') {
-      for (var r = 0; r < 4; r++) {
-        var y = hy + (H - hy) * (0.2 + r * 0.22)
-        ctx.fillRect(0, y, W, 2)
+      /* A farm: a tree line at the back, then rows of crops coming towards
+         you, each row bigger than the last. */
+      /* A tree line: a trunk and two overlapping canopies each, rather than
+         one circle. A row of plain circles at the horizon reads as bushes at
+         best and as blobs at worst, which is what it did. */
+      for (var t2 = 0; t2 < 11; t2++) {
+        var tx = fixed(t2 * 11, w)
+        var th = h * (0.05 + fixed(t2, 0.035))
+        g.fillStyle = 'rgba(70,50,25,0.5)'
+        g.fillRect(tx - 3, hy - th * 0.45, 6, th * 0.45)
+        g.fillStyle = 'rgba(38,72,30,0.55)'
+        g.beginPath()
+        g.arc(tx - th * 0.16, hy - th * 0.55, th * 0.3, 0, Math.PI * 2)
+        g.fill()
+        g.fillStyle = 'rgba(52,92,38,0.6)'
+        g.beginPath()
+        g.arc(tx + th * 0.14, hy - th * 0.66, th * 0.34, 0, Math.PI * 2)
+        g.fill()
       }
+      /* Rows of small plants, close together, each nudged off its slot.
+
+         The first version drew twelve large triangles per row on an even
+         pitch, which is a pattern rather than a field: the eye reads the
+         repeat instead of the crop, and on a narrow screen they were as big as
+         the things the child was counting. */
+      for (var r2 = 0; r2 < 6; r2++) {
+        var tt3 = (r2 + 1) / 6
+        var ry = hy + (h - hy) * (0.06 + tt3 * tt3 * 0.8)
+        var size = 3 + tt3 * 7
+        var per = Math.round(w / (size * 2.6))
+        g.fillStyle = r2 % 2 ? '#4a7526' : '#588a30'
+        for (var cpt = 0; cpt < per; cpt++) {
+          var cxp = (cpt + 0.5) * (w / per) + (fixed(r2 * 31 + cpt, size) - size / 2)
+          g.beginPath()
+          g.moveTo(cxp, ry - size * 0.5)
+          g.lineTo(cxp - size * 0.8, ry + size)
+          g.lineTo(cxp + size * 0.8, ry + size)
+          g.closePath()
+          g.fill()
+        }
+      }
+
     } else if (s.props === 'road') {
-      ctx.fillRect(0, hy + (H - hy) * 0.45, W, 3)
-      ctx.globalAlpha = 0.5
-      for (var d = 0; d < 8; d++) {
-        ctx.fillStyle = '#fff'
-        ctx.fillRect(d * (W / 8) + W / 32, hy + (H - hy) * 0.45 - 1, W / 22, 5)
+      var ry2 = hy + (h - hy) * 0.42
+      /* The road itself, wider as it comes towards you. */
+      g.fillStyle = '#4a4f5a'
+      g.beginPath()
+      g.moveTo(w * 0.34, hy)
+      g.lineTo(w * 0.66, hy)
+      g.lineTo(w, h)
+      g.lineTo(0, h)
+      g.closePath()
+      g.fill()
+      /* Dashes down the middle, growing with the perspective. */
+      g.fillStyle = '#ffe9a8'
+      for (var d = 0; d < 6; d++) {
+        var tt = d / 6
+        var dy = hy + (h - hy) * (tt * tt)
+        var dw = 4 + tt * 16
+        var dh = 6 + tt * 26
+        g.fillRect(w / 2 - dw / 2, dy, dw, dh)
       }
-    } else if (s.props === 'water') {
-      /* Short curved strokes, scattered, rather than full width rules. The
-         first version drew lines across the whole width and the river read as
-         a sheet of ruled paper. */
-      ctx.strokeStyle = '#fff'
-      ctx.globalAlpha = 0.30
-      ctx.lineWidth = 3
-      for (var w = 0; w < 14; w++) {
-        var wx = ((w * 167) % 100) / 100 * W
-        var wy = hy + (H - hy) * (0.08 + ((w * 37) % 80) / 100)
-        var len = W * 0.05
-        ctx.beginPath()
-        ctx.moveTo(wx, wy)
-        ctx.quadraticCurveTo(wx + len / 2, wy - 5, wx + len, wy)
-        ctx.stroke()
+      /* A pole at the side, so the road has a scale. */
+      g.fillStyle = '#7d7f88'
+      g.fillRect(w * 0.14, hy - h * 0.2, 6, h * 0.2)
+      g.fillStyle = '#d6402e'
+      g.beginPath()
+      g.arc(w * 0.14 + 3, hy - h * 0.2, 12, 0, Math.PI * 2)
+      g.fill()
+      void ry2
+
+    } else if (s.props === 'water' || s.props === 'sea') {
+      var waterTop = s.props === 'sea' ? hy - h * 0.12 : hy
+      if (s.props === 'sea') {
+        var sea = g.createLinearGradient(0, waterTop, 0, hy + h * 0.04)
+        sea.addColorStop(0, '#2f7f9e')
+        sea.addColorStop(1, '#63b6d4')
+        g.fillStyle = sea
+        g.fillRect(0, waterTop, w, hy - waterTop + h * 0.04)
       }
+      /* Ripples: short curved strokes, scattered. Full width rules made the
+         river read as a sheet of ruled paper. */
+      g.strokeStyle = '#fff'
+      g.lineWidth = 3
+      for (var wv = 0; wv < 18; wv++) {
+        g.globalAlpha = 0.14 + fixed(wv * 3, 0.2)
+        var wx = fixed(wv * 17, w)
+        var wy = waterTop + (h - waterTop) * (0.05 + fixed(wv * 29, 0.7))
+        var len = w * 0.05
+        g.beginPath()
+        g.moveTo(wx, wy)
+        g.quadraticCurveTo(wx + len / 2, wy - 5, wx + len, wy)
+        g.stroke()
+      }
+      g.globalAlpha = 1
+      /* Reeds at the near edge, so the water has a bank. */
+      g.strokeStyle = '#4f7a2a'
+      g.lineWidth = 4
+      for (var rd = 0; rd < 14; rd++) {
+        var rx = fixed(rd * 23, w)
+        var rh = h * (0.05 + fixed(rd * 7, 0.05))
+        g.beginPath()
+        g.moveTo(rx, h)
+        g.quadraticCurveTo(rx + 8, h - rh * 0.6, rx + 3, h - rh)
+        g.stroke()
+      }
+
     } else if (s.props === 'board') {
-      ctx.fillRect(W * 0.1, H * 0.1, W * 0.8, hy - H * 0.2)
+      /* A classroom: a blackboard with chalk on it, and a floor. */
+      g.fillStyle = '#e4d8bd'
+      g.fillRect(0, 0, w, hy)
+      g.fillStyle = '#2f4032'
+      g.fillRect(w * 0.08, h * 0.08, w * 0.84, hy - h * 0.18)
+      g.strokeStyle = '#8a6a3c'
+      g.lineWidth = 10
+      g.strokeRect(w * 0.08, h * 0.08, w * 0.84, hy - h * 0.18)
+      g.strokeStyle = 'rgba(255,255,255,0.4)'
+      g.lineWidth = 3
+      for (var ch = 0; ch < 3; ch++) {
+        var chy = h * 0.16 + ch * h * 0.07
+        g.beginPath()
+        g.moveTo(w * 0.14, chy)
+        g.lineTo(w * (0.3 + fixed(ch * 5, 0.4)), chy)
+        g.stroke()
+      }
+      /* The chalk rail. */
+      g.fillStyle = '#8a6a3c'
+      g.fillRect(w * 0.08, hy - h * 0.1, w * 0.84, 10)
+
     } else if (s.props === 'tree') {
-      ctx.fillRect(W * 0.12, hy - H * 0.18, W * 0.03, H * 0.18)
-      ctx.beginPath()
-      ctx.arc(W * 0.135, hy - H * 0.20, W * 0.08, 0, Math.PI * 2)
-      ctx.fill()
+      /* A yard with one big mango tree, which is where a Ghanaian child sits.
+         Drawn large and off centre, so it frames the play area. */
+      var tx2 = w * 0.16
+      g.fillStyle = '#7a5230'
+      g.fillRect(tx2 - 10, hy - h * 0.26, 20, h * 0.26)
+      /* Roots. */
+      g.beginPath()
+      g.moveTo(tx2 - 26, hy); g.lineTo(tx2 - 8, hy - h * 0.06)
+      g.lineTo(tx2 + 8, hy - h * 0.06); g.lineTo(tx2 + 26, hy)
+      g.closePath()
+      g.fill()
+      /* Canopy, as three overlapping greens so it has depth. */
+      var greens = ['#2f6b2a', '#3d8433', '#4f9c3d']
+      for (var cg = 0; cg < 3; cg++) {
+        g.fillStyle = greens[cg]
+        g.beginPath()
+        g.arc(tx2 - 26 + cg * 26, hy - h * (0.3 + cg * 0.015), h * (0.1 - cg * 0.012), 0, Math.PI * 2)
+        g.fill()
+      }
+      /* Mangoes in it. */
+      g.fillStyle = '#f5a623'
+      for (var mg = 0; mg < 5; mg++) {
+        g.beginPath()
+        g.arc(tx2 - 30 + fixed(mg * 9, 80), hy - h * 0.3 + fixed(mg * 13, h * 0.07), 7, 0, Math.PI * 2)
+        g.fill()
+      }
+
     } else if (s.props === 'stars') {
-      ctx.globalAlpha = 0.8
-      ctx.fillStyle = '#fff'
-      for (var t = 0; t < 30; t++) {
-        /* Fixed by index rather than random, so they do not twinkle about
-           between frames. */
-        var sx = ((t * 137) % 100) / 100 * W
-        var sy = ((t * 71) % 100) / 100 * hy
-        ctx.fillRect(sx, sy, 2, 2)
+      /* Night: a moon, stars that do not move, and huts on the horizon. */
+      g.fillStyle = '#fdf3cf'
+      g.beginPath()
+      g.arc(w * 0.82, hy * 0.26, h * 0.055, 0, Math.PI * 2)
+      g.fill()
+      g.fillStyle = s.sky[0]
+      g.beginPath()
+      g.arc(w * 0.79, hy * 0.22, h * 0.05, 0, Math.PI * 2)
+      g.fill()
+
+      g.fillStyle = '#fff'
+      for (var st = 0; st < 40; st++) {
+        var sx2 = fixed(st * 37, w)
+        var sy2 = fixed(st * 61, hy * 0.9)
+        var sr = st % 5 === 0 ? 2.5 : 1.5
+        g.globalAlpha = 0.45 + fixed(st * 3, 0.5)
+        g.beginPath()
+        g.arc(sx2, sy2, sr, 0, Math.PI * 2)
+        g.fill()
+      }
+      g.globalAlpha = 1
+      /* Huts, silhouetted. */
+      g.fillStyle = '#131c30'
+      for (var ht = 0; ht < 4; ht++) {
+        var hx = fixed(ht * 19 + 2, w * 0.9)
+        var hw = w * 0.07, hh = h * 0.06
+        g.fillRect(hx, hy - hh, hw, hh)
+        g.beginPath()
+        g.moveTo(hx - 8, hy - hh)
+        g.lineTo(hx + hw / 2, hy - hh - h * 0.035)
+        g.lineTo(hx + hw + 8, hy - hh)
+        g.closePath()
+        g.fill()
       }
     }
-    ctx.restore()
+
+    /* Ground texture, in every scene.
+
+       Without it the near half of the screen is one flat slab of colour, which
+       is most of why the old scenes felt empty: the eye reads a large unbroken
+       fill as nothing rather than as ground. Speckle placed by index rather
+       than at random, so it is the same ground every time it paints, and baked
+       into the backdrop so it costs nothing per frame. */
+    if (s.props !== 'water' && s.props !== 'road') {
+      g.save()
+      for (var sp = 0; sp < 90; sp++) {
+        var px2 = fixed(sp * 41, w)
+        /* Squared, so the speckle crowds towards the viewer the way real
+           ground does rather than spreading evenly. */
+        var tt2 = fixed(sp * 13, 1)
+        var py2 = hy + (h - hy) * tt2 * tt2
+        var pr = 1.5 + tt2 * 4
+        g.globalAlpha = 0.05 + fixed(sp * 7, 0.07)
+        g.fillStyle = sp % 3 === 0 ? '#fff' : '#000'
+        g.beginPath()
+        g.ellipse(px2, py2, pr, pr * 0.45, 0, 0, Math.PI * 2)
+        g.fill()
+      }
+      g.restore()
+    }
+
+    /* A soft band where the ground meets the sky, so the horizon is a place
+       rather than a cut. */
+    var haze = g.createLinearGradient(0, hy - h * 0.03, 0, hy + h * 0.04)
+    haze.addColorStop(0, 'rgba(255,255,255,0.18)')
+    haze.addColorStop(1, 'rgba(255,255,255,0)')
+    g.fillStyle = haze
+    g.fillRect(0, hy - h * 0.03, w, h * 0.07)
+  }
+
+  /** Build the backdrop for the current size and scene, if it is not current. */
+  function ensureBackdrop() {
+    var want = (spec ? spec.scene : '') + ':' + Math.round(W) + 'x' + Math.round(H)
+    if (backdrop && backdropFor === want) return
+    var dpr = window.devicePixelRatio || 1
+    var off = document.createElement('canvas')
+    off.width = Math.max(1, Math.round(W * dpr))
+    off.height = Math.max(1, Math.round(H * dpr))
+    var g = off.getContext('2d')
+    g.scale(dpr, dpr)
+    paintScene(g, W, H)
+    backdrop = off
+    backdropFor = want
+  }
+
+  function drawScene() {
+    ensureBackdrop()
+    if (backdrop) ctx.drawImage(backdrop, 0, 0, W, H)
   }
 
   /* ── drawing an item ─────────────────────────────────────────────────────── */
@@ -346,6 +897,52 @@
     ctx.restore()
 
     ctx.scale(lifted, lifted)
+
+    /* Covered, for the remembering game.
+
+       Drawn here rather than in the builder because covering is about how an
+       item looks, not about what the question is, and the same separation is
+       why one small set of builders can produce games that do not feel alike.
+
+       A cloth with a fold in it, not a grey box. A four year old has to
+       believe there is something underneath. */
+    if (it.coverAt && now > it.coverAt) {
+      ctx.save()
+      /* A different colour each, because five identical beige lumps is a row
+         of rocks and a child has no reason to look at any one of them. The
+         cloth is the only thing on screen during this verb, so it has to
+         carry the whole game. */
+      ctx.fillStyle = it.good ? '#4fae70' : it.wrong ? '#d6614e' : (it.cloth || '#d9c7a6')
+      ctx.strokeStyle = 'rgba(70,45,15,0.35)'
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      /* Slightly domed, as cloth over a thing rather than a lid on a box. */
+      ctx.moveTo(-r, r * 0.8)
+      ctx.quadraticCurveTo(-r * 1.05, -r * 0.55, 0, -r * 0.8)
+      ctx.quadraticCurveTo(r * 1.05, -r * 0.55, r, r * 0.8)
+      ctx.quadraticCurveTo(0, r * 1.05, -r, r * 0.8)
+      ctx.closePath()
+      ctx.fill()
+      ctx.stroke()
+      /* Two folds, so it reads as fabric rather than as a dome. */
+      ctx.strokeStyle = 'rgba(255,255,255,0.28)'
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.4, -r * 0.5); ctx.lineTo(-r * 0.25, r * 0.75)
+      ctx.moveTo(r * 0.4, -r * 0.5); ctx.lineTo(r * 0.25, r * 0.75)
+      ctx.stroke()
+      /* A band along the hem and a knot on top, so it is a cloth somebody put
+         there rather than a shape that happens to be in the way. */
+      ctx.fillStyle = 'rgba(255,255,255,0.35)'
+      ctx.fillRect(-r * 0.92, r * 0.5, r * 1.84, r * 0.16)
+      ctx.fillStyle = it.good ? '#4fae70' : it.wrong ? '#d6614e' : (it.cloth || '#d9c7a6')
+      ctx.beginPath()
+      ctx.arc(0, -r * 0.82, r * 0.16, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+      ctx.restore()
+      return
+    }
 
     if (it.look === 'balloon') {
       /* A balloon on a string. Popping something is the one interaction a
@@ -1278,8 +1875,115 @@
     }
   }
 
+  /**
+   * Remember where it was.
+   *
+   * The first verb whose difficulty is not about the numbers. Everything else
+   * in the grammar is answerable from what is on the screen at the moment the
+   * child answers; this one is answerable only from what was on the screen a
+   * moment ago. That is a different thing to be good at, and it is the reason
+   * for adding it rather than an eighth way of tapping the right number.
+   *
+   * Three seconds of looking, then the cloths come down. Long enough for a
+   * four year old to actually look, short enough that it is remembering rather
+   * than reading.
+   */
+  function buildHide() {
+    var subject = spec.subject
+    var max = ceiling()
+    var t = pick(things())
+    var n = spec.tiny ? 3 : 4
+    var spots = spread(n, (playTop() + playBottom()) / 2, itemSize() * 1.1)
+    var vals = valuesFor(n, max)
+    var target = pick(vals)
+    var items = []
+
+    /* Long enough to look, and every cover falls together: covering them one
+       by one would tell the child which to watch. */
+    var coverAt = now + 3000
+
+    var CLOTHS = ['#e8674f', '#f2b517', '#4a9bd4', '#5fbd63', '#b579d6', '#f5843c']
+    var order = shuffle(CLOTHS)
+    for (var i = 0; i < vals.length; i++) {
+      var it = itemFor(subject === 'numeral' ? 'numeral' : 'count', vals[i], spots[i], t)
+      it.coverAt = coverAt
+      it.cloth = order[i % order.length]
+      items.push(it)
+    }
+
+    var one = subject !== 'numeral' && target === 1
+    var what = subject === 'numeral'
+      ? 'the number ' + target
+      : target + ' ' + (one ? t.one : t.many)
+
+    return {
+      items: items, needDone: false,
+      /* "Where is 6 mangoes" is what you get from gluing a number to a noun
+         and hoping. The verb has to agree with what follows it. */
+      ask: 'Look carefully. Where ' + (one || subject === 'numeral' ? 'is' : 'are')
+        + ' ' + what + '?',
+      tell: 'It was under a different one.',
+      onTap: function (hit) {
+        /* Nothing counts until they are hidden. A child tapping while they are
+           still in plain sight has not remembered anything, and marking that
+           right would teach them the game is about being quick. */
+        if (now < coverAt) return null
+        return hit.value === target
+      },
+    }
+  }
+
+  /**
+   * Put in exactly the right number, one at a time, and say when you are done.
+   *
+   * Different from collecting because the board answers back as you go: the
+   * count is shown, so a child who cannot yet count four things reliably can
+   * still get there by adding one and looking. Collecting asks you to know the
+   * answer before you start; this one lets you find it.
+   */
+  function buildFill() {
+    var max = ceiling()
+    var t = pick(things())
+    var want = rand(spec.tiny ? 1 : 2, Math.min(max, spec.tiny ? 5 : 9))
+
+    /* A jar, drawn as the basket the engine already knows how to draw. */
+    var jarW = clamp(W * 0.34, 120, 220)
+    var jarH = clamp(H * 0.26, 110, 190)
+    /* Positioned by its centre, which is what `drawBasket` expects. */
+    var jar = {
+      x: W / 2, y: playBottom() - jarH / 2,
+      w: jarW, h: jarH, label: '', count: 0, counted: true,
+    }
+
+    /* One tappable pile. Tapping it adds one; tapping the jar takes one back,
+       because a child who overshoots must be able to fix it without starting
+       again. */
+    var pile = newItem({
+      x: W / 2, y: playTop() + itemSize() * 1.3, r: itemSize() * 1.15,
+      value: 1, shownAs: 'glyphs', glyph: t.emoji, word: t.many,
+    })
+    pile.fixed = true
+
+    return {
+      items: [pile], basket: jar, needDone: true,
+      ask: 'Put ' + want + ' ' + (want === 1 ? t.one : t.many) + ' in the jar.',
+      tell: 'You needed ' + want + '.',
+      ready: function () { return jar.count > 0 },
+      check: function () { return jar.count === want },
+      /* Tapping is how you add and remove, so it is not an answer. Returning
+         null tells the engine this tap was not a guess. */
+      onTap: function (hit) {
+        if (hit === pile) jar.count = Math.min(jar.count + 1, max + 4)
+        return null
+      },
+      onBasketTap: function () { jar.count = Math.max(0, jar.count - 1) },
+    }
+  }
+
   var BUILDERS = {
     collect: buildCollect,
+    hide: buildHide,
+    fill: buildFill,
     pop: buildPop,
     sort: buildSort,
     order: buildOrder,
@@ -1321,7 +2025,8 @@
   /** The verbs that are finished by pressing Done rather than by one tap. */
   function wantsButton() {
     if (spec.goal === 'collect' || spec.goal === 'sort'
-      || spec.goal === 'order' || spec.goal === 'build') return true
+      || spec.goal === 'order' || spec.goal === 'build'
+      || spec.goal === 'fill') return true
     /* The balance is two games: tapping the heavier side needs no button,
        making the sides match does. */
     if (spec.goal === 'balance') return spec.subject === 'sum' || spec.subject === 'size'
@@ -1337,6 +2042,8 @@
     round = make()
     dress()
     expose()
+    audio.duck(true)
+    setTimeout(function () { audio.duck(false) }, 3200)
     say(round.ask)
   }
 
@@ -1347,6 +2054,11 @@
     mood = correct ? 'happy' : 'sad'
     if (correct) right++
     post({ type: 'attempt', correct: !!correct })
+    audio.play(correct ? 'right' : 'wrong')
+    /* Out of the way of the voice, then back. A spoken question competing with
+       even a quiet note is a spoken question a four year old does not catch. */
+    audio.duck(true)
+    setTimeout(function () { audio.duck(false) }, 2600)
     say(correct ? pick(['Yes. Well done.', 'That is right.', 'Good.'])
       : 'Not quite. ' + (round.tell || ''))
 
@@ -1380,6 +2092,8 @@
       phase = 'over'
       /* However it went, the last thing a child sees is not a frown. */
       mood = right === 0 ? 'idle' : 'happy'
+      audio.play('finish')
+      audio.stopMusic()
       post({ type: 'done', right: right, rounds: spec.rounds })
       return
     }
@@ -1480,20 +2194,46 @@
       return
     }
 
+    /* The jar itself is tappable, so a child who put in one too many can take
+       it back rather than starting the round again. Checked before the items,
+       because the jar sits under them. */
+    if (round.onBasketTap && round.basket) {
+      var jb = round.basket
+      if (Math.abs(p.x - jb.x) <= jb.w / 2 && Math.abs(p.y - jb.y) <= jb.h / 2) {
+        round.onBasketTap()
+        return
+      }
+    }
+
     var it = hit(p)
     if (!it) return
 
-    if (!round.needDone && round.onTap) {
+    /* A tap that is a move rather than an answer.
+
+       Most verbs answer with one tap, so a tap is a guess and is marked. In
+       `fill` a tap adds one to the jar and the round is finished with Done,
+       so the same gesture has to be able to mean "not an answer". A builder
+       says so by returning null, and a round with `needDone` gets its taps
+       too, which it did not before: the old condition skipped `onTap` whenever
+       Done was in play, so filling silently did nothing. */
+    if (round.onTap) {
       var verdict = round.onTap(it)
-      if (verdict === null) return
-      it.pulse = 1
-      it[verdict ? 'good' : 'wrong'] = true
-      finish(verdict)
-      return
+      if (verdict === null) {
+        it.pulse = 1
+        audio.play('tap')
+        return
+      }
+      if (!round.needDone) {
+        it.pulse = 1
+        it[verdict ? 'good' : 'wrong'] = true
+        finish(verdict)
+        return
+      }
     }
 
     if (it.fixed) return
     it.pulse = 1
+    audio.play('lift')
     held = it
     it.drag = true
     it.held = true
@@ -1521,9 +2261,12 @@
       var b = round.basket
       var inside = Math.abs(it.x - b.x) <= b.w / 2 + it.r * 0.5
         && Math.abs(it.y - b.y) <= b.h / 2 + it.r * 0.8
+      var was = it.inBasket
       it.inBasket = inside
       if (inside) {
         it.parked = true
+        /* Only on arriving, not on every release while already inside. */
+        if (!was) audio.play('drop')
       } else {
         it.parked = false
       }
@@ -1559,6 +2302,12 @@
   }
 
   canvas.addEventListener('pointerdown', function (e) {
+    /* The gesture that allows sound. A browser keeps an AudioContext
+       suspended until the user has touched something, so this is the earliest
+       honest moment to start one, and the music starts with it rather than at
+       load where it would be silently blocked. */
+    if (audio.touched() && audio.isOn()) audio.startMusic()
+
     /**
      * Capture the pointer, but never at the cost of the tap.
      *
@@ -1861,48 +2610,126 @@
    * a four year old that difference is most of whether they keep playing, and
    * it costs about forty lines.
    */
+  /**
+   * The friend watching the game, drawn as one of the app's own cast.
+   *
+   * It used to be a flat yellow circle with two dots and an arc. The rest of
+   * the platform has a drawn cast with volume, a light source and a shadow
+   * (`src/components/kid/art.tsx`), and the seam between that and this was the
+   * most visible thing in a game: a child went from a lit, rounded star on the
+   * home screen to a smiley face drawn like a sticker.
+   *
+   * Same light as everything else, top left. Same face. The star cannot be
+   * imported here, because the engine is plain script in a sandboxed frame, so
+   * it is drawn again rather than shared. That duplication is the price of the
+   * frame having no access to the app, and it is worth paying.
+   */
   function drawFace() {
-    var r = clamp(Math.min(W, H) * 0.07, 24, 54)
-    var x = W - r - 14
-    var y = H * 0.26
+    var r = clamp(Math.min(W, H) * 0.075, 26, 58)
+    var x = W - r - 18
+    var y = H * 0.24
     var blink = (now % 4200) < 140
 
     ctx.save()
-    /* A small bounce when pleased, a slump when not. */
-    var bob = mood === 'happy' ? Math.abs(Math.sin(now * 0.008)) * r * 0.16
-      : mood === 'sad' ? r * 0.1 : Math.sin(now * 0.0015) * r * 0.04
+    var bob = mood === 'happy' ? Math.abs(Math.sin(now * 0.008)) * r * 0.18
+      : mood === 'sad' ? r * 0.1 : Math.sin(now * 0.0015) * r * 0.05
     ctx.translate(x, y + bob)
 
-    ctx.fillStyle = '#f2b517'
+    /* A shadow under it, so it sits in the scene rather than on the glass. */
+    ctx.save()
+    ctx.globalAlpha = 0.14
+    ctx.fillStyle = '#000'
     ctx.beginPath()
-    ctx.arc(0, 0, r, 0, Math.PI * 2)
+    ctx.ellipse(0, r * 1.18, r * 0.72, r * 0.16, 0, 0, Math.PI * 2)
     ctx.fill()
-    ctx.strokeStyle = 'rgba(20,36,58,0.22)'
-    ctx.lineWidth = 3
+    ctx.restore()
+
+    /* The star, with rounded points. A spiky star reads as a warning badge and
+       this has to read as a friend. */
+    var g = ctx.createRadialGradient(-r * 0.3, -r * 0.35, r * 0.1, 0, 0, r * 1.2)
+    g.addColorStop(0, '#fff6cf')
+    g.addColorStop(0.55, '#f5c026')
+    g.addColorStop(1, '#d98b06')
+    ctx.fillStyle = g
+    ctx.strokeStyle = 'rgba(120,80,0,0.22)'
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    for (var i = 0; i < 10; i++) {
+      var ang = -Math.PI / 2 + i * Math.PI / 5
+      var rad = i % 2 === 0 ? r : r * 0.46
+      var px = Math.cos(ang) * rad
+      var py = Math.sin(ang) * rad
+      if (i === 0) ctx.moveTo(px, py)
+      else ctx.lineTo(px, py)
+    }
+    ctx.closePath()
+    ctx.fill()
     ctx.stroke()
 
-    ctx.fillStyle = '#14243a'
+    /* The specular highlight, which is most of what makes it read as round
+       rather than as a filled outline. */
+    ctx.save()
+    ctx.globalAlpha = 0.4
+    ctx.fillStyle = '#fff'
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.3, -r * 0.34, r * 0.22, r * 0.14, -0.5, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+
+    /* Eyes: taller than round, which is most of what makes an eye read as an
+       eye rather than as a dot. */
+    ctx.fillStyle = '#4a3a06'
     if (blink && mood !== 'sad') {
-      ctx.fillRect(-r * 0.42, -r * 0.16, r * 0.26, 4)
-      ctx.fillRect(r * 0.16, -r * 0.16, r * 0.26, 4)
+      ctx.fillRect(-r * 0.36, -r * 0.1, r * 0.2, Math.max(3, r * 0.07))
+      ctx.fillRect(r * 0.16, -r * 0.1, r * 0.2, Math.max(3, r * 0.07))
     } else {
       ctx.beginPath()
-      ctx.arc(-r * 0.29, -r * 0.16, r * 0.11, 0, Math.PI * 2)
-      ctx.arc(r * 0.29, -r * 0.16, r * 0.11, 0, Math.PI * 2)
+      ctx.ellipse(-r * 0.26, -r * 0.1, r * 0.1, r * 0.13, 0, 0, Math.PI * 2)
+      ctx.ellipse(r * 0.26, -r * 0.1, r * 0.1, r * 0.13, 0, 0, Math.PI * 2)
+      ctx.fill()
+      /* The catch light. Two dots, and the face is alive rather than drawn. */
+      ctx.fillStyle = '#fff'
+      ctx.beginPath()
+      ctx.arc(-r * 0.22, -r * 0.14, r * 0.035, 0, Math.PI * 2)
+      ctx.arc(r * 0.3, -r * 0.14, r * 0.035, 0, Math.PI * 2)
       ctx.fill()
     }
 
-    ctx.strokeStyle = '#14243a'
-    ctx.lineWidth = Math.max(3, r * 0.09)
-    ctx.beginPath()
-    if (mood === 'sad') {
-      ctx.arc(0, r * 0.52, r * 0.34, Math.PI * 1.15, Math.PI * 1.85)
-    } else if (mood === 'happy') {
-      ctx.arc(0, r * 0.14, r * 0.42, 0.18 * Math.PI, 0.82 * Math.PI)
-    } else {
-      ctx.arc(0, r * 0.18, r * 0.34, 0.22 * Math.PI, 0.78 * Math.PI)
+    /* Cheeks, except when it has gone wrong. */
+    if (mood !== 'sad') {
+      ctx.save()
+      ctx.globalAlpha = 0.4
+      ctx.fillStyle = '#e0715c'
+      ctx.beginPath()
+      ctx.ellipse(-r * 0.5, r * 0.1, r * 0.13, r * 0.09, 0, 0, Math.PI * 2)
+      ctx.ellipse(r * 0.5, r * 0.1, r * 0.13, r * 0.09, 0, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
     }
-    ctx.stroke()
+
+    /* Pleased is an open mouth, not a wider line. A filled mouth is a face
+       laughing; a curve is a face being polite about it. */
+    ctx.fillStyle = '#4a3a06'
+    ctx.strokeStyle = '#4a3a06'
+    ctx.lineWidth = Math.max(3, r * 0.08)
+    if (mood === 'happy') {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.3, r * 0.16)
+      ctx.quadraticCurveTo(0, r * 0.62, r * 0.3, r * 0.16)
+      ctx.quadraticCurveTo(0, r * 0.28, -r * 0.3, r * 0.16)
+      ctx.closePath()
+      ctx.fill()
+    } else if (mood === 'sad') {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.22, r * 0.32)
+      ctx.quadraticCurveTo(0, r * 0.1, r * 0.22, r * 0.32)
+      ctx.stroke()
+    } else {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.24, r * 0.2)
+      ctx.quadraticCurveTo(0, r * 0.44, r * 0.24, r * 0.2)
+      ctx.stroke()
+    }
     ctx.restore()
   }
 
@@ -2026,15 +2853,27 @@
          bowl over them. */
       if (round.basket) drawBasket(round.basket)
 
+      /* The friend is drawn before the items, not after.
+
+         It lives in the top right of the play field, which is also a cell
+         `scatter` will happily put a card in, and drawn last it sat on top of
+         one. Behind them it peeks out when there is room and is quietly
+         covered when there is not, which is the right behaviour for something
+         that is watching rather than playing. */
+      drawFace()
+
       for (var d = 0; d < round.items.length; d++) drawItem(round.items[d])
 
       if (round.basket) {
-        var inb = 0
-        for (var c = 0; c < round.items.length; c++) if (round.items[c].inBasket) inb++
+        /* A jar that keeps its own count, because in `fill` nothing is dragged
+           into it: tapping adds, and the number is the answer being built. */
+        var inb = round.basket.counted ? round.basket.count : 0
+        if (!round.basket.counted) {
+          for (var c = 0; c < round.items.length; c++) if (round.items[c].inBasket) inb++
+        }
         drawBasketFront(round.basket, inb)
       }
 
-      drawFace()
       /* The question, until there is no longer a question. */
       if (phase !== 'over') drawAsk()
       if (phase === 'play') drawDone()
@@ -2132,13 +2971,31 @@
 
   window.addEventListener('message', function (e) {
     var d = e.data
-    if (!d || d.nx !== 1 || d.type !== 'setup' || !d.spec) return
+    if (!d || d.nx !== 1) return
     /* Learned once, and everything after this is addressed to it. */
     if (!origin) origin = e.origin && e.origin !== 'null' ? e.origin : null
+
+    /**
+     * The app owns the mute switch, so the frame is told rather than deciding.
+     *
+     * One switch for speech, effects and music together. A parent who wants a
+     * quiet room wants a quiet room, not three settings, and the app already
+     * has that switch on the grown up's screen.
+     */
+    if (d.type === 'sound') {
+      audio.set(!!d.on)
+      if (d.on && spec && phase !== 'over') audio.startMusic()
+      return
+    }
+
+    if (d.type !== 'setup' || !d.spec) return
 
     spec = d.spec
     roundIndex = 0
     right = 0
+    /* A new game after one has finished: the music was stopped at the end of
+       the last set and has to be allowed back. */
+    if (audio.isOn()) audio.startMusic()
     wait.className = 'gone'
     fit()
     nextRound()

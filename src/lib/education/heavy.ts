@@ -104,9 +104,28 @@ export type Goal =
   | 'balance'
   /** Make a total out of parts. Addition, partitioning. */
   | 'build'
+  /**
+   * Look, then the covers come down, then say where it was.
+   *
+   * The first verb whose difficulty is not about the numbers. Every other one
+   * is answerable from what is on the screen at the moment of answering; this
+   * is answerable only from what was there a moment ago. Remembering where a
+   * thing was is a different thing to be good at, which is the reason for
+   * adding it rather than an eighth way of tapping the right number.
+   */
+  | 'hide'
+  /**
+   * Put in exactly the right number, one at a time, and say when done.
+   *
+   * Different from `collect` because the jar answers back as it fills. A child
+   * who cannot yet count four things reliably can still get to four by adding
+   * one and looking. Collecting asks you to know the answer before you start;
+   * filling lets you find it, which is the only verb here that does.
+   */
+  | 'fill'
 
 export const GOALS: Goal[] = [
-  'collect', 'pop', 'sort', 'order', 'match', 'balance', 'build',
+  'collect', 'pop', 'sort', 'order', 'match', 'balance', 'build', 'hide', 'fill',
 ]
 
 /** How the things behave. Changes the feel and the difficulty, never the answer. */
@@ -192,18 +211,25 @@ export interface GameSpec {
  * that pairs a goal with a subject it cannot teach is refused before it plays.
  */
 const GOALS_FOR: Record<Subject, Goal[]> = {
-  count: ['collect', 'pop', 'match', 'build'],
-  numeral: ['match', 'pop', 'order', 'collect'],
+  count: ['collect', 'pop', 'match', 'build', 'hide', 'fill'],
+  numeral: ['match', 'pop', 'order', 'collect', 'hide'],
   compare: ['balance', 'sort', 'pop'],
   sequence: ['order', 'pop', 'build'],
   letter: ['pop', 'match', 'sort', 'collect'],
   shape: ['sort', 'match', 'pop', 'order'],
   size: ['order', 'sort', 'balance', 'pop'],
-  sum: ['build', 'balance', 'collect'],
+  /* Filling suits a total: putting in five one at a time is what addition
+     feels like before it is written down. */
+  sum: ['build', 'balance', 'collect', 'fill'],
 }
 
 /** Motions that would make a goal unplayable rather than harder. */
 const MOTION_BANS: Partial<Record<Goal, Motion[]>> = {
+  /* Remembering where a thing was is impossible if the thing then moves, and
+     the child would be right to be furious about it. */
+  hide: ['fall', 'drift', 'bob', 'orbit'],
+  /* Tapping a pile to add one, while the pile wanders off. */
+  fill: ['fall', 'orbit', 'drift'],
   /* Dragging something that is falling is not a challenge, it is a fight. */
   order: ['fall', 'orbit'],
   sort: ['fall', 'orbit'],
@@ -383,6 +409,8 @@ const GOAL_WORDS: Record<Goal, string> = {
   match: 'Let us find the pairs',
   balance: 'Let us make both sides the same',
   build: 'Let us make the number together',
+  hide: 'Let us see what you can remember',
+  fill: 'Let us fill the jar',
 }
 
 /**

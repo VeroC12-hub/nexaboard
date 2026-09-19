@@ -256,4 +256,6 @@ const GOAL_NAMES: Record<Goal, string> = {
   match: 'matching',
   balance: 'balancing',
   build: 'building',
+  hide: 'remembering',
+  fill: 'filling',
 }
