@@ -375,3 +375,99 @@
   gap: 10px;
   margin-bottom: 8px;
 }
+
+/* ── a stored lesson, assembled for this learner ─────────────────────────── */
+
+/* Parts rather than one run of prose, so each one is given a heading and a
+   little air. The headings are what make an assembled lesson readable: a
+   learner who gets a recap first should be able to see that it is a recap. */
+.nx-taught { margin-bottom: 8px; }
+
+.nx-piece + .nx-piece { margin-top: 24px; }
+
+.nx-piece-head {
+  margin: 0 0 8px;
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 30;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--nx-ink);
+}
+
+/* The method, and the traps. Numbered because the method genuinely is a
+   sequence, which is the one case where numbering carries information. */
+.nx-piece-lines {
+  margin: 0;
+  /* Stated, because the study surface resets list markers globally and a
+     numbered method with no numbers is just indented prose. */
+  list-style: decimal;
+  padding-left: 1.4em;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 62ch;
+  color: var(--nx-ink-2);
+}
+
+.nx-piece-lines li { margin-bottom: 7px; }
+
+/* Traps are not a sequence, so they lose the numbers. */
+.nx-piece.is-traps .nx-piece-lines { list-style: disc; }
+
+/* A worked example is set apart, the way it would be boxed in a textbook, so
+   it is not mistaken for the explanation around it. */
+.nx-worked {
+  padding: 16px 18px;
+  background: var(--nx-cream);
+  border: 1px solid var(--nx-line);
+  border-radius: 12px;
+  max-width: 62ch;
+}
+
+.nx-worked-ask {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 700;
+  color: var(--nx-ink);
+}
+
+.nx-worked-steps {
+  margin: 0 0 10px;
+  list-style: decimal;
+  padding-left: 1.4em;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--nx-ink-2);
+}
+
+.nx-worked-steps li { margin-bottom: 6px; }
+
+.nx-worked-answer {
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--nx-line);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--nx-ink);
+}
+
+/* Why this lesson is shaped the way it is. Quiet, and at the end. */
+.nx-taught-why {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--nx-line);
+  max-width: 62ch;
+}
+
+/* Answer options inside a lesson. Unnumbered, because they are choices rather
+   than steps, and a numbered list of options invites picking the first. */
+.nx-choices {
+  margin: 0 0 10px;
+  padding-left: 1.2em;
+  list-style: disc;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--nx-ink-2);
+}
+
+.nx-choices li { margin-bottom: 5px; }

@@ -22,6 +22,9 @@ import { hasSyllabus, sizeOf, syllabusFor } from './syllabus'
 /* Loads every outline into the registry. Imported here because this is the
    module every screen already goes through to find out what there is to study. */
 import './library/syllabus'
+/* And the stored lessons, for the same reason: this is the module every screen
+   already goes through, so nothing else has to know the content files exist. */
+import './library/lessons'
 
 export interface Subject {
   id: string

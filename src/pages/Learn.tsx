@@ -46,6 +46,8 @@ import '../styles/read.css'
 import '../styles/paged.css'
 import { asksFor, askBrief } from '../lib/education/ask'
 import { primerAloud, primerFor, type Primer } from '../lib/education/primer'
+import { assemble } from '../lib/education/taught'
+import { taughtFor } from '../lib/education/taught-registry'
 import { mediumBrief } from '../lib/education/medium'
 import {
   leadsWith, localPlan, planIsStale, rank, readPlan, savePlan, savedPlan,
@@ -596,8 +598,26 @@ function Lesson({
   onOpenTopic?: (topicId: string) => void
 }) {
   const young = skin === 'kid'
+
+  /**
+   * The stored lesson for this topic, assembled for this learner.
+   *
+   * Tried before anything is asked of a model. Where it exists the topic is
+   * taught instantly, offline, the same way every time, from material a person
+   * has read, and shaped by this learner's own preferences rather than by her
+   * year. See `taught.ts` for why that is parts rather than prose.
+   */
+  const stored = useMemo(() => {
+    const t = taughtFor(topic.id)
+    return t ? { taught: t, ...assemble(t, learner.profile) } : null
+    /* The profile is stable for the life of this screen, and a re-teach
+       arrives as a new key rather than as a changed prop. */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topic.id])
+
   const [text, setText] = useState('')
-  const [state, setState] = useState<'live' | 'done' | 'off' | 'failed'>('live')
+  const [state, setState] = useState<'live' | 'done' | 'off' | 'failed'>(
+    stored ? 'done' : 'live')
   const [stage, setStage] = useState<TutorStage>('sent')
   const [why, setWhy] = useState('')
   const [asking, setAsking] = useState(false)
@@ -706,6 +726,11 @@ function Lesson({
   })
 
   useEffect(() => {
+    /* A stored lesson needs nothing asked for. It is already written, already
+       reviewed, and assembling it for this learner is a pure function, so the
+       request is not made at all rather than made and thrown away. */
+    if (stored) return
+
     const ctrl = new AbortController()
 
     askLesson(
@@ -1054,6 +1079,63 @@ function Lesson({
           <p className="nx-lede" style={{ margin: '0 0 26px' }}>{topic.outcome}</p>
         </>
       )}
+
+          {/* A stored lesson, assembled for this learner.
+
+              Rendered instead of the generated prose, not beside it. The
+              pieces are already in her order: see `assemble` in `taught.ts`,
+              where the whole of `approach`, `footing`, `goal` and `diet` turns
+              into which parts appear and in what sequence. */}
+          {stored && (
+            <div className="nx-taught">
+              {stored.pieces.map((piece, i) => (
+                <section key={i} className={`nx-piece is-${piece.kind}`}>
+                  <h3 className="nx-piece-head">{piece.heading}</h3>
+
+                  {piece.text && <Prose text={piece.text} className="nx-lesson-p" />}
+
+                  {piece.lines && (
+                    <ol className="nx-piece-lines">
+                      {piece.lines.map((line, j) => <li key={j}>{line}</li>)}
+                    </ol>
+                  )}
+
+                  {piece.worked && (
+                    <div className="nx-worked">
+                      <p className="nx-worked-ask">{piece.worked.ask}</p>
+                      <ol className="nx-worked-steps">
+                        {piece.worked.steps.map((st, j) => <li key={j}>{st}</li>)}
+                      </ol>
+                      <p className="nx-worked-answer">{piece.worked.answer}</p>
+                    </div>
+                  )}
+
+                  {piece.question && (
+                    <div className="nx-worked">
+                      <p className="nx-worked-ask">{piece.question.ask}</p>
+                      {/* Not `nx-piece-lines`: those are numbered because a
+                          method is a sequence, and answer options are not.
+                          Numbering four choices implies an order they do not
+                          have and invites picking the first. */}
+                      {piece.question.options && (
+                        <ul className="nx-choices">
+                          {piece.question.options.map(o => <li key={o}>{o}</li>)}
+                        </ul>
+                      )}
+                      <p className="nx-fineprint">
+                        Have a go before you read on. The full set is under Practise.
+                      </p>
+                    </div>
+                  )}
+                </section>
+              ))}
+
+              {/* Why this lesson looks the way it does. The same honesty
+                  `plan.ts` already keeps: a lesson quietly different for each
+                  child, that never says so, is one nobody can check. */}
+              <p className="nx-fineprint nx-taught-why">{stored.because}</p>
+            </div>
+          )}
 
           {state === 'live' && !text.trim() && (
             <p className="nx-ai-p nx-ai-wait">
