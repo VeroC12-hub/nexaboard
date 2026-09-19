@@ -69,15 +69,23 @@ export interface Game {
  * and the difference between counting mangoes and counting a fruit they have
  * never seen is the difference between a sum and a puzzle.
  */
+/**
+ * The things games are played with.
+ *
+ * `draw` names a painter in the engine, which draws the object with the same
+ * light as the rest of the platform rather than printing somebody else's
+ * emoji. The emoji stays as the fallback for anything not painted yet, so a
+ * thing without a painter still plays.
+ */
 export const THINGS = [
-  { emoji: '🥭', one: 'mango', many: 'mangoes' },
-  { emoji: '🍌', one: 'banana', many: 'bananas' },
-  { emoji: '🥜', one: 'groundnut', many: 'groundnuts' },
-  { emoji: '🐟', one: 'fish', many: 'fish' },
-  { emoji: '🥚', one: 'egg', many: 'eggs' },
-  { emoji: '🌽', one: 'corn', many: 'cobs of corn' },
-  { emoji: '🍅', one: 'tomato', many: 'tomatoes' },
-  { emoji: '⚽', one: 'ball', many: 'balls' },
+  { emoji: '🥭', one: 'mango', many: 'mangoes', draw: 'mango' },
+  { emoji: '🍌', one: 'banana', many: 'bananas', draw: 'banana' },
+  { emoji: '🥜', one: 'groundnut', many: 'groundnuts', draw: 'groundnut' },
+  { emoji: '🐟', one: 'fish', many: 'fish', draw: 'fish' },
+  { emoji: '🥚', one: 'egg', many: 'eggs', draw: 'egg' },
+  { emoji: '🌽', one: 'corn', many: 'cobs of corn', draw: 'corn' },
+  { emoji: '🍅', one: 'tomato', many: 'tomatoes', draw: 'tomato' },
+  { emoji: '⚽', one: 'ball', many: 'balls', draw: 'ball' },
 ] as const
 
 export const GAMES: Game[] = [

@@ -449,6 +449,13 @@
       sky: ['#bfe6ff', '#8fd18a'], ground: '#7ba648', far: '#5d8a34', horizon: 0.66,
       props: 'rows',
     },
+    /* An orchard rather than a field, for the games about picking fruit. The
+       trees fill the upper half, so fruit laid out across the play area reads
+       as hanging on them rather than floating in the sky. */
+    orchard: {
+      sky: ['#cfeaff', '#a8dca0'], ground: '#84ad4e', far: '#5d8a34', horizon: 0.72,
+      props: 'orchard',
+    },
     road: {
       sky: ['#cfe4f7', '#9bb6cc'], ground: '#7d8494', far: '#5d6370', horizon: 0.70,
       props: 'road',
@@ -614,6 +621,81 @@
           g.lineTo(cxp - size * 0.8, ry + size)
           g.lineTo(cxp + size * 0.8, ry + size)
           g.closePath()
+          g.fill()
+        }
+      }
+
+    } else if (s.props === 'orchard') {
+      /* Three big trees, drawn tall so their canopies reach into the top half
+         of the screen where the fruit is laid out. */
+      var spots = [0.22, 0.54, 0.86]
+      for (var ti = 0; ti < spots.length; ti++) {
+        var ox = w * spots[ti]
+        var oh = h * (0.44 + fixed(ti * 9, 0.1))
+        /* Trunk, wider at the base. */
+        g.fillStyle = '#7a5230'
+        g.beginPath()
+        g.moveTo(ox - w * 0.018, hy)
+        g.lineTo(ox - w * 0.009, hy - oh * 0.55)
+        g.lineTo(ox + w * 0.009, hy - oh * 0.55)
+        g.lineTo(ox + w * 0.018, hy)
+        g.closePath()
+        g.fill()
+        /* A couple of limbs. */
+        g.strokeStyle = '#7a5230'
+        g.lineWidth = Math.max(3, w * 0.008)
+        g.lineCap = 'round'
+        g.beginPath()
+        g.moveTo(ox, hy - oh * 0.42)
+        g.lineTo(ox - w * 0.05, hy - oh * 0.62)
+        g.moveTo(ox, hy - oh * 0.48)
+        g.lineTo(ox + w * 0.05, hy - oh * 0.66)
+        g.stroke()
+        /**
+         * The canopy: a clump of leaves, not a stack of circles.
+         *
+         * The first version drew four large overlapping discs on a row, which
+         * at full width came out as a single green sausage the size of a bus.
+         * A tree reads as a tree from its outline, so this is a ring of
+         * smaller lobes around a centre, sized against the tree rather than
+         * against the screen.
+         */
+        var cr = Math.min(oh * 0.3, w * 0.075)
+        var cy = hy - oh * 0.72
+        var lobes = [
+          [0, 0, 1.0, '#3d8433'],
+          [-0.72, 0.28, 0.72, '#2f6b2a'],
+          [0.72, 0.28, 0.72, '#2f6b2a'],
+          [-0.42, -0.42, 0.66, '#4f9c3d'],
+          [0.42, -0.45, 0.62, '#5fb048'],
+          [0, 0.52, 0.66, '#357a2e'],
+        ]
+        for (var cg = 0; cg < lobes.length; cg++) {
+          g.fillStyle = lobes[cg][3]
+          g.beginPath()
+          g.arc(ox + lobes[cg][0] * cr, cy + lobes[cg][1] * cr, cr * lobes[cg][2], 0, Math.PI * 2)
+          g.fill()
+        }
+        /* A few apples in the tree, so an orchard has fruit on it whether or
+           not the round happens to lay any out nearby.
+
+           Placed around the canopy by angle rather than by the noise
+           function, which kept returning neighbouring values and drew them as
+           overlapping pairs: four apples came out as two peanuts. */
+        for (var fr = 0; fr < 5; fr++) {
+          var fa = (fr / 5) * Math.PI * 2 + ti
+          var fd = cr * (0.5 + (fr % 2) * 0.28)
+          var fx2 = ox + Math.cos(fa) * fd
+          var fy2 = cy + Math.sin(fa) * fd * 0.72
+          g.fillStyle = '#b83026'
+          g.beginPath()
+          g.arc(fx2, fy2, cr * 0.11, 0, Math.PI * 2)
+          g.fill()
+          /* A highlight, so even at this size they are round things rather
+             than red dots. */
+          g.fillStyle = 'rgba(255,255,255,0.35)'
+          g.beginPath()
+          g.arc(fx2 - cr * 0.035, fy2 - cr * 0.035, cr * 0.035, 0, Math.PI * 2)
           g.fill()
         }
       }
@@ -852,6 +934,519 @@
 
   /* ── drawing an item ─────────────────────────────────────────────────────── */
 
+  /* ── drawn things ────────────────────────────────────────────────────────── */
+
+  /**
+   * Objects drawn rather than typed.
+   *
+   * ── Why not emoji ──────────────────────────────────────────────────────────
+   *
+   * Every object in these games was a system emoji. That is somebody else's
+   * artwork, it is a different picture on every phone, and it cannot be lit,
+   * shaded or posed. A farm full of 🍎 renders one way on a Samsung and
+   * another on a cheap Android, and neither of them matches the drawn cast on
+   * the rest of the platform.
+   *
+   * These are paths. They cost nothing to download, they are identical
+   * everywhere, and because they are drawn they can have a light source.
+   *
+   * ── The light ──────────────────────────────────────────────────────────────
+   *
+   * Top left, always, the same as `src/components/kid/art.tsx`. One light
+   * across the whole product is the difference between a set of objects and a
+   * pile of them. Each painter gets volume from a radial gradient, a specular
+   * highlight where the light lands, and a darker underside. That reads as
+   * three dimensional without any of the cost of actually being so: a WebGL
+   * dependency is most of a megabyte and stutters on the phones this is for.
+   *
+   * Each painter draws centred on the origin, sized to `r`, and leaves the
+   * context as it found it.
+   */
+
+  /** A soft specular highlight, the mark that makes a shape look round. */
+  function gloss(g, x, y, rx, ry, tilt, alpha) {
+    g.save()
+    g.globalAlpha = alpha === undefined ? 0.45 : alpha
+    g.fillStyle = '#fff'
+    g.translate(x, y)
+    g.rotate(tilt || -0.5)
+    g.beginPath()
+    g.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2)
+    g.fill()
+    g.restore()
+  }
+
+  /** A leaf with a vein, used by most of the fruit. */
+  function leaf(g, r, flip) {
+    g.save()
+    g.scale(flip ? -1 : 1, 1)
+    var lg = g.createLinearGradient(0, -r * 0.95, r * 0.7, -r * 0.6)
+    lg.addColorStop(0, '#5fc47f')
+    lg.addColorStop(1, '#2a8a4a')
+    g.fillStyle = lg
+    g.beginPath()
+    g.moveTo(r * 0.05, -r * 0.82)
+    g.quadraticCurveTo(r * 0.55, -r * 1.2, r * 0.72, -r * 0.72)
+    g.quadraticCurveTo(r * 0.4, -r * 0.55, r * 0.05, -r * 0.82)
+    g.closePath()
+    g.fill()
+    g.strokeStyle = 'rgba(20,70,35,0.35)'
+    g.lineWidth = Math.max(1, r * 0.035)
+    g.beginPath()
+    g.moveTo(r * 0.12, -r * 0.8)
+    g.quadraticCurveTo(r * 0.42, -r * 0.86, r * 0.66, -r * 0.74)
+    g.stroke()
+    g.restore()
+  }
+
+  var PAINT = {
+    /**
+     * An apple.
+     *
+     * The silhouette is the whole job: a circle with a stem on it is a
+     * tomato. An apple dips at the top, is widest above its middle, and comes
+     * to a slightly narrower base, and it is that dip a four year old
+     * recognises before any colour.
+     */
+    apple: function (g, r) {
+      var body = g.createRadialGradient(-r * 0.32, -r * 0.38, r * 0.08, 0, 0, r * 1.15)
+      body.addColorStop(0, '#ff8a75')
+      body.addColorStop(0.42, '#e03a2f')
+      body.addColorStop(1, '#8d1410')
+      g.fillStyle = body
+      g.beginPath()
+      /* Left shoulder, down to the base, and back up the right. */
+      g.moveTo(0, -r * 0.62)
+      g.bezierCurveTo(-r * 0.36, -r * 1.02, -r * 1.02, -r * 0.72, -r * 0.96, -r * 0.05)
+      g.bezierCurveTo(-r * 0.92, r * 0.62, -r * 0.44, r * 1.0, 0, r * 0.86)
+      g.bezierCurveTo(r * 0.44, r * 1.0, r * 0.92, r * 0.62, r * 0.96, -r * 0.05)
+      g.bezierCurveTo(r * 1.02, -r * 0.72, r * 0.36, -r * 1.02, 0, -r * 0.62)
+      g.closePath()
+      g.fill()
+
+      /* The underside, so it sits in light rather than floating in it. */
+      g.save()
+      g.globalAlpha = 0.18
+      g.fillStyle = '#4a0806'
+      g.beginPath()
+      g.ellipse(r * 0.12, r * 0.52, r * 0.7, r * 0.3, 0, 0, Math.PI * 2)
+      g.fill()
+      g.restore()
+
+      /* The stem, sitting in the dip. */
+      g.strokeStyle = '#6b4322'
+      g.lineWidth = Math.max(2, r * 0.11)
+      g.lineCap = 'round'
+      g.beginPath()
+      g.moveTo(0, -r * 0.62)
+      g.quadraticCurveTo(r * 0.06, -r * 0.92, -r * 0.05, -r * 1.02)
+      g.stroke()
+
+      leaf(g, r, false)
+      gloss(g, -r * 0.34, -r * 0.34, r * 0.24, r * 0.15, -0.6, 0.5)
+      gloss(g, -r * 0.46, -r * 0.05, r * 0.08, r * 0.2, -0.3, 0.2)
+    },
+
+    /** A banana: a crescent, which is the only thing that reads as one. */
+    banana: function (g, r) {
+      var body = g.createLinearGradient(-r * 0.5, -r * 0.6, r * 0.5, r * 0.6)
+      body.addColorStop(0, '#ffe98a')
+      body.addColorStop(0.5, '#f5c02a')
+      body.addColorStop(1, '#c98a08')
+      g.fillStyle = body
+      g.beginPath()
+      g.moveTo(-r * 0.78, -r * 0.42)
+      g.quadraticCurveTo(-r * 0.2, r * 0.96, r * 0.82, r * 0.34)
+      g.quadraticCurveTo(r * 0.5, r * 0.02, r * 0.52, -r * 0.16)
+      g.quadraticCurveTo(-r * 0.1, r * 0.5, -r * 0.56, -r * 0.5)
+      g.closePath()
+      g.fill()
+      g.fillStyle = '#6b4322'
+      g.beginPath()
+      g.arc(-r * 0.72, -r * 0.46, r * 0.11, 0, Math.PI * 2)
+      g.fill()
+      gloss(g, -r * 0.2, r * 0.18, r * 0.3, r * 0.08, 0.5, 0.4)
+    },
+
+    /** A mango, which is a fatter teardrop lying over. */
+    mango: function (g, r) {
+      var body = g.createRadialGradient(-r * 0.3, -r * 0.4, r * 0.08, 0, 0, r * 1.1)
+      body.addColorStop(0, '#ffe08a')
+      body.addColorStop(0.5, '#f5a623')
+      body.addColorStop(1, '#bf4418')
+      g.fillStyle = body
+      g.beginPath()
+      g.ellipse(0, 0, r * 0.95, r * 0.8, -0.28, 0, Math.PI * 2)
+      g.fill()
+      leaf(g, r * 0.85, false)
+      gloss(g, -r * 0.3, -r * 0.3, r * 0.26, r * 0.14, -0.5, 0.45)
+    },
+
+    /** An orange. Round, so the peel texture is what tells you. */
+    orange: function (g, r) {
+      var body = g.createRadialGradient(-r * 0.3, -r * 0.36, r * 0.08, 0, 0, r * 1.05)
+      body.addColorStop(0, '#ffc46b')
+      body.addColorStop(0.5, '#f5843c')
+      body.addColorStop(1, '#b8460d')
+      g.fillStyle = body
+      g.beginPath()
+      g.arc(0, 0, r * 0.88, 0, Math.PI * 2)
+      g.fill()
+      g.save()
+      g.globalAlpha = 0.14
+      g.fillStyle = '#7a2c05'
+      for (var i = 0; i < 16; i++) {
+        var a = i * 2.39
+        var d = r * 0.3 + (i % 5) * r * 0.1
+        g.beginPath()
+        g.arc(Math.cos(a) * d, Math.sin(a) * d, r * 0.045, 0, Math.PI * 2)
+        g.fill()
+      }
+      g.restore()
+      leaf(g, r * 0.8, true)
+      gloss(g, -r * 0.3, -r * 0.32, r * 0.22, r * 0.13, -0.5, 0.42)
+    },
+
+    /** An egg. */
+    egg: function (g, r) {
+      var body = g.createRadialGradient(-r * 0.28, -r * 0.4, r * 0.06, 0, 0, r * 1.05)
+      body.addColorStop(0, '#fffaf0')
+      body.addColorStop(0.6, '#f0dfc2')
+      body.addColorStop(1, '#bfa279')
+      g.fillStyle = body
+      g.beginPath()
+      g.ellipse(0, r * 0.06, r * 0.62, r * 0.84, 0, 0, Math.PI * 2)
+      g.fill()
+      gloss(g, -r * 0.2, -r * 0.3, r * 0.14, r * 0.22, -0.4, 0.5)
+    },
+
+    /** A ball, panelled so it is a ball rather than a circle. */
+    ball: function (g, r) {
+      var body = g.createRadialGradient(-r * 0.3, -r * 0.36, r * 0.08, 0, 0, r * 1.05)
+      body.addColorStop(0, '#ffffff')
+      body.addColorStop(0.55, '#e8eef5')
+      body.addColorStop(1, '#93a3b5')
+      g.fillStyle = body
+      g.beginPath()
+      g.arc(0, 0, r * 0.86, 0, Math.PI * 2)
+      g.fill()
+      g.fillStyle = '#25324a'
+      g.beginPath()
+      for (var k = 0; k < 5; k++) {
+        var ang = -Math.PI / 2 + k * (Math.PI * 2 / 5)
+        var px = Math.cos(ang) * r * 0.3
+        var py = Math.sin(ang) * r * 0.3
+        if (k === 0) g.moveTo(px, py)
+        else g.lineTo(px, py)
+      }
+      g.closePath()
+      g.fill()
+      gloss(g, -r * 0.32, -r * 0.34, r * 0.2, r * 0.12, -0.5, 0.6)
+    },
+
+    /** A cob of corn: kernels in rows, with the husk pulled back. */
+    corn: function (g, r) {
+      var body = g.createLinearGradient(-r * 0.3, -r * 0.7, r * 0.3, r * 0.7)
+      body.addColorStop(0, '#ffe98a')
+      body.addColorStop(0.5, '#f5c02a')
+      body.addColorStop(1, '#c98a08')
+      g.fillStyle = body
+      g.beginPath()
+      g.ellipse(0, -r * 0.05, r * 0.42, r * 0.82, 0, 0, Math.PI * 2)
+      g.fill()
+      /* Kernels, in staggered rows, which is what makes it corn. */
+      g.save()
+      g.globalAlpha = 0.28
+      g.fillStyle = '#8a5c04'
+      for (var row = -4; row <= 4; row++) {
+        for (var col = -1; col <= 1; col++) {
+          var kx = col * r * 0.24 + (row % 2 ? r * 0.12 : 0)
+          var ky = row * r * 0.17 - r * 0.05
+          if (Math.abs(kx) > r * 0.34) continue
+          g.beginPath()
+          g.ellipse(kx, ky, r * 0.09, r * 0.07, 0, 0, Math.PI * 2)
+          g.fill()
+        }
+      }
+      g.restore()
+      /* Husk leaves, one each side. */
+      g.fillStyle = '#4f9c3d'
+      g.beginPath()
+      g.moveTo(-r * 0.34, r * 0.3)
+      g.quadraticCurveTo(-r * 0.82, r * 0.5, -r * 0.5, r * 0.92)
+      g.quadraticCurveTo(-r * 0.3, r * 0.6, -r * 0.34, r * 0.3)
+      g.closePath()
+      g.fill()
+      g.fillStyle = '#3d8433'
+      g.beginPath()
+      g.moveTo(r * 0.34, r * 0.3)
+      g.quadraticCurveTo(r * 0.82, r * 0.5, r * 0.5, r * 0.92)
+      g.quadraticCurveTo(r * 0.3, r * 0.6, r * 0.34, r * 0.3)
+      g.closePath()
+      g.fill()
+      gloss(g, -r * 0.16, -r * 0.4, r * 0.1, r * 0.26, -0.15, 0.4)
+    },
+
+    /** A tomato: rounder and flatter than an apple, with a green calyx. */
+    tomato: function (g, r) {
+      var body = g.createRadialGradient(-r * 0.28, -r * 0.34, r * 0.06, 0, 0, r * 1.05)
+      body.addColorStop(0, '#ff8a75')
+      body.addColorStop(0.45, '#d6402e')
+      body.addColorStop(1, '#8a1309')
+      g.fillStyle = body
+      g.beginPath()
+      g.ellipse(0, r * 0.05, r * 0.9, r * 0.76, 0, 0, Math.PI * 2)
+      g.fill()
+      /* The calyx: five small leaves from the stem, which is the one thing
+         that tells a tomato from an apple at this size. */
+      g.fillStyle = '#3d8433'
+      for (var i = 0; i < 5; i++) {
+        var a = -Math.PI / 2 + i * (Math.PI * 2 / 5)
+        g.save()
+        g.rotate(a)
+        g.beginPath()
+        g.moveTo(0, -r * 0.55)
+        g.quadraticCurveTo(r * 0.16, -r * 0.78, 0, -r * 0.92)
+        g.quadraticCurveTo(-r * 0.16, -r * 0.78, 0, -r * 0.55)
+        g.closePath()
+        g.fill()
+        g.restore()
+      }
+      g.fillStyle = '#2f6b2a'
+      g.beginPath()
+      g.arc(0, -r * 0.6, r * 0.1, 0, Math.PI * 2)
+      g.fill()
+      gloss(g, -r * 0.3, -r * 0.26, r * 0.22, r * 0.13, -0.5, 0.45)
+    },
+
+    /** A groundnut in its shell: two lobes and a pinched waist. */
+    groundnut: function (g, r) {
+      var body = g.createLinearGradient(-r * 0.4, -r * 0.5, r * 0.4, r * 0.6)
+      body.addColorStop(0, '#e8cfa0')
+      body.addColorStop(0.55, '#c99f63')
+      body.addColorStop(1, '#8a6534')
+      g.fillStyle = body
+      g.beginPath()
+      g.moveTo(0, -r * 0.86)
+      g.bezierCurveTo(r * 0.56, -r * 0.86, r * 0.56, -r * 0.2, r * 0.26, -r * 0.05)
+      g.bezierCurveTo(r * 0.62, r * 0.12, r * 0.58, r * 0.88, 0, r * 0.88)
+      g.bezierCurveTo(-r * 0.58, r * 0.88, -r * 0.62, r * 0.12, -r * 0.26, -r * 0.05)
+      g.bezierCurveTo(-r * 0.56, -r * 0.2, -r * 0.56, -r * 0.86, 0, -r * 0.86)
+      g.closePath()
+      g.fill()
+      /* The shell's ribbing, which is most of what a groundnut looks like. */
+      g.save()
+      g.globalAlpha = 0.3
+      g.strokeStyle = '#6b4a22'
+      g.lineWidth = Math.max(1, r * 0.05)
+      for (var v = -2; v <= 2; v++) {
+        g.beginPath()
+        g.moveTo(v * r * 0.17, -r * 0.7)
+        g.quadraticCurveTo(v * r * 0.3, 0, v * r * 0.17, r * 0.74)
+        g.stroke()
+      }
+      g.restore()
+      gloss(g, -r * 0.2, -r * 0.5, r * 0.14, r * 0.08, -0.5, 0.35)
+    },
+
+    /** A fish, seen side on. */
+    fish: function (g, r) {
+      var body = g.createLinearGradient(0, -r * 0.6, 0, r * 0.6)
+      body.addColorStop(0, '#7fd4ff')
+      body.addColorStop(0.5, '#2d7ff9')
+      body.addColorStop(1, '#14459c')
+      g.fillStyle = body
+      g.beginPath()
+      g.ellipse(-r * 0.08, 0, r * 0.74, r * 0.5, 0, 0, Math.PI * 2)
+      g.fill()
+      g.beginPath()
+      g.moveTo(r * 0.56, 0)
+      g.lineTo(r * 0.98, -r * 0.42)
+      g.lineTo(r * 0.98, r * 0.42)
+      g.closePath()
+      g.fill()
+      g.fillStyle = '#fff'
+      g.beginPath()
+      g.arc(-r * 0.48, -r * 0.12, r * 0.13, 0, Math.PI * 2)
+      g.fill()
+      g.fillStyle = '#14243a'
+      g.beginPath()
+      g.arc(-r * 0.5, -r * 0.12, r * 0.07, 0, Math.PI * 2)
+      g.fill()
+      gloss(g, -r * 0.18, -r * 0.25, r * 0.24, r * 0.09, -0.25, 0.35)
+    },
+  }
+
+  /* ── whoever is in the scene ─────────────────────────────────────────────── */
+
+  /**
+   * A character standing in the game.
+   *
+   * ── Why anybody is here at all ─────────────────────────────────────────────
+   *
+   * The games were a board of objects on a backdrop. That is a worksheet with
+   * a picture behind it. What makes a four year old want a second round is
+   * somebody to be doing it for: "Kofi is picking apples, let us help him" is
+   * a reason to put an apple in a basket, and "put four apples in the basket"
+   * is an instruction.
+   *
+   * ── Why they are not a child ───────────────────────────────────────────────
+   *
+   * Same rule as the drawn cast in the app. No skin tone, no hair, no
+   * clothing that places anybody: a platform for Ghanaian children that draws
+   * one specific child excludes every child who does not look like the
+   * drawing, and choosing a tone is not a decision code should make on a
+   * school's behalf. The bodies here are a round friend, a monster, an animal
+   * and a bird, coloured by the costume.
+   *
+   * They watch, they do not play. Drawn behind the items for the same reason
+   * the star is: a character standing in a cell `scatter` will use must never
+   * cover the thing the child is being asked to tap.
+   */
+  function drawCharacter(who, groundY) {
+    if (!who) return
+    var r = clamp(Math.min(W, H) * 0.085, 30, 64)
+    var x = W * (who.at === undefined ? 0.14 : who.at)
+    var y = groundY - r * 0.2
+    var skin = (who.colours && who.colours[0]) || '#c98a52'
+    var trim = (who.colours && who.colours[1]) || '#f2b517'
+
+    /* A slow breath, so they are alive rather than pasted on. */
+    var breathe = Math.sin(now * 0.0014) * r * 0.035
+
+    ctx.save()
+    ctx.translate(x, y + breathe)
+
+    /* Contact shadow, on the same ground as everything else. */
+    ctx.save()
+    ctx.globalAlpha = 0.16
+    ctx.fillStyle = '#000'
+    ctx.beginPath()
+    ctx.ellipse(0, r * 1.02, r * 0.72, r * 0.17, 0, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+
+    if (who.body === 'bird') {
+      var bg = ctx.createRadialGradient(-r * 0.3, -r * 0.35, r * 0.08, 0, 0, r)
+      bg.addColorStop(0, '#a8d4ff'); bg.addColorStop(0.55, skin); bg.addColorStop(1, '#14459c')
+      ctx.fillStyle = bg
+      ctx.beginPath(); ctx.ellipse(0, r * 0.1, r * 0.72, r * 0.66, 0, 0, Math.PI * 2); ctx.fill()
+      ctx.fillStyle = trim
+      ctx.beginPath()
+      ctx.moveTo(r * 0.6, r * 0.02); ctx.lineTo(r * 1.02, r * 0.16); ctx.lineTo(r * 0.6, r * 0.3)
+      ctx.closePath(); ctx.fill()
+
+    } else if (who.body === 'monster') {
+      var mg = ctx.createRadialGradient(-r * 0.3, -r * 0.4, r * 0.08, 0, 0, r * 1.1)
+      mg.addColorStop(0, '#c7f0a8'); mg.addColorStop(0.5, skin); mg.addColorStop(1, '#2f6b2a')
+      ctx.fillStyle = mg
+      /* A rounded body with a wobbly top, which is most of what makes a shape
+         friendly rather than mechanical. */
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.78, r * 0.85)
+      ctx.quadraticCurveTo(-r * 0.95, -r * 0.35, -r * 0.3, -r * 0.72)
+      ctx.quadraticCurveTo(0, -r * 0.95, r * 0.3, -r * 0.72)
+      ctx.quadraticCurveTo(r * 0.95, -r * 0.35, r * 0.78, r * 0.85)
+      ctx.closePath(); ctx.fill()
+      /* Two horns, so it is a monster and not a blob. */
+      ctx.fillStyle = trim
+      ctx.beginPath(); ctx.moveTo(-r * 0.4, -r * 0.68)
+      ctx.lineTo(-r * 0.52, -r * 1.05); ctx.lineTo(-r * 0.18, -r * 0.8); ctx.closePath(); ctx.fill()
+      ctx.beginPath(); ctx.moveTo(r * 0.4, -r * 0.68)
+      ctx.lineTo(r * 0.52, -r * 1.05); ctx.lineTo(r * 0.18, -r * 0.8); ctx.closePath(); ctx.fill()
+
+    } else if (who.body === 'animal') {
+      var ag = ctx.createRadialGradient(-r * 0.3, -r * 0.4, r * 0.08, 0, 0, r * 1.05)
+      ag.addColorStop(0, '#fdf6e8'); ag.addColorStop(0.55, skin); ag.addColorStop(1, '#8a6534')
+      ctx.fillStyle = ag
+      ctx.beginPath(); ctx.ellipse(0, r * 0.12, r * 0.68, r * 0.62, 0, 0, Math.PI * 2); ctx.fill()
+      /* Ears out to the sides, which is what makes an animal an animal small. */
+      ctx.beginPath(); ctx.ellipse(-r * 0.62, -r * 0.3, r * 0.2, r * 0.13, -0.5, 0, Math.PI * 2); ctx.fill()
+      ctx.beginPath(); ctx.ellipse(r * 0.62, -r * 0.3, r * 0.2, r * 0.13, 0.5, 0, Math.PI * 2); ctx.fill()
+
+    } else {
+      /* The round friend. A body, a head, and two arms: enough to be somebody
+         and not enough to be a particular child. */
+      ctx.fillStyle = trim
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.52, r * 0.95)
+      ctx.quadraticCurveTo(-r * 0.62, r * 0.05, 0, -r * 0.02)
+      ctx.quadraticCurveTo(r * 0.62, r * 0.05, r * 0.52, r * 0.95)
+      ctx.closePath(); ctx.fill()
+
+      /* Arms, one raised, because a still figure reads as a statue. */
+      ctx.strokeStyle = skin
+      ctx.lineWidth = r * 0.17
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.46, r * 0.3)
+      ctx.quadraticCurveTo(-r * 0.78, r * 0.1, -r * 0.7, -r * 0.22)
+      ctx.moveTo(r * 0.46, r * 0.3)
+      ctx.quadraticCurveTo(r * 0.8, r * 0.16, r * 0.76, r * 0.5)
+      ctx.stroke()
+
+      var hg = ctx.createRadialGradient(-r * 0.2, -r * 0.6, r * 0.05, 0, -r * 0.42, r * 0.7)
+      hg.addColorStop(0, '#ffffff'); hg.addColorStop(0.25, skin); hg.addColorStop(1, '#6b4322')
+      ctx.fillStyle = hg
+      ctx.beginPath(); ctx.arc(0, -r * 0.42, r * 0.48, 0, Math.PI * 2); ctx.fill()
+    }
+
+    /* The face, the same one the whole platform uses: eyes taller than round,
+       a catch light in each, cheeks, and a mouth that is a filled shape when
+       pleased rather than a wider line. */
+    var fy = who.body === 'child' ? -r * 0.42 : -r * 0.1
+    var fr = who.body === 'child' ? r * 0.48 : r * 0.6
+    var blink = (now % 5200) < 140
+
+    ctx.fillStyle = '#3a2a10'
+    if (blink) {
+      ctx.fillRect(-fr * 0.44, fy - fr * 0.04, fr * 0.26, Math.max(2, fr * 0.08))
+      ctx.fillRect(fr * 0.18, fy - fr * 0.04, fr * 0.26, Math.max(2, fr * 0.08))
+    } else {
+      ctx.beginPath()
+      ctx.ellipse(-fr * 0.3, fy, fr * 0.11, fr * 0.15, 0, 0, Math.PI * 2)
+      ctx.ellipse(fr * 0.3, fy, fr * 0.11, fr * 0.15, 0, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.fillStyle = '#fff'
+      ctx.beginPath()
+      ctx.arc(-fr * 0.26, fy - fr * 0.05, fr * 0.04, 0, Math.PI * 2)
+      ctx.arc(fr * 0.34, fy - fr * 0.05, fr * 0.04, 0, Math.PI * 2)
+      ctx.fill()
+    }
+
+    ctx.save()
+    ctx.globalAlpha = 0.35
+    ctx.fillStyle = '#e0715c'
+    ctx.beginPath()
+    ctx.ellipse(-fr * 0.56, fy + fr * 0.26, fr * 0.14, fr * 0.09, 0, 0, Math.PI * 2)
+    ctx.ellipse(fr * 0.56, fy + fr * 0.26, fr * 0.14, fr * 0.09, 0, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+
+    ctx.fillStyle = '#3a2a10'
+    ctx.beginPath()
+    ctx.moveTo(-fr * 0.26, fy + fr * 0.28)
+    ctx.quadraticCurveTo(0, fy + fr * 0.72, fr * 0.26, fy + fr * 0.28)
+    ctx.quadraticCurveTo(0, fy + fr * 0.42, -fr * 0.26, fy + fr * 0.28)
+    ctx.closePath()
+    ctx.fill()
+
+    ctx.restore()
+  }
+
+  /** Whether a name has a painter, so callers can fall back to a glyph. */
+  function canPaint(name) { return !!(name && PAINT[name]) }
+
+  /** Draw a named thing, centred, at radius `r`. */
+  function paintThing(name, r) {
+    var f = PAINT[name]
+    if (!f) return false
+    ctx.save()
+    f(ctx, r)
+    ctx.restore()
+    return true
+  }
+
   function emojiFont(size) {
     return size + 'px "Segoe UI Emoji","Noto Color Emoji","Apple Color Emoji",system-ui,sans-serif'
   }
@@ -926,8 +1521,22 @@
     ctx.save()
     ctx.globalAlpha = it.drag ? 0.22 : 0.13
     ctx.fillStyle = '#000'
+    /**
+     * Under the thing, not under where a card would have been.
+     *
+     * A card fills its radius, so a shadow at 0.98 sits right beneath it. A
+     * bare object is painted smaller than its radius, and the same shadow
+     * landed well below it: the apples looked suspended above the ground with
+     * their shadows cast on a floor somewhere else. A floating object with a
+     * detached shadow is the one lighting mistake a child notices without
+     * being able to name.
+     */
+    var footY = it.look === 'bare' ? r * 0.82 : r * 0.98
+    /* Its own path. Without this every shadow joins the last one and the
+       screen fills with grey wedges connecting the things to each other,
+       which is exactly what happened when this block was rewritten. */
     ctx.beginPath()
-    ctx.ellipse(it.drag ? r * 0.18 : 0, r * (it.drag ? 1.15 : 0.98),
+    ctx.ellipse(it.drag ? r * 0.18 : 0, it.drag ? footY + r * 0.16 : footY,
       r * (it.drag ? 0.82 : 0.7), r * 0.2, 0, 0, Math.PI * 2)
     ctx.fill()
     ctx.restore()
@@ -1047,12 +1656,17 @@
       drawShape(it.value, 0, 0, r * 0.62, '#f2b517')
 
     } else if (it.shownAs === 'scaled') {
-      ctx.font = emojiFont(Math.round(r * 0.5 + r * 0.9 * (it.value / 5)))
-      ctx.fillText(it.glyph, 0, 0)
+      var sz = r * 0.5 + r * 0.9 * (it.value / 5)
+      if (!paintThing(it.draw, sz * 0.55)) {
+        ctx.font = emojiFont(Math.round(sz))
+        ctx.fillText(it.glyph, 0, 0)
+      }
 
     } else if (it.shownAs === 'picture') {
-      ctx.font = emojiFont(Math.round(r * 1.05))
-      ctx.fillText(it.glyph, 0, 0)
+      if (!paintThing(it.draw, r * 0.92)) {
+        ctx.font = emojiFont(Math.round(r * 1.05))
+        ctx.fillText(it.glyph, 0, 0)
+      }
 
     } else {
       /**
@@ -1070,11 +1684,21 @@
       var cols = n <= 2 ? n : n <= 6 ? 3 : 4
       var rows = Math.ceil(n / cols)
       var cell = r * 0.56
-      ctx.font = emojiFont(Math.round(cell * 0.95))
+      var painted = canPaint(it.draw)
+      if (!painted) ctx.font = emojiFont(Math.round(cell * 0.95))
       for (var i = 0; i < n; i++) {
         var cx = (i % cols - (cols - 1) / 2) * cell
         var cy = (Math.floor(i / cols) - (rows - 1) / 2) * cell
-        ctx.fillText(it.glyph, cx, cy)
+        if (painted) {
+          ctx.save()
+          ctx.translate(cx, cy)
+          /* Every copy the same size whatever the count: see the note above.
+             A group of one must not be one enormous apple. */
+          paintThing(it.draw, cell * 0.46)
+          ctx.restore()
+        } else {
+          ctx.fillText(it.glyph, cx, cy)
+        }
       }
     }
 
@@ -1092,7 +1716,54 @@
    * never punished by the clock. That is deliberate. A timer on a counting
    * game teaches a child that they are bad at counting.
    */
+  /**
+   * Give an item a place inside the basket and send it there.
+   *
+   * Laid out in rows from the bottom, so a filling basket looks like a filling
+   * basket rather than a heap at one point. Slightly jittered, because fruit
+   * does not stack on a grid and a perfect lattice looks like a spreadsheet.
+   */
+  function seatInBasket(it, b) {
+    var inb = []
+    for (var i = 0; i < round.items.length; i++) {
+      if (round.items[i].inBasket) inb.push(round.items[i])
+    }
+    var idx = inb.indexOf(it)
+    if (idx < 0) idx = inb.length
+
+    var per = Math.max(2, Math.floor(b.w / (it.r * 1.5)))
+    var col = idx % per
+    var row = Math.floor(idx / per)
+
+    var spanW = b.w * 0.78
+    var left = b.x - spanW / 2
+    var stepX = per > 1 ? spanW / (per - 1) : 0
+
+    it.settle = {
+      x: per > 1 ? left + col * stepX : b.x,
+      /* Deep in the bowl, so the front of the basket covers all but the tops.
+         Sitting proud of the rim they looked like things balanced on a box
+         rather than things put away inside one. */
+      y: b.y + b.h * 0.42 - row * it.r * 0.5 + (idx % 2 ? -it.r * 0.05 : it.r * 0.05),
+    }
+  }
+
+  /** How fast a seated item travels to its place. A short, eased hop. */
+  function settleTowards(it, dt) {
+    var k = Math.min(1, dt * 12)
+    it.x += (it.settle.x - it.x) * k
+    it.y += (it.settle.y - it.y) * k
+    if (Math.abs(it.x - it.settle.x) < 0.6 && Math.abs(it.y - it.settle.y) < 0.6) {
+      it.x = it.settle.x
+      it.y = it.settle.y
+      it.settle = null
+    }
+  }
+
   function move(it, dt) {
+    /* Travelling into the basket. Runs even though it is parked, because
+       parked means "not drifting about", not "frozen mid air". */
+    if (!it.drag && it.settle) { settleTowards(it, dt); return }
     if (it.drag || it.slot != null || it.parked) return
     var slow = spec.tiny ? 0.62 : 1
 
@@ -1137,6 +1808,9 @@
       value: o.value,
       glyph: o.glyph || '',
       shownAs: o.shownAs || 'glyphs',
+      /* Which drawn object this is, when there is one. Falls back to the
+         glyph, so a thing with no painter still plays. */
+      draw: o.draw || '',
       word: o.word || '',
       speed: (o.speed || (H * 0.055)) * (0.7 + Math.random() * 0.6),
       dir: Math.random() < 0.5 ? -1 : 1,
@@ -1263,7 +1937,7 @@
     if (subject === 'letter') {
       return newItem({
         x: at.x, y: at.y, r: at.r, value: value, shownAs: 'picture',
-        glyph: t.emoji, word: t.one,
+        glyph: t.emoji, draw: t.draw, word: t.one,
       })
     }
     if (subject === 'shape') {
@@ -1271,13 +1945,14 @@
     }
     if (subject === 'size') {
       return newItem({
-        x: at.x, y: at.y, r: at.r, value: value, shownAs: 'scaled', glyph: t.emoji,
+        x: at.x, y: at.y, r: at.r, value: value, shownAs: 'scaled',
+        glyph: t.emoji, draw: t.draw,
       })
     }
     /* count, compare, sum: a cluster you can actually count. */
     return newItem({
       x: at.x, y: at.y, r: at.r, value: value, shownAs: 'glyphs',
-      glyph: t.emoji, word: value === 1 ? t.one : t.many,
+      glyph: t.emoji, draw: t.draw, word: value === 1 ? t.one : t.many,
     })
   }
 
@@ -2044,9 +2719,13 @@
    * what lets one small set of builders produce games that do not feel alike.
    */
   function dress() {
-    var look = spec.goal === 'pop' ? 'balloon'
-      : spec.goal === 'balance' ? 'bare'
-        : 'card'
+    /* A costume may override. Apples on a farm should be apples, not apples
+       printed on white cards: the card is right for a numeral and wrong for
+       fruit. The verb only decides the default. */
+    var look = spec.look ? spec.look
+      : spec.goal === 'pop' ? 'balloon'
+        : spec.goal === 'balance' ? 'bare'
+          : 'card'
 
     for (var i = 0; i < round.items.length; i++) {
       var it = round.items[i]
@@ -2329,16 +3008,45 @@
     /* Where did it land? A basket, a bin, or back where it came from. */
     if (round.basket) {
       var b = round.basket
-      var inside = Math.abs(it.x - b.x) <= b.w / 2 + it.r * 0.5
-        && Math.abs(it.y - b.y) <= b.h / 2 + it.r * 0.8
+      /**
+       * Over the basket, not merely near it.
+       *
+       * This used to allow the centre of an item to be half its own radius
+       * *outside* the rim and still count. Combined with the item then staying
+       * where it was dropped, that is how a mango ended up sitting beside the
+       * basket while the game counted it as in.
+       *
+       * Generous enough that a four year old's aim is not the thing being
+       * tested, and no longer generous enough to be untrue: the centre has to
+       * be within the basket, plus a little above the rim, because things are
+       * dropped from above.
+       */
+      var inside = Math.abs(it.x - b.x) <= b.w / 2
+        && it.y >= b.y - b.h / 2 - it.r * 0.6
+        && it.y <= b.y + b.h / 2 + it.r * 0.2
       var was = it.inBasket
       it.inBasket = inside
       if (inside) {
         it.parked = true
-        /* Only on arriving, not on every release while already inside. */
-        if (!was) audio.play('drop')
+        /**
+         * Put it where it now says it is.
+         *
+         * The bug this fixes: an item dropped near the rim stayed exactly
+         * where it was let go, sitting outside the basket, while the count
+         * went up and the game insisted it was in. A child can see that it is
+         * not, and being told otherwise by the thing teaching them is worse
+         * than a wrong answer: it teaches them the game lies.
+         *
+         * So it travels to a place inside the basket and stays there. What is
+         * counted and what is on screen are then the same fact.
+         */
+        if (!was) {
+          audio.play('drop')
+          seatInBasket(it, b)
+        }
       } else {
         it.parked = false
+        it.settle = null
       }
       return
     }
@@ -3009,6 +3717,9 @@
          covered when there is not, which is the right behaviour for something
          that is watching rather than playing. */
       drawFace()
+      /* Whoever the costume put in the scene, standing on the ground, behind
+         the game for the same reason the star is. */
+      if (spec.character) drawCharacter(spec.character, H * scene().horizon + H * 0.06)
 
       for (var d = 0; d < round.items.length; d++) drawItem(round.items[d])
 

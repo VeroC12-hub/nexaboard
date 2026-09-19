@@ -80,6 +80,8 @@
 import { THINGS, rangeFor } from './games'
 import type { Stage } from './learner'
 import { lastGoal, pickWeighted, playsFor, weightsFor } from './taste'
+import { costumeFor } from './costumes'
+import './library/games'
 
 /* ── the grammar ──────────────────────────────────────────────────────────── */
 
@@ -141,10 +143,10 @@ export const MOTIONS: Motion[] = ['still', 'fall', 'drift', 'bob', 'orbit']
  * shapes and a gradient, so a new scene costs nothing to load.
  */
 export type Scene =
-  | 'market' | 'farm' | 'road' | 'river' | 'school' | 'yard' | 'beach' | 'night'
+  | 'market' | 'farm' | 'orchard' | 'road' | 'river' | 'school' | 'yard' | 'beach' | 'night'
 
 export const SCENES: Scene[] = [
-  'market', 'farm', 'road', 'river', 'school', 'yard', 'beach', 'night',
+  'market', 'farm', 'orchard', 'road', 'river', 'school', 'yard', 'beach', 'night',
 ]
 
 /** What the round is about, which decides what the engine lays out. */
@@ -162,6 +164,15 @@ export interface Thing {
   emoji: string
   one: string
   many: string
+  /**
+   * Which drawn object the engine paints for this, if there is one.
+   *
+   * An emoji is somebody else's artwork, renders differently on every phone,
+   * and cannot be lit. A painted thing is a path, identical everywhere, and
+   * takes the same light as the rest of the platform. The emoji stays as the
+   * fallback so a thing nobody has painted yet still plays.
+   */
+  draw?: string
 }
 
 /**
@@ -196,6 +207,24 @@ export interface GameSpec {
   intro: string
   /** Bigger targets, slower motion, fewer things on screen. */
   tiny: boolean
+  /**
+   * The named game this is, when it is one.
+   *
+   * A costume dresses a verb: the same `collect` becomes Count the Apples in
+   * an orchard with a child in it. Only presentation travels here. Nothing in
+   * a costume decides an answer, so a mistake in one can make a game ugly and
+   * never wrong. See `costumes.ts`.
+   */
+  costume?: string
+  /** How the things are presented: a card, the thing alone, or a balloon. */
+  look?: 'card' | 'bare' | 'balloon'
+  /** Somebody standing in the scene, drawn by the engine from this. */
+  character?: {
+    body: 'child' | 'monster' | 'animal' | 'bird'
+    name: string
+    colours: [string, string]
+    at?: number
+  }
   /** Where this came from, so a spec that plays badly can be traced. */
   source: 'composed' | 'model' | 'imported'
 }
@@ -393,6 +422,7 @@ function shuffled<T>(xs: readonly T[]): T[] {
 const SCENE_WORDS: Record<Scene, string> = {
   market: 'at the market',
   farm: 'on the farm',
+  orchard: 'in the orchard',
   road: 'by the roadside',
   river: 'down at the river',
   school: 'in the classroom',
@@ -486,13 +516,42 @@ export function composeSpec({
     (weights.get(o.goal) ?? 1) * (recent.includes(fingerprint(o)) ? 0.35 : 1))
     ?? pickOne(usable)
 
+  /**
+   * A named game, if one fits this verb and this topic.
+   *
+   * Chosen after the verb rather than before it, so the teaching decides the
+   * game and the costume only decides what it looks like. Picking the costume
+   * first would mean a child who likes apples getting counting games forever.
+   */
+  const worn = costumeFor(stage, topicTitle, chosen.goal)
+
+  if (worn) {
+    return {
+      title: worn.name,
+      goal: worn.goal,
+      subject: worn.subject,
+      motion: chosen.motion,
+      scene: worn.scene,
+      things: worn.things.map(t => ({ emoji: t.emoji, one: t.one, many: t.many, draw: t.draw })),
+      max: rangeFor(stage, year, accuracy),
+      rounds: tiny ? 5 : stage === 'primary' ? 6 : 8,
+      intro: worn.intro,
+      tiny,
+      costume: worn.id,
+      look: worn.look,
+      character: worn.character,
+      source: 'composed',
+    }
+  }
+
   return {
     title: GOAL_WORDS[chosen.goal],
     goal: chosen.goal,
     subject: chosen.subject,
     motion: chosen.motion,
     scene: chosen.scene,
-    things: shuffled(THINGS.map(t => ({ emoji: t.emoji, one: t.one, many: t.many }))).slice(0, 5),
+    things: shuffled(THINGS.map(t => ({ emoji: t.emoji, one: t.one, many: t.many, draw: t.draw })))
+      .slice(0, 5),
     max: rangeFor(stage, year, accuracy),
     rounds: tiny ? 5 : stage === 'primary' ? 6 : 8,
     intro: `${GOAL_WORDS[chosen.goal]} ${SCENE_WORDS[chosen.scene]}.`,
@@ -579,7 +638,8 @@ export function floorFor(stage: Stage, year: string, accuracy: number | null) {
     max: rangeFor(stage, year, accuracy),
     rounds: stage === 'creche' ? 5 : stage === 'primary' ? 6 : 8,
     tiny: stage === 'creche',
-    things: shuffled(THINGS.map(t => ({ emoji: t.emoji, one: t.one, many: t.many }))).slice(0, 5),
+    things: shuffled(THINGS.map(t => ({ emoji: t.emoji, one: t.one, many: t.many, draw: t.draw })))
+      .slice(0, 5),
   }
 }
 
