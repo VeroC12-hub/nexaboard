@@ -45,6 +45,7 @@ import '../styles/scholar.css'
 import '../styles/read.css'
 import '../styles/paged.css'
 import { asksFor, askBrief } from '../lib/education/ask'
+import { primerAloud, primerFor, type Primer } from '../lib/education/primer'
 import { mediumBrief } from '../lib/education/medium'
 import {
   leadsWith, localPlan, planIsStale, rank, readPlan, savePlan, savedPlan,
@@ -431,6 +432,7 @@ export default function Learn({
           topic={topic} place={place} learner={learner} askedFor={askedFor}
           plan={plan}
           skin={skin}
+          primer={primerFor(syllabus, topic.id)}
           onAsked={() => setAsks(asksFor(profile.id))}
           onBack={backFromTopic}
           onAgain={asked => setView({
@@ -440,6 +442,7 @@ export default function Learn({
           onPlay={playable(profile.stage, topic.title) || gameFor(profile.stage, topic.title)
             ? () => setView({ at: 'game', topicId: topic.id, attempt: 0 })
             : undefined}
+          onOpenTopic={id => setView({ at: 'lesson', topicId: id, attempt: 0, askedFor: '' })}
         />
       )
     }
@@ -556,12 +559,21 @@ export default function Learn({
 /* ── the lesson ───────────────────────────────────────────────────────────── */
 
 function Lesson({
-  topic, place, learner, askedFor, plan, skin, onAsked,
-  onBack, onAgain, onPractise, onPlay,
+  topic, place, learner, askedFor, plan, skin, primer, onAsked,
+  onBack, onAgain, onPractise, onPlay, onOpenTopic,
 }: {
   topic: Topic
   place: SyllabusPlace
   learner: LearnerBrief
+  /**
+   * What this topic can teach with no tutor at all.
+   *
+   * Passed in rather than computed here because it comes from the syllabus,
+   * which the parent already holds, and because it must exist before the
+   * request is made: the page it fills is the one shown when the request
+   * never arrives.
+   */
+  primer: Primer | null
   /** What the learner asked for last time, when they wanted it differently. */
   askedFor: string
   /** How this learner is taught: what leads, and whether words can be relied on. */
@@ -575,6 +587,13 @@ function Lesson({
   onPractise: () => void
   /** Present when this topic has a game, so the prose is never the only way in. */
   onPlay?: () => void
+  /**
+   * Open another topic in this subject.
+   *
+   * Only used by the primer, to make "you need fractions first" a thing the
+   * learner can act on rather than a thing they are told.
+   */
+  onOpenTopic?: (topicId: string) => void
 }) {
   const young = skin === 'kid'
   const [text, setText] = useState('')
@@ -1094,7 +1113,15 @@ function Lesson({
                  press. A sleeping friend says "not now" without words. */
               <div className="kid-none kid-none-pal">
                 <Mascot size={78} mood="rest" />
-                <span>Your tutor is asleep. Try a game instead.</span>
+
+                {/* What this topic is, in one sentence, read aloud like every
+                    other sentence in this tier. A five year old cannot use a
+                    list of prerequisites, so the primer is cut to the one part
+                    that is about them: what they will be able to do. */}
+                {primer
+                  ? <span>{primerAloud(primer)}</span>
+                  : <span>Your tutor is asleep. Try a game instead.</span>}
+
                 <div className="kid-actions" style={{ width: '100%' }}>
                   {onPlay && (
                     <button className="nx-btn nx-btn-primary" onClick={onPlay}>
@@ -1108,17 +1135,69 @@ function Lesson({
               </div>
             ) : (
               <>
-                <p className="nx-ai-p nx-ai-wait">{why}</p>
-                {/* The outline is still worth something on its own. */}
-                <p className="nx-ai-p nx-ai-wait">
-                  What this topic covers is above. You can still practise it, or
-                  come back when the tutor is available.
-                </p>
-                {state === 'failed' && (
-                  <button className="nx-link" onClick={() => onAgain(askedFor)}>
-                    Try again
-                  </button>
+                {/* The floor.
+
+                    This used to be the apology and nothing else, and the copy
+                    said "what this topic covers is above" when above it was
+                    the title. Everything here is written per topic in
+                    `library/syllabus/` by a person, so it needs no tutor, no
+                    network and no waiting, and none of it is invented at the
+                    moment of reading. */}
+                {primer && (
+                  <div className="nx-primer">
+                    {primer.parts.map((part, i) => (
+                      <section key={i}>
+                        <h3 className="nx-primer-head">{part.heading}</h3>
+                        {part.lines.map((line, j) => (
+                          <p key={j} className="nx-primer-p">{line}</p>
+                        ))}
+                      </section>
+                    ))}
+
+                    {/* A learner told they are missing something should be one
+                        tap from it, not told to go and find it. */}
+                    {primer.before.length > 0 && onOpenTopic && (
+                      <div className="nx-primer-go">
+                        {primer.before.map(t => (
+                          <button
+                            key={t.id}
+                            className="nx-btn"
+                            onClick={() => onOpenTopic(t.id)}>
+                            Go to {t.title}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 )}
+
+                {/* Said after, not before. The reason the fuller lesson is
+                    missing matters less to a learner than what they can do
+                    now, so it does not get the top of the page. */}
+                <p className="nx-primer-why">
+                  {why} The outline above is what this topic covers, and it is
+                  all written down rather than generated, so it is here whether
+                  or not the tutor is.
+                </p>
+                {/* A way out that does not depend on the thing that just
+                    failed. A game is composed locally from the grammar in
+                    `heavy.ts` and needs no tutor, no key and no network, so it
+                    is the one action here that is certain to work. Practice is
+                    deliberately not offered: its questions are generated by
+                    the same route that has just failed, so the button would
+                    lead to this same page. */}
+                <div className="nx-primer-actions">
+                  {onPlay && (
+                    <button className="nx-btn nx-btn-grow" onClick={onPlay}>
+                      Play this topic instead
+                    </button>
+                  )}
+                  {state === 'failed' && (
+                    <button className="nx-btn" onClick={() => onAgain(askedFor)}>
+                      Try again
+                    </button>
+                  )}
+                </div>
               </>
             )
           )}

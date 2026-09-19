@@ -309,3 +309,69 @@
   .sch-read { padding: 14px 12px 44px; }
   .sch-read-in { padding: 20px 18px 26px; border-radius: 14px; }
 }
+
+/* ── the floor under a topic with no lesson ──────────────────────────────── */
+
+/* Shown when no lesson has been written for a topic and no tutor answered.
+
+   It is deliberately not styled like a lesson. A lesson is prose at a reading
+   measure; this is a short structured brief, and dressing it up as teaching
+   would be a lie about what it is. Headings, short lines, and the reason it is
+   all there is stays at the bottom in smaller type. */
+.nx-primer {
+  margin: 4px 0 20px;
+  padding: 20px 22px;
+  background: var(--nx-card);
+  border: 1px solid var(--nx-line);
+  border-radius: 14px;
+}
+
+.nx-primer section + section { margin-top: 18px; }
+
+.nx-primer-head {
+  margin: 0 0 6px;
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 28;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--nx-ink);
+}
+
+.nx-primer-p {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 62ch;
+  color: var(--nx-ink-2);
+}
+
+.nx-primer-p:last-child { margin-bottom: 0; }
+
+/* Going back to what a topic stands on, as something to press. */
+.nx-primer-go {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--nx-line);
+}
+
+/* Why the fuller lesson is missing. Under the useful part, and quieter than
+   it, because it matters less to the learner than what they can do now. */
+.nx-primer-why {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 62ch;
+  color: var(--nx-ink-3);
+}
+
+/* A way out of a topic whose lesson could not be written. Under the reason,
+   because the reason explains why these are the only two offered. */
+.nx-primer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
