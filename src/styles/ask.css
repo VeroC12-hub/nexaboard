@@ -1,0 +1,224 @@
+/* ===========================================================================
+   Asking, and the answers.
+
+   Two rules.
+
+   The menu appears over the lesson, next to the thing she pointed at, and must
+   never cover it. So it sits above the selection where there is room and below
+   it when the selection is near the top of the screen, and the component
+   decides which.
+
+   The answer is part of the lesson, not a notification. It appears under the
+   paragraph she asked about and stays there, because a child who asks three
+   questions should be able to scroll back through her own conversation with
+   the page rather than watch the answers disappear.
+   =========================================================================== */
+
+.ak-menu {
+  position: fixed;
+  /* Placed by the component, then pulled back by half its own width so it is
+     centred on the selection rather than starting at it. */
+  transform: translate(-50%, -100%);
+  z-index: 60;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 5px;
+  max-width: min(94vw, 420px);
+
+  background: #14243a;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(10, 18, 30, 0.3);
+  /* The selection underneath stays visible and highlighted; this is a tool
+     about it, not a replacement for it. */
+}
+
+.ak-item {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fffdf5;
+  background: none;
+  border: 0;
+  border-radius: 10px;
+  /* A 44px target even though this is a small floating menu: it is tapped by
+     the same fingers as everything else. */
+  min-height: 40px;
+  padding: 8px 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ak-item:hover { background: rgba(255, 255, 255, 0.12); }
+.ak-item:active { background: rgba(255, 255, 255, 0.2); }
+
+.ak-ask { border-left: 1px solid rgba(255, 255, 255, 0.16); }
+
+.ak-form { display: flex; gap: 6px; padding: 2px; }
+
+.ak-input {
+  font: inherit;
+  font-size: 14px;
+  min-width: min(62vw, 240px);
+  padding: 9px 11px;
+  border: 0;
+  border-radius: 10px;
+  background: #fffdf5;
+  color: #14243a;
+}
+
+.ak-go {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #14243a;
+  background: #f2b517;
+  border: 0;
+  border-radius: 10px;
+  padding: 9px 14px;
+  min-height: 40px;
+  cursor: pointer;
+}
+
+/* ── the big button ───────────────────────────────────────────────────────── */
+
+/* For a learner who cannot read the menu, cannot drag a cursor, and needs one
+   thing to press. Deliberately large and deliberately not styled as a warning:
+   saying you do not understand is ordinary, not an error. */
+.ak-lost {
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 14px 22px;
+  margin: 18px 0 4px;
+  border: 2px solid #e8e2d3;
+  border-radius: 999px;
+  background: #fffdf5;
+  color: #14243a;
+  cursor: pointer;
+}
+
+.ak-lost:active { transform: scale(0.98); }
+.ak-lost.is-waiting { opacity: 0.6; cursor: default; }
+
+/* ── the answer card ──────────────────────────────────────────────────────── */
+
+.ak-card {
+  margin: 14px 0 20px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  /* Set apart from the lesson, but clearly the same document. A card that
+     looked like a system message would read as an interruption. */
+  background: #fffdf5;
+  border: 1px solid #e8e2d3;
+  border-left: 4px solid #f2b517;
+}
+
+.ak-asked {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #46536b;
+  line-height: 1.5;
+}
+
+.ak-asked b { color: #14243a; }
+
+.ak-waiting, .ak-failed {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #46536b;
+}
+
+.ak-failed { color: #a8341f; }
+
+/* A quiet pulse, so waiting looks like waiting rather than like nothing. */
+.ak-waiting::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 7px;
+  border-radius: 50%;
+  background: #f2b517;
+  animation: ak-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes ak-pulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ak-waiting::after { animation: none; opacity: 0.8; }
+}
+
+.ak-answer { font-size: 16px; line-height: 1.65; }
+
+/* A figure Claude writes carries a small viewBox, often 200 by 80. Left to
+   stretch to the card it scaled up sevenfold and measured 1378 by 551: three
+   circles occupying half the screen. Capped to what a diagram is worth. */
+.ak-figure {
+  margin: 6px 0 2px;
+  max-width: 460px;
+}
+
+.ak-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+}
+
+.ak-picture, .ak-video {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  border-radius: 12px;
+  background: #f1ece0;
+}
+
+/* ── did it help ──────────────────────────────────────────────────────────── */
+
+.ak-did {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #efe9db;
+}
+
+.ak-did-q { font-size: 14px; color: #46536b; margin-right: 2px; }
+.ak-did-said { font-size: 14px; color: #46536b; font-style: italic; }
+
+.ak-yes, .ak-no {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 40px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid #e8e2d3;
+  background: #fff;
+  color: #14243a;
+  cursor: pointer;
+}
+
+.ak-yes:hover { border-color: #0f8a4d; color: #0f8a4d; }
+.ak-no:hover { border-color: #d6402e; color: #d6402e; }
+
+@media (max-width: 480px) {
+  .ak-menu { max-width: 94vw; }
+  .ak-item { font-size: 13px; padding: 8px 9px; }
+  .ak-card { padding: 14px; border-radius: 14px; }
+}

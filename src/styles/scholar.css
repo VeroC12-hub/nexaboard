@@ -1,0 +1,547 @@
+/* ===========================================================================
+   Senior high, TVET and university.
+
+   The only tier that is desktop first. The other three are phones, because a
+   nine year old's device is a phone and usually somebody else's. By senior
+   high a learner is as likely to be at a school computer, a laboratory
+   machine, or a laptop in a hall of residence, and a single column of cards
+   wastes most of a 1400px screen.
+
+   So: a fixed dark sidebar and a wide working area, collapsing to a drawer and
+   one column on a phone. Nothing here assumes a mouse. Every target is still
+   44px, because the same page has to work on the phone they check between
+   lectures.
+
+   Scoped under .sch.
+   =========================================================================== */
+
+.sch {
+  /* All from `tokens.css`.
+
+     The rail is `--nx-ink`: literally the same value as body text everywhere
+     else in the platform. That is what joins this dark tier to the three light
+     ones, and it is why the charcoal it used to be looked borrowed. */
+  --ink: var(--nx-ink);
+  --ink-soft: var(--nx-ink-2);
+  --page: var(--nx-paper);
+  --card: var(--nx-card);
+  --line: var(--nx-line);
+  --rail: var(--nx-ink);
+  --rail-soft: #24405f;
+  --rail-ink: #cdd7e4;
+  --accent: var(--nx-gold);
+  --brand: var(--nx-ink);
+  --right: var(--nx-green);
+  --wrong: var(--nx-red);
+
+  min-height: 100dvh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system,
+               'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── the voice ───────────────────────────────────────────────────────────── */
+
+/* The four tiers were separated by colour alone, which meant they were
+   separated by nothing once the palette was unified: the same grotesque at the
+   same weights, four times over.
+
+   This tier gets the house serif for anything that is a heading or a piece of
+   writing, and keeps the grotesque for the chrome: navigation, buttons,
+   counters, labels. The split is deliberate. A serif reads as a document,
+   which is what a syllabus is, and a grotesque reads as a control, which is
+   what a button is.
+
+   The youngest tier deliberately does not get this. A child still learning
+   letterforms needs a single-storey `a` and unbracketed strokes, and a
+   high-contrast display serif is the wrong shape to be learning to read
+   from. */
+.sch-greet h1,
+.sch-panel-top h2,
+.sch-card h3,
+.sch-line-title {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 32;
+}
+
+/* The serif is narrower than the grotesque at the same size, so the greeting
+   is set slightly larger to keep the same presence it had. */
+.sch-greet h1 { letter-spacing: -0.012em; }
+
+/* ── the rail ─────────────────────────────────────────────────────────────── */
+
+.sch-rail {
+  flex: 0 0 236px;
+  background: var(--rail);
+  color: var(--rail-ink);
+  padding: 22px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 100dvh;
+  position: sticky;
+  top: 0;
+}
+
+.sch-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px 26px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.sch-brand-name { display: inline-block; }
+.sch-brand-name i { color: var(--accent); font-style: normal; }
+
+/* Only on a phone, where the rail is a drawer. On a laptop the rail is always
+   there and there is nothing to close. */
+.sch-close { display: none; }
+
+@media (max-width: 900px) {
+  .sch-brand { display: flex; align-items: center; }
+
+  .sch-close {
+    /* Pushed to the end rather than the row being spread, so the wordmark
+       keeps its own spacing. */
+    margin-left: auto;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-right: -6px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+    color: var(--rail-ink);
+    cursor: pointer;
+  }
+
+  .sch-close:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+}
+
+.sch-nav {
+  font: inherit;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  min-height: 46px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--rail-ink);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sch-nav:hover { background: var(--rail-soft); color: #fff; }
+
+.sch-nav.is-on {
+  background: var(--accent);
+  color: var(--nx-ink);
+  font-weight: 800;
+}
+
+.sch-nav-mark { font-size: 16px; line-height: 1; width: 18px; text-align: center; }
+
+.sch-rail-foot { margin-top: auto; padding-top: 18px; }
+
+/* ── the working area ─────────────────────────────────────────────────────── */
+
+.sch-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 26px 30px 48px;
+  box-sizing: border-box;
+}
+
+.sch-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.sch-greet { flex: 1 1 280px; min-width: 0; }
+
+.sch-greet h1 {
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 29px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.sch-greet p {
+  margin: 6px 0 0;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+
+.sch-search {
+  font: inherit;
+  flex: 0 1 300px;
+  min-height: 46px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-size: 14.5px;
+  color: var(--ink);
+  box-sizing: border-box;
+}
+
+.sch-who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+.sch-who-ring {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--brand);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* Both blocks, or the name and the year run together as one word: the chip
+   read "Yaw MensahSHS 2". */
+.sch-who-name { display: block; font-size: 14px; font-weight: 700; line-height: 1.25; }
+.sch-who-sub { display: block; font-size: 12px; color: var(--ink-soft); }
+
+/* ── panels ───────────────────────────────────────────────────────────────── */
+
+.sch-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+.sch-panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+
+.sch-panel-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sch-panel-top h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.sch-quiet {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  background: none;
+  border: 0;
+  padding: 8px 2px;
+  min-height: 44px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── subject cards ────────────────────────────────────────────────────────── */
+
+.sch-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  gap: 14px;
+}
+
+.sch-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--card);
+}
+
+.sch-tag {
+  align-self: flex-start;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--nx-ink);
+  color: #fff;
+}
+
+.sch-tag.is-elective { background: var(--nx-line-soft); color: var(--nx-ink-2); }
+
+.sch-card h3 {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.sch-card-note {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin: -4px 0 0;
+}
+
+/* `display: block` matters here and is easy to lose.
+
+   Every one of these tracks is a <span>, because it lives inside a <button>
+   and a <div> is not allowed there. An inline element ignores `height`, so the
+   bar grew to the line height of its parent and the fill inside it escaped.
+   Caught in Chrome: a 10px goal bar measured 44.8px tall and read as empty. */
+.sch-track {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--nx-line-soft);
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.sch-track i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.sch-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* Not full width inside a card.
+
+   Three cards each with a full width gold button turned the panel into three
+   gold blocks with some text above them: the accent was carrying more weight
+   than the subject names. The card is what you read; the button is what you
+   press. */
+.sch-btn {
+  font: inherit;
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--accent);
+  color: var(--nx-ink);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: filter 120ms, transform 120ms;
+}
+
+.sch-btn:hover { filter: brightness(1.06); }
+.sch-btn:active { transform: scale(0.97); }
+
+.sch-btn.is-quiet {
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.sch-btn.is-quiet:hover {
+  border-color: var(--ink);
+  background: var(--nx-cream);
+  filter: none;
+}
+
+/* ── the week ─────────────────────────────────────────────────────────────── */
+
+.sch-week { display: flex; gap: 6px; justify-content: space-between; }
+
+.sch-wday {
+  flex: 1 1 0;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+
+.sch-wday-name {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+
+.sch-wday-n {
+  display: block;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.sch-wday.is-done {
+  background: var(--nx-gold-soft);
+  border-color: #f0d79a;
+}
+
+.sch-wday.is-today { border-color: var(--brand); }
+
+/* ── rows of work done ────────────────────────────────────────────────────── */
+
+.sch-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.sch-line:last-child { border-bottom: 0; }
+
+.sch-line-body { flex: 1 1 auto; min-width: 0; }
+
+.sch-line-title {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sch-line-sub {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+/* A score, boxed, as the reference has it. The colour is the judgement and the
+   word beside it in the title is the context, so the box is never the only
+   thing carrying meaning. */
+.sch-score {
+  flex: 0 0 auto;
+  text-align: center;
+  min-width: 56px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: var(--nx-gold-soft);
+  border: 1px solid #f0d79a;
+}
+
+.sch-score b { display: block; font-size: 16px; font-weight: 800; }
+.sch-score span { display: block; font-size: 10.5px; color: var(--ink-soft); font-weight: 700; }
+
+.sch-score.is-strong { background: var(--nx-green-soft); border-color: #a9dcc0; }
+.sch-score.is-weak { background: var(--nx-red-soft); border-color: #f2b5ac; }
+
+.sch-none {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ── the drawer, on a phone ───────────────────────────────────────────────── */
+
+.sch-burger {
+  display: none;
+  font: inherit;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sch-scrim {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(20, 36, 58, 0.5);
+}
+
+@media (max-width: 900px) {
+  .sch { display: block; }
+
+  /* Off canvas, and slid in. Still the same markup and the same nav, so there
+     is one navigation to maintain rather than a desktop one and a mobile one
+     that drift. */
+  .sch-rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 60;
+    width: 256px;
+    flex: none;
+    transform: translateX(-100%);
+    transition: transform 220ms ease-out;
+  }
+
+  .sch.is-open .sch-rail { transform: none; }
+  .sch.is-open .sch-scrim { display: block; }
+
+  .sch-main { padding: 18px 16px 44px; }
+  .sch-burger { display: inline-grid; place-items: center; }
+  .sch-grid { grid-template-columns: minmax(0, 1fr); }
+  .sch-search { flex: 1 1 100%; }
+}
+
+/* The same press feedback as the tier below. See teen.css for why. */
+.sch-card:active,
+.sch-line:active { transform: scale(0.99); }
+
+.sch-nav:active,
+.sch-burger:active,
+.sch-who:active { transform: scale(0.97); }
+
+.sch-card,
+.sch-line,
+.sch-btn,
+.sch-nav,
+.sch-burger,
+.sch-who { transition: transform 0.08s ease, background 0.14s ease, border-color 0.14s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sch-rail { transition: none; }
+  .sch * { transition: none !important; }
+  .sch-card:active,
+  .sch-line:active,
+  .sch-btn:active,
+  .sch-burger:active,
+  .sch-who:active { transform: none; }
+}

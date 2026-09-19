@@ -1,0 +1,359 @@
+/* ===========================================================================
+   The games, for learners who cannot read yet.
+
+   Two rules decide everything here.
+
+   First, a four year old taps with a finger, not a mouse, and often on a
+   borrowed phone held by somebody else. So every target is at least 64px,
+   nothing depends on hover, and nothing depends on precision. A missed tap is
+   the platform's fault, not the child's.
+
+   Second, one thing at a time. There is no scoreboard, no timer, no streak, no
+   confetti. A child counting mangoes should be counting mangoes, and every
+   other moving thing on the screen is competing with the lesson.
+
+   Scoped under .gm so nothing here can reach the rest of the app.
+   =========================================================================== */
+
+.gm {
+  --ink: #14243a;
+  --ink-soft: #46536b;
+  --paper: #fffdf5;
+  --card: #ffffff;
+  --line: #e8e2d3;
+  --right: #0f8a4d;
+  --wrong: #d6402e;
+  --gold: #f2b517;
+
+  color: var(--ink);
+  background: var(--paper);
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system,
+               'Segoe UI', Roboto, sans-serif;
+  min-height: 100dvh;
+  padding: 18px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Nothing here should ever be dragged or text selected by a stray long press. */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gm-top {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Progress as dots rather than a number, because the number is not the point
+   and a child cannot read it anyway. */
+.gm-dots { display: flex; gap: 8px; }
+.gm-dots i {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--line);
+  transition: background-color 160ms;
+}
+.gm-dots i.is-now { background: var(--gold); }
+.gm-dots i.is-right { background: var(--right); }
+.gm-dots i.is-wrong { background: var(--wrong); }
+
+.gm-quiet {
+  font: inherit; font-size: 13px;
+  background: none; border: 0; color: var(--ink-soft);
+  text-decoration: underline; text-underline-offset: 3px;
+  cursor: pointer; padding: 6px;
+}
+
+/* The instruction, read aloud by whoever is sitting with them. Large because
+   the adult is often holding the phone at arm's length. */
+.gm-ask {
+  font-size: clamp(24px, 6vw, 34px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-align: center;
+  margin: 26px 0 30px;
+  max-width: 22ch;
+}
+
+/* ── things to count ─────────────────────────────────────────────────────── */
+
+.gm-scatter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 720px;
+  margin-bottom: 22px;
+}
+
+.gm-thing {
+  font-size: clamp(44px, 11vw, 64px);
+  line-height: 1;
+  /* Comfortably bigger than the 44px minimum, because this is the target a
+     four year old actually has to hit. */
+  min-width: 76px;
+  min-height: 76px;
+  display: grid;
+  place-items: center;
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  cursor: pointer;
+  transition: transform 120ms, border-color 120ms, background-color 120ms;
+}
+
+.gm-thing:active { transform: scale(0.94); }
+
+/* Counted. A ring and a lift, not a colour change, so a colour blind child
+   sees it too. */
+.gm-thing.is-on {
+  border-color: var(--right);
+  background: #eefaf1;
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 4px rgba(15, 138, 77, 0.18);
+}
+
+.gm-thing.is-still {
+  border: 0; background: none; min-width: 0; min-height: 0;
+  box-shadow: none; cursor: default;
+}
+
+.gm-scatter.is-still { gap: 14px; }
+
+.gm-counted {
+  display: flex; align-items: center; gap: 18px;
+  margin-bottom: 8px;
+}
+
+.gm-counted-n {
+  font-size: 46px; font-weight: 800; color: var(--gold);
+  min-width: 56px; text-align: center;
+}
+
+/* ── choices ─────────────────────────────────────────────────────────────── */
+
+.gm-choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.gm-choice {
+  font: inherit;
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  cursor: pointer;
+  min-width: 96px;
+  min-height: 96px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  transition: transform 120ms, border-color 120ms;
+}
+.gm-choice:active { transform: scale(0.95); }
+.gm-choice:disabled { opacity: 0.55; cursor: default; }
+
+.gm-choice.is-number { font-size: 46px; font-weight: 800; }
+.gm-choice.is-letter { font-size: 52px; font-weight: 800; text-transform: lowercase; }
+.gm-choice.is-shape { color: var(--ink); }
+
+/* ── two groups to compare ───────────────────────────────────────────────── */
+
+.gm-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 14px;
+}
+
+.gm-group {
+  font: inherit;
+  display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+  gap: 6px;
+  min-height: 190px;
+  padding: 14px;
+  font-size: clamp(28px, 7vw, 40px);
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 120ms, border-color 120ms;
+}
+.gm-group:active { transform: scale(0.97); }
+.gm-group:disabled { opacity: 0.6; cursor: default; }
+
+/* ── a run of numbers with a gap ─────────────────────────────────────────── */
+
+.gm-run {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 26px;
+}
+
+.gm-run-n {
+  min-width: 78px; min-height: 78px;
+  display: grid; place-items: center;
+  font-size: 38px; font-weight: 800;
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 16px;
+}
+
+.gm-run-n.is-gap {
+  border-style: dashed;
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.gm-big { font-size: clamp(96px, 26vw, 150px); line-height: 1; margin-bottom: 24px; }
+.gm-target { margin-bottom: 24px; color: var(--ink); }
+
+/* ── what happened ───────────────────────────────────────────────────────── */
+
+.gm-said {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  justify-content: center;
+  font-size: 20px; font-weight: 600;
+  padding: 16px 20px;
+  border-radius: 18px;
+  margin-top: 8px;
+  max-width: 560px;
+  text-align: center;
+}
+.gm-said.is-right { background: #eefaf1; color: var(--right); }
+.gm-said.is-wrong { background: #fdeeec; color: var(--wrong); }
+.gm-said-mark { font-size: 30px; line-height: 1; }
+
+.gm-go {
+  font: inherit; font-size: 18px; font-weight: 700;
+  padding: 14px 28px;
+  min-height: 52px;
+  border: 0; border-radius: 999px;
+  background: var(--ink); color: #fff;
+  cursor: pointer;
+}
+.gm-go:disabled { opacity: 0.35; cursor: default; }
+
+.gm-foot {
+  margin-top: 26px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
+/* A phone held in one hand. Everything already wraps and scales, so this only
+   tightens the gaps that stop being comfortable. */
+@media (max-width: 420px) {
+  .gm-ask { margin: 18px 0 22px; }
+  .gm-scatter { gap: 8px; }
+  .gm-choice { min-width: 84px; min-height: 84px; }
+  .gm-pair { gap: 10px; }
+  .gm-group { min-height: 160px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gm-thing, .gm-choice, .gm-group { transition: none; }
+  .gm-thing:active, .gm-choice:active, .gm-group:active { transform: none; }
+}
+
+/* The voice controls. Two taps: say it again, and turn it off.
+
+   Both are prominent rather than tucked away. A child wants the instruction
+   repeated constantly, and a teacher with thirty phones in a room needs the
+   off switch immediately, not three menus down. */
+
+.gm-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gm-icon {
+  font-size: 20px;
+  line-height: 1;
+  /* The same 44px floor as everything else here: these get tapped by the same
+     small fingers as the game itself. */
+  min-width: 46px;
+  min-height: 46px;
+  display: grid;
+  place-items: center;
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 120ms, border-color 120ms;
+}
+.gm-icon:active { transform: scale(0.94); }
+.gm-icon.is-on { border-color: var(--right); }
+
+/* ── the generated games, in their frame ──────────────────────────────────────
+
+   The game is a canvas in a sandboxed iframe, so the layout's only job here is
+   to give it as much of the screen as it can have and keep the chrome above it
+   small. A phone in portrait is the case that matters: the frame takes what is
+   left after the progress dots and the footer, and the game lays itself out to
+   whatever it is given.
+   -------------------------------------------------------------------------- */
+
+.gm-heavy {
+  padding-bottom: 14px;
+  /* The frame fills the rest, rather than the page scrolling. A child dragging
+     a mango must not drag the page underneath it. */
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.gm-frame-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 900px;
+  /* Even on a short landscape phone the game needs a playable area. */
+  min-height: 52dvh;
+  margin: 12px 0 6px;
+}
+
+.gm-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 20px;
+  background: #0e1524;
+  /* The game handles its own gestures. Without this a drag inside the frame
+     can still scroll the page on some Android browsers. */
+  touch-action: none;
+}
+
+/* Shown when the frame never reports in: a blocked iframe, a file that did not
+   deploy, a browser that refuses it. A child staring at a blank rectangle has
+   already decided the app is broken, so they are offered a way out instead. */
+.gm-frame-fail {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  font-size: 17px;
+}
+
+@media (max-width: 420px) {
+  .gm-frame-wrap { margin: 8px 0 4px; }
+  .gm-frame { border-radius: 16px; }
+}

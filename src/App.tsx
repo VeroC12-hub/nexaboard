@@ -8,6 +8,9 @@ import Dashboard from './pages/Dashboard'
 import Session from './pages/Session'
 import Join from './pages/Join'
 import StudentSession from './pages/StudentSession'
+import SchoolApp from './pages/SchoolApp'
+import LearnerApp from './pages/LearnerApp'
+import Study from './pages/Study'
 import type { User } from '@supabase/supabase-js'
 
 function App() {
@@ -53,6 +56,12 @@ function App() {
         <Route path="/session/:id" element={user ? <Session user={user} /> : <Navigate to="/auth" />} />
         <Route path="/join/:code" element={<Join />} />
         <Route path="/student/:sessionId" element={<StudentSession />} />
+        {/* Phase 2, the school platform. Mounts beside Phase 1, never inside it. */}
+        <Route path="/school" element={<SchoolApp />} />
+        {/* Stage Two: the learner curriculum navigator, on the real education model. */}
+        <Route path="/learn/*" element={<LearnerApp />} />
+        {/* The learner surface that works with an empty database. */}
+        <Route path="/study" element={<Study />} />
       </Routes>
     </BrowserRouter>
   )

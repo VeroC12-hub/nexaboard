@@ -1,0 +1,915 @@
+/* ===========================================================================
+   The youngest learners' interface.
+
+   A phone held by a child, or by an adult holding it for them. Every rule here
+   follows from that:
+
+   - Two tabs, at the bottom. A thumb reaches the bottom of a phone and does not
+     reach the top of one, and five destinations was four too many for somebody
+     who cannot read a label. Everything else is reached through the header,
+     where the adult is.
+   - 56px minimum on anything tappable, against the usual 44. A four year old
+     aims with the pad of a finger, not a fingertip.
+   - A drawn scene behind the page, not a flat tint. For this age a flat
+     background is a form rather than a place.
+   - Nothing depends on colour alone, so a colour blind child loses nothing.
+   - Hover and focus on everything clickable. Schools have laptops, and on a
+     laptop an unhovered card is indistinguishable from a picture.
+
+   Scoped under .kid so none of it can reach the rest of the app, which serves
+   university students from the same bundle.
+   =========================================================================== */
+
+.kid {
+  /* All from `tokens.css`. This tier used to be violet on lilac, which was a
+     fifth palette in a product that already had one. Same hues as everywhere
+     else now, at the warmest and most saturated end of them. */
+  --ink: var(--nx-ink);
+  --ink-soft: var(--nx-ink-2);
+  --card: var(--nx-card);
+  --line: var(--nx-line);
+  --brand: var(--nx-green);
+  --brand-deep: var(--nx-green-deep);
+  --brand-soft: var(--nx-green-soft);
+  --gold: var(--nx-gold);
+  --right: var(--nx-green);
+  --wrong: var(--nx-red);
+  --warm: var(--nx-warm);
+  --cool: var(--nx-sky);
+
+  position: relative;
+  min-height: 100dvh;
+  color: var(--ink);
+  background: var(--nx-paper);
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system,
+               'Segoe UI', Roboto, sans-serif;
+  /* Room for the tab bar, plus the home indicator on a modern phone. */
+  padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* The scene. Fixed at the top, behind everything, and it does not scroll with
+   the content: a background that slides about under cards reads as a bug. */
+.kid-sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.kid-page,
+.kid-bar-top {
+  position: relative;
+  z-index: 1;
+}
+
+.kid-page {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 4px 16px 8px;
+  box-sizing: border-box;
+}
+
+/* ── one header row ───────────────────────────────────────────────────────── */
+
+/* The first version stacked two right-aligned clusters in a staircase: the
+   voice buttons, then the counters below them. One row, counters on the left
+   where they are read first, controls on the right where a thumb is. */
+.kid-bar-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 12px 16px 6px;
+  box-sizing: border-box;
+}
+
+.kid-gap { flex: 1 1 auto; }
+
+/* A counter that goes somewhere.
+
+   These used to be inert chips shaped exactly like buttons: a number on screen
+   that looks pressable and is not. Tapping either one now opens Rewards, where
+   what they mean is written down, because "4" on its own answers nothing. */
+.kid-stat {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  min-height: 44px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  color: var(--ink);
+  transition: transform 120ms, box-shadow 120ms, border-color 120ms;
+}
+
+/* The reading variants. The fill colours measured 3.81:1 and 3.49:1 on
+   white, which is under the floor for a 13px counter. */
+.kid-stat.is-xp { color: var(--nx-sky-text); }
+.kid-stat.is-days { color: var(--nx-warm-text); }
+
+.kid-stat:hover {
+  border-color: var(--nx-green-text);
+  box-shadow: 0 3px 10px rgba(20, 60, 40, 0.14);
+}
+
+.kid-stat:active { transform: scale(0.96); }
+
+.kid-icon {
+  font: inherit;
+  display: grid;
+  place-items: center;
+  min-width: 46px;
+  min-height: 46px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  transition: transform 120ms, border-color 120ms, color 120ms, box-shadow 120ms;
+}
+
+.kid-icon:hover {
+  color: var(--nx-green-text);
+  border-color: var(--nx-green-text);
+  box-shadow: 0 3px 10px rgba(20, 60, 40, 0.14);
+}
+
+.kid-icon:active { transform: scale(0.94); }
+.kid-icon.is-on { color: var(--nx-green-text); border-color: var(--nx-green-text); background: var(--brand-soft); }
+
+/* ── the greeting ─────────────────────────────────────────────────────────── */
+
+.kid-hello {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 4px 0 18px;
+}
+
+.kid-hi {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.kid-ask {
+  margin: 0;
+  font-size: clamp(23px, 6.6vw, 30px);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  max-width: 17ch;
+}
+
+/* The character had a point clipped off the right edge of the screen. The
+   negative margin is the drawing's own transparent margin, not the shape. */
+.kid-mascot {
+  flex: 0 0 auto;
+  margin: -10px -6px 0 0;
+}
+
+/* ── subject tiles ────────────────────────────────────────────────────────── */
+
+.kid-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 12px 10px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+
+/* Five or more subjects wrap rather than shrinking below a tappable size. */
+.kid-tiles.is-many { row-gap: 12px; }
+
+.kid-tile {
+  font: inherit;
+  border: 0;
+  background: none;
+  padding: 6px 2px;
+  min-height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  color: var(--ink);
+  border-radius: 16px;
+  transition: background-color 130ms;
+}
+
+.kid-tile-art {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: var(--brand-soft);
+  transition: transform 140ms, box-shadow 140ms;
+}
+
+.kid-tile:hover { background: rgba(15, 138, 77, 0.07); }
+
+.kid-tile:hover .kid-tile-art {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(20, 60, 40, 0.18);
+}
+
+.kid-tile:active .kid-tile-art { transform: scale(0.93); }
+
+/* Two lines allowed, and the box reserves both, so one long subject name does
+   not make its tile taller than the three beside it. */
+.kid-tile-name {
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  min-height: 2.4em;
+}
+
+/* ── the daily goal ───────────────────────────────────────────────────────── */
+
+/* A gradient under white text has to clear the contrast floor at its lightest
+   stop, not on average, because that is where a line can land. The three
+   banners were built by eye and the light ends measured 3.05:1 (green) and
+   1.93:1 (warm); the warm one was the worst thing in the palette. */
+.kid-goal {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(140deg, var(--nx-green-deep), var(--nx-green) 58%, #12864c);
+  color: #fff;
+  border-radius: 24px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 24px rgba(10, 80, 45, 0.2);
+}
+
+/* A few stars inside the card, so the one saturated block on the page has
+   something happening in it. */
+.kid-goal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 74%, rgba(255, 255, 255, 0.5) 2px, transparent 2px),
+    radial-gradient(circle at 36% 22%, rgba(255, 255, 255, 0.35) 2px, transparent 2px),
+    radial-gradient(circle at 68% 82%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+    radial-gradient(circle at 88% 30%, rgba(255, 255, 255, 0.4) 2px, transparent 2px);
+  pointer-events: none;
+}
+
+.kid-goal-body { flex: 1 1 auto; min-width: 0; position: relative; }
+
+.kid-goal h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.kid-goal p {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  opacity: 0.92;
+  line-height: 1.45;
+  max-width: 24ch;
+}
+
+.kid-bar {
+  display: block;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.26);
+  overflow: hidden;
+}
+
+.kid-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: #fff;
+  transition: width 320ms ease-out;
+}
+
+.kid-goal-count {
+  margin: 8px 0 0;
+  font-size: 13px;
+  font-weight: 800;
+  opacity: 0.95;
+}
+
+/* ── the week ─────────────────────────────────────────────────────────────── */
+
+/* Days learned, not a streak that breaks. See `rewards.ts`. */
+/* The week sits on the page, not in a card.
+
+   Every other block on this screen is a rounded panel with a border, and by
+   the fourth one in a column the page has no hierarchy left: the subjects, the
+   day's work and the week all announce themselves equally loudly. Seven day
+   boxes are already a shape. Putting that shape in a box says nothing and
+   costs the screen its one moment of quiet. */
+.kid-week {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2px 4px 22px;
+}
+
+/* "this week" on one line. At 360px it wrapped to two, which put a two line
+   label beside a row of 34px boxes and knocked the row off centre. */
+.kid-week > .kid-row-sub { white-space: nowrap; }
+
+.kid-days { display: flex; gap: 6px; }
+
+/* The letter stays on a done day, with a tick above it, so a child can still
+   tell which day it was. Filling the circle and dropping the letter meant
+   counting along the row to work out what had happened. */
+.kid-day {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  border: 2px solid var(--line);
+  background: #fff;
+  position: relative;
+}
+
+.kid-day.is-done {
+  border-color: var(--nx-green-text);
+  background: var(--brand);
+  color: #fff;
+}
+
+.kid-day.is-today { box-shadow: 0 0 0 3px rgba(15, 138, 77, 0.22); }
+
+.kid-flame-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--nx-warm-deep);
+}
+
+/* ── section headings ─────────────────────────────────────────────────────── */
+
+.kid-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 2px 10px;
+}
+
+.kid-head h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  flex: 1 1 auto;
+}
+
+.kid-more {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--nx-green-text);
+  background: none;
+  border: 0;
+  padding: 8px 6px;
+  min-height: 40px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.kid-more:hover { background: var(--brand-soft); }
+
+/* ── a row you can carry on with ──────────────────────────────────────────── */
+
+.kid-row {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 14px;
+  margin-bottom: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--ink);
+  /* The whole row is the target, not the little arrow on the end of it. */
+  min-height: 78px;
+  transition: transform 130ms, border-color 130ms, box-shadow 130ms;
+}
+
+.kid-row:hover {
+  border-color: var(--nx-green-text);
+  box-shadow: 0 6px 16px rgba(20, 60, 40, 0.12);
+}
+
+.kid-row:active { transform: scale(0.985); }
+
+/* Not every row is a button. The ones that only report something must not
+   pretend otherwise. */
+.kid-row.is-flat { cursor: default; }
+.kid-row.is-flat:hover { border-color: var(--line); box-shadow: none; }
+
+.kid-row-art {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--brand-soft);
+}
+
+.kid-row-body { flex: 1 1 auto; min-width: 0; }
+
+.kid-row-title {
+  font-size: 15.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.kid-row-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+
+.kid-row-bar {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  overflow: hidden;
+  margin-top: 9px;
+}
+
+.kid-row-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--brand);
+}
+
+.kid-row-count {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  margin-top: 5px;
+  display: block;
+}
+
+.kid-go {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--brand);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  /* Decorative: the row itself is the button. It is hidden from assistive
+     technology so it is not announced as a second way to do one thing. */
+  pointer-events: none;
+  transition: transform 130ms;
+}
+
+.kid-row:hover .kid-go { transform: scale(1.08); }
+
+/* ── two-up cards ─────────────────────────────────────────────────────────── */
+
+.kid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.kid-card {
+  font: inherit;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 20px;
+  padding: 0 0 12px;
+  overflow: hidden;
+  cursor: pointer;
+  color: var(--ink);
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 130ms, border-color 130ms, box-shadow 130ms;
+}
+
+.kid-card:hover {
+  border-color: var(--nx-green-text);
+  box-shadow: 0 8px 18px rgba(20, 60, 40, 0.14);
+}
+
+.kid-card:active { transform: scale(0.985); }
+
+/* A character in the art panel, so the two-up cards are not a pale block with
+   a small symbol floating in the middle of it. */
+.kid-card-art {
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  background: linear-gradient(160deg, var(--nx-gold-soft), var(--nx-green-soft));
+}
+
+/* The ground under a character.
+
+   Without it a pale friend disappeared into the cream panel while a saturated
+   one popped, so two cards side by side looked like one was still loading. */
+.kid-card-art > * {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(20, 60, 40, 0.1);
+}
+
+.kid-card-name {
+  padding: 10px 12px 0;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.24;
+}
+
+.kid-card-sub {
+  padding: 3px 12px 0;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+
+/* ── the tab bar ──────────────────────────────────────────────────────────── */
+
+/* Two tabs. Five was four too many for somebody who cannot read a label, and
+   two of the five went to screens that repeated Home or belonged to an adult. */
+.kid-tabs {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+  padding: 7px 10px calc(7px + env(safe-area-inset-bottom, 0px));
+}
+
+.kid-tab {
+  /* Half the bar each. Two tabs centred in the middle left big dead margins
+     on either side, which on a phone is the part a thumb reaches most
+     easily. */
+  flex: 1 1 0;
+  max-width: 260px;
+  font: inherit;
+  background: none;
+  border: 0;
+  /* 62px, not 44px: this is the control a small child hits most often. */
+  min-height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  padding: 4px 0;
+  border-radius: 16px;
+  transition: background-color 130ms, color 130ms;
+}
+
+.kid-tab:hover { background: var(--brand-soft); color: var(--nx-green-text); }
+.kid-tab.is-on { color: var(--nx-green-text); background: var(--brand-soft); }
+
+.kid-tab-name { font-size: 11.5px; font-weight: 800; letter-spacing: 0.01em; }
+
+/* ── chips ────────────────────────────────────────────────────────────────── */
+
+.kid-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 2px 14px;
+  scrollbar-width: none;
+}
+
+.kid-chips::-webkit-scrollbar { display: none; }
+
+.kid-chip {
+  font: inherit;
+  flex: 0 0 auto;
+  font-size: 13.5px;
+  font-weight: 800;
+  padding: 10px 16px;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 120ms, background-color 120ms, color 120ms;
+}
+
+.kid-chip:hover { border-color: var(--nx-green-text); color: var(--nx-green-text); }
+
+.kid-chip.is-on {
+  background: var(--brand);
+  border-color: var(--nx-green-text);
+  color: #fff;
+}
+
+/* ── the banner on an inner screen ───────────────────────────────────────── */
+
+/* One palette for the tier.
+
+   The first version had a teal subject banner, a purple rewards banner and a
+   blue profile banner, set inline, in three screens of the same interface. It
+   looked like three products. The accent is now set by one variable that the
+   screen may tint. */
+.kid-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  border-radius: 24px;
+  background: linear-gradient(140deg, var(--nx-green-deep), var(--nx-green) 58%, #12864c);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(10, 80, 45, 0.18);
+  overflow: hidden;
+}
+
+.kid-banner.is-warm {
+  background: linear-gradient(140deg, #8f3c16, #a8481c 58%, #bb5220);
+  box-shadow: 0 10px 24px rgba(190, 80, 20, 0.18);
+}
+
+.kid-banner.is-cool {
+  background: linear-gradient(140deg, #0e2036, var(--nx-ink) 55%, #24405f);
+  box-shadow: 0 10px 24px rgba(12, 30, 55, 0.18);
+}
+
+.kid-banner-body { flex: 1 1 auto; min-width: 0; }
+
+.kid-banner h1 {
+  margin: 0;
+  font-size: clamp(19px, 5.2vw, 24px);
+  font-weight: 800;
+  line-height: 1.18;
+  max-width: 20ch;
+}
+
+.kid-banner p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.93;
+}
+
+/* ── the top bar on inner screens ─────────────────────────────────────────── */
+
+.kid-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.kid-back {
+  font: inherit;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 120ms, color 120ms, transform 120ms;
+}
+
+.kid-back:hover { border-color: var(--nx-green-text); color: var(--nx-green-text); }
+.kid-back:active { transform: scale(0.94); }
+
+.kid-top-name {
+  font-size: 17px;
+  font-weight: 800;
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+/* ── rewards ──────────────────────────────────────────────────────────────── */
+
+.kid-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 16px 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+
+.kid-stat-cell { text-align: center; }
+
+.kid-stat-name {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  line-height: 1.3;
+  min-height: 2.6em;
+}
+
+.kid-stat-n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 26px;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+/* Three across, so seven badges are 3 + 3 + 1 rather than a ragged 4 + 3, and
+   each one has room for its name on one line. */
+.kid-badges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 10px;
+  margin-bottom: 20px;
+}
+
+.kid-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  text-align: center;
+  padding: 12px 6px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid transparent;
+}
+
+.kid-badge.is-earned { background: var(--card); border-color: var(--line); }
+
+.kid-badge-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink-soft);
+}
+
+.kid-badge.is-earned .kid-badge-name { color: var(--ink); }
+
+/* ── the one celebration ─────────────────────────────────────────────────── */
+
+/* Marks that fall once across the width of the screen and then stop.
+
+   There is deliberately nothing else like this in the platform. An interface
+   where every card fades and slides in has spent its attention budget before
+   the child has earned anything, so all of the motion is saved for the one
+   moment that is genuinely an event: a badge that was not there before. */
+.kid-sparkles {
+  position: fixed;
+  inset: 0 0 auto 0;
+  width: 100%;
+  height: 70vh;
+  z-index: 60;
+  /* Nothing here is interactive, and a celebration that eats the first tap
+     after it is worse than no celebration. */
+  pointer-events: none;
+}
+
+.kid-spark {
+  animation: kid-fall 1.5s cubic-bezier(0.3, 0, 0.7, 1) forwards;
+}
+
+@keyframes kid-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  12% { opacity: 1; }
+  100% { transform: translateY(130px) rotate(220deg); opacity: 0; }
+}
+
+/* The badge that was just won, lifted out of the grid of seven so the sentence
+   in the banner has something to point at. */
+.kid-badge.is-new {
+  background: var(--card);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(242, 181, 23, 0.28);
+}
+
+/* A warmer band behind the greeting when it is announcing something, rather
+   than a second layout for the same screen.
+
+   The colour has to come with it. `.kid-banner` sets white text for the deep
+   green it normally carries, and lightening only the background left "You got
+   First Steps" in white on pale gold, which measured about 1.3:1: the one
+   sentence on the screen that says what the child just won was the least
+   readable thing on it. Found by looking, because the contrast sweep skips
+   gradients. */
+.kid-banner.is-won {
+  background: linear-gradient(180deg, #fff2c9, var(--nx-gold-soft));
+  border: 1px solid var(--gold);
+  color: var(--ink);
+}
+
+.kid-banner.is-won h1 { color: var(--ink); }
+.kid-banner.is-won p { color: var(--ink-soft); }
+
+/* ── empty and waiting ───────────────────────────────────────────────────── */
+
+.kid-none {
+  padding: 20px 18px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px dashed var(--line);
+  border-radius: 20px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+/* A friend beside an empty screen, so nothing-here-yet is an invitation rather
+   than a dead end. */
+.kid-none-pal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── the quality floor ────────────────────────────────────────────────────── */
+
+/* Keyboard focus, visible on everything. A school laptop is a keyboard. */
+.kid :is(button, [tabindex]):focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kid * { transition: none !important; }
+  /* The celebration goes away entirely rather than being slowed down. Falling
+     confetti is exactly the class of motion somebody sets this preference to
+     avoid, and the sentence in the banner still says what was won. */
+  .kid-sparkles { display: none; }
+  .kid-row:active,
+  .kid-card:active,
+  .kid-tile:active .kid-tile-art,
+  .kid-stat:active,
+  .kid-icon:active { transform: none; }
+}
+
+@media (max-width: 380px) {
+  .kid-tiles { gap: 4px; padding: 10px 6px; }
+  .kid-tile-art { width: 50px; height: 50px; }
+  .kid-badges { grid-template-columns: repeat(2, 1fr); }
+}

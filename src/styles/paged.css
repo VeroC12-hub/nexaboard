@@ -1,0 +1,145 @@
+/* ===========================================================================
+   Reading a lesson a page at a time, and being able to say something about it.
+
+   Two things the lesson page was missing.
+
+   It used to render the whole lesson in one scroll, with the questions and the
+   game at the bottom. Nobody is taught that way: a learner gets one idea and a
+   page they can finish, and the length of the whole thing stops being the
+   first thing they see.
+
+   And the only way to ask a question in words was to select some text and find
+   the box inside the menu that appeared. Anybody who did not know to do that
+   had no way to say anything at all.
+
+   Shared by all three interfaces, tinted by each one's own variables.
+   =========================================================================== */
+
+.nx-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 22px 0 6px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line, #e8e2d3);
+}
+
+.nx-page-btn {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line, #e8e2d3);
+  background: var(--card, #fff);
+  color: var(--ink, #14243a);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color 120ms, transform 120ms, background-color 120ms;
+}
+
+.nx-page-btn:hover:not(:disabled) { border-color: var(--nx-green-text); color: var(--nx-green-text); }
+.nx-page-btn:active:not(:disabled) { transform: scale(0.97); }
+
+/* Dimmed rather than removed. A Back button that disappears on the first page
+   moves Next under the thumb that was reaching for Back. */
+.nx-page-btn:disabled { opacity: 0.4; cursor: default; }
+
+.nx-page-btn.is-go {
+  background: var(--nx-green);
+  border-color: var(--nx-green-text);
+  color: #fff;
+}
+
+.nx-page-btn.is-go:hover:not(:disabled) {
+  background: var(--nx-green-deep);
+  border-color: var(--nx-green-deep);
+  color: #fff;
+}
+
+/* How far through, as dots rather than "3 of 7". A count tells a child how
+   much is left, which is the one thing that makes them stop. */
+.nx-page-dots { display: flex; gap: 7px; }
+
+.nx-page-dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line, #e8e2d3);
+}
+
+.nx-page-dots i.is-done { background: var(--nx-green-soft); }
+
+.nx-page-dots i.is-now {
+  background: var(--nx-green);
+  transform: scale(1.35);
+}
+
+/* ── saying something ─────────────────────────────────────────────────────── */
+
+.nx-comment {
+  margin: 20px 0 4px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: var(--nx-cream);
+  border: 1px solid var(--line, #e8e2d3);
+}
+
+.nx-comment-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink, #14243a);
+}
+
+.nx-comment-row { display: flex; gap: 8px; }
+
+.nx-comment-box {
+  font: inherit;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 48px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line, #e8e2d3);
+  background: #fff;
+  color: var(--ink, #14243a);
+  font-size: 15.5px;
+}
+
+.nx-comment-box:focus-visible {
+  outline: 3px solid var(--nx-green);
+  outline-offset: 1px;
+}
+
+.nx-comment-go {
+  font: inherit;
+  flex: 0 0 auto;
+  min-height: 48px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  border: 0;
+  background: var(--nx-green);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.nx-comment-go:disabled { opacity: 0.45; cursor: default; }
+.nx-comment-go:hover:not(:disabled) { background: var(--nx-green-deep); }
+
+/* The youngest: full width, stacked, and bigger. A 48px field beside a button
+   on a 390px screen leaves neither of them a comfortable target. */
+.kid .nx-comment { border-radius: 22px; }
+.kid .nx-comment-row { flex-direction: column; }
+.kid .nx-comment-box { min-height: 56px; font-size: 17px; }
+.kid .nx-comment-go { min-height: 56px; width: 100%; font-size: 17px; }
+.kid .nx-comment-label { font-size: 16px; }
+
+.kid .nx-page-btn { min-height: 56px; font-size: 16px; }

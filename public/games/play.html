@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Play</title>
+<!--
+  The page that plays any generated game.
+
+  There is one of these, not one per game. It is handed a spec by the app
+  through postMessage and builds the game from it, so a new game costs nothing
+  to load and nothing to deploy.
+
+  It runs in a sandboxed frame with no same-origin permission, which means an
+  opaque origin: no cookies, no localStorage, no reach into the app that opened
+  it. Nothing here should try, and nothing here does.
+
+  No dependency, no engine, no font download. A cheap Android on mobile data
+  gets about fifteen kilobytes.
+-->
+<style>
+  /* Nothing here should scroll, bounce, select or show a tap highlight. A
+     child dragging a mango across the screen must not drag the page with it. */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #0e1524;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system,
+                 'Segoe UI', Roboto, sans-serif;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+
+  /* Shown until the app sends a spec, and if it never does. A blank frame is
+     indistinguishable from a broken one, and a child staring at black has
+     already decided the app is broken. */
+  #wait {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #cfd8e8;
+    font-size: 17px;
+    text-align: center;
+    padding: 24px;
+    line-height: 1.5;
+  }
+  #wait.gone { display: none; }
+</style>
+</head>
+<body>
+  <canvas id="stage"></canvas>
+  <div id="wait">Getting your game ready</div>
+  <script src="engine.js"></script>
+</body>
+</html>

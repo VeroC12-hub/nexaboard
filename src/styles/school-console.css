@@ -1,0 +1,626 @@
+/* ===========================================================================
+   The school console, on top of the parent tier's language.
+
+   This page and the parent page are read by the same kind of person about the
+   same children: somebody responsible for several learners, checking between
+   other things, who needs to know what to do rather than what the average is.
+   So it loads `guardian.css` first and adds only what a school has that a
+   family does not: classes, a teacher in front of each, and a student row that
+   has to carry four facts without becoming a spreadsheet.
+
+   Everything here draws from `tokens.css`. The page it replaced was the last
+   one in the old `nexaedu.css` language, which made it a fifth scheme in a
+   platform unified on four: fifteen of its text colours measured around
+   3.1:1, its section labels were tracked capitals, and every class card had a
+   blue rail in a palette where blue means information and never brand.
+   =========================================================================== */
+
+/* ── the school's own name ────────────────────────────────────────────────── */
+
+.sk-title {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 40;
+  font-size: clamp(26px, 3.4vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  margin: 4px 0 6px;
+  color: var(--ink);
+}
+
+.sk-title-sub {
+  margin: 0 0 22px;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+
+/* ── one search field ─────────────────────────────────────────────────────── */
+
+/* A chooser, a field and a way out, drawn as one control.
+
+   Three search boxes or three buttons would both have worked and both would
+   have been worse: a head looking for "Ofori" already knows whether that is a
+   teacher or a student, so they say it once. The chooser sits *inside* the
+   field because it belongs to it. Beside it, it reads as a filter applying to
+   the whole page. */
+.sk-search {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sk-search:focus-within {
+  border-color: var(--bar);
+  box-shadow: 0 0 0 3px rgba(20, 36, 58, 0.12);
+}
+
+.sk-search-by {
+  display: flex;
+  flex: 0 0 auto;
+  border-right: 1px solid var(--line);
+  background: var(--wash);
+}
+
+.sk-search-by select {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.sk-search-by select:focus { outline: none; }
+
+.sk-search-in {
+  font: inherit;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 0;
+  background: transparent;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.sk-search-in:focus { outline: none; }
+.sk-search-in::placeholder { color: var(--nx-ink-3); }
+
+.sk-search-clear {
+  font: inherit;
+  flex: 0 0 auto;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.sk-search-clear:hover { background: var(--wash); color: var(--ink); }
+
+/* Which class a found student is in. Only a search sets this; inside a class
+   it would be the class name repeated once per student. */
+.sk-row-where {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  vertical-align: 1px;
+}
+
+/* ── the class list, which is the front page ──────────────────────────────── */
+
+/* Five columns: a mark, the class, who teaches it, how big it is, and how it
+   is going. A head with twenty classes reads down the last column and stops at
+   the rows with a mark.
+
+   Not a `<table>`. Every row is a button that opens the class, and a table row
+   cannot be one without nesting interactive elements or spreading the click
+   across six cells. A grid gives the same alignment and keeps the row a single
+   control. */
+.sk-lines {
+  display: grid;
+  gap: 4px;
+}
+
+.sk-lines-head,
+.sk-line {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1.5fr) minmax(0, 1fr) 86px minmax(0, 1.4fr) 20px;
+  align-items: center;
+  gap: 12px;
+}
+
+.sk-lines-head {
+  padding: 0 12px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 6px;
+}
+
+.sk-line {
+  font: inherit;
+  width: 100%;
+  text-align: left;
+  padding: 11px 12px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sk-line:hover { background: var(--wash); border-color: var(--line); }
+
+/* Only the rows that need something are tinted. Tinting every row is the same
+   as tinting none, which is what the old page did with a blue rail on every
+   class card. */
+.sk-line.is-warn { background: var(--warn-soft); border-color: #f6d6d1; }
+.sk-line.is-warn:hover { border-color: #f2b5ac; }
+
+/* Standing on its own outside the panel, so it needs its own edges. */
+.sk-line.is-loose { margin-top: 12px; border-color: #f2b5ac; }
+
+.sk-line-mark {
+  font-size: 11px;
+  line-height: 1;
+  /* The reading variant. `--warn` is the fill red and measured 3.97:1 here,
+     and this mark is the whole point for a reader who cannot use the tint. */
+  color: var(--nx-red-text);
+}
+
+.sk-line-name {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 28;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--ink);
+  min-width: 0;
+}
+
+/* The year, attached to the class it belongs to rather than given a column of
+   its own: "JHS 2 Gold" and "JHS 2" in separate columns is the same fact
+   twice for most schools' naming. */
+.sk-line-year {
+  display: block;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.sk-line-who {
+  font-size: 13.5px;
+  color: var(--ink);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sk-line-none { color: var(--nx-red-text); font-weight: 700; }
+
+.sk-line-count {
+  font-size: 13px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.sk-line-state {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  min-width: 0;
+}
+
+.sk-line-state.is-warn { color: var(--nx-red-text); font-weight: 700; }
+
+.sk-line-go { color: var(--ink-soft); display: grid; place-items: center; }
+
+/* ── inside a class ───────────────────────────────────────────────────────── */
+
+.sk-back {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin: 0 0 4px -8px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.sk-back:hover { background: var(--wash); color: var(--ink); }
+
+/* The reason somebody opened this class, said once, above everything else. */
+.sk-banner {
+  display: grid;
+  gap: 4px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  background: var(--warn-soft);
+  border: 1px solid #f2b5ac;
+}
+
+.sk-banner b {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 30;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.sk-banner span { font-size: 13.5px; color: var(--ink-soft); }
+
+.sk-note {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+/* How many classes want the head's morning. */
+.sk-need { color: var(--nx-red-text); }
+
+/* ── a student ────────────────────────────────────────────────────────────── */
+
+.sk-rows {
+  display: grid;
+  gap: 6px;
+}
+
+/* Name and difficulty on the left, then the rate and when they were last seen.
+
+   Not a table. A table needs a header row to be read, and this list appears
+   two or three times on a page; the row carries its own meaning instead, which
+   is also what lets it collapse to two lines on a phone. */
+.sk-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+}
+
+.sk-row.is-warn { border-color: #f2b5ac; }
+
+/* The name and the reason are one button, so the whole left side opens the
+   student rather than a word of it. */
+.sk-row-open {
+  font: inherit;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: block;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  cursor: pointer;
+  color: inherit;
+  border-radius: 8px;
+}
+
+.sk-row-name {
+  display: block;
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 24;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* The sentence that makes the page worth opening. "Ratio and proportion keeps
+   going wrong, in Mathematics" is something a head can say out loud in a
+   corridor; "55%" is not. */
+.sk-row-why {
+  display: block;
+  margin-top: 1px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.sk-row-stat {
+  flex: 0 0 auto;
+  font-size: 12.5px;
+  text-align: right;
+  min-width: 62px;
+}
+
+.sk-move { flex: 0 0 auto; }
+
+/* Quieter than the sentence it follows, because it is a count of things not
+   shown rather than one of them. */
+.sk-more { color: var(--nx-ink-3); }
+
+/* Visible to a screen reader, not on screen. A bare select in a row of names
+   announces nothing about whose class it changes. */
+.sk-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── controls ─────────────────────────────────────────────────────────────── */
+
+.sk-field {
+  display: block;
+  min-width: 0;
+}
+
+.sk-field-name {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.sk-in,
+.sk-sel {
+  font: inherit;
+  font-size: 14.5px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  box-sizing: border-box;
+}
+
+.sk-in::placeholder { color: var(--nx-ink-3); }
+
+.sk-in:focus,
+.sk-sel:focus {
+  outline: none;
+  border-color: var(--bar);
+  box-shadow: 0 0 0 3px rgba(20, 36, 58, 0.12);
+}
+
+/* The move control sits inside a row of names, so it stays out of the way
+   until somebody reaches for it. */
+.sk-sel.is-quiet {
+  width: auto;
+  min-height: 40px;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  background: transparent;
+  border-color: transparent;
+  color: var(--ink-soft);
+}
+
+.sk-sel.is-quiet:hover {
+  border-color: var(--line);
+  background: var(--card);
+  color: var(--ink);
+}
+
+.sk-go {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 44px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--bar);
+  color: #fff;
+  cursor: pointer;
+}
+
+.sk-go:hover:not(:disabled) { background: var(--bar-deep, #0e2036); }
+.sk-go:disabled { opacity: 0.45; cursor: default; }
+
+/* Adding a student is a real action but not this page's purpose, so it is a
+   quiet full-width row at the foot of the class it belongs to. */
+.sk-add {
+  font: inherit;
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 10px;
+  padding: 11px 14px;
+  border-radius: 11px;
+  border: 1px dashed var(--line);
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.sk-add:hover {
+  border-color: var(--bar);
+  color: var(--ink);
+  background: var(--card);
+}
+
+/* ── manage ───────────────────────────────────────────────────────────────── */
+
+.sk-manage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-bottom: 4px;
+  /* Each form is as tall as its own content. Stretched, the class form grew a
+     column of empty tint to match the teacher form, which carries a staff
+     list under it. */
+  align-items: start;
+}
+
+.sk-form {
+  background: var(--wash, var(--nx-cream));
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.sk-form-name {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 28;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.sk-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.sk-staff {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.sk-staff li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 13.5px;
+}
+
+/* ── press, focus, and less motion ───────────────────────────────────────── */
+
+.sk-row,
+.sk-add,
+.sk-go,
+.sk-sel,
+.sk-row-open { transition: transform 0.08s ease, background 0.14s ease, border-color 0.14s ease; }
+
+.sk-row:hover { border-color: var(--bar); }
+.sk-row-open:active { transform: scale(0.99); }
+.sk-add:active,
+.sk-go:active { transform: scale(0.97); }
+
+.sk-row-open:focus-visible,
+.sk-add:focus-visible,
+.sk-go:focus-visible,
+.sk-in:focus-visible,
+.sk-sel:focus-visible {
+  outline: 3px solid var(--bar);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-row-open:active,
+  .sk-add:active,
+  .sk-go:active { transform: none; }
+}
+
+/* ── on a phone ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 560px) {
+  /* A class becomes two lines rather than six columns: the class and its
+     status on top, the teacher and the size under them. Six columns in 328px
+     gives each of them about fifty pixels, which is not a column. */
+  .sk-lines-head { display: none; }
+
+  .sk-line {
+    grid-template-columns: 14px minmax(0, 1fr) 20px;
+    grid-template-areas:
+      "mark name go"
+      ".    state ."
+      ".    who   .";
+    row-gap: 2px;
+    align-items: start;
+  }
+
+  .sk-line-mark { grid-area: mark; padding-top: 5px; }
+  .sk-line-name { grid-area: name; }
+  .sk-line-state { grid-area: state; }
+  .sk-line-go { grid-area: go; padding-top: 3px; }
+
+  /* Teacher and size share the last line, because together they are one
+     thought: who is looking after how many. */
+  .sk-line-who {
+    grid-area: who;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    white-space: normal;
+  }
+
+  .sk-line-count { display: none; }
+  .sk-line-year { display: inline; margin-left: 6px; }
+
+  /* "Needs a teacher" directly above "No teacher" is a stutter. */
+  .sk-line.is-unstaffed .sk-line-who { display: none; }
+
+  /* The chooser keeps the top line and the field takes the width under it.
+     Side by side at 328px the placeholder had about a hundred pixels, which is
+     not enough to say what the field is for. */
+  .sk-search { flex-wrap: wrap; }
+  .sk-search-by { flex: 1 1 auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .sk-search-by select { width: 100%; }
+  .sk-search-clear { flex: 0 0 auto; border-left: 0; border-bottom: 1px solid var(--line); }
+  .sk-search-in { flex: 1 1 100%; }
+
+  .sk-banner { padding: 14px; }
+
+  /* The row becomes two lines: who and why on top, the numbers under them.
+
+     Four things across 328px would put "Ratio and proportion keeps going
+     wrong" on four lines of two words. */
+  .sk-row {
+    flex-wrap: wrap;
+    row-gap: 4px;
+    padding: 10px;
+  }
+
+  .sk-row-open { flex: 1 1 100%; }
+  .sk-row-stat { min-width: 0; text-align: left; }
+  .sk-move { margin-left: auto; }
+
+  /* A select is as wide as its widest option, so "Out of this class" made the
+     closed control 140px and pushed it onto a line of its own, ragged against
+     the rows whose pills happened to be narrower. It only ever shows the word
+     "Move", so it is capped; the native list opens at full width regardless. */
+  .sk-row .sk-sel.is-quiet {
+    max-width: 86px;
+    text-overflow: ellipsis;
+  }
+
+  .sk-manage { gap: 14px; }
+}

@@ -1,0 +1,552 @@
+/* ============================================================================
+   NEXA•EDU, the National Education Ecosystem.
+
+   Scoped entirely under .nb-school. Phase 1 (the board, sessions, dashboard,
+   join) shares no selector with this file and cannot be affected by it.
+
+   Palette is NexaCore's own, taken from Phase 1: navy rail, soft green ground,
+   green accent, white cards. Restrained on purpose, because the audience is a
+   ministry.
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   NexaCore palette.
+
+   Taken from Phase 1, which is the brand: index.css declares --color-nb-primary
+   #5ab82e, --color-nb-navy #1b2b4b, --color-nb-soft #f3fcf0 and
+   --color-nb-border #d1fae5. Those values are the source, restated here because
+   Phase 1 declares them inside a Tailwind @theme block that this file cannot
+   reach.
+
+   NexaCore is green on navy, not blue. The --blue-* names below are kept only
+   because a good deal of existing markup references them; they now hold the
+   brand green, and --brand-* is the name to use from here on.
+   ---------------------------------------------------------------------------- */
+.nb-school {
+  /* rail: the Phase 1 navy, with two deeper and one lighter step for surfaces */
+  --navy-900: #16233d;
+  --navy-800: #1b2b4b;   /* --color-nb-navy exactly */
+  --navy-700: #26385c;
+  --navy-600: #33486f;
+
+  --ground:   #f3fcf0;   /* --color-nb-soft */
+  --card:     #ffffff;   /* --color-nb-card */
+  --line:     #d1fae5;   /* --color-nb-border */
+  --line-2:   #e4f7e6;
+
+  --brand:     #5ab82e;  /* --color-nb-primary */
+  --brand-600: #52ab29;
+  --brand-700: #489f22;  /* --color-nb-primary-hover */
+  --brand-50:  #f3fcf0;
+  --brand-100: #d9f5cd;
+
+  /* Historical names, same values. Do not use in new work. */
+  --blue:     var(--brand);
+  --blue-600: var(--brand-600);
+  --blue-700: var(--brand-700);
+  --blue-50:  var(--brand-50);
+  --blue-100: var(--brand-100);
+
+  --ink:      #1b2b4b;   /* --color-nb-navy */
+  --ink-2:    #3d4d6b;
+  --muted:    #6b7280;   /* --color-nb-muted */
+  --faint:    #9aa4b2;
+
+  /* status, reserved: never reused as a chart series */
+  --good:     #3f8f1f;
+  --warn:     #b45309;
+  --crit:     #dc2626;   /* --color-nb-danger, darkened for text contrast */
+  --good-bg:  #eaf7e3;
+  --warn-bg:  #fdf3e7;
+  --crit-bg:  #fdecec;
+
+  /* validated categorical series, light surface */
+  --c1:#4a9e26; --c2:#1b2b4b; --c3:#c2701a; --c4:#a3378f;
+
+  --shadow: 0 1px 2px rgba(27,43,75,.06);
+  --lift:   0 8px 26px rgba(27,43,75,.10);
+  --rail:   232px;
+
+  background: var(--ground);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.nb-school *,
+.nb-school *::before,
+.nb-school *::after { box-sizing: border-box; }
+
+.nb-school :focus-visible {
+  outline: 2px solid var(--blue-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------ brand -- */
+.nb-brand {
+  display: inline-flex; align-items: baseline; gap: 9px;
+  font-size: 15px; font-weight: 800; letter-spacing: .01em;
+}
+.nb-brand .dot { color: var(--blue-600); }
+.nb-brand .tag {
+  font-size: 11px; font-weight: 500; letter-spacing: 0; color: var(--muted);
+}
+
+/* ------------------------------------------------------------------ shell -- */
+.nb-shell { display: flex; min-height: 100vh; }
+
+.nb-rail {
+  width: var(--rail); flex: 0 0 var(--rail);
+  background: var(--navy-900); color: #fff;
+  display: flex; flex-direction: column;
+  padding: 20px 14px; gap: 2px;
+  position: sticky; top: 0; height: 100vh;
+}
+.nb-rail .nb-brand { color: #fff; padding: 0 8px 22px; }
+.nb-rail .nb-brand .tag { color: rgba(255,255,255,.5); }
+
+.nb-navb {
+  width: 100%; text-align: left; border: 0; background: transparent;
+  color: rgba(255,255,255,.62); cursor: pointer;
+  font: inherit; font-size: 13.5px; font-weight: 500;
+  padding: 9px 11px; border-radius: 8px;
+}
+.nb-navb:hover { color: #fff; background: rgba(255,255,255,.07); }
+.nb-navb[aria-current] { color: #fff; background: var(--navy-700); font-weight: 600; }
+
+.nb-railfoot {
+  margin-top: auto; padding: 13px 11px 0; border-top: 1px solid rgba(255,255,255,.10);
+  font-size: 11.5px; color: rgba(255,255,255,.45); line-height: 1.5;
+}
+.nb-railfoot b { display: block; color: #fff; font-size: 13px; font-weight: 600; }
+
+.nb-main { flex: 1 1 auto; min-width: 0; }
+
+.nb-top {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--ground) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 14px; padding: 13px 30px;
+}
+.nb-crumbs { display: flex; align-items: center; gap: 7px; min-width: 0;
+  font-size: 12.5px; color: var(--muted); }
+.nb-crumbs b { color: var(--ink); font-weight: 600; }
+.nb-context {
+  margin-left: auto; font-size: 12px; font-weight: 600; color: var(--blue-600);
+  white-space: nowrap;
+}
+
+.nb-page { padding: 30px; max-width: 1180px; }
+
+/* --------------------------------------------------------- demo switcher -- */
+/* Scaffolding, deliberately not app chrome. It does not exist in the real
+   product: there the rail is built from the signed-in user's role, and the
+   database refuses anything outside it regardless of what the UI shows. */
+.nb-demo {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px dashed var(--warn); border-radius: 9px;
+  padding: 5px 6px 5px 10px; background: var(--warn-bg);
+}
+.nb-demo > b {
+  font-size: 9.5px; font-weight: 700; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--warn); white-space: nowrap;
+}
+.nb-demo select {
+  font: inherit; font-size: 12.5px; font-weight: 600; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 6px; padding: 5px 8px; cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .nb-shell { flex-direction: column; }
+  .nb-rail {
+    width: 100%; height: auto; position: static;
+    flex-direction: row; overflow-x: auto; padding: 10px;
+    gap: 4px; align-items: center;
+  }
+  .nb-rail .nb-brand, .nb-railfoot { display: none; }
+  .nb-navb { width: auto; flex: 0 0 auto; white-space: nowrap; font-size: 13px; }
+  .nb-page { padding: 20px 16px 60px; }
+  .nb-top { padding: 11px 16px; }
+  .nb-demo > b { display: none; }
+}
+
+/* ------------------------------------------------------------------- type -- */
+.nb-eyebrow {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--blue-600); margin-bottom: 9px;
+}
+.nb-h1 { margin: 0; font-size: clamp(26px, 3.4vw, 34px); font-weight: 700;
+  letter-spacing: -.025em; line-height: 1.12; }
+.nb-sub { margin: 8px 0 0; font-size: 14.5px; color: var(--muted); max-width: 46rem; }
+.nb-h2 { margin: 0 0 3px; font-size: 10.5px; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--blue-600); }
+.nb-sec { margin-top: 34px; }
+.nb-say { margin: 0 0 14px; font-size: 13.5px; color: var(--muted); }
+
+.nb-live { width: 7px; height: 7px; border-radius: 50%; background: var(--good); }
+@media (prefers-reduced-motion: no-preference) {
+  .nb-live { animation: nb-pulse 2.6s ease-in-out infinite; }
+  @keyframes nb-pulse { 0%,100% { opacity: 1 } 50% { opacity: .4 } }
+}
+
+/* ------------------------------------------------------------------ stats -- */
+.nb-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+@media (min-width: 760px) { .nb-stats { grid-template-columns: repeat(4, 1fr); } }
+.nb-stat {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 12px; padding: 16px 17px;
+}
+.nb-stat b {
+  display: block; font-size: 10px; font-weight: 700; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--blue-600);
+}
+.nb-stat span { display: block; margin-top: 7px; font-size: 30px; font-weight: 700;
+  letter-spacing: -.035em; line-height: 1; color: var(--ink); }
+.nb-stat em { display: block; margin-top: 6px; font-style: normal;
+  font-size: 11.5px; color: var(--muted); }
+.nb-up { color: var(--good); } .nb-down { color: var(--crit); }
+
+/* ------------------------------------------------------------------ cards -- */
+.nb-card { background: var(--card); border: 1px solid var(--line);
+  border-radius: 12px; padding: 19px; }
+.nb-card + .nb-card { margin-top: 11px; }
+.nb-card h3 { margin: 0 0 4px; font-size: 16px; font-weight: 700; letter-spacing: -.012em; }
+.nb-card p { margin: 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.62; }
+
+/* the one loud card, used once per screen at most */
+.nb-feature {
+  background: var(--blue); border-color: var(--blue); color: #fff;
+}
+.nb-feature h3 { color: #fff; }
+.nb-feature p { color: rgba(255,255,255,.82); }
+
+.nb-insight { border-left: 3px solid var(--blue-600); }
+
+.nb-pill { display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10.5px; font-weight: 700; padding: 3px 9px;
+  border-radius: 6px; letter-spacing: .02em; white-space: nowrap; }
+.nb-pill.good { background: var(--good-bg); color: var(--good); }
+.nb-pill.warn { background: var(--warn-bg); color: var(--warn); }
+.nb-pill.crit { background: var(--crit-bg); color: var(--crit); }
+.nb-pill.flat { background: var(--blue-50); color: var(--blue-700); }
+
+.nb-btn { font: inherit; font-size: 13.5px; font-weight: 600; border-radius: 8px;
+  padding: 10px 16px; border: 1px solid transparent; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 42px; }
+.nb-btn.p { background: var(--blue); color: #fff; }
+.nb-btn.p:hover { background: var(--blue-700); }
+.nb-btn.g { background: var(--card); border-color: var(--line); color: var(--ink); }
+.nb-btn.g:hover { border-color: var(--blue-600); color: var(--blue-700); }
+.nb-feature .nb-btn.g { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.3); color: #fff; }
+.nb-acts { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 15px; }
+
+/* ------------------------------------------------------------ ranked list -- */
+.nb-ranks { background: var(--card); border: 1px solid var(--line);
+  border-radius: 12px; padding: 5px; }
+.nb-rank { width: 100%; border: 0; background: transparent; color: inherit;
+  font: inherit; display: block; text-align: left; padding: 12px 13px;
+  border-radius: 9px; cursor: pointer; }
+.nb-rank:hover { background: var(--blue-50); }
+.nb-rank-top { display: flex; align-items: baseline; gap: 10px; }
+.nb-rank-name { font-size: 14px; font-weight: 600; }
+.nb-rank-sub { font-size: 11.5px; color: var(--muted); }
+.nb-rank-val { margin-left: auto; font-size: 14px; font-weight: 700; }
+.nb-track { height: 6px; background: var(--line-2); border-radius: 4px;
+  margin-top: 9px; overflow: hidden; }
+.nb-track i { display: block; height: 100%; border-radius: 4px; }
+
+/* -------------------------------------------------------- journey stages -- */
+.nb-journey { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 10px; }
+.nb-stage {
+  flex: 1 1 128px; min-width: 128px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 11px; padding: 14px;
+}
+.nb-stage b { display: block; font-size: 10.5px; font-weight: 700;
+  color: var(--blue-600); letter-spacing: .08em; }
+.nb-stage span { display: block; margin-top: 9px; font-size: 13.5px; font-weight: 600; }
+.nb-stage.now { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-100); }
+.nb-stage.future { opacity: .55; }
+
+/* ------------------------------------------------------------- tutor chat -- */
+.nb-msg { max-width: 86%; padding: 11px 14px; border-radius: 12px;
+  margin-bottom: 9px; font-size: 13.5px; line-height: 1.55; }
+.nb-msg.me { margin-left: auto; background: var(--blue); color: #fff;
+  border-bottom-right-radius: 4px; }
+.nb-msg.ai { background: var(--blue-50); border: 1px solid var(--blue-100);
+  border-bottom-left-radius: 4px; }
+
+/* ---------------------------------------------------------------- callout -- */
+.nb-note { background: var(--blue-50); border: 1px solid var(--blue-100);
+  border-radius: 10px; padding: 13px 15px; margin-top: 14px;
+  font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+.nb-note b { color: var(--ink); font-weight: 600; }
+
+.nb-split { display: flex; justify-content: space-between; gap: 14px;
+  align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--line-2);
+  font-size: 13.5px; }
+.nb-split:last-child { border-bottom: 0; }
+.nb-split .k { color: var(--muted); }
+.nb-split .v { font-weight: 600; text-align: right; }
+
+/* ----------------------------------------------------------------- layout -- */
+/* Main column plus a side rail. Screens that only stack cards read as empty
+   however much content is on them, so anything with a secondary story uses
+   this instead. */
+.nb-grid { display: grid; gap: 14px; margin-top: 20px; }
+@media (min-width: 1000px) {
+  .nb-grid.two { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); align-items: start; }
+  .nb-grid.half { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+}
+.nb-panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+.nb-panel-head {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 15px 17px 12px; border-bottom: 1px solid var(--line-2);
+}
+.nb-panel-head h3 { margin: 0; font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; }
+.nb-panel-head .more { margin-left: auto; font-size: 12px; font-weight: 600;
+  color: var(--blue-600); background: 0; border: 0; cursor: pointer; }
+.nb-panel-body { padding: 6px 8px 8px; }
+.nb-panel-body.pad { padding: 16px 17px 17px; }
+
+/* ------------------------------------------------------------------ table -- */
+.nb-tablewrap { overflow-x: auto; }
+.nb-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 460px; }
+.nb-table th {
+  text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 9px 12px; border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.nb-table td { padding: 11px 12px; border-bottom: 1px solid var(--line-2); vertical-align: middle; }
+.nb-table tbody tr:last-child td { border-bottom: 0; }
+.nb-table tbody tr:hover { background: var(--blue-50); }
+.nb-table .num { text-align: right; font-weight: 600; white-space: nowrap; }
+.nb-table .nm { font-weight: 600; color: var(--ink); }
+.nb-table .sub { display: block; font-size: 11.5px; color: var(--muted); font-weight: 400; margin-top: 1px; }
+
+/* mini bar inside a table cell */
+.nb-mini { display: flex; align-items: center; gap: 9px; min-width: 128px; }
+.nb-mini .bar { flex: 1 1 auto; height: 6px; border-radius: 4px; background: var(--line-2); overflow: hidden; }
+.nb-mini .bar i { display: block; height: 100%; border-radius: 4px; }
+.nb-mini .pc { font-size: 12px; font-weight: 700; width: 34px; text-align: right; }
+
+/* ------------------------------------------------------------- timetable -- */
+.nb-period {
+  display: flex; align-items: center; gap: 13px;
+  padding: 12px 13px; border-radius: 9px;
+}
+.nb-period + .nb-period { border-top: 1px solid var(--line-2); border-radius: 0; }
+.nb-period .when {
+  flex: 0 0 46px; font-size: 12px; font-weight: 700; color: var(--muted);
+}
+.nb-period .what { flex: 1 1 auto; min-width: 0; }
+.nb-period .what b { display: block; font-size: 13.5px; font-weight: 600; }
+.nb-period .what span { font-size: 11.5px; color: var(--muted); }
+.nb-period.now { background: var(--blue-50); border-radius: 9px; }
+.nb-period.done { opacity: .55; }
+
+/* -------------------------------------------------------------- feed rows -- */
+.nb-feed { display: flex; flex-direction: column; }
+.nb-feed li { display: flex; gap: 11px; padding: 11px 13px; list-style: none;
+  border-bottom: 1px solid var(--line-2); }
+.nb-feed li:last-child { border-bottom: 0; }
+.nb-feed .dot { flex: 0 0 7px; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--blue-100); margin-top: 6px; }
+.nb-feed .dot.good { background: var(--good); }
+.nb-feed .dot.warn { background: var(--warn); }
+.nb-feed .dot.crit { background: var(--crit); }
+.nb-feed .txt { flex: 1 1 auto; min-width: 0; font-size: 13px; line-height: 1.5; }
+.nb-feed .txt b { font-weight: 600; }
+.nb-feed .ago { font-size: 11px; color: var(--faint); white-space: nowrap; }
+.nb-feed ul { margin: 0; padding: 0; }
+
+/* --------------------------------------------------------- progress rings -- */
+.nb-subs { display: grid; gap: 11px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.nb-sub {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 11px; padding: 15px;
+}
+.nb-sub b { display: block; font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--blue-600); }
+.nb-sub .v { display: block; margin-top: 8px; font-size: 26px; font-weight: 700;
+  letter-spacing: -.03em; line-height: 1; }
+.nb-sub .t { display: block; margin-top: 5px; font-size: 11.5px; color: var(--muted); }
+.nb-sub .bar { height: 5px; border-radius: 4px; background: var(--line-2);
+  margin-top: 11px; overflow: hidden; }
+.nb-sub .bar i { display: block; height: 100%; border-radius: 4px; }
+
+/* ------------------------------------------------------------------ chart -- */
+.nb-chart { background: var(--card); border: 1px solid var(--line);
+  border-radius: 12px; padding: 18px 16px 8px; overflow-x: auto; }
+.nb-chart .axis text { fill: var(--muted); font-size: 10.5px; }
+.nb-chart .grid line { stroke: var(--line-2); stroke-width: 1; }
+.nb-chart .slabel { font-size: 11.5px; font-weight: 700; }
+.nb-chart .dotmark { stroke: var(--card); stroke-width: 2; }
+
+.nb-tip { position: fixed; pointer-events: none; z-index: 60;
+  background: var(--navy-900); color: #fff; border-radius: 8px; padding: 9px 12px;
+  font-size: 12px; box-shadow: var(--lift); opacity: 0; transition: opacity .1s; }
+.nb-tip b { display: block; margin-bottom: 4px; font-size: 11px;
+  color: rgba(255,255,255,.6); font-weight: 600; }
+.nb-tip .r { display: flex; align-items: center; gap: 7px; margin-top: 3px; }
+.nb-tip .r i { width: 8px; height: 8px; border-radius: 2px; display: block; }
+.nb-tip .r span { margin-left: auto; font-weight: 700; padding-left: 12px; }
+@media (prefers-reduced-motion: reduce) { .nb-tip { transition: none; } }
+
+/* ----------------------------------------------------------- identity card -- */
+.nb-idcard {
+  background: linear-gradient(160deg, var(--blue), var(--navy-700));
+  color: #fff; border-radius: 14px; padding: 24px; max-width: 340px;
+}
+.nb-idcard .nm { font-size: 21px; font-weight: 700; letter-spacing: .04em; }
+.nb-idcard .lb { margin-top: 16px; font-size: 10px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.nb-idcard .id { margin-top: 4px; font-size: 16px; font-weight: 600;
+  font-family: ui-monospace, Menlo, Consolas, monospace; }
+.nb-idcard .vf { margin-top: 26px; font-size: 11.5px; color: rgba(255,255,255,.7); }
+
+/* -------------------------------------------------------------- entry page -- */
+.nb-entry { min-height: 100vh; display: grid; place-items: center; padding: 24px;
+  background: var(--ground); }
+.nb-entrybox { background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; padding: 30px; width: 100%; max-width: 380px; }
+.nb-entrybox h1 { margin: 0; font-size: 23px; font-weight: 700; letter-spacing: -.02em; }
+.nb-entrybox p { margin: 7px 0 22px; font-size: 13.5px; color: var(--muted); }
+.nb-role { width: 100%; text-align: left; font: inherit; font-size: 14px;
+  font-weight: 600; padding: 13px 15px; margin-bottom: 9px; cursor: pointer;
+  background: var(--card); border: 1px solid var(--line); border-radius: 9px;
+  color: var(--ink); }
+.nb-role:hover { border-color: var(--blue); color: var(--blue-700); background: var(--blue-50); }
+.nb-entryfoot { margin-top: 16px; font-size: 11.5px; color: var(--faint); text-align: center; }
+
+/* Group headings in the rail. Only appear when a role has enough sections that
+   an undivided list stops being scannable. */
+.nb-school .nb-navgroup {
+  display: block; padding: 14px 11px 5px;
+  font-size: 9.5px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(255,255,255,.32);
+}
+@media (max-width: 900px) { .nb-school .nb-navgroup { display: none; } }
+
+/* ============================================================================
+   The lesson player.
+   Where learning actually happens, as opposed to being reported on.
+   ============================================================================ */
+.nb-school .nb-lesson { max-width: 760px; }
+
+.nb-school .nb-steps { display: flex; gap: 5px; margin: 18px 0 22px; }
+.nb-school .nb-steps i {
+  flex: 1 1 0; height: 5px; border-radius: 3px; background: var(--line); display: block;
+}
+.nb-school .nb-steps i.done { background: var(--blue); }
+.nb-school .nb-steps i.now  { background: var(--blue-600); box-shadow: 0 0 0 3px var(--blue-100); }
+
+.nb-school .nb-stage {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--blue-600); margin-bottom: 8px;
+}
+.nb-school .nb-teach {
+  font-size: 17px; line-height: 1.72; color: var(--ink-2); margin: 0;
+}
+.nb-school .nb-teach b { color: var(--ink); font-weight: 600; }
+
+/* worked example, revealed a line at a time */
+.nb-school .nb-problem {
+  background: var(--blue-50); border: 1px solid var(--blue-100); border-radius: 10px;
+  padding: 15px 16px; font-size: 16px; font-weight: 600; margin: 0 0 16px;
+}
+.nb-school .nb-wline {
+  border-left: 2px solid var(--line); padding: 0 0 0 16px; margin: 0 0 4px;
+}
+.nb-school .nb-wline.shown { border-left-color: var(--blue); }
+.nb-school .nb-wmath {
+  font-size: 18px; font-weight: 600; padding: 10px 0 4px; letter-spacing: .01em;
+}
+.nb-school .nb-wwhy { font-size: 13.5px; color: var(--muted); line-height: 1.6; padding-bottom: 12px; }
+
+/* the learner's own answer */
+.nb-school .nb-answer {
+  width: 100%; font: inherit; font-size: 18px; padding: 14px 15px;
+  border-radius: 10px; border: 2px solid var(--line); background: var(--card);
+  color: var(--ink); letter-spacing: .01em;
+}
+.nb-school .nb-answer:focus { border-color: var(--blue); outline: none; }
+.nb-school .nb-answer.right { border-color: var(--good); background: var(--good-bg); }
+.nb-school .nb-answer.wrong { border-color: var(--crit); background: var(--crit-bg); }
+
+.nb-school .nb-verdict { margin-top: 14px; padding: 14px 15px; border-radius: 10px; font-size: 14.5px; line-height: 1.6; }
+.nb-school .nb-verdict.right { background: var(--good-bg); color: var(--good); }
+.nb-school .nb-verdict.wrong { background: var(--crit-bg); color: var(--crit); }
+.nb-school .nb-verdict.hint  { background: var(--warn-bg); color: var(--warn); }
+.nb-school .nb-verdict b { display: block; margin-bottom: 3px; }
+
+/* mastery */
+.nb-school .nb-mast { display: flex; align-items: center; gap: 4px; }
+.nb-school .nb-mast i {
+  width: 22px; height: 6px; border-radius: 3px; background: var(--line); display: block;
+}
+.nb-school .nb-mast i.on { background: var(--blue); }
+.nb-school .nb-mast i.on.full { background: var(--good); }
+
+/* ============================================================================
+   The portal: levels, subjects, and the content itself.
+   ============================================================================ */
+.nb-school .nb-levels { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 18px; }
+.nb-school .nb-level {
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  padding: 8px 14px; border-radius: 8px; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line);
+}
+.nb-school .nb-level:hover { border-color: var(--blue); color: var(--blue-700); }
+.nb-school .nb-level[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+.nb-school .nb-subjects {
+  display: grid; gap: 11px; margin-top: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+.nb-school .nb-subj {
+  text-align: left; font: inherit; cursor: pointer; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 15px; display: block;
+}
+.nb-school .nb-subj:hover { border-color: var(--blue); background: var(--blue-50); }
+.nb-school .nb-subj b { display: block; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+.nb-school .nb-subj span { display: block; margin-top: 6px; font-size: 11.5px; color: var(--muted); }
+.nb-school .nb-subj .cnt { display: flex; gap: 9px; margin-top: 10px; font-size: 11px; color: var(--blue-600); font-weight: 600; }
+
+/* a shelf of things you can open */
+.nb-school .nb-shelf {
+  display: grid; gap: 11px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+.nb-school .nb-item {
+  text-align: left; font: inherit; cursor: pointer; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.nb-school .nb-item:hover { border-color: var(--blue); }
+.nb-school .nb-cover {
+  height: 92px; display: grid; place-items: center; position: relative;
+  background: linear-gradient(150deg, var(--navy-700), var(--navy-900)); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+}
+.nb-school .nb-cover.vid { background: linear-gradient(150deg, var(--blue), var(--navy-700)); }
+.nb-school .nb-cover.doc { background: linear-gradient(150deg, #3c5578, #24406b); }
+.nb-school .nb-cover.pap { background: linear-gradient(150deg, #6b4d8a, #3d2a52); }
+.nb-school .nb-play {
+  position: absolute; width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,.92); display: grid; place-items: center;
+}
+.nb-school .nb-play::after {
+  content: ""; border-left: 11px solid var(--navy-900);
+  border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px;
+}
+.nb-school .nb-meta { padding: 12px 13px; flex: 1 1 auto; }
+.nb-school .nb-meta b { display: block; font-size: 13.5px; font-weight: 600; line-height: 1.35; }
+.nb-school .nb-meta span { display: block; margin-top: 5px; font-size: 11.5px; color: var(--muted); }
+.nb-school .nb-meta .sz { margin-top: 8px; font-size: 11px; color: var(--faint); }

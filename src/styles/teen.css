@@ -1,0 +1,484 @@
+/* ===========================================================================
+   Basic 3 to JHS 3.
+
+   A learner who reads. That single fact separates this from the kid interface
+   and explains every difference:
+
+   - Words carry the meaning again, so the pictures shrink to markers and the
+     type comes down from 18.5px to 16px.
+   - White rather than tinted, and thin borders rather than deep cards. Nine to
+     fifteen year olds read a playroom as being for younger children, and an
+     interface that feels like it is for younger children is one they will not
+     be seen using.
+   - The header carries points and days, because at this age the count is the
+     thing they check first.
+   - A top bar rather than bottom tabs. There are only two places to be, and a
+     tab bar for two destinations is furniture.
+
+   Scoped under .teen. The same bundle serves a four year old and a university
+   student, so nothing here may leak.
+   =========================================================================== */
+
+.teen {
+  /* All from `tokens.css`. This tier was blue on cool grey, against a product
+     that is navy on cream. Same palette now, at its quietest: white paper,
+     green used sparingly, gold on the counters. */
+  --ink: var(--nx-ink);
+  --ink-soft: var(--nx-ink-2);
+  --page: var(--nx-card);
+  --card: var(--nx-card);
+  --line: var(--nx-line);
+  --wash: var(--nx-cream);
+  --brand: var(--nx-green);
+  --brand-soft: var(--nx-green-soft);
+  /* The reading variant, not the fill. --nx-warm is the colour of a drawn
+     flame; as a number beside one it measured 2.55:1 on white. */
+  --flame: var(--nx-warm-text);
+  --right: var(--nx-green);
+  --wrong: var(--nx-red);
+
+  min-height: 100dvh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system,
+               'Segoe UI', Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.teen-page {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+  box-sizing: border-box;
+}
+
+/* ── the bar across the top ───────────────────────────────────────────────── */
+
+.teen-bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.teen-bar-in {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.teen-wordmark {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  flex: 1 1 auto;
+}
+
+.teen-wordmark span { color: var(--nx-gold-text); }
+
+/* The two counts. Points in the brand colour and days in the flame colour, so
+   the pair is legible at a glance without reading either label. */
+.teen-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14.5px;
+  font-weight: 800;
+  min-height: 44px;
+  padding: 0 4px;
+}
+
+/* Was --nx-gold-deep, which is 2.56:1 on white: a gold number on paper was
+   decoration rather than information. */
+.teen-count.is-xp { color: var(--nx-gold-text); }
+.teen-count.is-days { color: var(--flame); }
+
+.teen-menu {
+  font: inherit;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.teen-menu:hover { background: var(--wash); }
+
+/* ── the greeting ─────────────────────────────────────────────────────────── */
+
+.teen-hello {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 26px 0 20px;
+}
+
+.teen-hi {
+  margin: 0;
+  font-size: clamp(27px, 7.4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+/* Their year, as a chip. Read by them and by whoever is checking they are in
+   the right place. */
+.teen-chip {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--nx-green-text);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+/* ── cards ────────────────────────────────────────────────────────────────── */
+
+.teen-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.teen-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.teen-card-top h2 {
+  margin: 0;
+  font-size: 16.5px;
+  font-weight: 800;
+  flex: 1 1 auto;
+}
+
+.teen-card-top.is-wash { background: var(--wash); }
+
+.teen-card-body { padding: 18px; }
+
+/* ── the daily goal ───────────────────────────────────────────────────────── */
+
+.teen-goal-nums {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.teen-goal-xp {
+  font-size: 23px;
+  font-weight: 800;
+  color: var(--nx-green-text);
+}
+
+.teen-goal-of {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* `display: block` matters here and is easy to lose.
+
+   Every one of these tracks is a <span>, because it lives inside a <button>
+   and a <div> is not allowed there. An inline element ignores `height`, so the
+   bar grew to the line height of its parent and the fill inside it escaped.
+   Caught in Chrome: a 10px goal bar measured 44.8px tall and read as empty. */
+.teen-bar-track {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--wash);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.teen-bar-track i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--brand);
+  transition: width 320ms ease-out;
+}
+
+/* ── the week ─────────────────────────────────────────────────────────────── */
+
+/* Rings, one per day, and the flame at the end. Days learned rather than a
+   streak that breaks: see `rewards.ts`. */
+.teen-week {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* On one line, for the same reason as the tier below. */
+.teen-week > .teen-row-sub { white-space: nowrap; flex: 0 0 auto; }
+
+
+/* Seven days plus a label has to fit a 360px phone.
+
+   At a fixed 40px each with an 8px gap the row measured 328px, and with the
+   label beside it the strip ran off the right edge of the screen and clipped
+   "this week" in half. The boxes flex instead, with a floor that keeps them a
+   real tap target. */
+.teen-days { display: flex; gap: 8px; flex: 1 1 auto; min-width: 0; }
+
+.teen-day {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 42px;
+  /* Square, from whatever width the flex gives it. A fixed height with a
+     flexed width made 25x40 ovals at 360px, and a 50% radius on a box that is
+     not square is not a circle. */
+  aspect-ratio: 1;
+  height: auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  border: 2px solid var(--line);
+  background: #fff;
+}
+
+.teen-day.is-done {
+  border-color: var(--nx-green-text);
+  color: var(--nx-green-text);
+  background: var(--brand-soft);
+}
+
+.teen-day.is-today { box-shadow: 0 0 0 3px rgba(15, 138, 77, 0.18); }
+
+.teen-flame {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--flame);
+}
+
+/* On a phone the label drops below the strip rather than competing with it for
+   width. Sharing the row left the seven circles 25px across, which is neither
+   a circle nor a tap target.
+
+   This has to sit after the rules it overrides. The same block placed above
+   `.teen-days` did nothing, because the two selectors have equal specificity
+   and source order decides. */
+@media (max-width: 460px) {
+  .teen-week { flex-wrap: wrap; }
+  .teen-days { flex: 1 1 100%; }
+  .teen-week > .teen-row-sub { margin-top: 2px; }
+}
+
+/* ── list rows ────────────────────────────────────────────────────────────── */
+
+.teen-row {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  min-height: 72px;
+}
+
+.teen-row:last-child { border-bottom: 0; }
+.teen-row:hover { background: var(--wash); }
+
+.teen-row-art {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--wash);
+  border: 1px solid var(--line);
+}
+
+.teen-row-body { flex: 1 1 auto; min-width: 0; }
+
+.teen-row-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.teen-row-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.teen-chev {
+  flex: 0 0 auto;
+  font-size: 22px;
+  color: var(--ink-soft);
+  line-height: 1;
+}
+
+/* A thin progress line under a row's title, for a subject part way through. */
+.teen-line {
+  display: block;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--wash);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.teen-line i {
+  display: block;
+  height: 100%;
+  background: var(--brand);
+}
+
+/* ── buttons ──────────────────────────────────────────────────────────────── */
+
+.teen-btn {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.teen-btn.is-dark {
+  background: var(--nx-ink);
+  border-color: var(--nx-ink);
+  color: #fff;
+}
+
+.teen-btn.is-brand {
+  background: var(--brand);
+  border-color: var(--nx-green-text);
+  color: #fff;
+}
+
+/* ── the menu sheet ───────────────────────────────────────────────────────── */
+
+.teen-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(16, 24, 40, 0.4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.teen-sheet-in {
+  width: 100%;
+  max-width: 620px;
+  background: #fff;
+  border-radius: 18px 18px 0 0;
+  padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px));
+}
+
+.teen-sheet-item {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  padding: 16px 22px;
+  min-height: 56px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.teen-sheet-item:hover { background: var(--wash); }
+
+/* ── nothing here yet ─────────────────────────────────────────────────────── */
+
+.teen-none {
+  padding: 22px 18px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* Something happens when you press.
+
+   Hover was added to all four tiers after somebody opened them on a laptop,
+   and pressing was left out, which leaves a phone with no feedback at all: on
+   touch there is no hover, so a tap on a card produced nothing until the next
+   screen arrived. On a slow connection that is indistinguishable from a dead
+   control, and the second tap is the one that double-fires. */
+.teen-card:active,
+.teen-row:active,
+.teen-line:active,
+.teen-sheet-item:active { transform: scale(0.988); }
+
+.teen-btn:active,
+.teen-chip:active,
+.teen-menu:active,
+.teen-count:active { transform: scale(0.96); }
+
+.teen-card,
+.teen-row,
+.teen-line,
+.teen-btn,
+.teen-chip,
+.teen-menu,
+.teen-count,
+.teen-sheet-item { transition: transform 0.08s ease, background 0.14s ease, border-color 0.14s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .teen-bar-track i, .teen-line i { transition: none; }
+  .teen * { transition: none !important; }
+  .teen-card:active,
+  .teen-row:active,
+  .teen-line:active,
+  .teen-sheet-item:active,
+  .teen-btn:active,
+  .teen-chip:active,
+  .teen-menu:active,
+  .teen-count:active { transform: none; }
+}

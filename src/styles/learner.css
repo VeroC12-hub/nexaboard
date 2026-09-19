@@ -1,0 +1,486 @@
+/* ============================================================================
+   LEARNER APPLICATION SHELL  (UI Stage 1)
+
+   One shell for every learner at every education level. Nothing in this file
+   branches on KG, JHS, SHS, TVET or university: the context engine decides what
+   the navigation contains, and this file decides only how it looks.
+
+   Extends the tokens already declared on .nb-school in school.css. No new
+   palette, no second design system, no new font. Every colour below is an
+   existing token.
+   ============================================================================ */
+
+.nb-school { --side: 252px; --head: 60px; --wrap: 1080px; }
+
+/* Two rows: the header, then everything else. The sidebar spans both, so its
+   full height cannot push the content area below the fold. */
+.nb-app {
+  background: linear-gradient(to bottom right, #ffffff, #f3fcf0 55%, #dcfce7);
+  display: grid;
+  grid-template-columns: var(--side) 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+/* ------------------------------------------------------------------ side -- */
+/* Light, like the rest of NexaCore. Phase 1 has no dark chrome anywhere: its
+   header is white over a soft green ground, so the rail follows it. */
+.nb-side {
+  grid-column: 1; grid-row: 1 / -1;
+  background: var(--card); color: var(--ink);
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+}
+.nb-side-brand {
+  display: flex; align-items: center; gap: 9px;
+  padding: 14px 18px; flex: 0 0 auto;
+  border-bottom: 1px solid var(--line-2);
+}
+.nb-side-brand img { height: 32px; width: auto; object-fit: contain; }
+
+.nb-side-nav { flex: 1 1 auto; padding: 6px 11px 18px; }
+
+.nb-navgroup {
+  display: block; padding: 16px 9px 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--faint);
+}
+
+.nb-nav {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  text-align: left; border: 0; background: transparent; cursor: pointer;
+  font: inherit; font-size: 13.5px; font-weight: 500;
+  color: var(--muted);
+  padding: 9px 10px; border-radius: 8px; margin-top: 1px;
+  transition: background .12s, color .12s;
+}
+.nb-nav:hover { color: var(--ink); background: var(--brand-50); }
+
+/* Exactly one item reads as selected, in the NexaCore green. */
+.nb-nav[aria-current] {
+  color: #fff; background: var(--brand); font-weight: 600;
+}
+.nb-nav[aria-current] .ico { opacity: 1; }
+.nb-nav .ico { width: 17px; flex: 0 0 17px; opacity: .8; }
+.nb-nav.sub { font-size: 13px; padding: 7px 10px 7px 37px; }
+.nb-nav.sub[aria-current] {
+  background: var(--brand-100); color: var(--brand-700); font-weight: 600;
+}
+
+/* ------------------------------------------------------- learner in rail -- */
+.nb-me {
+  flex: 0 0 auto; margin-top: auto;
+  border-top: 1px solid var(--line); padding: 13px 14px 15px;
+}
+.nb-me-row { display: flex; align-items: center; gap: 10px; }
+.nb-me-name { display: block; font-size: 13px; font-weight: 650; color: var(--ink); line-height: 1.3; }
+.nb-me-sub { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+
+.nb-avatar {
+  flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--brand); color: #fff;
+  font-size: 12px; font-weight: 700; letter-spacing: .02em;
+}
+.nb-avatar.sm { width: 28px; height: 28px; font-size: 11px; }
+
+/* ------------------------------------------------------------------ head -- */
+.nb-head {
+  grid-column: 2; grid-row: 1; position: sticky; top: 0; z-index: 20;
+  height: var(--head); display: flex; align-items: center; gap: 12px;
+  padding: 0 24px; background: rgba(255,255,255,.86); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nb-head-t { font-size: 14.5px; font-weight: 650; color: var(--ink); }
+.nb-head-r { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+.nb-search {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--ground); border: 1px solid var(--line);
+  border-radius: 9px; padding: 0 10px; height: 34px; width: 220px;
+}
+.nb-search input {
+  font: inherit; font-size: 13px; border: 0; background: transparent; outline: 0;
+  color: var(--ink); width: 100%;
+}
+.nb-search input::placeholder { color: var(--faint); }
+
+.nb-ctx-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--brand-50); border: 1px solid var(--brand-100);
+  color: var(--brand-700); border-radius: 999px;
+  padding: 5px 11px; font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+
+/* --------------------------------------------------------------- profile -- */
+.nb-prof { position: relative; }
+.nb-prof-btn {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  border: 1px solid transparent; background: transparent; border-radius: 9px;
+  padding: 3px 6px 3px 3px; font: inherit;
+}
+.nb-prof-btn:hover { background: var(--ground); border-color: var(--line); }
+
+.nb-pop {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 40;
+  width: 268px; background: var(--card);
+  border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--lift);
+  padding: 13px; animation: nbpop .12s ease-out;
+}
+@keyframes nbpop { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .nb-pop { animation: none; } }
+
+.nb-pop-h { font-size: 13.5px; font-weight: 650; color: var(--ink); }
+.nb-pop-l {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin: 13px 0 6px;
+}
+.nb-pop-kv { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; padding: 3px 0; }
+.nb-pop-kv span { color: var(--muted); }
+.nb-pop-kv b { color: var(--ink); font-weight: 600; text-align: right; }
+.nb-pop hr { border: 0; border-top: 1px solid var(--line-2); margin: 12px 0; }
+
+.nb-pop-b {
+  display: block; width: 100%; text-align: left; border: 0; background: transparent;
+  font: inherit; font-size: 13px; color: var(--ink); cursor: pointer;
+  padding: 8px 9px; border-radius: 7px;
+}
+.nb-pop-b:hover:not(:disabled) { background: var(--ground); }
+.nb-pop-b:disabled { color: var(--faint); cursor: not-allowed; }
+.nb-pop-b .why { display: block; font-size: 11px; color: var(--faint); margin-top: 1px; }
+.nb-pop-b.danger { color: var(--crit); }
+.nb-pop-b.danger:hover { background: var(--crit-bg); }
+
+/* ------------------------------------------------------------------ body -- */
+.nb-body { grid-column: 2; grid-row: 2; min-width: 0; }
+.nb-wrap { max-width: var(--wrap); padding: 26px 24px 72px; }
+
+.nb-title { margin: 0; font-size: 25px; font-weight: 700; letter-spacing: -.021em; color: var(--ink); }
+.nb-lede { margin: 7px 0 0; font-size: 14px; color: var(--ink-2); line-height: 1.6; max-width: 62ch; }
+.nb-sect { margin-top: 30px; }
+.nb-sect-h { margin: 0 0 3px; font-size: 15.5px; font-weight: 650; letter-spacing: -.01em; color: var(--ink); }
+.nb-sect-s { margin: 0 0 13px; font-size: 13px; color: var(--muted); }
+.nb-metaline { font-size: 12px; color: var(--muted); }
+
+/* ----------------------------------------------------------- breadcrumbs -- */
+.nb-bc {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  font-size: 12.5px; color: var(--muted); margin-bottom: 12px;
+}
+.nb-bc button {
+  font: inherit; border: 0; background: 0; padding: 0; cursor: pointer;
+  color: var(--muted); border-radius: 4px;
+}
+.nb-bc button:hover { color: var(--brand-700); text-decoration: underline; }
+.nb-bc .sep { color: var(--faint); }
+.nb-bc .now { color: var(--ink); font-weight: 600; }
+
+/* ---------------------------------------------------------------- states -- */
+.nb-skel {
+  background: linear-gradient(90deg, var(--line-2) 25%, #f3f6fa 50%, var(--line-2) 75%);
+  background-size: 200% 100%; animation: nbsk 1.3s ease-in-out infinite;
+  border-radius: 7px;
+}
+@keyframes nbsk { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .nb-skel { animation: none; } }
+
+.nb-state {
+  border: 1px solid var(--line); background: var(--card);
+  border-radius: 12px; padding: 34px 26px; text-align: center;
+}
+.nb-state .mark {
+  width: 42px; height: 42px; border-radius: 11px; margin: 0 auto 13px;
+  display: grid; place-items: center; background: var(--ground); color: var(--muted);
+}
+.nb-state.bad .mark { background: var(--crit-bg); color: var(--crit); }
+.nb-state h3 { margin: 0; font-size: 15.5px; font-weight: 650; color: var(--ink); }
+.nb-state p { margin: 7px auto 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.6; max-width: 46ch; }
+.nb-state .act { margin-top: 16px; display: flex; gap: 9px; justify-content: center; flex-wrap: wrap; }
+
+/* ---------------------------------------------------------------- inputs -- */
+.nb-field { display: block; }
+.nb-label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.nb-input, .nb-select {
+  font: inherit; font-size: 13.5px; width: 100%;
+  background: var(--card); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 9px; padding: 9px 11px;
+  transition: border-color .12s, box-shadow .12s;
+}
+.nb-select {
+  appearance: none; cursor: pointer; padding-right: 32px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 52%, calc(100% - 11px) 52%;
+  background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+}
+.nb-input:focus, .nb-select:focus {
+  outline: 0; border-color: var(--brand-600); box-shadow: 0 0 0 3px var(--brand-50);
+}
+.nb-input:disabled, .nb-select:disabled { background: var(--ground); color: var(--faint); cursor: not-allowed; }
+.nb-input[aria-invalid="true"], .nb-select[aria-invalid="true"] { border-color: var(--crit); }
+.nb-fielderr { display: block; font-size: 12px; color: var(--crit); margin-top: 5px; }
+.nb-fieldhint { display: block; font-size: 12px; color: var(--muted); margin-top: 5px; }
+
+/* ----------------------------------------------------------- mobile shell -- */
+.nb-burger, .nb-scrim, .nb-tabs { display: none; }
+
+@media (max-width: 900px) {
+  .nb-app { grid-template-columns: 1fr; }
+
+  /* A drawer, never a squeezed sidebar. */
+  .nb-side {
+    position: fixed; inset: 0 auto 0 0; width: 280px; z-index: 60;
+    transform: translateX(-100%); transition: transform .2s ease;
+    height: 100dvh;
+  }
+  .nb-side[data-open="true"] { transform: none; box-shadow: var(--lift); }
+
+  .nb-scrim {
+    display: block; position: fixed; inset: 0; z-index: 50;
+    background: rgba(27,43,75,.45); border: 0;
+  }
+
+  .nb-head { grid-column: 1; grid-row: 1; }
+  .nb-body { grid-column: 1; grid-row: 2; }
+  .nb-head { padding: 0 14px; }
+  .nb-burger {
+    display: grid; place-items: center; width: 36px; height: 36px;
+    border: 1px solid var(--line); background: var(--card);
+    border-radius: 9px; cursor: pointer; color: var(--ink); flex: 0 0 auto;
+  }
+  .nb-search { display: none; }
+  .nb-wrap { padding: 18px 14px 96px; }
+  .nb-title { font-size: 21px; }
+  .nb-pop { width: min(300px, calc(100vw - 28px)); }
+
+  /* Bottom navigation for the primary destinations. */
+  .nb-tabs {
+    display: flex; position: fixed; inset: auto 0 0 0; z-index: 45;
+    background: var(--card); border-top: 1px solid var(--line);
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  }
+  .nb-tab {
+    flex: 1 1 0; min-height: 48px; border: 0; background: 0; cursor: pointer;
+    font: inherit; font-size: 10.5px; font-weight: 600; color: var(--muted);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    border-radius: 9px; padding: 4px 2px;
+  }
+  .nb-tab[aria-current] { color: var(--brand); background: var(--brand-50); }
+}
+
+@media (prefers-reduced-motion: reduce) { .nb-side { transition: none; } }
+
+/* Tablet: the shell stays whole, the sidebar simply narrows. */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .nb-school { --side: 216px; }
+  .nb-search { width: 160px; }
+}
+
+/* ============================================================================
+   ONBOARDING  (UI-02A)
+
+   A focused confirmation screen, deliberately without the learner sidebar. Same
+   tokens as the rest of the shell: no new palette, no second visual language.
+   ============================================================================ */
+
+.nb-onb {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #ffffff, #f3fcf0 55%, #dcfce7);
+  display: flex; flex-direction: column;
+}
+
+.nb-onb-top {
+  flex: 0 0 auto; padding: 14px 22px;
+  border-bottom: 1px solid var(--line); background: var(--card);
+}
+.nb-onb-top img { height: 32px; width: auto; object-fit: contain; display: block; }
+
+.nb-onb-main {
+  flex: 1 1 auto; width: 100%; max-width: 1080px;
+  margin: 0 auto; padding: 30px 22px 56px;
+}
+.nb-onb-narrow { max-width: 560px; }
+
+.nb-onb-eyebrow {
+  margin: 0 0 9px; font-size: 10.5px; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--brand-700);
+}
+.nb-onb-h1 {
+  margin: 0; font-size: 27px; font-weight: 700;
+  letter-spacing: -.024em; line-height: 1.18; color: var(--ink);
+}
+.nb-onb-lede {
+  margin: 11px 0 0; font-size: 14.5px; line-height: 1.65;
+  color: var(--ink-2); max-width: 62ch;
+}
+.nb-onb-ready {
+  margin: 22px 0 10px; font-size: 12px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+}
+
+/* -------------------------------------------------- the resolved context -- */
+/* One card, weighted so the eye reads stage, level, place, then time. */
+.nb-onb-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 20px 24px; box-shadow: var(--shadow);
+}
+.nb-onb-stage {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-size: 11px; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--brand-700);
+}
+.nb-onb-level {
+  margin: 8px 0 0; font-size: 29px; font-weight: 700;
+  letter-spacing: -.026em; line-height: 1.1; color: var(--ink);
+}
+.nb-onb-where { margin-top: 13px; }
+.nb-onb-school { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+.nb-onb-group  { margin: 3px 0 0; font-size: 14px; color: var(--ink-2); }
+.nb-onb-when {
+  margin: 13px 0 0; padding-top: 12px; border-top: 1px solid var(--line-2);
+  font-size: 13px; color: var(--muted);
+}
+.nb-onb-cur { margin: 5px 0 0; font-size: 13px; color: var(--muted); }
+
+.nb-onb-note {
+  margin: 11px 0 0; font-size: 12.5px; color: var(--muted); line-height: 1.6;
+}
+
+/* ------------------------------------------------------- what is in here -- */
+.nb-onb-what { margin-top: 26px; }
+
+.nb-onb-h2 { margin: 0; font-size: 16px; font-weight: 650; letter-spacing: -.01em; color: var(--ink); }
+.nb-onb-say { margin: 6px 0 0; font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+.nb-onb-grid {
+  list-style: none; margin: 15px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+.nb-onb-grid li { display: block; }
+.nb-onb-grid .ico {
+  display: grid; place-items: center; width: 34px; height: 34px;
+  border-radius: 9px; background: var(--brand-100); color: var(--brand-700);
+  margin-bottom: 10px;
+}
+.nb-onb-grid b { display: block; font-size: 13.5px; font-weight: 650; color: var(--ink); }
+.nb-onb-grid span:last-child {
+  display: block; margin-top: 3px; font-size: 12.5px; color: var(--muted); line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------- cta -- */
+.nb-onb-cta { margin-top: 24px; display: flex; gap: 10px; flex-wrap: wrap; }
+.nb-onb-cta .nb-btn { min-height: 44px; padding: 0 22px; font-size: 14.5px; }
+
+/* The account, kept visibly apart from the learning context above. */
+.nb-onb-who {
+  margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--line-2);
+  font-size: 12.5px; color: var(--muted);
+}
+.nb-onb-who b { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 700px) {
+  .nb-onb-main { padding: 30px 16px 56px; }
+  .nb-onb-h1 { font-size: 24px; }
+  .nb-onb-level { font-size: 27px; }
+  .nb-onb-card { padding: 20px 18px; border-radius: 12px; }
+  .nb-onb-grid { grid-template-columns: 1fr; gap: 16px; }
+  .nb-onb-grid li { display: grid; grid-template-columns: 34px 1fr; column-gap: 12px; }
+  .nb-onb-grid .ico { grid-row: 1 / span 2; margin-bottom: 0; }
+  .nb-onb-cta { margin-top: 28px; }
+  .nb-onb-cta .nb-btn { width: 100%; justify-content: center; }
+}
+
+/* ---------------------------------------------------------------------------
+   Onboarding, two columns.
+
+   Declared last so it wins over the single-column base rules above. Side by
+   side, the learner sees the welcome, their context, what is inside and the way
+   in without scrolling for the action that completes the step.
+   --------------------------------------------------------------------------- */
+.nb-onb-body { display: grid; gap: 24px; }
+
+@media (min-width: 900px) {
+  .nb-onb-body { grid-template-columns: 1.05fr 1fr; gap: 34px; align-items: start; }
+  .nb-onb-what { margin-top: 0; }
+  /* Stacked rows, not three cramped columns inside half the width. */
+  .nb-onb-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 16px; }
+  .nb-onb-grid li { display: grid; grid-template-columns: 32px 1fr; column-gap: 12px; }
+  .nb-onb-grid .ico { grid-row: 1 / span 2; margin-bottom: 0; width: 32px; height: 32px; }
+}
+
+/* Wide desktops: the heading scales up with the extra room, and the two columns
+   breathe rather than leaving the sides empty. */
+@media (min-width: 1180px) {
+  .nb-onb-main { padding-left: 32px; padding-right: 32px; }
+  .nb-onb-h1 { font-size: 31px; }
+  .nb-onb-level { font-size: 33px; }
+  .nb-onb-card { padding: 24px 28px; }
+  .nb-onb-body { gap: 44px; }
+}
+
+/* --------------------------------------------------------------- teaching -- */
+/* Reading typography for authored lesson prose: a comfortable measure, real
+   paragraph spacing, and a line height meant for sustained reading. */
+.nb-prose {
+  margin: 0 0 14px; font-size: 15px; line-height: 1.72;
+  color: var(--ink-2); max-width: 68ch;
+}
+.nb-prose:last-child { margin-bottom: 0; }
+.nb-prose strong { color: var(--ink); font-weight: 650; }
+
+.nb-figure {
+  margin: 18px 0; padding: 16px 16px 10px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  max-width: 520px;
+}
+.nb-figure figcaption {
+  margin-top: 8px; font-size: 12px; color: var(--muted); text-align: center;
+}
+
+/* The step's own label, so the learner can see the shape of the lesson. */
+.nb-steplabel {
+  display: inline-block; margin-bottom: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--brand-700);
+}
+
+/* Where the material came from. Quiet, factual, and shown once. */
+.nb-source {
+  margin-top: 10px; font-size: 12px; color: var(--muted);
+}
+
+/* ------------------------------------------------------- knowledge check -- */
+.nb-check {
+  margin-top: 18px; padding: 18px;
+  background: var(--brand-50); border: 1px solid var(--brand-100); border-radius: 12px;
+}
+.nb-check-q { margin: 0 0 14px; font-size: 15px; font-weight: 650; color: var(--ink); line-height: 1.5; }
+.nb-check-opts { display: grid; gap: 8px; }
+
+.nb-opt {
+  display: block; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; font-size: 14px; color: var(--ink);
+  background: var(--card); border: 1.5px solid var(--line);
+  border-radius: 9px; padding: 11px 13px; min-height: 44px;
+  transition: border-color .12s, background .12s;
+}
+.nb-opt b { display: inline-block; min-width: 20px; color: var(--muted); font-weight: 700; }
+.nb-opt:hover:not(:disabled) { border-color: var(--brand); }
+.nb-opt[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-100); }
+.nb-opt:disabled { cursor: default; opacity: .75; }
+/* State is carried by an icon-free label and a border, never colour alone. */
+.nb-opt[data-state="right"] { border-color: var(--good); background: var(--good-bg); opacity: 1; }
+.nb-opt[data-state="wrong"] { border-color: var(--crit); background: var(--crit-bg); opacity: 1; }
+
+.nb-feedback {
+  margin-top: 14px; padding: 14px 15px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--card);
+}
+.nb-feedback b { display: block; font-size: 14px; margin-bottom: 5px; }
+.nb-feedback p { margin: 0; font-size: 13.5px; line-height: 1.62; color: var(--ink-2); }
+.nb-feedback.right { border-color: var(--good); background: var(--good-bg); }
+.nb-feedback.right b { color: var(--good); }
+.nb-feedback.wrong { border-color: var(--crit); background: var(--crit-bg); }
+.nb-feedback.wrong b { color: var(--crit); }
+.nb-feedback.review b { color: var(--warn); }

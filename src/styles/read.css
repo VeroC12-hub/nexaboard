@@ -1,0 +1,311 @@
+/* ===========================================================================
+   The lesson and the questions, for the two older tiers.
+
+   The kid interface needed its own everything, because a five year old cannot
+   use a page built for reading. From Basic 3 up the adult reading layout is
+   already close to right: one column, generous measure, the words first. What
+   these two need is to look like the interface they arrived from, not like a
+   different product.
+
+   So this is theming rather than rebuilding. The markup is the shared lesson
+   markup in every tier.
+   =========================================================================== */
+
+/* ── Basic 3 to JHS ───────────────────────────────────────────────────────── */
+
+.teen-read {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 18px 16px 44px;
+  box-sizing: border-box;
+}
+
+.teen .nx-display {
+  font-weight: 800;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+}
+
+.teen .nx-lesson-p,
+.teen .nx-ai-p {
+  font-size: 17px;
+  line-height: 1.68;
+  /* Was 38ch, which is a caption measure: a paragraph set that narrow breaks
+     every second line and reads as a column of fragments. Under 80 characters
+     is the rule and the high fifties is the comfortable part of it. */
+  max-width: 58ch;
+  color: var(--ink);
+}
+
+.teen .nx-lede {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.teen .nx-mark {
+  font-size: 11.5px;
+  /* No longer uppercase. This class mostly carries a topic title straight
+     from the syllabus, and "LETTERS STANDING FOR NUMBERS" is both harder to
+     read and a worse sentence than the one that was written. Small, soft and
+     slightly tracked says "this is where you are" without shouting it. */
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.teen .nx-ai-wait {
+  font-style: normal;
+  color: var(--ink-soft);
+  background: var(--wash);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  max-width: none;
+}
+
+.teen .nx-fig {
+  margin: 6px 0 22px;
+  padding: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.teen .nx-fig-media,
+.teen .nx-film { width: 100%; border-radius: 10px; display: block; }
+
+.teen .nx-btn,
+.teen .nx-link {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.teen .nx-btn-primary {
+  background: var(--brand);
+  border-color: var(--nx-green-text);
+  color: #fff;
+}
+
+/* A choice, as a row that is obviously pressable. Not the kid card, which at
+   64px tall reads as being for a small child, and not a bare line of text. */
+.teen .nx-choice {
+  font: inherit;
+  display: block;
+  width: 100%;
+  text-align: left;
+  min-height: 52px;
+  padding: 14px 18px;
+  margin: 0 0 9px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.teen .nx-choice:hover { border-color: var(--nx-green-text); }
+.teen .nx-choice.is-picked { border-color: var(--nx-green-text); background: var(--brand-soft); }
+
+.teen .nx-choice.is-answer {
+  border-color: var(--right);
+  background: #e9f7ef;
+  color: #10603a;
+}
+
+.teen .nx-choice.is-answer::after { content: " \2713"; font-weight: 800; }
+
+.teen .nx-choice.is-missed {
+  border-color: var(--wrong);
+  background: #fdeceb;
+  color: #8f2c1b;
+}
+
+.teen .nx-choice.is-missed::after { content: " \2717"; font-weight: 800; }
+
+.teen .nx-write {
+  font: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 52px;
+  padding: 14px 18px;
+  font-size: 17px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+}
+
+.teen .nx-write.is-right { border-color: var(--right); }
+.teen .nx-write.is-wrong { border-color: var(--wrong); }
+
+.teen .nx-ai {
+  background: var(--wash);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.teen .nx-note {
+  font: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 15.5px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+}
+
+.teen .nx-fineprint { font-size: 12.5px; color: var(--ink-soft); }
+.teen .ak-card { border-radius: 14px; }
+
+/* The bar above a lesson, matching the one on their home screen. */
+.teen-read-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.teen-back {
+  font: inherit;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ── SHS, TVET, university ────────────────────────────────────────────────── */
+
+/* The reading column sits on the dashboard's own grey, in a white sheet, so
+   moving from the dashboard into a lesson does not look like leaving the
+   product. The measure is wider than the teen one: by this age a longer line
+   is comfortable and the material is denser. */
+.sch-read {
+  min-height: 100dvh;
+  background: var(--nx-paper);
+  padding: 24px 16px 56px;
+}
+
+.sch-read-in {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--nx-line);
+  border-radius: 16px;
+  padding: 30px 32px 36px;
+  box-sizing: border-box;
+}
+
+.sch-read .nx-lesson-p,
+.sch-read .nx-ai-p {
+  /* The senior tier reads in the house serif, which is what separates it from
+     the tier below now that all four share one palette. Serif text wants a
+     little more leading and carries a slightly longer measure than a sans at
+     the same size, so both are set for it rather than inherited. */
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 14;
+  font-size: 17px;
+  line-height: 1.78;
+  max-width: 66ch;
+  color: var(--nx-ink);
+}
+
+.sch-read .nx-display { letter-spacing: -0.02em; color: var(--nx-ink); }
+.sch-read .nx-lede { color: var(--nx-ink-2); }
+
+.sch-read .nx-mark {
+  font-size: 11.5px;
+  /* No longer uppercase. This class mostly carries a topic title straight
+     from the syllabus, and "LETTERS STANDING FOR NUMBERS" is both harder to
+     read and a worse sentence than the one that was written. Small, soft and
+     slightly tracked says "this is where you are" without shouting it. */
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  color: var(--nx-ink-2);
+}
+
+.sch-read .nx-btn,
+.sch-read .nx-link {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--nx-line);
+  background: #fff;
+  color: var(--nx-ink);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sch-read .nx-btn-primary {
+  background: var(--nx-gold);
+  border-color: var(--nx-gold);
+  color: var(--nx-ink);
+}
+
+.sch-read .nx-choice {
+  font: inherit;
+  display: block;
+  width: 100%;
+  text-align: left;
+  min-height: 50px;
+  padding: 13px 18px;
+  margin: 0 0 8px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--nx-line);
+  background: #fff;
+  color: var(--nx-ink);
+  cursor: pointer;
+}
+
+.sch-read .nx-choice:hover { border-color: var(--nx-ink); }
+.sch-read .nx-choice.is-picked { border-color: var(--nx-ink); background: var(--nx-cream); }
+.sch-read .nx-choice.is-answer { border-color: var(--nx-green-text); background: var(--nx-green-soft); }
+.sch-read .nx-choice.is-answer::after { content: " \2713"; font-weight: 800; }
+.sch-read .nx-choice.is-missed { border-color: var(--nx-red); background: var(--nx-red-soft); }
+.sch-read .nx-choice.is-missed::after { content: " \2717"; font-weight: 800; }
+
+.sch-read .nx-fig {
+  margin: 8px 0 24px;
+  padding: 10px;
+  border: 1px solid #e7eaf0;
+  border-radius: 14px;
+}
+
+.sch-read .nx-fig-media,
+.sch-read .nx-film { width: 100%; border-radius: 10px; display: block; }
+
+@media (max-width: 640px) {
+  .sch-read { padding: 14px 12px 44px; }
+  .sch-read-in { padding: 20px 18px 26px; border-radius: 14px; }
+}

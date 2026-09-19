@@ -1,0 +1,415 @@
+/* ===========================================================================
+   Parents and schools.
+
+   A different job from every other interface here. A learner's screens exist
+   to teach; this one exists to answer one question in as little time as
+   possible: is anybody struggling, and with what.
+
+   That is why the ordering matters more than the layout. A parent with four
+   children and three minutes reads the first two rows, so whoever needs help
+   most is first, and "ratio and proportion keeps going wrong" is above the
+   fold while a percentage is not shown at all. Nobody can act on 68%.
+
+   Scoped under .gd.
+   =========================================================================== */
+
+.gd {
+  /* All from `tokens.css`. The band was a blue of its own, next to a child's
+     screen in another colour entirely. It is the platform's ink now, so a
+     parent opening their child's page stays in the same building. */
+  --ink: var(--nx-ink);
+  --ink-soft: var(--nx-ink-2);
+  --page: var(--nx-paper);
+  --card: var(--nx-card);
+  --line: var(--nx-line);
+  --bar: var(--nx-ink);
+  --bar-deep: #0d1a2b;
+  --wash: var(--nx-cream);
+  --warn: var(--nx-red);
+  --warn-soft: var(--nx-red-soft);
+  --good: var(--nx-green);
+  --good-soft: var(--nx-green-soft);
+
+  min-height: 100dvh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system,
+               'Segoe UI', Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── the voice ───────────────────────────────────────────────────────────── */
+
+/* The same split as the senior tier: the house serif for headings and names,
+   the grotesque for chrome. This page is a report about somebody's children,
+   and a report should read like a document rather than like a settings panel.
+
+   The wordmark stays in the grotesque, because it is the product's mark and
+   the same mark appears in the bar of the other tiers. */
+.gd-panel-top h2,
+.gd-empty h2,
+.gd-ring-name,
+.gd-item-name,
+.gd-name {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variation-settings: 'opsz' 32;
+}
+
+/* Table headers are labels, not headings, so they keep the grotesque even
+   though the cell under them does not. */
+.gd-table th { font-family: inherit; }
+
+/* ── the bar ───────────────────────────────────────────────────────────────── */
+
+.gd-bar {
+  background: var(--bar);
+  color: #fff;
+}
+
+.gd-bar-in {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.gd-wordmark {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.gd-wordmark i { font-style: normal; opacity: 0.7; }
+
+.gd-role {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.gd-bar-spacer { flex: 1 1 auto; }
+
+.gd-bar-btn {
+  font: inherit;
+  min-height: 40px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gd-bar-btn:hover { background: rgba(255, 255, 255, 0.14); }
+.gd-bar-btn.is-solid { background: #fff; color: var(--bar-deep); border-color: #fff; }
+
+/* ── the working area ─────────────────────────────────────────────────────── */
+
+.gd-main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 22px 56px;
+}
+
+.gd-grid {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* The full width row under the two columns. Nothing to it but a name, so the
+   table can be read across the page instead of down one lane of it. */
+.gd-wide { display: block; }
+
+.gd-panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+
+.gd-panel-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.gd-panel-top h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.gd-count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* ── rings, one per learner ───────────────────────────────────────────────── */
+
+/* The reference shows progress as a ring with the number inside it, and for a
+   handful of children that reads faster than a row of bars: the eye compares
+   arcs without reading any of the labels. */
+.gd-rings {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 14px;
+}
+
+.gd-ring-card {
+  font: inherit;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 14px 14px;
+  background: var(--wash);
+  cursor: pointer;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 190px;
+}
+
+.gd-ring-card:hover { border-color: var(--bar); background: #fff; }
+
+.gd-ring-card.is-warn { background: var(--warn-soft); border-color: #f2b5ac; }
+
+.gd-ring-name {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.gd-ring-sub { font-size: 12px; color: var(--ink-soft); }
+
+.gd-ring-open {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bar);
+}
+
+/* ── the list of who needs attention ──────────────────────────────────────── */
+
+.gd-item {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 13px 14px;
+  margin-bottom: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--wash);
+  cursor: pointer;
+  color: var(--ink);
+  min-height: 64px;
+}
+
+.gd-item:hover { border-color: var(--bar); background: #fff; }
+.gd-item.is-warn { background: var(--warn-soft); border-color: #f2b5ac; }
+
+.gd-dot {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bar);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.gd-item.is-warn .gd-dot { background: var(--warn); }
+
+.gd-item-body { flex: 1 1 auto; min-width: 0; }
+
+.gd-item-name { display: block; font-size: 14.5px; font-weight: 700; }
+
+.gd-item-why {
+  display: block;
+  margin-top: 3px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* ── the table ────────────────────────────────────────────────────────────── */
+
+.gd-scroll { overflow-x: auto; }
+
+.gd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 560px;
+}
+
+.gd-table th {
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 700;
+  /* Sentence case. A column header is a word, and setting every one of them
+     in caps is decoration charged to the reader. */
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  padding: 0 14px 10px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.gd-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.gd-table tr:last-child td { border-bottom: 0; }
+.gd-table tbody tr:hover { background: var(--wash); }
+
+.gd-name { font-weight: 700; }
+.gd-soft { color: var(--ink-soft); }
+
+.gd-pill {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* The reading variants, because a chip is the hardest case in the palette:
+   a tinted background under 11px type. On its own tint the fill colours
+   measured 3.92:1 and 3.97:1. */
+.gd-pill.is-good { background: var(--good-soft); color: var(--nx-green-text); }
+.gd-pill.is-warn { background: var(--warn-soft); color: var(--nx-red-text); }
+.gd-pill.is-idle { background: var(--nx-line-soft); color: var(--nx-ink-2); }
+
+.gd-open {
+  font: inherit;
+  min-height: 40px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.gd-open:hover { border-color: var(--bar); color: var(--bar); }
+
+/* ── nothing yet ──────────────────────────────────────────────────────────── */
+
+.gd-none {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.gd-empty {
+  text-align: center;
+  padding: 44px 22px;
+}
+
+.gd-empty h2 {
+  margin: 0 0 8px;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .gd-grid { grid-template-columns: minmax(0, 1fr); }
+  .gd-main { padding: 18px 14px 44px; }
+  .gd-panel { padding: 16px 16px; }
+}
+
+/* ── on a phone ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 560px) {
+  /* Two across, not one.
+
+     At 168px minimum the ring cards fell to a single column and a parent with
+     four children got four full screens of mostly empty card, one ring each.
+     The ring is the whole content; it does not need 300px of width around
+     it. */
+  .gd-rings { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .gd-ring-card { padding: 14px 8px; }
+  .gd-ring-name { font-size: 13.5px; }
+
+  /* Topics and Answered come off the table, because the ring above already
+     says how many topics, and the table's job on a phone is the two things
+     the cards do not carry: how it is going and when they were last here.
+     Four columns fit; six made the table scroll sideways and wrapped every
+     child's name onto two lines. */
+  .gd-table th:nth-child(3),
+  .gd-table td:nth-child(3),
+  .gd-table th:nth-child(4),
+  .gd-table td:nth-child(4) { display: none; }
+
+  /* And the Open button, because every child already has one on the card
+     above. Keeping it here squeezed the two status pills until "today" read
+     as "toda" and "never" as "neve", which is worse than not repeating a
+     control that is nine pixels further up the page. */
+  .gd-table th:last-child,
+  .gd-table td:last-child { display: none; }
+
+  /* And the min-width goes with them. It was 560px, which is what forced the
+     sideways scroll in the first place: four columns fit in 300px, six never
+     could. */
+  .gd-table { min-width: 0; font-size: 13.5px; table-layout: fixed; }
+  .gd-table th, .gd-table td { padding: 10px 4px; }
+  /* The last six pixels. A status pill in a 60px column has room for the word
+     or for its own padding, not both. */
+  .gd-pill { padding: 5px 8px; }
+  /* Headers wrap here. "Last seen" on two lines costs one line of height; on
+     one line it cost the table 35px it did not have. */
+  .gd-table th { white-space: normal; }
+  .gd-table th:first-child, .gd-table td:first-child { width: 40%; }
+}
+
+/* ── press, and less motion ──────────────────────────────────────────────── */
+
+/* The same press feedback as the other tiers. See teen.css for why. A parent
+   checking on four children is tapping rows, and a row that does nothing when
+   pressed reads as a row that is not a link. */
+.gd-ring-card:active,
+.gd-item:active,
+.gd-open:active { transform: scale(0.988); }
+
+.gd-bar-btn:active { transform: scale(0.96); }
+
+.gd-ring-card,
+.gd-item,
+.gd-open,
+.gd-bar-btn { transition: transform 0.08s ease, background 0.14s ease, border-color 0.14s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gd * { transition: none !important; }
+  .gd-ring-card:active,
+  .gd-item:active,
+  .gd-open:active,
+  .gd-bar-btn:active { transform: none; }
+}

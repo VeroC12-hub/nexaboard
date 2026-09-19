@@ -1,0 +1,714 @@
+/* ===========================================================================
+   NEXA•EDU learner surface.
+
+   The object this is built from is the exercise book every student here
+   already learns in: faint ruled paper, and a red margin rule down the left
+   where the teacher's pen goes.
+
+   That margin is the whole design. It is not decoration: in a real exercise
+   book the margin is where the marking lives, so here it carries the marking
+   too. Ticks accumulate down it as work is secured, and the topic numbers sit
+   in it the way you number your own work on paper. Everything else stays
+   quiet so the margin is the thing you remember.
+
+   It also connects the two halves of the product. The board in the classroom
+   already paints squared and ruled paper; the learner's own page is the same
+   material, seen alone.
+
+   Scoped under .nx so nothing here can reach the board.
+   =========================================================================== */
+
+.nx {
+  /* ── Drawn from the one palette ──────────────────────────────────────────
+
+     This file had its own colours: a cool grey green paper, a grey ruled
+     line, its own green at #4e9f2e and its own red. That made it a fifth
+     scheme inside a platform that had just been unified on four, and it was
+     the worst place for one, because the lesson page is where a learner
+     spends the most time. Moving from the dashboard into a lesson changed
+     product.
+
+     The exercise book idea survives intact: the ruled paper, the red margin
+     and the ticks down it are all still here. They are drawn in the
+     platform's colours now instead of their own.
+
+     One value was not merely off-palette but failing: `--grow` at #4e9f2e put
+     white button text at 3.32:1.
+     ──────────────────────────────────────────────────────────────────────── */
+
+  /* ink, the colour you write in */
+  --ink: var(--nx-ink);
+  --ink-soft: var(--nx-ink-2);
+  --ink-faint: var(--nx-ink-3);
+
+  /* Paper. Warm, like every other surface in the platform. The old comment
+     said exercise paper is not parchment, which is true, and also true of
+     the cream the rest of the product is printed on. */
+  --paper: var(--nx-paper);
+  --paper-raised: var(--nx-card);
+
+  /* the printed rule, and the red margin the teacher marks in */
+  --rule: var(--nx-line);
+  --margin: var(--nx-red);
+
+  /* growth, and the gold that only appears for work that is secure */
+  --grow: var(--nx-green);
+  --grow-deep: var(--nx-green-deep);
+  /* The reading variant: this is used as text as well as as a fill. */
+  --grow-text: var(--nx-green-text);
+  --gold: var(--nx-gold-text);
+
+  --shaky: var(--nx-red);
+
+  --measure: 64ch;
+  --margin-w: 84px;
+
+  color: var(--ink);
+  background: var(--paper);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia,
+               'Noto Serif', ui-serif, serif;
+  font-size: 17.5px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display face, used with restraint: headings and the one big number. */
+.nx-display {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-optical-sizing: auto;
+  font-variation-settings: 'SOFT' 20, 'WONK' 0;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+}
+
+/* Utility face for the things a person writes in the margin: numbers, labels.
+
+   The monospace stays, because this really is the annotation face and the
+   numbers down the margin need to line up. The uppercase does not: this class
+   carries sentences as often as labels ("Keeping up with class", "Start
+   here", a topic title), and setting a sentence in tracked caps makes it
+   slower to read and louder than the heading under it. */
+.nx-mark {
+  font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Menlo, monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+/* ── the page ─────────────────────────────────────────────────────────────── */
+
+.nx-page {
+  min-height: 100vh;
+  /* The ruled ground. Faint enough to feel like paper, never to be read. */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 33px,
+    color-mix(in srgb, var(--rule) 55%, transparent) 33px,
+    color-mix(in srgb, var(--rule) 55%, transparent) 34px
+  );
+  background-position: 0 8px;
+}
+
+.nx-sheet {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+  position: relative;
+}
+
+/* The margin rule itself, drawn as a real line down the sheet. */
+.nx-sheet::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: calc(24px + var(--margin-w));
+  width: 1px;
+  background: color-mix(in srgb, var(--margin) 42%, transparent);
+  pointer-events: none;
+}
+
+.nx-body { margin-left: calc(var(--margin-w) + 28px); }
+
+/* Anything that belongs to the teacher's pen sits in the margin. */
+.nx-in-margin {
+  position: absolute;
+  left: 24px;
+  width: var(--margin-w);
+  padding-right: 18px;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .nx { --margin-w: 44px; font-size: 17px; }
+  .nx-body { margin-left: calc(var(--margin-w) + 16px); }
+  /* The margin box has to end before the body begins.
+
+     At the desktop values it does: 24 + 84 = 108, against a body starting at
+     112. On a phone the margin narrowed to 44 but its left offset stayed at
+     24, so it ended at 68 against a body starting at 60, and the progress
+     count sat on top of the heading beside it. */
+  .nx-in-margin { left: 8px; padding-right: 8px; }
+}
+
+/* ── header ───────────────────────────────────────────────────────────────── */
+
+.nx-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  max-width: 940px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* On a phone the header becomes two lines rather than four columns fighting
+   over 360px. It used to break "Change subject" and "Sign out" onto two lines
+   each, which made a 96px tall header out of two links. */
+@media (max-width: 560px) {
+  .nx-top {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    padding: 14px 16px;
+  }
+
+  .nx-top > .nx-mark { flex: 1 1 100%; order: 3; }
+  .nx-top > span:last-child { margin-left: auto; white-space: nowrap; }
+}
+
+.nx-wordmark {
+  font-family: Fraunces, Georgia, ui-serif, serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.nx-wordmark span { color: var(--grow-text); }
+
+/* ── type scale ───────────────────────────────────────────────────────────── */
+
+.nx-h1 { font-size: clamp(34px, 5.2vw, 52px); }
+.nx-h2 { font-size: clamp(25px, 3.4vw, 33px); }
+.nx-lede { font-size: 19px; color: var(--ink-soft); max-width: 54ch; line-height: 1.6; }
+.nx-prose { max-width: var(--measure); }
+.nx-prose p { margin: 0 0 1.15em; }
+
+/* ── the tick, which is the signature ─────────────────────────────────────── */
+
+/* Drawn as a stroked path rather than two rotated rectangles, because a tick
+   is one continuous movement of a pen and its two arms have to actually meet.
+   It is written at a slant for the same reason a hand writes at a slant. */
+.nx-mark-svg {
+  fill: none;
+  stroke: var(--grow);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: rotate(-7deg);
+  overflow: visible;
+}
+.nx-mark-svg.is-wrong { stroke: var(--shaky); transform: none; }
+
+/* The mark goes on the way a pen goes on: in one stroke, once. */
+.nx-mark-svg path {
+  stroke-dasharray: 34;
+  stroke-dashoffset: 34;
+  animation: nx-stroke 300ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.nx-mark-svg path:nth-child(2) { animation-delay: 90ms; }
+
+@keyframes nx-stroke { to { stroke-dashoffset: 0; } }
+
+/* ── cards, kept deliberately plain so the margin stays the loud part ─────── */
+
+.nx-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 22px 24px;
+}
+
+.nx-card.is-focus {
+  border-color: color-mix(in srgb, var(--grow) 45%, var(--rule));
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--grow) 20%, transparent);
+}
+
+/* ── controls ─────────────────────────────────────────────────────────────── */
+
+.nx-btn {
+  font-family: inherit;
+  font-size: 16px;
+  padding: 11px 22px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 140ms, border-color 140ms, color 140ms;
+}
+.nx-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.nx-btn-primary { background: var(--ink); color: #fff; }
+.nx-btn-primary:hover:not(:disabled) { background: #24365a; }
+
+.nx-btn-grow { background: var(--grow); color: #fff; }
+.nx-btn-grow:hover:not(:disabled) { background: var(--grow-deep); }
+
+.nx-btn-quiet { background: transparent; color: var(--ink-soft); border-color: var(--rule); }
+.nx-btn-quiet:hover:not(:disabled) { color: var(--ink); border-color: var(--ink-faint); }
+
+.nx-link {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font: inherit; font-size: 15px; color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule);
+  /* So the hit area can be grown without moving the underline. */
+  position: relative;
+}
+.nx-link:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+/* A 44px target on a 26px link.
+
+   These are real controls: "Change subject", "Sign out", "Back", "Reset". At
+   15px with no padding they measured 26px tall, which is under the size a
+   thumb reliably hits, and the ones in the header sit next to each other. The
+   area grows; the underline stays on the text, because padding would have
+   pushed it away from the words it belongs to. */
+.nx-link::after {
+  content: '';
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  top: 50%;
+  height: 44px;
+  transform: translateY(-50%);
+}
+
+/* An answer is written on the rule, not into a box. */
+.nx-write {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  font-size: 26px;
+  width: 100%;
+  padding: 6px 2px 10px;
+  border: 0;
+  border-bottom: 2px solid var(--ink-faint);
+  background: transparent;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 140ms;
+}
+.nx-write::placeholder { color: var(--ink-faint); opacity: 0.55; }
+.nx-write:focus { border-color: var(--grow); }
+.nx-write.is-right { border-color: var(--grow); }
+.nx-write.is-wrong { border-color: var(--shaky); }
+
+/* A choice is a line you pick, not a chip. */
+.nx-choice {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  padding: 15px 18px;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-left: 3px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 140ms, background-color 140ms, transform 140ms;
+}
+.nx-choice:hover:not(:disabled) { border-left-color: var(--ink-faint); transform: translateX(2px); }
+.nx-choice.is-picked { border-left-color: var(--grow); background: color-mix(in srgb, var(--grow) 6%, #fff); }
+.nx-choice.is-answer { border-left-color: var(--grow); background: color-mix(in srgb, var(--grow) 9%, #fff); }
+.nx-choice.is-missed { border-left-color: var(--shaky); background: color-mix(in srgb, var(--shaky) 6%, #fff); }
+.nx-choice:disabled { cursor: default; }
+.nx-choice-note { display: block; font-size: 14.5px; color: var(--ink-soft); margin-top: 3px; }
+
+/* ── state dots on the contents list ──────────────────────────────────────── */
+
+.nx-state { font-size: 13.5px; }
+.nx-state.is-secure { color: var(--gold); }
+/* --nx-red as text is 4.53:1 on white and 3.97:1 on its own tint, so the
+   reading variant, same as every other status word in the platform. */
+.nx-state.is-shaky  { color: var(--nx-red-text); }
+.nx-state.is-going  { color: var(--grow-deep); }
+.nx-state.is-cold   { color: var(--ink-soft); }
+.nx-state.is-new    { color: var(--ink-faint); }
+
+/* ── the one orchestrated moment: the page settling as it loads ───────────── */
+
+@keyframes nx-settle {
+  from { opacity: 0; transform: translateY(9px); }
+  to   { opacity: 1; transform: none; }
+}
+.nx-settle { animation: nx-settle 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.nx-settle-1 { animation-delay: 40ms; }
+.nx-settle-2 { animation-delay: 110ms; }
+.nx-settle-3 { animation-delay: 180ms; }
+
+/* ── quality floor ────────────────────────────────────────────────────────── */
+
+.nx :focus-visible {
+  outline: 2px solid var(--grow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* The writing line shows focus by the rule going green, so a box around it
+   would be saying the same thing twice and would turn the line back into a
+   form field, which is the thing this design is avoiding. */
+.nx .nx-write:focus-visible { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nx *, .nx *::before, .nx *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* ── the interactive figure ───────────────────────────────────────────────────
+   The reference apps all put a manipulable object on the page rather than a
+   picture of one, and that is what makes a subject feel touchable instead of
+   read. Rounder and warmer than the rest of the sheet on purpose: this is the
+   part you are meant to reach for. */
+
+.nx-play {
+  background: linear-gradient(170deg, #fff 0%, color-mix(in srgb, var(--grow) 5%, #fff) 100%);
+  border: 1px solid color-mix(in srgb, var(--grow) 22%, var(--rule));
+  border-radius: 18px;
+  padding: 18px 22px 22px;
+  margin: 8px 0 30px;
+  box-shadow: 0 1px 2px rgba(22, 35, 61, 0.04), 0 12px 28px -18px rgba(22, 35, 61, 0.28);
+}
+
+.nx-play-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+
+.nx-balance { width: 100%; height: auto; max-height: 210px; display: block; }
+.nx-beam    { stroke: var(--ink); stroke-width: 5; stroke-linecap: round; }
+.nx-string  { stroke: var(--ink-faint); stroke-width: 2; }
+.nx-pan     { fill: color-mix(in srgb, var(--grow) 16%, #fff); stroke: var(--grow-deep); stroke-width: 2; stroke-linejoin: round; }
+.nx-fulcrum { fill: var(--ink); }
+.nx-pan-text {
+  text-anchor: middle;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 17px;
+  fill: var(--ink);
+}
+
+.nx-equation {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 23px;
+  text-align: center;
+  margin: 4px 0 10px;
+  color: var(--ink);
+}
+
+.nx-play-note { margin: 0 0 16px; font-size: 15.5px; color: var(--ink-soft); text-align: center; }
+.nx-play-note.is-good { color: var(--grow-deep); font-weight: 600; }
+.nx-play-note.is-bad  { color: var(--nx-red-text); }
+
+.nx-play-controls { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; justify-content: center; }
+
+.nx-op {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 15px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in srgb, var(--grow) 40%, var(--rule));
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 120ms, background-color 120ms, border-color 120ms;
+}
+.nx-op:hover:not(:disabled) { background: color-mix(in srgb, var(--grow) 10%, #fff); border-color: var(--grow); transform: translateY(-1px); }
+.nx-op:active:not(:disabled) { transform: translateY(0); }
+.nx-op:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.nx-op-toggle {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 14.5px; color: var(--nx-red-text); cursor: pointer;
+  padding: 8px 14px; border-radius: 999px;
+  border: 1.5px dashed color-mix(in srgb, var(--shaky) 45%, transparent);
+}
+
+/* ── warmer, softer surfaces throughout ───────────────────────────────────── */
+
+.nx-card   { border-radius: 14px; padding: 24px 26px; }
+.nx-choice { border-radius: 12px; padding: 16px 20px; }
+.nx-btn    { border-radius: 999px; padding: 12px 26px; }
+.nx-card.is-focus {
+  box-shadow: 0 1px 2px rgba(22, 35, 61, 0.04), 0 14px 30px -20px rgba(22, 35, 61, 0.3);
+}
+
+/* ── The tutor ───────────────────────────────────────────────────────────────
+   Set apart from the printed page without becoming a chat window. The book's
+   own explanation is on the paper; this is the person leaning over to tell you
+   where your answer went, so it sits on a raised card with the margin colour
+   down its edge, the way a comment in a margin does. */
+
+.nx-ai {
+  margin-top: 26px;
+  max-width: var(--measure);
+}
+
+.nx-ai-ask {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.nx-ai-who {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  color: var(--ink-faint);
+}
+
+/* Not a spinner. It says what is happening, and stops saying it when it stops
+   happening, which a spinner cannot do. */
+.nx-ai-live {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--margin);
+  animation: nx-ai-breathe 1.6s ease-in-out infinite;
+}
+
+@keyframes nx-ai-breathe {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-ai-live { animation: none; opacity: 0.7; }
+}
+
+.nx-ai-p {
+  margin: 0 0 14px;
+  padding-left: 16px;
+  border-left: 2px solid var(--rule);
+}
+
+.nx-ai-p:first-of-type { border-left-color: var(--margin); }
+
+.nx-ai-wait { color: var(--ink-soft); font-style: italic; }
+
+.nx-ai-display {
+  display: block;
+  margin: 12px 0;
+  overflow-x: auto;
+}
+
+/* ── The syllabus outline, and a lesson written from it ──────────────────────
+   A subject's outline is a list a learner scans to decide what to do next, so
+   the topic title carries the weight and the outcome sits under it in the same
+   quiet voice the contents list uses. Nothing here is a card: the page is
+   still paper. */
+
+.nx-topics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.nx-topic-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 13px 2px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: background 0.14s ease, padding-left 0.14s ease;
+}
+
+.nx-topic-btn:hover {
+  background: var(--paper-raised);
+  padding-left: 10px;
+}
+
+.nx-topic-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.nx-topic-title {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Said plainly. "Worked on" is true; "complete" would not be. */
+.nx-topic-done {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  color: var(--grow-text);
+}
+
+.nx-topic-outcome {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+/* A lesson is long and is meant to be read, so it gets the measure and the
+   leading of a book rather than the tighter setting of an explanation. */
+.nx-lesson-p {
+  margin: 0 0 18px;
+  max-width: var(--measure);
+  line-height: 1.75;
+}
+
+/* A question may contain maths, so it is set as prose rather than as a
+   heading, but must not inherit a paragraph's bottom margin. */
+.nx-q-line {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+/* ── pictures in a lesson ────────────────────────────────────────────────────
+   A diagram drawn by the tutor sits on the page like a textbook figure: no
+   frame, no card, just the drawing and its caption, because the drawing is
+   part of the explanation rather than an attachment to it.
+
+   A generated photograph or clip is framed, deliberately. It came from a
+   different kind of machine and cannot be read for detail, and the frame is
+   the visual difference between "this is the lesson" and "this is what it
+   looks like". */
+
+.nx-fig {
+  margin: 26px 0;
+  max-width: var(--measure);
+}
+
+.nx-fig-svg {
+  display: block;
+  width: 100%;
+  /* The drawing inherits the ink of the page, which is how currentColor in the
+     SVG ends up matching the prose around it. */
+  color: var(--ink);
+}
+
+.nx-fig-svg svg { display: block; width: 100%; height: auto; }
+
+.nx-fig-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  background: var(--paper-raised);
+}
+
+.nx-fig-cap {
+  display: block;
+  margin-top: 10px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.nx-fig-words { display: block; }
+
+/* Who made it, and the limit of what it can be trusted for. Small, always
+   present, never hidden behind a hover. */
+.nx-fig-by {
+  display: block;
+  margin-top: 3px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+/* A generated picture arrives after the words, so the space it will take is
+   held open. Without this the lesson reflows under the reader the moment the
+   image lands, which on a phone means losing your place mid sentence. */
+.nx-fig-media {
+  min-height: 180px;
+  object-fit: cover;
+}
+
+/* A lesson video. Wider than the measure, because it is watched rather than
+   read, and the words inside it are already set at a size that suits. */
+.nx-film {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  background: #000;
+}
+
+/* ── when words are not the way this learner is taught ─────────────────────── */
+
+/* A wordless plan does not delete the lesson. A parent may want to read it, the
+   learner may want it later, and hiding it outright would be deciding something
+   about her that nobody asked for. So it is folded, and it says who it is for.
+
+   Styled as a quiet aside rather than as a warning: there is nothing wrong with
+   a learner who does better watching than reading, and the page should not
+   imply there is. */
+
+.nx-words-fold {
+  margin: 26px 0 10px;
+  padding: 0;
+  border-top: 1px solid #ece6d8;
+}
+
+.nx-words-sum {
+  cursor: pointer;
+  list-style: none;
+  padding: 14px 2px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7688;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* A 44px target: an adult taps this on the same phone the child is holding. */
+  min-height: 44px;
+}
+
+.nx-words-sum::-webkit-details-marker { display: none; }
+
+.nx-words-sum::before {
+  content: '▸';
+  font-size: 12px;
+  transition: transform 140ms;
+}
+
+.nx-words-fold[open] .nx-words-sum::before { transform: rotate(90deg); }
+.nx-words-sum:hover { color: #14243a; }
+
+/* How this learner is being taught, and why, in one line. Shown because a
+   parent whose child is given video and no reading deserves to know that a
+   decision was made rather than wonder whether the app is broken. */
+.nx-plan-line {
+  margin: 0 0 22px;
+  padding: 11px 14px;
+  border-left: 3px solid #f2b517;
+  background: #fffdf5;
+  border-radius: 0 10px 10px 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #46536b;
+}
+
+.nx-plan-line b { color: #14243a; font-weight: 600; }

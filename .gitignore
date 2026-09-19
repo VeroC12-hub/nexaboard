@@ -29,3 +29,13 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# NaCCA curriculum documents, fetched by tools/nacca-fetch.sh.
+# The documents are NaCCA's; the repository keeps what is derived from them.
+.nacca/
+
+# Rendered lesson videos, made by tools/video-render.mjs.
+.renders/
+
+# Narration recorded by tools/tts.mjs for the lesson videos.
+public/narration/

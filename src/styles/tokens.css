@@ -1,0 +1,115 @@
+/* ===========================================================================
+   One palette, for the whole platform.
+
+   ── Why this file exists ──────────────────────────────────────────────────
+
+   The four interfaces were built one after another and each one invented its
+   own colour: the youngest were violet, Basic 3 to JHS were blue, senior high
+   was charcoal and amber, and the parent's page was a third blue. Four
+   unrelated hues, so moving from a child's screen to their parent's felt like
+   changing product.
+
+   The app already had a palette before any of them: deep navy ink on cream,
+   with gold, green and a warm red. The games use it, the written lessons use
+   it, and it is a warm, specific set rather than a default. So the fix was not
+   to invent a fifth scheme but to adopt the one that was already here.
+
+   ── How the tiers differ now ──────────────────────────────────────────────
+
+   By density and temperature, never by hue.
+
+   | Tier | Paper | Solid | Accent |
+   |---|---|---|---|
+   | Creche to Basic 2 | Warm cream, most tint | Green | Gold, used generously |
+   | Basic 3 to JHS | Near white | Green, sparingly | Gold on the counters |
+   | SHS to university | Cool cream grey | Navy ink, as the rail | Gold |
+   | Parents, schools | Light cream | Navy ink, as the band | Gold, green, red for status |
+
+   The senior tier's dark rail is literally `--ink`, the same value as body
+   text everywhere else. That is the join: the darkest surface in the platform
+   is the same colour as its writing.
+
+   Green and gold are also simply the right two colours for a Ghanaian school
+   product, which is worth more than any amount of neutrality.
+   =========================================================================== */
+
+:root {
+  /* Ink. One family, from the writing down to the faintest label. */
+  --nx-ink: #14243a;
+  --nx-ink-2: #46536b;
+  /* Was #8792a6, which measured 3.14:1 on white: fine for a 20px number,
+     below the floor for the 11px labels it was actually being used on.
+
+     Then #697282, which cleared the three papers and quietly failed on all
+     four soft tints, between 4.24 and 4.39. A faint label does not stay on
+     white; it ends up inside a status chip or on a tinted warning card, and
+     the tint is the case that matters. This value clears 4.5:1 on every
+     surface in this file, tints included, which is the same rule the `-text`
+     values below follow, with enough headroom that a rounding difference
+     between two tools is never what decides it: 4.70 on the tightest tint. */
+  --nx-ink-3: #626b7b;
+
+  /* Paper. Warm, and tuned per tier from these three. */
+  --nx-cream: #fffcf2;
+  --nx-paper: #faf7ee;
+  --nx-card: #ffffff;
+
+  /* The warm rule that separates two pieces of paper. Never a cool grey: a
+     grey hairline on cream is the one thing that makes warm paper look like a
+     mistake. */
+  --nx-line: #e8e2d3;
+  --nx-line-soft: #f1ece0;
+
+  /* The three that carry meaning. */
+  /* Was #0f8a4d, and it measured 4.41:1 both ways: a hair under the floor for
+     white text on a green button and for green text on white. A third of a
+     step darker clears it at 4.82:1 and is not a colour anybody can tell
+     apart from the old one. */
+  --nx-green: #0e8348;
+  --nx-green-deep: #0a6d3c;
+  --nx-green-soft: #e7f5ec;
+
+  --nx-gold: #f2b517;
+  --nx-gold-deep: #d99413;
+  --nx-gold-soft: #fdf3da;
+
+  --nx-red: #d6402e;
+  --nx-red-soft: #fdeceb;
+
+  /* Used for information and links, never for success or failure. */
+  --nx-sky: #2d7ff9;
+  --nx-sky-soft: #eaf2fe;
+
+  /* The one warm secondary, for flames, mangoes and the market. */
+  --nx-warm: #f5843c;
+  --nx-warm-deep: #e2622f;
+
+  /* ── the same colours, as writing ────────────────────────────────────────
+
+     A colour that is bright enough to fill a shape is almost never dark
+     enough to be read on light paper, and the first version of this palette
+     used one value for both jobs. Measured, that gave white text on gold at
+     1.84:1, a sky blue link at 3.81:1 and every status chip between 3.9 and
+     4.1: all of them under the 4.5:1 floor, and the gold one unreadable
+     rather than merely tight.
+
+     So each meaning has two values. The plain one fills; the `-text` one is
+     written.
+
+     Every `-text` value clears 4.5:1 against **every** surface in this file,
+     not only its own. The first version solved each against its own tint,
+     which was the obvious pairing and the wrong one: green writing turns up
+     on a red card the moment a control sits inside a warning, and that is
+     exactly where it failed, at 4.43:1. A colour does not stay in the family
+     it was named for, so each is solved against the hardest surface in the
+     set, with headroom so a rounding difference between two tools is never
+     what decides it.
+
+     Gold never carries white text anywhere in the platform. On gold the
+     writing is `--nx-ink`, which measures 8.49:1. */
+  --nx-green-text: #0c7b45;
+  --nx-gold-text: #88650c;
+  --nx-red-text: #c23a29;
+  --nx-sky-text: #2568ce;
+  --nx-warm-text: #a35727;
+}
