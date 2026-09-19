@@ -79,6 +79,7 @@
 
 import { THINGS, rangeFor } from './games'
 import type { Stage } from './learner'
+import { lastGoal, pickWeighted, playsFor, weightsFor } from './taste'
 
 /* ── the grammar ──────────────────────────────────────────────────────────── */
 
@@ -419,31 +420,43 @@ export function composeSpec({
   if (!options.length) return null
 
   /**
-   * Prefer a verb they have not just done, then a subject, then anything.
+   * Which verb, and this is the part that decides whether the games feel like
+   * one game or like a shelf of them.
    *
-   * Ordered this way because the verb is what a child notices. Given the
-   * choice between a new thing to do with numbers and the same thing to do
-   * with letters, the new thing to do wins every time.
+   * The first version preferred a verb they had **not** just done, reasoning
+   * that a new thing to do beats the same thing in a new place. True for the
+   * second game and false by the tenth: a child who loves popping was steered
+   * away from popping, every time, by design. That is the opposite of
+   * personalisation, and it is why every child ended up with the same spread
+   * whatever they enjoyed.
+   *
+   * So the verb is now weighted by what this learner actually finishes, from
+   * `taste.ts`, with three rules that survive it:
+   *
+   *   - never the verb they just played, because immediate repetition is what
+   *     makes a shelf feel like one game
+   *   - a verb they have never met outranks a favourite, because a child
+   *     cannot prefer something they have not been shown
+   *   - nothing reaches zero, because the seven verbs teach seven different
+   *     things and a child served only their favourite never learns the rest
    */
-  const recentGoals = new Set(recent.map(r => r.split(':')[0]))
-  const lastGoal = recent.length ? recent[0].split(':')[0] : null
+  const plays = playsFor(learnerId)
+  const justPlayed = lastGoal(plays)
+
   const pool = shuffled(options)
+  const fresh = pool.filter(o => o.goal !== justPlayed)
+  const usable = fresh.length ? fresh : pool
 
-  /**
-   * The last resort still refuses the game they just played.
-   *
-   * A topic can hold fewer verbs than the ledger remembers, and once every
-   * verb is in the recent list both preferences above fall through. The first
-   * version then picked at random, which handed a child the same verb twice
-   * running about one time in four. Repeating eventually is unavoidable on a
-   * topic with four verbs; repeating immediately is what makes it feel like
-   * there is only one game.
-   */
-  const notJustPlayed = pool.filter(o => o.goal !== lastGoal)
+  /* Weight per verb, then applied to every dressing of it, so the scene and
+     the motion stay an even shuffle and only the verb is steered. */
+  const weights = weightsFor([...new Set(usable.map(o => o.goal))], plays)
 
-  const chosen = pool.find(o => !recentGoals.has(o.goal))
-    ?? pool.find(o => !recent.includes(fingerprint(o)) && o.goal !== lastGoal)
-    ?? pickOne(notJustPlayed.length ? notJustPlayed : options)
+  /* Among dressings of the chosen verb, still prefer one this learner has not
+     had recently. The scene is not the game, but the same verb in the same
+     place twice running is worth avoiding where it is free to do so. */
+  const chosen = pickWeighted(usable, o =>
+    (weights.get(o.goal) ?? 1) * (recent.includes(fingerprint(o)) ? 0.35 : 1))
+    ?? pickOne(usable)
 
   return {
     title: GOAL_WORDS[chosen.goal],

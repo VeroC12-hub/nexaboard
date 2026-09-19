@@ -33,6 +33,7 @@ import {
   ENGINE_PATH, composeSpec, fingerprint, fromGame, remember,
   type GameSpec,
 } from '../lib/education/heavy'
+import { recordPlay } from '../lib/education/taste'
 import {
   canSpeak, say, setVoiceOn, stop, voiceOn, whenVoicesReady,
 } from '../lib/education/speak'
@@ -101,6 +102,7 @@ export default function HeavyGame({
       spec={spec}
       topicId={topicId}
       topicTitle={topicTitle}
+      learnerId={learnerId}
       voice={voice}
       onVoice={next => { setVoice(next); setVoiceOn(next); if (!next) stop() }}
       onAnother={() => { stop(); setNth(n => n + 1) }}
@@ -114,12 +116,14 @@ export default function HeavyGame({
 
 /** One game, from loading it to finishing it. Remounted for the next one. */
 function Session({
-  spec, topicId, topicTitle, voice, onVoice, onAnother,
+  spec, topicId, topicTitle, learnerId, voice, onVoice, onAnother,
   onAttempt, onDone, onRead, onSimple,
 }: {
   spec: GameSpec
   topicId: string
   topicTitle: string
+  /** Used only to write down how this game went. Never sent to the frame. */
+  learnerId: string
   voice: boolean
   onVoice: (on: boolean) => void
   onAnother: () => void
@@ -132,6 +136,41 @@ function Session({
   const [marks, setMarks] = useState<boolean[]>([])
   const [running, setRunning] = useState(false)
   const [late, setLate] = useState(false)
+
+  /**
+   * How it went, written down when the game ends however it ends.
+   *
+   * Recorded on unmount rather than on `done`, because the interesting case is
+   * the one that never reaches `done`. A child who is enjoying a game plays
+   * its rounds; one who is not wanders off, and walking away is the clearest
+   * opinion a four year old can give. Only recording completions would record
+   * only the games that went well, and taste built from that would be a
+   * measure of nothing.
+   *
+   * A ref because the cleanup runs once, at the end, and must see the final
+   * marks rather than the ones that existed when the effect was set up.
+   */
+  const soFar = useRef<boolean[]>([])
+  useEffect(() => { soFar.current = marks }, [marks])
+
+  useEffect(() => () => {
+    const played = soFar.current
+    /* Nothing attempted is not a play. A frame that never loaded, or a child
+       who opened it and left at once, says nothing about what they like. */
+    if (!played.length) return
+    recordPlay(learnerId, {
+      goal: spec.goal,
+      subject: spec.subject,
+      topicId,
+      offered: spec.rounds,
+      finished: played.length,
+      right: played.filter(Boolean).length,
+      at: new Date().toISOString(),
+    })
+    /* Runs once per game. `spec` is fixed for the life of this component,
+       which is remounted by key for the next one. */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   /**
    * A frame that never reports in.
