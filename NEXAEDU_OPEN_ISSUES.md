@@ -183,11 +183,21 @@ is one celebration replayed.
 
 ---
 
-## 8. Phase 2 is entirely uncommitted
+## 8. DONE: Phase 2 is in git
 
-`src/App.tsx` is modified and around twenty paths are untracked, including every
-file in this direction. Nothing here is in git and nothing is deployed. One bad
-`git clean` loses all of it.
+It was entirely uncommitted. `src/App.tsx` was modified and every file in this
+direction was untracked, so one bad `git clean` would have lost all of it.
+
+Committed to the `nexaedu` branch and pushed: 201 files, 63,844 lines. The
+branch rather than `master` because `master` is the classroom board, and this
+has not been reviewed by anybody yet.
+
+Checked before committing rather than after: no key or token anywhere in the
+tree, `.env` still ignored and `.env.example` still only placeholder names, and
+nothing built or rendered included.
+
+**Still not deployed.** The branch exists; no schools are running it, and two
+BLOCKING issues (1 and 15) say it should not be.
 
 ---
 
