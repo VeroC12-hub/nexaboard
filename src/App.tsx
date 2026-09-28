@@ -11,6 +11,7 @@ import StudentSession from './pages/StudentSession'
 import SchoolApp from './pages/SchoolApp'
 import LearnerApp from './pages/LearnerApp'
 import Study from './pages/Study'
+import NotFound from './pages/NotFound'
 import LessonPreview from './pages/LessonPreview'
 import type { User } from '@supabase/supabase-js'
 
@@ -70,6 +71,19 @@ function App() {
         {import.meta.env.DEV && (
           <Route path="/preview" element={<LessonPreview />} />
         )}
+        {/* Anything else.
+ 
+            There was no catch-all, and the consequence was the worst failure
+            mode a web page has: an address that matched no route rendered a
+            silent white screen. It happened for real. A link to /study was
+            opened against a deployment that did not have that route yet, and
+            the page gave no indication of whether the site was broken, the
+            link was wrong, or the browser had failed to load anything.
+ 
+            Blank is unreportable. A visitor cannot tell you what went wrong
+            and you cannot tell from a screenshot. So this says which address
+            was asked for and offers the way back. */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
