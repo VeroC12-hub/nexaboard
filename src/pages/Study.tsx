@@ -55,7 +55,7 @@ import {
 } from '../lib/education/learner'
 import {
   accountById, addLearnerTo, attemptsFor, learnerById, learnersFor,
-  loadSession, saveAttempts, saveLearner, saveSession, signOut,
+  loadSession, resume, saveAttempts, saveLearner, saveSession, signOut,
   type Account, type Created,
 } from '../lib/education/accounts'
 
@@ -142,6 +142,36 @@ export default function Study() {
     if (!l) return { at: 'roll' }
     return { at: 'subjects' }
   })
+  /**
+   * Catch up with the server, after the cached page is already on screen.
+   *
+   * Everything above reads the device cache synchronously, which is what makes
+   * the app open instantly and work with no connection at all. The cost is
+   * that the cache can be behind: a learner who answered questions on a school
+   * tablet this morning and opens their phone this afternoon would see this
+   * morning's state for ever, because nothing would ever go and look.
+   *
+   * So this runs once, in the background, and quietly replaces what is on
+   * screen if the server knows more. It is deliberately not awaited by
+   * anything and deliberately not shown: a learner with no network gets the
+   * cached page and no error, which is the whole point of the cache. It also
+   * flushes the outbox, so answers written offline are sent the moment there
+   * is a connection to send them on.
+   */
+  useEffect(() => {
+    let live = true
+    void resume().then(fresh => {
+      if (!live || !fresh) return
+      setAccount(fresh)
+      const s = loadSession()
+      if (!s?.activeLearnerId) return
+      const l = learnerById(s.activeLearnerId)
+      if (l) setProfile(l)
+      setAttempts(attemptsFor(s.activeLearnerId))
+    }).catch(() => { /* offline, or signed out elsewhere. The cache stands. */ })
+    return () => { live = false }
+  }, [])
+
   const [view, setView] = useState<View>({ at: 'home' })
   const [stage, setStage] = useState<Stage>('jhs')
   /* Set when a parent or school is adding another learner, so the create

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clock Detective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Clock Detective. Setting the hands, not reading them.
+
+  ── Why the child moves the hands ────────────────────────────────────────────
+
+  Showing a clock and asking which of four times it reads is a matching game.
+  A child can pass it by noticing that the little hand is somewhere near the
+  three and that only one answer says three, and they come out of it unable to
+  set a clock or to picture a time they have been told.
+
+  So it is the other way round here: the time is given in words and the clock
+  is blank of meaning until the child puts the hands where they belong. There
+  is nothing to eliminate and nothing to match. Either they can place the hands
+  or they cannot, and if they cannot the clock shows them exactly what they did
+  think.
+
+  ── Why the hour hand snaps to half hours ────────────────────────────────────
+
+  This is the whole game. Every child eventually learns that "half past three"
+  means the minute hand at six, and almost every child then puts the hour hand
+  on the three, because three is the word they heard. On a real clock at half
+  past three the hour hand is halfway to four, and a child who has not
+  understood that cannot read a real clock at all: at twenty to nine they will
+  say twenty to eight.
+
+  So the hour hand has twenty four stops, one on each numeral and one between
+  each pair, and "half past three" is only accepted with the hour hand in the
+  gap. Quarter past three is accepted on the three, quarter to eight only in
+  the gap between seven and eight. The snapping is what makes the distinction
+  possible to hit with a thumb, and the distinction is the lesson.
+
+  ── Why the times are said in words ──────────────────────────────────────────
+
+  "3:30" is a number to copy. "Half past three" has to be understood before
+  anything can be done with it, and it is what a person actually says. Reading
+  the words is half the skill, so there are no digits anywhere in this game.
+
+  ── Why the two hands are different colours ──────────────────────────────────
+
+  Short and fat against long and thin is the real difference and it is drawn
+  that way, but on a phone at arm's length the length is the only cue left and
+  it is not enough while a child is still learning which hand is which. The
+  colour plus the little key beside the clock removes a confusion that has
+  nothing to do with telling the time, so the confusion that is left is the
+  one worth having.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #7a5a2e;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, randInt = K.randInt, pick = K.pick
+
+  var TAU = Math.PI * 2
+  /** One stop on the minute hand: five minutes, a twelfth of the way round. */
+  var MIN_STEP = TAU / 12
+  /** One stop on the hour hand: half an hour, a twenty fourth of the way round. */
+  var HOUR_STEP = TAU / 24
+
+  var HOUR_INK = '#d6402e'
+  var MIN_INK = '#2b3f6b'
+
+  /* ── saying the time ─────────────────────────────────────────────────────── */
+
+  var ONES = ['twelve', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
+    'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
+    'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty',
+    'twenty one', 'twenty two', 'twenty three', 'twenty four', 'twenty five']
+
+  /** The hour after `h`, going round the face rather than off the end of it. */
+  function nextHour(h) { return h === 12 ? 1 : h + 1 }
+
+  /**
+   * A time, in the words a person would use.
+   *
+   * Quarters and the half get their own names because those are the names they
+   * have, and a child who is told "fifteen minutes past" will never recognise
+   * "quarter past" when somebody says it to them. Past up to the half and to
+   * after it, because that is how the minute hand is actually read: on the
+   * right going down, on the left coming up.
+   */
+  function timeWords(h, m) {
+    if (m === 0) return ONES[h] + " o'clock"
+    if (m === 15) return 'quarter past ' + ONES[h]
+    if (m === 30) return 'half past ' + ONES[h]
+    if (m === 45) return 'quarter to ' + ONES[nextHour(h)]
+    if (m < 30) return ONES[m] + ' minutes past ' + ONES[h]
+    return ONES[60 - m] + ' minutes to ' + ONES[nextHour(h)]
+  }
+
+  /* ── the times to ask for ────────────────────────────────────────────────── */
+
+  /**
+   * One time to show.
+   *
+   * ── On the climb ──────────────────────────────────────────────────────────
+   *
+   * O'clock first, which is the only time where both hands land on a numeral
+   * and nothing has to be understood about the gap. Then the half, which is
+   * where the hour hand first has to leave the numeral and where most of the
+   * learning happens. Then the quarters, which bring in "to" as well as
+   * "past", so the minute hand has to be read on the left hand side of the
+   * face. Then every five minute step, which is the real thing.
+   */
+  function makeTime(round) {
+    var m
+    if (round < 3) m = 0
+    else if (round < 6) m = pick([0, 30])
+    else if (round < 10) m = pick([0, 15, 30, 45])
+    else m = randInt(0, 11) * 5
+    return { h: randInt(1, 12), m: m }
+  }
+
+  /** Every tenth time set right, the clock chimes and pays. */
+  function isChime(round) { return round > 0 && round % 10 === 9 }
+
+  /* ── hands, as angles ────────────────────────────────────────────────────── */
+
+  /**
+   * The hands are kept as the angles they are drawn at, and nothing else.
+   *
+   * Not as an hour and a minute with the angles worked out for drawing, which
+   * would mean the game held an opinion about what the clock says that the
+   * picture could disagree with. The angle on the screen is the only record,
+   * and `judge` reads it back out of the same two numbers the hands were drawn
+   * from. There is nowhere for a stored answer to hide.
+   */
+  function snap(a, step) {
+    var n = Math.round(a / step) * step
+    return ((n % TAU) + TAU) % TAU
+  }
+
+  /** Which of the twelve five minute stops an angle is on: 0 to 11. */
+  function readMinIndex(a) { return ((Math.round(a / MIN_STEP) % 12) + 12) % 12 }
+  /** Which of the twenty four half hour stops an angle is on: 0 to 23. */
+  function readHourIndex(a) { return ((Math.round(a / HOUR_STEP) % 24) + 24) % 24 }
+
+  /** Where the hour hand must stand for a given time, as a stop number. */
+  function wantHourIndex(t) { return ((t.h % 12) * 2 + (t.m >= 30 ? 1 : 0)) % 24 }
+
+  /** The numeral the hour hand has passed, read off a stop number. */
+  function shownHour(idx) {
+    var h = Math.floor(idx / 2)
+    return h === 0 ? 12 : h
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * Pure functions of the screen size, not of `k`.
+   *
+   * `props` bakes the rug into the backdrop and is handed its own width and
+   * height, so anything it shares with `paint` has to be sized from arguments
+   * rather than from `k.W`.
+   */
+
+  /** The band at the bottom the kit's confirm button owns. */
+  function band(H) { return clamp(H * 0.16, 76, 124) }
+
+  /** The floor line the clock stands its feet on, clear of the button. */
+  function feetY(H) { return H - band(H) * 1.06 }
+
+  /**
+   * How big the face is.
+   *
+   * ── Why it stands on the floor instead of hanging on the wall ─────────────
+   *
+   * A wall clock has to fit between the banner and the line where the wall
+   * meets the floor, which on a phone held sideways is about a hundred and
+   * fifty pixels. A clock that small cannot carry twelve numerals and two
+   * hands a thumb can grab, and the hands are the entire game.
+   *
+   * So it is a tall standing clock with two feet, which may use the floor as
+   * well as the wall and comes out more than twice the size. It stands in
+   * front of the room's window, which is what a large object in a small room
+   * does, and a hard outline plus a shadow is enough to keep it clearly in
+   * front rather than muddled with it.
+   */
+  function faceR(W, H) {
+    return clamp(Math.min(W * 0.30, (feetY(H) - H * 0.20) * 0.47), 60, 250)
+  }
+  /** Off centre, so the right hand third of the room is left for the trader. */
+  function faceCX(W) { return W * 0.40 }
+  function faceCY(W, H) { return feetY(H) - faceR(W, H) * 1.02 }
+
+  /** How long each hand is. Short and fat against long and thin. */
+  function hourLen(R) { return R * 0.48 }
+  function minLen(R) { return R * 0.76 }
+
+  /** Where a hand's tip is, for grabbing and for drawing the knob. */
+  function tipOf(W, H, a, len) {
+    var R = faceR(W, H)
+    return {
+      x: faceCX(W) + Math.sin(a) * len,
+      y: faceCY(W, H) - Math.cos(a) * len
+    }
+  }
+
+  /**
+   * How near a thumb has to land to pick a hand up.
+   *
+   * Generous on purpose, and never below forty four pixels whatever the screen
+   * does, because a child aiming at the end of a thin stick with a finger that
+   * covers the whole stick will miss it every time otherwise. The two tips are
+   * always at least a quarter of the radius apart, so a tap that is in range of
+   * both still has an unambiguous nearer one.
+   */
+  function grabR(W, H) { return Math.max(44, faceR(W, H) * 0.5) }
+
+  /* ── the clock ───────────────────────────────────────────────────────────── */
+
+  /**
+   * One hand: a tapering spike from the boss to the tip.
+   *
+   * Drawn as a filled shape rather than a stroked line, because a stroked line
+   * is the same width at both ends and reads as a stick lying on the face. The
+   * taper is what makes it a hand, and the taper is also what tells the short
+   * fat one from the long thin one at a glance.
+   */
+  function drawHand(ctx, cx, cy, a, len, halfW, fill, held) {
+    ctx.save()
+    ctx.translate(cx, cy)
+    ctx.rotate(a)
+    ctx.beginPath()
+    ctx.moveTo(-halfW, halfW * 0.8)
+    ctx.lineTo(-halfW * 0.86, -len + halfW * 2)
+    ctx.lineTo(0, -len)
+    ctx.lineTo(halfW * 0.86, -len + halfW * 2)
+    ctx.lineTo(halfW, halfW * 0.8)
+    ctx.closePath()
+    K.inkedOn(ctx, fill, K.LINE, 3.5)
+    ctx.restore()
+
+    /**
+     * A knob on the tip.
+     *
+     * It is the handle. Without something round and solid at the end, nothing
+     * on the screen says the hand can be taken hold of, and a child will tap
+     * the numerals instead. It swells while it is held, which is the only
+     * feedback that a drag has actually caught.
+     */
+    var tx = cx + Math.sin(a) * len
+    var ty = cy - Math.cos(a) * len
+    var kr = halfW * (held ? 2.3 : 1.7)
+    ctx.beginPath()
+    ctx.arc(tx, ty, kr, 0, TAU)
+    K.inkedOn(ctx, fill, K.LINE, 3)
+    ctx.save()
+    ctx.globalAlpha = held ? 0.9 : 0.5
+    ctx.strokeStyle = '#ffffff'
+    ctx.lineWidth = Math.max(2, kr * 0.28)
+    ctx.beginPath()
+    ctx.arc(tx, ty, kr * 0.55, 0, TAU)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  /**
+   * The face: rim, dial, ticks, numerals.
+   *
+   * The numerals are drawn upright, never rotated to follow the rim. A rotated
+   * numeral is a puzzle before it is a number, and a child who is still working
+   * out which way up a six is does not need a six lying on its side.
+   */
+  function drawFace(ctx, cx, cy, R, font) {
+    /* Rim, then dial. Two rings rather than one thick stroke, so the wood and
+       the paper are separate objects with their own outlines. */
+    ctx.beginPath()
+    ctx.arc(cx, cy, R, 0, TAU)
+    K.inkedOn(ctx, '#c98f4e', K.LINE, 5)
+    ctx.beginPath()
+    ctx.arc(cx, cy, R * 0.88, 0, TAU)
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 4)
+
+    /* Sixty ticks, every fifth one long and thick. The small ones are what let
+       a child count round to twenty past instead of guessing at it. */
+    ctx.save()
+    ctx.lineCap = 'butt'
+    for (var i = 0; i < 60; i++) {
+      var a = i * TAU / 60
+      var big = i % 5 === 0
+      var out = R * 0.82
+      var inn = R * (big ? 0.72 : 0.77)
+      ctx.strokeStyle = big ? K.LINE : 'rgba(60,45,30,0.5)'
+      ctx.lineWidth = big ? Math.max(3, R * 0.028) : Math.max(1.5, R * 0.012)
+      ctx.beginPath()
+      ctx.moveTo(cx + Math.sin(a) * inn, cy - Math.cos(a) * inn)
+      ctx.lineTo(cx + Math.sin(a) * out, cy - Math.cos(a) * out)
+      ctx.stroke()
+    }
+    ctx.restore()
+
+    ctx.save()
+    ctx.font = '700 ' + Math.round(R * 0.175) + 'px ' + font
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillStyle = '#2b2118'
+    for (var n = 1; n <= 12; n++) {
+      var na = n * TAU / 12
+      ctx.fillText(String(n), cx + Math.sin(na) * R * 0.62,
+        cy - Math.cos(na) * R * 0.62)
+    }
+    ctx.restore()
+  }
+
+  /** The case the face sits in, with two feet on the floor. */
+  function drawCase(ctx, cx, cy, R, floorY) {
+    /* Feet first, behind the case, so the case outline is unbroken. */
+    for (var s = -1; s <= 1; s += 2) {
+      ctx.beginPath()
+      ctx.roundRect(cx + s * R * 0.58 - R * 0.14, cy + R * 0.6,
+        R * 0.28, floorY - (cy + R * 0.6) + R * 0.06, R * 0.07)
+      K.inkedOn(ctx, '#8a5a2b', K.LINE, 4)
+    }
+    /* A crown on top, which is what makes it furniture rather than a plate. */
+    ctx.beginPath()
+    ctx.moveTo(cx - R * 0.42, cy - R * 0.9)
+    ctx.quadraticCurveTo(cx, cy - R * 1.32, cx + R * 0.42, cy - R * 0.9)
+    ctx.closePath()
+    K.inkedOn(ctx, '#a9703c', K.LINE, 4)
+  }
+
+  /**
+   * A hat, put on him after he has drawn himself.
+   *
+   * Sized and placed from `him.at`, which is where he actually ended up, so it
+   * rides his breathing and his hop instead of floating at the spot he was
+   * asked to stand. It is a plain brimmed hat and not a deerstalker: a
+   * deerstalker at forty pixels is a lump with two ears, and a lump with two
+   * ears on a spider is not a detective, it is a mistake.
+   */
+  function drawHat(ctx, at) {
+    var x = at.x
+    var y = at.y - at.r * 1.24
+    var r = at.r
+    ctx.save()
+    /* Crown first, behind the brim, so the brim reads as being in front and
+       the hat sits down on his head instead of hovering over it. */
+    ctx.beginPath()
+    ctx.roundRect(x - r * 0.42, y - r * 0.52, r * 0.84, r * 0.6,
+      [r * 0.28, r * 0.28, r * 0.06, r * 0.06])
+    K.inkedOn(ctx, '#6b4a22', K.LINE, 3.5)
+    ctx.beginPath()
+    ctx.ellipse(x, y, r * 0.86, r * 0.2, 0, 0, TAU)
+    K.inkedOn(ctx, '#7a5a3a', K.LINE, 3.5)
+    /* A band where the crown meets the brim. */
+    ctx.beginPath()
+    ctx.roundRect(x - r * 0.42, y - r * 0.16, r * 0.84, r * 0.14, r * 0.05)
+    K.inkedOn(ctx, '#2b3f6b', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    ask: function (w) { return 'Show ' + w + '.' },
+    right: ['That is the time!', 'Case closed!', 'Exactly right!', 'Good detective work!'],
+    chime: 'The clock chimes! Ten coins!',
+    empty: 'Move both hands first, the big one and the small one.',
+    over: 'My eyes are tired. Let us look again!',
+    poke: 'Do not tickle me, look at the clock!'
+  }
+
+  AnanseKit.run({
+    title: 'Clock Detective',
+    overTitle: 'Out of time!',
+    scene: 'room',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'times',
+    /* The child arranges two hands, and there is no moment that says by itself
+       that the arrangement is finished. Without a button the first nudge of the
+       minute hand would be judged as the answer. */
+    button: true,
+    buttonLabel: 'Done!',
+    restMood: 'watching',
+    hud: function (k) {
+      return [
+        { label: 'times', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      var t = makeTime(k.round)
+      k.own.t = t
+      k.target = t.h * 100 + t.m
+
+      /**
+       * The hands start somewhere that is not the answer.
+       *
+       * Left where the last round finished, roughly half the easy rounds would
+       * open already correct and the child would press the button without
+       * looking. Rolled at random and rerolled until at least one hand is
+       * wrong, every round costs at least one deliberate move.
+       */
+      var hi, mi
+      do {
+        hi = randInt(0, 23)
+        mi = randInt(0, 11)
+      } while (hi === wantHourIndex(t) && mi === t.m / 5)
+      k.own.ha = hi * HOUR_STEP
+      k.own.ma = mi * MIN_STEP
+
+      k.own.drag = null
+      k.own.movedH = false
+      k.own.movedM = false
+
+      if (k.own.coins === undefined) k.own.coins = 0
+      /* A restart after losing every life. The kit resets its score and lives;
+         the purse is the game's own and has to be reset here. */
+      if (k.round === 0) k.own.coins = 0
+
+      k.say(LINES.ask(timeWords(t.h, t.m)))
+      k.him.setMood('watching')
+    },
+
+    ask: function (k) {
+      if (!k.own.t) return null
+      var words = timeWords(k.own.t.h, k.own.t.m)
+      if (k.phase === 'won') return { head: 'Yes! ', num: words, tail: '' }
+      return { head: 'Show ', num: words, tail: '' }
+    },
+
+    /**
+     * Both hands have to have been taken hold of at least once.
+     *
+     * Not "the clock is different from how it started": a child who moved the
+     * minute hand and left the hour hand on a number it happened to start on
+     * has not shown a time, they have shown half a time and got lucky. Asking
+     * for both makes the hour hand a decision every single round, which is the
+     * decision this game exists for.
+     */
+    ready: function (k) { return k.own.movedH && k.own.movedM },
+
+    /**
+     * Read the two angles on the face and see what time they say.
+     *
+     * The angles are the only record of the hands and they are the same two
+     * numbers the hands were drawn from a frame ago, so what is judged is
+     * literally what is on the screen. The time that was asked for is turned
+     * into hand positions here, at this moment, rather than hand positions
+     * being stored when the question was made.
+     */
+    judge: function (k) {
+      var t = k.own.t
+      return readMinIndex(k.own.ma) === t.m / 5
+        && readHourIndex(k.own.ha) === wantHourIndex(t)
+    },
+
+    down: function (k, x, y) {
+      if (k.phase !== 'play') return false
+      var W = k.W, H = k.H
+      var R = faceR(W, H)
+      var hTip = tipOf(W, H, k.own.ha, hourLen(R))
+      var mTip = tipOf(W, H, k.own.ma, minLen(R))
+      var dh = Math.hypot(x - hTip.x, y - hTip.y)
+      var dm = Math.hypot(x - mTip.x, y - mTip.y)
+      var reach = grabR(W, H)
+      if (Math.min(dh, dm) > reach) return false
+
+      k.own.drag = dh <= dm ? 'h' : 'm'
+      k.sound.play('lift')
+      return true
+    },
+
+    move: function (k, x, y) {
+      if (k.phase !== 'play' || !k.own.drag) return
+      var W = k.W, H = k.H
+      /* The angle of the pointer from the middle of the face, measured
+         clockwise from twelve, which is the direction a clock counts in. */
+      var a = Math.atan2(x - faceCX(W), faceCY(W, H) - y)
+      if (k.own.drag === 'h') {
+        var wasH = readHourIndex(k.own.ha)
+        k.own.ha = snap(a, HOUR_STEP)
+        k.own.movedH = true
+        if (readHourIndex(k.own.ha) !== wasH) k.sound.play('poke')
+      } else {
+        var wasM = readMinIndex(k.own.ma)
+        k.own.ma = snap(a, MIN_STEP)
+        k.own.movedM = true
+        if (readMinIndex(k.own.ma) !== wasM) k.sound.play('poke')
+      }
+    },
+
+    up: function (k) {
+      if (!k.own.drag) return
+      k.own.drag = null
+      k.sound.play('thud')
+    },
+
+    onEmpty: function (k) { k.say(LINES.empty) },
+
+    onWin: function (k) {
+      var W = k.W, H = k.H
+      k.own.coins += 1
+      if (isChime(k.round)) {
+        k.own.coins += 10
+        k.cheer(faceCX(W), faceCY(W, H) - faceR(W, H) * 0.8)
+        k.say(LINES.chime)
+      } else {
+        k.cheer(faceCX(W), faceCY(W, H))
+        k.say(pick(LINES.right))
+      }
+    },
+
+    /**
+     * Say what the clock is showing, not that it is wrong.
+     *
+     * If the minute hand is in the wrong place the honest reading of the face
+     * is the correction: hearing "you showed twenty five past nine" against
+     * "show quarter past nine" locates the mistake without anybody explaining
+     * anything.
+     *
+     * If the minute hand is right and the hour hand is not, reading the face
+     * out is useless, because the wrong hour hand at half past three still
+     * reads as half past three to somebody who is making exactly that mistake.
+     * So that case gets the rule instead, said as a fact about where the hand
+     * sits, which is the one sentence this whole game is built to deliver.
+     */
+    onMiss: function (k) {
+      var t = k.own.t
+      var mIdx = readMinIndex(k.own.ma)
+      if (mIdx !== t.m / 5) {
+        k.say('You showed ' + timeWords(shownHour(readHourIndex(k.own.ha)), mIdx * 5) + '.')
+        return
+      }
+      var words = timeWords(t.h, t.m)
+      if (t.m >= 30) {
+        k.say('Almost! At ' + words + ' the small hand sits between '
+          + ONES[t.h] + ' and ' + ONES[nextHour(t.h)] + '.')
+      } else {
+        k.say('Almost! At ' + words + ' the small hand sits on ' + ONES[t.h] + '.')
+      }
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    /**
+     * A rug under the clock.
+     *
+     * Baked once, because it never moves. The room's floor is drawn as planks
+     * fanning towards the viewer, and a heavy object standing straight on top
+     * of converging lines looks like it is sliding down them. A rug gives the
+     * feet something flat to stand on and settles the clock into the room.
+     */
+    props: function (k, g, W, H) {
+      var cx = faceCX(W)
+      var fy = feetY(H)
+      var R = faceR(W, H)
+      g.beginPath()
+      g.ellipse(cx, fy + R * 0.04, R * 1.15, R * 0.2, 0, 0, TAU)
+      K.inkedOn(g, '#c2452f', K.LINE, 4)
+      g.beginPath()
+      g.ellipse(cx, fy + R * 0.04, R * 0.92, R * 0.14, 0, 0, TAU)
+      K.inkedOn(g, '#e0684a', K.LINE, 3)
+      /* Fringe along the front edge, which is what says rug and not paint. */
+      g.strokeStyle = '#f2d024'
+      g.lineWidth = Math.max(2, R * 0.018)
+      g.lineCap = 'round'
+      for (var f = -6; f <= 6; f++) {
+        var fx = cx + f * R * 0.17
+        g.beginPath()
+        g.moveTo(fx, fy + R * 0.2)
+        g.lineTo(fx, fy + R * 0.27)
+        g.stroke()
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var W = k.W, H = k.H
+      var R = faceR(W, H)
+      var cx = faceCX(W)
+      var cy = faceCY(W, H)
+      var fy = feetY(H)
+      var font = k.FONT
+
+      /* A shadow on the rug, so the case is standing on the floor rather than
+         pasted over it. */
+      ctx.save()
+      ctx.globalAlpha = 0.18
+      ctx.fillStyle = '#000000'
+      ctx.beginPath()
+      ctx.ellipse(cx, fy + R * 0.05, R * 0.9, R * 0.13, 0, 0, TAU)
+      ctx.fill()
+      ctx.restore()
+
+      drawCase(ctx, cx, cy, R, fy)
+      drawFace(ctx, cx, cy, R, font)
+
+      /* Hour hand under the minute hand: the short one would be half buried by
+         the long one either way round, and a child reaching for the long one
+         should not have to get past the short one to do it. */
+      drawHand(ctx, cx, cy, k.own.ha, hourLen(R), R * 0.075, HOUR_INK,
+        k.own.drag === 'h')
+      drawHand(ctx, cx, cy, k.own.ma, minLen(R), R * 0.045, MIN_INK,
+        k.own.drag === 'm')
+
+      /* The boss, over both, which is what holds them on. */
+      ctx.beginPath()
+      ctx.arc(cx, cy, R * 0.075, 0, TAU)
+      K.inkedOn(ctx, '#f2c33b', K.LINE, 3)
+
+      /**
+       * The key, in the empty third of the room to the left of the clock.
+       *
+       * Which hand is which is not the skill being taught and a child who has
+       * forgotten should be able to look it up rather than lose a life over it.
+       * Sized against the gap it sits in so it never runs under the case.
+       */
+      var gap = cx - R
+      var size = clamp(Math.min(W, H) * 0.032, 13, 24)
+      var barL = Math.min(R * 0.34, gap * 0.34)
+      var kx = gap * 0.5 - (barL + size * 0.4) * 0.5
+      var rows = [
+        { y: cy - size * 1.5, len: barL * 0.6, w: size * 0.3, ink: HOUR_INK, text: 'hour' },
+        { y: cy + size * 1.5, len: barL, w: size * 0.18, ink: MIN_INK, text: 'minute' }
+      ]
+      for (var r = 0; r < rows.length; r++) {
+        var row = rows[r]
+        ctx.beginPath()
+        ctx.roundRect(kx, row.y - row.w / 2, row.len, row.w, row.w * 0.5)
+        K.inkedOn(ctx, row.ink, K.LINE, 2.5)
+        k.shoutLeft(row.text, kx + barL + size * 0.35, row.y, size, '#3a2a14')
+      }
+
+      /**
+       * Him, on the floor to the right of the clock.
+       *
+       * Beside it and clear of it. He is the size of about a third of the face,
+       * which keeps him a character in the room rather than a thing competing
+       * with the only object the child has to look at.
+       */
+      var hr = clamp(Math.min(W * 0.06, H * 0.15), 28, 62)
+      var hy = H * 0.74
+      k.him.draw(W * 0.8, hy - hr * 1.3, hr, hy)
+      drawHat(ctx, k.him.at)
+    },
+
+    peek: function (k) {
+      if (!k.own.t) return { t: null }
+      var W = k.W, H = k.H
+      var R = faceR(W, H)
+      var t = k.own.t
+      var hTip = tipOf(W, H, k.own.ha, hourLen(R))
+      var mTip = tipOf(W, H, k.own.ma, minLen(R))
+      var b = k.buttonRect()
+      var mIdx = readMinIndex(k.own.ma)
+      var hIdx = readHourIndex(k.own.ha)
+      return {
+        want: { hour: t.h, minute: t.m, words: timeWords(t.h, t.m) },
+        wantHourIndex: wantHourIndex(t),
+        wantMinIndex: t.m / 5,
+        showing: { hour: shownHour(hIdx), minute: mIdx * 5 },
+        hourIndex: hIdx,
+        minIndex: mIdx,
+        moved: { hour: k.own.movedH, minute: k.own.movedM },
+        dragging: k.own.drag,
+        ready: k.own.movedH && k.own.movedM,
+        coins: k.own.coins,
+        chime: isChime(k.round),
+        /* Everything a test has to be able to put a finger on. The hand tips
+           are what a drag starts from, the centre is what it swings around,
+           and the button is what ends the round. */
+        hands: {
+          hour: { x: Math.round(hTip.x), y: Math.round(hTip.y) },
+          minute: { x: Math.round(mTip.x), y: Math.round(mTip.y) }
+        },
+        centre: { x: Math.round(faceCX(W)), y: Math.round(faceCY(W, H)) },
+        radius: Math.round(R),
+        grab: Math.round(grabR(W, H)),
+        done: { x: Math.round(b.x + b.w / 2), y: Math.round(b.y + b.h / 2) }
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

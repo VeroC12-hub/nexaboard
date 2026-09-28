@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plant Parts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Plant Parts. Labelling a living thing.
+
+  ── Why the labels stay on the plant ─────────────────────────────────────────
+
+  The obvious build is five separate questions: here is a plant, which bit is
+  the stem, next plant, which bit is the leaf. That is a quiz, and at the end of
+  it the child has five ticks and no picture.
+
+  Here the labels accumulate. Each correct drop leaves a card sitting beside the
+  part with a line pointing at it, and the board is only cleared once all five
+  are on. What the child is working towards is the thing itself: a finished
+  labelled diagram, exactly like the one in the science book, that they built.
+  That is also why the parts are asked in a random order out of the ones still
+  missing, rather than top to bottom. The plant is the goal, not the list.
+
+  ── Why the plant changes every five rounds ──────────────────────────────────
+
+  A child who only ever labels one drawing learns that drawing. Tomato, maize,
+  cassava and pawpaw have the same five parts arranged very differently: the
+  maize flower is a tassel at the very top, the pawpaw flowers sit low on the
+  trunk, the cassava roots are swollen into tubers. Meeting the same five words
+  on four bodies is what turns them from positions on a picture into parts of a
+  plant.
+
+  ── Why every part is drawn exactly once ─────────────────────────────────────
+
+  The drop regions are not painted on top of the artwork, they ARE the artwork:
+  the drawing routine is handed the same five centres the judging uses, draws a
+  stalk from the stem out to each one and puts the part there. So there is never
+  a second leaf somewhere that is not a leaf as far as the game is concerned,
+  which is the unfairness that would otherwise be invisible to whoever built it
+  and obvious to every child playing.
+
+  ── Why a drop on nothing costs nothing ──────────────────────────────────────
+
+  Letting go over empty sky sends the card home and does not judge anything. A
+  fumbled drag is a motor mistake, not a science mistake, and a life should only
+  ever be spent on the second kind.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /* ── what the parts are for ──────────────────────────────────────────────── */
+
+  /**
+   * The five parts, in the order a labelled diagram reads down the page.
+   *
+   * ── Why every part carries a job ──────────────────────────────────────────
+   *
+   * "This is the stem" teaches a child a caption. "The stem holds the plant up
+   * and carries water to the leaves" teaches them what a plant is doing, and it
+   * is the sentence that makes the name stick, so it is said on every correct
+   * drop and on every wrong one. A wrong drop is the better teaching moment of
+   * the two: the child has just pointed at a part and is now told what that
+   * part does.
+   */
+  var PARTS = ['roots', 'stem', 'leaf', 'flower', 'fruit']
+
+  var JOB = {
+    roots: 'The roots drink water from the soil and hold the plant down.',
+    stem: 'The stem holds the plant up and carries water to the leaves.',
+    leaf: 'The leaf makes food from sunlight.',
+    flower: 'The flower makes the seeds.',
+    fruit: 'The fruit holds the seeds and feeds whoever eats it.'
+  }
+
+  var LINES = {
+    ask: function (w) { return 'Put the ' + w + ' on the plant.' },
+    right: function (w) { return 'Yes, the ' + w + '. ' + JOB[w] },
+    wrong: function (w) { return 'That is the ' + w + '. ' + JOB[w] },
+    whole: 'The whole plant! Every part has its name.',
+    lift: 'Now find where it goes.',
+    over: 'My garden is empty. Let us plant again!',
+    poke: 'Hee hee! I am not a plant!'
+  }
+
+  /** Every tenth plant labelled is worth a basket of coins. */
+  function isBonus(round) { return round > 0 && round % 10 === 9 }
+
+  /* ── where the ground is ─────────────────────────────────────────────────── */
+
+  /**
+   * The soil line.
+   *
+   * Lower than the scene's own horizon, because this game needs the earth to be
+   * a real band and not a strip: the roots are half the lesson and they have to
+   * be drawn below the surface at a size a finger can aim at. The band itself is
+   * painted into the backdrop by `props`, so the garden becomes a cutaway bed.
+   *
+   * Taken from W and H rather than from `k`, because `props` is handed the size
+   * directly and has to agree with the play code to the pixel.
+   */
+  function soilAt(W, H) {
+    return clamp(H * 0.62, K.groundY(H) + H * 0.06, H * 0.72)
+  }
+  function soilY(k) { return soilAt(k.W, k.H) }
+  /** The top of the sky the plant may grow into: clear of the banner. */
+  function skyY(k) { return k.H * 0.2 }
+
+  /* ── the plant ───────────────────────────────────────────────────────────── */
+
+  /**
+   * The geometry of one plant, and the five places its parts are.
+   *
+   * One table, read by the drawing and by the judging alike. The offsets are
+   * fractions of the plant's own height so the same numbers hold on a phone
+   * held sideways and on a classroom projector.
+   *
+   * The centres are spaced so that no two are closer than about one drop
+   * radius: the drop takes the nearest region it is inside, so generosity near
+   * a leaf can never quietly become an answer of "stem".
+   */
+  var SHAPE = {
+    tomato: {
+      top: -0.92,
+      stem: [0, -0.30], leaf: [-0.42, -0.46], flower: [0.36, -0.78], fruit: [0.34, -0.28]
+    },
+    maize: {
+      top: -1.0,
+      stem: [0, -0.28], leaf: [-0.40, -0.58], flower: [0, -0.98], fruit: [0.32, -0.52]
+    },
+    cassava: {
+      top: -0.94,
+      stem: [0, -0.34], leaf: [-0.40, -0.80], flower: [0.30, -0.86], fruit: [0.42, -0.52]
+    },
+    pawpaw: {
+      top: -0.96,
+      stem: [0, -0.32], leaf: [-0.40, -0.86], flower: [0.26, -0.48], fruit: [0.32, -0.84]
+    }
+  }
+
+  var KINDS = ['tomato', 'maize', 'cassava', 'pawpaw']
+
+  function layout(k, kind) {
+    var soil = soilY(k)
+    /* Kept off the width as well as the height: on a wide screen a plant sized
+       only by the sky above it grows fatter than the room beside it and its
+       leaves reach under the label column. */
+    var h = Math.min(soil - skyY(k), k.W * 0.42)
+    var rootD = Math.min(k.H - soil - k.H * 0.04, h * 0.46)
+    var x = k.W * 0.46
+    var s = SHAPE[kind]
+    /* Generous, because a small hand aims at a leaf and lands near it. The
+       floor keeps it a thumb's width even on the shortest screen. */
+    var r = Math.max(h * 0.17, 44)
+
+    var L = {
+      kind: kind, x: x, soil: soil, h: h, rootD: rootD, r: r,
+      top: soil + s.top * h, part: {}
+    }
+    L.part.roots = { x: x, y: soil + rootD * 0.55, r: r }
+    for (var i = 1; i < PARTS.length; i++) {
+      var p = PARTS[i]
+      L.part[p] = { x: x + s[p][0] * h, y: soil + s[p][1] * h, r: r }
+    }
+    return L
+  }
+
+  /* ── drawing the plant ───────────────────────────────────────────────────── */
+
+  var GREEN = '#3fae4c', GREEN_D = '#2e8038', LEAFY = '#4cbf55'
+
+  /** A pointed leaf lying along its own +x, drawn from where it joins. */
+  function pointedLeaf(ctx, x, y, len, wide, ang, fill) {
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.rotate(ang)
+    ctx.beginPath()
+    ctx.moveTo(0, 0)
+    ctx.quadraticCurveTo(len * 0.45, -wide, len, 0)
+    ctx.quadraticCurveTo(len * 0.45, wide, 0, 0)
+    ctx.closePath()
+    K.inkedOn(ctx, fill, K.LINE, 3)
+    ctx.strokeStyle = 'rgba(20,60,20,0.35)'
+    ctx.lineWidth = Math.max(1.5, len * 0.05)
+    ctx.beginPath()
+    ctx.moveTo(len * 0.08, 0)
+    ctx.lineTo(len * 0.88, 0)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  /** A long strap that arches over and droops, which is a maize leaf. */
+  function strapLeaf(ctx, x, y, len, wide, dir, fill) {
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.beginPath()
+    ctx.moveTo(0, 0)
+    ctx.quadraticCurveTo(dir * len * 0.55, -len * 0.42, dir * len, -len * 0.06)
+    ctx.quadraticCurveTo(dir * len * 0.5, -len * 0.3 + wide, 0, wide)
+    ctx.closePath()
+    K.inkedOn(ctx, fill, K.LINE, 3)
+    ctx.strokeStyle = 'rgba(20,60,20,0.32)'
+    ctx.lineWidth = Math.max(1.5, len * 0.04)
+    ctx.beginPath()
+    ctx.moveTo(0, wide * 0.4)
+    ctx.quadraticCurveTo(dir * len * 0.55, -len * 0.3, dir * len * 0.94, -len * 0.05)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  /**
+   * A hand of leaflets on one stalk, which is what cassava and pawpaw have.
+   *
+   * Drawn as separate pointed leaves round a common point rather than as one
+   * outlined blob, because the deep lobes are the whole look of both plants and
+   * a blob outline round them comes out as a scribble.
+   */
+  function palmLeaf(ctx, x, y, r, fill, lobes) {
+    for (var i = 0; i < lobes; i++) {
+      var a = -Math.PI * 0.94 + (i / (lobes - 1)) * Math.PI * 0.88
+      pointedLeaf(ctx, x, y, r * (i === (lobes - 1) / 2 ? 1.1 : 0.94), r * 0.3, a,
+        i % 2 ? fill : LEAFY)
+    }
+    ctx.beginPath()
+    ctx.arc(x, y, r * 0.12, 0, Math.PI * 2)
+    K.inkedOn(ctx, GREEN_D, K.LINE, 2)
+  }
+
+  /** A fan of thin roots. Every plant here has some, tuber or no tuber. */
+  function fibrous(ctx, x, y, w, d, n) {
+    ctx.strokeStyle = '#c99a5e'
+    ctx.lineCap = 'round'
+    for (var i = 0; i < n; i++) {
+      var t = n === 1 ? 0.5 : i / (n - 1)
+      var ex = x + (t - 0.5) * w * 2
+      ctx.lineWidth = Math.max(2.5, d * (0.09 - Math.abs(t - 0.5) * 0.08))
+      ctx.beginPath()
+      ctx.moveTo(x, y)
+      ctx.quadraticCurveTo(x + (t - 0.5) * w * 1.1, y + d * 0.55, ex, y + d)
+      ctx.stroke()
+      /* One hair off each, so the fan is a root system and not a whisk. */
+      ctx.lineWidth = Math.max(1.5, d * 0.03)
+      ctx.beginPath()
+      ctx.moveTo(x + (t - 0.5) * w * 1.05, y + d * 0.5)
+      ctx.lineTo(x + (t - 0.5) * w * 1.6, y + d * 0.78)
+      ctx.stroke()
+    }
+  }
+
+  var ROOTS = {
+    tomato: function (ctx, L) { fibrous(ctx, L.x, L.soil, L.h * 0.3, L.rootD, 7) },
+    maize: function (ctx, L) {
+      /* Maize also throws brace roots out of the stem above the soil, which is
+         the thing a child has actually seen in a field. */
+      fibrous(ctx, L.x, L.soil, L.h * 0.26, L.rootD, 9)
+      ctx.strokeStyle = '#c99a5e'
+      ctx.lineWidth = Math.max(2.5, L.rootD * 0.07)
+      for (var s = -1; s <= 1; s += 2) {
+        ctx.beginPath()
+        ctx.moveTo(L.x + s * L.h * 0.02, L.soil - L.h * 0.09)
+        ctx.quadraticCurveTo(L.x + s * L.h * 0.13, L.soil - L.h * 0.02,
+          L.x + s * L.h * 0.16, L.soil + L.rootD * 0.22)
+        ctx.stroke()
+      }
+    },
+    cassava: function (ctx, L) {
+      /* ── Why the cassava tubers are drawn as roots ──────────────────────
+         The part of a cassava a Ghanaian child knows is the tuber they eat,
+         and the tuber is a swollen root, not a fruit. Drawing it here, on the
+         root fan, is both the botanically true answer and the one that makes
+         the word "roots" mean something to them. The real cassava fruit is
+         the little green capsule up near the flowers. */
+      fibrous(ctx, L.x, L.soil, L.h * 0.3, L.rootD, 6)
+      for (var i = -1; i <= 1; i++) {
+        ctx.save()
+        ctx.translate(L.x + i * L.h * 0.19, L.soil + L.rootD * 0.52)
+        ctx.rotate(i * 0.5)
+        ctx.beginPath()
+        ctx.ellipse(0, 0, L.rootD * 0.14, L.rootD * 0.4, 0, 0, Math.PI * 2)
+        K.inkedOn(ctx, '#d9b489', K.LINE, 3)
+        ctx.strokeStyle = 'rgba(120,80,40,0.35)'
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.moveTo(-L.rootD * 0.09, -L.rootD * 0.1)
+        ctx.lineTo(L.rootD * 0.09, -L.rootD * 0.05)
+        ctx.stroke()
+        ctx.restore()
+      }
+    },
+    pawpaw: function (ctx, L) {
+      /* One thick tap root with side roots off it: a tree, not a herb. */
+      ctx.strokeStyle = '#c99a5e'
+      ctx.lineCap = 'round'
+      ctx.lineWidth = Math.max(4, L.rootD * 0.16)
+      ctx.beginPath()
+      ctx.moveTo(L.x, L.soil)
+      ctx.lineTo(L.x + L.rootD * 0.08, L.soil + L.rootD)
+      ctx.stroke()
+      fibrous(ctx, L.x, L.soil + L.rootD * 0.1, L.h * 0.26, L.rootD * 0.85, 5)
+    }
+  }
+
+  /* The four flowers. Each is the one flower on its plant. */
+  var FLOWER = {
+    tomato: function (ctx, r) {
+      for (var i = 0; i < 5; i++) {
+        var a = -Math.PI / 2 + i * Math.PI * 0.4
+        ctx.beginPath()
+        ctx.ellipse(Math.cos(a) * r * 0.42, Math.sin(a) * r * 0.42,
+          r * 0.34, r * 0.2, a, 0, Math.PI * 2)
+        K.inkedOn(ctx, '#ffd93b', K.LINE, 2.5)
+      }
+      ctx.beginPath()
+      ctx.arc(0, 0, r * 0.22, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#e8913c', K.LINE, 2.5)
+    },
+    maize: function (ctx, r) {
+      /* A tassel: the maize flower, and nothing like a petal, which is exactly
+         why it is worth a child meeting it. */
+      ctx.strokeStyle = '#d9b463'
+      ctx.lineCap = 'round'
+      for (var i = -3; i <= 3; i++) {
+        ctx.lineWidth = Math.max(2.5, r * 0.1)
+        ctx.beginPath()
+        ctx.moveTo(0, r * 0.7)
+        ctx.quadraticCurveTo(i * r * 0.16, -r * 0.1, i * r * 0.3, -r * 0.7)
+        ctx.stroke()
+      }
+      ctx.fillStyle = '#c4972f'
+      for (var b = 0; b < 8; b++) {
+        ctx.beginPath()
+        ctx.ellipse(K.fixed(b * 7, r * 1.1) - r * 0.55,
+          -r * 0.6 + K.fixed(b * 13, r * 0.9), r * 0.09, r * 0.05, 0, 0, Math.PI * 2)
+        ctx.fill()
+      }
+    },
+    cassava: function (ctx, r) {
+      /* A small pale cluster on a short branch. Cassava flowers are easy to
+         miss on a real plant, so this one is drawn plainly rather than made
+         showy: the point is that it is there. */
+      for (var i = 0; i < 4; i++) {
+        var a = -Math.PI / 2 + i * 1.5
+        ctx.beginPath()
+        ctx.ellipse(Math.cos(a) * r * 0.36, Math.sin(a) * r * 0.32,
+          r * 0.24, r * 0.18, a, 0, Math.PI * 2)
+        K.inkedOn(ctx, '#f3ecc4', K.LINE, 2.5)
+      }
+      ctx.beginPath()
+      ctx.arc(0, 0, r * 0.17, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#c9d67a', K.LINE, 2)
+    },
+    pawpaw: function (ctx, r) {
+      for (var i = 0; i < 5; i++) {
+        var a = -Math.PI / 2 + i * Math.PI * 0.4
+        ctx.beginPath()
+        ctx.ellipse(Math.cos(a) * r * 0.4, Math.sin(a) * r * 0.4,
+          r * 0.3, r * 0.17, a, 0, Math.PI * 2)
+        K.inkedOn(ctx, '#fdf6e0', K.LINE, 2.5)
+      }
+      ctx.beginPath()
+      ctx.arc(0, 0, r * 0.2, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#f2c33b', K.LINE, 2.5)
+    }
+  }
+
+  /* The four fruits. */
+  var FRUIT = {
+    tomato: function (ctx, r) {
+      ctx.beginPath()
+      ctx.arc(0, r * 0.1, r * 0.62, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#e0482e', K.LINE, 3.5)
+      ctx.save()
+      ctx.globalAlpha = 0.35
+      ctx.beginPath()
+      ctx.ellipse(-r * 0.2, -r * 0.14, r * 0.2, r * 0.12, -0.5, 0, Math.PI * 2)
+      ctx.fillStyle = '#ffffff'
+      ctx.fill()
+      ctx.restore()
+      for (var i = 0; i < 5; i++) {
+        var a = -Math.PI / 2 + i * Math.PI * 0.4
+        ctx.beginPath()
+        ctx.ellipse(Math.cos(a) * r * 0.3, -r * 0.42 + Math.sin(a) * r * 0.16,
+          r * 0.26, r * 0.1, a * 0.5, 0, Math.PI * 2)
+        K.inkedOn(ctx, GREEN_D, K.LINE, 2)
+      }
+    },
+    maize: function (ctx, r) {
+      /* A cob half out of its husk, tilted, because a cob drawn upright on a
+         stalk reads as another leaf. */
+      ctx.save()
+      ctx.rotate(-0.35)
+      ctx.beginPath()
+      ctx.ellipse(0, 0, r * 0.32, r * 0.78, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#f2c33b', K.LINE, 3)
+      ctx.save()
+      ctx.beginPath()
+      ctx.ellipse(0, 0, r * 0.32, r * 0.78, 0, 0, Math.PI * 2)
+      ctx.clip()
+      ctx.strokeStyle = 'rgba(140,96,20,0.45)'
+      ctx.lineWidth = Math.max(1.5, r * 0.05)
+      for (var g = -3; g <= 3; g++) {
+        ctx.beginPath()
+        ctx.moveTo(-r * 0.4, g * r * 0.2)
+        ctx.lineTo(r * 0.4, g * r * 0.2)
+        ctx.moveTo(g * r * 0.16, -r * 0.8)
+        ctx.lineTo(g * r * 0.16, r * 0.8)
+        ctx.stroke()
+      }
+      ctx.restore()
+      /* The husk, peeled back off the lower half. */
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.34, r * 0.1)
+      ctx.quadraticCurveTo(-r * 0.6, r * 0.6, -r * 0.16, r * 0.92)
+      ctx.lineTo(r * 0.2, r * 0.82)
+      ctx.quadraticCurveTo(r * 0.5, r * 0.4, r * 0.34, r * 0.06)
+      ctx.closePath()
+      K.inkedOn(ctx, LEAFY, K.LINE, 3)
+      /* Silk at the tip. */
+      ctx.strokeStyle = '#c4972f'
+      ctx.lineWidth = Math.max(2, r * 0.06)
+      ctx.lineCap = 'round'
+      for (var s = -1; s <= 1; s++) {
+        ctx.beginPath()
+        ctx.moveTo(s * r * 0.08, -r * 0.7)
+        ctx.lineTo(s * r * 0.3, -r * 1.05)
+        ctx.stroke()
+      }
+      ctx.restore()
+    },
+    cassava: function (ctx, r) {
+      /* A ribbed green capsule. Small on purpose: this really is a small thing
+         on a real cassava, and the child has probably never noticed it. */
+      ctx.beginPath()
+      ctx.arc(0, 0, r * 0.42, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#7fbf3f', K.LINE, 3)
+      ctx.strokeStyle = 'rgba(30,70,20,0.45)'
+      ctx.lineWidth = Math.max(1.5, r * 0.05)
+      for (var i = -1; i <= 1; i++) {
+        ctx.beginPath()
+        ctx.moveTo(i * r * 0.2, -r * 0.38)
+        ctx.quadraticCurveTo(i * r * 0.3, 0, i * r * 0.2, r * 0.38)
+        ctx.stroke()
+      }
+      ctx.beginPath()
+      ctx.moveTo(0, -r * 0.42)
+      ctx.lineTo(0, -r * 0.66)
+      ctx.strokeStyle = GREEN_D
+      ctx.lineWidth = Math.max(2, r * 0.08)
+      ctx.stroke()
+    },
+    pawpaw: function (ctx, r) {
+      ctx.beginPath()
+      ctx.ellipse(0, 0, r * 0.5, r * 0.72, 0.12, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#f2a33b', K.LINE, 3.5)
+      ctx.save()
+      ctx.globalAlpha = 0.3
+      ctx.beginPath()
+      ctx.ellipse(-r * 0.16, -r * 0.2, r * 0.14, r * 0.26, 0.2, 0, Math.PI * 2)
+      ctx.fillStyle = '#ffffff'
+      ctx.fill()
+      ctx.restore()
+      ctx.strokeStyle = 'rgba(150,80,10,0.3)'
+      ctx.lineWidth = Math.max(1.5, r * 0.05)
+      for (var i = -1; i <= 1; i++) {
+        ctx.beginPath()
+        ctx.moveTo(i * r * 0.22, -r * 0.6)
+        ctx.quadraticCurveTo(i * r * 0.36, 0, i * r * 0.22, r * 0.6)
+        ctx.stroke()
+      }
+    }
+  }
+
+  /* The four leaves, each drawn at its region centre. */
+  var LEAF = {
+    tomato: function (ctx, r) {
+      pointedLeaf(ctx, -r * 0.1, 0, r * 0.95, r * 0.3, 3.05, LEAFY)
+      pointedLeaf(ctx, -r * 0.1, 0, r * 0.7, r * 0.26, 2.3, GREEN)
+      pointedLeaf(ctx, -r * 0.1, 0, r * 0.7, r * 0.26, 3.7, GREEN)
+    },
+    maize: function (ctx, r) { strapLeaf(ctx, r * 0.5, r * 0.2, r * 1.25, r * 0.3, -1, LEAFY) },
+    cassava: function (ctx, r) { palmLeaf(ctx, 0, 0, r * 0.95, GREEN, 5) },
+    pawpaw: function (ctx, r) { palmLeaf(ctx, 0, 0, r * 1.05, GREEN, 7) }
+  }
+
+  /**
+   * The stem, from the soil up to the top of the plant.
+   *
+   * A tapered polygon rather than a stroked line, because a stroke of one width
+   * reads as wire. Maize gets nodes, cassava gets leaf scars and pawpaw gets the
+   * ringed trunk, which is the cheapest way to tell three green uprights apart.
+   */
+  function drawStem(ctx, L) {
+    var w = L.h * (L.kind === 'pawpaw' ? 0.075 : L.kind === 'maize' ? 0.06 : 0.048)
+    var topW = w * (L.kind === 'pawpaw' ? 0.62 : 0.7)
+    var fill = L.kind === 'pawpaw' ? '#b8a06a' : L.kind === 'cassava' ? '#a9773c' : GREEN
+    ctx.beginPath()
+    ctx.moveTo(L.x - w, L.soil + L.h * 0.02)
+    ctx.lineTo(L.x - topW, L.top)
+    ctx.lineTo(L.x + topW, L.top)
+    ctx.lineTo(L.x + w, L.soil + L.h * 0.02)
+    ctx.closePath()
+    K.inkedOn(ctx, fill, K.LINE, 3.5)
+
+    ctx.strokeStyle = 'rgba(40,60,20,0.35)'
+    ctx.lineWidth = Math.max(1.5, w * 0.3)
+    if (L.kind === 'maize') {
+      for (var n = 1; n < 5; n++) {
+        var ny = L.soil + (L.top - L.soil) * (n / 5)
+        ctx.beginPath()
+        ctx.moveTo(L.x - w * 0.9, ny)
+        ctx.lineTo(L.x + w * 0.9, ny)
+        ctx.stroke()
+      }
+    } else if (L.kind === 'pawpaw' || L.kind === 'cassava') {
+      /* Leaf scars: the diamonds left where old leaves fell off. */
+      for (var s = 1; s < 6; s++) {
+        var sy = L.soil + (L.top - L.soil) * (s / 6)
+        var side = s % 2 ? -1 : 1
+        ctx.beginPath()
+        ctx.ellipse(L.x + side * w * 0.45, sy, w * 0.3, w * 0.18, 0, 0, Math.PI * 2)
+        ctx.stroke()
+      }
+    }
+  }
+
+  /** A thin green stalk from the stem out to a part, so the part is attached. */
+  function stalk(ctx, L, p, w) {
+    var attach = clamp(p.y + L.h * 0.06, L.top + L.h * 0.02, L.soil - L.h * 0.06)
+    ctx.strokeStyle = GREEN_D
+    ctx.lineWidth = Math.max(2.5, w)
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(L.x, attach)
+    ctx.quadraticCurveTo((L.x + p.x) / 2, attach - (attach - p.y) * 0.3, p.x, p.y)
+    ctx.stroke()
+  }
+
+  /**
+   * The whole plant.
+   *
+   * Roots, then stem, then a stalk out to each of the three hanging parts, then
+   * the parts themselves at exactly the centres the judging uses. Nothing here
+   * knows which part is being asked for, and nothing is drawn twice.
+   */
+  function drawPlant(ctx, L) {
+    ROOTS[L.kind](ctx, L)
+    drawStem(ctx, L)
+
+    var partR = L.h * 0.19
+    var order = ['fruit', 'leaf', 'flower']
+    for (var i = 0; i < order.length; i++) {
+      var name = order[i]
+      var p = L.part[name]
+      /* The maize tassel sits on top of its own stem, so it needs no stalk, and
+         a stalk drawn to it would come out as a second stem. */
+      if (!(L.kind === 'maize' && name === 'flower')) stalk(ctx, L, p, L.h * 0.022)
+      ctx.save()
+      ctx.translate(p.x, p.y)
+      ;(name === 'leaf' ? LEAF : name === 'flower' ? FLOWER : FRUIT)[L.kind](ctx, partR)
+      ctx.restore()
+    }
+  }
+
+  /* ── the cards ───────────────────────────────────────────────────────────── */
+
+  function cardH(k) { return clamp(k.H * 0.13, 52, 84) }
+  function chipH(k) { return clamp(k.H * 0.1, 40, 62) }
+  function chipW(k) { return clamp(k.W * 0.17, 86, 156) }
+
+  /**
+   * One card, drawn from its centre.
+   *
+   * Cream with a dark rim and dark lettering. White letters on a card this size
+   * would need an outline as heavy as the strokes themselves and would close up.
+   */
+  function drawCard(ctx, x, y, w, h, word, font, held, done) {
+    ctx.save()
+    ctx.translate(x, y)
+    if (held) ctx.scale(1.08, 1.08)
+    ctx.beginPath()
+    ctx.roundRect(-w / 2, -h / 2 + h * 0.14, w, h, h * 0.3)
+    ctx.fillStyle = '#8a5a2b'
+    ctx.fill()
+    ctx.beginPath()
+    ctx.roundRect(-w / 2, -h / 2, w, h, h * 0.3)
+    K.inkedOn(ctx, done ? '#ffd93b' : '#fdf3dc', K.LINE, 3.5)
+
+    var size = h * 0.46
+    ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    while (ctx.measureText(word).width > w * 0.8 && size > h * 0.2) {
+      size *= 0.92
+      ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    }
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillStyle = '#3a2a10'
+    ctx.fillText(word, 0, 0)
+    ctx.restore()
+  }
+
+  /**
+   * Where a label that is already on the plant parks.
+   *
+   * A fixed column down the right, one slot per part in diagram order, with a
+   * line out to the part. Parking each card beside its own part instead looked
+   * better for one label and became a pile the moment two parts were close
+   * together, which on the pawpaw is most of them. A column cannot collide, and
+   * a column of labels with leader lines is what a science book looks like.
+   */
+  function slotAt(k, i) {
+    var top = k.H * 0.24
+    var bottom = k.H * 0.88
+    return {
+      x: k.W - chipW(k) * 0.5 - k.W * 0.015,
+      y: top + (bottom - top) * (i / (PARTS.length - 1))
+    }
+  }
+
+  /** Where the card to be dragged waits. Clear of the roots and of him. */
+  function cardHome(k) {
+    return { x: k.W * 0.2, y: k.H - cardH(k) * 0.72 }
+  }
+
+  function cardW(k, word) {
+    var h = cardH(k)
+    return clamp(k.shoutWidth(word, h * 0.46) + h * 1.1, h * 2, k.W * 0.34)
+  }
+
+  AnanseKit.run({
+    title: 'Plant Parts',
+    overTitle: 'The garden is bare!',
+    scene: 'garden',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'labels',
+    /* Dropping the card on a part is the whole answer, so there is nothing to
+       confirm and no button. */
+    button: false,
+    restMood: 'hello',
+    hud: function (k) {
+      return [
+        { label: 'labels', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      /* Carried across rounds: the plant being labelled and what is already on
+         it. `begin` runs once a round, so clearing these here would wipe the
+         diagram every time a new label was asked for. */
+      if (k.own.placed === undefined) {
+        k.own.placed = {}
+        k.own.kindIx = 0
+        k.own.coins = 0
+      }
+      /* A run that ended and was tapped to start again. The kit puts its own
+         score and lives back; the garden has to be replanted. */
+      if (k.round === 0) {
+        k.own.placed = {}
+        k.own.kindIx = 0
+        k.own.coins = 0
+      }
+
+      /* A finished plant is the reward, so it is only cleared once it has been
+         finished and looked at, which is the round after the fifth label. */
+      var left = PARTS.filter(function (p) { return !k.own.placed[p] })
+      if (!left.length) {
+        k.own.kindIx = (k.own.kindIx + 1) % KINDS.length
+        k.own.placed = {}
+        left = PARTS.slice()
+      }
+      k.own.kind = KINDS[k.own.kindIx]
+      k.own.word = pick(left)
+      k.target = k.own.word
+      k.own.dropped = null
+
+      var home = cardHome(k)
+      k.own.card = { x: home.x, y: home.y, held: false, settle: null, idle: 0 }
+      k.say(LINES.ask(k.own.word))
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) {
+      if (!k.own.card) return
+      var home = cardHome(k)
+      if (!k.own.card.held) { k.own.card.x = home.x; k.own.card.y = home.y }
+    },
+
+    ask: function (k) {
+      if (!k.own.word) return null
+      if (k.phase === 'won') return { head: 'The ', num: k.own.word, tail: '!' }
+      return { head: 'Put ', num: k.own.word, tail: ' on the plant' }
+    },
+
+    /**
+     * Which part the card was let go over, against the word written on it.
+     *
+     * Both read off the board at the moment of the drop. No region carries a
+     * flag saying it is the answer, and the card does not remember where it was
+     * meant to go: the comparison is between two strings that are on screen.
+     */
+    judge: function (k) {
+      return !!k.own.dropped && k.own.dropped === k.own.word
+    },
+
+    down: function (k, x, y) {
+      var c = k.own.card
+      if (!c || c.done) return false
+      var w = cardW(k, k.own.word)
+      var h = cardH(k)
+      /* A margin, because a thumb that lands just off a card meant for thumbs
+         should still pick it up. */
+      if (x < c.x - w / 2 - 12 || x > c.x + w / 2 + 12) return false
+      if (y < c.y - h / 2 - 14 || y > c.y + h / 2 + 14) return false
+      c.held = true
+      c.settle = null
+      k.sound.play('lift')
+      k.say(LINES.lift)
+      k.him.setMood('watching')
+      return true
+    },
+
+    move: function (k, x, y) {
+      var c = k.own.card
+      if (!c || !c.held) return
+      c.x = x
+      c.y = y
+    },
+
+    up: function (k) {
+      var c = k.own.card
+      if (!c || !c.held) return
+      c.held = false
+      if (k.phase !== 'play') { c.settle = cardHome(k); return }
+
+      /* The nearest region the card is actually inside. Nearest, not first,
+         so a generous radius can never quietly answer "stem" for a drop that
+         landed closer to the leaf. */
+      var L = layout(k, k.own.kind)
+      var best = null, bestD = 0
+      for (var i = 0; i < PARTS.length; i++) {
+        var name = PARTS[i]
+        if (k.own.placed[name]) continue
+        var p = L.part[name]
+        var d = Math.hypot(c.x - p.x, c.y - p.y)
+        if (d > p.r) continue
+        if (!best || d < bestD) { best = name; bestD = d }
+      }
+
+      if (!best) {
+        /* Nowhere in particular: it goes back, and nothing is judged. */
+        c.settle = cardHome(k)
+        if (k.phase === 'play') k.him.setMood('hello')
+        return
+      }
+      k.own.dropped = best
+      k.sound.play('thud')
+      k.kick(3)
+      k.commit()
+    },
+
+    onWin: function (k) {
+      var L = layout(k, k.own.kind)
+      var p = L.part[k.own.word]
+      k.own.placed[k.own.word] = true
+      k.own.card.done = true
+      k.own.coins += 1
+      k.cheer(p.x, p.y)
+      k.puff(p.x, p.y, 8, 'rgba(255,240,150,0.8)')
+
+      var done = PARTS.every(function (n) { return k.own.placed[n] })
+      if (done) {
+        k.sound.play('win')
+        k.cheer(L.x, L.top)
+      }
+      if (isBonus(k.round)) {
+        /* Ten labels on the plants is worth a basket. */
+        k.own.coins += 10
+        k.cheer(k.W * 0.5, L.top)
+      }
+      k.say(done ? LINES.whole : LINES.right(k.own.word))
+    },
+
+    onMiss: function (k) {
+      /* Named out loud, with what that part does. The child pointed at a part
+         and gets told what it is for, which is worth more than "no". */
+      k.say(LINES.wrong(k.own.dropped))
+      k.own.dropped = null
+      k.own.card.settle = cardHome(k)
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      var c = k.own.card
+      if (!c) return
+      c.idle += dt
+      if (!c.settle || c.held) return
+      c.x += (c.settle.x - c.x) * Math.min(1, dt * 14)
+      c.y += (c.settle.y - c.y) * Math.min(1, dt * 14)
+      if (Math.abs(c.x - c.settle.x) < 0.5 && Math.abs(c.y - c.settle.y) < 0.5) {
+        c.x = c.settle.x
+        c.y = c.settle.y
+        c.settle = null
+      }
+    },
+
+    /**
+     * The earth, baked into the backdrop.
+     *
+     * The garden scene's own ground is a lawn, and a lawn cannot show roots.
+     * This cuts the bed open: a brown band with a ragged top, laid over the
+     * grass, so everything below the soil line is underground and the roots have
+     * somewhere to be. It is painted once per size rather than every frame.
+     */
+    props: function (k, g, W, H) {
+      var soil = soilAt(W, H)
+      g.beginPath()
+      g.moveTo(0, soil + H * 0.02)
+      for (var i = 0; i <= 12; i++) {
+        var x = (i / 12) * W
+        g.lineTo(x, soil + K.fixed(i * 9, H * 0.018) - H * 0.008)
+      }
+      g.lineTo(W, H)
+      g.lineTo(0, H)
+      g.closePath()
+      K.inkedOn(g, '#8a5a2b', K.LINE, 4)
+
+      /* Speckles and a few stones, so the earth is soil and not a brown bar. */
+      g.fillStyle = 'rgba(58,34,10,0.4)'
+      for (var s = 0; s < 46; s++) {
+        var sx = K.fixed(s * 13, W)
+        var sy = soil + H * 0.04 + K.fixed(s * 7, H - soil - H * 0.06)
+        g.beginPath()
+        g.arc(sx, sy, 1.5 + K.fixed(s * 5, 2.5), 0, Math.PI * 2)
+        g.fill()
+      }
+      for (var p = 0; p < 5; p++) {
+        g.beginPath()
+        g.ellipse(K.fixed(p * 29 + 3, W), soil + H * 0.06 + K.fixed(p * 11, H - soil - H * 0.1),
+          H * 0.014, H * 0.01, K.fixed(p * 3, 1), 0, Math.PI * 2)
+        K.inkedOn(g, '#a9703c', K.LINE, 2)
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var L = layout(k, k.own.kind)
+      var c = k.own.card
+      var cw = cardW(k, k.own.word)
+      var ch = cardH(k)
+      var i
+
+      drawPlant(ctx, L)
+
+      /* The soil line drawn over the plant's collar, so the stem goes into the
+         ground rather than standing on it. */
+      ctx.save()
+      ctx.globalAlpha = 0.5
+      ctx.strokeStyle = '#6b4a22'
+      ctx.lineWidth = Math.max(2, L.h * 0.02)
+      ctx.beginPath()
+      ctx.moveTo(L.x - L.h * 0.18, L.soil)
+      ctx.lineTo(L.x + L.h * 0.18, L.soil)
+      ctx.stroke()
+      ctx.restore()
+
+      /**
+       * Rings on every unlabelled part while the card is in the air.
+       *
+       * Nothing else on the screen says which bits of a drawing are places you
+       * may drop something. Every open part gets a ring, so the ring says
+       * "here are the choices" and never "here is the answer", and the one
+       * under the hand says so louder.
+       */
+      if (c.held) {
+        for (i = 0; i < PARTS.length; i++) {
+          if (k.own.placed[PARTS[i]]) continue
+          var p = L.part[PARTS[i]]
+          var near = Math.hypot(c.x - p.x, c.y - p.y) <= p.r
+          ctx.save()
+          ctx.globalAlpha = near ? 1 : 0.5
+          ctx.strokeStyle = near ? '#ffd93b' : '#ffffff'
+          ctx.lineWidth = Math.max(3, p.r * (near ? 0.14 : 0.09))
+          ctx.lineCap = 'round'
+          ctx.setLineDash([p.r * 0.42, p.r * 0.34])
+          ctx.translate(p.x, p.y)
+          ctx.rotate(k.now * 0.0008)
+          ctx.beginPath()
+          ctx.arc(0, 0, p.r * 0.86, 0, Math.PI * 2)
+          ctx.stroke()
+          ctx.restore()
+        }
+      }
+
+      /* Labels already on the plant: a card in its slot and a line to the part
+         with a dot on the end, which is the whole point of the exercise. */
+      for (i = 0; i < PARTS.length; i++) {
+        var name = PARTS[i]
+        if (!k.own.placed[name]) continue
+        var at = slotAt(k, i)
+        var to = L.part[name]
+        ctx.save()
+        ctx.strokeStyle = '#3a2a10'
+        ctx.lineWidth = Math.max(2.5, k.H * 0.005)
+        ctx.lineCap = 'round'
+        ctx.beginPath()
+        ctx.moveTo(at.x - chipW(k) * 0.46, at.y)
+        ctx.lineTo(to.x, to.y)
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.arc(to.x, to.y, Math.max(4, k.H * 0.01), 0, Math.PI * 2)
+        K.inkedOn(ctx, '#ffd93b', K.LINE, 2.5)
+        ctx.restore()
+        drawCard(ctx, at.x, at.y, chipW(k), chipH(k), name, k.FONT, false, true)
+      }
+
+      /* Him, on the soil at the left, out of the way of the diagram. */
+      var hr = clamp(Math.min(k.W, k.H) * 0.072, 28, 58)
+      k.him.draw(hr * 1.5, L.soil - hr * 1.3, hr, L.soil)
+
+      /* The card being asked for. A small hop while it waits, because a thing
+         that moves is a thing a child reaches for. */
+      if (!k.own.card.done) {
+        var waiting = !c.held && !c.settle
+        var bob = waiting ? Math.abs(Math.sin(c.idle * 2.2)) * ch * 0.14 : 0
+        drawCard(ctx, c.x, c.y - bob, cw, ch, k.own.word, k.FONT, c.held, false)
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.word) return { word: null }
+      var L = layout(k, k.own.kind)
+      var cw = cardW(k, k.own.word)
+      var ch = cardH(k)
+      var parts = {}
+      for (var i = 0; i < PARTS.length; i++) {
+        var p = L.part[PARTS[i]]
+        parts[PARTS[i]] = {
+          x: Math.round(p.x), y: Math.round(p.y), r: Math.round(p.r),
+          labelled: !!k.own.placed[PARTS[i]]
+        }
+      }
+      return {
+        plant: k.own.kind,
+        word: k.own.word,
+        dropped: k.own.dropped,
+        coins: k.own.coins,
+        placed: PARTS.filter(function (n) { return k.own.placed[n] }),
+        /* Everything draggable and every place it may be dropped, so a test can
+           play a round without looking at the screen. */
+        card: {
+          x: Math.round(k.own.card.x), y: Math.round(k.own.card.y),
+          w: Math.round(cw), h: Math.round(ch), held: !!k.own.card.held
+        },
+        parts: parts
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

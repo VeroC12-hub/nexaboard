@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shape Hunt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Shape Hunt. Finding a shape in the world, not on a shelf.
+
+  ── Why the shapes are parts of the picture ──────────────────────────────────
+
+  The easy build is a row of shapes and "tap the triangle". That is Balloon Pop
+  with shapes on it, and building the same verb in a different hat is exactly
+  what made the old generated games interchangeable.
+
+  What a shape hunt is actually for is the step after naming: seeing that the
+  window is a circle, the roof is a triangle and the door is a rectangle. A
+  child who can pick a triangle out of a line of shapes still may not notice one
+  in a roof, and noticing is the skill that makes shapes useful rather than
+  vocabulary.
+
+  So every shape here is a thing: a window, a door, a kite, the sun, a sign. It
+  sits where that thing belongs, at the size that thing would be, and the child
+  has to look at a picture rather than scan a row.
+
+  ── Why the same shape never appears twice in a round ────────────────────────
+
+  Because "tap the circle" has to have exactly one answer. Two circles means a
+  child who taps the wrong one is marked wrong for being right, which is the
+  single fastest way to make a game feel unfair.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: function (n) { return 'Can you find the ' + n + '?' },
+    right: ['You found it!', 'Yes! That is the one!', 'Sharp eyes!'],
+    wrong: function (n) { return 'That is not the ' + n + '. Look again!' },
+    tickle: 'Hee hee! I am not a shape!',
+    over: 'You found them all! Thank you, my friend!',
+  }
+
+  var KINDS = [
+    { name: 'circle', colour: '#e8543c' },
+    { name: 'square', colour: '#3f9ede' },
+    { name: 'triangle', colour: '#26a86a' },
+    { name: 'star', colour: '#f2c33b' },
+    { name: 'heart', colour: '#e0679f' },
+    { name: 'diamond', colour: '#8a5ccf' },
+  ]
+
+  /* ── the picture ─────────────────────────────────────────────────────────── */
+
+  function house(k) {
+    var w = Math.min(k.W * 0.34, k.H * 0.46)
+    var h = w * 0.72
+    return { x: k.W * 0.5, w: w, h: h, baseY: k.ground() + (k.H - k.ground()) * 0.34 }
+  }
+
+  /**
+   * Where a shape can be, and what it is pretending to be there.
+   *
+   * Each slot is a real place in the picture, so whatever shape lands in it
+   * reads as an object rather than a floating symbol. That is the whole point:
+   * the child is looking at a house, not at a menu.
+   */
+  function slots(k) {
+    var H0 = house(k)
+    var r = clamp(Math.min(k.W, k.H) * 0.062, 26, 60)
+    return [
+      { id: 'windowL', x: H0.x - H0.w * 0.25, y: H0.baseY - H0.h * 0.62, r: r * 0.82 },
+      { id: 'windowR', x: H0.x + H0.w * 0.25, y: H0.baseY - H0.h * 0.62, r: r * 0.82 },
+      { id: 'door', x: H0.x, y: H0.baseY - H0.h * 0.2, r: r * 0.95 },
+      { id: 'kite', x: k.W * 0.8, y: k.H * 0.2, r: r * 0.9 },
+      { id: 'sun', x: k.W * 0.16, y: k.H * 0.16, r: r * 0.88 },
+      { id: 'sign', x: k.W * 0.2, y: k.ground() + (k.H - k.ground()) * 0.3, r: r * 0.8 },
+    ]
+  }
+
+  AnanseKit.run({
+    title: 'Shape Hunt',
+    overTitle: 'You found them all!',
+    scene: 'garden',
+    rounds: 5,
+    /* One tap is the whole answer. */
+    button: false,
+    restMood: 'hello',
+
+    /**
+     * The house itself, baked into the backdrop.
+     *
+     * It never changes, so it costs one `drawImage` a frame however detailed it
+     * is. Only the shapes on it move from round to round.
+     */
+    props: function (k, g, w, h) {
+      var H0 = { x: w * 0.5, w: Math.min(w * 0.34, h * 0.46) }
+      H0.h = H0.w * 0.72
+      H0.baseY = K.groundY(h) + (h - K.groundY(h)) * 0.34
+
+      /* Shadow on the grass. */
+      g.save()
+      g.globalAlpha = 0.16
+      g.fillStyle = '#000'
+      g.beginPath()
+      g.ellipse(H0.x, H0.baseY + H0.h * 0.03, H0.w * 0.62, H0.h * 0.09, 0, 0, Math.PI * 2)
+      g.fill()
+      g.restore()
+
+      /* Walls. */
+      g.beginPath()
+      g.roundRect(H0.x - H0.w / 2, H0.baseY - H0.h, H0.w, H0.h, H0.w * 0.03)
+      K.inkedOn(g, '#f5e0b0', K.LINE, 4)
+
+      /* Roof: a broad triangle, overhanging on both sides. */
+      g.beginPath()
+      g.moveTo(H0.x - H0.w * 0.62, H0.baseY - H0.h)
+      g.lineTo(H0.x, H0.baseY - H0.h * 1.62)
+      g.lineTo(H0.x + H0.w * 0.62, H0.baseY - H0.h)
+      g.closePath()
+      K.inkedOn(g, '#c4442e', K.LINE, 4)
+
+      /* The post the sign hangs on. */
+      g.beginPath()
+      g.roundRect(w * 0.2 - H0.w * 0.02, K.groundY(h) + (h - K.groundY(h)) * 0.3,
+        H0.w * 0.04, (h - K.groundY(h)) * 0.3, H0.w * 0.02)
+      K.inkedOn(g, '#a9703c', K.LINE, 3)
+
+      /* The kite string, so a shape in the sky is a kite and not a sticker. */
+      g.strokeStyle = 'rgba(40,60,30,0.45)'
+      g.lineWidth = 3
+      g.beginPath()
+      g.moveTo(w * 0.8, h * 0.2)
+      g.bezierCurveTo(w * 0.86, h * 0.36, w * 0.76, h * 0.46, w * 0.83, h * 0.58)
+      g.stroke()
+    },
+
+    begin: function (k) {
+      var all = slots(k)
+      /* Five of the six places, so the picture is not identical every round. */
+      var where = all.slice().sort(function () { return Math.random() - 0.5 }).slice(0, 5)
+
+      /**
+       * Every shape different.
+       *
+       * "Tap the circle" must have exactly one answer. Two circles means a
+       * child who taps the other one is marked wrong for being right, which is
+       * the fastest way to make a game feel unfair.
+       */
+      var kinds = KINDS.slice().sort(function () { return Math.random() - 0.5 })
+        .slice(0, where.length)
+
+      k.own.things = where.map(function (slot, i) {
+        return {
+          id: slot.id, name: kinds[i].name, colour: kinds[i].colour,
+          x: slot.x, y: slot.y, r: slot.r,
+          /* Kites and signs hang at an angle; things on a wall do not. */
+          turn: slot.id === 'kite' ? 0.35 : slot.id === 'sign' ? -0.08 : 0,
+          pop: 0, wrong: 0,
+        }
+      })
+
+      k.target = pick(k.own.things).name
+      k.own.picked = null
+      k.say(LINES.ask(K.SHAPE_NAMES[k.target]))
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) {
+      if (!k.own.things) return
+      var all = slots(k)
+      for (var i = 0; i < k.own.things.length; i++) {
+        for (var j = 0; j < all.length; j++) {
+          if (all[j].id === k.own.things[i].id) {
+            k.own.things[i].x = all[j].x
+            k.own.things[i].y = all[j].y
+            k.own.things[i].r = all[j].r
+          }
+        }
+      }
+    },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'Found it!' }
+      return { head: 'Find the ' + K.SHAPE_NAMES[k.target] }
+    },
+
+    /**
+     * Whichever shape was tapped, compared with the target now.
+     *
+     * No shape knows whether it is the answer and the target is not written
+     * onto any of them.
+     */
+    judge: function (k) {
+      return !!k.own.picked && k.own.picked.name === k.target
+    },
+
+    onWin: function (k) {
+      k.cheer(k.own.picked.x, k.own.picked.y)
+      k.say(pick(LINES.right))
+    },
+    onMiss: function (k) { k.say(LINES.wrong(K.SHAPE_NAMES[k.target])) },
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.tickle) },
+
+    down: function (k, x, y) {
+      for (var i = k.own.things.length - 1; i >= 0; i--) {
+        var t = k.own.things[i]
+        /* Generous, because small hands are inaccurate, and measured on a
+           circle even for a triangle: a child aims at the middle of a thing. */
+        if (Math.hypot(t.x - x, t.y - y) > t.r * 1.25) continue
+        k.own.picked = t
+        t.pop = 1
+        if (t.name !== k.target) t.wrong = 1
+        k.sound.play('lift')
+        k.commit()
+        return true
+      }
+      return false
+    },
+
+    step: function (k, dt) {
+      if (!k.own.things) return
+      for (var i = 0; i < k.own.things.length; i++) {
+        var t = k.own.things[i]
+        t.pop = Math.max(0, t.pop - dt * 2.4)
+        t.wrong = Math.max(0, t.wrong - dt * 1.6)
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+
+      for (var i = 0; i < k.own.things.length; i++) {
+        var t = k.own.things[i]
+        /* A shake when it was the wrong one, a squeeze when it was tapped. */
+        var wob = t.wrong > 0 ? Math.sin(k.now * 0.045) * t.wrong * 0.2 : 0
+        var size = t.r * (1 + t.pop * 0.18)
+
+        /* Things on the ground have a shadow; things in the sky do not. */
+        if (t.id === 'sign' || t.id === 'door') {
+          ctx.save()
+          ctx.globalAlpha = 0.15
+          ctx.fillStyle = '#000'
+          ctx.beginPath()
+          ctx.ellipse(t.x, t.y + t.r * 1.15, t.r * 0.7, t.r * 0.18, 0, 0, Math.PI * 2)
+          ctx.fill()
+          ctx.restore()
+        }
+        K.shape(ctx, t.name, t.x, t.y, size, t.colour, { turn: t.turn + wob })
+      }
+
+      var ar = clamp(Math.min(k.W, k.H) * 0.08, 32, 66)
+      /* His feet, not his middle, sit above the bottom edge. He stands 1.5
+         radii below his centre, so anchoring him at one radius put his legs
+         off the screen and sliced the character the children actually like. */
+      k.him.draw(k.W - ar * 1.5, k.H - ar * 1.75, ar, k.H - ar * 0.25)
+    },
+
+    peek: function (k) {
+      if (!k.own.things) return { things: 0 }
+      return {
+        want: k.target,
+        things: k.own.things.map(function (t) {
+          return { s: t.name, where: t.id, x: Math.round(t.x), y: Math.round(t.y) }
+        }),
+        picked: k.own.picked ? k.own.picked.name : null,
+      }
+    },
+  })
+}())
+</script>
+</body>
+</html>

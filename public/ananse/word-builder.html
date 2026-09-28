@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ananse's Crossing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Word Builder. Word families, crossed on foot.
+
+  ── What makes this a Primary game and not a KG one ──────────────────────────
+
+  The KG games ask one question and the reward is the moment itself. This one
+  has somewhere to get to. There is an island with a chest on it, there is
+  water in between, and the only thing that puts stones in the water is reading
+  a word correctly. The goal is visible from the first question and it does not
+  move.
+
+  That is the whole structural difference, and it is why the view scrolls
+  rather than laying the crossing out as a diagram. A diagram of five slots is
+  a progress bar. A camera that follows someone across open water is a journey,
+  and a seven year old can tell the difference immediately.
+
+  ── Why word families ────────────────────────────────────────────────────────
+
+  Because it is the highest-leverage thing in early reading. A child who can
+  read "cap" can read tap, map, nap, lap, gap and rap the moment they see that
+  the ending is the same. Teaching thirty rimes teaches several hundred words.
+  Teaching several hundred words teaches several hundred words.
+
+  So the question is never "what is this word". It is "which of these belongs
+  to this family", and the family is shown as a pattern with its beginning
+  missing, sitting in the hole in the path where the answer will go. The
+  question is drawn in the place the answer fills.
+
+  ── Why the wrong answers share a first letter ───────────────────────────────
+
+  Offering "cap", "dish" and "met" for _ap is not reading, it is spotting the
+  short one that looks a bit like the pattern. At least one distractor here
+  starts with the same letter as the answer and the rest are the same length,
+  so cap sits next to cat and can. The eye cannot settle it. The child has to
+  read to the end of the word, which is the exact habit this is for.
+
+  ── Why a wrong stone sinks instead of turning red ───────────────────────────
+
+  A red tile is a mark. A crate that drops into the sea with a splash is a
+  consequence, and it leaves the board honestly changed: that stone is gone,
+  the gap is still there, and the two that are left are still worth reading.
+  The round is already recorded as missed, so the second try costs nothing more
+  and still ends with the child having read the right word.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #0d2f4d;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /**
+   * How far apart the islands are.
+   *
+   * ── Why the crossing has no end ───────────────────────────────────────────
+   *
+   * A five year old needs to see the finish from the start, because without it
+   * they do not know the game is nearly over and they cannot pace themselves.
+   * An eight year old has the opposite need: a set of twelve tells them
+   * exactly how little is being asked of them, and they stop as soon as it is
+   * done whether or not they were enjoying it.
+   *
+   * So this one runs until they lose it. What replaces the finish line is an
+   * island every ten stones: somewhere to arrive, a chest to open, and a
+   * number that got bigger. The sea after it is deeper.
+   */
+  var STRETCH = 10
+
+  /** Every tenth landing is dry ground rather than another crate. */
+  function isIsland(slot) { return slot > 0 && slot % STRETCH === STRETCH - 1 }
+
+  /* ── the words ───────────────────────────────────────────────────────────── */
+
+  /**
+   * Word families, shortest rimes first.
+   *
+   * `say` is how the rime is pronounced when it is read aloud, which is not
+   * always how it is spelled. Saying it and showing it together is the lesson.
+   *
+   * Every word here is one a Ghanaian Primary child has met. No "vat", no
+   * "fen", no words that exist only inside phonics books.
+   */
+  var SHORT = [
+    { rime: 'ap', say: 'ap', words: ['cap', 'map', 'tap', 'nap', 'lap', 'gap'] },
+    { rime: 'at', say: 'at', words: ['cat', 'hat', 'bat', 'mat', 'rat', 'sat'] },
+    { rime: 'an', say: 'an', words: ['can', 'man', 'pan', 'fan', 'ran', 'van'] },
+    { rime: 'ig', say: 'ig', words: ['pig', 'big', 'dig', 'wig'] },
+    { rime: 'og', say: 'og', words: ['dog', 'log', 'fog', 'jog'] },
+    { rime: 'un', say: 'un', words: ['sun', 'run', 'bun', 'fun'] },
+    { rime: 'et', say: 'et', words: ['net', 'wet', 'get', 'pet', 'let'] },
+    { rime: 'op', say: 'op', words: ['top', 'mop', 'hop', 'pop', 'shop'] },
+    { rime: 'ug', say: 'ug', words: ['bug', 'rug', 'mug', 'hug', 'jug'] },
+    { rime: 'in', say: 'in', words: ['pin', 'win', 'bin', 'tin', 'thin'] },
+    { rime: 'ed', say: 'ed', words: ['bed', 'red', 'fed', 'led'] },
+    { rime: 'ot', say: 'ot', words: ['pot', 'hot', 'dot', 'not', 'got'] }
+  ]
+
+  var LONG = [
+    { rime: 'ock', say: 'ock', words: ['rock', 'sock', 'lock', 'clock', 'block'] },
+    { rime: 'ing', say: 'ing', words: ['ring', 'king', 'sing', 'wing', 'thing'] },
+    { rime: 'ash', say: 'ash', words: ['cash', 'wash', 'dash', 'flash', 'crash'] },
+    { rime: 'ell', say: 'ell', words: ['bell', 'well', 'sell', 'shell', 'smell'] },
+    { rime: 'ick', say: 'ick', words: ['kick', 'sick', 'pick', 'stick', 'brick'] },
+    { rime: 'ump', say: 'ump', words: ['jump', 'bump', 'pump', 'lump'] },
+    { rime: 'and', say: 'and', words: ['hand', 'land', 'sand', 'band', 'stand'] },
+    { rime: 'ill', say: 'ill', words: ['hill', 'bill', 'fill', 'spill', 'still'] },
+    { rime: 'ack', say: 'ack', words: ['back', 'pack', 'sack', 'black', 'track'] }
+  ]
+
+  var ALL = SHORT.concat(LONG)
+
+  /** Every word this game knows, for picking wrong answers out of. */
+  var POOL = []
+  for (var fi = 0; fi < ALL.length; fi++) {
+    for (var wi = 0; wi < ALL[fi].words.length; wi++) {
+      POOL.push({ word: ALL[fi].words[wi], rime: ALL[fi].rime })
+    }
+  }
+
+  function endsWith(word, rime) {
+    return word.length > rime.length
+      && word.slice(word.length - rime.length) === rime
+  }
+
+  /**
+   * One gap's worth of question.
+   *
+   * ── On the difficulty ─────────────────────────────────────────────────────
+   *
+   * The first two stones are three letter rimes and the rest may be four, so
+   * the crossing gets harder as it goes. That is the climb the KG games
+   * deliberately do not have: a child who is finding it easy at the ship is
+   * working by the time they can see the island.
+   *
+   * ── On the wrong answers ──────────────────────────────────────────────────
+   *
+   * One shares the answer's first letter wherever the word bank allows it, and
+   * none of them ends in the rime. A child who reads only the first letter
+   * gets it wrong, and a child who reads only the shape of the word gets it
+   * wrong, which is the entire purpose of the exercise.
+   */
+  function makeQuestion(round) {
+    /* Three letter rimes in the shallows, everything once he is out of sight
+       of the ship, and only the four letter families in deep water. */
+    var fam = pick(round < 3 ? SHORT : round < 8 ? ALL : LONG)
+    var answer = pick(fam.words)
+    var head = answer.charAt(0)
+    var wrong = []
+
+    function usable(p) {
+      return !endsWith(p.word, fam.rime) && p.word !== answer
+        && wrong.indexOf(p.word) < 0
+    }
+
+    var sameStart = POOL.filter(function (p) {
+      return usable(p) && p.word.charAt(0) === head
+    })
+    if (sameStart.length) wrong.push(pick(sameStart).word)
+
+    var sameLength = POOL.filter(function (p) {
+      return usable(p) && p.word.length === answer.length
+    })
+    while (wrong.length < 2 && sameLength.length) {
+      var near = pick(sameLength).word
+      if (wrong.indexOf(near) < 0) wrong.push(near)
+    }
+
+    /* Whatever is left, for the rare family where the bank ran out of near
+       misses. Never a word that ends in the rime. */
+    var rest = POOL.filter(usable)
+    while (wrong.length < 2 && rest.length) {
+      var any = pick(rest).word
+      if (wrong.indexOf(any) < 0) wrong.push(any)
+    }
+
+    /* A fourth crate once he is a good way out. More to read, and a guess is
+       worth a quarter instead of a third. */
+    if (round >= 15) {
+      var extra = POOL.filter(usable)
+      if (extra.length) wrong.push(pick(extra).word)
+    }
+
+    var options = [answer].concat(wrong)
+    options.sort(function () { return Math.random() - 0.5 })
+    return { rime: fam.rime, say: fam.say, answer: answer, options: options }
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * How far apart the stepping stones sit, in world units.
+   *
+   * The world is wider than the screen and the camera follows, so this is not
+   * a fraction of the crossing. It is how big a step looks, and it stays the
+   * same whether there are five stones or fifty.
+   */
+  /** Where the sea meets the sky, which is higher on a phone held upright. */
+  function horizon(k) { return K.seaY(k.W, k.H) }
+
+  /** How deep the water is: everything in the game happens in here. */
+  function waterH(k) { return (k.H - K.tileRow(k.H)) - horizon(k) }
+
+  /**
+   * How far apart the stepping stones sit.
+   *
+   * Against the width and the depth of the water both. It was the width and
+   * the height of the screen, and on a phone held upright that made the
+   * stones a fifth of the width while nearly half the screen was empty sky:
+   * everything the child had to read was small, and none of the room was
+   * being used.
+   */
+  function stride(k) {
+    return clamp(Math.min(k.W * 0.42, waterH(k) * 0.72), 108, 260)
+  }
+  function stoneS(k) { return stride(k) * 0.62 }
+  /**
+   * The ship, sized against him rather than against the stones.
+   *
+   * It was two thirds of a crate, which made him taller than the boat he was
+   * standing in and left him perched on it like a decoration. A boat has to be
+   * big enough to be got into.
+   */
+  function shipS(k) { return stoneS(k) * 0.95 }
+  /** The rim of the hull, which is the surface he stands on at slot -1. */
+  function deckY(k) { return laneY(k) + swell(k, -1) - shipS(k) * 0.5 }
+
+  /**
+   * The waterline the stones sit on.
+   *
+   * A little past the middle of the water, and then held off both edges by
+   * the size of a stone, so the crossing never rides up onto the horizon on a
+   * short screen or down into the answers on a tall one.
+   */
+  function laneY(k) {
+    var top = horizon(k)
+    var bottom = k.H - K.tileRow(k.H)
+    var s = stoneS(k)
+    return clamp(top + (bottom - top) * 0.58, top + s * 0.62, bottom - s * 0.62)
+  }
+
+  /**
+   * Where the camera should be for someone standing on slot `i`.
+   *
+   * He is kept a third of the way in rather than centred, because the
+   * interesting part of the picture is ahead of him: the gap, the next stones
+   * and the island. Centring him would spend half the screen on water he has
+   * already crossed.
+   */
+  /**
+   * Where the camera should be for someone standing on slot `i`.
+   *
+   * He is kept a third of the way in rather than centred, because the
+   * interesting part of the picture is ahead of him: the gap, the next stones
+   * and whatever island is coming. Centring him would spend half the screen on
+   * water he has already crossed.
+   */
+  function camFor(k, stand) { return stand * stride(k) - k.W * 0.32 }
+
+  /** The bob of the water at a slot, so the stones are afloat and not pinned. */
+  function swell(k, i) { return Math.sin(k.now * 0.0016 + i * 1.1) * stoneS(k) * 0.07 }
+
+  /** The crates to choose from, along the bottom. */
+  function pickRect(k, i, n) {
+    var row = K.tileRow(k.H)
+    var size = Math.min(row * 0.88, k.W / (n + 1.5))
+    var gap = size * 0.26
+    var total = n * size + (n - 1) * gap
+    var x0 = k.W / 2 - total / 2
+    return { x: x0 + i * (size + gap), y: k.H - row * 0.52 - size * 0.5, w: size, h: size }
+  }
+
+  function pickAt(k, n, px, py) {
+    for (var i = 0; i < n; i++) {
+      var r = pickRect(k, i, n)
+      /* A margin, because a thumb that lands just off a crate meant for thumbs
+         should still count. */
+      if (px >= r.x - 8 && px <= r.x + r.w + 8
+        && py >= r.y - 10 && py <= r.y + r.h + 10) return i
+    }
+    return -1
+  }
+
+  /* ── the things in the water ─────────────────────────────────────────────── */
+
+  /**
+   * A crate.
+   *
+   * Drawn from its centre so the same code can put one in the row, fly one
+   * across the water and sink one, without caring which it is doing. The word
+   * takes a dark outline and a white fill, which is the lettering rule
+   * everywhere in this set: white alone vanishes against pale water, and a
+   * coloured ring as well would close the letters up at this size.
+   */
+  function drawCrate(ctx, x, y, s, word, font, tint) {
+    var h = s * 0.5
+    ctx.save()
+    ctx.translate(x, y)
+
+    ctx.beginPath()
+    ctx.roundRect(-h, -h, s, s, s * 0.1)
+    K.inkedOn(ctx, tint || '#b5793a', K.LINE, 4)
+
+    /* Planks and a brace, which is what stops a brown square being a box. */
+    ctx.save()
+    ctx.beginPath()
+    ctx.roundRect(-h, -h, s, s, s * 0.1)
+    ctx.clip()
+    ctx.strokeStyle = 'rgba(80,46,12,0.45)'
+    ctx.lineWidth = Math.max(2, s * 0.035)
+    ctx.beginPath()
+    ctx.moveTo(-h, -h + s * 0.22)
+    ctx.lineTo(h, -h + s * 0.22)
+    ctx.moveTo(-h, h - s * 0.22)
+    ctx.lineTo(h, h - s * 0.22)
+    ctx.moveTo(-h, -h)
+    ctx.lineTo(h, h)
+    ctx.moveTo(h, -h)
+    ctx.lineTo(-h, h)
+    ctx.stroke()
+    ctx.restore()
+
+    /* Studs round the rim. */
+    ctx.fillStyle = '#e8913c'
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 1.6
+    for (var sx = -1; sx <= 1; sx += 2) {
+      for (var sy = -1; sy <= 1; sy += 2) {
+        ctx.beginPath()
+        ctx.arc(sx * s * 0.36, sy * s * 0.36, s * 0.055, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.stroke()
+      }
+    }
+
+    if (word) {
+      var size = s * 0.3
+      ctx.font = '700 ' + Math.round(size) + 'px ' + font
+      while (ctx.measureText(word).width > s * 0.78 && size > s * 0.14) {
+        size *= 0.92
+        ctx.font = '700 ' + Math.round(size) + 'px ' + font
+      }
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.lineJoin = 'round'
+      ctx.miterLimit = 2
+      ctx.strokeStyle = K.LINE
+      ctx.lineWidth = size * 0.3
+      ctx.strokeText(word, 0, 0)
+      ctx.fillStyle = '#ffffff'
+      ctx.fillText(word, 0, 0)
+    }
+    ctx.restore()
+  }
+
+  /**
+   * The gap, with the pattern in it.
+   *
+   * The question is drawn in the hole the answer fills, so there is nothing to
+   * look back and forth between. The underscore stands where the missing
+   * letter goes and the rime is solid, which is the same convention the child
+   * will meet on a worksheet.
+   */
+  function drawGap(ctx, x, y, s, rime, font, now) {
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.globalAlpha = 0.85 + Math.sin(now * 0.004) * 0.15
+    ctx.strokeStyle = '#ffffff'
+    ctx.lineWidth = Math.max(3, s * 0.05)
+    ctx.setLineDash([s * 0.16, s * 0.12])
+    ctx.beginPath()
+    ctx.roundRect(-s * 0.5, -s * 0.5, s, s, s * 0.1)
+    ctx.stroke()
+    ctx.setLineDash([])
+
+    /* A dark plate under the pattern.
+       Yellow letters on bright water are the same problem as white letters on
+       a pale sky: the fill and the background sit at the same value and only
+       the outline survives. The reference apps all put the pattern on a dark
+       bubble, and this is that bubble. */
+    ctx.globalAlpha = 1
+    ctx.beginPath()
+    ctx.roundRect(-s * 0.42, -s * 0.24, s * 0.84, s * 0.48, s * 0.24)
+    ctx.fillStyle = 'rgba(12,42,70,0.72)'
+    ctx.fill()
+
+    var label = '_' + rime
+    var size = s * 0.34
+    ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    while (ctx.measureText(label).width > s * 0.8 && size > s * 0.16) {
+      size *= 0.92
+      ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    }
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.lineJoin = 'round'
+    ctx.miterLimit = 2
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = size * 0.3
+    ctx.strokeText(label, 0, 0)
+    ctx.fillStyle = '#ffd93b'
+    ctx.fillText(label, 0, 0)
+    ctx.restore()
+  }
+
+  /** The ship he sets off from. Only the bow is ever on screen. */
+  function drawShip(ctx, x, y, s) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    /* Mast and sail, well back down the deck.
+       They were amidships, which is exactly where he stands, so he covered the
+       sail completely and appeared to be holding a pole. */
+    var mast = -s * 1.9
+    ctx.strokeStyle = '#8a5a2b'
+    ctx.lineWidth = Math.max(4, s * 0.12)
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(mast, -s * 2.7)
+    ctx.lineTo(mast, -s * 0.2)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.moveTo(mast + s * 0.06, -s * 2.55)
+    ctx.quadraticCurveTo(s * 0.5, -s * 1.5, mast + s * 0.06, -s * 0.55)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 4)
+    /* A pennant, so the top of the mast is not a bare stick. */
+    ctx.beginPath()
+    ctx.moveTo(mast, -s * 2.7)
+    ctx.lineTo(mast + s * 0.7, -s * 2.5)
+    ctx.lineTo(mast, -s * 2.3)
+    ctx.closePath()
+    K.inkedOn(ctx, '#e0482e', K.LINE, 3)
+
+    /* Hull: a wedge, bow to the right, because that is the way he is going. */
+    ctx.beginPath()
+    ctx.moveTo(-s * 3.2, -s * 0.5)
+    ctx.lineTo(s * 0.62, -s * 0.5)
+    ctx.quadraticCurveTo(s * 0.5, s * 0.5, -s * 0.2, s * 0.62)
+    ctx.lineTo(-s * 3.2, s * 0.62)
+    ctx.closePath()
+    K.inkedOn(ctx, '#e8913c', K.LINE, 4)
+
+    /* Deck line and a porthole. */
+    ctx.strokeStyle = 'rgba(90,50,12,0.5)'
+    ctx.lineWidth = Math.max(2, s * 0.05)
+    ctx.beginPath()
+    ctx.moveTo(-s * 3.2, -s * 0.2)
+    ctx.lineTo(s * 0.5, -s * 0.2)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.arc(-s * 0.9, s * 0.1, s * 0.16, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#7fd0f2', K.LINE, 3)
+    ctx.restore()
+  }
+
+  /**
+   * The chest, closed or open.
+   *
+   * ── Why the lid is drawn first when it is open ────────────────────────────
+   *
+   * A lid hinged at the back belongs behind the box, and drawing it after the
+   * box put it in front of everything: it came out as a red fan stuck to the
+   * side and read as something the spider was wearing rather than something
+   * he had found. Behind the box, tipped back, with the coins in the mouth in
+   * front of it, is the only arrangement that reads as open at this size.
+   */
+  function drawChest(ctx, x, y, s, open, now) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    /* The glow, under everything, which is the only light in the picture. */
+    if (open) {
+      var g = ctx.createRadialGradient(0, 0, 0, 0, 0, s * 2.4)
+      g.addColorStop(0, 'rgba(255,228,110,0.7)')
+      g.addColorStop(1, 'rgba(255,228,110,0)')
+      ctx.fillStyle = g
+      ctx.beginPath()
+      ctx.arc(0, 0, s * 2.4, 0, Math.PI * 2)
+      ctx.fill()
+    }
+
+    var bw = s          /* the box, full width */
+    var bh = s * 0.48   /* and how deep it stands */
+
+    function lid(tilt) {
+      ctx.save()
+      /* Hinged on the back top corner, so it swings up and away. */
+      ctx.translate(-bw * 0.5, 0)
+      ctx.rotate(-tilt)
+      ctx.beginPath()
+      ctx.moveTo(0, 0)
+      ctx.lineTo(0, -s * 0.1)
+      ctx.quadraticCurveTo(bw * 0.5, -s * 0.52, bw, -s * 0.1)
+      ctx.lineTo(bw, 0)
+      ctx.closePath()
+      K.inkedOn(ctx, '#d6543a', K.LINE, 3.5)
+      /* One gold strap, lining up with the one on the box. */
+      ctx.strokeStyle = '#f2c33b'
+      ctx.lineWidth = Math.max(3, s * 0.08)
+      ctx.beginPath()
+      ctx.moveTo(bw * 0.5, -s * 0.37)
+      ctx.lineTo(bw * 0.5, 0)
+      ctx.stroke()
+      ctx.restore()
+    }
+
+    if (open) lid(1.05)
+
+    /* The box. */
+    ctx.beginPath()
+    ctx.roundRect(-bw * 0.5, 0, bw, bh, s * 0.06)
+    K.inkedOn(ctx, '#c4442e', K.LINE, 3.5)
+
+    if (open) {
+      /* The mouth, dark, then what is in it. */
+      ctx.beginPath()
+      ctx.ellipse(0, s * 0.02, bw * 0.42, s * 0.1, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#5a1d12', K.LINE, 2.5)
+      for (var c = 0; c < 7; c++) {
+        var cx = (-0.3 + (c % 4) * 0.2) * bw
+        var cy = s * (-0.03 - Math.floor(c / 4) * 0.09)
+        var wob = Math.sin(now * 0.004 + c) * s * 0.015
+        ctx.beginPath()
+        ctx.ellipse(cx, cy + wob, s * 0.11, s * 0.08, 0, 0, Math.PI * 2)
+        K.inkedOn(ctx, c % 2 ? '#f2d024' : '#ffe98a', K.LINE, 2)
+      }
+    }
+
+    /* The strap down the front, and the lock when it is shut. */
+    ctx.strokeStyle = '#f2c33b'
+    ctx.lineWidth = Math.max(3, s * 0.08)
+    ctx.beginPath()
+    ctx.moveTo(0, 0)
+    ctx.lineTo(0, bh)
+    ctx.stroke()
+
+    if (!open) {
+      lid(0)
+      ctx.beginPath()
+      ctx.roundRect(-s * 0.09, bh * 0.22, s * 0.18, s * 0.18, s * 0.05)
+      K.inkedOn(ctx, '#f2c33b', K.LINE, 2.5)
+    }
+    ctx.restore()
+  }
+
+  /**
+   * An island, sitting on a slot where a crate would otherwise be.
+   *
+   * Small, because it has to occupy one step of the crossing rather than end
+   * it. It is a checkpoint: somewhere to arrive, a chest that opens, and the
+   * only dry ground in the game. Everything about it is a reward for having
+   * got this far, which is what replaces a finish line in a run that has none.
+   */
+  function drawIslet(ctx, x, y, s, open, now) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    /* Rock below the waterline, grass above it.
+       Wide enough for a chest and a spider side by side. It was a stone's
+       width, so the two of them were laid on top of one another and the chest
+       came out looking like something he was wearing. */
+    ctx.beginPath()
+    ctx.moveTo(-s * 1.5, -s * 0.18)
+    ctx.quadraticCurveTo(-s * 1.2, s * 0.8, 0, s * 0.84)
+    ctx.quadraticCurveTo(s * 1.2, s * 0.8, s * 1.5, -s * 0.18)
+    ctx.closePath()
+    K.inkedOn(ctx, '#a9703c', K.LINE, 4)
+
+    ctx.beginPath()
+    ctx.ellipse(0, -s * 0.3, s * 1.58, s * 0.34, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#6cbf42', K.LINE, 4)
+
+    /* A palm, so it reads as an island and not a hat. */
+    ctx.strokeStyle = '#8a5a2b'
+    ctx.lineWidth = Math.max(4, s * 0.1)
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(s * 1.12, -s * 0.42)
+    ctx.quadraticCurveTo(s * 1.4, -s * 1.15, s * 1.18, -s * 1.7)
+    ctx.stroke()
+    for (var l = -1; l <= 1; l++) {
+      ctx.beginPath()
+      ctx.ellipse(s * (1.18 + l * 0.34), -s * 1.78, s * 0.4, s * 0.16,
+        l * 0.5, 0, Math.PI * 2)
+      K.inkedOn(ctx, l === 0 ? '#2e9e42' : '#3fae4c', K.LINE, 3)
+    }
+
+    /* The chest at the left end of the grass, where he is not. */
+    drawChest(ctx, -s * 0.78, -s * 0.78, s * 0.92, open, now)
+    ctx.restore()
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    ask: function (r) { return 'Find the word that ends with ' + r + '.' },
+    right: ['Step across!', 'Good! Keep going!', 'That is the one!', 'Onward!'],
+    wrong: function (r) { return 'Splash! That one does not end with ' + r + '.' },
+    over: 'Oh no! I am in the water!',
+    island: 'Land! And treasure! Let us keep going!',
+    poke: 'Careful! Do not push me in!'
+  }
+
+  AnanseKit.run({
+    title: "Ananse's Crossing",
+    overTitle: 'Splash!',
+    scene: 'sea',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'stones',
+    hud: function (k) {
+      return [
+        { label: 'stones', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+    /* Tapping a crate is the whole answer. */
+    button: false,
+    restMood: 'hello',
+
+    begin: function (k) {
+      var q = makeQuestion(k.round)
+      k.own.q = q
+      k.target = q.answer
+      k.own.picked = -1
+      k.own.sunk = []
+      k.own.fly = null
+
+      /* Carried across rounds: where he stands, what he has already laid, and
+         where the camera is. `begin` runs once a round, so none of these may
+         be reset here or the crossing would restart at every question. */
+      if (k.own.stand === undefined) {
+        k.own.stand = -1
+        k.own.laid = []
+        k.own.coins = 0
+        k.own.cam = camFor(k, -1)
+      }
+      /* A run that ended and was tapped to start again. The kit resets its own
+         score and lives; the crossing has to be put back out to sea. */
+      if (k.round === 0 && k.own.stand !== -1) {
+        k.own.stand = -1
+        k.own.laid = []
+        k.own.coins = 0
+        k.own.sank = false
+        k.own.cam = camFor(k, -1)
+      }
+      k.say(LINES.ask(q.say))
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) {
+      if (k.own.stand === undefined) return
+      k.own.cam = camFor(k, k.own.stand)
+    },
+
+    ask: function (k) {
+      if (!k.own.q) return null
+      if (k.phase === 'won') return { head: 'Yes! ', num: k.own.q.answer, tail: '' }
+      return { head: 'Which word ends in ', num: k.own.q.say, tail: '?' }
+    },
+
+    /**
+     * Does the word on the crate that was tapped end with the rime on the gap?
+     *
+     * Worked out from the two strings on screen at this moment. Nothing stores
+     * which crate is the right one, so there is nothing that can drift out of
+     * step with the picture.
+     */
+    judge: function (k) {
+      if (k.own.picked < 0) return false
+      var word = k.own.q.options[k.own.picked]
+      if (!word) return false
+      return endsWith(word, k.own.q.rime)
+    },
+
+    down: function (k, x, y) {
+      if (k.own.picked >= 0 || k.own.fly) return false
+      var n = k.own.q.options.length
+      var i = pickAt(k, n, x, y)
+      if (i < 0 || !k.own.q.options[i]) return false
+      k.own.picked = i
+      k.sound.play('lift')
+      k.commit()
+      return true
+    },
+
+    onWin: function (k) {
+      var word = k.own.q.options[k.own.picked]
+      var from = pickRect(k, k.own.picked, k.own.q.options.length)
+      /* Off the row the moment it is picked up.
+         It was only hidden while it was in the air, so the instant it landed
+         in the gap a second copy of the same crate blinked back into the row
+         and sat there until the next question. */
+      k.own.q.options[k.own.picked] = null
+      /* Flown from the row into the gap, so the answer visibly becomes the
+         path rather than a counter going up somewhere. */
+      k.own.fly = {
+        word: word, slot: k.round, t: 0,
+        fx: from.x + from.w / 2, fy: from.y + from.h / 2
+      }
+      k.say(pick(LINES.right))
+    },
+
+    onMiss: function (k) {
+      var word = k.own.q.options[k.own.picked]
+      k.own.sunk.push({ word: word, at: k.own.picked, t: 0 })
+      /* Gone from the row: the sea has it. The two that are left are still
+         worth reading, and the round is already recorded as missed. */
+      k.own.q.options[k.own.picked] = null
+      k.own.picked = -1
+      k.sound.play('steal')
+      k.say(LINES.wrong(k.own.q.say))
+    },
+
+    onOver: function (k) {
+      /* Out of lives. He goes in the water, which is the one thing the whole
+         crossing has been about avoiding. */
+      k.own.sank = true
+      k.say(LINES.over)
+    },
+
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      if (k.own.stand === undefined) return
+
+      var want = camFor(k, k.own.stand)
+      k.own.cam += (want - k.own.cam) * Math.min(1, dt * 3.2)
+
+      for (var s = 0; s < k.own.sunk.length; s++) {
+        k.own.sunk[s].t = Math.min(1, k.own.sunk[s].t + dt * 1.1)
+      }
+
+      var fly = k.own.fly
+      if (fly) {
+        fly.t = Math.min(1, fly.t + dt * 2.1)
+        if (fly.t >= 1) {
+          /* It has landed. The stone is real, and he steps onto it. */
+          k.own.laid[fly.slot] = fly.word
+          k.own.stand = fly.slot
+          k.own.fly = null
+          k.sound.play('thud')
+          k.kick(4)
+          var atX = fly.slot * stride(k) - k.own.cam
+          k.puff(atX, laneY(k), 12, 'rgba(255,255,255,0.8)')
+
+          k.own.coins += 1
+          if (isIsland(fly.slot)) {
+            /* Dry ground. Worth arriving at, so it pays. */
+            k.own.coins += 10
+            k.cheer(atX, laneY(k) - stoneS(k) * 0.4)
+            k.sound.play('win')
+            k.say(LINES.island)
+          }
+        }
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var cam = k.own.cam
+      var st = stride(k)
+      var ss = stoneS(k)
+      var lane = laneY(k)
+      var font = k.FONT
+      var i
+
+      function screenX(slot) { return slot * st - cam }
+
+      /* The ship, at slot -1. */
+      drawShip(ctx, screenX(-1), lane + swell(k, -1), shipS(k))
+
+      /**
+       * Stones already laid, the gap being worked on, and the islands.
+       *
+       * Only the slots that are on screen. The crossing has no length, so
+       * looping over all of it would mean looping over a run that could be a
+       * hundred stones long, sixty times a second, to draw the four that are
+       * visible.
+       */
+      var first = Math.floor((cam - ss * 2) / st)
+      var last = Math.ceil((cam + k.W + ss * 2) / st)
+      for (i = Math.max(0, first); i <= last; i++) {
+        var sx = screenX(i)
+        var sy = lane + swell(k, i)
+
+        /* An island shows itself before it is reached, which is the point of
+           it: something to aim at out in open water. */
+        if (isIsland(i) && !k.own.laid[i] && i !== k.round) {
+          drawIslet(ctx, sx, sy, ss * 0.78, false, k.now)
+          continue
+        }
+
+        if (k.own.laid[i]) {
+          if (isIsland(i)) {
+            drawIslet(ctx, sx, sy, ss * 0.78, true, k.now)
+            continue
+          }
+          /* A shadow on the water, so the crate is floating in it. */
+          ctx.save()
+          ctx.globalAlpha = 0.18
+          ctx.fillStyle = '#062a45'
+          ctx.beginPath()
+          ctx.ellipse(sx, sy + ss * 0.58, ss * 0.5, ss * 0.13, 0, 0, Math.PI * 2)
+          ctx.fill()
+          ctx.restore()
+          drawCrate(ctx, sx, sy, ss, k.own.laid[i], font)
+        } else if (i === k.round && k.own.q && k.phase !== 'over') {
+          /* The island being worked towards still shows, behind the pattern,
+             so the child can see the reward the gap is standing in front of. */
+          if (isIsland(i)) drawIslet(ctx, sx, sy, ss * 0.78, false, k.now)
+          drawGap(ctx, sx, sy, ss, k.own.q.rime, font, k.now)
+        }
+      }
+
+      /**
+       * Him, on whatever he is standing on.
+       *
+       * Smaller than the crate on purpose. At four tenths of it his eight legs
+       * reached past both edges and hung over open water, and a spider with
+       * its legs in mid air reads as floating however carefully its feet are
+       * placed. Fitting on the stone is what makes him stand on it.
+       */
+      var hr = ss * 0.33
+      /* On the ship he stands at the bow, which is both where a lookout
+         stands and the only part of the deck the mast is not on. */
+      /* On an island he stands to the right of the chest, and on the grass
+         rather than half sunk into it. */
+      var standX = k.own.stand === -1
+        ? screenX(-1) - ss * 0.1
+        : isIsland(k.own.stand)
+          ? screenX(k.own.stand) + ss * 0.78 * 0.62
+          : screenX(k.own.stand)
+      var deck
+      if (k.own.stand === -1) deck = deckY(k)
+      else if (isIsland(k.own.stand)) {
+        /* The middle of the grass mound, which is its visible top surface.
+           Its outline reaches higher than that, and standing him on the
+           outline left daylight under his feet. */
+        deck = lane + swell(k, k.own.stand) - ss * 0.78 * 0.3
+      } else deck = lane + swell(k, k.own.stand) - ss * 0.5
+
+      if (k.own.sank) {
+        standX = (k.own.stand === -1 ? screenX(-1) : screenX(k.own.stand)) + st * 0.5
+        /* In the water. Chest deep, with a ring where he went in, because a
+           run that ends has to end with something happening to him and not
+           just a number appearing. */
+        var wy = lane + ss * 0.3
+        ctx.save()
+        ctx.strokeStyle = 'rgba(255,255,255,0.65)'
+        ctx.lineWidth = Math.max(3, ss * 0.05)
+        for (var ring = 0; ring < 2; ring++) {
+          ctx.beginPath()
+          ctx.ellipse(standX, wy + hr * 0.5, hr * (1.1 + ring * 0.55),
+            hr * (0.3 + ring * 0.15), 0, 0, Math.PI * 2)
+          ctx.stroke()
+        }
+        ctx.beginPath()
+        ctx.rect(0, 0, k.W, wy + hr * 0.5)
+        ctx.clip()
+        k.him.draw(standX, wy - hr * 0.3, hr, wy + hr * 0.5)
+        ctx.restore()
+      } else {
+        k.him.draw(standX, deck - hr * 1.26, hr, deck)
+      }
+
+      /* A crate on its way into the gap. */
+      var fly = k.own.fly
+      if (fly) {
+        var tx = screenX(fly.slot)
+        var ty = lane + swell(k, fly.slot)
+        var t = fly.t
+        var ease = t * t * (3 - 2 * t)
+        /* Thrown, not slid: an arc says it was tossed across the water. */
+        var arc = Math.sin(t * Math.PI) * ss * 0.9
+        drawCrate(ctx, fly.fx + (tx - fly.fx) * ease,
+          fly.fy + (ty - fly.fy) * ease - arc, ss, fly.word, font)
+      }
+
+      /* Crates that went in the water, on their way down. */
+      for (i = 0; i < k.own.sunk.length; i++) {
+        var sk = k.own.sunk[i]
+        if (sk.t >= 1) continue
+        var r0 = pickRect(k, sk.at, k.own.q.options.length)
+        ctx.save()
+        ctx.globalAlpha = 1 - sk.t
+        drawCrate(ctx, r0.x + r0.w / 2, r0.y + r0.h / 2 + sk.t * r0.h * 0.9,
+          r0.w * (1 - sk.t * 0.2), sk.word, font, '#8a5a2b')
+        ctx.restore()
+      }
+
+      /* The crates to choose from. Gone once he is ashore: they are the
+         question, and the question is over. */
+      if (k.phase === 'over') return
+      var n = k.own.q.options.length
+      for (i = 0; i < n; i++) {
+        var word = k.own.q.options[i]
+        if (!word) continue
+        if (fly && i === k.own.picked) continue
+        var r = pickRect(k, i, n)
+        var lift = Math.sin(k.now * 0.002 + i * 1.7) * r.h * 0.04
+        drawCrate(ctx, r.x + r.w / 2, r.y + r.h / 2 + lift, r.w, word, font)
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.q) return { q: null }
+      return {
+        rime: k.own.q.rime,
+        answer: k.own.q.answer,
+        options: k.own.q.options,
+        picked: k.own.picked,
+        stand: k.own.stand,
+        laid: k.own.laid,
+        flying: !!k.own.fly,
+        coins: k.own.coins,
+        sank: !!k.own.sank,
+        island: isIsland(k.round),
+        crates: k.own.q.options.map(function (w, i) {
+          var r = pickRect(k, i, k.own.q.options.length)
+          return { word: w, x: Math.round(r.x + r.w / 2), y: Math.round(r.y + r.h / 2) }
+        })
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Multiplication Monster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Multiplication Monster. Times tables, as plates of buns.
+
+  ── Why the buns are drawn out in full ───────────────────────────────────────
+
+  The fast way to build this is a banner that says 3 x 4 and four tiles to pick
+  from, and it would be a memory test. A child who has not met the four times
+  table cannot get in, and a child who has does not need the game.
+
+  So every bun is on the screen, laid out as three plates with four buns on
+  each. That array is the entire lesson: it is what makes 3 x 4 visible as
+  three fours rather than a fact to be recited, and it leaves a child who does
+  not know the table a way through, which is to count. Counting a hundred buns
+  is slow, and the slowness is the pressure that makes them look for the
+  shortcut. That is how the table gets learnt.
+
+  ── Why the wrong answers are what they are ──────────────────────────────────
+
+  a + b is there because adding when you were asked to multiply is the
+  commonest slip at this age by a distance, and a child who makes it has to be
+  shown it rather than allowed past it. a x (b - 1) and a x (b + 1) are the two
+  ways to lose or gain a plate while counting, which is the second commonest.
+
+  a x (b + 1) is always larger than the answer, so the biggest tile is always
+  wrong. The row cannot be beaten by a rule of thumb.
+
+  ── Why the monster is silly ─────────────────────────────────────────────────
+
+  It lives in a cave, it is enormous and it eats everything on the shelves, so
+  the only thing keeping it from being frightening is how it is drawn. Round
+  body, no teeth worth the name, eyes far too big, horns that curl the wrong
+  way. Then it swells up and burps. A monster a six year old wants to feed is a
+  monster they will come back to.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #3a2a3f;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /**
+   * Number names, for the spoken line only.
+   *
+   * The banner shows digits because that is what a child has to learn to read.
+   * The voice says words because a speech engine handed "3 x 4" reads it as
+   * "three x four" or spells it out, and the one sentence that has to arrive
+   * intact is the one that names what the picture means.
+   */
+  var WORD = ['zero', 'one', 'two', 'three', 'four', 'five',
+    'six', 'seven', 'eight', 'nine', 'ten']
+
+  function capital(s) { return s.charAt(0).toUpperCase() + s.slice(1) }
+
+  var LINES = {
+    ask: function (a, b) {
+      return capital(WORD[a]) + ' plates of ' + WORD[b] + ' buns. How many buns?'
+    },
+    right: ['It ate the lot!', 'Yes! Feed it more!', 'That is it!', 'Good counting!'],
+    wrong: function (n) { return 'Count them again. There are ' + n + ' buns.' },
+    giant: 'A giant one! Look how much it can eat!',
+    over: 'The monster is still hungry. Let us try again!',
+    poke: 'Do not poke me, poke the monster!'
+  }
+
+  /** Every tenth monster is a giant, and a giant is worth ten coins. */
+  var GIANT = 10
+  function isGiant(round) { return round > 0 && round % GIANT === GIANT - 1 }
+
+  /* ── the sums ──────────────────────────────────────────────────────────── */
+
+  /**
+   * One monster's worth of question.
+   *
+   * ── On the difficulty ─────────────────────────────────────────────────────
+   *
+   * Up to five by five for the first four monsters, then up to ten by ten.
+   * Neither number ever drops below two: a x 1 is not multiplication, it is
+   * the word "a", and one plate of anything does not show an array at all.
+   *
+   * ── On the wrong answers ──────────────────────────────────────────────────
+   *
+   * The three near misses are built first and then deduplicated, because at
+   * two by two the sum and the product are both four and the row would have
+   * offered the answer twice. Whatever is short is topped up with something
+   * else in range, never with a number so far off that the row can be solved
+   * by ignoring three of the tiles.
+   */
+  function makeSum(round) {
+    var top = round < 4 ? 5 : 10
+    var a = randInt(2, top)
+    var b = randInt(2, top)
+    var answer = a * b
+
+    var wrong = []
+    function offer(v) {
+      if (v < 0 || v === answer || wrong.indexOf(v) >= 0) return
+      wrong.push(v)
+    }
+    /* Added instead of multiplied. This one has to be on the row every time. */
+    offer(a + b)
+    offer(a * (b - 1))
+    offer(a * (b + 1))
+    var spare = [answer - 2, answer + 2, answer + a, answer - a, answer + b]
+    for (var s = 0; s < spare.length && wrong.length < 3; s++) offer(spare[s])
+
+    var options = [answer].concat(wrong.slice(0, 3))
+    options.sort(function () { return Math.random() - 0.5 })
+    return { a: a, b: b, options: options }
+  }
+
+  /* ── layout ────────────────────────────────────────────────────────────── */
+
+  /**
+   * The wall of shelves the plates stand on.
+   *
+   * It starts well below the banner and stops short of the answer row, and it
+   * keeps clear of the right hand third, which belongs to the monster. Sized
+   * against both dimensions, because on a phone held sideways the height is
+   * what runs out first and on a tablet it is the width.
+   */
+  function shelfBox(k) {
+    var top = k.H * 0.30
+    var bottom = k.H - K.tileRow(k.H) - k.H * 0.03
+    return { x: k.W * 0.025, y: top, w: k.W * 0.58, h: bottom - top }
+  }
+
+  /**
+   * Where one plate stands, and how big it is.
+   *
+   * One row of plates up to five, two rows after that, and the last row is
+   * centred under the first. A ragged right hand edge on a grid of plates
+   * makes a child count the gap, and five across is already as many as fits
+   * on a phone with buns on them.
+   */
+  function plateSpot(k, i, n) {
+    var box = shelfBox(k)
+    var rows = n <= 5 ? 1 : 2
+    var cols = Math.ceil(n / rows)
+    var row = Math.floor(i / cols)
+    var at = i - row * cols
+    var count = Math.min(cols, n - row * cols)
+    var cw = box.w / cols
+    var ch = box.h / rows
+    var span = count * cw
+    return {
+      x: box.x + box.w / 2 - span / 2 + (at + 0.5) * cw,
+      /* The plate sits low in its cell, so the buns have the rest of it to
+         stack up into. */
+      y: box.y + (row + 0.74) * ch,
+      r: Math.min(cw * 0.46, ch * 0.4),
+      row: row, cols: cols, cw: cw, ch: ch, count: count
+    }
+  }
+
+  /**
+   * Where one bun sits on its plate.
+   *
+   * Up to three in a row and then a second row on top, which is the same
+   * shape as the plates themselves, so a child reading one is reading the
+   * other. The bun shrinks to whatever fits rather than the pile overflowing,
+   * because ten by ten is a hundred buns and they all have to be there.
+   */
+  function bunSpot(spot, j, m) {
+    var cols = m <= 3 ? m : Math.min(5, Math.ceil(m / 2))
+    var rows = Math.ceil(m / cols)
+    var row = Math.floor(j / cols)
+    var at = j - row * cols
+    var count = Math.min(cols, m - row * cols)
+    var cw = (spot.r * 1.72) / cols
+    var ch = (spot.r * 1.15) / rows
+    var r = Math.min(cw, ch) * 0.46
+    return {
+      x: spot.x + (at - (count - 1) / 2) * cw,
+      /* Built upwards from the plate, so the bottom row rests on the china. */
+      y: spot.y - spot.r * 0.16 - r - (rows - 1 - row) * ch,
+      r: r
+    }
+  }
+
+  function monsterR(k, giant) {
+    return clamp(Math.min(k.W * 0.12, k.H * 0.2), 40, 132) * (giant ? 1.3 : 1)
+  }
+  /**
+   * Where the monster stands.
+   *
+   * Four fifths of the way across, which leaves the shelves the left three
+   * fifths and still leaves a spider's width of floor to its right. A giant
+   * one is a third wider again, and the two numbers were picked so that even
+   * a giant standing next to ten plates of ten buns does not reach them.
+   */
+  function monsterX(k) { return k.W * 0.8 }
+  /** The cave floor everything heavy stands on, clear of the answer row. */
+  function floorY(k) { return k.H - K.tileRow(k.H) - k.H * 0.02 }
+  /** Roughly where the mouth is, which is where the buns fly to. */
+  function mouthY(k, r) { return floorY(k) - r * 0.82 }
+
+  /* ── the buns ──────────────────────────────────────────────────────────── */
+
+  /** A bun. Round, glazed, two seeds, and nothing else at this size. */
+  function drawBun(ctx, x, y, r) {
+    ctx.beginPath()
+    ctx.arc(x, y, r, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#e0964a', K.LINE, Math.max(1.6, r * 0.16))
+
+    /* The glaze, an arc across the top rather than a gradient: this set is
+       flat cartoon and volume is two tones, never a blend. */
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(x, y, r, 0, Math.PI * 2)
+    ctx.clip()
+    ctx.beginPath()
+    ctx.ellipse(x, y - r * 0.42, r * 0.78, r * 0.5, 0, 0, Math.PI * 2)
+    ctx.fillStyle = '#f0b978'
+    ctx.fill()
+    ctx.restore()
+
+    if (r > 6) {
+      ctx.strokeStyle = 'rgba(90,52,18,0.55)'
+      ctx.lineWidth = Math.max(1, r * 0.11)
+      ctx.lineCap = 'round'
+      for (var s = -1; s <= 1; s += 2) {
+        ctx.beginPath()
+        ctx.moveTo(x + s * r * 0.3, y - r * 0.34)
+        ctx.lineTo(x + s * r * 0.44, y - r * 0.2)
+        ctx.stroke()
+      }
+    }
+  }
+
+  /** A plate, flat on, so the pile on it is never hidden behind a rim. */
+  function drawPlate(ctx, x, y, r) {
+    ctx.beginPath()
+    ctx.ellipse(x, y, r, r * 0.3, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f3e7d2', K.LINE, 3)
+    ctx.beginPath()
+    ctx.ellipse(x, y - r * 0.03, r * 0.66, r * 0.17, 0, 0, Math.PI * 2)
+    ctx.strokeStyle = 'rgba(120,90,60,0.4)'
+    ctx.lineWidth = 2
+    ctx.stroke()
+  }
+
+  /* ── the monster ───────────────────────────────────────────────────────── */
+
+  /**
+   * The monster.
+   *
+   * ── Why it is one blob and not a body with parts ──────────────────────────
+   *
+   * The outline is what carries the drawing in this set, and stroking a
+   * cluster of overlapping circles strokes every interior edge, which comes
+   * out as a scribble. So the belly, the shoulders and the head go through
+   * `blobOn` as one silhouette and only the things that genuinely sit in front
+   * of it, the eyes, the mouth, the belly patch, are drawn afterwards.
+   *
+   * `fat` is how much of the meal is inside it, nought to one. It widens the
+   * blob rather than scaling it, so the monster gets rounder and not merely
+   * bigger, and the feet stay where they were.
+   */
+  function drawMonster(ctx, x, y, r, fat, chew, sad, now) {
+    var wf = 1 + fat * 0.34
+    var breathe = Math.sin(now * 0.0022) * r * 0.02
+
+    ctx.save()
+    ctx.translate(x, y)
+
+    /* Feet first, behind everything, so the blob sits down onto them. */
+    for (var f = -1; f <= 1; f += 2) {
+      ctx.beginPath()
+      ctx.ellipse(f * r * 0.46 * wf, -r * 0.08, r * 0.34, r * 0.17, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#3f9ab0', K.LINE, 3)
+    }
+
+    /* Horns, behind, so their roots disappear under the head instead of
+       ending in two visible stumps on top of it. They curl outwards and are
+       blunt: a horn with a point on it turns the whole face. */
+    for (var hn = -1; hn <= 1; hn += 2) {
+      ctx.beginPath()
+      ctx.moveTo(hn * r * 0.4, -r * 1.7 + breathe)
+      ctx.quadraticCurveTo(hn * r * 0.92, -r * 2.1 + breathe,
+        hn * r * 0.74, -r * 2.42 + breathe)
+      ctx.quadraticCurveTo(hn * r * 0.5, -r * 2.1 + breathe,
+        hn * r * 0.18, -r * 1.62 + breathe)
+      ctx.closePath()
+      K.inkedOn(ctx, '#f5eeda', K.LINE, 3)
+    }
+
+    /* The silhouette: a heavy belly, shoulders, and a head merged into it.
+       No neck, because a neck on a round monster reads as a snowman. */
+    K.blobOn(ctx, [
+      [0, -r * 0.62, r * 0.9 * wf],
+      [-r * 0.5 * wf, -r * 1.02, r * 0.54 * wf],
+      [r * 0.5 * wf, -r * 1.02, r * 0.54 * wf],
+      [0, -r * 1.3 + breathe, r * 0.72 * wf]
+    ], '#7fd6e8', 4)
+
+    /* Arms, short and stubby, drawn after the body because they hang in
+       front of it. */
+    for (var am = -1; am <= 1; am += 2) {
+      ctx.beginPath()
+      ctx.ellipse(am * r * (0.86 * wf + 0.06), -r * 0.62, r * 0.2, r * 0.3,
+        am * 0.32, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#63c6dc', K.LINE, 3)
+    }
+
+    /* The belly, paler, which is the second tone that gives it volume. */
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.5, r * 0.56 * wf, r * 0.5, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#bdeaf4', K.LINE, 2.5)
+
+    /**
+     * The mouth.
+     *
+     * Enormous, low on the face, and a plain curve. Open when it is chewing
+     * and a smile the rest of the time, so the same path does both and a
+     * child never sees a mouth that is neither.
+     */
+    var open = r * (0.14 + chew * 0.52)
+    var mw = r * 0.62 * wf
+    var my = -r * 0.98 + breathe
+    if (sad) {
+      /* Missed. The mouth turns down, and that is the whole of the sulk: a
+         wrong answer already has a red tile saying so and does not need the
+         monster to be upset as well. */
+      ctx.strokeStyle = K.LINE
+      ctx.lineWidth = Math.max(3, r * 0.06)
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(-mw * 0.7, my + r * 0.12)
+      ctx.quadraticCurveTo(0, my - r * 0.16, mw * 0.7, my + r * 0.12)
+      ctx.stroke()
+    } else {
+      ctx.beginPath()
+      ctx.moveTo(-mw, my)
+      ctx.quadraticCurveTo(0, my + open * 2.6, mw, my)
+      ctx.closePath()
+      K.inkedOn(ctx, '#7a1c2e', K.LINE, 3.5)
+      /* A tongue in the bottom of it, so the mouth has a floor and does not
+         read as a hole cut through the monster. */
+      ctx.save()
+      ctx.beginPath()
+      ctx.moveTo(-mw, my)
+      ctx.quadraticCurveTo(0, my + open * 2.6, mw, my)
+      ctx.closePath()
+      ctx.clip()
+      ctx.beginPath()
+      ctx.ellipse(0, my + open * 2.1, mw * 0.6, open * 0.8, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#e0679f', K.LINE, 2.5)
+      ctx.restore()
+      /* Two blunt teeth. Two, because a full set is a predator. */
+      for (var t = -1; t <= 1; t += 2) {
+        ctx.beginPath()
+        ctx.moveTo(t * mw * 0.44, my)
+        ctx.lineTo(t * mw * 0.62, my)
+        ctx.lineTo(t * mw * 0.53, my + open * 0.9)
+        ctx.closePath()
+        K.inkedOn(ctx, '#ffffff', K.LINE, 2)
+      }
+    }
+
+    /* Eyes, far too big, which is the single thing doing the most work to
+       keep this funny. */
+    var er = r * 0.27
+    for (var e = -1; e <= 1; e += 2) {
+      var ex = e * r * 0.32 * wf
+      var ey = -r * 1.52 + breathe
+      ctx.beginPath()
+      ctx.arc(ex, ey, er, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#ffffff', K.LINE, 3)
+      ctx.beginPath()
+      ctx.arc(ex + er * 0.14, ey + er * 0.14, er * 0.46, 0, Math.PI * 2)
+      ctx.fillStyle = '#2a2230'
+      ctx.fill()
+      ctx.beginPath()
+      ctx.arc(ex - er * 0.16, ey - er * 0.22, er * 0.19, 0, Math.PI * 2)
+      ctx.fillStyle = '#ffffff'
+      ctx.fill()
+    }
+    ctx.restore()
+  }
+
+  /* ── the game ──────────────────────────────────────────────────────────── */
+
+  AnanseKit.run({
+    title: 'Multiplication Monster',
+    overTitle: 'It ate the shelf!',
+    scene: 'cave',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'monsters',
+    /* One tap on a tile is the whole answer, so there is nothing to confirm. */
+    button: false,
+    restMood: 'hungry',
+    hud: function (k) {
+      return [
+        { label: 'monsters', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      var q = makeSum(k.round)
+      k.own.q = q
+      k.target = q.a * q.b
+      k.own.picked = -1
+      /* How far through the meal we are, in seconds since the answer landed.
+         Nought means nothing has been eaten and the plates are all still
+         full. */
+      k.own.eat = 0
+      k.own.eating = false
+      k.own.fat = 0
+      k.own.chew = 0
+      k.own.sad = false
+      k.own.burped = false
+
+      /* Coins survive rounds, so they are only created once. They must also
+         be cleared when the round counter is back at nought, because that is
+         a run that ended and was tapped to start again. */
+      if (k.own.coins === undefined) k.own.coins = 0
+      if (k.round === 0) k.own.coins = 0
+
+      k.say(LINES.ask(q.a, q.b))
+      k.him.setMood('hungry')
+    },
+
+    ask: function (k) {
+      if (!k.own.q) return null
+      var q = k.own.q
+      if (k.phase === 'won') return { head: 'Yes! ', num: q.a * q.b, tail: ' buns' }
+      return { head: q.a + ' plates of ' + q.b + ' buns = ', num: '?', tail: '' }
+    },
+
+    /**
+     * The tile that was tapped, against the product worked out now.
+     *
+     * Multiplied here, from the two numbers the banner and the shelves are
+     * both drawn from, rather than compared with something stored when the
+     * question was made. No option carries a flag saying it is the right one,
+     * so there is nothing that could disagree with the picture.
+     */
+    judge: function (k) {
+      if (k.own.picked < 0) return false
+      return k.own.q.options[k.own.picked] === k.own.q.a * k.own.q.b
+    },
+
+    down: function (k, x, y) {
+      /**
+       * A round already missed may be answered again.
+       *
+       * This guard exists to stop a second tap landing inside the same commit,
+       * not to end the round. Without the second half of the test it never let
+       * go: `picked` is only cleared in `begin`, `begin` only runs on a new
+       * round, and a new round only comes after a win. So one wrong answer
+       * locked the board for good. The child lost a life and then could not
+       * answer anything again, in a game with no end.
+       */
+      if (k.own.picked >= 0 && k.results[k.round] !== false) return false
+      var i = K.tileAt(k.W, k.H, k.own.q.options.length, x, y)
+      if (i < 0) return false
+      k.own.picked = i
+      k.sound.play('lift')
+      k.commit()
+      return true
+    },
+
+    onWin: function (k) {
+      /* The reward is the monster clearing the shelves, which is also the
+         only thing that makes the count on screen go away: right up until
+         this moment every bun is still there to be recounted. */
+      k.own.eating = true
+      k.own.coins += 1
+      if (isGiant(k.round)) {
+        k.own.coins += 10
+        k.cheer(monsterX(k), mouthY(k, monsterR(k, true)))
+        k.say(LINES.giant)
+      } else {
+        k.say(pick(LINES.right))
+      }
+    },
+
+    onMiss: function (k) {
+      k.own.sad = true
+      k.say(LINES.wrong(k.own.q.a * k.own.q.b))
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      if (!k.own.q) return
+      if (k.own.sad && k.phase === 'play') k.own.sad = false
+
+      if (k.own.eating) {
+        k.own.eat += dt
+        var total = k.own.q.a * k.own.q.b
+        var span = eatSpan(total)
+        k.own.fat = clamp(k.own.eat / span, 0, 1)
+        /* Jaw working while there is still food in the air, then shut. */
+        var want = k.own.eat < span ? 0.5 + Math.sin(k.own.eat * 26) * 0.5 : 0
+        k.own.chew += (want - k.own.chew) * Math.min(1, dt * 14)
+
+        if (!k.own.burped && k.own.eat > span + 0.35) {
+          k.own.burped = true
+          k.sound.play('thud')
+          k.kick(5)
+          var r = monsterR(k, isGiant(k.round))
+          /* The burp, as a cloud out of the mouth. It is the payoff for the
+             counting and it is the thing children come back for. */
+          k.puff(monsterX(k), mouthY(k, r), 14, 'rgba(160,230,150,0.75)')
+        }
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var q = k.own.q
+      if (!q) return
+      var giant = isGiant(k.round)
+      var mr = monsterR(k, giant)
+      var mx = monsterX(k)
+      var my = mouthY(k, mr)
+      var total = q.a * q.b
+      var span = eatSpan(total)
+      var i, j
+
+      /**
+       * The shelves, one per row of plates.
+       *
+       * Drawn here rather than baked into the backdrop by `props`, because
+       * how many rows there are depends on how many plates this monster
+       * wants, and the backdrop is painted once per resize and knows nothing
+       * about the round.
+       */
+      var rows = q.a <= 5 ? 1 : 2
+      for (var rw = 0; rw < rows; rw++) {
+        var first = plateSpot(k, rw * Math.ceil(q.a / rows), q.a)
+        var last = plateSpot(k,
+          Math.min(q.a - 1, rw * Math.ceil(q.a / rows) + first.count - 1), q.a)
+        var sx = first.x - first.r * 1.35
+        var sw = (last.x + last.r * 1.35) - sx
+        ctx.beginPath()
+        ctx.roundRect(sx, first.y + first.r * 0.14, sw, first.r * 0.34,
+          first.r * 0.1)
+        K.inkedOn(ctx, '#6b5240', K.LINE, 3.5)
+      }
+
+      /* The plates, and the buns on them. A bun that has been eaten flies to
+         the mouth and shrinks into it, so the array visibly becomes the
+         number the child just named. */
+      for (i = 0; i < q.a; i++) {
+        var spot = plateSpot(k, i, q.a)
+        drawPlate(ctx, spot.x, spot.y, spot.r)
+        for (j = 0; j < q.b; j++) {
+          var bun = bunSpot(spot, j, q.b)
+          var idx = i * q.b + j
+          var t = k.own.eating ? flightT(k.own.eat, idx, total, span) : 0
+          if (t >= 1) continue
+          var ease = t * t * (3 - 2 * t)
+          var bx = bun.x + (mx - bun.x) * ease
+          var by = bun.y + (my - bun.y) * ease - Math.sin(t * Math.PI) * mr * 0.4
+          drawBun(ctx, bx, by, bun.r * (1 - ease * 0.55))
+        }
+      }
+
+      /* The monster, on the floor at the right, with room beside it. */
+      drawMonster(ctx, mx, floorY(k), mr, k.own.fat, k.own.chew,
+        k.own.sad && !k.own.eating, k.now)
+
+      /**
+       * Him, to the right of the monster rather than in front of it.
+       *
+       * In front is the obvious place and it hides the monster completely,
+       * and the monster is the reason the child is counting. Standing him at
+       * one and a quarter radii below his own centre is what puts his feet on
+       * the floor instead of his waist.
+       */
+      var hr = clamp(Math.min(k.W * 0.05, k.H * 0.085), 22, 54)
+      var hx = Math.min(k.W - hr * 1.2, mx + mr * (giant ? 1.05 : 1.15))
+      k.him.draw(hx, floorY(k) - hr * 1.3, hr, floorY(k))
+
+      /* The answers. A wrong tap turns its own tile red and the right one
+         green at the same moment, so the child sees what they should have
+         picked and not only that they were wrong. */
+      if (k.phase === 'over') return
+      var n = q.options.length
+      for (var tl = 0; tl < n; tl++) {
+        var state = 'idle'
+        if (k.own.picked >= 0) {
+          if (q.options[tl] === q.a * q.b) state = 'right'
+          else if (tl === k.own.picked) state = 'wrong'
+          else state = 'dim'
+        }
+        K.drawTile(ctx, k.W, k.H, tl, n, String(q.options[tl]), state, k.FONT)
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.q) return { q: null }
+      var q = k.own.q
+      var n = q.options.length
+      return {
+        plates: q.a,
+        buns: q.b,
+        answer: q.a * q.b,
+        options: q.options,
+        picked: k.own.picked,
+        coins: k.own.coins,
+        giant: isGiant(k.round),
+        fat: Math.round(k.own.fat * 100) / 100,
+        burped: !!k.own.burped,
+        monster: { x: Math.round(monsterX(k)), y: Math.round(floorY(k)) },
+        tiles: q.options.map(function (v, i) {
+          var r = K.tileRect(k.W, k.H, i, n)
+          return { value: v, x: Math.round(r.x + r.w / 2), y: Math.round(r.y + r.h / 2) }
+        })
+      }
+    }
+  })
+
+  /* ── the meal ──────────────────────────────────────────────────────────── */
+
+  /**
+   * How long the whole plateful takes to go in.
+   *
+   * Fixed at just over a second however many buns there are, because a win
+   * gives 2600ms before the next question and a hundred buns leaving one at a
+   * time on a fixed stagger would still be flying when the next monster
+   * arrived. So the stagger shrinks as the meal grows, and what a child sees
+   * is a stream rather than a queue.
+   */
+  function eatSpan(total) { return 1.05 + Math.min(total, 100) * 0.0015 }
+
+  /** How far one particular bun is along its flight, nought to one. */
+  function flightT(eat, idx, total, span) {
+    var fly = 0.4
+    var stagger = total > 1 ? (span - fly) / (total - 1) : 0
+    return clamp((eat - idx * stagger) / fly, 0, 1)
+  }
+}())
+</script>
+</body>
+</html>

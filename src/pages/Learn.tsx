@@ -27,6 +27,9 @@ import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import '../styles/study.css'
 import Prose from '../components/Prose'
 import { blocksOf } from '../components/blocks'
+import { readImage } from '../lib/education/lesson-blocks'
+import BlockAsk from '../components/BlockAsk'
+import { LessonPicture } from '../components/LessonBits'
 import { AskCard, AskMenu, LostButton } from '../components/Ask'
 import { useSpot } from '../components/useSpot'
 import { useAsking } from '../components/useAsking'
@@ -55,9 +58,10 @@ import {
 } from '../lib/education/plan'
 import { askPlan } from '../lib/education/ai'
 import { illustrate, rendererAvailable } from '../lib/education/illustrate'
+import { runAhead, sharedVideo, sharedVisual } from '../lib/education/ahead'
 import { likelyKind, type Visual, type VisualKind } from '../lib/education/visuals'
 import {
-  askLesson, askQuestions, askVideo, observeRound, TutorOff,
+  askLesson, askQuestions, observeRound, TutorOff,
   type LearnerBrief, type RoundEntry, type SyllabusPlace, type TutorStage,
 } from '../lib/education/ai'
 import { styleFor } from '../lib/education/storyboard'
@@ -324,6 +328,12 @@ export default function Learn({
          neither was reaching the tutor. */
       asked: askBrief(asks),
       mediums: mediumBrief(attempts),
+      /* How she is taught, so the tutor writes the lesson her plan calls for
+         rather than the one a rule for her year group calls for. This is the
+         link that makes two learners in the same class get different lessons,
+         and it was the missing half of `plan.ts`: the plan decided what the
+         app rendered and had no say in what was written. */
+      plan,
       stuckOn: everything
         .filter(t => {
           const rows = attempts.filter(a => a.objectiveId === t.id && a.isCorrect !== null)
@@ -332,7 +342,7 @@ export default function Learn({
         })
         .map(t => t.title),
     }
-  }, [profile, syllabus, attempts, everything, observations, asks])
+  }, [profile, syllabus, attempts, everything, observations, asks, plan])
 
   /**
    * Ask the tutor how she should be taught, in the background.
@@ -432,7 +442,9 @@ export default function Learn({
         <Lesson
           key={topic.id + '-' + attempt}
           topic={topic} place={place} learner={learner} askedFor={askedFor}
+          syllabus={syllabus} level={profile.level}
           plan={plan}
+          onAttempt={onAttempt}
           skin={skin}
           primer={primerFor(syllabus, topic.id)}
           onAsked={() => setAsks(asksFor(profile.id))}
@@ -561,11 +573,21 @@ export default function Learn({
 /* ── the lesson ───────────────────────────────────────────────────────────── */
 
 function Lesson({
-  topic, place, learner, askedFor, plan, skin, primer, onAsked,
-  onBack, onAgain, onPractise, onPlay, onOpenTopic,
+  topic, place, syllabus, level, learner, askedFor, plan, skin, primer, onAsked,
+  onAttempt, onBack, onAgain, onPractise, onPlay, onOpenTopic,
 }: {
   topic: Topic
   place: SyllabusPlace
+  /**
+   * The whole subject, not just this learner's place in it.
+   *
+   * Needed for two things that are deliberately not about her: a shared
+   * artifact is keyed on the syllabus so one film serves a classroom, and
+   * getting ahead has to know which topic follows this one.
+   */
+  syllabus: Syllabus
+  /** Her year label, so the topic queued ahead comes from her year. */
+  level: string
   learner: LearnerBrief
   /**
    * What this topic can teach with no tutor at all.
@@ -582,6 +604,15 @@ function Lesson({
   plan: Plan
   /** Which interface this learner is in. Decides the frame and the chrome. */
   skin: Skin
+  /**
+   * Recorded when she answers a question inside the lesson body.
+   *
+   * A lesson used to produce no evidence at all: she read it and the mastery
+   * record learned nothing until she reached the practice screen. An inline
+   * question is the cheapest evidence there is, and it arrives while she is
+   * still on the idea rather than after it.
+   */
+  onAttempt: (a: Attempt) => void
   /** So an ask made here reaches the decision about how she is taught. */
   onAsked: () => void
   onBack: () => void
@@ -762,6 +793,24 @@ function Lesson({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  /**
+   * Whether the page is still waiting on anything, readable from a closure.
+   *
+   * This exists because `runAhead` is started inside an effect that runs once,
+   * when the lesson text arrives, and is handed a predicate it calls for
+   * minutes afterwards. Reading `coming` and `filming` directly in that
+   * predicate reads the values they had when the effect ran: empty and false,
+   * because the effect itself is what sets them. So the page would look
+   * permanently quiet and the prefetch would queue her next topic's film in
+   * front of the one she is waiting for, which is the single thing the
+   * predicate is there to stop. A ref is the value now rather than the value
+   * then.
+   */
+  const busyNow = useRef(true)
+  useEffect(() => {
+    busyNow.current = state !== 'done' || coming.length > 0 || filming
+  })
+
   /* Drawn from the finished lesson rather than from the topic title, so every
      picture illustrates what was actually taught. Silent about failure: a
      lesson with no diagram is still a lesson. */
@@ -771,12 +820,23 @@ function Lesson({
     started.current = true
     const ctrl = new AbortController()
 
+    /* The diagram is asked for as it always was, and the photograph and the
+       clip now go through the shared store.
+ 
+       The split is the whole point rather than an optimisation. A diagram is
+       written from the lesson text in front of THIS learner, so its labels can
+       name the worked example only she was shown, and it costs nothing to
+       draw. A photograph of two soil types is the same photograph for every
+       learner in the country and costs a render, so making it forty times for
+       one classroom is forty times the wait and forty times the bill. */
     const ask = (kind: VisualKind) => {
       setComing(list => [...list, kind])
-      return illustrate(
-        { kind, topicId: topic.id, learner, syllabus: place, lesson: text },
-        ctrl.signal,
-      )
+      return (kind === 'figure'
+        ? illustrate(
+          { kind, topicId: topic.id, learner, syllabus: place, lesson: text },
+          ctrl.signal,
+        )
+        : sharedVisual({ kind, syllabus, topic }, ctrl.signal))
         .then(v => {
           if (ctrl.signal.aborted) return
           /* Shown the moment it is ready. Waiting for all three would make the
@@ -797,7 +857,7 @@ function Lesson({
     /* And the film. Asked for last and awaited longest: it needs the worker to
        render it, so on the free route it queues behind everything else. */
     setFilming(true)
-    askVideo({ learner, syllabus: place, lesson: text }, ctrl.signal)
+    sharedVideo({ syllabus, topic }, ctrl.signal)
       .then(made => {
         if (ctrl.signal.aborted) return
         setFilming(false)
@@ -814,7 +874,26 @@ function Lesson({
       else { ask('illustration'); ask('clip') }
     })
 
-    return () => ctrl.abort()
+    /* And, once this page has gone quiet, get her next topic ready.
+ 
+       The ordering here is deliberate and it is the only reason this is safe
+       to turn on. Everything above is work she is waiting for right now;
+       `runAhead` is work for a topic she has not opened. On the free route one
+       worker answers one job at a time, so a prefetch queued while she is
+       still reading would put her own film behind a film she has not asked
+       for. That is why it is handed a `busy` predicate rather than a delay:
+       it re-asks immediately before every single submission, so pressing
+       "teach it differently" halfway through stops the next job rather than
+       racing it. */
+    const ahead = runAhead({
+      syllabus,
+      level,
+      currentTopicId: topic.id,
+      plan,
+      busy: () => busyNow.current,
+    })
+
+    return () => { ctrl.abort(); ahead.cancel() }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state])
 
@@ -834,18 +913,60 @@ function Lesson({
           text={shown}
           startIndex={from}
           className="nx-lesson-p"
+          /* An ```image fence becomes a real picture, in the flow of the
+             lesson. `StepPicture` is reused rather than reimplemented: it
+             already polls `/api/render`, caches per prompt so going back a
+             page does not pay for the picture twice, and falls back to the
+             alt text when nothing can render. */
+          picture={(body, key) => {
+            const img = readImage(body)
+            return img ? <LessonPicture image={img} stepId={`b${key}`} /> : null
+          }}
+          /* Answering inside the lesson is an attempt like any other, filed
+             against this topic with `via: 'prose'` so the model can tell
+             reading from watching. */
+          onTried={correct => onAttempt({
+            objectiveId: topic.id,
+            isCorrect: correct,
+            hintUsed: false,
+            at: new Date().toISOString(),
+            via: 'prose',
+          })}
           after={i => {
             const mine = hers.asks.filter(a => (a.block ?? -1) === i)
-            if (!mine.length) return null
-            return mine.map(a => (
-              <AskCard
-                key={a.id}
-                ask={a}
-                speak={!reads}
-                onHelped={did => { hers.helped(a, did); onAsked() }}
-                onAgain={() => { /* the next ask is made by `helped` */ }}
-              />
-            ))
+            return (
+              <>
+                {mine.map(a => (
+                  <AskCard
+                    key={a.id}
+                    ask={a}
+                    speak={!reads}
+                    onHelped={did => { hers.helped(a, did); onAsked() }}
+                    onAgain={() => { /* the next ask is made by `helped` */ }}
+                  />
+                ))}
+                {/* A box on every block, so a question carries where it was
+                    asked without the learner having to describe it. The block's
+                    own text is sent as the `about`, which is what lets the
+                    tutor answer this paragraph rather than the topic. */}
+                <BlockAsk
+                  young={young}
+                  busy={hers.busy}
+                  onAsk={said => {
+                    /* x and y are zero because a `Spot` carries them only to
+                       position the selection menu, and this route never shows
+                       one: the box is already where the learner is looking.
+                       `Ask.tsx` is the sole reader of those two fields. */
+                    hers.ask(
+                      'explain',
+                      { block: i, text: blocks[i] ?? '', x: 0, y: 0 },
+                      said,
+                    )
+                    onAsked()
+                  }}
+                />
+              </>
+            )
           }}
         />
       </div>

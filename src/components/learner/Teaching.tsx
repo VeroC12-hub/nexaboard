@@ -14,6 +14,12 @@ import {
  * The diagrams are drawn here rather than loaded as images: they are part of
  * the explanation, they scale to any screen, and they carry text alternatives
  * so a learner using a screen reader is taught the same thing.
+ *
+ * Generated media for a step, a rendered picture or a clip, lives in
+ * StepMedia.tsx and not here, because the two are not the same kind of thing:
+ * everything in this file is written by the tutor and may be read as fact,
+ * and a rendered picture may not. Keeping the boundary at the file makes that
+ * hard to blur by accident.
  */
 
 /** Splits on blank lines and renders **bold** runs. Deliberately minimal. */

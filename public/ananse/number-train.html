@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Number Train</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Number Train. What comes between, by mending a train.
+
+  ── What this teaches that the other two do not ──────────────────────────────
+
+  Feed Ananse asks how many. Balloon Pop asks which mark means that many. This
+  asks what comes next, which is a third skill and the one that turns counting
+  from a rhyme into an order. A child can chant "one two three four five"
+  perfectly and still not know what sits between three and five, because the
+  chant is a song to them and not a line of numbers.
+
+  ── Why a gap and not a jumble ───────────────────────────────────────────────
+
+  The Alphabet Train sorts a shuffled row, which is a harder and different task:
+  hold the whole sequence in your head and place everything. This has one hole
+  in an otherwise correct row, so the child only has to look at the two
+  neighbours. That is the right first step, and it is why these two games are
+  not the same game with different letters on it.
+
+  ── Why the spare carriages are neighbours ───────────────────────────────────
+
+  Offering 4, 5 and 9 for a gap between 4 and 6 is not a test: 9 is obviously
+  wrong from its shape alone. Offering 4, 5 and 6 means the child has to
+  actually work out which one belongs, which is the thing being learned.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: 'A carriage fell off! Which number is missing?',
+    right: ['Choo choo! Off we go!', 'You mended it!', 'Perfect! All aboard!'],
+    wrong: function (n) { return 'Not quite. It was ' + n + '.' },
+    lift: 'Where does it go?',
+    tickle: 'Hee hee! Mind the train!',
+    over: 'What a journey! Thank you, my friend!',
+  }
+
+  /* Bright wagon colours, none of them close to the grass behind. */
+  var WAGONS = ['#e8543c', '#f2a93b', '#3f9ede', '#8a5ccf', '#26a86a', '#e0679f']
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * The train, laid out to fit whatever width there is.
+   *
+   * Sized from the number of carriages rather than fixed, because five wagons
+   * and an engine on a phone is a very different amount of room from the same
+   * thing on a tablet. The engine is counted as one and a bit, which is roughly
+   * what it occupies.
+   */
+  function layout(k) {
+    var n = k.own.slots.length
+    var pad = k.W * 0.03
+    var unit = (k.W - pad * 2) / (n + 1.7)
+    var w = unit * 0.86
+    var h = clamp(w * 0.78, 40, 110)
+    /* High on the grass, because the spare carriages need a whole row of their
+       own underneath. At the old height the siding was drawn straight over the
+       train and the two were indistinguishable. */
+    var railY = k.ground() + (k.H - k.ground()) * 0.26
+    var y = railY - h * 0.5
+    return {
+      w: w, h: h, unit: unit, railY: railY, y: y,
+      engineX: pad + unit * 0.85,
+      firstX: pad + unit * 1.7 + w * 0.5,
+    }
+  }
+
+  function slotAt(k, L, i) { return { x: L.firstX + i * L.unit, y: L.y } }
+
+  /**
+   * The siding where the spare carriages wait.
+   *
+   * Well below the train and slightly left of centre, because the character
+   * stands on the right. A spare sitting under him is one a child cannot pick
+   * up without poking him instead.
+   */
+  function spareAt(k, L, i) {
+    var n = k.own.spares.length
+    var gap = L.w * 1.3
+    return {
+      x: k.W * 0.44 + (i - (n - 1) / 2) * gap,
+      y: k.H - L.h * 0.85,
+    }
+  }
+
+  AnanseKit.run({
+    title: 'Number Train',
+    overTitle: 'What a journey!',
+    scene: 'rails',
+    rounds: 5,
+    /* Dropping the carriage into the hole is the whole answer. There is nothing
+       left to confirm afterwards. */
+    button: false,
+    restMood: 'hello',
+
+    begin: function (k) {
+      /**
+       * A run of five, with one taken out of the middle.
+       *
+       * Never the first or the last: a gap at either end has only one
+       * neighbour, so the child can get it by counting on from one side
+       * without ever looking at the sequence as a sequence.
+       */
+      var from = randInt(1, 5)
+      var run = [from, from + 1, from + 2, from + 3, from + 4]
+      var holeAt = randInt(1, 3)
+      k.target = run[holeAt]
+
+      k.own.slots = run.map(function (v, i) {
+        return {
+          value: v,
+          filled: i !== holeAt,
+          colour: WAGONS[(i + randInt(0, 5)) % WAGONS.length],
+          hole: i === holeAt,
+        }
+      })
+      k.own.holeAt = holeAt
+
+      /* Three spares: the answer and its two nearest neighbours, shuffled. */
+      var choices = [k.target, k.target - 1, k.target + 1]
+      if (choices[1] < 1) choices[1] = k.target + 2
+      choices.sort(function () { return Math.random() - 0.5 })
+      k.own.spares = choices.map(function (v, i) {
+        return {
+          value: v, x: 0, y: 0, home: null,
+          colour: WAGONS[(i + 3) % WAGONS.length],
+          held: false, placed: false, settle: null,
+        }
+      })
+
+      k.own.held = null
+      k.own.dropped = null
+      /* How far the train has pulled out once the answer is right, how fast,
+         and how far its wheels have turned. */
+      k.own.drive = 0
+      k.own.speed = 0
+      k.own.roll = 0
+      k.own.leaving = false
+      k.own.smokeAt = 0
+      k.own.puffAt = 0
+      place(k)
+      k.say(LINES.ask)
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) { if (k.own.spares) place(k) },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'Choo choo!' }
+      return { head: 'Which number is missing?' }
+    },
+
+    /**
+     * Worked out from the carriage that is actually in the hole.
+     *
+     * No spare knows whether it is the right one. The hole's value and the
+     * dropped carriage's value are compared here, once, when the child has
+     * committed by letting go over the gap.
+     */
+    judge: function (k) {
+      return !!k.own.dropped && k.own.dropped.value === k.target
+    },
+
+    onWin: function (k) {
+      var L = layout(k)
+      var at = slotAt(k, L, k.own.holeAt)
+      k.cheer(at.x, at.y)
+      k.say(pick(LINES.right))
+    },
+    onMiss: function (k) {
+      k.say(LINES.wrong(k.target))
+      /* The wrong carriage goes back to the siding so the row is readable
+         again and the child can try the others. */
+      if (k.own.dropped) {
+        k.own.dropped.placed = false
+        k.own.dropped.settle = k.own.dropped.home
+        k.own.dropped = null
+      }
+    },
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.tickle) },
+
+    down: function (k, x, y) {
+      var L = layout(k)
+      for (var i = k.own.spares.length - 1; i >= 0; i--) {
+        var sp = k.own.spares[i]
+        if (sp.placed) continue
+        /* Generous: a carriage is a rectangle but a small hand aims at a blob. */
+        if (Math.abs(x - sp.x) > L.w * 0.75 || Math.abs(y - sp.y) > L.h * 0.9) continue
+        k.own.held = sp
+        sp.held = true
+        sp.settle = null
+        k.sound.play('lift')
+        k.say(LINES.lift)
+        k.him.setMood('watching')
+        return true
+      }
+      return false
+    },
+
+    move: function (k, x, y) {
+      var sp = k.own.held
+      if (!sp) return
+      sp.x = x
+      sp.y = y
+    },
+
+    up: function (k) {
+      var sp = k.own.held
+      if (!sp) return
+      k.own.held = null
+      sp.held = false
+
+      var L = layout(k)
+      var hole = slotAt(k, L, k.own.holeAt)
+      /* Generous again, and measured to the hole rather than to the nearest
+         slot: dropping a carriage vaguely near the gap should mean the gap. */
+      if (Math.abs(sp.x - hole.x) < L.unit * 0.85 && Math.abs(sp.y - hole.y) < L.h * 1.6) {
+        sp.placed = true
+        sp.settle = { x: hole.x, y: hole.y }
+        k.own.dropped = sp
+        k.sound.play('thud')
+        k.kick(4)
+        k.own.puffAt = 0.35
+        k.commit()
+      } else {
+        /* Anywhere else and it goes back to the siding. Leaving it where it
+           was dropped makes a board that looks like an answer and is not. */
+        sp.settle = sp.home
+      }
+      if (k.phase === 'play') k.him.setMood('hello')
+    },
+
+    step: function (k, dt) {
+      if (!k.own.spares) return
+      /**
+       * The train leaves.
+       *
+       * ── Why this is worth the code ────────────────────────────────────────
+       *
+       * Pressing "all aboard" on a correct train used to produce a noise, some
+       * confetti, and then the next question. The child mended a train and the
+       * train did nothing. The reward for finishing a thing should be the thing
+       * working, and for a train that means it pulls out: wheels turning, smoke
+       * going up, away off the edge.
+       *
+       * It accelerates rather than starting at speed, because a train instantly
+       * at full pelt reads as a slide rather than a departure, and the moment of
+       * it just beginning to move is the satisfying part.
+       *
+       * Only on a correct answer. A wrong train stays exactly where it is, so
+       * the child can see what they built and fix it.
+       */
+      if (k.phase === 'won' || k.own.leaving) {
+        var EL = layout(k)
+        k.own.leaving = true
+        k.own.speed = Math.min(k.own.speed + k.W * 0.5 * dt, k.W * 0.8)
+        /**
+         * Leftwards, because that is the way the engine is pointing.
+         *
+         * The boiler and the funnel are drawn on the left of the cab, so the
+         * front of the engine faces left and the carriages trail off to the
+         * right behind it. Driving it to the right made it shunt its own train
+         * backwards, which is the sort of thing a child who has watched a train
+         * notices immediately even if they cannot say why it looks wrong.
+         */
+        k.own.drive -= k.own.speed * dt
+        /* Rolling, not sliding: the wheels turn at the rate the ground is
+           passing under them, and in the direction of travel. */
+        k.own.roll -= (k.own.speed / Math.max(8, EL.h * 0.22)) * dt
+        k.own.smokeAt -= dt
+        if (k.own.smokeAt <= 0) {
+          k.own.smokeAt = 0.08
+          k.puff(EL.engineX + k.own.drive - EL.w * 0.3, EL.y - EL.h * 1.05, 3,
+            'rgba(255,255,255,0.85)')
+        }
+      }
+
+      for (var i = 0; i < k.own.spares.length; i++) {
+        var sp = k.own.spares[i]
+        if (!sp.settle || sp.held) continue
+        /* Eased home rather than snapped, so a carriage that was put back looks
+           like it travelled rather than teleported. */
+        sp.x += (sp.settle.x - sp.x) * Math.min(1, dt * 13)
+        sp.y += (sp.settle.y - sp.y) * Math.min(1, dt * 13)
+        if (Math.abs(sp.x - sp.settle.x) < 0.5 && Math.abs(sp.y - sp.settle.y) < 0.5) {
+          sp.x = sp.settle.x
+          sp.y = sp.settle.y
+          sp.settle = null
+        }
+      }
+      if (k.own.puffAt > 0) {
+        k.own.puffAt -= dt
+        if (k.own.puffAt <= 0) {
+          var L = layout(k)
+          k.puff(L.engineX - L.w * 0.3, L.y - L.h * 1.1, 8, 'rgba(255,255,255,0.8)')
+        }
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var L = layout(k)
+
+      /* The rails stay put; the train runs along them. */
+      K.rails(ctx, L.railY + L.h * 0.22, k.W, L.h * 0.5)
+      var go = k.own.drive
+      K.engine(ctx, L.engineX + go, L.y, L.w, L.h, k.own.roll)
+
+      /* The train, left to right. */
+      for (var i = 0; i < k.own.slots.length; i++) {
+        var slot = k.own.slots[i]
+        var at = slotAt(k, L, i)
+        at = { x: at.x + go, y: at.y }
+        if (slot.hole && !k.own.dropped) {
+          /**
+           * The hole, drawn as a dashed outline on the rails.
+           *
+           * An actual gap with nothing in it reads as the end of the train. A
+           * dashed ghost says "something belongs here", which is the entire
+           * instruction, given without words.
+           */
+          ctx.save()
+          ctx.strokeStyle = 'rgba(255,255,255,0.85)'
+          ctx.lineWidth = Math.max(3, L.h * 0.07)
+          ctx.setLineDash([L.h * 0.16, L.h * 0.16])
+          ctx.beginPath()
+          ctx.roundRect(at.x - L.w / 2, at.y - L.h / 2, L.w, L.h, L.h * 0.16)
+          ctx.stroke()
+          ctx.restore()
+          continue
+        }
+        if (slot.hole) continue
+        K.carriage(ctx, at.x, at.y, L.w, L.h, slot.colour,
+          { coupling: i > 0, spin: k.own.roll })
+        k.shout(String(slot.value), at.x, at.y - L.h * 0.02, L.h * 0.52, '#2b3a1c', null)
+      }
+
+      /* The spares, in the siding, and whichever one is in hand on top. */
+      var order = k.own.spares.slice().sort(function (a, b) {
+        return (a.held ? 1 : 0) - (b.held ? 1 : 0)
+      })
+      for (var j = 0; j < order.length; j++) {
+        var sp = order[j]
+        var lift = sp.held ? 1.08 : 1
+        /* A spare that was dropped into the hole is part of the train now and
+           leaves with it. The ones still in the siding do not. */
+        var sx = sp.x + (sp.placed ? go : 0)
+        K.carriage(ctx, sx, sp.y, L.w * lift, L.h * lift, sp.colour,
+          { coupling: false, spin: sp.placed ? k.own.roll : 0 })
+        k.shout(String(sp.value), sx, sp.y - L.h * 0.02, L.h * 0.52 * lift, '#2b3a1c', null)
+      }
+
+      /* Him last, on the right, clear of the siding. He is the guard here, not
+         the target: the train is what the child is working on. */
+      var ar = clamp(Math.min(k.W, k.H) * 0.08, 32, 66)
+      /* His feet, not his middle, sit above the bottom edge. He stands 1.5
+         radii below his centre, so anchoring him at one radius put his legs
+         off the screen and sliced the character the children actually like. */
+      k.him.draw(k.W - ar * 1.5, k.H - ar * 1.75, ar, k.H - ar * 0.25)
+    },
+
+    peek: function (k) {
+      if (!k.own.spares) return { spares: 0 }
+      return {
+        missing: k.target,
+        spares: k.own.spares.map(function (s) {
+          return { v: s.value, x: Math.round(s.x), y: Math.round(s.y), placed: s.placed }
+        }),
+        hole: (function () {
+          var L = layout(k)
+          var at = slotAt(k, L, k.own.holeAt)
+          return { x: Math.round(at.x), y: Math.round(at.y) }
+        }()),
+        dropped: k.own.dropped ? k.own.dropped.value : null,
+      }
+    },
+  })
+
+  /** Park the spares in their siding, and remember where home is. */
+  function place(k) {
+    var L = layout(k)
+    for (var i = 0; i < k.own.spares.length; i++) {
+      var at = spareAt(k, L, i)
+      var sp = k.own.spares[i]
+      sp.home = { x: at.x, y: at.y }
+      if (!sp.placed && !sp.held) { sp.x = at.x; sp.y = at.y; sp.settle = null }
+    }
+  }
+}())
+</script>
+</body>
+</html>

@@ -712,3 +712,447 @@
 }
 
 .nx-plan-line b { color: #14243a; font-weight: 600; }
+
+/* ── Tables, charts, facts and try-it, inside a lesson ───────────────────────
+   A lesson is not only prose. A comparison belongs in a table, data belongs in
+   a chart, and a question in the middle of the page turns reading into doing.
+
+   All of it is real markup rather than generated pictures, for the reason
+   stated at the top of LessonChart.tsx: the numbers have to be the numbers.
+
+   These inherit the page's own tokens (--rule, --ink, --margin) so a lesson
+   reads as one document rather than a page with widgets dropped into it. */
+
+.nx-block { margin: 0; }
+
+/* A table scrolls sideways on a phone rather than squeezing its columns into
+   unreadable slivers or pushing the whole page wide. */
+.nx-table-wrap {
+  margin: 0 0 16px;
+  padding-left: 16px;
+  border-left: 2px solid var(--rule);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nx-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: min(100%, 22rem);
+  font-size: 0.97em;
+}
+
+.nx-table th,
+.nx-table td {
+  padding: 7px 12px 7px 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* The header row is the only rule that is heavier than a hairline, so the eye
+   finds the top of the table without a box around it. */
+.nx-table thead th {
+  border-bottom: 2px solid var(--margin);
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+/* The row label, which is also a header cell for screen reader purposes. */
+.nx-table tbody th {
+  font-weight: 600;
+  padding-right: 18px;
+}
+
+.nx-table tbody tr:last-child th,
+.nx-table tbody tr:last-child td { border-bottom: none; }
+
+/* ── Charts ── */
+
+.nx-chart {
+  margin: 0 0 18px;
+  padding-left: 16px;
+  border-left: 2px solid var(--rule);
+}
+
+.nx-chart-svg {
+  display: block;
+  width: 100%;
+  /* Caps the height on a wide screen: a chart that grows with the column
+     eventually dominates the lesson it is illustrating. */
+  max-width: 34rem;
+  height: auto;
+}
+
+.nx-chart-grid { stroke: var(--rule); stroke-width: 1; }
+.nx-chart-zero { stroke: var(--ink-soft); stroke-width: 1.4; }
+
+.nx-chart-tick,
+.nx-chart-label,
+.nx-chart-axis,
+.nx-chart-value,
+.nx-chart-slice-label {
+  fill: var(--ink-soft);
+  font-size: 11px;
+  font-family: inherit;
+}
+
+.nx-chart-label { fill: var(--ink); }
+.nx-chart-axis { fill: var(--ink-soft); font-size: 11.5px; font-style: italic; }
+.nx-chart-value { fill: var(--ink); font-size: 10.5px; font-weight: 600; }
+.nx-chart-slice-label { fill: #fff; font-size: 11px; font-weight: 650; }
+
+.nx-chart-bar { fill: var(--nx-green, #2f6b4f); }
+.nx-chart-line { stroke: var(--nx-green, #2f6b4f); stroke-width: 2.2; stroke-linejoin: round; }
+.nx-chart-dot { fill: var(--nx-green, #2f6b4f); }
+
+/* Six slice colours, distinguishable by lightness as well as by hue so the
+   chart still reads when printed in grey or seen by somebody colour blind. */
+.nx-chart-s0 { fill: #2f6b4f; }
+.nx-chart-s1 { fill: #c98a2b; }
+.nx-chart-s2 { fill: #7a3b8f; }
+.nx-chart-s3 { fill: #1f5f7a; }
+.nx-chart-s4 { fill: #a8442f; }
+.nx-chart-s5 { fill: #5c6b2f; }
+
+.nx-chart-cap {
+  margin: 6px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.86em;
+  line-height: 1.45;
+  max-width: var(--measure, 34rem);
+}
+
+/* ── Worth remembering ── */
+
+.nx-facts {
+  margin: 0 0 18px;
+  padding: 12px 16px 12px 16px;
+  border-left: 3px solid var(--margin);
+  background: color-mix(in srgb, var(--margin) 7%, transparent);
+  border-radius: 0 6px 6px 0;
+}
+
+.nx-facts-h {
+  margin: 0 0 6px;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--margin);
+}
+
+.nx-facts-list { margin: 0; padding-left: 18px; }
+.nx-facts-list li { margin: 0 0 5px; line-height: 1.55; }
+.nx-facts-list li:last-child { margin-bottom: 0; }
+
+/* ── A question mid lesson ── */
+
+.nx-try {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+
+.nx-try-ask { margin: 0 0 10px; font-weight: 600; line-height: 1.5; }
+
+.nx-try-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.nx-try-choice {
+  flex: 1 1 auto;
+  min-width: 7rem;
+  padding: 10px 14px;
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  background: var(--nx-paper, #fff);
+  border: 1.5px solid var(--rule);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nx-try-choice:hover:not(:disabled) { border-color: var(--margin); }
+.nx-try-choice:disabled { cursor: default; }
+
+/* Marked, not cleared: a learner should see what they chose next to what was
+   right. A wrong answer that vanishes teaches guessing. */
+.nx-try-right {
+  border-color: var(--nx-green, #2f6b4f);
+  background: color-mix(in srgb, var(--nx-green, #2f6b4f) 12%, transparent);
+  font-weight: 600;
+}
+
+.nx-try-wrong {
+  border-color: var(--nx-red, #a8442f);
+  background: color-mix(in srgb, var(--nx-red, #a8442f) 10%, transparent);
+  text-decoration: line-through;
+}
+
+.nx-try-why {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  line-height: 1.55;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nx-try-choice { transition: border-color 120ms ease, background 120ms ease; }
+}
+
+/* ── Counted objects, and a question box on every block ──────────────────────
+   The count block draws exactly N things using the games' own artwork, so a
+   counting lesson and the game that follows it show the same mango. See
+   CountBlock.tsx for why this is not a generated picture. */
+
+.nx-count {
+  margin: 0 0 18px;
+  padding-left: 16px;
+  border-left: 2px solid var(--rule);
+}
+
+.nx-count-canvas {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+}
+
+.nx-count-cap {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.86em;
+}
+
+/* A quiet line that becomes a field. Ten open boxes down a lesson would
+   compete with the lesson, and a control hidden behind a hover does not exist
+   on a phone, which is where this is mostly read. */
+.nx-blockask-open {
+  display: inline-block;
+  margin: 0 0 14px 16px;
+  padding: 2px 0;
+  font: inherit;
+  font-size: 0.82em;
+  color: var(--ink-faint, var(--ink-soft));
+  background: none;
+  border: none;
+  border-bottom: 1px dotted var(--rule);
+  cursor: pointer;
+}
+
+.nx-blockask-open:hover,
+.nx-blockask-open:focus-visible {
+  color: var(--margin);
+  border-bottom-color: var(--margin);
+}
+
+.nx-blockask {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 16px 16px;
+  max-width: 30rem;
+}
+
+.nx-blockask-box {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 8px 11px;
+  font: inherit;
+  font-size: 0.92em;
+  color: var(--ink);
+  background: var(--nx-paper, #fff);
+  border: 1.5px solid var(--rule);
+  border-radius: 6px;
+}
+
+.nx-blockask-box:focus-visible { border-color: var(--margin); outline: none; }
+
+.nx-blockask-send {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 0.9em;
+  color: var(--nx-paper, #fff);
+  background: var(--margin);
+  border: 1.5px solid var(--margin);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nx-blockask-send:disabled { opacity: 0.45; cursor: default; }
+
+/* ── Money, and the side column ──────────────────────────────────────────────
+   Money is drawn from an amount in pesewas, never generated as a picture. See
+   the header of MoneyBlock.tsx: a banknote IS its writing, and a generated
+   image may not contain writing, so a picture of money cannot be right. */
+
+.nx-money {
+  margin: 0 0 18px;
+  padding-left: 16px;
+  border-left: 2px solid var(--rule);
+}
+
+.nx-money-total {
+  margin: 0 0 8px;
+  font-size: 1.3em;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.nx-money-row { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+
+/* A note is paper: rectangular, pale, a hairline edge. A coin is a disc. The
+   shapes do the telling so the label does not have to say which it is. */
+.nx-money-note {
+  padding: 9px 13px;
+  min-width: 4.2rem;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #2f5d43;
+  background: #eef6ef;
+  border: 1.5px solid #9dc3a8;
+  border-radius: 3px;
+}
+
+.nx-money-coin {
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  font-size: 0.78em;
+  font-weight: 650;
+  color: #6b4a16;
+  background: radial-gradient(circle at 35% 30%, #f7e3ab, #dcb75e 70%);
+  border: 1.5px solid #b8933f;
+  border-radius: 50%;
+}
+
+.nx-money-cap {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.86em;
+}
+
+/* One paragraph and its side column. The lesson keeps the measure it had; the
+   aside takes space outside it, so nothing about the reading width changes. */
+.nx-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 9.5rem;
+  gap: 0 14px;
+  align-items: start;
+}
+
+.nx-aside {
+  padding-top: 2px;
+  /* Quieter than the lesson on purpose: it is available, not inviting. */
+  font-size: 0.94em;
+}
+
+/* Inside the aside the ask control is already narrow, so it loses the indent
+   it needed when it sat in the reading column. */
+.nx-aside .nx-blockask-open,
+.nx-aside .nx-blockask { margin-left: 0; }
+
+.nx-aside .nx-blockask { flex-direction: column; align-items: stretch; gap: 6px; }
+.nx-aside .nx-blockask-box { font-size: 0.86em; padding: 6px 9px; }
+.nx-aside .nx-blockask-send { padding: 6px 10px; font-size: 0.84em; }
+
+/* No margin to put it in. The aside drops under the paragraph it belongs to,
+   which is where it used to live, and that is correct on a phone: there is one
+   column and the question still follows its own paragraph. */
+@media (max-width: 52rem) {
+  .nx-row { grid-template-columns: minmax(0, 1fr); }
+  .nx-aside { padding-top: 0; margin: 0 0 14px; }
+  .nx-aside .nx-blockask { flex-direction: row; align-items: center; }
+}
+
+/* A picture and the names of its parts. The names are real text under the
+   image, never inside it: a picture model cannot spell, and the names are the
+   one thing a parts diagram exists to teach. A lesson may hold as many of
+   these as the topic has parts. */
+.nx-figure { margin: 0 0 18px; }
+
+.nx-figure-parts {
+  margin: 8px 0 0;
+  padding-left: 34px;
+  color: var(--ink);
+  font-size: 0.92em;
+}
+
+.nx-figure-parts li { margin: 0 0 3px; line-height: 1.5; }
+
+/* ── A conversation about one part of the lesson ─────────────────────────────
+   The control that opens it sits in the margin; the conversation itself is
+   full width. An answer squeezed into a nine rem margin is a column of single
+   words with nowhere to type a reply, which is what this replaced. */
+
+.nx-thread {
+  margin: 2px 0 20px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--margin);
+  background: color-mix(in srgb, var(--margin) 4%, transparent);
+  border-radius: 0 8px 8px 0;
+}
+
+.nx-thread-turn { margin: 0 0 14px; }
+
+/* The learner's own words, set apart so a long exchange stays followable. */
+.nx-thread-asked {
+  margin: 0 0 8px;
+  padding: 7px 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--nx-paper, #fff);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  /* Not the full measure: a question is usually short and a full width bubble
+     makes a two word question look like a paragraph. */
+  max-width: 34rem;
+}
+
+.nx-thread-answer .nx-ai-p {
+  padding-left: 0;
+  border-left: none;
+  margin-bottom: 10px;
+}
+
+.nx-thread-failed {
+  margin: 0;
+  color: var(--nx-red-text, #8c3b28);
+  font-size: 0.92em;
+}
+
+.nx-thread-form { display: flex; gap: 8px; margin: 4px 0 0; max-width: 38rem; }
+
+.nx-thread-box {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 0.94em;
+  color: var(--ink);
+  background: var(--nx-paper, #fff);
+  border: 1.5px solid var(--rule);
+  border-radius: 6px;
+}
+
+.nx-thread-box:focus-visible { border-color: var(--margin); outline: none; }
+
+.nx-thread-send {
+  flex: 0 0 auto;
+  padding: 9px 16px;
+  font: inherit;
+  font-size: 0.92em;
+  color: var(--nx-paper, #fff);
+  background: var(--margin);
+  border: 1.5px solid var(--margin);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nx-thread-send:disabled { opacity: 0.45; cursor: default; }
+
+.nx-thread-note {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.82em;
+}

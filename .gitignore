@@ -39,3 +39,13 @@ dist-ssr
 
 # Narration recorded by tools/tts.mjs for the lesson videos.
 public/narration/
+
+# Rendered lesson films.
+#
+# Build outputs, not source: they are produced by `npm run tutor` from the
+# storyboards in video/ananse/, and the worker uploads each one to Supabase
+# Storage so a deployment serves it from there rather than from the bundle.
+# One film is 12 MB, and a library of forty would make the repository
+# unusable. The storyboards and the drawing code ARE committed, so any film
+# can be rebuilt.
+public/ananse/video/*.mp4

@@ -19,13 +19,26 @@
  * child can understand what to do.
  */
 
+import { bankReady, clipFor } from './voice-bank'
+
 /** Preferred first. Ghanaian English follows British convention. */
 const WANTED = [/en[-_]GH/i, /en[-_]GB/i, /en[-_]NG/i, /en[-_]ZA/i, /^en/i]
 
 const KEY = 'nexaedu_voice_on'
 
-/** Whether the platform has a voice at all. */
+/** Whether this device can make a sound out of a sentence, by any route. */
 export function canSpeak(): boolean {
+  if (typeof window === 'undefined') return false
+  /* A recording plays on anything with an audio element, which is every phone.
+     That is the whole reason the bank exists: it is the only route that does
+     not depend on what the device happens to have installed. */
+  if (bankReady()) return true
+  return 'speechSynthesis' in window
+    && typeof window.SpeechSynthesisUtterance === 'function'
+}
+
+/** Whether the device can synthesise, as opposed to play a recording. */
+function canSynthesise(): boolean {
   return typeof window !== 'undefined'
     && 'speechSynthesis' in window
     && typeof window.SpeechSynthesisUtterance === 'function'
@@ -73,8 +86,28 @@ function bestVoice(): SpeechSynthesisVoice | null {
   return voices[0] ?? null
 }
 
+/**
+ * What is playing now, and which request it belongs to.
+ *
+ * `turn` is bumped by every new `say` and by `stop`. Anything already in
+ * flight checks it before doing anything further, which is how a queued
+ * sequence is abandoned halfway without it having to know it was queued.
+ */
+let playing: HTMLAudioElement | null = null
+let turn = 0
+
 export function stop(): void {
-  if (!canSpeak()) return
+  turn++
+  if (playing) {
+    try {
+      playing.pause()
+      playing.src = ''
+    } catch {
+      /* Already gone. */
+    }
+    playing = null
+  }
+  if (!canSynthesise()) return
   try {
     window.speechSynthesis.cancel()
   } catch {
@@ -99,7 +132,7 @@ export function stop(): void {
  * possible answer to a direct request. `asked` says the person pressed the
  * button, and then it speaks regardless.
  */
-export function say(text: string, opts: {
+export function say(text: string | string[], opts: {
   rate?: number
   /** True when a person pressed something, rather than the app deciding to. */
   asked?: boolean
@@ -110,10 +143,84 @@ export function say(text: string, opts: {
   const o = typeof opts === 'number' ? { rate: opts } : opts
   const rate = o.rate ?? 0.85
 
-  const line = String(text || '').trim()
-  if (!line || !canSpeak() || (!o.asked && !voiceOn())) { o.onEnd?.(); return }
+  /**
+   * Several sentences, said one after another.
+   *
+   * A wrong answer says "Not quite." and then what the answer was. Those used
+   * to be glued into one string, which meant the recorded bank needed every
+   * opener crossed with every explanation. As two sentences it needs three
+   * files plus the explanations, and it sounds the same, because each part is
+   * a whole sentence with its own shape either way.
+   */
+  const lines = (Array.isArray(text) ? text : [text])
+    .map(t => String(t || '').trim())
+    .filter(Boolean)
 
+  if (!lines.length || !canSpeak() || (!o.asked && !voiceOn())) { o.onEnd?.(); return }
+
+  /* A child who taps twice should hear the new instruction, not the old one
+     finishing over it. */
   stop()
+  const mine = turn
+
+  const next = (i: number): void => {
+    if (mine !== turn) return            /* something else started talking */
+    if (i >= lines.length) { o.onEnd?.(); return }
+    speakOne(lines[i], rate, () => next(i + 1))
+  }
+  next(0)
+}
+
+/**
+ * One sentence: the recording if there is one, the device voice if not.
+ *
+ * The fallback is per sentence rather than per request on purpose. A game can
+ * easily say one line that was baked and one that was not, and dropping the
+ * whole thing to the device voice because of the second would change the voice
+ * halfway through for no reason the child could understand.
+ */
+function speakOne(line: string, rate: number, done: () => void): void {
+  const mine = turn
+  const clip = clipFor(line)
+
+  if (clip) {
+    try {
+      const audio = new Audio(clip)
+      playing = audio
+      /* The recordings are already read at a child's pace, so this only nudges
+         when a caller explicitly asked for slower or faster. */
+      audio.playbackRate = Math.max(0.5, Math.min(1.6, rate / 0.85))
+      const finish = () => {
+        if (playing === audio) playing = null
+        if (mine === turn) done()
+      }
+      audio.onended = finish
+      /* A file that will not play is not a reason for silence: the device
+         voice still has the sentence. */
+      audio.onerror = () => {
+        if (playing === audio) playing = null
+        if (mine === turn) synthesise(line, rate, done)
+      }
+      const started = audio.play()
+      if (started && typeof started.catch === 'function') {
+        started.catch(() => {
+          /* Blocked because nothing has been tapped yet, or no codec. Either
+             way the device voice is the answer. */
+          if (playing === audio) playing = null
+          if (mine === turn) synthesise(line, rate, done)
+        })
+      }
+      return
+    } catch {
+      /* Fall through to the device voice. */
+    }
+  }
+  synthesise(line, rate, done)
+}
+
+function synthesise(line: string, rate: number, done: () => void): void {
+  if (!canSynthesise()) { done(); return }
+  const mine = turn
   try {
     const utter = new SpeechSynthesisUtterance(line)
     const voice = bestVoice()
@@ -122,10 +229,8 @@ export function say(text: string, opts: {
       utter.lang = voice.lang
     }
     utter.rate = rate
-    if (o.onEnd) {
-      utter.onend = () => o.onEnd?.()
-      utter.onerror = () => o.onEnd?.()
-    }
+    utter.onend = () => { if (mine === turn) done() }
+    utter.onerror = () => { if (mine === turn) done() }
     /* Very slightly higher than natural, which reads as friendlier to a young
        child without tipping into the cartoon register. */
     utter.pitch = 1.05
@@ -133,7 +238,7 @@ export function say(text: string, opts: {
   } catch {
     /* A device that refuses to speak leaves the text on screen, which is
        where it already was. */
-    o.onEnd?.()
+    done()
   }
 }
 
@@ -145,7 +250,7 @@ export function say(text: string, opts: {
  * Resolves either way, so nothing waits on a browser that never fires it.
  */
 export function whenVoicesReady(then: () => void): void {
-  if (!canSpeak()) { then(); return }
+  if (!canSynthesise()) { then(); return }
   if (window.speechSynthesis.getVoices().length) { then(); return }
 
   let done = false

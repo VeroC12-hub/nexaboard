@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Addition Race</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Addition Race. Adding, with something to win.
+
+  ── What changes at Primary ──────────────────────────────────────────────────
+
+  The KG games each ask one kind of question and the reward is the moment
+  itself: a mango eaten, a balloon burst, a train that pulls away. That is right
+  for four year olds and thin for seven year olds, who can hold a goal in their
+  head across several questions and want to know whether they are winning.
+
+  So Primary games have a row of answers along the bottom and something on
+  screen that advances. Here it is a race: every sum answered correctly moves
+  Ananse forward, every one missed lets the rival gain, and the finish line is
+  visible from the first question.
+
+  ── Why the rival gains instead of Ananse losing ground ──────────────────────
+
+  Because a racer that slides backwards wipes out work a child already did, and
+  at that point the honest move is to stop playing. The rival closing the gap
+  costs nothing already earned and still makes a wrong answer matter.
+
+  ── Why the wrong answers are near misses ────────────────────────────────────
+
+  Offering 8, 3, 19 and 40 for 5 + 3 is not arithmetic, it is spotting the
+  small one. The distractors here are off by one or two, or the result of the
+  common slip of subtracting instead, so the child has to actually add.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    right: ['Go go go!', 'We are ahead!', 'Faster!', 'Yes! Keep going!'],
+    wrong: function (n) { return 'It was ' + n + '. He is catching up!' },
+    leg: 'We won that race! Line up for the next one!',
+    lost: 'He beat us this time. Let us race again!',
+  }
+
+  /**
+   * How long a leg of the race is.
+   *
+   * ── Why the race no longer ends ───────────────────────────────────────────
+   *
+   * It was six sums and a finish line, which told a seven year old exactly how
+   * little was being asked of them: they stopped the moment it was done,
+   * whether or not they were enjoying it. Every other Primary game here is a
+   * run that goes until they lose it, and this was the one left over.
+   *
+   * So the finish line still exists, it is just never the last one. Crossing
+   * it wins the leg, pays a bonus, and puts a new stretch of track ahead with
+   * the rival further back. The race is the unit, not the session.
+   */
+  var LEG = 8
+
+  /* ── the sums ────────────────────────────────────────────────────────────── */
+
+  /**
+   * A sum, and three wrong answers worth offering.
+   *
+   * ── On the difficulty ─────────────────────────────────────────────────────
+   *
+   * Sums stay within twenty and cross ten about half the time, because 7 + 8 is
+   * the thing Primary 1 is actually working on and 2 + 3 is revision they can
+   * already do in their sleep.
+   *
+   * ── On the wrong answers ──────────────────────────────────────────────────
+   *
+   * Off by one either way, and the answer you get by subtracting instead of
+   * adding, which is the commonest slip at this age. A child who is guessing
+   * cannot tell these apart from the right one at a glance, which is the entire
+   * point: the tile row must not be solvable by looking.
+   */
+  function makeSum(round) {
+    /* Within ten at first, then crossing ten, then two digit numbers. A run
+       with no end needs somewhere to go or it is the same question forever. */
+    var top = round < 4 ? 5 : round < 10 ? 9 : round < 18 ? 12 : 20
+    var a = randInt(2, top)
+    var b = randInt(2, top)
+    var answer = a + b
+    var wrong = {}
+    wrong[answer + 1] = true
+    wrong[answer - 1] = true
+    if (a !== b) wrong[Math.abs(a - b)] = true
+    else wrong[answer + 2] = true
+    delete wrong[answer]
+
+    var list = Object.keys(wrong).map(Number).filter(function (v) { return v > 0 })
+    while (list.length < 3) {
+      var extra = answer + pick([-2, 2, 3])
+      if (extra > 0 && extra !== answer && list.indexOf(extra) < 0) list.push(extra)
+    }
+    var options = [answer].concat(list.slice(0, 3))
+    options.sort(function () { return Math.random() - 0.5 })
+    return { a: a, b: b, answer: answer, options: options }
+  }
+
+  /* ── the rival ───────────────────────────────────────────────────────────── */
+
+  /**
+   * A goat, because a goat is funny and because everybody here has been beaten
+   * to something by one.
+   */
+  function drawGoat(ctx, x, y, r, trot) {
+    var bob = Math.sin(trot) * r * 0.06
+    ctx.save()
+    ctx.translate(x, y + bob)
+
+    /* Legs, alternating, so it is trotting rather than sliding. */
+    ctx.strokeStyle = '#7d5636'
+    ctx.lineWidth = r * 0.16
+    ctx.lineCap = 'round'
+    for (var i = 0; i < 4; i++) {
+      var swing = Math.sin(trot * 2 + i * 1.6) * r * 0.22
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.4 + i * r * 0.28, r * 0.3)
+      ctx.lineTo(-r * 0.4 + i * r * 0.28 + swing, r * 0.78)
+      ctx.stroke()
+    }
+
+    /* Brown, not cream. A pale body with pale legs read as a lamb, and losing
+       a race to a lamb is a different feeling from losing one to a goat. */
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.76, r * 0.5, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#b8865a', K.LINE, 3.5)
+
+    /* Tail. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.68, -r * 0.16)
+    ctx.lineTo(-r * 0.92, -r * 0.4)
+    ctx.lineTo(-r * 0.6, -r * 0.34)
+    ctx.closePath()
+    K.inkedOn(ctx, '#b8865a', K.LINE, 2.5)
+
+    /* Head. */
+    ctx.beginPath()
+    ctx.ellipse(r * 0.7, -r * 0.32, r * 0.36, r * 0.3, -0.2, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#cf9c6c', K.LINE, 3)
+    /* Horns, curving back, which is the whole silhouette of a goat. */
+    /* Horns, curving back and big enough to be seen at lane size. */
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = r * 0.17
+    ctx.lineCap = 'round'
+    for (var s = 0; s < 2; s++) {
+      ctx.beginPath()
+      ctx.moveTo(r * (0.58 + s * 0.16), -r * 0.56)
+      ctx.quadraticCurveTo(r * (0.42 + s * 0.16), -r * 1.02, r * (0.78 + s * 0.16), -r * 1.1)
+      ctx.stroke()
+    }
+    ctx.strokeStyle = '#8a5a2b'
+    ctx.lineWidth = r * 0.1
+    for (var s2 = 0; s2 < 2; s2++) {
+      ctx.beginPath()
+      ctx.moveTo(r * (0.58 + s2 * 0.16), -r * 0.56)
+      ctx.quadraticCurveTo(r * (0.42 + s2 * 0.16), -r * 1.02, r * (0.78 + s2 * 0.16), -r * 1.1)
+      ctx.stroke()
+    }
+    /* Beard, because a goat without one is a sheep. */
+    ctx.beginPath()
+    ctx.moveTo(r * 0.82, -r * 0.14)
+    ctx.lineTo(r * 0.86, r * 0.22)
+    ctx.lineTo(r * 0.72, -r * 0.1)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f2ece0', K.LINE, 2)
+
+    ctx.beginPath()
+    ctx.arc(r * 0.78, -r * 0.38, r * 0.06, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+    ctx.restore()
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /** How far along this leg of the track a racer at step `n` stands. */
+  function trackX(k, steps) {
+    var start = k.W * 0.1
+    var finish = k.W * 0.88
+    return start + (finish - start) * clamp(steps / LEG, 0, 1)
+  }
+
+  /**
+   * How big a racer is.
+   *
+   * Sized against the gap between the two lanes, which is the only measurement
+   * that matters: a runner taller than his own lane is standing across both of
+   * them, and Ananse was, so the picture had one creature sprawled over the
+   * whole track and a goat tucked in beside its knee.
+   */
+  function racerR(k) {
+    var L = K.lanes(k.H)
+    return clamp(Math.min(k.W * 0.05, (L.two - L.one) * 0.62), 20, 50)
+  }
+
+  /**
+   * He is drawn smaller than the goat, and the goat larger, so that they come
+   * out the same size.
+   *
+   * Eight legs spread him about two and a half radii wide and the goat is
+   * about two. Drawing both at one radius makes the spider visibly the bigger
+   * animal, which is funny once and wrong every time after that.
+   */
+  function himR(k) { return racerR(k) * 0.72 }
+  function goatR(k) { return racerR(k) * 0.98 }
+
+  AnanseKit.run({
+    title: 'Addition Race',
+    overTitle: 'The goat wins!',
+    scene: 'track',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'sums',
+    hud: function (k) {
+      return [
+        { label: 'sums', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+    /* Tapping an answer is the answer. */
+    button: false,
+    restMood: 'hello',
+
+    begin: function (k) {
+      var sum = makeSum(k.round)
+      k.own.sum = sum
+      k.target = sum.answer
+      k.own.picked = -1
+      k.own.showing = 0
+      if (k.own.me === undefined) { k.own.me = 0; k.own.rival = 0; k.own.coins = 0 }
+      /* Round zero is a fresh run after losing, so the track goes back to the
+         start line even though `own` survived. */
+      if (k.round === 0) {
+        k.own.me = 0; k.own.rival = 0; k.own.coins = 0
+        k.own.meAt = 0; k.own.rivalAt = 0; k.own.cross = 0
+      }
+      /* Where each racer is drawn, eased towards where it should be. */
+      if (k.own.meAt === undefined) { k.own.meAt = 0; k.own.rivalAt = 0 }
+      if (k.own.cross === undefined) k.own.cross = 0
+      k.own.trot = 0
+      k.say(sum.a + ' plus ' + sum.b + '. What is the answer?')
+      k.him.setMood('hello')
+    },
+
+    ask: function (k) {
+      if (!k.own.sum) return null
+      if (k.phase === 'won') return { head: 'Yes! ', num: k.target, tail: '' }
+      return { head: k.own.sum.a + ' + ' + k.own.sum.b + ' = ', num: '?', tail: '' }
+    },
+
+    /**
+     * Which tile was tapped, compared with the sum worked out now.
+     *
+     * The answer is recomputed from `a` and `b` at this moment rather than
+     * trusted from when the question was made, so there is no stored answer
+     * anywhere that could drift from the question on screen.
+     */
+    judge: function (k) {
+      if (k.own.picked < 0) return false
+      return k.own.sum.options[k.own.picked] === k.own.sum.a + k.own.sum.b
+    },
+
+    onWin: function (k) {
+      k.own.me++
+      k.own.coins += 1
+      k.cheer(trackX(k, k.own.meAt), K.lanes(k.H).one)
+
+      /* The finish line, crossed. It is never the last one: the leg resets and
+         a new stretch of track is ahead, which is what turns a set of six sums
+         into a run worth beating. */
+      if (k.own.me >= LEG) {
+        k.own.coins += 10
+        k.sound.play('win')
+        /**
+         * Run through the tape, do not teleport back to the start.
+         *
+         * Setting the position straight back to zero slid him the whole length
+         * of the track backwards, which is exactly the thing this game was
+         * built to avoid: it wipes out work the child just did and it looks
+         * like a punishment for winning. So he runs off the right hand edge,
+         * the track is quietly reset behind him, and he comes back on from the
+         * left for the next race. `step` does the second half.
+         */
+        k.own.me = LEG + 1.4
+        k.own.cross = 0.85
+        k.say(LINES.leg)
+        return
+      }
+      k.say(pick(LINES.right))
+    },
+    onMiss: function (k) {
+      /* The rival gains instead of Ananse losing ground. A racer that slides
+         backwards wipes out work the child already did. */
+      k.own.rival++
+      k.say(LINES.wrong(k.own.sum.a + k.own.sum.b))
+    },
+    onOver: function (k) { k.say(LINES.lost) },
+
+    down: function (k, x, y) {
+      /**
+       * A round already missed may be answered again.
+       *
+       * This guard exists to stop a second tap landing inside the same commit,
+       * not to end the round. Without the second half of the test it never let
+       * go: `picked` is only cleared in `begin`, `begin` only runs on a new
+       * round, and a new round only comes after a win. So one wrong answer
+       * locked the board for good. The child lost a life and then could not
+       * answer anything again, in a game with no end.
+       */
+      if (k.own.picked >= 0 && k.results[k.round] !== false) return false
+      var i = K.tileAt(k.W, k.H, k.own.sum.options.length, x, y)
+      if (i < 0) return false
+      k.own.picked = i
+      k.sound.play('lift')
+      k.commit()
+      return true
+    },
+
+    step: function (k, dt) {
+      if (!k.own.sum) return
+      k.own.trot += dt * 7
+      k.own.run = (k.own.run || 0) + dt * 11
+
+      /* The second half of crossing the line: once he is off the right hand
+         edge the track is reset and he re-enters from the left. */
+      if (k.own.cross > 0) {
+        k.own.cross -= dt
+        if (k.own.cross <= 0) {
+          k.own.cross = 0
+          k.own.me = 0
+          k.own.rival = 0
+          k.own.meAt = -1.4
+          k.own.rivalAt = -1.8
+        }
+      }
+
+      /* Dust, while either of them is actually gaining ground. Nothing else
+         on screen says this is a race rather than a diagram of one. */
+      k.own.puffAt = (k.own.puffAt || 0) - dt
+      var moving = Math.abs(k.own.me - k.own.meAt) > 0.04
+        || Math.abs(k.own.rival - k.own.rivalAt) > 0.04
+      if (moving && k.own.puffAt <= 0) {
+        k.own.puffAt = 0.06
+        var L0 = K.lanes(k.H)
+        var rr = racerR(k)
+        k.puff(trackX(k, k.own.meAt) - rr * 0.9, L0.one + rr * 1.0, 2,
+          'rgba(190,110,70,0.55)')
+        k.puff(trackX(k, k.own.rivalAt) - rr * 0.8, L0.two + rr * 0.7, 2,
+          'rgba(190,110,70,0.45)')
+      }
+      /* Eased along the track, so a racer travels rather than teleporting from
+         one step to the next. */
+      k.own.meAt += (k.own.me - k.own.meAt) * Math.min(1, dt * 3.5)
+      k.own.rivalAt += (k.own.rival - k.own.rivalAt) * Math.min(1, dt * 3.5)
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var L = K.lanes(k.H)
+      var r = racerR(k)
+
+      /* The rival in the far lane, Ananse in the near one, so he is in front of
+         the divider and reads as the one you are playing. */
+      var gr = goatR(k)
+      drawGoat(ctx, trackX(k, k.own.rivalAt), L.two - gr * 0.1, gr, k.own.trot)
+
+      /**
+       * Him, running.
+       *
+       * Eight legs already swing on their own, but a character that holds one
+       * height while the ground goes past reads as being towed. The bob is
+       * small and only happens while he is gaining, so standing still looks
+       * like standing still.
+       */
+      var hr = himR(k)
+      var gaining = Math.abs(k.own.me - k.own.meAt) > 0.04
+      var bob = gaining ? Math.abs(Math.sin(k.own.run)) * hr * 0.16 : 0
+      var mx = trackX(k, k.own.meAt)
+      if (gaining) {
+        /* Speed lines, which is the cheapest and most legible way a flat
+           cartoon says fast. */
+        ctx.save()
+        ctx.strokeStyle = 'rgba(255,255,255,0.5)'
+        ctx.lineWidth = Math.max(2, r * 0.08)
+        ctx.lineCap = 'round'
+        for (var sl = 0; sl < 3; sl++) {
+          var sy = L.one - r * 0.4 + sl * r * 0.5
+          var len = r * (0.9 + (sl % 2) * 0.6)
+          ctx.beginPath()
+          ctx.moveTo(mx - r * 1.2 - len, sy)
+          ctx.lineTo(mx - r * 1.2, sy)
+          ctx.stroke()
+        }
+        ctx.restore()
+      }
+      k.him.draw(mx, L.one - bob, hr, L.one + hr * 1.35)
+
+      /* The answers. */
+      var n = k.own.sum.options.length
+      for (var i = 0; i < n; i++) {
+        var state = 'idle'
+        if (k.own.picked >= 0) {
+          if (k.own.sum.options[i] === k.own.sum.a + k.own.sum.b) state = 'right'
+          else if (i === k.own.picked) state = 'wrong'
+          else state = 'dim'
+        }
+        K.drawTile(ctx, k.W, k.H, i, n, String(k.own.sum.options[i]), state, k.FONT)
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.sum) return { sum: null }
+      return {
+        sum: k.own.sum.a + '+' + k.own.sum.b,
+        answer: k.own.sum.a + k.own.sum.b,
+        options: k.own.sum.options,
+        picked: k.own.picked,
+        me: k.own.me, rival: k.own.rival, coins: k.own.coins,
+        tiles: k.own.sum.options.map(function (v, i) {
+          var r = K.tileRect(k.W, k.H, i, k.own.sum.options.length)
+          return { value: v, x: Math.round(r.x + r.w / 2), y: Math.round(r.y + r.h / 2) }
+        }),
+      }
+    },
+  })
+}())
+</script>
+</body>
+</html>

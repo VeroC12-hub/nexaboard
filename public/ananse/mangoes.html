@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Feed Ananse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Feed Ananse. Counting to five, by putting mangoes in a greedy spider.
+
+  ── Why feeding, and not a basket ────────────────────────────────────────────
+
+  It was a basket: Ananse had eaten Mama's mangoes and the child had to put some
+  back before she came home. Two abstract ideas stacked on each other,
+  restitution and an unseen person being avoided, both of which a five year old
+  has to hold in their head before the counting even starts. It was shown to
+  children and it did not land.
+
+  "Ananse is hungry, feed him" is one idea, it is the single thing everybody
+  already knows about him, and the action is its own reward: a mango goes in, he
+  chews with his cheeks full and says something greedy. That is funny the first
+  time and still funny the twentieth.
+
+  It also makes the maths visible instead of bookkept. He swallows each one, so
+  what he has eaten is shown as a row of mangoes rather than a numeral. A row
+  can be counted, pointed at and counted again, which is the skill.
+
+  ── What is in this file ─────────────────────────────────────────────────────
+
+  Only the mangoes. The scene, the lettering, the banner, the button, the sound,
+  the voice, the title card, the progress row, the round loop and the judging
+  all live in `kit.js`, because nine tenths of a game turned out not to be about
+  mangoes at all.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script src="count.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /**
+   * The script.
+   *
+   * ── Why it was rewritten ──────────────────────────────────────────────────
+   *
+   * It used to say "Ananse ate the mangoes! Put four mangoes back, quick!".
+   * Every word of that is an adult explaining a premise. These are short,
+   * greedy and silly, because he is, and the instruction sits inside the joke
+   * rather than being announced before it.
+   *
+   * Kept in one place so this file and `tools/bake-voice.mts` cannot drift:
+   * anything said here has to exist as a recording, and the baker holds the
+   * same list.
+   */
+  var LINES = {
+    ask: function (n) {
+      return 'Ananse is so hungry! Feed him ' + n + ' ' + word(n) + '!'
+    },
+    /* A noise per bite. Short, so it never runs over the next thing a child
+       does, and varied, so the fourth mango is not the first one again. */
+    bite: ['Yum!', 'Mmm!', 'Tasty!', 'More!', 'Nice!'],
+    full: ['Yum yum! My tummy is happy!', 'I am full! Thank you, my friend!', 'That was delicious!'],
+    tooMany: function (n) { return 'Oh! Too many! I only wanted ' + n + '!' },
+    tooFew: function (n) { return 'I am still hungry! I wanted ' + n + '!' },
+    spit: 'Oops! I dropped one!',
+    tickle: 'Hee hee! That tickles!',
+    nothing: 'Feed me first! I am starving!',
+    over: 'What a feast! Thank you, my friend!',
+  }
+
+  /** Singular or plural, from the shared table rather than from a guess. */
+  function word(n) {
+    var m = AnanseCount.THINGS.mango
+    return n === 1 ? m.one : m.many
+  }
+
+  /* ── the mango ───────────────────────────────────────────────────────────── */
+
+  /**
+   * One mango, drawn by the shared module.
+   *
+   * ── Why the drawing left this file ────────────────────────────────────────
+   *
+   * The lesson video counts mangoes and then hands the child straight to this
+   * game to count mangoes. While each half drew its own, they were two
+   * different fruit, and the handover was a change of subject dressed up as a
+   * continuation. There is now one mango, in `count.js`, and both halves call
+   * it: this game with a script tag, the video by importing the same file into
+   * its bundle.
+   *
+   * This wrapper stays because the call sites below pass a position, and the
+   * shared function draws at the origin like everything else in the kit. That
+   * is one translate, and it is cheaper than changing eight call sites in a
+   * game that is already verified.
+   */
+  function drawMango(ctx, x, y, r, spin, squash) {
+    ctx.save()
+    ctx.translate(x, y)
+    AnanseCount.draw('mango', ctx, r, { spin: spin, squash: squash })
+    ctx.restore()
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  /**
+   * How big a loose mango is.
+   *
+   * Shared as well as the drawing, so a mango in the video and a mango in the
+   * game are the same size as well as the same shape. The figure is unchanged,
+   * it has just moved.
+   */
+  function mangoR(k) { return AnanseCount.unitR(k.W, k.H) }
+
+  /**
+   * Where he sits, and how big.
+   *
+   * One function, because the scatter has to keep mangoes off him and the
+   * drawing has to put him somewhere. When those were two numbers they
+   * disagreed by four percent of the width and a mango landed on his face.
+   *
+   * He is large: he is the drop target, not scenery, and a target has to be big
+   * enough for a small hand aiming while excited.
+   */
+  function seat(k) {
+    var r = clamp(Math.min(k.W, k.H) * 0.15, 52, 120)
+    return { x: k.W * 0.5, y: k.ground() + (k.H - k.bandH() - k.ground()) * 0.52, r: r }
+  }
+
+  /**
+   * Whether a dropped mango went in his mouth.
+   *
+   * Deliberately generous, and centred on his mouth rather than his middle. A
+   * four year old aiming at a mouth lands near it, and a game that rejects a
+   * near miss feels broken rather than strict.
+   */
+  function atMouth(k, x, y) {
+    var a = seat(k)
+    var mx = k.him.at.mouthX || a.x
+    var my = k.him.at.mouthY || a.y
+    return Math.hypot(x - mx, y - my) < a.r * 1.15
+  }
+
+  /** Lay the loose mangoes on the floor without letting them overlap. */
+  function scatter(k) {
+    var r = mangoR(k)
+    /* The whole floor, not a strip near the horizon: that is a band forty
+       pixels tall on a wide screen and every mango comes out in a neat row,
+       which is the worksheet look this game exists to escape. */
+    var top = k.ground() + r * 1.1
+    var bottom = k.H - k.bandH() - r * 1.1
+    var a = seat(k)
+
+    for (var i = 0; i < k.own.mangoes.length; i++) {
+      var m = k.own.mangoes[i]
+      for (var tries = 0; tries < 140; tries++) {
+        m.x = rand(r * 1.4, k.W - r * 1.4)
+        m.y = rand(top, Math.max(top + 10, bottom))
+        var ok = true
+        for (var j = 0; j < i; j++) {
+          if (Math.hypot(k.own.mangoes[j].x - m.x, k.own.mangoes[j].y - m.y) < r * 2.4) {
+            ok = false
+            break
+          }
+        }
+        /* Clear of him: a mango on his face is one the child cannot tell apart
+           from one he has already eaten. */
+        if (Math.hypot(m.x - a.x, m.y - a.y) < a.r * 1.5 + r) ok = false
+        if (ok) break
+      }
+      /* Where it was laid is the floor under it. */
+      m.restY = m.y
+    }
+  }
+
+  function onGround(k) {
+    var n = 0
+    for (var i = 0; i < k.own.mangoes.length; i++) if (!k.own.mangoes[i].hidden) n++
+    return n
+  }
+
+  /**
+   * Send a mango into his mouth.
+   *
+   * An arc, not a straight line: a straight line between two points is a cursor
+   * move, an arc is a thing being carried. It shrinks as it goes in, which is
+   * the cheapest possible "swallowed" and reads far better than vanishing at
+   * full size.
+   */
+  function feed(k, m) {
+    m.held = false
+    m.settled = false
+    m.fly = {
+      t: 0,
+      dur: 0.42,
+      fromX: m.x, fromY: m.y,
+      liftY: Math.min(m.y, k.him.at.mouthY) - mangoR(k) * 2.2,
+    }
+  }
+
+  AnanseKit.run({
+    title: 'Feed Ananse',
+    overTitle: 'What a feast!',
+    scene: 'garden',
+    rounds: 5,
+    buttonLabel: 'He is full!',
+    restMood: 'hungry',
+
+    begin: function (k) {
+      k.own.eaten = 0
+      k.own.held = null
+      k.own.tally = new K.Spring(1, 220, 12)
+      k.own.spitAt = rand(6, 11)
+
+      /* Two to five, which is what a child of this age counts, and kept away
+         from the last one so two rounds do not feel identical. */
+      var was = k.target
+      /* The range comes from the shared lesson, so the video knows what this
+         game is going to ask before it hands over to it. */
+      var asks = AnanseCount.LESSON.game.asks
+      do {
+        k.target = randInt(asks[0], asks[1])
+      } while (k.target === was && Math.random() < 0.7)
+
+      /* More on the ground than he wants. With exactly the right number lying
+         there the game is "pick everything up", which needs no counting: the
+         spares are what make it a question. */
+      var loose = k.target + randInt(2, 3)
+      k.own.mangoes = []
+      for (var i = 0; i < loose; i++) {
+        k.own.mangoes.push({
+          x: 0, y: 0, vx: 0, vy: 0, restY: undefined,
+          spin: rand(-0.5, 0.5), spinVel: 0, squash: 1,
+          held: false, settled: true, fly: null, gone: 0, hidden: false,
+        })
+      }
+      scatter(k)
+      k.say(LINES.ask(k.target))
+      k.him.setMood('hungry')
+    },
+
+    resize: function (k) { if (k.own.mangoes) scatter(k) },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'Yum!' }
+      return {
+        head: 'Feed him ',
+        num: k.target,
+        tail: ' ' + word(k.target),
+      }
+    },
+
+    /** Nothing eaten is not an answer. */
+    ready: function (k) { return k.own.eaten > 0 },
+
+    /**
+     * Counted here, at the moment of judging, from what he has swallowed.
+     *
+     * The target is stored nowhere else and no mango knows whether it was "the
+     * right one", so there is nothing that could be edited to make a wrong
+     * count pass.
+     */
+    judge: function (k) { return k.own.eaten === k.target },
+
+    onWin: function (k) {
+      var a = seat(k)
+      k.cheer(a.x, a.y - a.r * 0.5)
+      k.say(pick(LINES.full))
+    },
+    onMiss: function (k) {
+      k.say(k.own.eaten > k.target ? LINES.tooMany(k.target) : LINES.tooFew(k.target))
+    },
+    onOver: function (k) { k.say(LINES.over) },
+    onEmpty: function (k) { k.say(LINES.nothing) },
+    onPoke: function (k) { k.say(LINES.tickle) },
+
+    down: function (k, x, y) {
+      var r = mangoR(k)
+      /* Backwards, so the one drawn on top is the one picked up. */
+      for (var i = k.own.mangoes.length - 1; i >= 0; i--) {
+        var m = k.own.mangoes[i]
+        if (m.hidden || m.fly) continue
+        /* Generous, because small hands are inaccurate. */
+        if (Math.hypot(m.x - x, m.y - y) < r * 1.5) {
+          k.own.held = m
+          m.held = true
+          m.settled = false
+          m.squash = 0.78
+          m.vx = 0; m.vy = 0
+          m.restY = undefined
+          k.sound.play('lift')
+          k.him.setMood('watching')
+          return true
+        }
+      }
+      return false
+    },
+
+    move: function (k, x, y) {
+      var m = k.own.held
+      if (!m) return
+      /* Leaning into the direction of travel, which is what makes a dragged
+         object feel like it has weight rather than being stuck to the finger. */
+      m.spin = clamp((x - m.x) * 0.012, -0.5, 0.5)
+      m.x = x
+      m.y = y
+    },
+
+    up: function (k) {
+      var m = k.own.held
+      if (!m) return
+      k.own.held = null
+      m.held = false
+      m.squash = 1.16
+
+      if (atMouth(k, m.x, m.y)) {
+        feed(k, m)
+        /**
+         * Deliberately not judged here.
+         *
+         * The first version ended the round the moment the count matched, which
+         * made the game unloseable. That sounds kind and is not: a child can
+         * feed him one at a time and stop when the game stops them, and what
+         * that teaches is "keep going until something happens", not counting.
+         * It also meant no wrong answer was ever recorded, so the platform
+         * learned nothing about what the child can do.
+         */
+      } else {
+        /* Dropped on the ground. Where they let go is where it belongs. */
+        var r = mangoR(k)
+        m.restY = clamp(m.y, k.ground() + r * 1.1, k.H - k.bandH() - r * 1.1)
+        m.settled = false
+        m.vy = 60
+        m.spinVel = rand(-4, 4)
+      }
+      if (k.phase === 'play') k.him.setMood('hungry')
+    },
+
+    step: function (k, dt) {
+      if (!k.own.mangoes) return
+      k.own.tally.target = 1
+      k.own.tally.step(dt)
+
+      var r = mangoR(k)
+      for (var i = 0; i < k.own.mangoes.length; i++) {
+        var m = k.own.mangoes[i]
+        m.squash += (1 - m.squash) * Math.min(1, dt * 12)
+        if (m.held || m.hidden) continue
+
+        if (m.fly) {
+          m.fly.t += dt
+          var t = clamp(m.fly.t / m.fly.dur, 0, 1)
+          var tx = k.him.at.mouthX, ty = k.him.at.mouthY
+          var om = 1 - t
+          m.x = om * om * m.fly.fromX + 2 * om * t * (m.fly.fromX + tx) / 2 + t * t * tx
+          m.y = om * om * m.fly.fromY + 2 * om * t * m.fly.liftY + t * t * ty
+          m.spin += dt * 7
+          m.gone = t
+          if (t >= 1) {
+            m.fly = null
+            m.hidden = true
+            k.own.eaten++
+            k.own.tally.v = 1.35
+            k.him.eat(1.1)
+            k.him.hop(90)
+            k.sound.play('thud')
+            k.puff(tx, ty, 5, 'rgba(230,150,60,0.6)')
+            /* A beat before the answer can be given, so the child sees the row
+               grow before deciding they are done. */
+            k.settle(0.4)
+            k.say(pick(LINES.bite))
+          }
+          continue
+        }
+
+        if (!m.settled) {
+          m.vy += 2100 * dt
+          m.x += m.vx * dt
+          m.y += m.vy * dt
+          m.spin += m.spinVel * dt
+          m.spinVel *= 0.99
+          if (m.x < r) { m.x = r; m.vx = Math.abs(m.vx) * 0.5 }
+          if (m.x > k.W - r) { m.x = k.W - r; m.vx = -Math.abs(m.vx) * 0.5 }
+
+          /**
+           * Its own ground line, not a shared one.
+           *
+           * Everything used to land on one horizontal line just under the
+           * horizon, which is the line at the *back* of the floor: a mango
+           * dropped near the bottom of the screen flew backwards and upwards to
+           * the far wall. Where a thing is on this floor is where it lands.
+           */
+          var floor = m.restY === undefined ? k.ground() + r * 1.2 : m.restY
+          if (m.y > floor) {
+            m.y = floor
+            if (Math.abs(m.vy) > 140) {
+              /* A real bounce with a squash and a puff of dust. A thing that
+                 simply stops looks like it was switched off. */
+              m.vy = -m.vy * 0.34
+              m.vx *= 0.7
+              m.squash = 1.3
+              k.sound.play('thud')
+              k.puff(m.x, m.y + r * 0.6, 5)
+            } else {
+              m.vy = 0; m.vx = 0; m.spinVel = 0
+              m.settled = true
+              m.spin = clamp(m.spin, -0.5, 0.5)
+            }
+          }
+        }
+      }
+
+      /**
+       * He spits one back out.
+       *
+       * The joke, and the reason five rounds are not the same round five times.
+       * It is also revision by stealth: the count changed, and the child has to
+       * notice and put it right.
+       *
+       * Never when it would leave them unable to finish, and never in the
+       * moment after they fed him, when they are still moving and have not
+       * looked at the row. Being beaten by something you could not have seen is
+       * the fastest way to make a child stop playing, and it would be entirely
+       * our fault.
+       */
+      if (k.phase !== 'play') return
+      k.own.spitAt -= dt
+      if (k.own.spitAt > 0 || k.settleFor > 0) return
+      k.own.spitAt = rand(7, 12)
+      if (k.own.eaten < 2 || (onGround(k) + k.own.eaten - 1) < k.target) return
+
+      for (var s = k.own.mangoes.length - 1; s >= 0; s--) {
+        var v = k.own.mangoes[s]
+        if (!v.hidden) continue
+        v.hidden = false
+        v.gone = 0
+        v.x = k.him.at.mouthX
+        v.y = k.him.at.mouthY
+        v.vx = rand(-240, 240)
+        v.vy = rand(-540, -400)
+        v.spinVel = rand(-9, 9)
+        v.settled = false
+        v.restY = clamp(v.y + rand(k.H * 0.1, k.H * 0.2),
+          k.ground() + r * 1.1, k.H - k.bandH() - r * 1.1)
+        k.own.eaten--
+        k.own.tally.v = 1.35
+        k.him.setMood('caught')
+        k.sound.play('steal')
+        k.say(LINES.spit)
+        k.settle(1.6)
+        setTimeout(function () {
+          if (k.phase === 'play') k.him.setMood('hungry')
+        }, 1500)
+        break
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var r = mangoR(k)
+      var a = seat(k)
+
+      /* Him first, then the fruit over him: a mango being carried to his mouth
+         must not disappear behind his head on the way, which looks like the
+         game eating it early. */
+      k.him.draw(a.x, a.y, a.r, a.y + a.r * 1.45)
+
+      /* Near things in front of far things. The floor recedes, so a mango lower
+         on the screen is closer and has to overlap one higher up. */
+      var loose = []
+      for (var q = 0; q < k.own.mangoes.length; q++) {
+        if (!k.own.mangoes[q].hidden) loose.push(k.own.mangoes[q])
+      }
+      loose.sort(function (x, y) { return x.y - y.y })
+
+      for (var i = 0; i < loose.length; i++) {
+        var m = loose[i]
+        if (!m.fly && !m.held) {
+          /* Under the mango's own place on the floor, not under a line shared
+             by every mango. A shadow in the wrong place is the one lighting
+             mistake a child notices without being able to name it. */
+          var rest = m.restY === undefined ? k.ground() + r * 1.2 : m.restY
+          var air = clamp((rest - m.y) / (r * 3), 0, 1)
+          ctx.save()
+          ctx.globalAlpha = 0.2 * (1 - air * 0.75)
+          ctx.fillStyle = '#000'
+          ctx.beginPath()
+          ctx.ellipse(m.x, rest + r * 0.35, r * (0.8 - air * 0.25), r * 0.2, 0, 0, Math.PI * 2)
+          ctx.fill()
+          ctx.restore()
+        }
+        var size = m.held ? r * 1.12 : r
+        if (m.gone) size *= 1 - m.gone * 0.55
+        drawMango(ctx, m.x, m.y, size, m.spin, m.squash)
+      }
+    },
+
+    /**
+     * What he has eaten, as a row of mangoes.
+     *
+     * Because he swallows them, so without this the only record of the answer
+     * is a numeral, and a child still learning to count cannot check a numeral
+     * against anything. A row can be counted, pointed at and counted again,
+     * which is the whole skill being practised. It pops when it changes, so the
+     * thing that just happened is the thing the eye goes to.
+     */
+    overlay: function (k) {
+      if (k.phase === 'start' || k.phase === 'over') return
+      var ctx = k.ctx
+      var r = clamp(Math.min(k.W, k.H) * 0.028, 11, 22)
+      var gap = r * 2.5
+      var y = k.tallyY()
+
+      ctx.save()
+      ctx.translate(k.W / 2, y)
+      ctx.scale(k.own.tally.v, k.own.tally.v)
+      for (var i = 0; i < k.own.eaten; i++) {
+        drawMango(ctx, (i - (k.own.eaten - 1) / 2) * gap, 0, r, -0.3, 1)
+      }
+      if (!k.own.eaten) {
+        /* An empty plate, so the row has somewhere to appear rather than
+           materialising out of nothing. */
+        ctx.strokeStyle = 'rgba(255,255,255,0.6)'
+        ctx.lineWidth = Math.max(2, r * 0.16)
+        ctx.setLineDash([r * 0.4, r * 0.5])
+        ctx.beginPath()
+        ctx.ellipse(0, 0, r * 1.6, r * 0.7, 0, 0, Math.PI * 2)
+        ctx.stroke()
+        ctx.setLineDash([])
+      }
+      ctx.restore()
+    },
+
+    /* Guarded: the state hook can be read on the title card, before `begin`
+       has ever laid out a board. */
+    peek: function (k) {
+      if (!k.own.mangoes) return { eaten: 0, onGround: 0 }
+      return { eaten: k.own.eaten, onGround: onGround(k) }
+    },
+  })
+}())
+</script>
+</body>
+</html>

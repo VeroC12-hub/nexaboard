@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shape Puzzle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Shape Puzzle. Recognising shapes, with a shape sorter.
+
+  ── Why a piece that does not fit bounces out ────────────────────────────────
+
+  The obvious build lets any piece sit in any hole and marks the board at the
+  end. That is how a worksheet works and it is not how a shape sorter works: a
+  square does not go into a round hole, and every child who has held one knows
+  it. Letting a square rest in a circle teaches them the toy is lying.
+
+  So a wrong piece is refused with a shove, and the refusal is the teaching. The
+  child is not told they are wrong by a voice, they are told by the hole.
+
+  ── How it is still scored, then ─────────────────────────────────────────────
+
+  Because a sorter that only accepts correct answers records nothing, and this
+  platform has to know what a child can actually do. So the board keeps whether
+  anything was ever refused this round, and a round completed after a refusal
+  earns no star. The child still finishes, still hears what was wrong, and the
+  record still tells the truth about whether they knew it.
+
+  ── Why the holes are shuffled every round ───────────────────────────────────
+
+  Otherwise a child learns "the star goes on the right" rather than what a star
+  is, and by the third round they are solving a memory game.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: 'Put each shape in its own hole!',
+    fit: ['In it goes!', 'That fits!', 'Yes!'],
+    nofit: function (name) { return 'That is not the ' + name + ' hole. Try another!' },
+    done: ['You did it! All of them!', 'The whole board! Well done!'],
+    slow: 'You finished it! Look at the shapes again next time.',
+    lift: 'Where does that one go?',
+    tickle: 'Hee hee! I am not a shape!',
+    over: 'What a clever friend! Thank you!',
+  }
+
+  var KINDS = [
+    { name: 'circle', colour: '#e8543c' },
+    { name: 'square', colour: '#3f9ede' },
+    { name: 'triangle', colour: '#26a86a' },
+    { name: 'star', colour: '#f2c33b' },
+    { name: 'heart', colour: '#e0679f' },
+    { name: 'diamond', colour: '#8a5ccf' },
+  ]
+
+  var HOW_MANY = 4
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * The board, and the pieces waiting under it.
+   *
+   * The board hangs above the floor line and the loose pieces sit on the floor
+   * below it, which is the arrangement of a real sorter on a table and needs no
+   * explaining. Sized from the width so four holes always fit across a phone.
+   */
+  function layout(k) {
+    var r = clamp(Math.min(k.W / 6.4, k.H * 0.12), 26, 66)
+    var padX = r * 1.9
+    var boardW = Math.min(k.W * 0.92, padX * 2 + r * 2 * HOW_MANY + r * 1.1 * (HOW_MANY - 1))
+    var boardH = r * 3.2
+    var boardX = k.W / 2 - boardW / 2
+    var boardY = k.ground() - boardH * 0.72
+    var step = (boardW - padX * 2) / Math.max(1, HOW_MANY - 1)
+    return {
+      r: r, boardX: boardX, boardY: boardY, boardW: boardW, boardH: boardH,
+      holeY: boardY + boardH * 0.5,
+      firstX: boardX + padX,
+      step: HOW_MANY > 1 ? step : 0,
+      trayY: k.H - k.bandH() - r * 1.5,
+    }
+  }
+
+  function holeAt(k, L, i) { return { x: L.firstX + i * L.step, y: L.holeY } }
+
+  function trayAt(k, L, i) {
+    var gap = L.r * 2.7
+    return { x: k.W * 0.42 + (i - (HOW_MANY - 1) / 2) * gap, y: L.trayY }
+  }
+
+  AnanseKit.run({
+    title: 'Shape Puzzle',
+    overTitle: 'What a clever friend!',
+    scene: 'room',
+    rounds: 5,
+    /* The last piece going in finishes the board. There is nothing left to
+       confirm, so there is no button. */
+    button: false,
+    restMood: 'hello',
+
+    begin: function (k) {
+      /* Four of the six, different each round, so the set itself varies. */
+      var kinds = KINDS.slice().sort(function () { return Math.random() - 0.5 })
+        .slice(0, HOW_MANY)
+
+      /* The holes in one order and the pieces in another, so a child cannot
+         solve it by position. */
+      k.own.holes = kinds.slice().sort(function () { return Math.random() - 0.5 })
+        .map(function (kind) { return { name: kind.name, filled: null } })
+
+      k.own.pieces = kinds.slice().sort(function () { return Math.random() - 0.5 })
+        .map(function (kind, i) {
+          return {
+            name: kind.name, colour: kind.colour,
+            x: 0, y: 0, seat: i, home: null,
+            held: false, placed: false, settle: null,
+            /* A little wobble when refused, so the board says no physically. */
+            shove: 0,
+          }
+        })
+
+      k.own.held = null
+      /* Whether anything was ever pushed back this round. A board finished
+         after a refusal is finished, but it is not a star. */
+      k.own.slipped = false
+      k.own.pop = 0
+      park(k)
+      k.say(LINES.ask)
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) { if (k.own.pieces) park(k) },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'All of them!' }
+      return { head: 'Put each shape in its hole' }
+    },
+
+    /**
+     * True only if the board was filled without a single piece being refused.
+     *
+     * The kit asks this once, when the last piece goes in. Nothing stores
+     * "correct": every placement was checked against the hole it was dropped
+     * into at the moment it was dropped, and this reports whether any of those
+     * checks ever failed.
+     */
+    judge: function (k) { return !k.own.slipped },
+
+    onWin: function (k) {
+      var L = layout(k)
+      k.cheer(k.W / 2, L.holeY)
+      k.say(pick(LINES.done))
+    },
+    onMiss: function (k) { k.say(LINES.slow) },
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.tickle) },
+
+    down: function (k, x, y) {
+      var L = layout(k)
+      for (var i = k.own.pieces.length - 1; i >= 0; i--) {
+        var p = k.own.pieces[i]
+        if (p.placed) continue
+        if (Math.hypot(p.x - x, p.y - y) > L.r * 1.35) continue
+        k.own.held = p
+        p.held = true
+        p.settle = null
+        k.sound.play('lift')
+        k.say(LINES.lift)
+        k.him.setMood('watching')
+        return true
+      }
+      return false
+    },
+
+    move: function (k, x, y) {
+      var p = k.own.held
+      if (!p) return
+      p.x = x
+      p.y = y
+    },
+
+    up: function (k) {
+      var p = k.own.held
+      if (!p) return
+      k.own.held = null
+      p.held = false
+
+      var L = layout(k)
+      var over = -1
+      for (var i = 0; i < k.own.holes.length; i++) {
+        var at = holeAt(k, L, i)
+        /* Generous, because a small hand aims at a hole and lands near it. */
+        if (Math.hypot(p.x - at.x, p.y - at.y) < L.r * 1.5) { over = i; break }
+      }
+
+      if (over < 0) { p.settle = p.home; return }
+
+      var hole = k.own.holes[over]
+      if (hole.filled) { p.settle = p.home; return }
+
+      if (hole.name === p.name) {
+        /* It fits. It drops in and stays. */
+        var at2 = holeAt(k, L, over)
+        hole.filled = p
+        p.placed = true
+        p.settle = { x: at2.x, y: at2.y }
+        k.sound.play('thud')
+        k.kick(3)
+        k.own.pop = 0.25
+        k.say(pick(LINES.fit))
+
+        var all = true
+        for (var j = 0; j < k.own.holes.length; j++) if (!k.own.holes[j].filled) all = false
+        if (all) k.commit()
+      } else {
+        /**
+         * It does not fit, so the hole refuses it.
+         *
+         * The refusal is the teaching. A square resting quietly in a round hole
+         * would tell the child the toy does not mind, and the whole reason a
+         * shape sorter works is that it does.
+         */
+        k.own.slipped = true
+        p.shove = 1
+        p.settle = p.home
+        k.sound.play('oops')
+        k.kick(4)
+        k.him.setMood('caught')
+        k.say(LINES.nofit(K.SHAPE_NAMES[hole.name]))
+        setTimeout(function () {
+          if (k.phase === 'play') k.him.setMood('hello')
+        }, 1400)
+      }
+      if (k.phase === 'play' && !k.own.slipped) k.him.setMood('hello')
+    },
+
+    step: function (k, dt) {
+      if (!k.own.pieces) return
+      if (k.own.pop > 0) k.own.pop = Math.max(0, k.own.pop - dt)
+      for (var i = 0; i < k.own.pieces.length; i++) {
+        var p = k.own.pieces[i]
+        p.shove = Math.max(0, p.shove - dt * 3)
+        if (!p.settle || p.held) continue
+        /* Eased home rather than snapped, so a refused piece looks like it was
+           pushed back rather than teleported. */
+        p.x += (p.settle.x - p.x) * Math.min(1, dt * 14)
+        p.y += (p.settle.y - p.y) * Math.min(1, dt * 14)
+        if (Math.abs(p.x - p.settle.x) < 0.5 && Math.abs(p.y - p.settle.y) < 0.5) {
+          p.x = p.settle.x
+          p.y = p.settle.y
+          p.settle = null
+        }
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var L = layout(k)
+
+      /* The board: a plank with a shadow under it, standing on the floor. */
+      ctx.save()
+      ctx.globalAlpha = 0.18
+      ctx.fillStyle = '#000'
+      ctx.beginPath()
+      ctx.ellipse(k.W / 2, L.boardY + L.boardH * 1.02, L.boardW * 0.46, L.r * 0.34, 0, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+
+      ctx.beginPath()
+      ctx.roundRect(L.boardX, L.boardY, L.boardW, L.boardH, L.r * 0.4)
+      ctx.fillStyle = '#d29a55'
+      ctx.fill()
+      ctx.strokeStyle = K.LINE
+      ctx.lineWidth = 4
+      ctx.stroke()
+      /* Grain, so it is a wooden board and not a beige rectangle. */
+      ctx.save()
+      ctx.beginPath()
+      ctx.roundRect(L.boardX, L.boardY, L.boardW, L.boardH, L.r * 0.4)
+      ctx.clip()
+      ctx.strokeStyle = 'rgba(130,78,26,0.25)'
+      ctx.lineWidth = 3
+      for (var gline = 1; gline < 5; gline++) {
+        ctx.beginPath()
+        ctx.moveTo(L.boardX, L.boardY + L.boardH * (gline / 5))
+        ctx.lineTo(L.boardX + L.boardW, L.boardY + L.boardH * (gline / 5) + L.r * 0.1)
+        ctx.stroke()
+      }
+      ctx.restore()
+
+      /* The holes, and whatever is sitting in them. */
+      for (var i = 0; i < k.own.holes.length; i++) {
+        var at = holeAt(k, L, i)
+        var hole = k.own.holes[i]
+        if (!hole.filled) {
+          K.shape(ctx, hole.name, at.x, at.y, L.r, 'rgba(70,42,16,0.6)', { hole: true })
+        }
+      }
+
+      /* The pieces: settled ones first, the one in hand last. */
+      var order = k.own.pieces.slice().sort(function (a, b) {
+        return (a.held ? 1 : 0) - (b.held ? 1 : 0)
+      })
+      for (var j = 0; j < order.length; j++) {
+        var p = order[j]
+        /* A refused piece shakes for a moment. */
+        var wob = p.shove > 0 ? Math.sin(k.now * 0.05) * p.shove * 0.22 : 0
+        var lift = p.held ? 1.12 : (p.placed && k.own.pop > 0 ? 1 + k.own.pop * 0.4 : 1)
+        if (!p.placed && !p.held) {
+          ctx.save()
+          ctx.globalAlpha = 0.18
+          ctx.fillStyle = '#000'
+          ctx.beginPath()
+          ctx.ellipse(p.x, p.y + L.r * 1.1, L.r * 0.72, L.r * 0.2, 0, 0, Math.PI * 2)
+          ctx.fill()
+          ctx.restore()
+        }
+        K.shape(ctx, p.name, p.x, p.y, L.r * lift, p.colour, { turn: wob })
+      }
+
+      var ar = clamp(Math.min(k.W, k.H) * 0.075, 30, 60)
+      /* Standing on the floor of the room rather than sunk through it. */
+      var feet = k.H - k.bandH() * 0.2 - ar * 0.25
+      k.him.draw(k.W - ar * 1.5, feet - ar * 1.5, ar, feet)
+    },
+
+    peek: function (k) {
+      if (!k.own.pieces) return { pieces: 0 }
+      var L = layout(k)
+      return {
+        slipped: k.own.slipped,
+        pieces: k.own.pieces.map(function (p) {
+          return { s: p.name, x: Math.round(p.x), y: Math.round(p.y), placed: p.placed }
+        }),
+        holes: k.own.holes.map(function (h, i) {
+          var at = holeAt(k, L, i)
+          return { s: h.name, x: Math.round(at.x), y: Math.round(at.y), filled: !!h.filled }
+        }),
+      }
+    },
+  })
+
+  /** Put every loose piece in the tray, and remember where home is. */
+  function park(k) {
+    var L = layout(k)
+    for (var i = 0; i < k.own.pieces.length; i++) {
+      var p = k.own.pieces[i]
+      if (p.placed || p.held) continue
+      var at = trayAt(k, L, p.seat)
+      p.home = { x: at.x, y: at.y }
+      if (p.x === 0 && p.y === 0) { p.x = at.x; p.y = at.y }
+      else p.settle = { x: at.x, y: at.y }
+    }
+  }
+}())
+</script>
+</body>
+</html>

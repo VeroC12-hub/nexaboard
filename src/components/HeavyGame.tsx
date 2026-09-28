@@ -30,13 +30,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import '../styles/games.css'
 import {
-  ENGINE_PATH, composeSpec, fingerprint, fromGame, remember,
+  ENGINE_PATH, composeSpec, fingerprint, fromGame, remember, spokenLines,
   type GameSpec,
 } from '../lib/education/heavy'
 import { recordPlay } from '../lib/education/taste'
 import {
   canSpeak, say, setVoiceOn, stop, voiceOn, whenVoicesReady,
 } from '../lib/education/speak'
+import { warm } from '../lib/education/voice-bank'
 import type { Attempt } from '../lib/education/mastery'
 import type { Stage } from '../lib/education/learner'
 
@@ -246,6 +247,11 @@ function Session({
         case 'ready':
           setRunning(true)
           setLate(false)
+          /* Pull the recordings this game will need into the cache now, while
+             the frame is still laying out its first round. A spoken question
+             that arrives after the child has started guessing is worse than
+             one that was never spoken. */
+          warm(spokenLines(spec))
           /* The spec, and nothing else. No learner, no record, no session. */
           frame.current.contentWindow?.postMessage({ nx: 1, type: 'setup', spec }, '*')
           /* And whether it may make a noise. The frame has its own effects and

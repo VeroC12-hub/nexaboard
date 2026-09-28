@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Subtraction Safari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Subtraction Safari. Taking away, at the watering hole.
+
+  ── Why the animals are hidden before the question is answered ───────────────
+
+  The obvious build is: show eight animals, three walk off, count the five that
+  are left. That teaches counting, which they can already do, and it never once
+  asks a child to subtract: the answer is sitting on the screen being five.
+
+  So the herd runs into the dust and the dust does not clear until an answer is
+  committed. While the question is open there is nothing to count and the only
+  way through is the arithmetic. The moment it is answered the dust lifts and
+  the animals that are left are there to be counted, which is where the child
+  finds out whether they were right and why.
+
+  ── Why the wrong answers are what they are ──────────────────────────────────
+
+  Off by one either way, and the sum, because adding when you were asked to
+  take away is the commonest slip at this age by a distance. A row that offers
+  5, 11, 4 and 6 for 8 take away 3 cannot be solved by picking the small one.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #3a2a10;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: function (a, b) { return a + ' animals. ' + b + ' run away. How many are left?' },
+    right: ['Count them! We were right!', 'Yes! Drive on!', 'Good eye!', 'That is it!'],
+    wrong: function (n) { return 'Look, there are ' + n + '.' },
+    rare: 'An elephant! Write that in the book!',
+    over: 'The jeep is stuck. Let us go again!',
+    poke: 'Shh! You will frighten them!'
+  }
+
+  /** Every tenth watering hole has something worth the drive. */
+  var RARE = 10
+  function isRare(round) { return round > 0 && round % RARE === RARE - 1 }
+
+  /* ── the sums ────────────────────────────────────────────────────────────── */
+
+  /**
+   * One watering hole's worth of question.
+   *
+   * ── On the difficulty ─────────────────────────────────────────────────────
+   *
+   * Within ten at the first few holes, then within twenty, then crossing ten
+   * on the way down, which is the thing Primary 2 is actually working on:
+   * 14 take away 6 is a different problem from 9 take away 6 and a child who
+   * can do the second cannot always do the first.
+   */
+  function makeSum(round) {
+    var top = round < 3 ? 9 : round < 8 ? 14 : 20
+    var a = randInt(Math.min(5, top), top)
+    var b = round < 8 ? randInt(1, Math.min(a - 1, 6)) : randInt(3, a - 1)
+    var answer = a - b
+
+    var wrong = {}
+    wrong[answer + 1] = true
+    wrong[answer - 1] = true
+    /* Adding instead of taking away. The commonest mistake there is. */
+    wrong[a + b] = true
+    delete wrong[answer]
+
+    var list = Object.keys(wrong).map(Number).filter(function (v) { return v >= 0 })
+    while (list.length < 3) {
+      var extra = answer + pick([-2, 2, 3])
+      if (extra >= 0 && extra !== answer && list.indexOf(extra) < 0) list.push(extra)
+    }
+    var options = [answer].concat(list.slice(0, 3))
+    options.sort(function () { return Math.random() - 0.5 })
+    return { a: a, b: b, answer: answer, options: options }
+  }
+
+  /* ── the animals ─────────────────────────────────────────────────────────── */
+
+  /**
+   * A beast, drawn from its middle at radius `r`.
+   *
+   * Three kinds, because a herd of one kind is a pattern and a child stops
+   * seeing them as individuals to be counted. They are silhouettes with one
+   * identifying feature each: the neck, the stripes, the trunk. Anything more
+   * at this size is mud.
+   */
+  function drawBeast(ctx, kind, r, flip) {
+    ctx.save()
+    if (flip) ctx.scale(-1, 1)
+
+    var hide = kind === 'zebra' ? '#f2ece0' : kind === 'giraffe' ? '#e8b45c' : '#c08a5e'
+
+    /* Legs first, behind. */
+    ctx.strokeStyle = kind === 'zebra' ? '#6b6154' : '#8a5f38'
+    ctx.lineWidth = r * 0.15
+    ctx.lineCap = 'round'
+    for (var i = 0; i < 4; i++) {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.45 + i * r * 0.3, r * 0.25)
+      ctx.lineTo(-r * 0.45 + i * r * 0.3, r * 0.85)
+      ctx.stroke()
+    }
+
+    /* Body. */
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.76, r * 0.46, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, hide, K.LINE, 3.5)
+
+    if (kind === 'zebra') {
+      ctx.save()
+      ctx.beginPath()
+      ctx.ellipse(0, 0, r * 0.76, r * 0.46, 0, 0, Math.PI * 2)
+      ctx.clip()
+      ctx.fillStyle = '#3a3a3a'
+      for (var s = 0; s < 4; s++) {
+        ctx.fillRect(-r * 0.5 + s * r * 0.3, -r * 0.6, r * 0.11, r * 1.2)
+      }
+      ctx.restore()
+    }
+
+    /* Tail. */
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = r * 0.07
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.74, -r * 0.1)
+    ctx.quadraticCurveTo(-r * 0.98, r * 0.1, -r * 0.88, r * 0.34)
+    ctx.stroke()
+
+    if (kind === 'giraffe') {
+      /* Neck, which is the whole animal. */
+      ctx.strokeStyle = hide
+      ctx.lineWidth = r * 0.28
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(r * 0.5, -r * 0.2)
+      ctx.lineTo(r * 0.78, -r * 1.05)
+      ctx.stroke()
+      ctx.strokeStyle = K.LINE
+      ctx.lineWidth = 3
+      ctx.beginPath()
+      ctx.moveTo(r * 0.38, -r * 0.24)
+      ctx.lineTo(r * 0.66, -r * 1.08)
+      ctx.moveTo(r * 0.62, -r * 0.16)
+      ctx.lineTo(r * 0.9, -r * 1.0)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.ellipse(r * 0.84, -r * 1.12, r * 0.24, r * 0.17, -0.3, 0, Math.PI * 2)
+      K.inkedOn(ctx, hide, K.LINE, 3)
+      ctx.beginPath()
+      ctx.arc(r * 0.9, -r * 1.2, r * 0.05, 0, Math.PI * 2)
+      ctx.fillStyle = '#25321a'
+      ctx.fill()
+    } else {
+      /* Head. */
+      ctx.beginPath()
+      ctx.ellipse(r * 0.74, -r * 0.3, r * 0.3, r * 0.25, -0.25, 0, Math.PI * 2)
+      K.inkedOn(ctx, hide, K.LINE, 3)
+      if (kind === 'elephant') {
+        /* Ear and trunk. */
+        ctx.beginPath()
+        ctx.ellipse(r * 0.6, -r * 0.32, r * 0.24, r * 0.28, 0.2, 0, Math.PI * 2)
+        K.inkedOn(ctx, '#ac7850', K.LINE, 2.5)
+        ctx.strokeStyle = hide
+        ctx.lineWidth = r * 0.16
+        ctx.lineCap = 'round'
+        ctx.beginPath()
+        ctx.moveTo(r * 0.96, -r * 0.24)
+        ctx.quadraticCurveTo(r * 1.24, r * 0.1, r * 1.06, r * 0.42)
+        ctx.stroke()
+        ctx.strokeStyle = K.LINE
+        ctx.lineWidth = 2.5
+        ctx.stroke()
+        ctx.strokeStyle = hide
+        ctx.lineWidth = r * 0.12
+        ctx.stroke()
+      } else {
+        /* Horns. */
+        ctx.strokeStyle = '#6b4a22'
+        ctx.lineWidth = r * 0.07
+        for (var hn = 0; hn < 2; hn++) {
+          ctx.beginPath()
+          ctx.moveTo(r * (0.66 + hn * 0.12), -r * 0.5)
+          ctx.quadraticCurveTo(r * (0.6 + hn * 0.12), -r * 0.78, r * (0.8 + hn * 0.12), -r * 0.84)
+          ctx.stroke()
+        }
+      }
+      ctx.beginPath()
+      ctx.arc(r * 0.84, -r * 0.36, r * 0.055, 0, Math.PI * 2)
+      ctx.fillStyle = '#25321a'
+      ctx.fill()
+    }
+    ctx.restore()
+  }
+
+  /* ── the jeep ────────────────────────────────────────────────────────────── */
+
+  /** What he is driving. He sits in it, so it is drawn open at the top. */
+  function drawJeep(ctx, x, y, s, spin) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    /* Wheels, turning, behind the body. */
+    for (var wl = -1; wl <= 1; wl += 2) {
+      ctx.save()
+      ctx.translate(wl * s * 0.62, s * 0.5)
+      ctx.beginPath()
+      ctx.arc(0, 0, s * 0.3, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#3a3a3a', K.LINE, 3.5)
+      ctx.rotate(spin)
+      ctx.strokeStyle = '#8a8a8a'
+      ctx.lineWidth = Math.max(2, s * 0.05)
+      for (var sp = 0; sp < 3; sp++) {
+        ctx.rotate(Math.PI / 3)
+        ctx.beginPath()
+        ctx.moveTo(-s * 0.2, 0)
+        ctx.lineTo(s * 0.2, 0)
+        ctx.stroke()
+      }
+      ctx.restore()
+    }
+
+    /* Body: a bathtub with a bonnet. */
+    ctx.beginPath()
+    ctx.moveTo(-s, s * 0.42)
+    ctx.lineTo(-s, -s * 0.18)
+    ctx.lineTo(s * 0.16, -s * 0.18)
+    ctx.lineTo(s * 0.16, -s * 0.44)
+    ctx.lineTo(s * 1.02, -s * 0.44)
+    ctx.lineTo(s * 1.02, s * 0.42)
+    ctx.closePath()
+    K.inkedOn(ctx, '#6cbf42', K.LINE, 4)
+
+    /* Bonnet line and a headlamp. */
+    ctx.strokeStyle = 'rgba(30,70,20,0.4)'
+    ctx.lineWidth = Math.max(2, s * 0.05)
+    ctx.beginPath()
+    ctx.moveTo(s * 0.16, -s * 0.18)
+    ctx.lineTo(s * 1.02, -s * 0.18)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.arc(s * 0.92, s * 0.04, s * 0.14, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffe07a', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /** The band of savannah a herd may stand in, above the answers. */
+  function fieldTop(k) { return k.ground() + (k.H - k.ground()) * 0.06 }
+  function fieldBottom(k) { return k.H - K.tileRow(k.H) - k.H * 0.02 }
+  function beastR(k) {
+    return clamp(Math.min(k.W * 0.062, (fieldBottom(k) - fieldTop(k)) * 0.3), 22, 54)
+  }
+
+  /**
+   * Where each animal stands.
+   *
+   * Two ragged rows with the nearer one lower and larger, because a herd laid
+   * out on a grid is a chart and a child counts a chart differently from the
+   * way they count animals.
+   */
+  function herdSpot(k, i, n) {
+    var r = beastR(k)
+    var top = fieldTop(k)
+    var bottom = fieldBottom(k)
+    var perRow = Math.ceil(n / 2)
+    var row = i < perRow ? 0 : 1
+    var at = row ? i - perRow : i
+    var count = row ? n - perRow : perRow
+    /* Centred right of middle, because the jeep and the man in it own the
+       left of the field and a herd laid out from the centre walked through
+       both of them. */
+    var span = Math.min(k.W * 0.62, count * r * 2.4)
+    var x0 = k.W * 0.6 - span / 2
+    var step = count > 1 ? span / (count - 1) : 0
+    return {
+      x: x0 + at * step + K.fixed(i * 7, r * 0.3) - r * 0.15,
+      y: row ? bottom - r * 0.9 : top + (bottom - top) * 0.3,
+      near: row === 1
+    }
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  AnanseKit.run({
+    title: 'Subtraction Safari',
+    overTitle: 'Out of fuel!',
+    scene: 'savannah',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'holes',
+    button: false,
+    restMood: 'watching',
+    hud: function (k) {
+      return [
+        { label: 'holes', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      var q = makeSum(k.round)
+      k.own.q = q
+      k.target = q.answer
+      k.own.picked = -1
+      /* How much dust is over the herd: one while the question is open, and
+         falling away once it has been answered. */
+      k.own.dust = 0
+      k.own.raised = false
+      k.own.slide = 1
+      k.own.spin = 0
+      k.own.kinds = []
+      for (var i = 0; i < q.a; i++) {
+        k.own.kinds.push(['antelope', 'zebra', 'giraffe'][K.randInt(0, 2)])
+      }
+      if (k.own.coins === undefined) k.own.coins = 0
+      if (k.round === 0) k.own.coins = 0
+
+      k.say(LINES.ask(q.a, q.b))
+      k.him.setMood('watching')
+    },
+
+    ask: function (k) {
+      if (!k.own.q) return null
+      if (k.phase === 'won') return { head: 'Yes! ', num: k.own.q.answer, tail: ' left' }
+      return { head: k.own.q.a + ' take away ' + k.own.q.b + ' = ', num: '?', tail: '' }
+    },
+
+    /**
+     * The tile that was tapped, against the subtraction worked out now.
+     *
+     * Recomputed from the two numbers on the banner rather than trusted from
+     * when the question was made, so there is no stored answer to drift out of
+     * step with the picture.
+     */
+    judge: function (k) {
+      if (k.own.picked < 0) return false
+      return k.own.q.options[k.own.picked] === k.own.q.a - k.own.q.b
+    },
+
+    down: function (k, x, y) {
+      /**
+       * A round already missed may be answered again.
+       *
+       * This guard exists to stop a second tap landing inside the same commit,
+       * not to end the round. Without the second half of the test it never let
+       * go: `picked` is only cleared in `begin`, `begin` only runs on a new
+       * round, and a new round only comes after a win. So one wrong answer
+       * locked the board for good. The child lost a life and then could not
+       * answer anything again, in a game with no end.
+       */
+      if (k.own.picked >= 0 && k.results[k.round] !== false) return false
+      if (k.own.slide > 0.02) return false
+      var i = K.tileAt(k.W, k.H, k.own.q.options.length, x, y)
+      if (i < 0) return false
+      k.own.picked = i
+      k.sound.play('lift')
+      k.commit()
+      return true
+    },
+
+    onWin: function (k) {
+      /* The dust lifts, so the animals that are left can be counted. Being
+         told the answer and being shown it are different things. */
+      k.own.raised = true
+      k.own.coins += 1
+      if (isRare(k.round)) {
+        k.own.coins += 10
+        k.cheer(k.W * 0.5, fieldTop(k))
+        k.say(LINES.rare)
+      } else {
+        k.say(pick(LINES.right))
+      }
+    },
+
+    onMiss: function (k) {
+      k.own.raised = true
+      k.say(LINES.wrong(k.own.q.a - k.own.q.b))
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      if (!k.own.q) return
+      /* The drive in from the right at the start of every hole. */
+      k.own.slide = Math.max(0, k.own.slide - dt * 1.6)
+      k.own.spin += dt * (4 + k.own.slide * 22)
+
+      var want = k.own.raised ? 0 : 1
+      k.own.dust += (want - k.own.dust) * Math.min(1, dt * (k.own.raised ? 2.6 : 5))
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var q = k.own.q
+      var r = beastR(k)
+      var n = q.options.length
+      /* Everything at the hole travels in together, which is what reads as
+         having driven to a different place rather than the same one again. */
+      var slide = k.own.slide * k.W * 0.8
+
+      ctx.save()
+      ctx.translate(slide, 0)
+
+      /* The watering hole. */
+      var hy = (fieldTop(k) + fieldBottom(k)) / 2
+      ctx.beginPath()
+      ctx.ellipse(k.W * 0.6, hy, Math.min(k.W * 0.24, r * 5), r * 1.15, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#3f9ede', K.LINE, 4)
+      ctx.save()
+      ctx.globalAlpha = 0.45
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineWidth = Math.max(2, r * 0.1)
+      ctx.lineCap = 'round'
+      for (var ri = 0; ri < 2; ri++) {
+        ctx.beginPath()
+        ctx.moveTo(k.W * 0.6 - r * (1.4 - ri * 0.5), hy + (ri - 0.5) * r * 0.5)
+        ctx.lineTo(k.W * 0.6 + r * (0.6 - ri * 0.4), hy + (ri - 0.5) * r * 0.5)
+        ctx.stroke()
+      }
+      ctx.restore()
+
+      /* The herd. Only the ones that stayed, and only once the dust is down. */
+      var left = q.a - q.b
+      for (var i = 0; i < q.a; i++) {
+        var gone = i >= left
+        /* The ones that ran are drawn sprinting off to the right and fading,
+           and they are gone entirely by the time the dust clears. */
+        if (gone && k.own.dust < 0.35) continue
+        var at = herdSpot(k, i, q.a)
+        var rr = at.near ? r : r * 0.82
+        ctx.save()
+        ctx.globalAlpha = 0.16
+        ctx.fillStyle = '#6b4a22'
+        ctx.beginPath()
+        ctx.ellipse(at.x, at.y + rr * 0.86, rr * 0.7, rr * 0.16, 0, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+        ctx.save()
+        ctx.translate(at.x + (gone ? (1 - k.own.dust) * k.W * 0.4 : 0), at.y)
+        if (gone) ctx.globalAlpha = Math.max(0, k.own.dust - 0.35) * 1.5
+        drawBeast(ctx, k.own.kinds[i], rr, false)
+        ctx.restore()
+      }
+
+      /**
+       * The dust.
+       *
+       * Not decoration. It is the reason the question cannot be answered by
+       * counting, so it has to be opaque enough to actually hide a herd, and
+       * it has to sit exactly over the ground the herd is standing on.
+       */
+      /**
+       * The dust.
+       *
+       * Not decoration: it is the reason the question cannot be answered by
+       * counting, so it has to be genuinely opaque. But only over the herd. It
+       * was a band across the whole width and it read as a sandstorm that had
+       * swallowed the savannah, trees and all, which is a different and much
+       * worse picture than a herd kicking up dirt.
+       */
+      if (k.own.dust > 0.02) {
+        var box = { l: k.W, r0: 0, t: k.H, b: 0 }
+        for (var hb = 0; hb < q.a; hb++) {
+          var sp = herdSpot(k, hb, q.a)
+          if (sp.x < box.l) box.l = sp.x
+          if (sp.x > box.r0) box.r0 = sp.x
+          if (sp.y < box.t) box.t = sp.y
+          if (sp.y > box.b) box.b = sp.y
+        }
+        var pad = r * 1.15
+        var dl = box.l - pad, dr = box.r0 + pad
+        var dt = box.t - pad, db = box.b + pad * 0.7
+
+        ctx.save()
+        ctx.globalAlpha = k.own.dust
+        /* A ring of overlapping puffs round the box, then the box filled in,
+           which is the same trick the kit uses for clouds: stroke nothing,
+           just pile discs up and fill the middle. */
+        var puffs = []
+        var across = Math.max(3, Math.round((dr - dl) / (r * 0.9)))
+        for (var pi = 0; pi <= across; pi++) {
+          var px = dl + (pi / across) * (dr - dl)
+          puffs.push([px, dt, r * (0.62 + K.fixed(pi * 13, 0.5))])
+          puffs.push([px, db, r * (0.5 + K.fixed(pi * 7, 0.4))])
+        }
+        for (var qi = 0; qi <= 2; qi++) {
+          var py = dt + (qi / 2) * (db - dt)
+          puffs.push([dl, py, r * 0.62])
+          puffs.push([dr, py, r * 0.62])
+        }
+        ctx.fillStyle = '#d6a765'
+        for (var fi = 0; fi < puffs.length; fi++) {
+          ctx.beginPath()
+          ctx.arc(puffs[fi][0], puffs[fi][1], puffs[fi][2], 0, Math.PI * 2)
+          ctx.fill()
+        }
+        ctx.beginPath()
+        ctx.rect(dl, dt, dr - dl, db - dt)
+        ctx.fill()
+
+        /* Lighter swirls inside, so it is moving air and not a beige sticker. */
+        ctx.globalAlpha = k.own.dust * 0.45
+        ctx.fillStyle = '#efd0a2'
+        for (var sw = 0; sw < 8; sw++) {
+          ctx.beginPath()
+          ctx.arc(dl + K.fixed(sw * 17, dr - dl), dt + K.fixed(sw * 11, db - dt),
+            r * (0.28 + K.fixed(sw * 5, 0.42)), 0, Math.PI * 2)
+          ctx.fill()
+        }
+        ctx.restore()
+      }
+      ctx.restore()
+
+      /* Him, in the jeep, at the left, watching. He does not travel with the
+         hole: the hole comes to him, which is the cheapest honest way to say
+         the jeep is the thing standing still in the frame. */
+      var js = clamp(Math.min(k.W * 0.09, k.H * 0.125), 38, 88)
+      /* Its wheels reach 0.8 of its size below the body, and the answer row
+         starts where `fieldBottom` ends, so it is hung off the bottom of the
+         field by its own wheels rather than by a guess. */
+      var jy = fieldBottom(k) - js * 0.82
+      drawJeep(ctx, js * 1.25, jy, js, k.own.spin)
+      /* Standing in it, at the back, so he is not drawn over the bonnet. */
+      k.him.draw(js * 0.75, jy - js * 0.95, js * 0.48, jy - js * 0.25)
+
+      /* The answers. */
+      for (var t = 0; t < n; t++) {
+        var state = 'idle'
+        if (k.own.picked >= 0) {
+          if (q.options[t] === q.a - q.b) state = 'right'
+          else if (t === k.own.picked) state = 'wrong'
+          else state = 'dim'
+        }
+        K.drawTile(ctx, k.W, k.H, t, n, String(q.options[t]), state, k.FONT)
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.q) return { q: null }
+      var n = k.own.q.options.length
+      return {
+        sum: k.own.q.a + '-' + k.own.q.b,
+        answer: k.own.q.a - k.own.q.b,
+        options: k.own.q.options,
+        picked: k.own.picked,
+        coins: k.own.coins,
+        dust: Math.round(k.own.dust * 100) / 100,
+        tiles: k.own.q.options.map(function (v, i) {
+          var r = K.tileRect(k.W, k.H, i, n)
+          return { value: v, x: Math.round(r.x + r.w / 2), y: Math.round(r.y + r.h / 2) }
+        })
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

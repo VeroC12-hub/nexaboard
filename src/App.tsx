@@ -11,6 +11,7 @@ import StudentSession from './pages/StudentSession'
 import SchoolApp from './pages/SchoolApp'
 import LearnerApp from './pages/LearnerApp'
 import Study from './pages/Study'
+import LessonPreview from './pages/LessonPreview'
 import type { User } from '@supabase/supabase-js'
 
 function App() {
@@ -62,6 +63,13 @@ function App() {
         <Route path="/learn/*" element={<LearnerApp />} />
         {/* The learner surface that works with an empty database. */}
         <Route path="/study" element={<Study />} />
+        {/* A review surface for generated lessons, development only.
+            Reads a finished tutor job by id and renders it whole with the real
+            components. Not mounted on a deployment: it is for looking at
+            content before a learner does, and a learner has the real screens. */}
+        {import.meta.env.DEV && (
+          <Route path="/preview" element={<LessonPreview />} />
+        )}
       </Routes>
     </BrowserRouter>
   )

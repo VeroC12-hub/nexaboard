@@ -1,0 +1,39 @@
+Music in this folder comes from two places.
+
+── The jingles ───────────────────────────────────────────────────────────────
+
+  intro.mp3    jingles_STEEL03    the title card
+  chime.mp3    jingles_STEEL13    a group of number characters arriving
+  fanfare.mp3  jingles_STEEL07    the handover at the end
+  nudge.mp3    jingles_PIZZI08    spare, for a prompt
+
+  Source:  Kenney (kenney.nl), "Music Jingles" pack, released 2014
+           https://kenney.nl/assets/music-jingles
+  Licence: Creative Commons Zero (CC0 1.0)
+           http://creativecommons.org/publicdomain/zero/1.0/
+
+CC0 places the work in the public domain: free in personal, educational and
+commercial projects, with no restriction and no attribution required. Kenney
+asks for credit voluntarily, so this file exists.
+
+Converted from the pack's .ogg originals to mono 64 kbit MP3, for the same
+reason the sound effects were: Safari only gained Ogg support recently and this
+has to play on the oldest phone in the classroom.
+
+The steel drum family was chosen over the saxophone, chiptune and pizzicato
+ones. It is warm rather than jokey, and it is the closest thing in the pack to
+an instrument a Ghanaian child hears outside of school.
+
+── The counting notes ────────────────────────────────────────────────────────
+
+  count-01.mp3 .. count-10.mp3
+
+Ours, synthesised by `tools/lesson-music.mjs`. Kenney has no scale in it and a
+scale is the point: the pitch climbs with the number, so "how many" and "how
+high" become the same sensation. That is how every counting song a child has
+heard works, and it is a teaching device rather than decoration.
+
+C major pentatonic, two octaves, one note per number. Pentatonic because it has
+no semitones: any two of its notes sound right together in any order at any
+speed, which means the counting cannot sound wrong even when a child taps ahead
+of the beat.

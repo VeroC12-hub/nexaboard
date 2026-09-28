@@ -6,41 +6,227 @@ item says what is actually true of the code today.
 
 ---
 
-## 1. Accounts are local, and they must not be: BLOCKING
+## 0. RESOLVED 2026-09-21: the two migrations are applied
 
-**What is true today.** `src/lib/education/accounts.ts` stores accounts,
-learners, sessions and every answered question in `localStorage`. Passwords are
-SHA-256 with a per-account salt.
+`20260921000002_edu_shared_artifact` and `20260921000010_past_paper_provenance`
+are live on `aoanslmovspmjqiqozcq`. `supabase migration list` shows local and
+remote matching on all 48 migrations. The 56 existing questions are untouched.
 
-**Why that is wrong.** The platform's central promise is one identity from
-creche to university, usable anywhere. An account that exists only in one
-browser's storage cannot be opened on another device, cannot be recovered when
-the phone is lost or wiped, and cannot be seen by a school. A learner who does a
-term of work and then changes phone loses the term.
+**What the delay was, recorded because it will recur.** Not a code problem. The
+CLI was signed into the wrong Supabase account. The board project lives in the
+`roveroc21@gmail.com` account (org `ngklgvbfkwnnvmarqugq`), and the CLI held a
+token for the NexaCore account, whose orgs are `mkmdvisncldglrixzswy` and the
+Vercel-managed `godwinocloo21-gmailcom's projects`. Neither owns the project, so
+`db push` failed with a 403 on the login-role endpoint, which reads like a
+permissions bug and is really an account mix-up. `supabase login` authorizes as
+whichever account is signed into the browser, so logging in again without
+switching accounts first reproduces it exactly.
 
-It is also not authentication. Anyone holding the device can read the store, and
-SHA-256 is fast enough to brute force a weak password offline. It keeps two
-siblings out of each other's work on a shared phone, which is the only threat it
-was built for.
+**Diagnose it in one command:** `supabase projects list`. If
+`aoanslmovspmjqiqozcq` is absent, no amount of retrying `db push` will work.
 
-**What it has to become.** Supabase Auth on the existing project
-`aoanslmovspmjqiqozcq`, with the `edu_` tables already migrated there.
+**The four layers were verified against the live database, not just applied.**
+Each was attacked with the service key and held:
 
-- Parents and schools map cleanly onto email and password sign in.
-- Learners do not, because they have no email. Options, in the order worth
-  trying: a synthetic address derived from the learner id
-  (`edu-2026-4543@learners.nexaedu.gh`) so Supabase Auth can be used unchanged;
-  or a custom sign in through an Edge Function that checks a name and password
-  against a table and mints a session.
-- Progress moves from `nexaedu_attempts:<id>` to `edu_practice_attempts`, which
-  already exists with the right shape.
-- Offline still has to work: the device store becomes a cache and a queue, not
-  the source of truth. The plan document already calls offline-first a
-  foundation decision rather than a feature.
+- relabelling `origin` from `AUTHORED` to `IMPORTED` is refused by trigger
+  (`23514`, "origin is immutable"), and the row is unchanged.
+- attaching a `paper_id` that does not exist is refused by the foreign key
+  (`23503`).
+- writing `source_exam`, `source_year` and `source_paper` onto a question with
+  no paper does not error. The derive trigger recomputes them from `paper_id`
+  and so nulls them straight back out. Worth knowing: the defence here is
+  erasure, not refusal, and it is the stronger of the two because a fake exam
+  claim cannot survive the write at all.
+- `kind = 'figure'` is refused by the check constraint on the shared store, so
+  a personal diagram cannot be cached as if it were shareable.
 
-**Why it is survivable for now.** Every password check and every read and write
-of an account goes through `accounts.ts` and nowhere else. That file changes and
-the four screens that use it do not.
+`edu_shared_artifact_sweep()` is callable and returned 0. Nothing schedules it
+yet, which is deliberate: pg_cron is not enabled and the client already refuses
+to serve anything past its shelf life, so an unswept row costs storage and
+never teaches anybody the wrong thing.
+
+---
+
+## 1. MOSTLY DONE: accounts are on Supabase Auth
+
+Passwords are gone from this codebase. There is no salt, no digest and no
+`passwordHash` on `Account`; `auth.users` holds credentials and
+`src/lib/education/accounts.ts` holds only the identity hanging off them.
+
+**The screens did not change, and that was the constraint that shaped it.**
+Every read in that module is synchronous and called straight from render, so
+making it async would have turned a storage change into a rewrite of five
+screens. The device store stays, demoted from source of truth to a cache and an
+outbox: reads answer from it at once, writes go to it and to a queue that
+flushes on `window.online`. That is also exactly the offline behaviour this
+product needs, so the two requirements turned out to be the same requirement.
+
+**Three account kinds, as before:** `learner`, `parent`, `school`. A learner
+signs in with a name, and `edu_learner.self_user_id` is what lets somebody
+learn here when their school will not take part.
+
+**The schema, in migrations 000003 to 000005.** `edu_account`, `edu_learner`,
+`edu_account_learner`, `edu_learner_attempt`. The link between an account and a
+learner is a membership ROW, not a column, because this file's own promise is
+that a learner's identity and history "survive the parent's account being
+deleted". A column with a cascade would have deleted the child with the parent.
+
+**Verified against the live database, not just compiled.** A learner was
+created, signed in with the public anon key, wrote their profile and an answer,
+and then:
+
+- reading another learner with no membership and no self link returned nothing
+- `PATCH` of an answer to a different value affected **zero rows** and the
+  answer is unchanged
+- `DELETE` of an answer affected **zero rows** and the answer is still there
+- `anon` could neither read nor insert anything: `42501` on both
+- deleting the auth user cascaded `edu_account` away with it
+
+The append-only test is worth keeping: an earlier run of it "passed" against
+zero matching rows, which proves nothing. Under RLS an UPDATE with no visible
+rows returns 204 and changes nothing, so refusal and absence look identical.
+Only a test with a row that really exists distinguishes them.
+
+### What is left on this issue
+
+- **The five screens have never been run.** `CreateProfile`, `SignIn`, `Study`,
+  `Learners` and `School` typecheck and build against the new module and have
+  not been exercised in a browser. Both browser MCP servers are failing to
+  connect.
+- **`/api/signup` needs a deployment or `vercel dev`.** A learner is created
+  pre-confirmed through the Admin API from that function, so plain `vite` on its
+  own cannot create a learner: there is nothing serving `/api`.
+- **`edu_students` is never linked.** `edu_learner.student_id` exists and
+  nothing sets it, so a learner who joins a participating school does not yet
+  get connected to its roll.
+- **Migrating a local account is not implemented, and by decision.** Nobody has
+  registered, so there was nothing to preserve and no compatibility burden was
+  taken on.
+
+---
+
+## 1b. DONE: learner sign up is rate limited durably
+
+Twelve sign ups per ten minutes per address, counted in Postgres by
+`edu_signup_rate` (migration 000006) rather than in the function's memory.
+
+**The first version was measured doing nothing.** It counted in a module level
+Map, and fourteen consecutive requests against a limit of twelve all returned
+200. Two independent reasons: `tools/vite-api.mjs` re-imports the handler on
+every request by design, so the Map began each request empty, and on Vercel
+each instance has its own memory and any of them may be cold. That is the test
+to run if anybody ever moves this back in-process.
+
+Now verified: twelve requests refused on validation, then 429 from the
+thirteenth.
+
+It fails OPEN if the throttle table cannot be reached, deliberately. The
+alternative is that a database hiccup locks every new learner out of the
+platform, which is both worse and likelier than somebody flooding the user
+table during the same minutes.
+
+Still not covered: a distributed attempt from many addresses. That belongs at
+the edge.
+
+The table holds IP addresses, which are personal data, so it holds nothing
+else, and rows are deleted after an hour by the same function that counts them.
+Hashing was considered and rejected as false comfort: the IPv4 space is small
+enough to reverse a plain hash by brute force.
+
+---
+
+## 1d. DONE: server side routes work in development
+
+`.env` was never loaded into `process.env`, so **every** `/api` route returned
+501 under `vite`. Vite reads `.env` only to expose `VITE_` prefixed variables to
+client code through `import.meta.env`, which is exactly the set the handlers do
+not use.
+
+The visible effect was that `/api/queue` answered "No tutor is configured for
+this deployment" on every local request, and had since it was written. Anybody
+reading that would go hunting for a missing key rather than four missing lines
+in `tools/vite-api.mjs`, whose own header says it exists so the tutor can be
+tried without a deployment.
+
+This is listed here because of what it was silently blocking: lesson generation
+could not be tested locally at all.
+
+---
+
+## 1c. A parent's email address is confirmed; a learner's cannot be: OPEN
+
+Email confirmation is ON for this project, and it stays on. Parents and schools
+receive a real confirmation email through Resend and cannot sign in until they
+follow it, which is correct.
+
+**This was nearly broken on purpose, so the reasoning is recorded.** The
+straightforward fix for learners was to turn confirmations off, and
+`supabase config diff` showed what that would actually have done: this project
+also carries the **ELTUFF Ideas Ventures** website's authentication, with
+`site_url` and redirect urls pointing at it, real SMTP through Resend, TOTP MFA
+enabled and Twilio SMS enabled. Email confirmation is a project wide switch, so
+turning it off to help learners would have silently weakened sign up
+verification for another live product's real users. It was not done, and
+`supabase/config.toml` was deleted rather than pushed.
+
+The consequence to be aware of: a learner has no address, so there is no way to
+send them a password reset. A forgotten learner password currently has no
+recovery path at all. The honest fix is a guardian contact on the learner
+record, or a reset code issued by whoever holds them, and neither exists yet.
+
+---
+
+## 1e. DONE: a lesson can hold tables, charts, pictures, facts and a question
+
+A lesson was prose with maths in it, and the prompt explicitly forbade
+structure ("no headings and no lists"). So there was no way to express a
+comparison as a table or data as a chart, and a learner scrolled text.
+
+It now carries five block kinds, placed inline where the tutor put them rather
+than collected at the bottom, because a table three paragraphs below the
+sentence that needs it is a table nobody reads.
+
+- **Tables**: markdown pipes into a real `<table>`, with `scope` on the header
+  and row cells so a screen reader announces "Ashanti, rainfall, 1400" rather
+  than a stream of bare numbers.
+- **Charts**: bar, line and pie as hand rolled inline SVG in
+  `components/LessonChart.tsx`, drawn from data the tutor supplies.
+- **Pictures**: an `image` fence, rendered through the existing `StepPicture`,
+  which already polls `/api/render` and caches per prompt.
+- **Facts box** and **one question mid lesson**, the question recording a real
+  attempt with `via: 'prose'`.
+
+**Why charts are SVG and not Chart.js,** which was already a dependency: it
+scales with the text instead of needing a sized canvas in a flowing page, it
+prints and screenshots cleanly, it carries a real `<title>` and `<desc>`, and
+the same code can run inside the Remotion lesson videos where there is no
+canvas. Chart.js would have been less code and none of those four things.
+
+**Why tables and charts are data and never generated images.** The rule the
+product already followed for video: a diffusion model asked for "a bar chart of
+rainfield by region" returns bars of plausible but wrong heights and axis labels
+spelled almost correctly. In a lesson about reading a chart that is not
+cosmetic, the learner is reading data that means nothing. So the prompt
+explicitly forbids putting a number or a label inside an image prompt.
+
+**Verified on real tutor output**, not on a fixture: a Social Studies lesson on
+regional rainfall produced 15 blocks, 11 paragraphs plus a 4 by 5 table, a
+5 point bar chart carrying exact figures (Western 1800, Ashanti 1400,
+Brong-Ahafo 1200, Northern 1050, Upper East 950), a facts box and a question.
+All parsed cleanly.
+
+### The bug this uncovered, which was much worse than the feature
+
+`blocksOf` split paragraphs on a blank line written as two consecutive
+newlines. In CRLF text a blank line has a carriage return between them, so the
+pattern matched nothing. The tutor runs the Claude Code CLI and on Windows its
+output is CRLF, so **every lesson written on this machine arrived as one
+unbroken block**, and `Learn.tsx` then counted one paragraph and put the whole
+lesson on a single page.
+
+It survived because it does not look like a fault: a three thousand character
+paragraph on one page reads as a layout decision. Fixed by stripping carriage
+returns in the one function that decides where a block begins.
 
 ---
 
@@ -294,6 +480,16 @@ Supabase Storage on completion, key it on the topic and the brief, and serve the
 stored copy. Unlike a lesson, a clip of rain falling is not personal at all, so
 it caches cleanly across every learner in the country.
 
+**Half done.** The keying and the sharing exist: `edu_shared_artifact` holds
+one row per topic and style, so two learners in a class pay for a clip once
+rather than twice, which closes the second consequence. The first is still
+open, because what is stored is the service's own url and not a file we own.
+So the store gives a shared artifact a shelf life of half a day and stops
+trusting the row after that, which prevents the expiry turning into a broken
+image for every learner in the country. Raising that to months is exactly the
+Supabase Storage upload described here and in issue 18, and it is the one
+change that closes this issue.
+
 Until then, treat video as a demonstration rather than something to switch on
 for a school.
 
@@ -370,28 +566,59 @@ waiting behind each other.
 
 Three fixes, in order of value:
 
-1. **Cache what is not personal.** A storyboard for counting to five, and the
-   video rendered from it, are identical for every learner in the country. Same
-   for a photograph of two soil types. Only the lesson and the explanations are
-   genuinely per learner.
+1. **DONE: cache what is not personal.** `src/lib/education/ahead.ts` and
+   `supabase/migrations/20260921000002_edu_shared_artifact.sql`. A film, a
+   photograph and a clip are now made once per topic and style and shared by
+   every learner, and the row is inserted before the work starts so forty
+   children in one classroom opening the same topic queue one job rather than
+   forty. The lesson, the explanations and the diagram stay per learner, and a
+   diagram is deliberately not cached: it is written from the lesson text in
+   front of this learner and costs nothing to draw. The migration is written
+   and **not yet applied**. Not wired into the lesson page yet: `Learn.tsx`
+   still calls `askVideo` and `illustrate` directly, and swapping those two
+   calls for `sharedVideo` and `sharedVisual` is what switches it on.
 2. **More than one worker.** The queue already claims by id and status together,
    so two workers on two machines is safe today and untested.
 3. **Set `ANTHROPIC_API_KEY`**, which makes the writing parallel rather than
    serial and leaves only the render on the worker.
 
-## 18. Rendered videos have nowhere to live in production
+Still open, and now the limiting factor: **the queue has no priority.**
+`edu_jobs` is claimed in `created_at` order, so a job put on it ahead of a
+learner genuinely sits in front of a job she submits a moment later, and
+nothing in a browser can take it back. `ahead.ts` works around that by
+queueing at most one job at a time and only while the page says it is waiting
+on nothing, which caps the damage at one job of latency. The real fix is a
+priority column on `edu_jobs` and an ordering in `api/queue.js` that prefers
+what somebody is waiting for right now.
 
-`tools/video-render.mjs` writes to `.renders/` and the dev server serves it.
-Neither exists on a deployment: a Vercel function has no disk, and the machine
-that rendered the file is somebody's laptop.
+## 18. DONE: rendered videos have somewhere to live
 
-The worker needs to upload the MP4 to Supabase Storage and hand back that url
-instead of a local path. It has `EDU_WORKER_SECRET` but not the service key, so
-either the site gains an upload endpoint the worker can post to, or the worker
-gains a storage credential of its own. The second is simpler and the first is
-safer.
+The worker uploads the finished MP4 to Supabase Storage and hands back that url
+instead of a path on whoever's laptop rendered it.
 
-Until then, video works in development and not on a deployment.
+`tools/upload.mjs` exports `uploadRender(file, name)` and `uploadBlocked()`,
+and `tools/tutor-worker.mjs` calls both: the second at startup, so the log says
+whether renders will be hosted before anything is rendered rather than after.
+`renderStoryboard` returns `{ video: put.url || '/renders/' + name, hosted }`,
+so a failed upload degrades to exactly the old behaviour instead of losing a
+film that took a minute of CPU.
+
+Of the two options this file weighed, it took the worker holding its own
+storage credential, which it called simpler and less safe than an upload
+endpoint. That trade is still real: the worker now has the service key. It runs
+on a machine Godwin owns, which is the only reason that is acceptable.
+
+The bucket is `lesson-video`, public, 50 MB per object. 100 MB was refused by
+the plan. Public is deliberate and the reasoning is in the header of
+`upload.mjs`: a film of counting to five is the same film for every learner in
+the country, nothing learner specific is ever rendered into one, so a CDN
+should serve it rather than a function minting a signed url per view. If a film
+is ever rendered with a child's name or work in it, this has to become signed
+urls on a private bucket.
+
+**Verified end to end,** not just wired: the real 11.6 MB film uploaded, and a
+public fetch of it returned `206 video/mp4`, so range requests work and a
+browser can seek rather than having to buffer the whole file.
 
 ## 19. The sound is in, in English, in a dated voice
 
@@ -497,7 +724,7 @@ away on a deployment with no renderer, leaving a title, a line of fineprint and
 a closed fold. The words now stand down only when the thing replacing them has
 actually arrived, not when it is merely preferred.
 
-## 24. Nothing is made before she asks for it
+## 24. MOSTLY DONE: nothing is made before she asks for it
 
 A video is two to five minutes every single time: storyboard, narration, then a
 render on the worker machine. The card is honest about the wait and she is not
@@ -509,9 +736,24 @@ there when she asks. That is what makes learning her preferences worth
 anything: it converts the knowledge into no wait rather than into a better
 guess about her diet.
 
-Related: there is still no caching at all, so the same question asked by two
-children is generated twice, and no rate limit, so a child tapping "video of
-this" forty times is an hour of worker queue or real money on fal.
+**Built.** `runAhead` in `src/lib/education/ahead.ts`. It reads `Plan.parts`,
+so a learner whose plan has no film in it gets no film rendered ahead and the
+worker is not spent on her, and it takes the next line of her year from
+`topicsFor` rather than trying to predict anything cleverer. It refuses to run
+on a plan whose source is still `stated`, because a guess off her sign-up form
+is not worth minutes of the only worker. It queues nothing until the page has
+been quiet for twenty seconds continuously, re-asks before every submission,
+queues one artifact at a time, at most two per topic, looks in the shared
+store first so a classroom or a second sitting queues nothing at all, and
+cancels cleanly. Not wired in yet: the lesson page has to call it and cancel
+it when she leaves the topic.
+
+Two of the three "related" points are now closed too. Duplicate work across
+learners is gone for the shared kinds, by the store in issue 17. Still open:
+**no rate limit**, so a child tapping "video of this" forty times is still an
+hour of worker queue or real money on fal. That is per learner and belongs
+with issue 12, not here, because a cache cannot help with forty requests for
+forty different things.
 
 ## 25. DONE: all four interfaces exist
 

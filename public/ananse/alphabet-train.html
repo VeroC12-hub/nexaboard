@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alphabet Train</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Alphabet Train. Putting letters in order, by loading a train.
+
+  ── Why this is not the Number Train with letters on it ──────────────────────
+
+  That was the obvious build and it would have been the old mistake in a new
+  coat: the same verb in a different hat is exactly what made the generated
+  games interchangeable, and children would not play those.
+
+  The Number Train has one hole in a correct row, so a child only has to look at
+  the two carriages either side. This has an *empty* train and a jumbled siding,
+  so they have to hold the run in their head and place every carriage. One is
+  "what goes between", the other is "put these in order", and the second is
+  genuinely harder: it is why this game uses four letters and not five.
+
+  ── Why four consecutive letters and not A to Z ──────────────────────────────
+
+  Ordering the whole alphabet is a task for a seven year old. Four in a row, out
+  of order, is the same skill at a size a five year old can hold, and it moves
+  through the alphabet across rounds so a child meets all of it eventually
+  rather than drilling A B C for ever.
+
+  ── Why it is judged only when the train is full ─────────────────────────────
+
+  Judging each carriage as it lands would turn it into four separate one letter
+  questions, and the whole point is the ordering. So carriages can be placed,
+  moved and swapped freely, and nothing is right or wrong until the child says
+  the train is ready.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: 'Put the letters in order!',
+    right: ['Choo choo! Off we go!', 'Perfect order!', 'All aboard!'],
+    wrong: 'Nearly! Look at the order again.',
+    lift: 'Where does it go?',
+    empty: 'Load the train first!',
+    tickle: 'Hee hee! Mind the train!',
+    over: 'What a journey! Thank you, my friend!',
+  }
+
+  var WAGONS = ['#e8543c', '#f2a93b', '#3f9ede', '#8a5ccf', '#26a86a', '#e0679f']
+  var HOW_MANY = 4
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  function layout(k) {
+    var pad = k.W * 0.03
+    var unit = (k.W - pad * 2) / (HOW_MANY + 1.7)
+    var w = unit * 0.86
+    var h = clamp(w * 0.78, 40, 110)
+    /**
+     * Measured inside the band the button owns.
+     *
+     * The Number Train has no button so it can use the whole height. This one
+     * does, and laying the siding out against the full height put the spare
+     * carriages underneath it: the child could see four letters and press none
+     * of them.
+     */
+    var railY = k.ground() + (k.H - k.bandH() - k.ground()) * 0.12
+    return {
+      w: w, h: h, unit: unit, railY: railY, y: railY - h * 0.5,
+      engineX: pad + unit * 0.85,
+      firstX: pad + unit * 1.7 + w * 0.5,
+    }
+  }
+
+  function slotAt(k, L, i) { return { x: L.firstX + i * L.unit, y: L.y } }
+
+  /** The siding, above the button and left of the character. */
+  function sidingAt(k, L, i) {
+    var gap = L.w * 1.22
+    return {
+      x: k.W * 0.42 + (i - (HOW_MANY - 1) / 2) * gap,
+      y: k.H - k.bandH() - L.h * 0.72,
+    }
+  }
+
+  /** Which slot a point is over, or -1. */
+  function slotUnder(k, L, x, y) {
+    if (Math.abs(y - L.y) > L.h * 1.6) return -1
+    for (var i = 0; i < HOW_MANY; i++) {
+      if (Math.abs(x - slotAt(k, L, i).x) < L.unit * 0.55) return i
+    }
+    return -1
+  }
+
+  AnanseKit.run({
+    title: 'Alphabet Train',
+    overTitle: 'What a journey!',
+    scene: 'rails',
+    rounds: 5,
+    /**
+     * This one keeps the button.
+     *
+     * Unlike the Number Train, one drop is not an answer here: the child is
+     * arranging four things and needs to be able to move them about, change
+     * their mind and swap two over without being marked on every move. Only
+     * they know when the train is ready.
+     */
+    button: true,
+    buttonLabel: 'All aboard!',
+    restMood: 'hello',
+
+    begin: function (k) {
+      /* A window that moves through the alphabet across rounds, so a child
+         meets more than A B C without ever facing the whole thing. */
+      var start = randInt(0, 26 - HOW_MANY)
+      var run = []
+      for (var i = 0; i < HOW_MANY; i++) run.push(String.fromCharCode(65 + start + i))
+      k.own.answer = run.slice()
+
+      /* Shuffled, and never into the order it is supposed to end in: handing a
+         child a finished train and asking them to order it teaches nothing. */
+      var jumble = run.slice()
+      var guard = 0
+      do {
+        jumble.sort(function () { return Math.random() - 0.5 })
+      } while (guard++ < 40 && jumble.join('') === run.join(''))
+
+      k.own.cars = jumble.map(function (letter, i) {
+        return {
+          letter: letter, x: 0, y: 0,
+          colour: WAGONS[i % WAGONS.length],
+          /* Where it is: a slot index, or -1 for the siding. */
+          slot: -1, seat: i,
+          held: false, settle: null,
+        }
+      })
+      k.own.held = null
+      k.own.puffAt = 0
+      /* How far the train has pulled out once the order is right, how fast,
+         and how far its wheels have turned. */
+      k.own.drive = 0
+      k.own.speed = 0
+      k.own.roll = 0
+      k.own.leaving = false
+      k.own.smokeAt = 0
+      park(k)
+      k.say(LINES.ask)
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) { if (k.own.cars) park(k) },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'Choo choo!' }
+      return { head: 'Put the letters in order' }
+    },
+
+    /** Nothing loaded is not an answer, and nor is a half loaded train. */
+    ready: function (k) {
+      if (!k.own.cars) return false
+      for (var i = 0; i < k.own.cars.length; i++) if (k.own.cars[i].slot < 0) return false
+      return true
+    },
+
+    /**
+     * Read the train left to right and compare it with the alphabet.
+     *
+     * Worked out here, from where the carriages actually are. No carriage knows
+     * which slot it belongs in and the answer is not written onto any of them,
+     * so there is nothing that could be edited to make a jumbled train pass.
+     */
+    judge: function (k) {
+      var seen = []
+      for (var i = 0; i < HOW_MANY; i++) {
+        for (var j = 0; j < k.own.cars.length; j++) {
+          if (k.own.cars[j].slot === i) { seen.push(k.own.cars[j].letter); break }
+        }
+      }
+      return seen.length === HOW_MANY && seen.join('') === k.own.answer.join('')
+    },
+
+    onWin: function (k) {
+      var L = layout(k)
+      k.cheer(k.W / 2, L.y)
+      k.own.puffAt = 0.2
+      k.say(pick(LINES.right))
+    },
+    onMiss: function (k) { k.say(LINES.wrong) },
+    onOver: function (k) { k.say(LINES.over) },
+    onEmpty: function (k) { k.say(LINES.empty) },
+    onPoke: function (k) { k.say(LINES.tickle) },
+
+    down: function (k, x, y) {
+      var L = layout(k)
+      /* Backwards, so the one drawn on top is the one picked up. */
+      for (var i = k.own.cars.length - 1; i >= 0; i--) {
+        var car = k.own.cars[i]
+        if (Math.abs(x - car.x) > L.w * 0.72 || Math.abs(y - car.y) > L.h * 0.85) continue
+        k.own.held = car
+        car.held = true
+        car.settle = null
+        /* It leaves whatever slot it was in, so the space is free to drop
+           something else into. */
+        car.slot = -1
+        k.sound.play('lift')
+        k.say(LINES.lift)
+        k.him.setMood('watching')
+        return true
+      }
+      return false
+    },
+
+    move: function (k, x, y) {
+      var car = k.own.held
+      if (!car) return
+      car.x = x
+      car.y = y
+    },
+
+    up: function (k) {
+      var car = k.own.held
+      if (!car) return
+      k.own.held = null
+      car.held = false
+
+      var L = layout(k)
+      var want = slotUnder(k, L, car.x, car.y)
+      if (want >= 0) {
+        /**
+         * Something already there goes back to the siding.
+         *
+         * Not a swap into this carriage's old place, because it no longer has
+         * one: it was taken out of the train the moment it was picked up. The
+         * siding is always somewhere to put a thing, which means a child can
+         * never wedge themselves into a board they cannot fix.
+         */
+        for (var i = 0; i < k.own.cars.length; i++) {
+          var other = k.own.cars[i]
+          if (other !== car && other.slot === want) other.slot = -1
+        }
+        car.slot = want
+        k.sound.play('thud')
+        k.kick(3)
+      }
+      park(k)
+      if (k.phase === 'play') k.him.setMood('hello')
+    },
+
+    step: function (k, dt) {
+      if (!k.own.cars) return
+      /**
+       * The train leaves.
+       *
+       * ── Why this is worth the code ────────────────────────────────────────
+       *
+       * Pressing "all aboard" on a correct train used to produce a noise, some
+       * confetti, and then the next question. The child mended a train and the
+       * train did nothing. The reward for finishing a thing should be the thing
+       * working, and for a train that means it pulls out: wheels turning, smoke
+       * going up, away off the edge.
+       *
+       * It accelerates rather than starting at speed, because a train instantly
+       * at full pelt reads as a slide rather than a departure, and the moment of
+       * it just beginning to move is the satisfying part.
+       *
+       * Only on a correct answer. A wrong train stays exactly where it is, so
+       * the child can see what they built and fix it.
+       */
+      if (k.phase === 'won' || k.own.leaving) {
+        var EL = layout(k)
+        k.own.leaving = true
+        k.own.speed = Math.min(k.own.speed + k.W * 0.5 * dt, k.W * 0.8)
+        /**
+         * Leftwards, because that is the way the engine is pointing.
+         *
+         * The boiler and the funnel are drawn on the left of the cab, so the
+         * front of the engine faces left and the carriages trail off to the
+         * right behind it. Driving it to the right made it shunt its own train
+         * backwards, which is the sort of thing a child who has watched a train
+         * notices immediately even if they cannot say why it looks wrong.
+         */
+        k.own.drive -= k.own.speed * dt
+        /* Rolling, not sliding: the wheels turn at the rate the ground is
+           passing under them, and in the direction of travel. */
+        k.own.roll -= (k.own.speed / Math.max(8, EL.h * 0.22)) * dt
+        k.own.smokeAt -= dt
+        if (k.own.smokeAt <= 0) {
+          k.own.smokeAt = 0.08
+          k.puff(EL.engineX + k.own.drive - EL.w * 0.3, EL.y - EL.h * 1.05, 3,
+            'rgba(255,255,255,0.85)')
+        }
+      }
+
+      for (var i = 0; i < k.own.cars.length; i++) {
+        var car = k.own.cars[i]
+        if (!car.settle || car.held) continue
+        /* Eased home rather than snapped, so a carriage that was moved looks
+           like it rolled rather than teleported. */
+        car.x += (car.settle.x - car.x) * Math.min(1, dt * 13)
+        car.y += (car.settle.y - car.y) * Math.min(1, dt * 13)
+        if (Math.abs(car.x - car.settle.x) < 0.5 && Math.abs(car.y - car.settle.y) < 0.5) {
+          car.x = car.settle.x
+          car.y = car.settle.y
+          car.settle = null
+        }
+      }
+      if (k.own.puffAt > 0) {
+        k.own.puffAt -= dt
+        if (k.own.puffAt <= 0) {
+          var L = layout(k)
+          k.puff(L.engineX - L.w * 0.3, L.y - L.h * 1.1, 10, 'rgba(255,255,255,0.8)')
+        }
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var L = layout(k)
+
+      /* The rails stay put; the train runs along them. */
+      K.rails(ctx, L.railY + L.h * 0.22, k.W, L.h * 0.5)
+      var go = k.own.drive
+      K.engine(ctx, L.engineX + go, L.y, L.w, L.h, k.own.roll)
+
+      /**
+       * The empty slots, as dashed outlines.
+       *
+       * An empty stretch of rail reads as the end of the train. A row of ghosts
+       * says "four carriages belong here, in this order", which is the whole
+       * instruction given without words.
+       */
+      for (var i = 0; i < HOW_MANY; i++) {
+        var taken = false
+        for (var j = 0; j < k.own.cars.length; j++) {
+          if (k.own.cars[j].slot === i) { taken = true; break }
+        }
+        if (taken) continue
+        var at = slotAt(k, L, i)
+        ctx.save()
+        ctx.strokeStyle = 'rgba(255,255,255,0.85)'
+        ctx.lineWidth = Math.max(3, L.h * 0.07)
+        ctx.setLineDash([L.h * 0.16, L.h * 0.16])
+        ctx.beginPath()
+        ctx.roundRect(at.x - L.w / 2, at.y - L.h / 2, L.w, L.h, L.h * 0.16)
+        ctx.stroke()
+        ctx.restore()
+      }
+
+      /* The carriages, with whichever is in hand drawn last. */
+      var order = k.own.cars.slice().sort(function (a, b) {
+        return (a.held ? 1 : 0) - (b.held ? 1 : 0)
+      })
+      for (var c = 0; c < order.length; c++) {
+        var car = order[c]
+        var lift = car.held ? 1.08 : 1
+        /* Carriages on the train leave with it. Anything still in the siding
+           stays, though by the time it can leave the siding is empty. */
+        var cx = car.x + (car.slot >= 0 ? go : 0)
+        K.carriage(ctx, cx, car.y, L.w * lift, L.h * lift, car.colour,
+          { coupling: car.slot > 0, spin: car.slot >= 0 ? k.own.roll : 0 })
+        k.shout(car.letter, cx, car.y - L.h * 0.02, L.h * 0.54 * lift, '#2b3a1c', null)
+      }
+
+      var ar = clamp(Math.min(k.W, k.H) * 0.075, 30, 60)
+      k.him.draw(k.W - ar * 1.4, k.H - k.bandH() - ar * 0.5, ar,
+        k.H - k.bandH() + ar * 0.3)
+    },
+
+    peek: function (k) {
+      if (!k.own.cars) return { cars: 0 }
+      var L = layout(k)
+      return {
+        answer: k.own.answer.join(''),
+        cars: k.own.cars.map(function (c) {
+          return { l: c.letter, slot: c.slot, x: Math.round(c.x), y: Math.round(c.y) }
+        }),
+        slots: (function () {
+          var out = []
+          for (var i = 0; i < HOW_MANY; i++) {
+            var at = slotAt(k, L, i)
+            out.push({ i: i, x: Math.round(at.x), y: Math.round(at.y) })
+          }
+          return out
+        }()),
+      }
+    },
+  })
+
+  /** Put every carriage where it belongs: its slot, or a free siding space. */
+  function park(k) {
+    var L = layout(k)
+    var used = 0
+    for (var i = 0; i < k.own.cars.length; i++) {
+      var car = k.own.cars[i]
+      if (car.held) continue
+      var at = car.slot >= 0 ? slotAt(k, L, car.slot) : sidingAt(k, L, used++)
+      if (car.x === 0 && car.y === 0) { car.x = at.x; car.y = at.y }
+      else car.settle = { x: at.x, y: at.y }
+    }
+  }
+}())
+</script>
+</body>
+</html>

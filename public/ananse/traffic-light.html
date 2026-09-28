@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Traffic Light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Traffic Light. Crossing the road, by waiting for green.
+
+  ── Why this game is different from all the others ───────────────────────────
+
+  Every other game asks a child to choose: which balloon, which fish, which
+  hole. This one asks them to *wait*, and waiting is a skill nothing else here
+  practises. There is only ever one thing to do and the whole question is when.
+
+  It is also the only game on the list that teaches something with consequences
+  outside the app, which is why it is worth the care.
+
+  ── Why a wrong answer is not punished harshly ───────────────────────────────
+
+  A child who steps out on red has done the dangerous thing, and the instinct is
+  to make the moment frightening so it sticks. That is the wrong instinct for a
+  five year old: frightened children stop playing, and a game they will not open
+  teaches nothing at all. He stops at the kerb, a car goes past, and he says to
+  wait for green. The near miss does the teaching without the fright.
+
+  ── Why green does not last forever ──────────────────────────────────────────
+
+  Because a green light that waits indefinitely is not a traffic light, it is a
+  button that has not been pressed yet, and the whole point is that the moment
+  is real. It holds long enough for a hesitant child, then turns back and they
+  wait for the next one. Missing a green costs nothing but another wait.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: 'Wait for the green light, then tap me to cross!',
+    green: 'Green! Now we can go!',
+    crossed: ['We made it across!', 'Safely over!', 'Well done, we waited!'],
+    tooSoon: 'Wait! It is red. We must stop.',
+    missed: 'The light went red again. We wait for the next one.',
+    over: 'You kept us safe all the way! Thank you, my friend!',
+  }
+
+  function walker(k) {
+    var r = clamp(Math.min(k.W, k.H) * 0.085, 34, 70)
+    return { r: r, x: k.W * 0.5 }
+  }
+
+  /* ── the light ───────────────────────────────────────────────────────────── */
+
+  function lightBox(k) {
+    var w = clamp(Math.min(k.W * 0.07, k.H * 0.1), 34, 74)
+    return {
+      x: k.W * 0.82, y: k.ground() - w * 0.4,
+      w: w, h: w * 2.5,
+      poleBase: K.kerbs(k.H).near + (k.H - K.kerbs(k.H).near) * 0.4,
+    }
+  }
+
+  /**
+   * A pedestrian light: two lamps, not three.
+   *
+   * A real crossing light has a red person and a green person, and that is what
+   * a child is being taught to read. Adding an amber would be copying a car
+   * light, which is a different thing that means something else and is not the
+   * one they will be standing in front of.
+   */
+  function drawLight(ctx, k, L, state) {
+    /* Pole. */
+    ctx.beginPath()
+    ctx.roundRect(L.x - L.w * 0.09, L.y + L.h * 0.5, L.w * 0.18, L.poleBase - L.y - L.h * 0.5,
+      L.w * 0.09)
+    K.inkedOn(ctx, '#7d848e', K.LINE, 3)
+
+    /* Case. */
+    ctx.beginPath()
+    ctx.roundRect(L.x - L.w / 2, L.y - L.h / 2, L.w, L.h, L.w * 0.22)
+    K.inkedOn(ctx, '#3d4a57', K.LINE, 4)
+
+    var r = L.w * 0.31
+    var lamps = [
+      { y: L.y - L.h * 0.22, on: state === 'red', lit: '#ff4d3d', off: '#5e2a26' },
+      { y: L.y + L.h * 0.22, on: state === 'green', lit: '#37d96b', off: '#1f4a30' },
+    ]
+    for (var i = 0; i < lamps.length; i++) {
+      var lamp = lamps[i]
+      /* A halo round the lit one, which is what makes a coloured circle read as
+         a light that is actually on. */
+      if (lamp.on) {
+        var glow = ctx.createRadialGradient(L.x, lamp.y, r * 0.3, L.x, lamp.y, r * 2.4)
+        glow.addColorStop(0, lamp.lit)
+        glow.addColorStop(1, 'rgba(0,0,0,0)')
+        ctx.save()
+        ctx.globalAlpha = 0.45
+        ctx.fillStyle = glow
+        ctx.beginPath()
+        ctx.arc(L.x, lamp.y, r * 2.4, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+      }
+      ctx.beginPath()
+      ctx.arc(L.x, lamp.y, r, 0, Math.PI * 2)
+      K.inkedOn(ctx, lamp.on ? lamp.lit : lamp.off, K.LINE, 2.5)
+      if (lamp.on) {
+        ctx.save()
+        ctx.globalAlpha = 0.45
+        ctx.fillStyle = '#ffffff'
+        ctx.beginPath()
+        ctx.ellipse(L.x - r * 0.3, lamp.y - r * 0.34, r * 0.3, r * 0.18, -0.5, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+      }
+    }
+  }
+
+  /** A car, for the near miss. Nothing else in the game uses one. */
+  function drawCar(ctx, x, y, w, tint) {
+    var h = w * 0.44
+    ctx.save()
+    ctx.translate(x, y)
+    /* Cabin. */
+    ctx.beginPath()
+    ctx.roundRect(-w * 0.26, -h * 1.05, w * 0.55, h * 0.72, h * 0.2)
+    K.inkedOn(ctx, tint, K.LINE, 3.5)
+    ctx.beginPath()
+    ctx.roundRect(-w * 0.18, -h * 0.94, w * 0.38, h * 0.48, h * 0.14)
+    K.inkedOn(ctx, '#bfe8fb', K.LINE, 2.5)
+    /* Body. */
+    ctx.beginPath()
+    ctx.roundRect(-w / 2, -h * 0.4, w, h * 0.8, h * 0.28)
+    K.inkedOn(ctx, tint, K.LINE, 3.5)
+    /* Wheels. */
+    for (var s = -1; s <= 1; s += 2) {
+      ctx.beginPath()
+      ctx.arc(s * w * 0.3, h * 0.4, h * 0.3, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#3d4a57', K.LINE, 3)
+      ctx.beginPath()
+      ctx.arc(s * w * 0.3, h * 0.4, h * 0.12, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#c9ced6', K.LINE, 2)
+    }
+    ctx.restore()
+  }
+
+  AnanseKit.run({
+    title: 'Traffic Light',
+    overTitle: 'You kept us safe!',
+    scene: 'road',
+    rounds: 5,
+    /* Tapping him is the whole answer, and when you tap is the question. */
+    button: false,
+    restMood: 'hello',
+
+    begin: function (k) {
+      var kb = K.kerbs(k.H)
+      k.own.light = 'red'
+      /**
+       * How long the red lasts.
+       *
+       * Varied, and never short. A predictable wait becomes a rhythm a child
+       * can tap along to without ever looking at the light, which is the exact
+       * habit this game is trying not to teach.
+       */
+      k.own.changeIn = rand(2.2, 4.6)
+      k.own.greenLeft = 0
+      k.own.walk = 0
+      /* Standing on the near pavement with his feet on it, not hanging over
+         the bottom edge of the screen. */
+      k.own.y = kb.near + (k.H - kb.near) * 0.34
+      k.own.startY = k.own.y
+      k.own.endY = kb.far - walker(k).r * 0.5
+      k.own.car = null
+      k.own.result = null
+      k.say(LINES.ask)
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) {
+      if (!k.own.light) return
+      var kb = K.kerbs(k.H)
+      k.own.startY = kb.near + (k.H - kb.near) * 0.34
+      k.own.endY = kb.far - walker(k).r * 0.5
+      if (!k.own.walk) k.own.y = k.own.startY
+    },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'Safely across!' }
+      if (k.own.light === 'green') return { head: 'Green! Tap Ananse to cross' }
+      return { head: 'Red. Wait!' }
+    },
+
+    /**
+     * Was the light green at the moment they tapped.
+     *
+     * Recorded at the tap and read here, because by the time this is asked the
+     * light may already have changed, and a child who went on green must not be
+     * marked wrong because the light turned while he was walking.
+     */
+    judge: function (k) { return k.own.result === true },
+
+    onWin: function (k) { k.say(pick(LINES.crossed)) },
+    onMiss: function (k) { k.say(LINES.tooSoon) },
+    onOver: function (k) { k.say(LINES.over) },
+
+    down: function (k, x, y) {
+      if (k.own.walk > 0) return true
+      /* Anywhere on him, generously. There is only one thing to do in this
+         game, so a near miss should never be a miss. */
+      if (!k.him.hit(x, y)) return false
+
+      if (k.own.light === 'green') {
+        k.own.result = true
+        k.own.walk = 0.001
+        k.sound.play('lift')
+        k.him.setMood('happy')
+      } else {
+        /**
+         * Stepping out on red.
+         *
+         * A car goes past and he stops at the kerb. Not a crash and not a
+         * fright: a frightened five year old closes the app, and a game they
+         * will not open teaches nothing. The near miss does the work.
+         */
+        k.own.result = false
+        k.own.car = { x: -k.W * 0.2, speed: k.W * 0.95 }
+        k.sound.play('oops')
+        k.kick(6)
+        k.him.setMood('caught')
+        k.commit()
+      }
+      return true
+    },
+
+    step: function (k, dt) {
+      if (!k.own.light) return
+
+      /* The car, whenever there is one. */
+      if (k.own.car) {
+        k.own.car.x += k.own.car.speed * dt
+        if (k.own.car.x > k.W * 1.3) k.own.car = null
+      }
+
+      if (k.own.walk > 0) {
+        /* Crossing. Eased, so he sets off and arrives rather than sliding at a
+           constant rate. */
+        k.own.walk = Math.min(1, k.own.walk + dt * 0.75)
+        var t = k.own.walk
+        var e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2
+        k.own.y = k.own.startY + (k.own.endY - k.own.startY) * e
+        if (k.own.walk >= 1 && k.phase === 'play') k.commit()
+        return
+      }
+
+      if (k.phase !== 'play') return
+
+      /* The light. */
+      k.own.changeIn -= dt
+      if (k.own.light === 'red' && k.own.changeIn <= 0) {
+        k.own.light = 'green'
+        /**
+         * Long enough for a child who is hesitating, short enough to be a
+         * moment. A green that waits forever is not a light, it is a button
+         * that has not been pressed.
+         */
+        k.own.greenLeft = 5
+        k.sound.play('lift')
+        k.say(LINES.green)
+        k.him.setMood('happy')
+      } else if (k.own.light === 'green') {
+        k.own.greenLeft -= dt
+        if (k.own.greenLeft <= 0) {
+          k.own.light = 'red'
+          k.own.changeIn = rand(2.2, 4.6)
+          k.him.setMood('hello')
+          k.say(LINES.missed)
+        }
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var W0 = walker(k)
+      var L = lightBox(k)
+      var kb = K.kerbs(k.H)
+
+      drawLight(ctx, k, L, k.own.light)
+
+      /* The car passes in front of him if he stepped out, which is the whole
+         point of it being there. */
+      if (k.own.car) {
+        drawCar(ctx, k.own.car.x, (kb.far + kb.near) / 2 + (kb.near - kb.far) * 0.18,
+          Math.min(k.W * 0.22, k.H * 0.3), '#e8543c')
+      }
+
+      k.him.draw(W0.x, k.own.y, W0.r, k.own.y + W0.r * 1.15)
+    },
+
+    peek: function (k) {
+      if (!k.own.light) return { light: null }
+      return {
+        light: k.own.light,
+        greenLeft: Math.round(k.own.greenLeft * 10) / 10,
+        changeIn: Math.round(k.own.changeIn * 10) / 10,
+        walk: Math.round(k.own.walk * 100) / 100,
+        result: k.own.result,
+        him: { x: Math.round(W(k)), y: Math.round(k.own.y) },
+      }
+    },
+  })
+
+  function W(k) { return walker(k).x }
+}())
+</script>
+</body>
+</html>

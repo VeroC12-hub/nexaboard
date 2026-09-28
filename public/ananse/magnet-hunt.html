@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magnet Hunt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Magnet Hunt. Predict, then test.
+
+  ── Why the child chooses a whole set and not one thing at a time ────────────
+
+  One object at a time with a floats-or-sinks style answer row would work, and
+  it would also be the same game as Floating or Sinking with different pictures.
+  More importantly it would let a child guess their way through: one in two,
+  every time, and a coin flip gets you half the stars.
+
+  Choosing the whole set is a different problem. Eight objects means two hundred
+  and fifty six possible answers and guessing is hopeless, so the only way
+  through is to actually decide about each one. It also mirrors what the
+  exercise is in a classroom: here is a tray of things, sort them.
+
+  ── Why the magnet always sweeps ─────────────────────────────────────────────
+
+  The sweep runs whether the child was right or wrong, because the sweep is not
+  the reward, it is the experiment. A child who guessed wrong and is simply
+  told so has learned that they were wrong. A child who watches the nail leap
+  and the coin sit still has learned which things are magnetic.
+
+  ── The trap this game exists for ────────────────────────────────────────────
+
+  Children believe all metal is magnetic. It is the single most common wrong
+  idea about magnets at this age, and it is why the bank has a coin, an
+  aluminium cup and a brass key in the not-magnetic group. Ghanaian coins are
+  nickel plated steel in some years and not in others, so rather than teach
+  something that might be false under a real magnet in a real classroom, the
+  coin here is explicitly a brass one and is not magnetic. Only iron and steel
+  are magnetic, and the game says so in as many words.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #3a2a10;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: 'Which ones will the magnet pick up? Choose them all.',
+    right: ['All correct! You know your metals!', 'Every one! Well done!', 'Perfect sorting!'],
+    over: 'The magnet has gone flat. Let us try again!',
+    empty: 'Choose at least one first!',
+    big: 'A giant magnet! Careful with it!',
+    poke: 'Do not stick me to it!'
+  }
+
+  var BIG = 10
+  function isBig(round) { return round > 0 && round % BIG === BIG - 1 }
+
+  /* ── the things on the table ─────────────────────────────────────────────── */
+
+  /**
+   * Every object carries what it is made of, and nothing else.
+   *
+   * There is no `magnetic: true` field anywhere, on purpose. Whether a thing
+   * jumps is worked out from its material at the moment the magnet is
+   * switched on, the same way it would be worked out in a classroom, so there
+   * is no flag sitting in the data that could disagree with what the child is
+   * shown.
+   */
+  var IRON = ['iron', 'steel']
+
+  function magnetic(thing) { return IRON.indexOf(thing.of) >= 0 }
+
+  var THINGS = [
+    /* Iron and steel: these jump. */
+    { name: 'nail', of: 'steel', draw: drawNail },
+    { name: 'pin', of: 'steel', draw: drawPin },
+    { name: 'paper clip', of: 'steel', draw: drawClip },
+    { name: 'key', of: 'steel', draw: drawKey },
+    { name: 'spoon', of: 'steel', draw: drawSpoon },
+    { name: 'bottle top', of: 'steel', draw: drawTop },
+    { name: 'bolt', of: 'iron', draw: drawBolt },
+    { name: 'scissors', of: 'steel', draw: drawScissors },
+
+    /* Everything else: these do not. */
+    { name: 'pencil', of: 'wood', draw: drawPencil },
+    { name: 'eraser', of: 'rubber', draw: drawEraser },
+    { name: 'ruler', of: 'plastic', draw: drawRuler },
+    { name: 'marble', of: 'glass', draw: drawMarble },
+    { name: 'chalk', of: 'chalk', draw: drawChalk },
+    { name: 'comb', of: 'plastic', draw: drawComb },
+    { name: 'coin', of: 'brass', draw: drawCoin },
+    { name: 'leaf', of: 'leaf', draw: drawLeaf },
+    { name: 'cup', of: 'aluminium', draw: drawCup },
+    { name: 'cloth', of: 'cloth', draw: drawCloth }
+  ]
+
+  /** Why a thing did or did not jump, which is the whole lesson. */
+  function because(thing) {
+    if (magnetic(thing)) return 'The ' + thing.name + ' is steel, so it jumps.'
+    if (thing.of === 'brass') return 'The ' + thing.name + ' is brass. Not all metal is magnetic.'
+    if (thing.of === 'aluminium') return 'The ' + thing.name + ' is aluminium. Metal, but not magnetic.'
+    return 'The ' + thing.name + ' is ' + thing.of + ', so nothing happens.'
+  }
+
+  /* ── drawing the things ──────────────────────────────────────────────────── */
+
+  var STEEL = '#c3cbd4', STEEL_LO = '#8f99a5'
+
+  function drawNail(ctx, r) {
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.09, -r * 0.5, r * 0.18, r * 1.0, r * 0.05)
+    K.inkedOn(ctx, STEEL, K.LINE, 3)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.09, r * 0.46)
+    ctx.lineTo(0, r * 0.78)
+    ctx.lineTo(r * 0.09, r * 0.46)
+    ctx.closePath()
+    K.inkedOn(ctx, STEEL_LO, K.LINE, 2.5)
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.5, r * 0.3, r * 0.1, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, STEEL, K.LINE, 3)
+  }
+
+  function drawPin(ctx, r) {
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = r * 0.14
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.6, r * 0.3)
+    ctx.lineTo(r * 0.55, -r * 0.35)
+    ctx.stroke()
+    ctx.strokeStyle = STEEL
+    ctx.lineWidth = r * 0.08
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.arc(-r * 0.62, r * 0.33, r * 0.16, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#e0483a', K.LINE, 2.5)
+  }
+
+  function drawClip(ctx, r) {
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = r * 0.17
+    ctx.lineCap = 'round'
+    ctx.lineJoin = 'round'
+    function path() {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.2, r * 0.5)
+      ctx.lineTo(-r * 0.2, -r * 0.42)
+      ctx.quadraticCurveTo(-r * 0.2, -r * 0.62, 0, -r * 0.62)
+      ctx.quadraticCurveTo(r * 0.2, -r * 0.62, r * 0.2, -r * 0.42)
+      ctx.lineTo(r * 0.2, r * 0.3)
+      ctx.quadraticCurveTo(r * 0.2, r * 0.46, r * 0.04, r * 0.46)
+      ctx.quadraticCurveTo(-r * 0.04, r * 0.46, -r * 0.04, r * 0.3)
+      ctx.lineTo(-r * 0.04, -r * 0.4)
+    }
+    path()
+    ctx.stroke()
+    ctx.strokeStyle = STEEL
+    ctx.lineWidth = r * 0.1
+    path()
+    ctx.stroke()
+  }
+
+  function drawKey(ctx, r) {
+    ctx.beginPath()
+    ctx.arc(-r * 0.4, 0, r * 0.3, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#d9b04a', K.LINE, 3)
+    ctx.beginPath()
+    ctx.arc(-r * 0.4, 0, r * 0.12, 0, Math.PI * 2)
+    ctx.fillStyle = '#7a5f1e'
+    ctx.fill()
+    ctx.beginPath()
+    ctx.rect(-r * 0.16, -r * 0.1, r * 0.8, r * 0.2)
+    K.inkedOn(ctx, '#d9b04a', K.LINE, 3)
+    ctx.beginPath()
+    ctx.rect(r * 0.34, r * 0.08, r * 0.12, r * 0.24)
+    ctx.rect(r * 0.54, r * 0.08, r * 0.1, r * 0.18)
+    K.inkedOn(ctx, '#d9b04a', K.LINE, 2.5)
+  }
+
+  function drawSpoon(ctx, r) {
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.38, r * 0.26, r * 0.34, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, STEEL, K.LINE, 3)
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.09, -r * 0.1, r * 0.18, r * 0.86, r * 0.09)
+    K.inkedOn(ctx, STEEL, K.LINE, 3)
+  }
+
+  function drawTop(ctx, r) {
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.46, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#e0483a', K.LINE, 3)
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 2
+    for (var i = 0; i < 14; i++) {
+      var a = (i / 14) * Math.PI * 2
+      ctx.beginPath()
+      ctx.moveTo(Math.cos(a) * r * 0.4, Math.sin(a) * r * 0.4)
+      ctx.lineTo(Math.cos(a) * r * 0.52, Math.sin(a) * r * 0.52)
+      ctx.stroke()
+    }
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.26, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f2ece0', K.LINE, 2)
+  }
+
+  function drawBolt(ctx, r) {
+    ctx.beginPath()
+    for (var i = 0; i < 6; i++) {
+      var a = (i / 6) * Math.PI * 2 - Math.PI / 2
+      var px = Math.cos(a) * r * 0.36, py = -r * 0.26 + Math.sin(a) * r * 0.36
+      if (i === 0) ctx.moveTo(px, py)
+      else ctx.lineTo(px, py)
+    }
+    ctx.closePath()
+    K.inkedOn(ctx, STEEL, K.LINE, 3)
+    ctx.beginPath()
+    ctx.rect(-r * 0.15, -r * 0.1, r * 0.3, r * 0.8)
+    K.inkedOn(ctx, STEEL_LO, K.LINE, 3)
+    ctx.strokeStyle = 'rgba(60,70,80,0.5)'
+    ctx.lineWidth = 2
+    for (var t = 0; t < 4; t++) {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.15, r * (0.04 + t * 0.16))
+      ctx.lineTo(r * 0.15, r * (0.04 + t * 0.16))
+      ctx.stroke()
+    }
+  }
+
+  function drawScissors(ctx, r) {
+    for (var s = -1; s <= 1; s += 2) {
+      ctx.strokeStyle = K.LINE
+      ctx.lineWidth = r * 0.2
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(s * r * 0.22, r * 0.2)
+      ctx.lineTo(-s * r * 0.24, -r * 0.62)
+      ctx.stroke()
+      ctx.strokeStyle = STEEL
+      ctx.lineWidth = r * 0.12
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.ellipse(s * r * 0.34, r * 0.52, r * 0.2, r * 0.26, s * 0.4, 0, Math.PI * 2)
+      ctx.strokeStyle = K.LINE
+      ctx.lineWidth = 3
+      ctx.fillStyle = '#e0483a'
+      ctx.fill()
+      ctx.stroke()
+    }
+    ctx.beginPath()
+    ctx.arc(0, r * 0.08, r * 0.08, 0, Math.PI * 2)
+    K.inkedOn(ctx, STEEL_LO, K.LINE, 2)
+  }
+
+  function drawPencil(ctx, r) {
+    ctx.beginPath()
+    ctx.rect(-r * 0.13, -r * 0.5, r * 0.26, r * 0.92)
+    K.inkedOn(ctx, '#f2c33b', K.LINE, 3)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.13, r * 0.42)
+    ctx.lineTo(0, r * 0.76)
+    ctx.lineTo(r * 0.13, r * 0.42)
+    ctx.closePath()
+    K.inkedOn(ctx, '#e8c9a0', K.LINE, 2.5)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.05, r * 0.62)
+    ctx.lineTo(0, r * 0.76)
+    ctx.lineTo(r * 0.05, r * 0.62)
+    ctx.closePath()
+    ctx.fillStyle = '#3a3a3a'
+    ctx.fill()
+    ctx.beginPath()
+    ctx.rect(-r * 0.13, -r * 0.64, r * 0.26, r * 0.16)
+    K.inkedOn(ctx, '#e0679f', K.LINE, 2.5)
+  }
+
+  function drawEraser(ctx, r) {
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.42, -r * 0.24, r * 0.84, r * 0.48, r * 0.07)
+    K.inkedOn(ctx, '#e0679f', K.LINE, 3)
+    ctx.beginPath()
+    ctx.rect(-r * 0.42, -r * 0.06, r * 0.84, r * 0.12)
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 2)
+  }
+
+  function drawRuler(ctx, r) {
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.62, -r * 0.16, r * 1.24, r * 0.32, r * 0.05)
+    K.inkedOn(ctx, '#7fd0f2', K.LINE, 3)
+    ctx.strokeStyle = 'rgba(30,70,100,0.6)'
+    ctx.lineWidth = 2
+    for (var i = 1; i < 8; i++) {
+      var x = -r * 0.62 + (i / 8) * r * 1.24
+      ctx.beginPath()
+      ctx.moveTo(x, -r * 0.16)
+      ctx.lineTo(x, -r * 0.16 + r * (i % 2 ? 0.1 : 0.17))
+      ctx.stroke()
+    }
+  }
+
+  function drawMarble(ctx, r) {
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.4, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#8fd2f5', K.LINE, 3)
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.4, 0, Math.PI * 2)
+    ctx.clip()
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.4, r * 0.14, -0.6, 0, Math.PI * 2)
+    ctx.fillStyle = '#e0483a'
+    ctx.fill()
+    ctx.restore()
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.14, -r * 0.16, r * 0.12, r * 0.07, -0.6, 0, Math.PI * 2)
+    ctx.fillStyle = 'rgba(255,255,255,0.8)'
+    ctx.fill()
+  }
+
+  function drawChalk(ctx, r) {
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.14, -r * 0.5, r * 0.28, r * 1.0, r * 0.06)
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 3)
+    ctx.beginPath()
+    ctx.rect(-r * 0.14, -r * 0.16, r * 0.28, r * 0.3)
+    K.inkedOn(ctx, '#6cbf42', K.LINE, 2)
+  }
+
+  function drawComb(ctx, r) {
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.56, -r * 0.38, r * 1.12, r * 0.28, r * 0.05)
+    K.inkedOn(ctx, '#8a5ccf', K.LINE, 3)
+    ctx.strokeStyle = '#8a5ccf'
+    ctx.lineWidth = r * 0.07
+    ctx.lineCap = 'round'
+    for (var i = 0; i < 10; i++) {
+      var x = -r * 0.48 + i * r * 0.107
+      ctx.beginPath()
+      ctx.moveTo(x, -r * 0.1)
+      ctx.lineTo(x, r * 0.44)
+      ctx.stroke()
+    }
+  }
+
+  function drawCoin(ctx, r) {
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.42, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#d9b04a', K.LINE, 3)
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.3, 0, Math.PI * 2)
+    ctx.strokeStyle = 'rgba(120,90,20,0.5)'
+    ctx.lineWidth = 2
+    ctx.stroke()
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillStyle = '#7a5f1e'
+    ctx.font = '700 ' + Math.round(r * 0.34) + 'px ' + FONT_CACHE
+    ctx.fillText('1', 0, r * 0.02)
+  }
+
+  function drawLeaf(ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(0, r * 0.5)
+    ctx.quadraticCurveTo(-r * 0.56, 0, 0, -r * 0.52)
+    ctx.quadraticCurveTo(r * 0.56, 0, 0, r * 0.5)
+    ctx.closePath()
+    K.inkedOn(ctx, '#6cbf42', K.LINE, 3)
+    ctx.strokeStyle = '#2e7a33'
+    ctx.lineWidth = 2.5
+    ctx.beginPath()
+    ctx.moveTo(0, r * 0.48)
+    ctx.lineTo(0, -r * 0.48)
+    ctx.stroke()
+  }
+
+  function drawCup(ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.34, -r * 0.38)
+    ctx.lineTo(-r * 0.26, r * 0.42)
+    ctx.lineTo(r * 0.26, r * 0.42)
+    ctx.lineTo(r * 0.34, -r * 0.38)
+    ctx.closePath()
+    K.inkedOn(ctx, STEEL, K.LINE, 3)
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.38, r * 0.34, r * 0.11, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#e6ecf2', K.LINE, 2.5)
+  }
+
+  function drawCloth(ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.5, -r * 0.3)
+    ctx.quadraticCurveTo(-r * 0.1, -r * 0.46, r * 0.5, -r * 0.28)
+    ctx.quadraticCurveTo(r * 0.36, r * 0.1, r * 0.46, r * 0.4)
+    ctx.quadraticCurveTo(0, r * 0.22, -r * 0.46, r * 0.42)
+    ctx.quadraticCurveTo(-r * 0.36, r * 0.05, -r * 0.5, -r * 0.3)
+    ctx.closePath()
+    K.inkedOn(ctx, '#e8543c', K.LINE, 3)
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)'
+    ctx.lineWidth = 2
+    for (var i = -1; i <= 1; i++) {
+      ctx.beginPath()
+      ctx.moveTo(i * r * 0.24, -r * 0.34)
+      ctx.lineTo(i * r * 0.24, r * 0.34)
+      ctx.stroke()
+    }
+  }
+
+  /* The coin needs the font name and the kit only hands it over inside `run`. */
+  var FONT_CACHE = '"Fredoka", ui-rounded, system-ui, sans-serif'
+
+  /* ── the magnet ──────────────────────────────────────────────────────────── */
+
+  /** A horseshoe, red with steel tips, because that is what a magnet looks
+      like in every book a child has ever seen. */
+  function drawMagnet(ctx, x, y, r, turn) {
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.rotate(turn || 0)
+
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = r * 0.62
+    ctx.lineCap = 'butt'
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.52, Math.PI, 0)
+    ctx.stroke()
+    ctx.strokeStyle = '#e0483a'
+    ctx.lineWidth = r * 0.48
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.52, Math.PI, 0)
+    ctx.stroke()
+
+    /* The poles. */
+    for (var s = -1; s <= 1; s += 2) {
+      ctx.beginPath()
+      ctx.rect(s * r * 0.52 - r * 0.24, 0, r * 0.48, r * 0.34)
+      K.inkedOn(ctx, '#c3cbd4', K.LINE, 3)
+    }
+    ctx.restore()
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  function tableTop(k) { return k.ground() + (k.H - k.ground()) * 0.16 }
+  function tableBottom(k) { return k.H - K.tileRow(k.H) * 0.28 }
+
+  function thingR(k) {
+    return clamp(Math.min(k.W * 0.058, (tableBottom(k) - tableTop(k)) * 0.26), 26, 62)
+  }
+
+  /**
+   * Where each thing lies on the table.
+   *
+   * Two rows, and the count per row is worked out from how many there are, so
+   * four things are not strung out across the whole table and eight do not
+   * pile up. The left fifth is left clear for the man holding the magnet.
+   */
+  function spot(k, i, n) {
+    var r = thingR(k)
+    var rows = n > 4 ? 2 : 1
+    var per = Math.ceil(n / rows)
+    var row = Math.floor(i / per)
+    var at = i - row * per
+    var count = Math.min(per, n - row * per)
+    var left = k.W * 0.26
+    var right = k.W * 0.94
+    var span = Math.min(right - left, count * r * 2.9)
+    var x0 = (left + right) / 2 - span / 2
+    var step = count > 1 ? span / (count - 1) : 0
+    var top = tableTop(k) + r * 1.1
+    var bottom = tableBottom(k) - r * 1.0
+    return {
+      x: x0 + at * step,
+      y: rows === 1 ? (top + bottom) / 2 : top + row * (bottom - top)
+    }
+  }
+
+  function thingAt(k, x, y) {
+    var n = k.own.set.length
+    var r = thingR(k)
+    for (var i = 0; i < n; i++) {
+      var p = spot(k, i, n)
+      /* Generous, because a thumb aimed at a paper clip lands near it. */
+      if (Math.hypot(p.x - x, p.y - y) <= r * 1.25) return i
+    }
+    return -1
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  AnanseKit.run({
+    title: 'Magnet Hunt',
+    overTitle: 'Flat battery!',
+    scene: 'room',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'tests',
+    button: true,
+    buttonLabel: 'Test it!',
+    restMood: 'scheming',
+    hud: function (k) {
+      return [
+        { label: 'tests', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      /* Four things at first, then six, then eight. Never more: past eight the
+         tap targets are smaller than a thumb on a phone. */
+      var n = k.round < 3 ? 4 : k.round < 8 ? 6 : 8
+      var iron = THINGS.filter(magnetic)
+      var other = THINGS.filter(function (t) { return !magnetic(t) })
+      shuffle(iron)
+      shuffle(other)
+      /* Always at least one of each, so "all of them" and "none of them" are
+         never the answer and a child cannot get through on a hunch. */
+      var want = randInt(1, n - 1)
+      var set = iron.slice(0, want).concat(other.slice(0, n - want))
+      shuffle(set)
+
+      k.own.set = set
+      k.own.chosen = []
+      k.own.sweep = -1
+      k.own.flew = []
+      for (var i = 0; i < set.length; i++) { k.own.chosen.push(false); k.own.flew.push(0) }
+
+      if (k.own.coins === undefined) k.own.coins = 0
+      if (k.round === 0) k.own.coins = 0
+
+      k.say(LINES.ask)
+      k.him.setMood('scheming')
+    },
+
+    ask: function (k) {
+      if (!k.own.set) return null
+      if (k.phase === 'won') return { head: 'Only iron and ', num: 'steel', tail: '!' }
+      return { head: 'Which ones will the magnet ', num: 'pick up', tail: '?' }
+    },
+
+    /* At least one chosen. Choosing none is not an answer, it is not having
+       started, and the button says so by staying dim. */
+    ready: function (k) {
+      for (var i = 0; i < k.own.chosen.length; i++) if (k.own.chosen[i]) return true
+      return false
+    },
+    onEmpty: function (k) { k.say(LINES.empty) },
+
+    /**
+     * Every choice against every material, right now.
+     *
+     * Exactly right: no magnetic thing left out and nothing extra put in. The
+     * truth comes from `magnetic(thing)` reading the material, so there is no
+     * answer stored anywhere to go stale.
+     */
+    judge: function (k) {
+      for (var i = 0; i < k.own.set.length; i++) {
+        if (k.own.chosen[i] !== magnetic(k.own.set[i])) return false
+      }
+      return true
+    },
+
+    down: function (k, x, y) {
+      if (k.own.sweep >= 0) return false
+      var i = thingAt(k, x, y)
+      if (i < 0) return false
+      k.own.chosen[i] = !k.own.chosen[i]
+      k.sound.play(k.own.chosen[i] ? 'lift' : 'poke')
+      return true
+    },
+
+    onWin: function (k) {
+      k.own.sweep = 0
+      k.own.coins += 1
+      if (isBig(k.round)) { k.own.coins += 10; k.say(LINES.big) }
+      else k.say(pick(LINES.right))
+    },
+
+    /**
+     * The sweep runs on a miss too.
+     *
+     * Being told you were wrong teaches that you were wrong. Watching the nail
+     * leap and the coin sit still teaches which things are magnetic, and that
+     * is the only reason this game exists, so it must happen either way.
+     */
+    onMiss: function (k) {
+      k.own.sweep = 0
+      var said = null
+      for (var i = 0; i < k.own.set.length && !said; i++) {
+        if (k.own.chosen[i] !== magnetic(k.own.set[i])) said = k.own.set[i]
+      }
+      k.say(said ? because(said) : 'Watch what sticks.')
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      if (!k.own.set) return
+      if (k.own.sweep < 0) return
+      k.own.sweep = Math.min(1, k.own.sweep + dt * 0.7)
+      /* Each magnetic thing lets go as the magnet passes over it, so they leap
+         one after another rather than all at once. */
+      var r = thingR(k)
+      for (var i = 0; i < k.own.set.length; i++) {
+        if (!magnetic(k.own.set[i])) continue
+        var p = spot(k, i, k.own.set.length)
+        var when = clamp((p.x - k.W * 0.2) / (k.W * 0.8), 0, 1)
+        if (k.own.sweep > when && k.own.flew[i] < 1) {
+          if (k.own.flew[i] === 0) {
+            k.sound.play('thud')
+            k.puff(p.x, p.y, 4, 'rgba(255,220,120,0.7)')
+          }
+          k.own.flew[i] = Math.min(1, k.own.flew[i] + dt * 3.2)
+        }
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var set = k.own.set
+      var n = set.length
+      var r = thingR(k)
+      FONT_CACHE = k.FONT
+
+      /* The table. */
+      var tt = tableTop(k)
+      var tb = tableBottom(k)
+      ctx.beginPath()
+      ctx.roundRect(k.W * 0.04, tt, k.W * 0.92, tb - tt, Math.min(24, k.W * 0.02))
+      K.inkedOn(ctx, '#c99457', K.LINE, 4)
+      ctx.fillStyle = 'rgba(120,80,36,0.22)'
+      ctx.fillRect(k.W * 0.04, tt, k.W * 0.92, Math.max(5, k.H * 0.012))
+
+      /* The magnet's path across the table, once it is switched on. */
+      var magX = k.W * 0.16 + k.own.sweep * k.W * 0.82
+      var magY = tt - r * 0.9
+
+      for (var i = 0; i < n; i++) {
+        var p = spot(k, i, n)
+        var flew = k.own.flew[i]
+        /* Things that jumped hang under the magnet, so where they ended up is
+           the record of what the magnet did. */
+        var px = p.x + (magX - p.x) * flew
+        var py = p.y + (magY + r * 0.55 - p.y) * flew
+
+        ctx.save()
+        ctx.globalAlpha = 0.16 * (1 - flew)
+        ctx.fillStyle = '#6b4a22'
+        ctx.beginPath()
+        ctx.ellipse(p.x, p.y + r * 0.62, r * 0.5, r * 0.13, 0, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+
+        /* The ring that says chosen. It stays up through the sweep, so the
+           child can see their own prediction against what actually happened,
+           which is the entire point of predicting first. */
+        if (k.own.chosen[i]) {
+          ctx.save()
+          ctx.translate(px, py)
+          ctx.rotate(k.now * 0.0009)
+          ctx.strokeStyle = k.own.sweep < 0 ? '#ffd93b'
+            : (magnetic(set[i]) ? '#23b862' : '#e0483a')
+          ctx.lineWidth = Math.max(3, r * 0.12)
+          ctx.setLineDash([r * 0.34, r * 0.26])
+          ctx.beginPath()
+          ctx.arc(0, 0, r * 0.88, 0, Math.PI * 2)
+          ctx.stroke()
+          ctx.restore()
+        } else if (k.own.sweep >= 0 && magnetic(set[i])) {
+          /* One they missed. Marked once the truth is out, not before. */
+          ctx.save()
+          ctx.strokeStyle = '#e0483a'
+          ctx.lineWidth = Math.max(3, r * 0.1)
+          ctx.setLineDash([r * 0.2, r * 0.2])
+          ctx.beginPath()
+          ctx.arc(px, py, r * 0.88, 0, Math.PI * 2)
+          ctx.stroke()
+          ctx.restore()
+        }
+
+        ctx.save()
+        ctx.translate(px, py)
+        if (flew > 0) ctx.rotate(Math.sin(k.now * 0.01) * 0.12 * flew)
+        set[i].draw(ctx, r)
+        ctx.restore()
+      }
+
+      /* The magnet, held out in front of him. */
+      if (k.own.sweep >= 0) {
+        drawMagnet(ctx, magX, magY, r * 1.3, 0)
+      }
+
+      /* Him, at the left end of the table, clear of everything on it. */
+      var hr = clamp(Math.min(k.W * 0.055, k.H * 0.085), 28, 60)
+      var feet = tb - hr * 0.2
+      k.him.draw(k.W * 0.11, feet - hr * 1.3, hr, feet)
+      if (k.own.sweep < 0) {
+        drawMagnet(ctx, k.W * 0.11 + hr * 1.25, feet - hr * 1.5, hr * 0.85, 0.5)
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.set) return { set: null }
+      var n = k.own.set.length
+      return {
+        things: k.own.set.map(function (t, i) {
+          var p = spot(k, i, n)
+          return {
+            name: t.name, of: t.of, magnetic: magnetic(t),
+            chosen: k.own.chosen[i],
+            x: Math.round(p.x), y: Math.round(p.y)
+          }
+        }),
+        sweep: Math.round(k.own.sweep * 100) / 100,
+        coins: k.own.coins,
+        button: (function () {
+          var b = k.buttonRect()
+          return { x: Math.round(b.x + b.w / 2), y: Math.round(b.y + b.h / 2) }
+        }())
+      }
+    }
+  })
+
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1))
+      var t = a[i]; a[i] = a[j]; a[j] = t
+    }
+    return a
+  }
+}())
+</script>
+</body>
+</html>

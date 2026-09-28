@@ -10,6 +10,7 @@ import {
   WelcomeScreen, WelcomeSkeleton, NoContextScreen, ContextErrorScreen,
 } from '../components/learner/Welcome'
 import { Prose, Diagram, InlineCheck } from '../components/learner/Teaching'
+import { StepPicture, StepClip } from '../components/learner/StepMedia'
 import { continueLearning, nextLesson, type Waypoint } from '../lib/education/journey'
 import { resolveLearnerContext, type LearnerContext } from '../lib/education/context'
 import {
@@ -19,6 +20,7 @@ import {
 } from '../lib/education/navigator'
 import {
   openLesson, recordStep, completeLesson, restartLesson,
+  stepDiagram, stepImage, stepVideo,
   type OpenLesson,
 } from '../lib/education/lesson'
 import {
@@ -959,9 +961,43 @@ export default function LearnerApp() {
                             ? <Prose text={lesson.steps[step].body} />
                             : <p className="nb-say">This step has no content yet.</p>}
 
-                          <Diagram name={
-                            (lesson.steps[step].payload as { diagram?: string })?.diagram
-                          } />
+                          {/* The tutor's own drawing, first. It is real text in
+                              real DOM, so anything a learner must READ is here
+                              or in the prose above, never in the generated
+                              picture below. */}
+                          <Diagram name={stepDiagram(lesson.steps[step])} />
+
+                          {/* Then the media the step asks for, if any. Both read
+                              their brief out of `payload` and both render
+                              nothing when they have nothing good to show, which
+                              is why they sit after the teaching rather than
+                              around it: on a deployment with no renderer, or a
+                              connection that drops the clip, everything above
+                              this point is the lesson and it is complete. */}
+                          {(() => {
+                            const image = stepImage(lesson.steps[step])
+                            const clip = stepVideo(lesson.steps[step])
+                            return (
+                              <>
+                                {image && (
+                                  <StepPicture
+                                    /* The prompt is in the key so a lesson
+                                       re-generated in place remounts this
+                                       rather than keeping the old picture:
+                                       that is what lets StepPicture hold its
+                                       state with no reset inside its effect. */
+                                    key={`${lesson.steps[step].id}-img-${image.prompt}`}
+                                    image={image}
+                                    stepId={lesson.steps[step].id} />
+                                )}
+                                {clip && (
+                                  <StepClip
+                                    key={`${lesson.steps[step].id}-vid`}
+                                    video={clip} />
+                                )}
+                              </>
+                            )
+                          })()}
 
                           {/* A check inside the lesson, drawn from the very
                               objective this lesson teaches, so the question is

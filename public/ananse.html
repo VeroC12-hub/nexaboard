@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ananse</title>
+<!--
+  Ananse on his own, with no game around him.
+
+  ── Why this page still exists ───────────────────────────────────────────────
+
+  It was built to answer one question before anything was built on top of him:
+  will children warm to this character. They did. It stays because it is now
+  the quickest way to check him after a change without loading a game to do it,
+  and the quickest way to show somebody who he is.
+
+  The character himself lives in `ananse/rig.js`. Nothing about him is on this
+  page, deliberately: one character drawn in two places is two characters, and
+  children spot that faster than adults do.
+-->
+<style>
+  :root {
+    --ink: #2b1c0e;
+    --paper: #fff3dc;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: ui-rounded, 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /**
+   * The canvas is positioned, not flexed.
+   *
+   * As a flex child it had no CSS height, so its layout height came from its
+   * `height` attribute, which the code sets from its own measured height. That
+   * is a loop: each resize made it taller, and it grew until the controls were
+   * pushed off the bottom of the screen.
+   */
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: pointer;
+  }
+  #bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+  }
+  button {
+    font: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    background: #ffffff;
+    border: 2px solid rgba(43, 28, 14, 0.15);
+    border-radius: 999px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: transform .12s ease, background .12s ease;
+  }
+  button:hover { background: #ffe9bd; }
+  button:active { transform: scale(.94); }
+  button.on { background: #f2a83c; border-color: #b9741a; }
+  #hint {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    opacity: .5;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+  <div id="hint">Tap him. Move around. He is watching you.</div>
+  <canvas id="stage"></canvas>
+  <div id="bar"></div>
+
+<script src="ananse/rig.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var canvas = document.getElementById('stage')
+  var ctx = canvas.getContext('2d')
+  var bar = document.getElementById('bar')
+  var him = new Ananse(ctx)
+  var W = 0, H = 0, last = 0
+
+  var BUTTONS = [
+    ['hello', 'Hello'],
+    ['happy', 'Happy'],
+    ['scheming', 'Scheming'],
+    ['hungry', 'Hungry'],
+    ['caught', 'Caught!'],
+    ['watching', 'Watching'],
+    ['sleepy', 'Sleepy'],
+  ]
+
+  function paintButtons() {
+    for (var i = 0; i < bar.children.length; i++) {
+      bar.children[i].className = bar.children[i].dataset.mood === him.mood ? 'on' : ''
+    }
+  }
+
+  BUTTONS.forEach(function (b) {
+    var el = document.createElement('button')
+    el.textContent = b[1]
+    el.dataset.mood = b[0]
+    el.addEventListener('click', function () { him.setMood(b[0]); paintButtons() })
+    bar.appendChild(el)
+  })
+
+  function fit() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2)
+    W = canvas.clientWidth
+    H = canvas.clientHeight
+    canvas.width = Math.round(W * dpr)
+    canvas.height = Math.round(H * dpr)
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    him.look(W / 2, H * 0.3)
+  }
+
+  function frame(t) {
+    requestAnimationFrame(frame)
+    var dt = last ? Math.min((t - last) / 1000, 0.05) : 0.016
+    last = t
+
+    him.step(dt)
+    ctx.clearRect(0, 0, W, H)
+    var R = Math.min(W * 0.17, H * 0.19)
+    him.draw(W / 2, H * 0.52, R, H * 0.52 + R * 1.5)
+  }
+
+  canvas.addEventListener('pointermove', function (e) { him.look(e.clientX, e.clientY) })
+  canvas.addEventListener('pointerdown', function (e) {
+    him.look(e.clientX, e.clientY)
+    him.poke()
+  })
+
+  window.addEventListener('resize', fit)
+  fit()
+  paintButtons()
+  requestAnimationFrame(frame)
+}())
+</script>
+</body>
+</html>

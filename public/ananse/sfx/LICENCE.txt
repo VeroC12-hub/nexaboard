@@ -1,0 +1,25 @@
+Sound effects in this folder come from Kenney (kenney.nl).
+
+  Licence: Creative Commons Zero (CC0 1.0)
+           http://creativecommons.org/publicdomain/zero/1.0/
+  Packs:   Interface Sounds (11-02-2020), Impact Sounds (2019)
+  Source:  https://kenney.nl/assets/interface-sounds
+           https://kenney.nl/assets/impact-sounds
+
+CC0 places the work in the public domain: free in personal, educational and
+commercial projects, with no restriction and no attribution required. Kenney
+asks for credit voluntarily, so this file exists.
+
+Converted from the packs' .ogg originals to mono 64 kbit MP3, because Safari
+only gained Ogg support recently and this has to play on the oldest phone in
+the classroom.
+
+  lift   pluck_001            picking a mango up
+  thud   impactSoft_medium    a mango landing in the basket
+  win    confirmation_001     the basket was right
+  oops   question_002         the basket was wrong. Deliberately not `error`:
+                              a harsh buzzer at a four year old who is already
+                              struggling teaches them to stop playing.
+  steal  scratch_003          Ananse taking one back
+  poke   toggle_001           tapping him
+  cover  drop_003             the cloth going over

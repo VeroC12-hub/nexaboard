@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sentence Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Sentence Builder. Word cards, put in order on the board.
+
+  ── Why the child builds and does not choose ─────────────────────────────────
+
+  The easy version of this shows two sentences and asks which one is right.
+  That can be won by noticing which one sounds odd, and a child can do it
+  without ever deciding where a word belongs. Here there is nothing to choose
+  between: there is a heap of words and an empty line, and every card has to be
+  put somewhere by someone who has decided where it goes.
+
+  ── Why the capital letter and the full stop stay on the cards ───────────────
+
+  This is the whole lesson and it is why the cards are not stripped down to
+  bare words. "The" with its capital can only be the first card. "big." with
+  its full stop can only be the last. A question mark says the sentence is a
+  question before a single word has been read, which changes what the middle is
+  allowed to be.
+
+  So the punctuation is not decoration carried along for correctness: it is the
+  clue. A child who works out that the capital goes first has learned what a
+  capital is for, which is a better lesson than word order and comes free with
+  it. It also means the two ends of every sentence are solvable by anyone, and
+  a child who cannot read the middle still gets a foothold.
+
+  ── Why the sentence is not read out at the start ────────────────────────────
+
+  Because it would be the answer. Spelling Bee has to speak its word, since the
+  word is the question. Here the words are already on the table and hearing
+  them in order is the entire puzzle handed over. The sentence is only spoken
+  once it is finished or once it has been missed, which is the moment it stops
+  being the answer and starts being the thing that was learned.
+
+  ── Why the pool closes up and the sentence line does not ────────────────────
+
+  Cards are different widths, so a pool that kept every empty gap would waste
+  most of a row on holes of the wrong shape and push the sentence off the
+  screen. The line is different: it has to read as a sentence, so it closes up
+  too, but from the left, in reading order, which is where the eye already is.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #6b4a22;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, pick = K.pick
+
+  /* ── the sentences ───────────────────────────────────────────────────────── */
+
+  /**
+   * Three and four word sentences.
+   *
+   * Short enough that the two clues, the capital and the full stop, pin down
+   * half of the whole puzzle. At three words a child who has understood the
+   * punctuation has already finished, which is exactly the right first
+   * experience of it.
+   */
+  var SHORT = [
+    'The dog is big.',
+    'I like kenkey.',
+    'My name is Ama.',
+    'The sun is hot.',
+    'We went to school.',
+    'Kofi has a ball.',
+    'The rice is ready.',
+    'Mother is at home.',
+    'I can read.',
+    'The goat ran away.'
+  ]
+
+  /**
+   * Five and six words, and the first questions.
+   *
+   * A question mark is worth meeting early because it tells the child
+   * something no other card can: that this sentence starts with a question
+   * word. "Where", "Do", "Who", "Are" and "Can" all sit at the front, and once
+   * that is noticed the question mark and the capital point at each other.
+   */
+  var MIDDLE = [
+    'Where is my school bag?',
+    'The market is very busy today.',
+    'Do you like fried rice?',
+    'We drink water from the borehole.',
+    'My father drives a trotro.',
+    'Who is knocking on the door?',
+    'She is wearing a kente cloth.',
+    'The harmattan wind is very cold.',
+    'Can I have some water please?',
+    'We play football after school.',
+    'The teacher wrote on the board.',
+    'Grandmother is cooking banku tonight.',
+    'Are we going to Accra today?'
+  ]
+
+  /**
+   * Seven words and up, each with a connective in it.
+   *
+   * "because", "when", "so", "before", "although". These are the words that
+   * join two ideas, and they are the reason a long sentence is not just a
+   * longer short one: the card cannot go first and cannot go last, and the
+   * words on either side of it have to make sense as two halves. That is the
+   * step from writing sentences to writing paragraphs.
+   */
+  var LONG = [
+    'We went to the market because it was Saturday.',
+    'I ate all my food because I was hungry.',
+    'The children ran inside when the rain started.',
+    'My sister sells oranges at the market every morning.',
+    'He could not sleep because the night was hot.',
+    'We fetch water from the borehole before we go to school.',
+    'She wears her kente cloth when there is a festival.',
+    'The trotro was full so we waited for another one.',
+    'I like harmattan mornings although they are very cold.'
+  ]
+
+  /** Every tenth sentence is a prize sentence, and it chalks a star up. */
+  function isPrize(round) { return round > 0 && round % 10 === 9 }
+
+  /**
+   * One round's worth of sentence.
+   *
+   * The cards are the sentence split on its spaces and nothing else, so each
+   * card keeps whatever punctuation was attached to it. Shuffling is the only
+   * thing done to them.
+   */
+  function makeSentence(round, seen) {
+    var bank = round < 4 ? SHORT : round < 10 ? MIDDLE : LONG
+    var fresh = bank.filter(function (s) { return seen.indexOf(s) < 0 })
+    var text = pick(fresh.length ? fresh : bank)
+
+    var words = text.split(' ')
+    var cards = words.slice()
+    cards.sort(function () { return Math.random() - 0.5 })
+    /* A shuffle that happens to come out in order is not a puzzle. One swap
+       is enough to break it and cannot itself produce the answer. */
+    if (cards.join(' ') === text && cards.length > 1) {
+      var swap = cards[0]
+      cards[0] = cards[cards.length - 1]
+      cards[cards.length - 1] = swap
+    }
+    return { text: text, cards: cards }
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  function playTop(k) { return k.tallyY() + k.H * 0.02 }
+  function playBottom(k) { return k.H - k.bandH() }
+  function playH(k) { return playBottom(k) - playTop(k) }
+
+  /**
+   * The two side columns: he stands in the left one, the books sit in the
+   * right one, and the cards never reach into either.
+   */
+  function sideW(W, H) { return clamp(Math.min(W * 0.085, H * 0.15), 50, 110) }
+  function boxW(k) { return k.W - sideW(k.W, k.H) * 2 }
+
+  /**
+   * The height of one row of cards.
+   *
+   * ── Why it is a third of the space and not a half ─────────────────────────
+   *
+   * The sentence line may take two rows and so may the pool, but never both at
+   * once. If every card together fits on two rows, then splitting them into
+   * two groups can only ever cost one more row: a group needing two rows is
+   * wider than the box, and two such groups would be wider than two boxes,
+   * which the fitting rule below forbids. So three rows is the true worst
+   * case, the line grows down from the board and the pool grows up from the
+   * floor, and they cannot meet.
+   */
+  function rowH(k) {
+    return clamp(Math.min(playH(k) / 3.3, k.W * 0.105), 46, 124)
+  }
+  function cardH(k) { return rowH(k) * 0.8 }
+
+  /** The blackboard, always two rows tall so it never jumps as cards land. */
+  function boardRect(k) {
+    var pad = rowH(k) * 0.18
+    return {
+      x: sideW(k.W, k.H) - pad, y: playTop(k) - pad * 0.5,
+      w: boxW(k) + pad * 2, h: rowH(k) * 2.08 + pad
+    }
+  }
+
+  /**
+   * Where every card is, this frame.
+   *
+   * ── Why the type size is solved rather than chosen ────────────────────────
+   *
+   * "We fetch water from the borehole before we go to school." is eleven cards
+   * and "I can read." is three. One type size cannot serve both, and a size
+   * that fits the long one would make the short one look like small print. So
+   * the size starts generous and is shrunk until two things are true: every
+   * card together fits in one and seven tenths of a row, and no single card is
+   * wider than about a quarter of one. Those two facts are what make the three
+   * row guarantee above hold, and they are also what stops a long word running
+   * off the edge of its card.
+   */
+  function layout(k) {
+    var q = k.own.q
+    var line = k.own.line
+    var key = Math.round(k.W) + 'x' + Math.round(k.H) + '|' + q.text + '|' + line.join(',')
+    if (k.own.lay && k.own.lay.key === key) return k.own.lay
+
+    var ctx = k.ctx
+    var bw = boxW(k)
+    var ch = cardH(k)
+    var n = q.cards.length
+    var fs = ch * 0.44
+    var floor = ch * 0.22
+    var widths = []
+    var i
+
+    function measure() {
+      ctx.save()
+      ctx.font = '600 ' + Math.round(fs) + 'px ' + k.FONT
+      widths.length = 0
+      var max = 0, total = 0
+      for (i = 0; i < n; i++) {
+        var w = Math.max(ch * 1.15, fs * 2.4, ctx.measureText(q.cards[i]).width + fs * 0.9)
+        widths.push(w)
+        if (w > max) max = w
+        total += w + fs * 0.4
+      }
+      ctx.restore()
+      return { max: max, total: total }
+    }
+
+    var m = measure()
+    while ((m.total > bw * 1.7 || m.max > bw * 0.28) && fs > floor) {
+      fs *= 0.94
+      m = measure()
+    }
+    var gap = fs * 0.4
+
+    /** Greedy wrap: fill a row until the next card will not fit. */
+    function wrap(order) {
+      var rows = [], cur = [], curW = 0
+      for (var j = 0; j < order.length; j++) {
+        var idx = order[j]
+        var w = widths[idx]
+        var add = cur.length ? gap + w : w
+        if (cur.length && curW + add > bw) {
+          rows.push({ items: cur, w: curW })
+          cur = []
+          curW = 0
+          add = w
+        }
+        cur.push(idx)
+        curW += add
+      }
+      if (cur.length) rows.push({ items: cur, w: curW })
+      return rows
+    }
+
+    var poolOrder = []
+    for (i = 0; i < n; i++) if (line.indexOf(i) < 0) poolOrder.push(i)
+
+    var lineRows = wrap(line)
+    var poolRows = wrap(poolOrder)
+    var out = { key: key, fs: fs, h: ch, cards: [] }
+
+    function place(rows, rowY) {
+      for (var r = 0; r < rows.length; r++) {
+        var row = rows[r]
+        var x = k.W * 0.5 - row.w * 0.5
+        var y = rowY(r, rows.length)
+        for (var j = 0; j < row.items.length; j++) {
+          var idx = row.items[j]
+          out.cards[idx] = { x: x, y: y - ch * 0.5, w: widths[idx], h: ch }
+          x += widths[idx] + gap
+        }
+      }
+    }
+
+    /* The sentence hangs from the top of the board, the pool sits on the
+       floor. Neither is centred in what is left, because a row that moves when
+       another row changes length is a row a child has to find again. */
+    var top = boardRect(k).y + rowH(k) * 0.72
+    place(lineRows, function (r) { return top + r * rowH(k) * 1.04 })
+    place(poolRows, function (r, total) {
+      return playBottom(k) - rowH(k) * 0.45 - (total - 1 - r) * rowH(k) * 1.04
+    })
+
+    k.own.lay = out
+    return out
+  }
+
+  function inRect(r, px, py) {
+    /* A margin, because a thumb that lands just off a card meant for thumbs
+       should still count. */
+    return px >= r.x - 8 && px <= r.x + r.w + 8
+      && py >= r.y - 10 && py <= r.y + r.h + 10
+  }
+
+  /* ── the pieces ──────────────────────────────────────────────────────────── */
+
+  /**
+   * One word card.
+   *
+   * ── Why the lettering is dark on cream and not white on colour ────────────
+   *
+   * Everywhere else in this set a label is one short word or a numeral, and
+   * white on a saturated fill is the most legible thing there is at that size.
+   * A card here may say "borehole" at half that size on a phone, and white on
+   * orange loses its counters first. Dark ink on a pale card is what a word
+   * card actually looks like, and it survives being small.
+   */
+  function drawCard(ctx, r, text, font, fs, state) {
+    var face = '#f6ebcf'
+    var edge = '#c9a86a'
+    if (state === 'right') { face = '#8fe2ae'; edge = '#3f9a64' }
+    else if (state === 'wrong') { face = '#f5a89c'; edge = '#b85b4c' }
+
+    ctx.save()
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y + r.h * 0.1, r.w, r.h, r.h * 0.24)
+    ctx.fillStyle = edge
+    ctx.fill()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 3.5
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y, r.w, r.h, r.h * 0.24)
+    K.inkedOn(ctx, face, K.LINE, 3.5)
+
+    var size = fs
+    ctx.font = '600 ' + Math.round(size) + 'px ' + font
+    /* Shrunk to fit its own card, on top of the solve above, because a card
+       forced to its minimum width by a neighbour may still be too narrow. */
+    while (ctx.measureText(text).width > r.w * 0.86 && size > fs * 0.5) {
+      size *= 0.92
+      ctx.font = '600 ' + Math.round(size) + 'px ' + font
+    }
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillStyle = '#3a2410'
+    ctx.fillText(text, r.x + r.w * 0.5, r.y + r.h * 0.54)
+    ctx.restore()
+  }
+
+  /** The place a card is waiting to be put back into. */
+  function drawHole(ctx, r) {
+    ctx.save()
+    ctx.globalAlpha = 0.26
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y, r.w, r.h, r.h * 0.24)
+    ctx.fillStyle = '#123322'
+    ctx.fill()
+    ctx.restore()
+  }
+
+  /**
+   * The blackboard the sentence is built on.
+   *
+   * Not scenery: it is the reason the line reads as a sentence being written
+   * rather than as four cards lying next to each other. The chalk rule under
+   * the top row is the line a child writes on, and the wooden frame keeps the
+   * dark green from being read as a hole in the wall.
+   */
+  function drawBoard(ctx, b, stars) {
+    ctx.save()
+    ctx.beginPath()
+    ctx.roundRect(b.x, b.y, b.w, b.h, Math.min(b.h * 0.1, 18))
+    K.inkedOn(ctx, '#8a5a2b', K.LINE, 4)
+    var in0 = Math.min(b.h * 0.07, 12)
+    ctx.beginPath()
+    ctx.roundRect(b.x + in0, b.y + in0, b.w - in0 * 2, b.h - in0 * 2,
+      Math.min(b.h * 0.06, 10))
+    K.inkedOn(ctx, '#2f5c42', K.LINE, 3)
+
+    /* Chalk dust along the bottom, which is what says a board has been used. */
+    ctx.save()
+    ctx.beginPath()
+    ctx.roundRect(b.x + in0, b.y + in0, b.w - in0 * 2, b.h - in0 * 2, 10)
+    ctx.clip()
+    ctx.globalAlpha = 0.16
+    ctx.fillStyle = '#ffffff'
+    ctx.fillRect(b.x, b.y + b.h - in0 * 2.4, b.w, in0 * 1.6)
+    ctx.restore()
+
+    /* Stars chalked in the top corner of the board, one per prize sentence.
+       The corner nearest the frame, because the middle belongs to the words. */
+    var shown = Math.min(stars || 0, 6)
+    var sr = Math.min(b.h * 0.075, 13)
+    for (var s = 0; s < shown; s++) {
+      ctx.save()
+      ctx.translate(b.x + in0 + sr * 1.6 + s * sr * 2.5, b.y + in0 + sr * 1.5)
+      ctx.beginPath()
+      K.SHAPES.star(ctx, sr)
+      K.inkedOn(ctx, '#f2d024', K.LINE, 2)
+      ctx.restore()
+    }
+    ctx.restore()
+  }
+
+  /** Chalk lettering, wrapped and shrunk to sit inside the board. */
+  function chalk(ctx, text, b, font) {
+    var size = b.h * 0.3
+    var maxW = b.w * 0.84
+    var words = text.split(' ')
+    var lines, i, n
+    for (n = 0; n < 12; n++) {
+      ctx.font = '600 ' + Math.round(size) + 'px ' + font
+      lines = ['']
+      for (i = 0; i < words.length; i++) {
+        var probe = lines[lines.length - 1] ? lines[lines.length - 1] + ' ' + words[i] : words[i]
+        if (ctx.measureText(probe).width > maxW && lines[lines.length - 1]) lines.push(words[i])
+        else lines[lines.length - 1] = probe
+      }
+      if (lines.length <= 2) break
+      size *= 0.9
+    }
+    ctx.save()
+    ctx.font = '600 ' + Math.round(size) + 'px ' + font
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillStyle = '#f4f7ef'
+    var cy = b.y + b.h * 0.5 - (lines.length - 1) * size * 0.62
+    for (i = 0; i < lines.length; i++) {
+      ctx.fillText(lines[i], b.x + b.w * 0.5, cy + i * size * 1.24)
+    }
+    ctx.restore()
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    ask: 'Put the words in order.',
+    right: ['That is a sentence!', 'Well built!', 'Yes! Read it again.', 'Perfect order!'],
+    prize: 'A star on the board! Keep going!',
+    over: 'The chalk is finished. Let us start again!',
+    empty: 'Use every card first.',
+    poke: 'Put the words up, not me!'
+  }
+
+  AnanseKit.run({
+    title: 'Sentence Builder',
+    overTitle: 'Out of chalk!',
+    scene: 'room',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'sentences',
+    /* The child builds the answer card by card, so only a button can say
+       "I have finished" rather than "I am still going". */
+    button: true,
+    buttonLabel: 'Read it!',
+    restMood: 'watching',
+    hud: function (k) {
+      return [
+        { label: 'sentences', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      if (k.own.coins === undefined) {
+        k.own.coins = 0
+        k.own.stars = 0
+        k.own.seen = []
+      }
+      /* A run that ended and was tapped to start again. The kit puts back its
+         own score and lives; the board and the sentences already met are ours. */
+      if (k.round === 0) {
+        k.own.coins = 0
+        k.own.stars = 0
+        k.own.seen = []
+      }
+
+      var q = makeSentence(k.round, k.own.seen)
+      k.own.q = q
+      k.own.seen.push(q.text)
+      k.target = q.text
+      /* The indices of the cards standing on the line, in the order they were
+         put there. Nothing here records whether that order is right. */
+      k.own.line = []
+      k.own.reveal = false
+      k.own.lay = null
+
+      k.say(LINES.ask)
+      k.him.setMood('watching')
+    },
+
+    ask: function (k) {
+      if (!k.own.q) return null
+      if (k.phase === 'won') return { head: 'Yes! That is the sentence.', num: '', tail: '' }
+      if (k.own.reveal) return { head: 'Read it with me.', num: '', tail: '' }
+      /* The word count in the yellow slot: the one thing about the sentence
+         worth putting there, since the sentence itself is the answer. */
+      return { head: 'Make a sentence with ', num: k.own.q.cards.length, tail: ' words.' }
+    },
+
+    /** Every card used. Nothing about the order they are in. */
+    ready: function (k) {
+      return !!k.own.q && k.own.line.length === k.own.q.cards.length
+    },
+
+    /**
+     * Read the line left to right and see what sentence it makes.
+     *
+     * Joined with single spaces and compared with the sentence the cards were
+     * cut from, at this moment, off the board. No card knows its own place and
+     * no slot remembers what belongs in it.
+     */
+    judge: function (k) {
+      var q = k.own.q
+      if (k.own.line.length !== q.cards.length) return false
+      var built = []
+      for (var i = 0; i < k.own.line.length; i++) built.push(q.cards[k.own.line[i]])
+      return built.join(' ') === q.text
+    },
+
+    down: function (k, x, y) {
+      if (!k.own.q || k.own.reveal) return false
+      var lay = layout(k)
+      var i
+
+      /* A card already on the line goes back to the pool. Without a way back a
+         card put down early in the wrong place locks the sentence, and the
+         only escape is to commit an answer known to be wrong. */
+      for (i = 0; i < k.own.line.length; i++) {
+        var at = k.own.line[i]
+        if (inRect(lay.cards[at], x, y)) {
+          k.own.line.splice(i, 1)
+          k.own.lay = null
+          k.sound.play('thud')
+          return true
+        }
+      }
+
+      /* A card in the pool goes on the end of the line, so the sentence is
+         always built in reading order. */
+      for (i = 0; i < k.own.q.cards.length; i++) {
+        if (k.own.line.indexOf(i) >= 0) continue
+        if (!inRect(lay.cards[i], x, y)) continue
+        k.own.line.push(i)
+        k.own.lay = null
+        k.sound.play('lift')
+        return true
+      }
+      return false
+    },
+
+    onEmpty: function (k) { k.say(LINES.empty) },
+
+    onWin: function (k) {
+      k.own.coins += 1
+      /* Now it may be heard: the sentence has stopped being the answer. */
+      k.say(k.own.q.text)
+      if (isPrize(k.round)) {
+        k.own.coins += 10
+        k.own.stars += 1
+        var b = boardRect(k)
+        k.cheer(k.W * 0.5, b.y + b.h * 0.5)
+        setTimeout(function () { k.say(LINES.prize) }, 1400)
+      }
+    },
+
+    /**
+     * Clear the line and chalk the true sentence on the board.
+     *
+     * Spoken and written at once, because a sentence half heard and half read
+     * is the pair of skills this game is between. The miss is already
+     * recorded, so `step` takes the chalk off the moment the kit hands play
+     * back and the second try starts from an empty line rather than from a
+     * copying exercise.
+     */
+    onMiss: function (k) {
+      k.own.line = []
+      k.own.lay = null
+      k.own.reveal = true
+      k.say(k.own.q.text)
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k) {
+      if (k.phase === 'play' && k.own.reveal) {
+        k.own.reveal = false
+        k.own.lay = null
+      }
+    },
+
+    /**
+     * The floor, dressed, baked into the backdrop once per resize.
+     *
+     * A mat for the cards to be laid out on and a stack of books in the right
+     * column, which is the column the layout keeps empty. Both are there
+     * because a bare plank floor under a row of cards reads as nothing, and
+     * both sit where no card is ever placed.
+     */
+    props: function (k, g, W, H) {
+      var hy = K.groundY(H)
+      var side = sideW(W, H)
+
+      var cy = hy + (H - hy) * 0.66
+      var rx = W * 0.4
+      var ry = (H - hy) * 0.3
+      g.beginPath()
+      g.ellipse(W * 0.5, cy, rx, ry, 0, 0, Math.PI * 2)
+      K.inkedOn(g, '#3f8ec2', K.LINE, 4)
+      g.save()
+      g.beginPath()
+      g.ellipse(W * 0.5, cy, rx, ry, 0, 0, Math.PI * 2)
+      g.clip()
+      g.fillStyle = '#6fc0e8'
+      for (var b = -3; b <= 3; b++) {
+        g.fillRect(W * 0.5 - rx, cy + b * ry * 0.34 - ry * 0.05, rx * 2, ry * 0.11)
+      }
+      g.restore()
+
+      /* Books, stacked, in the right column. Three slabs with a lean on them,
+         because a stack drawn square reads as a box. */
+      var bw = side * 0.82
+      var bh = Math.max(9, side * 0.17)
+      var bx = W - side * 0.5
+      var by = hy + (H - hy) * 0.5
+      var tints = ['#d6543a', '#f2c33b', '#3f9ede']
+      for (var i = 0; i < 3; i++) {
+        g.save()
+        g.translate(bx, by - i * bh * 1.15)
+        g.rotate((i - 1) * 0.05)
+        g.beginPath()
+        g.roundRect(-bw * 0.5, -bh * 0.5, bw, bh, bh * 0.3)
+        K.inkedOn(g, tints[i], K.LINE, 3)
+        g.strokeStyle = 'rgba(255,255,255,0.55)'
+        g.lineWidth = 2
+        g.beginPath()
+        g.moveTo(-bw * 0.42, bh * 0.16)
+        g.lineTo(bw * 0.42, bh * 0.16)
+        g.stroke()
+        g.restore()
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var q = k.own.q
+      if (!q) return
+      var lay = layout(k)
+      var b = boardRect(k)
+      var i
+
+      drawBoard(ctx, b, k.own.stars)
+
+      if (k.own.reveal) {
+        chalk(ctx, q.text, b, k.FONT)
+      } else {
+        /* The cards on the line, then the holes they left, then the pool. */
+        for (i = 0; i < k.own.line.length; i++) {
+          var at = k.own.line[i]
+          drawCard(ctx, lay.cards[at], q.cards[at], k.FONT, lay.fs, 'idle')
+        }
+      }
+
+      for (i = 0; i < q.cards.length; i++) {
+        if (k.own.line.indexOf(i) >= 0) continue
+        var r = lay.cards[i]
+        var lift = Math.sin(k.now * 0.002 + i * 1.7) * r.h * 0.03
+        drawCard(ctx, { x: r.x, y: r.y + lift, w: r.w, h: r.h },
+          q.cards[i], k.FONT, lay.fs, 'idle')
+      }
+
+      /* An empty line needs somewhere to say "here". A dashed rule under the
+         board's first row, gone the moment the first card lands on it. */
+      if (!k.own.line.length && !k.own.reveal) {
+        ctx.save()
+        ctx.globalAlpha = 0.5 + Math.sin(k.now * 0.004) * 0.2
+        ctx.strokeStyle = '#f4f7ef'
+        ctx.lineWidth = Math.max(3, b.h * 0.025)
+        ctx.lineCap = 'round'
+        ctx.setLineDash([b.h * 0.1, b.h * 0.08])
+        ctx.beginPath()
+        ctx.moveTo(b.x + b.w * 0.14, b.y + rowH(k) * 1.16)
+        ctx.lineTo(b.x + b.w * 0.86, b.y + rowH(k) * 1.16)
+        ctx.stroke()
+        ctx.restore()
+      }
+
+      /**
+       * Him, standing on the floor in the left column.
+       *
+       * Beside the board and beside the cards, never over either, and with no
+       * card edge running across him: a line through a spider reads as a
+       * thread and he looks hung rather than stood.
+       */
+      var gy = k.ground() + (k.H - k.ground()) * 0.1
+      var hr = clamp(sideW(k.W, k.H) * 0.4, 20, 52)
+      k.him.draw(sideW(k.W, k.H) * 0.5, gy - hr * 1.3, hr, gy)
+    },
+
+    peek: function (k) {
+      if (!k.own.q) return { q: null }
+      var q = k.own.q
+      var lay = layout(k)
+      var built = []
+      for (var i = 0; i < k.own.line.length; i++) built.push(q.cards[k.own.line[i]])
+      var b = k.buttonRect()
+      return {
+        sentence: q.text,
+        built: built.join(' '),
+        reveal: !!k.own.reveal,
+        coins: k.own.coins,
+        stars: k.own.stars,
+        prize: isPrize(k.round),
+        cards: q.cards.map(function (w, j) {
+          var r = lay.cards[j]
+          return {
+            word: w,
+            where: k.own.line.indexOf(j) >= 0 ? 'line' : 'pool',
+            x: Math.round(r.x + r.w / 2), y: Math.round(r.y + r.h / 2)
+          }
+        }),
+        line: k.own.line.map(function (at) {
+          var r = lay.cards[at]
+          return {
+            word: q.cards[at],
+            x: Math.round(r.x + r.w / 2), y: Math.round(r.y + r.h / 2)
+          }
+        }),
+        button: { x: Math.round(b.x + b.w / 2), y: Math.round(b.y + b.h / 2) }
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

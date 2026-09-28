@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Letter Fishing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Letter Fishing. Recognising a letter, by catching it.
+
+  ── Why this is a drag and not a tap ─────────────────────────────────────────
+
+  Balloon Pop and Shape Hunt are both "tap the right one", and a third in a row
+  would start to feel like one game wearing three coats, which is the mistake
+  this whole rebuild exists to avoid.
+
+  Fishing should feel like fishing. Ananse holds the rod, the hook hangs off it
+  on a line, and the child pulls the hook onto the fish they want. It is a
+  slower, more deliberate action than a tap, and the deliberation is the point:
+  a letter is worth looking at twice.
+
+  ── Why the fish swim slowly ─────────────────────────────────────────────────
+
+  Fast fish make a reflex game, and this is a reading game. They drift at about
+  a fifth of the speed that would be exciting, because the difficulty has to
+  come from telling b from d, never from aiming.
+
+  ── Why the wrong letters look alike ─────────────────────────────────────────
+
+  Offering B against X is not a test of anything: they look nothing alike.
+  Offering B against D and P means the child has to read, which is the skill.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: function (l) { return 'Catch the letter ' + l + '!' },
+    right: ['Got it! What a catch!', 'You caught it!', 'That is the one!'],
+    wrong: function (l) { return 'That was not ' + l + '. It swam away!' },
+    lift: 'Which fish is it?',
+    tickle: 'Hee hee! I am fishing!',
+    over: 'What a catch! Thank you, my friend!',
+  }
+
+  var TINTS = [
+    ['#ffb04a', '#d97016'], ['#6fd0f5', '#1f7fc4'], ['#ff8fa8', '#d13a5e'],
+    ['#9be86a', '#3f9e1f'], ['#d7aaff', '#7a35c9'],
+  ]
+
+  /**
+   * Letters that are easy to confuse, so the distractors are real ones.
+   *
+   * These are the pairs children actually mix up at this age, and a game whose
+   * wrong answers are obviously wrong teaches nothing. Anything not listed
+   * falls back to neighbours in the alphabet, which is still harder than a
+   * random draw.
+   */
+  var CONFUSED = {
+    B: ['D', 'P', 'R'], D: ['B', 'P', 'O'], P: ['B', 'D', 'R'], R: ['P', 'B', 'K'],
+    M: ['W', 'N', 'H'], W: ['M', 'V', 'N'], N: ['M', 'H', 'W'], H: ['N', 'K', 'M'],
+    C: ['G', 'O', 'Q'], G: ['C', 'O', 'Q'], O: ['Q', 'C', 'G'], Q: ['O', 'G', 'C'],
+    E: ['F', 'B', 'L'], F: ['E', 'T', 'P'], I: ['J', 'L', 'T'], J: ['I', 'L', 'U'],
+    U: ['V', 'J', 'Y'], V: ['U', 'W', 'Y'], S: ['Z', 'G', 'C'], Z: ['S', 'N', 'X'],
+    K: ['X', 'H', 'R'], X: ['K', 'Y', 'Z'], Y: ['V', 'X', 'T'], T: ['I', 'F', 'Y'],
+    A: ['H', 'R', 'V'], L: ['I', 'J', 'T'],
+  }
+
+  /**
+   * Big fish.
+   *
+   * The letter on the side is the entire game, so the fish has to be large
+   * enough for that letter to be read across a room by somebody who is only
+   * just learning to read at all. At the first size the letters were about
+   * twenty five pixels and a B and a D were a guess rather than a decision.
+   */
+  function fishR(k) { return clamp(Math.min(k.W, k.H) * 0.098, 42, 92) }
+
+  /** Where Ananse sits with the rod, and where the rod tip is. */
+  function angler(k) {
+    var r = clamp(Math.min(k.W, k.H) * 0.085, 34, 70)
+    var x = r * 1.4
+    var y = k.ground() - r * 0.5
+    return { x: x, y: y, r: r, tipX: x + r * 2.6, tipY: y - r * 1.25 }
+  }
+
+  /* ── the fish ────────────────────────────────────────────────────────────── */
+
+  /**
+   * One fish, seen side on.
+   *
+   * The tail is the whole silhouette: an ellipse with an eye is a balloon. It
+   * flicks as the fish swims, because a rigid tail reads as a toy being pulled
+   * along on a string, and this one is supposed to be alive right up until it
+   * is caught.
+   */
+  function drawFish(ctx, f, r, t) {
+    ctx.save()
+    ctx.translate(f.x, f.y)
+    /* Facing the way it is going. Scaling by -1 would mirror the letter too, so
+       only the body is flipped and the letter is drawn upright afterwards. */
+    var dir = f.dir
+    ctx.save()
+    ctx.scale(dir, 1)
+    ctx.rotate(f.tilt)
+
+    var flick = Math.sin(t * 0.006 + f.phase) * 0.35
+
+    /* Tail. */
+    ctx.save()
+    ctx.translate(-r * 0.72, 0)
+    ctx.rotate(flick)
+    ctx.beginPath()
+    ctx.moveTo(0, 0)
+    ctx.lineTo(-r * 0.6, -r * 0.5)
+    ctx.quadraticCurveTo(-r * 0.4, 0, -r * 0.6, r * 0.5)
+    ctx.closePath()
+    K.inkedOn(ctx, f.tint[1], K.LINE, 3)
+    ctx.restore()
+
+    /* Top fin. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.2, -r * 0.42)
+    ctx.quadraticCurveTo(0, -r * 0.92, r * 0.3, -r * 0.36)
+    ctx.closePath()
+    K.inkedOn(ctx, f.tint[1], K.LINE, 3)
+
+    /* Body. */
+    var g = ctx.createRadialGradient(-r * 0.2, -r * 0.3, r * 0.08, 0, 0, r)
+    g.addColorStop(0, f.tint[0])
+    g.addColorStop(0.7, f.tint[1])
+    g.addColorStop(1, f.tint[1])
+    ctx.fillStyle = g
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.86, r * 0.56, 0, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 3.5
+    ctx.stroke()
+
+    /* Eye, right up at the leading end and high, so the letter panel behind it
+       has the whole flank to itself. When the panel was widened they grew into
+       each other and every fish looked like one enormous eye with a letter
+       inside it. */
+    ctx.beginPath()
+    ctx.arc(r * 0.56, -r * 0.2, r * 0.13, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffffff', K.LINE, 2)
+    ctx.beginPath()
+    ctx.arc(r * 0.6, -r * 0.2, r * 0.065, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+    ctx.restore()
+
+    /* The letter, upright whichever way the fish faces, on a pale panel so it
+       is legible on every body colour. */
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.16 * dir, r * 0.06, r * 0.38, r * 0.33, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, 'rgba(255,253,245,0.94)', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  AnanseKit.run({
+    title: 'Letter Fishing',
+    overTitle: 'What a catch!',
+    scene: 'pond',
+    rounds: 5,
+    /* Landing the hook on a fish is the whole answer. */
+    button: false,
+    restMood: 'hello',
+
+    begin: function (k) {
+      var r = fishR(k)
+      k.target = String.fromCharCode(65 + randInt(0, 25))
+
+      /* Three fish: the answer, plus two letters children actually confuse it
+         with. A wrong answer that looks nothing like the right one is not a
+         wrong answer, it is scenery. */
+      var others = (CONFUSED[k.target] || []).slice()
+      while (others.length < 2) {
+        var near = String.fromCharCode(65 + clamp(k.target.charCodeAt(0) - 65
+          + pick([-2, -1, 1, 2]), 0, 25))
+        if (near !== k.target && others.indexOf(near) < 0) others.push(near)
+      }
+      var letters = [k.target, others[0], others[1]]
+      letters.sort(function () { return Math.random() - 0.5 })
+
+      /* Spread down the pond so they never swim as a shoal, and each on its own
+         phase so their tails are never in step. */
+      var top = k.ground() + r * 1.3
+      var bottom = k.H - r * 1.4
+      k.own.fish = letters.map(function (letter, i) {
+        var dir = Math.random() < 0.5 ? 1 : -1
+        return {
+          letter: letter, tint: TINTS[(i + randInt(0, 4)) % TINTS.length],
+          x: rand(k.W * 0.3, k.W * 0.85),
+          y: top + (bottom - top) * ((i + 0.5) / letters.length) + rand(-r * 0.2, r * 0.2),
+          dir: dir,
+          speed: rand(16, 26),
+          phase: rand(0, Math.PI * 2),
+          tilt: 0,
+          caught: false, lift: 0,
+        }
+      })
+
+      var a = angler(k)
+      k.own.hook = { x: a.tipX, y: a.tipY + k.H * 0.16, held: false, home: null }
+      k.own.hook.home = { x: k.own.hook.x, y: k.own.hook.y }
+      k.own.hooked = null
+      k.say(LINES.ask(k.target))
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) {
+      if (!k.own.hook) return
+      var a = angler(k)
+      k.own.hook.home = { x: a.tipX, y: a.tipY + k.H * 0.16 }
+      if (!k.own.hook.held && !k.own.hooked) {
+        k.own.hook.x = k.own.hook.home.x
+        k.own.hook.y = k.own.hook.home.y
+      }
+    },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'Got it!' }
+      return { head: 'Catch the letter ', num: k.target, tail: '' }
+    },
+
+    /**
+     * Whichever fish took the hook, read now.
+     *
+     * No fish knows whether it is the right one and the target is not written
+     * onto any of them.
+     */
+    judge: function (k) {
+      return !!k.own.hooked && k.own.hooked.letter === k.target
+    },
+
+    onWin: function (k) {
+      k.cheer(k.own.hooked.x, k.own.hooked.y)
+      k.say(pick(LINES.right))
+    },
+    onMiss: function (k) {
+      k.say(LINES.wrong(k.target))
+      /* It wriggles off and swims on, so the pond is playable again. */
+      if (k.own.hooked) {
+        k.own.hooked.caught = false
+        k.own.hooked.lift = 0
+        k.own.hooked = null
+      }
+      k.own.hook.x = k.own.hook.home.x
+      k.own.hook.y = k.own.hook.home.y
+    },
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.tickle) },
+
+    down: function (k, x, y) {
+      var r = fishR(k)
+      var h = k.own.hook
+      /* Very generous: the hook is small and a child grabs at the line as much
+         as at the hook itself. */
+      if (Math.hypot(h.x - x, h.y - y) > r * 1.3) return false
+      h.held = true
+      k.sound.play('lift')
+      k.say(LINES.lift)
+      k.him.setMood('watching')
+      return true
+    },
+
+    move: function (k, x, y) {
+      if (!k.own.hook || !k.own.hook.held) return
+      k.own.hook.x = x
+      k.own.hook.y = y
+    },
+
+    up: function (k) {
+      var h = k.own.hook
+      if (!h || !h.held) return
+      h.held = false
+
+      var r = fishR(k)
+      for (var i = 0; i < k.own.fish.length; i++) {
+        var f = k.own.fish[i]
+        if (f.caught) continue
+        if (Math.hypot(f.x - h.x, f.y - h.y) > r * 1.15) continue
+        f.caught = true
+        k.own.hooked = f
+        k.sound.play('thud')
+        k.kick(4)
+        k.puff(f.x, f.y, 7, 'rgba(255,255,255,0.8)')
+        k.commit()
+        return
+      }
+      /* Nothing there. The line goes back out. */
+      h.x = h.home.x
+      h.y = h.home.y
+      if (k.phase === 'play') k.him.setMood('hello')
+    },
+
+    step: function (k, dt) {
+      if (!k.own.fish) return
+      var r = fishR(k)
+
+      for (var i = 0; i < k.own.fish.length; i++) {
+        var f = k.own.fish[i]
+        if (f.caught) {
+          /* Reeled up towards the rod, still wriggling. */
+          f.lift = Math.min(1, f.lift + dt * 1.6)
+          var a = angler(k)
+          f.x += (a.tipX - f.x) * Math.min(1, dt * 3)
+          f.y += (a.tipY - f.y) * Math.min(1, dt * 3)
+          f.tilt = Math.sin(k.now * 0.02) * 0.3
+          k.own.hook.x = f.x
+          k.own.hook.y = f.y - r * 0.5
+          continue
+        }
+        f.x += f.speed * f.dir * dt
+        /* Turn at the edges rather than wrapping, so a fish a child is looking
+           at never vanishes and reappears somewhere else. */
+        if (f.x > k.W - r * 1.2) { f.x = k.W - r * 1.2; f.dir = -1 }
+        if (f.x < k.W * 0.22) { f.x = k.W * 0.22; f.dir = 1 }
+        /* A slow rise and fall, so they are swimming rather than sliding. */
+        f.tilt = Math.sin(k.now * 0.0013 + f.phase) * 0.12
+        f.y += Math.sin(k.now * 0.0011 + f.phase) * 5 * dt
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var r = fishR(k)
+      var a = angler(k)
+
+      for (var i = 0; i < k.own.fish.length; i++) {
+        if (!k.own.fish[i].caught) drawFish(ctx, k.own.fish[i], r, k.now)
+      }
+
+      /* The rod, then the line, then the hook, then anything on it: the order
+         they would be in if you were holding it. */
+      ctx.strokeStyle = '#8a5a2b'
+      ctx.lineWidth = Math.max(4, r * 0.11)
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(a.x + a.r * 0.2, a.y - a.r * 0.2)
+      ctx.quadraticCurveTo(a.x + a.r * 1.6, a.y - a.r * 1.1, a.tipX, a.tipY)
+      ctx.stroke()
+
+      var h = k.own.hook
+      ctx.strokeStyle = 'rgba(255,255,255,0.75)'
+      ctx.lineWidth = Math.max(2, r * 0.045)
+      ctx.beginPath()
+      ctx.moveTo(a.tipX, a.tipY)
+      /* Slack, bowing towards the hook, rather than a straight taut line: a
+         straight line reads as a stick. */
+      ctx.quadraticCurveTo((a.tipX + h.x) / 2, (a.tipY + h.y) / 2 + r * 0.5, h.x, h.y)
+      ctx.stroke()
+
+      ctx.strokeStyle = '#c9ced6'
+      ctx.lineWidth = Math.max(3, r * 0.09)
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(h.x, h.y - r * 0.28)
+      ctx.lineTo(h.x, h.y)
+      ctx.arc(h.x - r * 0.12, h.y, r * 0.12, 0, Math.PI * 0.9)
+      ctx.stroke()
+
+      for (var j = 0; j < k.own.fish.length; j++) {
+        if (k.own.fish[j].caught) drawFish(ctx, k.own.fish[j], r, k.now)
+      }
+
+      /* The letters last, upright and over everything, because reading them is
+         the entire game. */
+      for (var m = 0; m < k.own.fish.length; m++) {
+        var f = k.own.fish[m]
+        /* Centred on the panel, which sits behind whichever way the fish is
+           facing. */
+        k.shout(f.letter, f.x - r * 0.16 * f.dir, f.y + r * 0.06, r * 0.56, '#2b3a1c', null)
+      }
+
+      k.him.draw(a.x, a.y, a.r, a.y + a.r * 1.1)
+    },
+
+    peek: function (k) {
+      if (!k.own.fish) return { fish: 0 }
+      return {
+        want: k.target,
+        hook: { x: Math.round(k.own.hook.x), y: Math.round(k.own.hook.y) },
+        fish: k.own.fish.map(function (f) {
+          return { l: f.letter, x: Math.round(f.x), y: Math.round(f.y), caught: f.caught }
+        }),
+        hooked: k.own.hooked ? k.own.hooked.letter : null,
+      }
+    },
+  })
+}())
+</script>
+</body>
+</html>

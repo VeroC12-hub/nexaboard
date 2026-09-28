@@ -40,8 +40,23 @@
  * is asked in the background, and its answer is kept for next time. Her diet
  * is a fact about her rather than about a topic, so a plan is per learner and
  * per subject and stays useful across topics.
+ *
+ * ── Where a plan is kept ────────────────────────────────────────────────────
+ *
+ * In `edu_learner_plan`, against her account, and mirrored into `localStorage`.
+ *
+ * The mirror is a cache and not the record. It is read first because it is
+ * synchronous and a session has to lay itself out now, and it is written on
+ * every load from the server so a second device catches up the first time she
+ * opens a topic on it.
+ *
+ * It used to be only `localStorage`, which meant a learner signing in on a
+ * school tablet met a platform that had forgotten how she learns and went back
+ * to guessing from her sign-up form. Her diet is a fact about her, not about
+ * the browser she opened.
  */
 
+import { supabase } from '../supabase'
 import { asksFor, askSignals, wantedMedium, type Ask } from './ask'
 import {
   DECISIVE, MEDIUMS, NEEDS_READING, allEvidence, spread, untried, working,
@@ -317,29 +332,97 @@ export function rank(plan: Plan, medium: Medium): number {
 /* ── keeping one ──────────────────────────────────────────────────────────── */
 
 const KEY = 'nexaedu_plan'
+const TABLE = 'edu_learner_plan'
 
 /** A plan older than this is worth asking about again. */
 const STALE_MS = 3 * 24 * 60 * 60 * 1000
 
 const keyFor = (learnerId: string, subjectId: string) => `${KEY}:${learnerId}:${subjectId}`
 
+/** Anything that is not a plan with parts in it is not a plan. */
+function usable(value: unknown): Plan | null {
+  const p = value as Plan | null
+  return p && Array.isArray(p.parts) && p.parts.length ? p : null
+}
+
+/**
+ * The cached copy, read synchronously.
+ *
+ * A session lays itself out the moment a topic opens, so there has to be an
+ * answer available without waiting for the network. This is that answer. It is
+ * a mirror of the row, never the record.
+ */
 export function savedPlan(learnerId: string, subjectId: string): Plan | null {
   try {
     const raw = localStorage.getItem(keyFor(learnerId, subjectId))
-    if (!raw) return null
-    const p = JSON.parse(raw) as Plan
-    return Array.isArray(p?.parts) && p.parts.length ? p : null
+    return raw ? usable(JSON.parse(raw)) : null
   } catch {
     return null
   }
 }
 
-export function savePlan(learnerId: string, subjectId: string, plan: Plan): void {
+/**
+ * The plan on her account, whichever device she is on.
+ *
+ * Awaited by whoever can afford to wait, which is anything loading a subject
+ * rather than laying out a session. It refreshes the cache as a side effect,
+ * so the next synchronous read on this device is right.
+ *
+ * A failure here is not an error worth showing anybody: `localPlan` produces a
+ * perfectly good plan from evidence this device already has.
+ */
+export async function accountPlan(
+  learnerId: string, subjectId: string,
+): Promise<Plan | null> {
+  try {
+    const { data, error } = await supabase
+      .from(TABLE)
+      .select('plan')
+      .eq('learner_id', learnerId)
+      .eq('subject_id', subjectId)
+      .maybeSingle()
+    if (error || !data) return null
+    const plan = usable(data.plan)
+    if (plan) cache(learnerId, subjectId, plan)
+    return plan
+  } catch {
+    return null
+  }
+}
+
+function cache(learnerId: string, subjectId: string, plan: Plan): void {
   try {
     localStorage.setItem(keyFor(learnerId, subjectId), JSON.stringify(plan))
   } catch {
-    /* Losing it costs one model call, not the session. */
+    /* Losing the cache costs one model call, not the session. */
   }
+}
+
+/**
+ * Keep a plan.
+ *
+ * The cache is written first and synchronously, because the caller is usually
+ * about to lay out a session with it and must not wait. The row follows, and
+ * if it fails the plan is still right on this device and will be written again
+ * next time.
+ */
+export function savePlan(learnerId: string, subjectId: string, plan: Plan): void {
+  cache(learnerId, subjectId, plan)
+  void supabase
+    .from(TABLE)
+    .upsert({
+      learner_id: learnerId,
+      subject_id: subjectId,
+      plan,
+      source: plan.source,
+    }, { onConflict: 'learner_id,subject_id' })
+    .then(({ error }) => {
+      if (error) {
+        /* Said once, quietly, because it is a real failure of the promise that
+           her diet follows her account, and it is invisible otherwise. */
+        console.warn('[plan] could not save to the account:', error.message)
+      }
+    })
 }
 
 /**

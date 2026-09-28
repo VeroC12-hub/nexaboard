@@ -8,9 +8,11 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "tutor": "tsx tools/tutor-worker.mjs",
+    "tutor": "tsx --env-file=.env tools/tutor-worker.mjs",
     "video:studio": "remotion studio video/index.ts",
-    "video:render": "remotion render video/index.ts Lesson"
+    "video:render": "remotion render video/index.ts Lesson",
+    "voice:bake": "tsx --env-file=.env tools/bake-voice.mts",
+    "voice:audition": "tsx --env-file=.env tools/audition-voice.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.126.0",
@@ -55,6 +57,7 @@
     "eslint": "^10.2.1",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
+    "ffmpeg-static": "^5.3.0",
     "globals": "^17.5.0",
     "remotion": "^4.0.526",
     "tsx": "^4.23.13",

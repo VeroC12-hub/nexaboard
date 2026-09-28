@@ -18,11 +18,17 @@
 //   2. on Vercel: SUPABASE_URL, SUPABASE_SERVICE_KEY, EDU_WORKER_SECRET
 //   3. here: EDU_WORKER_SECRET, the same value, and EDU_SITE if not the default
 
+/* First, so that every import below sees .env. `upload.mjs` and `tts.mjs` read
+   process.env when they load, not when they are called, so importing this
+   after them would be too late. */
+import './env.mjs';
 import os from 'node:os';
 import path from 'node:path';
 import fs from 'node:fs';
 import { Runner, resolveClaude, classify } from './runner.mjs';
+import { CodexRunner, resolveCodex } from './codex.mjs';
 import { render, RENDERS } from './video-render.mjs';
+import { uploadRender, uploadBlocked } from './upload.mjs';
 import { speak, narrationProvider } from './tts.mjs';
 import { readStoryboard } from '../src/lib/education/storyboard.ts';
 
@@ -42,7 +48,17 @@ const PROGRESS_MIN = 160;
 
 const WORKDIR = path.join(os.tmpdir(), 'nexaedu-tutor');
 
-const runner = new Runner({ model: MODEL, workdir: WORKDIR, log: (m) => console.log(m) });
+/* ChatGPT, tried when the Claude subscription is out of allowance. The same
+   arrangement the exam engine on this machine already uses: two writing
+   allowances, the first with room left answers, and drawing billed elsewhere. */
+const codex = new CodexRunner({ log: (m) => console.log(m) });
+
+const runner = new Runner({
+  model: MODEL,
+  workdir: WORKDIR,
+  log: (m) => console.log(m),
+  backup: codex,
+});
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -190,8 +206,33 @@ async function renderStoryboard(job, answer) {
     + ', ' + (spoken ? spoken + ' narrated' : 'no narration') + ', rendering');
   await render(boardPath, out, m => console.log(m));
 
+  /**
+   * Hand back a url a learner can actually reach.
+   *
+   * ── Why this is not just the local path ─────────────────────────────────
+   *
+   * `/renders/<name>` is served by the dev server on this machine and by
+   * nothing else. A Vercel function has no disk and the machine that rendered
+   * the file is somebody's laptop, so that path 404s for every real learner.
+   * That is why video worked in development and nowhere else.
+   *
+   * So the file goes to Supabase Storage and the public url goes back. If the
+   * upload fails the local path is returned instead, which is exactly the old
+   * behaviour: still useful on this machine, still broken on a deployment, and
+   * now it says so in the log rather than silently.
+   */
+  const put = await uploadRender(out, name);
+  if (put.url) {
+    console.log('    uploaded ' + (put.bytes / 1048576).toFixed(1) + ' MB to storage');
+  } else {
+    console.log('    not uploaded (' + put.why + '), serving the local path');
+  }
+
   return JSON.stringify({
-    video: '/renders/' + name,
+    video: put.url || ('/renders/' + name),
+    /* Whether a learner anywhere can see this, or only this machine. The
+       client does not need it; whoever is debugging a 404 does. */
+    hosted: Boolean(put.url),
     scenes: board.scenes.length,
     narrated: spoken,
     style: board.style,
@@ -210,7 +251,12 @@ async function main() {
   console.log('\nNEXA•EDU tutor worker');
   console.log('  site     ' + SITE);
   console.log('  claude   ' + resolveClaude());
+  console.log('  chatgpt  ' + (resolveCodex() || 'not installed, Claude only'));
   console.log('  model    ' + MODEL);
+  const noUpload = uploadBlocked();
+  console.log('  renders  ' + (noUpload
+    ? 'stay on this machine (' + noUpload + ')'
+    : 'upload to Supabase Storage'));
   console.log('  account  ' + (process.env.CLAUDE_CODE_OAUTH_TOKEN
     ? 'subscription token, headless'
     : 'the interactive login on this machine'));

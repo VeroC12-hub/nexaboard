@@ -25,6 +25,127 @@ export interface LessonStep {
   payload: Record<string, unknown>
 }
 
+/* ── Media inside a step ─────────────────────────────────────────────────────
+ *
+ * A step used to be prose plus, at most, the name of one diagram from a fixed
+ * set drawn in Teaching.tsx. That set cannot grow with generated lessons: a
+ * lesson written for one learner about one topic has no way to ask for a
+ * picture nobody drew in advance.
+ *
+ * `payload` is already free-form jsonb, so the fix needs no migration, only an
+ * agreed shape and a reader strict enough that a malformed payload shows
+ * nothing rather than something broken:
+ *
+ *   payload.diagram  the existing named SVG. Unchanged, still the first choice.
+ *   payload.image    a prompt for the renderer, plus alt text.
+ *   payload.video    a url for a clip or a rendered teaching film.
+ *
+ * The readers below are deliberately the only way into those three. A lesson
+ * step arrives from the database, which means it arrives from a generator, and
+ * a generator omits fields and invents field names. Everything optional is
+ * optional here too, and everything an accessible page cannot do without is
+ * required, so the check is a type boundary rather than a note in a review.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/**
+ * A picture asked for by prompt, not by name.
+ *
+ * `alt` is not optional, and that is the one rule in this file worth arguing
+ * about. A generated picture with no alt text teaches nobody using a screen
+ * reader, and a lesson that silently drops the picture reads correctly for
+ * everyone, so the strict reader costs a picture and the lax one costs a
+ * learner.
+ *
+ * What a picture may NOT carry: the fact. These models cannot spell and cannot
+ * be trusted with a quantity, so if the step's meaning depends on a number, a
+ * label or an equation, that belongs in `body` or in the named diagram, both of
+ * which are real DOM written by the tutor. The picture is atmosphere, and a
+ * step must still teach with it missing.
+ */
+export interface StepImage {
+  prompt: string
+  alt: string
+  caption?: string
+}
+
+/**
+ * A clip or a film already sitting at a url.
+ *
+ * Two sources exist and both arrive here identically: a Supabase Storage
+ * public url for a rendered teaching film, and a generated clip url from the
+ * renderer. Nothing downstream needs to tell them apart, so nothing here does.
+ *
+ * `words` is the transcript or the subtitle line as text. Required for the same
+ * reason `alt` is: a learner who cannot hear it, or whose connection will not
+ * carry it, is owed the same teaching. It is rendered as text on the page, not
+ * hidden in an attribute.
+ */
+export interface StepVideo {
+  url: string
+  words: string
+  caption?: string
+  poster?: string
+}
+
+/** A string field that is actually a string with something in it. */
+function words(v: unknown): string | null {
+  return typeof v === 'string' && v.trim() ? v.trim() : null
+}
+
+/**
+ * A url a browser may be pointed at from inside a lesson.
+ *
+ * http and https only. A step payload is data from the database, and `data:`
+ * and `javascript:` in a src attribute are the two ways that data becomes
+ * code. Same reasoning as `cleanSvg` in visuals.ts: the generator is ours, but
+ * "the generator would not do that" is not a boundary.
+ */
+function safeUrl(v: unknown): string | null {
+  const s = words(v)
+  if (!s) return null
+  try {
+    const u = new URL(s, window.location.origin)
+    return u.protocol === 'http:' || u.protocol === 'https:' ? u.href : null
+  } catch {
+    return null
+  }
+}
+
+/** The named diagram a step asks for, if any. Unchanged behaviour. */
+export function stepDiagram(step: LessonStep): string | undefined {
+  return words(step.payload.diagram) ?? undefined
+}
+
+/** The inline picture a step asks for, or null, which is the common answer. */
+export function stepImage(step: LessonStep): StepImage | null {
+  const raw = step.payload.image
+  if (!raw || typeof raw !== 'object') return null
+  const o = raw as Record<string, unknown>
+  const prompt = words(o.prompt)
+  const alt = words(o.alt)
+  if (!prompt || !alt) return null
+  return { prompt, alt, caption: words(o.caption) ?? undefined }
+}
+
+/** The inline clip or film a step carries, or null. */
+export function stepVideo(step: LessonStep): StepVideo | null {
+  const raw = step.payload.video
+  if (!raw || typeof raw !== 'object') return null
+  const o = raw as Record<string, unknown>
+  const url = safeUrl(o.url)
+  /* The transcript is accepted under any of the three names a generator
+     plausibly uses for it. Being generous here is cheap; being generous about
+     whether it exists at all is not, so a clip with no words is no clip. */
+  const said = words(o.transcript) ?? words(o.subtitles) ?? words(o.words)
+  if (!url || !said) return null
+  return {
+    url,
+    words: said,
+    caption: words(o.caption) ?? undefined,
+    poster: safeUrl(o.poster) ?? undefined,
+  }
+}
+
 export interface LessonProgress {
   status: 'IN_PROGRESS' | 'COMPLETED'
   lastStep: number

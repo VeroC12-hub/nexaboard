@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Money Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Money Shop. Paying for things, in cedis and pesewas.
+
+  ── Why this is production and not recognition ───────────────────────────────
+
+  The easy build is: show a coin, ask what it is worth. That is a flashcard,
+  and a child can pass it without ever being able to buy anything. The thing a
+  Ghanaian six year old is actually sent out to do is hand over the right money
+  at a stall, which means choosing several coins at once and knowing when to
+  stop. So the child builds the payment: taps money into a tray, takes it back
+  out if it is wrong, and confirms when the tray is right.
+
+  ── Why the tray does not show a running total ───────────────────────────────
+
+  A total in the tray would turn the whole thing into "make this number reach
+  three hundred and fifty", and the child would stop looking at the money
+  entirely. The adding up is the lesson. So the tray shows coins and notes,
+  exactly as a real tray would, and the only number on the screen is the price.
+
+  ── Why everything is counted in pesewas ─────────────────────────────────────
+
+  Internally there are no cedis at all: a price is an integer number of
+  pesewas, 350 rather than 3.5. Money in floating point is how you get a tray
+  that adds up to 3.4999999998 and a child told they are wrong when they are
+  right. Cedis exist only in the two places a person looks at: the label on a
+  coin and the price on the banner.
+
+  ── Why exact only ───────────────────────────────────────────────────────────
+
+  Change is a Primary 3 idea and this is a Primary 1 to 3 game, so overpaying
+  is a miss rather than a partial credit. But the miss is never just "no": it
+  says whether it was too much or too little, because that is the direction the
+  child has to feel before they can correct anything.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #6b3f18;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, randInt = K.randInt, pick = K.pick
+
+  /* ── the money ───────────────────────────────────────────────────────────── */
+
+  /**
+   * Real Ghanaian money, smallest first, all of it in pesewas.
+   *
+   * These are the pieces a child actually handles: the 1p and 5p coins are
+   * gone from circulation in practice and putting them in would teach a
+   * denomination nobody is ever given. The GH¢20 and GH¢50 notes are left out
+   * for the opposite reason: they are too big to be handed to a child, and
+   * seven pieces is already the most a phone width will hold at a size a thumb
+   * can hit.
+   *
+   * `kind` decides how it is drawn, not what it is worth. `rim` is the second
+   * metal on the bimetallic cedi coins, which is the thing that tells a GH¢1
+   * apart from a 50p at a glance in real life, so it is the thing that has to
+   * tell them apart here.
+   */
+  var MONEY = [
+    { v: 10, kind: 'coin', face: '#c9ccd2', rim: null },
+    { v: 20, kind: 'coin', face: '#c9ccd2', rim: null },
+    { v: 50, kind: 'coin', face: '#e3b23c', rim: null },
+    { v: 100, kind: 'coin', face: '#e3b23c', rim: '#c9ccd2' },
+    { v: 200, kind: 'coin', face: '#c9ccd2', rim: '#e3b23c' },
+    /* The note colours are the ones the paper actually is, near enough to be
+       recognised in a market: the five is olive brown, the ten is a blue
+       green. Getting these wrong would teach a child to reach for the wrong
+       paper, which is worse than not drawing notes at all. */
+    { v: 500, kind: 'note', face: '#9a8a4e' },
+    { v: 1000, kind: 'note', face: '#3f8f9e' }
+  ]
+
+  /** How a piece of money is written on itself: 50p, GH¢1, GH¢5. */
+  function label(p) {
+    if (p < 100) return p + 'p'
+    return 'GH' + '¢' + (p % 100 === 0 ? String(p / 100) : (p / 100).toFixed(2))
+  }
+
+  var ONES = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
+    'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
+    'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty']
+  var TENS = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty',
+    'seventy', 'eighty', 'ninety']
+
+  /**
+   * A price, said out loud.
+   *
+   * Read the way a trader says it, "three cedis fifty pesewas", and not the
+   * way a calculator says it. Half the point of the game is that the words and
+   * the coins are the same thing, so the words have to be the ones a child
+   * will hear at a stall.
+   */
+  function speak(p) {
+    var c = Math.floor(p / 100)
+    var r = p % 100
+    var out = ''
+    if (c) out += ONES[c] + (c === 1 ? ' cedi' : ' cedis')
+    if (r) out += (out ? ' ' : '') + TENS[r / 10] + ' pesewas'
+    return out.charAt(0).toUpperCase() + out.slice(1)
+  }
+
+  /* ── the goods ───────────────────────────────────────────────────────────── */
+
+  /** Things sold at a Ghanaian market, so the stall is somebody's stall. */
+  var GOODS = ['mango', 'orange', 'tomato', 'bread', 'banana', 'pineapple']
+
+  /**
+   * One item for sale, drawn standing on `baseY`.
+   *
+   * Flat shapes with one identifying mark each. The item is not the question,
+   * the price is, so it has to be recognisable in a glance and then get out of
+   * the way. Anything more detailed at this size turns into a coloured blob
+   * and costs reading time that belongs to the money.
+   */
+  function drawGood(ctx, name, x, baseY, r) {
+    ctx.save()
+    ctx.translate(x, baseY - r)
+
+    if (name === 'mango') {
+      ctx.beginPath()
+      ctx.ellipse(0, 0, r * 0.82, r * 0.64, -0.25, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#f2a23b', K.LINE, 4)
+      ctx.save()
+      ctx.beginPath()
+      ctx.ellipse(0, 0, r * 0.82, r * 0.64, -0.25, 0, Math.PI * 2)
+      ctx.clip()
+      ctx.beginPath()
+      ctx.ellipse(-r * 0.3, -r * 0.3, r * 0.5, r * 0.4, -0.25, 0, Math.PI * 2)
+      ctx.fillStyle = '#e0482e'
+      ctx.fill()
+      ctx.restore()
+      ctx.beginPath()
+      ctx.ellipse(r * 0.52, -r * 0.62, r * 0.3, r * 0.14, -0.5, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#2e9e42', K.LINE, 3)
+
+    } else if (name === 'orange') {
+      ctx.beginPath()
+      ctx.arc(0, 0, r * 0.72, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#f08a2e', K.LINE, 4)
+      ctx.beginPath()
+      ctx.ellipse(r * 0.34, -r * 0.62, r * 0.3, r * 0.13, -0.45, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#2e9e42', K.LINE, 3)
+
+    } else if (name === 'tomato') {
+      ctx.beginPath()
+      ctx.ellipse(0, r * 0.04, r * 0.74, r * 0.66, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#e0402e', K.LINE, 4)
+      /* The calyx, which is the only thing that stops a red circle being an
+         apple, a ball or a full stop. */
+      K.shape(ctx, 'star', 0, -r * 0.58, r * 0.28, '#2e9e42')
+
+    } else if (name === 'bread') {
+      ctx.beginPath()
+      ctx.roundRect(-r * 0.82, -r * 0.5, r * 1.64, r * 1.04, [r * 0.5, r * 0.5, r * 0.14, r * 0.14])
+      K.inkedOn(ctx, '#c98f4e', K.LINE, 4)
+      ctx.strokeStyle = 'rgba(110,64,20,0.45)'
+      ctx.lineWidth = Math.max(2, r * 0.07)
+      ctx.lineCap = 'round'
+      for (var sl = -1; sl <= 1; sl++) {
+        ctx.beginPath()
+        ctx.moveTo(sl * r * 0.38 - r * 0.12, -r * 0.38)
+        ctx.lineTo(sl * r * 0.38 + r * 0.12, -r * 0.1)
+        ctx.stroke()
+      }
+
+    } else if (name === 'banana') {
+      /* A crescent with a thick body, not a stroked arc: a stroked arc has
+         the same width at the tips as in the middle and reads as a smile. */
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.78, -r * 0.24)
+      ctx.quadraticCurveTo(0, r * 0.82, r * 0.78, -r * 0.24)
+      ctx.quadraticCurveTo(0, r * 0.36, -r * 0.78, -r * 0.24)
+      ctx.closePath()
+      K.inkedOn(ctx, '#f2d024', K.LINE, 4)
+      ctx.beginPath()
+      ctx.arc(-r * 0.78, -r * 0.24, r * 0.1, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#6b4a22', K.LINE, 2.5)
+
+    } else {
+      /* Pineapple: a body with a crosshatch and a crown. The crown is what
+         names it, so it is drawn big enough to survive on a phone. */
+      ctx.beginPath()
+      ctx.ellipse(0, r * 0.12, r * 0.58, r * 0.7, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#e0a52e', K.LINE, 4)
+      ctx.save()
+      ctx.beginPath()
+      ctx.ellipse(0, r * 0.12, r * 0.58, r * 0.7, 0, 0, Math.PI * 2)
+      ctx.clip()
+      ctx.strokeStyle = 'rgba(120,70,10,0.45)'
+      ctx.lineWidth = Math.max(2, r * 0.05)
+      for (var d = -3; d <= 3; d++) {
+        ctx.beginPath()
+        ctx.moveTo(d * r * 0.3 - r, -r)
+        ctx.lineTo(d * r * 0.3 + r, r)
+        ctx.moveTo(d * r * 0.3 - r, r)
+        ctx.lineTo(d * r * 0.3 + r, -r)
+        ctx.stroke()
+      }
+      ctx.restore()
+      for (var lf = -1; lf <= 1; lf++) {
+        ctx.beginPath()
+        ctx.moveTo(lf * r * 0.14, -r * 0.5)
+        ctx.lineTo(lf * r * 0.3, -r * 1.16)
+        ctx.lineTo(lf * r * 0.34 + r * 0.1, -r * 0.48)
+        ctx.closePath()
+        K.inkedOn(ctx, lf === 0 ? '#2e9e42' : '#3fae4c', K.LINE, 3)
+      }
+    }
+    ctx.restore()
+  }
+
+  /* ── drawing money ───────────────────────────────────────────────────────── */
+
+  /**
+   * Lettering on a coin or a note.
+   *
+   * Dark outline, white fill, nothing else. A white ring as well on a white
+   * fill hollows the letters out, which is the rule everywhere in this set,
+   * and on a gold disc the dark outline alone is already plenty of contrast.
+   */
+  function stamp(ctx, text, x, y, size, font, fill) {
+    ctx.save()
+    ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.lineJoin = 'round'
+    ctx.miterLimit = 2
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = size * 0.28
+    ctx.strokeText(text, x, y)
+    ctx.fillStyle = fill || '#ffffff'
+    ctx.fillText(text, x, y)
+    ctx.restore()
+  }
+
+  /** How big the value can be written on a disc of radius `r`. */
+  function fitStamp(ctx, text, size, font, room) {
+    ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    while (ctx.measureText(text).width > room && size > 8) {
+      size *= 0.92
+      ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    }
+    return size
+  }
+
+  /**
+   * A coin.
+   *
+   * Two tone volume and nothing else: a flat disc, a darker ring inside the
+   * edge for thickness, and the value stamped across the middle. The
+   * bimetallic cedi coins get their second metal as an outer band, because
+   * that band is how a real GH¢1 is told from a real 50p and a child who
+   * learns the band here will recognise the coin in a hand.
+   */
+  function drawCoin(ctx, x, y, r, m, font) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    if (m.rim) {
+      ctx.beginPath()
+      ctx.arc(0, 0, r, 0, Math.PI * 2)
+      K.inkedOn(ctx, m.rim, K.LINE, 3.5)
+      ctx.beginPath()
+      ctx.arc(0, 0, r * 0.74, 0, Math.PI * 2)
+      K.inkedOn(ctx, m.face, K.LINE, 3)
+    } else {
+      ctx.beginPath()
+      ctx.arc(0, 0, r, 0, Math.PI * 2)
+      K.inkedOn(ctx, m.face, K.LINE, 3.5)
+      /* A milled edge, which is what stops a plain disc reading as a button. */
+      ctx.strokeStyle = 'rgba(70,45,10,0.3)'
+      ctx.lineWidth = Math.max(2, r * 0.07)
+      ctx.beginPath()
+      ctx.arc(0, 0, r * 0.82, 0, Math.PI * 2)
+      ctx.stroke()
+    }
+
+    /* A highlight on the upper left, the same place on every piece, so the
+       whole trayful looks lit by one sun. */
+    ctx.save()
+    ctx.globalAlpha = 0.28
+    ctx.fillStyle = '#ffffff'
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.32, -r * 0.4, r * 0.34, r * 0.2, -0.7, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+
+    var text = label(m.v)
+    var size = fitStamp(ctx, text, r * 0.62, font, r * (m.rim ? 1.18 : 1.44))
+    stamp(ctx, text, 0, 0, size, font)
+    ctx.restore()
+  }
+
+  /**
+   * A note, drawn from its centre.
+   *
+   * Wider than it is tall, a paler panel inside the border, and the value
+   * written large. Real notes carry a portrait, and a portrait at this size is
+   * a smudge, so its place is taken by the value: on the screen the number is
+   * the thing that has to be legible from arm's length.
+   */
+  function drawNote(ctx, x, y, w, h, m, font) {
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.beginPath()
+    ctx.roundRect(-w / 2, -h / 2, w, h, h * 0.14)
+    K.inkedOn(ctx, m.face, K.LINE, 3.5)
+
+    ctx.save()
+    ctx.globalAlpha = 0.3
+    ctx.beginPath()
+    ctx.roundRect(-w * 0.42, -h * 0.34, w * 0.84, h * 0.68, h * 0.1)
+    ctx.fillStyle = '#ffffff'
+    ctx.fill()
+    ctx.restore()
+
+    ctx.strokeStyle = 'rgba(20,30,20,0.4)'
+    ctx.lineWidth = Math.max(1.5, h * 0.035)
+    ctx.beginPath()
+    ctx.roundRect(-w * 0.42, -h * 0.34, w * 0.84, h * 0.68, h * 0.1)
+    ctx.stroke()
+
+    var text = label(m.v)
+    var size = fitStamp(ctx, text, h * 0.46, font, w * 0.72)
+    stamp(ctx, text, 0, -h * 0.04, size, font)
+    /* The word underneath, small, because a child who can read "cedis" should
+       be given the chance to and one who cannot loses nothing. */
+    stamp(ctx, 'CEDIS', 0, h * 0.28, h * 0.16, font)
+    ctx.restore()
+  }
+
+  /** Any piece of money, in a box `w` by `h`, whichever kind it is. */
+  function drawMoney(ctx, m, x, y, w, h, font) {
+    if (m.kind === 'note') drawNote(ctx, x, y, w, h, m, font)
+    else drawCoin(ctx, x, y, Math.min(w, h) / 2, m, font)
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * Everything here is a pure function of the screen size rather than of `k`.
+   *
+   * `props` is called while the backdrop is being baked and is handed its own
+   * width and height, so any helper it shares with `paint` must not reach into
+   * `k.W`. Writing them all this way removes the chance of one of them
+   * quietly using the wrong size.
+   */
+
+  /** The band at the bottom the kit's confirm button owns. */
+  function band(H) { return clamp(H * 0.16, 76, 124) }
+
+  /** The strip of counter the money to spend is laid out on. */
+  function purseH(W, H) { return clamp(H * 0.25, 78, 132) }
+  function purseTop(W, H) { return H - band(H) - purseH(W, H) }
+
+  function purseSlot(W, H, i) {
+    var n = MONEY.length
+    var pad = Math.min(W * 0.03, 28)
+    var sw = (W - pad * 2) / n
+    var ph = purseH(W, H)
+    return { x: pad + i * sw, y: purseTop(W, H), w: sw, h: ph }
+  }
+
+  /** How big a piece of money is drawn in the purse row. */
+  function purseSize(W, H, m) {
+    var s = purseSlot(W, H, 0)
+    if (m.kind === 'note') {
+      var nw = s.w * 0.86
+      return { w: nw, h: Math.min(nw * 0.52, s.h * 0.74) }
+    }
+    var d = Math.min(s.w * 0.8, s.h * 0.84)
+    return { w: d, h: d }
+  }
+
+  /**
+   * The tray, sitting on the counter with its base on the counter line.
+   *
+   * It has to be above the purse row and below the banner, which on a phone
+   * held sideways is a band of about a hundred and thirty pixels. That is the
+   * whole reason the tray holds one row of money and not a grid: two rows in
+   * that band would be sixty pixels each and neither the child nor the
+   * denomination would survive it.
+   */
+  function trayRect(W, H) {
+    var base = K.groundY(H) + H * 0.012
+    var h = clamp(Math.min(W * 0.19, H * 0.33), 80, 200)
+    var w = Math.min(W * 0.58, h * 4.4)
+    return { x: W * 0.46 - w / 2, y: base - h, w: w, h: h }
+  }
+
+  /**
+   * Where the nth thing in the tray sits.
+   *
+   * The pitch is held at six pieces' worth until there are more than six, so
+   * the usual trayful is drawn at full size and only an unusually fiddly
+   * payment shrinks. Six covers every price this game can ask paid with the
+   * coins chosen sensibly; past that the child is stacking ten pesewas and the
+   * pieces closing up is a fair signal that there is an easier way.
+   */
+  function trayPitch(W, H, count) {
+    var t = trayRect(W, H)
+    return t.w * 0.9 / Math.max(6, count)
+  }
+
+  function traySpot(W, H, i, count) {
+    var t = trayRect(W, H)
+    var pitch = trayPitch(W, H, count)
+    var span = pitch * count
+    return { x: t.x + t.w / 2 - span / 2 + pitch * (i + 0.5), y: t.y + t.h * 0.52 }
+  }
+
+  /** How big a piece of money is drawn in the tray. */
+  function traySize(W, H, m, count) {
+    var t = trayRect(W, H)
+    var pitch = trayPitch(W, H, count)
+    if (m.kind === 'note') {
+      var nw = pitch * 0.96
+      return { w: nw, h: Math.min(nw * 0.52, t.h * 0.44) }
+    }
+    var d = Math.min(pitch * 0.94, t.h * 0.62)
+    return { w: d, h: d }
+  }
+
+  /** Where the item for sale stands: on the counter, left of the tray. */
+  function goodsR(W, H) { return clamp(Math.min(W * 0.06, H * 0.13), 26, 70) }
+  function goodsX(W) { return W * 0.09 }
+
+  /* ── difficulty ──────────────────────────────────────────────────────────── */
+
+  /**
+   * One price, in pesewas.
+   *
+   * ── On the climb ──────────────────────────────────────────────────────────
+   *
+   * Whole cedis first, because the first thing to learn is that GH¢3 means
+   * three of the cedi pieces or a five with nothing back. Then cedis and
+   * fifty, which introduces the idea that two of something make one of
+   * something else, and which is the commonest real price at a stall. Then any
+   * ten pesewa step to GH¢20, where the child has to combine a note, coins and
+   * small change in one payment.
+   */
+  function makePrice(round) {
+    if (round < 4) return randInt(1, 5) * 100
+    if (round < 8) return randInt(1, 8) * 100 + pick([0, 50])
+    return randInt(5, 200) * 10
+  }
+
+  /** Every tenth sale is market day, and market day pays. */
+  function isMarketDay(round) { return round > 0 && round % 10 === 9 }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    ask: function (p) { return speak(p) + '. Pay the trader.' },
+    right: ['Exactly right! Thank you!', 'That is the money!', 'Correct change, well counted!', 'Perfect! Take it.'],
+    over: function (p) { return 'That is too much. The price is only ' + speak(p) + '.' },
+    under: function (p) { return 'That is not enough. I need ' + speak(p) + '.' },
+    empty: 'The tray is empty! Put some money in it first.',
+    full: 'The tray is full. Try bigger money.',
+    market: 'Market day! Everybody is buying!',
+    done: 'The stall is closed. Come again!',
+    poke: 'Mind the goods! Count your money.'
+  }
+
+  AnanseKit.run({
+    title: 'Money Shop',
+    overTitle: 'Stall closed!',
+    scene: 'market',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'sales',
+    /* The child builds the payment out of several pieces, so there has to be
+       something that says "I have finished". Without it the first coin in the
+       tray would be judged as the whole answer. */
+    button: true,
+    buttonLabel: 'Pay!',
+    restMood: 'hello',
+    hud: function (k) {
+      return [
+        { label: 'sales', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      k.own.price = makePrice(k.round)
+      k.target = k.own.price
+      /* The tray holds indices into MONEY, in the order they were tapped, so
+         the picture is the history of what the child did. */
+      k.own.tray = []
+      k.own.good = pick(GOODS)
+      k.own.flash = 0
+
+      if (k.own.coins === undefined) k.own.coins = 0
+      /* A restart after losing every life. The kit puts its own score and
+         lives back; the purse has to be put back too. */
+      if (k.round === 0) k.own.coins = 0
+
+      k.say(LINES.ask(k.own.price))
+      k.him.setMood('hello')
+    },
+
+    ask: function (k) {
+      if (!k.own.price) return null
+      if (k.phase === 'won') return { head: 'Paid! ', num: label(k.own.price), tail: '' }
+      return { head: 'Pay ', num: label(k.own.price), tail: '' }
+    },
+
+    /** Nothing may be confirmed until there is money in the tray. */
+    ready: function (k) { return k.own.tray.length > 0 },
+
+    /**
+     * Does what is in the tray, right now, add up to the price?
+     *
+     * Summed from the pieces that are on the board at this moment. Nothing
+     * anywhere records which pieces would have been correct, so there is no
+     * stored answer to disagree with the picture, and a child who takes a coin
+     * back out after being told they are wrong is judged on the tray they end
+     * up with and not on the one they started with.
+     */
+    judge: function (k) {
+      var sum = 0
+      for (var i = 0; i < k.own.tray.length; i++) sum += MONEY[k.own.tray[i]].v
+      return sum === k.own.price
+    },
+
+    down: function (k, x, y) {
+      if (k.phase !== 'play') return false
+      var W = k.W, H = k.H
+      var i
+
+      /* Taking money back out of the tray. Checked first, because the tray
+         sits above the purse and a tap that lands on both belongs to the thing
+         nearer the front. */
+      var t = trayRect(W, H)
+      if (y >= t.y && y <= t.y + t.h && x >= t.x && x <= t.x + t.w) {
+        var count = k.own.tray.length
+        if (count) {
+          var pitch = trayPitch(W, H, count)
+          var left = t.x + t.w / 2 - pitch * count / 2
+          var at = Math.floor((x - left) / pitch)
+          if (at >= 0 && at < count) {
+            k.own.tray.splice(at, 1)
+            k.sound.play('lift')
+            k.puff(x, y, 5, 'rgba(255,255,255,0.7)')
+            return true
+          }
+        }
+        return false
+      }
+
+      /* Putting money in. */
+      for (i = 0; i < MONEY.length; i++) {
+        var s = purseSlot(W, H, i)
+        if (x >= s.x && x <= s.x + s.w && y >= s.y - 6 && y <= s.y + s.h) {
+          /* A cap, so a child paying an eight cedi bill in ten pesewa coins
+             runs out of tray rather than running off the end of the counter.
+             It is set above the most pieces any price here needs. */
+          if (k.own.tray.length >= 10) {
+            k.own.flash = 1
+            k.sound.play('oops')
+            k.say(LINES.full)
+            return true
+          }
+          k.own.tray.push(i)
+          k.sound.play('thud')
+          var spot = traySpot(W, H, k.own.tray.length - 1, k.own.tray.length)
+          k.puff(spot.x, spot.y, 5, 'rgba(255,240,180,0.8)')
+          return true
+        }
+      }
+      return false
+    },
+
+    onEmpty: function (k) {
+      k.own.flash = 1
+      k.say(LINES.empty)
+    },
+
+    onWin: function (k) {
+      var t = trayRect(k.W, k.H)
+      k.own.coins += 1
+      if (isMarketDay(k.round)) {
+        k.own.coins += 10
+        k.cheer(t.x + t.w / 2, t.y + t.h * 0.3)
+        k.say(LINES.market)
+      } else {
+        k.cheer(t.x + t.w / 2, t.y + t.h * 0.4)
+        k.say(pick(LINES.right))
+      }
+    },
+
+    /**
+     * Too much or too little, never just wrong.
+     *
+     * Which side of the price they landed on is the entire correction: a child
+     * who is short has to add and a child who has overpaid has to take
+     * something out, and those are opposite actions. Being told only "no"
+     * leaves them with a fifty fifty guess about which way to move, and the
+     * tray is left exactly as it was so they can act on the answer.
+     */
+    onMiss: function (k) {
+      var sum = 0
+      for (var i = 0; i < k.own.tray.length; i++) sum += MONEY[k.own.tray[i]].v
+      k.own.flash = 1
+      k.say(sum > k.own.price ? LINES.over(k.own.price) : LINES.under(k.own.price))
+    },
+
+    onOver: function (k) { k.say(LINES.done) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      if (k.own.flash > 0) k.own.flash = Math.max(0, k.own.flash - dt * 1.6)
+    },
+
+    /**
+     * A mat under the money.
+     *
+     * Baked into the backdrop rather than painted every frame, because it never
+     * moves. It is not decoration: gold coins on a tan wooden counter sit at
+     * almost the same value, so the whole purse row turns to mush at arm's
+     * length. A dark indigo cloth under them is what every trader actually has
+     * on the table and it is the only thing that makes the coins read.
+     */
+    props: function (k, g, W, H) {
+      var top = purseTop(W, H)
+      var h = purseH(W, H)
+      var pad = Math.min(W * 0.03, 28) * 0.4
+
+      g.beginPath()
+      g.roundRect(pad, top - 6, W - pad * 2, h + 4, Math.min(22, h * 0.2))
+      K.inkedOn(g, '#2b3f6b', K.LINE, 4)
+
+      /* A woven border, two lines in, which is what says cloth rather than
+         painted rectangle. */
+      g.strokeStyle = 'rgba(255,255,255,0.28)'
+      g.lineWidth = Math.max(2, h * 0.03)
+      g.beginPath()
+      g.roundRect(pad + h * 0.09, top - 6 + h * 0.09, W - pad * 2 - h * 0.18,
+        h + 4 - h * 0.18, Math.min(16, h * 0.14))
+      g.stroke()
+
+      /* Kente stripes along the top edge, small, so the mat belongs to this
+         market and not to a generic one. */
+      var stripes = ['#d6402e', '#f2d024', '#0f8a4d']
+      for (var s = 0; s * (h * 0.3) < W; s++) {
+        g.fillStyle = stripes[s % 3]
+        g.fillRect(pad + 6 + s * h * 0.3, top - 2, h * 0.14, h * 0.07)
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var W = k.W, H = k.H
+      var font = k.FONT
+      var i
+
+      /* The item for sale, on the counter to the left of the tray. */
+      var gr = goodsR(W, H)
+      var gx = goodsX(W)
+      var gy = K.groundY(H) + H * 0.02
+      ctx.save()
+      ctx.globalAlpha = 0.18
+      ctx.fillStyle = '#5a3410'
+      ctx.beginPath()
+      ctx.ellipse(gx, gy, gr * 0.86, gr * 0.2, 0, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+      drawGood(ctx, k.own.good, gx, gy, gr)
+
+      /**
+       * The tray.
+       *
+       * Drawn as a shallow box seen slightly from above: a floor, then a front
+       * wall with a lip. Money goes in between the two, so a coin in the tray
+       * is visibly inside something rather than sitting next to it.
+       */
+      var t = trayRect(W, H)
+      ctx.save()
+      ctx.beginPath()
+      ctx.roundRect(t.x, t.y, t.w, t.h, t.h * 0.16)
+      K.inkedOn(ctx, '#8a5a2b', K.LINE, 4.5)
+      ctx.beginPath()
+      ctx.roundRect(t.x + t.w * 0.02, t.y + t.h * 0.06, t.w * 0.96, t.h * 0.74,
+        t.h * 0.12)
+      K.inkedOn(ctx, '#a9703c', K.LINE, 3)
+      /* Weave, faint, across the floor of the tray. */
+      ctx.save()
+      ctx.beginPath()
+      ctx.roundRect(t.x + t.w * 0.02, t.y + t.h * 0.06, t.w * 0.96, t.h * 0.74,
+        t.h * 0.12)
+      ctx.clip()
+      ctx.strokeStyle = 'rgba(90,50,12,0.22)'
+      ctx.lineWidth = Math.max(2, t.h * 0.03)
+      for (i = 0; i * t.h * 0.22 < t.w; i++) {
+        ctx.beginPath()
+        ctx.moveTo(t.x + i * t.h * 0.22, t.y)
+        ctx.lineTo(t.x + i * t.h * 0.22 + t.h, t.y + t.h)
+        ctx.stroke()
+      }
+      ctx.restore()
+
+      /* The flash, when something was refused or wrong. A red rim round the
+         tray says the trouble is with the tray, which is where the child has
+         to look. */
+      if (k.own.flash > 0.02) {
+        ctx.save()
+        ctx.globalAlpha = k.own.flash
+        ctx.strokeStyle = '#e0402e'
+        ctx.lineWidth = Math.max(4, t.h * 0.07)
+        ctx.beginPath()
+        ctx.roundRect(t.x - 3, t.y - 3, t.w + 6, t.h + 6, t.h * 0.18)
+        ctx.stroke()
+        ctx.restore()
+      }
+      ctx.restore()
+
+      /* What is in the tray. Drawn in the order it was put in, so the child
+         can see the payment being built up left to right. */
+      var count = k.own.tray.length
+      for (i = 0; i < count; i++) {
+        var m = MONEY[k.own.tray[i]]
+        var spot = traySpot(W, H, i, count)
+        var size = traySize(W, H, m, count)
+        drawMoney(ctx, m, spot.x, spot.y, size.w, size.h, font)
+      }
+
+      /* An empty tray says so, because a wooden box with nothing in it looks
+         like scenery rather than like the thing to fill. */
+      if (!count) {
+        k.shout('Put the money here', t.x + t.w / 2, t.y + t.h * 0.52,
+          Math.min(t.h * 0.2, t.w * 0.08), '#f6efdc')
+      }
+
+      /**
+       * Him, behind the stall to the right of the tray.
+       *
+       * Behind, not in front: a trader stands on his own side of the counter,
+       * and putting him in front of the goods would hide the only thing on the
+       * counter that is not money.
+       */
+      var hr = clamp(Math.min(W * 0.055, H * 0.12), 26, 60)
+      var hx = W * 0.86
+      var hy = K.groundY(H) - hr * 0.1
+      k.him.draw(hx, hy - hr * 1.3, hr, hy)
+
+      /* The money to spend. */
+      for (i = 0; i < MONEY.length; i++) {
+        var pm = MONEY[i]
+        var s = purseSlot(W, H, i)
+        var ps = purseSize(W, H, pm)
+        /* A slow bob, out of phase, so the row is a pile of money and not a
+           printed strip of it. */
+        var lift = Math.sin(k.now * 0.002 + i * 1.3) * s.h * 0.025
+        drawMoney(ctx, pm, s.x + s.w / 2, s.y + s.h / 2 + lift, ps.w, ps.h, font)
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.price) return { price: null }
+      var W = k.W, H = k.H
+      var sum = 0
+      var i
+      for (i = 0; i < k.own.tray.length; i++) sum += MONEY[k.own.tray[i]].v
+      var count = k.own.tray.length
+
+      var purse = []
+      for (i = 0; i < MONEY.length; i++) {
+        var s = purseSlot(W, H, i)
+        purse.push({
+          value: MONEY[i].v, label: label(MONEY[i].v),
+          x: Math.round(s.x + s.w / 2), y: Math.round(s.y + s.h / 2)
+        })
+      }
+
+      var inTray = []
+      for (i = 0; i < count; i++) {
+        var spot = traySpot(W, H, i, count)
+        inTray.push({
+          value: MONEY[k.own.tray[i]].v,
+          x: Math.round(spot.x), y: Math.round(spot.y)
+        })
+      }
+
+      var b = k.buttonRect()
+      var t = trayRect(W, H)
+      return {
+        price: k.own.price,
+        priceLabel: label(k.own.price),
+        good: k.own.good,
+        total: sum,
+        ready: count > 0,
+        marketDay: isMarketDay(k.round),
+        coins: purse,
+        tray: inTray,
+        trayRect: {
+          x: Math.round(t.x), y: Math.round(t.y),
+          w: Math.round(t.w), h: Math.round(t.h)
+        },
+        pay: { x: Math.round(b.x + b.w / 2), y: Math.round(b.y + b.h / 2) }
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

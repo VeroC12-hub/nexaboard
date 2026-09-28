@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Punctuation Police</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Punctuation Police. The mark that finishes the sentence.
+
+  ── Why the sentence is on a road sign ───────────────────────────────────────
+
+  Because a road sign is the one place outside a book where a Ghanaian child
+  has already seen a short sentence painted large and expected to be read. It
+  gives the words somewhere to be that is not a worksheet, and it gives the
+  game a reason for a vehicle to drive past when the sign is finished: a sign
+  with a mistake on it is not ready for the road yet.
+
+  ── Why the marks are drawn and not typed ────────────────────────────────────
+
+  A full stop set in the tile font at the size a tile allows is a four pixel
+  dot, and a comma next to it is the same dot with a whisker. The child cannot
+  tell them apart at arm's length, which turns a reading question into an
+  eyesight question. So the four marks are drawn as vector shapes at the size
+  of the tile, and each tile also carries its name in words, because naming the
+  mark is half of what is being taught.
+
+  ── Why the reason is spoken on a miss ───────────────────────────────────────
+
+  A red tile says "not that one" and teaches nothing that survives the round.
+  The lesson is the rule: it asks something, so it needs a question mark. So
+  every miss says the rule out loud, and the correct tile lights green beside
+  the wrong one so the child can see the two together.
+
+  ── Why the comma only becomes real at round ten ─────────────────────────────
+
+  For the first nine signs the comma is a decoy and nothing more, which is
+  honest: at that point the child is only choosing between the three end marks.
+  From round ten the bank starts offering lists with the blank in the MIDDLE of
+  the sentence, and the position of the blank is itself the clue. That is what
+  stops the comma being a tile nobody ever presses, and it is the first time
+  the child has to look at where the hole is before deciding what fills it.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #14283a;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /** Every tenth sign is the big one on the main road into town. */
+  var STRETCH = 10
+  function isBillboard(round) { return round > 0 && round % STRETCH === STRETCH - 1 }
+
+  /** From round ten the sentence may have its hole in the middle. */
+  var LISTS_FROM = 10
+
+  /* ── the marks ───────────────────────────────────────────────────────────── */
+
+  /**
+   * What each kind of sentence ends with.
+   *
+   * This table is the only place the truth lives, and `judge` reads it at the
+   * moment of commit from the `kind` of the sentence that is on the sign. No
+   * option ever carries a flag saying it is the right one, so there is nothing
+   * that can be out of step with what the child is looking at.
+   */
+  var MARK = {
+    statement: '.',
+    question: '?',
+    exclamation: '!',
+    list: ','
+  }
+
+  var NAME = {
+    '.': 'full stop',
+    '?': 'question mark',
+    '!': 'exclamation',
+    ',': 'comma'
+  }
+
+  /**
+   * Why that mark, said as a rule rather than as a verdict.
+   *
+   * Phrased "it does X, so it needs Y" on purpose: the child can carry that
+   * sentence to the next question, and "wrong" cannot.
+   */
+  var REASON = {
+    statement: 'It tells us something, so it needs a full stop.',
+    question: 'It asks something, so it needs a question mark.',
+    exclamation: 'It shouts something, so it needs an exclamation mark.',
+    list: 'It is a list, so a comma goes between the things.'
+  }
+
+  /* ── the sentences ───────────────────────────────────────────────────────── */
+
+  /**
+   * The bank.
+   *
+   * A `#` is where the hole goes. No `#` means the hole is at the end, which
+   * is every sentence except the lists.
+   *
+   * Nothing in here is ambiguous, because a child who thinks carefully must
+   * not be punished for it. The statements cannot be shouted, the questions
+   * all begin with a question word or a helper word, and the exclamations all
+   * begin "What a", "How", or with an order given in a hurry. A sentence like
+   * "We won the match" was cut for exactly this reason: a full stop and an
+   * exclamation mark are both defensible and the child would be guessing.
+   *
+   * The content is the street, the market and the school, not apples and
+   * snowmen: kenkey, trotro, harmattan, the borehole, kente, Accra.
+   */
+  var BANK = [
+    /* Statements. */
+    { s: 'Mother went to the market', kind: 'statement' },
+    { s: 'We eat kenkey on Friday', kind: 'statement' },
+    { s: 'The trotro is full', kind: 'statement' },
+    { s: 'Harmattan makes my lips dry', kind: 'statement' },
+    { s: 'Kofi fetched water from the borehole', kind: 'statement' },
+    { s: 'Accra is very busy today', kind: 'statement' },
+    { s: 'My sister wears kente to church', kind: 'statement' },
+    { s: 'The football rolled into the gutter', kind: 'statement' },
+    { s: 'Grandmother sells plantain by the road', kind: 'statement' },
+    { s: 'The rain fell all night', kind: 'statement' },
+
+    /* Questions. */
+    { s: 'Where is the trotro station', kind: 'question' },
+    { s: 'How much is the kenkey', kind: 'question' },
+    { s: 'Who took my football', kind: 'question' },
+    { s: 'Are we going to Accra', kind: 'question' },
+    { s: 'Why is the borehole closed', kind: 'question' },
+    { s: 'What did you buy at the market', kind: 'question' },
+    { s: 'Is the harmattan over', kind: 'question' },
+    { s: 'When does school close', kind: 'question' },
+    { s: 'Can you tie kente cloth', kind: 'question' },
+    { s: 'Did you see the goat', kind: 'question' },
+
+    /* Exclamations. */
+    { s: 'What a big yam', kind: 'exclamation' },
+    { s: 'How hot this pepper is', kind: 'exclamation' },
+    { s: 'Look out for that trotro', kind: 'exclamation' },
+    { s: 'What a fine kente cloth', kind: 'exclamation' },
+    { s: 'How fast he ran', kind: 'exclamation' },
+    { s: 'Stop that goat', kind: 'exclamation' },
+    { s: 'What a noisy market', kind: 'exclamation' },
+    { s: 'How cold the harmattan is', kind: 'exclamation' },
+
+    /* Lists. The hole is in the middle, between the first thing and the next.
+       One comma only: a Primary 3 child is learning that a list is separated,
+       not yet that the last one takes "and". */
+    { s: 'I bought rice# beans and fish', kind: 'list' },
+    { s: 'We sell yam# cassava and plantain', kind: 'list' },
+    { s: 'Ama# Kofi and Esi went to school', kind: 'list' },
+    { s: 'She packed kenkey# fish and pepper', kind: 'list' },
+    { s: 'The market has tomatoes# onions and okro', kind: 'list' },
+    { s: 'We saw goats# sheep and hens', kind: 'list' }
+  ]
+
+  /** The sentence broken into what is drawn, with the hole as its own token. */
+  function tokenise(item) {
+    var cut = item.s.indexOf('#')
+    var before = cut < 0 ? item.s : item.s.slice(0, cut)
+    var after = cut < 0 ? '' : item.s.slice(cut + 1)
+    var toks = []
+    var w = before.split(' ')
+    var i
+    for (i = 0; i < w.length; i++) if (w[i]) toks.push({ word: w[i] })
+    toks.push({ blank: true })
+    w = after.split(' ')
+    for (i = 0; i < w.length; i++) if (w[i]) toks.push({ word: w[i] })
+    return toks
+  }
+
+  /** What the sentence sounds like when it is read out, hole and all. */
+  function spoken(item) {
+    return item.s.replace('#', '').replace(/\s+/g, ' ').trim()
+  }
+
+  /**
+   * One sign's worth of question.
+   *
+   * `seen` keeps the last few off the board, because a bank of thirty on an
+   * endless run repeats inside a minute otherwise and a child who has already
+   * been told the answer is not being asked anything.
+   */
+  function makeSign(round, seen) {
+    /* One sign in three is a list once lists are in play. Not half: the three
+       end marks are still the main lesson and the comma is the new thing being
+       introduced beside them, not the thing replacing them. */
+    var wantList = round >= LISTS_FROM && Math.random() < 0.34
+
+    function of(kind) { return (kind === 'list') === wantList }
+    var cands = BANK.filter(function (b) {
+      return of(b.kind) && seen.indexOf(b.s) < 0
+    })
+    if (!cands.length) cands = BANK.filter(function (b) { return of(b.kind) })
+
+    var item = pick(cands)
+    var options = ['.', '?', '!', ',']
+    /* Shuffled, so a child cannot learn "the answer is the second one". */
+    options.sort(function () { return Math.random() - 0.5 })
+    return { item: item, toks: tokenise(item), options: options }
+  }
+
+  /* ── drawing a punctuation mark ──────────────────────────────────────────── */
+
+  /**
+   * One mark, drawn as a shape, at cap height `s` centred on (x, y).
+   *
+   * ── Why these are not letters ─────────────────────────────────────────────
+   *
+   * Set as text, a full stop and a comma differ by about three pixels on a
+   * phone, and the whole exercise collapses into squinting. Drawn, each one is
+   * as big as the tile allows and the difference between them is a shape a
+   * child can see from the back of a classroom.
+   *
+   * White fill, dark outline, nothing else. A white ring on white lettering is
+   * the one thing this style never does.
+   */
+  function drawMark(ctx, mark, x, y, s, fill) {
+    var col = fill || '#ffffff'
+    var dotR = s * 0.15
+
+    function dot(dx, dy) {
+      ctx.beginPath()
+      ctx.arc(x + dx, y + dy, dotR, 0, Math.PI * 2)
+      K.inkedOn(ctx, col, K.LINE, Math.max(2.5, s * 0.1))
+    }
+
+    if (mark === '.') {
+      dot(0, s * 0.34)
+      return
+    }
+
+    if (mark === ',') {
+      /* The body and the tail as one path, so the outline goes round the
+         outside of the comma instead of drawing a line where the tail joins
+         the dot. */
+      ctx.beginPath()
+      ctx.arc(x, y + s * 0.26, dotR, Math.PI * 1.1, Math.PI * 0.35)
+      ctx.lineTo(x - dotR * 1.0, y + s * 0.26 + dotR * 3.0)
+      ctx.closePath()
+      K.inkedOn(ctx, col, K.LINE, Math.max(2.5, s * 0.1))
+      return
+    }
+
+    if (mark === '!') {
+      /* A tapered bar: wider at the top, which is what stops it reading as a
+         capital I. */
+      ctx.beginPath()
+      ctx.moveTo(x - s * 0.13, y - s * 0.5)
+      ctx.lineTo(x + s * 0.13, y - s * 0.5)
+      ctx.lineTo(x + s * 0.07, y + s * 0.08)
+      ctx.lineTo(x - s * 0.07, y + s * 0.08)
+      ctx.closePath()
+      K.inkedOn(ctx, col, K.LINE, Math.max(2.5, s * 0.1))
+      dot(0, s * 0.36)
+      return
+    }
+
+    /* A question mark: the hook and the neck as one stroked path, laid down
+       twice, dark and thick then coloured and thin. Stroking is the only way
+       to get an even weight round a curve that doubles back on itself. */
+    ctx.save()
+    ctx.lineCap = 'round'
+    ctx.lineJoin = 'round'
+    ctx.beginPath()
+    ctx.arc(x, y - s * 0.24, s * 0.25, Math.PI * 0.92, Math.PI * 0.22)
+    ctx.quadraticCurveTo(x + s * 0.2, y + s * 0.04, x, y + s * 0.1)
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = s * 0.3
+    ctx.stroke()
+    ctx.strokeStyle = col
+    ctx.lineWidth = s * 0.16
+    ctx.stroke()
+    ctx.restore()
+    dot(0, s * 0.36)
+  }
+
+  /* ── the sign ────────────────────────────────────────────────────────────── */
+
+  /**
+   * Where the board hangs.
+   *
+   * Under the banner, above the far pavement, and never wider than three and a
+   * half times its own height, so a short screen gets a sign shaped like a
+   * sign rather than a letterbox with one word in it.
+   */
+  function signRect(k) {
+    var top = k.H * 0.17
+    var bottom = k.H * 0.46
+    var w = Math.min(k.W * 0.68, (bottom - top) * 3.4)
+    return { x: k.W / 2 - w / 2, y: top, w: w, h: bottom - top }
+  }
+
+  /** The far pavement, which is where the post is planted and where he stands. */
+  function pavementY(k) { return K.kerbs(k.H).far }
+
+  /** The band of road a vehicle may drive along. */
+  function laneY(k) {
+    var kb = K.kerbs(k.H)
+    return kb.far + (kb.near - kb.far) * 0.62
+  }
+
+  /**
+   * Break the sentence into lines that fit the board.
+   *
+   * The hole is glued to the word before it whatever the width says, because a
+   * comma or a full stop that has wrapped onto the next line on its own is not
+   * a sentence any more, it is a typo.
+   */
+  function layout(ctx, rect, toks, size, font) {
+    ctx.font = '600 ' + Math.round(size) + 'px ' + font
+    var maxW = rect.w * 0.84
+    var space = ctx.measureText(' ').width
+    var blankW = size * 1.15
+    var lines = []
+    var cur = []
+    var curW = 0
+
+    for (var i = 0; i < toks.length; i++) {
+      var t = toks[i]
+      var tw = t.blank ? blankW : ctx.measureText(t.word).width
+      var glued = t.blank && cur.length > 0
+      var lead = cur.length && !glued ? space : 0
+      if (!glued && cur.length && curW + lead + tw > maxW) {
+        lines.push({ toks: cur, w: curW })
+        cur = []
+        curW = 0
+        lead = 0
+      }
+      cur.push({ t: t, w: tw, lead: lead })
+      curW += lead + tw
+    }
+    if (cur.length) lines.push({ toks: cur, w: curW })
+    return { lines: lines, size: size, blankW: blankW }
+  }
+
+  /** The board, its post, the words and the hole. */
+  function drawSign(ctx, k, rect, toks, shown, font) {
+    /* Post first, so the board sits in front of it. Two legs rather than one,
+       because a single central post under a wide board reads as a lollipop and
+       a road sign this size in Ghana always has two. */
+    var py = pavementY(k)
+    for (var leg = -1; leg <= 1; leg += 2) {
+      var lx = rect.x + rect.w * (0.5 + leg * 0.26)
+      ctx.beginPath()
+      ctx.rect(lx - rect.h * 0.035, rect.y + rect.h * 0.7, rect.h * 0.07, py - rect.y - rect.h * 0.7)
+      K.inkedOn(ctx, '#9aa3ad', K.LINE, 3.5)
+    }
+
+    /* The board. Navy face, white rim: the direction sign every Ghanaian road
+       has, and the only face colour that lets white lettering stay white. */
+    ctx.beginPath()
+    ctx.roundRect(rect.x, rect.y + rect.h * 0.05, rect.w, rect.h, rect.h * 0.1)
+    K.inkedOn(ctx, '#123a63', K.LINE, 4)
+    ctx.beginPath()
+    ctx.roundRect(rect.x, rect.y, rect.w, rect.h, rect.h * 0.1)
+    K.inkedOn(ctx, '#2b63a8', K.LINE, 4)
+    ctx.beginPath()
+    ctx.roundRect(rect.x + rect.h * 0.07, rect.y + rect.h * 0.07,
+      rect.w - rect.h * 0.14, rect.h - rect.h * 0.14, rect.h * 0.06)
+    ctx.strokeStyle = '#f3f1e8'
+    ctx.lineWidth = Math.max(2.5, rect.h * 0.03)
+    ctx.stroke()
+
+    /* The words, shrunk until they fit in both directions. Long sentences and
+       narrow phones both exist, and neither may push a word off the board. */
+    var size = rect.h * 0.3
+    var lay = layout(ctx, rect, toks, size, font)
+    var lineH = size * 1.42
+    while (lay.lines.length * lineH > rect.h * 0.66 && size > rect.h * 0.11) {
+      size *= 0.9
+      lay = layout(ctx, rect, toks, size, font)
+      lineH = size * 1.42
+    }
+
+    var cy = rect.y + rect.h * 0.5
+    var y0 = cy - (lay.lines.length - 1) * lineH / 2
+    ctx.save()
+    ctx.font = '600 ' + Math.round(size) + 'px ' + font
+    ctx.textAlign = 'left'
+    ctx.textBaseline = 'middle'
+    ctx.lineJoin = 'round'
+    ctx.miterLimit = 2
+
+    for (var li = 0; li < lay.lines.length; li++) {
+      var line = lay.lines[li]
+      var x = rect.x + rect.w / 2 - line.w / 2
+      var y = y0 + li * lineH
+      for (var ti = 0; ti < line.toks.length; ti++) {
+        var cell = line.toks[ti]
+        x += cell.lead
+        if (cell.t.blank) {
+          /* The hole: a dark plate with a dashed rim, drawn in the place the
+             answer will live, so there is nothing to look back and forth
+             between. */
+          ctx.save()
+          ctx.beginPath()
+          ctx.roundRect(x, y - size * 0.62, cell.w, size * 1.24, size * 0.18)
+          ctx.fillStyle = 'rgba(8,30,54,0.7)'
+          ctx.fill()
+          ctx.strokeStyle = '#ffffff'
+          ctx.lineWidth = Math.max(2, size * 0.07)
+          ctx.setLineDash([size * 0.2, size * 0.16])
+          ctx.stroke()
+          ctx.restore()
+          if (shown) drawMark(ctx, shown, x + cell.w / 2, y, size * 0.9, '#ffd93b')
+        } else {
+          ctx.strokeStyle = K.LINE
+          ctx.lineWidth = size * 0.26
+          ctx.strokeText(cell.t.word, x, y)
+          ctx.fillStyle = '#ffffff'
+          ctx.fillText(cell.t.word, x, y)
+        }
+        x += cell.w
+      }
+    }
+    ctx.restore()
+  }
+
+  /**
+   * The inspector's stamp, landing on the board.
+   *
+   * It comes down from above at three times its size and shrinks onto the
+   * sign, which is the whole vocabulary of a rubber stamp in two frames. A
+   * tick inside a ring, tilted, because a stamp that is square to the board
+   * looks printed and a stamp that is tilted looks used.
+   */
+  function drawStamp(ctx, x, y, s, t) {
+    var ease = t * t * (3 - 2 * t)
+    var scale = 1 + (1 - ease) * 2.2
+    ctx.save()
+    ctx.globalAlpha = Math.min(1, t * 3)
+    ctx.translate(x, y)
+    ctx.rotate(-0.26)
+    ctx.scale(scale, scale)
+    ctx.beginPath()
+    ctx.arc(0, 0, s, 0, Math.PI * 2)
+    ctx.strokeStyle = '#1f9b57'
+    ctx.lineWidth = Math.max(3, s * 0.16)
+    ctx.stroke()
+    ctx.strokeStyle = '#1f9b57'
+    ctx.lineWidth = Math.max(4, s * 0.2)
+    ctx.lineCap = 'round'
+    ctx.lineJoin = 'round'
+    ctx.beginPath()
+    ctx.moveTo(-s * 0.44, 0)
+    ctx.lineTo(-s * 0.1, s * 0.36)
+    ctx.lineTo(s * 0.48, -s * 0.38)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  /* ── what drives past ────────────────────────────────────────────────────── */
+
+  /** A small car. Drawn from the middle of its wheelbase, facing right. */
+  function drawCar(ctx, x, y, s) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    for (var w = -1; w <= 1; w += 2) {
+      ctx.beginPath()
+      ctx.arc(w * s * 0.56, s * 0.42, s * 0.26, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#3a3a3a', K.LINE, 3.5)
+      ctx.beginPath()
+      ctx.arc(w * s * 0.56, s * 0.42, s * 0.1, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#c9cdd2', K.LINE, 2)
+    }
+
+    /* Body: a bar with a cabin sitting on it. */
+    ctx.beginPath()
+    ctx.moveTo(-s * 1.0, s * 0.42)
+    ctx.lineTo(-s * 1.0, -s * 0.06)
+    ctx.quadraticCurveTo(-s * 0.72, -s * 0.12, -s * 0.5, -s * 0.14)
+    ctx.lineTo(-s * 0.3, -s * 0.62)
+    ctx.lineTo(s * 0.42, -s * 0.62)
+    ctx.lineTo(s * 0.64, -s * 0.12)
+    ctx.lineTo(s * 1.04, -s * 0.06)
+    ctx.lineTo(s * 1.04, s * 0.42)
+    ctx.closePath()
+    K.inkedOn(ctx, '#e0482e', K.LINE, 4)
+
+    ctx.beginPath()
+    ctx.moveTo(-s * 0.22, -s * 0.16)
+    ctx.lineTo(-s * 0.06, -s * 0.52)
+    ctx.lineTo(s * 0.34, -s * 0.52)
+    ctx.lineTo(s * 0.48, -s * 0.16)
+    ctx.closePath()
+    K.inkedOn(ctx, '#bfe8fb', K.LINE, 3)
+
+    ctx.beginPath()
+    ctx.arc(s * 0.92, s * 0.1, s * 0.13, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffe07a', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  /**
+   * A trotro, which is what comes past the big sign every tenth round.
+   *
+   * Longer, higher, a row of windows and a load on the roof. It is a different
+   * vehicle rather than a bigger car on purpose: the tenth sign has to look
+   * like an occasion from across the room.
+   */
+  function drawTrotro(ctx, x, y, s) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    for (var w = -1; w <= 1; w += 2) {
+      ctx.beginPath()
+      ctx.arc(w * s * 0.86, s * 0.5, s * 0.26, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#3a3a3a', K.LINE, 3.5)
+      ctx.beginPath()
+      ctx.arc(w * s * 0.86, s * 0.5, s * 0.1, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#c9cdd2', K.LINE, 2)
+    }
+
+    /* Roof load, first, so the body overlaps its feet. */
+    ctx.beginPath()
+    ctx.roundRect(-s * 0.9, -s * 1.12, s * 1.3, s * 0.26, s * 0.06)
+    K.inkedOn(ctx, '#b5793a', K.LINE, 3)
+
+    ctx.beginPath()
+    ctx.roundRect(-s * 1.3, -s * 0.9, s * 2.6, s * 1.4, s * 0.16)
+    K.inkedOn(ctx, '#f0e2bb', K.LINE, 4)
+
+    /* A blue stripe down the side, which is the whole trotro silhouette. */
+    ctx.beginPath()
+    ctx.rect(-s * 1.3, s * 0.06, s * 2.6, s * 0.18)
+    ctx.save()
+    ctx.clip()
+    ctx.fillStyle = '#2b63a8'
+    ctx.fillRect(-s * 1.3, s * 0.06, s * 2.6, s * 0.18)
+    ctx.restore()
+
+    for (var i = 0; i < 4; i++) {
+      ctx.beginPath()
+      ctx.roundRect(-s * 1.14 + i * s * 0.62, -s * 0.72, s * 0.46, s * 0.46, s * 0.06)
+      K.inkedOn(ctx, '#bfe8fb', K.LINE, 2.5)
+    }
+    ctx.beginPath()
+    ctx.arc(s * 1.18, s * 0.14, s * 0.12, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffe07a', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  /* ── the officer's kit ───────────────────────────────────────────────────── */
+
+  /**
+   * A baton, planted in the pavement beside him.
+   *
+   * Leaning, never upright. A vertical stick next to a spider reads as a
+   * thread he is hanging from, and once that has been seen he is no longer
+   * standing on the pavement directing traffic.
+   */
+  function drawBaton(ctx, x, footY, len) {
+    ctx.save()
+    ctx.translate(x, footY)
+    ctx.rotate(0.34)
+    ctx.beginPath()
+    ctx.roundRect(-len * 0.09, -len, len * 0.18, len, len * 0.09)
+    K.inkedOn(ctx, '#f3f1e8', K.LINE, 3)
+    ctx.fillStyle = '#1d1a17'
+    for (var b = 0; b < 2; b++) {
+      ctx.beginPath()
+      ctx.rect(-len * 0.09, -len * (0.78 - b * 0.28), len * 0.18, len * 0.12)
+      ctx.fill()
+    }
+    ctx.restore()
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    right: ['Stamped! Send it out.', 'Correct! Good eye.', 'That sign can go up.', 'Yes! Next one.'],
+    billboard: 'The big sign on the Accra road! Well done, officer.',
+    over: 'The signs are all wrong. Let us start again.',
+    poke: 'Not now, I am on duty!'
+  }
+
+  AnanseKit.run({
+    title: 'Punctuation Police',
+    overTitle: 'Signs down!',
+    scene: 'road',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'signs',
+    /* One tap is the whole answer, so there is nothing to confirm. */
+    button: false,
+    restMood: 'watching',
+    hud: function (k) {
+      return [
+        { label: 'signs', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      if (k.own.seen === undefined) { k.own.seen = []; k.own.coins = 0 }
+      /* A restart after losing the run. The kit puts its own score and lives
+         back; the coins and the recent sentences are ours to reset. */
+      if (k.round === 0) { k.own.seen = []; k.own.coins = 0 }
+
+      var q = makeSign(k.round, k.own.seen)
+      k.own.q = q
+      k.target = MARK[q.item.kind]
+      k.own.picked = -1
+      k.own.car = null
+      k.own.stamp = -1
+
+      k.own.seen.push(q.item.s)
+      /* Only the last few, so the bank does not run dry on a long run. */
+      while (k.own.seen.length > 8) k.own.seen.shift()
+
+      /* One call, because saying twice cancels the first: the kit's voice
+         stops whatever is playing when a new line arrives. So the sentence and
+         the question travel together. */
+      k.say(spoken(q.item) + '. ' + (q.item.kind === 'list'
+        ? 'What goes in the middle?'
+        : 'What goes at the end?'))
+      k.him.setMood('watching')
+    },
+
+    ask: function (k) {
+      if (!k.own.q) return null
+      if (k.phase === 'won') return { head: 'Yes! ', num: null, tail: NAME[MARK[k.own.q.item.kind]] }
+      /* The list rounds put the hole in the middle, and telling the child to
+         look at the end of a sentence whose hole is not there would be a lie
+         in the one place the position of the hole is the clue. */
+      return {
+        head: k.own.q.item.kind === 'list' ? 'What goes in the middle?' : 'What goes at the end?',
+        num: null,
+        tail: ''
+      }
+    },
+
+    /**
+     * Is the mark on the tile that was tapped the mark this kind of sentence
+     * takes?
+     *
+     * Both halves are read now: the character off the tile that is on the
+     * board, and the required mark off the sentence's kind through the one
+     * table that knows. Nothing was stored when the round was built.
+     */
+    judge: function (k) {
+      if (k.own.picked < 0) return false
+      var chosen = k.own.q.options[k.own.picked]
+      return chosen === MARK[k.own.q.item.kind]
+    },
+
+    down: function (k, x, y) {
+      /**
+       * A round already missed may be answered again.
+       *
+       * This guard exists to stop a second tap landing inside the same commit,
+       * not to end the round. Without the second half of the test it never let
+       * go: `picked` is only cleared in `begin`, `begin` only runs on a new
+       * round, and a new round only comes after a win. So one wrong answer
+       * locked the board for good. The child lost a life and then could not
+       * answer anything again, in a game with no end.
+       */
+      if (k.own.picked >= 0 && k.results[k.round] !== false) return false
+      var i = K.tileAt(k.W, k.H, k.own.q.options.length, x, y)
+      if (i < 0) return false
+      k.own.picked = i
+      k.sound.play('lift')
+      k.commit()
+      return true
+    },
+
+    onWin: function (k) {
+      /* The sign is finished, so the road opens: something drives past it and
+         the inspector's stamp comes down. The stamp is fired from `step` when
+         the vehicle is level with the board, so the two read as one event. */
+      k.own.car = { t: 0, big: isBillboard(k.round) }
+      k.own.coins += 1
+      if (isBillboard(k.round)) {
+        k.own.coins += 10
+        k.cheer(k.W * 0.5, signRect(k).y + signRect(k).h * 0.5)
+        k.say(LINES.billboard)
+      } else {
+        k.say(pick(LINES.right))
+      }
+    },
+
+    onMiss: function (k) {
+      /* The rule, out loud. This is the lesson: the red tile is only the
+         bookmark that says which rule it was. */
+      k.say(REASON[k.own.q.item.kind])
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      if (!k.own.q) return
+      var car = k.own.car
+      if (!car) return
+      car.t = Math.min(1, car.t + dt * 0.58)
+      if (k.own.stamp < 0 && car.t >= 0.52) {
+        k.own.stamp = 0
+        k.sound.play('thud')
+        k.kick(5)
+      }
+      if (k.own.stamp >= 0 && k.own.stamp < 1) {
+        k.own.stamp = Math.min(1, k.own.stamp + dt * 3.2)
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var q = k.own.q
+      var rect = signRect(k)
+      var need = MARK[q.item.kind]
+
+      /* The mark in the hole is whatever the child chose, right or wrong. The
+         board has to show what they actually said, not what they should have
+         said, or the miss has nothing to look at. */
+      var shown = k.own.picked >= 0 ? q.options[k.own.picked] : null
+
+      drawSign(ctx, k, rect, q.toks, shown, k.FONT)
+
+      if (k.own.stamp >= 0) {
+        drawStamp(ctx, rect.x + rect.w * 0.84, rect.y + rect.h * 0.24,
+          rect.h * 0.2, k.own.stamp)
+      }
+
+      /* Whatever is driving past, on the road, in front of the posts. */
+      if (k.own.car) {
+        var s = clamp(Math.min(k.W * 0.055, k.H * 0.09), 22, 56)
+        var span = k.W + s * 8
+        var cx = -s * 4 + k.own.car.t * span
+        var cy = laneY(k) - s * 0.42
+        if (k.own.car.big) drawTrotro(ctx, cx, cy, s)
+        else drawCar(ctx, cx, cy, s)
+      }
+
+      /**
+       * Him, on the far pavement in the gutter beside the sign.
+       *
+       * Beside it, never under it and never on the road. The gutter between
+       * the board's left edge and the edge of the screen is the only piece of
+       * pavement that is his, and it is wide enough at every size the sign is
+       * allowed to be.
+       */
+      var pave = pavementY(k)
+      var hr = clamp(Math.min(k.W * 0.05, k.H * 0.08), 20, 46)
+      var hx = rect.x * 0.5
+      drawBaton(ctx, hx + hr * 1.5, pave, hr * 1.5)
+      k.him.draw(hx, pave - hr * 1.3, hr, pave)
+
+      /* The answers. The shared row draws the tile; the mark and its name are
+         ours, because a punctuation mark set as text at tile size cannot be
+         told apart from the one next to it. */
+      var n = q.options.length
+      for (var i = 0; i < n; i++) {
+        var state = 'idle'
+        if (k.own.picked >= 0) {
+          if (q.options[i] === need) state = 'right'
+          else if (i === k.own.picked) state = 'wrong'
+          else state = 'dim'
+        }
+        /* An empty label, so the kit paints the face and nothing else. */
+        K.drawTile(ctx, k.W, k.H, i, n, '', state, k.FONT)
+
+        var r = K.tileRect(k.W, k.H, i, n)
+        ctx.save()
+        if (state === 'dim') ctx.globalAlpha = 0.4
+        drawMark(ctx, q.options[i], r.x + r.w / 2, r.y + r.h * 0.38, r.h * 0.46)
+
+        var label = NAME[q.options[i]]
+        var size = r.h * 0.2
+        ctx.font = '600 ' + Math.round(size) + 'px ' + k.FONT
+        while (ctx.measureText(label).width > r.w * 0.86 && size > r.h * 0.1) {
+          size *= 0.9
+          ctx.font = '600 ' + Math.round(size) + 'px ' + k.FONT
+        }
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.lineJoin = 'round'
+        ctx.miterLimit = 2
+        ctx.strokeStyle = K.LINE
+        ctx.lineWidth = size * 0.3
+        ctx.strokeText(label, r.x + r.w / 2, r.y + r.h * 0.8)
+        ctx.fillStyle = '#ffffff'
+        ctx.fillText(label, r.x + r.w / 2, r.y + r.h * 0.8)
+        ctx.restore()
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.q) return { q: null }
+      var q = k.own.q
+      var n = q.options.length
+      var rect = signRect(k)
+      return {
+        sentence: q.item.s,
+        kind: q.item.kind,
+        answer: MARK[q.item.kind],
+        blankInMiddle: q.item.s.indexOf('#') >= 0,
+        options: q.options,
+        picked: k.own.picked,
+        coins: k.own.coins,
+        billboard: isBillboard(k.round),
+        car: k.own.car ? Math.round(k.own.car.t * 100) / 100 : null,
+        stamp: k.own.stamp,
+        sign: {
+          x: Math.round(rect.x + rect.w / 2),
+          y: Math.round(rect.y + rect.h / 2),
+          w: Math.round(rect.w),
+          h: Math.round(rect.h)
+        },
+        him: {
+          x: Math.round(rect.x * 0.5),
+          y: Math.round(pavementY(k) - clamp(Math.min(k.W * 0.05, k.H * 0.08), 20, 46) * 1.3)
+        },
+        tiles: q.options.map(function (m, i) {
+          var r = K.tileRect(k.W, k.H, i, n)
+          return {
+            mark: m, name: NAME[m],
+            x: Math.round(r.x + r.w / 2),
+            y: Math.round(r.y + r.h / 2)
+          }
+        })
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

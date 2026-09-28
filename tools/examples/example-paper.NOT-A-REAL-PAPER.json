@@ -1,0 +1,67 @@
+{
+  "_THIS_IS_NOT_A_REAL_PAPER": [
+    "Nothing in this file came from any examination. It is a format illustration",
+    "for tools/import-papers.mjs and nothing else.",
+    "",
+    "It cannot be imported, by design, and not merely by convention:",
+    "  - the exam code EXAMPLE_NOT_REAL is not in edu_examinations, so validation",
+    "    stops at paper.exam;",
+    "  - the curriculum code EXAMPLE_NOT_REAL does not exist either;",
+    "  - this key itself is not in the accepted paper key list, so the importer",
+    "    refuses the file as having an unknown top level key.",
+    "Three separate refusals. Copy the shape, never the content.",
+    "",
+    "The stems below are descriptions of where real text goes. They are not",
+    "questions and must never be treated as any examination's questions."
+  ],
+
+  "paper": {
+    "exam": "EXAMPLE_NOT_REAL",
+    "year": 1999,
+    "paper": "Paper 0",
+    "subject": "EXAMPLE_NOT_REAL",
+    "curriculum": "EXAMPLE_NOT_REAL",
+    "curriculumVersion": "0.0",
+    "level": "EXAMPLE_NOT_REAL",
+    "title": "Format illustration only. Not a paper.",
+    "licence": "OWNED",
+    "licenceNote": "Written by hand as a format example. No examining body's material is reproduced here.",
+    "sourceReference": "None. There is no document behind this file."
+  },
+
+  "questions": [
+    {
+      "number": "1",
+      "kind": "MULTIPLE_CHOICE",
+      "stem": "The text of the real question goes here, copied exactly as printed.",
+      "objective": "EXAMPLE.0.0.0.0",
+      "marks": 1,
+      "difficulty": "CORE",
+      "options": [
+        { "key": "A", "text": "Option A as printed." },
+        { "key": "B", "text": "Option B as printed." },
+        { "key": "C", "text": "Option C as printed." },
+        { "key": "D", "text": "Option D as printed." }
+      ],
+      "answer": "B",
+      "explanation": "Only from the published marking scheme. Leave it out if you do not have one."
+    },
+    {
+      "number": "2(a)",
+      "kind": "NUMERIC",
+      "stem": "A question whose answer is a number. Note the number as printed, including the part.",
+      "objective": "EXAMPLE.0.0.0.1",
+      "marks": 3,
+      "answer": 0,
+      "tolerance": 0.01,
+      "unit": "unit as the paper states it"
+    },
+    {
+      "number": "2(b)",
+      "kind": "STRUCTURED",
+      "stem": "A question with no answer key. It is imported as needing a person to mark it, rather than marked against a guess.",
+      "objective": "EXAMPLE.0.0.0.1",
+      "marks": 5
+    }
+  ]
+}

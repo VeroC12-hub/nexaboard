@@ -35,7 +35,7 @@
  * mistake in a costume should be able to make a game ugly, never wrong.
  */
 
-import type { Goal, Scene, Subject, Thing } from './heavy'
+import type { Goal, Motion, Scene, Subject, Thing } from './heavy'
 import type { Stage } from './learner'
 
 /**
@@ -80,6 +80,15 @@ export interface Costume {
   /** Never offered for a topic matching this, however well `suits` matches. */
   not?: RegExp
   things: Thing[]
+  /**
+   * How the things move, when the game cares.
+   *
+   * Most do not: the grammar picks a motion and any of them is fine for a
+   * mango. Some do. A balloon that sinks is wrong about the world, and a
+   * child who has held one knows it, so Number Balloon Pop asks for `rise`
+   * rather than taking whatever comes up.
+   */
+  motion?: Motion
   /**
    * On the board: a card, the thing alone, or a balloon.
    *

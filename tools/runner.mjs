@@ -85,6 +85,10 @@ export class Runner {
     this.model = opts.model || 'sonnet';
     this.workdir = opts.workdir || path.join(os.tmpdir(), 'nexaedu-tutor');
     this.log = opts.log || (() => {});
+    /* The engine tried when this one is out of allowance. Injected rather than
+       constructed here, so `runner.mjs` does not have to know what a backup
+       is and a caller can supply a different one or none. */
+    this.backup = opts.backup || null;
     fs.mkdirSync(this.workdir, { recursive: true });
   }
 
@@ -200,10 +204,49 @@ export class Runner {
     });
   }
 
-  /** Run a prompt. Throws with something a person can read. */
+  /**
+   * Run a prompt, on whichever engine still has allowance.
+   *
+   * ── Why there is a chain ──────────────────────────────────────────────────
+   *
+   * This used to be one attempt on Claude, and a learner mid lesson whose
+   * subscription had run out was told the tutor was unavailable. That was true
+   * and useless: a second allowance was sitting on the same machine.
+   *
+   * So the order is Claude, then Codex, and the first with allowance answers.
+   * A `limit` or `auth` verdict is the whole reason this exists and moves on
+   * immediately. A plain `error` or an empty reply also moves on, because from
+   * the learner's side an engine that errors and an engine that is out are the
+   * same thing, and the second engine costs a few seconds to try.
+   *
+   * Images are deliberately NOT part of this chain: they go to OpenAI, a
+   * different account, so a lesson's pictures never consume the allowance its
+   * words need.
+   */
   async run(prompt, onChunk) {
-    const { out, verdict } = await this.attempt(prompt, onChunk);
-    if (verdict.ok) return out;
-    throw new Error(verdict.message || 'Claude Code produced no usable output.');
+    const tried = [];
+
+    const first = await this.attempt(prompt, onChunk);
+    if (first.verdict.ok) return first.out;
+    tried.push('Claude: ' + (first.verdict.message || first.verdict.kind));
+    this.log('  claude ' + first.verdict.kind + ', trying the next engine');
+
+    const backup = this.backup;
+    if (backup && backup.available) {
+      /* No `onChunk`. Codex runs to completion, and anything already streamed
+         from the failed attempt has to be discarded by the caller rather than
+         appended to, which is why `classify` is applied to the whole text
+         each time. */
+      const second = await backup.attempt(prompt);
+      if (second.verdict.ok) {
+        this.log('  codex answered');
+        return second.out;
+      }
+      tried.push('Codex: ' + (second.verdict.message || second.verdict.kind));
+    } else {
+      tried.push('Codex: not installed');
+    }
+
+    throw new Error('No engine could answer. ' + tried.join('; '));
   }
 }

@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Animal Groups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Animal Groups. Mammal, bird, fish, insect.
+
+  ── Why this is a tap and not a drag ─────────────────────────────────────────
+
+  Animal Home is a drag, and it should be: a fish held over a kennel is a joke
+  the hand can tell. This one must not be. The four answers here are words, not
+  pictures, and reading "mammal" and "insect" and telling them apart is half of
+  what is being taught. A drag lets a child aim at a shape and let go; a tap
+  makes them look at the sign they are pressing, and the sign has nothing on it
+  but the word.
+
+  ── Why the group signs are wooden boards on posts ───────────────────────────
+
+  Because a group is a place things are put, and the child has to believe the
+  animal can go there. Four floating buttons are a menu. Four signposts planted
+  in the ground are a park with four enclosures, and when the answer is right
+  the animal walks over and stands under its own sign, which is the whole idea
+  of a group said without a word.
+
+  ── Why the bat, the whale and the butterfly are in the bank ─────────────────
+
+  They are the point. A child who sorts a goat into mammals has used no rule at
+  all: goats are obviously animals-with-legs. A bat flies, a whale swims and a
+  butterfly has wings, and every one of them is in a group its appearance
+  argues against. Getting those three wrong and being told why is the lesson;
+  the goats are there so the lesson has somewhere easy to start.
+
+  ── Why there is no spider ───────────────────────────────────────────────────
+
+  A spider has eight legs and two body parts, so it is not an insect, and a
+  child who put one under "insect" would be marked wrong for the commonest
+  sensible guess there is. Teaching that properly needs a fifth sign for
+  arachnids and a joke about Ananse counting his own legs, and that is a
+  different game. So no spiders here, and the only eight legged thing on the
+  screen is the one holding the notebook.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #3a2a10;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /** Every tenth animal fills a page of the ranger's book. */
+  var STRETCH = 10
+  function isPage(round) { return round > 0 && round % STRETCH === STRETCH - 1 }
+
+  /** The four signs. Always all four, always these four. */
+  var GROUPS = ['mammal', 'bird', 'fish', 'insect']
+
+  /* ── the animals ─────────────────────────────────────────────────────────── */
+
+  /**
+   * A four legged body, which nine of the animals are a variation of.
+   *
+   * Legs, then body, then head, in that order, because the body has to overlap
+   * the tops of the legs or they read as sticks propped against it. Everything
+   * particular to one animal happens in `cfg.extra`, so a goat and a cow
+   * differ by their horns and their hide and by nothing else in the code.
+   */
+  function quad(ctx, r, cfg) {
+    var hide = cfg.hide
+    var legs = cfg.legCol || '#6b4a22'
+
+    ctx.strokeStyle = legs
+    ctx.lineWidth = r * (cfg.legW || 0.15)
+    ctx.lineCap = 'round'
+    for (var i = 0; i < 4; i++) {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.45 + i * r * 0.3, r * 0.25)
+      ctx.lineTo(-r * 0.45 + i * r * 0.3, r * (cfg.legLen || 0.85))
+      ctx.stroke()
+    }
+
+    /* Tail, before the body, so it grows out from behind it. */
+    ctx.strokeStyle = cfg.tailCol || legs
+    ctx.lineWidth = r * (cfg.tailW || 0.08)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.7, -r * 0.1)
+    if (cfg.tail === 'curl') {
+      ctx.quadraticCurveTo(-r * 1.15, -r * 0.5, -r * 0.78, -r * 0.72)
+    } else {
+      ctx.quadraticCurveTo(-r * 0.98, r * 0.1, -r * 0.88, r * 0.36)
+    }
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * (cfg.bodyW || 0.76), r * (cfg.bodyH || 0.46), 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, hide, K.LINE, 3.5)
+
+    /* Head. */
+    var hx = r * (cfg.headX || 0.74)
+    var hy = -r * (cfg.headY || 0.3)
+    ctx.beginPath()
+    ctx.ellipse(hx, hy, r * (cfg.headR || 0.3), r * (cfg.headR || 0.3) * 0.84,
+      -0.25, 0, Math.PI * 2)
+    K.inkedOn(ctx, cfg.face || hide, K.LINE, 3)
+
+    /* Ear. One only: a second ear on a side view is a lump on the skyline. */
+    if (cfg.ear === 'up') {
+      ctx.beginPath()
+      ctx.ellipse(hx - r * 0.12, hy - r * 0.26, r * 0.09, r * 0.16, -0.3, 0, Math.PI * 2)
+      K.inkedOn(ctx, cfg.face || hide, K.LINE, 2.5)
+    } else if (cfg.ear === 'floppy') {
+      ctx.beginPath()
+      ctx.ellipse(hx - r * 0.16, hy + r * 0.04, r * 0.11, r * 0.22, 0.3, 0, Math.PI * 2)
+      K.inkedOn(ctx, cfg.earCol || '#a9703c', K.LINE, 2.5)
+    }
+
+    if (cfg.extra) cfg.extra(ctx, r, hx, hy)
+
+    ctx.beginPath()
+    ctx.arc(hx + r * 0.12, hy - r * 0.06, r * 0.05, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+  }
+
+  /** A pair of horns, which is the only difference between three of the quads. */
+  function horns(ctx, r, hx, hy, kind) {
+    ctx.strokeStyle = '#e8dcc0'
+    ctx.lineWidth = r * 0.08
+    ctx.lineCap = 'round'
+    for (var s = 0; s < 2; s++) {
+      var base = hx - r * 0.04 + s * r * 0.14
+      ctx.beginPath()
+      ctx.moveTo(base, hy - r * 0.2)
+      if (kind === 'cow') {
+        ctx.quadraticCurveTo(base - r * 0.2, hy - r * 0.44, base + r * 0.06, hy - r * 0.5)
+      } else if (kind === 'antelope') {
+        /* Long and straight, which is the one thing that says antelope at this
+           size. A curve here and it is a goat again. */
+        ctx.lineTo(base - r * 0.1, hy - r * 0.86)
+      } else {
+        ctx.quadraticCurveTo(base - r * 0.16, hy - r * 0.42, base - r * 0.3, hy - r * 0.34)
+      }
+      ctx.stroke()
+    }
+  }
+
+  /**
+   * A bird.
+   *
+   * Feathers, a beak and two legs. The beak is where the species lives: a hook
+   * is a hunter, a curve is a parrot, a short cone is a hen.
+   */
+  function bird(ctx, r, cfg) {
+    ctx.strokeStyle = cfg.legCol || '#f2a93b'
+    ctx.lineWidth = r * 0.09
+    ctx.lineCap = 'round'
+    for (var l = -1; l <= 1; l += 2) {
+      ctx.beginPath()
+      ctx.moveTo(l * r * 0.14, r * 0.3)
+      ctx.lineTo(l * r * 0.18, r * 0.82)
+      ctx.stroke()
+    }
+
+    /* Tail, behind. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.5, 0)
+    ctx.lineTo(-r * (cfg.tailLen || 1.0), -r * 0.34)
+    ctx.lineTo(-r * (cfg.tailLen || 1.0) * 0.92, r * 0.26)
+    ctx.closePath()
+    K.inkedOn(ctx, cfg.dark, K.LINE, 3)
+
+    ctx.beginPath()
+    ctx.ellipse(0, r * 0.04, r * 0.7, r * 0.56, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, cfg.hide, K.LINE, 3.5)
+
+    /* Wing, folded. */
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.08, r * 0.08, r * 0.36, r * 0.24, -0.3, 0, Math.PI * 2)
+    K.inkedOn(ctx, cfg.dark, K.LINE, 2.5)
+
+    var hx = r * (cfg.headX || 0.46)
+    var hy = -r * (cfg.headY || 0.44)
+    ctx.beginPath()
+    ctx.arc(hx, hy, r * (cfg.headR || 0.36), 0, Math.PI * 2)
+    K.inkedOn(ctx, cfg.head || cfg.hide, K.LINE, 3.5)
+
+    if (cfg.extra) cfg.extra(ctx, r, hx, hy)
+
+    /* Beak. */
+    var bx = hx + r * (cfg.headR || 0.36) * 0.8
+    ctx.beginPath()
+    if (cfg.beak === 'hook') {
+      ctx.moveTo(bx - r * 0.04, hy - r * 0.12)
+      ctx.lineTo(bx + r * 0.34, hy - r * 0.02)
+      ctx.quadraticCurveTo(bx + r * 0.2, hy + r * 0.2, bx - r * 0.04, hy + r * 0.1)
+    } else if (cfg.beak === 'curve') {
+      ctx.moveTo(bx - r * 0.06, hy - r * 0.16)
+      ctx.quadraticCurveTo(bx + r * 0.3, hy - r * 0.02, bx + r * 0.02, hy + r * 0.26)
+      ctx.quadraticCurveTo(bx - r * 0.08, hy + r * 0.04, bx - r * 0.06, hy - r * 0.16)
+    } else {
+      ctx.moveTo(bx - r * 0.04, hy - r * 0.1)
+      ctx.lineTo(bx + r * 0.3, hy + r * 0.02)
+      ctx.lineTo(bx - r * 0.04, hy + r * 0.14)
+    }
+    ctx.closePath()
+    K.inkedOn(ctx, cfg.beakCol || '#f2a93b', K.LINE, 2.5)
+
+    ctx.beginPath()
+    ctx.arc(hx + r * 0.1, hy - r * 0.08, r * 0.06, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+  }
+
+  /**
+   * A fish.
+   *
+   * Fins and gills, drawn every time, because those two are the words the
+   * reason line uses and the child should be able to point at them.
+   */
+  function fish(ctx, r, cfg) {
+    /* Tail, upright, which is the half of the shape that separates a fish from
+       a whale in this set. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.6, 0)
+    ctx.lineTo(-r * 1.05, -r * 0.46)
+    ctx.quadraticCurveTo(-r * 0.82, 0, -r * 1.05, r * 0.46)
+    ctx.closePath()
+    K.inkedOn(ctx, cfg.dark, K.LINE, 3)
+
+    /* Dorsal fin. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.3, -r * 0.4)
+    ctx.lineTo(r * (cfg.finTall ? 0.0 : -0.1), -r * (cfg.finTall ? 0.98 : 0.72))
+    ctx.lineTo(r * 0.3, -r * 0.34)
+    ctx.closePath()
+    K.inkedOn(ctx, cfg.dark, K.LINE, 3)
+
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.84, r * (cfg.slim ? 0.4 : 0.5), 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, cfg.hide, K.LINE, 3.5)
+
+    /* Gill line and a belly fin. */
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 2.5
+    ctx.beginPath()
+    ctx.moveTo(r * 0.36, -r * 0.24)
+    ctx.quadraticCurveTo(r * 0.24, 0, r * 0.36, r * 0.24)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.1, r * 0.34)
+    ctx.lineTo(-r * 0.24, r * 0.7)
+    ctx.lineTo(r * 0.2, r * 0.4)
+    ctx.closePath()
+    K.inkedOn(ctx, cfg.dark, K.LINE, 2.5)
+
+    if (cfg.extra) cfg.extra(ctx, r)
+
+    ctx.beginPath()
+    ctx.arc(r * 0.56, -r * 0.12, r * 0.1, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffffff', K.LINE, 2)
+    ctx.beginPath()
+    ctx.arc(r * 0.58, -r * 0.12, r * 0.05, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+  }
+
+  /**
+   * An insect.
+   *
+   * Three body parts and six legs, always, both countable. The reason lines
+   * say "six legs and three body parts" and a picture that did not have them
+   * would make the reason a lie.
+   */
+  function bug(ctx, r, cfg) {
+    var legs = cfg.legCol || '#3a2a10'
+
+    /* Wings first, behind, so the body sits on top of them. */
+    if (cfg.wings === 'butterfly') {
+      for (var bw = -1; bw <= 1; bw += 2) {
+        ctx.beginPath()
+        ctx.ellipse(r * 0.1, bw * r * 0.52, r * 0.52, r * 0.42, bw * 0.4, 0, Math.PI * 2)
+        K.inkedOn(ctx, cfg.wing || '#f2a83c', K.LINE, 3)
+        ctx.beginPath()
+        ctx.ellipse(-r * 0.36, bw * r * 0.44, r * 0.34, r * 0.3, -bw * 0.3, 0, Math.PI * 2)
+        K.inkedOn(ctx, cfg.wing2 || '#e0482e', K.LINE, 3)
+      }
+    } else if (cfg.wings === 'clear') {
+      for (var cw = -1; cw <= 1; cw += 2) {
+        ctx.beginPath()
+        ctx.ellipse(-r * 0.05, cw * r * 0.4, r * 0.46, r * 0.2, cw * 0.5, 0, Math.PI * 2)
+        K.inkedOn(ctx, 'rgba(230,246,255,0.9)', K.LINE, 2.5)
+      }
+    }
+
+    /* Six legs, three a side, counted from the thorax. */
+    ctx.strokeStyle = legs
+    ctx.lineWidth = r * 0.07
+    ctx.lineCap = 'round'
+    for (var s = -1; s <= 1; s += 2) {
+      for (var i = 0; i < 3; i++) {
+        ctx.beginPath()
+        ctx.moveTo(-r * 0.05 + i * r * 0.16, 0)
+        ctx.quadraticCurveTo(-r * 0.2 + i * r * 0.22, s * r * 0.4,
+          -r * 0.34 + i * r * 0.34, s * r * 0.64)
+        ctx.stroke()
+      }
+    }
+    if (cfg.hop) {
+      /* The jumping leg, bent, which is the whole grasshopper. */
+      ctx.lineWidth = r * 0.12
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.2, r * 0.1)
+      ctx.lineTo(-r * 0.5, -r * 0.34)
+      ctx.lineTo(-r * 0.7, r * 0.5)
+      ctx.stroke()
+    }
+
+    /* Abdomen, thorax, head: three parts, left to right. */
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.5, 0, r * 0.42, r * (cfg.slim ? 0.2 : 0.3), 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, cfg.hide, K.LINE, 3)
+    if (cfg.stripes) {
+      ctx.save()
+      ctx.beginPath()
+      ctx.ellipse(-r * 0.5, 0, r * 0.42, r * 0.3, 0, 0, Math.PI * 2)
+      ctx.clip()
+      ctx.fillStyle = '#1d1a17'
+      for (var st = 0; st < 3; st++) {
+        ctx.fillRect(-r * 0.78 + st * r * 0.26, -r * 0.4, r * 0.11, r * 0.8)
+      }
+      ctx.restore()
+    }
+    ctx.beginPath()
+    ctx.ellipse(r * 0.02, 0, r * 0.26, r * 0.24, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, cfg.thorax || cfg.hide, K.LINE, 3)
+    ctx.beginPath()
+    ctx.arc(r * 0.42, 0, r * 0.22, 0, Math.PI * 2)
+    K.inkedOn(ctx, cfg.head || cfg.hide, K.LINE, 3)
+
+    /* Antennae. */
+    ctx.strokeStyle = legs
+    ctx.lineWidth = r * 0.055
+    for (var a = -1; a <= 1; a += 2) {
+      ctx.beginPath()
+      ctx.moveTo(r * 0.54, a * r * 0.1)
+      ctx.quadraticCurveTo(r * 0.82, a * r * 0.32, r * 0.96, a * r * 0.2)
+      ctx.stroke()
+    }
+
+    if (cfg.extra) cfg.extra(ctx, r)
+
+    ctx.beginPath()
+    ctx.arc(r * 0.5, -r * 0.08, r * (cfg.bigEye ? 0.11 : 0.06), 0, Math.PI * 2)
+    ctx.fillStyle = cfg.bigEye ? '#c4442e' : '#25321a'
+    ctx.fill()
+  }
+
+  /**
+   * A bat.
+   *
+   * Its own function because nothing else in the bank has skin wings, and skin
+   * wings are the argument the child has to overrule: this thing flies and is
+   * still a mammal. So the wings are drawn as scalloped membrane on a finger
+   * frame rather than as feathers, and the ears and the fur are deliberately
+   * the loudest things on it.
+   */
+  function bat(ctx, r) {
+    for (var s = -1; s <= 1; s += 2) {
+      ctx.beginPath()
+      ctx.moveTo(0, -r * 0.1)
+      ctx.lineTo(s * r * 0.6, -r * 0.62)
+      ctx.lineTo(s * r * 1.05, -r * 0.3)
+      ctx.quadraticCurveTo(s * r * 0.82, r * 0.02, s * r * 0.66, -r * 0.06)
+      ctx.quadraticCurveTo(s * r * 0.5, r * 0.22, s * r * 0.3, r * 0.1)
+      ctx.quadraticCurveTo(s * r * 0.16, r * 0.3, 0, r * 0.24)
+      ctx.closePath()
+      K.inkedOn(ctx, '#6b4a6a', K.LINE, 3)
+    }
+
+    ctx.beginPath()
+    ctx.ellipse(0, r * 0.04, r * 0.24, r * 0.34, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#8a5f84', K.LINE, 3)
+
+    /* Fur along the shoulders: the mammal evidence, drawn where it can be
+       seen rather than mentioned in the reason and nowhere else. */
+    ctx.strokeStyle = '#c99ec3'
+    ctx.lineWidth = r * 0.05
+    ctx.lineCap = 'round'
+    for (var f = -2; f <= 2; f++) {
+      ctx.beginPath()
+      ctx.moveTo(f * r * 0.07, -r * 0.2)
+      ctx.lineTo(f * r * 0.09, -r * 0.34)
+      ctx.stroke()
+    }
+
+    ctx.beginPath()
+    ctx.arc(0, -r * 0.3, r * 0.22, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#8a5f84', K.LINE, 3)
+    for (var e = -1; e <= 1; e += 2) {
+      ctx.beginPath()
+      ctx.moveTo(e * r * 0.06, -r * 0.44)
+      ctx.lineTo(e * r * 0.24, -r * 0.82)
+      ctx.lineTo(e * r * 0.26, -r * 0.4)
+      ctx.closePath()
+      K.inkedOn(ctx, '#8a5f84', K.LINE, 2.5)
+    }
+    for (var y = -1; y <= 1; y += 2) {
+      ctx.beginPath()
+      ctx.arc(y * r * 0.09, -r * 0.32, r * 0.04, 0, Math.PI * 2)
+      ctx.fillStyle = '#25321a'
+      ctx.fill()
+    }
+  }
+
+  /**
+   * A whale.
+   *
+   * The tail is horizontal and there is a spout, and those two are the entire
+   * teaching point: a fish tail stands up, a whale tail lies flat, and a whale
+   * comes up to breathe because it breathes air.
+   */
+  function whale(ctx, r) {
+    /* Spout first, above, so the body overlaps its base. */
+    ctx.strokeStyle = '#bfe8fb'
+    ctx.lineWidth = r * 0.09
+    ctx.lineCap = 'round'
+    for (var s = -1; s <= 1; s++) {
+      ctx.beginPath()
+      ctx.moveTo(r * 0.3, -r * 0.42)
+      ctx.quadraticCurveTo(r * (0.3 + s * 0.16), -r * 0.78, r * (0.3 + s * 0.3), -r * 0.98)
+      ctx.stroke()
+    }
+
+    /* Flukes: flat, wide, and the shape a child is asked to compare. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.62, 0)
+    ctx.lineTo(-r * 1.12, -r * 0.3)
+    ctx.quadraticCurveTo(-r * 0.86, r * 0.04, -r * 1.12, r * 0.3)
+    ctx.closePath()
+    K.inkedOn(ctx, '#2f6f9e', K.LINE, 3)
+
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.88, r * 0.46, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#3f8ec4', K.LINE, 3.5)
+
+    /* Pale belly with grooves. */
+    ctx.save()
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.88, r * 0.46, 0, 0, Math.PI * 2)
+    ctx.clip()
+    ctx.beginPath()
+    ctx.ellipse(r * 0.1, r * 0.34, r * 0.66, r * 0.26, 0, 0, Math.PI * 2)
+    ctx.fillStyle = '#d7ecf7'
+    ctx.fill()
+    ctx.strokeStyle = 'rgba(40,80,110,0.4)'
+    ctx.lineWidth = 2.5
+    for (var g = 0; g < 4; g++) {
+      ctx.beginPath()
+      ctx.moveTo(r * (0.0 + g * 0.16), r * 0.18)
+      ctx.lineTo(r * (0.06 + g * 0.16), r * 0.5)
+      ctx.stroke()
+    }
+    ctx.restore()
+
+    /* Flipper. */
+    ctx.beginPath()
+    ctx.ellipse(r * 0.18, r * 0.3, r * 0.26, r * 0.11, 0.5, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#2f6f9e', K.LINE, 2.5)
+
+    ctx.beginPath()
+    ctx.arc(r * 0.6, -r * 0.1, r * 0.08, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffffff', K.LINE, 2)
+    ctx.beginPath()
+    ctx.arc(r * 0.62, -r * 0.1, r * 0.04, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+    /* The smile, which is what keeps a blue ellipse from being a submarine. */
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 3
+    ctx.beginPath()
+    ctx.arc(r * 0.6, -r * 0.02, r * 0.22, 0.1, 1.1)
+    ctx.stroke()
+  }
+
+  /**
+   * A monkey, sitting.
+   *
+   * The only quad that is not standing side on, because a monkey standing on
+   * four legs is a dog with a long tail. A pale face and a curled tail are
+   * what carry it.
+   */
+  function monkey(ctx, r) {
+    ctx.strokeStyle = '#6b4a22'
+    ctx.lineWidth = r * 0.09
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.5, r * 0.2)
+    ctx.quadraticCurveTo(-r * 1.1, r * 0.1, -r * 0.86, -r * 0.6)
+    ctx.stroke()
+
+    for (var l = -1; l <= 1; l += 2) {
+      ctx.beginPath()
+      ctx.moveTo(l * r * 0.16, r * 0.34)
+      ctx.quadraticCurveTo(l * r * 0.5, r * 0.6, l * r * 0.3, r * 0.82)
+      ctx.stroke()
+    }
+
+    ctx.beginPath()
+    ctx.ellipse(0, r * 0.26, r * 0.42, r * 0.44, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#8a5f38', K.LINE, 3.5)
+
+    ctx.beginPath()
+    ctx.arc(0, -r * 0.34, r * 0.4, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#8a5f38', K.LINE, 3.5)
+    for (var e = -1; e <= 1; e += 2) {
+      ctx.beginPath()
+      ctx.arc(e * r * 0.42, -r * 0.34, r * 0.15, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#c98f4e', K.LINE, 2.5)
+    }
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.26, r * 0.27, r * 0.24, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f0d3a6', K.LINE, 2.5)
+    for (var y = -1; y <= 1; y += 2) {
+      ctx.beginPath()
+      ctx.arc(y * r * 0.13, -r * 0.42, r * 0.05, 0, Math.PI * 2)
+      ctx.fillStyle = '#25321a'
+      ctx.fill()
+    }
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 2.5
+    ctx.beginPath()
+    ctx.arc(0, -r * 0.24, r * 0.1, 0.2, Math.PI - 0.2)
+    ctx.stroke()
+  }
+
+  /**
+   * The bank.
+   *
+   * Weighted to what a child in Ghana has actually stood next to: goats and
+   * hens outnumber eagles, and the fish are the ones sold at the market.
+   *
+   * `why` is written as a rule with its evidence, never as a verdict, because
+   * the reason has to be worth more than the mark. `hard` marks the ones whose
+   * appearance argues for the wrong group; those are held back for a few
+   * rounds so the child meets the rule before the exception to it.
+   */
+  var BANK = [
+    /* Mammals. */
+    { name: 'goat', group: 'mammal',
+      why: 'A goat has hair and feeds its babies milk, so it is a mammal.',
+      draw: function (c, r) { quad(c, r, { hide: '#e8dcc0', ear: 'floppy', earCol: '#cbbb96', extra: function (cc, rr, hx, hy) {
+        horns(cc, rr, hx, hy, 'goat')
+        cc.strokeStyle = '#cbbb96'
+        cc.lineWidth = rr * 0.07
+        cc.beginPath()
+        cc.moveTo(hx + rr * 0.1, hy + rr * 0.22)
+        cc.lineTo(hx + rr * 0.04, hy + rr * 0.5)
+        cc.stroke()
+      } }) } },
+    { name: 'cow', group: 'mammal',
+      why: 'A cow has hair and feeds its babies milk, so it is a mammal.',
+      draw: function (c, r) { quad(c, r, { hide: '#f3f1e8', bodyW: 0.82, bodyH: 0.5, ear: 'floppy', earCol: '#d6cdbc', extra: function (cc, rr, hx, hy) {
+        horns(cc, rr, hx, hy, 'cow')
+        cc.save()
+        cc.beginPath()
+        cc.ellipse(0, 0, rr * 0.82, rr * 0.5, 0, 0, Math.PI * 2)
+        cc.clip()
+        cc.fillStyle = '#3a3a3a'
+        cc.beginPath()
+        cc.ellipse(-rr * 0.3, -rr * 0.1, rr * 0.24, rr * 0.2, 0.3, 0, Math.PI * 2)
+        cc.fill()
+        cc.beginPath()
+        cc.ellipse(rr * 0.2, rr * 0.18, rr * 0.18, rr * 0.14, -0.2, 0, Math.PI * 2)
+        cc.fill()
+        cc.restore()
+      } }) } },
+    { name: 'dog', group: 'mammal',
+      why: 'A dog has hair and feeds its babies milk, so it is a mammal.',
+      draw: function (c, r) { quad(c, r, { hide: '#c98f4e', face: '#d9a465', ear: 'floppy', tail: 'curl', extra: function (cc, rr, hx, hy) {
+        cc.beginPath()
+        cc.ellipse(hx + rr * 0.2, hy + rr * 0.16, rr * 0.18, rr * 0.12, 0, 0, Math.PI * 2)
+        K.inkedOn(cc, '#f0d3a6', K.LINE, 2.5)
+      } }) } },
+    { name: 'cat', group: 'mammal',
+      why: 'A cat has hair and feeds its babies milk, so it is a mammal.',
+      draw: function (c, r) { quad(c, r, { hide: '#8a8a8a', bodyW: 0.68, bodyH: 0.4, ear: 'up', tail: 'curl', tailW: 0.1, extra: function (cc, rr, hx, hy) {
+        cc.strokeStyle = '#f3f1e8'
+        cc.lineWidth = rr * 0.03
+        for (var w = -1; w <= 1; w += 2) {
+          cc.beginPath()
+          cc.moveTo(hx + rr * 0.16, hy + rr * 0.08)
+          cc.lineTo(hx + rr * 0.46, hy + rr * 0.08 + w * rr * 0.1)
+          cc.stroke()
+        }
+      } }) } },
+    { name: 'bat', group: 'mammal', hard: true,
+      why: 'A bat has fur and feeds its babies milk, so it is a mammal, not a bird.',
+      draw: function (c, r) { bat(c, r) } },
+    { name: 'elephant', group: 'mammal',
+      why: 'An elephant feeds its babies milk, so it is a mammal.',
+      draw: function (c, r) { quad(c, r, { hide: '#9aa3ad', bodyW: 0.86, bodyH: 0.56, legW: 0.22, legCol: '#8a929b', headR: 0.34, extra: function (cc, rr, hx, hy) {
+        cc.beginPath()
+        cc.ellipse(hx - rr * 0.16, hy - rr * 0.02, rr * 0.26, rr * 0.3, 0.2, 0, Math.PI * 2)
+        K.inkedOn(cc, '#8a929b', K.LINE, 2.5)
+        cc.strokeStyle = '#9aa3ad'
+        cc.lineWidth = rr * 0.16
+        cc.lineCap = 'round'
+        cc.beginPath()
+        cc.moveTo(hx + rr * 0.26, hy + rr * 0.1)
+        cc.quadraticCurveTo(hx + rr * 0.56, hy + rr * 0.42, hx + rr * 0.36, hy + rr * 0.76)
+        cc.strokeStyle = K.LINE
+        cc.lineWidth = rr * 0.2
+        cc.stroke()
+        cc.strokeStyle = '#9aa3ad'
+        cc.lineWidth = rr * 0.14
+        cc.stroke()
+      } }) } },
+    { name: 'antelope', group: 'mammal',
+      why: 'An antelope has hair and feeds its babies milk, so it is a mammal.',
+      draw: function (c, r) { quad(c, r, { hide: '#c08a5e', bodyW: 0.72, bodyH: 0.4, legW: 0.1, ear: 'up', extra: function (cc, rr, hx, hy) {
+        horns(cc, rr, hx, hy, 'antelope')
+      } }) } },
+    { name: 'monkey', group: 'mammal',
+      why: 'A monkey has hair and feeds its babies milk, so it is a mammal.',
+      draw: function (c, r) { monkey(c, r) } },
+    { name: 'whale', group: 'mammal', hard: true,
+      why: 'A whale breathes air and feeds its babies milk, so it is a mammal, not a fish.',
+      draw: function (c, r) { whale(c, r) } },
+
+    /* Birds. */
+    { name: 'hen', group: 'bird',
+      why: 'A hen has feathers and lays eggs, so it is a bird.',
+      draw: function (c, r) { bird(c, r, { hide: '#e8913c', dark: '#c4442e', tailLen: 0.9, extra: function (cc, rr, hx, hy) {
+        /* Comb and wattle. */
+        cc.beginPath()
+        cc.moveTo(hx - rr * 0.16, hy - rr * 0.3)
+        cc.quadraticCurveTo(hx - rr * 0.04, hy - rr * 0.62, hx + rr * 0.06, hy - rr * 0.32)
+        cc.quadraticCurveTo(hx + rr * 0.18, hy - rr * 0.58, hx + rr * 0.26, hy - rr * 0.22)
+        cc.closePath()
+        K.inkedOn(cc, '#d6402e', K.LINE, 2.5)
+        cc.beginPath()
+        cc.ellipse(hx + rr * 0.3, hy + rr * 0.3, rr * 0.08, rr * 0.13, 0, 0, Math.PI * 2)
+        K.inkedOn(cc, '#d6402e', K.LINE, 2)
+      } }) } },
+    { name: 'eagle', group: 'bird',
+      why: 'An eagle has feathers and lays eggs, so it is a bird.',
+      draw: function (c, r) { bird(c, r, { hide: '#6b4a22', dark: '#4a3216', head: '#f3f1e8', beak: 'hook', beakCol: '#f2d024' }) } },
+    { name: 'parrot', group: 'bird',
+      why: 'A parrot has feathers and lays eggs, so it is a bird.',
+      draw: function (c, r) { bird(c, r, { hide: '#2e9e42', dark: '#d6402e', tailLen: 1.15, beak: 'curve', beakCol: '#e8dcc0', extra: function (cc, rr, hx, hy) {
+        cc.beginPath()
+        cc.moveTo(hx - rr * 0.1, hy - rr * 0.3)
+        cc.quadraticCurveTo(hx - rr * 0.06, hy - rr * 0.76, hx + rr * 0.2, hy - rr * 0.6)
+        cc.quadraticCurveTo(hx + rr * 0.14, hy - rr * 0.34, hx + rr * 0.22, hy - rr * 0.26)
+        cc.closePath()
+        K.inkedOn(cc, '#f2d024', K.LINE, 2.5)
+      } }) } },
+    { name: 'owl', group: 'bird',
+      why: 'An owl has feathers and lays eggs, so it is a bird.',
+      draw: function (c, r) { bird(c, r, { hide: '#b5793a', dark: '#8a5a2b', headX: 0.3, headY: 0.5, headR: 0.44, tailLen: 0.7, extra: function (cc, rr, hx, hy) {
+        /* The face disc and two round eyes, which is all an owl is. */
+        for (var e = -1; e <= 1; e += 2) {
+          cc.beginPath()
+          cc.arc(hx + e * rr * 0.17, hy, rr * 0.19, 0, Math.PI * 2)
+          K.inkedOn(cc, '#f0e2bb', K.LINE, 2.5)
+          cc.beginPath()
+          cc.arc(hx + e * rr * 0.17, hy, rr * 0.09, 0, Math.PI * 2)
+          cc.fillStyle = '#25321a'
+          cc.fill()
+        }
+      } }) } },
+    { name: 'crow', group: 'bird',
+      why: 'A crow has feathers and lays eggs, so it is a bird.',
+      draw: function (c, r) { bird(c, r, { hide: '#3a3a3a', dark: '#1d1a17', head: '#3a3a3a', beakCol: '#6b6154', legCol: '#6b6154' }) } },
+    { name: 'vulture', group: 'bird',
+      why: 'A vulture has feathers and lays eggs, so it is a bird.',
+      draw: function (c, r) { bird(c, r, { hide: '#6b6154', dark: '#4a4238', head: '#e8b9a0', headR: 0.3, headY: 0.56, beak: 'hook', beakCol: '#d6cdbc' }) } },
+
+    /* Fish. */
+    { name: 'tilapia', group: 'fish',
+      why: 'A tilapia has fins and breathes with gills, so it is a fish.',
+      draw: function (c, r) { fish(c, r, { hide: '#9aa3ad', dark: '#6f757e', finTall: true, extra: function (cc, rr) {
+        cc.save()
+        cc.beginPath()
+        cc.ellipse(0, 0, rr * 0.84, rr * 0.5, 0, 0, Math.PI * 2)
+        cc.clip()
+        cc.strokeStyle = 'rgba(40,60,80,0.4)'
+        cc.lineWidth = rr * 0.06
+        for (var s = 0; s < 4; s++) {
+          cc.beginPath()
+          cc.moveTo(-rr * 0.5 + s * rr * 0.28, -rr * 0.6)
+          cc.lineTo(-rr * 0.6 + s * rr * 0.28, rr * 0.6)
+          cc.stroke()
+        }
+        cc.restore()
+      } }) } },
+    { name: 'shark', group: 'fish',
+      why: 'A shark has fins and breathes with gills, so it is a fish.',
+      draw: function (c, r) { fish(c, r, { hide: '#7f93a8', dark: '#57697d', slim: true, finTall: true, extra: function (cc, rr) {
+        cc.strokeStyle = K.LINE
+        cc.lineWidth = 2.5
+        for (var g = 0; g < 3; g++) {
+          cc.beginPath()
+          cc.moveTo(rr * (0.14 + g * 0.1), -rr * 0.2)
+          cc.lineTo(rr * (0.1 + g * 0.1), rr * 0.16)
+          cc.stroke()
+        }
+      } }) } },
+    { name: 'catfish', group: 'fish',
+      why: 'A catfish has fins and breathes with gills, so it is a fish.',
+      draw: function (c, r) { fish(c, r, { hide: '#6b5a3a', dark: '#4a3f28', slim: true, extra: function (cc, rr) {
+        /* Barbels, which is the only thing that makes it a catfish. */
+        cc.strokeStyle = '#4a3f28'
+        cc.lineWidth = rr * 0.045
+        cc.lineCap = 'round'
+        for (var b = -1; b <= 1; b += 2) {
+          cc.beginPath()
+          cc.moveTo(rr * 0.76, rr * 0.06)
+          cc.quadraticCurveTo(rr * 1.06, rr * (0.1 + b * 0.26), rr * 1.2, rr * (0.3 + b * 0.4))
+          cc.stroke()
+        }
+      } }) } },
+
+    /* Insects. */
+    { name: 'ant', group: 'insect',
+      why: 'An ant has six legs and three body parts, so it is an insect.',
+      draw: function (c, r) { bug(c, r, { hide: '#8a3a1e', head: '#6b2c16' }) } },
+    { name: 'bee', group: 'insect', hard: true,
+      why: 'A bee has six legs and three body parts, so it is an insect, not a bird.',
+      draw: function (c, r) { bug(c, r, { hide: '#f2c33b', head: '#3a2a10', wings: 'clear', stripes: true }) } },
+    { name: 'butterfly', group: 'insect', hard: true,
+      why: 'A butterfly has six legs and three body parts, so it is an insect, not a bird.',
+      draw: function (c, r) { bug(c, r, { hide: '#5a3a1e', head: '#5a3a1e', slim: true, wings: 'butterfly', wing: '#f2a83c', wing2: '#e0482e' }) } },
+    { name: 'mosquito', group: 'insect',
+      why: 'A mosquito has six legs and three body parts, so it is an insect.',
+      draw: function (c, r) { bug(c, r, { hide: '#6b6154', head: '#4a4238', slim: true, wings: 'clear', extra: function (cc, rr) {
+        cc.strokeStyle = '#4a4238'
+        cc.lineWidth = rr * 0.05
+        cc.lineCap = 'round'
+        cc.beginPath()
+        cc.moveTo(rr * 0.6, rr * 0.04)
+        cc.lineTo(rr * 1.06, rr * 0.16)
+        cc.stroke()
+      } }) } },
+    { name: 'grasshopper', group: 'insect',
+      why: 'A grasshopper has six legs and three body parts, so it is an insect.',
+      draw: function (c, r) { bug(c, r, { hide: '#5fa344', head: '#4f8f3a', slim: true, hop: true, legCol: '#2e6b24' }) } },
+    { name: 'housefly', group: 'insect',
+      why: 'A housefly has six legs and three body parts, so it is an insect.',
+      draw: function (c, r) { bug(c, r, { hide: '#4a4238', head: '#3a3a3a', wings: 'clear', bigEye: true }) } }
+  ]
+
+  /**
+   * One animal's worth of question.
+   *
+   * The hard ones are held back for the first few rounds: the rule has to be
+   * met on a goat before it can be tested on a bat. `seen` keeps the last few
+   * off the board so a long run does not ask the same thing twice in a minute.
+   */
+  function makeRound(round, seen) {
+    var pool = BANK.filter(function (a) {
+      if (a.hard && round < 4) return false
+      return seen.indexOf(a.name) < 0
+    })
+    if (!pool.length) pool = BANK.filter(function (a) { return !a.hard || round >= 4 })
+    var animal = pick(pool)
+
+    var signs = GROUPS.slice()
+    /* Shuffled every round. A fixed order would let a child learn that mammals
+       are on the left, and then they would never read the signs again, which
+       is the half of this exercise that is reading. */
+    signs.sort(function () { return Math.random() - 0.5 })
+    return { animal: animal, signs: signs }
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * One group sign.
+   *
+   * Sized off the same row the other games put their answer tiles in, so the
+   * signs sit where a child's thumb already expects the answers to be, and the
+   * post grows down from the board into that band rather than off the screen.
+   */
+  function signRect(k, i, n) {
+    var row = K.tileRow(k.H)
+    var pad = Math.min(k.W * 0.035, 36)
+    var gap = Math.min(k.W * 0.02, 18)
+    var w = (k.W - pad * 2 - gap * (n - 1)) / n
+    var h = Math.min(row * 0.5, w * 0.52)
+    var base = k.H - row * 0.1
+    return { x: pad + i * (w + gap), y: base - row * 0.4 - h, w: w, h: h, base: base }
+  }
+
+  /** Which sign a point is on, or -1. The post counts: it is part of the sign. */
+  function signAt(k, n, px, py) {
+    for (var i = 0; i < n; i++) {
+      var r = signRect(k, i, n)
+      if (px >= r.x - 6 && px <= r.x + r.w + 6
+        && py >= r.y - 12 && py <= r.base + 10) return i
+    }
+    return -1
+  }
+
+  /** The band the animal stands in: under the banner, above the signs. */
+  function stageTop(k) { return k.H * 0.085 + clamp(Math.min(k.W, k.H) * 0.052, 19, 36) * 1.6 }
+  function stageBottom(k) { return signRect(k, 0, 4).y - k.H * 0.025 }
+  function animalR(k) {
+    return clamp(Math.min(k.W * 0.13, (stageBottom(k) - stageTop(k)) * 0.36), 26, 112)
+  }
+  function homeX(k) { return k.W * 0.5 }
+  function homeY(k) { return stageBottom(k) - animalR(k) * 0.95 }
+
+  /* ── the signs ───────────────────────────────────────────────────────────── */
+
+  /**
+   * A wooden board on a post, with the group name on it.
+   *
+   * `state` is 'idle', 'right', 'wrong' or 'dim', matching the shared tile row
+   * so the feedback reads the same as every other game in the set: the one
+   * that was tapped and the one that was correct are both lit, together.
+   */
+  function drawSign(ctx, r, label, state, font) {
+    var face = '#b5793a'
+    var edge = '#8a5a2b'
+    if (state === 'right') { face = '#23b862'; edge = '#0a6336' }
+    else if (state === 'wrong') { face = '#e0483a'; edge = '#9b2417' }
+
+    ctx.save()
+    if (state === 'dim') ctx.globalAlpha = 0.45
+
+    /* A mound of earth, so the post is planted and not resting on the grass. */
+    ctx.beginPath()
+    ctx.ellipse(r.x + r.w / 2, r.base, r.w * 0.2, r.h * 0.14, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#a07c42', K.LINE, 2.5)
+
+    ctx.beginPath()
+    ctx.rect(r.x + r.w / 2 - r.h * 0.09, r.y + r.h * 0.6, r.h * 0.18, r.base - r.y - r.h * 0.6)
+    K.inkedOn(ctx, edge, K.LINE, 3)
+
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y + r.h * 0.1, r.w, r.h, r.h * 0.16)
+    ctx.fillStyle = edge
+    ctx.fill()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 3.5
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y, r.w, r.h, r.h * 0.16)
+    ctx.fillStyle = face
+    ctx.fill()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 3.5
+    ctx.stroke()
+
+    ctx.save()
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y, r.w, r.h, r.h * 0.16)
+    ctx.clip()
+    ctx.fillStyle = 'rgba(255,255,255,0.22)'
+    ctx.beginPath()
+    ctx.roundRect(r.x + r.h * 0.16, r.y + r.h * 0.12, r.w - r.h * 0.32, r.h * 0.2, r.h * 0.1)
+    ctx.fill()
+    ctx.restore()
+
+    var size = r.h * 0.48
+    ctx.font = '600 ' + Math.round(size) + 'px ' + font
+    while (ctx.measureText(label).width > r.w * 0.84 && size > r.h * 0.2) {
+      size *= 0.9
+      ctx.font = '600 ' + Math.round(size) + 'px ' + font
+    }
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.lineJoin = 'round'
+    ctx.miterLimit = 2
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = size * 0.28
+    ctx.strokeText(label, r.x + r.w / 2, r.y + r.h * 0.52)
+    ctx.fillStyle = '#ffffff'
+    ctx.fillText(label, r.x + r.w / 2, r.y + r.h * 0.52)
+    ctx.restore()
+  }
+
+  /**
+   * The ranger's badge, for a full page of the book.
+   *
+   * A rosette rather than a number going up, because the tenth animal has to
+   * feel like an occasion from across the room and a readout in the corner
+   * never does.
+   */
+  function drawBadge(ctx, x, y, s, t) {
+    var ease = t * t * (3 - 2 * t)
+    ctx.save()
+    ctx.globalAlpha = Math.min(1, t * 2.5)
+    ctx.translate(x, y)
+    ctx.rotate(-0.2 + (1 - ease) * 0.9)
+    ctx.scale(0.4 + ease * 0.6, 0.4 + ease * 0.6)
+    for (var p = 0; p < 10; p++) {
+      ctx.save()
+      ctx.rotate((p / 10) * Math.PI * 2)
+      ctx.beginPath()
+      ctx.ellipse(0, -s * 0.82, s * 0.26, s * 0.42, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, '#e0482e', K.LINE, 2.5)
+      ctx.restore()
+    }
+    ctx.beginPath()
+    ctx.arc(0, 0, s * 0.7, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f2d024', K.LINE, 3.5)
+    ctx.beginPath()
+    ctx.moveTo(-s * 0.34, 0)
+    ctx.lineTo(-s * 0.06, s * 0.3)
+    ctx.lineTo(s * 0.38, -s * 0.32)
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = Math.max(4, s * 0.16)
+    ctx.lineCap = 'round'
+    ctx.lineJoin = 'round'
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  /** The ranger's notebook, propped beside him. */
+  function drawBook(ctx, x, y, s) {
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.rotate(-0.18)
+    ctx.beginPath()
+    ctx.roundRect(-s * 0.5, -s, s, s * 1.0, s * 0.08)
+    K.inkedOn(ctx, '#f3f1e8', K.LINE, 3)
+    ctx.beginPath()
+    ctx.rect(-s * 0.5, -s, s * 0.16, s)
+    K.inkedOn(ctx, '#0f8a4d', K.LINE, 2.5)
+    ctx.strokeStyle = 'rgba(60,40,20,0.45)'
+    ctx.lineWidth = Math.max(2, s * 0.05)
+    for (var i = 0; i < 3; i++) {
+      ctx.beginPath()
+      ctx.moveTo(-s * 0.24, -s * (0.76 - i * 0.22))
+      ctx.lineTo(s * 0.34, -s * (0.76 - i * 0.22))
+      ctx.stroke()
+    }
+    ctx.restore()
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    right: ['Into its group!', 'Yes! Write it down.', 'That is right.', 'Good sorting!'],
+    page: 'A full page in the book! You are a real ranger.',
+    over: 'The book is closed. Let us start again.',
+    poke: 'Careful, I am writing!'
+  }
+
+  AnanseKit.run({
+    title: 'Animal Groups',
+    overTitle: 'Book closed!',
+    scene: 'savannah',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'animals',
+    /* Tapping a sign is the whole answer, so nothing needs confirming. */
+    button: false,
+    restMood: 'watching',
+    hud: function (k) {
+      return [
+        { label: 'animals', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      if (k.own.seen === undefined) { k.own.seen = []; k.own.coins = 0 }
+      /* A restart after losing the run. The kit puts back its own score and
+         lives; the coins and the recent animals are ours. */
+      if (k.round === 0) { k.own.seen = []; k.own.coins = 0 }
+
+      var q = makeRound(k.round, k.own.seen)
+      k.own.q = q
+      k.target = q.animal.group
+      k.own.picked = -1
+      k.own.walk = 0
+      k.own.badge = -1
+
+      k.own.seen.push(q.animal.name)
+      while (k.own.seen.length > 7) k.own.seen.shift()
+
+      k.say('Where does the ' + q.animal.name + ' belong?')
+      k.him.setMood('watching')
+    },
+
+    ask: function (k) {
+      if (!k.own.q) return null
+      if (k.phase === 'won') {
+        return { head: 'Yes! A ', num: k.own.q.animal.name, tail: ' is a ' + k.own.q.animal.group + '.' }
+      }
+      return { head: 'Where does the ', num: k.own.q.animal.name, tail: ' belong?' }
+    },
+
+    /**
+     * Is the word on the sign that was tapped the group the animal is in?
+     *
+     * Both halves are read off the board now: the label from the shuffled row
+     * of signs, the group from the animal standing on the screen. No option
+     * carries a flag, so nothing here can disagree with the picture.
+     */
+    judge: function (k) {
+      if (k.own.picked < 0) return false
+      return k.own.q.signs[k.own.picked] === k.own.q.animal.group
+    },
+
+    down: function (k, x, y) {
+      /**
+       * A round already missed may be answered again.
+       *
+       * This guard exists to stop a second tap landing inside the same commit,
+       * not to end the round. Without the second half of the test it never let
+       * go: `picked` is only cleared in `begin`, `begin` only runs on a new
+       * round, and a new round only comes after a win. So one wrong answer
+       * locked the board for good. The child lost a life and then could not
+       * answer anything again, in a game with no end.
+       */
+      if (k.own.picked >= 0 && k.results[k.round] !== false) return false
+      var i = signAt(k, k.own.q.signs.length, x, y)
+      if (i < 0) return false
+      k.own.picked = i
+      k.sound.play('lift')
+      k.commit()
+      return true
+    },
+
+    onWin: function (k) {
+      /* The animal walks over and stands under its own sign. That is what a
+         group is, said as a picture: the thing and its name in the same place.
+         `step` moves it; this only starts it. */
+      k.own.walk = 0.0001
+      k.own.coins += 1
+      if (isPage(k.round)) {
+        k.own.coins += 10
+        k.own.badge = 0
+        k.cheer(homeX(k), homeY(k))
+        k.say(LINES.page)
+      } else {
+        k.say(pick(LINES.right))
+      }
+    },
+
+    onMiss: function (k) {
+      /* The rule and its evidence, out loud. The red sign only says which
+         rule it was; the sentence is the thing worth keeping. */
+      k.say(k.own.q.animal.why)
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      if (!k.own.q) return
+      if (k.own.walk > 0) k.own.walk = Math.min(1, k.own.walk + dt * 1.1)
+      if (k.own.badge >= 0 && k.own.badge < 1) {
+        k.own.badge = Math.min(1, k.own.badge + dt * 2.4)
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var q = k.own.q
+      var n = q.signs.length
+      var r = animalR(k)
+
+      /* Where the animal is. At rest it stands in the middle of the field; on
+         a win it walks to the sign of its own group and shrinks a little, as
+         if it has gone further away into the enclosure. */
+      var ax = homeX(k)
+      var ay = homeY(k)
+      var scale = 1
+      if (k.own.walk > 0) {
+        var home = -1
+        for (var g = 0; g < n; g++) if (q.signs[g] === q.animal.group) home = g
+        var dest = signRect(k, home, n)
+        var ease = k.own.walk * k.own.walk * (3 - 2 * k.own.walk)
+        var tx = dest.x + dest.w / 2
+        var ty = dest.y - r * 0.55
+        ax += (tx - ax) * ease
+        ay += (ty - ay) * ease
+        scale = 1 - ease * 0.42
+        /* A little bounce, so it walks rather than slides. */
+        ay -= Math.abs(Math.sin(k.own.walk * Math.PI * 3)) * r * 0.1 * (1 - ease)
+      }
+
+      /* A shadow on the ground, which is what puts the animal on the savannah
+         instead of in front of it. */
+      ctx.save()
+      ctx.globalAlpha = 0.16
+      ctx.fillStyle = '#6b4a22'
+      ctx.beginPath()
+      ctx.ellipse(ax, ay + r * scale * 0.92, r * scale * 0.85, r * scale * 0.16, 0, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+
+      ctx.save()
+      ctx.translate(ax, ay)
+      ctx.scale(scale, scale)
+      /* A slow breath at rest, so the animal is alive while the child thinks. */
+      if (k.own.walk <= 0) {
+        var b = 1 + Math.sin(k.now * 0.0026) * 0.018
+        ctx.scale(1 / b, b)
+      }
+      q.animal.draw(ctx, r)
+      ctx.restore()
+
+      if (k.own.badge >= 0) {
+        drawBadge(ctx, homeX(k) + r * 0.9, stageTop(k) + r * 0.5, r * 0.42, k.own.badge)
+      }
+
+      /**
+       * Him, at the left, with the book. Well clear of the animal, which is
+       * the thing being looked at, and standing on the ground rather than in
+       * front of the signs.
+       */
+      var hr = clamp(Math.min(k.W * 0.048, k.H * 0.075), 18, 42)
+      var hx = k.W * 0.085
+      var hy = stageBottom(k) - hr * 0.2
+      drawBook(ctx, hx + hr * 1.5, hy, hr * 1.1)
+      k.him.draw(hx, hy - hr * 1.3, hr, hy)
+
+      /* The four group signs. */
+      for (var i = 0; i < n; i++) {
+        var state = 'idle'
+        if (k.own.picked >= 0) {
+          if (q.signs[i] === q.animal.group) state = 'right'
+          else if (i === k.own.picked) state = 'wrong'
+          else state = 'dim'
+        }
+        drawSign(ctx, signRect(k, i, n), q.signs[i], state, k.FONT)
+      }
+    },
+
+    peek: function (k) {
+      if (!k.own.q) return { q: null }
+      var q = k.own.q
+      var n = q.signs.length
+      var r = animalR(k)
+      return {
+        animal: q.animal.name,
+        answer: q.animal.group,
+        hard: !!q.animal.hard,
+        signs: q.signs,
+        picked: k.own.picked,
+        coins: k.own.coins,
+        walk: Math.round(k.own.walk * 100) / 100,
+        page: isPage(k.round),
+        beast: {
+          x: Math.round(homeX(k)),
+          y: Math.round(homeY(k)),
+          r: Math.round(r)
+        },
+        him: {
+          x: Math.round(k.W * 0.085),
+          y: Math.round(stageBottom(k) - clamp(Math.min(k.W * 0.048, k.H * 0.075), 18, 42) * 1.5)
+        },
+        tiles: q.signs.map(function (g, i) {
+          var s = signRect(k, i, n)
+          return {
+            group: g,
+            x: Math.round(s.x + s.w / 2),
+            y: Math.round(s.y + s.h / 2)
+          }
+        })
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

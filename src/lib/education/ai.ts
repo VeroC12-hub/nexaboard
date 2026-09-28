@@ -27,6 +27,7 @@
  * still on screen and a plain sentence saying the tutor is unavailable.
  */
 
+import type { Plan } from './plan'
 import type { LearnerProfile } from './learner'
 import type { Question } from './course'
 
@@ -89,6 +90,21 @@ export interface LearnerBrief {
   asked?: string
   /** How she has done in each kind of material, from `medium.ts`. */
   mediums?: string
+  /**
+   * How this learner is taught, from `plan.ts`.
+   *
+   * The most important field here and the last one to be connected. The tutor
+   * has always been able to WRITE a plan, through the `plan` task, and until
+   * now nothing sent one back when asking for a lesson. So the plan decided
+   * what the app rendered and had no say in what was written, and the shape of
+   * a lesson came from fixed rules per year group instead: the same lesson for
+   * every child in a class, whatever had been learned about them.
+   *
+   * With this, a learner whose plan leads with pictures gets a lesson built
+   * around pictures, and one whose plan leaves prose out gets as few words as
+   * the topic can be taught in.
+   */
+  plan?: Plan
 }
 
 export interface TutorHandlers {
@@ -109,6 +125,19 @@ export interface TutorHandlers {
 function brief(l: LearnerBrief) {
   return {
     name: l.profile.name.trim().split(' ')[0] || '',
+    /**
+     * The band of schooling, and this was missing.
+     *
+     * Only `level` was sent, as the bare string "KG 2", and a model cannot
+     * reliably tell from that whether it is writing for somebody who can read.
+     * It wrote three thousand words of prose for a five year old, correctly
+     * following a prompt that asked for a mechanism explained at length.
+     *
+     * The stage is what decides the SHAPE of a lesson rather than its
+     * difficulty, so it has to reach the prompt. It is not sensitive: it is
+     * already implied by the year, which was always sent.
+     */
+    stage: l.profile.stage,
     level: l.profile.level,
     goal: l.profile.goal,
     approach: l.profile.approach,
@@ -125,6 +154,18 @@ function brief(l: LearnerBrief) {
        learn. Still no id, no account and no other subject. */
     asked: l.asked ?? '',
     mediums: l.mediums ?? '',
+    /* Only the parts of the plan that say how to teach: the order of media,
+       what was deliberately left out, whether words can be relied on, and the
+       one sentence of reasoning. Not `source` or `at`, which are about how the
+       plan was arrived at and are none of the tutor's business. */
+    plan: l.plan
+      ? {
+        parts: l.plan.parts,
+        without: l.plan.without,
+        wordless: l.plan.wordless,
+        because: l.plan.because,
+      }
+      : undefined,
   }
 }
 

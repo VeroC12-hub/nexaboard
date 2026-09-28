@@ -1,0 +1,20 @@
+Objects in this folder are rendered from Kenney's "Food Kit" (kenney.nl).
+
+  Licence: Creative Commons Zero (CC0 1.0)
+           http://creativecommons.org/publicdomain/zero/1.0/
+  Source:  https://kenney.nl/assets/food-kit
+  Pack:    Food Kit, created/distributed by Kenney, 01-07-2026
+
+CC0 places the work in the public domain: free to use in personal, educational
+and commercial projects, with no restriction and no attribution required.
+Kenney asks for credit voluntarily, so this file exists. The credit also
+appears on the about screen.
+
+These PNGs are not the pack's own preview images, which are 64px thumbnails and
+too small to use. They are baked from the pack's .glb models with three.js, lit
+from the upper left to match LIGHT in src/components/kid/art.tsx, trimmed to
+their alpha bounds, scaled so every object has the same visual weight, and
+quantised to a 256 colour palette. The bake script is not committed: it is a
+one-off, and the inputs are a public download.
+
+  256x256, RGBA, ~5 KB each.

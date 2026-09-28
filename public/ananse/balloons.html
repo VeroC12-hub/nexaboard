@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Balloon Pop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Balloon Pop. Recognising the written numeral, by bursting it.
+
+  ── Why this is a different lesson from Feed Ananse ──────────────────────────
+
+  Feed Ananse asks how many. This asks which mark on the page means that many,
+  and they are genuinely separate skills: a child who can count five mangoes out
+  loud will still not know that "5" is the same idea. The first teaches
+  quantity, this teaches the symbol, and a counting app that only does the first
+  has taught half the thing.
+
+  ── Why tapping is the whole answer ──────────────────────────────────────────
+
+  Feed Ananse has a button, because the child assembles an answer over several
+  moves and nothing else can tell "finished" from "still going". Here one tap is
+  the entire answer, so a button would be asking a four year old to confirm
+  something they have already said. The kit supports both.
+
+  ── Why they rise ────────────────────────────────────────────────────────────
+
+  Because balloons do. An earlier version let the grammar pick a motion and it
+  sometimes chose falling, and a child who has held a balloon knows perfectly
+  well which way it goes. Getting that backwards costs the game its credibility
+  before the first question.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: function (n) { return 'Pop the balloon with ' + n + ' on it!' },
+    right: ['Pop! You got it!', 'Bang! Well done!', 'That is the one!'],
+    wrong: function (n) { return 'That was not ' + n + '. Try again!' },
+    tickle: 'Hee hee! Do not pop me!',
+    over: 'What a lot of bangs! Thank you, my friend!',
+  }
+
+  /* Bright, distinct, and none of them close to the green behind. */
+  var TINTS = [
+    ['#ff8fa8', '#d6153d'], ['#ffd257', '#e59400'], ['#8fd4ff', '#1668c9'],
+    ['#b6f08a', '#3f9e1f'], ['#d7aaff', '#7a35c9'], ['#ffb27a', '#d65a18'],
+  ]
+
+  /**
+   * One balloon.
+   *
+   * ── Why the shape matters ─────────────────────────────────────────────────
+   *
+   * The first version was an ellipse with a string under it, which is an egg.
+   * A balloon becomes a balloon at the point where it pinches to a neck and a
+   * knot, and the string has to hang from the knot rather than from thin air.
+   * That one detail is the difference between a child seeing a balloon and a
+   * child seeing a coloured circle with a number in it.
+   */
+  function drawBalloon(ctx, b, r, popped) {
+    if (popped) return
+    var neck = r * 0.94
+
+    ctx.save()
+    ctx.translate(b.x, b.y)
+
+    /* The string first, so the knot sits on top of its end. Slack, not taut: a
+       straight string reads as a stick. */
+    ctx.strokeStyle = 'rgba(40,60,30,0.45)'
+    ctx.lineWidth = Math.max(1.5, r * 0.045)
+    ctx.beginPath()
+    ctx.moveTo(0, neck)
+    ctx.bezierCurveTo(r * 0.3, r * 1.3, -r * 0.22, r * 1.45, r * 0.04, r * 1.85)
+    ctx.stroke()
+
+    /* The body: round at the shoulders, tapering into the neck. */
+    var g = ctx.createRadialGradient(-r * 0.3, -r * 0.4, r * 0.08, 0, 0, r * 1.05)
+    g.addColorStop(0, b.tint[0])
+    g.addColorStop(0.62, b.tint[1])
+    g.addColorStop(1, b.tint[1])
+    ctx.fillStyle = g
+    ctx.beginPath()
+    ctx.moveTo(0, -r)
+    ctx.bezierCurveTo(r * 0.92, -r, r * 0.86, r * 0.48, r * 0.12, neck)
+    ctx.lineTo(-r * 0.12, neck)
+    ctx.bezierCurveTo(-r * 0.86, r * 0.48, -r * 0.92, -r, 0, -r)
+    ctx.closePath()
+    ctx.fill()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 3.5
+    ctx.lineJoin = 'round'
+    ctx.stroke()
+
+    /* The knot. Small, and the one detail that settles what this is. */
+    ctx.fillStyle = b.tint[1]
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.14, neck)
+    ctx.lineTo(r * 0.14, neck)
+    ctx.lineTo(0, neck + r * 0.17)
+    ctx.closePath()
+    ctx.fill()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 2.5
+    ctx.stroke()
+
+    /* The catch light, up where the light is. */
+    ctx.save()
+    ctx.globalAlpha = 0.5
+    ctx.fillStyle = '#fff'
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.32, -r * 0.42, r * 0.17, r * 0.29, -0.35, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+
+    ctx.restore()
+  }
+
+  function balloonR(k) { return clamp(Math.min(k.W, k.H) * 0.1, 40, 88) }
+
+  /**
+   * He stands aside, not in the middle.
+   *
+   * In Feed Ananse he is the target and belongs centre stage. Here the
+   * balloons are the target and he is the one asking, so the middle is theirs.
+   * Centred, he had a balloon sitting on his head and the child could not tell
+   * which was which.
+   */
+  function seat(k) {
+    var r = clamp(Math.min(k.W, k.H) * 0.085, 34, 72)
+    return { x: r * 1.5, y: k.H - r * 1.1, r: r }
+  }
+
+  AnanseKit.run({
+    title: 'Balloon Pop',
+    overTitle: 'What a lot of bangs!',
+    scene: 'sky',
+    rounds: 5,
+    /* One tap is the whole answer, so there is nothing to confirm. */
+    button: false,
+    restMood: 'hello',
+
+    begin: function (k) {
+      var r = balloonR(k)
+      /* Three at this age. Four choices is where a five year old starts
+         guessing rather than reading. */
+      var n = 3
+
+      /**
+       * The numbers on offer.
+       *
+       * Neighbours of the answer, not random draws from the whole range.
+       * Telling 4 from 9 needs no numeral knowledge at all, because they look
+       * nothing alike; telling 4 from 5 is the actual skill. Random choices
+       * make a game that looks harder and tests less.
+       */
+      k.target = randInt(1, 9)
+      var pool = {}
+      pool[k.target] = true
+      var guard = 0
+      while (Object.keys(pool).length < n && guard++ < 60) {
+        var near = k.target + pick([-2, -1, 1, 2])
+        if (near >= 1 && near <= 9) pool[near] = true
+      }
+      var nums = Object.keys(pool).map(Number)
+      while (nums.length < n) nums.push(randInt(1, 9))
+
+      /* Shuffled, or the answer would always be first. */
+      nums.sort(function () { return Math.random() - 0.5 })
+
+      k.own.balloons = nums.map(function (value, i) {
+        return {
+          value: value,
+          tint: TINTS[(i + randInt(0, 5)) % TINTS.length],
+          x: 0, y: 0,
+          /* Each on its own phase, so they sway like air rather than marching
+             like a progress bar. */
+          phase: rand(0, Math.PI * 2),
+          rise: rand(13, 22),
+          popped: false,
+          flash: 0,
+        }
+      })
+
+      /**
+       * Spread across the sky to the right of him, and started low.
+       *
+       * Low, because they rise: starting high gives a child a second to read
+       * one before it leaves the top, which is not enough when reading the
+       * numeral is the whole task. Clear of him, because a balloon overlapping
+       * the character is one a child cannot pick out.
+       */
+      var left = seat(k).x + seat(k).r * 1.8
+      var span = k.W - left - r * 1.6
+      for (var i = 0; i < k.own.balloons.length; i++) {
+        var b = k.own.balloons[i]
+        b.x = left + span * ((i + 0.5) / k.own.balloons.length) + rand(-r * 0.2, r * 0.2)
+        b.y = k.H - r * 1.8 + rand(0, r * 0.8)
+      }
+
+      k.own.picked = null
+      k.own.bursts = []
+      k.say(LINES.ask(k.target))
+      k.him.setMood('hello')
+    },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'Pop!' }
+      return { head: 'Pop number ', num: k.target, tail: '' }
+    },
+
+    /**
+     * Whichever balloon was tapped, compared with the target now.
+     *
+     * No balloon knows whether it is the right one, and the target is not
+     * written onto any of them. The comparison happens here, once, at the
+     * moment the child answers.
+     */
+    judge: function (k) {
+      return !!k.own.picked && k.own.picked.value === k.target
+    },
+
+    onWin: function (k) {
+      k.cheer(k.own.picked.x, k.own.picked.y)
+      k.say(pick(LINES.right))
+    },
+    onMiss: function (k) { k.say(LINES.wrong(k.target)) },
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.tickle) },
+
+    down: function (k, x, y) {
+      var r = balloonR(k)
+      for (var i = k.own.balloons.length - 1; i >= 0; i--) {
+        var b = k.own.balloons[i]
+        if (b.popped) continue
+        /* Generous, because small hands are inaccurate and the balloon is
+           moving while they aim. */
+        if (Math.hypot(b.x - x, b.y - y) > r * 1.15) continue
+
+        k.own.picked = b
+        b.popped = true
+        k.sound.play('thud')
+
+        /**
+         * It bursts whichever answer it was.
+         *
+         * Popping is the gesture, not the reward. Sparing the wrong one turns
+         * the animation into a second way of being told off, and the falling
+         * notes and the spoken line have already said it kindly.
+         */
+        var bits = []
+        for (var s = 0; s < 9; s++) {
+          var a = (s / 9) * Math.PI * 2 + rand(0, 0.4)
+          bits.push({
+            a: a,
+            /* Uneven speeds: equal ones draw a perfect expanding ring and read
+               as a shockwave rather than as debris. */
+            v: r * rand(2.4, 4.6),
+            spin: rand(-4.5, 4.5),
+            size: r * rand(0.13, 0.25),
+          })
+        }
+        k.own.bursts.push({ x: b.x, y: b.y, t: 0, bits: bits, tint: b.tint })
+
+        k.commit()
+        return true
+      }
+      return false
+    },
+
+    step: function (k, dt) {
+      if (!k.own.balloons) return
+      var r = balloonR(k)
+      var top = k.tallyY() + r * 1.4
+
+      for (var i = 0; i < k.own.balloons.length; i++) {
+        var b = k.own.balloons[i]
+        if (b.popped) continue
+        b.y -= b.rise * dt
+        b.x += Math.sin(k.now * 0.0011 + b.phase) * 13 * dt
+        b.x = clamp(b.x, r * 1.1, k.W - r * 1.1)
+        /* Round again at the top rather than escaping, so a child who is
+           thinking never runs out of balloons to think about. */
+        if (b.y + r < top) b.y = k.H + r * 1.2
+      }
+
+      for (var j = k.own.bursts.length - 1; j >= 0; j--) {
+        k.own.bursts[j].t += dt
+        if (k.own.bursts[j].t > 0.45) k.own.bursts.splice(j, 1)
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var r = balloonR(k)
+      var a = seat(k)
+
+      k.him.draw(a.x, a.y, a.r, a.y + a.r * 1.1)
+
+      for (var i = 0; i < k.own.balloons.length; i++) {
+        var b = k.own.balloons[i]
+        if (b.popped) continue
+        drawBalloon(ctx, b, r, false)
+        /* The numeral, which is the entire point of the game, so it is the
+           loudest thing on the balloon. */
+        k.shout(String(b.value), b.x, b.y, r * 0.95, '#ffffff', null)
+      }
+
+      /* The shards, over everything. */
+      for (var j = 0; j < k.own.bursts.length; j++) {
+        var bu = k.own.bursts[j]
+        var t = bu.t / 0.45
+        ctx.save()
+        ctx.globalAlpha = 1 - t * t
+        for (var s = 0; s < bu.bits.length; s++) {
+          var p = bu.bits[s]
+          /* Eased outward and falling, so the shards slow and drop rather than
+             flying off in straight lines for ever. */
+          var d = p.v * (1 - Math.pow(1 - t, 2))
+          ctx.save()
+          ctx.translate(bu.x + Math.cos(p.a) * d, bu.y + Math.sin(p.a) * d + t * t * 90)
+          ctx.rotate(p.a + p.spin * bu.t)
+          ctx.fillStyle = s % 2 ? bu.tint[1] : bu.tint[0]
+          ctx.beginPath()
+          ctx.ellipse(0, 0, p.size, p.size * 0.42, 0, 0, Math.PI * 2)
+          ctx.fill()
+          ctx.restore()
+        }
+        ctx.restore()
+      }
+    },
+
+    /**
+     * Positions included, because they move.
+     *
+     * Reading a balloon's place off a screenshot and then clicking it does not
+     * work: frames advance in between and the balloon has risen by the time
+     * the tap lands. A test has to be able to ask where something is and hit it
+     * in the same breath.
+     */
+    peek: function (k) {
+      if (!k.own.balloons) return { on: 0 }
+      return {
+        on: k.own.balloons.filter(function (b) { return !b.popped }).length,
+        at: k.own.balloons.map(function (b) {
+          return { v: b.value, x: Math.round(b.x), y: Math.round(b.y), popped: b.popped }
+        }),
+        picked: k.own.picked ? k.own.picked.value : null,
+      }
+    },
+  })
+}())
+</script>
+</body>
+</html>

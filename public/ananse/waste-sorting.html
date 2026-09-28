@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Waste Sorting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Waste Sorting. Three bins in the yard, and a load of rubbish on the ground.
+
+  ── Why the child sorts a whole load and then confirms ───────────────────────
+
+  One piece at a time, judged as it lands, would be a quiz with three buttons.
+  Sorting is not that. Sorting is looking at a heap, deciding what each thing
+  is made of, and being able to change your mind about the second one after you
+  have seen the fifth. So the board stays open until "Done" is pressed, and
+  nothing is judged before then. The child owns the whole load.
+
+  ── Why only the wrong ones come back out ────────────────────────────────────
+
+  Emptying every bin on a miss punishes the eight decisions that were right in
+  order to correct the one that was not, and a child who has just been told
+  they failed does not want to redo work they already did. So the miss names
+  one piece, says why it belongs somewhere else, and lifts only the pieces that
+  are actually in the wrong bin back onto the ground. What is left standing in
+  the bins is the child's own correct work, still theirs.
+
+  ── Why the water sachet leads ───────────────────────────────────────────────
+
+  The "pure water" sachet is the single most common piece of litter in Ghana:
+  it is in every gutter, every schoolyard and every verge, and a child who has
+  never once thought about where one goes has already seen a thousand of them.
+  So it is in the load every single round, first in the bank and first in the
+  list, and it is the piece this whole game exists to make somebody notice.
+
+  ── Why the reason names the material and not the bin ────────────────────────
+
+  "That goes in the brown one" teaches a child this screen. "A banana peel is
+  food waste, it rots" teaches them every bin they will ever stand in front of.
+  Everything here is judged off what a piece is made of, never off a flag, so
+  the sentence the child is told is the same fact the code is using.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #3a2a10;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /** Every tenth load is worth a bonus. */
+  var STRETCH = 10
+  function isBonus(round) { return round > 0 && round % STRETCH === STRETCH - 1 }
+
+  /* ── the bins ────────────────────────────────────────────────────────────── */
+
+  /**
+   * Three bins, in a fixed order and fixed colours, every round.
+   *
+   * Blue for plastic, green for paper, brown for food waste, left to right,
+   * always. Shuffling them would turn a sorting game into a reading-the-labels
+   * game, and the colour is the thing a child will actually carry out of the
+   * door and recognise on a real bin.
+   */
+  var BINS = [
+    { kind: 'plastic', label: 'plastic', face: '#2f7fc4', edge: '#17517f' },
+    { kind: 'paper', label: 'paper', face: '#2e9e42', edge: '#175f27' },
+    { kind: 'food', label: 'food waste', face: '#8a5a2b', edge: '#553416' }
+  ]
+
+  function binLabel(kind) {
+    for (var i = 0; i < BINS.length; i++) if (BINS[i].kind === kind) return BINS[i].label
+    return kind
+  }
+
+  /* ── the rubbish ─────────────────────────────────────────────────────────── */
+
+  /**
+   * What lies in the yard.
+   *
+   * `material` is the only thing that decides anything: `judge` compares it
+   * with the bin the piece ended up in, and nothing anywhere records whether a
+   * placement was right. `subject` and `why` exist so the miss can be said in
+   * a whole sentence, because "A banana peel is food waste, it rots" is a rule
+   * and "wrong" is not.
+   *
+   * Everything here is something swept up in a Ghanaian schoolyard on an
+   * ordinary Friday.
+   */
+  var BANK = [
+    /* The sachet leads the bank and is in every load. See the note above. */
+    { name: 'water sachet', art: 'sachet', material: 'plastic',
+      subject: 'A water sachet is', why: 'it never rots' },
+    { name: 'plastic bottle', art: 'bottle', material: 'plastic',
+      subject: 'A plastic bottle is', why: 'it can be melted and made again' },
+    { name: 'plastic bag', art: 'bag', material: 'plastic',
+      subject: 'A plastic bag is', why: 'it never rots' },
+    { name: 'straw', art: 'straw', material: 'plastic',
+      subject: 'A straw is', why: 'it never rots' },
+    { name: 'yoghurt cup', art: 'yoghurt', material: 'plastic',
+      subject: 'A yoghurt cup is', why: 'it can be melted and made again' },
+
+    { name: 'exercise book', art: 'book', material: 'paper',
+      subject: 'An exercise book is', why: 'it is made from trees' },
+    { name: 'newspaper', art: 'newspaper', material: 'paper',
+      subject: 'A newspaper is', why: 'it can be made into new paper' },
+    { name: 'cardboard box', art: 'carton', material: 'paper',
+      subject: 'A cardboard box is', why: 'it can be made into new paper' },
+    { name: 'envelope', art: 'envelope', material: 'paper',
+      subject: 'An envelope is', why: 'it is made from trees' },
+    { name: 'paper bag', art: 'paperbag', material: 'paper',
+      subject: 'A paper bag is', why: 'it can be made into new paper' },
+    { name: 'receipt', art: 'receipt', material: 'paper',
+      subject: 'A receipt is', why: 'it is made from trees' },
+
+    { name: 'banana peel', art: 'banana', material: 'food',
+      subject: 'A banana peel is', why: 'it rots' },
+    { name: 'orange peel', art: 'orangepeel', material: 'food',
+      subject: 'An orange peel is', why: 'it rots' },
+    { name: 'plantain skin', art: 'plantain', material: 'food',
+      subject: 'A plantain skin is', why: 'it rots and feeds the soil' },
+    { name: 'fish bones', art: 'bones', material: 'food',
+      subject: 'Fish bones are', why: 'they rot' },
+    { name: 'cassava peel', art: 'cassava', material: 'food',
+      subject: 'A cassava peel is', why: 'it rots and feeds the soil' },
+    { name: 'maize husk', art: 'husk', material: 'food',
+      subject: 'A maize husk is', why: 'it rots' },
+    { name: 'leftover kenkey', art: 'kenkey', material: 'food',
+      subject: 'Leftover kenkey is', why: 'it rots' }
+  ]
+
+  /* ── the art ─────────────────────────────────────────────────────────────── */
+
+  /**
+   * Each piece, drawn from its centre at radius `r`.
+   *
+   * A child has to tell a receipt from an envelope from a paper bag at about
+   * forty pixels, so each one is one silhouette and one colour: the sachet is
+   * a fat pillow, the receipt is a narrow strip with a torn foot, the bones
+   * are a spine. Nothing is shaded.
+   */
+  var ART = {}
+
+  ART.sachet = function (ctx, r) {
+    /* A pillow of water with a seam across each end, which is exactly what
+       one looks like lying flat in the dust. */
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.62, -r * 0.5, r * 1.24, r * 1.0, r * 0.3)
+    K.inkedOn(ctx, 'rgba(210,238,250,0.95)', K.LINE, 3)
+    ctx.strokeStyle = 'rgba(40,110,150,0.55)'
+    ctx.lineWidth = Math.max(2, r * 0.07)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.62, -r * 0.28)
+    ctx.lineTo(-r * 0.62, r * 0.28)
+    ctx.moveTo(r * 0.62, -r * 0.28)
+    ctx.lineTo(r * 0.62, r * 0.28)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.4, -r * 0.16, r * 0.8, r * 0.32, r * 0.1)
+    K.inkedOn(ctx, '#3f9ede', K.LINE, 2)
+  }
+
+  ART.bottle = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(0.5)
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.3, -r * 0.3, r * 0.6, r * 0.96, r * 0.14)
+    K.inkedOn(ctx, 'rgba(226,244,252,0.95)', K.LINE, 3)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.3, -r * 0.24)
+    ctx.quadraticCurveTo(-r * 0.13, -r * 0.5, -r * 0.12, -r * 0.62)
+    ctx.lineTo(r * 0.12, -r * 0.62)
+    ctx.quadraticCurveTo(r * 0.13, -r * 0.5, r * 0.3, -r * 0.24)
+    ctx.closePath()
+    K.inkedOn(ctx, 'rgba(226,244,252,0.95)', K.LINE, 3)
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.15, -r * 0.8, r * 0.3, r * 0.2, r * 0.05)
+    K.inkedOn(ctx, '#3f9ede', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  ART.bag = function (ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.7, -r * 0.1)
+    ctx.quadraticCurveTo(-r * 0.4, r * 0.7, r * 0.1, r * 0.55)
+    ctx.quadraticCurveTo(r * 0.7, r * 0.4, r * 0.62, -r * 0.2)
+    ctx.quadraticCurveTo(r * 0.2, -r * 0.1, -r * 0.7, -r * 0.1)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f0f4f6', K.LINE, 3)
+    /* Two handles, which is what says bag and not paper. */
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = Math.max(2, r * 0.07)
+    ctx.beginPath()
+    ctx.arc(-r * 0.36, -r * 0.14, r * 0.22, Math.PI, Math.PI * 2)
+    ctx.arc(r * 0.26, -r * 0.2, r * 0.22, Math.PI, Math.PI * 2)
+    ctx.stroke()
+  }
+
+  ART.straw = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(-0.6)
+    ctx.strokeStyle = '#e0483a'
+    ctx.lineWidth = r * 0.2
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(0, -r * 0.8)
+    ctx.lineTo(0, r * 0.3)
+    ctx.quadraticCurveTo(0, r * 0.7, r * 0.42, r * 0.76)
+    ctx.stroke()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 2.5
+    ctx.stroke()
+    ctx.strokeStyle = '#e0483a'
+    ctx.lineWidth = r * 0.13
+    ctx.stroke()
+    /* The white bands, which is how every child draws a straw. */
+    ctx.strokeStyle = '#ffffff'
+    ctx.lineWidth = r * 0.13
+    for (var i = 0; i < 3; i++) {
+      ctx.beginPath()
+      ctx.moveTo(0, -r * 0.7 + i * r * 0.34)
+      ctx.lineTo(0, -r * 0.56 + i * r * 0.34)
+      ctx.stroke()
+    }
+    ctx.restore()
+  }
+
+  ART.yoghurt = function (ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.5, -r * 0.42)
+    ctx.lineTo(r * 0.5, -r * 0.42)
+    ctx.lineTo(r * 0.34, r * 0.56)
+    ctx.lineTo(-r * 0.34, r * 0.56)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 3)
+    /* A torn foil lid, half off. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.54, -r * 0.44)
+    ctx.lineTo(r * 0.54, -r * 0.44)
+    ctx.lineTo(r * 0.3, -r * 0.74)
+    ctx.lineTo(-r * 0.2, -r * 0.56)
+    ctx.closePath()
+    K.inkedOn(ctx, '#cfd6dc', K.LINE, 2.5)
+    ctx.beginPath()
+    ctx.rect(-r * 0.4, -r * 0.2, r * 0.8, r * 0.26)
+    K.inkedOn(ctx, '#e0679f', K.LINE, 2)
+  }
+
+  ART.book = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(0.22)
+    ctx.beginPath()
+    ctx.rect(-r * 0.56, -r * 0.7, r * 1.12, r * 1.4)
+    K.inkedOn(ctx, '#3f9ede', K.LINE, 3)
+    ctx.beginPath()
+    ctx.rect(-r * 0.56, -r * 0.7, r * 0.18, r * 1.4)
+    K.inkedOn(ctx, '#1f6fae', K.LINE, 2.5)
+    /* The name box every exercise book has on its cover. */
+    ctx.beginPath()
+    ctx.rect(-r * 0.24, -r * 0.34, r * 0.66, r * 0.5)
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 2.5)
+    ctx.strokeStyle = 'rgba(60,70,80,0.5)'
+    ctx.lineWidth = 2
+    for (var i = 0; i < 2; i++) {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.18, -r * 0.2 + i * r * 0.2)
+      ctx.lineTo(r * 0.34, -r * 0.2 + i * r * 0.2)
+      ctx.stroke()
+    }
+    ctx.restore()
+  }
+
+  ART.newspaper = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(-0.15)
+    ctx.beginPath()
+    ctx.rect(-r * 0.78, -r * 0.56, r * 1.56, r * 1.12)
+    K.inkedOn(ctx, '#f0ead6', K.LINE, 3)
+    /* The fold down the middle, which is the whole read. */
+    ctx.strokeStyle = 'rgba(90,80,60,0.6)'
+    ctx.lineWidth = Math.max(2, r * 0.06)
+    ctx.beginPath()
+    ctx.moveTo(0, -r * 0.56)
+    ctx.lineTo(0, r * 0.56)
+    ctx.stroke()
+    ctx.strokeStyle = 'rgba(70,64,52,0.55)'
+    ctx.lineWidth = 2
+    for (var c = -1; c <= 1; c += 2) {
+      for (var i = 0; i < 4; i++) {
+        ctx.beginPath()
+        ctx.moveTo(c > 0 ? r * 0.1 : -r * 0.68, -r * 0.3 + i * r * 0.2)
+        ctx.lineTo(c > 0 ? r * 0.68 : -r * 0.1, -r * 0.3 + i * r * 0.2)
+        ctx.stroke()
+      }
+    }
+    ctx.restore()
+  }
+
+  ART.carton = function (ctx, r) {
+    ctx.beginPath()
+    ctx.rect(-r * 0.66, -r * 0.28, r * 1.32, r * 0.86)
+    K.inkedOn(ctx, '#c99457', K.LINE, 3)
+    /* Flaps, open, leaning back. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.66, -r * 0.28)
+    ctx.lineTo(-r * 0.9, -r * 0.74)
+    ctx.lineTo(-r * 0.06, -r * 0.6)
+    ctx.lineTo(0, -r * 0.28)
+    ctx.closePath()
+    K.inkedOn(ctx, '#d9a465', K.LINE, 2.5)
+    ctx.beginPath()
+    ctx.moveTo(r * 0.66, -r * 0.28)
+    ctx.lineTo(r * 0.9, -r * 0.74)
+    ctx.lineTo(r * 0.06, -r * 0.6)
+    ctx.lineTo(0, -r * 0.28)
+    ctx.closePath()
+    K.inkedOn(ctx, '#d9a465', K.LINE, 2.5)
+    ctx.strokeStyle = 'rgba(120,80,36,0.5)'
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    ctx.moveTo(0, -r * 0.28)
+    ctx.lineTo(0, r * 0.58)
+    ctx.stroke()
+  }
+
+  ART.envelope = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(-0.25)
+    ctx.beginPath()
+    ctx.rect(-r * 0.76, -r * 0.5, r * 1.52, r * 1.0)
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 3)
+    /* The flap, which is the only thing telling it from a receipt. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.76, -r * 0.5)
+    ctx.lineTo(0, r * 0.12)
+    ctx.lineTo(r * 0.76, -r * 0.5)
+    ctx.closePath()
+    K.inkedOn(ctx, '#e2dccb', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  ART.paperbag = function (ctx, r) {
+    ctx.beginPath()
+    ctx.rect(-r * 0.5, -r * 0.4, r * 1.0, r * 1.0)
+    K.inkedOn(ctx, '#c99457', K.LINE, 3)
+    /* A folded top, which is what a paper bag has and a plastic one does not. */
+    ctx.beginPath()
+    ctx.rect(-r * 0.54, -r * 0.62, r * 1.08, r * 0.24)
+    K.inkedOn(ctx, '#b07f44', K.LINE, 2.5)
+    ctx.strokeStyle = 'rgba(90,60,20,0.45)'
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.16, -r * 0.38)
+    ctx.lineTo(-r * 0.16, r * 0.6)
+    ctx.moveTo(r * 0.16, -r * 0.38)
+    ctx.lineTo(r * 0.16, r * 0.6)
+    ctx.stroke()
+  }
+
+  ART.receipt = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(0.3)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.32, -r * 0.82)
+    ctx.lineTo(r * 0.32, -r * 0.82)
+    ctx.lineTo(r * 0.32, r * 0.7)
+    ctx.lineTo(r * 0.1, r * 0.84)
+    ctx.lineTo(-r * 0.12, r * 0.7)
+    ctx.lineTo(-r * 0.32, r * 0.84)
+    ctx.closePath()
+    K.inkedOn(ctx, '#ffffff', K.LINE, 2.5)
+    ctx.strokeStyle = 'rgba(70,64,52,0.6)'
+    ctx.lineWidth = 2
+    for (var i = 0; i < 5; i++) {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.22, -r * 0.6 + i * r * 0.24)
+      ctx.lineTo(r * 0.22, -r * 0.6 + i * r * 0.24)
+      ctx.stroke()
+    }
+    ctx.restore()
+  }
+
+  /** One curved strip of peel, used for three different fruits. */
+  function peelStrip(ctx, r, fill, inner, spread, len) {
+    for (var i = -1; i <= 1; i++) {
+      ctx.save()
+      ctx.rotate(i * spread)
+      ctx.beginPath()
+      ctx.moveTo(0, -r * 0.62)
+      ctx.quadraticCurveTo(r * 0.34, r * 0.1, r * 0.1, r * len)
+      ctx.quadraticCurveTo(-r * 0.12, r * 0.12, -r * 0.16, -r * 0.6)
+      ctx.closePath()
+      K.inkedOn(ctx, i === 0 ? fill : inner, K.LINE, 2.5)
+      ctx.restore()
+    }
+  }
+
+  ART.banana = function (ctx, r) {
+    peelStrip(ctx, r, '#f2d024', '#e8c21c', 0.85, 0.8)
+    ctx.beginPath()
+    ctx.arc(0, -r * 0.66, r * 0.16, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#8a5a2b', K.LINE, 2.5)
+  }
+
+  ART.plantain = function (ctx, r) {
+    peelStrip(ctx, r, '#cbc03a', '#a9a52e', 0.95, 0.9)
+    ctx.beginPath()
+    ctx.arc(0, -r * 0.66, r * 0.16, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#6b4a22', K.LINE, 2.5)
+  }
+
+  ART.orangepeel = function (ctx, r) {
+    /* A curl, orange outside and white inside, which is how a peel lies. */
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.74, 0.4, 3.4)
+    ctx.arc(0, 0, r * 0.4, 3.4, 0.4, true)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f2913b', K.LINE, 3)
+    ctx.save()
+    ctx.globalAlpha = 0.85
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.52, 0.5, 3.3)
+    ctx.arc(0, 0, r * 0.4, 3.3, 0.5, true)
+    ctx.closePath()
+    ctx.fillStyle = '#f6ecd6'
+    ctx.fill()
+    ctx.restore()
+  }
+
+  ART.cassava = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(0.4)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.8, -r * 0.2)
+    ctx.quadraticCurveTo(0, -r * 0.7, r * 0.8, -r * 0.1)
+    ctx.quadraticCurveTo(0, -r * 0.3, -r * 0.8, r * 0.16)
+    ctx.closePath()
+    K.inkedOn(ctx, '#8a5a2b', K.LINE, 3)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.78, r * 0.14)
+    ctx.quadraticCurveTo(0, -r * 0.28, r * 0.78, -r * 0.12)
+    ctx.quadraticCurveTo(0, r * 0.16, -r * 0.78, r * 0.44)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f0ead6', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  ART.husk = function (ctx, r) {
+    for (var i = -1; i <= 1; i++) {
+      ctx.save()
+      ctx.rotate(i * 0.5)
+      ctx.beginPath()
+      ctx.ellipse(0, r * 0.1, r * 0.2, r * 0.76, 0, 0, Math.PI * 2)
+      K.inkedOn(ctx, i === 0 ? '#cfd88a' : '#b9c472', K.LINE, 2.5)
+      ctx.restore()
+    }
+    ctx.strokeStyle = 'rgba(90,100,40,0.6)'
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    ctx.moveTo(0, -r * 0.6)
+    ctx.lineTo(0, r * 0.8)
+    ctx.stroke()
+  }
+
+  ART.bones = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(-0.2)
+    /* Head, then spine, then ribs. A fish skeleton is one of the few things a
+       child reads instantly at this size. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.86, 0)
+    ctx.lineTo(-r * 0.42, -r * 0.3)
+    ctx.lineTo(-r * 0.42, r * 0.3)
+    ctx.closePath()
+    K.inkedOn(ctx, '#e2dccb', K.LINE, 2.5)
+    ctx.strokeStyle = '#e2dccb'
+    ctx.lineWidth = Math.max(3, r * 0.1)
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.44, 0)
+    ctx.lineTo(r * 0.62, 0)
+    ctx.stroke()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 2
+    ctx.stroke()
+    ctx.strokeStyle = '#e2dccb'
+    ctx.lineWidth = Math.max(2, r * 0.06)
+    for (var i = 0; i < 4; i++) {
+      var bx = -r * 0.26 + i * r * 0.24
+      ctx.beginPath()
+      ctx.moveTo(bx, -r * 0.34)
+      ctx.lineTo(bx, r * 0.34)
+      ctx.stroke()
+    }
+    /* Tail. */
+    ctx.strokeStyle = '#e2dccb'
+    ctx.lineWidth = Math.max(3, r * 0.08)
+    ctx.beginPath()
+    ctx.moveTo(r * 0.62, 0)
+    ctx.lineTo(r * 0.9, -r * 0.3)
+    ctx.moveTo(r * 0.62, 0)
+    ctx.lineTo(r * 0.9, r * 0.3)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  ART.kenkey = function (ctx, r) {
+    /* A ball of dough still in its husk wrapper, tied at the top. */
+    ctx.beginPath()
+    ctx.arc(0, r * 0.12, r * 0.62, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#e8dfae', K.LINE, 3)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.6, r * 0.1)
+    ctx.quadraticCurveTo(-r * 0.3, -r * 0.7, 0, -r * 0.54)
+    ctx.quadraticCurveTo(r * 0.3, -r * 0.7, r * 0.6, r * 0.1)
+    ctx.quadraticCurveTo(0, r * 0.3, -r * 0.6, r * 0.1)
+    ctx.closePath()
+    K.inkedOn(ctx, '#b9c472', K.LINE, 2.5)
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = Math.max(2, r * 0.07)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.2, -r * 0.6)
+    ctx.lineTo(r * 0.2, -r * 0.6)
+    ctx.stroke()
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * The bins stand on the swept earth, a little way in front of the wall.
+   *
+   * They are allowed to rise past the ground line, because a bin seen from the
+   * front does exactly that: its base is on the earth and its lid is up
+   * against the block wall behind it.
+   */
+  function binBase(k) { return K.groundY(k.H) + (k.H - K.groundY(k.H)) * 0.17 }
+  function binH(k) { return clamp(Math.min(k.W * 0.15, k.H * 0.27), 64, 152) }
+  function binW(k) { return binH(k) * 0.76 }
+  function binTop(k) { return binBase(k) - binH(k) }
+
+  /** The row of three, pushed right so he has the near corner to stand in. */
+  function binAt(k, i) {
+    var gap = Math.min(k.W / 4.3, binW(k) * 1.65)
+    return { x: k.W * 0.56 + (i - 1) * gap, y: binBase(k) }
+  }
+
+  function pieceR(k) { return clamp(Math.min(k.W * 0.042, k.H * 0.056), 15, 33) }
+
+  /** Where he stands: on the earth, at the left, clear of the bins. */
+  function hisR(k) { return clamp(Math.min(k.W, k.H) * 0.068, 24, 52) }
+  function hisX(k) { return Math.min(k.W * 0.09, binAt(k, 0).x - binW(k) * 0.7 - hisR(k) * 1.4) }
+
+  /**
+   * The strip of ground the rubbish is thrown down on.
+   *
+   * Below the bins so nothing is hidden behind one, and above the button band,
+   * which belongs to "Done" and to nothing else.
+   */
+  function yardBox(k) {
+    var r = pieceR(k)
+    var top = binBase(k) + r * 0.9
+    var bottom = k.H - k.bandH() * 1.02 - r * 0.5
+    return { x: k.W * 0.05, y: top, w: k.W * 0.9, h: Math.max(r, bottom - top) }
+  }
+
+  /**
+   * Where the n-th piece in a bin sits, poking out of the mouth.
+   *
+   * Worked out from its position in that bin's list every frame rather than
+   * stored, so taking one back out shuffles the rest down instead of leaving a
+   * hole where it used to be.
+   */
+  function binSlot(k, bi, slot) {
+    var at = binAt(k, bi)
+    var r = pieceR(k)
+    var col = slot % 3
+    var row = Math.floor(slot / 3)
+    return {
+      x: at.x + (col - 1) * binW(k) * 0.3,
+      y: binTop(k) - r * 0.3 - row * r * 0.44
+    }
+  }
+
+  /** Which bin a point is over, or -1. Deliberately generous. */
+  function binUnder(k, x, y) {
+    var w = binW(k), h = binH(k)
+    for (var i = 0; i < BINS.length; i++) {
+      var at = binAt(k, i)
+      /* A box a third wider than the bin and reaching above its lid, because a
+         small hand aims at a bin and lets go somewhere near it. */
+      if (x >= at.x - w * 0.95 && x <= at.x + w * 0.95
+        && y >= binTop(k) - h * 0.42 && y <= at.y + h * 0.22) return i
+    }
+    return -1
+  }
+
+  /* ── the load ────────────────────────────────────────────────────────────── */
+
+  /**
+   * How much rubbish, by round.
+   *
+   * Three is a load a Primary 1 child can hold in their head at once. It goes
+   * to five and then to seven, which is where sorting stops being three
+   * separate decisions and starts being a job with a plan.
+   */
+  function loadSize(round) { return round < 3 ? 3 : round < 6 ? 5 : 7 }
+
+  /**
+   * One load.
+   *
+   * The sachet always, then one paper and one food piece so no load can be
+   * answered by putting everything in one bin, then the rest at random.
+   */
+  function makeLoad(n) {
+    var chosen = [BANK[0]]
+    var rest = BANK.slice(1).sort(function () { return Math.random() - 0.5 })
+    var m
+    for (m = 0; m < rest.length; m++) {
+      if (rest[m].material === 'paper') { chosen.push(rest.splice(m, 1)[0]); break }
+    }
+    for (m = 0; m < rest.length; m++) {
+      if (rest[m].material === 'food') { chosen.push(rest.splice(m, 1)[0]); break }
+    }
+    while (chosen.length < n && rest.length) chosen.push(rest.pop())
+    chosen.sort(function () { return Math.random() - 0.5 })
+    return chosen
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    ask: 'Put every piece in the right bin.',
+    right: ['The yard is clean!', 'Well sorted!', 'Every piece in its place!', 'That is the way!'],
+    /* The bonus is about the school, not about the player. Ten loads sorted is
+       worth saying out loud as a thing that was done for somewhere real. */
+    bonus: 'Ten loads! A school this clean is a school people are proud of.',
+    empty: 'Some rubbish is still on the ground. Put it all in a bin first.',
+    over: 'The yard is in a mess. Let us sweep it again!',
+    poke: 'Do not put me in the bin! I am not rubbish!'
+  }
+
+  AnanseKit.run({
+    title: 'Waste Sorting',
+    overTitle: 'What a mess!',
+    scene: 'yard',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'loads',
+    /* The child builds the whole answer, so the board has to be told when it
+       is finished. */
+    button: true,
+    buttonLabel: 'Done',
+    restMood: 'hello',
+    hud: function (k) {
+      return [
+        { label: 'loads', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      if (k.own.coins === undefined) k.own.coins = 0
+      /* A restart after losing every life. The kit puts back its own score and
+         lives; the purse is ours. */
+      if (k.round === 0) k.own.coins = 0
+
+      var load = makeLoad(loadSize(k.round))
+      var r = pieceR(k)
+      var spots = load.map(function () { return { x: 0, y: 0 } })
+      /* Laid out without overlapping, and never on top of him. */
+      K.scatter(spots, yardBox(k), r * 2.3, [[hisX(k), binBase(k), hisR(k) * 2.2]])
+
+      k.own.pieces = load.map(function (o, i) {
+        return {
+          o: o, bin: null, held: false,
+          home: { x: spots[i].x, y: spots[i].y },
+          x: spots[i].x, y: spots[i].y, tip: K.fixed(i * 23, 0.5) - 0.25
+        }
+      })
+      k.own.grabbed = -1
+      k.target = load.length
+      k.say(LINES.ask)
+      k.him.setMood('hello')
+    },
+
+    /**
+     * A resize moves the yard, so the pieces still on the ground move with it.
+     *
+     * Pieces already in a bin are not touched: their position is worked out
+     * from the bin every frame anyway.
+     */
+    resize: function (k) {
+      if (!k.own.pieces) return
+      var box = yardBox(k)
+      for (var i = 0; i < k.own.pieces.length; i++) {
+        var p = k.own.pieces[i]
+        p.home.x = clamp(p.home.x, box.x, box.x + box.w)
+        p.home.y = clamp(p.home.y, box.y, box.y + box.h)
+        if (p.bin === null && !p.held) { p.x = p.home.x; p.y = p.home.y }
+      }
+    },
+
+    ask: function (k) {
+      if (!k.own.pieces) return null
+      if (k.phase === 'won') return { head: 'All sorted!' }
+      var left = 0
+      for (var i = 0; i < k.own.pieces.length; i++) if (k.own.pieces[i].bin === null) left++
+      if (left === 0) return { head: 'Every piece is in. Press ', num: 'Done', tail: '.' }
+      return { head: 'Sort the rubbish. ', num: left, tail: left === 1 ? ' piece left' : ' pieces left' }
+    },
+
+    /** Nothing may be committed until the ground is clear. */
+    ready: function (k) {
+      if (!k.own.pieces) return false
+      for (var i = 0; i < k.own.pieces.length; i++) {
+        if (k.own.pieces[i].bin === null) return false
+      }
+      return true
+    },
+
+    /**
+     * Every piece, against the bin it is standing in, right now.
+     *
+     * Read off the board at the moment "Done" is pressed. A piece knows what
+     * it is made of and a bin knows what it takes, and the comparison happens
+     * here and nowhere else: nothing was marked right when it was dropped.
+     */
+    judge: function (k) {
+      for (var i = 0; i < k.own.pieces.length; i++) {
+        var p = k.own.pieces[i]
+        if (p.bin === null || BINS[p.bin].kind !== p.o.material) return false
+      }
+      return true
+    },
+
+    onEmpty: function (k) { k.say(LINES.empty) },
+
+    onWin: function (k) {
+      k.own.coins += 1
+      var at = binAt(k, 1)
+      if (isBonus(k.round)) {
+        k.own.coins += 10
+        k.cheer(at.x, binTop(k))
+        k.say(LINES.bonus)
+      } else {
+        k.cheer(at.x, binTop(k))
+        k.say(pick(LINES.right))
+      }
+    },
+
+    /**
+     * Name one piece and why, then lift out only the pieces in the wrong bin.
+     *
+     * The first one in the load's own order, so the sentence is about a piece
+     * the child can find on the board rather than whichever one happened to be
+     * checked first by a loop over the bins.
+     */
+    onMiss: function (k) {
+      var said = false
+      for (var i = 0; i < k.own.pieces.length; i++) {
+        var p = k.own.pieces[i]
+        if (p.bin !== null && BINS[p.bin].kind === p.o.material) continue
+        if (!said) {
+          k.say(p.o.subject + ' ' + binLabel(p.o.material) + ', ' + p.o.why + '.')
+          said = true
+        }
+        /* Back onto the ground, where it can be picked up and moved again.
+           The pieces that were right stay exactly where the child put them. */
+        p.bin = null
+        p.held = false
+      }
+      k.sound.play('steal')
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    /**
+     * Pick up whatever is under the finger, in a bin or on the ground.
+     *
+     * Bins are searched first and from the last piece dropped backwards, so
+     * the piece on top of the heap is the one that comes off it.
+     */
+    down: function (k, x, y) {
+      if (!k.own.pieces) return false
+      var r = pieceR(k)
+      var i, p
+
+      var slots = binSlots(k)
+      for (i = slots.length - 1; i >= 0; i--) {
+        p = k.own.pieces[slots[i].piece]
+        if (Math.hypot(slots[i].x - x, slots[i].y - y) > r * 1.3) continue
+        p.bin = null
+        p.held = true
+        p.x = slots[i].x
+        p.y = slots[i].y
+        k.own.grabbed = slots[i].piece
+        k.sound.play('lift')
+        return true
+      }
+
+      for (i = k.own.pieces.length - 1; i >= 0; i--) {
+        p = k.own.pieces[i]
+        if (p.bin !== null) continue
+        if (Math.hypot(p.x - x, p.y - y) > r * 1.5) continue
+        p.held = true
+        k.own.grabbed = i
+        k.sound.play('lift')
+        return true
+      }
+      return false
+    },
+
+    move: function (k, x, y) {
+      if (k.own.grabbed < 0) return
+      var p = k.own.pieces[k.own.grabbed]
+      p.x = x
+      p.y = y
+    },
+
+    up: function (k) {
+      if (k.own.grabbed < 0) return
+      var p = k.own.pieces[k.own.grabbed]
+      p.held = false
+      k.own.grabbed = -1
+
+      var b = binUnder(k, p.x, p.y)
+      if (b >= 0) {
+        p.bin = b
+        k.sound.play('thud')
+        k.kick(3)
+        return
+      }
+      /* Dropped nowhere in particular: it goes back down on the ground, which
+         is honest. It is still rubbish and it is still not in a bin. */
+      p.bin = null
+      p.x = p.home.x
+      p.y = p.home.y
+      k.sound.play('cover')
+    },
+
+    step: function (k, dt) {
+      if (!k.own.pieces) return
+      /* Pieces in a bin slide into their slot rather than teleporting, so a
+           piece taken back out and dropped in again reads as a move. */
+      var slots = binSlots(k)
+      for (var i = 0; i < slots.length; i++) {
+        var p = k.own.pieces[slots[i].piece]
+        if (p.held) continue
+        p.x += (slots[i].x - p.x) * Math.min(1, dt * 13)
+        p.y += (slots[i].y - p.y) * Math.min(1, dt * 13)
+      }
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      if (!k.own.pieces) return
+      var r = pieceR(k)
+      var w = binW(k), h = binH(k)
+      var top = binTop(k)
+      var i, p
+
+      var dragging = k.own.grabbed >= 0 ? k.own.pieces[k.own.grabbed] : null
+      var over = dragging ? binUnder(k, dragging.x, dragging.y) : -1
+
+      /* Him, on the earth at the left, beside the bins and not behind them.
+         He stands 1.5 radii below his centre, so his feet land on the same
+         line the bins stand on. */
+      var hr = hisR(k)
+      k.him.draw(hisX(k), binBase(k) - hr * 1.3, hr, binBase(k))
+
+      /* The three bins. */
+      for (i = 0; i < BINS.length; i++) {
+        drawBin(ctx, k, i, over === i)
+      }
+
+      /* Pieces standing in a bin, clipped at the rim so they are in it rather
+         than balanced on it. */
+      var slots = binSlots(k)
+      ctx.save()
+      ctx.beginPath()
+      for (i = 0; i < BINS.length; i++) {
+        var at = binAt(k, i)
+        ctx.rect(at.x - w * 0.62, top - r * 2.4, w * 1.24, r * 2.4 + h * 0.1)
+      }
+      ctx.clip()
+      for (i = 0; i < slots.length; i++) {
+        p = k.own.pieces[slots[i].piece]
+        if (p.held) continue
+        ctx.save()
+        ctx.translate(p.x, p.y)
+        ctx.rotate(p.tip)
+        ART[p.o.art](ctx, r * 0.84)
+        ctx.restore()
+      }
+      ctx.restore()
+
+      /* Pieces still on the ground, with a shadow each so they are lying in
+         the dust and not floating over it. */
+      for (i = 0; i < k.own.pieces.length; i++) {
+        p = k.own.pieces[i]
+        if (p.bin !== null || p.held) continue
+        groundPiece(ctx, p, r, 1)
+      }
+
+      /* Whatever is in the hand, last, over everything. */
+      if (dragging) groundPiece(ctx, dragging, r, 1.16)
+    },
+
+    /**
+     * Scenery baked into the backdrop once per resize.
+     *
+     * A broom against the wall and a gutter line along the foot of it. The
+     * yard scene has swept earth and nothing that says anyone sweeps it, and a
+     * game about keeping a place clean should show the tool.
+     */
+    props: function (k, g, W, H) {
+      var kk = { W: W, H: H }
+      var hy = K.groundY(H)
+      var s = Math.min(W, H) * 0.12
+
+      /* The broom, leaning on the wall at the far right, clear of the bins. */
+      var bx = W * 0.95
+      g.strokeStyle = '#a9703c'
+      g.lineWidth = Math.max(4, s * 0.1)
+      g.lineCap = 'round'
+      g.beginPath()
+      g.moveTo(bx, hy - s * 1.5)
+      g.lineTo(bx - s * 0.34, hy + s * 0.2)
+      g.stroke()
+      g.strokeStyle = K.LINE
+      g.lineWidth = 2.5
+      g.stroke()
+      g.strokeStyle = '#a9703c'
+      g.lineWidth = Math.max(3, s * 0.07)
+      g.stroke()
+      g.save()
+      g.translate(bx - s * 0.34, hy + s * 0.2)
+      g.rotate(0.22)
+      g.beginPath()
+      g.moveTo(-s * 0.2, 0)
+      g.lineTo(s * 0.2, 0)
+      g.lineTo(s * 0.3, s * 0.5)
+      g.lineTo(-s * 0.3, s * 0.5)
+      g.closePath()
+      K.inkedOn(g, '#cbc03a', K.LINE, 3)
+      g.restore()
+    },
+
+    /**
+     * Everything a test needs to drive this without a screenshot.
+     *
+     * Every piece by its screen centre and what it is made of, every bin by
+     * its screen centre and what it takes, and the Done button, so a test can
+     * sort a load, press Done and check the verdict.
+     */
+    peek: function (k) {
+      if (!k.own.pieces) return { pieces: null }
+      var b = k.buttonRect()
+      return {
+        round: k.round,
+        coins: k.own.coins,
+        grabbed: k.own.grabbed,
+        onGround: k.own.pieces.filter(function (p) { return p.bin === null }).length,
+        pieces: k.own.pieces.map(function (p) {
+          return {
+            name: p.o.name,
+            material: p.o.material,
+            bin: p.bin === null ? null : BINS[p.bin].kind,
+            x: Math.round(p.x), y: Math.round(p.y)
+          }
+        }),
+        bins: BINS.map(function (bin, i) {
+          var at = binAt(k, i)
+          return {
+            kind: bin.kind,
+            x: Math.round(at.x),
+            y: Math.round(binTop(k) + binH(k) * 0.5)
+          }
+        }),
+        done: {
+          x: Math.round(b.x + b.w / 2),
+          y: Math.round(b.y + b.h / 2)
+        }
+      }
+    }
+  })
+
+  /* ── drawing helpers, used from inside the game ──────────────────────────── */
+
+  /**
+   * Which piece is in which bin, in the order they were dropped.
+   *
+   * Rebuilt every time it is asked for rather than kept, because the only true
+   * record of where a piece is is the piece's own `bin`. A parallel list would
+   * be one more thing to go out of step.
+   */
+  function binSlots(k) {
+    var out = []
+    var counts = [0, 0, 0]
+    for (var i = 0; i < k.own.pieces.length; i++) {
+      var p = k.own.pieces[i]
+      if (p.bin === null) continue
+      var at = binSlot(k, p.bin, counts[p.bin]++)
+      out.push({ piece: i, x: at.x, y: at.y })
+    }
+    return out
+  }
+
+  function groundPiece(ctx, p, r, scale) {
+    ctx.save()
+    ctx.globalAlpha = 0.18
+    ctx.fillStyle = '#5a3618'
+    ctx.beginPath()
+    ctx.ellipse(p.x, p.y + r * 0.78, r * 0.72, r * 0.17, 0, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+    ctx.save()
+    ctx.translate(p.x, p.y)
+    ctx.rotate(p.tip)
+    ctx.scale(scale, scale)
+    ART[p.o.art](ctx, r)
+    ctx.restore()
+  }
+
+  /**
+   * One bin: a tapered body, a lid tipped open at the back, and its material
+   * written across the front.
+   *
+   * The lid is drawn before the body, because a lid hinged at the back belongs
+   * behind the box. Drawn after, it sits in front of the label and reads as a
+   * flap stuck on the bin rather than an opening into it.
+   */
+  function drawBin(ctx, k, i, lit) {
+    var bin = BINS[i]
+    var at = binAt(k, i)
+    var w = binW(k), h = binH(k)
+    var top = binTop(k)
+
+    ctx.save()
+    ctx.translate(at.x, 0)
+
+    /* A shadow, so it is standing on the earth. */
+    ctx.save()
+    ctx.globalAlpha = 0.2
+    ctx.fillStyle = '#5a3618'
+    ctx.beginPath()
+    ctx.ellipse(0, at.y + h * 0.02, w * 0.6, h * 0.05, 0, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+
+    /* While something is in the air, the bin under the hand says so. */
+    if (lit) {
+      ctx.save()
+      ctx.globalAlpha = 0.32
+      ctx.fillStyle = '#ffd93b'
+      ctx.beginPath()
+      ctx.ellipse(0, top, w * 0.9, h * 0.22, 0, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+    }
+
+    /* The lid, hinged at the back left and tipped open. */
+    ctx.save()
+    ctx.translate(-w * 0.5, top - h * 0.03)
+    ctx.rotate(-0.85)
+    ctx.beginPath()
+    ctx.roundRect(0, -h * 0.09, w * 1.04, h * 0.09, h * 0.04)
+    K.inkedOn(ctx, bin.edge, K.LINE, 3.5)
+    ctx.restore()
+
+    /* The mouth, dark, which is what makes it somewhere to put something. */
+    ctx.beginPath()
+    ctx.ellipse(0, top, w * 0.5, h * 0.09, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#2b2118', K.LINE, 3)
+
+    /* The body, wider at the top than at the foot. */
+    ctx.beginPath()
+    ctx.moveTo(-w * 0.5, top)
+    ctx.lineTo(w * 0.5, top)
+    ctx.lineTo(w * 0.42, at.y)
+    ctx.lineTo(-w * 0.42, at.y)
+    ctx.closePath()
+    K.inkedOn(ctx, bin.face, K.LINE, 4)
+
+    /* Ribs, which is what stops a coloured trapezium being a bucket. */
+    ctx.save()
+    ctx.beginPath()
+    ctx.moveTo(-w * 0.5, top)
+    ctx.lineTo(w * 0.5, top)
+    ctx.lineTo(w * 0.42, at.y)
+    ctx.lineTo(-w * 0.42, at.y)
+    ctx.closePath()
+    ctx.clip()
+    ctx.strokeStyle = bin.edge
+    ctx.lineWidth = Math.max(2, w * 0.035)
+    for (var g = -1; g <= 1; g += 2) {
+      ctx.beginPath()
+      ctx.moveTo(g * w * 0.28, top)
+      ctx.lineTo(g * w * 0.24, at.y)
+      ctx.stroke()
+    }
+    ctx.restore()
+
+    /* The name, on a pale plate across the front. White lettering takes a dark
+       outline and nothing else, and long words are shrunk to fit rather than
+       allowed to run off the side of the bin. */
+    var plateW = w * 0.86
+    var plateH = h * 0.2
+    var plateY = top + h * 0.42
+    ctx.beginPath()
+    ctx.roundRect(-plateW / 2, plateY - plateH / 2, plateW, plateH, plateH * 0.3)
+    K.inkedOn(ctx, bin.edge, K.LINE, 3)
+
+    var size = plateH * 0.56
+    ctx.font = '600 ' + Math.round(size) + 'px ' + k.FONT
+    while (ctx.measureText(bin.label).width > plateW * 0.84 && size > plateH * 0.24) {
+      size *= 0.92
+      ctx.font = '600 ' + Math.round(size) + 'px ' + k.FONT
+    }
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.lineJoin = 'round'
+    ctx.miterLimit = 2
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = size * 0.28
+    ctx.strokeText(bin.label, 0, plateY)
+    ctx.fillStyle = '#ffffff'
+    ctx.fillText(bin.label, 0, plateY)
+    ctx.restore()
+  }
+}())
+</script>
+</body>
+</html>

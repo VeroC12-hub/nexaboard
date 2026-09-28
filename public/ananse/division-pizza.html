@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Division Pizza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Division Pizza. Sharing out, on the kitchen counter.
+
+  ── Why there is no answer row ───────────────────────────────────────────────
+
+  Every other game in this set asks the child to recognise something: which
+  word, which number, which shape. This one asks them to produce it. There are
+  twelve slices in a box and three plates on the counter, and the only way
+  through is to actually share them out.
+
+  That is not a presentation choice, it is what division is at this age.
+  Primary 2 does not divide by knowing the three times table backwards, it
+  divides by dealing: one for you, one for you, one for you, round and round
+  until the box is empty. Dealing one at a time is the strategy a child should
+  leave with, so the game is built out of that action and nothing else. A row
+  of tiles with 4 on it would let a child who already knows the fact skip the
+  only part worth doing.
+
+  ── Why the button is there ──────────────────────────────────────────────────
+
+  A tap on a plate cannot mean "I have finished", because it already means
+  "one more slice here". Without a separate confirmation the game would have
+  to guess when the child had stopped, and it would guess wrong on the child
+  who is halfway through and thinking. So they say when they are done, and
+  until the box is empty the button is dead and says nothing.
+
+  ── Why one tap deals to every plate past fifteen slices ─────────────────────
+
+  Thirty slices one at a time is ninety taps and a child gives up somewhere
+  around the fortieth. Dealing a whole round at once is the same strategy
+  written larger, it is what an adult sharing thirty slices would actually do,
+  and it keeps the last few rounds about the arithmetic rather than about
+  stamina. The counter says so on screen, because a rule a child discovers by
+  accident is a rule they do not trust.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #c99457;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /**
+   * Number names, for the spoken line only.
+   *
+   * The banner shows the digits, because reading numerals is part of what is
+   * being practised. The voice needs words, because a speech engine handed
+   * "12" in the middle of a sentence is a coin toss between "twelve" and "one
+   * two".
+   */
+  var ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
+    'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
+    'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
+  var TENS = ['', '', 'twenty', 'thirty']
+
+  function words(n) {
+    if (n < 20) return ONES[n]
+    var t = TENS[Math.floor(n / 10)]
+    var r = n % 10
+    return r ? t + ' ' + ONES[r] : t
+  }
+  function capital(s) { return s.charAt(0).toUpperCase() + s.slice(1) }
+
+  var LINES = {
+    ask: function (n, m) {
+      return capital(words(n)) + ' slices for ' + words(m)
+        + ' friends. Share them out.'
+    },
+    right: ['The same for everybody!', 'Yes! Fair shares!', 'Nobody is cross!',
+      'That is it! Equal plates!'],
+    wrong: 'Look, the plates are not the same. Try again.',
+    empty: 'There are still slices in the box. Share them all out.',
+    feast: 'A whole feast! Everybody eats!',
+    over: 'The oven is cold. Let us go again!',
+    poke: 'Do not eat me, eat the pizza!'
+  }
+
+  /** Every tenth sharing is a feast, and a feast is worth ten coins. */
+  var FEAST = 10
+  function isFeast(round) { return round > 0 && round % FEAST === FEAST - 1 }
+
+  /**
+   * Above this, a tap deals a slice to every plate at once.
+   *
+   * Chosen so the worst case is about ten taps rather than about thirty. The
+   * threshold is on the number of slices and not on the number of plates,
+   * because what tires a child out is the total number of taps.
+   */
+  var DEAL_ALL_ABOVE = 15
+  function dealsAll(n) { return n > DEAL_ALL_ABOVE }
+
+  /* ── the sharings ──────────────────────────────────────────────────────── */
+
+  /**
+   * One sharing.
+   *
+   * ── Why it always divides exactly ─────────────────────────────────────────
+   *
+   * Remainders are Primary 4. A child who has just met sharing and is handed
+   * thirteen slices for three friends learns that the game is broken, not
+   * that thirteen is awkward. So the count is built as plates times a share,
+   * which cannot fail to come out even.
+   *
+   * ── On the difficulty ─────────────────────────────────────────────────────
+   *
+   * Two or three plates and up to twelve slices for the first four rounds,
+   * which is the two and three times tables from the sharing end. After that
+   * up to five plates and thirty slices, which is where dealing one at a time
+   * starts to feel long and the child begins to look for a faster way. That
+   * looking is the point of the later rounds.
+   *
+   * The share is never one. One each is not sharing, it is handing them out,
+   * and every plate looks right however they were dealt.
+   */
+  function makeShare(round) {
+    var early = round < 4
+    var m = early ? pick([2, 3]) : randInt(2, 5)
+    var most = Math.floor((early ? 12 : 30) / m)
+    var per = randInt(2, most)
+    return { n: m * per, m: m }
+  }
+
+  /* ── layout ────────────────────────────────────────────────────────────── */
+
+  /**
+   * The counter the plates stand on: below the box, above the button.
+   *
+   * The bottom band belongs to the commit button and nothing may be laid out
+   * in it, so the plates are hung off the bottom of the space that is left
+   * rather than off the height of the screen.
+   */
+  function counterY(k) { return k.ground() }
+  function workBottom(k) { return k.H - k.bandH() }
+
+  /**
+   * The open box, across the top of the counter.
+   *
+   * Its bottom edge rests on the counter line, so it is sitting on the
+   * worktop rather than floating over the tiles, and its top clears the
+   * banner on the shortest screen the game has to fit.
+   */
+  function boxRect(k) {
+    var top = k.H * 0.3
+    var bottom = counterY(k)
+    var w = Math.min(k.W * 0.66, (bottom - top) * 4.2)
+    return { x: k.W / 2 - w / 2, y: top, w: w, h: bottom - top }
+  }
+
+  /**
+   * Where one plate sits.
+   *
+   * The plates share the width from a fifth of the way across to the right
+   * edge, because the left fifth is where he stands and a plate under him
+   * cannot be tapped. Five plates on a phone is the tightest case and it is
+   * what the radius is sized against.
+   */
+  function plateSpot(k, i, m) {
+    var x0 = k.W * 0.21
+    var span = k.W * 0.77 - x0
+    var cw = span / m
+    var bottom = workBottom(k)
+    var top = counterY(k)
+    return {
+      x: x0 + (i + 0.5) * cw,
+      /* Low in the space, so the pile on the plate has room to build up
+         towards the box it came out of. */
+      y: bottom - (bottom - top) * 0.16,
+      r: Math.min(cw * 0.44, (bottom - top) * 0.3),
+      cw: cw
+    }
+  }
+
+  /**
+   * Which plate a tap landed on, or -1.
+   *
+   * A generous box rather than the ellipse itself: the plate is the thing
+   * being aimed at but the slices stacked above it are part of the same
+   * target as far as a child is concerned, and a tap that lands on the pile
+   * has to count.
+   */
+  function plateAt(k, m, px, py) {
+    for (var i = 0; i < m; i++) {
+      var s = plateSpot(k, i, m)
+      if (Math.abs(px - s.x) > s.cw * 0.5) continue
+      if (py < counterY(k) - s.r * 0.2 || py > workBottom(k)) continue
+      return i
+    }
+    return -1
+  }
+
+  /** Where one slice sits in the box, given how the box is packed. */
+  function boxSpot(k, j, n) {
+    var box = boxRect(k)
+    var rows = n <= 8 ? 1 : n <= 18 ? 2 : 3
+    var cols = Math.ceil(n / rows)
+    var row = Math.floor(j / cols)
+    var at = j - row * cols
+    var count = Math.min(cols, n - row * cols)
+    var cw = (box.w * 0.9) / cols
+    var ch = (box.h * 0.78) / rows
+    return {
+      x: box.x + box.w / 2 + (at - (count - 1) / 2) * cw,
+      y: box.y + box.h * 0.2 + (row + 0.5) * ch,
+      r: Math.min(cw, ch) * 0.46
+    }
+  }
+
+  /**
+   * Where the j'th slice on a plate sits.
+   *
+   * Three across and then a row on top, and the size comes from the most any
+   * plate could ever hold rather than from how many are on it now. Sizing it
+   * from the current count would make every slice already on the plate jump
+   * smaller the moment another one landed, and a pile that changes size
+   * cannot be counted.
+   */
+  function plateSlot(k, spot, j, most) {
+    var cols = Math.min(3, Math.max(1, most))
+    var rows = Math.ceil(most / cols)
+    var row = Math.floor(j / cols)
+    var at = j - row * cols
+    var count = Math.min(cols, most - row * cols)
+    var cw = (spot.r * 1.7) / cols
+    var ch = Math.min(cw * 0.9, (spot.r * 2.4) / rows)
+    return {
+      x: spot.x + (at - (count - 1) / 2) * cw,
+      y: spot.y - spot.r * 0.2 - ch * 0.5 - row * ch * 0.86,
+      r: Math.min(cw, ch) * 0.46
+    }
+  }
+
+  /* ── the food ──────────────────────────────────────────────────────────── */
+
+  /**
+   * One slice: a wedge, point down, with a crust along the top.
+   *
+   * Point down because that is how a slice is held and because a row of them
+   * pointing the same way reads as a set of identical things, which is what
+   * has to be countable. The crust is a filled band rather than a thick
+   * stroke, so it carries its own dark outline like everything else here.
+   */
+  function drawSlice(ctx, x, y, s) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    /* Cheese. */
+    ctx.beginPath()
+    ctx.moveTo(0, s * 0.96)
+    ctx.lineTo(-s * 0.78, -s * 0.56)
+    ctx.quadraticCurveTo(0, -s * 0.9, s * 0.78, -s * 0.56)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f4c24a', K.LINE, Math.max(2, s * 0.14))
+
+    /* Crust. */
+    ctx.beginPath()
+    ctx.moveTo(-s * 0.78, -s * 0.56)
+    ctx.quadraticCurveTo(0, -s * 0.9, s * 0.78, -s * 0.56)
+    ctx.lineTo(s * 0.9, -s * 0.84)
+    ctx.quadraticCurveTo(0, -s * 1.22, -s * 0.9, -s * 0.84)
+    ctx.closePath()
+    K.inkedOn(ctx, '#dd9b48', K.LINE, Math.max(2, s * 0.13))
+
+    /* Toppings, which are also what tells two slices apart when they overlap
+       on a crowded plate. */
+    if (s > 7) {
+      var dots = [[0, -s * 0.2], [-s * 0.32, s * 0.2], [s * 0.3, s * 0.16]]
+      for (var d = 0; d < dots.length; d++) {
+        ctx.beginPath()
+        ctx.arc(dots[d][0], dots[d][1], s * 0.17, 0, Math.PI * 2)
+        K.inkedOn(ctx, '#d6402e', K.LINE, Math.max(1.4, s * 0.09))
+      }
+    }
+    ctx.restore()
+  }
+
+  /** A plate, flat on, so whatever is on it is never hidden behind a rim. */
+  function drawPlate(ctx, x, y, r) {
+    ctx.save()
+    ctx.globalAlpha = 0.16
+    ctx.fillStyle = '#6b4a22'
+    ctx.beginPath()
+    ctx.ellipse(x, y + r * 0.16, r * 1.02, r * 0.3, 0, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+
+    ctx.beginPath()
+    ctx.ellipse(x, y, r, r * 0.32, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f7f3e9', K.LINE, 3.5)
+    ctx.beginPath()
+    ctx.ellipse(x, y - r * 0.03, r * 0.68, r * 0.19, 0, 0, Math.PI * 2)
+    ctx.strokeStyle = 'rgba(120,90,60,0.38)'
+    ctx.lineWidth = 2
+    ctx.stroke()
+  }
+
+  /**
+   * The box the slices come out of.
+   *
+   * Open, with the lid tipped back behind it, so the child can see what is
+   * left without anything being written down. An empty box is the whole of
+   * the "have I finished" question and it has to be readable at a glance,
+   * which is why the inside is dark and the slices are bright.
+   */
+  function drawBox(ctx, r, lit) {
+    /* The lid, behind, leaning back. */
+    ctx.beginPath()
+    ctx.moveTo(r.x + r.w * 0.04, r.y + r.h * 0.12)
+    ctx.lineTo(r.x + r.w * 0.16, r.y - r.h * 0.46)
+    ctx.lineTo(r.x + r.w * 0.96, r.y - r.h * 0.46)
+    ctx.lineTo(r.x + r.w * 0.84, r.y + r.h * 0.12)
+    ctx.closePath()
+    K.inkedOn(ctx, '#c08a5e', K.LINE, 3.5)
+
+    /* The box itself. */
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y, r.w, r.h, Math.min(14, r.h * 0.12))
+    K.inkedOn(ctx, '#d9a56f', K.LINE, 4)
+
+    /* The inside, darker, which is what makes empty look empty. */
+    ctx.beginPath()
+    ctx.roundRect(r.x + r.w * 0.03, r.y + r.h * 0.1,
+      r.w * 0.94, r.h * 0.82, Math.min(10, r.h * 0.09))
+    K.inkedOn(ctx, lit ? '#a9703c' : '#8a5a2b', K.LINE, 3)
+  }
+
+  /* ── the game ──────────────────────────────────────────────────────────── */
+
+  AnanseKit.run({
+    title: 'Division Pizza',
+    overTitle: 'No more pizza!',
+    scene: 'kitchen',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'pizzas',
+    /* The child builds the answer, so only they know when it is finished. */
+    button: true,
+    buttonLabel: 'Share!',
+    restMood: 'hungry',
+    hud: function (k) {
+      return [
+        { label: 'pizzas', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      var q = makeShare(k.round)
+      k.own.n = q.n
+      k.own.m = q.m
+      k.target = q.n / q.m
+      /* The board: how many are still in the box, and how many are on each
+         plate. These two are the whole state of the round and the only thing
+         the judging ever looks at. */
+      k.own.box = q.n
+      k.own.plates = []
+      for (var i = 0; i < q.m; i++) k.own.plates.push(0)
+      /* The last plate to receive something, and how long ago, so the newest
+         slice can pop rather than blink into existence. */
+      k.own.pop = -1
+      k.own.popT = 0
+
+      if (k.own.coins === undefined) k.own.coins = 0
+      if (k.round === 0) k.own.coins = 0
+
+      k.say(LINES.ask(q.n, q.m))
+      k.him.setMood('hungry')
+    },
+
+    ask: function (k) {
+      if (!k.own.n) return null
+      if (k.phase === 'won') {
+        return { head: 'Yes! ', num: k.own.n / k.own.m, tail: ' each' }
+      }
+      return {
+        head: '', num: k.own.n,
+        tail: ' slices for ' + k.own.m + ' friends'
+      }
+    },
+
+    /** The button is dead until every slice has left the box. */
+    ready: function (k) { return k.own.box === 0 },
+
+    onEmpty: function (k) { k.say(LINES.empty) },
+
+    /**
+     * Read the counter and decide whether it is a fair share.
+     *
+     * Counted off the plates as they stand at this instant: every plate the
+     * same, and nothing left in the box. Nothing anywhere holds n divided by
+     * m, so there is no stored answer for the board to disagree with, and a
+     * child who reaches the right arrangement by a route nobody thought of is
+     * still right.
+     */
+    judge: function (k) {
+      if (k.own.box !== 0) return false
+      var first = k.own.plates[0]
+      if (!first) return false
+      for (var i = 1; i < k.own.plates.length; i++) {
+        if (k.own.plates[i] !== first) return false
+      }
+      return true
+    },
+
+    down: function (k, x, y) {
+      if (k.phase !== 'play') return false
+      var i = plateAt(k, k.own.m, x, y)
+      if (i < 0) return false
+      var all = dealsAll(k.own.n)
+      var p
+
+      if (k.own.box > 0) {
+        /* Deal. A round at a time once there are too many slices for one at
+           a time to be reasonable. */
+        if (all) {
+          for (p = 0; p < k.own.m; p++) { k.own.plates[p]++; k.own.box-- }
+        } else {
+          k.own.plates[i]++
+          k.own.box--
+        }
+        k.sound.play('lift')
+      } else {
+        /**
+         * The box is empty, so a tap takes back instead.
+         *
+         * One action on one target, and which way it goes is decided by
+         * something the child can see: slices in the box means dealing,
+         * an empty box means undoing. A second gesture, or a separate undo
+         * button, would be one more thing to explain to a six year old, and
+         * nothing is ever lost: everything can be put back and dealt again.
+         */
+        if (all) {
+          for (p = 0; p < k.own.m; p++) {
+            if (k.own.plates[p] > 0) { k.own.plates[p]--; k.own.box++ }
+          }
+        } else if (k.own.plates[i] > 0) {
+          k.own.plates[i]--
+          k.own.box++
+        } else return false
+        k.sound.play('thud')
+      }
+
+      k.own.pop = all ? -2 : i
+      k.own.popT = 1
+      /* A beat before the button will answer, so the last slice has visibly
+         landed before it can be committed. */
+      k.settle(0.18)
+      return true
+    },
+
+    onWin: function (k) {
+      k.own.coins += 1
+      var mid = plateSpot(k, (k.own.m - 1) / 2, k.own.m)
+      if (isFeast(k.round)) {
+        k.own.coins += 10
+        k.cheer(mid.x, mid.y - mid.r)
+        k.say(LINES.feast)
+      } else {
+        k.cheer(mid.x, mid.y - mid.r)
+        k.say(pick(LINES.right))
+      }
+    },
+
+    onMiss: function (k) { k.say(LINES.wrong) },
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      if (k.own.popT > 0) k.own.popT = Math.max(0, k.own.popT - dt * 5.5)
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var n = k.own.n
+      var m = k.own.m
+      if (!n) return
+      var i, j
+
+      /* The box and whatever is still in it. */
+      var box = boxRect(k)
+      drawBox(ctx, box, k.own.box > 0)
+      for (j = 0; j < k.own.box; j++) {
+        var bs = boxSpot(k, j, n)
+        drawSlice(ctx, bs.x, bs.y, bs.r)
+      }
+
+      /**
+       * The note about dealing to everybody at once.
+       *
+       * On the box, where the slices are, because that is where the child is
+       * looking when the rule matters. Only while there is anything left to
+       * deal: once the box is empty the tap does the opposite and the note
+       * would be a lie.
+       */
+      if (dealsAll(n) && k.own.box > 0) {
+        var ns = clamp(Math.min(k.W, k.H) * 0.03, 13, 22)
+        k.shout('One tap fills every plate', k.W / 2, box.y + box.h + ns * 1.1,
+          ns, '#ffffff')
+      }
+
+      /* The plates, and the share on each. */
+      var most = Math.max(1, Math.ceil(n / m))
+      for (i = 0; i < m; i++) {
+        var spot = plateSpot(k, i, m)
+        drawPlate(ctx, spot.x, spot.y, spot.r)
+        var have = k.own.plates[i]
+        for (j = 0; j < have; j++) {
+          var slot = plateSlot(k, spot, j, most)
+          /* The newest slice on the plate that just changed swells out of
+             nothing, which is the only feedback saying the tap landed on
+             this plate and not the one next to it. */
+          var grow = 1
+          if (k.own.popT > 0 && j === have - 1
+            && (k.own.pop === i || k.own.pop === -2)) {
+            grow = 0.45 + (1 - k.own.popT) * 0.55
+          }
+          drawSlice(ctx, slot.x, slot.y, slot.r * grow)
+        }
+      }
+
+      /**
+       * Him, at the far left on the counter.
+       *
+       * Out of the plates' way entirely, because a plate underneath him
+       * cannot be tapped and a spider standing on the food is not something
+       * a child wants to share out. Anchored at one and a quarter radii below
+       * his centre so his feet are on the counter and not his waist.
+       */
+      var hr = clamp(Math.min(k.W * 0.055, k.H * 0.095), 24, 58)
+      var hy = workBottom(k) - hr * 0.1
+      k.him.draw(k.W * 0.09, hy - hr * 1.3, hr, hy)
+    },
+
+    peek: function (k) {
+      if (!k.own.n) return { q: null }
+      var m = k.own.m
+      return {
+        slices: k.own.n,
+        friends: m,
+        share: k.own.n / m,
+        box: k.own.box,
+        plates: k.own.plates.slice(),
+        dealsAll: dealsAll(k.own.n),
+        ready: k.own.box === 0,
+        coins: k.own.coins,
+        feast: isFeast(k.round),
+        button: (function () {
+          var b = k.buttonRect()
+          return { x: Math.round(b.x + b.w / 2), y: Math.round(b.y + b.h / 2) }
+        }()),
+        /* Every plate is tappable, so every plate's centre is here. A test
+           drives this game entirely by tapping these and then the button. */
+        tiles: k.own.plates.map(function (v, i) {
+          var s = plateSpot(k, i, m)
+          return { value: v, x: Math.round(s.x), y: Math.round(s.y) }
+        })
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

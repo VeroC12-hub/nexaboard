@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Floating or Sinking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Floating or Sinking. Predict, then test.
+
+  ── Why the game is built in that order and not the other one ────────────────
+
+  The lazy build is: drop the thing in, then ask what happened. That is not
+  science, it is observation with a quiz stapled to it, and a child can win it
+  without ever having had a thought before the event.
+
+  So this one is built in the order of the scientific method, and the code is
+  laid out in that order too: a prediction is taken first, from two tiles, and
+  only once it is committed does the object actually go in the water. The child
+  has to have said what they think will happen before the world is allowed to
+  tell them. That gap between saying and seeing is the entire lesson, and every
+  design decision below serves it.
+
+  ── Why a wrong answer gets the slower, bigger drop ──────────────────────────
+
+  A win is already its own reward: they said it, it happened, done. A miss is
+  where the learning actually is, so the miss is the one that gets the time.
+  The object falls more slowly, the splash is bigger, the bubbles are heavier
+  and the bob goes on longer, because a child who has just been told they were
+  wrong needs to watch the real answer happen rather than read it.
+
+  ── Why the reason and not the mark ──────────────────────────────────────────
+
+  "Wrong, it sinks" teaches a child to memorise a list of objects. "The stone
+  is heavier than the water it pushes aside, so it sinks" teaches the rule that
+  covers every object they will ever meet, including the ones not in the bank.
+  So onMiss always says why, in terms of the water being pushed aside.
+
+  ── Why an orange and an egg are in here on purpose ──────────────────────────
+
+  Children guess with their hands: heavy sinks, light floats. That rule is
+  wrong, and the two objects that prove it are in every Ghanaian kitchen. An
+  orange is heavy in the hand and floats, because of the air in its peel. An
+  egg is light in the hand and sinks, because there is no air in it at all. A
+  child who has seen both of those cannot go on believing that heavy is the
+  thing that matters, which is exactly the belief that has to go.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #3a2a10;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  /** Every tenth test is worth a bonus, the same as the rest of the set. */
+  var STRETCH = 10
+  function isBonus(round) { return round > 0 && round % STRETCH === STRETCH - 1 }
+
+  /* ── the objects ─────────────────────────────────────────────────────────── */
+
+  /**
+   * What goes in the tank.
+   *
+   * ── Why grams and millilitres and not a "floats" flag ─────────────────────
+   *
+   * Nothing here says what an object does. Each one says how heavy it is and
+   * how much room it takes up, which is what the child is being taught to
+   * think about, and the behaviour is worked out from those two numbers at the
+   * moment of judging. A flag would let the picture and the verdict drift
+   * apart, and worse, it would let the code know something the physics does
+   * not.
+   *
+   * The numbers are rough but honest: a real orange really is about 180 grams
+   * and about 200 millilitres, which is why it floats with barely anything
+   * showing. Water is one gram per millilitre, so anything under that line
+   * floats and anything over it sinks.
+   *
+   * Every object is one a Primary child in Ghana has held. No ice cubes, no
+   * pieces of pine, no laboratory blocks.
+   */
+  var BANK = [
+    /* Floats. */
+    { name: 'leaf', art: 'leaf', g: 2, ml: 9,
+      why: 'A leaf is thin and very light for its size, so it rests on top.' },
+    { name: 'cork', art: 'cork', g: 5, ml: 22,
+      why: 'A cork is full of tiny air pockets, so it floats.' },
+    { name: 'empty bottle', art: 'bottle', g: 22, ml: 520,
+      why: 'The bottle is full of air, so it floats.' },
+    { name: 'wooden spoon', art: 'woodspoon', g: 30, ml: 52,
+      why: 'Dry wood is lighter than the water it pushes aside, so it floats.' },
+    { name: 'orange', art: 'orange', g: 180, ml: 205, surprise: true,
+      why: 'The orange is heavy, but its peel is full of air, so it still floats.' },
+    { name: 'sponge', art: 'sponge', g: 10, ml: 130,
+      why: 'A dry sponge is mostly holes full of air, so it floats.' },
+    { name: 'plastic cup', art: 'cup', g: 8, ml: 95,
+      why: 'The cup holds air inside it, so it floats.' },
+    { name: 'dry stick', art: 'stick', g: 24, ml: 44,
+      why: 'A dry stick is lighter than the water it pushes aside, so it floats.' },
+    { name: 'ball', art: 'ball', g: 410, ml: 5000,
+      why: 'The ball is big and full of air, so it floats.' },
+    { name: 'candle', art: 'candle', g: 40, ml: 46,
+      why: 'Wax is a little lighter than water, so a candle floats.' },
+
+    /* Sinks. */
+    { name: 'stone', art: 'stone', g: 120, ml: 45,
+      why: 'The stone is heavier than the water it pushes aside, so it sinks.' },
+    { name: 'nail', art: 'nail', g: 8, ml: 1,
+      why: 'Iron is very heavy for its size, so even a small nail sinks.' },
+    { name: 'coin', art: 'coin', g: 5, ml: 0.6,
+      why: 'A coin is small but metal is heavy for its size, so it sinks.' },
+    { name: 'key', art: 'key', g: 12, ml: 1.5,
+      why: 'The key is metal, heavy for its size, so it sinks.' },
+    { name: 'metal spoon', art: 'metalspoon', g: 45, ml: 6,
+      why: 'A metal spoon is heavy for its size, so it sinks.' },
+    { name: 'marble', art: 'marble', g: 12, ml: 5,
+      why: 'Glass is heavier than water, so a marble sinks.' },
+    { name: 'full bottle', art: 'fullbottle', g: 520, ml: 500,
+      why: 'This bottle has no air in it, only water and plastic, so it sinks.' },
+    { name: 'mango seed', art: 'seed', g: 35, ml: 30,
+      why: 'The seed is packed solid with no air in it, so it sinks.' },
+    { name: 'pot shard', art: 'shard', g: 60, ml: 25,
+      why: 'Baked clay is heavier than water, so the shard sinks.' },
+    { name: 'egg', art: 'egg', g: 58, ml: 53, surprise: true,
+      why: 'The egg feels light, but there is no air inside it, so it sinks.' }
+  ]
+
+  /**
+   * The one piece of physics in the game.
+   *
+   * Grams per millilitre against water, which is one. Called by `judge`, by
+   * the drop animation and by the tile colouring, so all three are reading the
+   * same truth off the same object at the same instant.
+   */
+  function floatsInWater(o) { return o.g / o.ml < 1 }
+
+  /* ── the art ─────────────────────────────────────────────────────────────── */
+
+  /**
+   * Each object, drawn from its centre at radius `r`.
+   *
+   * Flat fills and one hard outline each. They are seen at about forty pixels
+   * inside a tank of water, so every one is built round a single unmistakable
+   * silhouette and nothing else: the key is a ring with teeth, the nail is a
+   * line with a disc on it, the egg is an egg.
+   */
+  var ART = {}
+
+  ART.leaf = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(-0.4)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.9, 0)
+    ctx.quadraticCurveTo(0, -r * 0.72, r * 0.9, 0)
+    ctx.quadraticCurveTo(0, r * 0.72, -r * 0.9, 0)
+    ctx.closePath()
+    K.inkedOn(ctx, '#4fae3c', K.LINE, 3)
+    ctx.strokeStyle = '#2b7a26'
+    ctx.lineWidth = Math.max(2, r * 0.08)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.86, 0)
+    ctx.lineTo(r * 0.86, 0)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  ART.cork = function (ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.42, -r * 0.7)
+    ctx.lineTo(r * 0.42, -r * 0.7)
+    ctx.lineTo(r * 0.52, r * 0.7)
+    ctx.lineTo(-r * 0.52, r * 0.7)
+    ctx.closePath()
+    K.inkedOn(ctx, '#d9a465', K.LINE, 3)
+    ctx.fillStyle = 'rgba(120,80,36,0.4)'
+    for (var i = 0; i < 5; i++) {
+      ctx.beginPath()
+      ctx.arc(K.fixed(i * 13, r * 0.7) - r * 0.35, K.fixed(i * 7, r * 1.1) - r * 0.55,
+        r * 0.07, 0, Math.PI * 2)
+      ctx.fill()
+    }
+  }
+
+  /** The bottle, empty or full. The water inside is the whole difference. */
+  function bottle(ctx, r, full) {
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.4, -r * 0.42, r * 0.8, r * 1.28, r * 0.18)
+    K.inkedOn(ctx, full ? '#bfe4f5' : 'rgba(226,244,252,0.95)', K.LINE, 3)
+    if (full) {
+      ctx.save()
+      ctx.beginPath()
+      ctx.roundRect(-r * 0.4, -r * 0.42, r * 0.8, r * 1.28, r * 0.18)
+      ctx.clip()
+      ctx.fillStyle = '#4fb6ef'
+      ctx.fillRect(-r * 0.4, -r * 0.3, r * 0.8, r * 1.2)
+      ctx.restore()
+    }
+    /* Shoulders and neck. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.4, -r * 0.34)
+    ctx.quadraticCurveTo(-r * 0.18, -r * 0.62, -r * 0.16, -r * 0.78)
+    ctx.lineTo(r * 0.16, -r * 0.78)
+    ctx.quadraticCurveTo(r * 0.18, -r * 0.62, r * 0.4, -r * 0.34)
+    ctx.closePath()
+    K.inkedOn(ctx, full ? '#bfe4f5' : 'rgba(226,244,252,0.95)', K.LINE, 3)
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.2, -r * 1.0, r * 0.4, r * 0.24, r * 0.06)
+    K.inkedOn(ctx, '#3f9ede', K.LINE, 2.5)
+  }
+  ART.bottle = function (ctx, r) { bottle(ctx, r, false) }
+  ART.fullbottle = function (ctx, r) { bottle(ctx, r, true) }
+
+  /** A spoon. Wood or metal, which is the only thing that matters here. */
+  function spoon(ctx, r, metal) {
+    var body = metal ? '#cfd6dc' : '#c98f4e'
+    ctx.save()
+    ctx.rotate(-0.5)
+    ctx.strokeStyle = body
+    ctx.lineWidth = r * 0.2
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(0, r * 0.1)
+    ctx.lineTo(0, r * 0.92)
+    ctx.stroke()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 2.5
+    ctx.stroke()
+    ctx.strokeStyle = body
+    ctx.lineWidth = r * 0.13
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.34, r * 0.34, r * 0.5, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, body, K.LINE, 3)
+    if (metal) {
+      ctx.save()
+      ctx.globalAlpha = 0.7
+      ctx.beginPath()
+      ctx.ellipse(-r * 0.1, -r * 0.42, r * 0.11, r * 0.22, 0.2, 0, Math.PI * 2)
+      ctx.fillStyle = '#ffffff'
+      ctx.fill()
+      ctx.restore()
+    }
+    ctx.restore()
+  }
+  ART.woodspoon = function (ctx, r) { spoon(ctx, r, false) }
+  ART.metalspoon = function (ctx, r) { spoon(ctx, r, true) }
+
+  ART.orange = function (ctx, r) {
+    ctx.beginPath()
+    ctx.arc(0, r * 0.06, r * 0.82, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f2913b', K.LINE, 3.5)
+    ctx.strokeStyle = 'rgba(160,80,16,0.4)'
+    ctx.lineWidth = Math.max(2, r * 0.06)
+    ctx.beginPath()
+    ctx.arc(-r * 0.24, r * 0.06, r * 0.5, -1.1, 1.1)
+    ctx.stroke()
+    /* A stalk and a leaf, so an orange circle is an orange. */
+    ctx.strokeStyle = '#6b4a22'
+    ctx.lineWidth = Math.max(3, r * 0.09)
+    ctx.beginPath()
+    ctx.moveTo(0, -r * 0.72)
+    ctx.lineTo(0, -r * 0.95)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.ellipse(r * 0.28, -r * 0.94, r * 0.26, r * 0.12, -0.4, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#4fae3c', K.LINE, 2.5)
+  }
+
+  ART.sponge = function (ctx, r) {
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.82, -r * 0.5, r * 1.64, r * 1.0, r * 0.14)
+    K.inkedOn(ctx, '#f2d024', K.LINE, 3)
+    ctx.fillStyle = 'rgba(160,120,10,0.35)'
+    for (var i = 0; i < 7; i++) {
+      ctx.beginPath()
+      ctx.arc(-r * 0.6 + K.fixed(i * 11, r * 1.2), -r * 0.32 + K.fixed(i * 5, r * 0.64),
+        r * (0.07 + K.fixed(i * 3, 0.05)), 0, Math.PI * 2)
+      ctx.fill()
+    }
+  }
+
+  ART.cup = function (ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.6, -r * 0.6)
+    ctx.lineTo(r * 0.6, -r * 0.6)
+    ctx.lineTo(r * 0.42, r * 0.66)
+    ctx.lineTo(-r * 0.42, r * 0.66)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 3)
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.6, r * 0.6, r * 0.16, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#e2dccb', K.LINE, 3)
+    ctx.strokeStyle = 'rgba(120,110,90,0.4)'
+    ctx.lineWidth = Math.max(2, r * 0.05)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.52, -r * 0.1)
+    ctx.lineTo(r * 0.52, -r * 0.1)
+    ctx.stroke()
+  }
+
+  ART.stick = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(-0.35)
+    ctx.strokeStyle = '#8a5a2b'
+    ctx.lineWidth = r * 0.24
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.92, r * 0.14)
+    ctx.quadraticCurveTo(0, -r * 0.12, r * 0.92, r * 0.06)
+    ctx.stroke()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 2.5
+    ctx.stroke()
+    ctx.strokeStyle = '#a9703c'
+    ctx.lineWidth = r * 0.15
+    ctx.stroke()
+    /* One side twig, so it is a stick and not a rope. */
+    ctx.strokeStyle = '#8a5a2b'
+    ctx.lineWidth = r * 0.1
+    ctx.beginPath()
+    ctx.moveTo(r * 0.1, -r * 0.06)
+    ctx.lineTo(r * 0.44, -r * 0.5)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  ART.ball = function (ctx, r) {
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.86, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 3.5)
+    ctx.fillStyle = '#2b3440'
+    for (var i = 0; i < 3; i++) {
+      var a = i * Math.PI * 2 / 3 - 0.6
+      ctx.beginPath()
+      ctx.arc(Math.cos(a) * r * 0.46, Math.sin(a) * r * 0.46, r * 0.2, 0, Math.PI * 2)
+      ctx.fill()
+    }
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.2, 0, Math.PI * 2)
+    ctx.fill()
+  }
+
+  ART.candle = function (ctx, r) {
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.3, -r * 0.62, r * 0.6, r * 1.3, r * 0.08)
+    K.inkedOn(ctx, '#f3e7d2', K.LINE, 3)
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.62, r * 0.3, r * 0.1, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#e2dccb', K.LINE, 2.5)
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = Math.max(2, r * 0.07)
+    ctx.beginPath()
+    ctx.moveTo(0, -r * 0.66)
+    ctx.lineTo(0, -r * 0.88)
+    ctx.stroke()
+  }
+
+  ART.stone = function (ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.82, r * 0.1)
+    ctx.lineTo(-r * 0.5, -r * 0.6)
+    ctx.lineTo(r * 0.22, -r * 0.72)
+    ctx.lineTo(r * 0.8, -r * 0.14)
+    ctx.lineTo(r * 0.54, r * 0.58)
+    ctx.lineTo(-r * 0.42, r * 0.6)
+    ctx.closePath()
+    K.inkedOn(ctx, '#8d9299', K.LINE, 3.5)
+    ctx.fillStyle = 'rgba(255,255,255,0.28)'
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.46, -r * 0.5)
+    ctx.lineTo(r * 0.16, -r * 0.6)
+    ctx.lineTo(-r * 0.1, -r * 0.18)
+    ctx.closePath()
+    ctx.fill()
+  }
+
+  ART.nail = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(0.5)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.12, -r * 0.62)
+    ctx.lineTo(r * 0.12, -r * 0.62)
+    ctx.lineTo(r * 0.03, r * 0.88)
+    ctx.lineTo(-r * 0.03, r * 0.88)
+    ctx.closePath()
+    K.inkedOn(ctx, '#aeb6bd', K.LINE, 2.5)
+    ctx.beginPath()
+    ctx.ellipse(0, -r * 0.64, r * 0.3, r * 0.1, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#cfd6dc', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  ART.coin = function (ctx, r) {
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.66, r * 0.62, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f2c33b', K.LINE, 3)
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.44, r * 0.4, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffe07a', K.LINE, 2)
+  }
+
+  ART.key = function (ctx, r) {
+    ctx.save()
+    ctx.rotate(-0.5)
+    ctx.beginPath()
+    ctx.arc(0, -r * 0.48, r * 0.34, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#e0b23a', K.LINE, 3)
+    ctx.beginPath()
+    ctx.arc(0, -r * 0.48, r * 0.14, 0, Math.PI * 2)
+    ctx.fillStyle = '#7a5a12'
+    ctx.fill()
+    ctx.beginPath()
+    ctx.rect(-r * 0.1, -r * 0.2, r * 0.2, r * 1.0)
+    K.inkedOn(ctx, '#e0b23a', K.LINE, 2.5)
+    /* Teeth, which is the only part that says key and not lollipop. */
+    ctx.beginPath()
+    ctx.rect(r * 0.08, r * 0.44, r * 0.26, r * 0.14)
+    ctx.rect(r * 0.08, r * 0.68, r * 0.2, r * 0.13)
+    K.inkedOn(ctx, '#e0b23a', K.LINE, 2.5)
+    ctx.restore()
+  }
+
+  ART.marble = function (ctx, r) {
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.64, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#7fc5f0', K.LINE, 3)
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(0, 0, r * 0.64, 0, Math.PI * 2)
+    ctx.clip()
+    ctx.strokeStyle = '#e0679f'
+    ctx.lineWidth = r * 0.2
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.6, r * 0.2)
+    ctx.quadraticCurveTo(0, -r * 0.5, r * 0.6, r * 0.24)
+    ctx.stroke()
+    ctx.restore()
+    ctx.beginPath()
+    ctx.arc(-r * 0.22, -r * 0.28, r * 0.14, 0, Math.PI * 2)
+    ctx.fillStyle = 'rgba(255,255,255,0.8)'
+    ctx.fill()
+  }
+
+  ART.seed = function (ctx, r) {
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.78, r * 0.5, -0.2, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#d9c48a', K.LINE, 3)
+    /* Fibres, which is what a mango seed looks like once it is cleaned. */
+    ctx.strokeStyle = 'rgba(130,100,40,0.55)'
+    ctx.lineWidth = Math.max(2, r * 0.05)
+    for (var i = 0; i < 5; i++) {
+      var t = -0.5 + i * 0.25
+      ctx.beginPath()
+      ctx.moveTo(r * t, -r * 0.42)
+      ctx.quadraticCurveTo(r * (t + 0.1), 0, r * t, r * 0.42)
+      ctx.stroke()
+    }
+  }
+
+  ART.shard = function (ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.78, r * 0.44)
+    ctx.quadraticCurveTo(-r * 0.2, -r * 0.82, r * 0.72, -r * 0.3)
+    ctx.lineTo(r * 0.3, r * 0.56)
+    ctx.closePath()
+    K.inkedOn(ctx, '#c4552e', K.LINE, 3)
+    ctx.strokeStyle = 'rgba(90,30,12,0.45)'
+    ctx.lineWidth = Math.max(2, r * 0.06)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.5, r * 0.28)
+    ctx.quadraticCurveTo(-r * 0.05, -r * 0.4, r * 0.5, -r * 0.16)
+    ctx.stroke()
+  }
+
+  ART.egg = function (ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(0, -r * 0.82)
+    ctx.bezierCurveTo(r * 0.56, -r * 0.6, r * 0.62, r * 0.36, 0, r * 0.74)
+    ctx.bezierCurveTo(-r * 0.62, r * 0.36, -r * 0.56, -r * 0.6, 0, -r * 0.82)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f6ecd6', K.LINE, 3)
+    ctx.fillStyle = 'rgba(200,170,120,0.35)'
+    ctx.beginPath()
+    ctx.ellipse(r * 0.2, r * 0.18, r * 0.2, r * 0.3, 0.3, 0, Math.PI * 2)
+    ctx.fill()
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * The tank.
+   *
+   * It stands on the worktop, which begins at the scene's ground line, and its
+   * base is held clear of the answer row: nothing may sit in the bottom band,
+   * because that band belongs to the two tiles. It is allowed to rise past the
+   * ground line into the tiled splashback, which is where a tall glass tank on
+   * a counter would actually be seen.
+   */
+  function tankBase(k) { return k.H - K.tileRow(k.H) - k.H * 0.03 }
+  function tankH(k) { return clamp(Math.min(k.H * 0.36, k.W * 0.26), 92, 230) }
+  function tankW(k) { return tankH(k) * 1.12 }
+  function tankX(k) { return k.W * 0.56 }
+  function tankTop(k) { return tankBase(k) - tankH(k) }
+
+  /** The surface of the water, a little below the rim so it can splash. */
+  function waterY(k) { return tankTop(k) + tankH(k) * 0.2 }
+  /** The inside of the floor, which is as far down as anything can get. */
+  function floorY(k) { return tankBase(k) - tankH(k) * 0.06 }
+
+  function objR(k) { return clamp(tankH(k) * 0.19, 17, 46) }
+  /** Where the object waits while the prediction is being made. */
+  function hoverY(k) { return tankTop(k) - objR(k) * 1.5 }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    right: ['We were right!', 'Good prediction!', 'That is what happened!', 'Yes! Test it again.'],
+    bonus: 'Ten tests done! You are a real scientist.',
+    over: 'The water is all gone. Let us start again!',
+    poke: 'Careful, do not knock over the tank!'
+  }
+
+  /* How long the two halves of the drop take, in seconds at normal rate. */
+  var FALL = 0.42
+  var WET = 1.5
+
+  AnanseKit.run({
+    title: 'Floating or Sinking',
+    overTitle: 'Tank empty!',
+    scene: 'kitchen',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'tests',
+    /* Tapping a prediction is the whole answer, so there is nothing to
+       confirm afterwards. */
+    button: false,
+    restMood: 'watching',
+    hud: function (k) {
+      return [
+        { label: 'tests', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      if (k.own.coins === undefined) k.own.coins = 0
+      /* A restart after losing every life. The kit puts its own score and
+         lives back; the bag and the purse are ours to reset. */
+      if (k.round === 0) { k.own.coins = 0; k.own.bag = null }
+
+      /* Drawn without replacement, so a child does not meet the stone four
+         times before they have met the egg once. */
+      if (!k.own.bag || !k.own.bag.length) {
+        k.own.bag = BANK.map(function (o, i) { return i })
+        k.own.bag.sort(function () { return Math.random() - 0.5 })
+        /* Never the same object twice across the seam between two bags. */
+        if (k.own.obj && BANK[k.own.bag[k.own.bag.length - 1]] === k.own.obj) {
+          k.own.bag.unshift(k.own.bag.pop())
+        }
+      }
+      k.own.obj = BANK[k.own.bag.pop()]
+      k.target = k.own.obj.name
+      k.own.pick = null
+      k.own.drop = null
+      k.own.bubbles = []
+      k.own.splashed = false
+
+      k.say('Will the ' + k.own.obj.name + ' float or sink? Say it first.')
+      k.him.setMood('watching')
+    },
+
+    ask: function (k) {
+      if (!k.own.obj) return null
+      if (k.phase === 'won') {
+        return { head: 'Yes! The ' + k.own.obj.name + ' ',
+          num: floatsInWater(k.own.obj) ? 'floats' : 'sinks', tail: '' }
+      }
+      return { head: 'Will the ', num: k.own.obj.name, tail: ' float or sink?' }
+    },
+
+    /**
+     * The prediction against what the object actually does.
+     *
+     * Worked out here, now, from the object's own weight and size. There is no
+     * stored verdict anywhere, so what the tiles say, what the tank does and
+     * what the score records cannot disagree.
+     */
+    judge: function (k) {
+      if (!k.own.pick) return false
+      return k.own.pick === (floatsInWater(k.own.obj) ? 'floats' : 'sinks')
+    },
+
+    /**
+     * Two tiles, always in the same order.
+     *
+     * Floats on the left and sinks on the right every single round. Shuffling
+     * them would make the child hunt for the word instead of thinking about
+     * the object, and with only two choices a fixed order costs nothing: they
+     * still have to decide which one is true.
+     */
+    down: function (k, x, y) {
+      if (k.own.pick) return false
+      var i = K.tileAt(k.W, k.H, 2, x, y)
+      if (i < 0) return false
+      k.own.pick = i === 0 ? 'floats' : 'sinks'
+      k.sound.play('lift')
+      k.commit()
+      return true
+    },
+
+    onWin: function (k) {
+      /* The test runs now, at the brisk rate: they already know what is coming
+         and the picture is confirming it, not teaching it. */
+      k.own.drop = { t: 0, rate: 1.15, hard: false }
+      k.own.coins += 1
+      if (isBonus(k.round)) {
+        k.own.coins += 10
+        k.cheer(tankX(k), tankTop(k))
+        k.say(LINES.bonus)
+      } else if (k.own.obj.surprise) {
+        /* The two that break the heavy-means-sinks rule are worth a sentence
+           even when the child got them right, because guessing right and
+           knowing why are not the same thing. */
+        k.say(k.own.obj.why)
+      } else {
+        k.say(pick(LINES.right))
+      }
+    },
+
+    onMiss: function (k) {
+      /* Slower, and with a heavier splash. Being shown you were wrong is where
+         the learning is, so the demonstration gets the time and the weight. */
+      k.own.drop = { t: 0, rate: 0.72, hard: true }
+      k.say(k.own.obj.why)
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k, dt) {
+      var d = k.own.drop
+      var i
+
+      /* Bubbles rise and fade whether or not the drop is still running. */
+      for (i = k.own.bubbles.length - 1; i >= 0; i--) {
+        var b = k.own.bubbles[i]
+        b.y -= b.up * dt
+        b.life -= dt * 0.8
+        if (b.life <= 0 || b.y < waterY(k)) k.own.bubbles.splice(i, 1)
+      }
+      if (!d) return
+
+      var was = d.t
+      d.t += dt * d.rate
+
+      /* The moment of entry: one splash, once. */
+      if (!k.own.splashed && was < FALL && d.t >= FALL) {
+        k.own.splashed = true
+        k.sound.play('thud')
+        k.kick(d.hard ? 8 : 5)
+        k.puff(tankX(k), waterY(k), d.hard ? 18 : 11, 'rgba(180,225,255,0.9)')
+      }
+
+      /* Bubbles all the way down, because a sinking thing drives the air out
+         of itself and that is the visible part of the explanation. */
+      if (d.t > FALL && !floatsInWater(k.own.obj)) {
+        var u = (d.t - FALL) / WET
+        if (u < 0.92 && Math.random() < (d.hard ? 0.5 : 0.32)) {
+          k.own.bubbles.push({
+            x: tankX(k) + rand(-objR(k) * 0.7, objR(k) * 0.7),
+            y: objectY(k) - objR(k) * 0.2,
+            r: rand(objR(k) * 0.08, objR(k) * 0.2),
+            up: rand(40, 95), life: 1
+          })
+        }
+      }
+    },
+
+    /**
+     * The tank, the water and whatever is in it.
+     *
+     * Drawn back to front: the glass behind, the water, the object clipped
+     * inside the walls, then the front face of the glass over the top. The
+     * clip is what stops a sinking stone drifting out through the side of a
+     * tank that is supposed to be holding it.
+     */
+    paint: function (k) {
+      var ctx = k.ctx
+      var o = k.own.obj
+      if (!o) return
+      var cx = tankX(k), tw = tankW(k), th = tankH(k)
+      var top = tankTop(k), base = tankBase(k)
+      var wy = waterY(k)
+      var r = objR(k)
+      var i
+
+      /* Him, beside the tank on the worktop, on the side the water is not.
+         He stands 1.5 radii below his centre, so his feet land on the base
+         line of the tank and he is on the same surface as it. */
+      var hr = clamp(Math.min(k.W, k.H) * 0.072, 26, 56)
+      k.him.draw(cx - tw * 0.5 - hr * 1.5, base - hr * 1.3, hr, base)
+
+      /* A shadow under the tank, so it is standing on the wood. */
+      ctx.save()
+      ctx.globalAlpha = 0.2
+      ctx.fillStyle = '#5a3618'
+      ctx.beginPath()
+      ctx.ellipse(cx, base + th * 0.03, tw * 0.6, th * 0.05, 0, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+
+      /* The glass box. */
+      ctx.beginPath()
+      ctx.roundRect(cx - tw / 2, top, tw, th, th * 0.05)
+      K.inkedOn(ctx, 'rgba(226,244,252,0.55)', K.LINE, 4)
+
+      ctx.save()
+      ctx.beginPath()
+      ctx.roundRect(cx - tw / 2, top, tw, th, th * 0.05)
+      ctx.clip()
+
+      /* The water. */
+      ctx.fillStyle = 'rgba(63,158,222,0.72)'
+      ctx.fillRect(cx - tw / 2, wy, tw, base - wy)
+
+      /* The object, wherever the drop has got it to. */
+      var oy = objectY(k)
+      if (oy > top - r) {
+        ctx.save()
+        ctx.translate(cx, oy)
+        if (k.own.drop && k.own.drop.t > FALL && !floatsInWater(o)) {
+          /* A slow turn as it goes down, which reads as tumbling through
+             water rather than dropping down a chute. */
+          ctx.rotate(Math.min(1, (k.own.drop.t - FALL) / WET) * 0.6)
+        }
+        ART[o.art](ctx, r)
+        ctx.restore()
+      }
+
+      /* Bubbles. */
+      for (i = 0; i < k.own.bubbles.length; i++) {
+        var b = k.own.bubbles[i]
+        ctx.save()
+        ctx.globalAlpha = clamp(b.life, 0, 1) * 0.85
+        ctx.beginPath()
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2)
+        K.inkedOn(ctx, 'rgba(226,244,252,0.9)', 'rgba(20,60,90,0.5)', 2)
+        ctx.restore()
+      }
+
+      /* The surface, with a ripple that is bigger just after an entry. */
+      var since = k.own.drop ? Math.max(0, k.own.drop.t - FALL) : 0
+      var wave = k.own.drop
+        ? Math.exp(-since * 2.2) * th * 0.045 * (k.own.drop.hard ? 1.6 : 1)
+        : 0
+      ctx.strokeStyle = '#bfe4f5'
+      ctx.lineWidth = Math.max(3, th * 0.025)
+      ctx.beginPath()
+      for (var px = 0; px <= 12; px++) {
+        var fx = cx - tw / 2 + (px / 12) * tw
+        var fy = wy + Math.sin(k.now * 0.005 + px * 0.9) * (th * 0.008 + wave)
+        if (px === 0) ctx.moveTo(fx, fy)
+        else ctx.lineTo(fx, fy)
+      }
+      ctx.stroke()
+      ctx.restore()
+
+      /* The front face of the glass: one pale streak and a rim. Two tone
+         volume, no gradient, the same as everything else in the set. */
+      ctx.save()
+      ctx.globalAlpha = 0.25
+      ctx.fillStyle = '#ffffff'
+      ctx.beginPath()
+      ctx.moveTo(cx - tw * 0.4, top + th * 0.06)
+      ctx.lineTo(cx - tw * 0.24, top + th * 0.06)
+      ctx.lineTo(cx - tw * 0.38, base - th * 0.06)
+      ctx.lineTo(cx - tw * 0.46, base - th * 0.06)
+      ctx.closePath()
+      ctx.fill()
+      ctx.restore()
+      ctx.beginPath()
+      ctx.roundRect(cx - tw / 2, top, tw, th, th * 0.05)
+      ctx.strokeStyle = K.LINE
+      ctx.lineWidth = 4
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.roundRect(cx - tw * 0.54, top - th * 0.05, tw * 1.08, th * 0.08, th * 0.04)
+      K.inkedOn(ctx, '#7fc5f0', K.LINE, 3)
+
+      /* The object waiting to be dropped, above the rim, bobbing so it reads
+         as held rather than stuck to the picture. */
+      if (!k.own.drop) {
+        ctx.save()
+        ctx.translate(cx, hoverY(k) + Math.sin(k.now * 0.003) * r * 0.12)
+        ART[o.art](ctx, r)
+        ctx.restore()
+      }
+
+      /* The two predictions. Their colours are worked out from the object the
+         same way `judge` does it, so the green tile is green for a reason and
+         not because something was remembered. */
+      var labels = ['floats', 'sinks']
+      var truth = floatsInWater(o) ? 'floats' : 'sinks'
+      for (i = 0; i < 2; i++) {
+        var state = 'idle'
+        if (k.own.pick) {
+          if (labels[i] === truth) state = 'right'
+          else if (labels[i] === k.own.pick) state = 'wrong'
+          else state = 'dim'
+        }
+        K.drawTile(ctx, k.W, k.H, i, 2, labels[i], state, k.FONT)
+      }
+    },
+
+    /**
+     * Scenery baked into the backdrop once per resize.
+     *
+     * A jug at the far end of the worktop and a cloth at the near end, both
+     * well clear of the tank and of where he stands. The kit has no kitchen
+     * clutter and a bare counter with one tank on it looks like a diagram.
+     */
+    props: function (k, g, W, H) {
+      var kk = { W: W, H: H }
+      var base = tankBase(kk)
+      var s = Math.min(W, H) * 0.075
+
+      /* The jug, right of the tank. */
+      var jx = W * 0.9
+      g.beginPath()
+      g.moveTo(jx - s * 0.5, base - s * 1.1)
+      g.lineTo(jx + s * 0.5, base - s * 1.1)
+      g.lineTo(jx + s * 0.38, base)
+      g.lineTo(jx - s * 0.38, base)
+      g.closePath()
+      K.inkedOn(g, '#3f9ede', K.LINE, 3.5)
+      g.beginPath()
+      g.ellipse(jx, base - s * 1.1, s * 0.5, s * 0.14, 0, 0, Math.PI * 2)
+      K.inkedOn(g, '#7fc5f0', K.LINE, 3)
+      g.strokeStyle = K.LINE
+      g.lineWidth = Math.max(3, s * 0.1)
+      g.beginPath()
+      g.arc(jx + s * 0.55, base - s * 0.62, s * 0.3, -1.2, 1.2)
+      g.stroke()
+
+      /* A folded cloth, far left, flat on the wood. */
+      var cxp = W * 0.07
+      g.beginPath()
+      g.roundRect(cxp - s * 0.7, base - s * 0.3, s * 1.4, s * 0.3, s * 0.08)
+      K.inkedOn(g, '#e0679f', K.LINE, 3)
+      g.beginPath()
+      g.roundRect(cxp - s * 0.6, base - s * 0.52, s * 1.2, s * 0.26, s * 0.07)
+      K.inkedOn(g, '#f090bb', K.LINE, 3)
+    },
+
+    /**
+     * Everything a test needs to drive this without looking at it.
+     *
+     * Both tiles by their screen centres, the object and where it is, and the
+     * density the verdict is worked out from, so a test can check the picture
+     * agrees with the physics.
+     */
+    peek: function (k) {
+      if (!k.own.obj) return { object: null }
+      var o = k.own.obj
+      return {
+        object: o.name,
+        grams: o.g,
+        millilitres: o.ml,
+        density: Math.round(o.g / o.ml * 100) / 100,
+        behaviour: floatsInWater(o) ? 'floats' : 'sinks',
+        pick: k.own.pick,
+        dropping: !!k.own.drop,
+        dropT: k.own.drop ? Math.round(k.own.drop.t * 100) / 100 : 0,
+        splashed: !!k.own.splashed,
+        coins: k.own.coins,
+        objectAt: { x: Math.round(tankX(k)), y: Math.round(objectY(k)) },
+        waterY: Math.round(waterY(k)),
+        tiles: ['floats', 'sinks'].map(function (label, i) {
+          var r = K.tileRect(k.W, k.H, i, 2)
+          return {
+            label: label,
+            x: Math.round(r.x + r.w / 2),
+            y: Math.round(r.y + r.h / 2)
+          }
+        })
+      }
+    }
+  })
+
+  /**
+   * Where the object is right now.
+   *
+   * Defined after the game because it is used from `step`, `paint` and `peek`
+   * alike and all three must agree to the pixel: the bubbles come off it, the
+   * picture draws it, and the test reads it.
+   */
+  function objectY(k) {
+    var d = k.own.drop
+    var r = objR(k)
+    if (!d) return hoverY(k) + Math.sin(k.now * 0.003) * r * 0.12
+
+    if (d.t < FALL) {
+      /* Falling, gathering speed, from the hand to the surface. */
+      var f = d.t / FALL
+      return hoverY(k) + (waterY(k) - hoverY(k)) * f * f
+    }
+
+    var u = clamp((d.t - FALL) / WET, 0, 1)
+    if (floatsInWater(k.own.obj)) {
+      /* Pushed under by the fall, then shoved back up and bobbing to rest.
+         The bob is the buoyancy: it is the water pushing, made visible. */
+      var dip = r * (d.hard ? 1.3 : 1.0) * Math.sin(u * 9) * Math.exp(-u * 2.4)
+      return waterY(k) + r * 0.22 + dip
+    }
+    /* Going down, slowing as the water holds it. */
+    var e = 1 - Math.pow(1 - u, 2)
+    return waterY(k) + (floorY(k) - r * 0.7 - waterY(k)) * e
+  }
+}())
+</script>
+</body>
+</html>

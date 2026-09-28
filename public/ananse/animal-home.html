@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Animal Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Animal Home. Where things live.
+
+  ── Why one animal and not a boardful ────────────────────────────────────────
+
+  Shape Puzzle is four pieces and four holes, and building this the same way
+  would have made it Shape Puzzle with animals painted on, which is the mistake
+  this whole rebuild exists to avoid.
+
+  More importantly the two games test different kinds of knowing. A square does
+  not fit a round hole, and a child can see that: the answer is in front of them
+  and the board will tell them. Where a fish lives is not visible anywhere on
+  the screen. They either know it or they do not, and nothing in the picture can
+  help them work it out.
+
+  That makes it a harder question with a softer shape, so it gets one animal,
+  three homes, and a single decision.
+
+  ── Why a wrong home says no gently ──────────────────────────────────────────
+
+  The animal will not go in, and it says why. A fish held over a kennel is a
+  funny idea, not a failure, and the joke is what makes the fact stick.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #2a1a0c;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, rand = K.rand, randInt = K.randInt, pick = K.pick
+
+  var LINES = {
+    ask: function (a) { return 'Where does the ' + a + ' live?' },
+    right: ['That is home!', 'Yes! In it goes!', 'Just right!'],
+    wrong: function (a, h) { return 'A ' + a + ' does not live in the ' + h + '!' },
+    lift: 'Take it home!',
+    tickle: 'Hee hee! I live in a web!',
+    over: 'Everybody is home! Thank you, my friend!',
+  }
+
+  /* ── who lives where ─────────────────────────────────────────────────────── */
+
+  /**
+   * Four animals and the one place each belongs.
+   *
+   * Deliberately unambiguous. A cat could live in a house or a basket and a bird
+   * could be in a tree or a cage, and a question with two defensible answers is
+   * a question that punishes a child for thinking. These four have one home
+   * each and a Ghanaian child has seen all of them.
+   */
+  var WORLD = [
+    { animal: 'fish', home: 'pond', homeName: 'pond' },
+    { animal: 'bird', home: 'nest', homeName: 'nest' },
+    { animal: 'dog', home: 'kennel', homeName: 'kennel' },
+    { animal: 'bee', home: 'hive', homeName: 'hive' },
+  ]
+
+  /* ── the animals ─────────────────────────────────────────────────────────── */
+
+  function drawFish(ctx, r) {
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.62, 0)
+    ctx.lineTo(-r * 1.0, -r * 0.42)
+    ctx.quadraticCurveTo(-r * 0.78, 0, -r * 1.0, r * 0.42)
+    ctx.closePath()
+    K.inkedOn(ctx, '#d97016', K.LINE, 3)
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.8, r * 0.52, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffa63d', K.LINE, 3.5)
+    ctx.beginPath()
+    ctx.arc(r * 0.42, -r * 0.14, r * 0.13, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffffff', K.LINE, 2)
+    ctx.beginPath()
+    ctx.arc(r * 0.46, -r * 0.14, r * 0.06, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+  }
+
+  function drawBird(ctx, r) {
+    /* Tail and wing before the body, so the body overlaps them. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.5, 0)
+    ctx.lineTo(-r * 1.0, -r * 0.34)
+    ctx.lineTo(-r * 0.92, r * 0.22)
+    ctx.closePath()
+    K.inkedOn(ctx, '#1f7fc4', K.LINE, 3)
+
+    ctx.beginPath()
+    ctx.ellipse(0, r * 0.06, r * 0.72, r * 0.58, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#3f9ede', K.LINE, 3.5)
+
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.1, r * 0.1, r * 0.34, r * 0.24, -0.3, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#7fc5f0', K.LINE, 2.5)
+
+    ctx.beginPath()
+    ctx.arc(r * 0.46, -r * 0.42, r * 0.36, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#3f9ede', K.LINE, 3.5)
+
+    /* Beak. */
+    ctx.beginPath()
+    ctx.moveTo(r * 0.76, -r * 0.44)
+    ctx.lineTo(r * 1.1, -r * 0.34)
+    ctx.lineTo(r * 0.76, -r * 0.24)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f2a93b', K.LINE, 2.5)
+
+    ctx.beginPath()
+    ctx.arc(r * 0.5, -r * 0.5, r * 0.11, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffffff', K.LINE, 2)
+    ctx.beginPath()
+    ctx.arc(r * 0.53, -r * 0.5, r * 0.05, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+  }
+
+  function drawDog(ctx, r) {
+    /* Body. */
+    ctx.beginPath()
+    ctx.ellipse(-r * 0.18, r * 0.2, r * 0.66, r * 0.44, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#c98f4e', K.LINE, 3.5)
+    /* Tail. */
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = r * 0.17
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.76, r * 0.08)
+    ctx.quadraticCurveTo(-r * 1.04, -r * 0.2, -r * 0.86, -r * 0.42)
+    ctx.stroke()
+    ctx.strokeStyle = '#c98f4e'
+    ctx.lineWidth = r * 0.1
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.76, r * 0.08)
+    ctx.quadraticCurveTo(-r * 1.04, -r * 0.2, -r * 0.86, -r * 0.42)
+    ctx.stroke()
+    /* Head. */
+    ctx.beginPath()
+    ctx.arc(r * 0.42, -r * 0.18, r * 0.42, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#d9a465', K.LINE, 3.5)
+    /* Ear, floppy, which is most of what makes a circle read as a dog. */
+    ctx.beginPath()
+    ctx.ellipse(r * 0.16, -r * 0.3, r * 0.16, r * 0.3, 0.3, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#a9703c', K.LINE, 2.5)
+    /* Snout. */
+    ctx.beginPath()
+    ctx.ellipse(r * 0.66, -r * 0.02, r * 0.24, r * 0.17, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f0d3a6', K.LINE, 2.5)
+    ctx.beginPath()
+    ctx.arc(r * 0.82, -r * 0.06, r * 0.08, 0, Math.PI * 2)
+    ctx.fillStyle = '#3a2a10'
+    ctx.fill()
+    ctx.beginPath()
+    ctx.arc(r * 0.52, -r * 0.3, r * 0.07, 0, Math.PI * 2)
+    ctx.fillStyle = '#25321a'
+    ctx.fill()
+  }
+
+  function drawBee(ctx, r) {
+    /* Wings first, behind. */
+    for (var s = -1; s <= 1; s += 2) {
+      ctx.beginPath()
+      ctx.ellipse(-r * 0.05, -r * 0.5, r * 0.34, r * 0.2, s * 0.6, 0, Math.PI * 2)
+      K.inkedOn(ctx, 'rgba(230,246,255,0.9)', K.LINE, 2.5)
+    }
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.7, r * 0.52, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#f2c33b', K.LINE, 3.5)
+    /* Stripes, which are the whole identity. */
+    ctx.save()
+    ctx.beginPath()
+    ctx.ellipse(0, 0, r * 0.7, r * 0.52, 0, 0, Math.PI * 2)
+    ctx.clip()
+    ctx.fillStyle = '#3a2a10'
+    for (var i = 0; i < 2; i++) {
+      ctx.fillRect(-r * 0.36 + i * r * 0.42, -r * 0.6, r * 0.2, r * 1.2)
+    }
+    ctx.restore()
+    ctx.beginPath()
+    ctx.arc(r * 0.64, -r * 0.12, r * 0.3, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#3a2a10', K.LINE, 3)
+    ctx.beginPath()
+    ctx.arc(r * 0.74, -r * 0.18, r * 0.09, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#ffffff', K.LINE, 1.6)
+  }
+
+  var ANIMALS = { fish: drawFish, bird: drawBird, dog: drawDog, bee: drawBee }
+
+  /* ── the homes ───────────────────────────────────────────────────────────── */
+
+  function drawPond(ctx, r) {
+    ctx.beginPath()
+    ctx.ellipse(0, r * 0.15, r * 1.05, r * 0.66, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#3f9ede', K.LINE, 4)
+    ctx.save()
+    ctx.globalAlpha = 0.5
+    ctx.strokeStyle = '#ffffff'
+    ctx.lineWidth = Math.max(2, r * 0.07)
+    ctx.lineCap = 'round'
+    for (var i = 0; i < 2; i++) {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.4 + i * r * 0.3, r * (0.05 + i * 0.3))
+      ctx.lineTo(r * 0.1 + i * r * 0.3, r * (0.05 + i * 0.3))
+      ctx.stroke()
+    }
+    ctx.restore()
+    /* Reeds, so a blue puddle reads as a pond. */
+    ctx.strokeStyle = '#3f8f38'
+    ctx.lineWidth = Math.max(3, r * 0.09)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.86, r * 0.1)
+    ctx.quadraticCurveTo(-r * 0.96, -r * 0.3, -r * 0.82, -r * 0.6)
+    ctx.moveTo(-r * 0.68, r * 0.2)
+    ctx.quadraticCurveTo(-r * 0.74, -r * 0.1, -r * 0.62, -r * 0.36)
+    ctx.stroke()
+  }
+
+  function drawNest(ctx, r) {
+    /* Branch. */
+    ctx.strokeStyle = '#8a5a2b'
+    ctx.lineWidth = Math.max(5, r * 0.16)
+    ctx.lineCap = 'round'
+    ctx.beginPath()
+    ctx.moveTo(-r * 1.15, r * 0.7)
+    ctx.quadraticCurveTo(0, r * 0.46, r * 1.15, r * 0.66)
+    ctx.stroke()
+    /* Bowl. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.85, r * 0.05)
+    ctx.quadraticCurveTo(0, r * 1.0, r * 0.85, r * 0.05)
+    ctx.quadraticCurveTo(0, r * 0.4, -r * 0.85, r * 0.05)
+    ctx.closePath()
+    K.inkedOn(ctx, '#b07b3d', K.LINE, 4)
+    /* Twigs, so it is woven and not a bowl of soup. */
+    ctx.strokeStyle = 'rgba(70,44,14,0.4)'
+    ctx.lineWidth = Math.max(2, r * 0.05)
+    for (var i = 0; i < 4; i++) {
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.7 + i * r * 0.36, r * 0.22)
+      ctx.lineTo(-r * 0.5 + i * r * 0.36, r * 0.52)
+      ctx.stroke()
+    }
+  }
+
+  function drawKennel(ctx, r) {
+    ctx.beginPath()
+    ctx.rect(-r * 0.75, -r * 0.1, r * 1.5, r * 0.95)
+    K.inkedOn(ctx, '#d9a465', K.LINE, 4)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.95, -r * 0.1)
+    ctx.lineTo(0, -r * 0.95)
+    ctx.lineTo(r * 0.95, -r * 0.1)
+    ctx.closePath()
+    K.inkedOn(ctx, '#c4442e', K.LINE, 4)
+    /* The doorway: an arch, dark, which is what makes it somewhere to go in. */
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.36, r * 0.85)
+    ctx.lineTo(-r * 0.36, r * 0.16)
+    ctx.quadraticCurveTo(0, -r * 0.3, r * 0.36, r * 0.16)
+    ctx.lineTo(r * 0.36, r * 0.85)
+    ctx.closePath()
+    K.inkedOn(ctx, '#5a3618', K.LINE, 3)
+  }
+
+  function drawHive(ctx, r) {
+    /* Stacked bands, narrowing upward. */
+    for (var i = 0; i < 4; i++) {
+      var t = i / 3
+      var bw = r * (0.92 - t * 0.34)
+      ctx.beginPath()
+      ctx.roundRect(-bw, r * (0.75 - i * 0.42), bw * 2, r * 0.4, r * 0.2)
+      K.inkedOn(ctx, i % 2 ? '#e8b64c' : '#f2c964', K.LINE, 3)
+    }
+    /* The hole. */
+    ctx.beginPath()
+    ctx.ellipse(0, r * 0.5, r * 0.22, r * 0.17, 0, 0, Math.PI * 2)
+    K.inkedOn(ctx, '#5a3618', K.LINE, 2.5)
+  }
+
+  var HOMES = { pond: drawPond, nest: drawNest, kennel: drawKennel, hive: drawHive }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * Three homes have to fit across the screen without touching.
+   *
+   * Sized against the width divided by three homes and a bit, not against the
+   * width alone: on a phone in portrait the old figure made them wider than
+   * their own spacing and the nest sat on the kennel's roof.
+   */
+  function homeR(k) { return clamp(Math.min(k.W / 8.7, k.H * 0.13), 28, 84) }
+  function animalR(k) { return homeR(k) * 0.82 }
+
+  /**
+   * The row of homes, in the grass between the horizon and the animal.
+   *
+   * Placed against where the animal actually waits rather than against the
+   * height of the screen. On a phone held sideways the grass is a couple of
+   * hundred pixels deep, and a fixed fraction of it sat the houses on top of
+   * the animal the child is supposed to pick up.
+   */
+  function homeAt(k, i, n) {
+    var gap = Math.min(k.W / (n + 0.6), homeR(k) * 3.1)
+    var top = k.ground()
+    var bottom = startAt(k).y - animalR(k) * 1.2
+    return {
+      x: k.W / 2 + (i - (n - 1) / 2) * gap,
+      y: top + Math.max(homeR(k) * 0.4, (bottom - top) * 0.42),
+    }
+  }
+
+  function startAt(k) {
+    /* Measured off the animal, not off the button band.
+       On a phone held sideways there is barely any grass, and a fixed offset
+       from the bottom put the animal and the ring round it half off the
+       screen. Its own radius is the thing that has to fit. */
+    return { x: k.W * 0.42, y: k.H - animalR(k) * 1.8 }
+  }
+
+  AnanseKit.run({
+    title: 'Animal Home',
+    overTitle: 'Everybody is home!',
+    scene: 'garden',
+    rounds: 5,
+    /* Dropping the animal somewhere is the whole answer. */
+    button: false,
+    restMood: 'hello',
+
+    begin: function (k) {
+      var deck = WORLD.slice().sort(function () { return Math.random() - 0.5 })
+      var right = deck[0]
+      /* Three homes: the right one and two others, shuffled so the answer is
+         not always in the same place. */
+      var homes = [right, deck[1], deck[2]].sort(function () { return Math.random() - 0.5 })
+
+      k.own.animal = right.animal
+      k.own.homeName = right.homeName
+      k.target = right.home
+      k.own.homes = homes.map(function (h) { return { kind: h.home, name: h.homeName } })
+
+      var s = startAt(k)
+      k.own.pet = {
+        x: s.x, y: s.y, held: false, settle: null, home: { x: s.x, y: s.y },
+        placed: false, shove: 0, sink: 0, idle: 0,
+      }
+      k.own.dropped = null
+      k.say(LINES.ask(right.animal))
+      k.him.setMood('hello')
+    },
+
+    resize: function (k) {
+      if (!k.own.pet) return
+      var s = startAt(k)
+      k.own.pet.home = { x: s.x, y: s.y }
+      if (!k.own.pet.held && !k.own.pet.placed) { k.own.pet.x = s.x; k.own.pet.y = s.y }
+    },
+
+    ask: function (k) {
+      if (k.phase === 'won') return { head: 'Home!' }
+      return { head: 'Where does the ' + k.own.animal + ' live?' }
+    },
+
+    /**
+     * Which home it was dropped on, compared with where that animal lives.
+     *
+     * Read at the moment of the drop. No home knows whether it is the right
+     * one, and the animal does not carry its address around with it.
+     */
+    judge: function (k) { return k.own.dropped === k.target },
+
+    onWin: function (k) {
+      var i = 0
+      for (var j = 0; j < k.own.homes.length; j++) {
+        if (k.own.homes[j].kind === k.target) i = j
+      }
+      var at = homeAt(k, i, k.own.homes.length)
+      k.cheer(at.x, at.y)
+      k.say(pick(LINES.right))
+    },
+    onMiss: function (k) {
+      var name = k.own.homeName
+      for (var j = 0; j < k.own.homes.length; j++) {
+        if (k.own.homes[j].kind === k.own.dropped) name = k.own.homes[j].name
+      }
+      k.say(LINES.wrong(k.own.animal, name))
+      /* It comes back out, so the board is playable again. */
+      k.own.pet.placed = false
+      k.own.pet.sink = 0
+      k.own.pet.shove = 1
+      k.own.pet.settle = k.own.pet.home
+      k.own.dropped = null
+    },
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.tickle) },
+
+    down: function (k, x, y) {
+      var p = k.own.pet
+      if (p.placed) return false
+      if (Math.hypot(p.x - x, p.y - y) > animalR(k) * 1.5) return false
+      p.held = true
+      p.settle = null
+      k.sound.play('lift')
+      k.say(LINES.lift)
+      k.him.setMood('watching')
+      return true
+    },
+
+    move: function (k, x, y) {
+      var p = k.own.pet
+      if (!p || !p.held) return
+      p.x = x
+      p.y = y
+    },
+
+    up: function (k) {
+      var p = k.own.pet
+      if (!p || !p.held) return
+      p.held = false
+
+      var n = k.own.homes.length
+      var r = homeR(k)
+      for (var i = 0; i < n; i++) {
+        var at = homeAt(k, i, n)
+        /* Generous, because a small hand aims at a house and lands near it. */
+        if (Math.hypot(p.x - at.x, p.y - at.y) > r * 1.35) continue
+        k.own.dropped = k.own.homes[i].kind
+        p.placed = true
+        p.settle = { x: at.x, y: at.y + r * 0.1 }
+        k.sound.play('thud')
+        k.kick(3)
+        k.commit()
+        return
+      }
+      /* Nowhere in particular: it goes back. */
+      p.settle = p.home
+      if (k.phase === 'play') k.him.setMood('hello')
+    },
+
+    step: function (k, dt) {
+      var p = k.own.pet
+      if (!p) return
+      p.shove = Math.max(0, p.shove - dt * 3)
+      p.idle += dt
+      /* Settling into the home it was accepted by, so it ends up nestled in
+         rather than sitting on top like a sticker. */
+      if (p.placed) p.sink = Math.min(1, p.sink + dt * 2.2)
+      if (!p.settle || p.held) return
+      p.x += (p.settle.x - p.x) * Math.min(1, dt * 14)
+      p.y += (p.settle.y - p.y) * Math.min(1, dt * 14)
+      if (Math.abs(p.x - p.settle.x) < 0.5 && Math.abs(p.y - p.settle.y) < 0.5) {
+        p.x = p.settle.x
+        p.y = p.settle.y
+        p.settle = null
+      }
+    },
+
+    /**
+     * A ring, dashed and turning.
+     *
+     * ── Why this game needed one ──────────────────────────────────────────
+     *
+     * Nothing on the screen said which thing to touch. One animal and three
+     * houses sat on the grass at the same size and with the same weight as the
+     * flowers behind them, so a four year old was looking at a picture, not at
+     * a game. The rules worked perfectly and no child could find them.
+     *
+     * The ring is the whole affordance: it marks the animal as the thing you
+     * pick up, and then, once it is in the air, it marks the three places it
+     * can go. It turns because a still ring reads as decoration.
+     */
+    paint: function (k) {
+      var ctx = k.ctx
+      var r = homeR(k)
+      var ar = animalR(k)
+      var n = k.own.homes.length
+      var p0 = k.own.pet
+
+      function ring(x, y, rad, colour, spin, weight) {
+        ctx.save()
+        ctx.translate(x, y)
+        ctx.rotate(spin)
+        ctx.strokeStyle = colour
+        ctx.lineWidth = weight
+        ctx.lineCap = 'round'
+        ctx.setLineDash([rad * 0.42, rad * 0.34])
+        ctx.beginPath()
+        ctx.arc(0, 0, rad, 0, Math.PI * 2)
+        ctx.stroke()
+        ctx.restore()
+      }
+
+      for (var i = 0; i < n; i++) {
+        var at = homeAt(k, i, n)
+
+        /* While the animal is in the air, every home says it will take it, and
+           the one under the hand says so louder. */
+        if (p0.held) {
+          var near = Math.hypot(p0.x - at.x, p0.y - at.y) <= r * 1.35
+          ctx.save()
+          if (near) {
+            ctx.globalAlpha = 0.3
+            ctx.fillStyle = '#ffd93b'
+            ctx.beginPath()
+            ctx.ellipse(at.x, at.y + r * 0.55, r * 1.3, r * 0.62, 0, 0, Math.PI * 2)
+            ctx.fill()
+          }
+          ctx.globalAlpha = near ? 1 : 0.55
+          ring(at.x, at.y + r * 0.55, r * 1.2, near ? '#ffd93b' : '#ffffff',
+            k.now * 0.0008, Math.max(3, r * (near ? 0.12 : 0.08)))
+          ctx.restore()
+        }
+        ctx.save()
+        ctx.globalAlpha = 0.16
+        ctx.fillStyle = '#000'
+        ctx.beginPath()
+        ctx.ellipse(at.x, at.y + r * 0.92, r * 0.84, r * 0.2, 0, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+
+        ctx.save()
+        ctx.translate(at.x, at.y)
+        HOMES[k.own.homes[i].kind](ctx, r)
+        ctx.restore()
+      }
+
+      var p = k.own.pet
+      var waiting = !p.placed && !p.held && !p.settle
+      /* A small hop while it waits, because a thing that moves is a thing a
+         child reaches for. It stops the moment the animal is picked up. */
+      var bob = waiting ? Math.abs(Math.sin(p.idle * 2.2)) * ar * 0.16 : 0
+
+      if (!p.placed && !p.held) {
+        ctx.save()
+        ctx.globalAlpha = 0.16
+        ctx.fillStyle = '#000'
+        ctx.beginPath()
+        ctx.ellipse(p.x, p.y + ar * 0.85, ar * (0.7 - bob / ar * 0.2), ar * 0.18,
+          0, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+      }
+
+      if (waiting) {
+        ctx.save()
+        ctx.globalAlpha = 0.7 + Math.sin(p.idle * 2.6) * 0.25
+        ring(p.x, p.y + ar * 0.6, ar * 1.05, '#ffffff', -k.now * 0.001,
+          Math.max(3, ar * 0.12))
+        ctx.restore()
+      }
+
+      ctx.save()
+      ctx.translate(p.x, p.y - bob)
+      if (p.shove > 0) ctx.rotate(Math.sin(k.now * 0.05) * p.shove * 0.25)
+      /* Shrinking as it settles in, which reads as going inside. */
+      var lift = p.held ? 1.15 : 1 - p.sink * 0.35
+      ctx.scale(lift, lift)
+      ANIMALS[k.own.animal](ctx, ar)
+      ctx.restore()
+
+      var hr = clamp(Math.min(k.W, k.H) * 0.075, 30, 60)
+      /* His feet, not his middle, sit above the bottom edge. He stands 1.5
+         radii below his centre, so anchoring him at one radius put his legs
+         off the screen and sliced the character the children actually like. */
+      k.him.draw(k.W - hr * 1.5, k.H - hr * 1.75, hr, k.H - hr * 0.25)
+    },
+
+    peek: function (k) {
+      if (!k.own.pet) return { animal: null }
+      var n = k.own.homes.length
+      return {
+        animal: k.own.animal,
+        belongs: k.target,
+        pet: { x: Math.round(k.own.pet.x), y: Math.round(k.own.pet.y) },
+        homes: k.own.homes.map(function (h, i) {
+          var at = homeAt(k, i, n)
+          return { kind: h.kind, x: Math.round(at.x), y: Math.round(at.y) }
+        }),
+        dropped: k.own.dropped,
+      }
+    },
+  })
+}())
+</script>
+</body>
+</html>

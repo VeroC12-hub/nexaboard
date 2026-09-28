@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spelling Bee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Spelling Bee. The word is only ever heard.
+
+  ── Why the word is never written down ───────────────────────────────────────
+
+  A game that shows "market" and asks the child to pick it out of four spellings
+  is a proofreading exercise. The child compares two pictures and the letters
+  never have to be produced from anything. It looks like spelling and it is not.
+
+  So the word arrives through the ear and nowhere else: spoken, then spoken
+  again inside a sentence so the meaning comes with it. What is on the board is
+  a row of empty slots and a heap of letters. The only route from one to the
+  other is holding the sound in the head, cutting it into parts, and finding a
+  letter for each part. That is spelling.
+
+  ── Why there is a speaker button ────────────────────────────────────────────
+
+  Because the instant the word is only audio, hearing it once is not enough, and
+  a child who missed it has no way back. Worse, if the only way to hear it again
+  were to guess and be wrong, then not hearing properly would cost a life, and
+  the game would be punishing hearing rather than spelling. The speaker is free
+  and unlimited for exactly that reason.
+
+  ── Why the letters keep their places when they are used ─────────────────────
+
+  The row does not close up when a letter is taken. Its socket stays empty where
+  it was. A row that reflows moves every remaining letter each time one is
+  taken, and a six year old hunting for the second "e" has to start the hunt
+  again after every tap. The gaps also happen to show, at a glance, how much of
+  the word is still to come.
+
+  ── Why a miss clears the board instead of freezing it ───────────────────────
+
+  The miss is already recorded, so the second try costs nothing more. What it
+  must not do is leave the wrong spelling sitting on screen next to the right
+  one, because a child who is unsure which of the two was correct has just
+  learned the wrong one half the time. The slots empty, the true spelling stands
+  in them on its own for a beat, and then the board is clean to try again.
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #6b4a22;
+    touch-action: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Fredoka', ui-rounded, 'Segoe UI Rounded', system-ui, sans-serif;
+  }
+  #stage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<script src="rig.js"></script>
+<script src="kit.js"></script>
+<script>
+(function () {
+  'use strict'
+
+  var K = AnanseKit
+  var clamp = K.clamp, pick = K.pick, randInt = K.randInt
+
+  /* ── the words ───────────────────────────────────────────────────────────── */
+
+  /**
+   * Every word comes with a sentence.
+   *
+   * ── Why the sentence is not optional ──────────────────────────────────────
+   *
+   * A word said on its own is a noise to be copied down. A word said inside a
+   * sentence is a word: the child knows which "their" they are being asked for,
+   * and a child who knows what the word means has somewhere to put the letters.
+   * It also carries the one thing a spelling list never does, which is a reason
+   * to ever write the word again.
+   *
+   * The sentences are Ghanaian on purpose. "The bowl is on the mat" is a
+   * sentence about a room the child has been in.
+   */
+  var EASY = [
+    { w: 'cup', s: 'Pour the water into the cup.' },
+    { w: 'bag', s: 'My books are in my bag.' },
+    { w: 'yam', s: 'Mother is boiling the yam.' },
+    { w: 'hat', s: 'He wears a hat in the sun.' },
+    { w: 'bed', s: 'I sleep on my bed.' },
+    { w: 'pot', s: 'The soup is in the pot.' },
+    { w: 'bowl', s: 'The rice is in the bowl.' },
+    { w: 'farm', s: 'Grandfather works on the farm.' },
+    { w: 'rice', s: 'We ate rice and stew.' },
+    { w: 'hand', s: 'Put up your hand.' },
+    { w: 'fish', s: 'We buy fish at the beach.' },
+    { w: 'book', s: 'Open your book to page ten.' }
+  ]
+
+  var MIDDLE = [
+    { w: 'mango', s: 'The mango is sweet.' },
+    { w: 'table', s: 'The plates are on the table.' },
+    { w: 'chair', s: 'Please sit on the chair.' },
+    { w: 'plate', s: 'Wash your plate after eating.' },
+    { w: 'broom', s: 'She sweeps with a broom.' },
+    { w: 'shoes', s: 'Put on your school shoes.' },
+    { w: 'maize', s: 'We roast maize by the road.' },
+    { w: 'spoon', s: 'Eat the soup with a spoon.' },
+    { w: 'market', s: 'Mother went to the market.' },
+    { w: 'school', s: 'We walk to school together.' },
+    { w: 'friend', s: 'Kofi is my best friend.' },
+    { w: 'bucket', s: 'Fill the bucket with water.' },
+    { w: 'orange', s: 'She is peeling an orange.' },
+    { w: 'kenkey', s: 'I eat kenkey with pepper.' }
+  ]
+
+  /**
+   * Words with a trap in them.
+   *
+   * Every one of these is a word a Primary child uses every day and spells
+   * wrongly, and each fails in a different way: a sound that is written with
+   * letters you cannot hear (because, enough, laugh, would), a vowel pair that
+   * does not say what it looks like (again, water, said), or a shape that has
+   * to be learned whole (eight, beautiful). Sounding them out is not enough,
+   * which is the lesson: some words have to be remembered.
+   */
+  var HARD = [
+    { w: 'water', s: 'Please bring me some water.' },
+    { w: 'again', s: 'Say it again, louder.' },
+    { w: 'laugh', s: 'The story made us laugh.' },
+    { w: 'night', s: 'The stars come out at night.' },
+    { w: 'eight', s: 'There are eight mangoes here.' },
+    { w: 'said', s: 'The teacher said we may go.' },
+    { w: 'their', s: 'The children took their bags.' },
+    { w: 'know', s: 'I know the answer.' },
+    { w: 'would', s: 'I would like some banku.' },
+    { w: 'because', s: 'She was late because of the rain.' },
+    { w: 'people', s: 'Many people came to the festival.' },
+    { w: 'enough', s: 'We have enough water for today.' },
+    { w: 'tomorrow', s: 'We are travelling tomorrow.' },
+    { w: 'beautiful', s: 'That is a beautiful kente cloth.' }
+  ]
+
+  /** Letters that make plausible decoys: nothing rare, nothing unsayable. */
+  var SPARE = 'abcdefghiklmnoprstuwy'.split('')
+
+  /** Every tenth word won is a prize word, and it puts a star on the wall. */
+  function isPrize(round) { return round > 0 && round % 10 === 9 }
+
+  /**
+   * One word's worth of question.
+   *
+   * ── On the difficulty ─────────────────────────────────────────────────────
+   *
+   * Three and four letters first, where every letter says its own sound and
+   * the child can get there by sounding out alone. Then five and six, where
+   * the word has to be held in the head long enough to be cut up. Then the
+   * traps, where sounding out actively gives the wrong answer.
+   *
+   * ── On the decoy letters ──────────────────────────────────────────────────
+   *
+   * None at the start, because a beginner who has all and only the right
+   * letters can use the heap itself as a check: when it is empty they are
+   * done. Taking that away too early turns a spelling game into a patience
+   * game. From the middle rounds one decoy appears and later two, which breaks
+   * the trick and means the row has to be read rather than exhausted.
+   */
+  function makeWord(round, seen) {
+    var bank = round < 4 ? EASY : round < 10 ? MIDDLE : HARD
+    var fresh = bank.filter(function (e) { return seen.indexOf(e.w) < 0 })
+    var entry = pick(fresh.length ? fresh : bank)
+
+    var decoys = round < 4 ? 0 : round < 10 ? 1 : 2
+    var letters = entry.w.split('')
+    for (var d = 0; d < decoys; d++) {
+      /* A decoy the word does not already use. A second "a" beside the one
+         that belongs there is not a decoy, it is a coin toss. */
+      var spare = SPARE.filter(function (c) { return letters.indexOf(c) < 0 })
+      if (!spare.length) break
+      letters.push(pick(spare))
+    }
+    letters.sort(function () { return Math.random() - 0.5 })
+
+    return { word: entry.w, sentence: entry.s, letters: letters }
+  }
+
+  /* ── layout ──────────────────────────────────────────────────────────────── */
+
+  /** The top of the game's own space, clear of the banner and the corners. */
+  function playTop(k) { return k.tallyY() + k.H * 0.02 }
+  /** The bottom of it, clear of the commit button. */
+  function playBottom(k) { return k.H - k.bandH() }
+  function playH(k) { return playBottom(k) - playTop(k) }
+
+  /**
+   * The width of the two side columns.
+   *
+   * He stands in the left one and the speaker sits in the right one, which is
+   * the only way to give both of them room without spending a whole band of
+   * the height on them. On a sideways phone the height is the scarce thing and
+   * the width is not, so anything that can be solved sideways should be.
+   */
+  function sideW(k) { return clamp(Math.min(k.W * 0.10, k.H * 0.16), 58, 112) }
+
+  /** The width the slots and the letters share, between the two columns. */
+  function boxW(k) { return k.W - sideW(k) * 2 - Math.min(k.W * 0.02, 20) }
+  function boxX(k) { return k.W * 0.5 - boxW(k) * 0.5 }
+
+  /**
+   * How big one slot is.
+   *
+   * Against the width per slot and against the height of the play area both.
+   * "beautiful" is nine slots and on a sideways phone nine slots across is the
+   * binding constraint; on a tablet the height is, and a slot sized only
+   * against the width would come out taller than the space it sits in.
+   */
+  function slotS(k, n) {
+    return clamp(Math.min(boxW(k) / (n * 1.18), playH(k) * 0.30, 96), 44, 96)
+  }
+  function slotRect(k, n, i) {
+    var s = slotS(k, n)
+    var step = s * 1.18
+    var x0 = k.W * 0.5 - (n * step - (step - s)) * 0.5
+    return { x: x0 + i * step, y: slotCy(k, n) - s * 0.5, w: s, h: s }
+  }
+  function slotCy(k, n) { return playTop(k) + playH(k) * 0.06 + slotS(k, n) * 0.5 }
+
+  /** How big one letter tile is. Up to eleven of them on one line. */
+  function tileS(k, n) {
+    return clamp(Math.min(k.W * 0.94 / (n * 1.18), playH(k) * 0.26, 88), 42, 88)
+  }
+  function tileCy(k, n) { return playBottom(k) - tileS(k, n) * 0.62 }
+  function tileRect(k, n, i) {
+    var s = tileS(k, n)
+    var step = s * 1.18
+    var x0 = k.W * 0.5 - (n * step - (step - s)) * 0.5
+    return { x: x0 + i * step, y: tileCy(k, n) - s * 0.5, w: s, h: s }
+  }
+
+  /** The speaker, in the right column, level with the slots. */
+  function hornR(k) { return sideW(k) * 0.46 }
+  function hornAt(k, n) {
+    return { x: k.W - sideW(k) * 0.5, y: slotCy(k, n), r: hornR(k) }
+  }
+
+  function inRect(r, px, py) {
+    /* A margin, because a thumb that lands just off a thing meant for thumbs
+       should still count. */
+    return px >= r.x - 8 && px <= r.x + r.w + 8
+      && py >= r.y - 10 && py <= r.y + r.h + 10
+  }
+
+  /* ── the pieces ──────────────────────────────────────────────────────────── */
+
+  /**
+   * One letter tile, drawn from its centre.
+   *
+   * White letter on wood, with a dark outline and nothing else. A white ring as
+   * well would be white inside white inside dark and the letter would read as
+   * hollow, which is the lettering rule for the whole set.
+   */
+  function drawTile(ctx, x, y, s, ch, font, face, edge) {
+    var h = s * 0.5
+    ctx.save()
+    ctx.translate(x, y)
+
+    ctx.beginPath()
+    ctx.roundRect(-h, -h + s * 0.1, s, s, s * 0.18)
+    ctx.fillStyle = edge || '#a2652c'
+    ctx.fill()
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = 3.5
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.roundRect(-h, -h, s, s, s * 0.18)
+    K.inkedOn(ctx, face || '#d99a4e', K.LINE, 3.5)
+
+    /* A highlight along the top, which is what gives a flat square a face. */
+    ctx.save()
+    ctx.beginPath()
+    ctx.roundRect(-h, -h, s, s, s * 0.18)
+    ctx.clip()
+    ctx.fillStyle = 'rgba(255,255,255,0.26)'
+    ctx.beginPath()
+    ctx.roundRect(-h + s * 0.14, -h + s * 0.1, s * 0.72, s * 0.18, s * 0.09)
+    ctx.fill()
+    ctx.restore()
+
+    var size = s * 0.56
+    ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    while (ctx.measureText(ch).width > s * 0.68 && size > s * 0.25) {
+      size *= 0.92
+      ctx.font = '700 ' + Math.round(size) + 'px ' + font
+    }
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.lineJoin = 'round'
+    ctx.miterLimit = 2
+    ctx.strokeStyle = K.LINE
+    ctx.lineWidth = size * 0.26
+    ctx.strokeText(ch, 0, s * 0.03)
+    ctx.fillStyle = '#ffffff'
+    ctx.fillText(ch, 0, s * 0.03)
+    ctx.restore()
+  }
+
+  /** The hole a tile came out of, so the row keeps its shape. */
+  function drawSocket(ctx, x, y, s) {
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.globalAlpha = 0.3
+    ctx.beginPath()
+    ctx.roundRect(-s * 0.5, -s * 0.5, s, s, s * 0.18)
+    ctx.fillStyle = '#7a5020'
+    ctx.fill()
+    ctx.restore()
+  }
+
+  /**
+   * One empty slot.
+   *
+   * A dark plate with a writing line under it. The line is the whole point: it
+   * is the line the child writes on in an exercise book, so an empty slot reads
+   * as somewhere a letter goes rather than as a missing tile.
+   */
+  function drawSlot(ctx, x, y, s, now) {
+    ctx.save()
+    ctx.translate(x, y)
+    ctx.beginPath()
+    ctx.roundRect(-s * 0.5, -s * 0.5, s, s, s * 0.18)
+    ctx.fillStyle = 'rgba(60,34,10,0.3)'
+    ctx.fill()
+    ctx.globalAlpha = 0.72 + Math.sin(now * 0.004) * 0.18
+    ctx.strokeStyle = '#ffffff'
+    ctx.lineWidth = Math.max(2.5, s * 0.05)
+    ctx.setLineDash([s * 0.18, s * 0.13])
+    ctx.stroke()
+    ctx.setLineDash([])
+    ctx.globalAlpha = 1
+    ctx.lineCap = 'round'
+    ctx.lineWidth = Math.max(3, s * 0.07)
+    ctx.beginPath()
+    ctx.moveTo(-s * 0.34, s * 0.42)
+    ctx.lineTo(s * 0.34, s * 0.42)
+    ctx.stroke()
+    ctx.restore()
+  }
+
+  /**
+   * The speaker the child taps to hear the word again.
+   *
+   * A horn with waves coming out of it, and the waves move whenever the word is
+   * being said. A speaker that looks the same while it is talking and while it
+   * is idle gives a child no way to tell whether their tap did anything, and
+   * they tap it again and again.
+   */
+  function drawHorn(ctx, x, y, r, live) {
+    ctx.save()
+    ctx.translate(x, y)
+
+    ctx.beginPath()
+    ctx.arc(0, 0, r, 0, Math.PI * 2)
+    K.inkedOn(ctx, live ? '#f2c33b' : '#e05128', K.LINE, 4)
+
+    /* The horn itself: a box and a cone, pointing right at the waves. */
+    ctx.beginPath()
+    ctx.roundRect(-r * 0.62, -r * 0.2, r * 0.3, r * 0.4, r * 0.06)
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 2.5)
+    ctx.beginPath()
+    ctx.moveTo(-r * 0.34, -r * 0.2)
+    ctx.lineTo(r * 0.04, -r * 0.54)
+    ctx.lineTo(r * 0.04, r * 0.54)
+    ctx.lineTo(-r * 0.34, r * 0.2)
+    ctx.closePath()
+    K.inkedOn(ctx, '#f6f1e2', K.LINE, 2.5)
+
+    ctx.strokeStyle = K.LINE
+    ctx.lineCap = 'round'
+    for (var a = 0; a < 3; a++) {
+      ctx.globalAlpha = live ? 1 : 0.45
+      ctx.lineWidth = Math.max(2.5, r * 0.09)
+      ctx.beginPath()
+      ctx.arc(r * 0.12, 0, r * (0.26 + a * 0.2), -0.85, 0.85)
+      ctx.stroke()
+    }
+    ctx.restore()
+  }
+
+  /* ── the game ────────────────────────────────────────────────────────────── */
+
+  var LINES = {
+    right: ['You spelled it!', 'That is the word!', 'Well spelled!', 'Yes! Every letter.'],
+    prize: 'A star for the wall! Keep spelling!',
+    wrong: 'Look at it. This is how it is written.',
+    over: 'My head is full. Let us start again!',
+    empty: 'Fill every space first.',
+    poke: 'Listen to the word, not to me!'
+  }
+
+  AnanseKit.run({
+    title: 'Spelling Bee',
+    overTitle: 'Out of words!',
+    scene: 'room',
+    endless: true,
+    lives: 3,
+    scoreLabel: 'words',
+    /* The child builds the answer a letter at a time, so nothing but a button
+       can tell "I have finished" from "I am still going". */
+    button: true,
+    buttonLabel: 'Done!',
+    restMood: 'watching',
+    hud: function (k) {
+      return [
+        { label: 'words', value: k.score },
+        { label: 'coins', value: k.own.coins || 0 }
+      ]
+    },
+
+    begin: function (k) {
+      if (k.own.coins === undefined) {
+        k.own.coins = 0
+        k.own.stars = 0
+        k.own.seen = []
+      }
+      /* A run that ended and was tapped to start again. The kit puts its own
+         score and lives back; the wall of stars and the words already met are
+         ours to put back. */
+      if (k.round === 0) {
+        k.own.coins = 0
+        k.own.stars = 0
+        k.own.seen = []
+      }
+
+      var q = makeWord(k.round, k.own.seen)
+      k.own.q = q
+      k.own.seen.push(q.word)
+      k.target = q.word
+      /* One entry per letter of the word. Each holds the index of the tile
+         standing in it, or null. Nothing here records whether it is right. */
+      k.own.slots = []
+      for (var i = 0; i < q.word.length; i++) k.own.slots.push(null)
+      k.own.reveal = false
+      k.own.talkUntil = 0
+
+      /* The word alone first, then the word inside its sentence. Said as one
+         line because the voice cancels whatever it was saying when it is asked
+         for something new, so two calls would only ever play the second. */
+      k.say(q.word + '. ' + q.sentence)
+      k.own.talkUntil = k.now + 2600
+      k.him.setMood('watching')
+    },
+
+    /**
+     * The banner, which must not contain the word.
+     *
+     * So the number of letters goes in the yellow slot instead. It is the one
+     * fact about the word that can be shown without giving it away, and it is
+     * worth showing: counting the sounds in a word before writing it is the
+     * habit this game is trying to build, and the count is the check.
+     */
+    ask: function (k) {
+      if (!k.own.q) return null
+      if (k.phase === 'won') return { head: 'Yes! ', num: k.own.q.word, tail: '' }
+      if (k.own.reveal) return { head: 'It is ', num: k.own.q.word, tail: '' }
+      return { head: 'Spell it. ', num: k.own.q.word.length, tail: ' letters.' }
+    },
+
+    /** Every slot filled. Nothing about which letters are in them. */
+    ready: function (k) {
+      if (!k.own.slots) return false
+      for (var i = 0; i < k.own.slots.length; i++) {
+        if (k.own.slots[i] === null) return false
+      }
+      return true
+    },
+
+    /**
+     * Read the slots left to right and see what word they spell.
+     *
+     * Worked out from the tiles standing on the board at this moment. No tile
+     * knows whether it belongs anywhere, and no slot remembers what should have
+     * gone in it, so there is nothing that can drift out of step with what the
+     * child can see.
+     */
+    judge: function (k) {
+      var built = ''
+      for (var i = 0; i < k.own.slots.length; i++) {
+        var at = k.own.slots[i]
+        if (at === null) return false
+        built += k.own.q.letters[at]
+      }
+      return built === k.own.q.word
+    },
+
+    down: function (k, x, y) {
+      var q = k.own.q
+      if (!q || k.own.reveal) return false
+      var n = q.letters.length
+      var i
+
+      /* The speaker, first, because it has to work at every moment the board
+         does. Hunting for a word you did not catch must never cost a life. */
+      var horn = hornAt(k, k.own.slots.length)
+      var dx = x - horn.x, dy = y - horn.y
+      if (dx * dx + dy * dy <= (horn.r * 1.6) * (horn.r * 1.6)) {
+        k.say(q.word)
+        k.own.talkUntil = k.now + 1200
+        return true
+      }
+
+      /* A filled slot sends its letter home. Without this one wrong first
+         letter locks the whole word and the only way out is to be wrong on
+         purpose, which teaches exactly the wrong thing about mistakes. */
+      for (i = 0; i < k.own.slots.length; i++) {
+        if (k.own.slots[i] === null) continue
+        if (inRect(slotRect(k, k.own.slots.length, i), x, y)) {
+          k.own.slots[i] = null
+          k.sound.play('thud')
+          return true
+        }
+      }
+
+      /* A tile goes into the first empty slot, which is the leftmost one, so
+         the word is always built in reading order. */
+      for (i = 0; i < n; i++) {
+        if (k.own.slots.indexOf(i) >= 0) continue
+        if (!inRect(tileRect(k, n, i), x, y)) continue
+        for (var s = 0; s < k.own.slots.length; s++) {
+          if (k.own.slots[s] !== null) continue
+          k.own.slots[s] = i
+          k.sound.play('lift')
+          return true
+        }
+        return true
+      }
+      return false
+    },
+
+    onEmpty: function (k) { k.say(LINES.empty) },
+
+    onWin: function (k) {
+      k.own.coins += 1
+      var at = slotRect(k, k.own.slots.length, 0)
+      if (isPrize(k.round)) {
+        k.own.coins += 10
+        k.own.stars += 1
+        k.cheer(k.W * 0.5, at.y)
+        k.say(LINES.prize)
+      } else {
+        k.say(pick(LINES.right))
+      }
+    },
+
+    /**
+     * Empty the slots and stand the true spelling in them for a beat.
+     *
+     * The round ends with the child having seen the word written correctly,
+     * which is the only part of a miss that teaches anything. `step` takes the
+     * reveal down the moment the kit hands play back, so the second try starts
+     * from a clean row rather than from a copying exercise.
+     */
+    onMiss: function (k) {
+      for (var i = 0; i < k.own.slots.length; i++) k.own.slots[i] = null
+      k.own.reveal = true
+      k.say(k.own.q.word + '. ' + k.own.q.sentence)
+      k.own.talkUntil = k.now + 2400
+    },
+
+    onOver: function (k) { k.say(LINES.over) },
+    onPoke: function (k) { k.say(LINES.poke) },
+
+    step: function (k) {
+      if (k.phase === 'play' && k.own.reveal) k.own.reveal = false
+    },
+
+    /**
+     * The floor mat, baked into the backdrop once per resize.
+     *
+     * The letters sit on the lower half of the room and a bare plank floor
+     * under them reads as nothing at all. A mat gives them somewhere to be laid
+     * out, which is what a child does with letter cards on a real floor.
+     */
+    props: function (k, g, W, H) {
+      var hy = K.groundY(H)
+      var cy = hy + (H - hy) * 0.62
+      var rx = W * 0.44
+      var ry = (H - hy) * 0.34
+      g.beginPath()
+      g.ellipse(W * 0.5, cy, rx, ry, 0, 0, Math.PI * 2)
+      K.inkedOn(g, '#c2543a', K.LINE, 4)
+      g.save()
+      g.beginPath()
+      g.ellipse(W * 0.5, cy, rx, ry, 0, 0, Math.PI * 2)
+      g.clip()
+      /* Bands rather than a weave. At this size a weave is noise, and the mat
+         only has to say "a place things are laid out on". */
+      g.fillStyle = '#e0a13c'
+      for (var b = -3; b <= 3; b++) {
+        g.fillRect(W * 0.5 - rx, cy + b * ry * 0.34 - ry * 0.06, rx * 2, ry * 0.12)
+      }
+      g.restore()
+      g.beginPath()
+      g.ellipse(W * 0.5, cy, rx * 0.86, ry * 0.7, 0, 0, Math.PI * 2)
+      g.strokeStyle = 'rgba(90,30,16,0.45)'
+      g.lineWidth = 3
+      g.stroke()
+    },
+
+    paint: function (k) {
+      var ctx = k.ctx
+      var q = k.own.q
+      if (!q) return
+      var font = k.FONT
+      var slots = k.own.slots
+      var sn = slots.length
+      var ln = q.letters.length
+      var s = slotS(k, sn)
+      var i
+
+      /**
+       * The stars, on the wall above the slots.
+       *
+       * One per prize word. It is the only thing in the room that remembers the
+       * whole run, and a run with nothing that accumulates is the same round
+       * over and over however many of them are won.
+       */
+      var shown = Math.min(k.own.stars || 0, 8)
+      if (shown > 0) {
+        var sr = clamp(s * 0.16, 7, 16)
+        var sx0 = k.W * 0.5 - (shown - 1) * sr * 2.6 * 0.5
+        for (i = 0; i < shown; i++) {
+          ctx.save()
+          ctx.translate(sx0 + i * sr * 2.6, playTop(k) + sr * 1.1)
+          ctx.beginPath()
+          K.SHAPES.star(ctx, sr)
+          K.inkedOn(ctx, '#f2d024', K.LINE, 2.5)
+          ctx.restore()
+        }
+      }
+
+      /* The slots, and whatever is standing in them. */
+      for (i = 0; i < sn; i++) {
+        var r = slotRect(k, sn, i)
+        var cx = r.x + r.w * 0.5
+        var cy = r.y + r.h * 0.5
+        if (k.own.reveal) {
+          /* The true spelling, in green, read straight off the target word. */
+          drawTile(ctx, cx, cy, s, q.word.charAt(i), font, '#23b862', '#0a6336')
+        } else if (slots[i] === null) {
+          drawSlot(ctx, cx, cy, s, k.now)
+        } else {
+          drawTile(ctx, cx, cy, s, q.letters[slots[i]], font)
+        }
+      }
+
+      /* The heap of letters. A used one leaves its socket behind. */
+      for (i = 0; i < ln; i++) {
+        var t = tileRect(k, ln, i)
+        var ts = t.w
+        var tx = t.x + ts * 0.5
+        var ty = t.y + ts * 0.5
+        if (slots.indexOf(i) >= 0) {
+          drawSocket(ctx, tx, ty, ts)
+        } else {
+          var lift = Math.sin(k.now * 0.002 + i * 1.7) * ts * 0.035
+          drawTile(ctx, tx, ty + lift, ts, q.letters[i], font)
+        }
+      }
+
+      /* The speaker, lit while the word is being said. */
+      var horn = hornAt(k, sn)
+      drawHorn(ctx, horn.x, horn.y, horn.r, k.now < k.own.talkUntil)
+
+      /**
+       * Him, standing on the floor in the left column.
+       *
+       * Beside the slots, never over them, and never with the slot row running
+       * through him: a line across a spider reads as a thread and he looks
+       * hung rather than stood.
+       */
+      var gy = k.ground() + (k.H - k.ground()) * 0.06
+      var hr = clamp(sideW(k) * 0.4, 20, 52)
+      k.him.draw(sideW(k) * 0.5, gy - hr * 1.3, hr, gy)
+    },
+
+    peek: function (k) {
+      if (!k.own.q) return { q: null }
+      var q = k.own.q
+      var sn = k.own.slots.length
+      var ln = q.letters.length
+      var built = ''
+      for (var i = 0; i < sn; i++) {
+        built += k.own.slots[i] === null ? '_' : q.letters[k.own.slots[i]]
+      }
+      var horn = hornAt(k, sn)
+      return {
+        word: q.word,
+        sentence: q.sentence,
+        built: built,
+        reveal: !!k.own.reveal,
+        coins: k.own.coins,
+        stars: k.own.stars,
+        prize: isPrize(k.round),
+        letters: q.letters.map(function (ch, j) {
+          var r = tileRect(k, ln, j)
+          return {
+            ch: ch, used: k.own.slots.indexOf(j) >= 0,
+            x: Math.round(r.x + r.w / 2), y: Math.round(r.y + r.h / 2)
+          }
+        }),
+        slots: k.own.slots.map(function (at, j) {
+          var r = slotRect(k, sn, j)
+          return {
+            ch: at === null ? null : q.letters[at],
+            x: Math.round(r.x + r.w / 2), y: Math.round(r.y + r.h / 2)
+          }
+        }),
+        speaker: { x: Math.round(horn.x), y: Math.round(horn.y) },
+        button: (function () {
+          var b = k.buttonRect()
+          return { x: Math.round(b.x + b.w / 2), y: Math.round(b.y + b.h / 2) }
+        }())
+      }
+    }
+  })
+}())
+</script>
+</body>
+</html>

@@ -121,7 +121,22 @@
   }
 
   /** Read this line out. The app owns the voice, and owns the mute switch. */
+  /**
+   * Ask the app to speak.
+   *
+   * An array is several sentences said one after another. That is not a
+   * convenience: the recorded voice is baked one whole sentence at a time, so
+   * "Not quite." followed by "It needed to be four." costs three opener files
+   * plus the explanations, where the same words glued into one string would
+   * need every opener recorded against every explanation. Split at sentences
+   * and the bank stays small without the speech sounding assembled.
+   */
   function say(text) {
+    if (Array.isArray(text)) {
+      var lines = text.filter(function (t) { return t })
+      if (lines.length) post({ type: 'say', text: lines })
+      return
+    }
     if (text) post({ type: 'say', text: String(text) })
   }
 
@@ -155,6 +170,16 @@
   var beamTilt = 0
   /** What the face is doing: 'idle', 'happy' or 'sad'. */
   var mood = 'idle'
+  /**
+   * How each round went, and how many right in a row.
+   *
+   * `results` is what the journey ribbon draws, so it is kept even though
+   * `right` already counts the total: a child cannot see a total, and the
+   * point of the ribbon is that they can see where they are and that it ends.
+   */
+  var results = []
+  var streak = 0
+  var bestStreak = 0
   /** Briefly lit after the question is replayed, so the press is acknowledged. */
   var replayLit = 0
   /** When the child last did anything, for the nudge. */
@@ -362,6 +387,14 @@
           note(SCALE[1], t, 0.16, 0.10, 'sine')
           note(SCALE[0], t + 0.13, 0.26, 0.09, 'sine')
 
+        } else if (what === 'pop') {
+          /* A balloon. A very short filtered noise burst with a bright chirp
+             on top: the burst is the skin, the chirp is the air leaving. Not
+             a cartoon "boing", which gets old by the fourth balloon. */
+          thud(t, 0.30)
+          note(SCALE[4] * 1.5, t, 0.07, 0.12, 'triangle')
+          note(SCALE[2], t + 0.03, 0.10, 0.08, 'sine')
+
         } else if (what === 'finish') {
           /* The end of a whole set, so it may be a little more than a round. */
           var run = [SCALE[0], SCALE[2], SCALE[3], SCALE[4], SCALE[4] * 1.5]
@@ -440,45 +473,56 @@
    * draw a proper market instead of five boxes. Repainted only when the size
    * changes or the scene does.
    */
+  /**
+   * Each place, and what lives in it.
+   *
+   * `hills`, `clouds`, `birds` and `grass` are what the living layer reads.
+   * They default to on where leaving them off would be the surprising choice,
+   * so a new scene gets a sky with weather in it for free and only has to say
+   * what it does *not* want. A ridge of hills behind the sea, or a bird over
+   * a night sky, is worse than nothing.
+   */
   var SCENES = {
     market: {
-      sky: ['#ffd89b', '#ff9a6c'], ground: '#c47a43', far: '#a85f36', horizon: 0.62,
-      props: 'stalls',
+      sky: ['#f2a24e', '#ffdfb4'], ground: '#c47a43', far: '#a85f36', horizon: 0.62,
+      props: 'stalls', grass: false,
     },
     farm: {
-      sky: ['#bfe6ff', '#8fd18a'], ground: '#7ba648', far: '#5d8a34', horizon: 0.66,
-      props: 'rows',
+      sky: ['#5db0ee', '#dcf1ea'], ground: '#7ba648', far: '#5d8a34', horizon: 0.66,
+      props: 'rows', grass: true,
     },
     /* An orchard rather than a field, for the games about picking fruit. The
        trees fill the upper half, so fruit laid out across the play area reads
        as hanging on them rather than floating in the sky. */
     orchard: {
-      sky: ['#cfeaff', '#a8dca0'], ground: '#84ad4e', far: '#5d8a34', horizon: 0.72,
-      props: 'orchard',
+      sky: ['#5db0ee', '#ddf0e4'], ground: '#84ad4e', far: '#5d8a34', horizon: 0.72,
+      props: 'orchard', grass: true,
     },
     road: {
-      sky: ['#cfe4f7', '#9bb6cc'], ground: '#7d8494', far: '#5d6370', horizon: 0.70,
-      props: 'road',
+      sky: ['#7fb2da', '#dce7ef'], ground: '#7d8494', far: '#5d6370', horizon: 0.70,
+      props: 'road', grass: true,
     },
     river: {
-      sky: ['#cbeeff', '#7ec7e8'], ground: '#3d93b4', far: '#2f7f9e', horizon: 0.64,
-      props: 'water',
+      sky: ['#5ec2ea', '#d8f2fb'], ground: '#3d93b4', far: '#2f7f9e', horizon: 0.64,
+      props: 'water', grass: true,
     },
     school: {
-      sky: ['#f2ead6', '#dcd0b4'], ground: '#a68a60', far: '#8b7350', horizon: 0.68,
-      props: 'board',
+      sky: ['#8cc4e8', '#eeeada'], ground: '#a68a60', far: '#8b7350', horizon: 0.68,
+      props: 'board', grass: false,
     },
     yard: {
-      sky: ['#ffe9c4', '#f2c58a'], ground: '#bf8e4e', far: '#a9793f', horizon: 0.66,
-      props: 'tree',
+      sky: ['#efb25e', '#ffe9c4'], ground: '#bf8e4e', far: '#a9793f', horizon: 0.66,
+      props: 'tree', grass: true,
     },
+    /* No hills: a ridge behind the sea is a ridge in the sea. The horizon is
+       the point of a beach. */
     beach: {
-      sky: ['#ffeec2', '#ffd08a'], ground: '#f0dcae', far: '#3d9fc4', horizon: 0.63,
-      props: 'sea',
+      sky: ['#55c6ee', '#ffeec2'], ground: '#f0dcae', far: '#3d9fc4', horizon: 0.63,
+      props: 'sea', hills: false, grass: false,
     },
     night: {
-      sky: ['#16233f', '#2c3f6b'], ground: '#2b3853', far: '#1d2740', horizon: 0.68,
-      props: 'stars',
+      sky: ['#0c1630', '#33497a'], ground: '#2b3853', far: '#1d2740', horizon: 0.68,
+      props: 'stars', clouds: false, birds: false, grass: false,
     },
   }
 
@@ -491,6 +535,37 @@
   /** Stable pseudo randomness, so a scene looks the same every time it paints. */
   function fixed(i, n) { return ((i * 9301 + 49297) % 233280) / 233280 * n }
 
+  /* ── colour ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * Reading and blending the scene colours.
+   *
+   * The scene table is written in hex because that is what a person editing it
+   * wants to type. Depth needs those same colours paler, darker and part way
+   * between, so they have to be taken apart. Six digit hex only: the table is
+   * ours and nothing else is allowed in it.
+   */
+  function rgbOf(hex) {
+    var v = parseInt(String(hex).slice(1), 16)
+    return [(v >> 16) & 255, (v >> 8) & 255, v & 255]
+  }
+
+  /** `k` of the way from `a` to `b`. */
+  function mix(a, b, k) {
+    var x = rgbOf(a), y = rgbOf(b)
+    return 'rgb(' + Math.round(x[0] + (y[0] - x[0]) * k) + ','
+      + Math.round(x[1] + (y[1] - x[1]) * k) + ','
+      + Math.round(x[2] + (y[2] - x[2]) * k) + ')'
+  }
+
+  /** Towards white, for haze and for things far away. */
+  function lighten(hex, k) { return mix(hex, '#ffffff', k) }
+
+  function withAlpha(hex, a) {
+    var c = rgbOf(hex)
+    return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'
+  }
+
   /**
    * Paint one scene into a context. Called once per size, never per frame.
    *
@@ -498,41 +573,126 @@
    * lines and no bytes over the wire, which is the whole reason a game on a
    * Ghanaian phone can have eight of them.
    */
+  /**
+   * A ridge of hills, drawn as one soft path across the width.
+   *
+   * Distance in a flat drawing comes almost entirely from two things: things
+   * further away are paler and bluer, and they overlap. A single ridge behind
+   * the props does more for depth than any amount of detail in front of them.
+   */
+  function ridge(g, w, baseY, height, colour, seed) {
+    g.fillStyle = colour
+    g.beginPath()
+    g.moveTo(-10, baseY + 10)
+    g.lineTo(-10, baseY)
+    var steps = 7
+    for (var i = 0; i <= steps; i++) {
+      var x = (i / steps) * (w + 20) - 10
+      /* Two waves of different lengths, so the skyline is uneven without
+         being noisy. One wave is a hill; two is a range. */
+      var k = Math.sin(i * 1.1 + seed) * 0.5 + Math.sin(i * 2.7 + seed * 1.8) * 0.28
+      var y = baseY - height * (0.55 + k * 0.45)
+      if (i === 0) g.lineTo(x, y)
+      else {
+        var px = ((i - 1) / steps) * (w + 20) - 10
+        g.quadraticCurveTo((px + x) / 2, y, x, y)
+      }
+    }
+    g.lineTo(w + 10, baseY)
+    g.lineTo(w + 10, baseY + 10)
+    g.closePath()
+    g.fill()
+  }
+
+  /** A palm, for the scenes that have a coast or a roadside in them. */
+  function palm(g, x, groundY, size, tint) {
+    g.save()
+    g.translate(x, groundY)
+    g.strokeStyle = tint || '#6b4a2a'
+    g.lineWidth = Math.max(2, size * 0.055)
+    g.lineCap = 'round'
+    g.beginPath()
+    g.moveTo(0, 0)
+    g.quadraticCurveTo(size * 0.12, -size * 0.55, size * 0.02, -size)
+    g.stroke()
+    g.fillStyle = tint ? tint : '#2f7a3f'
+    for (var i = 0; i < 6; i++) {
+      var a = -Math.PI / 2 + (i - 2.5) * 0.52
+      g.save()
+      g.translate(size * 0.02, -size)
+      g.rotate(a)
+      g.beginPath()
+      g.moveTo(0, 0)
+      g.quadraticCurveTo(size * 0.3, -size * 0.14, size * 0.52, size * 0.03)
+      g.quadraticCurveTo(size * 0.3, size * 0.05, 0, 0)
+      g.closePath()
+      g.fill()
+      g.restore()
+    }
+    g.restore()
+  }
+
   function paintScene(g, w, h) {
     var s = scene()
     var hy = h * s.horizon
+    var night = s.props === 'stars'
 
+    /**
+     * The sky, in four stops rather than two.
+     *
+     * Two stops is a colour wash. A real sky is darkest overhead and lightest
+     * where it meets the ground, and the change is not linear: most of it
+     * happens in the lowest third. Putting the middle stops low is the whole
+     * difference between a gradient and a sky.
+     */
     var sky = g.createLinearGradient(0, 0, 0, hy)
     sky.addColorStop(0, s.sky[0])
-    sky.addColorStop(1, s.sky[1])
+    sky.addColorStop(0.55, mix(s.sky[0], s.sky[1], 0.45))
+    sky.addColorStop(0.86, s.sky[1])
+    sky.addColorStop(1, lighten(s.sky[1], 0.22))
     g.fillStyle = sky
     g.fillRect(0, 0, w, hy)
+
+    /* The sun, where the light in every other drawing comes from. Not a disc:
+       a glow, because a disc in the corner of a children's game reads as a
+       sticker and this has to sit behind everything. */
+    if (!night) {
+      var sun = g.createRadialGradient(w * 0.26, hy * 0.2, 0, w * 0.26, hy * 0.2, h * 0.5)
+      sun.addColorStop(0, 'rgba(255,248,214,0.55)')
+      sun.addColorStop(0.45, 'rgba(255,238,190,0.16)')
+      sun.addColorStop(1, 'rgba(255,238,190,0)')
+      g.fillStyle = sun
+      g.fillRect(0, 0, w, hy)
+    }
+
+    /**
+     * Far hills, then nearer ones.
+     *
+     * Two ranges, the back one paler and flatter. This is the layer that was
+     * missing: without it the props stood on the horizon with nothing behind
+     * them and every scene ended at the skyline.
+     */
+    if (s.hills !== false) {
+      ridge(g, w, hy, h * 0.12, night ? 'rgba(30,44,78,0.85)' : withAlpha(s.far, 0.28), 1.7)
+      ridge(g, w, hy, h * 0.075, night ? 'rgba(22,34,62,0.9)' : withAlpha(s.far, 0.45), 4.2)
+    }
+
+    /* Haze along the horizon, which is what tells the eye the hills are far
+       away rather than small. */
+    var haze = g.createLinearGradient(0, hy - h * 0.16, 0, hy)
+    haze.addColorStop(0, 'rgba(255,255,255,0)')
+    haze.addColorStop(1, night ? 'rgba(120,150,210,0.22)' : 'rgba(255,252,240,0.5)')
+    g.fillStyle = haze
+    g.fillRect(0, hy - h * 0.16, w, h * 0.16)
 
     /* The ground, darker at the horizon and warmer close up, so it reads as a
        surface going away from you rather than as a filled rectangle. */
     var gr = g.createLinearGradient(0, hy, 0, h)
     gr.addColorStop(0, s.far)
+    gr.addColorStop(0.35, mix(s.far, s.ground, 0.7))
     gr.addColorStop(1, s.ground)
     g.fillStyle = gr
     g.fillRect(0, hy, w, h - hy)
-
-    /* Something in the sky, in every scene but the ones that own it. */
-    if (s.props !== 'stars' && s.props !== 'board') {
-      g.save()
-      g.globalAlpha = 0.5
-      g.fillStyle = '#fff'
-      for (var c = 0; c < 3; c++) {
-        var cx = fixed(c * 7 + 3, w)
-        var cy = hy * (0.14 + fixed(c * 13, 0.3))
-        var cr = h * (0.035 + fixed(c * 5, 0.025))
-        g.beginPath()
-        g.arc(cx, cy, cr, 0, Math.PI * 2)
-        g.arc(cx + cr * 0.9, cy + cr * 0.1, cr * 0.78, 0, Math.PI * 2)
-        g.arc(cx - cr * 0.85, cy + cr * 0.15, cr * 0.62, 0, Math.PI * 2)
-        g.fill()
-      }
-      g.restore()
-    }
 
     if (s.props === 'stalls') {
       /* A market: stalls with striped awnings, and baskets in front of them.
@@ -927,9 +1087,143 @@
     backdropFor = want
   }
 
+  /* ── the living layer ────────────────────────────────────────────────────── */
+
+  /**
+   * The things in a scene that move.
+   *
+   * ── Why they are not in the backdrop ───────────────────────────────────────
+   *
+   * The backdrop is painted once and copied in, which is what makes a detailed
+   * scene affordable. Anything that moves cannot live there, so it is drawn
+   * fresh each frame on top. That is a handful of shapes, which costs nothing,
+   * and it is the difference between a picture of a place and a place.
+   *
+   * ── Why it matters more than the detail does ───────────────────────────────
+   *
+   * A still scene reads as a screenshot however well it is drawn, and a child
+   * stops seeing it within seconds. One cloud crossing and one bird is worth
+   * more than another twenty baked shapes, because movement is what the eye
+   * keeps coming back to.
+   *
+   * ── The rule ───────────────────────────────────────────────────────────────
+   *
+   * Nothing here is ever tappable and nothing here is ever the answer. It sits
+   * behind the game and it must never compete with it: slow, low contrast,
+   * away from the middle where the items are. A bird that crosses at the speed
+   * of a balloon is a bird a child will try to pop.
+   */
+  function drawLife() {
+    var s = scene()
+    var hy = H * s.horizon
+    var night = s.props === 'stars'
+
+    if (!night && s.clouds !== false) {
+      /* Three clouds at different depths: the far one small, pale and slow,
+         the near one larger and quicker. Parallax, which is the cheapest
+         convincing depth there is. */
+      for (var c = 0; c < 3; c++) {
+        var depth = 0.35 + c * 0.32
+        var speed = 5 + c * 7
+        var cw = H * (0.05 + c * 0.022)
+        /* Wrapped across a span wider than the screen so one is always about
+           to arrive rather than all three popping in together. */
+        var span = W + cw * 6
+        var cx = ((now * 0.001 * speed + fixed(c * 31 + 5, span)) % span) - cw * 3
+        var cy = hy * (0.13 + fixed(c * 13, 0.32))
+        ctx.save()
+        ctx.globalAlpha = 0.24 + depth * 0.4
+        ctx.fillStyle = '#ffffff'
+        ctx.beginPath()
+        ctx.arc(cx, cy, cw, 0, Math.PI * 2)
+        ctx.arc(cx + cw * 0.95, cy + cw * 0.12, cw * 0.76, 0, Math.PI * 2)
+        ctx.arc(cx - cw * 0.9, cy + cw * 0.16, cw * 0.6, 0, Math.PI * 2)
+        ctx.arc(cx + cw * 0.2, cy - cw * 0.42, cw * 0.62, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+      }
+    }
+
+    if (!night && s.birds !== false) {
+      /**
+       * Two birds, crossing now and then rather than always.
+       *
+       * The gap is the point. Something that is always on screen is scenery;
+       * something that appears every twenty seconds or so is an event, and a
+       * child looks up for it. They are drawn as two strokes because a bird at
+       * this distance is two strokes, and anything more detailed starts
+       * competing with the game.
+       */
+      for (var b = 0; b < 2; b++) {
+        var cycle = 21000 + b * 9000
+        var t = (now + b * 12000) % cycle
+        if (t > 8000) continue
+        var k = t / 8000
+        var bx = -40 + k * (W + 80)
+        var by = hy * (0.2 + b * 0.16) + Math.sin(k * 7 + b) * H * 0.02
+        var flap = Math.sin(now * 0.011 + b * 2) * 0.5 + 0.5
+        var bs = H * 0.013
+        ctx.save()
+        ctx.globalAlpha = 0.4
+        ctx.strokeStyle = '#3a4a63'
+        ctx.lineWidth = Math.max(1.4, bs * 0.3)
+        ctx.lineCap = 'round'
+        ctx.beginPath()
+        ctx.moveTo(bx - bs, by + flap * bs * 0.5)
+        ctx.quadraticCurveTo(bx - bs * 0.3, by - bs * 0.35, bx, by)
+        ctx.quadraticCurveTo(bx + bs * 0.3, by - bs * 0.35, bx + bs, by + flap * bs * 0.5)
+        ctx.stroke()
+        ctx.restore()
+      }
+    }
+
+    if (s.grass) {
+      /**
+       * Grass along the horizon, leaning in the wind.
+       *
+       * All of it leans together on one slow wave rather than each blade on
+       * its own phase. Independent blades look like static; a single wave
+       * passing through them looks like wind, which is the thing being drawn.
+       */
+      var blades = Math.round(W / 11)
+      ctx.save()
+      ctx.strokeStyle = withAlpha(s.far, 0.72)
+      ctx.lineCap = 'round'
+      for (var i = 0; i < blades; i++) {
+        var gx = (i + 0.5) * (W / blades) + fixed(i * 17, 10) - 5
+        var gh = H * (0.024 + fixed(i * 7, 0.03))
+        var lean = Math.sin(now * 0.0013 + gx * 0.012) * gh * 0.42
+        ctx.lineWidth = Math.max(1.2, gh * 0.12)
+        ctx.beginPath()
+        ctx.moveTo(gx, hy + H * 0.012)
+        ctx.quadraticCurveTo(gx + lean * 0.4, hy - gh * 0.55, gx + lean, hy - gh)
+        ctx.stroke()
+      }
+      ctx.restore()
+    }
+
+    if (night) {
+      /* Stars that breathe, each on its own phase so the sky shimmers rather
+         than blinking on and off together. */
+      ctx.save()
+      ctx.fillStyle = '#fff'
+      for (var st = 0; st < 26; st++) {
+        var sx = fixed(st * 11 + 2, W)
+        var sy = fixed(st * 23 + 7, hy * 0.86)
+        var tw = 0.35 + 0.4 * (Math.sin(now * 0.0021 + st) * 0.5 + 0.5)
+        ctx.globalAlpha = tw
+        ctx.beginPath()
+        ctx.arc(sx, sy, H * 0.0035 * (0.7 + tw), 0, Math.PI * 2)
+        ctx.fill()
+      }
+      ctx.restore()
+    }
+  }
+
   function drawScene() {
     ensureBackdrop()
     if (backdrop) ctx.drawImage(backdrop, 0, 0, W, H)
+    drawLife()
   }
 
   /* ── drawing an item ─────────────────────────────────────────────────────── */
@@ -1314,8 +1608,34 @@
     /* A slow breath, so they are alive rather than pasted on. */
     var breathe = Math.sin(now * 0.0014) * r * 0.035
 
+    /**
+     * What they do when the answer lands.
+     *
+     * ── Why they have to do anything ───────────────────────────────────────
+     *
+     * They stood there, breathing, whatever happened. A character who does not
+     * react is a painting, and the whole reason for putting somebody in the
+     * scene was to give the child someone to be doing it *for*. Getting it
+     * right has to visibly please them or there was no point.
+     *
+     * Three hops on a right answer, easing out, so the celebration is over
+     * before the next question starts. A wrong answer is a small lean, not a
+     * slump: they are a friend waiting, not a teacher disappointed in you.
+     */
+    var hop = 0, tilt = 0
+    if (phase === 'verdict') {
+      var since = (now - verdictAt) / 1000
+      if (wasRight && since < 1.1) {
+        var fade = 1 - since / 1.1
+        hop = -Math.abs(Math.sin(since * 9)) * r * 0.42 * fade
+      } else if (!wasRight && since < 1.1) {
+        tilt = Math.sin(since * 4) * 0.09 * (1 - since / 1.1)
+      }
+    }
+
     ctx.save()
-    ctx.translate(x, y + breathe)
+    ctx.translate(x, y + breathe + hop)
+    if (tilt) ctx.rotate(tilt)
 
     /* Contact shadow, on the same ground as everything else. */
     ctx.save()
@@ -1374,15 +1694,24 @@
       ctx.quadraticCurveTo(r * 0.62, r * 0.05, r * 0.52, r * 0.95)
       ctx.closePath(); ctx.fill()
 
-      /* Arms, one raised, because a still figure reads as a statue. */
+      /* Arms, one raised, because a still figure reads as a statue. Both go
+         up while they are hopping: at this size the arms are most of what
+         makes a celebration readable, more than the face is. */
       ctx.strokeStyle = skin
       ctx.lineWidth = r * 0.17
       ctx.lineCap = 'round'
       ctx.beginPath()
-      ctx.moveTo(-r * 0.46, r * 0.3)
-      ctx.quadraticCurveTo(-r * 0.78, r * 0.1, -r * 0.7, -r * 0.22)
-      ctx.moveTo(r * 0.46, r * 0.3)
-      ctx.quadraticCurveTo(r * 0.8, r * 0.16, r * 0.76, r * 0.5)
+      if (hop) {
+        ctx.moveTo(-r * 0.46, r * 0.3)
+        ctx.quadraticCurveTo(-r * 0.86, r * 0.02, -r * 0.72, -r * 0.5)
+        ctx.moveTo(r * 0.46, r * 0.3)
+        ctx.quadraticCurveTo(r * 0.86, r * 0.02, r * 0.72, -r * 0.5)
+      } else {
+        ctx.moveTo(-r * 0.46, r * 0.3)
+        ctx.quadraticCurveTo(-r * 0.78, r * 0.1, -r * 0.7, -r * 0.22)
+        ctx.moveTo(r * 0.46, r * 0.3)
+        ctx.quadraticCurveTo(r * 0.8, r * 0.16, r * 0.76, r * 0.5)
+      }
       ctx.stroke()
 
       var hg = ctx.createRadialGradient(-r * 0.2, -r * 0.6, r * 0.05, 0, -r * 0.42, r * 0.7)
@@ -1434,17 +1763,163 @@
     ctx.restore()
   }
 
-  /** Whether a name has a painter, so callers can fall back to a glyph. */
-  function canPaint(name) { return !!(name && PAINT[name]) }
+  /* ── baked objects ───────────────────────────────────────────────────────── */
+
+  /**
+   * Objects that were modelled rather than drawn by hand.
+   *
+   * ── Why these exist next to the painters ───────────────────────────────────
+   *
+   * Every object was a path in `PAINT`, written by hand. That was the right
+   * first move, because it costs nothing to download and it made the light
+   * consistent. It does not scale: a painter is a few dozen lines of bezier
+   * per object, the quality varies with how well the shape happens to suit
+   * curves, and this platform needs hundreds of objects across 550 games.
+   *
+   * These are renders of public domain 3D models, baked once at build time
+   * and shipped as flat PNGs. See `art/LICENCE.txt` for where they come from
+   * and exactly what was done to them. They are lit from the upper left, the
+   * same as the painters and the same as the drawn cast in the app, so an
+   * apple that was modelled and a mango that was drawn sit in one light.
+   *
+   * ── Why not just three.js in the page ──────────────────────────────────────
+   *
+   * Because the models were only ever needed once. Rendering them in the
+   * browser would mean shipping a WebGL library and the meshes to every child
+   * on a metered connection, to produce a picture that is identical every
+   * time. Baking gives the same image for about 5 KB and no dependency.
+   *
+   * ── The painters stay ──────────────────────────────────────────────────────
+   *
+   * They are not dead code and they are not a legacy layer. They are the floor
+   * under this one. A sprite can fail: a flaky connection, a cache miss, a
+   * file that never deployed. When that happens the game must still be
+   * playable, because a four year old cannot be told to try again on better
+   * wifi. Anything with a painter falls back to it silently. Anything without
+   * one falls back to a glyph, which is worse looking and still correct.
+   *
+   * Some objects are deliberately painted rather than baked: the modelled
+   * avocado, coconut and onion are brown ovals that no child would name, and
+   * the modelled fish is grey and spiky where the painted one is friendly. A
+   * better technique is not automatically a better picture.
+   */
+  var sprites = (function () {
+    /**
+     * The names that have a baked object, listed rather than discovered.
+     *
+     * A list means a miss is free: `known()` answers without a request, so a
+     * painter name never costs a 404 on a slow connection.
+     */
+    var HAVE = {
+      apple: 1, banana: 1, bread: 1, broccoli: 1, cabbage: 1, carrot: 1,
+      cheese: 1, cookie: 1, corn: 1, cupcake: 1, donut: 1, egg: 1,
+      eggplant: 1, grapes: 1, lemon: 1, mushroom: 1, orange: 1, pear: 1,
+      pineapple: 1, pumpkin: 1, strawberry: 1, tomato: 1, watermelon: 1,
+    }
+
+    var loaded = {}   /* name -> decoded image */
+    var failed = {}   /* name -> true, never asked for twice */
+    var asked = {}    /* name -> promise, so two things in play share one request */
+
+    /**
+     * How much of its square each baked object fills.
+     *
+     * The bake trims every object to its own edges and scales it so the
+     * longest side is this fraction of the canvas, which is what makes a
+     * banana and a strawberry carry the same weight on the board. Drawing has
+     * to undo it, or every sprite would sit smaller than the painter beside
+     * it.
+     */
+    var FILL = 0.88
+
+    function known(name) { return !!(name && HAVE[name] && !failed[name]) }
+    function ready(name) { return !!loaded[name] }
+
+    function load(name) {
+      if (!known(name)) return Promise.resolve(false)
+      if (loaded[name]) return Promise.resolve(true)
+      if (asked[name]) return asked[name]
+      asked[name] = new Promise(function (done) {
+        var im = new Image()
+        /* Relative to play.html, so this works wherever the app is served
+           from and needs no origin: the frame has none. */
+        im.src = 'art/' + name + '.png'
+        im.onload = function () { loaded[name] = im; done(true) }
+        im.onerror = function () { failed[name] = true; done(false) }
+      })
+      return asked[name]
+    }
+
+    return {
+      known: known,
+      ready: ready,
+
+      /**
+       * Fetch what a game needs, and never hold the game up for it.
+       *
+       * Resolves when every object is decoded or after the deadline,
+       * whichever comes first. A child on a bad connection gets the painted
+       * fallback immediately rather than a spinner, which is the right way
+       * round: the game is the point, the picture is the polish.
+       */
+      want: function (names, deadline) {
+        var all = Promise.all((names || []).map(load))
+        return Promise.race([
+          all,
+          new Promise(function (done) { setTimeout(done, deadline || 2500) }),
+        ])
+      },
+
+      /** Draw a decoded object centred on the origin, sized to match a painter. */
+      draw: function (name, r) {
+        var im = loaded[name]
+        if (!im) return false
+        /* The painters span roughly ±r, so the object inside the square has
+           to span that too. Undo FILL to get the box. */
+        var half = r / FILL
+        ctx.drawImage(im, -half, -half, half * 2, half * 2)
+        return true
+      },
+    }
+  }())
+
+  /**
+   * Whether a name will be drawn as a picture rather than a glyph.
+   *
+   * This decides *layout*, so it must give the same answer for the whole of a
+   * round. It deliberately does not ask whether a sprite has arrived yet: if
+   * it did, a board laid out for glyphs would reflow into pictures the moment
+   * a PNG decoded, moving things under a child's finger mid-drag. Sprites are
+   * resolved before a round is built, never during one. See the `setup`
+   * handler.
+   */
+  function canPaint(name) { return !!(name && (PAINT[name] || sprites.ready(name))) }
 
   /** Draw a named thing, centred, at radius `r`. */
   function paintThing(name, r) {
+    /* Baked first, painter second. Both are correct; one is better looking. */
+    if (sprites.draw(name, r)) return true
     var f = PAINT[name]
     if (!f) return false
     ctx.save()
     f(ctx, r)
     ctx.restore()
     return true
+  }
+
+  /**
+   * Every object a spec puts on screen, so they can be fetched in one go.
+   *
+   * `spec.things` is the whole cast: the engine picks from it per round, so
+   * there is nothing else to look in and nothing to wait for later.
+   */
+  function thingsIn(sp) {
+    var out = {}
+    var ts = (sp && sp.things) || []
+    for (var i = 0; i < ts.length; i++) {
+      if (ts[i] && ts[i].draw && sprites.known(ts[i].draw)) out[ts[i].draw] = 1
+    }
+    return Object.keys(out)
   }
 
   function emojiFont(size) {
@@ -1498,6 +1973,10 @@
    * looks like should tell you what to do with it before anybody says a word.
    */
   function drawItem(it) {
+    /* Burst, so there is nothing left to draw. The item stays in the round
+       because the round still has to be scored on it. */
+    if (it.popped) return
+
     var r = it.r
 
     /* Arriving. A short spring, and nothing is drawn before its turn. */
@@ -1515,31 +1994,41 @@
     ctx.save()
     ctx.translate(it.x, it.y)
 
-    /* A shadow, so things sit on the scene instead of floating over it. It
-       grows while an item is held, which is the whole cue that it is picked
-       up rather than stuck down. */
-    ctx.save()
-    ctx.globalAlpha = it.drag ? 0.22 : 0.13
-    ctx.fillStyle = '#000'
     /**
-     * Under the thing, not under where a card would have been.
+     * A shadow, so things sit on the scene instead of floating over it. It
+     * grows while an item is held, which is the whole cue that it is picked
+     * up rather than stuck down.
      *
-     * A card fills its radius, so a shadow at 0.98 sits right beneath it. A
-     * bare object is painted smaller than its radius, and the same shadow
-     * landed well below it: the apples looked suspended above the ground with
-     * their shadows cast on a floor somewhere else. A floating object with a
-     * detached shadow is the one lighting mistake a child notices without
-     * being able to name.
+     * Except for a balloon, which has nothing to sit on. A contact shadow is
+     * a statement that an object is resting on the ground, and following a
+     * rising balloon up the sky with one pinned under it made three balloons
+     * look like three eggs being lifted off a table. The thing that sells a
+     * balloon is that nothing is holding it up.
      */
-    var footY = it.look === 'bare' ? r * 0.82 : r * 0.98
-    /* Its own path. Without this every shadow joins the last one and the
-       screen fills with grey wedges connecting the things to each other,
-       which is exactly what happened when this block was rewritten. */
-    ctx.beginPath()
-    ctx.ellipse(it.drag ? r * 0.18 : 0, it.drag ? footY + r * 0.16 : footY,
-      r * (it.drag ? 0.82 : 0.7), r * 0.2, 0, 0, Math.PI * 2)
-    ctx.fill()
-    ctx.restore()
+    if (it.look !== 'balloon') {
+      ctx.save()
+      ctx.globalAlpha = it.drag ? 0.22 : 0.13
+      ctx.fillStyle = '#000'
+      /**
+       * Under the thing, not under where a card would have been.
+       *
+       * A card fills its radius, so a shadow at 0.98 sits right beneath it. A
+       * bare object is painted smaller than its radius, and the same shadow
+       * landed well below it: the apples looked suspended above the ground
+       * with their shadows cast on a floor somewhere else. A floating object
+       * with a detached shadow is the one lighting mistake a child notices
+       * without being able to name.
+       */
+      var footY = it.look === 'bare' ? r * 0.82 : r * 0.98
+      /* Its own path. Without this every shadow joins the last one and the
+         screen fills with grey wedges connecting the things to each other,
+         which is exactly what happened when this block was rewritten. */
+      ctx.beginPath()
+      ctx.ellipse(it.drag ? r * 0.18 : 0, it.drag ? footY + r * 0.16 : footY,
+        r * (it.drag ? 0.82 : 0.7), r * 0.2, 0, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+    }
 
     ctx.scale(lifted, lifted)
 
@@ -1590,31 +2079,65 @@
     }
 
     if (it.look === 'balloon') {
-      /* A balloon on a string. Popping something is the one interaction a
-         child does not need explaining. */
-      var g = ctx.createRadialGradient(-r * 0.3, -r * 0.35, r * 0.1, 0, 0, r)
+      /**
+       * A balloon on a string.
+       *
+       * Popping something is the one interaction a child does not need
+       * explaining, so the shape has to be unmistakably a balloon and not a
+       * coloured circle. What does that is the bottom: an ellipse is an egg,
+       * and it becomes a balloon at the point where it pinches to a neck and
+       * a knot. The string hangs from the knot, not from thin air under it.
+       */
+      var g = ctx.createRadialGradient(-r * 0.3, -r * 0.4, r * 0.08, 0, 0, r * 1.05)
       g.addColorStop(0, it.tint ? it.tint[0] : '#ffe08a')
-      g.addColorStop(1, it.tint ? it.tint[1] : '#f2b517')
-      ctx.strokeStyle = 'rgba(20,36,58,0.25)'
-      ctx.lineWidth = 2
+      g.addColorStop(0.55, it.tint ? it.tint[1] : '#f2b517')
+      g.addColorStop(1, 'rgba(0,0,0,0.22)')
+
+      var neck = r * 0.94
+
+      /* The string, drawn first so the knot sits on top of its end. A slack
+         curve rather than a straight line: a taut string reads as a stick. */
+      ctx.strokeStyle = 'rgba(20,36,58,0.3)'
+      ctx.lineWidth = Math.max(1.5, r * 0.035)
       ctx.beginPath()
-      ctx.moveTo(0, r * 0.95)
-      ctx.quadraticCurveTo(r * 0.22, r * 1.35, 0, r * 1.7)
+      ctx.moveTo(0, neck)
+      ctx.bezierCurveTo(r * 0.3, r * 1.3, -r * 0.22, r * 1.45, r * 0.04, r * 1.85)
       ctx.stroke()
+
+      /* The body: round at the shoulders, tapering into the neck. */
       ctx.fillStyle = g
       ctx.beginPath()
-      ctx.ellipse(0, 0, r * 0.88, r * 0.98, 0, 0, Math.PI * 2)
+      ctx.moveTo(0, -r)
+      ctx.bezierCurveTo(r * 0.92, -r, r * 0.86, r * 0.48, r * 0.12, neck)
+      ctx.lineTo(-r * 0.12, neck)
+      ctx.bezierCurveTo(-r * 0.86, r * 0.48, -r * 0.92, -r, 0, -r)
+      ctx.closePath()
       ctx.fill()
       if (it.wrong || it.good) {
         ctx.strokeStyle = it.wrong ? '#d6402e' : '#0f8a4d'
         ctx.lineWidth = 5
         ctx.stroke()
       }
-      /* The catch light. Two ellipses and it reads as a real balloon. */
-      ctx.globalAlpha = 0.45
+
+      /* The knot. Small, and the one detail that settles what this is. */
+      ctx.fillStyle = it.tint ? it.tint[1] : '#f2b517'
+      ctx.beginPath()
+      ctx.moveTo(-r * 0.13, neck)
+      ctx.lineTo(r * 0.13, neck)
+      ctx.lineTo(0, neck + r * 0.15)
+      ctx.closePath()
+      ctx.fill()
+
+      /* The catch light, up where the light is, and a soft second one below
+         it so the rubber looks stretched rather than painted. */
+      ctx.globalAlpha = 0.5
       ctx.fillStyle = '#fff'
       ctx.beginPath()
-      ctx.ellipse(-r * 0.3, -r * 0.38, r * 0.2, r * 0.3, -0.4, 0, Math.PI * 2)
+      ctx.ellipse(-r * 0.32, -r * 0.42, r * 0.17, r * 0.29, -0.35, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.globalAlpha = 0.18
+      ctx.beginPath()
+      ctx.ellipse(-r * 0.44, r * 0.06, r * 0.07, r * 0.16, -0.2, 0, Math.PI * 2)
       ctx.fill()
       ctx.globalAlpha = 1
 
@@ -1663,7 +2186,22 @@
       }
 
     } else if (it.shownAs === 'picture') {
-      if (!paintThing(it.draw, r * 0.92)) {
+      /**
+       * A picture is drawn smaller than its tap target, on purpose.
+       *
+       * `r` is how close a finger has to land, not how big the thing looks.
+       * Small hands are inaccurate, so the target stays generous and the
+       * picture sits inside it.
+       *
+       * The number matters more than it looks. `paintThing` draws an object
+       * spanning about twice what it is given, so the old `r * 0.92` meant a
+       * picture nearly twice the width of the emoji it replaced: apples the
+       * size of the trees they came from. That went unseen for as long as it
+       * did because no builder was passing `draw`, so this branch always fell
+       * through to the glyph. `0.55` puts a drawn object at the size the
+       * scene was composed around.
+       */
+      if (!paintThing(it.draw, r * 0.55)) {
         ctx.font = emojiFont(Math.round(r * 1.05))
         ctx.fillText(it.glyph, 0, 0)
       }
@@ -1723,28 +2261,69 @@
    * basket rather than a heap at one point. Slightly jittered, because fruit
    * does not stack on a grid and a perfect lattice looks like a spreadsheet.
    */
-  function seatInBasket(it, b) {
+  /**
+   * Where the front of the basket begins, in page pixels.
+   *
+   * Shared by the seating and by `drawBasketFront`, because they are two
+   * halves of one illusion: things sit behind this line and the near side of
+   * the basket is drawn over it. If the two ever disagree, fruit floats in
+   * front of the basket holding it.
+   */
+  function basketFrontTop(b) { return b.y - b.h * 0.06 }
+
+  /**
+   * Lay out everything in the basket, as one centred row.
+   *
+   * ── Why every item, every time ─────────────────────────────────────────────
+   *
+   * The old version placed only the item that had just landed, on a grid
+   * anchored to the left edge of the basket. Two things were wrong with that.
+   * `per` is never less than two, so the `per > 1` branch was always taken and
+   * the first apple went to the *left edge* rather than the middle: one apple
+   * in a basket sat in the corner. And because each item was placed against
+   * the grid rather than against the others, three apples in a five wide grid
+   * clustered to one side with a gap beside them.
+   *
+   * Re-seating all of them means the group is centred at every count, and it
+   * costs nothing: there are never more than a dozen.
+   *
+   * ── Why one row ────────────────────────────────────────────────────────────
+   *
+   * Rows stacked upward climbed out of the basket and over the rim. A basket
+   * of apples is a heap with the tops showing, so when it gets crowded they
+   * overlap rather than pile into the air.
+   */
+  function reseatBasket(b) {
     var inb = []
     for (var i = 0; i < round.items.length; i++) {
       if (round.items[i].inBasket) inb.push(round.items[i])
     }
-    var idx = inb.indexOf(it)
-    if (idx < 0) idx = inb.length
+    if (!inb.length) return
 
-    var per = Math.max(2, Math.floor(b.w / (it.r * 1.5)))
-    var col = idx % per
-    var row = Math.floor(idx / per)
+    var n = inb.length
+    var spanW = b.w * 0.74
+    var front = basketFrontTop(b)
 
-    var spanW = b.w * 0.78
-    var left = b.x - spanW / 2
-    var stepX = per > 1 ? spanW / (per - 1) : 0
+    for (var k = 0; k < n; k++) {
+      var it = inb[k]
+      /* Shoulder to shoulder until they run out of room, then overlapping. */
+      var ideal = it.r * 1.55
+      var step = n > 1 ? Math.min(ideal, spanW / (n - 1)) : 0
+      var x = b.x + (k - (n - 1) / 2) * step
+      /* Low enough that the near side of the basket covers the body and only
+         the top of each one shows, which is what being *in* a basket looks
+         like. High enough to stay clear of the rim above. */
+      var y = front + it.r * 0.2 + (k % 2 ? -it.r * 0.06 : it.r * 0.06)
 
-    it.settle = {
-      x: per > 1 ? left + col * stepX : b.x,
-      /* Deep in the bowl, so the front of the basket covers all but the tops.
-         Sitting proud of the rim they looked like things balanced on a box
-         rather than things put away inside one. */
-      y: b.y + b.h * 0.42 - row * it.r * 0.5 + (idx % 2 ? -it.r * 0.05 : it.r * 0.05),
+      if (it.fixed) {
+        /* Already in the basket when the round was built. It never travelled,
+           so it must not appear to. */
+        it.x = x
+        it.y = y
+        it.settle = null
+      } else {
+        it.settle = { x: x, y: y }
+      }
     }
   }
 
@@ -1757,6 +2336,69 @@
       it.x = it.settle.x
       it.y = it.settle.y
       it.settle = null
+    }
+  }
+
+  /* ── bursts ──────────────────────────────────────────────────────────────── */
+
+  /**
+   * What is left of a balloon after it is popped.
+   *
+   * ── Why a balloon has to actually pop ──────────────────────────────────────
+   *
+   * It did not. A tapped balloon got a coloured ring drawn round it and sat
+   * there, whole, while the game said well done. In a game called Balloon Pop
+   * that is the one thing the child came for, and a ring is the feedback you
+   * give a button.
+   *
+   * These are shards, not a puff of dust: a burst balloon leaves curls of
+   * rubber flying outward, and eight of them at the balloon's own colour is
+   * enough for the eye to accept it. They are drawn and forgotten, they never
+   * decide anything, and if the list is empty the frame costs nothing.
+   */
+  var bursts = []
+
+  function spawnBurst(x, y, r, tint) {
+    var bits = []
+    for (var i = 0; i < 9; i++) {
+      var a = (i / 9) * Math.PI * 2 + Math.random() * 0.4
+      bits.push({
+        a: a,
+        /* Uneven speeds, because equal ones draw a perfect expanding ring
+           and read as a shockwave rather than as debris. */
+        v: r * (2.4 + Math.random() * 2.2),
+        spin: (Math.random() - 0.5) * 9,
+        size: r * (0.13 + Math.random() * 0.12),
+      })
+    }
+    bursts.push({ x: x, y: y, t: 0, bits: bits, tint: tint || ['#ffe08a', '#f2b517'] })
+  }
+
+  function drawBursts(dt) {
+    for (var i = bursts.length - 1; i >= 0; i--) {
+      var b = bursts[i]
+      b.t += dt
+      /* Just over a third of a second. Long enough to see, short enough that
+         it is gone before the next question is asked. */
+      if (b.t > 0.42) { bursts.splice(i, 1); continue }
+      var k = b.t / 0.42
+      ctx.save()
+      ctx.globalAlpha = 1 - k * k
+      for (var j = 0; j < b.bits.length; j++) {
+        var p2 = b.bits[j]
+        /* Eased outward and falling, so the shards slow and drop rather than
+           flying off in straight lines for ever. */
+        var d = p2.v * (1 - Math.pow(1 - k, 2))
+        ctx.save()
+        ctx.translate(b.x + Math.cos(p2.a) * d, b.y + Math.sin(p2.a) * d + k * k * 70)
+        ctx.rotate(p2.a + p2.spin * b.t)
+        ctx.fillStyle = j % 2 ? b.tint[1] : b.tint[0]
+        ctx.beginPath()
+        ctx.ellipse(0, 0, p2.size, p2.size * 0.42, 0, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+      }
+      ctx.restore()
     }
   }
 
@@ -1783,6 +2425,27 @@
       var a = now * 0.0009 * slow + it.phase
       it.x = it.homeX + Math.cos(a) * it.r * 0.9
       it.y = it.homeY + Math.sin(a) * it.r * 0.55
+
+    } else if (spec.motion === 'rise') {
+      /**
+       * Upward, wrapping at the top.
+       *
+       * `fall` read backwards is not good enough for the thing this was added
+       * for. A balloon that sinks is wrong about the world, and a four year
+       * old knows perfectly well which way a balloon goes: getting it
+       * backwards costs the game its credibility before the first question.
+       *
+       * The sideways wander is the point as much as the lift. Balloons going
+       * straight up in parallel lines look like a progress bar; a slow sway,
+       * each on its own phase, looks like air.
+       */
+      it.y -= it.speed * dt * slow
+      it.x += Math.sin(now * 0.0011 + it.phase) * 14 * dt * slow
+      if (it.y + it.r < 0) {
+        it.y = H + it.r
+        it.x = clamp(it.homeX + rand(-30, 30), it.r, W - it.r)
+      }
+      it.x = clamp(it.x, it.r, W - it.r)
     }
   }
 
@@ -1988,6 +2651,169 @@
    * fractions overlapped. A child could not drop a mango without pressing
    * Done, which ended the round they were still answering.
    */
+  /** A five pointed star, filled. Used for a round won and for the reward. */
+  function drawStar(x, y, r, colour) {
+    ctx.fillStyle = colour
+    ctx.beginPath()
+    for (var i = 0; i < 10; i++) {
+      var a = -Math.PI / 2 + i * Math.PI / 5
+      var rr = i % 2 ? r * 0.44 : r
+      var px = x + Math.cos(a) * rr
+      var py = y + Math.sin(a) * rr
+      if (i === 0) ctx.moveTo(px, py)
+      else ctx.lineTo(px, py)
+    }
+    ctx.closePath()
+    ctx.fill()
+  }
+
+  /* ── the journey ─────────────────────────────────────────────────────────── */
+
+  /**
+   * How tall the ribbon is, which the layout has to reserve.
+   *
+   * Zero when there is nothing to show, so a game with one round does not get
+   * a progress bar with one step on it.
+   */
+  function ribbonH() {
+    if (!spec || spec.rounds < 2) return 0
+    return clamp(Math.min(W, H) * 0.062, 26, 42)
+  }
+
+  /**
+   * The row of steps along the top: where you are and where it ends.
+   *
+   * ── Why this exists ────────────────────────────────────────────────────────
+   *
+   * A game was eight rounds that looked identical, with a score a child cannot
+   * read and no sign of an end. That is the definition of boring: nothing to
+   * play *for*. A four year old cannot hold "three of eight" in their head,
+   * but they can see five dots behind them and two in front, and they will
+   * finish the two.
+   *
+   * ── What each mark means ───────────────────────────────────────────────────
+   *
+   * A star for a round won, a plain dot for one lost, a hollow ring for one
+   * still to come, and a flag at the end. Losing a round is a dot rather than
+   * a cross on purpose: the ribbon is a map, not a report card, and a row of
+   * red crosses in front of a child who is struggling makes them stop.
+   */
+  function drawRibbon() {
+    var h = ribbonH()
+    if (!h) return
+    var n = spec.rounds
+    var y = bands().top - h * 0.5
+
+    /**
+     * Its own pill, the same as the question box has.
+     *
+     * The first version drew white marks straight onto the scene. On a pale
+     * beach sky that is invisible, and on a night sky white was the only
+     * thing that worked, so no single colour could serve both. A translucent
+     * pill solves it the way the question box already does: the marks are
+     * always dark on light, whatever is behind them.
+     */
+    /* Big enough to be watched, not so big it competes with the question.
+       A star a child cannot see collected is a star that did not happen. */
+    var mark = Math.min(h * 0.48, 18)
+    var gap = mark * 2.3
+    var barH = h * 0.86
+    /* The run badge needs its own room, or it sits on top of the first star.
+       Counted into the width rather than drawn over the padding, so the pill
+       grows when a run starts instead of the steps shuffling under it. */
+    var badge = streak >= 3 ? barH * 1.35 : 0
+    var inner = gap * n + h * 1.1 + badge  /* steps, the flag, and the run */
+    var barW = Math.min(W * 0.92, inner)
+    var barX = (W - barW) / 2
+
+    ctx.save()
+    ctx.fillStyle = 'rgba(255,253,245,0.82)'
+    roundRect(barX, y - barH / 2, barW, barH, barH / 2)
+    ctx.fill()
+    ctx.strokeStyle = 'rgba(20,36,58,0.10)'
+    ctx.lineWidth = 1.5
+    roundRect(barX, y - barH / 2, barW, barH, barH / 2)
+    ctx.stroke()
+
+    var pad = barH * 0.62
+    var flagW = barH * 0.72
+    var left = barX + pad + badge
+    var span = barW - pad * 2 - flagW - badge
+    var step = span / Math.max(1, n)
+
+    /* The path they are walking, under the marks. */
+    ctx.strokeStyle = 'rgba(20,36,58,0.22)'
+    ctx.lineWidth = Math.max(2, h * 0.08)
+    ctx.lineCap = 'round'
+    ctx.setLineDash([Math.max(2, h * 0.08), Math.max(5, h * 0.2)])
+    ctx.beginPath()
+    ctx.moveTo(left, y)
+    ctx.lineTo(left + span, y)
+    ctx.stroke()
+    ctx.setLineDash([])
+
+    for (var i = 0; i < n; i++) {
+      var x = left + step * (i + 0.5)
+      var got = results[i]
+      if (got === true) {
+        /* A star for a round won. Filled, because a child reads a filled
+           shape as won and an outline as not yet. */
+        drawStar(x, y, mark, '#e0a008')
+      } else if (got === false) {
+        /* A plain dot, not a cross. The ribbon is a map, not a report card:
+           a row of red crosses in front of a child who is already struggling
+           is a reason to stop playing. */
+        ctx.fillStyle = 'rgba(20,36,58,0.3)'
+        ctx.beginPath()
+        ctx.arc(x, y, mark * 0.46, 0, Math.PI * 2)
+        ctx.fill()
+      } else {
+        /* Still to come, and the next one pulses so there is never any doubt
+           about which step is being played now. */
+        var next = i === results.length
+        ctx.strokeStyle = next ? '#e0a008' : 'rgba(20,36,58,0.3)'
+        ctx.lineWidth = Math.max(2, mark * 0.24)
+        var pulse = next ? 1 + Math.sin(now * 0.005) * 0.16 : 1
+        ctx.beginPath()
+        ctx.arc(x, y, mark * 0.52 * pulse, 0, Math.PI * 2)
+        ctx.stroke()
+      }
+    }
+
+    /* The flag, so the end of the row is a destination and not a stop. */
+    var fx = left + span + flagW * 0.2
+    var done = results.length >= n
+    ctx.strokeStyle = 'rgba(20,36,58,0.55)'
+    ctx.lineWidth = Math.max(2, h * 0.07)
+    ctx.beginPath()
+    ctx.moveTo(fx, y - barH * 0.34)
+    ctx.lineTo(fx, y + barH * 0.3)
+    ctx.stroke()
+    ctx.fillStyle = done ? '#e0a008' : 'rgba(20,36,58,0.42)'
+    ctx.beginPath()
+    ctx.moveTo(fx, y - barH * 0.34)
+    ctx.lineTo(fx + flagW * 0.62, y - barH * 0.16)
+    ctx.lineTo(fx, y + barH * 0.02)
+    ctx.closePath()
+    ctx.fill()
+
+    /**
+     * The run, once it is worth saying.
+     *
+     * Two in a row is a coincidence; three is something a child is trying to
+     * keep, and the moment they know they are keeping it is the moment the
+     * game stops being a worksheet.
+     */
+    if (streak >= 3) {
+      ctx.fillStyle = '#c94f14'
+      ctx.font = '800 ' + Math.round(barH * 0.56) + 'px system-ui, sans-serif'
+      ctx.textAlign = 'left'
+      ctx.textBaseline = 'middle'
+      ctx.fillText(streak + 'x', barX + pad * 0.72, y + 1)
+    }
+    ctx.restore()
+  }
+
   function bands() {
     var btnH = Math.max(H * 0.085, 54)
     var btnPad = Math.max(H * 0.02, 10)
@@ -2003,7 +2829,7 @@
      */
     var reserve = needsButton ? btnH + btnPad * 2 : btnPad
     return {
-      top: askH,
+      top: askH + ribbonH(),
       btnH: btnH,
       btnPad: btnPad,
       /* Everything answerable stops here, so nothing lands under the button. */
@@ -2043,7 +2869,7 @@
         var one = set[s]
         pool.push(newItem({
           x: spots[s].x, y: spots[s].y, value: one.one[0].toLowerCase(),
-          shownAs: 'picture', glyph: one.emoji, word: one.one,
+          shownAs: 'picture', glyph: one.emoji, draw: one.draw, word: one.one,
         }))
       }
       want = pool.filter(function (p) { return p.value === target }).length
@@ -2100,7 +2926,7 @@
     for (var p2 = 0; p2 < loose; p2++) {
       pool.push(newItem({
         x: spots3[p2].x, y: spots3[p2].y, value: 1,
-        shownAs: 'picture', glyph: t.emoji, word: t.one,
+        shownAs: 'picture', glyph: t.emoji, draw: t.draw, word: t.one,
       }))
     }
     /* Pre-filled ones are in the basket from the start and cannot be dragged
@@ -2108,7 +2934,7 @@
     for (var f = 0; f < have; f++) {
       var it = newItem({
         x: basket.x - basket.w / 2 + basket.w * (f + 0.5) / Math.max(have, 1),
-        y: basket.y, value: 1, shownAs: 'picture', glyph: t.emoji, parked: true,
+        y: basket.y, value: 1, shownAs: 'picture', glyph: t.emoji, draw: t.draw, parked: true,
       })
       it.inBasket = true
       it.fixed = true
@@ -2143,8 +2969,13 @@
     var n = spec.tiny ? 3 : 4
     /* Falling things start higher, so there is time to look at them before
        they reach the bottom and wrap round again. */
-    var spots = scatter(n, itemSize(), playTop(),
-      spec.motion === 'fall' ? playTop() + (playBottom() - playTop()) * 0.55 : playBottom())
+    /* Falling things start high and rising things start low, so either way
+       there is time to look at one before it leaves the screen. */
+    var spots = spec.motion === 'fall'
+      ? scatter(n, itemSize(), playTop(), playTop() + (playBottom() - playTop()) * 0.55)
+      : spec.motion === 'rise'
+        ? scatter(n, itemSize(), playTop() + (playBottom() - playTop()) * 0.45, playBottom())
+        : scatter(n, itemSize(), playTop(), playBottom())
     var items = [], ask, tell, target
 
     if (subject === 'sequence') {
@@ -2193,7 +3024,7 @@
       for (var l = 0; l < set.length; l++) {
         items.push(newItem({
           x: spots[l].x, y: spots[l].y, value: set[l].one[0].toLowerCase(),
-          shownAs: 'picture', glyph: set[l].emoji, word: set[l].one,
+          shownAs: 'picture', glyph: set[l].emoji, draw: set[l].draw, word: set[l].one,
         }))
       }
       ask = 'Tap the one that starts with ' + target + '.'
@@ -2297,7 +3128,7 @@
       for (var m = 0; m < mix.length; m++) {
         items.push(newItem({
           x: spots4[m].x, y: spots4[m].y, value: mix[m].one[0].toLowerCase(),
-          shownAs: 'picture', glyph: mix[m].emoji, word: mix[m].one,
+          shownAs: 'picture', glyph: mix[m].emoji, draw: mix[m].draw, word: mix[m].one,
         }))
       }
       ask = 'Put each one under the sound it starts with.'
@@ -2417,7 +3248,7 @@
       target = chosen.one[0].toLowerCase()
       var q = newItem({
         x: W / 2, y: playTop() + itemSize() * 1.35, r: itemSize() * 1.25, value: target,
-        shownAs: 'picture', glyph: chosen.emoji, word: chosen.one, parked: true,
+        shownAs: 'picture', glyph: chosen.emoji, draw: chosen.draw, word: chosen.one, parked: true,
       })
       q.fixed = true
       q.question = true
@@ -2520,7 +3351,7 @@
         x: pan.x + pan.w * (0.15 + 0.7 * ((s % 4) / 3)),
         y: pan.y + pan.h * (s < 4 ? 0.35 : 0.7),
         r: itemSize() * 0.78,
-        value: 1, shownAs: 'picture', glyph: t.emoji,
+        value: 1, shownAs: 'picture', glyph: t.emoji, draw: t.draw,
       })
       it.slot = side
       items.push(it)
@@ -2671,7 +3502,7 @@
        again. */
     var pile = newItem({
       x: W / 2, y: playTop() + itemSize() * 1.3, r: itemSize() * 1.15,
-      value: 1, shownAs: 'glyphs', glyph: t.emoji, word: t.many,
+      value: 1, shownAs: 'glyphs', glyph: t.emoji, draw: t.draw, word: t.many,
     })
     pile.fixed = true
 
@@ -2773,27 +3604,80 @@
     if (!quiet) say(round.ask)
   }
 
-  function finish(correct) {
+  /**
+   * The answer is in. Score it, say something about it, and celebrate it.
+   *
+   * `at` is where on screen the child actually answered, so the celebration
+   * comes out of the thing they touched. It used to burst from the middle of
+   * the screen whatever they did, which reads as the game congratulating
+   * itself rather than them.
+   */
+  function finish(correct, at) {
     phase = 'verdict'
     verdictAt = now
     wasRight = correct
     mood = correct ? 'happy' : 'sad'
     if (correct) right++
+    results[roundIndex] = !!correct
+
+    /**
+     * The streak.
+     *
+     * Counted here rather than derived from `results` because it has to
+     * survive being reset: a wrong answer ends a run, and the run that ended
+     * is still worth remembering at the finish.
+     */
+    if (correct) {
+      streak++
+      if (streak > bestStreak) bestStreak = streak
+    } else {
+      streak = 0
+    }
+
     post({ type: 'attempt', correct: !!correct })
     audio.play(correct ? 'right' : 'wrong')
     /* Out of the way of the voice, then back. A spoken question competing with
        even a quiet note is a spoken question a four year old does not catch. */
     audio.duck(true)
     setTimeout(function () { audio.duck(false) }, 2600)
-    say(correct ? pick(['Yes. Well done.', 'That is right.', 'Good.'])
-      : 'Not quite. ' + (round.tell || ''))
+
+    /**
+     * What is said.
+     *
+     * ── Why there is so much of it ─────────────────────────────────────────
+     *
+     * A child who cannot read only has the voice. The game used to say one of
+     * three words and go quiet, and three words on a loop stop meaning
+     * anything by the fourth round. So praise varies, a run gets called out
+     * because that is the thing worth being proud of, and a wrong answer is
+     * always followed by what the answer was, which is the only part that
+     * teaches anything.
+     */
+    if (correct) {
+      var line = pick([
+        'Yes. Well done.', 'That is right.', 'Good one.', 'Lovely.',
+        'You got it.', 'Clever.', 'That is the one.',
+      ])
+      /* A run is the thing to make a noise about, and only when it is new:
+         saying it every round from three onward turns it into wallpaper. */
+      if (streak === 3) line = 'Three in a row. You are on fire.'
+      else if (streak === 5) line = 'Five in a row. Nobody can stop you.'
+      else if (streak > 5 && streak % 3 === 0) line = streak + ' in a row.'
+      say(line)
+    } else {
+      say([pick(['Not quite.', 'Nearly.', 'Almost.']), round.tell || ''])
+    }
 
     if (correct) {
-      for (var i = 0; i < 18; i++) {
+      /* Out of the thing they touched, or the middle if the verb has no one
+         place (Done answers for the whole board). */
+      var ox = at && at.x != null ? at.x : W / 2
+      var oy = at && at.y != null ? at.y : H * 0.5
+      for (var i = 0; i < 22; i++) {
         sparks.push({
-          x: W / 2, y: H * 0.5,
-          vx: (Math.random() - 0.5) * W * 0.9,
-          vy: -Math.random() * H * 0.7,
+          x: ox, y: oy,
+          vx: (Math.random() - 0.5) * W * 0.8,
+          vy: -Math.random() * H * 0.62 - H * 0.1,
           life: 1,
         })
       }
@@ -2925,7 +3809,10 @@
         say('Move some first, then press Done.')
         return
       }
-      finish(!!(round.check && round.check()))
+      /* Done answers for the whole board, so the celebration comes from the
+         basket, which is the thing they were filling. */
+      finish(!!(round.check && round.check()),
+        round.basket ? { x: round.basket.x, y: round.basket.y } : null)
       return
     }
 
@@ -2975,7 +3862,16 @@
       if (!round.needDone) {
         it.pulse = 1
         it[verdict ? 'good' : 'wrong'] = true
-        finish(verdict)
+        /* A balloon bursts whichever answer it was. Popping is the gesture,
+           not the reward: sparing the wrong one turns the animation into a
+           second way of being told off, and the falling notes already said
+           it kindly. */
+        if (it.look === 'balloon') {
+          spawnBurst(it.x, it.y, it.r, it.tint)
+          it.popped = true
+          audio.play('pop')
+        }
+        finish(verdict, { x: it.x, y: it.y })
         return
       }
     }
@@ -3042,7 +3938,9 @@
          */
         if (!was) {
           audio.play('drop')
-          seatInBasket(it, b)
+          /* Every item, not just this one: the group has to re-centre now
+             that it is one bigger. */
+          reseatBasket(b)
         }
       } else {
         it.parked = false
@@ -3326,9 +4224,56 @@
     ctx.restore()
   }
 
-  /** The front of the bowl, and the count, over the items sitting in it. */
+  /**
+   * The near side of the bowl, and the count, over the items sitting in it.
+   *
+   * ── Why there is a front at all ────────────────────────────────────────────
+   *
+   * There used not to be. This drew the rim across the top and nothing else,
+   * so "the front of the basket covers all but the tops" was a comment
+   * describing something that was never drawn. Items sat at the bottom of the
+   * basket in full view and hung out underneath it, and a child who is told
+   * four apples are in the basket while looking at four apples in front of it
+   * has been told something they can see is false.
+   *
+   * So the near side is a real panel, drawn after the items, from
+   * `basketFrontTop` down to the base. The tops show above it. That is the
+   * whole trick, and it is why the seating and this function have to agree on
+   * one line.
+   */
   function drawBasketFront(b, count) {
     var x = b.x - b.w / 2, y = b.y - b.h / 2
+
+    /* The near side. The basket tapers, so the panel has to taper with it or
+       it stands proud of its own sides. */
+    var fy = basketFrontTop(b)
+    var f = (fy - y) / b.h                    /* how far down the taper it starts */
+    var inset = b.w * 0.09
+    ctx.fillStyle = 'rgba(158,104,54,0.99)'
+    ctx.beginPath()
+    ctx.moveTo(x + inset * f, fy)
+    ctx.lineTo(x + b.w - inset * f, fy)
+    ctx.lineTo(x + b.w - inset, y + b.h)
+    ctx.lineTo(x + inset, y + b.h)
+    ctx.closePath()
+    ctx.fill()
+
+    /* The weave, continued onto the near side so it is one basket. */
+    ctx.save()
+    ctx.clip()
+    ctx.globalAlpha = 0.16
+    ctx.fillStyle = '#000'
+    for (var w = 1; w < 4; w++) ctx.fillRect(x + 8, fy + b.h * (w / 5), b.w - 16, 3)
+    ctx.restore()
+
+    /* A soft inner shadow along the top edge, so the fruit reads as being
+       behind the panel rather than cut off by it. */
+    var lip = ctx.createLinearGradient(0, fy, 0, fy + b.h * 0.16)
+    lip.addColorStop(0, 'rgba(60,32,10,0.34)')
+    lip.addColorStop(1, 'rgba(60,32,10,0)')
+    ctx.fillStyle = lip
+    ctx.fillRect(x + inset * f, fy, b.w - inset * f * 2, b.h * 0.16)
+
     ctx.fillStyle = 'rgba(146,94,48,0.97)'
     roundRect(x - b.w * 0.03, y - b.h * 0.07, b.w * 1.06, b.h * 0.2, b.h * 0.1)
     ctx.fill()
@@ -3722,6 +4667,8 @@
       if (spec.character) drawCharacter(spec.character, H * scene().horizon + H * 0.06)
 
       for (var d = 0; d < round.items.length; d++) drawItem(round.items[d])
+      /* Over the items, under the basket front and the question. */
+      if (bursts.length) drawBursts(dt)
 
       if (round.basket) {
         /* A jar that keeps its own count, because in `fill` nothing is dragged
@@ -3734,7 +4681,12 @@
       }
 
       /* The question, until there is no longer a question. */
-      if (phase !== 'over') drawAsk()
+      if (phase !== 'over') {
+        drawAsk()
+        /* Over the question box rather than under it, so the row of steps is
+           never hidden by a question that wrapped to three lines. */
+        drawRibbon()
+      }
       if (phase === 'play') drawDone()
       if (phase === 'over') drawOver()
       if (phase === 'verdict') {
@@ -3852,22 +4804,42 @@
     spec = d.spec
     roundIndex = 0
     right = 0
-    /* A new game after one has finished: the music was stopped at the end of
-       the last set and has to be allowed back. */
-    if (audio.isOn()) audio.startMusic()
-    wait.className = 'gone'
-    fit()
-    /* What this game is, before the first question. A child who cannot read
-       the title has no other way to know what they have just been given, and
-       "let us fill the basket" is the difference between a screen of things
-       and a thing to do. The round is built silently and the two lines are
-       spoken in order. */
-    nextRound(!!spec.intro)
-    if (spec.intro) {
-      var opening = spec.intro
-      say(opening)
-      setTimeout(function () { if (round) say(round.ask) }, 2800)
-    }
+    results = []
+    streak = 0
+    bestStreak = 0
+
+    /**
+     * Fetch the baked objects before anything is laid out.
+     *
+     * Not during. `canPaint` decides whether a group is drawn as pictures or
+     * as glyphs, and it has to give one answer for the whole round: a board
+     * built for glyphs that reflowed into pictures the instant a PNG decoded
+     * would move things under a child's finger in the middle of a drag.
+     *
+     * The wait is capped, so a bad connection costs a moment and then the
+     * painted fallback, never a spinner. `want` resolves either way and the
+     * game starts from the same line in both cases.
+     */
+    sprites.want(thingsIn(spec)).then(function () {
+      if (spec !== d.spec) return   /* another game arrived while we waited */
+
+      /* A new game after one has finished: the music was stopped at the end of
+         the last set and has to be allowed back. */
+      if (audio.isOn()) audio.startMusic()
+      wait.className = 'gone'
+      fit()
+      /* What this game is, before the first question. A child who cannot read
+         the title has no other way to know what they have just been given, and
+         "let us fill the basket" is the difference between a screen of things
+         and a thing to do. The round is built silently and the two lines are
+         spoken in order. */
+      nextRound(!!spec.intro)
+      if (spec.intro) {
+        var opening = spec.intro
+        say(opening)
+        setTimeout(function () { if (round) say(round.ask) }, 2800)
+      }
+    })
   })
 
   fit()

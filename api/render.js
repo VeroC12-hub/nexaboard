@@ -31,6 +31,7 @@
 
 import { submit as localSubmit, poll as localPoll, LOCAL_TAG } from './render-local.js';
 import { submit as freeSubmit, poll as freePoll, FREE_TAG } from './render-free.js';
+import { submit as aiSubmit, poll as aiPoll, OPENAI_TAG } from './render-openai.js';
 
 const FAL = 'https://queue.fal.run';
 
@@ -41,6 +42,10 @@ const FAL = 'https://queue.fal.run';
  *           video, paid per render, needs FAL_KEY.
  *   free    real images from FLUX with no key and no bill, watermarked, and no
  *           video at all. See render-free.js for what it costs instead.
+ *   openai  gpt-image, clean and billed per image. The quality route: use it
+ *           to judge whether generated pictures are good enough, once `free`
+ *           has proved the chain works. Not the cheap one, despite being
+ *           reached for as one. See render-openai.js.
  *   local   a test double that makes no pictures. Offline and instant.
  *
  * Neither of the last two is ever chosen by accident. A deployment quietly
@@ -51,6 +56,7 @@ const FAL = 'https://queue.fal.run';
 const RENDERER = process.env.EDU_RENDERER || 'fal';
 const LOCAL = RENDERER === 'local';
 const FREE = RENDERER === 'free';
+const OPENAI = RENDERER === 'openai';
 
 /** Open weight, commercially usable, and quick enough to wait for. */
 const MODELS = {
@@ -62,11 +68,12 @@ const MODELS = {
 const GIVE_UP_MS = 6 * 60 * 1000;
 
 function configured(res) {
-  if (LOCAL || FREE || process.env.FAL_KEY) return true;
+  if (LOCAL || FREE || OPENAI || process.env.FAL_KEY) return true;
   res.status(501).json({
     error: 'No renderer is configured for this deployment, so lessons have '
       + 'diagrams but no photographs or video. EDU_RENDERER=free gives real '
-      + 'images with no key, FAL_KEY gives images and video, and '
+      + 'images with no key, EDU_RENDERER=openai gives clean images with '
+      + 'OPENAI_API_KEY, FAL_KEY gives images and video, and '
       + 'EDU_RENDERER=local gives placeholders for testing. The diagrams are '
       + 'drawn by the tutor itself and need none of them.',
   });
@@ -159,6 +166,16 @@ export default async function handler(req, res) {
         return;
       }
 
+      if (OPENAI) {
+        /* This route does the work in submit, because the API answers with the
+           image rather than a queue ticket. The shape it returns is the same
+           either way, so nothing downstream knows the difference. */
+        const made = await aiSubmit(kind, prompt);
+        if (made.error) { res.status(501).json({ error: made.error }); return; }
+        res.status(200).json({ ...made, status: 'pending' });
+        return;
+      }
+
       const model = MODELS[kind];
       const made = await fetch(`${FAL}/${model}`, {
         method: 'POST',
@@ -198,6 +215,15 @@ export default async function handler(req, res) {
           return;
         }
         res.status(200).json(await freePoll(id));
+        return;
+      }
+
+      if (id.startsWith(OPENAI_TAG + '|')) {
+        if (!OPENAI) {
+          res.status(400).json({ error: 'That id is from the OpenAI renderer.' });
+          return;
+        }
+        res.status(200).json(await aiPoll(id));
         return;
       }
 

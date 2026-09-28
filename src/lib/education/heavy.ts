@@ -131,8 +131,16 @@ export const GOALS: Goal[] = [
 ]
 
 /** How the things behave. Changes the feel and the difficulty, never the answer. */
-export type Motion = 'still' | 'fall' | 'drift' | 'bob' | 'orbit'
+export type Motion = 'still' | 'fall' | 'drift' | 'bob' | 'orbit' | 'rise'
 
+/**
+ * The motions the grammar may pick at random.
+ *
+ * `rise` is deliberately absent. It exists for things that go up, and almost
+ * nothing does: a mango that floats off the top of the screen is a stranger
+ * sight than one that never moves. A game that wants it asks for it, which is
+ * what `Costume.motion` is for.
+ */
 export const MOTIONS: Motion[] = ['still', 'fall', 'drift', 'bob', 'orbit']
 
 /**
@@ -530,7 +538,9 @@ export function composeSpec({
       title: worn.name,
       goal: worn.goal,
       subject: worn.subject,
-      motion: chosen.motion,
+      /* A costume may insist on a motion, because for some games it is not
+         decoration: balloons go up. Most do not care and take the grammar's. */
+      motion: worn.motion || chosen.motion,
       scene: worn.scene,
       things: worn.things.map(t => ({ emoji: t.emoji, one: t.one, many: t.many, draw: t.draw })),
       max: rangeFor(stage, year, accuracy),
@@ -653,7 +663,7 @@ export interface Setup {
 
 export type FromGame =
   | { nx: 1, type: 'ready' }
-  | { nx: 1, type: 'say', text: string }
+  | { nx: 1, type: 'say', text: string | string[] }
   | { nx: 1, type: 'attempt', correct: boolean }
   | { nx: 1, type: 'done', right: number, rounds: number }
 
@@ -677,11 +687,25 @@ export function fromGame(data: unknown): FromGame | null {
       return { nx: 1, type: 'ready' }
 
     case 'say': {
-      /* Spoken, so flattened to one line and capped. A sentence is all a game
-         ever has to say, and an unbounded string handed to a speech engine is
-         a way to make a phone unresponsive. */
-      if (typeof m.text !== 'string') return null
-      const text = m.text.replace(/\s+/g, ' ').trim().slice(0, 160)
+      /**
+       * Spoken, so capped hard. An unbounded string handed to a speech engine
+       * is a way to make a phone unresponsive, and this crosses a trust
+       * boundary however much we wrote both sides.
+       *
+       * An array is several whole sentences said in turn, which is how a
+       * wrong answer says "Not quite." and then what the answer was. Four is
+       * well past anything a game has to say at once and stops a loop in the
+       * frame turning into a minute of talking a child cannot interrupt.
+       */
+      const tidy = (v: unknown) => typeof v === 'string'
+        ? v.replace(/\s+/g, ' ').trim().slice(0, 160)
+        : ''
+
+      if (Array.isArray(m.text)) {
+        const lines = m.text.slice(0, 4).map(tidy).filter(Boolean)
+        return lines.length ? { nx: 1, type: 'say', text: lines } : null
+      }
+      const text = tidy(m.text)
       return text ? { nx: 1, type: 'say', text } : null
     }
 
@@ -710,3 +734,48 @@ export function fromGame(data: unknown): FromGame | null {
 
 /** The one page that plays any spec. Same origin, then sandboxed into none. */
 export const ENGINE_PATH = '/games/play.html'
+
+/**
+ * The lines a game is likely to say, so their recordings can be fetched early.
+ *
+ * ── Why guess at all ─────────────────────────────────────────────────────────
+ *
+ * The recorded voice lives in files. A file fetched at the moment it is wanted
+ * arrives a beat late, and a beat late on the very first question is a child
+ * already reaching for the apples while the game is still clearing its throat.
+ * Everything here is fetched into the browser cache as the game opens, so by
+ * the time anything is said it is instant.
+ *
+ * ── Why it is allowed to be wrong ────────────────────────────────────────────
+ *
+ * This mirrors the question templates in the engine, and two copies of
+ * anything drift. That is survivable by construction: this list is a cache
+ * hint and nothing else. A line it fails to predict is fetched when it is
+ * needed, one beat late, once. A line it predicts that never gets said cost
+ * one small file nobody heard. Neither is a bug worth coupling the engine to
+ * the app to avoid.
+ */
+export function spokenLines(spec: GameSpec): string[] {
+  const out: string[] = [spec.intro]
+
+  /* Said whatever the game is. */
+  out.push(
+    'Yes. Well done.', 'That is right.', 'Good one.', 'Lovely.',
+    'You got it.', 'Clever.', 'That is the one.',
+    'Not quite.', 'Nearly.', 'Almost.',
+  )
+
+  const top = Math.min(spec.max, 12)
+  for (let n = 1; n <= top; n++) {
+    out.push(`It needed to be ${n}.`, `That was not ${n}.`, `It was ${n}.`)
+    if (spec.goal === 'pop' && spec.subject === 'numeral') out.push(`Tap the number ${n}.`)
+    for (const t of spec.things) {
+      const word = n === 1 ? t.one : t.many
+      if (spec.goal === 'collect') out.push(`Put ${n} ${word} in the basket.`)
+      if (spec.goal === 'pop' && spec.subject === 'count') {
+        out.push(`Tap the group with ${n} ${word}.`)
+      }
+    }
+  }
+  return out
+}
