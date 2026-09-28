@@ -59,30 +59,69 @@ const SIZE = process.env.EDU_OPENAI_IMAGE_SIZE || '1024x1024';
 const QUALITY = process.env.EDU_OPENAI_IMAGE_QUALITY || 'medium';
 
 /**
- * The newest image model on the account, not the oldest.
+ * The image models to try, best first.
  *
- * This was `gpt-image-1`, and that was simply out of date: the same key also
- * exposes `gpt-image-1.5`, `gpt-image-2` and two `gpt-image-2.5` builds. The
- * pictures were being judged, and found wanting, on the weakest model
- * available.
+ * ── Why this is a list and not a setting ──────────────────────────────────
+ *
+ * It was one model, and one model means one thing going wrong takes all the
+ * pictures with it. A model is withdrawn, or is briefly overloaded, and every
+ * lesson on the platform loses its illustrations until somebody notices and
+ * edits an environment variable.
+ *
+ * The writing side already works the other way: Claude, then ChatGPT through
+ * the Codex CLI, and the first with allowance left answers. This is the same
+ * shape for pictures. The exam engine on this machine has done it this way
+ * for months.
+ *
+ * ── Why this order ───────────────────────────────────────────────────────
  *
  * Measured on the same prompt, a hibiscus cut in half for a JHS science
- * lesson:
+ * lesson, all three produced a usable picture:
  *
  *   gpt-image-2.5-flare   32s
  *   gpt-image-1.5         43s
  *   gpt-image-2           69s
  *
- * So the newest is also the fastest by a factor of two, which matters when a
- * lesson asks for three pictures and a learner is waiting for the first.
+ * So the newest is also the fastest, by a factor of two over gpt-image-2,
+ * which matters when a lesson asks for three pictures and a learner is
+ * waiting on the first.
  *
- * `flare` is a codename rather than a plain version, so it may be withdrawn.
- * If this starts failing, `gpt-image-2` is the stable fallback and needs only
- * EDU_OPENAI_IMAGE_MODEL set. `dall-e-3` is deliberately not mentioned as an
- * option: it is no longer on the account at all, having been superseded by
- * this family.
+ * `flare` is a codename rather than a plain version number, so it is the one
+ * most likely to be withdrawn. That is exactly why `gpt-image-2` sits behind
+ * it: it is the stable name and needs no intervention when that happens.
+ *
+ * `dall-e-3` is deliberately absent. It is no longer on the account at all,
+ * having been superseded by this family, so listing it would only add a
+ * failed attempt to every chain.
+ *
+ * EDU_OPENAI_IMAGE_MODEL still wins outright and is comma separated too, so
+ * one model can be pinned for comparing output, or a different order tried
+ * without editing this file.
  */
-const MODEL = process.env.EDU_OPENAI_IMAGE_MODEL || 'gpt-image-2.5-flare';
+const MODELS = process.env.EDU_OPENAI_IMAGE_MODEL
+  ? String(process.env.EDU_OPENAI_IMAGE_MODEL)
+    .split(',').map(name => name.trim()).filter(Boolean)
+  : ['gpt-image-2.5-flare', 'gpt-image-2', 'gpt-image-1.5'];
+
+/**
+ * Whether a failure is worth trying the next model for.
+ *
+ * A withdrawn model, a bad request for that model, or a provider having a bad
+ * minute are all worth moving on from. Authentication and billing are not:
+ * they are facts about the whole account, so every model in the list would
+ * fail the same way and trying them only makes a learner wait three times as
+ * long for the same answer.
+ *
+ * The same distinction `classify` in tools/runner.mjs draws for the writing
+ * engines, for the same reason.
+ */
+function worthAnotherModel(status, body) {
+  if (status === 401 || status === 403) return false;
+  const said = String(body || '').toLowerCase();
+  if (said.includes('insufficient_quota') || said.includes('billing')) return false;
+  if (said.includes('exceeded your current quota')) return false;
+  return true;
+}
 
 /**
  * What must never be in the picture, said in the prompt itself.
@@ -150,7 +189,7 @@ async function store(bytes, name) {
 }
 
 /**
- * Ask for the image.
+ * Ask for the image, from the first model that will make one.
  *
  * The work all happens here, because there is no queue to poll: the request
  * returns the picture. `poll` only decodes the url out of the id.
@@ -167,65 +206,83 @@ export async function submit(kind, prompt) {
     return { error: 'EDU_RENDERER=openai needs OPENAI_API_KEY set.' };
   }
 
-  let res;
-  try {
-    res = await fetch(ENDPOINT, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${key}`,
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        prompt: `${prompt}
+  const tried = [];
+
+  for (const model of MODELS) {
+    let res;
+    try {
+      res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${key}`,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          model,
+          prompt: `${prompt}
 
 ${NEVER}`,
-        size: SIZE,
-        quality: QUALITY,
-        n: 1,
-      }),
-    });
-  } catch (err) {
-    return { error: 'Could not reach OpenAI.' };
-  }
-
-  if (!res.ok) {
-    /* The status matters to whoever is configuring this, and the body may
-       carry a billing message that is the actual answer. Neither is shown to a
-       learner: `render.js` decides what reaches the page. */
-    let detail = '';
-    try { detail = (await res.text()).slice(0, 300); } catch (e) { /* ignore */ }
-    return { error: `OpenAI images ${res.status}: ${detail}` };
-  }
-
-  let body;
-  try { body = await res.json(); } catch (err) {
-    return { error: 'OpenAI returned something that was not JSON.' };
-  }
-
-  const first = body && body.data && body.data[0];
-  if (!first) return { error: 'OpenAI returned no image.' };
-
-  /* A url when the model gives one, otherwise the base64 is uploaded and its
-     url used instead. Either way what travels onward is a url. */
-  let url = typeof first.url === 'string' ? first.url : '';
-
-  if (!url && typeof first.b64_json === 'string') {
-    const bytes = Buffer.from(first.b64_json, 'base64');
-    const name = `img-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}.png`;
-    url = (await store(bytes, name)) || '';
-    if (!url) {
-      /* Storage is not configured on this deployment. The data uri still
-         works and is still enormous, so it is used rather than losing a
-         picture that has already been paid for, and the size is the reason
-         `store` exists. */
-      url = `data:image/png;base64,${first.b64_json}`;
+          size: SIZE,
+          quality: QUALITY,
+          n: 1,
+        }),
+      });
+    } catch (err) {
+      tried.push(`${model}: could not reach OpenAI`);
+      continue;
     }
+
+    if (!res.ok) {
+      /* The body may carry a billing message that is the actual answer, and it
+         decides whether the next model is worth trying. It is logged and not
+         returned: `render.js` decides what reaches a learner. */
+      let detail = '';
+      try { detail = (await res.text()).slice(0, 300); } catch (e) { /* ignore */ }
+      tried.push(`${model}: ${res.status}`);
+      console.error('openai images', model, res.status, detail);
+
+      if (!worthAnotherModel(res.status, detail)) {
+        return { error: `OpenAI images ${res.status}: ${detail}` };
+      }
+      continue;
+    }
+
+    let body;
+    try { body = await res.json(); } catch (err) {
+      tried.push(`${model}: reply was not JSON`);
+      continue;
+    }
+
+    const first = body && body.data && body.data[0];
+    if (!first) { tried.push(`${model}: no image`); continue; }
+
+    /* A url when the model gives one, otherwise the base64 is uploaded and its
+       url used instead. Either way what travels onward is a url. */
+    let url = typeof first.url === 'string' ? first.url : '';
+
+    if (!url && typeof first.b64_json === 'string') {
+      const bytes = Buffer.from(first.b64_json, 'base64');
+      const name = `img-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}.png`;
+      url = (await store(bytes, name)) || '';
+      if (!url) {
+        /* Storage is not configured on this deployment. The data uri still
+           works and is still enormous, so it is used rather than losing a
+           picture that has already been paid for, and the size is the reason
+           `store` exists. */
+        url = `data:image/png;base64,${first.b64_json}`;
+      }
+    }
+
+    if (!url) { tried.push(`${model}: no image`); continue; }
+
+    if (tried.length) console.log('openai images: fell back to ' + model);
+    return {
+      id: `${OPENAI_TAG}|${Buffer.from(url, 'utf8').toString('base64url')}`,
+      madeBy: `${model}, ${QUALITY} quality`,
+    };
   }
 
-  if (!url) return { error: 'OpenAI returned no image.' };
-
-  return { id: `${OPENAI_TAG}|${Buffer.from(url, 'utf8').toString('base64url')}` };
+  return { error: 'No OpenAI image model could answer. ' + tried.join('; ') };
 }
 
 export async function poll(id) {
@@ -235,5 +292,7 @@ export async function poll(id) {
   }
   const url = Buffer.from(parts.slice(1).join('|'), 'base64url').toString('utf8');
   if (!url) return { status: 'error', error: 'That render id carries no picture.' };
-  return { status: 'done', url, madeBy: `${MODEL}, ${QUALITY} quality` };
+  /* Which model made it is reported by `submit`, which is the only place
+     that knows: the id carries the url and nothing else. */
+  return { status: 'done', url, madeBy: `OpenAI, ${QUALITY} quality` };
 }

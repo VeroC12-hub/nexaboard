@@ -36,27 +36,59 @@ import { submit as aiSubmit, poll as aiPoll, OPENAI_TAG } from './render-openai.
 const FAL = 'https://queue.fal.run';
 
 /**
- * Which renderer answers. Set EDU_RENDERER.
+ * Which renderers answer, in order. Set EDU_RENDERER.
  *
- *   fal     the default. Open weight models on somebody else's GPU, images and
- *           video, paid per render, needs FAL_KEY.
- *   free    real images from FLUX with no key and no bill, watermarked, and no
- *           video at all. See render-free.js for what it costs instead.
- *   openai  gpt-image, clean and billed per image. The quality route: use it
- *           to judge whether generated pictures are good enough, once `free`
- *           has proved the chain works. Not the cheap one, despite being
- *           reached for as one. See render-openai.js.
+ *   fal     open weight models on somebody else's GPU, images and video,
+ *           paid per render, needs FAL_KEY.
+ *   openai  gpt-image, clean and billed per image, on its own list of models.
+ *           See render-openai.js.
+ *   free    real images from FLUX with no key and no bill, watermarked, and
+ *           no video at all. See render-free.js for what it costs instead.
  *   local   a test double that makes no pictures. Offline and instant.
  *
- * Neither of the last two is ever chosen by accident. A deployment quietly
- * serving placeholders to real learners, or quietly sending their lesson
- * prompts to an unaccountable free service, would both be worse than one that
- * served nothing and said so.
+ * ── Why this is an order and not a choice ─────────────────────────────────
+ *
+ * It used to be exactly one, and one means a learner gets nothing the moment
+ * that one has a bad minute. Writing has not worked that way for a while:
+ * Claude, then ChatGPT through the Codex CLI, and the first with allowance
+ * left answers. Pictures now have the same shape at both levels, the models
+ * inside `render-openai.js` and the providers here.
+ *
+ * Comma separated, best first:
+ *
+ *   EDU_RENDERER=openai,free    the sensible one. Good pictures, and a
+ *                               watermarked picture rather than none when
+ *                               the account is out or the API is down.
+ *   EDU_RENDERER=openai         no fallback, for judging quality honestly.
+ *   EDU_RENDERER=fal            when FAL_KEY exists and video is wanted.
+ *
+ * A single value still works and still means exactly that one, so nothing
+ * that was configured before behaves differently today.
+ *
+ * ── What is NOT in the chain ──────────────────────────────────────────────
+ *
+ * `local` is never reached by fallback, only by being asked for on its own. A
+ * deployment quietly serving placeholders to real learners would be worse
+ * than one that served nothing and said so, and a chain ending in `local`
+ * would do exactly that, silently.
+ *
+ * Polling needs no chain at all: every id carries its provider's tag, so
+ * whichever one answered, the GET below finds it.
  */
-const RENDERER = process.env.EDU_RENDERER || 'fal';
-const LOCAL = RENDERER === 'local';
-const FREE = RENDERER === 'free';
-const OPENAI = RENDERER === 'openai';
+const RENDERERS = String(process.env.EDU_RENDERER || 'fal')
+  .split(',')
+  .map(name => name.trim().toLowerCase())
+  .filter(Boolean);
+
+/** Whether a provider is named anywhere in the chain. */
+const uses = (name) => RENDERERS.includes(name);
+
+const LOCAL = RENDERERS[0] === 'local';
+const FREE = uses('free');
+const OPENAI = uses('openai');
+
+/** Tried in order, minus the ones that cannot be reached by fallback. */
+const CHAIN = RENDERERS.filter(name => name !== 'local' || LOCAL);
 
 /** Open weight, commercially usable, and quick enough to wait for. */
 const MODELS = {
@@ -151,49 +183,66 @@ export default async function handler(req, res) {
         return;
       }
 
-      /* The other two renderers answer here, in the same shape, so everything
-         after this point is the same code on every route. */
-      if (LOCAL) {
-        res.status(200).json({ ...localSubmit(kind, prompt), status: 'pending' });
-        return;
-      }
-      if (FREE) {
-        const made = freeSubmit(kind, prompt);
-        /* No free video exists, so a clip is refused rather than silently
-           turned into a still, which would be a lie about what was asked for. */
-        if (made.error) { res.status(501).json({ error: made.error }); return; }
-        res.status(200).json({ ...made, status: 'pending' });
-        return;
+      /* Each provider in turn, until one makes a picture.
+ 
+         Every one of them answers in the same shape, an id plus a pending
+         status, and every id carries its own provider's tag, so the GET below
+         finds whichever one won without being told. That is what makes a chain
+         possible here at all.
+ 
+         A clip is a special case worth knowing about: only fal makes video, so
+         a chain of openai then free will refuse one twice and say so, rather
+         than quietly returning a still. Answering a request for a clip with a
+         photograph would be a lie about what was asked for. */
+      const attempt = async (name) => {
+        if (name === 'local') return { ...localSubmit(kind, prompt) };
+        if (name === 'free') return freeSubmit(kind, prompt);
+        if (name === 'openai') return await aiSubmit(kind, prompt);
+        if (name === 'fal') {
+          if (!process.env.FAL_KEY) return { error: 'fal needs FAL_KEY.' };
+          const model = MODELS[kind];
+          let made;
+          try {
+            made = await fetch(`${FAL}/${model}`, {
+              method: 'POST',
+              headers: auth(),
+              body: JSON.stringify(argsFor(kind, prompt)),
+            });
+          } catch (err) {
+            return { error: 'Could not reach fal.' };
+          }
+          const said = await made.json().catch(() => null);
+          if (!made.ok || !said || !said.request_id) {
+            return {
+              error: 'fal refused that: '
+                + ((said && (said.detail || said.error)) || made.status),
+            };
+          }
+          /* The model id travels back in the id, because polling needs it and
+             the browser should not have to remember which model made what. */
+          return { id: `${model}|${said.request_id}` };
+        }
+        return { error: `Unknown renderer "${name}".` };
+      };
+
+      const refused = [];
+      for (const name of CHAIN) {
+        const made = await attempt(name);
+        if (made.id) {
+          if (refused.length) console.log('render: fell back to ' + name);
+          res.status(200).json({ ...made, status: 'pending' });
+          return;
+        }
+        refused.push(`${name}: ${made.error || 'no picture'}`);
+        console.error('render', name, made.error || 'no picture');
       }
 
-      if (OPENAI) {
-        /* This route does the work in submit, because the API answers with the
-           image rather than a queue ticket. The shape it returns is the same
-           either way, so nothing downstream knows the difference. */
-        const made = await aiSubmit(kind, prompt);
-        if (made.error) { res.status(501).json({ error: made.error }); return; }
-        res.status(200).json({ ...made, status: 'pending' });
-        return;
-      }
-
-      const model = MODELS[kind];
-      const made = await fetch(`${FAL}/${model}`, {
-        method: 'POST',
-        headers: auth(),
-        body: JSON.stringify(argsFor(kind, prompt)),
+      /* Nothing in the chain could answer. 501 rather than 502 because the
+         commonest cause by far is configuration, and the message says which
+         providers were tried so that is diagnosable from the response alone. */
+      res.status(501).json({
+        error: 'No renderer could make that. ' + refused.join('; '),
       });
-      const said = await made.json().catch(() => null);
-      if (!made.ok || !said || !said.request_id) {
-        res.status(502).json({
-          error: 'The renderer refused that: '
-            + ((said && (said.detail || said.error)) || made.status),
-        });
-        return;
-      }
-
-      /* The model id travels back in the id, because polling needs it and the
-         browser should not have to remember which model made what. */
-      res.status(200).json({ id: `${model}|${said.request_id}`, status: 'pending' });
       return;
     }
 
