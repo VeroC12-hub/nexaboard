@@ -332,18 +332,58 @@ export async function createAccount(input: SignUp): Promise<Created> {
     }
     if (!res.ok) {
       const said = await res.json().catch(() => ({})) as { error?: string }
+
+      /* Which of the endpoint's messages a learner may see.
+
+         This was `said.error ?? fallback`, and the fallback therefore never
+         ran: the endpoint always sends an `error`, so its message always won.
+         A person trying to sign up on the deployment was shown
+
+           "Accounts are not configured on this deployment.
+            SUPABASE_URL and SUPABASE_SERVICE_KEY must be set."
+
+         which is written for whoever is configuring the site, names internal
+         variables to anybody who asks, and tells the learner nothing they can
+         act on.
+
+         The endpoint's 400, 409 and 429 messages are the opposite: they were
+         written for the learner and are better than anything this file could
+         invent, because only the endpoint knows whether it was the name, the
+         password or the rate limit. So those are passed through and the
+         configuration ones are replaced. */
+      const mine = res.status === 400 || res.status === 409 || res.status === 429
+      if (!mine) console.error('signup', res.status, said.error)
+
       throw new SignUpError(
-        said.error
-        ?? (res.status === 501
-          ? 'Accounts are not set up on this deployment yet.'
-          : 'That account could not be created. Try again.'),
+        (mine && said.error)
+          ? said.error
+          : res.status === 501
+            ? 'Creating an account is not switched on for this site yet. '
+              + 'Nothing you typed was wrong.'
+            : 'That account could not be created just now. Please try again.',
       )
     }
   }
 
   const { data, error } = input.kind === 'learner'
     ? await supabase.auth.signInWithPassword({ email: address, password: input.password })
-    : await supabase.auth.signUp({ email: address, password: input.password })
+    : await supabase.auth.signUp({
+      email: address,
+      password: input.password,
+      /* Carried on the auth user so the account row can be rebuilt later.
+      
+         A parent on a project with confirmations on gets no session here, so
+         the `edu_account` insert below never runs: the throw happens first.
+         Without this metadata there would be nothing left anywhere saying who
+         they are, and `pull` could not heal it after they confirm. */
+      options: {
+        data: {
+          kind: input.kind,
+          name: input.name.trim(),
+          handle,
+        },
+      },
+    })
   if (error) throw new SignUpError(friendly(error.message, input.kind))
 
   const user = data.user
@@ -517,12 +557,89 @@ const asProfile = (r: LearnerRow): LearnerProfile => ({
  * signing in on a borrowed phone gets their own work, because it was never on
  * the first phone in the first place.
  */
+/**
+ * Build the missing account row for a user who is already signed in.
+ *
+ * Only reachable when Supabase Auth has a confirmed user and this product has
+ * no row for them, which happens for exactly one reason: `createAccount` could
+ * not insert the row because email confirmation meant there was no session
+ * yet. See the note in `pull`.
+ *
+ * Everything needed comes from the auth user, which is why `createAccount`
+ * puts `kind`, `name` and `handle` into its metadata. The email comes from
+ * auth itself.
+ *
+ * Returns null rather than guessing when the metadata is not there. A row
+ * invented from nothing would be worse than a failed sign in: it would claim
+ * a kind, and the kind decides whether somebody sees a learner's lesson page
+ * or a school's register.
+ */
+async function heal(userId: string): Promise<Account | null> {
+  const { data: got } = await supabase.auth.getUser()
+  const user = got?.user
+  if (!user || user.id !== userId) return null
+
+  const meta = (user.user_metadata ?? {}) as Record<string, unknown>
+  const kind = meta.kind === 'parent' || meta.kind === 'school' || meta.kind === 'learner'
+    ? meta.kind
+    : null
+  const name = typeof meta.name === 'string' ? meta.name.trim() : ''
+  const handle = typeof meta.handle === 'string' ? meta.handle.trim() : ''
+  if (!kind || !name || !handle) return null
+
+  const isLearner = kind === 'learner'
+  const email = isLearner ? null : (user.email ?? null)
+
+  const { error } = await supabase.from('edu_account').insert({
+    id: userId,
+    kind,
+    name,
+    handle,
+    email,
+    classes: [],
+    teachers: [],
+  })
+  /* A duplicate here means another tab healed it first, which is a success. */
+  if (error && !/duplicate|already exists/i.test(error.message)) return null
+
+  const account: Account = {
+    id: userId,
+    kind,
+    name,
+    email: email ?? undefined,
+    handle,
+    createdAt: user.created_at ?? new Date().toISOString(),
+    learnerIds: [],
+    ...(kind === 'school' ? { classes: [], teachers: [] } : {}),
+  }
+  write(ACCOUNTS, [...allAccounts().filter(a => a.id !== userId), account])
+  return account
+}
+
 async function pull(userId: string): Promise<Account | null> {
   const { data: row, error } = await supabase
     .from('edu_account')
     .select('id,kind,name,handle,email,classes,teachers,created_at')
     .eq('id', userId)
     .maybeSingle()
+
+  /* No row, but a real signed-in user. Build it from what the auth user
+     carries, rather than refusing the sign in.
+  
+     ── The dead end this removes ─────────────────────────────────────────────
+  
+     A parent signing up on a project with email confirmation on gets no
+     session from `signUp`, so `createAccount` throws "check your email"
+     BEFORE it can insert the account row. They then confirm the address, sign
+     in correctly, and this function found nothing, so `signIn` told them
+     their name and password did not match an account. They could not register
+     again either, because the auth user already existed.
+  
+     So a parent who did everything right was permanently locked out, and told
+     it was their password. This heals that on the first successful sign in,
+     which is the first moment there is a session for the row's policy to
+     check `auth.uid()` against. */
+  if (!error && !row) return await heal(userId)
   if (error || !row) return null
 
   /* Learners this account holds, plus the learner they are themselves. Both
