@@ -236,8 +236,14 @@ export default function CreateProfile({
                 </Field>
               )}
 
+              {/* The hint says eight because eight is what is enforced.
+                  It said six, while `passwordProblem` and `/api/signup` both
+                  required eight, so somebody who did exactly what the form
+                  told them was refused by a message contradicting the label
+                  they had just read. A hint that disagrees with the rule is
+                  worse than no hint at all. */}
               {!onlyLearner && (
-                <Field label="Password" hint="six characters or more">
+                <Field label="Password" hint="eight characters or more, with letters">
                   <input className="ne-in" type="password" value={password}
                     placeholder="Choose a password"
                     onChange={e => setPassword(e.target.value)} />
