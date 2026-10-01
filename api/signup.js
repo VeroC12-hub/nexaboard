@@ -168,10 +168,11 @@ export default async function handler(req, res) {
   }
 
   const body = typeof req.body === 'string' ? safeJson(req.body) : (req.body || {});
-  const rawName = body.name;
+  const rawName = String(body.name || '').trim();
   const password = String(body.password || '');
+  const kind = body.kind === 'parent' || body.kind === 'school' ? body.kind : 'learner';
 
-  if (!NAME_OK.test(String(rawName || '').trim())) {
+  if (!NAME_OK.test(rawName)) {
     return res.status(400).json({
       error: 'That name cannot be used. Use letters and numbers, at least two characters.',
     });
@@ -190,18 +191,63 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Use letters as well as numbers.' });
   }
 
-  const handle = normalise(rawName);
-  if (!handle) {
-    return res.status(400).json({ error: 'That name cannot be used.' });
-  }
-  /* An @ would mean the normalised handle could build an address that is not
-     on the learner domain. Refused rather than escaped, because a name with an
-     @ in it is not a name. */
-  if (handle.includes('@')) {
-    return res.status(400).json({ error: 'A name cannot contain an @ sign.' });
-  }
+  /* ── which address this account gets ──────────────────────────────────────
+  
+     A learner has no email, so one is derived from their name on a domain
+     nothing can deliver to. A parent or a school has a real address and uses
+     it.
+  
+     Parents and schools are created here, pre-confirmed, rather than through
+     `supabase.auth.signUp`, and that is a change made because the ordinary
+     path does not work on this project at all. Supabase is configured to send
+     a confirmation email through SMTP that belongs to another product sharing
+     the database, and that send fails for every address, verified Gmail
+     included:
+  
+       "Error sending confirmation email"
+  
+     So no parent or school could register, at all. The project wide
+     confirmation switch was deliberately left alone, because turning it off
+     would remove sign up verification from the other product's real users to
+     solve a problem only this one has. Creating our own users pre-confirmed
+     touches nothing they depend on.
+  
+     ── What this costs, and it is a real cost ──────────────────────────────
+  
+     An email address is no longer proved to belong to whoever typed it. Two
+     consequences: somebody can register on an address they do not own, and
+     there is no verified address to send a password reset to later. Email
+     verification is owed work, recorded in NEXAEDU_OPEN_ISSUES.md, and the
+     place for it is a link sent AFTER the account exists rather than a gate
+     before it. */
+  let email;
+  let handle;
 
-  const email = addressFor(handle);
+  if (kind === 'learner') {
+    handle = normalise(rawName);
+    if (!handle) {
+      return res.status(400).json({ error: 'That name cannot be used.' });
+    }
+    /* An @ would mean the normalised handle could build an address that is not
+       on the learner domain. Refused rather than escaped, because a name with
+       an @ in it is not a name. */
+    if (handle.includes('@')) {
+      return res.status(400).json({ error: 'A name cannot contain an @ sign.' });
+    }
+    email = addressFor(handle);
+  } else {
+    const typed = String(body.email || '').trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(typed) || typed.length > 160) {
+      return res.status(400).json({ error: 'That does not look like an email address.' });
+    }
+    /* The learner domain is reserved: a parent registering there would collide
+       with a learner's derived address. */
+    if (typed.endsWith(LEARNER_DOMAIN)) {
+      return res.status(400).json({ error: 'That domain cannot be used.' });
+    }
+    email = typed;
+    handle = typed;
+  }
 
   let made;
   try {
@@ -218,7 +264,7 @@ export default async function handler(req, res) {
         /* The whole reason this endpoint exists: the account is usable at once
            and no message is ever sent to a domain that cannot receive one. */
         email_confirm: true,
-        user_metadata: { kind: 'learner', handle },
+        user_metadata: { kind, name: rawName, handle },
       }),
     });
   } catch (err) {

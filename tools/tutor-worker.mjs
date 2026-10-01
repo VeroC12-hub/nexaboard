@@ -32,7 +32,16 @@ import { uploadRender, uploadBlocked } from './upload.mjs';
 import { speak, narrationProvider } from './tts.mjs';
 import { readStoryboard } from '../src/lib/education/storyboard.ts';
 
-const SITE = process.env.EDU_SITE || 'https://nexaboard.vercel.app';
+/* The deployed site, when EDU_SITE does not say otherwise.
+ 
+   `nexaboard.vercel.app` was the default and is NOT this product: that
+   hostname belongs to somebody else. A worker falling back to it would poll a
+   stranger's site for jobs for ever, which looks exactly like "no learners are
+   asking" and is the least diagnosable failure this file could have.
+ 
+   The public deployment is nexaboard-ten.vercel.app. Set EDU_SITE to point a
+   worker at a local dev server instead. */
+const SITE = process.env.EDU_SITE || 'https://nexaboard-ten.vercel.app';
 const SECRET = process.env.EDU_WORKER_SECRET || '';
 const MODEL = process.env.EDU_WORKER_MODEL || 'sonnet';
 

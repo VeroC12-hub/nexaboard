@@ -268,6 +268,7 @@ export interface Created { account: Account; session: Session }
 /** Thrown with a sentence meant to be shown to whoever is holding the phone. */
 export class SignUpError extends Error {}
 
+
 function friendly(message: string, kind: AccountKind): string {
   const m = message.toLowerCase()
   if (m.includes('already registered') || m.includes('already been registered')) {
@@ -290,110 +291,105 @@ function friendly(message: string, kind: AccountKind): string {
   return message
 }
 
-/**
- * Whether this account still has to prove it owns its email address.
- *
- * True only for a parent or a school on a project with confirmations on, which
- * is the state today. Their account exists and cannot be signed in to until
- * they follow the link. A learner is never in this state.
- */
-export interface NeedsEmail { needsEmail: true; address: string }
-
 export async function createAccount(input: SignUp): Promise<Created> {
   const handle = input.kind === 'learner' ? normalise(input.name) : normaliseEmail(input.email)
   const address = addressFor(input.kind, handle)
 
-  /* ── learners ──────────────────────────────────────────────────────────────
-     Created through `/api/signup`, not through `supabase.auth.signUp`, and the
-     reason is not convenience.
-
-     This project has email confirmation switched on and real SMTP behind it,
-     because it also carries another product's live authentication. An ordinary
-     sign up therefore tries to email `learners.nexaedu.gh`, which is a domain
-     nothing owns, Resend refuses the delivery, and the request fails outright
-     with a 500. Turning confirmations off would fix it for learners by
-     weakening sign up verification for every real user on the project, so the
-     endpoint creates the learner pre-confirmed instead and the shared setting
-     is left alone. The endpoint never returns a session, which is why the
-     ordinary sign in below still has to happen. */
-  if (input.kind === 'learner') {
-    let res: Response
-    try {
-      res = await fetch('/api/signup', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ name: input.name, password: input.password }),
-      })
-    } catch {
-      throw new SignUpError(
-        'No connection. Creating an account needs the internet once, after '
-        + 'which the app works offline.',
-      )
-    }
-    if (!res.ok) {
-      const said = await res.json().catch(() => ({})) as { error?: string }
-
-      /* Which of the endpoint's messages a learner may see.
-
-         This was `said.error ?? fallback`, and the fallback therefore never
-         ran: the endpoint always sends an `error`, so its message always won.
-         A person trying to sign up on the deployment was shown
-
-           "Accounts are not configured on this deployment.
-            SUPABASE_URL and SUPABASE_SERVICE_KEY must be set."
-
-         which is written for whoever is configuring the site, names internal
-         variables to anybody who asks, and tells the learner nothing they can
-         act on.
-
-         The endpoint's 400, 409 and 429 messages are the opposite: they were
-         written for the learner and are better than anything this file could
-         invent, because only the endpoint knows whether it was the name, the
-         password or the rate limit. So those are passed through and the
-         configuration ones are replaced. */
-      const mine = res.status === 400 || res.status === 409 || res.status === 429
-      if (!mine) console.error('signup', res.status, said.error)
-
-      throw new SignUpError(
-        (mine && said.error)
-          ? said.error
-          : res.status === 501
-            ? 'Creating an account is not switched on for this site yet. '
-              + 'Nothing you typed was wrong.'
-            : 'That account could not be created just now. Please try again.',
-      )
-    }
+  /* ── every kind goes through /api/signup ─────────────────────────────────
+  
+     There is no email confirmation step in this product. Signing up signs you
+     in, for a learner, a parent and a school alike.
+  
+     That is a decision rather than an omission. Supabase on this project is
+     configured to send a confirmation email through SMTP belonging to another
+     product that shares the database, and that send fails for every address,
+     a verified Gmail included:
+  
+       "Error sending confirmation email"
+  
+     So the ordinary `supabase.auth.signUp` path registered nobody at all. The
+     project wide confirmation switch was deliberately left alone, because
+     turning it off would remove sign up verification from the other product's
+     real users to solve a problem only this one has. Creating our own users
+     pre-confirmed through the endpoint touches nothing they rely on.
+  
+     ── What is owed ───────────────────────────────────────────────────────
+  
+     An email address is no longer proved to belong to whoever typed it, so
+     there is no verified address to send a password reset to. Verification is
+     owed work and belongs AFTER the account exists, as a link that marks it
+     verified, never as a gate in front of a parent trying to register.
+     Recorded in NEXAEDU_OPEN_ISSUES.md. */
+  let res: Response
+  try {
+    res = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        kind: input.kind,
+        name: input.name,
+        password: input.password,
+        ...(input.kind === 'learner' ? {} : { email: input.email }),
+      }),
+    })
+  } catch {
+    throw new SignUpError(
+      'No connection. Creating an account needs the internet once, after '
+      + 'which the app works offline.',
+    )
   }
 
-  const { data, error } = input.kind === 'learner'
-    ? await supabase.auth.signInWithPassword({ email: address, password: input.password })
-    : await supabase.auth.signUp({
-      email: address,
-      password: input.password,
-      /* Carried on the auth user so the account row can be rebuilt later.
-      
-         A parent on a project with confirmations on gets no session here, so
-         the `edu_account` insert below never runs: the throw happens first.
-         Without this metadata there would be nothing left anywhere saying who
-         they are, and `pull` could not heal it after they confirm. */
-      options: {
-        data: {
-          kind: input.kind,
-          name: input.name.trim(),
-          handle,
-        },
-      },
-    })
+  if (!res.ok) {
+    const said = await res.json().catch(() => ({})) as { error?: string }
+
+    /* Which of the endpoint's messages a learner may see.
+    
+       This was `said.error ?? fallback`, and the fallback therefore never ran:
+       the endpoint always sends an `error`, so its message always won. A person
+       trying to sign up was shown
+    
+         "Accounts are not configured on this deployment.
+          SUPABASE_URL and SUPABASE_SERVICE_KEY must be set."
+    
+       which is written for whoever is configuring the site, names internal
+       variables to anybody who asks, and tells the learner nothing they can
+       act on.
+    
+       The endpoint's 400, 409 and 429 messages are the opposite: written for
+       the person reading them, and better than anything this file could
+       invent, because only the endpoint knows whether it was the name, the
+       email, the password or the rate limit. Those are passed through and the
+       configuration ones replaced. */
+    const mine = res.status === 400 || res.status === 409 || res.status === 429
+    if (!mine) console.error('signup', res.status, said.error)
+
+    throw new SignUpError(
+      (mine && said.error)
+        ? said.error
+        : res.status === 501
+          ? 'Creating an account is not switched on for this site yet. '
+            + 'Nothing you typed was wrong.'
+          : 'That account could not be created just now. Please try again.',
+    )
+  }
+
+  /* Straight in. The endpoint created the user already confirmed, so this is
+     an ordinary sign in and there is nothing to wait for. */
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: address,
+    password: input.password,
+  })
   if (error) throw new SignUpError(friendly(error.message, input.kind))
 
   const user = data.user
   if (!user || !data.session) {
-    /* A parent or school on a project with confirmations on. The account was
-       made and there is no session until they follow the link in their email.
-       This is the normal path rather than a fault, so it says what to do. */
+    /* Unreachable while the endpoint creates users confirmed. If it is ever
+       reached, something upstream has started requiring confirmation again,
+       and that is a configuration fault rather than anything the person
+       typed, so it does not tell them to go and check an inbox. */
+    console.error('signup: signed up but no session for', input.kind)
     throw new SignUpError(
-      `Almost done. Check ${address} for a message from us and follow the link, `
-      + 'then sign in. The account is not usable until you do.',
+      'The account was created but could not be opened. Try signing in.',
     )
   }
 
