@@ -29,7 +29,7 @@ import {
   type Choice, type LearnerProfile, type Stage,
 } from '../lib/education/learner'
 import {
-  createAccount, emailProblem, handleTaken, passwordProblem,
+  createAccount, emailProblem, handleTaken, passwordProblem, SignUpError,
   type AccountKind, type Created,
 } from '../lib/education/accounts'
 
@@ -170,8 +170,31 @@ export default function CreateProfile({
           })
         : await createAccount({ kind, name: name.trim(), email: email.trim(), password })
       onCreated(created)
-    } catch {
-      setProblem('Could not save the profile on this device. Check that storage is not full or blocked.')
+    } catch (err) {
+      /* Say what actually went wrong.
+      
+         This used to be a bare `catch` that threw the error away and always
+         reported "Could not save the profile on this device. Check that
+         storage is not full or blocked."
+      
+         That was true once: `createAccount` only wrote to localStorage, so a
+         failure really was a storage failure. It now creates a user in
+         Supabase Auth and calls /api/signup, and the handler was never
+         updated, so every possible failure was reported as a storage problem.
+         A person told their disk was full when the real answer was "that name
+         is already taken" has no way to get past it, and nor does anybody
+         helping them.
+      
+         `SignUpError` exists precisely because its message is written for the
+         person reading it, so it is shown as-is. Anything else is a fault
+         nobody typed their way into, so it gets a plain sentence and the
+         detail goes to the console for whoever is debugging. */
+      if (err instanceof SignUpError && err.message.trim()) {
+        setProblem(err.message)
+      } else {
+        console.error('createAccount', err)
+        setProblem('Could not create the profile just now. Please try again.')
+      }
     } finally {
       setBusy(false)
     }

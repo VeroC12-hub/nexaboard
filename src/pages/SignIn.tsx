@@ -29,10 +29,21 @@ export default function SignIn({ onSignedIn, onCreate, onBack }: {
     setWhy(null)
     if (!handle.trim() || !password) return
     setBusy(true)
-    const r = await signIn(handle, password)
-    setBusy(false)
-    if (r.ok) onSignedIn({ account: r.account, session: r.session })
-    else setWhy(r.why)
+    try {
+      const r = await signIn(handle, password)
+      if (r.ok) onSignedIn({ account: r.account, session: r.session })
+      else setWhy(r.why)
+    } catch (err) {
+      /* `signIn` reports its expected failures by returning `{ ok: false }`,
+         so reaching here means something unforeseen. Without this the throw
+         escaped, `setBusy(false)` never ran, and the button stayed disabled
+         for ever with nothing on screen: the one failure a person cannot even
+         retry their way out of. */
+      console.error('signIn', err)
+      setWhy('Could not sign in just now. Please try again.')
+    } finally {
+      setBusy(false)
+    }
   }
 
   return (
