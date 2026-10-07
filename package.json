@@ -13,7 +13,8 @@
     "video:render": "remotion render video/index.ts Lesson",
     "voice:bake": "tsx --env-file=.env tools/bake-voice.mts",
     "voice:audition": "tsx --env-file=.env tools/audition-voice.mts",
-    "tutor:prod": "tsx --env-file=.env tools/tutor-prod.mjs"
+    "tutor:prod": "tsx --env-file=.env tools/tutor-prod.mjs",
+    "plan:check": "tsx scripts/plan-check.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.126.0",
