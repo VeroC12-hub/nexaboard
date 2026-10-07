@@ -849,9 +849,49 @@ async function putAccount(id: string): Promise<boolean> {
   return !error
 }
 
+/**
+ * Attach a learner to an account on the server.
+ *
+ * The membership row is what actually grants a parent sight of their child, so
+ * it has to survive a failure. It used to be written by a fire and forget
+ * promise in `addLearnerTo` whose catch said "the link retries next time",
+ * which was not true: the retry it meant was the outbox, and the outbox was
+ * only ever given the account and the learner, never the link between them.
+ *
+ * So one failed request lost the membership permanently and silently, and the
+ * screen said the child had been added. It happened to a real family: a parent
+ * added a second child sixteen minutes after the first, the learner row was
+ * written, the link was not, and the child simply was not there. The row had to
+ * be reattached by hand.
+ *
+ * Being a job rather than a promise is the whole fix. It is retried on the next
+ * flush, when the connection returns, and on reload.
+ *
+ * The learner's own uuid is resolved here rather than by the caller, because on
+ * a first add the learner may not have reached the server yet, and a link to a
+ * row that does not exist is a foreign key error rather than a membership.
+ */
+async function putLink(key: string): Promise<boolean> {
+  const [accountId, learnerLocalId, classId] = key.split('|')
+  if (!accountId || !learnerLocalId) return true
+
+  const p = learnerById(learnerLocalId)
+  /* The learner has been deleted on this device. Nothing left to link, and
+     reporting failure would keep a dead job in the outbox for ever. */
+  if (!p) return true
+
+  const uuid = uuidFor(p.id) ?? await putLearner(p)
+  if (!uuid) return false
+
+  const { error } = await supabase.from('edu_account_learner')
+    .upsert({ account_id: accountId, learner_id: uuid, class_id: classId || null },
+      { onConflict: 'account_id,learner_id' })
+  return !error
+}
+
 /* ── the outbox ──────────────────────────────────────────────────────────── */
 
-interface Job { what: 'learner' | 'attempts' | 'account'; id: string }
+interface Job { what: 'learner' | 'attempts' | 'account' | 'link'; id: string }
 
 const jobs = () => read<Job[]>(OUTBOX, [])
 
@@ -896,6 +936,7 @@ export async function flush(): Promise<void> {
       try {
         if (job.what === 'attempts') ok = await putAttempts(job.id)
         else if (job.what === 'account') ok = await putAccount(job.id)
+        else if (job.what === 'link') ok = await putLink(job.id)
         else {
           const p = learnerById(job.id)
           ok = p ? Boolean(await putLearner(p)) : true
@@ -957,19 +998,9 @@ export function addLearnerTo(accountId: string, learner: LearnerProfile, classId
   })
   write(ACCOUNTS, list)
   queue({ what: 'account', id: accountId })
-  /* The membership is what actually grants sight of this child, so it is
-     written as soon as both ends exist. Ordered after the learner push, which
-     is why it is not simply another job. */
-  void (async () => {
-    const p = learnerById(learner.id)
-    if (!p) return
-    const uuid = uuidFor(p.id) ?? await putLearner(p)
-    if (!uuid) return
-    await supabase.from('edu_account_learner')
-      .upsert({ account_id: accountId, learner_id: uuid, class_id: classId ?? null },
-        { onConflict: 'account_id,learner_id' })
-      .select('learner_id')
-  })().catch(() => { /* the outbox carries the learner; the link retries next time */ })
+  /* The membership goes through the outbox like everything else, so that a
+     failed request is retried rather than lost. See `putLink`. */
+  queue({ what: 'link', id: `${accountId}|${learner.id}|${classId ?? ''}` })
 }
 
 /** Replace an account in place. Used by the school console. */

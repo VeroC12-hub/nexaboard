@@ -71,6 +71,55 @@ const runner = new Runner({
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/* ── what a day of real learners actually consumes ──────────────────────────
+ 
+   "What will the AI cost us a month" could only be answered by estimating:
+   measure the system prompt, guess how many lessons a learner opens, multiply.
+   The guess was doing most of the work, and the answer decides whether this
+   runs on a subscription or on the API.
+ 
+   Claude Code reports its own token counts in the final event of the stream,
+   so the runner now keeps them and this writes them down. One line per job in
+   JSONL, which a week of real use turns into an answer.
+ 
+   Nothing here can fail a job: a log that breaks the thing it is measuring is
+   worse than no log. */
+
+const LEDGER = process.env.EDU_LEDGER
+  || path.join(process.cwd(), 'tutor-usage.jsonl');
+
+/** The token counts for the job just finished, for the console line. */
+function spent() {
+  const u = runner.lastUsed;
+  if (!u) return runner.lastEngine === 'codex' ? ', via codex' : '';
+  const inTok = (u.input_tokens || 0)
+    + (u.cache_read_input_tokens || 0)
+    + (u.cache_creation_input_tokens || 0);
+  const out = u.output_tokens || 0;
+  const cached = u.cache_read_input_tokens || 0;
+  return `, ${inTok} in (${cached} cached) / ${out} out`;
+}
+
+/** One line in the ledger. Never throws. */
+function record(job, started, chars) {
+  try {
+    const u = runner.lastUsed || {};
+    fs.appendFileSync(LEDGER, JSON.stringify({
+      at: new Date().toISOString(),
+      task: job.task,
+      subject: job.subject_id || null,
+      seconds: Math.round((Date.now() - started) / 1000),
+      chars,
+      engine: runner.lastEngine || null,
+      in_tokens: u.input_tokens ?? null,
+      cache_read: u.cache_read_input_tokens ?? null,
+      cache_write: u.cache_creation_input_tokens ?? null,
+      out_tokens: u.output_tokens ?? null,
+      api_cost_usd: runner.lastCost ?? null,
+    }) + '\n', 'utf8');
+  } catch (err) { /* measuring must not break the thing measured */ }
+}
+
 async function api(pathname, init) {
   const res = await fetch(SITE + pathname, {
     ...init,
@@ -140,7 +189,8 @@ async function work(job) {
         method: 'PUT',
         body: JSON.stringify({ id: job.id, status: 'done', answer: made }),
       });
-      console.log('    answered in ' + Math.round((Date.now() - started) / 1000) + 's');
+      console.log('    answered in ' + Math.round((Date.now() - started) / 1000) + 's' + spent());
+      record(job, started, String(made || '').length);
       return;
     }
 
@@ -149,7 +199,8 @@ async function work(job) {
       body: JSON.stringify({ id: job.id, status: 'done', answer }),
     });
     console.log('    answered in ' + Math.round((Date.now() - started) / 1000)
-      + 's, ' + answer.length + ' characters');
+      + 's, ' + answer.length + ' characters' + spent());
+    record(job, started, answer.length);
   } catch (err) {
     const why = String(err.message || 'unknown').split('\n')[0];
     console.log('    failed: ' + why.slice(0, 140));

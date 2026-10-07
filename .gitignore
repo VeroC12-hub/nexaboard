@@ -49,3 +49,4 @@ public/narration/
 # unusable. The storyboards and the drawing code ARE committed, so any film
 # can be rebuilt.
 public/ananse/video/*.mp4
+tutor-usage.jsonl

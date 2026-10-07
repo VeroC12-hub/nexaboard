@@ -143,6 +143,8 @@ export class Runner {
       let pending = '';
       let written = '';   // the answer, assembled from text deltas
       let settled = '';   // the final text, when the run reports one
+      let used = null;    // the token counts, when the run reports them
+      let cost = null;    // what it would have cost on the API
 
       const onLine = (line) => {
         const t = line.trim();
@@ -160,6 +162,21 @@ export class Runner {
         /* The run's own final answer, preferred over the deltas because it is
            what Claude Code considers the reply. */
         if (typeof ev.result === 'string' && ev.result.trim()) settled = ev.result;
+
+        /* What the run actually consumed, which the same final event carries.
+
+           Recorded because the question "what will this cost a month" has so
+           far only been answerable by estimating from prompt lengths, and an
+           estimate built on a guess about how many lessons a learner opens is
+           not worth much. Six jobs per topic, a system prompt around ten
+           thousand characters, and a per job cost nobody had measured. This is
+           the measurement.
+
+           On a subscription none of it is billed per token, so the number that
+           matters is not money but how much of the allowance a day of real
+           learners eats. Same figures either way. */
+        if (ev.usage && typeof ev.usage === 'object') used = ev.usage;
+        if (typeof ev.total_cost_usd === 'number') cost = ev.total_cost_usd;
       };
 
       let done = false;
@@ -176,7 +193,7 @@ export class Runner {
         const err = extra || decode(Buffer.concat(errChunks));
         /* Judged on the prose when there is prose, and otherwise on whatever
            came out, which is where an authentication failure would be. */
-        resolve({ out, verdict: classify(out || raw || err, code) });
+        resolve({ out, verdict: classify(out || raw || err, code), used, cost });
       };
 
       const timer = setTimeout(() => {
@@ -227,6 +244,12 @@ export class Runner {
     const tried = [];
 
     const first = await this.attempt(prompt, onChunk);
+    /* Left on the instance rather than returned, so that every existing caller
+       of `run` keeps working unchanged and only the one that wants the figures
+       has to know they exist. */
+    this.lastUsed = first.used || null;
+    this.lastCost = first.cost;
+    this.lastEngine = 'claude';
     if (first.verdict.ok) return first.out;
     tried.push('Claude: ' + (first.verdict.message || first.verdict.kind));
     this.log('  claude ' + first.verdict.kind + ', trying the next engine');
@@ -238,6 +261,12 @@ export class Runner {
          appended to, which is why `classify` is applied to the whole text
          each time. */
       const second = await backup.attempt(prompt);
+      /* Codex reports no usage, so the figures are cleared rather than left
+         showing the failed Claude attempt's numbers as if they were this
+         answer's. */
+      this.lastUsed = null;
+      this.lastCost = null;
+      this.lastEngine = 'codex';
       if (second.verdict.ok) {
         this.log('  codex answered');
         return second.out;
