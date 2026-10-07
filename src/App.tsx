@@ -13,6 +13,7 @@ import LearnerApp from './pages/LearnerApp'
 import Study from './pages/Study'
 import NotFound from './pages/NotFound'
 import LessonPreview from './pages/LessonPreview'
+import Front from './pages/Front'
 import type { User } from '@supabase/supabase-js'
 
 function App() {
@@ -70,6 +71,16 @@ function App() {
             content before a learner does, and a learner has the real screens. */}
         {import.meta.env.DEV && (
           <Route path="/preview" element={<LessonPreview />} />
+        )}
+        {/* The front page on its own, development only.
+
+            /study shows the front page only to a visitor who is not signed in,
+            so anybody with a profile on the machine cannot look at it without
+            signing out of their own account first. That made the page the
+            hardest screen in the project to iterate on, which is a poor
+            property for the first thing every visitor sees. */}
+        {import.meta.env.DEV && (
+          <Route path="/front" element={<Front onStart={() => {}} onArrive={() => {}} />} />
         )}
         {/* Anything else.
  

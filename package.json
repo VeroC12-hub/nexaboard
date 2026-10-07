@@ -12,7 +12,8 @@
     "video:studio": "remotion studio video/index.ts",
     "video:render": "remotion render video/index.ts Lesson",
     "voice:bake": "tsx --env-file=.env tools/bake-voice.mts",
-    "voice:audition": "tsx --env-file=.env tools/audition-voice.mts"
+    "voice:audition": "tsx --env-file=.env tools/audition-voice.mts",
+    "tutor:prod": "tsx --env-file=.env tools/tutor-prod.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.126.0",

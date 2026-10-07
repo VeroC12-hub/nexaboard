@@ -1,34 +1,65 @@
 /**
  * The front page.
  *
- * The hero is not a claim about the product, it is the product. And because
- * this platform runs from creche to university, one demonstration would have
- * quietly told five of the six audiences that it was not for them. So the
- * visitor picks their level and the demonstration changes to match.
+ * The hero is not a claim about the product, it is the product: one thing to
+ * play, and six of them to get through. Every demonstration is a real
+ * interaction rather than a picture of one, and each is drawn from what that
+ * stage of school actually does: counting for a child who cannot yet read, a
+ * missing number for primary, algebra for JHS, a triangle for SHS, a working
+ * mix for TVET, a gradient for university.
  *
- * That choice is the argument. The whole promise is that the platform adapts
- * to who is using it, and here it does exactly that before anyone has signed
- * up for anything, in the first few seconds, with no explanation needed.
+ * ── Why it looks like this ──────────────────────────────────────────────────
  *
- * Every demonstration is a real interaction rather than a picture of one, and
- * each is drawn from what that stage of school actually does: counting for a
- * child who cannot yet read, a missing number for primary, algebra for JHS, a
- * triangle for SHS, a working mix for TVET, a gradient for university.
+ * The first version put the six behind a tab row that advanced itself every
+ * 3.6 seconds, and the page carried three promise cards, a stage caption and
+ * two copies of every call to action underneath. A client called it too busy
+ * and said the game was the part he liked, which is the same verdict twice:
+ * everything on the page was competing with the one thing on it worth doing.
+ *
+ * Two consequences, and they are the whole design:
+ *
+ *   - Nothing moves on its own. The rotation meant a visitor who started
+ *     counting mangoes had the panel slide out from under them mid tap. A
+ *     demonstration of a platform that waits until you understand should not
+ *     take itself away after three seconds.
+ *   - Finishing one offers the next. The six were always there and nobody saw
+ *     more than two, because a tab row reads as navigation to be ignored
+ *     rather than as a queue with five more in it. Dots and a `next` that
+ *     lights up when you are right say the same thing and get played.
+ *
+ * ── What was given up ──────────────────────────────────────────────────────
+ *
+ * The tab row was also the only place the page said "creche to university".
+ * Its labels now ride on the game itself, as the caption above each one, so
+ * the range is still stated, once, where somebody is already looking. That is
+ * weaker than six visible labels and it is the trade the simplicity cost.
  */
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import '../styles/nexaedu.css'
 import type { Stage } from '../lib/education/learner'
 
 const THREADS = ['var(--gold)', 'var(--green)', 'var(--red)', 'var(--sky)']
 
-function Weave({ count = 28, tall = false }: { count?: number; tall?: boolean }) {
+/**
+ * The kente band, woven down the binding of the book.
+ *
+ * The band was two horizontal strips floating in the middle of the page, which
+ * after the cut had nothing left around them to belong to: a striped bar under
+ * a headline reads as a loading indicator. Down the fold between two pages it
+ * is the stitching that holds the thing together, which is what a binding is,
+ * and it is the one loud element on a page that is otherwise ink on cream.
+ *
+ * It weaves itself in once on load, thread after thread. That is the only
+ * motion on the page that nobody asked for.
+ */
+function Bind({ count = 26 }: { count?: number }) {
   return (
-    <div className={`ne-weave${tall ? ' is-tall' : ''}`} aria-hidden>
+    <div className="ne-bind" aria-hidden>
       {Array.from({ length: count }, (_, i) => (
-        <span key={i} className="ne-weave-block" style={{
+        <span key={i} className="ne-bind-thread" style={{
           ['--blk' as string]: THREADS[i % THREADS.length],
-          ['--wait' as string]: `${i * 45}ms`,
+          ['--wait' as string]: `${i * 24}ms`,
         }} />
       ))}
     </div>
@@ -37,35 +68,50 @@ function Weave({ count = 28, tall = false }: { count?: number; tall?: boolean })
 
 /* ── shared bits ──────────────────────────────────────────────────────────── */
 
-function Panel({ hint, children, verdict, tone, onReset }: {
+/**
+ * How a game hands its progress row back to the page.
+ *
+ * A function rather than a value because only the game knows whether it has
+ * been solved, and only the page knows what comes next. Passing `foot` down
+ * and calling it with `done` keeps that in one place: no duplicated win
+ * condition, no effect syncing a boolean upward, and no demonstration that can
+ * drift out of step with the row underneath it.
+ */
+type DemoProps = { foot: (done: boolean) => React.ReactNode }
+
+function Panel({ hint, children, verdict, tone, onReset, foot }: {
   hint: string
   children: React.ReactNode
   verdict: string
   tone?: 'win' | 'tip'
   onReset?: () => void
+  foot?: React.ReactNode
 }) {
   return (
-    <div className="ne-live">
-      <div className="ne-live-head">
-        <span className="ne-mono">Try it now</span>
-        {onReset && (
-          <button className="ne-mono" onClick={onReset}
-            style={{ background: 'none', border: 0, cursor: 'pointer', color: 'inherit', textDecoration: 'underline' }}>
-            Reset
-          </button>
-        )}
-      </div>
-      {children}
+    <div className="ne-work">
+      {/* No "TRY IT NOW" eyebrow. A tracked out capital label above a thing
+          that plainly invites a tap was telling the visitor what they could
+          already see, and it was the loudest text in the panel. */}
+      <div className="ne-work-body">{children}</div>
       <p className={`ne-verdict${tone === 'win' ? ' is-win' : tone === 'tip' ? ' is-tip' : ''}`}>
         {verdict || hint}
       </p>
+      {/* Both controls that are not part of the exercise live together along
+          the bottom of the page: start this one again on the left, go on to
+          the next on the right. */}
+      <div className="ne-foot">
+        {onReset
+          ? <button className="ne-work-reset" onClick={onReset}>Start again</button>
+          : <span />}
+        {foot}
+      </div>
     </div>
   )
 }
 
 /* ── creche and KG: counting, before reading ──────────────────────────────── */
 
-function CountDemo() {
+function CountDemo({ foot }: DemoProps) {
   const total = 6
   const [got, setGot] = useState<number[]>([])
   const done = got.length === total
@@ -76,6 +122,7 @@ function CountDemo() {
       verdict={done ? `Six mangoes. You counted them all.` : `Tap each mango to count them. ${got.length} so far.`}
       tone={done ? 'win' : undefined}
       onReset={() => setGot([])}
+      foot={foot(done)}
     >
       <div className="ne-count">
         {Array.from({ length: total }, (_, i) => {
@@ -99,7 +146,7 @@ function CountDemo() {
 
 /* ── primary: the missing number ──────────────────────────────────────────── */
 
-function MissingDemo() {
+function MissingDemo({ foot }: DemoProps) {
   const [v, setV] = useState(2)
   const right = v === 5
   return (
@@ -108,6 +155,7 @@ function MissingDemo() {
       verdict={right ? 'Both sides are 12. That is the missing number.' : 'Make both sides the same.'}
       tone={right ? 'win' : undefined}
       onReset={() => setV(2)}
+      foot={foot(right)}
     >
       <p className="ne-eq">7 + <span className={right ? 'ne-slot is-right' : 'ne-slot'}>{v}</span> = 12</p>
       <div className="ne-bars">
@@ -138,7 +186,7 @@ const say = (s: Side) => {
   return bits.join(' + ')
 }
 
-function BalanceDemo() {
+function BalanceDemo({ foot }: DemoProps) {
   const [left, setLeft] = useState<Side>(L0)
   const [right, setRight] = useState<Side>(R0)
   const [broke, setBroke] = useState(false)
@@ -154,6 +202,7 @@ function BalanceDemo() {
         : 'Take 4 from both sides, then divide both by 3. Keep it level.'}
       tone={solved ? 'win' : broke ? 'tip' : undefined}
       onReset={() => { setLeft(L0); setRight(R0); setBroke(false) }}
+      foot={foot(solved)}
     >
       <svg viewBox="0 0 400 150" className="ne-scale" role="img"
         aria-label={`Balance showing ${say(left)} equals ${say(right)}`}>
@@ -188,7 +237,7 @@ function BalanceDemo() {
 
 /* ── SHS: a triangle you can stretch ──────────────────────────────────────── */
 
-function TriangleDemo() {
+function TriangleDemo({ foot }: DemoProps) {
   const [b, setB] = useState(4)
   const a = 3
   const h = Math.sqrt(a * a + b * b)
@@ -201,6 +250,7 @@ function TriangleDemo() {
         : `${a}² + ${b}² = ${(a * a + b * b)}, so the longest side is √${a * a + b * b} ≈ ${h.toFixed(2)}.`}
       tone={nice ? 'win' : undefined}
       onReset={() => setB(4)}
+      foot={foot(nice)}
     >
       <svg viewBox="0 0 400 160" className="ne-scale" role="img"
         aria-label={`Right angled triangle with sides ${a} and ${b}`}>
@@ -224,7 +274,7 @@ function TriangleDemo() {
 
 /* ── TVET: a mix that has to be right ─────────────────────────────────────── */
 
-function MixDemo() {
+function MixDemo({ foot }: DemoProps) {
   const [sand, setSand] = useState(2)
   const right = sand === 4
   return (
@@ -234,6 +284,7 @@ function MixDemo() {
         : `One part cement to ${sand} part${sand === 1 ? '' : 's'} sand. A floor screed wants 1 : 4.`}
       tone={right ? 'win' : undefined}
       onReset={() => setSand(2)}
+      foot={foot(right)}
     >
       <div className="ne-mix">
         <span className="ne-mix-block is-cement">cement</span>
@@ -252,7 +303,7 @@ function MixDemo() {
 
 /* ── university: the gradient at a point ──────────────────────────────────── */
 
-function TangentDemo() {
+function TangentDemo({ foot }: DemoProps) {
   const [a, setA] = useState(-1.4)
   const flat = Math.abs(a) < 0.06
   // y = x^2 mapped into the panel, x from -3 to 3
@@ -273,6 +324,7 @@ function TangentDemo() {
         : `At x = ${a.toFixed(1)} the gradient is 2x, which is ${m.toFixed(1)}.`}
       tone={flat ? 'win' : undefined}
       onReset={() => setA(-1.4)}
+      foot={foot(flat)}
     >
       <svg viewBox="0 0 400 160" className="ne-scale" role="img"
         aria-label={`Curve y equals x squared with a tangent at x equals ${a.toFixed(1)}`}>
@@ -291,134 +343,150 @@ function TangentDemo() {
   )
 }
 
-/* ── the levels ───────────────────────────────────────────────────────────── */
+/* ── the six ──────────────────────────────────────────────────────────────── */
 
-const STAGES = [
-  { key: 'creche', label: 'Creche & KG', line: 'Counting, shapes and first words, before reading starts.', demo: CountDemo },
-  { key: 'primary', label: 'Primary', line: 'Number, reading and the habits that everything later rests on.', demo: MissingDemo },
-  { key: 'jhs', label: 'JHS', line: 'The core subjects, worked properly, all the way to BECE.', demo: BalanceDemo },
-  { key: 'shs', label: 'SHS', line: 'Electives taken seriously, with WASSCE in view.', demo: TriangleDemo },
-  { key: 'tvet', label: 'TVET', line: 'Competence you can show, judged on the work itself.', demo: MixDemo },
-  { key: 'uni', label: 'University', line: 'Course by course, at the depth a degree actually asks for.', demo: TangentDemo },
+/**
+ * In school order, youngest first.
+ *
+ * `label` is doing the job the deleted tab row used to do: it is the only
+ * place the page says this platform runs from creche to university, so it
+ * names the level rather than the game. `asks` names the game, because a
+ * visitor part way through the queue wants to know what the next one is.
+ */
+const ALL = [
+  { key: 'creche', tab: 'KG', label: 'Creche & KG', asks: 'Counting', demo: CountDemo },
+  { key: 'primary', tab: 'Primary', label: 'Primary', asks: 'The missing number', demo: MissingDemo },
+  { key: 'jhs', tab: 'JHS', label: 'JHS', asks: 'Solving for x', demo: BalanceDemo },
+  { key: 'shs', tab: 'SHS', label: 'SHS', asks: 'Pythagoras', demo: TriangleDemo },
+  { key: 'tvet', tab: 'TVET', label: 'TVET', asks: 'Mixing a screed', demo: MixDemo },
+  { key: 'uni', tab: 'Uni', label: 'University', asks: 'Gradients', demo: TangentDemo },
 ] as const
 
-/** How long each stage holds before the page moves itself on. */
-const HOLD_MS = 3600
+/**
+ * Levels written, working, and deliberately not shown on the front page yet.
+ *
+ * Held back rather than deleted. Both exercises work and are reached from
+ * inside the platform; what they do not yet have is the depth of content
+ * behind them that KG through SHS have, and a front page that advertises six
+ * levels while two of them are thin is a promise the product cannot keep to
+ * the first visitor who taps one.
+ *
+ * Taking a key out of this list is all that is needed to show it again.
+ */
+const HIDDEN: readonly string[] = ['tvet', 'uni']
+
+const GAMES = ALL.filter(g => !HIDDEN.includes(g.key))
 
 export default function Front({ onStart, onArrive }: {
   onStart: (stage: Stage) => void
   onArrive: () => void
 }) {
-  // Starts at the youngest and walks up, so a visitor who does nothing at all
-  // still sees the whole range. Most people will not click to find out what a
-  // product covers, and a page that needs to be operated before it explains
-  // itself has already lost them.
-  const [stage, setStage] = useState(0)
-  // The moment anyone touches it, the page stops moving and they are driving.
-  // Something that keeps sliding out from under your hand is worse than
-  // something static.
-  const [taken, setTaken] = useState(false)
-  const timer = useRef<number | null>(null)
+  /* Starts at the youngest and only moves when somebody moves it. The first
+     version advanced itself every 3.6 seconds, which took the exercise away
+     from anybody halfway through one. */
+  const [at, setAt] = useState(() => {
+    /* ?at=2 opens straight on the third exercise, in development only.
+ 
+       Checking a layout at phone width means driving a headless browser, and a
+       headless browser cannot tap a tab. Without this the only exercise that
+       could ever be photographed on a phone was the first one, and the widest
+       of them, the balance, was the one that needed looking at. */
+    if (!import.meta.env.DEV) return 0
+    const asked = Number(new URLSearchParams(window.location.search).get('at'))
+    return Number.isInteger(asked) && asked >= 0 ? asked : 0
+  })
+  /* Which levels have been finished, so a tab can show it. A set rather than a
+     count because the tabs let you jump about, and finishing SHS first should
+     colour SHS rather than KG. */
+  const [done, setDone] = useState<string[]>([])
 
-  useEffect(() => {
-    if (taken) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    timer.current = window.setInterval(
-      () => setStage(i => (i + 1) % STAGES.length), HOLD_MS)
-    return () => { if (timer.current) window.clearInterval(timer.current) }
-  }, [taken])
+  const current = GAMES[at % GAMES.length]
+  const Demo = current.demo
+  const next = GAMES[(at + 1) % GAMES.length]
 
-  const takeOver = (i?: number) => {
-    setTaken(true)
-    if (typeof i === 'number') setStage(i)
+  /* The exercise reports whether it is solved by calling this; only the
+     exercise knows, and only the page can act on it. Recording it here is what
+     fills the tab in. */
+  const foot = (solved: boolean) => {
+    if (solved && !done.includes(current.key)) {
+      /* Queued out of the render pass, because this runs while the exercise is
+         rendering and setting state during a render of a child is the one way
+         React will loop for ever. */
+      queueMicrotask(() => setDone(d => (d.includes(current.key) ? d : [...d, current.key])))
+    }
+    return (
+      <button className={`ne-next${solved ? ' is-ready' : ''}`}
+        onClick={() => setAt(i => (i + 1) % GAMES.length)}>
+        {solved ? 'Next' : next.asks}
+      </button>
+    )
   }
 
-  const current = STAGES[stage]
-  const Demo = current.demo
-
   return (
-    <div className="ne">
-      <div className="ne-shell">
+    <div className="ne ne-front">
+      <div className="ne-desk">
         <header className="ne-top">
           <span className="ne-wordmark">NEXA<i>•</i>EDU</span>
-          <span className="ne-mono" style={{ color: 'var(--ink-3)' }}>Ghana</span>
           <button className="ne-quiet-link" style={{ marginLeft: 'auto' }} onClick={onArrive}>
             I already have an ID
           </button>
-          <button className="ne-btn ne-btn-quiet" style={{ padding: '10px 22px', fontSize: 15 }}
-            onClick={() => onStart(current.key as Stage)}>
-            Start learning
-          </button>
         </header>
 
-        <div className="ne-rise ne-rise-1"><Weave /></div>
-
-        <section className="ne-hero">
-          <div>
-            <h1 className="ne-display ne-h1 ne-rise ne-rise-1">
-              Learn it until<br />you <span className="ne-mark-gold">actually</span><br />know it.
-            </h1>
-            <p className="ne-lede ne-rise ne-rise-2">
+        {/* An exercise book, opened. Notes on the left page, the working on the
+            right, kente woven down the binding, and a tab for each level out
+            of the fore edge.
+ 
+            The tabs are the stage switcher that was cut for being busy, put
+            back as part of an object rather than as a row of pills under the
+            headline. As a row they read as navigation and were ignored; as
+            tabs on the edge of a book they read as somewhere to go. They also
+            carry the progress, so the woven band in the footer could go: one
+            thing saying where you are is enough. */}
+        <div className="ne-spread">
+          <div className="ne-leaf is-notes">
+            {/* Set narrow rather than merely large. Bricolage Grotesque has a
+                width axis that nothing in this project had ever used. The gold
+                highlighter behind one word is gone: a single accented word in
+                a headline is the commonest tell there is. */}
+            <h1 className="ne-slab">Learn it until you actually know it.</h1>
+            <p className="ne-lede">
               One platform from creche to university. It watches how you work,
               notices what keeps going wrong, and changes what it gives you next.
             </p>
 
-            {/* Choosing a stage changes the demonstration, which is the whole
-                promise of the platform performed rather than described. */}
-            <div className="ne-stages ne-rise ne-rise-2" role="tablist" aria-label="Choose your stage">
-              {STAGES.map((s, i) => (
-                <button key={s.key} role="tab" aria-selected={i === stage}
-                  className={`ne-stage${i === stage ? ' is-on' : ''}`}
-                  onClick={() => takeOver(i)}>
-                  {s.label}
-                  {i === stage && !taken && (
-                    <span key={stage} className="ne-stage-hold"
-                      style={{ animationDuration: `${HOLD_MS}ms` }} />
-                  )}
-                </button>
-              ))}
+            <div className="ne-task">
+              <span className="ne-task-level">{current.label}</span>
+              <span className="ne-task-asks">{current.asks}</span>
             </div>
-            <p className="ne-stage-line ne-rise ne-rise-3">{current.line}</p>
 
-            <div className="ne-cta-row ne-rise ne-rise-3">
-              <button className="ne-btn ne-btn-go" onClick={() => onStart(current.key as Stage)}>Start learning</button>
-              <span className="ne-fineprint">Free. No sign-up. Works offline.</span>
-              <button className="ne-quiet-link" onClick={onArrive}>
-                Already have an ID?
+            <button className="ne-btn ne-btn-go" onClick={() => onStart(current.key as Stage)}>
+              Start learning
+            </button>
+            <p className="ne-foot-note">
+              Built for Ghanaian classrooms. Works on a shared phone.
+            </p>
+          </div>
+
+          <Bind />
+
+          {/* Keyed on the game so each one mounts fresh and arrives unsolved
+              rather than carrying the last one's state. */}
+          <div key={current.key} className="ne-leaf is-work">
+            <Demo foot={foot} />
+          </div>
+
+          <nav className="ne-tabs" aria-label="Choose your level">
+            {GAMES.map((g, i) => (
+              <button key={g.key}
+                className={`ne-tab${i === at % GAMES.length ? ' is-on' : ''}${done.includes(g.key) ? ' is-done' : ''}`}
+                style={{ ['--blk' as string]: THREADS[i % THREADS.length] }}
+                aria-current={i === at % GAMES.length ? 'true' : undefined}
+                onClick={() => setAt(i)}>
+                {g.tab}
               </button>
-            </div>
-          </div>
-
-          {/* Keyed on the stage so each demonstration mounts fresh and plays
-              its own entrance rather than morphing out of the last one. */}
-          <div key={current.key} className="ne-rise ne-rise-2"
-            onPointerDown={() => takeOver()}>
-            <Demo />
-          </div>
-        </section>
-
-        <div className="ne-rise ne-rise-4"><Weave tall /></div>
-
-        <section className="ne-three">
-          {[
-            { c: 'var(--red)', n: '01', h: 'It notices',
-              p: 'Every answer is remembered. Get something wrong twice and it stops moving you on, because the syllabus order does not care that you are stuck.' },
-            { c: 'var(--green)', n: '02', h: 'It explains',
-              p: 'Not the answer again, louder. It names the thinking that led you to the wrong answer, then teaches the method that works on the next question too.' },
-            { c: 'var(--sky)', n: '03', h: 'It comes back',
-              p: 'What you secured last month gets checked before it is lost. Cheap to check, expensive to relearn.' },
-          ].map((x, i) => (
-            <article key={x.n} className={`ne-promise ne-rise ne-rise-${i + 2}`}>
-              <span className="ne-chip" style={{ background: x.c }}>{x.n}</span>
-              <h3 className="ne-display">{x.h}</h3>
-              <p>{x.p}</p>
-            </article>
-          ))}
-        </section>
-
-        <footer style={{ padding: '30px 0 60px', color: 'var(--ink-3)', fontSize: 15 }}>
-          Built for Ghanaian classrooms. Works on a shared phone, on a weak connection.
-        </footer>
+            ))}
+          </nav>
+        </div>
       </div>
     </div>
   )

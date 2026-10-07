@@ -192,32 +192,6 @@
 .ne-verdict.is-win  { color: var(--green); font-weight: 700; }
 .ne-verdict.is-tip  { color: var(--red); }
 
-/* ── the three promises ───────────────────────────────────────────────────── */
-
-.ne-three {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  padding: 56px 0 24px;
-}
-@media (max-width: 820px) { .ne-three { grid-template-columns: 1fr; } }
-
-.ne-promise {
-  background: var(--card);
-  border: 1.5px solid var(--line);
-  border-radius: 18px;
-  padding: 26px 24px 28px;
-  transition: transform 160ms, border-color 160ms;
-}
-.ne-promise:hover { transform: translateY(-3px); border-color: var(--ink-3); }
-.ne-promise h3 { font-size: 22px; margin: 14px 0 8px; letter-spacing: -0.02em; }
-.ne-promise p  { margin: 0; color: var(--ink-2); font-size: 16.5px; }
-
-.ne-chip {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px; border-radius: 13px;
-  font-family: ui-monospace, Menlo, monospace; font-weight: 700; font-size: 17px;
-  color: #fff;
-}
-
 /* ── entrance ─────────────────────────────────────────────────────────────── */
 
 @keyframes ne-rise {
@@ -241,24 +215,6 @@
   }
   .ne-weave-block::after { transform: scaleX(1); }
 }
-
-/* ── the stage switcher ───────────────────────────────────────────────────────
-   Six stages, and picking one changes the demonstration in the hero. This is
-   the product's own behaviour performed on the front page, so it earns the
-   space it takes. */
-
-.ne-stages { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 12px; }
-
-.ne-stage {
-  font-family: inherit; font-size: 14.5px; font-weight: 600;
-  padding: 8px 15px; border-radius: 999px;
-  border: 1.5px solid var(--line); background: var(--card); color: var(--ink-2);
-  cursor: pointer; transition: background-color 130ms, border-color 130ms, color 130ms, transform 130ms;
-}
-.ne-stage:hover { border-color: var(--ink-3); transform: translateY(-1px); }
-.ne-stage.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
-
-.ne-stage-line { font-size: 16px; color: var(--ink-2); margin: 0 0 26px; min-height: 24px; }
 
 /* ── creche: counting ─────────────────────────────────────────────────────── */
 
@@ -335,21 +291,6 @@
 
 .ne-slider-row { padding: 6px 4px 0; }
 .ne-slider { width: 100%; accent-color: var(--green); height: 26px; cursor: pointer; }
-
-/* The hold on the active stage, drawn as a line filling underneath it, so the
-   page moving on reads as deliberate rather than as a glitch. It disappears
-   the moment the visitor takes control. */
-.ne-stage { position: relative; overflow: hidden; }
-
-.ne-stage-hold {
-  position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
-  background: var(--gold);
-  transform-origin: left;
-  animation: ne-hold linear forwards;
-}
-@keyframes ne-hold { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-
-@media (prefers-reduced-motion: reduce) { .ne-stage-hold { display: none; } }
 
 /* ── what the answers do ──────────────────────────────────────────────────── */
 
@@ -1030,3 +971,285 @@
   text-underline-offset: 2px;
 }
 .ne-inline-link:hover { color: var(--ink); }
+
+/* ===========================================================================
+   The front page: an exercise book, opened
+
+   Two earlier attempts failed in opposite directions. The first was a two
+   column hero with a tab row, three promise cards and every call to action
+   printed twice, and a client called it too busy. Cutting it back left one
+   white card floating in an empty cream field with every line centred, which
+   was simple and characterless: a card is the one thing every learning product
+   on the web already has.
+
+   So the page is the object a Ghanaian pupil already owns. Notes on the left
+   page, the working on the right on squared paper, kente woven down the
+   binding, and a tab out of the fore edge for each level. The tabs are the
+   stage switcher that was cut for being busy, returned as part of a thing
+   rather than as a row of pills: as a row they read as navigation and got
+   ignored, and on the edge of a book they read as somewhere to go.
+
+   Brilliant.org does this same job well and scores for it, and its one
+   criticised weakness is that its hero never names a subject. Hence the level
+   and the topic in plain words on the left page, where they cannot be missed.
+
+   Everything loud is in the binding and the tabs. Everything else is ink on
+   cream.
+   =========================================================================== */
+
+.ne-front { min-height: 100vh; }
+
+.ne-desk { max-width: 1140px; margin: 0 auto; padding: 0 30px 70px; }
+@media (max-width: 880px) { .ne-desk { padding: 0 18px 50px; } }
+
+.ne-front .ne-top { padding: 24px 0 20px; flex-wrap: wrap; }
+
+/* -- the spread ----------------------------------------------------------- */
+
+/* The tab rail is a column of the grid rather than an overhang, so nothing is
+   ever clipped off the side of a narrow window. */
+.ne-spread {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) 18px minmax(0, 1.08fr) auto;
+  align-items: stretch;
+  filter: drop-shadow(0 18px 30px rgba(20, 36, 58, 0.13));
+}
+
+.ne-leaf {
+  border: 2px solid var(--ink);
+  min-height: 460px;
+  padding: 30px 32px 26px;
+  display: flex; flex-direction: column;
+}
+
+/* The left page is the note: slightly warmer than white, as paper that has
+   been written on rather than worked on. */
+.ne-leaf.is-notes {
+  background: #fffdf6;
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+/* The right page is where the working goes, so it is squared. Faint enough to
+   read numbers against, strong enough to see on a phone in daylight. */
+.ne-leaf.is-work {
+  background: var(--card);
+  background-image:
+    linear-gradient(to right, rgba(20, 36, 58, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 36, 58, 0.055) 1px, transparent 1px);
+  background-size: 23px 23px;
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+  padding: 26px 30px 22px;
+}
+
+/* -- the binding ---------------------------------------------------------- */
+
+.ne-bind {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 2px 0;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  border-left: 0; border-right: 0;
+}
+
+.ne-bind-thread {
+  flex: 1; background: rgba(255, 255, 255, 0.14);
+  position: relative; overflow: hidden;
+}
+
+/* Woven downward, thread after thread. The horizontal band this replaced
+   filled from the left because that is the direction a strip grows on a loom;
+   stood on its end it fills from the top for the same reason. */
+.ne-bind-thread::after {
+  content: ''; position: absolute; inset: 0;
+  transform: scaleY(0); transform-origin: top;
+  background: var(--blk, var(--gold));
+  animation: ne-thread-down 400ms cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  animation-delay: var(--wait, 0ms);
+}
+@keyframes ne-thread-down { to { transform: scaleY(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ne-bind-thread::after { animation-duration: 1ms !important; }
+}
+
+/* -- the tabs ------------------------------------------------------------- */
+
+.ne-tabs { display: flex; flex-direction: column; gap: 7px; padding-top: 26px; }
+
+.ne-tab {
+  font-family: inherit; font-size: 13.5px; font-weight: 700;
+  text-align: left;
+  padding: 9px 13px 9px 12px;
+  border: 2px solid var(--ink); border-left: 0;
+  border-radius: 0 9px 9px 0;
+  background: #fffdf6; color: var(--ink-2);
+  cursor: pointer;
+  min-width: 68px;
+  margin-left: -2px;
+  transition: transform 160ms, background-color 160ms, color 160ms;
+}
+.ne-tab:hover { transform: translateX(3px); color: var(--ink); }
+
+/* A level you have finished keeps its thread colour, which is why the woven
+   band in the footer could go: the tabs say where you are and what is behind
+   you, and two indicators saying the same thing is one too many. */
+.ne-tab.is-done { background: var(--blk); color: #fff; }
+
+.ne-tab.is-on {
+  background: var(--ink); color: #fff;
+  transform: translateX(7px);
+  box-shadow: -3px 0 0 var(--blk);
+}
+
+/* -- the left page -------------------------------------------------------- */
+
+/* Narrow rather than merely big. Bricolage Grotesque carries a width axis and
+   nothing in this project had ever used it, so every headline was the family's
+   default proportions at a large size. */
+.ne-slab {
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  font-variation-settings: 'wdth' 78, 'opsz' 96;
+  font-weight: 800;
+  font-size: clamp(38px, 4.4vw, 60px);
+  line-height: 0.92;
+  letter-spacing: -0.028em;
+  margin: 0 0 16px;
+}
+
+.ne-front .ne-lede {
+  font-size: 17px; line-height: 1.55; color: var(--ink-2);
+  max-width: 40ch; margin: 0 0 auto;
+}
+
+/* What the right page is asking, written on the left page as a note. It
+   replaced a tracked out capital pill, which is the label treatment every
+   generated page reaches for and which shouted louder than the headline. */
+.ne-task {
+  display: flex; flex-direction: column; gap: 1px;
+  margin: 28px 0 22px; padding-left: 14px;
+  border-left: 3px solid var(--gold);
+}
+.ne-task-level { font-weight: 700; font-size: 15px; color: var(--ink-3); }
+.ne-task-asks { font-weight: 700; font-size: 21px; letter-spacing: -0.02em; }
+
+.ne-leaf.is-notes .ne-btn-go { align-self: flex-start; }
+
+.ne-foot-note {
+  margin: 22px 0 0; color: var(--ink-3); font-size: 14px; max-width: 34ch;
+}
+
+/* -- the working ---------------------------------------------------------- */
+
+.ne-work { display: flex; flex-direction: column; height: 100%; }
+
+/* One height for all six, so the controls underneath do not walk up and down
+   the page as you move between them. Set from the tallest, the balance. */
+.ne-work-body {
+  flex: 1; min-height: 290px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.ne-work .ne-scale { max-height: 210px; }
+.ne-work .ne-verdict { text-align: left; margin: 14px 0 0; min-height: 46px; }
+
+/* Six mangoes spread across a whole page are six separate things rather than a
+   group to count, so the exercise is held to a readable measure. */
+/* Every measure here is a ceiling and not a floor. Written as plain pixel
+   max-widths they were ceilings on a desktop and floors on a phone: a 420px
+   grid of mangoes inside two pages of padding made the document about 500px
+   wide at a 390px viewport, and the whole page was clipped down its right hand
+   side. min() with 100% is the difference. */
+.ne-work .ne-count { width: min(420px, 100%); gap: 6px; }
+.ne-work .ne-bars { max-width: min(540px, 100%); }
+.ne-work .ne-ops { justify-content: flex-start; }
+.ne-work .ne-eq { text-align: left; }
+.ne-work .ne-slider-row { max-width: min(440px, 100%); }
+
+/* Grid and flex children default to min-width: auto, which lets a wide child
+   push its parent past the viewport rather than being made to fit. */
+.ne-spread, .ne-leaf, .ne-work, .ne-work-body { min-width: 0; }
+
+.ne-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1.5px solid var(--line);
+}
+
+.ne-work-reset {
+  font-family: inherit; font-size: 14px; color: var(--ink-3);
+  background: none; border: 0; padding: 2px 0; cursor: pointer;
+  border-bottom: 1.5px solid var(--line);
+}
+.ne-work-reset:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* Quiet until the exercise is right, then plainly the next thing to touch. It
+   stays clickable throughout: somebody who cannot finish the university
+   gradient must still be able to move on, and a disabled button would strand
+   them on the hardest of the six. */
+.ne-next {
+  font-family: inherit; font-size: 15.5px; font-weight: 700;
+  padding: 10px 19px; border-radius: 8px; cursor: pointer;
+  border: 1.5px solid var(--line); background: transparent; color: var(--ink-2);
+  transition: background-color 160ms, border-color 160ms, color 160ms;
+}
+.ne-next:hover { border-color: var(--ink); color: var(--ink); }
+.ne-next.is-ready { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* -- closed, on a phone --------------------------------------------------- */
+
+/* A book cannot be open at this width, so it closes: the pages stack, the
+   binding lies across the top of the working, and the tabs become a row above
+   it. */
+@media (max-width: 880px) {
+  /* A column rather than a block, so the tabs can be moved. In the markup
+     they come last, which is right on a desktop where they are a rail beside
+     the pages. Stacked, last put them about 980px down the page: on an 844px
+     phone the level switcher was below the fold, under the exercise it is
+     meant to be choosing. So on a phone it reads notes, levels, working. */
+  .ne-spread { display: flex; flex-direction: column; filter: none; }
+  .ne-leaf.is-notes { order: 1; }
+  .ne-tabs { order: 2; }
+  .ne-bind { order: 3; }
+  .ne-leaf.is-work { order: 4; }
+
+  .ne-leaf { min-height: 0; padding: 24px 20px 22px; }
+  .ne-leaf.is-notes {
+    border-right: 2px solid var(--ink);
+    border-radius: 10px;
+  }
+  .ne-leaf.is-work {
+    border-left: 2px solid var(--ink);
+    border-radius: 0 0 10px 10px;
+    border-top: 0;
+    /* Stated again because .ne-leaf.is-work outranks the .ne-leaf rule above
+       on specificity, so the narrower padding was never reaching it. */
+    padding: 22px 16px 20px;
+  }
+
+  .ne-bind {
+    flex-direction: row; height: 9px; padding: 0 2px;
+    border: 2px solid var(--ink); border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+  }
+  .ne-bind-thread::after {
+    transform: scaleX(0); transform-origin: left;
+    animation-name: ne-thread;
+  }
+
+  .ne-tabs {
+    flex-direction: row; gap: 6px; padding: 14px 0 12px;
+    overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
+  }
+  .ne-tabs::-webkit-scrollbar { display: none; }
+  .ne-tab {
+    border: 2px solid var(--ink); border-radius: 9px;
+    margin-left: 0; min-width: 0; flex: 0 0 auto;
+  }
+  .ne-tab:hover, .ne-tab.is-on { transform: none; }
+  .ne-tab.is-on { box-shadow: 0 3px 0 var(--blk); }
+
+  .ne-slab { font-size: clamp(34px, 9vw, 46px); }
+  .ne-work-body { min-height: 240px; }
+}
