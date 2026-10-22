@@ -14,6 +14,8 @@ import Study from './pages/Study'
 import NotFound from './pages/NotFound'
 import LessonPreview from './pages/LessonPreview'
 import Front from './pages/Front'
+import Courses from './pages/Courses'
+import Verify from './pages/Verify'
 import type { User } from '@supabase/supabase-js'
 
 function App() {
@@ -59,6 +61,10 @@ function App() {
         <Route path="/session/:id" element={user ? <Session user={user} /> : <Navigate to="/auth" />} />
         <Route path="/join/:code" element={<Join />} />
         <Route path="/student/:sessionId" element={<StudentSession />} />
+        <Route path="/courses" element={user ? <Courses user={user} /> : <Navigate to="/auth" />} />
+        {/* Public: anybody holding a certificate code can check it. */}
+        <Route path="/verify" element={<Verify />} />
+        <Route path="/verify/:code" element={<Verify />} />
         {/* Phase 2, the school platform. Mounts beside Phase 1, never inside it. */}
         <Route path="/school" element={<SchoolApp />} />
         {/* Stage Two: the learner curriculum navigator, on the real education model. */}

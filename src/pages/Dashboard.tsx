@@ -5,7 +5,7 @@ import { generateJoinCode, formatDate, timeAgo } from '../lib/utils'
 import toast from 'react-hot-toast'
 import type { User } from '@supabase/supabase-js'
 import type { Session } from '../types'
-import { Plus, BookOpen, Clock, Monitor, ChevronRight, LogOut, Copy, Play, Square, RotateCcw } from 'lucide-react'
+import { Plus, BookOpen, Clock, Monitor, ChevronRight, LogOut, Copy, Play, Square, RotateCcw, GraduationCap } from 'lucide-react'
 
 const SUBJECTS = ['Python', 'Machine Learning', 'Data Analysis', 'Autodesk', 'Mathematics', 'Coding', 'Other']
 
@@ -96,6 +96,9 @@ export default function Dashboard({ user }: { user: User }) {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <img src="/nexacore-logo.jpg" alt="NexaCore" className="h-9 object-contain" />
           <div className="flex items-center gap-4">
+            <Link to="/courses" className="flex items-center gap-1.5 text-sm font-semibold text-[#008FA6] hover:text-[#007588] transition-colors">
+              <GraduationCap size={15} /> Courses and certificates
+            </Link>
             <span className="text-[#6b7280] text-sm">Welcome, <span className="font-semibold text-[#1b2b4b]">{teacherName}</span></span>
             <button onClick={signOut} className="flex items-center gap-1.5 text-[#6b7280] hover:text-[#1b2b4b] text-sm transition-colors">
               <LogOut size={15} /> Sign out
