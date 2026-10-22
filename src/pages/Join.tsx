@@ -3,12 +3,24 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
 import { ArrowRight } from 'lucide-react'
+import { setContact } from '../lib/attendance'
+
+/** What a learner typed last time, so a five week course is one tap a day. */
+const PROFILE_KEY = 'nexaboard_profile'
+function savedProfile(): { name: string; email: string; phone: string } {
+  try {
+    const p = JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}') as Record<string, unknown>
+    return { name: String(p.name ?? ''), email: String(p.email ?? ''), phone: String(p.phone ?? '') }
+  } catch { return { name: '', email: '', phone: '' } }
+}
 
 export default function Join() {
   const { code } = useParams<{ code: string }>()
   const navigate = useNavigate()
   const [joinCode, setJoinCode] = useState(code === 'enter' ? '' : (code || '').toUpperCase())
-  const [name, setName] = useState('')
+  const [name, setName] = useState(() => savedProfile().name)
+  const [email, setEmail] = useState(() => savedProfile().email)
+  const [phone, setPhone] = useState(() => savedProfile().phone)
   const [loading, setLoading] = useState(false)
   const [step, setStep] = useState<'code' | 'name'>(code && code !== 'enter' ? 'name' : 'code')
   const [sessionInfo, setSessionInfo] = useState<{ id: string; title: string; subject: string } | null>(null)
@@ -42,9 +54,21 @@ export default function Join() {
     setSessionInfo(data); setStep('name')
   }
 
+  const emailOk = email.trim() === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+  const phoneDigits = phone.replace(/[^0-9+]/g, '')
+  const phoneOk = phone.trim() === '' || (phoneDigits.length >= 7 && phoneDigits.length <= 16)
+
+  /** Remember the details and file the contact (best effort, never blocks joining). */
+  const afterJoin = async (participantId: string) => {
+    try { localStorage.setItem(PROFILE_KEY, JSON.stringify({ name: name.trim(), email: email.trim(), phone: phone.trim() })) } catch { /* private mode */ }
+    if (email.trim() || phone.trim()) await setContact(participantId, email.trim(), phone.trim())
+  }
+
   const handleJoin = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!name.trim() || !sessionInfo) return
+    if (!emailOk) { toast.error('Check your email address'); return }
+    if (!phoneOk) { toast.error('Check your phone number'); return }
     setLoading(true)
 
     // Check if this device already has a participant slot for this session
@@ -61,6 +85,7 @@ export default function Join() {
           sessionStorage.setItem('nexaboard_participant_id', saved.id)
           sessionStorage.setItem('nexaboard_participant_name', name.trim())
           localStorage.setItem(`nexaboard_participant_${sessionInfo.id}`, JSON.stringify({ id: saved.id, name: name.trim() }))
+          await afterJoin(saved.id)
           navigate(`/student/${sessionInfo.id}`)
           return
         }
@@ -74,6 +99,7 @@ export default function Join() {
     sessionStorage.setItem('nexaboard_participant_id', data.id)
     sessionStorage.setItem('nexaboard_participant_name', name.trim())
     localStorage.setItem(`nexaboard_participant_${sessionInfo.id}`, JSON.stringify({ id: data.id, name: name.trim() }))
+    await afterJoin(data.id)
     navigate(`/student/${sessionInfo.id}`)
   }
 
@@ -112,8 +138,22 @@ export default function Join() {
               </div>
               <label className="block text-sm font-semibold text-[#1b2b4b] mb-1.5">Your Name</label>
               <input type="text" value={name} onChange={e => setName(e.target.value)} required placeholder="e.g. John Mensah"
-                className="w-full bg-[#f3fcf0] border border-green-200 rounded-lg px-4 py-3 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#5ab82e] mb-4"
+                className="w-full bg-[#f3fcf0] border border-green-200 rounded-lg px-4 py-3 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#5ab82e] mb-1"
                 autoFocus />
+              <p className="text-xs text-[#9ca3af] mb-4">Use your full name as it should appear on a certificate.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-1">
+                <div>
+                  <label className="block text-xs font-semibold text-[#1b2b4b] mb-1">Email <span className="font-normal text-[#9ca3af]">(optional)</span></label>
+                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" autoComplete="email"
+                    className={`w-full bg-[#f3fcf0] border rounded-lg px-3 py-2.5 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#5ab82e] ${emailOk ? 'border-green-200' : 'border-red-300'}`} />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-[#1b2b4b] mb-1">Phone <span className="font-normal text-[#9ca3af]">(optional)</span></label>
+                  <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="024 000 0000" autoComplete="tel"
+                    className={`w-full bg-[#f3fcf0] border rounded-lg px-3 py-2.5 text-sm text-[#1b2b4b] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#5ab82e] ${phoneOk ? 'border-green-200' : 'border-red-300'}`} />
+                </div>
+              </div>
+              <p className="text-xs text-[#9ca3af] mb-4">On a course with certificates, give the same email or phone every day so your attendance adds up. Only your teacher sees them.</p>
               <button type="submit" disabled={loading || !name.trim()}
                 className="w-full py-3 bg-[#1b2b4b] hover:bg-[#243660] disabled:opacity-40 text-white rounded-lg font-bold transition-colors shadow-md flex items-center justify-center gap-2">
                 {loading ? 'Joining...' : 'Join Session'} <ArrowRight size={16} />
