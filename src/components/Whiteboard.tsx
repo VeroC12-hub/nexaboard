@@ -20,6 +20,7 @@ import {
   type ShapeKind, type PenTool, type BoardState, type BoardPage, type TextItem,
 } from '../lib/board'
 import toast from 'react-hot-toast'
+import { liveUpdateGap } from '../lib/live'
 
 interface Props {
   sessionId: string
@@ -391,7 +392,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
     lastLaserPoint.current = point
     // eslint-disable-next-line react-hooks/purity -- pointer handler, not render
     const now = Date.now()
-    if (now - lastLaserSent.current < 50) return
+    if (now - lastLaserSent.current < liveUpdateGap(50)) return
     lastLaserSent.current = now
     sendLaser(point)
 
@@ -754,7 +755,7 @@ export default function Whiteboard({ sessionId, isTeacher, canDraw, boardKey }: 
     // Freehand streams its new points; shapes are cheap enough to resend whole.
     // eslint-disable-next-line react-hooks/purity -- pointer handler, not render
     const now = Date.now()
-    if (now - lastPointBroadcast.current < 60) return
+    if (now - lastPointBroadcast.current < liveUpdateGap(60)) return
     lastPointBroadcast.current = now
     if (stroke.shape) {
       channelRef.current?.send({

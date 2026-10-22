@@ -143,6 +143,8 @@ export interface LessonState {
   board?: BoardState
   notes?: unknown
   questions?: unknown
+  /** Broadcast mode and video engine, see lib/live.ts. */
+  live?: unknown
 }
 
 export async function loadLesson(sessionId: string): Promise<LessonState | null> {
@@ -172,10 +174,24 @@ export class NotSavedError extends Error {
  * real save from a silent no-op, and the lesson would look saved when it was
  * never written.
  */
-export async function saveLessonSlice(
+export function saveLessonSlice(
   sessionId: string,
   slice: Partial<LessonState>,
 ): Promise<void> {
+  /* Saves from one tab run one after another. The board, notes, questions and
+     live settings each save on their own timers, and two overlapping
+     read-modify-writes would let the later one put back the earlier one's
+     stale copy of a slice it never meant to touch. */
+  const prev = saveQueue.get(sessionId) ?? Promise.resolve()
+  const next = prev.catch(() => {}).then(() => writeSlice(sessionId, slice))
+  saveQueue.set(sessionId, next)
+  next.finally(() => { if (saveQueue.get(sessionId) === next) saveQueue.delete(sessionId) }).catch(() => {})
+  return next
+}
+
+const saveQueue = new Map<string, Promise<void>>()
+
+async function writeSlice(sessionId: string, slice: Partial<LessonState>): Promise<void> {
   const current = (await loadLesson(sessionId)) ?? {}
   const { data, error } = await supabase
     .from('sessions')
