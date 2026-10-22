@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import type { User } from '@supabase/supabase-js'
@@ -11,8 +11,15 @@ import ClassQuestion from '../components/ClassQuestion'
 import StudentWorkPanel from '../components/StudentWorkPanel'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff, HelpCircle, PenSquare, RotateCcw } from 'lucide-react'
+import { Monitor, Code2, FileText, Users, MessageSquare, Copy, Square, ChevronRight, ChevronLeft, Home, Video, VideoOff, HelpCircle, PenSquare, RotateCcw, Radio, ClipboardList } from 'lucide-react'
 import VideoCallNative from '../components/VideoCallNative'
+import LargeClassPanel from '../components/LargeClassPanel'
+import AttendancePanel from '../components/AttendancePanel'
+import { useLiveState } from '../components/useLiveState'
+import { isBroadcasting, resolveVideoEngine, setLargeClass, LARGE_CLASS_THRESHOLD } from '../lib/live'
+
+// LiveKit is a large bundle and most classes never load it.
+const LiveKitCall = lazy(() => import('../components/LiveKitCall'))
 
 type Tab = 'whiteboard' | 'code' | 'notes'
 type SideTab = 'students' | 'chat'
@@ -34,6 +41,35 @@ export default function Session({ user }: { user: User }) {
   const [callManuallyLeft, setCallManuallyLeft] = useState(false)
 
   const teacherName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Teacher'
+
+  // ── Large class ────────────────────────────────────────────────────────────
+  const live = useLiveState(id)
+  const broadcasting = isBroadcasting(live.state)
+  const engine = resolveVideoEngine(live.state.videoMode, live.sfuConfigured)
+  const [largeOpen, setLargeOpen] = useState(false)
+  const [attendanceOpen, setAttendanceOpen] = useState(false)
+  const [activeCount, setActiveCount] = useState(0)
+
+  // How many are in the room, so a big class switches the board to batched
+  // live updates (see setLargeClass). Polled, not subscribed: a realtime
+  // listener here would itself cost a message per join and leave.
+  useEffect(() => {
+    if (!id) return
+    let alive = true
+    const count = async () => {
+      const { count: n } = await supabase.from('session_participants')
+        .select('id', { count: 'exact', head: true }).eq('session_id', id).eq('is_active', true)
+      if (alive && typeof n === 'number') setActiveCount(n)
+    }
+    count()
+    const t = setInterval(count, 60_000)
+    return () => { alive = false; clearInterval(t) }
+  }, [id])
+
+  useEffect(() => {
+    setLargeClass(broadcasting || activeCount >= LARGE_CLASS_THRESHOLD)
+    return () => setLargeClass(false)
+  }, [broadcasting, activeCount])
 
   // Block browser refresh / tab close while call is active
   useEffect(() => {
@@ -178,6 +214,11 @@ export default function Session({ user }: { user: User }) {
             className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
             <PenSquare size={12} /> Student Work
           </button>
+          <button onClick={() => setAttendanceOpen(true)}
+            title="Who joined, when, and for how long"
+            className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
+            <ClipboardList size={12} /> Attendance
+          </button>
           <button onClick={() => setAskOpen(true)}
             title="Ask the class a question and see their answers"
             className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] rounded-lg text-xs font-semibold border border-green-200 transition-colors">
@@ -185,6 +226,11 @@ export default function Session({ user }: { user: User }) {
           </button>
           {/* The code and the call only mean anything while the class is open. */}
           {isLive && <>
+          <button onClick={() => setLargeOpen(true)}
+            title="Broadcast a live stream to a big class, and choose the video engine"
+            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${broadcasting ? 'bg-red-500 text-white border-red-500' : 'bg-[#f3fcf0] hover:bg-green-100 text-[#1b2b4b] border-green-200'}`}>
+            <Radio size={12} /> {broadcasting ? 'On air' : 'Large class'}
+          </button>
           <button onClick={copyCode}
             className="flex items-center gap-1 px-2.5 py-1.5 bg-[#f3fcf0] hover:bg-green-100 text-[#5ab82e] font-mono font-bold rounded-lg text-xs border border-green-200 transition-colors">
             <Copy size={11} /> {session?.join_code}
@@ -279,7 +325,32 @@ export default function Session({ user }: { user: User }) {
         />
       )}
 
-      {callOpen && (
+      {largeOpen && (
+        <LargeClassPanel
+          state={live.state}
+          sfuConfigured={live.sfuConfigured}
+          publish={live.publish}
+          onClose={() => setLargeOpen(false)}
+        />
+      )}
+
+      {attendanceOpen && (
+        <AttendancePanel sessionId={id!} sessionTitle={session?.title ?? 'class'} onClose={() => setAttendanceOpen(false)} />
+      )}
+
+      {callOpen && engine === 'sfu' && (
+        <Suspense fallback={null}>
+          <LiveKitCall
+            sessionId={id!}
+            isTeacher
+            participantId={null}
+            displayName={teacherName}
+            onClose={() => { setCallOpen(false); setCallManuallyLeft(true); sessionStorage.removeItem(`nexaboard_call_${id}`) }}
+          />
+        </Suspense>
+      )}
+
+      {callOpen && engine === 'mesh' && (
         <VideoCallNative
           sessionId={id!}
           isTeacher

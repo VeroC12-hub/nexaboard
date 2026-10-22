@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import type { Session, Participant } from '../types'
@@ -7,11 +7,18 @@ import CodeEditor from '../components/CodeEditor'
 import ChatSidebar from '../components/ChatSidebar'
 import RichTextEditor from '../components/RichTextEditor'
 import toast from 'react-hot-toast'
-import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft, Video, VideoOff, LogOut, HelpCircle, PenSquare } from 'lucide-react'
+import { Monitor, Code2, FileText, MessageSquare, Hand, Pencil, ChevronRight, ChevronLeft, Video, VideoOff, LogOut, HelpCircle, PenSquare, Radio } from 'lucide-react'
 import VideoCallNative from '../components/VideoCallNative'
 import ClassQuestion from '../components/ClassQuestion'
+import LiveStreamPlayer from '../components/LiveStreamPlayer'
+import { useLiveState } from '../components/useLiveState'
+import { useAttendance } from '../components/useAttendance'
+import { isBroadcasting, resolveVideoEngine, setLargeClass } from '../lib/live'
 
-type Tab = 'whiteboard' | 'mywork' | 'code' | 'notes' | 'mynotes'
+// LiveKit is a large bundle and most classes never load it.
+const LiveKitCall = lazy(() => import('../components/LiveKitCall'))
+
+type Tab = 'live' | 'whiteboard' | 'mywork' | 'code' | 'notes' | 'mynotes'
 
 export default function StudentSession() {
   const { sessionId } = useParams<{ sessionId: string }>()
@@ -41,6 +48,34 @@ export default function StudentSession() {
   const participantName = sessionStorage.getItem('nexaboard_participant_name') || 'Student'
   const [askOpen, setAskOpen] = useState(false)
   const [unseenQuestion, setUnseenQuestion] = useState(false)
+
+  // ── Large class: broadcast stream, video engine, attendance ──────────────
+  const live = useLiveState(sessionId)
+  const broadcasting = isBroadcasting(live.state)
+  const streamId = live.state.stream?.videoId ?? null
+  const engine = resolveVideoEngine(live.state.videoMode, live.sfuConfigured)
+  // Direct (mesh) video is what cannot scale, so it is off while broadcasting.
+  const meshBlocked = broadcasting && engine === 'mesh'
+  useAttendance(participantId, !loading && !!session)
+
+  useEffect(() => { setLargeClass(broadcasting); return () => setLargeClass(false) }, [broadcasting])
+
+  // Stream switched on: bring everyone to it. Switched off: back to the board.
+  // Adjusting state while rendering, keyed on the previous value, is React's
+  // recommended alternative to a synchronising effect.
+  const [seenBroadcast, setSeenBroadcast] = useState<string | null>(null)
+  const broadcastKey = broadcasting ? streamId : null
+  if (broadcastKey !== seenBroadcast) {
+    setSeenBroadcast(broadcastKey)
+    if (broadcastKey) setTab('live')
+    else if (tab === 'live') setTab('whiteboard')
+  }
+  // A direct call that was open simply stops rendering while the broadcast is
+  // on (callOpen is kept, so it comes back by itself when the broadcast ends).
+  const callHidden = meshBlocked && callOpen
+  useEffect(() => {
+    if (callHidden) toast('Your teacher is broadcasting, so the video call is paused. Watch on the Live tab.', { icon: '📺' })
+  }, [callHidden])
 
   // Block browser refresh / tab close while call is active
   useEffect(() => {
@@ -180,6 +215,12 @@ export default function StudentSession() {
         {/* Row 2 (mobile) / rest of row (desktop): tabs + actions */}
         <div className="flex items-center gap-2 sm:ml-auto flex-wrap">
           <div className="flex items-center bg-[#f3fcf0] border border-green-200 rounded-lg p-0.5 gap-0.5">
+            {broadcasting && (
+              <button onClick={() => setTab('live')}
+                className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'live' ? 'bg-red-500 text-white shadow-sm' : 'text-red-500 hover:bg-red-50'}`}>
+                <Radio size={13} /> Live
+              </button>
+            )}
             <button onClick={() => setTab('whiteboard')}
               className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${tab === 'whiteboard' ? 'bg-white text-[#1b2b4b] shadow-sm' : 'text-[#6b7280] hover:text-[#1b2b4b]'}`}>
               <Monitor size={13} /> Board
@@ -219,7 +260,7 @@ export default function StudentSession() {
             </button>
           )}
 
-          <button
+          {!meshBlocked && <button
             disabled={!teacherInCall && !callOpen}
             onClick={() => {
               const next = !callOpen
@@ -237,7 +278,7 @@ export default function StudentSession() {
           >
             {callOpen ? <VideoOff size={12} /> : <Video size={12} />}
             {callOpen ? 'Leave Call' : teacherInCall ? 'Join Call' : 'No Call'}
-          </button>
+          </button>}
           <button onClick={raiseHand}
             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${participant?.hand_raised ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-[#f3fcf0] text-[#6b7280] border-green-200 hover:text-[#1b2b4b]'}`}>
             <Hand size={11} /> {participant?.hand_raised ? 'Lower' : 'Raise Hand'}
@@ -251,7 +292,15 @@ export default function StudentSession() {
 
       {/* Main layout */}
       <div className="flex-1 flex min-h-0">
-        <div className="flex-1 min-w-0 flex flex-col">
+        <div className="flex-1 min-w-0 flex flex-col relative">
+          {broadcasting && streamId && (
+            <LiveStreamPlayer
+              videoId={streamId}
+              mode={tab === 'live' ? 'full' : 'mini'}
+              onExpand={() => setTab('live')}
+              onShrink={() => setTab('whiteboard')}
+            />
+          )}
           <div className={tab === 'whiteboard' ? 'flex-1 min-h-0' : 'hidden'}><Whiteboard sessionId={sessionId!} isTeacher={false} canDraw={canDraw} /></div>
           <div className={tab === 'mywork' ? 'flex-1 min-h-0' : 'hidden'}>
             <Whiteboard sessionId={sessionId!} isTeacher={false} canDraw boardKey={participantId ?? 'anon'} />
@@ -276,7 +325,18 @@ export default function StudentSession() {
           />
         )}
 
-        {callOpen && participantId && (
+        {callOpen && participantId && engine === 'sfu' && (
+          <Suspense fallback={null}>
+            <LiveKitCall
+              sessionId={sessionId!}
+              isTeacher={false}
+              participantId={participantId}
+              displayName={participantName}
+              onClose={() => { setCallOpen(false); sessionStorage.removeItem(`nexaboard_call_${sessionId}`) }}
+            />
+          </Suspense>
+        )}
+        {callOpen && participantId && engine === 'mesh' && !meshBlocked && (
           <VideoCallNative
             sessionId={sessionId!}
             isTeacher={false}
