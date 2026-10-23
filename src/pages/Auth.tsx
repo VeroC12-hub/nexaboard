@@ -20,7 +20,11 @@ export default function Auth() {
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { data: { full_name: name } },
+          options: {
+            data: { full_name: name },
+            // the Supabase project is shared, so return to this app rather than the project's Site URL
+            emailRedirectTo: `${window.location.origin}/`,
+          },
         })
         if (error) throw error
         toast.success('Account created! Check your email to confirm.')
