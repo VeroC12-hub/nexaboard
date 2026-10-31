@@ -379,9 +379,20 @@ export const TASKS = {
     'whole lesson properly explained. Do not pad to look thorough.',
     '',
     'READING LEVEL',
-    'Write at the level of their year group, and below it if their record says',
-    'they struggle with reading. Short sentences and common words are never',
-    'wrong. Long ones often are.',
+    'The learner brief says how simply to put it. Follow it exactly, even when',
+    'it is far below their year group. A learner in JHS 3 may have asked to be',
+    'written for as though they were in Basic 2, and that is a legitimate',
+    'request from somebody who knows they are not following the usual wording.',
+    '',
+    'SIMPLER WORDS NEVER MEANS LESS CONTENT',
+    'This is the part that is easy to get wrong. Writing more simply means',
+    'shorter sentences, commoner words, more everyday examples, and taking one',
+    'step at a time. It does not mean dropping steps, skipping the reasoning,',
+    'or leaving out the hard part. The learner asked for it to be easier to',
+    'read, not for less to be taught. A simplified lesson that quietly teaches',
+    'less is how a struggling learner stays behind.',
+    'Technical terms stay. Say the term, then say what it means in plain words.',
+    'Removing the term would leave them unable to follow their own class.',
     '',
     'DO NOT',
     'Do not mention that you are retelling anything, or that a lesson exists',
@@ -868,6 +879,9 @@ const FOOTINGS = {
  * keep mirroring them: a learner given the kid interface must not be sent a
  * lesson written for somebody who can read.
  */
+/** How far each `ease` setting moves a learner from their year group. */
+const SHIFT = { MUCH_SIMPLER: -2, SIMPLER: -1, NORMAL: 0, DEEPER: 1 };
+
 export function readingLevel(learner = {}) {
   const stage = String(learner.stage || '').toLowerCase();
   const level = String(learner.level || '');
@@ -875,11 +889,29 @@ export function readingLevel(learner = {}) {
   /* Creche is KG. Basic 1 and 2 are five to seven year olds who are still
      learning to decode words, so reading is the obstacle rather than the
      medium. */
-  if (stage === 'creche') return 'preReader';
-  if (stage === 'primary' && /basic ?[12]\b|^p ?[12]\b|^kg/i.test(level)) return 'preReader';
-  if (stage === 'primary') return 'earlyReader';
-  if (stage === 'jhs') return 'reader';
-  return 'fluent';
+  /* Where the year group alone would put them. */
+  let at;
+  if (stage === 'creche') at = 0;
+  else if (stage === 'primary' && /basic ?[12]\b|^p ?[12]\b|^kg/i.test(level)) at = 0;
+  else if (stage === 'primary') at = 1;
+  else if (stage === 'jhs') at = 2;
+  else at = 3;
+
+  /* And where the learner asked to be put instead.
+
+     This is the whole reason the function is no longer a lookup table. Two
+     learners in one JHS 3 class read very differently, and the one who is
+     struggling used to be given JHS 3 wording regardless, because the app
+     decided what she could read from the room she sits in. She could not
+     ask for anything else. A lesson she cannot follow is not a harder
+     lesson, it is no lesson.
+
+     Nothing is removed by moving down a level. The same facts, the same
+     steps and the same answer are given in words she can actually read. */
+  const shift = SHIFT[String(learner.ease || 'NORMAL')] || 0;
+  const LEVELS = ['preReader', 'earlyReader', 'reader', 'fluent'];
+  const i = Math.max(0, Math.min(LEVELS.length - 1, at + shift));
+  return LEVELS[i];
 }
 
 /**

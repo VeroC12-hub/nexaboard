@@ -70,6 +70,38 @@ export type Diet = 'READ' | 'WATCH' | 'PRACTISE' | 'MIXED'
 export type Depth = 'BRIEF' | 'FULL' | 'DEEP'
 
 /**
+ * How simply a learner wants things put, regardless of their class.
+ *
+ * ── Why this cannot be worked out from the year group ──────────────────────
+ *
+ * It used to be. `readingLevel` read the stage and the year and returned a
+ * fixed answer: every JHS learner was a "reader", every Basic 1 learner a
+ * "preReader", and nothing could change it.
+ *
+ * That quietly fails the learners who need the app most. A JHS 3 pupil who
+ * is struggling is given JHS 3 wording whatever happens, because the app
+ * decided what she could read from the class she sits in. If she cannot
+ * follow it, she has no way to say so, and the result is not a harder
+ * lesson, it is no lesson at all.
+ *
+ * Two children in the same room read very differently. The class tells you
+ * what they are studying. It does not tell you how it should be said.
+ *
+ * So this is asked, and it can be changed mid lesson, because a learner
+ * discovers they are lost while reading rather than while filling in a form.
+ * `NORMAL` keeps the old behaviour for anybody who never touches it.
+ */
+export type Ease = 'MUCH_SIMPLER' | 'SIMPLER' | 'NORMAL' | 'DEEPER'
+
+/** How far each setting moves the wording from the year group's level. */
+export const EASE_SHIFT: Record<Ease, number> = {
+  MUCH_SIMPLER: -2,
+  SIMPLER: -1,
+  NORMAL: 0,
+  DEEPER: 1,
+}
+
+/**
  * One set of results the learner brought with them.
  *
  * Modelled as a record per term rather than a pile of files, because that is
@@ -120,6 +152,13 @@ export interface LearnerProfile {
    * existed keeps the lesson they were already getting.
    */
   depth?: Depth
+  /**
+   * How simply to put things, independent of the year group.
+   *
+   * Absent means NORMAL, so a learner created before this existed reads
+   * exactly what they read before.
+   */
+  ease?: Ease
   /**
    * The course they are offering, where the stage has courses.
    *
@@ -231,6 +270,7 @@ export const DEFAULT_PROFILE: LearnerProfile = {
   footing: 'OKAY',
   diet: 'MIXED',
   depth: 'FULL',
+  ease: 'NORMAL',
   programme: null,
   subjectId: null,
   aiNotes: {},
@@ -391,6 +431,20 @@ export const DEPTHS: Choice<Depth>[] = [
   { value: 'FULL',  label: 'The whole lesson',  note: 'The idea, why it works, and the common mistakes.' },
   { value: 'BRIEF', label: 'Just the main thing', note: 'What it is and how to do it. Nothing else.' },
   { value: 'DEEP',  label: 'All of it',         note: 'Everything, including what comes after your year.' },
+]
+
+/**
+ * Worded as a learner would say it, and carefully.
+ *
+ * Nobody wants to tick a box that says they are behind. So these describe
+ * the words on the page rather than the person reading them: it is the
+ * explanation that is simple, not the learner.
+ */
+export const EASES: Choice<Ease>[] = [
+  { value: 'NORMAL',       label: 'Normal',            note: 'Explained for my class.' },
+  { value: 'SIMPLER',      label: 'A bit simpler',     note: 'Shorter sentences, easier words.' },
+  { value: 'MUCH_SIMPLER', label: 'As simple as possible', note: 'Explained as if I were much younger. Nothing is left out.' },
+  { value: 'DEEPER',       label: 'Go deeper',         note: 'Treat me as further ahead than my class.' },
 ]
 
 export const FOOTINGS: Choice<Footing>[] = [

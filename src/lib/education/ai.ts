@@ -468,6 +468,8 @@ export function askRetell(
     because?: string
     depth?: string
     year?: string
+    /** How simply to put it, which may be far below their year group. */
+    ease?: string
   },
   handlers: TutorHandlers,
   signal?: AbortSignal,

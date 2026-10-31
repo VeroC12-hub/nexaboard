@@ -51,6 +51,9 @@ import { asksFor, askBrief } from '../lib/education/ask'
 import { primerAloud, primerFor, type Primer } from '../lib/education/primer'
 import { assemble } from '../lib/education/taught'
 import { askRetell } from '../lib/education/ai'
+
+/** The ease settings in order, easiest first, so a step down is an index. */
+const EASE_STEPS = ['MUCH_SIMPLER', 'SIMPLER', 'NORMAL', 'DEEPER'] as const
 import { taughtFor } from '../lib/education/taught-registry'
 import { mediumBrief } from '../lib/education/medium'
 import {
@@ -807,6 +810,19 @@ function Lesson({
    * Nothing here is stored. It is written for one reading, which is exactly
    * why it can be free with the wording in a way stored content cannot.
    */
+  /**
+   * A simpler telling, asked for during the lesson.
+   *
+   * The setting on the profile is the learner's usual preference. This is
+   * the one they reach for when they are halfway down a page and have
+   * realised they are lost, which is when people actually discover it.
+   * Asking them to go back to a settings screen at that moment is asking
+   * them to give up, and most would.
+   *
+   * It applies to this lesson only and resets on the next one, because
+   * being stuck on one topic says nothing about the next.
+   */
+  const [easier, setEasier] = useState(0)
   const [retold, setRetold] = useState('')
   /* Starts true: a retelling is requested as soon as this screen opens, and
      nothing uses the flag until some text has actually arrived. */
@@ -863,6 +879,12 @@ function Lesson({
         because: stored.because,
         depth: learner.profile.depth ?? 'FULL',
         year: learner.profile.level,
+        /* The profile preference, moved down by however many times they
+           have asked for it simpler on this page. */
+        ease: EASE_STEPS[Math.max(
+          0,
+          EASE_STEPS.indexOf(learner.profile.ease ?? 'NORMAL') - easier,
+        )],
       },
       {
         onText: (chunk: string) => {
@@ -880,9 +902,9 @@ function Lesson({
       .finally(() => { if (!ctrl.signal.aborted) setRetelling(false) })
 
     return () => ctrl.abort()
-    /* Once per topic. A changed profile arrives as a fresh key. */
+    /* Once per topic, and again each time they ask for it simpler. */
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topic.id, stored])
+  }, [topic.id, stored, easier])
 
   const [text, setText] = useState('')
   const [state, setState] = useState<'live' | 'done' | 'off' | 'failed'>(
@@ -1499,6 +1521,25 @@ function Lesson({
                   </button>
                 )}
               </p>
+
+              {/* The way out of being stuck, where being stuck happens.
+
+                  A learner finds out the wording is too hard halfway down
+                  the page, not while filling in a form. Sending them to a
+                  settings screen at that moment is asking them to give up.
+
+                  It says nothing about their class or their ability. It
+                  changes how it is said, not what is taught. */}
+              {!retelling && easier < 2 && (
+                <div className="nx-taught-actions">
+                  <button
+                    type="button"
+                    className="nx-btn"
+                    onClick={() => setEasier(easier + 1)}>
+                    {easier === 0 ? 'Say this more simply' : 'Simpler still'}
+                  </button>
+                </div>
+              )}
             </div>
           )}
 

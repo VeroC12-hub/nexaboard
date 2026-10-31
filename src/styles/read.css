@@ -558,3 +558,14 @@
   color: var(--nx-ink-2, #44505f);
   text-align: left;
 }
+
+/* The way out of being stuck, under a retold lesson. Deliberately plain and
+   deliberately present: a learner who cannot follow the wording needs this
+   where they are reading, not in a settings screen they would have to go
+   and find. */
+.nx-taught-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
