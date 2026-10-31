@@ -100,6 +100,22 @@ export interface Taught {
   /** What the thing IS. Always shown, to everybody. */
   idea: string
   /**
+   * The same lesson told short, for a learner who asked for the gist.
+   *
+   * Not an extract of the full one. A summary written on purpose: the idea in
+   * two or three sentences and the method in as few steps as still work. A
+   * learner who picks BRIEF is not being given less teaching, they are being
+   * given the part they can act on now, and they can open the full version
+   * whenever they want it.
+   *
+   * Optional. A topic with no brief form serves the full one to everybody,
+   * which is what every lesson written before this did.
+   */
+  brief?: {
+    idea?: string
+    method?: string[]
+  }
+  /**
    * Why it works, rather than that it works.
    *
    * The rule the prompts have always carried: "take 4 from both sides" teaches
@@ -174,19 +190,42 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
   const shows = p.diet === 'WATCH'
   const doing = p.diet === 'PRACTISE'
 
-  const idea: Piece = { kind: 'idea', heading: 'The idea', text: t.idea }
+  /* How much they asked for. Absent means FULL, so nothing changes for a
+     learner who was created before the question was asked. */
+  const depth = p.depth ?? 'FULL'
+  const gist = depth === 'BRIEF'
+  const deep = depth === 'DEEP'
 
-  const mechanism: Piece | null = t.mechanism && !(strong && doing)
+  /* The short telling where the topic has one. A topic with no brief form
+     falls back to the full wording rather than to nothing, because a shorter
+     lesson is the point and an empty one is a bug. */
+  const idea: Piece = {
+    kind: 'idea',
+    heading: 'The idea',
+    text: (gist && t.brief?.idea) || t.idea,
+  }
+  if (gist && t.brief?.idea) why.push('it is the short version, because you asked for the gist')
+  else if (gist) why.push('you asked for the gist, and this topic has only the full telling')
+
+  /* The reasoning. Dropped for a strong learner who prefers doing, dropped
+     again for anybody who asked for the gist, and kept for DEEP whatever
+     else is true: somebody who wants all of it has said so. */
+  const wantsMechanism = deep || !(gist || (strong && doing))
+  const mechanism: Piece | null = t.mechanism && wantsMechanism
     ? { kind: 'mechanism', heading: 'Why it works', text: t.mechanism }
     : null
-  if (t.mechanism && !mechanism) why.push('the reasoning is left out because you are strong here and prefer to be doing')
+  if (t.mechanism && !mechanism && !gist) why.push('the reasoning is left out because you are strong here and prefer to be doing')
 
-  const recap: Piece | null = t.recap && (catchingUp || shaky)
+  const recap: Piece | null = t.recap && (catchingUp || shaky) && !gist
     ? { kind: 'recap', heading: 'First, the thing it stands on', text: t.recap }
     : null
   if (recap) why.push(catchingUp ? 'it starts further back because you are closing gaps' : 'it starts further back because you said you are shaky here')
 
-  const method: Piece = { kind: 'method', heading: 'How to do any of them', lines: t.method }
+  const method: Piece = {
+    kind: 'method',
+    heading: 'How to do any of them',
+    lines: (gist && t.brief?.method?.length) ? t.brief.method : t.method,
+  }
 
   /* One worked example, at the level that suits them, not all of them. A page
      of five worked examples is a page nobody finishes. */
@@ -200,7 +239,10 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
 
   /* Traps are useful to everybody and required for somebody sitting an exam,
      which is the one goal that explicitly asks for the common trap. */
-  const traps: Piece | null = t.traps?.length
+  /* Traps are cut from the gist. They are the longest part of most lessons
+     and the least useful to somebody who only wants to know what the thing
+     is. Anybody sitting an exam is not on BRIEF. */
+  const traps: Piece | null = t.traps?.length && !gist
     ? {
       kind: 'traps',
       heading: forExam ? 'What loses marks' : 'Where it usually goes wrong',
@@ -208,10 +250,14 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     }
     : null
 
-  const extension: Piece | null = t.extension && further
+  const extension: Piece | null = t.extension && (further || deep) && !gist
     ? { kind: 'extension', heading: 'Further than your class has gone', text: t.extension }
     : null
-  if (extension) why.push('it goes past your year because you asked not to be held back')
+  if (extension) {
+    why.push(further
+      ? 'it goes past your year because you asked not to be held back'
+      : 'it goes past your year because you asked for all of it')
+  }
 
   const figure: Piece | null = t.figure
     ? { kind: 'figure', heading: 'Picture it', figure: t.figure }

@@ -46,6 +46,30 @@ export type Footing = 'SHAKY' | 'OKAY' | 'STRONG'
 export type Diet = 'READ' | 'WATCH' | 'PRACTISE' | 'MIXED'
 
 /**
+ * How much of a lesson somebody wants.
+ *
+ * ── Why this was missing, and what it cost ──────────────────────────────────
+ *
+ * `assemble` could already reorder a lesson, drop the reasoning for a strong
+ * learner and add a recap for a shaky one. What it could not do was make a
+ * lesson shorter or longer, because nothing in the profile said how much the
+ * learner wanted. So every learner got between 250 and 320 words, and two
+ * learners as different as "keep up" and "sitting an exam" received byte for
+ * byte the same page.
+ *
+ * That was measured, not guessed: `scripts/coverage/personalisation-check.mts`
+ * showed 100% identical sentences for that pair. Godwin had said from the
+ * start that one person wants a summary and another wants it in full, and the
+ * app had no way to hold that fact about a person.
+ *
+ * BRIEF is the gist: what it is, how to do it, one example.
+ * FULL is the whole lesson, and the default for anybody who never said.
+ * DEEP keeps the reasoning and goes past the year, for somebody who wants all
+ * of it whatever their footing.
+ */
+export type Depth = 'BRIEF' | 'FULL' | 'DEEP'
+
+/**
  * One set of results the learner brought with them.
  *
  * Modelled as a record per term rather than a pile of files, because that is
@@ -89,6 +113,13 @@ export interface LearnerProfile {
   footing: Footing
   /** What kind of material to lead with. */
   diet: Diet
+  /**
+   * How much of the lesson they want: the gist, the whole thing, or all of it.
+   *
+   * Optional, and absent means FULL, so every learner created before this
+   * existed keeps the lesson they were already getting.
+   */
+  depth?: Depth
   /**
    * The course they are offering, where the stage has courses.
    *
