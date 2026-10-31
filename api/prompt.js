@@ -329,6 +329,66 @@ export const TASKS = {
      strong, and no "the thing it stands on" to add for somebody shaky. This
      task produces the parts `taught.ts` assembles from, which is what turns one
      stored lesson into a different lesson per child. */
+  /**
+   * Tell an existing lesson again, for one learner, without changing it.
+   *
+   * This is the last piece of the personalisation, and it is deliberately
+   * the most constrained task in the file.
+   *
+   * `assemble` can already choose which parts a learner sees, in what
+   * order, and whether they get the summary or the whole thing. What it
+   * cannot do is change the words, because the words were written once. So
+   * two learners who both ask for the gist receive the same gist. Measured,
+   * that showed as 100% identical sentences between them.
+   *
+   * This task closes that gap and nothing else. It is handed a lesson a
+   * person has already read and approved, and it re-tells it for the
+   * learner in front of it. It must not add a fact, drop a step, or change
+   * an answer, because the accuracy of what it is given was established by
+   * review and this task is not reviewed. Everything it is allowed to
+   * change is a matter of telling: the words, the length, the examples it
+   * reaches for, how much is assumed.
+   *
+   * The result is never stored and never approved. It exists for one
+   * reading by one learner, which is exactly why it can be free with the
+   * wording in a way stored content cannot.
+   */
+  retell: [
+    'Below is a lesson that a teacher has already read and approved, and a',
+    'description of one learner. Tell that same lesson again, for that one',
+    'learner. Return plain prose, not JSON.',
+    '',
+    'WHAT YOU MAY NOT CHANGE',
+    'Every fact, every step of every method, every answer, and every warning',
+    'about a mistake. The lesson was checked by a person. You were not. If you',
+    'think something in it is wrong, say so in one line at the end rather than',
+    'quietly correcting it, because a silent correction is indistinguishable',
+    'from a silent error.',
+    'Do not add facts that are not in the lesson, even true ones. The learner',
+    'cannot tell which parts were reviewed and which you added.',
+    '',
+    'WHAT YOU ARE HERE TO CHANGE',
+    'The telling. Use the words this learner will follow. Make it as long or as',
+    'short as they asked for. Reach for examples from their life rather than the',
+    'ones in the lesson, as long as the point is identical. Assume what they',
+    'already know and spell out what they do not.',
+    '',
+    'LENGTH',
+    'Match what they asked for. Somebody who wants the gist should get a few',
+    'short paragraphs and no more. Somebody who wants all of it should get the',
+    'whole lesson properly explained. Do not pad to look thorough.',
+    '',
+    'READING LEVEL',
+    'Write at the level of their year group, and below it if their record says',
+    'they struggle with reading. Short sentences and common words are never',
+    'wrong. Long ones often are.',
+    '',
+    'DO NOT',
+    'Do not mention that you are retelling anything, or that a lesson exists',
+    'behind what they are reading. To the learner this is simply their lesson.',
+    'Do not open by naming the topic back at them. They clicked it.',
+  ],
+
   taught: [
     'Write a stored lesson for the topic named below, as JSON and nothing else.',
     '',
@@ -1324,6 +1384,36 @@ export function buildTaughtUser({ topic, topicId, outcome, year, place, syllabus
   return lines.join('\n\n');
 }
 
+/**
+ * Hand over the approved lesson and ask for it in this learner's words.
+ *
+ * The lesson arrives already assembled for this learner, so the parts they
+ * were not going to see are not here, and the order is the one chosen for
+ * them. That matters: the model should re-tell what they were going to be
+ * given, not the whole stored topic.
+ */
+export function buildRetellUser({ topic, lesson, because, depth, year }) {
+  const lines = [`THE TOPIC\n${String(topic || '').trim()}`];
+  if (year) lines.push(`THEIR YEAR GROUP\n${year}`);
+
+  const want = depth === 'BRIEF'
+    ? 'They asked for the main thing only. A few short paragraphs.'
+    : depth === 'DEEP'
+      ? 'They asked for all of it, including what comes after their year.'
+      : 'They asked for the whole lesson, properly explained.';
+  lines.push(`HOW MUCH THEY WANT\n${want}`);
+
+  /* Why `assemble` put it together this way. It is already written as a
+     sentence for the learner, and it tells the model what was decided about
+     them more compactly than restating the profile would. */
+  if (because) lines.push(`WHY IT WAS PUT TOGETHER THIS WAY\n${because}`);
+
+  lines.push('THE APPROVED LESSON, to be retold and not changed\n'
+    + String(lesson || '').trim());
+
+  return lines.join('\n\n');
+}
+
 /** Write practice questions for this topic. */
 export function buildQuestionsUser({ topic, count, level, avoid }) {
   const n = Math.max(1, Math.min(8, Number(count) || 4));
@@ -1396,6 +1486,10 @@ export const SHAPES = {
      is why the builder reads both. */
   outline: { needs: 'topic', build: buildOutlineUser },
   taught: { needs: 'topic', build: buildTaughtUser },
+  /* Needs a topic for the heading, and the lesson itself in `lesson`.
+     An empty lesson would make this a `lesson` task with no guardrails,
+     so the caller must not send one. */
+  retell: { needs: 'topic', build: buildRetellUser },
   figure: { needs: 'topic', build: buildVisualUser },
   illustration: { needs: 'topic', build: buildVisualUser },
   clip: { needs: 'topic', build: buildVisualUser },

@@ -428,6 +428,59 @@ export function askHelper(
 }
 
 /** Teach a topic from the syllabus. Streams, because a lesson is long. */
+/**
+ * Tell an approved lesson again, in this learner's words.
+ *
+ * ── Why this exists, and why it is not `askLesson` ─────────────────────────
+ *
+ * `assemble` personalises which parts a learner sees, their order, and
+ * whether they get the summary or the whole thing. It cannot personalise the
+ * words, because the words were written once by a person. Measured, two
+ * learners who both ask for the gist receive sentences that are 100%
+ * identical.
+ *
+ * This closes that, and only that. It is given a lesson somebody has already
+ * read and approved, and asks for the same lesson told for this learner. The
+ * prompt forbids adding facts, dropping steps or changing answers, because
+ * the accuracy of the input came from review and the output is not reviewed.
+ *
+ * `askLesson` is the opposite: it invents a lesson where none exists. The two
+ * must stay separate, because one is constrained by approved content and the
+ * other is not, and a caller should never be able to confuse them.
+ *
+ * Streamed, because a learner watching a spinner has stopped learning, and
+ * the stored version is already on screen underneath while this arrives.
+ */
+export function askRetell(
+  r: {
+    learner: LearnerBrief
+    /** The topic title, for the heading only. */
+    topic: string
+    /**
+     * The assembled, approved lesson as plain text.
+     *
+     * Assembled rather than the whole stored topic, so the retelling covers
+     * what this learner was going to be shown and not the parts `assemble`
+     * had already decided to leave out.
+     */
+    lesson: string
+    /** `assemble`'s own sentence about why it chose this shape. */
+    because?: string
+    depth?: string
+    year?: string
+  },
+  handlers: TutorHandlers,
+  signal?: AbortSignal,
+): Promise<void> {
+  /* Refused here rather than sent and hoped for. With an empty lesson this
+     task has no approved content to be bound by, so it would quietly become
+     a `lesson` task with none of that task's instructions. */
+  if (!r.lesson.trim()) {
+    return Promise.reject(new Error('Nothing to retell: no approved lesson was given.'))
+  }
+  return run({ task: 'retell', ...r } as unknown as Job, handlers, signal)
+}
+
 export function askLesson(
   r: { learner: LearnerBrief, syllabus: SyllabusPlace, askedFor?: string },
   handlers: TutorHandlers,

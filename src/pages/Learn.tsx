@@ -50,6 +50,7 @@ import '../styles/paged.css'
 import { asksFor, askBrief } from '../lib/education/ask'
 import { primerAloud, primerFor, type Primer } from '../lib/education/primer'
 import { assemble } from '../lib/education/taught'
+import { askRetell } from '../lib/education/ai'
 import { taughtFor } from '../lib/education/taught-registry'
 import { mediumBrief } from '../lib/education/medium'
 import {
@@ -783,6 +784,37 @@ function Lesson({
   const young = skin === 'kid'
 
   /**
+   * The same lesson, told again in this learner's own words.
+   *
+   * ── The last gap in the personalisation ────────────────────────────────
+   *
+   * `assemble` chooses the parts, the order and the depth. It cannot choose
+   * the words, because a person wrote them once. So two learners who both
+   * ask for the gist get sentences that are identical, which was measured
+   * rather than assumed.
+   *
+   * This asks the tutor to re-tell the approved lesson for this learner.
+   * The prompt forbids it from adding a fact, dropping a step or changing
+   * an answer: it may only change the telling.
+   *
+   * ── Why the approved version never goes away ───────────────────────────
+   *
+   * A retelling is not reviewed. The lesson underneath it is. So the
+   * retelling is labelled as such and the reviewed version stays one tap
+   * away, always. Quietly replacing checked text with unchecked text, with
+   * no way back, would undo the point of having a review step at all.
+   *
+   * Nothing here is stored. It is written for one reading, which is exactly
+   * why it can be free with the wording in a way stored content cannot.
+   */
+  const [retold, setRetold] = useState('')
+  /* Starts true: a retelling is requested as soon as this screen opens, and
+     nothing uses the flag until some text has actually arrived. */
+  const [retelling, setRetelling] = useState(true)
+  /** Which the learner is looking at. Theirs by default once it arrives. */
+  const [showOriginal, setShowOriginal] = useState(false)
+
+  /**
    * The stored lesson for this topic, assembled for this learner.
    *
    * Tried before anything is asked of a model. Where it exists the topic is
@@ -797,6 +829,60 @@ function Lesson({
        arrives as a new key rather than as a changed prop. */
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topic.id])
+
+  /**
+   * Ask for the retelling, once, in the background.
+   *
+   * The stored lesson is already on screen while this runs, so there is
+   * nothing to wait for and no spinner to watch. If the tutor cannot be
+   * reached the learner never finds out, because what they are reading was
+   * always going to be the floor.
+   */
+  useEffect(() => {
+    if (!stored) return
+    const ctrl = new AbortController()
+    let got = ''
+
+    /* The lesson as the learner would have read it: the parts `assemble`
+       chose, in its order. Not the whole stored topic, or the retelling
+       would put back the parts that were deliberately left out. */
+    const text = stored.pieces
+      .map(x => [
+        x.heading,
+        x.text ?? '',
+        x.lines?.join('\n') ?? '',
+        x.worked ? `${x.worked.ask}\n${x.worked.steps.join('\n')}\n${x.worked.answer}` : '',
+      ].filter(Boolean).join('\n'))
+      .join('\n\n')
+
+    askRetell(
+      {
+        learner,
+        topic: topic.title,
+        lesson: text,
+        because: stored.because,
+        depth: learner.profile.depth ?? 'FULL',
+        year: learner.profile.level,
+      },
+      {
+        onText: (chunk: string) => {
+          if (ctrl.signal.aborted) return
+          got += chunk
+          setRetold(got)
+        },
+      },
+      ctrl.signal,
+    )
+      /* Failure is silent on purpose. The approved lesson is already on
+         screen, so there is nothing to apologise for and nothing the
+         learner could do about it. */
+      .catch(() => { /* no tutor, no retelling, no loss */ })
+      .finally(() => { if (!ctrl.signal.aborted) setRetelling(false) })
+
+    return () => ctrl.abort()
+    /* Once per topic. A changed profile arrives as a fresh key. */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topic.id, stored])
 
   const [text, setText] = useState('')
   const [state, setState] = useState<'live' | 'done' | 'off' | 'failed'>(
@@ -1390,8 +1476,45 @@ function Lesson({
               pieces are already in her order: see `assemble` in `taught.ts`,
               where the whole of `approach`, `footing`, `goal` and `diet` turns
               into which parts appear and in what sequence. */}
-          {stored && (
+          {/* The retelling, when there is one and they have not asked to see
+              the reviewed version.
+
+              Labelled, always. The learner is told this was written for
+              them and given one tap back to the lesson a teacher checked.
+              Replacing reviewed text with unreviewed text and saying
+              nothing would make the whole review step decorative. */}
+          {stored && retold.trim() && !showOriginal && (
             <div className="nx-taught">
+              <Prose text={retold} className="nx-lesson-p" />
+              <p className="nx-fineprint nx-taught-why">
+                {retelling
+                  ? 'Being written for you...'
+                  : 'Written for you from the lesson your teacher approved. '}
+                {!retelling && (
+                  <button
+                    type="button"
+                    className="nx-link"
+                    onClick={() => setShowOriginal(true)}>
+                    Show me the approved words
+                  </button>
+                )}
+              </p>
+            </div>
+          )}
+
+          {stored && (!retold.trim() || showOriginal) && (
+            <div className="nx-taught">
+              {showOriginal && (
+                <p className="nx-fineprint nx-taught-why">
+                  This is the lesson as your teacher approved it.{' '}
+                  <button
+                    type="button"
+                    className="nx-link"
+                    onClick={() => setShowOriginal(false)}>
+                    Back to yours
+                  </button>
+                </p>
+              )}
               {stored.pieces.map((piece, i) => (
                 <section key={i} className={`nx-piece is-${piece.kind}`}>
                   <h3 className="nx-piece-head">{piece.heading}</h3>
