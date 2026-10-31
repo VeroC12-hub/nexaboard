@@ -35,12 +35,14 @@ teach({
     + '342 is three hundreds, four tens and two ones.',
 
   mechanism:
-    'Nothing new is invented here. The rule from two digit numbers simply keeps '
-    + 'going: each place to the left is worth ten of the place beside it. Ones, '
-    + 'then tens, then hundreds. That is why you never have to learn a separate '
-    + 'rule for bigger numbers, and why the same comparison trick keeps working: '
-    + 'the leftmost place decides, because one hundred beats every possible '
-    + 'arrangement of tens and ones below it.',
+    'Nothing new is invented here. '
+    + 'The old rule just keeps going. '
+    + 'Each place to the left is worth ten of the place beside it. '
+    + 'Ones, then tens, then hundreds. '
+    + 'So you never learn a new rule for bigger numbers. '
+    + 'And the same trick keeps working for comparing them. '
+    + 'The leftmost place decides. '
+    + 'One hundred beats any number of tens and ones below it.',
 
   recap:
     'In a two digit number the left digit counts tens and the right counts '
@@ -107,9 +109,11 @@ teach({
   ],
 
   extension:
-    'Ten hundreds make one thousand, and the places keep going the same way '
-    + 'into thousands, ten thousands and beyond. The rule never changes, which '
-    + 'is why you can read a number of any length once you can read this one.',
+    'Ten hundreds make one thousand. '
+    + 'The places keep going the same way after that. '
+    + 'Thousands. Ten thousands. On and on. '
+    + 'The rule never changes. '
+    + 'So once you can read this, you can read a number of any size.',
 
   figure: {
     alt: 'The number 342 split into three hundred squares, four tens rods and '
@@ -202,12 +206,13 @@ teach({
     + 'the ten you carried.',
 
   mechanism:
-    'Carrying is not a rule about digits, it is a swap. Ten ones and one ten '
-    + 'are the same amount, so trading one for the other changes nothing about '
-    + 'how much you have, only about which column is holding it. That is why '
-    + 'the answer stays correct. A child who knows this can check their own '
-    + 'work; a child who only knows "put the 1 on top" cannot tell a carry from '
-    + 'a slip of the pen.',
+    'Carrying is not a rule about digits. It is a swap. '
+    + 'Ten ones and one ten are the same amount. '
+    + 'So you trade one for the other. '
+    + 'You still have just as much as before. '
+    + 'All that changed is which column holds it. '
+    + 'That is why the answer stays right. '
+    + 'Know this and you can check your own work.',
 
   recap:
     'Each column has a name: ones on the right, then tens, then hundreds. A '
@@ -274,10 +279,11 @@ teach({
   ],
 
   extension:
-    'The same exchange works in every column, including hundreds into '
-    + 'thousands, and it is the exact reverse of borrowing. Once you see '
-    + 'carrying as a swap of ten for one, subtraction with borrowing is the '
-    + 'same idea run backwards.',
+    'The same swap works in every column. '
+    + 'Hundreds into thousands too. '
+    + 'And borrowing is this swap run backwards. '
+    + 'See carrying as trading ten for one. '
+    + 'Then borrowing is trading one back for ten.',
 
   figure: {
     alt: 'The sum 28 plus 15 set out in columns, with the ones making thirteen, '
@@ -361,12 +367,15 @@ teach({
     + 'and change it into ten ones. Now the top number has enough.',
 
   mechanism:
-    'The word borrowing is misleading, because nothing is given back. What '
-    + 'happens is an exchange: one ten becomes ten ones, which is the same '
-    + 'amount in smaller pieces, exactly like changing a one cedi coin for ten '
-    + 'ten pesewa coins. The total on the top line never changes. That is why '
-    + 'the answer is still right, and it is why you must reduce the tens digit '
-    + 'by one: you spent that ten.',
+    'The word borrowing is a poor name. Nothing is given back. '
+    + 'What really happens is a swap. '
+    + 'One ten turns into ten ones. '
+    + 'Same amount, just in smaller pieces. '
+    + 'It is like changing one cedi for ten ten pesewa coins. '
+    + 'The top line never changes. '
+    + 'That is why the answer is still right. '
+    + 'And it is why the tens digit drops by one. '
+    + 'You spent that ten.',
 
   recap:
     'Carrying trades ten ones for one ten when a column overflows. This is the '
@@ -439,10 +448,12 @@ teach({
   ],
 
   extension:
-    'Checking by adding is not a trick for the classroom, it is how anybody '
-    + 'who works with money checks change. If your answer plus what you took '
-    + 'away does not give what you started with, the subtraction is wrong, and '
-    + 'you know it without being told.',
+    'Checking by adding is not a school trick. '
+    + 'It is how traders check change all day. '
+    + 'Add your answer to what you took away. '
+    + 'Do you get back what you started with? '
+    + 'If not, the sum is wrong. '
+    + 'And you found it yourself. Nobody had to tell you.',
 
   figure: {
     alt: 'The subtraction 52 take away 27 in columns, showing the 5 tens '
@@ -530,12 +541,14 @@ teach({
     + 'Knowing them is not about being clever, it is about not having to count.',
 
   mechanism:
-    'There is a reason this is worth the effort, and it is not speed for its '
-    + 'own sake. Long multiplication, division, fractions and areas all use '
-    + 'these facts as single steps. A child who has to count up to find six '
-    + 'sevens loses their place in the bigger problem every time, so the hard '
-    + 'part is never the hard part, it is the arithmetic underneath. Knowing '
-    + 'the facts frees the attention for the actual question.',
+    'This is worth the work, and not just to be fast. '
+    + 'Bigger sums use these facts as single steps. '
+    + 'Long multiplying. Dividing. Fractions. Areas. '
+    + 'Say you must count up to find six sevens. '
+    + 'Every time you do, you lose your place in the big sum. '
+    + 'So the hard part is never really the hard part. '
+    + 'It is the small sums underneath. '
+    + 'Know the facts and your mind is free for the real question.',
 
   recap:
     'Four groups of three means three counted four times, and it is twelve. '
@@ -601,10 +614,13 @@ teach({
   ],
 
   extension:
-    'Look down the answers of any table and you will find a pattern: the five '
-    + 'table ends in five or nought, the nine table has digits that add to '
-    + 'nine. The patterns are not tricks, they come from how the places work, '
-    + 'and they make the facts easier to hold.',
+    'Look down the answers of any table. '
+    + 'You will find a pattern. '
+    + 'The five table ends in five or nought. '
+    + 'In the nine table the two digits add up to nine. '
+    + 'These are not tricks. '
+    + 'They come from how the places work. '
+    + 'And they make the facts easier to hold on to.',
 
   questions: [
     {
@@ -648,18 +664,22 @@ teach({
   approved: true,
 
   idea:
-    'A fraction counts parts of a whole. In three quarters, written with a 3 '
-    + 'above a 4, the bottom number says how many equal parts the whole was cut '
-    + 'into, and the top number says how many of them you have.',
+    'A fraction counts parts of a whole. '
+    + 'Take three quarters. It is a 3 above a 4. '
+    + 'The bottom number says how many equal parts the whole was cut into. '
+    + 'The top number says how many of them you have.',
 
   mechanism:
-    'The bottom number is the one people misread, and it is the key to '
-    + 'everything else. It is not an amount, it is a size: it tells you how big '
-    + 'each piece is by saying how many fit in the whole. That is why a bigger '
-    + 'bottom number means a smaller piece. One eighth is less than one '
-    + 'quarter, because cutting the same thing into eight gives smaller pieces '
-    + 'than cutting it into four. Every confusing thing about fractions comes '
-    + 'back to this one sentence.',
+    'People misread the bottom number. '
+    + 'It is the key to everything else. '
+    + 'It is not an amount. It is a size. '
+    + 'It tells you how big each piece is. '
+    + 'It does that by saying how many fit in the whole. '
+    + 'So a bigger bottom number means a smaller piece. '
+    + 'One eighth is less than one quarter. '
+    + 'Cut a thing into eight and the pieces are small. '
+    + 'Cut it into four and they are bigger. '
+    + 'Almost everything confusing about fractions comes back to this.',
 
   recap:
     'Half means two equal parts and a quarter means four equal parts. The parts '
@@ -728,10 +748,11 @@ teach({
   ],
 
   extension:
-    'Two fractions that look different can be the same amount, like six '
-    + 'eighths and three quarters, because the pieces were just cut differently. '
-    + 'That is what equivalent fractions means, and it is the next thing you '
-    + 'will do with them.',
+    'Two fractions can look different and be the same amount. '
+    + 'Six eighths and three quarters are the same. '
+    + 'The pieces were just cut a different way. '
+    + 'We call those equivalent fractions. '
+    + 'That is what you will do with them next.',
 
   figure: {
     alt: 'Three bars of the same length, one cut into halves with one part '
@@ -814,16 +835,20 @@ teach({
     + 'circle has more than you could count. Many shapes have none at all.',
 
   mechanism:
-    'The fold is the test, and it is stricter than it looks. Two halves that '
-    + 'are the same size are not enough: every point has to land on its partner. '
-    + 'That is why a line through the diagonal of a rectangle fails even though '
-    + 'it makes two equal triangles. Fold it and the corners do not meet. If you '
-    + 'cannot fold the paper, imagine a mirror standing on the line: what you '
-    + 'see in the mirror must look exactly like the half that is hidden.',
+    'The fold is the test. And it is stricter than it looks. '
+    + 'Two halves of the same size are not enough. '
+    + 'Every point must land on its partner. '
+    + 'Take the diagonal of a rectangle. '
+    + 'It makes two triangles of equal size. '
+    + 'But fold along it and the corners do not meet. '
+    + 'So it fails. '
+    + 'Cannot fold the paper? Then picture a mirror on the line. '
+    + 'What you see in the mirror must match the hidden half.',
 
   recap:
-    'You already know shapes by counting sides and corners. This is about how a '
-    + 'shape is balanced rather than how many sides it has.',
+    'You name shapes by counting sides and corners. '
+    + 'This is different. '
+    + 'This is about how a shape is balanced.',
 
   method: [
     'Draw or imagine a line across the shape.',
@@ -891,10 +916,11 @@ teach({
   ],
 
   extension:
-    'Symmetry is everywhere once you look for it: in kente patterns, in the '
-    + 'adinkra symbols, in a butterfly, in the face of the person beside you. '
-    + 'Most of them are not perfect, and finding where the symmetry breaks is '
-    + 'as interesting as finding where it holds.',
+    'Start looking and you will find symmetry everywhere. '
+    + 'In kente patterns. In adinkra symbols. '
+    + 'In a butterfly. In the face of the person beside you. '
+    + 'Most are not perfect. '
+    + 'Finding where it breaks is as good as finding where it holds.',
 
   figure: {
     alt: 'A square with its four lines of symmetry drawn in, beside a '
@@ -969,22 +995,28 @@ teach({
   approved: true,
 
   idea:
-    'Length is how long something is, measured in metres and centimetres. Mass '
-    + 'is how heavy it is, in kilograms and grams. Capacity is how much a '
-    + 'container holds, in litres and millilitres. Each has a big unit and a '
-    + 'small one, and a hundred or a thousand of the small makes the big.',
+    'Length is how long a thing is. '
+    + 'We measure it in metres and centimetres. '
+    + 'Mass is how heavy it is. '
+    + 'We measure it in kilograms and grams. '
+    + 'Capacity is how much a container holds. '
+    + 'We measure it in litres and millilitres. '
+    + 'Each one has a big unit and a small unit.',
 
   mechanism:
-    'Choosing the unit is the real skill, and the rule behind it is simple: '
-    + 'pick the unit that gives you a number you can hold in your head. The '
-    + 'classroom is 8 metres, not 800 centimetres. A baby is 3 kilograms, not '
-    + '3000 grams. Both are true, but one of them you can picture and compare '
-    + 'and the other you cannot. The unit is chosen for the person reading the '
-    + 'measurement, not for the thing being measured.',
+    'Picking the unit is the real skill. '
+    + 'The rule is simple. '
+    + 'Pick the unit that gives a number you can hold in your head. '
+    + 'The classroom is 8 metres. Not 800 centimetres. '
+    + 'A baby is 3 kilograms. Not 3000 grams. '
+    + 'Both are true. But you can picture one of them. '
+    + 'You pick the unit for the person reading it. '
+    + 'Not for the thing you measured.',
 
   recap:
-    'Numbers to 1000 and place value. Changing between units is multiplying or '
-    + 'dividing by 100 or 1000, which moves the digits along the places.',
+    'You know numbers to 1000 and what each place is worth. '
+    + 'Changing units is just times or divide by 100 or 1000. '
+    + 'The digits slide along the places.',
 
   method: [
     'Decide what you are measuring: how long, how heavy, or how much it holds.',
@@ -1047,10 +1079,12 @@ teach({
   ],
 
   extension:
-    'A litre of water happens to have a mass of about one kilogram, which is '
-    + 'why market traders can judge both at once by lifting. It is a useful '
-    + 'coincidence of how the units were chosen, and it does not hold for '
-    + 'things lighter or heavier than water, like oil or honey.',
+    'One litre of water weighs about one kilogram. '
+    + 'That is handy. '
+    + 'A trader can lift a tin and judge both at once. '
+    + 'It is not magic. It is how the units were chosen. '
+    + 'And it only works for water. '
+    + 'Oil is lighter. Honey is heavier.',
 
   figure: {
     alt: 'A table of the three kinds of measurement, the big and small unit '
@@ -1137,8 +1171,9 @@ teach({
     + 'long hand in fives and the clock stops being a puzzle.',
 
   recap:
-    'Counting in fives: five, ten, fifteen, twenty. That is exactly what the '
-    + 'long hand needs, because each number it passes is five minutes.',
+    'Count in fives. Five, ten, fifteen, twenty. '
+    + 'That is all the long hand needs. '
+    + 'Each number it passes is five minutes.',
 
   method: [
     'Find the short hand. Which number has it passed? That is the hour.',
@@ -1203,9 +1238,11 @@ teach({
   ],
 
   extension:
-    'The same time can be said two ways: 2:50 is ten to three, and both are '
-    + 'correct. Digital clocks only ever count forwards, which is why they are '
-    + 'easier to read and worse at showing you how long is left until the hour.',
+    'You can say the same time two ways. '
+    + '2:50 is also ten to three. Both are right. '
+    + 'A digital clock only counts forwards. '
+    + 'That makes it easier to read. '
+    + 'But it never shows you how long is left until the hour.',
 
   figure: {
     alt: 'A clock face showing quarter past four, with the short hand just '

@@ -25,21 +25,28 @@ teach({
   approved: true,
 
   idea:
-    'Your language is written with the same letters as English and a few more '
-    + 'besides, because it has sounds English does not have. Two of those '
-    + 'extra letters turn up in many Ghanaian languages: ɛ, which is the sound '
-    + 'in the English word "bed", and ɔ, which is the sound in "pot". They are '
-    + 'letters in their own right, not a decorated e and o.',
+    'Your language uses the same letters as English. '
+    + 'And it uses a few more. '
+    + 'Why? Because it has sounds English does not have. '
+    + 'Two extra letters show up in many Ghanaian languages. '
+    + 'The first is ɛ. It says the sound in the word "bed". '
+    + 'The second is ɔ. It says the sound in the word "pot". '
+    + 'These are real letters of their own. '
+    + 'They are not an e and an o with marks on them.',
 
   mechanism:
-    'Here is the part that makes your language easier to read than English. In '
-    + 'these spellings, one letter means one sound, every time. English writes '
-    + 'the same letter "a" for the sound in "cat", in "car" and in "cake", so '
-    + 'an English reader has to guess and check. Your language does not ask you '
-    + 'to guess. If you know the sound each letter makes, you can read a word '
-    + 'you have never seen before and say it correctly. That is exactly why the '
-    + 'extra letters exist: without ɛ, the word would have to be spelled with '
-    + 'an e and you would be back to guessing which e it was.',
+    'Here is why your language is easier to read than English. '
+    + 'One letter means one sound. Every time. '
+    + 'English is not like that. '
+    + 'Look at the letter a in cat, in car, and in cake. '
+    + 'Same letter. Three different sounds. '
+    + 'So an English reader has to guess, then check. '
+    + 'Your language never asks you to guess. '
+    + 'Learn the sound each letter makes. '
+    + 'Then you can read a brand new word and say it right. '
+    + 'That is why the extra letters exist. '
+    + 'Take ɛ away and you would write an e instead. '
+    + 'And then you would be guessing which e it was.',
 
   recap:
     'Blending is running sounds together into a word. You take the sound of '
@@ -115,10 +122,10 @@ teach({
   ],
 
   extension:
-    'The extra letters are not a Ghanaian oddity. They come from a set agreed '
-    + 'for writing down sounds in any language in the world, which is why the '
-    + 'same ɛ turns up in books about languages from other continents '
-    + 'altogether.',
+    'These extra letters are not just a Ghanaian thing. '
+    + 'They come from a set people agreed on long ago. '
+    + 'It is used to write the sounds of any language on earth. '
+    + 'So the same ɛ shows up in books about far away languages too.',
 
   figure: {
     alt: 'A table of letters used in Ghanaian languages that English does not '

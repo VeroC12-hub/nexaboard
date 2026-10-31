@@ -28,22 +28,27 @@ teach({
   approved: true,
 
   idea:
-    'A household runs on jobs, and the jobs are shared out. Somebody earns, '
-    + 'somebody cooks, somebody fetches water, somebody sweeps, somebody looks '
-    + 'after the small ones. Households are not all made of the same people, '
-    + 'but every household has these jobs in it, and everybody old enough does '
-    + 'some of them.',
+    'A home runs on jobs. The jobs get shared out. '
+    + 'Someone earns the money. Someone cooks. '
+    + 'Someone fetches water. Someone sweeps. '
+    + 'Someone minds the small ones. '
+    + 'Homes are not all made of the same people. '
+    + 'But every home has these jobs in it. '
+    + 'And everyone old enough does some of them.',
 
   mechanism:
-    'The jobs are shared because no one person could do them all in a day. '
-    + 'That is the reason, and it is worth knowing, because it explains why a '
-    + 'job left undone is felt by everybody and not only by the person who '
-    + 'usually does it. If nobody fetches water, nobody washes and nobody '
-    + 'cooks either. The jobs hold each other up.',
+    'Why share the jobs? One person could not do them all in a day. '
+    + 'That is the whole reason. '
+    + 'And it tells you something else. '
+    + 'When one job is left undone, everyone feels it. '
+    + 'Not just the person who usually does it. '
+    + 'Say nobody fetches water. '
+    + 'Then nobody can wash. And nobody can cook. '
+    + 'The jobs hold each other up.',
 
   recap:
-    'You belong to a group of people who live together and look after each '
-    + 'other. That is your household, and you are one of its members.',
+    'You live with people who look after each other. '
+    + 'That is your home. You are one of them.',
 
   method: [
     'Name the people in your household.',
@@ -107,10 +112,11 @@ teach({
   ],
 
   extension:
-    'A community shares out jobs in the same way a household does, only with '
-    + 'strangers rather than relatives. The teacher, the nurse, the farmer and '
-    + 'the driver each do one job that the rest of us depend on, and that is '
-    + 'the next thing to look at.',
+    'A town shares out jobs too. Just like a home does. '
+    + 'But not with your family. With people you do not know. '
+    + 'The teacher does one job. So does the nurse. '
+    + 'So does the farmer. So does the driver. '
+    + 'We all lean on each one of them.',
 
   questions: [
     {
@@ -162,17 +168,22 @@ teach({
   approved: true,
 
   idea:
-    'Your community is the place you live and the people in it: the houses, '
-    + 'the road, the school, the market, the clinic, the church or the mosque, '
-    + 'and everybody who uses them. You can draw it. A drawing of a place seen '
-    + 'from above is a map.',
+    'Your community is the place you live. '
+    + 'It is the people in it too. '
+    + 'The houses. The road. The school. The market. '
+    + 'The clinic. The church or the mosque. '
+    + 'And everyone who uses them. '
+    + 'You can draw it. '
+    + 'A drawing of a place seen from above is a map.',
 
   mechanism:
-    'A map is useful because it shows where things are in relation to each '
-    + 'other, which a list of names cannot. "School, market, clinic" tells you '
-    + 'nothing about which way to walk. A map does, and that is its whole '
-    + 'point: it keeps the directions and the distances, and throws away '
-    + 'everything else about how the places look.',
+    'A map shows you where things sit next to each other. '
+    + 'A list of names cannot do that. '
+    + 'Say the list reads: school, market, clinic. '
+    + 'Which way do you walk? It does not tell you. '
+    + 'A map does. That is the whole point of it. '
+    + 'It keeps the way to go. It keeps how far. '
+    + 'It throws away everything else.',
 
   recap:
     'You know your own house and the way to school. Those are the first two '
@@ -242,10 +253,11 @@ teach({
   ],
 
   extension:
-    'Real maps add a few things to make them easier to share: a mark showing '
-    + 'which way is north, and a note saying how much ground one step on the '
-    + 'paper stands for. Both exist so that somebody who has never been there '
-    + 'can still use your map.',
+    'Real maps add two more things. '
+    + 'A mark showing which way is north. '
+    + 'And a note saying how much ground one step on the paper means. '
+    + 'Why add them? So a stranger can use your map. '
+    + 'Someone who has never been there at all.',
 
   figure: {
     alt: 'A simple map of a community drawn from above, with a road through '
@@ -338,12 +350,14 @@ teach({
     + 'nothing could get done, before there was one.',
 
   mechanism:
-    'That is the part worth holding on to. A rule is not a decision somebody '
-    + 'made to be strict. It is an answer to a problem, and the way to '
-    + 'understand any rule is to ask what goes wrong without it. Thirty '
-    + 'children all speaking at once means nobody is heard, including the one '
-    + 'who was speaking first. The rule about hands is what gives that child a '
-    + 'turn.',
+    'Hold on to this part. '
+    + 'A rule is not someone being strict. '
+    + 'A rule is an answer to a problem. '
+    + 'So ask one question about any rule. '
+    + 'What goes wrong if nobody follows it? '
+    + 'Picture thirty children all talking at once. '
+    + 'Nobody is heard. Not even the one who started. '
+    + 'The hand up rule is what gives that child a turn.',
 
   recap:
     'Many people share your school: your class, the other classes, the '
@@ -416,9 +430,11 @@ teach({
   ],
 
   extension:
-    'A town has rules too, and they are called laws. They are made the same '
-    + 'way and for the same reason, by people a community chooses, and they '
-    + 'can be changed when a reason stops being a good one.',
+    'A town has rules too. We call them laws. '
+    + 'They are made the same way, for the same reason. '
+    + 'People the town chooses make them. '
+    + 'And a law can be changed. '
+    + 'When the reason behind it stops being a good one.',
 
   questions: [
     {

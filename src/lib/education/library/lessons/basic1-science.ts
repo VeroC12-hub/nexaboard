@@ -28,15 +28,22 @@ teach({
     + 'and water, does it make young ones?',
 
   mechanism:
-    'Looking is not enough, because living things do not all look alike. A '
-    + 'tree does not move about and a goat does, yet both are alive. A toy '
-    + 'goat moves when you push it and is not. So the test is not movement or '
-    + 'shape, it is whether the thing feeds, grows and makes more of itself. '
-    + 'Those three go together: nothing does one without the others.',
+    'Looking is not enough. '
+    + 'Living things do not all look alike. '
+    + 'A tree stays in one place. A goat runs about. '
+    + 'Both are alive. '
+    + 'A toy goat moves when you push it. It is not alive. '
+    + 'So moving is not the test. Shape is not the test. '
+    + 'Ask three things instead. '
+    + 'Does it feed? Does it grow? Does it make more of itself? '
+    + 'Those three go together. '
+    + 'Nothing does one without the others.',
 
   recap:
-    'You know many animals and many plants already. Name three animals and '
-    + 'three plants near your house before you start, and keep them in mind.',
+    'You know lots of animals and plants already. '
+    + 'Name three animals near your house. '
+    + 'Now name three plants. '
+    + 'Keep them in your head.',
 
   method: [
     'Ask: does it grow bigger by itself?',
@@ -99,10 +106,12 @@ teach({
   ],
 
   extension:
-    'Things that were once alive, like a wooden stool or a leather sandal, are '
-    + 'in between. They are not alive now, but they came from something that '
-    + 'was. Older classes call these "once living", and it is a useful third '
-    + 'box when the two do not fit.',
+    'Some things sit in between. '
+    + 'A wooden stool. A leather sandal. '
+    + 'They are not alive now. '
+    + 'But they came from something that was. '
+    + 'Older classes call these "once living". '
+    + 'It is a good third box when the first two do not fit.',
 
   figure: {
     alt: 'Three questions used to test whether something is living, with a '
@@ -190,16 +199,23 @@ teach({
     + 'make that journey.',
 
   mechanism:
-    'Think of the path a germ takes: from a thing you touched, onto your hand, '
-    + 'onto your food, into your mouth, and then you are ill. Washing breaks '
-    + 'that path in the middle. Soap matters because germs cling to the oil on '
-    + 'your skin, and water alone slides over it. Soap lifts the oil, and the '
-    + 'germs leave with it.',
+    'Follow the path a germ takes. '
+    + 'It sits on a thing you touch. '
+    + 'Then it is on your hand. '
+    + 'Then it is on your food. '
+    + 'Then it is in your mouth. Then you are ill. '
+    + 'Washing cuts that path in the middle. '
+    + 'Why use soap? '
+    + 'Germs hold on to the oil on your skin. '
+    + 'Water just slides over it. '
+    + 'Soap lifts the oil off. '
+    + 'And the germs go with it.',
 
   recap:
-    'You cannot tell by looking whether your hands are dirty. Hands that look '
-    + 'clean can still carry germs, which is why the rule is about when you '
-    + 'wash, not about how dirty they look.',
+    'You cannot see germs. '
+    + 'Hands can look clean and still carry them. '
+    + 'So the rule is not about how dirty they look. '
+    + 'It is about when you wash.',
 
   method: [
     'Wet your hands.',
@@ -262,10 +278,11 @@ teach({
   ],
 
   extension:
-    'The same idea of breaking a path explains much more than handwashing. '
-    + 'Covering food keeps flies from carrying germs onto it, and covering '
-    + 'your mouth when you cough stops the path starting at all. Find the '
-    + 'path, then break it anywhere along its length.',
+    'Breaking the path works for much more than hands. '
+    + 'Cover your food. Then flies cannot carry germs onto it. '
+    + 'Cover your mouth when you cough. '
+    + 'Then the path never starts. '
+    + 'Find the path. Then break it anywhere along it.',
 
   figure: {
     alt: 'The path a germ takes from a touched object to the hand to the food '

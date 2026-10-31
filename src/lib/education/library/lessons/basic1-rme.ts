@@ -29,24 +29,30 @@ teach({
   approved: true,
 
   idea:
-    'Every faith has an account of how the world began. Christians read in the '
-    + 'Bible that God made the world in six days and rested on the seventh. In '
-    + 'Islam, Muslims read in the Qur’an that Allah created the heavens and '
-    + 'the earth and everything in them. In Ghanaian traditional religion, '
-    + 'Onyame is the creator of all things, and the stories are told by elders '
-    + 'rather than read from a book.',
+    'Every faith tells how the world began. '
+    + 'Christians read it in the Bible. '
+    + 'God made the world in six days. He rested on the seventh. '
+    + 'Muslims read it in the Qur’an. '
+    + 'Allah made the heavens and the earth and all that is in them. '
+    + 'In Ghanaian traditional religion, Onyame made all things. '
+    + 'Those stories are not read from a book. '
+    + 'Elders tell them.',
 
   mechanism:
-    'These accounts are not all the same, and they are not meant to be. Each '
-    + 'one belongs to a community and is told in that community’s own way: '
-    + 'some written down and read aloud, some passed from elder to child by '
-    + 'speaking. What they share is the answer to the same question, which is '
-    + 'why they can be learned side by side.',
+    'These stories are not the same. '
+    + 'They were never meant to be. '
+    + 'Each one belongs to its own people. '
+    + 'Each is told that people’s own way. '
+    + 'Some are written down and read aloud. '
+    + 'Some pass from an elder to a child by speaking. '
+    + 'But they all answer one question. The same question. '
+    + 'That is why you can learn them side by side.',
 
   recap:
-    'You already know things about where you come from: your family, your '
-    + 'town. A creation account answers a much older version of that question, '
-    + 'about where everything comes from.',
+    'You know where you come from. '
+    + 'You know your family. You know your town. '
+    + 'A creation story asks a much older question. '
+    + 'Where did everything come from?',
 
   method: [
     'Say whose account it is first: Christian, Muslim, or traditional.',
@@ -107,9 +113,10 @@ teach({
   ],
 
   extension:
-    'Nearly every people on earth has a creation account, far beyond the three '
-    + 'practised in Ghana. Asking why that question is asked everywhere is a '
-    + 'bigger question than any single answer to it.',
+    'Almost every people on earth tells a creation story. '
+    + 'Not just the ones here in Ghana. All of them. '
+    + 'So people everywhere ask the same question. '
+    + 'Why does everyone ask it? That is a big question on its own.',
 
   questions: [
     {
@@ -158,22 +165,27 @@ teach({
   approved: true,
 
   idea:
-    'All three faiths practised in Ghana teach that the world is not ours to '
-    + 'spoil. Christians and Muslims both teach that people were given the '
-    + 'earth to look after and will answer for how they treated it. In '
-    + 'Ghanaian traditional religion certain rivers, groves and days are '
-    + 'treated as sacred, and harming them is a serious wrong.',
+    'All three faiths here teach the same thing. '
+    + 'The world is not ours to spoil. '
+    + 'Christians and Muslims teach that the earth was given to us. '
+    + 'We are to look after it. '
+    + 'And one day we will answer for how we treated it. '
+    + 'In Ghanaian traditional religion some rivers are sacred. '
+    + 'So are some groves, and some days. '
+    + 'To harm them is a serious wrong.',
 
   mechanism:
-    'The reason is the same in each case even though the words differ: the '
-    + 'world was given, not earned, so it is held in trust rather than owned. '
-    + 'Something held in trust is one you must hand on in good condition. That '
-    + 'is why all three treat spoiling the land as a wrong against somebody, '
-    + 'not merely as waste.',
+    'The words differ. The reason is the same. '
+    + 'The world was given to us. We did not earn it. '
+    + 'So we hold it in trust. We do not own it. '
+    + 'When you hold a thing in trust, you must hand it on in good shape. '
+    + 'That is why all three see spoiling the land as a wrong. '
+    + 'A wrong against someone, not just waste.',
 
   recap:
-    'You know that borrowing something means returning it as you found it. '
-    + 'This is the same idea, about something much bigger.',
+    'Borrow a thing and you give it back as you found it. '
+    + 'You already know that rule. '
+    + 'This is the same rule, about something much bigger.',
 
   method: [
     'Name one thing in the world near you: a tree, a stream, an animal.',
@@ -235,10 +247,12 @@ teach({
   ],
 
   extension:
-    'Many old Ghanaian rules, a day on which no one farms, a stretch of river '
-    + 'no one fishes, give the land and the fish time to recover. Modern '
-    + 'science calls that a closed season, and it was being practised here '
-    + 'long before it had that name.',
+    'Ghana has old rules worth looking at. '
+    + 'A day when no one farms. '
+    + 'A stretch of river where no one fishes. '
+    + 'They give the land and the fish time to recover. '
+    + 'Science has a name for this now. A closed season. '
+    + 'People here were doing it long before it had a name.',
 
   questions: [
     {
@@ -286,22 +300,29 @@ teach({
   approved: true,
 
   idea:
-    'Worship is how people show honour to God. Christians gather in a church, '
-    + 'mostly on Sunday, to pray, sing and hear the Bible read. Muslims pray '
-    + 'five times a day, facing Mecca, and gather at the mosque on Friday. In '
-    + 'Ghanaian traditional religion, worship includes prayer, libation poured '
-    + 'by an elder, and offerings, often at a shrine or a family gathering.',
+    'Worship is how people show honour to God. '
+    + 'Christians meet in a church, mostly on Sunday. '
+    + 'They pray, they sing, and they hear the Bible read. '
+    + 'Muslims pray five times a day, facing Mecca. '
+    + 'On Friday they meet at the mosque. '
+    + 'In Ghanaian traditional religion there is prayer too. '
+    + 'An elder pours libation. People bring offerings. '
+    + 'It happens at a shrine, or when the family gathers.',
 
   mechanism:
-    'Although what is done differs, the shape is alike: a time set aside, a '
-    + 'place set aside, words said, and something given up, whether that is '
-    + 'money, food or simply the time itself. Setting a time and place apart '
-    + 'is what makes it worship rather than a passing thought, and that is why '
-    + 'every faith has both.',
+    'What people do is different. But the shape is the same. '
+    + 'A time is set apart. A place is set apart. '
+    + 'Words are said. And something is given up. '
+    + 'It may be money. It may be food. '
+    + 'It may just be the time itself. '
+    + 'Setting a time and a place apart is what makes it worship. '
+    + 'Without that it is only a passing thought. '
+    + 'That is why every faith has both.',
 
   recap:
-    'You greet people differently depending on who they are. Worship is also a '
-    + 'way of showing honour, with its own words and its own manners.',
+    'You greet a friend one way. You greet an elder another way. '
+    + 'Worship is a way of showing honour too. '
+    + 'It has its own words. It has its own manners.',
 
   method: [
     'Say which faith you are describing.',
@@ -360,10 +381,11 @@ teach({
   ],
 
   extension:
-    'Many Ghanaian families include more than one faith, and they manage it by '
-    + 'honouring each other’s times: nobody is called away during Friday '
-    + 'prayer or Sunday service. That is a practical kind of respect worth '
-    + 'noticing.',
+    'Many families in Ghana hold more than one faith. '
+    + 'They make it work in a simple way. They guard each other’s times. '
+    + 'Nobody calls you away during Friday prayer. '
+    + 'Nobody calls you away during Sunday service. '
+    + 'That is respect you can see.',
 
   figure: {
     alt: 'Worship in Christianity, Islam and Ghanaian traditional religion '
@@ -443,24 +465,27 @@ teach({
   approved: true,
 
   idea:
-    'A festival is a day a community keeps every year to remember something '
-    + 'important. Christians keep Christmas, remembering the birth of Jesus, '
-    + 'and Easter, remembering his death and rising. Muslims keep Eid al-Fitr '
-    + 'at the end of the fasting month of Ramadan, and Eid al-Adha, which '
-    + 'remembers Ibrahim’s willingness to obey Allah. In Ghana there are '
-    + 'also traditional festivals such as Homowo and Odwira, which remember a '
-    + 'people’s history and give thanks for the harvest.',
+    'A festival is a special day. It comes once every year. '
+    + 'It helps people remember something big. '
+    + 'Christians keep Christmas. It remembers the birth of Jesus. '
+    + 'They keep Easter too. It remembers his death and his rising. '
+    + 'Muslims keep Eid al-Fitr. It comes at the end of the fasting month. '
+    + 'They keep Eid al-Adha. It remembers how Ibrahim obeyed Allah. '
+    + 'Ghana has its own festivals. Homowo and Odwira are two. '
+    + 'They give thanks for the harvest.',
 
   mechanism:
-    'A festival works by repeating. Keeping the same day every year is how a '
-    + 'community makes sure the next generation is told the same thing, '
-    + 'without anyone having to remember to teach it. The food, the clothes '
-    + 'and the gathering are not extras; they are what makes the day '
-    + 'memorable enough to do its job.',
+    'A festival works because it comes back. '
+    + 'Same day. Every year. So nobody forgets. '
+    + 'Children see it, year after year. That is how they learn it. '
+    + 'Nobody has to sit them down and teach it. '
+    + 'The food and the clothes are not extra. '
+    + 'They are what makes the day stick in your head.',
 
   recap:
-    'You know that families gather for particular days. A festival is that, '
-    + 'for a whole community, and always on the same day each year.',
+    'Your family comes together on special days. '
+    + 'A festival is the same thing. But it is a whole town. '
+    + 'And it is the same day every year.',
 
   method: [
     'Name the festival and whose it is.',
@@ -521,9 +546,10 @@ teach({
   ],
 
   extension:
-    'Many Ghanaian festivals fall at harvest, because that is when there is '
-    + 'food enough to feed a gathering and reason enough to give thanks. The '
-    + 'farming year and the festival year are tied together.',
+    'Many festivals in Ghana come at harvest time. '
+    + 'There is a good reason. That is when there is food to share. '
+    + 'And a good crop is a thing to thank God for. '
+    + 'The farming year and the festival year move together.',
 
   questions: [
     {
@@ -571,19 +597,25 @@ teach({
   approved: true,
 
   idea:
-    'Christians follow the teaching of Jesus Christ, who taught people to love '
-    + 'God and to love their neighbour as themselves. Muslims follow the '
-    + 'teaching brought by the Prophet Muhammad, peace be upon him, who taught '
-    + 'that there is one God and that mercy and charity are owed to others. '
-    + 'Ghanaian traditional religion has no single founder; it has been passed '
-    + 'down through elders, priests and families.',
+    'Christians follow the teaching of Jesus Christ. '
+    + 'He taught people to love God. '
+    + 'And to love your neighbour as you love yourself. '
+    + 'Muslims follow the teaching brought by the Prophet Muhammad, '
+    + 'peace be upon him. '
+    + 'He taught that there is one God. '
+    + 'And that we owe others mercy and charity. '
+    + 'Ghanaian traditional religion has no one founder. '
+    + 'It has been passed down by elders, priests and families.',
 
   mechanism:
-    'Having a founder and not having one changes how a faith is carried. A '
-    + 'faith with a founder keeps his words and returns to them. A faith '
-    + 'without one keeps its teaching in the practices and sayings of a '
-    + 'community, which is why elders hold the authority there: they are where '
-    + 'the teaching is stored.',
+    'Some faiths have a founder. Some do not. '
+    + 'That changes how the faith is carried. '
+    + 'A faith with a founder keeps his words. '
+    + 'People go back to those words again and again. '
+    + 'A faith without one keeps its teaching another way. '
+    + 'It lives in what people do and what they say. '
+    + 'That is why elders matter so much there. '
+    + 'The teaching is stored in them.',
 
   recap:
     'You know that each faith keeps its account of creation differently, some '
@@ -699,22 +731,28 @@ teach({
   approved: true,
 
   idea:
-    'Being honest means saying what is true and giving back what is not yours, '
-    + 'even when nobody would know. All three faiths teach it, and it is also '
-    + 'something you can see the sense of yourself: a person known to tell the '
-    + 'truth is believed, and a person caught lying is not believed even when '
-    + 'they are telling the truth.',
+    'Being honest means two things. '
+    + 'You say what is true. And you give back what is not yours. '
+    + 'You do it even when nobody would ever know. '
+    + 'All three faiths teach this. '
+    + 'And you can see why on your own. '
+    + 'People believe a person who tells the truth. '
+    + 'Once you are caught in a lie, they stop believing you. '
+    + 'Even when you are telling the truth.',
 
   mechanism:
-    'That last part is the whole reason, and it is worth understanding rather '
-    + 'than being told. Being believed is something you build slowly and lose '
-    + 'quickly. One lie that is found out does not only cost you that day, it '
-    + 'costs you every day afterwards when you needed somebody to believe you. '
-    + 'That is why honesty is worth more than what a lie would have gained.',
+    'That last part is the whole reason. '
+    + 'Being believed takes a long time to build. '
+    + 'It takes one day to lose. '
+    + 'You tell one lie and you are caught. '
+    + 'It does not just cost you that day. '
+    + 'It costs you every day after, when you need someone to believe you. '
+    + 'A lie never wins you as much as it takes away.',
 
   recap:
-    'You know what it feels like not to be believed when you were telling the '
-    + 'truth. That feeling is what dishonesty costs, and it lasts.',
+    'You told the truth once and nobody believed you. '
+    + 'Remember how that felt. '
+    + 'That feeling is what lying costs. And it lasts a long time.',
 
   method: [
     'Say what actually happened, even the part that makes you look bad.',
@@ -823,22 +861,25 @@ teach({
   approved: true,
 
   idea:
-    'Respect is treating a person as somebody who matters. You show it to '
-    + 'elders by greeting properly, listening, and doing what you are asked '
-    + 'without arguing. You show it to children your own age by taking turns '
-    + 'and not mocking them. You show it to people who are not like you by '
-    + 'treating them exactly as carefully as you treat your own.',
+    'Respect means you treat a person as someone who matters. '
+    + 'With elders, you greet them well. You listen. '
+    + 'You do what you are asked, and you do not argue. '
+    + 'With children your own age, you take turns. You do not mock them. '
+    + 'With people who are not like you, there is no change at all. '
+    + 'You treat them just as well as you treat your own.',
 
   mechanism:
-    'Respect is not the same as fear, and that difference matters. If you are '
-    + 'only polite when somebody is watching, that is fear, and it stops the '
-    + 'moment they look away. Respect is the way you behave when nobody is '
-    + 'checking, and it is the only kind that is worth anything to the person '
-    + 'receiving it.',
+    'Respect is not the same as fear. That matters. '
+    + 'Are you only polite when someone is watching? '
+    + 'Then it is fear, not respect. '
+    + 'It stops the moment they look away. '
+    + 'Respect is how you act when nobody is checking. '
+    + 'That is the only kind worth having.',
 
   recap:
-    'You know greetings change for elders and for friends. That is respect '
-    + 'already, in the one place you have practised it most.',
+    'You greet an elder one way. You greet a friend another way. '
+    + 'That is respect already. '
+    + 'You have practised it more than you think.',
 
   method: [
     'Greet first, properly for who they are.',
@@ -900,9 +941,11 @@ teach({
   ],
 
   extension:
-    'Ghana has many languages, faiths and peoples living side by side, and '
-    + 'that works because of ordinary daily respect far more than because of '
-    + 'any law. Each person keeping it is what holds it up.',
+    'Ghana has many languages. Many faiths. Many peoples. '
+    + 'They live side by side. '
+    + 'What makes that work is not a law. '
+    + 'It is plain daily respect. '
+    + 'Each person keeping it is what holds it up.',
 
   questions: [
     {
@@ -950,22 +993,25 @@ teach({
   approved: true,
 
   idea:
-    'Work is how things get made and how people are fed. All three faiths '
-    + 'practised in Ghana speak well of honest work and badly of taking what '
-    + 'you did not earn. At your age your work is your schoolwork and the jobs '
-    + 'you are given at home, and doing them properly is the same habit as any '
-    + 'other work.',
+    'Work is how things get made. It is how people are fed. '
+    + 'All three faiths here speak well of honest work. '
+    + 'They speak badly of taking what you did not earn. '
+    + 'Your work right now is your schoolwork. '
+    + 'And the jobs you are given at home. '
+    + 'Doing those properly builds the very same habit.',
 
   mechanism:
-    'The reward for work is usually not immediate, which is exactly what makes '
-    + 'it hard. A farmer plants and waits months. You practise reading today '
-    + 'and read easily next year. Because the reward is late, the only thing '
-    + 'that gets you through is the habit of finishing what you started. The '
-    + 'habit is the real skill, more than any single task.',
+    'Work does not pay you back straight away. '
+    + 'That is what makes it hard. '
+    + 'A farmer plants, then waits months. '
+    + 'You practise reading today and read well next year. '
+    + 'The reward comes late. So what carries you through? '
+    + 'One habit. Finishing what you started. '
+    + 'That habit is the real skill. More than any one task.',
 
   recap:
-    'You have finished something difficult before and felt the difference '
-    + 'afterwards. That is the pattern this is about.',
+    'You have finished something hard before. '
+    + 'You felt different after. That is what this is about.',
 
   method: [
     'Start the task rather than thinking about it.',
@@ -1027,10 +1073,10 @@ teach({
   ],
 
   extension:
-    'Every trade you can see around you, the weaver, the mason, the seamstress, '
-    + 'is somebody who practised one thing for years. Watching how long they '
-    + 'took to become good at it tells you more about work than any saying '
-    + 'about it.',
+    'Look at the weaver. The mason. The seamstress. '
+    + 'Each one practised a single thing for years. '
+    + 'Ask how long it took them to get good. '
+    + 'Their answer teaches you more about work than any saying.',
 
   questions: [
     {
@@ -1078,21 +1124,25 @@ teach({
   approved: true,
 
   idea:
-    'People who live together quarrel, and the question is what happens next. '
-    + 'Forgiving somebody means letting go of paying them back. All three '
-    + 'faiths teach it, and in Ghana a quarrel is often settled with an elder '
-    + 'sitting both sides down to hear each of them.',
+    'People who live together will quarrel. That is normal. '
+    + 'The real question is what happens next. '
+    + 'Forgiving means you let go of paying them back. '
+    + 'All three faiths teach it. '
+    + 'In Ghana an elder often settles a quarrel. '
+    + 'They sit both sides down and hear each one.',
 
   mechanism:
-    'Paying back feels like justice, but it rarely ends there: the other '
-    + 'person then has something to pay back too, and the quarrel keeps going '
-    + 'long after what started it is forgotten. Forgiving is the only move '
-    + 'that actually stops it, which is why it is treated as strength rather '
-    + 'than as weakness.',
+    'Paying back feels fair. But look at what happens next. '
+    + 'Now the other person has something to pay back too. '
+    + 'So they hit back. Then you hit back. '
+    + 'The quarrel runs on and on. '
+    + 'In the end nobody even remembers how it started. '
+    + 'Forgiving is the only move that stops it. '
+    + 'That is why it takes strength, not weakness.',
 
   recap:
-    'You know how to speak respectfully even when you disagree. Settling a '
-    + 'quarrel needs exactly that, from both sides.',
+    'You can speak with respect even when you do not agree. '
+    + 'Settling a quarrel needs exactly that. From both sides.',
 
   method: [
     'Cool down before you speak. Nothing is settled while you are shouting.',
@@ -1158,10 +1208,11 @@ teach({
   ],
 
   extension:
-    'Settling a dispute by having both sides heard by a respected person is '
-    + 'how chiefs have resolved matters in Ghana for centuries, and it is '
-    + 'still used beside the courts today. The reason it lasts is that both '
-    + 'sides leave having been listened to.',
+    'Two people quarrel. A chief sits and hears them both. '
+    + 'Chiefs in Ghana have settled matters this way for hundreds of years. '
+    + 'It is still used today, beside the courts. '
+    + 'Why does it last? Because both sides get to speak. '
+    + 'Both sides are heard. That is what makes it hold.',
 
   questions: [
     {

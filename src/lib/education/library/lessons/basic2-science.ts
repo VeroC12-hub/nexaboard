@@ -29,11 +29,13 @@ teach({
     + 'and the fruit carries the seed away.',
 
   mechanism:
-    'A plant cannot walk to water, so it grows roots to the water instead, and '
-    + 'it cannot carry its own food, so it makes food where the light is, in '
-    + 'the leaves. Every part is an answer to something a plant cannot do. '
-    + 'That is why you can often guess a part by asking what problem it '
-    + 'solves, which works better than remembering a list.',
+    'A plant cannot walk to water. '
+    + 'So it grows roots down to the water instead. '
+    + 'A plant cannot carry its food about. '
+    + 'So it makes food where the light falls, in the leaves. '
+    + 'Every part solves one problem the plant has. '
+    + 'So ask what problem a part solves. '
+    + 'That works better than learning a list.',
 
   recap:
     'Living things grow, need water and food, and make young ones. A plant '
@@ -101,9 +103,11 @@ teach({
   ],
 
   extension:
-    'Some plants store food in a part you can eat. A cassava stores it in the '
-    + 'root, a yam in an underground stem, and a cabbage in its leaves. When '
-    + 'you eat a plant you are usually eating its store.',
+    'Some plants keep a store of food. You can eat it. '
+    + 'Cassava keeps its store in the root. '
+    + 'Yam keeps its store in a stem under the ground. '
+    + 'Cabbage keeps its store in the leaves. '
+    + 'When you eat a plant, you are usually eating its store.',
 
   figure: {
     alt: 'A plant drawn with roots below the soil line and stem, leaves, '
@@ -203,11 +207,14 @@ teach({
     + 'came in through one of them.',
 
   mechanism:
-    'Each organ catches one kind of thing and nothing else. The eye catches '
-    + 'light, so in the dark the eye tells you nothing, however hard you '
-    + 'stare. The ear catches sound, so it still works in the dark. That is '
-    + 'why we have five and not one: each covers what the others miss, and '
-    + 'together they give a fuller picture than any could alone.',
+    'Each organ catches one kind of thing. Only one. '
+    + 'The eye catches light. '
+    + 'So in the dark the eye tells you nothing. '
+    + 'You can stare as hard as you like. '
+    + 'The ear catches sound, and sound is not light. '
+    + 'So the ear still works in the dark. '
+    + 'That is why you have five and not one. '
+    + 'Each one covers what the others miss.',
 
   recap:
     'Your body has parts that each do a job, the way a plant does. The sense '
@@ -275,10 +282,11 @@ teach({
   ],
 
   extension:
-    'Somebody who cannot use one sense often gets very good with the others, '
-    + 'and reading by touch, with raised dots, is one way. The senses that '
-    + 'remain do more of the work, which shows how much each one was always '
-    + 'carrying.',
+    'Some people cannot use one of their senses. '
+    + 'They often get very good with the rest. '
+    + 'Some read by touch, with raised dots. '
+    + 'The senses they have left do more of the work. '
+    + 'That shows how much each one was carrying all along.',
 
   figure: {
     alt: 'A table of the five sense organs, what each one senses, and one way '
@@ -361,12 +369,14 @@ teach({
     + 'pulled it.',
 
   mechanism:
-    'The important part is that a push does three different jobs, not one. It '
-    + 'can start something that was still, it can stop something that was '
-    + 'moving, and it can turn something that was going one way. That is why a '
-    + 'goalkeeper catching a ball and a child kicking one are doing the same '
-    + 'kind of thing: both are pushes, and only the job they are doing '
-    + 'differs.',
+    'Here is the important part. '
+    + 'A push does three jobs, not one. '
+    + 'It can start a thing that was still. '
+    + 'It can stop a thing that was moving. '
+    + 'It can turn a thing that was going one way. '
+    + 'So a goalkeeper catching a ball and a child kicking one '
+    + 'are doing the same kind of thing. '
+    + 'Both are pushes. Only the job is different.',
 
   recap:
     'Moving means changing where you are. A thing can move fast or slowly, and '
@@ -433,10 +443,11 @@ teach({
   ],
 
   extension:
-    'A bigger push makes a bigger change, and the same push moves a light '
-    + 'thing more than a heavy one. An empty box slides across the floor at a '
-    + 'touch and a full one hardly shifts, which is worth trying with two '
-    + 'boxes and the same shove.',
+    'A bigger push makes a bigger change. '
+    + 'And the same push moves a light thing further than a heavy one. '
+    + 'Push an empty box. It slides across the floor. '
+    + 'Push a full one the same way. It hardly moves. '
+    + 'Try it with two boxes and the same shove.',
 
   figure: {
     alt: 'Three pictures of a ball: a push starting it moving, a hand stopping '

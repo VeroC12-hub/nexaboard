@@ -29,27 +29,28 @@ teach({
   approved: true,
 
   idea:
-    'Numbers keep going after ten. We count them in tens, the way we tie '
-    + 'things in bundles. Ten sticks make one bundle. Three bundles and four '
-    + 'loose sticks is thirty four. The first number tells you the bundles. '
-    + 'The second tells you the loose ones.',
+    'Tie ten sticks together. That is one bundle. '
+    + 'Count the bundles. Then count the loose sticks. '
+    + 'Three bundles and four sticks is thirty four. '
+    + 'The first number counts bundles. The second counts loose ones.',
 
   mechanism:
-    'The place a number sits tells you what it is worth. In 34 the 3 is not '
-    + 'three. It is three bundles, so it is thirty. That is why 34 and 43 are '
-    + 'different numbers even though they use the same two digits. Move a digit '
-    + 'and you change what it is worth.',
+    'Look at 34. The 3 is not three. '
+    + 'It sits in the bundle place. So it means three bundles. That is thirty. '
+    + 'Now look at 43. The 3 has moved. '
+    + 'Now it means three loose sticks. Just three. '
+    + 'Same 3. New place. New size.',
 
   recap:
-    'Counting means one number for each thing, and no thing counted twice. '
-    + 'Touch each one as you say its number. The last number you say is how '
-    + 'many there are.',
+    'Touch each thing as you count it. '
+    + 'One number for each thing. Never touch one twice. '
+    + 'The last number you say is how many there are.',
 
   method: [
-    'To read a number, say the tens first, then the ones. 56 is fifty, then six.',
-    'To say which is bigger, look at the tens first.',
-    'More tens wins. 40 is bigger than 39, because four bundles beat three.',
-    'Only if the tens are the same do you look at the ones. 56 beats 53.',
+    'Say the bundles first. Then say the loose ones. 56 is fifty, then six.',
+    'To find the bigger number, count bundles first.',
+    'More bundles wins. 40 beats 39. Four bundles beat three.',
+    'Same bundles? Then look at the loose ones. 56 beats 53.',
   ],
 
   worked: [
@@ -89,25 +90,25 @@ teach({
   traps: [
     {
       mistake: 'Saying 19 is bigger than 20 because 9 is bigger than 0.',
-      why: 'The 9 is only nine loose ones. The 2 in 20 is two whole bundles. '
-        + 'Always count bundles before loose ones.',
+      why: 'The 9 is only nine loose sticks. '
+        + 'The 2 in 20 is two whole bundles. Count bundles first. Always.',
     },
     {
       mistake: 'Reading 34 as "three four".',
-      why: 'The 3 is not three. It is thirty, because it sits in the tens '
-        + 'place. Say the tens first, then the ones.',
+      why: 'The 3 is not three here. It is thirty. '
+        + 'It sits in the bundle place. Say the bundles first.',
     },
     {
       mistake: 'Writing sixty one as 601.',
-      why: 'Sixty is already written with the 6 in the tens place. You do not '
-        + 'write the nought as well. Sixty one is 61.',
+      why: 'The 6 is already in the bundle place. '
+        + 'That is what makes it sixty. Do not add a nought. Write 61.',
     },
   ],
 
   extension:
-    'The same idea keeps working past a hundred. Ten bundles tied together '
-    + 'make one big bundle of a hundred, and then 342 is three hundreds, four '
-    + 'tens and two ones. Nothing new is learned, the places just keep going.',
+    'Tie ten bundles together. That makes one hundred. '
+    + 'Now 342 is three hundreds, four bundles and two sticks. '
+    + 'It is the same game. The places just keep going.',
 
   figure: {
     alt: 'Three bundles of ten sticks and four single sticks, labelled as '
@@ -187,29 +188,29 @@ teach({
   approved: true,
 
   idea:
-    'Adding is putting groups together and counting what you now have. Taking '
-    + 'away is removing some and counting what is left. You do not have to '
-    + 'count from one every time. Some answers you simply know, and the rest '
-    + 'you work out from the ones you know.',
+    'Adding is putting things together. Then you count them all. '
+    + 'Taking away is moving some away. Then you count what is left. '
+    + 'You need not start at one each time. '
+    + 'Some answers you just know. Use those to find the rest.',
 
   mechanism:
-    'Ten is the easy number, so we use it to get past it. To work out 8 and 5, '
-    + 'take 2 from the 5 to fill the 8 up to ten. Ten and the 3 that is left '
-    + 'is thirteen. That is why a child who knows the pairs that make ten can '
-    + 'add anything up to twenty, and a child who counts on their fingers each '
-    + 'time has to start again every time.',
+    'Ten is the easy one. So make ten first. '
+    + 'Take 8 and 5. The 8 wants 2 more to be ten. '
+    + 'Take 2 from the 5. Now you have ten, and 3 left over. '
+    + 'Ten and 3 is thirteen. '
+    + 'Learn the pairs that make ten. Then every sum gets easy.',
 
   recap:
-    'Counting on is adding. Start at the bigger number and count forward. For '
-    + '9 and 2, start at nine and say ten, eleven. It is the same answer as '
-    + 'counting all of them from one, and it is quicker.',
+    'Counting on is adding. Start at the big number. Count forward. '
+    + 'For 9 and 2, say nine. Then ten, eleven. '
+    + 'Same answer as counting from one. Much faster.',
 
   method: [
-    'Put the bigger number first. 3 and 9 is easier as 9 and 3.',
-    'If one number is near ten, fill it up to ten first.',
-    'Then add on what is left over.',
-    'To take away, count back from the bigger number.',
-    'Check it the other way round: if 8 and 5 is 13, then 13 take away 5 is 8.',
+    'Put the big number first. 3 and 9 is easier as 9 and 3.',
+    'Is one number near ten? Fill it up to ten first.',
+    'Then add what is left over.',
+    'To take away, count back from the big number.',
+    'Check it backwards. 8 and 5 is 13. So 13 take away 5 is 8.',
   ],
 
   worked: [
@@ -247,25 +248,26 @@ teach({
   traps: [
     {
       mistake: 'Counting the starting number as one of the steps.',
-      why: 'For 6 and 3, a child who says "six, seven, eight" has only counted '
-        + 'two. Start the count on the next number after six.',
+      why: 'For 6 and 3, do not say six first. '
+        + 'Say seven, eight, nine. Start on the next one after six.',
     },
     {
       mistake: 'Starting from one every single time.',
-      why: 'It is not wrong, but it is slow and it is where mistakes creep in. '
-        + 'Start from the bigger number and count on.',
+      why: 'It works, but it is slow. Slow is where mistakes come in. '
+        + 'Start at the big number. Count on from there.',
     },
     {
       mistake: 'Taking away the wrong way round, like 7 take away 15.',
-      why: 'You cannot take more than you have. Read the question again and '
-        + 'find which number is the amount you started with.',
+      why: 'You cannot take more than you have. '
+        + 'Read it again. Find what you started with. Start there.',
     },
   ],
 
   extension:
-    'The same filling up to ten works for bigger numbers later. 28 and 5 is '
-    + 'done by taking 2 from the 5 to make 30, then adding the 3 that is left '
-    + 'to get 33. A child who learns the habit now keeps using it for years.',
+    'This trick keeps working on big numbers. '
+    + 'Take 28 and 5. Give 2 to the 28 and it becomes 30. '
+    + 'Then add the 3 left over. That is 33. '
+    + 'Learn it now and you will use it for years.',
 
   figure: {
     alt: 'Eight counters and five counters, with two of the five moved across '
@@ -345,30 +347,31 @@ teach({
   approved: true,
 
   idea:
-    'Shapes have names, and the name comes from what you can count on them. A '
-    + 'flat shape with three sides is a triangle. With four equal sides it is '
-    + 'a square. Solid shapes are the ones you can hold: a ball is a sphere, a '
-    + 'tin is a cylinder, a box is a cuboid.',
+    'Every shape has a name. Count to find it. '
+    + 'Flat with three sides? That is a triangle. '
+    + 'Four sides, all the same? That is a square. '
+    + 'Some shapes you can hold. A ball is a sphere. '
+    + 'A tin is a cylinder. A box is a cuboid.',
 
   mechanism:
-    'You do not remember shapes by how they look. You name them by counting. '
-    + 'Count the sides and the corners of a flat shape, or the faces of a '
-    + 'solid one, and the name follows. That is why a long thin triangle and a '
-    + 'wide flat triangle are both triangles, even though they do not look '
-    + 'alike: both have three sides.',
+    'Do not name a shape by how it looks. Count it. '
+    + 'Count the sides. Count the corners. The name comes from that. '
+    + 'One triangle is long and thin. One is wide and flat. '
+    + 'They look nothing alike. Both have three sides. '
+    + 'So both are triangles.',
 
   recap:
-    'A side is a straight edge you can run your finger along. A corner is '
-    + 'where two sides meet and your finger has to turn.',
+    'A side is a straight edge. Run your finger along it. '
+    + 'A corner is where two sides meet. Your finger turns there.',
 
   method: [
-    'Is it flat, or can you hold it? Flat shapes first.',
-    'Count the sides. Three is a triangle. Four is a square or a rectangle.',
-    'If all four sides are the same length it is a square. If two are long and '
-      + 'two are short it is a rectangle.',
-    'No sides at all and no corners means a circle.',
-    'For solid shapes, find the flat faces. A box has six. A tin has two flat '
-      + 'ends and one curved around. A ball has none.',
+    'Is it flat, or can you hold it?',
+    'Count the sides. Three means a triangle.',
+    'Four sides, all the same length? A square.',
+    'Four sides, two long and two short? A rectangle.',
+    'No sides and no corners? A circle.',
+    'Can you hold it? Count the flat faces. A box has six.',
+    'A tin has two flat ends. A ball has none at all.',
   ],
 
   worked: [
@@ -408,25 +411,25 @@ teach({
   traps: [
     {
       mistake: 'Calling every four sided shape a square.',
-      why: 'A square needs all four sides the same length. A door and a book '
-        + 'are rectangles, not squares.',
+      why: 'A square needs all four sides the same length. '
+        + 'A door is taller than it is wide. So is a book. Those are rectangles.',
     },
     {
       mistake: 'Saying a triangle turned upside down is not a triangle.',
-      why: 'Turning a shape does not change how many sides it has. Count, do '
-        + 'not look.',
+      why: 'Turn it any way you like. It still has three sides. '
+        + 'Count it. Do not just look at it.',
     },
     {
       mistake: 'Mixing up a circle and a sphere.',
-      why: 'A circle is flat, like a drawn ring. A sphere is solid, like a '
-        + 'ball you can hold.',
+      why: 'A circle is flat. You draw it on paper. '
+        + 'A sphere is solid. You can hold it in your hand.',
     },
   ],
 
   extension:
-    'Shapes with five and six sides have names too, the pentagon and the '
-    + 'hexagon, and the counting rule is the same one. Look at the pattern on '
-    + 'a football and you will find hexagons on it.',
+    'Five sides is a pentagon. Six sides is a hexagon. '
+    + 'The rule never changes. Just count the sides. '
+    + 'Look at a football. Those white patches have six sides.',
 
   figure: {
     alt: 'A triangle, a square, a rectangle and a circle, each labelled with '

@@ -29,14 +29,17 @@ teach({
     + 'like, and the people you belong to.',
 
   mechanism:
-    'Knowing these things is not only politeness. If you are ever lost, your '
-    + 'full name and your town are what let somebody take you home, and a '
-    + 'first name alone is not enough because many children share it. That is '
-    + 'the reason this is worth learning properly rather than roughly.',
+    'This is not just good manners. '
+    + 'What if you get lost one day? '
+    + 'Your full name and your town can get you home. '
+    + 'One name is not enough. '
+    + 'Lots of children share your first name. '
+    + 'So learn all of it well.',
 
   recap:
-    'You answer questions in full sentences. "My name is Ama" rather than '
-    + '"Ama". The same habit is used here.',
+    'Answer in a full sentence. '
+    + 'Say "My name is Ama". Do not just say "Ama". '
+    + 'Do the same here.',
 
   method: [
     'Say your first name and your family name together.',
@@ -100,9 +103,11 @@ teach({
   ],
 
   extension:
-    'People belong to more than one group at once, and all of them are true '
-    + 'together. You are a member of your family, your class, your town and '
-    + 'your country, and being one does not stop you being the others.',
+    'You belong to more than one group. '
+    + 'You are in your family. You are in your class. '
+    + 'You are in your town. You are in your country. '
+    + 'All of them at once. '
+    + 'Being one does not stop you being the rest.',
 
   figure: {
     alt: 'The three things that answer who are you, name, age and place, with '
@@ -178,16 +183,19 @@ teach({
     + 'age. Getting it right is how you show you were brought up well.',
 
   mechanism:
-    'A greeting is not only a sound, it is a sign of respect, and respect in '
-    + 'Ghana is shown by noticing a person’s age and standing. That is why '
-    + 'there is no single greeting for everybody: using the one you would use '
-    + 'with a friend on an elder says you did not notice who they were. The '
-    + 'words matter less than the noticing.',
+    'A greeting is not just a sound. It shows respect. '
+    + 'In Ghana you show respect by noticing who a person is. '
+    + 'How old are they? Who are they? '
+    + 'That is why one greeting does not fit everybody. '
+    + 'Greet an elder the way you greet a friend '
+    + 'and you have said you did not notice them. '
+    + 'The noticing matters more than the words.',
 
   recap:
-    'You already greet people at home. Think about how you greet your mother '
-    + 'in the morning, and how that is different from how you call a friend '
-    + 'across the yard.',
+    'You greet people at home already. '
+    + 'How do you greet your mother in the morning? '
+    + 'Now how do you call a friend across the yard? '
+    + 'They are not the same.',
 
   method: [
     'Look at the person and stop what you are doing.',
@@ -251,10 +259,11 @@ teach({
   ],
 
   extension:
-    'In many Ghanaian languages the reply to a greeting is fixed too, so a '
-    + 'greeting is a short exchange rather than one line. Learning the reply '
-    + 'as well as the greeting is what lets you take part properly rather '
-    + 'than only start.',
+    'In many Ghanaian languages the reply is set too. '
+    + 'So a greeting is not one line. '
+    + 'It is a short back and forth. '
+    + 'Learn the reply as well as the greeting. '
+    + 'Then you can take your part, not just start it.',
 
   figure: {
     alt: 'A greeting chosen by two things at once, the time of day and who is '
@@ -329,15 +338,20 @@ teach({
     + 'is for pointing. The system unit is the box that does the thinking.',
 
   mechanism:
-    'The parts split into three jobs: things that put information in, things '
-    + 'that show it to you, and the one thing that does the work. The keyboard '
-    + 'and the mouse put in. The monitor shows. The system unit works. Once '
-    + 'you see that, you can place a part you have never met before: a printer '
-    + 'shows, a microphone puts in.',
+    'The parts do three jobs. '
+    + 'Some put things in. Some show things to you. '
+    + 'And one does the work. '
+    + 'The keyboard puts in. So does the mouse. '
+    + 'The monitor shows. '
+    + 'The system unit does the work. '
+    + 'Now you can place a part you have never seen. '
+    + 'A printer shows. A microphone puts in.',
 
   recap:
-    'You have seen a screen before, on a phone or a television. A computer '
-    + 'screen does the same thing: it shows you what the machine is doing.',
+    'You have seen a screen before. '
+    + 'On a phone. On a television. '
+    + 'A computer screen does the same job. '
+    + 'It shows you what the machine is doing.',
 
   method: [
     'Ask what the part does.',
@@ -401,10 +415,12 @@ teach({
   ],
 
   extension:
-    'A phone and a laptop have all four of these parts too, they are just '
-    + 'packed into one case. The screen is the monitor, the touch screen is '
-    + 'doing the job of the mouse, and the thinking part is inside. Nothing is '
-    + 'missing, it is only hidden.',
+    'A phone has all four parts too. So does a laptop. '
+    + 'They are just packed into one case. '
+    + 'The screen is the monitor. '
+    + 'The touch screen does the job of the mouse. '
+    + 'The thinking part is inside. '
+    + 'Nothing is missing. It is only hidden.',
 
   figure: {
     alt: 'A monitor, keyboard, mouse and system unit, each labelled with its '

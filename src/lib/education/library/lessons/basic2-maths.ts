@@ -34,16 +34,22 @@ teach({
     + 'not the same number.',
 
   mechanism:
-    'A digit does not carry its own value. It gets its value from where it '
-    + 'sits. The 4 in 42 means four tens, which is forty. The 4 in 24 means '
-    + 'four ones, which is four. Same digit, ten times the difference, because '
-    + 'each place to the left is worth ten of the place to its right. Nothing '
-    + 'about the shape of the 4 tells you that. Only its seat does.',
+    'Look at 42. Now look at 24. '
+    + 'Both have a 4 in them. '
+    + 'But the two 4s are not worth the same. '
+    + 'In 42 the 4 sits in the tens place. '
+    + 'So it means four bundles of ten. That is forty. '
+    + 'In 24 the 4 has moved to the ones place. '
+    + 'Now it means four loose ones. Just four. '
+    + 'The 4 did not change at all. Its seat changed. '
+    + 'And the seat is what gives it its size.',
 
   recap:
-    'Ten ones make one ten. Count out ten bottle tops and tie them together, '
-    + 'and you now have one bundle instead of ten loose ones. You have not '
-    + 'changed how many you have, only how you are holding them.',
+    'Ten ones make one ten. '
+    + 'Count out ten bottle tops. Tie them together. '
+    + 'Now you hold one bundle, not ten loose ones. '
+    + 'You still have the same amount. '
+    + 'Only the way you hold them changed.',
 
   method: [
     'Look at the right hand digit. That is the ones.',
@@ -106,9 +112,11 @@ teach({
   ],
 
   extension:
-    'The places keep going the same way. Ten bundles tied together make one '
-    + 'hundred, so 342 is three hundreds, four tens and two ones. The rule '
-    + 'never changes: each place to the left is worth ten of the one beside it.',
+    'The places keep going the same way. '
+    + 'Tie ten bundles together and you have one hundred. '
+    + 'So 342 is three hundreds, four tens and two ones. '
+    + 'The rule never changes. '
+    + 'Each place to the left is worth ten of the one beside it.',
 
   figure: {
     alt: 'The number 42 shown as four bundles of ten and two single sticks, '
@@ -200,11 +208,16 @@ teach({
     + 'counting equal groups quickly.',
 
   mechanism:
-    'Multiplying only works when the groups are equal. That is the whole '
-    + 'condition. Four bowls holding three, three, three and three can be '
-    + 'counted as four threes. Four bowls holding three, two, five and three '
-    + 'cannot, and have to be added one at a time. So before you multiply, the '
-    + 'question to ask is not how many groups, it is whether the groups match.',
+    'Multiplying only works when the groups match. '
+    + 'That is the one rule. '
+    + 'Put three mangoes in each of four bowls. '
+    + 'Three, three, three, three. '
+    + 'Now you can say four threes. '
+    + 'But put three in one bowl, two in the next, then five, then three. '
+    + 'Now you cannot. '
+    + 'You must add them one by one. '
+    + 'So do not ask how many bowls first. '
+    + 'Ask if the bowls match.',
 
   recap:
     'Adding the same number again and again is what this replaces. 3 and 3 and '
@@ -270,9 +283,10 @@ teach({
   ],
 
   extension:
-    'Because 4 groups of 3 and 3 groups of 4 give the same answer, every fact '
-    + 'you learn gives you a second one free. Knowing four threes means you '
-    + 'already know three fours, which is half the work gone.',
+    '4 groups of 3 gives the same answer as 3 groups of 4. '
+    + 'So every fact you learn gives you a second one free. '
+    + 'Know four threes and you already know three fours. '
+    + 'That is half the work gone.',
 
   figure: {
     alt: 'Four rows of three dots, counted as four groups of three making '
@@ -363,15 +377,17 @@ teach({
     + 'two equal pieces.',
 
   mechanism:
-    'The parts have to be equal or the word is wrong. If you break an orange '
-    + 'into a big piece and a small piece you have two pieces, but you do not '
-    + 'have two halves. That is why cutting matters more than counting here: a '
-    + 'child who counts four pieces and says quarters, without checking they '
-    + 'match, has learned the word and not the idea.',
+    'The parts must be equal. If they are not, the word is wrong. '
+    + 'Break an orange into a big piece and a small piece. '
+    + 'You have two pieces. '
+    + 'But you do not have two halves. '
+    + 'So counting the pieces is not enough. '
+    + 'You must check that they match.',
 
   recap:
-    'Sharing fairly means everybody gets the same amount. If one person gets '
-    + 'more, the sharing was not fair and the pieces are not halves.',
+    'Sharing fairly means everyone gets the same. '
+    + 'Did one person get more? '
+    + 'Then it was not fair. And they are not halves.',
 
   method: [
     'Count how many people or parts you are sharing between. Two, or four.',
@@ -436,9 +452,11 @@ teach({
   ],
 
   extension:
-    'A half can be written as 1 out of 2 parts, and a quarter as 1 out of 4. '
-    + 'Once it is written that way the same idea covers thirds, fifths and any '
-    + 'other sharing, which is where fractions proper begin.',
+    'You can write a half as 1 out of 2 parts. '
+    + 'You can write a quarter as 1 out of 4. '
+    + 'Write it that way and the same idea covers thirds. '
+    + 'And fifths. And any other sharing. '
+    + 'That is where fractions begin.',
 
   figure: {
     alt: 'A circle split into two equal halves, a circle split into four equal '
@@ -513,11 +531,13 @@ teach({
     + 'then do that again.',
 
   mechanism:
-    'The rule lives between the items, not in them. Looking at 3, 6, 9 and '
-    + 'trying to see something in the 9 itself gets you nowhere. Looking at '
-    + 'the gaps, three to six, six to nine, hands you the rule at once: add '
-    + 'three. That is why the first thing to do with any pattern is compare '
-    + 'neighbours rather than stare at numbers.',
+    'The rule lives between the items. Not inside them. '
+    + 'Take 3, 6, 9. '
+    + 'Stare at the 9 on its own and you learn nothing. '
+    + 'Now look at the gaps. Three to six. Six to nine. '
+    + 'There is the rule. Add three. '
+    + 'So with any pattern, do one thing first. '
+    + 'Compare the neighbours.',
 
   recap:
     'Counting on means adding the same amount again. Counting on in twos from '
@@ -583,9 +603,12 @@ teach({
   ],
 
   extension:
-    'Some patterns change by a different amount each step, like 1, 2, 4, 8, '
-    + 'where you double instead of adding. The method does not change, only '
-    + 'what you find when you compare the neighbours.',
+    'Some patterns change by a new amount each step. '
+    + 'Look at 1, 2, 4, 8. '
+    + 'You double it. You do not add. '
+    + 'The method is still the same. '
+    + 'You still compare the neighbours. '
+    + 'You just find something different when you do.',
 
   figure: {
     alt: 'The pattern 3, 6, 9, 12 with arrows between the numbers each marked '
@@ -657,17 +680,23 @@ teach({
   approved: true,
 
   idea:
-    'A tally is a mark you make for each answer as you hear it, so you do not '
-    + 'have to remember. One stroke for each one, and every fifth stroke laid '
-    + 'across the four before it. Then you count the bundles of five and add '
-    + 'the leftovers, and write that number in a table.',
+    'A tally is a mark you make for each answer. '
+    + 'You make it as you hear it. Then you need not remember. '
+    + 'One stroke for each one. '
+    + 'Every fifth stroke lies across the four before it. '
+    + 'At the end, count the fives. Then add the leftovers. '
+    + 'Write that number in a table.',
 
   mechanism:
-    'The marks are made in fives because counting a long row of single '
-    + 'strokes is exactly as hard as counting the children was, which would '
-    + 'leave you no better off. Grouped in fives, you count five, ten, fifteen '
-    + 'and then the few left over. The tally is for collecting. The table is '
-    + 'for reading. They are two jobs, which is why both exist.',
+    'Why group the marks in fives? '
+    + 'Think about a long row of single strokes. '
+    + 'Counting those is just as hard as counting the children was. '
+    + 'You would be no better off. '
+    + 'Group them in fives and it is easy. '
+    + 'Five, ten, fifteen, then the few left over. '
+    + 'So the tally is for collecting. '
+    + 'The table is for reading. '
+    + 'Two jobs. That is why you need both.',
 
   recap:
     'Counting in fives: five, ten, fifteen, twenty. If you know that, you can '
@@ -737,9 +766,11 @@ teach({
   ],
 
   extension:
-    'Once the numbers are in a table they can be drawn as a bar chart, where '
-    + 'the tallest bar answers the question without anybody counting anything. '
-    + 'That is the next step, and the table is what it is built from.',
+    'Once your numbers are in a table, you can draw them. '
+    + 'A bar chart is one way. '
+    + 'Then the tallest bar answers the question at a glance. '
+    + 'Nobody has to count anything. '
+    + 'That is the next step, and it is built from your table.',
 
   figure: {
     alt: 'A tally chart for favourite fruit with mango, orange and banana '

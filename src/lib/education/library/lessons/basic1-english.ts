@@ -30,14 +30,19 @@ teach({
     + 'what they are doing.',
 
   mechanism:
-    'One word makes the listener do the work. They have to guess the rest, and '
-    + 'they can guess wrong. A full sentence carries the whole message, so '
-    + 'nobody has to guess. That is why we practise it: not because short '
-    + 'answers are rude, but because they leave things out.',
+    'One word makes the other person do the work. '
+    + 'They have to guess the rest. '
+    + 'And they can guess wrong. '
+    + 'A full sentence carries the whole message. '
+    + 'Then nobody has to guess. '
+    + 'Short answers are not rude. '
+    + 'They just leave things out.',
 
   recap:
-    'When somebody asks you a question, they are waiting for you to say '
-    + 'something back. Look at them, and answer loud enough to be heard.',
+    'Someone asks you a question. '
+    + 'They are waiting for you to speak. '
+    + 'Look at them. '
+    + 'Say it loud enough to be heard.',
 
   method: [
     'Listen to the question all the way to the end.',
@@ -96,10 +101,11 @@ teach({
   ],
 
   extension:
-    'Two sentences joined with "because" tell somebody the reason as well as '
-    + 'the fact. "I am late" is a fact. "I am late because I was helping my '
-    + 'mother" is a fact and a reason, and it is the kind of answer that stops '
-    + 'the next question being asked.',
+    'Join two sentences with "because". '
+    + 'Now you give the reason too. '
+    + '"I am late" tells them what happened. '
+    + '"I am late because I was helping my mother" tells them why. '
+    + 'That kind of answer stops the next question.',
 
   figure: {
     alt: 'One word answer compared with a full sentence, showing the parts a '
@@ -176,15 +182,19 @@ teach({
     + 'never seen.',
 
   mechanism:
-    'Writing is speech written down. Somebody had to agree which mark stands '
-    + 'for which sound, and once you know those agreements you can unlock any '
-    + 'word. That is why the sound matters more than the name. The letter '
-    + 'called "em" makes the sound mmm, and it is the sound, not the name, '
-    + 'that helps you read.',
+    'Writing is just talking, written down. '
+    + 'Long ago people agreed on it. '
+    + 'This mark stands for that sound. '
+    + 'Learn those and you can open any word. '
+    + 'So the sound matters more than the name. '
+    + 'We call one letter "em". '
+    + 'But it makes the sound mmm. '
+    + 'The sound is what helps you read.',
 
   recap:
-    'Words are made of sounds joined together. Say your own name slowly and '
-    + 'listen to the sounds in it, one after another.',
+    'Words are made of sounds joined up. '
+    + 'Say your own name slowly. '
+    + 'Listen to each sound in it.',
 
   method: [
     'Look at the letter.',
@@ -242,10 +252,12 @@ teach({
   ],
 
   extension:
-    'Some sounds can be spelled more than one way, and some letters make more '
-    + 'than one sound. The c in cat and the c in rice are not the same. You do '
-    + 'not need that yet, but when a word does not sound right, that is often '
-    + 'why.',
+    'Some sounds can be spelled more than one way. '
+    + 'And some letters make more than one sound. '
+    + 'The c in cat is not the c in rice. '
+    + 'You do not need this yet. '
+    + 'But a word may not sound right one day. '
+    + 'This is often why.',
 
   figure: {
     alt: 'Letters with the sound each one makes and a Ghanaian word that '
@@ -333,14 +345,18 @@ teach({
     + 'told you.',
 
   mechanism:
-    'The sounds are already the word. They are only being said too slowly to '
-    + 'hear it. Speeding them up does not change them, it just lets your ear '
-    + 'catch the whole word instead of the pieces. That is why the trick is to '
-    + 'say them again faster rather than to think harder.',
+    'The sounds are the word already. '
+    + 'You are just saying them too slowly to hear it. '
+    + 'Say them faster and nothing changes. '
+    + 'But now your ear catches the whole word. '
+    + 'Not the bits. '
+    + 'So do not think harder. Just say it faster.',
 
   recap:
-    'Each letter stands for a sound. You need the sounds before you can join '
-    + 'them, so if a letter is not certain yet, say its sound first on its own.',
+    'Each letter stands for a sound. '
+    + 'You need the sounds before you can join them. '
+    + 'Not sure of a letter? '
+    + 'Say its sound on its own first.',
 
   method: [
     'Point at the first letter and say its sound.',
@@ -406,9 +422,11 @@ teach({
   ],
 
   extension:
-    'Longer words work the same way, you just do them in chunks. For market, '
-    + 'read mar, then ket, then put the two together. The method never '
-    + 'changes, only the size of the pieces.',
+    'Long words work the same way. '
+    + 'You just take them in chunks. '
+    + 'Take market. Read mar. Then read ket. '
+    + 'Then put the two together. '
+    + 'The way never changes. Only the size of the bits.',
 
   figure: {
     alt: 'The word mat shown as three separate sounds being joined into one '

@@ -29,12 +29,14 @@ teach({
     + 'way you know your own name. Those are sight words.',
 
   mechanism:
-    'There is a reason this matters, and it is not speed. While you are '
-    + 'sounding out "the", you are not thinking about what the sentence says. '
-    + 'Your attention can only be in one place. Every word you know on sight '
-    + 'is attention given back to the meaning. That is why these particular '
-    + 'words are worth learning whole: they are the commonest ones, so they '
-    + 'steal the most attention.',
+    'This matters, and not because of speed. '
+    + 'While you sound out "the", you are busy. '
+    + 'You are not thinking about what the sentence means. '
+    + 'Your mind can only be in one place at a time. '
+    + 'Each word you know on sight gives that time back. '
+    + 'These words come up the most. '
+    + 'So they steal the most time. '
+    + 'That is why they are worth learning whole.',
 
   recap:
     'Sounding out means saying each letter sound and running them together. '
@@ -104,10 +106,12 @@ teach({
   ],
 
   extension:
-    'As more words become automatic, reading starts to feel like listening, '
-    + 'and you begin to notice how the sentence sounds and what it means while '
-    + 'your eyes are still moving. That is fluency, and it is built one '
-    + 'automatic word at a time.',
+    'Learn more words by sight and something changes. '
+    + 'Reading starts to feel like listening. '
+    + 'You hear how the sentence sounds while your eyes move. '
+    + 'You take in what it means at the same time. '
+    + 'That is called fluency. '
+    + 'It is built one word at a time.',
 
   questions: [
     {
@@ -237,10 +241,11 @@ teach({
   ],
 
   extension:
-    'A sentence that asks something ends with a question mark instead of a '
-    + 'full stop, and one shouted out ends with an exclamation mark. The job '
-    + 'is the same in all three: tell the reader where the thought ends and '
-    + 'what kind of thought it was.',
+    'A sentence that asks ends with a question mark. '
+    + 'A sentence that is shouted ends with an exclamation mark. '
+    + 'All three marks do the same job. '
+    + 'They tell the reader where the thought ends. '
+    + 'And what kind of thought it was.',
 
   figure: {
     alt: 'One sentence written out with the capital letter at the start and '
@@ -387,10 +392,11 @@ teach({
   ],
 
   extension:
-    'Verbs change their shape to say when something happened: she walks today, '
-    + 'she walked yesterday. Nouns change to say how many: one mango, two '
-    + 'mangoes. Those two changes carry most of what a sentence tells you '
-    + 'about time and amount.',
+    'Verbs change shape to tell you when. '
+    + 'She walks today. She walked yesterday. '
+    + 'Nouns change shape to tell you how many. '
+    + 'One mango. Two mangoes. '
+    + 'Those two small changes carry a lot.',
 
   figure: {
     alt: 'The sentence "Ama sells oranges at the market" with the nouns Ama, '
