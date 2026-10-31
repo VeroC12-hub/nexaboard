@@ -28,6 +28,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'The flag of Ghana is red, gold and green with a black star. '
+      + 'Each part stands for something.',
+    method: [
+      'Red is for those who died for our freedom.',
+      'Gold is for the wealth in our ground.',
+      'Green is for forest and farm. The star is African freedom.',
+    ],
+  },
+
   idea:
     'Ghana has symbols that stand for the whole country. '
     + 'The flag has three bands: red, gold and green. '
@@ -184,6 +195,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'A conversation goes back and forth. Give the other person '
+      + 'something to answer.',
+    method: [
+      'Greet first and wait for the reply.',
+      'Ask one short question.',
+      'Answer theirs, then hand the turn back.',
+    ],
+  },
+
   idea:
     'A conversation is not one line. It goes back and forth. '
     + 'You greet. They reply. You ask. They answer. Then they ask you. '
@@ -320,6 +342,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Write a letter for each sound you hear. Take care with the '
+      + 'letters English does not have.',
+    method: [
+      'Say the sentence out loud, slowly.',
+      'Write a letter for each sound.',
+      'Read it back out loud to check.',
+    ],
+  },
+
   idea:
     'You can already read the letters of your language. '
     + 'Now you write them. '
@@ -455,6 +488,17 @@ teach({
   topicId: 'input-output',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'Input goes into the machine. Output comes out to you. Ask '
+      + 'which way the information is going.',
+    method: [
+      'Point at the device.',
+      'Ask where the information starts.',
+      'From you is input. From the machine is output.',
+    ],
+  },
 
   idea:
     'Some parts of a computer put things in. Those are input. '
@@ -629,6 +673,17 @@ teach({
   topicId: 'typing',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'Use both hands. Your fingers rest on the middle row and come '
+      + 'back to it after every key.',
+    method: [
+      'Put your left fingers on a, s, d, f.',
+      'Put your right fingers on j, k, l and the next key.',
+      'Bring each finger back after every key.',
+    ],
+  },
 
   idea:
     'Typing well means using both hands and the right fingers. '

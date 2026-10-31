@@ -9,15 +9,18 @@ const base = {
   forChild: true, programme: null, subjectId: 'maths', results: [], aiNotes: {},
 } as unknown as LearnerProfile
 
+/* Depth is included because it is the axis that actually changes the words.
+   Without it these four differed only in which blocks appeared, and two of
+   them came out byte for byte identical. */
 const people: Array<[string, Partial<LearnerProfile>]> = [
-  ['shaky, catching up, wants it shown',
-   { footing: 'SHAKY', goal: 'CATCH_UP', approach: 'SHOW_FIRST', diet: 'WATCH', whenStuck: 'METHOD' }],
-  ['strong, go further, wants to do',
-   { footing: 'STRONG', goal: 'GO_FURTHER', approach: 'TRY_FIRST', diet: 'PRACTISE', whenStuck: 'HINT' }],
+  ['shaky, catching up, shown, gist',
+   { footing: 'SHAKY', goal: 'CATCH_UP', approach: 'SHOW_FIRST', diet: 'WATCH', whenStuck: 'METHOD', depth: 'BRIEF' }],
+  ['strong, go further, doing, all',
+   { footing: 'STRONG', goal: 'GO_FURTHER', approach: 'TRY_FIRST', diet: 'PRACTISE', whenStuck: 'HINT', depth: 'DEEP' }],
   ['middling, keep up, idea first',
-   { footing: 'OK', goal: 'KEEP_UP', approach: 'IDEA_FIRST', diet: 'READ', whenStuck: 'HINT' }],
-  ['exam, strong, read',
-   { footing: 'STRONG', goal: 'EXAM', approach: 'IDEA_FIRST', diet: 'READ', whenStuck: 'EASIER' }],
+   { footing: 'OK', goal: 'KEEP_UP', approach: 'IDEA_FIRST', diet: 'READ', whenStuck: 'HINT', depth: 'FULL' }],
+  ['exam, strong, read, gist',
+   { footing: 'STRONG', goal: 'EXAM', approach: 'IDEA_FIRST', diet: 'READ', whenStuck: 'EASIER', depth: 'BRIEF' }],
 ]
 
 const t = taughtFor('tens-and-ones')!

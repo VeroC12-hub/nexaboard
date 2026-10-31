@@ -24,7 +24,7 @@
 import { useState } from 'react'
 import '../styles/nexaedu.css'
 import {
-  APPROACHES, DEFAULT_PROFILE, DIETS, FOOTINGS, GOALS, PERIODS, STAGE_YEARS,
+  APPROACHES, DEFAULT_PROFILE, DEPTHS, DIETS, FOOTINGS, GOALS, PERIODS, STAGE_YEARS,
   WHEN_STUCK, newLearnerId,
   type Choice, type LearnerProfile, type Stage,
 } from '../lib/education/learner'
@@ -301,6 +301,10 @@ export default function CreateProfile({
                     <Select value={p.whenStuck} options={WHEN_STUCK}
                       onChange={w => set('whenStuck', w)} />
                   </Field>
+                  <Field label="How much you want">
+                    <Select value={p.depth ?? 'FULL'} options={DEPTHS} onChange={d => set('depth', d)} />
+                  </Field>
+
                   <Field label="Material you prefer">
                     <Select value={p.diet} options={DIETS} onChange={d => set('diet', d)} />
                   </Field>

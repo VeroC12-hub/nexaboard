@@ -230,6 +230,7 @@ export const DEFAULT_PROFILE: LearnerProfile = {
   whenStuck: 'HINT',
   footing: 'OKAY',
   diet: 'MIXED',
+  depth: 'FULL',
   programme: null,
   subjectId: null,
   aiNotes: {},
@@ -374,6 +375,22 @@ export const DIETS: Choice<Diet>[] = [
   { value: 'READ',     label: 'Reading',          note: 'Explanations written out in full.' },
   { value: 'WATCH',    label: 'Watching',         note: 'Shown and talked through.' },
   { value: 'PRACTISE', label: 'Straight practice', note: 'Learn it by doing questions.' },
+]
+
+/**
+ * How much lesson they want.
+ *
+ * Worded as the learner would say it, not as the code names it. Nobody
+ * thinks "I am a BRIEF learner"; they think "just tell me the main thing".
+ *
+ * FULL is first because it is the default and the right answer for most
+ * people. A learner who never touches this question keeps getting exactly
+ * the lesson they got before this existed.
+ */
+export const DEPTHS: Choice<Depth>[] = [
+  { value: 'FULL',  label: 'The whole lesson',  note: 'The idea, why it works, and the common mistakes.' },
+  { value: 'BRIEF', label: 'Just the main thing', note: 'What it is and how to do it. Nothing else.' },
+  { value: 'DEEP',  label: 'All of it',         note: 'Everything, including what comes after your year.' },
 ]
 
 export const FOOTINGS: Choice<Footing>[] = [

@@ -24,6 +24,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Your language uses extra letters English does not have. One '
+      + 'letter means one sound, every time.',
+    method: [
+      'Learn the extra letters by their sound.',
+      'Say each sound on its own first.',
+      'Then blend them without stopping.',
+    ],
+  },
+
   idea:
     'Your language uses the same letters as English. '
     + 'And it uses a few more. '

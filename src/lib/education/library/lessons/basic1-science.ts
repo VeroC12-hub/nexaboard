@@ -21,6 +21,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'A living thing feeds, grows and makes more of itself. All '
+      + 'three together. Moving is not the test.',
+    method: [
+      'Ask: does it feed?',
+      'Ask: does it grow?',
+      'Ask: does it make more of itself?',
+    ],
+  },
+
   idea:
     'Some things are alive and some are not. A goat is alive. A stone is not. '
     + 'A mango tree is alive, and so is the mango on it. To know which, you do '
@@ -191,6 +202,17 @@ teach({
   topicId: 'hygiene-primary',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'Germs travel from things you touch to your mouth. Washing with '
+      + 'soap breaks that path.',
+    method: [
+      'Wet your hands.',
+      'Use soap and rub all over, front and back.',
+      'Rinse and dry.',
+    ],
+  },
 
   idea:
     'Germs are too small to see. They sit on your hands after you touch '

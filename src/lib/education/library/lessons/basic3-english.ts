@@ -25,6 +25,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'A good description lets somebody else pick the thing out. Name '
+      + 'what only yours has.',
+    method: [
+      'Say what the thing is.',
+      'Say its size and colour.',
+      'Say the one odd thing about it.',
+    ],
+  },
+
   idea:
     'To describe something is to say what it is like. '
     + 'You say enough that somebody else could pick it out. '
@@ -151,6 +162,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Read at the speed you talk, and stop where the marks tell you '
+      + 'to stop.',
+    method: [
+      'Read the sentence in your head first.',
+      'Read it out at talking speed.',
+      'Pause at a full stop. Lift your voice at a question mark.',
+    ],
+  },
+
   idea:
     'Reading aloud well is not reading fast. '
     + 'It is reading so that somebody listening understands you. '
@@ -275,6 +297,17 @@ teach({
   topicId: 'answer-from-text',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'The answer is in the passage. Find the line it came from and '
+      + 'point at it.',
+    method: [
+      'Read the whole passage once.',
+      'Find the important word from the question.',
+      'Hunt for it, then read that line.',
+    ],
+  },
 
   idea:
     'When you answer a question about a passage, the answer is in the passage. '
@@ -409,6 +442,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Singular is one, plural is more than one. Most words add s, '
+      + 'but some change shape.',
+    method: [
+      'Most words: add s.',
+      'Ends in s, x, ch or sh: add es.',
+      'A few change shape: foot becomes feet.',
+    ],
+  },
+
   idea:
     'Singular means one. Plural means more than one. '
     + 'One book, two books. '
@@ -534,6 +578,17 @@ teach({
   topicId: 'choose-a-book',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'A book is right for you if you can mostly read it. Five hard '
+      + 'words on a page means too hard.',
+    method: [
+      'Open a page from the middle.',
+      'Hold up a finger for each word you cannot read.',
+      'Five fingers means too hard for now.',
+    ],
+  },
 
   idea:
     'A good book for you is one you can mostly read on your own. '

@@ -22,6 +22,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Roots drink and hold the plant down. The stem holds it up. '
+      + 'Leaves make the food. Flowers make the seed.',
+    method: [
+      'Start below the ground: those are the roots.',
+      'Follow the stem up.',
+      'Find the leaves, then the flower and fruit.',
+    ],
+  },
+
   idea:
     'A plant has roots, a stem, leaves, and often flowers and fruit. Each part '
     + 'has a job. The roots hold it down and drink. The stem holds it up and '
@@ -200,6 +211,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Eyes see, ears hear, nose smells, tongue tastes, skin feels. '
+      + 'Each one catches a different thing.',
+    method: [
+      'Ask what kind of thing you are noticing.',
+      'Match it to the organ that catches it.',
+      'If one cannot help, use another.',
+    ],
+  },
+
   idea:
     'You find out about the world through five parts of your body. Eyes to '
     + 'see, ears to hear, nose to smell, tongue to taste, skin to feel. Those '
@@ -361,6 +383,17 @@ teach({
   topicId: 'push-and-pull',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'A push or pull can start something, stop it, or turn it. '
+      + 'Towards you is a pull, away is a push.',
+    method: [
+      'Find what moved.',
+      'Ask which way: towards you or away.',
+      'Ask which job it did: start, stop or turn.',
+    ],
+  },
 
   idea:
     'A push or a pull is what makes things move, stop or change direction. You '

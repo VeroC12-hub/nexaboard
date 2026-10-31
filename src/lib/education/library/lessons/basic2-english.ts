@@ -23,6 +23,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Some words come up in nearly every sentence. Know them on '
+      + 'sight instead of sounding them out.',
+    method: [
+      'Look at the whole word, not the letters.',
+      'Say it, cover it, say it again, check.',
+      'Then read it inside a real sentence.',
+    ],
+  },
+
   idea:
     'Some words come up in nearly every sentence: the, and, is, to, you, was. '
     + 'You do not sound those out. You know them the moment you see them, the '
@@ -160,6 +171,17 @@ teach({
   topicId: 'write-sentences',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'A sentence tells one whole thing. It starts with a capital and '
+      + 'ends with a full stop.',
+    method: [
+      'Say it out loud first.',
+      'Write who it is about and what they did.',
+      'Capital at the start, full stop at the end.',
+    ],
+  },
 
   idea:
     'A sentence tells somebody one whole thing. It names who or what, and says '
@@ -313,6 +335,17 @@ teach({
   topicId: 'nouns-verbs',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'A noun is a naming word. A verb is a doing word. Nearly every '
+      + 'sentence has both.',
+    method: [
+      'Ask who or what it is about. That is the noun.',
+      'Ask what they do. That is the verb.',
+      'Check: you can put the word the in front of a noun.',
+    ],
+  },
 
   idea:
     'A noun is a naming word: a person, a place, a thing. Ama, market, mango, '

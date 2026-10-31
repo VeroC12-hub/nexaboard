@@ -20,6 +20,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Animals are sorted into groups. Decide what you are grouping '
+      + 'by before you start.',
+    method: [
+      'Pick the question: how they move, what they eat, where they live.',
+      'Say the groups out loud.',
+      'Put each animal in one.',
+    ],
+  },
+
   idea:
     'There are too many animals to learn one at a time. '
     + 'So we put them into groups. '
@@ -193,6 +204,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Things are made of materials, and the material is chosen for '
+      + 'the job the thing has to do.',
+    method: [
+      'Name the object and what it is made of.',
+      'Say what job it has to do.',
+      'Ask what the material does that fits that job.',
+    ],
+  },
+
   idea:
     'Things are made of materials. Metal, wood, glass, cloth, plastic. '
     + 'Each material behaves in its own way. '
@@ -325,6 +347,17 @@ teach({
   topicId: 'day-night-seasons',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'The Earth turns. Your side faces the sun and that is day. It '
+      + 'turns away and that is night.',
+    method: [
+      'Picture the Earth turning, not the sun moving.',
+      'Your side towards the sun is day.',
+      'Your side away is night.',
+    ],
+  },
 
   idea:
     'The sun does not move across the sky. The Earth turns. '

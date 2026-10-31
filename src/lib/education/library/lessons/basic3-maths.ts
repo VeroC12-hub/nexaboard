@@ -29,6 +29,18 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Three digits means hundreds, tens and ones. 342 is three '
+      + 'hundreds, four tens and two ones. To compare, look at the '
+      + 'hundreds first.',
+    method: [
+      'Name the places from the right: ones, tens, hundreds.',
+      'Read the hundreds first, then the rest.',
+      'To compare, start at the leftmost place.',
+    ],
+  },
+
   idea:
     'After ninety nine the tens run out, so we start counting hundreds. Ten '
     + 'tens make one hundred. A three digit number has hundreds, tens and ones: '
@@ -199,6 +211,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'When a column makes ten or more, write the ones digit and carry '
+      + 'the ten to the next column.',
+    method: [
+      'Line the numbers up from the right.',
+      'Add the ones. Ten or more? Write the ones digit, carry the ten.',
+      'Add the tens, including what you carried.',
+    ],
+  },
+
   idea:
     'When the ones column adds up to ten or more, you cannot write a two digit '
     + 'answer in one column. So you exchange ten ones for one ten and move it '
@@ -360,6 +383,17 @@ teach({
   topicId: 'subtract-with-borrowing',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'If the top digit is too small, take one ten from next door. It '
+      + 'becomes ten ones. The tens digit drops by one.',
+    method: [
+      'Start at the ones column.',
+      'Top digit too small? Take one ten from the next column.',
+      'That ten becomes ten ones. Now subtract.',
+    ],
+  },
 
   idea:
     'Sometimes the digit on top is smaller than the one below it, so you cannot '
@@ -535,6 +569,18 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'A times table is facts you know without working them out. '
+      + 'Turning them round gives the same answer, so each fact you learn '
+      + 'is really two.',
+    method: [
+      'Learn one table at a time, out loud.',
+      'Then practise it out of order.',
+      'Build from a fact you know: six eights is five eights and one more.',
+    ],
+  },
+
   idea:
     'A times table is a set of answers you know without working them out. Six '
     + 'sevens is forty two, and you say it the way you say your own age. '
@@ -662,6 +708,18 @@ teach({
   topicId: 'what-a-fraction-is',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'The bottom number says how many equal parts the whole was cut '
+      + 'into. The top says how many you have. A bigger bottom number '
+      + 'means smaller pieces.',
+    method: [
+      'Read the bottom number. That is how many parts in the whole.',
+      'Check the parts are equal.',
+      'Read the top number. That is how many you have.',
+    ],
+  },
 
   idea:
     'A fraction counts parts of a whole. '
@@ -829,6 +887,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'A line of symmetry is a fold where both halves land exactly on '
+      + 'each other. Equal size is not enough.',
+    method: [
+      'Draw a line across the shape.',
+      'Fold along it, really or in your head.',
+      'Every corner must land on a corner.',
+    ],
+  },
+
   idea:
     'A shape has a line of symmetry if you can fold it along that line and the '
     + 'two halves land exactly on each other. A square has four such lines. A '
@@ -994,6 +1063,18 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Length is metres and centimetres. Mass is kilograms and grams. '
+      + 'Capacity is litres and millilitres. Pick the unit that gives a '
+      + 'number you can picture.',
+    method: [
+      'Decide what you are measuring.',
+      'Pick the unit that gives a sensible number.',
+      'Before adding or subtracting, put both in the same unit.',
+    ],
+  },
+
   idea:
     'Length is how long a thing is. '
     + 'We measure it in metres and centimetres. '
@@ -1155,6 +1236,17 @@ teach({
   topicId: 'time-primary',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'The short hand gives the hour. The long hand counts minutes, '
+      + 'five for each number it passes.',
+    method: [
+      'Read the short hand first. Take the number it has passed.',
+      'Count the long hand round from the 12 in fives.',
+      'Say the hour, then the minutes.',
+    ],
+  },
 
   idea:
     'A clock has two hands doing two different jobs. The short hand points at '

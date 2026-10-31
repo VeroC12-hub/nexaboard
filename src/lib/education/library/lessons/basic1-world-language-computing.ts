@@ -22,6 +22,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'You have a name, an age and a place you come from. Those three '
+      + 'answer who you are.',
+    method: [
+      'Say your full name, not just your first name.',
+      'Say your age.',
+      'Say the town you come from.',
+    ],
+  },
+
   idea:
     'You have a name, an age, and a place you come from. Those three answer '
     + 'the question "who are you?" for anybody who asks. But you are more than '
@@ -175,6 +186,17 @@ teach({
   topicId: 'greetings-ghl',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'Greet by the time of day and by who the person is. An elder is '
+      + 'greeted differently from a friend.',
+    method: [
+      'Stop and look at the person.',
+      'Notice the time of day and who they are.',
+      'Greet them, then wait for the reply.',
+    ],
+  },
 
   idea:
     'A greeting changes with the time of day and with who you are greeting. '
@@ -331,6 +353,17 @@ teach({
   topicId: 'name-the-parts',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'A computer has a keyboard, a mouse, a monitor and a system '
+      + 'unit. Each one has its own job.',
+    method: [
+      'Find the screen. That is the monitor.',
+      'Find the keys and the mouse. You use those.',
+      'The box that does the work is the system unit.',
+    ],
+  },
 
   idea:
     'A computer is made of parts, and each part has one job. The monitor is '

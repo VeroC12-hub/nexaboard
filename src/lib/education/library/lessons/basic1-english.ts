@@ -23,6 +23,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Answer in a whole sentence, not one word. A full sentence '
+      + 'carries the whole message.',
+    method: [
+      'Look at the person.',
+      'Say the whole thing, not one word.',
+      'Speak loud enough to be heard.',
+    ],
+  },
+
   idea:
     'A sentence tells somebody the whole thing. If I ask where you are going '
     + 'and you say "market", I know one word. If you say "I am going to the '
@@ -174,6 +185,17 @@ teach({
   topicId: 'letter-sounds-primary',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'Every letter stands for a sound. The sound matters more than '
+      + 'the letter name.',
+    method: [
+      'Look at the letter.',
+      'Say its sound, not its name.',
+      'Practise until the sound comes without thinking.',
+    ],
+  },
 
   idea:
     'Letters are marks that stand for sounds. The letter m says mmm, like the '
@@ -337,6 +359,17 @@ teach({
   topicId: 'blend-to-read',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'Say the sounds of a word in order, then say them faster. The '
+      + 'sounds are already the word.',
+    method: [
+      'Say each sound in order.',
+      'Say them again, faster.',
+      'Now say the whole word.',
+    ],
+  },
 
   idea:
     'To read a word you do not know, say each sound in it and then run them '

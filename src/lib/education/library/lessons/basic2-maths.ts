@@ -27,6 +27,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'The left digit counts tens. The right digit counts ones. So 42 '
+      + 'is four tens and two ones. That is why 42 is not 24.',
+    method: [
+      'Right digit is the ones.',
+      'Left digit is the tens.',
+      'Say the tens as a ten word, then the ones.',
+    ],
+  },
+
   idea:
     'Every two digit number is made of tens and ones. 42 is four tens and two '
     + 'ones. The digit on the left counts the tens. The digit on the right '
@@ -201,6 +212,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Equal groups can be counted together. Four bowls of three is '
+      + 'four threes, which is twelve. The groups must all match.',
+    method: [
+      'Count the groups.',
+      'Count how many in one group. Check the others match.',
+      'Say it: so many groups of so many.',
+    ],
+  },
+
   idea:
     'When every group has the same number in it, you do not have to count them '
     + 'all one by one. Four bowls with three mangoes in each is four groups of '
@@ -370,6 +392,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Half means two equal parts. A quarter means four equal parts. '
+      + 'The parts must be the same size.',
+    method: [
+      'Count how many you are sharing between.',
+      'Share one at a time until nothing is left.',
+      'Check that all the parts match.',
+    ],
+  },
+
   idea:
     'Half means split into two parts that are the same. A quarter means split '
     + 'into four parts that are the same. Half of a ten pesewa coin shared '
@@ -523,6 +556,17 @@ teach({
   topicId: 'continue-pattern',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'A pattern repeats the same change each step. Look at the gap '
+      + 'between two items to find the rule.',
+    method: [
+      'Compare the first two items. What changed?',
+      'Check the next gap is the same.',
+      'Do that change once more.',
+    ],
+  },
 
   idea:
     'A pattern is something that repeats in the same way each time. Red, blue, '
@@ -678,6 +722,17 @@ teach({
   topicId: 'tally-and-table',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'A tally is one stroke per answer. Every fifth stroke lies across '
+      + 'the other four. Count the fives, then write the number down.',
+    method: [
+      'Write the choices down the page.',
+      'One stroke per person. Cross the fifth.',
+      'Count in fives, then add the leftovers.',
+    ],
+  },
 
   idea:
     'A tally is a mark you make for each answer. '

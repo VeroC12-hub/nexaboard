@@ -28,6 +28,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Ten sticks tied up make one bundle. Count the bundles, then the '
+      + 'loose sticks. Three bundles and four sticks is thirty four.',
+    method: [
+      'Count the bundles. Say that number first.',
+      'Then count the loose ones. Say that after.',
+      'More bundles always wins.',
+    ],
+  },
+
   idea:
     'Tie ten sticks together. That is one bundle. '
     + 'Count the bundles. Then count the loose sticks. '
@@ -187,6 +198,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'Adding is putting things together and counting them. Start at '
+      + 'the big number and count on. Do not start again at one.',
+    method: [
+      'Put the big number first.',
+      'Count on from it.',
+      'Near ten? Fill up to ten, then add the rest.',
+    ],
+  },
+
   idea:
     'Adding is putting things together. Then you count them all. '
     + 'Taking away is moving some away. Then you count what is left. '
@@ -345,6 +367,17 @@ teach({
   topicId: 'name-2d-3d',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'Count the sides to name a shape. Three sides is a triangle. Four '
+      + 'the same is a square.',
+    method: [
+      'Count the sides.',
+      'Three means triangle. Four means square or rectangle.',
+      'No sides at all means circle.',
+    ],
+  },
 
   idea:
     'Every shape has a name. Count to find it. '

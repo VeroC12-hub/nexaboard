@@ -27,6 +27,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  brief: {
+    idea:
+      'A home runs on jobs that are shared out. Everyone old enough '
+      + 'does some of them.',
+    method: [
+      'Name the people in your home.',
+      'Say one job each of them does.',
+      'Say your own jobs.',
+    ],
+  },
+
   idea:
     'A home runs on jobs. The jobs get shared out. '
     + 'Someone earns the money. Someone cooks. '
@@ -166,6 +177,17 @@ teach({
   topicId: 'my-community-owop',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'Your community is where you live and the people in it. A map '
+      + 'shows it from above.',
+    method: [
+      'Put your own house on the paper first.',
+      'Draw the road past it.',
+      'Add the places you walk to, on the right side.',
+    ],
+  },
 
   idea:
     'Your community is the place you live. '
@@ -342,6 +364,17 @@ teach({
   topicId: 'school-and-rules',
   source: 'WRITTEN',
   approved: true,
+
+  brief: {
+    idea:
+      'A rule is an answer to a problem. To understand one, ask what '
+      + 'goes wrong without it.',
+    method: [
+      'Say the rule in your own words.',
+      'Ask what would happen if nobody followed it.',
+      'That answer is what the rule protects.',
+    ],
+  },
 
   idea:
     'A rule says what to do, or what not to do, in a place where many people '
