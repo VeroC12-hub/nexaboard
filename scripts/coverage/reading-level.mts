@@ -45,6 +45,11 @@ for (const stage of STAGES)
 const EXPECT: Record<string, number> = {
   'KG 1': 0, 'KG 2': 0, 'Basic 1': 1, 'Basic 2': 2, 'Basic 3': 3,
   'Basic 4': 4, 'Basic 5': 5, 'Basic 6': 6,
+  /* JHS and SHS were missing, so the one JHS lesson written so far sat at
+     grade 10 and the check reported nothing. A check that does not cover a
+     stage is worse than no check for it: it reads as a pass. */
+  'JHS 1': 7, 'JHS 2': 8, 'JHS 3': 9,
+  'SHS 1': 10, 'SHS 2': 11, 'SHS 3': 12,
 }
 
 const rows: Array<{ year: string, id: string, part: string, g: number, wps: number }> = []

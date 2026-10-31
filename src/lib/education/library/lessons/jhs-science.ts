@@ -21,30 +21,34 @@ teach({
   approved: true,
 
   idea:
-    'Everything around you is made of about a hundred basic substances called '
-    + 'elements. An element cannot be broken into anything simpler by any '
-    + 'ordinary means: iron is iron all the way down. When two or more elements '
-    + 'join chemically they make a compound, and the compound is a new substance '
-    + 'with its own properties. When substances are only mixed together, without '
-    + 'joining chemically, you have a mixture, and each one keeps being itself.',
+    'Everything around you is built from about a hundred basic substances. '
+    + 'We call them elements. '
+    + 'An element cannot be broken into anything simpler. '
+    + 'Iron is iron all the way down. '
+    + 'When elements join chemically they make a compound. '
+    + 'A compound is a new substance with its own properties. '
+    + 'When substances are only mixed, and not joined, you have a mixture. '
+    + 'In a mixture each one is still itself.',
 
   mechanism:
-    'The difference that matters is whether the substances are joined or only '
-    + 'sitting together. In a compound the atoms are bonded, in a fixed ratio, '
-    + 'and it takes a chemical reaction to separate them. Water is always two '
-    + 'hydrogen to one oxygen, and nothing you do by hand will get the hydrogen '
-    + 'back out. In a mixture nothing is bonded, the proportions can be anything '
-    + 'you like, and a physical method is enough to separate it. That single '
-    + 'question, are they joined or only together, decides every other '
-    + 'difference between the two.',
+    'One question settles it. Are they joined, or only sitting together? '
+    + 'In a compound the atoms are bonded. '
+    + 'They are bonded in a fixed ratio. '
+    + 'It takes a chemical reaction to part them. '
+    + 'Water is always two hydrogen to one oxygen. '
+    + 'Nothing you do by hand gets the hydrogen back out. '
+    + 'In a mixture nothing is bonded. '
+    + 'The proportions can be whatever you like. '
+    + 'A physical method is enough to separate it. '
+    + 'Every other difference follows from that one question.',
 
   recap:
-    'Everything is made of particles that are too small to see. In a solid they '
-    + 'are packed close and only vibrate, in a liquid they are close but slide '
-    + 'past each other, and in a gas they are far apart and move freely. That is '
-    + 'the picture you need here, because the difference between a compound and '
-    + 'a mixture is a question about what those particles are doing: joined to '
-    + 'each other, or merely nearby.',
+    'Everything is made of particles too small to see. '
+    + 'In a solid they are packed close and only vibrate. '
+    + 'In a liquid they are close but slide past each other. '
+    + 'In a gas they are far apart and move freely. '
+    + 'Hold that picture, because this topic asks one thing about it. '
+    + 'Are the particles joined to each other, or merely near each other?',
 
   method: [
     'Ask first: is it one kind of atom only? If yes, it is an element.',
