@@ -46,7 +46,16 @@
   /* Room for the tab bar, plus the home indicator on a modern phone. */
   padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
   -webkit-tap-highlight-color: transparent;
-  overflow-x: hidden;
+  /* `clip`, not `hidden`.
+
+     Both stop the sideways overflow this page has by design (the greeting's
+     character hangs past the edge on its own transparent margin). The
+     difference is that `overflow-x: hidden` forces `overflow-y` to compute as
+     `auto`, which makes this element a scroll container, and a scroll container
+     here is the nearest scrollport for everything inside it. The document is
+     what actually scrolls, so `position: sticky` resolved against this box and
+     never engaged. `clip` creates no scrollport and sticky works. */
+  overflow-x: clip;
 }
 
 /* The scene. Fixed at the top, behind everything, and it does not scroll with
@@ -236,14 +245,15 @@
 
 .kid-tile:active .kid-tile-art { transform: scale(0.93); }
 
-/* Two lines allowed, and the box reserves both, so one long subject name does
-   not make its tile taller than the three beside it. */
 .kid-tile-name {
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 700;
   text-align: center;
   line-height: 1.2;
-  min-height: 2.4em;
+  /* Three lines reserved, because "Religious and Moral Education" takes three
+     at this size and a tile that grows taller than the seven beside it makes
+     the whole grid look broken. */
+  min-height: 3.6em;
 }
 
 /* ── the daily goal ───────────────────────────────────────────────────────── */
@@ -284,13 +294,13 @@
 
 .kid-goal h2 {
   margin: 0 0 4px;
-  font-size: 18px;
+  font-size: 19.5px;
   font-weight: 800;
 }
 
 .kid-goal p {
   margin: 0 0 14px;
-  font-size: 13.5px;
+  font-size: 15px;
   opacity: 0.92;
   line-height: 1.45;
   max-width: 24ch;
@@ -454,7 +464,7 @@
 .kid-row-body { flex: 1 1 auto; min-width: 0; }
 
 .kid-row-title {
-  font-size: 15.5px;
+  font-size: 16.5px;
   font-weight: 800;
   line-height: 1.25;
   display: -webkit-box;
@@ -466,7 +476,7 @@
 .kid-row-sub {
   display: block;
   margin-top: 2px;
-  font-size: 12.5px;
+  font-size: 13.5px;
   color: var(--ink-soft);
   line-height: 1.35;
 }
@@ -488,7 +498,7 @@
 }
 
 .kid-row-count {
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-weight: 800;
   color: var(--ink-soft);
   margin-top: 5px;
@@ -559,24 +569,28 @@
 /* The ground under a character.
 
    Without it a pale friend disappeared into the cream panel while a saturated
-   one popped, so two cards side by side looked like one was still loading. */
+   one popped, so two cards side by side looked like one was still loading.
+
+   A wash rather than a disc. The white circle with a shadow under it read as a
+   badge the character had been stuck onto, and at this size the edge of the
+   disc cut across the drawing's own feet. A radial fade has no edge to cut
+   with and still lifts a pale friend off the panel. */
 .kid-card-art > * {
-  background: rgba(255, 255, 255, 0.72);
-  border-radius: 50%;
+  background: radial-gradient(closest-side,
+              rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.55) 62%, transparent);
   padding: 4px;
-  box-shadow: 0 2px 8px rgba(20, 60, 40, 0.1);
 }
 
 .kid-card-name {
   padding: 10px 12px 0;
-  font-size: 14px;
+  font-size: 15.5px;
   font-weight: 800;
   line-height: 1.24;
 }
 
 .kid-card-sub {
   padding: 3px 12px 0;
-  font-size: 11.5px;
+  font-size: 13px;
   color: var(--ink-soft);
 }
 
@@ -912,4 +926,230 @@
   .kid-tiles { gap: 4px; padding: 10px 6px; }
   .kid-tile-art { width: 50px; height: 50px; }
   .kid-badges { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── the grown up's gate ──────────────────────────────────────────────────── */
+
+/* The sum in front of the grown up's page.
+
+   Not security: a child who can do the sum has earned the page. It is a speed
+   bump, so that the settings, the sign out and the plan are not one tap from
+   a screen a four year old is holding. Scoped `kg-` rather than `kid-` and
+   with its own colours spelled out, because the dialog renders over the page
+   rather than inside it and cannot inherit the tier's variables. */
+.kg-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(14, 21, 36, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.kg-card {
+  width: 100%;
+  max-width: 340px;
+  padding: 22px 20px 18px;
+  border-radius: 20px;
+  background: #fffdf5;
+  color: #14243a;
+  text-align: center;
+  font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system,
+               'Segoe UI', Roboto, sans-serif;
+  box-shadow: 0 18px 50px rgba(14, 21, 36, 0.35);
+}
+
+.kg-title {
+  margin: 0;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+}
+
+.kg-why {
+  margin: 6px 0 16px;
+  font-size: 14.5px;
+  color: #46536b;
+}
+
+/* The sum itself, big enough to be read across a room by somebody being handed
+   the phone. */
+.kg-sum {
+  margin: 0 0 14px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.kg-field {
+  width: 130px;
+  padding: 10px 12px;
+  border: 2px solid #e8e2d3;
+  border-radius: 14px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.kg-field:focus {
+  outline: 3px solid rgba(20, 36, 58, 0.25);
+  outline-offset: 2px;
+}
+
+.kg-field.is-wrong { border-color: #d6402e; }
+
+.kg-no {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #d6402e;
+}
+
+.kg-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+/* The way out, and it is a text button rather than a second filled one: the
+   grown up who opened this by accident should not have to choose between two
+   things that look equally like the answer. */
+.kg-quiet {
+  padding: 10px 6px;
+  border: 0;
+  background: none;
+  color: #46536b;
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.kg-go {
+  min-height: 46px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 999px;
+  background: #14243a;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kg-go:disabled { opacity: 0.35; cursor: default; }
+
+/* ===========================================================================
+   The same screen on a laptop.
+
+   This tier is a phone app and that is the right thing to design first and was
+   the only thing designed at all. The result on a school's laptop was a 560px
+   strip of content standing in the middle of a 1536px window, with the drawn
+   sky visible for 490px either side of it and the tab bar running the full
+   width underneath. It read as a phone app someone had opened on the wrong
+   device, which is exactly what it was.
+
+   Nothing about the interaction changes here. Same two tabs in the same place,
+   same targets, same order of the same blocks. A child who learns this app on
+   a classroom laptop and then picks up a phone must not have to learn it
+   again. This is the same screen, given the room it is being shown in.
+   =========================================================================== */
+
+/* The phone is the default and the laptop is the exception, which is the order
+   this interface is designed in: until 900px these wrappers are not boxes at
+   all and the page is the flat single column it has always been. */
+.kid-learn,
+.kid-col { display: contents; }
+
+@media (min-width: 900px) {
+  /* The scene has to cover the part of the page that is above the fold, or it
+     is a band of sky with the page starting underneath it. */
+  .kid-sky { height: 460px; }
+
+  .kid-page,
+  .kid-bar-top { max-width: 1040px; }
+
+  .kid-page { padding: 6px 24px 16px; }
+
+  /* A column of rows, not a dashboard. Rewards and the grown up's page have
+     nothing to put in a second column. */
+  .kid-page.is-narrow { max-width: 720px; }
+  .kid-bar-top { padding: 16px 24px 8px; }
+
+  /* Two columns: the subjects, which are what a child came to tap, and the
+     day beside them. The wrappers are `display: contents` below this width,
+     so the phone keeps one column in the order it always had. */
+  .kid-learn {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .kid-col { display: flex; flex-direction: column; min-width: 0; }
+
+  /* The subjects stay put while the day scrolls beside them.
+
+     The two columns are different lengths, so once the page scrolled the left
+     one was a panel of tiles followed by 300px of nothing. Holding it means
+     that dead space becomes a subject picker a child can reach at any point
+     on the screen, which is the one thing they are most likely to want. */
+  .kid-col.is-main {
+    position: sticky;
+    top: 10px;
+  }
+
+  /* The greeting does not stretch to the full 1040px. Left to itself the
+     character ended up alone at the far right of the window, 400px from the
+     sentence it belongs to, which reads as a stray picture rather than as
+     somebody saying hello. */
+  .kid-hello {
+    margin: 8px 0 26px;
+    justify-content: flex-start;
+    gap: 18px;
+    max-width: 720px;
+  }
+
+  .kid-ask {
+    font-size: 36px;
+    max-width: 20ch;
+  }
+
+  .kid-mascot { margin: -14px 0 0 0; }
+
+  /* Room to breathe rather than four more tiles. Eight subjects at 64px with
+     a 14px name is a panel a child can aim at from a laptop's trackpad. */
+  .kid-tiles {
+    gap: 10px;
+    padding: 18px 16px;
+    margin-bottom: 0;
+  }
+
+  .kid-tile { min-height: 108px; }
+
+  .kid-tile-art { width: 64px; height: 64px; border-radius: 20px; }
+
+  .kid-tile-name { font-size: 14.5px; }
+
+  /* A list of 78px rows across 1040px is mostly empty row, so the lists go
+     two across. Still one tap, still the whole row. */
+  .kid-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .kid-list .kid-row { margin-bottom: 0; }
+
+  .kid-banner { padding: 20px 24px; }
 }

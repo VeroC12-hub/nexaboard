@@ -46,7 +46,7 @@ const PATIENCE_MS = 7000
 
 export default function HeavyGame({
   topicId, topicTitle, stage, year, accuracy, learnerId,
-  onAttempt, onDone, onRead, onSimple,
+  onAttempt, onDone, onRead, onLeave, onSimple,
 }: {
   topicId: string
   topicTitle: string
@@ -60,6 +60,8 @@ export default function HeavyGame({
   onDone: () => void
   /** Back to the written lesson, which at this age is for the adult. */
   onRead: () => void
+  /** Out of the game, back to wherever they came in from. */
+  onLeave: () => void
   /** The plain tapping games, if the frame will not run. */
   onSimple?: () => void
 }) {
@@ -67,16 +69,15 @@ export default function HeavyGame({
    * Which game. Composed here rather than fetched, so it is instant, free and
    * works offline.
    *
-   * `nth` is how another one is asked for. The composer is random and avoids
-   * what this learner has played recently, so asking again with the same
-   * arguments is a different game, which is the entire point of generating
-   * rather than shipping a fixed set.
+   * Another one is asked for by finishing this one: `onDone` is what remounts
+   * this component with a fresh spec, and the composer is random and avoids
+   * what this learner has played recently. There is no counter here as well,
+   * because two counters for one thing is how a game ends up rebuilding itself
+   * underneath a child who is still playing it.
    */
-  const [nth, setNth] = useState(0)
   const spec = useMemo<GameSpec | null>(
     () => composeSpec({ stage, year, accuracy, topicTitle, learnerId }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [stage, year, accuracy, topicTitle, learnerId, nth])
+    [stage, year, accuracy, topicTitle, learnerId])
 
   /**
    * One switch, two capabilities.
@@ -112,18 +113,17 @@ export default function HeavyGame({
 
   return (
     <Session
-      key={`${fingerprint(spec)}-${nth}`}
+      key={fingerprint(spec)}
       spec={spec}
       topicId={topicId}
-      topicTitle={topicTitle}
       learnerId={learnerId}
       voice={voice}
       sound={sound}
       onVoice={next => { setSound(next); setVoiceOn(next); if (!next) stop() }}
-      onAnother={() => { stop(); setNth(n => n + 1) }}
       onAttempt={onAttempt}
       onDone={onDone}
       onRead={onRead}
+      onLeave={onLeave}
       onSimple={onSimple}
     />
   )
@@ -131,12 +131,11 @@ export default function HeavyGame({
 
 /** One game, from loading it to finishing it. Remounted for the next one. */
 function Session({
-  spec, topicId, topicTitle, learnerId, voice, sound, onVoice, onAnother,
-  onAttempt, onDone, onRead, onSimple,
+  spec, topicId, learnerId, voice, sound, onVoice,
+  onAttempt, onDone, onRead, onLeave, onSimple,
 }: {
   spec: GameSpec
   topicId: string
-  topicTitle: string
   /** Used only to write down how this game went. Never sent to the frame. */
   learnerId: string
   /** Whether to speak: the preference, and a device that can. */
@@ -144,10 +143,10 @@ function Session({
   /** Whether to make any noise at all: the preference alone. */
   sound: boolean
   onVoice: (on: boolean) => void
-  onAnother: () => void
   onAttempt: (a: Attempt) => void
   onDone: () => void
   onRead: () => void
+  onLeave: () => void
   onSimple?: () => void
 }) {
   const frame = useRef<HTMLIFrameElement | null>(null)
@@ -278,61 +277,49 @@ function Session({
     return () => window.removeEventListener('message', onMessage)
   }, [spec, attempt, onDone])
 
-  const score = marks.filter(Boolean).length
-
+  /**
+   * The game, and nothing else.
+   *
+   * This screen used to carry a row of progress dots, a button for a different
+   * game, a sound control that could grow into a sentence, a link labelled
+   * "For the grown up", and a footer naming the game, the topic and the score.
+   * All of it was readable only by someone who can read, which is not who this
+   * screen is for, and all of it sat between a four year old and the thing
+   * they came to do.
+   *
+   * So the frame takes the whole screen and two controls float on top of it:
+   * out, and sound. Out is the one a child needs and could not find. Sound
+   * stays because a game making no noise looks broken to the adult sitting
+   * next to them, which was a real report and not a guess.
+   *
+   * Everything that was removed still exists elsewhere: the score is in the
+   * mastery record either way, since `attempt` writes every round, and the
+   * lesson is a tap away once they are out.
+   */
   return (
-    <div className="gm gm-heavy">
-      <div className="gm-top">
-        <span className="gm-dots" aria-label={`round ${marks.length + 1} of ${spec.rounds}`}>
-          {Array.from({ length: spec.rounds }, (_, i) => (
-            <i key={i} className={
-              i < marks.length ? (marks[i] ? 'is-right' : 'is-wrong')
-                : i === marks.length ? 'is-now' : ''
-            } />
-          ))}
-        </span>
-        <span className="gm-controls">
-          {/* Another game, on demand. A child who is bored of this one should
-              not have to finish it to see a different one, and there is always
-              a different one. */}
-          <button
-            className="gm-icon"
-            aria-label="A different game"
-            title="A different game"
-            onClick={onAnother}>
-            🎲
-          </button>
-          {/* Always shown.
-
-              It used to be hidden unless the device could do text to speech,
-              which was right when it only controlled the voice and wrong now
-              that it controls the clicks, the chimes and the music too: a
-              phone with no speech synthesis had sound it could not turn off.
-
-              It says "sound" rather than "voice" for the same reason. */}
-          {/* Says so in words when it is off.
-
-              It was a bare bell with a line through it and nothing else. A
-              muted game is indistinguishable from a broken one, and the person
-              looking at it has no reason to think a small grey symbol is the
-              thing to press: the first report of this was "I am still not
-              hearing anything", from a game that was working exactly as
-              configured.
-
-              On, it stays a symbol, because there is nothing to fix. */}
-          <button
-            className={`gm-icon${sound ? ' is-on' : ' is-muted'}`}
-            aria-label={sound ? 'Turn the sound off' : 'Turn the sound on'}
-            aria-pressed={sound}
-            title={sound ? 'Sound on' : 'Sound is off. Press to turn it on.'}
-            onClick={() => onVoice(!sound)}>
-            {sound ? '🔔' : <><span aria-hidden>🔕</span> Sound is off</>}
-          </button>
-          <button className="gm-quiet" onClick={onRead}>For the grown up</button>
-        </span>
-      </div>
-
+    <div className="gm gm-heavy is-bare">
       <div className="gm-frame-wrap">
+        <button
+          className="gm-exit"
+          aria-label="Leave the game"
+          title="Leave the game"
+          onClick={() => { stop(); onLeave() }}>
+          <span aria-hidden>✕</span>
+        </button>
+
+        {/* Muted is the state worth shouting about: a silent game is
+            indistinguishable from a broken one, and the control that fixes it
+            has to look like the answer rather than like decoration. On, it
+            stays a bare symbol, because there is nothing to fix. */}
+        <button
+          className={`gm-sound${sound ? ' is-on' : ' is-muted'}`}
+          aria-label={sound ? 'Turn the sound off' : 'Turn the sound on'}
+          aria-pressed={sound}
+          title={sound ? 'Sound on' : 'Sound is off. Press to turn it on.'}
+          onClick={() => onVoice(!sound)}>
+          {sound ? <span aria-hidden>🔔</span> : <><span aria-hidden>🔕</span> Sound is off</>}
+        </button>
+
         <iframe
           ref={frame}
           className="gm-frame"
@@ -355,11 +342,6 @@ function Session({
           </div>
         )}
       </div>
-
-      <p className="gm-foot">
-        {spec.title} · {topicTitle}
-        {marks.length ? ` · ${score} of ${marks.length} right` : ''}
-      </p>
     </div>
   )
 }

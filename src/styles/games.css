@@ -326,6 +326,70 @@
   overflow: hidden;
 }
 
+/* ── the game on its own ──────────────────────────────────────────────────────
+
+   Nothing around the frame: no dots, no footer, no links. The two controls
+   that remain float on top of the game in opposite corners, sized for the same
+   small fingers as the game itself and placed clear of where the engine draws.
+   -------------------------------------------------------------------------- */
+
+.gm-heavy.is-bare {
+  padding: 0;
+  /* Edge to edge. The rounded card made sense under a header and a footer and
+     makes none when the game is the whole screen. */
+  max-width: none;
+}
+
+.gm-heavy.is-bare .gm-frame-wrap {
+  margin: 0;
+  max-width: none;
+  min-height: 0;
+  height: 100dvh;
+}
+
+.gm-heavy.is-bare .gm-frame { border-radius: 0; }
+
+.gm-exit,
+.gm-sound {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  z-index: 2;
+  font: inherit;
+  min-width: 52px;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ink);
+  background: rgba(255, 253, 245, 0.92);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  /* The game behind these is dark, so they need to lift off it. */
+  box-shadow: 0 2px 10px rgba(14, 21, 36, 0.35);
+  transition: transform 120ms;
+}
+.gm-exit:active,
+.gm-sound:active { transform: scale(0.94); }
+
+/* Out is on the left, where a thumb reaches it and where no engine puts a
+   score. It is the only way out of this screen, so it never changes place. */
+.gm-exit { left: max(12px, env(safe-area-inset-left)); font-weight: 700; }
+.gm-sound { right: max(12px, env(safe-area-inset-right)); }
+
+.gm-sound.is-muted {
+  width: auto;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--nx-red-text);
+  border-color: var(--nx-red);
+  background: var(--nx-red-soft);
+}
+
 .gm-frame-wrap {
   position: relative;
   flex: 1 1 auto;

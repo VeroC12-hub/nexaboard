@@ -60,8 +60,14 @@ export function readinessOf(stage: Stage, subject: Subject): Readiness {
 }
 
 /** How much subject there is, for a screen that should not overstate it. */
-export function shapeOf(stage: Stage, subjectId: string): { strands: number, topics: number } | null {
-  const s = syllabusFor(stage, subjectId)
+export function shapeOf(
+  stage: Stage,
+  subjectId: string,
+  /* A school's own outline is a different size from the national one, so a
+     screen that states how much subject there is must be told whose. */
+  curriculum?: string,
+): { strands: number, topics: number } | null {
+  const s = syllabusFor(stage, subjectId, curriculum)
   return s ? sizeOf(s) : null
 }
 

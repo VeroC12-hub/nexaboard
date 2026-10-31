@@ -248,14 +248,22 @@ export function localPlan({
   const wordless = readingIsBad() && !leadNeedsReading
 
   const s = askSignals(asks)
+  /* Every one of these reads after a medium from WHY, which is a phrase like
+     "doing it" or "seeing it drawn". "Trying doing it" was the result, and it
+     was on the grown up's screen for every new learner. "Starting with" takes
+     the same phrase and is a sentence.
+
+     And "them", not "her". The sign up form never asks whether a learner is a
+     boy or a girl, so half the parents reading this were being told about
+     somebody else's daughter. */
   const because = parts.length === 1
-    ? `Only ${WHY[parts[0].medium]}, because that is what has been working for her.`
+    ? `Only ${WHY[parts[0].medium]}, because that is what has been working for them.`
     : source === 'stated'
-      ? `Trying ${parts.map(p => WHY[p.medium]).join(', then ')},`
-        + ' because nothing is known yet about what suits her.'
+      ? `Starting with ${parts.map(p => WHY[p.medium]).join(', then ')},`
+        + ' because nothing is known yet about what suits them.'
       : `Mostly ${WHY[parts[0].medium]}`
         + (parts.length > 1 ? `, then ${parts.slice(1).map(p => WHY[p.medium]).join(', ')}` : '')
-        + (s.total ? ', from what she has asked for and how she has been doing.' : '.')
+        + (s.total ? ', from what they have asked for and how they have been doing.' : '.')
 
   return {
     parts,
@@ -351,3 +359,31 @@ export function rank(plan: Plan, medium: Medium): number {
   const i = plan.parts.findIndex(p => p.medium === medium)
   return i === -1 ? 99 : i
 }
+
+/* ── accepting one that was stored ───────────────────────────── */
+
+export /** Anything that is not a plan with parts in it is not a plan. */
+function usable(value: unknown): Plan | null {
+  const p = value as Plan | null
+  if (!p || !Array.isArray(p.parts) || !p.parts.length) return null
+
+  /* A stored plan may name a medium this build can no longer produce, and when
+     it does it has to be thrown away rather than honoured.
+
+     This is what made fixing the planning look like it had changed nothing. A
+     plan is cached in localStorage and kept in edu_learner_plan, and
+     `planIsStale` leaves a locally worked out one alone for three days. So
+     every learner who already had a plan naming video kept being taught from
+     it after video left RENDERABLE: the code was right and every existing
+     learner still got the old lesson. On production that is every learner
+     there is.
+
+     Returning null here sends the caller to `localPlan`, which is instant,
+     offline and now correct, so the next topic a learner opens is planned
+     again rather than in three days' time. */
+  const stale = p.parts.filter(part => part && !RENDERABLE.includes(part.medium))
+  if (stale.length) return null
+
+  return p
+}
+

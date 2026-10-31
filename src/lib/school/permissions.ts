@@ -26,8 +26,10 @@ export type Capability =
   | 'class.manage' | 'lesson.create' | 'assignment.create' | 'work.mark'
   | 'attendance.record' | 'performance.view.class' | 'ai.teaching'
   | 'communicate.class' | 'cpd.complete' | 'profile.professional'
+  | 'curriculum.approve'
   // institution
   | 'school.manage' | 'staff.manage' | 'roll.manage' | 'notes.approve'
+  | 'curriculum.author'
   | 'reports.release' | 'attendance.view.school' | 'billing.manage'
   // government
   | 'analytics.national' | 'analytics.region' | 'analytics.district'
@@ -46,12 +48,23 @@ const TEACHER: Capability[] = [
   'class.manage', 'lesson.create', 'assignment.create', 'work.mark',
   'attendance.record', 'performance.view.class', 'ai.teaching',
   'communicate.class', 'cpd.complete', 'profile.professional', 'learning.view',
+  /* Reading a generated lesson and saying it may be taught. Held by a
+     teacher and not only by a head, because the subject teacher is the
+     person who can judge whether a Basic 2 science lesson is right, and a
+     gate only a head can pass stops the work rather than checking it. */
+  'curriculum.approve',
 ]
 
 const SCHOOL: Capability[] = [
   ...TEACHER,
   'school.manage', 'staff.manage', 'roll.manage', 'notes.approve',
   'reports.release', 'attendance.view.school', 'analytics.school',
+  /* Declaring that this school teaches its own scheme of work, and setting
+     the AI to build it. Separate from `curriculum.approve`, which every
+     teacher holds: reading one lesson and judging it is the subject
+     teacher's job, while deciding the school departs from the national
+     curriculum at all is the head's. */
+  'curriculum.author',
 ]
 
 export const CAPABILITIES: Record<Role, Capability[]> = {
@@ -76,6 +89,7 @@ export const CAPABILITIES: Record<Role, Capability[]> = {
 
   national: ['analytics.school', 'analytics.district', 'analytics.region',
              'analytics.national', 'ai.analysis', 'curriculum.manage',
+             'curriculum.approve', 'curriculum.author',
              'programme.manage', 'intervention.manage'],
 }
 
@@ -88,6 +102,7 @@ export const CAPABILITIES: Record<Role, Capability[]> = {
  */
 export const DENIALS: Partial<Record<Role, string[]>> = {
   student: [
+    'Approve teaching material that other learners will be taught from',
     'Modify official grades',
     'Modify official attendance',
     'Modify institutional records',

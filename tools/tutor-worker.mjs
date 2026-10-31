@@ -62,12 +62,37 @@ const WORKDIR = path.join(os.tmpdir(), 'nexaedu-tutor');
    allowances, the first with room left answers, and drawing billed elsewhere. */
 const codex = new CodexRunner({ log: (m) => console.log(m) });
 
-const runner = new Runner({
+/**
+ * A runner per job, not one shared by all of them.
+ *
+ * `Runner.run` leaves the tokens and the cost of the last answer on the
+ * instance, which is fine while jobs run one at a time and wrong the moment
+ * two overlap: the ledger would bill one learner's lesson against another
+ * learner's question. The object is a few fields and a mkdir, so one each is
+ * cheaper than the bug.
+ */
+const makeRunner = () => new Runner({
   model: MODEL,
   workdir: WORKDIR,
   log: (m) => console.log(m),
   backup: codex,
 });
+
+/**
+ * How many learners this worker serves at once.
+ *
+ * It used to be one, strictly: claim, answer, claim. The measured ledger says
+ * a job takes about 15 seconds in the middle and about 60 for a long lesson,
+ * and `api/queue.js` gives a learner up to four minutes before it gives up on
+ * them. So one worker quietly serves about four people in a burst and the
+ * fifth child onwards watches a spinner and then gets nothing.
+ *
+ * Each job is a separate `claude -p` process and the queue hands out a
+ * different job per claim, so overlapping them is safe. Three is the default
+ * because each one is a process on this machine: raise it on a machine with
+ * memory to spare, lower it to 1 to get the old behaviour back.
+ */
+const AT_ONCE = Math.max(1, Number(process.env.EDU_WORKER_JOBS || 3));
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -89,7 +114,7 @@ const LEDGER = process.env.EDU_LEDGER
   || path.join(process.cwd(), 'tutor-usage.jsonl');
 
 /** The token counts for the job just finished, for the console line. */
-function spent() {
+function spent(runner) {
   const u = runner.lastUsed;
   if (!u) return runner.lastEngine === 'codex' ? ', via codex' : '';
   const inTok = (u.input_tokens || 0)
@@ -101,7 +126,7 @@ function spent() {
 }
 
 /** One line in the ledger. Never throws. */
-function record(job, started, chars) {
+function record(job, started, chars, runner) {
   try {
     const u = runner.lastUsed || {};
     fs.appendFileSync(LEDGER, JSON.stringify({
@@ -148,6 +173,7 @@ async function api(pathname, init) {
  * routes that answer.
  */
 async function work(job) {
+  const runner = makeRunner();
   const label = (job.task || 'explain') + (job.subject ? ' · ' + job.subject : '');
   console.log('  job ' + String(job.id).slice(0, 8) + '  ' + label);
 
@@ -189,8 +215,8 @@ async function work(job) {
         method: 'PUT',
         body: JSON.stringify({ id: job.id, status: 'done', answer: made }),
       });
-      console.log('    answered in ' + Math.round((Date.now() - started) / 1000) + 's' + spent());
-      record(job, started, String(made || '').length);
+      console.log('    answered in ' + Math.round((Date.now() - started) / 1000) + 's' + spent(runner));
+      record(job, started, String(made || '').length, runner);
       return;
     }
 
@@ -199,8 +225,8 @@ async function work(job) {
       body: JSON.stringify({ id: job.id, status: 'done', answer }),
     });
     console.log('    answered in ' + Math.round((Date.now() - started) / 1000)
-      + 's, ' + answer.length + ' characters' + spent());
-    record(job, started, answer.length);
+      + 's, ' + answer.length + ' characters' + spent(runner));
+    record(job, started, answer.length, runner);
   } catch (err) {
     const why = String(err.message || 'unknown').split('\n')[0];
     console.log('    failed: ' + why.slice(0, 140));
@@ -320,10 +346,35 @@ async function main() {
   console.log('  account  ' + (process.env.CLAUDE_CODE_OAUTH_TOKEN
     ? 'subscription token, headless'
     : 'the interactive login on this machine'));
+  console.log('  at once   ' + AT_ONCE + (AT_ONCE === 1 ? ' job' : ' jobs'));
   console.log('\nWaiting for questions. Ctrl+C to stop.\n');
 
   let quiet = 0;
+
+  /* The jobs currently being answered. Claiming continues while there is room
+     in here, which is what lets a second child be served while the first
+     child's lesson is still being written. */
+  const running = new Set();
+
+  const start = (job) => {
+    /* `work` already swallows its own failures and tells the learner, so a
+       rejection here would be a bug in the reporting rather than a failed
+       answer. It is caught anyway: one unhandled rejection would take the
+       whole worker down, and with it every other learner waiting. */
+    const p = work(job)
+      .catch((err) => console.log('  job failed outright: ' + String((err && err.message) || err).slice(0, 120)))
+      .finally(() => running.delete(p));
+    running.add(p);
+  };
+
   for (;;) {
+    if (running.size >= AT_ONCE) {
+      /* Every slot is busy. Wait for whichever finishes first rather than
+         asking the queue for work we could not take. */
+      await Promise.race(running);
+      continue;
+    }
+
     let job = null;
     try {
       const got = await api('/api/queue?claim=1', { method: 'GET' });
@@ -338,8 +389,14 @@ async function main() {
     }
     quiet = 0;
 
-    if (!job) { await wait(IDLE_MS); continue; }
-    await work(job);
+    if (!job) {
+      /* Nothing waiting. While something of ours is still running, keep the
+         loop tight so its slot is reused the moment it frees. */
+      await wait(running.size ? BUSY_MS : IDLE_MS);
+      continue;
+    }
+
+    start(job);
     await wait(BUSY_MS);
   }
 }

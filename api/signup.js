@@ -61,7 +61,7 @@
 // that is the test to run.
 //
 // What it still does not stop is a distributed attempt from many addresses.
-// That belongs at the edge, and is recorded in NEXAEDU_OPEN_ISSUES.md.
+// That belongs at the edge, and is recorded in docs/NEXAEDU_OPEN_ISSUES.md.
 
 const SUPA_URL = process.env.SUPABASE_URL || '';
 const SUPA_KEY = process.env.SUPABASE_SERVICE_KEY || '';
@@ -217,7 +217,7 @@ export default async function handler(req, res) {
      An email address is no longer proved to belong to whoever typed it. Two
      consequences: somebody can register on an address they do not own, and
      there is no verified address to send a password reset to later. Email
-     verification is owed work, recorded in NEXAEDU_OPEN_ISSUES.md, and the
+     verification is owed work, recorded in docs/NEXAEDU_OPEN_ISSUES.md, and the
      place for it is a link sent AFTER the account exists rather than a gate
      before it. */
   let email;

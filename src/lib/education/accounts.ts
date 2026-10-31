@@ -319,7 +319,7 @@ export async function createAccount(input: SignUp): Promise<Created> {
      there is no verified address to send a password reset to. Verification is
      owed work and belongs AFTER the account exists, as a link that marks it
      verified, never as a gate in front of a parent trying to register.
-     Recorded in NEXAEDU_OPEN_ISSUES.md. */
+     Recorded in docs/NEXAEDU_OPEN_ISSUES.md. */
   let res: Response
   try {
     res = await fetch('/api/signup', {

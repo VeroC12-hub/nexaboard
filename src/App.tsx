@@ -12,6 +12,9 @@ import SchoolApp from './pages/SchoolApp'
 import LearnerApp from './pages/LearnerApp'
 import Study from './pages/Study'
 import NotFound from './pages/NotFound'
+import Review from './pages/Review'
+import CurriculumPage from './pages/Curriculum'
+import Helper from './components/Helper'
 import LessonPreview from './pages/LessonPreview'
 import Front from './pages/Front'
 import type { User } from '@supabase/supabase-js'
@@ -63,8 +66,11 @@ function App() {
         <Route path="/school" element={<SchoolApp />} />
         {/* Stage Two: the learner curriculum navigator, on the real education model. */}
         <Route path="/learn/*" element={<LearnerApp />} />
-        {/* The learner surface that works with an empty database. */}
-        <Route path="/study" element={<Study />} />
+        {/* The learner surface that works with an empty database.
+            A wildcard because every screen inside it is a real path now
+            (/study/learners, /study/subjects, /study/course/<topic>/lesson),
+            which is what makes the browser's back button work in there. */}
+        <Route path="/study/*" element={<Study />} />
         {/* A review surface for generated lessons, development only.
             Reads a finished tutor job by id and renders it whole with the real
             components. Not mounted on a deployment: it is for looking at
@@ -94,8 +100,24 @@ function App() {
             Blank is unreportable. A visitor cannot tell you what went wrong
             and you cannot tell from a screenshot. So this says which address
             was asked for and offers the way back. */}
+        {/* Reading generated lessons before a child is taught from them.
+
+            Not development only: a school's own teachers approve their own
+            subjects, which is the only way this scales past the people who
+            built the app. It is unguarded for now, which is owed work: see
+            docs/NEXAEDU_OPEN_ISSUES.md. */}
+        <Route path="/review" element={<Review />} />
+        <Route path="/curriculum" element={<CurriculumPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {/* The helper, above every screen.
+
+          Mounted here rather than inside each page because it is one
+          conversation that should survive moving between screens, and because
+          a page that forgot to include it would be a page a stuck learner
+          could not ask from. It draws nothing at all until a learner is open,
+          so the whiteboard side of the app is unaffected. */}
+      <Helper />
     </BrowserRouter>
   )
 }

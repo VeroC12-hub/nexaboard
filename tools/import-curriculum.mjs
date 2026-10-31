@@ -12,7 +12,7 @@
  * nothing runs on MODEL provenance, which is honest and teaches well, but it
  * cannot say that a topic is indicator B9.1.2.1.3, cannot say it is on the
  * BECE, and cannot say it carries eight marks. Those are checkable facts about
- * a real document, and docs/syllabus.md is blunt that the outlines in
+ * a real document, and docs/teaching/syllabus.md is blunt that the outlines in
  * src/lib/education/library/syllabus/ must never claim them.
  *
  * Loading the actual document raises those courses from MODEL to NATIONAL. It

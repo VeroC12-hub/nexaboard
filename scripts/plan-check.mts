@@ -12,7 +12,7 @@
 // Every line below is a plan nobody should ever be given. Run it after touching
 // RENDERABLE, fromStated or partsAllowed.
 
-import { localPlan, RENDERABLE } from '../src/lib/education/plan-core'
+import { localPlan, usable, RENDERABLE } from '../src/lib/education/plan-core'
 import type { LearnerProfile } from '../src/lib/education/learner'
 
 type Diet = LearnerProfile['diet']

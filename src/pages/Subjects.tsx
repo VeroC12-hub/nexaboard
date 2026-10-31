@@ -68,9 +68,14 @@ interface Row {
   worked: number
 }
 
-function rowFor(stage: Stage, subject: Subject, workedIds: Set<string>): Row {
-  const shape = shapeOf(stage, subject.id)
-  const syllabus = syllabusFor(stage, subject.id)
+function rowFor(
+  stage: Stage,
+  subject: Subject,
+  workedIds: Set<string>,
+  curriculum?: string,
+): Row {
+  const shape = shapeOf(stage, subject.id, curriculum)
+  const syllabus = syllabusFor(stage, subject.id, curriculum)
   /* Counted against this subject's own topic ids rather than against the
      learner's whole history, so work done in Mathematics cannot appear as
      progress in Physics. */
@@ -174,7 +179,7 @@ export default function Subjects({
 
   const rows = useMemo(() => {
     const workedIds = new Set(attempts.map(a => a.objectiveId))
-    return all.map(s => rowFor(profile.stage, s, workedIds))
+    return all.map(s => rowFor(profile.stage, s, workedIds, profile.curriculum))
   }, [all, attempts, profile.stage])
 
   const pick = (s: Subject) => {

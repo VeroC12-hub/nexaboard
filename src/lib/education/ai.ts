@@ -35,6 +35,8 @@ import type { Question } from './course'
 export type TutorTask =
   | 'explain' | 'hint' | 'method'
   | 'lesson' | 'questions'
+  /** The helper, open on every screen: anything, in their own words. */
+  | 'ask'
   | 'figure' | 'illustration' | 'clip' | 'storyboard'
   | 'observe'
   /** The only task that decides the form of teaching rather than its content. */
@@ -187,8 +189,11 @@ interface Job {
   /* observe */
   topic?: string
   round?: RoundEntry[]
-  /* figure, illustration, clip, storyboard */
+  /* figure, illustration, clip, storyboard, ask */
   lesson?: string
+  /* ask */
+  where?: string
+  said?: Said[]
   /** Which of the five video styles a storyboard should follow. */
   style?: string
 }
@@ -214,6 +219,8 @@ const payload = (j: Job) => JSON.stringify({
   topic: j.topic ?? j.syllabus?.topic ?? '',
   askedFor: j.askedFor ?? '',
   lesson: j.lesson ?? '',
+  where: j.where ?? '',
+  said: j.said ?? [],
   style: j.style ?? j.syllabus?.style ?? '',
   count: j.count,
   level: j.level,
@@ -387,6 +394,39 @@ export function askTutor(
   return run({ ...r }, handlers, signal)
 }
 
+/** One turn of the chat, as both sides are shown it. */
+export interface Said {
+  from: 'them' | 'tutor'
+  text: string
+}
+
+/**
+ * The helper. Anything, asked from anywhere, in the learner's own words.
+ *
+ * Streams, because an answer appearing a word at a time reads as a reply and a
+ * spinner reads as a hang. Everything that makes the answer fit this person is
+ * in `learner`, which is the same brief the lesson is written from, so the
+ * helper cannot disagree with the tutor about who it is talking to.
+ */
+export function askHelper(
+  r: {
+    learner: LearnerBrief
+    question: string
+    /** Which screen they asked from, in words. */
+    where?: string
+    /** The lesson on their screen, when there is one. */
+    lesson?: string
+    /** Where they are in the syllabus, when they are anywhere in it. */
+    syllabus?: SyllabusPlace
+    /** The conversation so far, so a follow up has something to attach to. */
+    said?: Said[]
+  },
+  handlers: TutorHandlers,
+  signal?: AbortSignal,
+): Promise<void> {
+  return run({ task: 'ask', ...r }, handlers, signal)
+}
+
 /** Teach a topic from the syllabus. Streams, because a lesson is long. */
 export function askLesson(
   r: { learner: LearnerBrief, syllabus: SyllabusPlace, askedFor?: string },
@@ -418,6 +458,40 @@ export async function askQuestions(
   const questions = readQuestions(text, r.syllabus.topic)
   if (!questions.length) throw new Error('No usable questions came back. Try again.')
   return questions
+}
+
+/**
+ * Ask for a subject outline, or for a lesson written as parts.
+ *
+ * Both return the raw reply rather than a parsed object, for the same reason
+ * `askVisual` does: the shapes are read in one place, `generated.ts`, which
+ * also decides what is unusable. A reply that is not valid curriculum is not
+ * an exception here, it is something a reader refuses, and keeping that
+ * judgement out of this file keeps it in the module that can be tested
+ * without a network.
+ *
+ * Neither is streamed. Nobody is watching a syllabus being written, and
+ * showing a learner a half-built lesson is exactly what the review step
+ * exists to prevent.
+ */
+export async function askCurriculum(
+  r: {
+    task: 'outline' | 'taught'
+    learner: LearnerBrief
+    /** The subject name for an outline, the topic title for a lesson. */
+    topic: string
+    topicId?: string
+    subjectName?: string
+    outcome?: string
+    year?: string
+    place?: string
+    askedFor?: string
+    syllabus?: { builds?: string[] }
+  },
+  signal?: AbortSignal,
+  onStage?: (s: TutorStage) => void,
+): Promise<string> {
+  return runToEnd(r as unknown as Job, signal, onStage)
 }
 
 /**

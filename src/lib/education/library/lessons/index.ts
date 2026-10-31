@@ -7,3 +7,15 @@
  */
 
 import './jhs-science'
+import './basic1-maths'
+import './basic1-english'
+import './basic1-science'
+import './basic1-world-language-computing'
+import './basic1-arts'
+import './basic1-rme'
+import './basic2-maths'
+import './basic2-english'
+import './basic2-science'
+import './basic2-owop'
+import './basic2-ghl'
+import './basic3-maths'

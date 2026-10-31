@@ -31,6 +31,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { KidBar, KidHead, KidShell, type KidTab } from '../components/kid/Shell'
 import { BadgeArt, Icon, Pal, Sparkles, Tile, type TileArt } from '../components/kid/art'
 import { palAt, palFor, type Friend } from '../components/kid/cast'
+import GrownUpGate from '../components/kid/GrownUpGate'
 import { artFor } from '../components/kid/subjectArt'
 import { subjectsFor } from '../lib/education/subjects'
 import { allTopics, syllabusFor, topicsFor, type Topic } from '../lib/education/syllabus'
@@ -104,6 +105,17 @@ function Home({ profile, subjects, standing, onOpen, carryOn, suggested, onSubje
         </span>
       </div>
 
+      {/* Two columns on a laptop, one on a phone.
+
+          These three wrappers are `display: contents` until 900px, so on a
+          phone the markup is the flat single column it has always been and
+          nothing here changes. Above it the page was a 560px strip of content
+          stranded in the middle of a 1536px window with the drawn sky showing
+          either side of it, which is what a school with laptops actually sees.
+          See the laptop section at the end of kid.css. */}
+      <div className="kid-learn">
+        <div className="kid-col is-main">
+
       {/* The subjects, as pictures. Tapping one opens it here: there is no
           longer a separate Learn tab showing the same four tiles. */}
       <div className={`kid-tiles${subjects.length > 4 ? ' is-many' : ''}`}>
@@ -114,6 +126,9 @@ function Home({ profile, subjects, standing, onOpen, carryOn, suggested, onSubje
           </button>
         ))}
       </div>
+
+        </div>
+        <div className="kid-col is-side">
 
       {/* The day's work, in answers rather than minutes: a clock rewards
           sitting still and this should reward doing something. */}
@@ -198,6 +213,8 @@ function Home({ profile, subjects, standing, onOpen, carryOn, suggested, onSubje
           </div>
         </>
       )}
+        </div>
+      </div>
     </>
   )
 }
@@ -440,8 +457,11 @@ function Rewards({ standing, onBack }: Seen & { onBack: () => void }) {
 
 /* ── the grown up's screen ────────────────────────────────────────────────── */
 
-function GrownUp({ profile, because, onBack, onSignOut, onBackToAll }: {
+function GrownUp({ profile, pal, because, onBack, onSignOut, onBackToAll }: {
   profile: LearnerProfile
+  /** This learner's own companion, so the grown up's page is recognisably
+      theirs rather than a settings screen with a stock character on it. */
+  pal: Friend
   because: string
   onBack: () => void
   onSignOut: () => void
@@ -467,7 +487,7 @@ function GrownUp({ profile, because, onBack, onSignOut, onBackToAll }: {
           <h1>{profile.name || 'Your learner'}</h1>
           <p>{profile.level}</p>
         </div>
-        <Pal who="drum" size={74} mood="wave" />
+        <Pal who={pal} size={74} mood="wave" />
       </div>
 
       {/* What the tutor decided, said out loud. A parent whose child is being
@@ -542,6 +562,7 @@ function GrownUp({ profile, because, onBack, onSignOut, onBackToAll }: {
 
 export default function KidApp({
   profile, attempts, onOpenSubject, onSignOut, onBack,
+  panel, subjectOpen, onPanel, onSubject,
 }: {
   profile: LearnerProfile
   attempts: Attempt[]
@@ -555,16 +576,37 @@ export default function KidApp({
   onSignOut: () => void
   /** Present when a parent or a school opened this learner. */
   onBack?: () => void
+  /**
+   * Which screen, and which subject, from the address rather than from state.
+   *
+   * Both of these used to be `useState` in here, which meant every screen
+   * inside the child's app was the same address. The browser's back button
+   * then left the app entirely from the second screen in, and on a phone that
+   * is the gesture a child uses most. The caller owns the URL, so the caller
+   * owns these two values and `onPanel`/`onSubject` ask it to move.
+   */
+  panel: KidTab
+  subjectOpen: string | null
+  onPanel: (t: KidTab) => void
+  onSubject: (id: string | null) => void
 }) {
-  const [tab, setTab] = useState<KidTab>('home')
-  /** Which subject is open, if any. Lives on Home now that Learn is gone. */
-  const [open, setOpen] = useState<string | null>(null)
+  const tab = panel
+  const open = subjectOpen
+
+  /**
+   * Whether the grown up's question is on screen.
+   *
+   * There are two ways out of a child's app, the header's door and the row on
+   * the grown up's page, and both have to ask the same question. So the flag
+   * lives here, above both of them, rather than in either.
+   */
+  const [askGrownUp, setAskGrownUp] = useState(false)
 
   const worked = useMemo(() => new Set(attempts.map(a => a.objectiveId)), [attempts])
 
   const subjects = useMemo<KidSubject[]>(() => {
     return subjectsFor(profile.stage).map(s => {
-      const syllabus = syllabusFor(profile.stage, s.id)
+      const syllabus = syllabusFor(profile.stage, s.id, profile.curriculum)
       const topics = syllabus ? topicsFor(syllabus, profile.level) : []
       /* Their year may hold nothing for a subject that starts later, in which
          case the whole subject is the honest fallback rather than an empty
@@ -688,29 +730,40 @@ export default function KidApp({
       reads={reads}
       xp={standing.xp}
       days={standing.daysLearned}
-      onTab={t => { setTab(t); if (t !== 'home') setOpen(null) }}>
+      /* The header's door asks the question rather than leaving. */
+      onSignOut={() => setAskGrownUp(true)}
+      onTab={t => { onPanel(t); if (t !== 'home') onSubject(null) }}>
 
       {tab === 'home' && (openSubject
-        ? <SubjectPage {...seen} subject={openSubject} onBack={() => setOpen(null)} />
+        ? <SubjectPage {...seen} subject={openSubject} onBack={() => onSubject(null)} />
         : (
           <Home
             {...seen}
             carryOn={carryOn}
             suggested={suggested}
-            onSubject={setOpen} />
+            onSubject={onSubject} />
         ))}
 
       {tab === 'play' && <Play {...seen} />}
 
-      {tab === 'rewards' && <Rewards {...seen} onBack={() => setTab('home')} />}
+      {tab === 'rewards' && <Rewards {...seen} onBack={() => onPanel('home')} />}
 
       {tab === 'profile' && (
         <GrownUp
           profile={profile}
+          pal={palFor(profile.name || profile.id)}
           because={plan.because}
-          onBack={() => setTab('home')}
-          onSignOut={onSignOut}
+          onBack={() => onPanel('home')}
+          onSignOut={() => setAskGrownUp(true)}
           onBackToAll={onBack} />
+      )}
+
+      {/* The question itself, over whichever screen asked it. */}
+      {askGrownUp && (
+        <GrownUpGate
+          what="sign out"
+          onPass={() => { setAskGrownUp(false); onSignOut() }}
+          onCancel={() => setAskGrownUp(false)} />
       )}
     </KidShell>
   )

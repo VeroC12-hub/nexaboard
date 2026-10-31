@@ -114,6 +114,8 @@ export default async function handler(req, res) {
             topic: String(body.topic || '').slice(0, 300),
             askedFor: String(body.askedFor || '').slice(0, 600),
             lesson: String(body.lesson || '').slice(0, 6000),
+            where: String(body.where || '').slice(0, 300),
+            said: body.said,
             count: body.count,
             level: body.level,
             avoid: body.avoid,

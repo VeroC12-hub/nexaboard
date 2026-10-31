@@ -23,7 +23,7 @@
  * error page.
  */
 
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import '../styles/study.css'
 import Prose from '../components/Prose'
 import { blocksOf } from '../components/blocks'
@@ -59,7 +59,7 @@ import {
 import { askPlan } from '../lib/education/ai'
 import { illustrate, rendererAvailable } from '../lib/education/illustrate'
 import { runAhead, sharedVideo, sharedVisual } from '../lib/education/ahead'
-import { likelyKind, type Visual, type VisualKind } from '../lib/education/visuals'
+import { cleanSvg, likelyKind, type Visual, type VisualKind } from '../lib/education/visuals'
 import {
   askLesson, askQuestions, observeRound, TutorOff,
   type LearnerBrief, type RoundEntry, type SyllabusPlace, type TutorStage,
@@ -216,7 +216,8 @@ function TopicRow({ topic, done, onOpen }: {
 }
 
 export default function Learn({
-  syllabus, profile, attempts, onAttempt, onBack, onSignOut, startTopicId,
+  syllabus, profile, attempts, onAttempt, onBack, onBounce, onSignOut,
+  place, onPlace,
 }: {
   syllabus: Syllabus
   profile: LearnerProfile
@@ -226,32 +227,93 @@ export default function Learn({
   onBack: () => void
   onSignOut: () => void
   /**
-   * A topic to open straight away, skipping the outline.
-   *
-   * For the youngest learners, who reach a topic by tapping its picture on
-   * their own screen rather than by reading a list of strands. Landing them on
-   * an outline they cannot read would undo the point of that screen.
+   * A path this screen cannot honour, so the caller replaces the address
+   * rather than pushing it: back must not return to a dead end.
    */
-  startTopicId?: string
+  onBounce?: () => void
+  /**
+   * Where it is, and how it moves.
+   *
+   * Both go through the URL, so the outline, a lesson, the questions and a
+   * game are four addresses rather than four values of one hidden variable.
+   * The shape is declared structurally rather than imported from the caller,
+   * because the caller imports this file.
+   */
+  place: { at: 'outline' } | { at: 'lesson' | 'practice' | 'game', topicId: string }
+  onPlace: (p: { at: 'outline' } | { at: 'lesson' | 'practice' | 'game', topicId: string }) => void
 }) {
+  /**
+   * The address, as one string, so that "same screen, same topic" is a
+   * comparison rather than a branch.
+   */
+  const key = place.at === 'outline' ? 'outline' : `${place.at}:${place.topicId}`
+
+  /**
+   * The parts of a view the address does not carry.
+   *
+   * Which screen and which topic are in the URL. How many times this one has
+   * been retried, what was asked for the last time it was rewritten, and
+   * whether the plain game was chosen are not: none of them is a place, and
+   * putting a retry count in the address would make the back button replay
+   * attempts. They are held here and thrown away the moment the address moves
+   * somewhere else, which is what comparing `key` does.
+   */
+  const [held, setHeld] = useState<{
+    key: string, attempt: number, askedFor: string, plain?: boolean
+  }>({ key, attempt: 0, askedFor: '' })
+
+  const extra = useMemo(
+    () => (held.key === key ? held : { key, attempt: 0, askedFor: '', plain: undefined }),
+    [held, key])
+
+  const view = useMemo<View>(() => (
+    place.at === 'outline'
+      ? { at: 'outline' }
+      : place.at === 'lesson'
+        ? { at: 'lesson', topicId: place.topicId, attempt: extra.attempt, askedFor: extra.askedFor }
+        : place.at === 'practice'
+          ? { at: 'practice', topicId: place.topicId, attempt: extra.attempt }
+          : { at: 'game', topicId: place.topicId, attempt: extra.attempt, plain: extra.plain }
+  ), [place, extra])
+
+  /**
+   * Moving, which is two things at once.
+   *
+   * The part the address holds goes to the caller, and only when it actually
+   * changed: asking for a lesson again is a new attempt at the same address,
+   * and pushing that would put a retry in the history. The part the address
+   * does not hold is kept here.
+   */
+  const setView = useCallback((next: View) => {
+    setHeld({
+      key: next.at === 'outline' ? 'outline' : `${next.at}:${next.topicId}`,
+      attempt: next.at === 'outline' ? 0 : next.attempt,
+      askedFor: next.at === 'lesson' ? next.askedFor : '',
+      plain: next.at === 'game' ? next.plain : undefined,
+    })
+    const moved = next.at !== place.at
+      || (next.at !== 'outline' && place.at !== 'outline' && next.topicId !== place.topicId)
+    if (moved) {
+      onPlace(next.at === 'outline' ? { at: 'outline' } : { at: next.at, topicId: next.topicId })
+    }
+  }, [place, onPlace])
+
   /**
    * Where "back" goes from inside a topic.
    *
    * Normally the outline, which is this screen's own list of topics. But when
-   * the caller deep-linked into a topic, the outline is not where the learner
+   * the learner arrived already inside a topic, the outline is not where they
    * came from and may be somewhere they cannot use at all: the youngest arrive
    * here by tapping a picture in their own interface, and the outline is a
    * list of syllabus strands. Caught in Chrome, where pressing back from a KG
    * learner's lesson stranded them in the adult topic list.
+   *
+   * Read from where they arrived rather than from where they are now, so that
+   * moving between a lesson and its questions does not change what back means
+   * half way through.
    */
-  const backFromTopic = startTopicId ? onBack : () => setView({ at: 'outline' })
-
-  const [view, setView] = useState<View>(
-    /* The lesson or the game, decided below by the plan, rather than the
-       outline. `attempt: 0` because arriving is not a retry. */
-    () => (startTopicId
-      ? { at: 'lesson', topicId: startTopicId, attempt: 0, askedFor: '' }
-      : { at: 'outline' }))
+  const [arrivedAt] = useState(place.at)
+  const backFromTopic = arrivedAt === 'outline' ? () => setView({ at: 'outline' }) : onBack
   /**
    * Which interface this learner is in.
    *
@@ -380,8 +442,23 @@ export default function Learn({
     () => (view.at === 'outline' ? null : everything.find(t => t.id === view.topicId) ?? null),
     [view, everything])
 
+  /**
+   * The outline is not a screen the youngest tier has.
+   *
+   * A kid arriving at one, or at a topic id this syllabus does not contain,
+   * is at an address that cannot be rendered for them. Leaving rather than
+   * drawing a list of syllabus strands for a five year old, and through
+   * `onBounce` so the caller replaces the address instead of pushing it:
+   * pressing back must not return here.
+   */
+  const bounce = skin === 'kid' && (view.at === 'outline' || !topic)
+
+  useEffect(() => { if (bounce) (onBounce ?? onBack)() }, [bounce, onBounce, onBack])
+
+  if (bounce) return null
+
   if (view.at !== 'outline' && topic) {
-    const place = placeFor(syllabus, topic, profile.stage)
+    const where = placeFor(syllabus, topic, profile.stage)
 
     if (view.at === 'game') {
       const { attempt, plain } = view
@@ -406,6 +483,9 @@ export default function Learn({
             onRead={() => setView({
               at: 'lesson', topicId: topic.id, attempt: 0, askedFor: '',
             })}
+            /* The way out of a game, which is the same way out as every other
+               screen inside a topic. */
+            onLeave={backFromTopic}
             onSimple={() => setView({
               at: 'game', topicId: topic.id, attempt: attempt + 1, plain: true,
             })}
@@ -441,7 +521,7 @@ export default function Learn({
       return (
         <Lesson
           key={topic.id + '-' + attempt}
-          topic={topic} place={place} learner={learner} askedFor={askedFor}
+          topic={topic} place={where} learner={learner} askedFor={askedFor}
           syllabus={syllabus} level={profile.level}
           plan={plan}
           onAttempt={onAttempt}
@@ -464,7 +544,7 @@ export default function Learn({
     return (
       <Practice
         key={topic.id + '-' + attempt}
-        topic={topic} place={place} learner={learner} profile={profile}
+        topic={topic} place={where} learner={learner} profile={profile}
         skin={skin}
         onAttempt={onAttempt}
         onObserved={setObservations}
@@ -572,6 +652,78 @@ export default function Learn({
 
 /* ── the lesson ───────────────────────────────────────────────────────────── */
 
+/**
+ * A drawing in the lesson, and the way to see it properly.
+ *
+ * The figure renders as it always did. What is new is that it is a button:
+ * tapping it hands the drawing up to the lesson, which shows it full screen.
+ * A picture a child cannot read is not a picture, and at phone width most of
+ * these cannot be read in the column.
+ *
+ * It stays a `figure` with its `img` role and its alt text, so a learner
+ * using a screen reader gets the description either way and is not told
+ * about a button that does nothing for them.
+ */
+function Figure({ svg, alt, onOpen }: {
+  svg: string
+  alt: string
+  onOpen: (f: { svg: string, alt: string }) => void
+}) {
+  return (
+    <figure className="nx-fig is-drawn">
+      <button
+        type="button"
+        className="nx-fig-open"
+        aria-label={'See the picture bigger: ' + alt}
+        onClick={() => onOpen({ svg, alt })}>
+        <div
+          className="nx-fig-svg"
+          role="img"
+          aria-label={alt}
+          dangerouslySetInnerHTML={{ __html: svg }}
+        />
+        <span className="nx-fig-hint">Tap to see it bigger</span>
+      </button>
+    </figure>
+  )
+}
+
+/**
+ * One drawing, filling the screen.
+ *
+ * Deliberately plain: the picture, its words, and one way out. A child who
+ * opened this wants to look at the picture, so nothing else is on screen to
+ * compete with it, and the whole backdrop closes it so there is no small
+ * target to hunt for.
+ */
+function BigFigure({ svg, alt, onClose }: {
+  svg: string
+  alt: string
+  onClose: () => void
+}) {
+  return (
+    <div
+      className="nx-big"
+      role="dialog"
+      aria-modal="true"
+      aria-label={alt}
+      onClick={onClose}>
+      <div className="nx-big-sheet" onClick={e => e.stopPropagation()}>
+        <div
+          className="nx-big-svg"
+          role="img"
+          aria-label={alt}
+          dangerouslySetInnerHTML={{ __html: svg }}
+        />
+        <p className="nx-big-alt">{alt}</p>
+        <button type="button" className="nx-btn nx-btn-primary" onClick={onClose}>
+          Close
+        </button>
+      </div>
+    </div>
+  )
+}
+
 function Lesson({
   topic, place, syllabus, level, learner, askedFor, plan, skin, primer, onAsked,
   onAttempt, onBack, onAgain, onPractise, onPlay, onOpenTopic,
@@ -650,6 +802,37 @@ function Lesson({
   const [state, setState] = useState<'live' | 'done' | 'off' | 'failed'>(
     stored ? 'done' : 'live')
   const [stage, setStage] = useState<TutorStage>('sent')
+
+  /**
+   * Whether this has gone on long enough to offer something else.
+   *
+   * Six seconds. A lesson that arrives quickly should not flash a "play
+   * instead" button at somebody who was never kept waiting, and one that does
+   * not arrive quickly should not leave an adult looking at a sentence.
+   */
+  const [waited, setWaited] = useState(false)
+
+  /**
+   * The drawing a learner has asked to see properly, or null.
+   *
+   * Figures are drawn on a 640 wide canvas with labels around 15px, and the
+   * reading column on a phone is about 306px, so those labels land near 7px.
+   * No child can read that, and the picture is often the part of the lesson
+   * that does the teaching.
+   *
+   * Rescaling every stored figure would mean changing about 160 font sizes
+   * laid out by hand, with overlapping labels as the likely result and no
+   * time to check each one. Opening the picture full screen fixes the same
+   * problem without touching a single drawing, and the browser's own pinch
+   * zoom then goes further than any size we could have chosen.
+   */
+  const [big, setBig] = useState<{ svg: string, alt: string } | null>(null)
+
+  useEffect(() => {
+    if (state !== 'live') return
+    const t = setTimeout(() => setWaited(true), 6000)
+    return () => clearTimeout(t)
+  }, [state])
   const [why, setWhy] = useState('')
   const [asking, setAsking] = useState(false)
   const [request, setRequest] = useState('')
@@ -707,7 +890,7 @@ function Lesson({
    *
    * The cost of this is real and worth stating: with a renderer configured,
    * every lesson opened now pays for one image and one video. See
-   * docs/visuals.md.
+   * docs/media/visuals.md.
    */
   const [visuals, setVisuals] = useState<Visual[]>([])
   const [coming, setComing] = useState<VisualKind[]>([])
@@ -1221,6 +1404,26 @@ function Lesson({
                     </ol>
                   )}
 
+                  {/* The diagram, which was being dropped.
+
+                      `assemble` builds a figure piece, places it first for a
+                      learner who takes things in better shown than told, and
+                      says so in the sentence under the lesson. This loop had
+                      no branch for it, so that learner was told the picture
+                      leads and then shown no picture, and a diagram somebody
+                      wrote by hand never reached anybody.
+
+                      Sanitised on the way in even though stored lessons are
+                      written rather than generated: the same rule `visuals.ts`
+                      applies to the tutor's own output, because the component
+                      cannot tell where its SVG came from. */}
+                  {piece.figure && (() => {
+                    const svg = cleanSvg(piece.figure.svg)
+                    return svg ? (
+                      <Figure svg={svg} alt={piece.figure.alt} onOpen={setBig} />
+                    ) : null
+                  })()}
+
                   {piece.worked && (
                     <div className="nx-worked">
                       <p className="nx-worked-ask">{piece.worked.ask}</p>
@@ -1258,12 +1461,81 @@ function Lesson({
             </div>
           )}
 
+          {/* Waiting, with something to do.
+
+              A lesson that has to be written takes as long as it takes, and on
+              the queued route that can be a minute or more. This used to be
+              one sentence and an empty screen, which is where a learner closes
+              the app, and the two things that would help were already built and
+              shown only when the tutor had FAILED: the primer, which is written
+              down and instant, and a game, which is composed locally and needs
+              no tutor at all. Neither of them depends on the thing being
+              waited for, so there is no reason to hold them back until it goes
+              wrong.
+
+              The offer appears after a few seconds rather than immediately: a
+              lesson that arrives quickly should not flash a "play instead"
+              button at somebody who was never kept waiting. */}
           {state === 'live' && !text.trim() && (
-            <p className="nx-ai-p nx-ai-wait">
-              {stage === 'queued'
-                ? 'Your tutor is writing this lesson for you. It takes a few seconds.'
-                : 'Preparing the lesson.'}
-            </p>
+            young ? (
+              /* Waiting, for somebody who cannot read that they are waiting.
+
+                 This was the adult block in a child's frame: a sentence about
+                 the tutor taking a minute, a paragraph of primer, and a text
+                 button that appeared six seconds later. A five year old can
+                 read none of it, so the screen was blank to them.
+
+                 The same shape as the failure state below it, because to a
+                 child they are the same situation: nothing to read yet, a
+                 friend to look at, and a game to play meanwhile. The game is
+                 offered at once rather than after a delay. The delay exists
+                 so that a lesson which arrives quickly does not flash an
+                 alternative at an adult who was never kept waiting, and a
+                 child who waits six seconds in front of a screen with nothing
+                 on it has already gone. */
+              <div className="kid-none kid-none-pal">
+                <Mascot size={78} mood="wave" />
+                <span>
+                  {primer ? primerAloud(primer) : 'Your tutor is writing this for you.'}
+                </span>
+                {onPlay && (
+                  <div className="kid-actions" style={{ width: '100%' }}>
+                    <button className="nx-btn nx-btn-primary" onClick={onPlay}>
+                      Play a game while you wait
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="nx-ai-wait-block">
+                <p className="nx-ai-p nx-ai-wait">
+                  {stage === 'queued'
+                    ? 'Your tutor is writing this lesson for you. It can take a minute.'
+                    : 'Preparing the lesson.'}
+                </p>
+
+                {primer && (
+                  <div className="nx-primer">
+                    {primer.parts.slice(0, 1).map((part, i) => (
+                      <div key={i}>
+                        <h3 className="nx-primer-head">{part.heading}</h3>
+                        {part.lines.map((line, j) => (
+                          <p key={j} className="nx-primer-p">{line}</p>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {waited && onPlay && (
+                  <div className="nx-primer-actions">
+                    <button className="nx-btn nx-btn-grow" onClick={onPlay}>
+                      Play this topic while you wait
+                    </button>
+                  </div>
+                )}
+              </div>
+            )
           )}
 
           {/* In the order this learner needs them.
@@ -1302,6 +1574,13 @@ function Lesson({
             </p>
           )}
 
+          {/* Above everything else on the page, because it covers the page.
+              Rendered here rather than beside the figure so that one picture
+              is open at a time whichever figure was tapped. */}
+          {big && (
+            <BigFigure svg={big.svg} alt={big.alt} onClose={() => setBig(null)} />
+          )}
+
           {state === 'live' && text.trim() && (
             <p className="nx-ai-who"><span className="nx-ai-live">still writing</span></p>
           )}
@@ -1323,17 +1602,34 @@ function Lesson({
                     that is about them: what they will be able to do. */}
                 {primer
                   ? <span>{primerAloud(primer)}</span>
-                  : <span>Your tutor is asleep. Try a game instead.</span>}
+                  : <span>This one is not ready yet. Let us find another.</span>}
 
+                {/* What the child can actually do about it, which depends on
+                    which of the two failures this is.
+
+                    `failed` is one attempt that went wrong, so trying again is
+                    a real option and it is offered first. `off` means this
+                    deployment has no tutor at all: pressing Try again then
+                    repeats a thing that cannot succeed, and a child who taps
+                    it twice learns that the app is broken rather than that
+                    this topic is not written yet. So in that case the way out
+                    is a game if the topic has one, and otherwise the way back
+                    to the topics that do have lessons. */}
                 <div className="kid-actions" style={{ width: '100%' }}>
                   {onPlay && (
                     <button className="nx-btn nx-btn-primary" onClick={onPlay}>
                       Play a game
                     </button>
                   )}
-                  <button className="nx-btn" onClick={() => onAgain(askedFor)}>
-                    Try again
-                  </button>
+                  {state === 'failed' ? (
+                    <button className="nx-btn" onClick={() => onAgain(askedFor)}>
+                      Try again
+                    </button>
+                  ) : (
+                    <button className="nx-btn" onClick={onBack}>
+                      Pick another one
+                    </button>
+                  )}
                 </div>
               </div>
             ) : (
@@ -1481,8 +1777,36 @@ function Practice({
   onBack: () => void
 }) {
   const young = skin === 'kid'
-  const [questions, setQuestions] = useState<Question[] | null>(null)
-  const [state, setState] = useState<'loading' | 'ready' | 'off' | 'failed'>('loading')
+
+  /**
+   * The written questions, when this topic has any.
+   *
+   * Every stored lesson carries its own, each with the level it suits and
+   * what to say when it goes wrong, all read by a person before it shipped.
+   * This screen used to ignore them and ask the tutor regardless, so practice
+   * needed a model to be reachable even on a topic that already had good
+   * questions sitting in the bundle.
+   *
+   * Three things follow from using them. Practice is instant rather than a
+   * twenty second wait. It costs nothing, which is what decides whether this
+   * can run with no server at all. And it works on a shared phone with no
+   * signal, which is the case this product is actually for.
+   *
+   * Read straight out of the registry, which is a map lookup, so it is the
+   * starting state rather than something an effect fills in later.
+   *
+   * The tutor still writes them for every topic that has none, which is most
+   * topics today, and it is still what makes a second round differ from the
+   * first: this set is fixed, so asking for more on a written topic brings
+   * the same questions back. Better than an empty screen, and worth improving
+   * once more topics are written.
+   */
+  const stored = taughtFor(topic.id)?.questions ?? null
+  const written = Boolean(stored?.length)
+
+  const [questions, setQuestions] = useState<Question[] | null>(stored)
+  const [state, setState] = useState<'loading' | 'ready' | 'off' | 'failed'>(
+    written ? 'ready' : 'loading')
   const [stage, setStage] = useState<TutorStage>('sent')
   const [why, setWhy] = useState('')
   const [index, setIndex] = useState(0)
@@ -1494,6 +1818,28 @@ function Practice({
 
   useEffect(() => {
     const ctrl = new AbortController()
+
+    /**
+     * The written questions first, when the topic has any.
+     *
+     * Every stored lesson carries its own questions, each with the level it
+     * suits and what to say when it goes wrong, all read by a person before
+     * it shipped. This screen used to ignore them and ask the tutor anyway,
+     * which meant practice needed a model to be reachable even on a topic
+     * that had perfectly good questions sitting in the bundle.
+     *
+     * Three things follow from using them. Practice is instant instead of a
+     * twenty second wait. It costs nothing, which decides whether this runs
+     * without a server at all. And it works on a shared phone with no signal,
+     * which is the case this product is actually for.
+     *
+     * The tutor still writes them for every topic that has none, and that is
+     * most topics today. It is also still what makes a second round different
+     * from the first: the stored set is fixed, so a learner who asks for more
+     * on a written topic sees the same questions again. Better than an empty
+     * screen, and worth replacing once more topics are written.
+     */
+    if (written) return () => ctrl.abort()
 
     askQuestions(
       { learner, syllabus: place, count: 4, level: 3 },

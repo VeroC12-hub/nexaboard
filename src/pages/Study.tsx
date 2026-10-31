@@ -12,6 +12,10 @@
  */
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import {
+  forgetHelperContext, setHelperContext,
+} from '../lib/education/helper-context'
 import '../styles/study.css'
 import Balance from '../components/study/Balance'
 import Front from './Front'
@@ -23,7 +27,7 @@ import Subjects from './Subjects'
 import Tutor from '../components/Tutor'
 import SyllabusLearn from './Learn'
 import { readinessOf, subjectById } from '../lib/education/subjects'
-import { syllabusFor } from '../lib/education/syllabus'
+import { subjectOfTopic, syllabusFor } from '../lib/education/syllabus'
 import KidApp from './KidApp'
 import TeenApp from './TeenApp'
 import ScholarApp from './ScholarApp'
@@ -67,6 +71,115 @@ import {
  * the same course screen a learner sees, because a child's page is not a
  * cut down view of their parent's.
  */
+/* ── where you are, as a URL ──────────────────────────────────────────────────
+
+   Every screen in here used to be a field of React state under the single path
+   /study, which meant the browser had nothing to go back through: pressing back
+   anywhere inside the app left the app entirely, and a refresh landed you at
+   the front page however deep you were. On a phone, where back is a hardware
+   gesture people use constantly, that made the whole thing feel broken.
+
+   So the state machine is the URL now. `pathOfGate` and `gateOfPath` are the
+   only two places that know the spelling, and they are each other's inverse:
+   every `setGate` is a navigation, and every back press is a `setGate` the
+   browser did for us.
+   -------------------------------------------------------------------------- */
+
+const GATE_WORD: Record<Exclude<Gate['at'], 'course'>, string> = {
+  front: '',
+  create: 'new',
+  signin: 'signin',
+  arrive: 'arrive',
+  roll: 'learners',
+  subjects: 'subjects',
+}
+
+/**
+ * The screens inside a learner's own app, as words.
+ *
+ * The learner app got real addresses and the screens *inside* it did not, so
+ * back out of a game landed on Home rather than on the Play list it was
+ * started from, and the grown up's page could not be returned to at all. These
+ * are the four places a child can be once their app is open.
+ *
+ * `home` is the empty string because it is the learner app itself: /study/subjects.
+ */
+const PANEL_WORD: Record<Panel, string> = {
+  home: '',
+  play: 'play',
+  rewards: 'stars',
+  profile: 'grown-up',
+}
+
+/** A screen inside the learner's own app. The two tabs, and two more. */
+export type Panel = 'home' | 'play' | 'rewards' | 'profile'
+
+/** What a topic opens as. A game is not a lesson with a game in it. */
+export type Mode = 'lesson' | 'practice' | 'game'
+
+/** What a place inside a course is doing: the three things `Learn` renders. */
+export type Place =
+  | { at: 'outline' }
+  | { at: 'lesson' | 'practice' | 'game', topicId: string }
+
+const MODES = ['lesson', 'practice', 'game'] as const
+
+function pathOfGate(g: Gate, place?: Place): string {
+  if (g.at === 'subjects') {
+    /* A subject opened in place is a screen of its own, so backing out of it
+       returns to the tiles rather than to the subject chooser. */
+    if (g.subjectId) return `/study/subjects/subject/${encodeURIComponent(g.subjectId)}`
+    const panel = PANEL_WORD[g.panel ?? 'home']
+    return '/study/subjects' + (panel ? '/' + panel : '')
+  }
+  if (g.at !== 'course') {
+    const word = GATE_WORD[g.at]
+    return '/study' + (word ? '/' + word : '')
+  }
+  /* A course carries where you are inside it, so that back out of a lesson
+     reaches the outline rather than the subject chooser. */
+  const at = place ?? (g.topicId
+    ? { at: g.mode ?? 'lesson', topicId: g.topicId }
+    : { at: 'outline' as const })
+  if (at.at === 'outline') return '/study/course'
+  return `/study/course/${encodeURIComponent(at.topicId)}/${at.at}`
+}
+
+/** The inverse. `null` for a path this app does not own, so the caller can bounce it. */
+function gateOfPath(pathname: string): { gate: Gate, place: Place } | null {
+  const rest = pathname.replace(/^\/study\/?/, '').replace(/\/+$/, '')
+  if (!rest) return { gate: { at: 'front' }, place: { at: 'outline' } }
+
+  const parts = rest.split('/').map(decodeURIComponent)
+
+  if (parts[0] === 'subjects') {
+    if (parts[1] === 'subject') {
+      return parts[2]
+        ? { gate: { at: 'subjects', subjectId: parts[2] }, place: { at: 'outline' } }
+        : null
+    }
+    const panel = (Object.keys(PANEL_WORD) as Panel[])
+      .find(k => PANEL_WORD[k] === (parts[1] ?? ''))
+    /* An unknown word under /study/subjects is bounced rather than silently
+       treated as the home screen: a mistyped address should go somewhere
+       truthful, not somewhere plausible. */
+    return panel ? { gate: { at: 'subjects', panel }, place: { at: 'outline' } } : null
+  }
+
+  if (parts[0] === 'course') {
+    const topicId = parts[1]
+    if (!topicId) return { gate: { at: 'course' }, place: { at: 'outline' } }
+    /* An unknown or missing mode is a lesson, which is what a deep link from a
+       child's own screen means and what this used to do with `startTopicId`. */
+    const mode = MODES.find(m => m === parts[2]) ?? 'lesson'
+    return { gate: { at: 'course', topicId }, place: { at: mode, topicId } }
+  }
+
+  const found = (Object.keys(GATE_WORD) as Array<keyof typeof GATE_WORD>)
+    .find(k => GATE_WORD[k] === parts[0])
+  return found ? { gate: { at: found }, place: { at: 'outline' } } : null
+}
+
 type Gate =
   | { at: 'front' }
   | { at: 'create' }
@@ -74,10 +187,21 @@ type Gate =
   | { at: 'arrive' }
   /** A parent's flat roll, or a school's classes. */
   | { at: 'roll' }
-  /** The learner's own page: which subject, and how to teach them. */
-  | { at: 'subjects' }
-  /** `topicId` when the learner tapped a topic rather than a subject. */
-  | { at: 'course', topicId?: string }
+  /**
+   * The learner's own app: which subject, and how to teach them.
+   *
+   * `panel` is which screen inside it, and `subjectId` is a subject opened in
+   * place on the kid home screen. Both were React state, which is why back
+   * inside a child's app left the child's app.
+   */
+  | { at: 'subjects', panel?: Panel, subjectId?: string }
+  /**
+   * `topicId` when the learner tapped a topic rather than a subject, and
+   * `mode` when they asked for something other than the lesson. The play
+   * button on a child's Play screen means the game, and without this it
+   * landed them on a lesson being written.
+   */
+  | { at: 'course', topicId?: string, mode?: Mode }
 
 const STATE_WORD: Record<MasteryState, { word: string; cls: string }> = {
   SECURE:     { word: 'secure',      cls: 'is-secure' },
@@ -127,7 +251,14 @@ export default function Study() {
     return s?.activeLearnerId ? attemptsFor(s.activeLearnerId) : []
   })
 
-  const [gate, setGate] = useState<Gate>(() => {
+  /**
+   * Where the session says they belong, when the URL says nothing.
+   *
+   * Only consulted for a bare /study and for a path that cannot be honoured,
+   * because the URL outranks it: somebody who bookmarked a lesson is asking
+   * for that lesson, not for wherever they happened to stop last time.
+   */
+  const [landing] = useState<Gate>(() => {
     const s = loadSession()
     if (!s) return { at: 'front' }
     const a = accountById(s.accountId)
@@ -141,7 +272,115 @@ export default function Study() {
        makes the second of those impossible to find. */
     if (!l) return { at: 'roll' }
     return { at: 'subjects' }
+    /* A lazy initial state rather than a memo, because it is read exactly
+       once: the session changing is what `enter`, `openLearner` and `leave`
+       navigate for, and re-deciding the landing underneath somebody who is
+       already somewhere would move them. */
   })
+
+
+  const nav = useNavigate()
+  const { pathname } = useLocation()
+
+  const read = useMemo(() => gateOfPath(pathname), [pathname])
+  const gate: Gate = read?.gate ?? landing
+  /* Its own memo so that the identity is stable: `addressed` depends on it,
+     and a fresh object each render would re-search every subject's outline
+     on every render of the whole app. */
+  const place: Place = useMemo(
+    () => read?.place ?? { at: 'outline' },
+    [read])
+
+  /**
+   * Moving is navigating. Pushes, so back undoes it.
+   *
+   * `swap` replaces instead, for the moves that are not places a person chose
+   * to be at: signing out, and a path that could not be honoured. Back through
+   * those would land on a screen that no longer exists for this session.
+   */
+  const setGate = useCallback(
+    (g: Gate) => { nav(pathOfGate(g)) },
+    [nav])
+  const swapGate = useCallback(
+    (g: Gate) => { nav(pathOfGate(g), { replace: true }) },
+    [nav])
+  /**
+   * The address decides the subject, not the stored one.
+   *
+   * `/study/course/<topicId>/<mode>` names a topic and no subject, so the
+   * subject used to come from whatever this learner last had open. Those two
+   * disagree more often than it sounds: reopening a lesson after changing
+   * subject does it, and so does a shared phone where the other child studied
+   * something else in between. When they disagreed the topic was not in the
+   * syllabus being searched, and the lesson screen bounced back to the tiles
+   * in silence, which read as the app refusing to open a lesson at all.
+   *
+   * So when the address names a topic, the subject that owns that topic wins.
+   * `null` covers the outline, where no topic is named, and a topic id that
+   * belongs to no subject, which is genuinely unopenable and still bounces.
+   *
+   * Nothing is written to storage here on purpose. The subject the address
+   * names is used to build the syllabus, and `Learn` keys a learner's plan
+   * off that syllabus rather than off the stored subject, so the view is
+   * already consistent. Saving would mean a state write during render for
+   * no gain, and the next subject a learner actually chooses saves itself.
+   */
+  const addressed = useMemo(
+    () => (profile && place.at !== 'outline'
+      ? subjectOfTopic(profile.stage, place.topicId)
+      : null),
+    [profile, place])
+
+  /** Where you are inside a course, from `Learn`. */
+  const setPlace = useCallback(
+    (p: Place) => { nav(pathOfGate({ at: 'course' }, p)) },
+    [nav])
+
+  /**
+   * Honour the URL, or bounce it.
+   *
+   * A path can ask for something this session cannot give: /study/subjects
+   * with no learner open, /study/learners while signed out, or a word this app
+   * does not know. Each of those renders nothing useful, so it is replaced
+   * with the landing rather than left on screen.
+   */
+  useEffect(() => {
+    if (!read) { swapGate(landing); return }
+    const needsLearner = read.gate.at === 'subjects' || read.gate.at === 'course'
+    if (needsLearner && !profile) { swapGate(landing); return }
+    if (read.gate.at === 'roll' && !account) swapGate(landing)
+  }, [read, profile, account, landing, swapGate])
+
+
+  /**
+   * Who the helper is talking to, outside a course.
+   *
+   * Enough for the year and the stage, which is what decides how it answers,
+   * and enough to answer a question about the app itself. The `Learn` screen
+   * publishes a far richer brief over the top of this one as soon as a subject
+   * is open, and clears only its own parts when it leaves.
+   */
+  useEffect(() => {
+    if (!profile) { forgetHelperContext(['learner', 'syllabus', 'lesson']); return }
+    /* Inside a course, `Learn` publishes all of this and more: the same brief
+       plus what they keep getting wrong, their plan, their own words and the
+       lesson on screen. This must not overwrite it with the thin version.
+
+       And it would, silently: effects run child first, so on a direct load of
+       a lesson URL `Learn` publishes the rich brief and this effect then runs
+       second and replaces it. Found by opening a game and watching the helper
+       report that the learner was on the home screen. */
+    if (gate.at === 'course') return
+    const subject = subjectById(profile.stage, profile.subjectId ?? null)
+    setHelperContext({
+      learner: {
+        subjectId: profile.subjectId ?? '',
+        subjectName: subject?.name ?? '',
+        profile,
+      },
+      where: 'their own home screen, choosing what to learn',
+    })
+  }, [profile, gate.at])
   /**
    * Catch up with the server, after the cached page is already on screen.
    *
@@ -221,7 +460,9 @@ export default function Study() {
     setAccount(null)
     setProfile(null)
     setAttempts([])
-    setGate({ at: 'front' })
+    /* Replaced, not pushed: back out of a sign out must not walk into the
+       signed in screens it just left. */
+    swapGate({ at: 'front' })
   }
 
   const mastery = useMemo(() => masteryOf(attempts, outline), [attempts, outline])
@@ -349,11 +590,11 @@ export default function Study() {
      * one of these screens reads the same syllabus, the same attempts and the
      * same plan; only what a person can actually use differs.
      */
-    const onOpen = (subjectId: string, topicId?: string) => {
+    const onOpen = (subjectId: string, topicId?: string, mode?: Mode) => {
       const next = { ...profile, subjectId }
       saveLearner(next)
       setProfile(next)
-      setGate({ at: 'course', topicId })
+      setGate({ at: 'course', topicId, mode })
     }
     const goBack = account && account.kind !== 'learner' ? leaveLearner : undefined
     const skin = skinFor(profile)
@@ -364,6 +605,14 @@ export default function Study() {
           profile={profile}
           attempts={attempts}
           onOpenSubject={onOpen}
+          /* Which screen, and which subject, from the address rather than
+             from state, so that back inside a child's app moves inside the
+             child's app instead of leaving it. */
+          panel={gate.panel ?? 'home'}
+          subjectOpen={gate.subjectId ?? null}
+          onPanel={pan => setGate({ at: 'subjects', panel: pan })}
+          onSubject={id => setGate(
+            id ? { at: 'subjects', subjectId: id } : { at: 'subjects' })}
           onSignOut={leave}
           onBack={goBack}
         />
@@ -375,7 +624,7 @@ export default function Study() {
         <TeenApp
           profile={profile}
           attempts={attempts}
-          onOpenSubject={onOpen}
+          onOpenSubject={(id, topicId) => onOpen(id, topicId)}
           onSignOut={leave}
           onBack={goBack}
         />
@@ -387,7 +636,7 @@ export default function Study() {
         <ScholarApp
           profile={profile}
           attempts={attempts}
-          onOpenSubject={onOpen}
+          onOpenSubject={(id, topicId) => onOpen(id, topicId)}
           onSignOut={leave}
           onBack={goBack}
         />
@@ -420,13 +669,28 @@ export default function Study() {
      syllabus layer existed only Mathematics could be chosen, so this screen
      could assume its course; now every subject opens and the assumption would
      serve JHS 2 Mathematics to somebody who asked for Physics. */
-  const chosen = subjectById(profile.stage, profile.subjectId)
+  /**
+   * The address decides the subject, not the stored one.
+   *
+   * `/study/course/<topicId>/<mode>` names a topic and no subject, so the
+   * subject used to come from whatever this learner last had open. Those two
+   * disagree more often than it sounds: reopening a lesson after changing
+   * subject does it, and so does a shared phone where the other child studied
+   * something else in between. When they disagreed the topic was not in the
+   * syllabus being searched, and the lesson screen bounced back to the tiles
+   * in silence, which read as the app refusing to open a lesson.
+   *
+   * So when the address names a topic, the subject that owns that topic wins.
+   * Falling back to the stored one covers the outline, where no topic is
+   * named, and a topic id that belongs to nothing, which still bounces.
+   */
+  const chosen = subjectById(profile.stage, addressed ?? profile.subjectId)
   const written = chosen && readinessOf(profile.stage, chosen) === 'written'
     ? WRITTEN[`${profile.stage}:${chosen.id}` as keyof typeof WRITTEN] ?? null
     : null
 
   if (!written) {
-    const syllabus = chosen ? syllabusFor(profile.stage, chosen.id) : null
+    const syllabus = chosen ? syllabusFor(profile.stage, chosen.id, profile.curriculum) : null
     if (syllabus) {
       return (
         <SyllabusLearn
@@ -435,8 +699,15 @@ export default function Study() {
           attempts={attempts}
           onAttempt={(a: Attempt) => setAttempts(prev => [...prev, a])}
           onBack={() => setGate({ at: 'subjects' })}
+          /* A path the learn screen cannot honour, so the address is replaced
+             rather than pushed: back must not return to it. */
+          onBounce={() => swapGate({ at: 'subjects' })}
           onSignOut={leave}
-          startTopicId={gate.at === 'course' ? gate.topicId : undefined}
+          /* Where it is, and how it moves. Both go through the URL, so the
+             outline, a lesson, the questions and a game are four addresses
+             rather than four values of one hidden variable. */
+          place={place}
+          onPlace={setPlace}
         />
       )
     }

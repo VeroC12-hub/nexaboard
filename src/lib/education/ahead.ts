@@ -3,7 +3,7 @@
  *
  * ── The problem, in the owner's own words ───────────────────────────────────
  *
- * From `NEXAEDU_OPEN_ISSUES.md`, issue 17: a complete lesson takes five to
+ * From `docs/NEXAEDU_OPEN_ISSUES.md`, issue 17: a complete lesson takes five to
  * eight minutes on the free route, because opening a topic asks for the
  * lesson, a diagram, a photograph, a clip and a film, and one worker answers
  * one job at a time. Issue 24 names the fix: "If she asks for video on most

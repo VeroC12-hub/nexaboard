@@ -63,7 +63,7 @@ export default function TeenApp({
 
   const courses = useMemo<Course[]>(() => {
     return subjectsFor(profile.stage).map(s => {
-      const syllabus = syllabusFor(profile.stage, s.id)
+      const syllabus = syllabusFor(profile.stage, s.id, profile.curriculum)
       const mine = syllabus ? topicsFor(syllabus, profile.level) : []
       const topics = mine.length ? mine : (syllabus ? allTopics(syllabus) : [])
       return {

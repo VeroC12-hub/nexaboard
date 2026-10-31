@@ -29,6 +29,11 @@ export const COMMON = [
   'STYLE',
   '- Write to the learner, in plain sentences, as a person would speak.',
   '- Do not use em dashes or en dashes anywhere. Use commas, colons, or the word "to" for ranges.',
+  '- Never guess whether a learner is a boy or a girl. Nothing in this platform asks,',
+  '  so nothing in it knows, and a name is not an answer. When you must refer to a',
+  '  learner in the third person, write "they", "them" and "their". A parent reading',
+  '  that their son "starts with a video because she cannot read yet" has been told',
+  '  about a child who is not theirs.',
   '- Inline maths in single dollar signs, display maths in double dollar signs.',
   '- Do not praise, do not console, and do not restate the question back at them.',
   '- Do not pad to reach a length. Say the thing, fully, and stop.',
@@ -168,8 +173,227 @@ const PLAN_TASK = [
   'all. Set it only when the lead is not prose or questions.',
 ].join('\n');
 
+/**
+ * How the app itself works, so the helper can answer "where is the sign out".
+ *
+ * Written here rather than fetched from the interface, because the interface
+ * cannot describe itself and a learner's parent asking "how do I see what she
+ * has done" needs a true answer, not a guess. It is short on purpose: every
+ * line is something somebody actually asks. When a screen moves, this moves
+ * with it, and the file that holds it is the one place to look.
+ */
+const APP_GUIDE = [
+  'HOW THIS APP WORKS, for questions about the app rather than about a subject.',
+  '',
+  'It is NEXA-EDU, a learning app for Ghanaian learners from creche to senior high.',
+  'A grown up makes one account and adds a learner for each child. Each learner',
+  'has their own name, year and record.',
+  '',
+  'The youngest learners see a picture interface with two tabs at the bottom,',
+  'Learn and Play. Learn holds the subjects as tiles and the topics inside them.',
+  'Play holds games only: every row on it is a game, and tapping one starts the',
+  'game rather than a lesson. Their points and days are buttons at the top which',
+  'open the rewards screen, and beside those are a speaker, a grown up button and',
+  'the way out. Older learners see a written interface with the same parts.',
+  '',
+  '- To start learning: the Learn tab, then a subject, then a topic. The lesson is',
+  '  written for that learner when they open it, and for the youngest it reads',
+  '  itself out loud and leads with a picture or a film rather than with words.',
+  '- To play: the Play tab. Every row there is a game. There is also a play button',
+  '  on a topic in the Learn tab, and a game offered on a lesson that is still',
+  '  being written.',
+  '- To leave a game: the round button marked with a cross, top left of the game.',
+  '- To stop the reading aloud: the green "Stop reading" button under the title.',
+  '  To turn narration off altogether: the grown up page, under Sound.',
+  '- To see points, badges and days learned: tap the points or the flame at the top.',
+  '- To change subject: the back arrow at the top of a subject.',
+  '- To sign out: the door button in the top corner of the header, or the "Sign out"',
+  '  row on the grown up page. Either one asks a multiplication first so that a',
+  '  child cannot sign out by accident. A grown up answers it.',
+  '- To switch to another child on the same account: the grown up button in the top',
+  '  corner, then "Back to everyone".',
+  '- Answers are saved on the device as well as the server, so the app keeps',
+  '  working with no network and catches up later.',
+  '',
+  'If somebody asks for something this app does not have, say so plainly rather',
+  'than inventing a screen. Never invent a button.',
+].join('\n');
+
+/**
+ * The helper: one chat, open on every screen, for anything.
+ *
+ * Distinct from `explain`, which answers one question just got wrong and is
+ * given the question and the answer. This one is given whatever is on screen
+ * and a person's own words, which may be about the lesson, about the subject,
+ * about a topic they have not reached, or about the app itself.
+ *
+ * Who it is talking to comes from the learner brief above it, which carries
+ * the year and the stage, so the same instruction serves a four year old and a
+ * sixth former without a branch here.
+ */
+const ASK_TASK = [
+  'Somebody has opened the helper and asked you something. Answer it.',
+  '',
+  'WHO YOU ARE TALKING TO is in the brief above: their year and their stage. Pitch',
+  'everything to that person.',
+  '- A creche or lower primary learner cannot read much. Answer in two or three',
+  '  short spoken sentences, words of one or two syllables, one idea. No lists, no',
+  '  symbols, no headings. Something a parent could read out loud as it stands.',
+  '- An upper primary or JHS learner gets a short paragraph and a worked example',
+  '  where one helps.',
+  '- A senior high learner gets the full explanation, with the proper terms and',
+  '  the working set out.',
+  '',
+  'A QUESTION ABOUT THE APP rather than about a subject is usually a grown up',
+  'asking on the child\'s device: where a button is, how to sign out, how to see',
+  'progress, what the badges mean. Answer those as an adult, plainly and briefly,',
+  'from the guide below. Do not write them for a child.',
+  '',
+  'A QUESTION ABOUT THE LESSON ON SCREEN is answered from that lesson, quoting its',
+  'own words where it helps them find the place again. Do not contradict it. If',
+  'the lesson is wrong about something, say what is right and say that it differs.',
+  '',
+  'A QUESTION ABOUT A TOPIC THEY HAVE NOT REACHED is answered anyway, at their',
+  'level, and you may say where it comes in their course.',
+  '',
+  'Teach, do not test. One question back at the end is allowed when it would',
+  'check that they have understood. Never more than one.',
+  '',
+  'If you do not know, or it is outside what this app teaches, say so in a',
+  'sentence. Never guess at a number, a date, a syllabus requirement or an exam',
+  'rule. A learner repeating your invention in a classroom is the worst thing',
+  'that can happen here.',
+  '',
+  'Plain sentences. No markdown headings, no bold, no tables. Short paragraphs,',
+  'because this is read in a narrow panel on a phone.',
+  '',
+  APP_GUIDE,
+].join('\n');
+
 export const TASKS = {
+  /* -- writing a syllabus for a subject nobody has filed --------------------
+     Used when a school adds a subject of its own. The app's existing outlines
+     were written this way, and `syllabus.ts` is honest that they carry
+     `source: 'MODEL'`, so this task's one hard rule is the rule those obey:
+     describe what the subject contains, and never claim anything only a filed
+     document could say. */
+  outline: [
+    'Write the outline of the subject named below, for the year group named,',
+    'as JSON and nothing else.',
+    '',
+    'WHAT AN OUTLINE IS',
+    'The teachable lines of the subject, grouped the way the subject itself is',
+    'organised. A strand is a top level division, a sub-strand is a part of one,',
+    'and a topic is one teachable idea. A topic is the unit a lesson will be',
+    'written against, so it must be small enough to teach in one sitting and',
+    'specific enough that two teachers would agree what it covers.',
+    '',
+    'WHAT YOU MAY NOT CLAIM',
+    'This is your own account of the subject, from general knowledge of it. So',
+    'never write an indicator code, never say how many marks something carries,',
+    'and never say a topic is on a particular examination. A learner cannot',
+    'tell when those are invented, and being wrong about them costs exactly the',
+    'trust a school is giving this app. Describe the subject; do not pretend to',
+    'quote a document.',
+    '',
+    'HOW MANY',
+    'As many topics as the year genuinely contains, which for one year of one',
+    'subject is usually between eight and thirty. Do not pad it to look full,',
+    'and do not compress two ideas into one topic to keep the list short.',
+    '',
+    'EVERY OUTCOME IS WHAT THE LEARNER WILL BE ABLE TO DO',
+    'Plain words, starting with a verb, and testable. "Understand fractions" is',
+    'not an outcome, because nobody can tell whether it happened. "Write a',
+    'fraction for part of a shape, and say which of two is larger" is.',
+    '',
+    'THE SHAPE',
+    '{"subject":"Mathematics","stage":"primary","year":"Basic 2",',
+    ' "strands":[{"id":"number","name":"Number",',
+    '   "purpose":"What numbers are and what you can do with them.",',
+    '   "subStrands":[{"id":"counting","name":"Counting and place value",',
+    '     "topics":[{"id":"tens-and-ones","title":"Tens and ones",',
+    '       "outcome":"Split any number to 100 into tens and ones, and say what',
+    ' each digit is worth.","year":"Basic 2"}]}]}]}',
+    '',
+    'Ids are lower case, words joined by hyphens, and unique across the whole',
+    'outline. A topic id is the key everything else hangs on, so make it from',
+    'what the topic is rather than from where it sits in the list.',
+    '',
+    'Reply with the JSON object and nothing else.',
+  ],
+
+  /* -- writing a lesson as PARTS rather than as a page ----------------------
+     The `lesson` task below writes a page, which is right when a learner is
+     reading it live. It is the wrong shape for storage, because a page cannot
+     be cut to a learner: there is no "the reasoning" to leave out for somebody
+     strong, and no "the thing it stands on" to add for somebody shaky. This
+     task produces the parts `taught.ts` assembles from, which is what turns one
+     stored lesson into a different lesson per child. */
+  taught: [
+    'Write a stored lesson for the topic named below, as JSON and nothing else.',
+    '',
+    'WHY THIS IS PARTS AND NOT A PAGE',
+    'What you write is not shown as you wrote it. Each learner is given a',
+    'different selection of these parts in a different order, decided by what is',
+    'known about them: somebody strong who prefers doing never sees the',
+    'reasoning, somebody shaky is given the part it stands on first, somebody who',
+    'learns by watching gets the picture before any words. So every part must',
+    'stand on its own and must never refer to another part by position. Do not',
+    'write "as explained above" or "we saw earlier", because for some learner it',
+    'was not above and they did not see it earlier.',
+    '',
+    'THE PARTS',
+    '- idea: what the thing IS. Everybody gets this. Required.',
+    '- mechanism: WHY it works, not that it works. This is the part a strong',
+    '  learner who prefers doing has removed, so it must be the reasoning and not',
+    '  a restatement of the idea.',
+    '- recap: the one thing this topic stands on, in a paragraph, for a learner',
+    '  who is catching up. Assume they do not have it.',
+    '- method: how to handle ANY question of this kind, as steps. Everybody gets',
+    '  this. Required.',
+    '- worked: worked examples, each with a level from 1 to 5, the question, the',
+    '  steps with the REASON for each step, and the answer. Two or three at',
+    '  different levels; the learner is shown the one nearest theirs.',
+    '- traps: the mistakes learners actually make here, each with what causes it.',
+    '  Not "be careful", but the specific wrong thinking and where it parts from',
+    '  the right thinking.',
+    '- extension: where this goes next, for a learner who asked not to be held',
+    '  back.',
+    '- figure: one SVG diagram, if and only if the topic genuinely needs one.',
+    '  Same rules as the figure task: viewBox 0 0 640 400, no width or height,',
+    '  labels in text elements because you are writing them, currentColor for',
+    '  lines and text, and only #0f8a4d for what is being taught and #c8433a for',
+    '  what is warned against. Omit the field entirely when a diagram would only',
+    '  decorate; that is the right answer more often for a topic made of words.',
+    '- questions: two or three, each with kind choice or numeric, the answer, and',
+    '  teach, which is what to say when it is got wrong. That names the thinking',
+    '  behind the wrong answer rather than repeating the right one.',
+    '',
+    'WHO IT IS FOR',
+    'The year group is given below. Where that year group cannot read fluently,',
+    'every line will be SPOKEN to them while they look at something, so write',
+    'short spoken sentences rather than paragraphs, and let the figure carry what',
+    'a reader would have taken from the words.',
+    '',
+    'WHAT YOU MAY NOT CLAIM',
+    'No indicator codes, no mark allocations, and no claim that something is on a',
+    'particular examination.',
+    '',
+    'THE SHAPE, with the figure omitted when there should not be one',
+    '{"topicId":"tens-and-ones","idea":"...","mechanism":"...","recap":"...",',
+    ' "method":["...","..."],',
+    ' "worked":[{"level":1,"ask":"...","steps":["..."],"answer":"..."}],',
+    ' "traps":[{"mistake":"...","why":"..."}],',
+    ' "extension":"...",',
+    ' "figure":{"alt":"...","svg":"<svg viewBox=...>...</svg>"},',
+    ' "questions":[{"id":"tao-1","ask":"...","kind":"choice","options":["..."],',
+    '   "answer":"...","teach":"...","level":1}]}',
+    '',
+    'Reply with the JSON object and nothing else.',
+  ],
+
   plan: PLAN_TASK,
+  ask: ASK_TASK,
   explain: [
     'They have just got this wrong. Explain it to them now.',
     '',
@@ -873,11 +1097,32 @@ function lessonShape(learner = {}) {
     lines.push('at a time. Do not write an essay about the idea; give them the');
     lines.push('thing to look at and the words to say while they do it. Length is');
     lines.push('whatever a small child will sit through, which is not much.');
+    lines.push('');
+    /* How it is actually shown, which the prompt never said.
+
+       "Length is whatever a small child will sit through" has no unit, and the
+       task above it says the idea should be the longest part, that three try
+       blocks is normal and that as many pictures as the topic needs is fine.
+       All of that is right for a reader and the model has no way to know it is
+       talking to a renderer that shows ONE block at a time: a Basic 1 lesson
+       came back as twenty-two blocks, which the app turned into twenty-two
+       screens with a Next button, for a five year old. The fix is not a word
+       limit, it is telling the model what a paragraph costs here. */
+    lines.push('HOW THIS WILL BE SHOWN TO THEM: one block at a time, on its own');
+    lines.push('screen, with a Next button. Every paragraph, every picture and');
+    lines.push('every question you write is one more screen a small child has to');
+    lines.push('be tapped through. So the whole lesson is a handful of screens,');
+    lines.push('not a page broken up: around four to six blocks in total, and the');
+    lines.push('pictures and the things to do are the ones worth spending them on.');
   } else if (level === 'earlyReader') {
     lines.push('');
     lines.push('They are still learning to read, so reading is work for them and');
     lines.push('some of this will be read aloud. Short sentences, common words,');
     lines.push('one idea per paragraph.');
+    lines.push('');
+    lines.push('HOW THIS WILL BE SHOWN TO THEM: a few blocks at a time, on a');
+    lines.push('screen they tap through. Write what a seven year old will finish,');
+    lines.push('which is nearer eight blocks than twenty.');
   }
 
   const plan = learner.plan && typeof learner.plan === 'object' ? learner.plan : null;
@@ -919,6 +1164,16 @@ function lessonShape(learner = {}) {
       lines.push('to be taught by what they can see and do. Any prose you write is');
       lines.push('for the adult sitting with them, not for them, so keep it short');
       lines.push('and put the teaching in the other blocks.');
+      /* And then address the adult, rather than the child about the adult.
+
+         This instruction and "use their name once at most" in the learner brief
+         pull in opposite directions, and the model resolved them by writing
+         "Ama, this part is for the grown-up sitting with you", which is a
+         sentence aimed at a five year old explaining that it is not for her.
+         Whoever a paragraph is for, it has to be written to them. */
+      lines.push('Write that part TO the adult: "read the short lines aloud",');
+      lines.push('"let her count each picture". Never open it by naming the child,');
+      lines.push('and never tell the child that a part is not for them.');
     }
 
     if (typeof plan.because === 'string' && plan.because.trim()) {
@@ -955,6 +1210,16 @@ function lessonShape(learner = {}) {
   lines.push('read goes back to their textbook, and the lesson has failed even if');
   lines.push('everything in it was correct. Use as many blocks and as few');
   lines.push('sentences as that takes.');
+  /* And a block is not free.
+
+     This section used to end there, and read against the pre-reader note above
+     it as a flat contradiction: a screen budget, then "not from a target". The
+     two are not actually in tension, because how many screens a block costs is
+     a fact about the renderer rather than a target for the writing, but the
+     model has to be told that or it picks one of them. */
+  lines.push('Where a note above says how this will be SHOWN, that is not a');
+  lines.push('target either. It is what a block costs the person reading it, and');
+  lines.push('deciding the length from this person means counting that cost.');
 
   return lines.join('\n');
 }
@@ -1012,6 +1277,53 @@ export function buildLessonUser({ topic, askedFor }) {
   return lines.join('\n\n');
 }
 
+/**
+ * What subject to outline, and for whom.
+ *
+ * The year group matters more than the subject here. A subject outline for
+ * Basic 2 and the same subject for SHS 2 share a name and almost nothing else,
+ * and the model has no way to know which is meant from the subject alone.
+ */
+export function buildOutlineUser({ topic, subjectName, year, place, askedFor }) {
+  const subject = String(subjectName || topic || '').trim();
+  const lines = [`OUTLINE THIS SUBJECT\n${subject}`];
+  if (year) lines.push(`FOR THIS YEAR GROUP\n${year}`);
+  if (place) lines.push(`WHERE THE LEARNERS ARE\n${place}`);
+  /* A school adding a subject of its own may say what it wants in it. Their
+     words outrank this prompt's guesses about the subject, the same way a
+     learner's own request outranks what was inferred about them. */
+  const asked = String(askedFor || '').trim();
+  if (asked) {
+    lines.push('WHAT THE SCHOOL ASKED FOR, which outranks your own sense of'
+      + ` the subject:\n${asked}`);
+  }
+  return lines.join('\n\n');
+}
+
+/**
+ * Which topic to write stored parts for.
+ *
+ * The outcome goes in because it is what the topic promises the learner will
+ * be able to do, and a lesson that does not get them there has missed. Where
+ * the topic sits goes in so the recap can name the thing it actually stands
+ * on rather than a plausible-sounding prerequisite.
+ */
+export function buildTaughtUser({ topic, topicId, outcome, year, place, syllabus }) {
+  const lines = [`WRITE THE STORED LESSON FOR\n${String(topic || '').trim()}`];
+  if (topicId) lines.push(`ITS ID, which must be the topicId you return\n${topicId}`);
+  if (outcome) {
+    lines.push('WHAT THE LEARNER MUST BE ABLE TO DO AFTERWARDS\n' + outcome);
+  }
+  if (year) lines.push(`THE YEAR GROUP\n${year}`);
+  if (place) lines.push(`WHERE IT SITS IN THE SUBJECT\n${place}`);
+  const builds = Array.isArray(syllabus && syllabus.builds) ? syllabus.builds : [];
+  if (builds.length) {
+    lines.push('WHAT IT STANDS ON, so the recap names a real prerequisite'
+      + ` rather than a likely one:\n${builds.map(b => `- ${b}`).join('\n')}`);
+  }
+  return lines.join('\n\n');
+}
+
 /** Write practice questions for this topic. */
 export function buildQuestionsUser({ topic, count, level, avoid }) {
   const n = Math.max(1, Math.min(8, Number(count) || 4));
@@ -1034,7 +1346,44 @@ export function buildQuestionsUser({ topic, count, level, avoid }) {
  * answering the same tasks will otherwise drift into accepting different
  * things. Both `api/tutor.js` and `api/queue.js` read this one.
  */
+/**
+ * What the helper is given: the words, the screen, the lesson, and the chat.
+ *
+ * The lesson is trimmed rather than sent whole. A question about a lesson is
+ * almost always about a part of it the learner can see, and the brief above
+ * already says who they are, so the first few thousand characters carry the
+ * explanation's shape without crowding out their actual question.
+ */
+export function buildAskUser({ question, lesson, where, said }) {
+  const lines = [];
+
+  const place = String(where || '').trim();
+  if (place) lines.push(`WHERE THEY ARE IN THE APP\n${place}`);
+
+  const text = String(lesson || '').trim();
+  if (text) {
+    lines.push('THE LESSON ON THEIR SCREEN, which their question is probably about:\n'
+      + text.slice(0, 4000));
+  }
+
+  /* The conversation so far, so a follow up like "why?" has something to
+     attach to. Capped: the helper is for a few turns at a time, and an hour of
+     chat would push the lesson itself out of the prompt. */
+  const turns = Array.isArray(said) ? said.slice(-8) : [];
+  if (turns.length) {
+    lines.push('WHAT HAS BEEN SAID ALREADY, oldest first:\n'
+      + turns.map(t => `${t.from === 'tutor' ? 'You' : 'They'}: ${String(t.text || '').slice(0, 1200)}`)
+        .join('\n'));
+  }
+
+  lines.push(`WHAT THEY ASKED, in their own words\n${String(question || '').trim()}`);
+  return lines.join('\n\n');
+}
+
 export const SHAPES = {
+  /* `question` is their own words, so both endpoints already refuse an empty
+     one for us. Everything else the helper gets is optional context. */
+  ask: { needs: 'question', build: buildAskUser },
   /* A plan is about the learner, not about a topic, so it needs neither a
      question nor a topic. The learner brief is the whole input. */
   plan: { needs: null, build: buildPlanUser },
@@ -1042,6 +1391,11 @@ export const SHAPES = {
   hint: { needs: 'question', build: buildUser },
   method: { needs: 'question', build: buildUser },
   lesson: { needs: 'topic', build: buildLessonUser },
+  /* An outline is about a subject, not a topic, so what it needs is the
+     subject name that arrives in `topic`. Same slot, different meaning, which
+     is why the builder reads both. */
+  outline: { needs: 'topic', build: buildOutlineUser },
+  taught: { needs: 'topic', build: buildTaughtUser },
   figure: { needs: 'topic', build: buildVisualUser },
   illustration: { needs: 'topic', build: buildVisualUser },
   clip: { needs: 'topic', build: buildVisualUser },

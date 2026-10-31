@@ -76,6 +76,15 @@ export interface Strand {
 export interface Syllabus {
   subjectId: string
   stage: Stage
+  /**
+   * Which curriculum this outline belongs to.
+   *
+   * Absent means the national one, so every outline written before curricula
+   * existed keeps working unchanged. A school that follows Cambridge, or a
+   * school anywhere else, files its own under its own id, and the two sit side
+   * by side instead of one having to replace the other.
+   */
+  curriculum?: string
   /** The subject's name as the learner knows it. */
   subject: string
   source: Provenance
@@ -87,41 +96,124 @@ export interface Syllabus {
   strands: Strand[]
 }
 
+/* ── curricula ────────────────────────────────────────────────────────────── */
+
+/**
+ * The curriculum an outline belongs to when it does not say.
+ *
+ * Everything in `library/syllabus/` is the Ghanaian national curriculum, and
+ * was written before this existed, so the default is what keeps all of it
+ * valid without a single file changing.
+ */
+export const NATIONAL = 'gh-nacca'
+
+/** A curriculum a school may follow. */
+export interface Curriculum {
+  id: string
+  /** As a school would name it: "Ghana (NaCCA)", "Cambridge Primary". */
+  name: string
+  /**
+   * Shown to a learner beside their subjects, so whose curriculum they are
+   * being taught is never hidden from them. The same honesty `source` keeps
+   * about where an outline came from.
+   */
+  note: string | null
+}
+
+const CURRICULA = new Map<string, Curriculum>([
+  [NATIONAL, {
+    id: NATIONAL,
+    name: 'Ghana (NaCCA)',
+    note: 'The Ghanaian national curriculum.',
+  }],
+])
+
+/** Add a curriculum. A school filing its own scheme of work calls this first. */
+export function defineCurriculum(c: Curriculum): Curriculum {
+  CURRICULA.set(c.id, c)
+  return c
+}
+
+export const curriculumById = (id: string): Curriculum | null =>
+  CURRICULA.get(id) ?? null
+
+/** Every curriculum known, for a school to choose from. */
+export const allCurricula = (): Curriculum[] => [...CURRICULA.values()]
+
 /* ── the registry ─────────────────────────────────────────────────────────── */
 
 const REGISTRY = new Map<string, Syllabus>()
 
-const key = (stage: Stage, subjectId: string) => `${stage}:${subjectId}`
+const key = (curriculum: string, stage: Stage, subjectId: string) =>
+  `${curriculum}:${stage}:${subjectId}`
 
 /** Put a syllabus in the registry. Called once per file in `library/syllabus`. */
 export function register(s: Syllabus): Syllabus {
-  REGISTRY.set(key(s.stage, s.subjectId), s)
+  REGISTRY.set(key(s.curriculum ?? NATIONAL, s.stage, s.subjectId), s)
   return s
 }
 
 /**
  * The best syllabus available for a subject at a stage.
  *
- * Only the model outlines are in here today. A school scheme or the national
- * curriculum arrives from the database, and `resolve` is where that overriding
- * happens, so every screen and every prompt asks one function and none of them
- * need to know which source won.
+ * This is the one function every screen and every prompt asks, so none of them
+ * needs to know which source won. A school following its own curriculum gets
+ * its own outline where it has filed one, and the national outline everywhere
+ * it has not, which means a school can add two subjects of its own without
+ * having to supply the other thirty.
+ *
+ * The fallback is deliberately silent to the caller but never to the learner:
+ * the `curriculum` on whatever comes back says which one this actually is, and
+ * the subject list shows it.
  */
-export function syllabusFor(stage: Stage, subjectId: string): Syllabus | null {
-  return REGISTRY.get(key(stage, subjectId)) ?? null
-}
-
-/** Every subject with an outline, for the subject list to be honest about. */
-export function outlinedSubjects(stage: Stage): string[] {
-  const out: string[] = []
-  for (const [k, s] of REGISTRY) {
-    if (k.startsWith(`${stage}:`)) out.push(s.subjectId)
+export function resolve(
+  stage: Stage,
+  subjectId: string,
+  curriculum: string = NATIONAL,
+): Syllabus | null {
+  if (curriculum !== NATIONAL) {
+    const theirs = REGISTRY.get(key(curriculum, stage, subjectId))
+    if (theirs) return theirs
   }
-  return out
+  return REGISTRY.get(key(NATIONAL, stage, subjectId)) ?? null
 }
 
-export const hasSyllabus = (stage: Stage, subjectId: string): boolean =>
-  REGISTRY.has(key(stage, subjectId))
+/**
+ * The same lookup, under the name the rest of the app already calls.
+ *
+ * Kept so that sixteen call sites written before curricula existed go on
+ * working, and so that adding the argument is a change at the place that knows
+ * which curriculum a learner follows rather than everywhere.
+ */
+export function syllabusFor(
+  stage: Stage,
+  subjectId: string,
+  curriculum: string = NATIONAL,
+): Syllabus | null {
+  return resolve(stage, subjectId, curriculum)
+}
+
+/**
+ * Every subject with an outline, for the subject list to be honest about.
+ *
+ * The union of what this curriculum has filed and what the national one has,
+ * because that is exactly the set a learner on it can be taught.
+ */
+export function outlinedSubjects(stage: Stage, curriculum: string = NATIONAL): string[] {
+  const out = new Set<string>()
+  for (const [k, s] of REGISTRY) {
+    if (!k.endsWith(`:${stage}:${s.subjectId}`)) continue
+    const owner = s.curriculum ?? NATIONAL
+    if (owner === curriculum || owner === NATIONAL) out.add(s.subjectId)
+  }
+  return [...out]
+}
+
+export const hasSyllabus = (
+  stage: Stage,
+  subjectId: string,
+  curriculum: string = NATIONAL,
+): boolean => resolve(stage, subjectId, curriculum) !== null
 
 /* ── reading a syllabus ───────────────────────────────────────────────────── */
 
@@ -140,6 +232,42 @@ export function allTopics(s: Syllabus): Topic[] {
 export function topicsFor(s: Syllabus, year: string): Topic[] {
   const mine = allTopics(s).filter(t => t.year === year)
   return mine.length ? mine : allTopics(s)
+}
+
+/**
+ * Which subject owns a topic, across a whole stage.
+ *
+ * ── Why this is needed, and what went wrong without it ──────────────────────
+ *
+ * A lesson address is `/study/course/<topicId>/<mode>`: it names the topic but
+ * not the subject. The subject was taken from the learner's stored active
+ * subject instead, which means the address only resolved while those two
+ * happened to agree. When they did not, the topic was not found in the
+ * syllabus being searched, and the learn screen bounced the child back to the
+ * tiles without saying anything.
+ *
+ * That is not a rare case on the device this product is for. Reopening a
+ * lesson after changing subject does it, and so does a shared phone where the
+ * other child studied something else in between.
+ *
+ * So the address is made self-sufficient: given a topic id, this says which
+ * subject it belongs to, and the screen can open the right syllabus whatever
+ * was last stored.
+ *
+ * Returns the first subject whose outline contains the id. Topic ids are
+ * unique across the outlines, and `readOutline` refuses a duplicate within
+ * one, so a tie cannot be resolved here and is not expected.
+ */
+export function subjectOfTopic(
+  stage: Stage,
+  topicId: string,
+  curriculum: string = NATIONAL,
+): string | null {
+  for (const subjectId of outlinedSubjects(stage, curriculum)) {
+    const s = resolve(stage, subjectId, curriculum)
+    if (s && topicById(s, topicId)) return subjectId
+  }
+  return null
 }
 
 export function topicById(s: Syllabus, id: string | null): Topic | null {

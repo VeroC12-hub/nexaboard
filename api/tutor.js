@@ -13,7 +13,37 @@ import { buildSystem, SHAPES, TASKS } from './prompt.js';
 
 export const maxDuration = 60;
 
-const MODEL = 'claude-opus-5';
+/**
+ * The model each task is worth, rather than the best model for all of them.
+ *
+ * Every task used to run on Opus. The measured ledger says why that is the
+ * wrong default: 41 of the first 88 real jobs were `plan`, which reads a
+ * short brief and returns about 190 tokens deciding how to teach somebody,
+ * and `observe` is a single sentence capped at 400 tokens. Paying the top
+ * rate to write one sentence, over and over, is most of what a month of this
+ * would cost, and none of it is visible to a learner.
+ *
+ * So the split follows what the learner actually sees. A lesson is the thing
+ * a child reads and is kept on the strongest model. Explaining a wrong answer
+ * and answering their own question are next, and go to Sonnet. The two the
+ * learner never reads go to Haiku.
+ *
+ * `EDU_TUTOR_MODEL` overrides the lot, so a deployment that wants everything
+ * on one model can say so without a code change.
+ */
+const MODEL_FOR = {
+  lesson: 'claude-opus-5-5',
+  ask: 'claude-sonnet-5-5',
+  explain: 'claude-sonnet-5-5',
+  questions: 'claude-sonnet-5-5',
+  plan: 'claude-haiku-5-5',
+  observe: 'claude-haiku-5-5',
+};
+
+const DEFAULT_MODEL = 'claude-sonnet-5-5';
+
+const modelFor = (task) =>
+  process.env.EDU_TUTOR_MODEL || MODEL_FOR[task] || DEFAULT_MODEL;
 
 /**
  * Long enough for a full explanation, short enough to keep the tutor honest.
@@ -22,7 +52,7 @@ const MODEL = 'claude-opus-5';
  * explanation of one wrong answer. An observation is one sentence, and giving
  * it four thousand tokens would only invite it to write an essay.
  */
-const MAX_TOKENS = { lesson: 8000, questions: 8000, observe: 400, plan: 400 };
+const MAX_TOKENS = { lesson: 8000, questions: 8000, observe: 400, plan: 400, ask: 1400 };
 const DEFAULT_MAX_TOKENS = 4000;
 
 export default async function handler(req, res) {
@@ -73,6 +103,9 @@ export default async function handler(req, res) {
     topic: String(body.topic || ''),
     askedFor: String(body.askedFor || ''),
     lesson: String(body.lesson || ''),
+    /* The helper: which screen they asked from, and the chat so far. */
+    where: String(body.where || ''),
+    said: body.said,
     count: body.count,
     level: body.level,
     avoid: body.avoid,
@@ -83,7 +116,7 @@ export default async function handler(req, res) {
 
   try {
     const stream = client.beta.messages.stream({
-      model: MODEL,
+      model: modelFor(task),
       max_tokens: MAX_TOKENS[task] ?? DEFAULT_MAX_TOKENS,
       /* Working out where a learner's thinking went wrong is the hard part of
          this job, and it is the part they never see. */
@@ -91,7 +124,11 @@ export default async function handler(req, res) {
       system,
       messages: [{ role: 'user', content: user }],
       betas: ['server-side-fallback-2026-06-01'],
-      fallbacks: [{ model: 'claude-opus-4-8' }],
+      /* One tier, not the top one. The fallback used to be Opus for every
+         task, so a Haiku job that failed once was retried at the most
+         expensive rate on the rare path nobody watches. Sonnet answers
+         any of these well enough to stand in. */
+      fallbacks: [{ model: 'claude-sonnet-5-5' }],
     });
 
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');

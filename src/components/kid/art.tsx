@@ -285,17 +285,29 @@ export function Pal({ who, size = 92, mood = 'wave' }: {
             <stop offset="100%" stopColor="#6d3411" />
           </linearGradient>
         </defs>
-        <Shadow cy={92} rx={22} />
-        <path d="M26 30 h48 l-7 52 q-17 8 -34 0 Z" fill={`url(#${g})`}
+        <Shadow cy={92} rx={20} />
+        {/* A waist, and a foot that flares back out.
+
+            The first one was a straight taper from a wide rim to a narrow
+            base, which is the silhouette of a takeaway cup, and that is
+            exactly what people read it as: somebody looking at the grown up's
+            page asked why their child's picture was a cup of coffee. A djembe
+            is a bowl, a narrow stem and a flared foot, and the waist is the
+            whole of what makes it recognisable at 40 pixels. */}
+        <path d="M26 31 C27 48 38 54 39 64 C40 74 35 79 33 85
+                 Q50 91 67 85 C65 79 60 74 61 64 C62 54 73 48 74 31 Z"
+          fill={`url(#${g})`} stroke="rgba(50,20,0,0.28)" strokeWidth="1.8" />
+        <ellipse cx="50" cy="31" rx="24" ry="8.5" fill="#fffcf2"
           stroke="rgba(50,20,0,0.28)" strokeWidth="1.8" />
-        <ellipse cx="50" cy="30" rx="24" ry="8.5" fill="#fffcf2"
-          stroke="rgba(50,20,0,0.28)" strokeWidth="1.8" />
-        <ellipse cx="44" cy="28" rx="9" ry="3" fill="#fff" opacity="0.7" />
-        {/* Tension ropes, which is what a djembe actually has. */}
-        <path d="M30 42 l40 0 M31 52 l38 0" stroke="rgba(255,248,230,0.35)"
-          strokeWidth="2.6" strokeLinecap="round" />
-        <path d="M34 34 l-3 46 M66 34 l3 46" stroke="rgba(255,248,230,0.22)" strokeWidth="2" />
-        <Face mood={mood} cy={60} s={0.74} ink="#3d1c02" />
+        <ellipse cx="44" cy="29" rx="9" ry="3" fill="#fff" opacity="0.7" />
+        {/* The rope, as a djembe is actually strung: verticals from the rim
+            down to the waist, pulled together by one band. Two horizontal
+            lines across a tapered body read as the seams of a cup. */}
+        <g stroke="rgba(255,248,230,0.3)" strokeWidth="2.2" strokeLinecap="round" fill="none">
+          <path d="M31 38 L39 62 M41 40 L44 62 M59 40 L56 62 M69 38 L61 62" />
+          <path d="M38 61 Q50 65 62 61" strokeWidth="2.8" />
+        </g>
+        <Face mood={mood} cy={46} s={0.7} ink="#3d1c02" />
       </Frame>
     )
   }
@@ -828,6 +840,10 @@ export function BadgeArt({ art, earned = true, size = 58 }: {
 export type Mark =
   | 'speak' | 'mute' | 'flame' | 'star' | 'dice' | 'think'
   | 'back' | 'next' | 'play' | 'grown' | 'tick'
+  /* The way out. Deliberately not a chevron: the sign out control sat in the
+     header next to a real back arrow drawn from the same `back` mark, and the
+     two were the same picture doing opposite things. */
+  | 'leave'
   /* The older tiers' chrome. These were text glyphs, and a chevron at 22px
      rendered as a small malformed mark that read as a typo rather than a
      control. Nothing in the interface is a character from a font any more. */
@@ -930,6 +946,17 @@ export function Icon({ mark, size = 22 }: { mark: Mark, size?: number }) {
           <path d="M56 86 a16 16 0 0 1 32 0 Z" fill="currentColor" />
         </Frame>
       )
+    case 'leave':
+      return (
+        <Frame size={size}>
+          {/* A door left open, with an arrow walking out of it. The door is
+              three sides on purpose: a closed rectangle at 21px is a box, and
+              the missing fourth side is what says the way out is this way. */}
+          <path d="M52 18 H26 a6 6 0 0 0 -6 6 v52 a6 6 0 0 0 6 6 h26" {...line} />
+          <path d="M56 50 h30" {...line} />
+          <path d="M74 36 L88 50 L74 64" {...line} />
+        </Frame>
+      )
     case 'menu':
       return (
         <Frame size={size}>
@@ -984,8 +1011,14 @@ export function TabIcon({ tab, on }: { tab: 'home' | 'play', on: boolean }) {
   return (
     <Frame size={26}>
       {tab === 'home' ? (
-        <path d="M18 48 L50 20 L82 48 V82 a4 4 0 0 1 -4 4 H22 a4 4 0 0 1 -4 -4 Z"
-          fill={c} stroke={s} strokeWidth="7" strokeLinejoin="round" />
+        /* An open book, because the tab says Learn. A house said Home, and
+           home is a fact about the navigation rather than about the child. */
+        <>
+          <path d="M50 34 C41 26 28 23 17 25 V73 C28 71 41 74 50 82
+                   C59 74 72 71 83 73 V25 C72 23 59 26 50 34 Z"
+            fill={c} stroke={s} strokeWidth="7" strokeLinejoin="round" />
+          <path d="M50 34 V82" stroke={s} strokeWidth="6" strokeLinecap="round" />
+        </>
       ) : (
         <>
           <rect x="10" y="32" width="80" height="42" rx="20" fill={c} stroke={s} strokeWidth="7" />

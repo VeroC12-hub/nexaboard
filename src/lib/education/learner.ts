@@ -99,6 +99,24 @@ export interface LearnerProfile {
    * does not apply. See `programmes.ts`.
    */
   programme: string | null
+  /**
+   * Whose curriculum this learner follows.
+   *
+   * Absent for the great majority, who follow the national one, and
+   * `syllabus.ts` treats absent as national so nothing has to be set for them.
+   *
+   * It exists because a school may teach its own course. A school that adds
+   * two subjects of its own gets those two from its curriculum and everything
+   * else from the national outline, which is what `resolve` does: the school
+   * is an overlay, never a replacement, so adding one subject does not oblige
+   * a school to supply the other thirty.
+   *
+   * On the learner rather than on the school, deliberately, and for the same
+   * reason the id above is: a child who changes school keeps their identity
+   * and their record, and only this field changes.
+   */
+  curriculum?: string
+
   /** The subject being studied now. Null until they have chosen one. */
   subjectId: string | null
   /**

@@ -35,16 +35,37 @@ import '../../styles/kid.css'
 /** Where a learner can be. Only the first two are tabs. */
 export type KidTab = 'home' | 'play' | 'rewards' | 'profile'
 
+/* Learn and Play, which is the whole of what a child does here.
+
+   It said Home, and Home is a word about navigation rather than about
+   learning: it told a child where the button went and nothing about what was
+   behind it. The two tabs are the two things: one where you are taught, one
+   where you play. The key stays `home` because it is also the learner app's
+   own address, /study/subjects, with nothing after it. */
 const TABS: Array<{ key: 'home' | 'play', name: string }> = [
-  { key: 'home', name: 'Home' },
+  { key: 'home', name: 'Learn' },
   { key: 'play', name: 'Play' },
 ]
 
 export function KidShell({
-  tab, onTab, reads, xp, days, children,
+  tab, onTab, reads, xp, days, onSignOut, children,
 }: {
   tab: KidTab
   onTab: (t: KidTab) => void
+  /**
+   * Leaving, from the header, on every screen.
+   *
+   * It used to be three taps down inside the grown up's page, which is where a
+   * standing preference belongs and not where the way out belongs. A parent
+   * being handed the phone back could not see it. It is gated rather than
+   * hidden, by the caller: a child pressing it reaches a question rather than
+   * the sign in screen.
+   */
+  /**
+   * Asks to leave. The question itself is the caller's, because there are two
+   * ways out of a child's app and both must ask the same one.
+   */
+  onSignOut: () => void
   /**
    * What this screen says, if somebody asks it to.
    *
@@ -129,9 +150,27 @@ export function KidShell({
           onClick={() => onTab('profile')}>
           <Icon mark="grown" size={21} />
         </button>
+
+        {/* The way out, in the same corner on every kid screen. */}
+        <button
+          className="kid-icon"
+          aria-label="Sign out"
+          title="Sign out"
+          onClick={() => { stop(); setSaid(null); onSignOut() }}>
+          {/* A door, not a chevron. This button sat beside the subject
+              screen's real back arrow drawn from the same mark, so the way out
+              of the app and the way back one screen were the same picture. */}
+          <Icon mark="leave" size={21} />
+        </button>
       </header>
 
-      <div className="kid-page">{children}</div>
+      {/* Rewards and the grown up's page are a single column of rows, so they
+          do not take the full width the Learn and Play screens do: a 1040px
+          row with a label at the left and a chevron at the right is a stretched
+          row. See the laptop section in kid.css. */}
+      <div className={`kid-page${tab === 'rewards' || tab === 'profile' ? ' is-narrow' : ''}`}>
+        {children}
+      </div>
 
       <nav className="kid-tabs" aria-label="Main">
         {TABS.map(t => (

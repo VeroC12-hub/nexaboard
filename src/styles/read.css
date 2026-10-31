@@ -471,3 +471,90 @@
 }
 
 .nx-choices li { margin-bottom: 5px; }
+
+/* ── a drawing, and seeing it properly ──────────────────────────────────────
+
+   Figures are drawn on a 640 wide canvas with labels around 15px. In a phone
+   reading column that is roughly 306px wide those labels render near 7px,
+   which no child can read, and the picture is often the part of the lesson
+   doing the teaching. Tapping opens it full screen, where the same drawing
+   gets the whole viewport and the browser's pinch zoom can go further still.
+
+   The button carries no button styling: the picture should look like a
+   picture, not like a control, so only the hint underneath says it can be
+   tapped. */
+
+.nx-fig-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: zoom-in;
+  text-align: center;
+}
+
+.nx-fig-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--nx-ink-3, #6b7280);
+}
+
+/* A pointer can hover, so the hint is only worth the space on touch. */
+@media (hover: hover) and (pointer: fine) {
+  .nx-fig-hint { opacity: 0; transition: opacity 120ms ease; }
+  .nx-fig-open:hover .nx-fig-hint,
+  .nx-fig-open:focus-visible .nx-fig-hint { opacity: 1; }
+}
+
+.nx-big {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(12, 16, 22, 0.82);
+  overflow: auto;
+}
+
+.nx-big-sheet {
+  width: 100%;
+  max-width: 900px;
+  background: var(--nx-paper, #fdfcf7);
+  border-radius: 16px;
+  padding: 16px 16px 20px;
+  text-align: center;
+}
+
+/* The drawing takes the width it is given, and keeps its proportions. */
+.nx-big-svg {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* The drawing is never shrunk below the size it was drawn at.
+
+   Filling the screen is not enough on a phone. A 360px screen less padding
+   is about 296px, so a 640 wide drawing is still scaled to 0.46 and its 15px
+   labels still land near 7px, which was the whole problem. So the picture is
+   shown at its own size or larger and the sheet scrolls sideways when that is
+   wider than the screen. A child pans a picture far more easily than they
+   read 7px type, and pinch zoom still works on top of this. */
+.nx-big-svg svg {
+  width: 100%;
+  min-width: 640px;
+  height: auto;
+}
+
+.nx-big-alt {
+  margin: 12px 0 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--nx-ink-2, #44505f);
+  text-align: left;
+}

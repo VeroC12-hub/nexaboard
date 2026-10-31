@@ -90,7 +90,7 @@ export default function ScholarApp({
     return subjectsFor(profile.stage)
       .filter(s => !allowed || allowed.includes(s.id))
       .map(s => {
-        const syllabus = syllabusFor(profile.stage, s.id)
+        const syllabus = syllabusFor(profile.stage, s.id, profile.curriculum)
         const mine = syllabus ? topicsFor(syllabus, profile.level) : []
         const topics = mine.length ? mine : (syllabus ? allTopics(syllabus) : [])
         const rows = attempts.filter(

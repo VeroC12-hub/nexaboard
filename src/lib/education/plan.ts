@@ -70,7 +70,7 @@ export {
   RENDERABLE, localPlan, readPlan, leadsWith, includes, rank,
   type Part, type Plan,
 } from './plan-core'
-import { localPlan, type Plan } from './plan-core'
+import { localPlan, usable, type Plan } from './plan-core'
 
 /* ── keeping one ──────────────────────────────────────────────────────────── */
 
@@ -82,11 +82,6 @@ const STALE_MS = 3 * 24 * 60 * 60 * 1000
 
 const keyFor = (learnerId: string, subjectId: string) => `${KEY}:${learnerId}:${subjectId}`
 
-/** Anything that is not a plan with parts in it is not a plan. */
-function usable(value: unknown): Plan | null {
-  const p = value as Plan | null
-  return p && Array.isArray(p.parts) && p.parts.length ? p : null
-}
 
 /**
  * The cached copy, read synchronously.

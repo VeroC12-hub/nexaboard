@@ -81,7 +81,7 @@ export function readOf(learner: LearnerProfile, now: number): Read {
      their year holds nothing, as their own screens do. */
   const topics: Array<{ topic: Topic, subject: string }> = []
   for (const s of subjectsFor(learner.stage)) {
-    const syllabus = syllabusFor(learner.stage, s.id)
+    const syllabus = syllabusFor(learner.stage, s.id, learner.curriculum)
     if (!syllabus) continue
     const mine = topicsFor(syllabus, learner.level)
     for (const t of (mine.length ? mine : allTopics(syllabus))) {
