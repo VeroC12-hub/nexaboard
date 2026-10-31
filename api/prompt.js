@@ -394,6 +394,17 @@ export const TASKS = {
     'Technical terms stay. Say the term, then say what it means in plain words.',
     'Removing the term would leave them unable to follow their own class.',
     '',
+    'WHAT THEY ASKED FOR',
+    'The learner brief may carry things this learner has asked for, in their',
+    'own words. Those outrank everything else here, including the reading',
+    'level and the length, because they came from the learner rather than',
+    'from watching the learner. "Explain it simpler", "use football examples",',
+    '"I did not follow the second step" are all instructions to you, and the',
+    'last of those means spend most of the retelling on that step.',
+    'If what they asked for would mean leaving out something they need, give',
+    'them what they asked for and keep the thing as well. They are telling you',
+    'how to teach them, not what to drop.',
+    '',
     'DO NOT',
     'Do not mention that you are retelling anything, or that a lesson exists',
     'behind what they are reading. To the learner this is simply their lesson.',
@@ -1424,7 +1435,7 @@ export function buildTaughtUser({ topic, topicId, outcome, year, place, syllabus
  * them. That matters: the model should re-tell what they were going to be
  * given, not the whole stored topic.
  */
-export function buildRetellUser({ topic, lesson, because, depth, year }) {
+export function buildRetellUser({ topic, lesson, because, depth, year, asked }) {
   const lines = [`THE TOPIC\n${String(topic || '').trim()}`];
   if (year) lines.push(`THEIR YEAR GROUP\n${year}`);
 
@@ -1439,6 +1450,11 @@ export function buildRetellUser({ topic, lesson, because, depth, year }) {
      sentence for the learner, and it tells the model what was decided about
      them more compactly than restating the profile would. */
   if (because) lines.push(`WHY IT WAS PUT TOGETHER THIS WAY\n${because}`);
+
+  /* Last, so it is the nearest instruction to the lesson itself, and
+     repeated here even though the brief already carries it, because this
+     is the one input that should override everything above. */
+  if (asked) lines.push('WHAT THEY ASKED FOR, which outranks the rest' + '\n' + asked);
 
   lines.push('THE APPROVED LESSON, to be retold and not changed\n'
     + String(lesson || '').trim());
