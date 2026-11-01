@@ -53,7 +53,9 @@ import { assemble } from '../lib/education/taught'
 import { askRetell } from '../lib/education/ai'
 
 import { taughtFor } from '../lib/education/taught-registry'
-import { ownTaughtFor } from '../lib/education/generated-store'
+import { acceptOwn, discardOwn, ownTaughtFor } from '../lib/education/generated-store'
+import { generateTaught } from '../lib/education/generate'
+import type { Taught } from '../lib/education/taught'
 import { mediumBrief } from '../lib/education/medium'
 import {
   leadsWith, localPlan, planIsStale, rank, readPlan, savePlan, savedPlan,
@@ -824,6 +826,23 @@ function Lesson({
    * has read, and shaped by this learner's own preferences rather than by her
    * year. See `taught.ts` for why that is parts rather than prose.
    */
+  /**
+   * This learner's own lesson for this topic, if they have kept one.
+   *
+   * Read synchronously, because it is a lookup in a list this device already
+   * holds. A learner who kept a lesson last week opens the topic and it is
+   * simply there, with no request made and nothing to wait for, which is the
+   * whole point of letting them keep it.
+   */
+  const kept = useMemo(
+    () => ownTaughtFor(topic.id, learner.profile.id),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [topic.id])
+  /** Theirs: the kept one, or the one written for them during this visit. */
+  const [own, setOwn] = useState<Taught | null>(kept)
+  /** Whether they have said it suits them. A kept one they already have. */
+  const [saved, setSaved] = useState(kept !== null)
+
   const stored = useMemo(() => {
     /* The shared library first, and a learner's own lesson only where it has
        nothing. A lesson a person wrote and a teacher passed outranks one the
@@ -833,13 +852,13 @@ function Lesson({
        they must not be said the same way: one was checked by a teacher and
        the other was not, and the screen says so either way. */
     const shared = taughtFor(topic.id)
-    const t = shared ?? ownTaughtFor(topic.id, learner.profile.id)
+    const t = shared ?? own
     if (!t) return null
     return { taught: t, mine: !shared, ...assemble(t, learner.profile) }
     /* The profile is stable for the life of this screen, and a re-teach
        arrives as a new key rather than as a changed prop. */
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topic.id])
+  }, [topic.id, own])
 
   /**
    * Ask for the retelling, once, in the background.
@@ -851,6 +870,11 @@ function Lesson({
    */
   useEffect(() => {
     if (!stored) return
+    /* Nothing to retell. The retelling exists because a person wrote the
+       stored lessons once, in one voice, for everybody. A lesson the tutor
+       has just written for this learner is already in their words, and
+       asking for it again would be a second call to say the same thing. */
+    if (stored.mine) return
     const ctrl = new AbortController()
     let got = ''
 
@@ -1055,26 +1079,70 @@ function Lesson({
 
     const ctrl = new AbortController()
 
-    askLesson(
-      { learner, syllabus: place, askedFor },
-      { onText: chunk => setText(prev => prev + chunk), onStage: setStage },
+    const failed = (e: unknown) => {
+      if (ctrl.signal.aborted) return
+      const said = e instanceof Error ? e.message : ''
+      if (e instanceof TutorOff) {
+        if (said) console.info('[tutor] ' + said)
+        setWhy('The tutor is not switched on here, so this topic cannot be taught yet.')
+        setState('off')
+        return
+      }
+      setWhy(said || 'The lesson could not be written just now.')
+      setState('failed')
+    }
+
+    /* The prose lesson: streamed, read once, and gone when the page closes. */
+    const prose = () =>
+      askLesson(
+        { learner, syllabus: place, askedFor },
+        { onText: chunk => setText(prev => prev + chunk), onStage: setStage },
+        ctrl.signal,
+      )
+        .then(() => {
+          if (ctrl.signal.aborted) return
+          setState('done')
+        })
+        .catch(failed)
+
+    /* Ask for a lesson in parts rather than prose, and for this learner.
+       ── Why the structured one is asked for first ──────────────────────────
+       Prose was all this screen ever asked for, and it could not be kept: the
+       store needs a lesson in parts, so a learner who liked what they read had
+       no way to keep it and paid for the same request again on every visit.
+       Asked for in parts, the same call produces something they can keep, and
+       the topic then costs nothing for the rest of their life.
+       What is lost is the streaming. Prose arrives a word at a time and this
+       arrives all at once, so there is a wait with the primer on screen rather
+       than text appearing. That is the trade, and it is made once per topic
+       rather than on every visit.
+       Prose remains the floor. If the parts cannot be written, or come back
+       unusable, the learner still gets the lesson they would have got
+       before. */
+    generateTaught(
+      {
+        learner,
+        topicId: topic.id,
+        topic: topic.title,
+        outcome: topic.outcome,
+        year: place.year ?? level,
+        builds: place.builds,
+        place: place.strand,
+        forLearner: learner.profile.id,
+      },
       ctrl.signal,
     )
-      .then(() => {
+      .then(t => {
         if (ctrl.signal.aborted) return
+        setOwn(t)
         setState('done')
       })
       .catch((e: unknown) => {
         if (ctrl.signal.aborted) return
-        const said = e instanceof Error ? e.message : ''
-        if (e instanceof TutorOff) {
-          if (said) console.info('[tutor] ' + said)
-          setWhy('The tutor is not switched on here, so this topic cannot be taught yet.')
-          setState('off')
-          return
-        }
-        setWhy(said || 'The lesson could not be written just now.')
-        setState('failed')
+        /* A tutor that is switched off will not answer the second request
+           either, so it is not made. */
+        if (e instanceof TutorOff) { failed(e); return }
+        void prose()
       })
 
     return () => ctrl.abort()
@@ -1554,6 +1622,34 @@ function Lesson({
                   Your own lesson, written by the tutor. No teacher has checked it.
                 </p>
               )}
+              {/* Keeping it is the learner's own decision, and the only thing
+                  that saves it.
+
+                  There is no teacher to approve a lesson somebody asked for
+                  on their own, which used to mean it was never served at
+                  all. The person who vouches for it is the person it is for:
+                  they read it, they ask again until it suits them, and saying
+                  it suits them is what keeps it. It stays theirs either way,
+                  so keeping it cannot put it in front of anybody else. */}
+              {!showOriginal && stored.mine && !saved && (
+                <div className="nx-primer-actions">
+                  <button
+                    className="nx-btn nx-btn-grow"
+                    onClick={() => {
+                      if (acceptOwn(topic.id, learner.profile.id)) setSaved(true)
+                    }}>
+                    Keep this lesson
+                  </button>
+                  <button
+                    className="nx-btn"
+                    onClick={() => {
+                      discardOwn(topic.id, learner.profile.id)
+                      onAgain(askedFor)
+                    }}>
+                    Write it again
+                  </button>
+                </div>
+              )}
               {stored.pieces.map((piece, i) => (
                 <section key={i} className={`nx-piece is-${piece.kind}`}>
                   <h3 className="nx-piece-head">{piece.heading}</h3>
@@ -1963,7 +2059,13 @@ function Practice({
    * the same questions back. Better than an empty screen, and worth improving
    * once more topics are written.
    */
-  const stored = taughtFor(topic.id)?.questions ?? null
+  /* A learner's own kept lesson counts here for the same reason a written one
+     does: its questions already exist, so practice is instant and free rather
+     than a request. Theirs are not registered, so they are looked up by
+     owner. */
+  const stored = (
+    taughtFor(topic.id) ?? ownTaughtFor(topic.id, learner.profile.id)
+  )?.questions ?? null
   const written = Boolean(stored?.length)
 
   const [questions, setQuestions] = useState<Question[] | null>(stored)
