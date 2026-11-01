@@ -482,3 +482,43 @@
   .teen-menu:active,
   .teen-count:active { transform: none; }
 }
+
+/* The same affordance the other two tiers now carry.
+
+   A teen row was a flat strip with a bottom border: the icon suggested
+   something and nothing else did, and on a phone there is no hover to find
+   it with. The arrow is drawn in CSS rather than added to the markup,
+   because every one of these rows is already a button and the only thing
+   missing was the sign that says so.
+
+   The kid tiles already press when tapped, which is where this came from. */
+.teen-row {
+  position: relative;
+  padding-right: 42px;
+  transition: background-color 120ms ease, transform 60ms ease;
+}
+
+.teen-row::after {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-top: -5px;
+  border-right: 2px solid currentColor;
+  border-top: 2px solid currentColor;
+  transform: rotate(45deg);
+  opacity: 0.4;
+}
+
+.teen-row:hover::after { opacity: 0.85; }
+
+.teen-row:active { background: var(--wash); transform: scale(0.997); }
+
+.teen-row:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; }
+
+/* A row that is a statement rather than a control, such as a line in the
+   week summary, must not grow an arrow. */
+.teen-week > .teen-row-sub::after,
+.teen-row.is-flat::after { content: none; }
