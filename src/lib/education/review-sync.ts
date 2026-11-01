@@ -246,7 +246,14 @@ export interface PulledReview {
 }
 
 /**
- * Everything this account owns, for merging into the device store.
+ * Everything this account may read, for merging into the device store.
+ *
+ * Since migration 000012 that is more than this account owns: a learner also
+ * reads the approved lessons, outlines and curricula of any school or parent
+ * account that holds them. The queries below did not change to make that
+ * happen, because who may read a row is the server's decision and not this
+ * module's. What did change is that each row now carries its owner, so the
+ * mapping below can mark the ones that came from somebody else.
  *
  * Called on sign in and on resume, not per screen. Returns null when there is
  * nobody signed in or the request failed, which the caller treats as "nothing
@@ -261,11 +268,12 @@ export async function pullReview(): Promise<PulledReview | null> {
   try {
     const [lessons, outlines, curricula] = await Promise.all([
       supabase.from('edu_generated_lesson')
-        .select('audience, for_learner, topic_id, curriculum, year, payload, '
-          + 'approved, approved_by, approved_at, created_at'),
+        .select('owner_id, audience, for_learner, topic_id, curriculum, year, '
+          + 'payload, approved, approved_by, approved_at, created_at'),
       supabase.from('edu_generated_outline')
-        .select('payload, approved_by, approved_at, created_at'),
-      supabase.from('edu_curriculum').select('curriculum_id, name, note'),
+        .select('owner_id, payload, approved_by, approved_at, created_at'),
+      supabase.from('edu_curriculum')
+        .select('owner_id, curriculum_id, name, note'),
     ])
     if (lessons.error || outlines.error || curricula.error) return null
 
@@ -274,6 +282,7 @@ export async function pullReview(): Promise<PulledReview | null> {
        back as a union with an error shape and every field read is refused
        until the row is given a name. */
     const lessonRows = (lessons.data ?? []) as unknown as {
+      owner_id: string | null
       audience: string | null
       for_learner: string | null
       topic_id: string
@@ -286,20 +295,40 @@ export async function pullReview(): Promise<PulledReview | null> {
       created_at: string | null
     }[]
     const outlineRows = (outlines.data ?? []) as unknown as {
+      owner_id: string | null
       payload: unknown
       approved_by: string | null
       approved_at: string | null
       created_at: string | null
     }[]
     const curriculumRows = (curricula.data ?? []) as unknown as {
+      owner_id: string | null
       curriculum_id: string
       name: string
       note: string | null
     }[]
 
+    /**
+     * Did this row come from somebody else?
+     *
+     * Since migration 000012 a pull returns two kinds of row: this account's
+     * own, and the approved material of a school or parent account that holds
+     * this learner. The server decides who may read what, and the only thing
+     * the client has to do is remember which is which, because the two are
+     * treated differently afterwards: one is work this account is responsible
+     * for, the other is material to be taught and nothing else.
+     *
+     * This is the one place where the distinction can be made cheaply, since
+     * the signed in account is already in hand here and every read in the
+     * store is synchronous and cannot go looking for it.
+     */
+    const notMine = (ownerId: string | null) =>
+      Boolean(ownerId) && ownerId !== owner
+
     return {
       lessons: lessonRows.map(r => {
         const taught = r.payload as Taught
+        const theirs = notMine(r.owner_id)
         return {
           /* The stored flag is not trusted over the column. `approved` is the
              one field a person set deliberately, and the column is where that
@@ -312,6 +341,7 @@ export async function pullReview(): Promise<PulledReview | null> {
           ...(r.for_learner ? { forLearner: String(r.for_learner) } : {}),
           ...(r.approved_by ? { approvedBy: String(r.approved_by) } : {}),
           ...(r.approved_at ? { approvedAt: String(r.approved_at) } : {}),
+          ...(theirs ? { fromSchool: true, owner: String(r.owner_id) } : {}),
         }
       }),
       outlines: outlineRows.map(r => ({
@@ -319,6 +349,9 @@ export async function pullReview(): Promise<PulledReview | null> {
         at: String(r.created_at ?? new Date().toISOString()),
         ...(r.approved_by ? { approvedBy: String(r.approved_by) } : {}),
         ...(r.approved_at ? { approvedAt: String(r.approved_at) } : {}),
+        ...(notMine(r.owner_id)
+          ? { fromSchool: true, owner: String(r.owner_id) }
+          : {}),
       })),
       curricula: curriculumRows.map(r => ({
         id: String(r.curriculum_id),

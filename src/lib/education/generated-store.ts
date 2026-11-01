@@ -68,6 +68,24 @@ export interface Pending {
   /** Who approved it, and when. Absent until somebody has. */
   approvedBy?: string
   approvedAt?: string
+  /**
+   * Set when the row came from a school or parent account that holds this
+   * learner, rather than from the account signed in here.
+   *
+   * It is the one distinction a learner's device has to keep, because a row
+   * from somebody else is read only here: it belongs in the teaching
+   * registry and it does not belong in a review queue, and rejecting it
+   * locally would only hide a lesson the server will hand back on the next
+   * pull. `review-sync.ts` sets it while merging, where the owning account is
+   * known; nothing written on this device ever has it.
+   */
+  fromSchool?: boolean
+  /**
+   * The account that owns a `fromSchool` row, so two accounts holding the
+   * same learner, a parent and a school, do not overwrite each other.
+   * Absent on this account's own rows.
+   */
+  owner?: string
 }
 
 /** A row's audience, with the default applied. */
@@ -98,10 +116,22 @@ export const allPending = (): Pending[] => read<Pending[]>(LESSONS, [])
  * material for a child who is not theirs and has already read it.
  */
 export const awaitingReview = (): Pending[] =>
-  allPending().filter(p => audienceOf(p) === 'SHARED' && !p.taught.approved).reverse()
+  allPending()
+    .filter(p => audienceOf(p) === 'SHARED' && !p.fromSchool && !p.taught.approved)
+    .reverse()
 
+/**
+ * What this account has approved.
+ *
+ * `fromSchool` rows are excluded for the same reason PERSONAL ones are: this
+ * is a record of decisions made here. A lesson another account approved is
+ * material to be taught, not work to be reviewed, and listing it would invite
+ * somebody to reject a lesson they have no authority over and that the next
+ * pull would bring straight back.
+ */
 export const reviewed = (): Pending[] =>
-  allPending().filter(p => audienceOf(p) === 'SHARED' && p.taught.approved)
+  allPending().filter(p =>
+    audienceOf(p) === 'SHARED' && !p.fromSchool && p.taught.approved)
 
 /**
  * Keep a freshly generated lesson.
@@ -231,7 +261,12 @@ export function discardOwn(topicId: string, learnerId: string): void {
  */
 export function approve(topicId: string, by: string): boolean {
   const rows = allPending()
-  const row = rows.find(r => r.taught.topicId === topicId)
+  /* This account's own row, never one pulled from a school that holds this
+     learner. Approving somebody else's lesson is refused by the policy on the
+     server anyway, so without this the only thing that would happen is a
+     write stuck in the outbox and a screen claiming an approval that never
+     took place. */
+  const row = rows.find(r => r.taught.topicId === topicId && !r.fromSchool)
   if (!row) return false
 
   row.taught = { ...row.taught, approved: true }
@@ -254,7 +289,11 @@ export function approve(topicId: string, by: string): boolean {
  * the text would only invite somebody to approve it later without rereading.
  */
 export function reject(topicId: string): void {
-  write(LESSONS, allPending().filter(r => r.taught.topicId !== topicId))
+  /* Own rows only, for the same reason as `approve`: a lesson another account
+     approved is not this account's to withdraw, and deleting it here would
+     hide it until the next pull handed it straight back. */
+  write(LESSONS, allPending().filter(r =>
+    r.taught.topicId !== topicId || r.fromSchool))
   queueLessonGone(topicId)
 }
 
@@ -265,6 +304,10 @@ export interface PendingOutline {
   at: string
   approvedBy?: string
   approvedAt?: string
+  /** From an account that holds this learner. See `Pending.fromSchool`. */
+  fromSchool?: boolean
+  /** The account that owns a `fromSchool` outline. */
+  owner?: string
 }
 
 export const allPendingOutlines = (): PendingOutline[] =>
@@ -304,12 +347,22 @@ export function approveOutline(curriculum: string, stage: string, subjectId: str
 
 /* ── what the server knows ───────────────────────────────────────────────── */
 
-/** The key a lesson is one of: a topic, for one audience, for one owner. */
+/**
+ * The key a lesson is one of: a topic, for one audience, for one owner.
+ *
+ * A row from another account carries that account in the key, and this
+ * account's own rows do not. That asymmetry is deliberate: it keeps the key
+ * of every row written on this device exactly what it was before pupils could
+ * read a school's material, so the server's copy of my own lesson still folds
+ * onto my local one instead of arriving as a second row, while two schools
+ * holding the same learner stay apart.
+ */
 const lessonKey = (p: Pending) =>
-  `${audienceOf(p)}:${p.forLearner ?? ''}:${p.taught.topicId}`
+  `${audienceOf(p)}:${p.forLearner ?? ''}:${p.fromSchool ? p.owner ?? '' : ''}:${p.taught.topicId}`
 
 const outlineKey = (p: PendingOutline) =>
-  `${p.syllabus.curriculum}:${p.syllabus.stage}:${p.syllabus.subjectId}`
+  `${p.fromSchool ? p.owner ?? '' : ''}:`
+  + `${p.syllabus.curriculum}:${p.syllabus.stage}:${p.syllabus.subjectId}`
 
 /**
  * Which of two copies of the same lesson to keep.
