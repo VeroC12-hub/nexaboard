@@ -202,6 +202,20 @@ function Mark({ wrong }: { wrong?: boolean }) {
   )
 }
 
+/**
+ * A block of lesson text, as the sentences it is read in.
+ *
+ * Kept deliberately simple: this is for speech, where a wrong split costs a
+ * slightly odd pause and nothing else, and the alternative is a thousand
+ * character clip nobody can pause.
+ */
+function sentencesOf(text: string): string[] {
+  return text
+    .split(/(?<=[.!?])\s+/)
+    .map(t => t.trim())
+    .filter(t => t.length > 1)
+}
+
 /** One topic in the outline. */
 function TopicRow({ topic, done, onOpen }: {
   topic: Topic
@@ -1627,7 +1641,20 @@ function Lesson({
               onClick={() => {
                 if (reading) { stopSpeaking(); setReading(false); return }
                 setReading(true)
-                say(`${topic.title}. ${text.replace(/[*#_`$]/g, '').slice(0, 1200)}`)
+                /* Sentence by sentence, not as one long string.
+
+                   `say` queues an array and plays a recording for any line
+                   that has one, falling back to the device voice per line.
+                   Baking whole lessons would mean one enormous clip per
+                   lesson, keyed on text that changes with the learner's own
+                   plan, so it would miss the bank almost every time. Keyed
+                   on sentences, the bank hits, the clips are reused across
+                   lessons, and a child hears one voice instead of a robot
+                   for the parts nobody baked. */
+                say([
+                  `${topic.title}.`,
+                  ...sentencesOf(text.replace(/[*#_`$]/g, '').slice(0, 1600)),
+                ])
               }}>
               <span aria-hidden>🔊</span>
               {reading ? 'Stop reading' : 'Read it to me'}

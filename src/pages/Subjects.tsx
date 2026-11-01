@@ -131,6 +131,14 @@ function SubjectRow({ row, chosen, onPick }: {
             <i style={{ width: `${Math.min(100, Math.round((row.worked / row.topics) * 100))}%` }} />
           </span>
         )}
+        {/* The same arrow the topic list carries. A row that opens something
+            should say so on a phone, where there is no hover to discover it
+            with. */}
+        <svg className="ne-row-go" viewBox="0 0 20 20" width="18" height="18"
+          aria-hidden="true">
+          <path d="M7 4 L13 10 L7 16" fill="none" stroke="currentColor"
+            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
     </li>
   )

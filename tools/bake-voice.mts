@@ -69,6 +69,11 @@ import { fileURLToPath } from 'node:url'
 import ffmpeg from 'ffmpeg-static'
 
 import { allCostumes } from '../src/lib/education/costumes'
+import { subjectsFor } from '../src/lib/education/subjects'
+import { syllabusFor, allTopics } from '../src/lib/education/syllabus'
+import { taughtFor } from '../src/lib/education/taught-registry'
+import type { Stage } from '../src/lib/education/learner'
+import '../src/lib/education/library/lessons/index'
 import { THINGS } from '../src/lib/education/games'
 import '../src/lib/education/library/games'
 
@@ -364,6 +369,60 @@ inScope('shared')
 /* ── what each costume says when it opens ──────────────────────────────────── */
 
 for (const c of allCostumes()) add(c.intro)
+
+inScope('read')
+
+/* ── reading a lesson aloud, for the children who cannot read it ──────────── */
+
+/**
+ * Every sentence of every lesson written for a stage that cannot read.
+ *
+ * ── Why this scope exists ─────────────────────────────────────────────────
+ *
+ * The whole bank until now was game lines. The lessons themselves were read
+ * by whatever voice the device happened to have, which on a cheap Android is
+ * flat, American, or absent altogether. For creche and KG that is not a
+ * degraded experience, it is the product failing: the child cannot read the
+ * words, so if nothing says them there is no lesson on the screen at all.
+ *
+ * ── Why sentences and not whole lessons ───────────────────────────────────
+ *
+ * A lesson is assembled per learner, so the text on the page is never quite
+ * the same twice and a clip keyed on the whole thing would miss the bank
+ * almost every time. Sentences are stable: they come from the lesson file
+ * as written, they survive being reordered, and they are shared between
+ * lessons, so 'Count them with your finger.' is baked once for the whole
+ * library.
+ *
+ * Primary is included as well as creche. A Basic 1 child can read some of
+ * it, slowly, and being read to while following the words is how that gets
+ * better.
+ */
+const READ_STAGES: Stage[] = ['creche', 'primary']
+
+const sentences = (text: string): string[] => String(text || '')
+  .replace(/[*#_`$]/g, '')
+  .split(/(?<=[.!?])\s+/)
+  .map(t => t.trim())
+  .filter(t => t.length > 1 && t.length <= 240)
+
+for (const stage of READ_STAGES) {
+  for (const subject of subjectsFor(stage)) {
+    const syllabus = syllabusFor(stage, subject.id)
+    if (!syllabus) continue
+    for (const topic of allTopics(syllabus)) {
+      const t = taughtFor(topic.id)
+      if (!t) continue
+      add(`${topic.title}.`)
+      for (const line of sentences(t.idea)) add(line)
+      for (const step of t.method) for (const line of sentences(step)) add(line)
+      if (t.brief?.idea) for (const line of sentences(t.brief.idea)) add(line)
+      for (const w of t.worked ?? []) {
+        for (const line of sentences(w.ask)) add(line)
+      }
+    }
+  }
+}
 
 /* ── render ────────────────────────────────────────────────────────────────── */
 

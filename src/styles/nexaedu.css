@@ -754,33 +754,52 @@
    edge, a hover lift and a shadow: five treatments to say "this text is
    clickable", repeated fifteen times, and under the real curriculum thirty
    three times. A rule and a hover tint say the same thing once. */
+/* A subject, as a card.
+
+   It was a row with a bottom border: nothing on it said it could be opened,
+   which is the same fault the topic list had and the same fix. A card with
+   an arrow, a lift on hover and a press on tap, so the subject chooser and
+   the topic list are recognisably one product rather than two screens that
+   happen to follow each other. */
 .ne-row {
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  column-gap: 16px;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  column-gap: 14px;
   width: 100%;
   text-align: left;
   font: inherit;
   color: inherit;
   cursor: pointer;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  border-left: 2px solid transparent;
-  padding: 13px 14px 12px 12px;
-  transition: background-color 130ms, border-left-color 130ms, padding-left 130ms;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 15px 16px;
+  margin-bottom: 10px;
+  transition: border-color 120ms ease, box-shadow 120ms ease, transform 60ms ease;
 }
 
 .ne-row:hover {
-  background: var(--card);
-  padding-left: 18px;
+  border-color: var(--ink-2);
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.06);
 }
 
+/* The only feedback a phone has: there is no hover, so without this a tap
+   feels like nothing happened until the next screen paints. */
+.ne-row:active { transform: scale(0.995); }
+
+.ne-row:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
 .ne-row.is-on {
-  border-left-color: var(--green);
-  background: var(--card);
+  border-color: var(--green);
+  box-shadow: inset 3px 0 0 var(--green);
 }
+
+.ne-row-go { grid-column: 3; color: var(--ink-3); opacity: 0.7; }
+.ne-row:hover .ne-row-go { opacity: 1; }
+
+/* The progress bar spans the card rather than sitting in a column. */
+.ne-row-bar { grid-column: 1 / -1; }
 
 /* A subject with nothing behind it yet. Dimmed rather than hidden, because a
    learner looking for it should find it and be told, not wonder. */
