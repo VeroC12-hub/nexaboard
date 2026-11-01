@@ -20,6 +20,7 @@
 // and the worker only runs what it is handed.
 
 import { buildSystem, SHAPES, TASKS } from './prompt.js';
+import { allowTutorCall } from './_limit.js';
 
 const SUPA_URL = process.env.SUPABASE_URL || '';
 const SUPA_KEY = process.env.SUPABASE_SERVICE_KEY || '';
@@ -81,6 +82,23 @@ export default async function handler(req, res) {
       }
       if (shape.needs === 'topic' && !String(body.topic || '').trim()) {
         res.status(400).json({ error: 'No topic was sent.' });
+        return;
+      }
+
+      /* The same limit as the direct tutor route, and for the same reason.
+
+         A queued job is not cheaper than a streamed one: a worker picks it
+         up and pays for it a moment later, and for the rendering tasks it
+         pays an image model rather than a text one. An endpoint that queues
+         without counting is the tutor hole with a delay in front of it.
+
+         Counted against the same allowance rather than a second one, so a
+         caller cannot have their hour's worth twice by alternating between
+         the two routes. */
+      const limit = await allowTutorCall(req, { task });
+      if (!limit.ok) {
+        res.setHeader('Retry-After', '60');
+        res.status(limit.status).json({ error: limit.why });
         return;
       }
 

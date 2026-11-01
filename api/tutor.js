@@ -9,6 +9,7 @@
 // learner staring at a spinner has already stopped learning.
 
 import Anthropic from '@anthropic-ai/sdk';
+import { allowTutorCall } from './_limit.js';
 import { buildSystem, SHAPES, TASKS } from './prompt.js';
 
 export const maxDuration = 60;
@@ -75,6 +76,21 @@ export default async function handler(req, res) {
 
   const body = req.body && typeof req.body === 'object' ? req.body : {};
   const task = Object.hasOwn(TASKS, body.task) ? body.task : 'explain';
+
+  /* Who is asking, and have they had enough.
+
+     After the key check and before any model call, which is the only
+     ordering that works: a deployment with no key must still answer 501
+     rather than silently counting calls it never makes, and nothing may be
+     spent before this has said yes. See `_limit.js` for why the count lives
+     in the database and why this one fails closed for a stranger where the
+     sign up throttle fails open. */
+  const limit = await allowTutorCall(req, { task });
+  if (!limit.ok) {
+    res.setHeader('Retry-After', '60');
+    res.status(limit.status).json({ error: limit.why });
+    return;
+  }
   const shape = SHAPES[task] ?? SHAPES.explain;
 
   /* The same requirement as the queue route, from the same table, so the two

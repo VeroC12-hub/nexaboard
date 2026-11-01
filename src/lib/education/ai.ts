@@ -28,6 +28,7 @@
  */
 
 import type { Plan } from './plan'
+import { supabase } from '../supabase'
 import type { LearnerProfile } from './learner'
 import type { Question } from './course'
 
@@ -257,6 +258,27 @@ async function runToEnd(j: Job, signal?: AbortSignal, onStage?: (s: TutorStage) 
  * not a failure. A real failure throws, because falling through to the queue
  * after a genuine error would double the wait for the same bad request.
  */
+/**
+ * The headers the tutor call carries.
+ *
+ * The session token is attached when there is one, and that is the whole
+ * point: `/api/tutor` spends money, so it counts calls per caller, and a
+ * signed in learner gets several times the allowance of an unknown device
+ * because there is an account behind them that can be seen and suspended.
+ *
+ * Absence is normal rather than an error. A learner with no account is a
+ * supported case here, and they simply get the smaller allowance.
+ */
+async function tutorHeaders(): Promise<Record<string, string>> {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+  try {
+    const { data } = await supabase.auth.getSession()
+    const token = data?.session?.access_token
+    if (token) headers.Authorization = `Bearer ${token}`
+  } catch { /* no session, or no connection to ask. Anonymous it is. */ }
+  return headers
+}
+
 async function askDirect(
   j: Job,
   { onText, onStage }: TutorHandlers,
@@ -266,7 +288,7 @@ async function askDirect(
   try {
     res = await fetch('/api/tutor', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: await tutorHeaders(),
       signal,
       body: payload(j),
     })
@@ -325,7 +347,7 @@ async function askQueue(
 
   const res = await fetch('/api/queue', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: await tutorHeaders(),
     signal,
     body: payload(j),
   })
