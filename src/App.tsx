@@ -4,6 +4,7 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import { supabase } from './lib/supabase'
 import Landing from './pages/Landing'
 import Helper from './components/Helper'
+import Boundary from './components/Boundary'
 import type { User } from '@supabase/supabase-js'
 
 /**
@@ -78,6 +79,15 @@ function App() {
           well under a second, and a full screen spinner for that long reads
           as a fault. On a slow connection the bar keeps moving, which is
           the thing a learner needs to know. */}
+      {/* One boundary around the routes, inside the router.
+
+          Inside, because the recovery offered has to be able to navigate,
+          and because a boundary outside the router would replace the whole
+          application with an error page when one screen fails. Around the
+          routes rather than per route: a second boundary inside a screen is
+          worth adding only where part of it can fail independently, and no
+          screen has that shape yet. */}
+      <Boundary>
       <Suspense fallback={<div className="nx-route-loading" role="status" aria-label="Loading" />}>
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
@@ -135,6 +145,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       </Suspense>
+      </Boundary>
       {/* The helper, above every screen.
 
           Mounted here rather than inside each page because it is one

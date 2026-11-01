@@ -137,3 +137,53 @@ html, body, #root {
 @media (prefers-reduced-motion: reduce) {
   .nx-route-loading { animation: none; background-position: 50% 0; }
 }
+
+/* The crash screen. Plain, legible, and not styled like the rest of the app
+   on purpose: if a stylesheet or a theme is what failed, this still reads. */
+.nx-crash {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 15vh 24px 24px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #0f172a;
+}
+
+.nx-crash-head { margin: 0 0 12px; font-size: 24px; font-weight: 700; }
+
+.nx-crash-body { margin: 0 0 16px; font-size: 17px; line-height: 1.6; }
+
+.nx-crash-detail {
+  margin: 0 0 24px;
+  padding: 12px 14px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #334155;
+  word-break: break-word;
+}
+
+.nx-crash-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.nx-crash-btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nx-crash-btn.is-quiet { background: #e2e8f0; color: #0f172a; }
+
+@media (prefers-color-scheme: dark) {
+  .nx-crash { color: #e2e8f0; }
+  .nx-crash-detail { background: #1e293b; color: #cbd5e1; }
+  .nx-crash-btn.is-quiet { background: #334155; color: #e2e8f0; }
+}

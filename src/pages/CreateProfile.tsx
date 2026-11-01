@@ -25,7 +25,7 @@ import { useState } from 'react'
 import '../styles/nexaedu.css'
 import {
   APPROACHES, DEFAULT_PROFILE, DEPTHS, DIETS, EASES, FOOTINGS, GOALS, PERIODS,
-  STAGE_YEARS,
+  STAGE_YEARS, STAGES_OFFERED,
   WHEN_STUCK, newLearnerId,
   type Choice, type LearnerProfile, type Stage,
 } from '../lib/education/learner'
@@ -38,7 +38,9 @@ const STAGE_LABEL: Record<Stage, string> = {
   creche: 'Creche & KG', primary: 'Primary', jhs: 'JHS',
   shs: 'SHS', tvet: 'TVET', uni: 'University',
 }
-const STAGES: Stage[] = ['creche', 'primary', 'jhs', 'shs', 'tvet', 'uni']
+/* Only the stages that have lessons behind them. The list, and why TVET
+   and university are not on it, live in `learner.ts`. */
+const STAGES: Stage[] = STAGES_OFFERED
 
 const KINDS: { value: AccountKind; label: string; blurb: string }[] = [
   { value: 'learner', label: 'I am learning', blurb: 'One profile, yours for the whole journey.' },

@@ -12,6 +12,26 @@
 export type Stage = 'creche' | 'primary' | 'jhs' | 'shs' | 'tvet' | 'uni'
 
 /**
+ * The stages a learner may actually choose.
+ *
+ * TVET and university are in the type, have outlines, and are taught by
+ * nobody: 165 topics between them with not one written lesson, by the
+ * owner's decision to finish school first. Offering them on the sign up
+ * screen sells a subject that opens empty, which is the one failure a
+ * learner cannot work around and the one a paying parent will not forgive.
+ *
+ * They stay in `Stage` and stay in the curriculum screen, because a school
+ * may still outline them and because the lessons will be written. This list
+ * is only about what a learner is offered today, so when those lessons
+ * exist, the fix is to add the stage back here and nowhere else.
+ *
+ * Deliberately NOT reused in `transfer.ts`: that file encodes a profile by
+ * the index of its stage in its own list, so shortening the list there
+ * would silently rewrite every transfer code already in circulation.
+ */
+export const STAGES_OFFERED: Stage[] = ['creche', 'primary', 'jhs', 'shs']
+
+/**
  * The years within each stage.
  *
  * Kept per stage rather than as one long list, because asking a parent of a
