@@ -28,8 +28,20 @@ const texts = new Map<string, string>()
 
 for (const [who, over] of people) {
   const a = assemble(t, { ...base, ...over } as LearnerProfile)
+  /* Every word the learner actually reads, which is not only `text` and
+     `lines`. A worked example and an inline question are prose on the page,
+     and counting the page without them understates both the length and the
+     difference: two lessons could differ by three worked examples and be
+     reported as identical. */
   const prose = a.pieces
-    .map(p => p.text ?? (p.lines ? p.lines.join(' ') : ''))
+    .map(p => p.text
+      ?? (p.lines ? p.lines.join(' ') : null)
+      ?? (p.worked
+        ? [p.worked.ask, ...p.worked.steps, p.worked.answer].join(' ')
+        : null)
+      ?? (p.question
+        ? [p.question.ask, ...(p.question.options ?? []), p.question.teach].join(' ')
+        : ''))
     .filter(Boolean).join(' ')
   const words = prose.split(/\s+/).filter(Boolean).length
   console.log(`\n${who}`)

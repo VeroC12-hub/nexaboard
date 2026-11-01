@@ -216,7 +216,16 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     : null
   if (t.mechanism && !mechanism && !gist) why.push('the reasoning is left out because you are strong here and prefer to be doing')
 
-  const recap: Piece | null = t.recap && (catchingUp || shaky) && !gist
+  /* ── Why the gist keeps this and used to not ────────────────────────────
+     BRIEF dropped the recap along with everything else, and that was the
+     wrong cut. The learner who asks for the gist and is shaky is not asking
+     to be told less about the thing they are missing: they are asking for a
+     short page, and the one part a short page cannot do without is the thing
+     this topic stands on. Dropping it also made every BRIEF learner's lesson
+     the same page, which `personalisation-check.mts` measured at 100%
+     identical for two learners as different as somebody catching up and
+     somebody sitting an exam. */
+  const recap: Piece | null = t.recap && (catchingUp || shaky)
     ? { kind: 'recap', heading: 'First, the thing it stands on', text: t.recap }
     : null
   if (recap) why.push(catchingUp ? 'it starts further back because you are closing gaps' : 'it starts further back because you said you are shaky here')
@@ -228,27 +237,55 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
   }
 
   /* One worked example, at the level that suits them, not all of them. A page
-     of five worked examples is a page nobody finishes. */
+     of five worked examples is a page nobody finishes.
+     ── Except for DEEP, and that is what DEEP is for ──────────────────────
+     DEEP used to differ from FULL by one part, the extension, and nothing
+     else: same idea, same reasoning, same single example. Measured, the two
+     lessons were 89% the same sentences, so a learner who said they wanted
+     all of it was given the ordinary lesson with a paragraph on the end.
+     What somebody who wants all of it actually wants is the range: the
+     example at their level and the harder ones after it, which is the part
+     of a worked set that teaches how far the method stretches. So DEEP gets
+     up to three, ordered easiest first, and everybody else still gets the
+     one that suits them. */
   const wantLevel = startingLevel(p)
-  const pick = (t.worked ?? [])
+  const nearest = (t.worked ?? [])
     .slice()
-    .sort((a, b) => Math.abs(a.level - wantLevel) - Math.abs(b.level - wantLevel))[0]
-  const worked: Piece | null = pick
-    ? { kind: 'worked', heading: 'Worked example', worked: pick }
-    : null
+    .sort((a, b) => Math.abs(a.level - wantLevel) - Math.abs(b.level - wantLevel))
+  const picks = nearest
+    .slice(0, deep ? 3 : 1)
+    .sort((a, b) => a.level - b.level)
+  const workedAll: Piece[] = picks.map((w, i) => ({
+    kind: 'worked',
+    heading: i === 0
+      ? 'Worked example'
+      : i === picks.length - 1 ? 'And a harder one' : 'Another',
+    worked: w,
+  }))
+  const worked: Piece | null = workedAll[0] ?? null
+  /* The rest, placed after the first wherever the first goes. */
+  const workedMore: Piece[] = workedAll.slice(1)
+  if (workedMore.length) why.push('it works more than one through, because you asked for all of it')
 
   /* Traps are useful to everybody and required for somebody sitting an exam,
      which is the one goal that explicitly asks for the common trap. */
   /* Traps are cut from the gist. They are the longest part of most lessons
      and the least useful to somebody who only wants to know what the thing
      is. Anybody sitting an exam is not on BRIEF. */
-  const traps: Piece | null = t.traps?.length && !gist
+  /* Cut from the gist, with one exception that matters more than the rule.
+     Somebody revising for an examination and asking for the gist is asking
+     for the short version OF a revision page, and the one line they cannot
+     be sent in without is where the marks go. So they keep a single trap,
+     the first, which is the one the lesson author put first. */
+  const trapsWanted = gist ? (forExam ? t.traps?.slice(0, 1) : []) : t.traps
+  const traps: Piece | null = trapsWanted?.length
     ? {
       kind: 'traps',
       heading: forExam ? 'What loses marks' : 'Where it usually goes wrong',
-      lines: t.traps.map(x => `${x.mistake} ${x.why}`),
+      lines: trapsWanted.map(x => `${x.mistake} ${x.why}`),
     }
     : null
+  if (gist && traps) why.push('the one place marks go is kept, because you are revising')
 
   const extension: Piece | null = t.extension && (further || deep) && !gist
     ? { kind: 'extension', heading: 'Further than your class has gone', text: t.extension }
@@ -285,6 +322,7 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
       question ?? worked!,
       recap, idea, mechanism, method,
       question ? worked : null,
+      ...workedMore,
       traps, figure, extension,
     ].filter(Boolean) as Piece[]
   } else if (p.approach === 'SHOW_FIRST') {
@@ -292,7 +330,9 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     pieces = [
       recap,
       shows ? figure : null,
-      worked, idea, mechanism, method, traps,
+      worked, idea, mechanism, method,
+      ...workedMore,
+      traps,
       shows ? null : figure,
       question, extension,
     ].filter(Boolean) as Piece[]
@@ -302,7 +342,9 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     pieces = [
       recap,
       shows ? figure : null,
-      idea, mechanism, method, worked, traps,
+      idea, mechanism, method, worked,
+      ...workedMore,
+      traps,
       shows ? null : figure,
       question, extension,
     ].filter(Boolean) as Piece[]
