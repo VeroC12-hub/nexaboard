@@ -975,3 +975,19 @@
   font-size: 13.5px;
   color: var(--nx-ink-2);
 }
+
+/* Next, at the end of a lesson.
+
+   Set apart from the other two: practising and being retaught keep you on
+   this topic, and this is the one that moves. Truncated rather than wrapped,
+   because a topic title can be eight words and the button should stay a
+   button. */
+.nx-btn-next {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff;
+  background: var(--nx-ink);
+  border-color: var(--nx-ink);
+}

@@ -238,7 +238,7 @@ export default function Subjects({
     <div className="ne">
       <div className="ne-shell">
         <header className="ne-top">
-          <span className="ne-wordmark">NEXA<i>•</i>EDU</span>
+          <span className="ne-wordmark"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
           <span className="ne-mono" style={{ color: 'var(--ink-3)' }}>
             {profile.level}
           </span>

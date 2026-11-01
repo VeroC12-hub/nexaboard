@@ -426,7 +426,7 @@ export default function Front({ onStart, onArrive }: {
     <div className="ne ne-front">
       <div className="ne-desk">
         <header className="ne-top">
-          <span className="ne-wordmark">NEXA<i>•</i>EDU</span>
+          <span className="ne-wordmark"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
           <button className="ne-quiet-link" style={{ marginLeft: 'auto' }} onClick={onArrive}>
             I already have an ID
           </button>

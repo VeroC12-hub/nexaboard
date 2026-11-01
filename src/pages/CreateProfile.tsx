@@ -227,7 +227,7 @@ export default function CreateProfile({
         <header className="ne-top">
           <button className="ne-wordmark" onClick={onBack}
             style={{ background: 'none', border: 0, padding: 0, cursor: 'pointer' }}>
-            NEXA<i>•</i>EDU
+            <span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span>
           </button>
           <span className="ne-fineprint" style={{ marginLeft: 'auto' }}>
             Already have a profile?

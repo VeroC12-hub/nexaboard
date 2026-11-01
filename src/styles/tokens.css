@@ -34,6 +34,22 @@
    =========================================================================== */
 
 :root {
+  /* ── Learning-Pal ───────────────────────────────────────────────────────
+
+     The two colours of the logo, sampled from the file rather than guessed:
+     the blue of the left page and the orange of the right.
+
+     They are the identity, not the interface. The tier palette below was
+     built on an argument, that the four interfaces should differ by density
+     and temperature and never by hue, and swapping navy and gold for blue
+     and orange across every screen would throw that away to no purpose. So
+     these are used where the product says its own name: the wordmark, the
+     icon, the address bar, the shared link, and the one accent a brand new
+     visitor meets. */
+  --lp-blue: #2f88be;
+  --lp-blue-deep: #1f6894;
+  --lp-orange: #ec8833;
+  --lp-orange-deep: #c96f1f;
   /* Ink. One family, from the writing down to the faintest label. */
   --nx-ink: #14243a;
   --nx-ink-2: #46536b;
@@ -113,3 +129,28 @@
   --nx-sky-text: #2568ce;
   --nx-warm-text: #a35727;
 }
+
+/* The wordmark.
+
+   Two colours and a hyphen, the way the logo reads: Learning in the blue of
+   the left page, Pal in the orange of the right. Set in one place because it
+   appears on eight screens and drifting versions of a name is how a product
+   starts to look homemade. */
+.lp-mark {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.lp-mark b { color: var(--lp-blue); font-weight: 800; }
+.lp-mark i { color: var(--lp-orange); font-style: normal; font-weight: 800; }
+.lp-mark em { color: var(--lp-orange); font-style: normal; font-weight: 800; }
+
+/* On a dark band the blue goes muddy, so both halves lighten. */
+.nx-dark .lp-mark b,
+.ne-dark .lp-mark b { color: #7cc0e8; }
+.nx-dark .lp-mark i,
+.nx-dark .lp-mark em,
+.ne-dark .lp-mark i,
+.ne-dark .lp-mark em { color: #f6a95c; }

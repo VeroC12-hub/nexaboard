@@ -103,7 +103,7 @@ export default function Onboarding({ stage: initial, onDone, onBack }: Props) {
         <header className="ne-top">
           <button className="ne-wordmark" onClick={onBack}
             style={{ background: 'none', border: 0, padding: 0, cursor: 'pointer' }}>
-            NEXA<i>•</i>EDU
+            <span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span>
           </button>
           <button className="ne-quiet-link" style={{ marginLeft: 'auto' }}
             onClick={() => onDone(quickProfile(p.stage))}>
@@ -132,7 +132,7 @@ export default function Onboarding({ stage: initial, onDone, onBack }: Props) {
             </div>
 
             <div className="ne-bigcard-body">
-              <span className="ne-mono ne-bigcard-brand">NEXA<i>•</i>EDU</span>
+              <span className="ne-mono ne-bigcard-brand"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
 
               <input
                 className="ne-bigcard-name" autoFocus value={p.name}

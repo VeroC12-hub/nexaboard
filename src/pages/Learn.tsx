@@ -609,7 +609,7 @@ export default function Learn({
     <div className="nx">
       <div className="nx-page">
         <header className="nx-top">
-          <span className="nx-brand">NEXA<i>•</i>EDU</span>
+          <span className="nx-brand"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
           <span className="nx-mark">
             {/* Not uppercased. "INTEGRATED SCIENCE · JHS 2" is the same words
                 made harder to read, and at 360px it took three lines of the
@@ -860,6 +860,21 @@ function Lesson({
    */
   onOpenTopic?: (topicId: string) => void
 }) {
+  /**
+   * The topic that follows this one in this learner's year.
+   *
+   * Taken from the year rather than from the whole subject, because the
+   * next thing for an SHS 2 learner is the next SHS 2 topic and not the
+   * next line of the syllabus, which may belong to a year they have not
+   * reached. Null on the last topic, where the honest thing is to offer
+   * nothing rather than loop back to the beginning.
+   */
+  const next = useMemo(() => {
+    const mine = topicsFor(syllabus, level)
+    const at = mine.findIndex(t => t.id === topic.id)
+    return at >= 0 && at + 1 < mine.length ? mine[at + 1] : null
+  }, [syllabus, level, topic.id])
+
   const young = skin === 'kid'
 
   /**
@@ -2116,6 +2131,19 @@ function Lesson({
               {!young && onPlay && (
                 <button className="nx-btn nx-btn-quiet" onClick={onPlay}>
                   Play it instead
+                </button>
+              )}
+              {/* The topic after this one.
+
+                  Finishing a lesson used to end in a choice between
+                  practising and being taught it again, both of which keep
+                  you where you are. A learner working through a subject had
+                  to go back to the list and find their place in it, which is
+                  the one moment they are most likely to stop. */}
+              {!young && next && onOpenTopic && (
+                <button className="nx-btn nx-btn-next"
+                  onClick={() => onOpenTopic(next.id)}>
+                  Next: {next.title}
                 </button>
               )}
               {/* No "show me a picture" button any more. A lesson arrives

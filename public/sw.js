@@ -44,13 +44,13 @@
  * a learner ends up with their own stage offline and nobody else's.
  */
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL = `shell-${VERSION}`;
 const ASSETS = `assets-${VERSION}`;
 const VENDOR = `vendor-${VERSION}`;
 
 /** The least that has to be there for the app to start with no connection. */
-const SHELL_FILES = ['/', '/index.html', '/share-card.jpg', '/favicon.svg'];
+const SHELL_FILES = ['/', '/index.html', '/share-card.jpg', '/favicon.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {

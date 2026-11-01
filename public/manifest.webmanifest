@@ -1,13 +1,13 @@
 {
-  "name": "NexaBoard: Ghana's curriculum, taught",
-  "short_name": "NexaBoard",
+  "name": "Learning-Pal: Ghana's curriculum, taught",
+  "short_name": "Learning-Pal",
   "description": "Every stage from creche to SHS, with lessons that work offline and a tutor that answers at eleven at night.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#0a162e",
-  "theme_color": "#0a162e",
+  "background_color": "#ffffff",
+  "theme_color": "#2f88be",
   "lang": "en-GH",
   "categories": ["education"],
   "icons": [

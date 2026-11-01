@@ -763,7 +763,7 @@ export default function Study() {
     <div className="nx">
       <div className="nx-page">
         <header className="nx-top">
-          <span className="nx-wordmark">NEXA<span>•</span>EDU</span>
+          <span className="nx-wordmark"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
           <span className="nx-mark" style={{ letterSpacing: '0.1em' }}>
             {course.subject} · {profile.level}
           </span>
