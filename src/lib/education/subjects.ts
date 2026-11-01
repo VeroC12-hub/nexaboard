@@ -22,9 +22,16 @@ import { hasSyllabus, sizeOf, syllabusFor } from './syllabus'
 /* Loads every outline into the registry. Imported here because this is the
    module every screen already goes through to find out what there is to study. */
 import './library/syllabus'
-/* And the stored lessons, for the same reason: this is the module every screen
-   already goes through, so nothing else has to know the content files exist. */
-import './library/lessons'
+/* The stored lessons are NOT imported here, and that is deliberate.
+
+   They used to be, for the same reason the outlines are: this is the module
+   every screen goes through. The cost of that convenience was that every
+   visitor downloaded all of them, 3.9 MB of source and growing, before the
+   front page could paint. They are now loaded one stage at a time by
+   `library/lessons/load.ts`, from the learner surface, which knows the
+   stage and is allowed to wait. The outlines stay here: they are 441 KB,
+   they are what this module answers questions about, and every screen that
+   lists subjects needs them. */
 
 export interface Subject {
   id: string

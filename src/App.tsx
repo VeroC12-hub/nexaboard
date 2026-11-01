@@ -1,23 +1,41 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { supabase } from './lib/supabase'
 import Landing from './pages/Landing'
-import Auth from './pages/Auth'
-import Dashboard from './pages/Dashboard'
-import Session from './pages/Session'
-import Join from './pages/Join'
-import StudentSession from './pages/StudentSession'
-import SchoolApp from './pages/SchoolApp'
-import LearnerApp from './pages/LearnerApp'
-import Study from './pages/Study'
-import NotFound from './pages/NotFound'
-import Review from './pages/Review'
-import CurriculumPage from './pages/Curriculum'
 import Helper from './components/Helper'
-import LessonPreview from './pages/LessonPreview'
-import Front from './pages/Front'
 import type { User } from '@supabase/supabase-js'
+
+/**
+ * Every screen but the first is loaded when it is asked for.
+ *
+ * The build was one 5.4 MB chunk, 1.57 MB over the wire, and a visitor
+ * landing on the front page downloaded all of it: the whiteboard, the CAD
+ * viewer, the school console and, heaviest by far, the whole lesson library,
+ * which is 3.9 MB of source today and grows every time the cloud writes a
+ * block. On a Ghanaian data bundle that is the difference between trying the
+ * app and giving up on it, and it is paid before a single word is read.
+ *
+ * `Landing` stays statically imported because it is the first paint: lazy
+ * loading the page somebody is already looking at only adds a flash of
+ * fallback. Everything else goes behind `lazy`, so a chunk arrives when its
+ * route is entered and a parent on the front page never downloads SHS
+ * Physics.
+ */
+const Auth = lazy(() => import('./pages/Auth'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const Session = lazy(() => import('./pages/Session'))
+const Join = lazy(() => import('./pages/Join'))
+const StudentSession = lazy(() => import('./pages/StudentSession'))
+const SchoolApp = lazy(() => import('./pages/SchoolApp'))
+const LearnerApp = lazy(() => import('./pages/LearnerApp'))
+const Study = lazy(() => import('./pages/Study'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const Review = lazy(() => import('./pages/Review'))
+const CurriculumPage = lazy(() => import('./pages/Curriculum'))
+const LessonPreview = lazy(() => import('./pages/LessonPreview'))
+const Front = lazy(() => import('./pages/Front'))
+
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
@@ -55,6 +73,12 @@ function App() {
           error: { iconTheme: { primary: '#ef4444', secondary: '#f8fafc' } },
         }}
       />
+      {/* The fallback is deliberately quiet: a thin bar rather than a
+          spinner over a dark page. A chunk on a good connection arrives in
+          well under a second, and a full screen spinner for that long reads
+          as a fault. On a slow connection the bar keeps moving, which is
+          the thing a learner needs to know. */}
+      <Suspense fallback={<div className="nx-route-loading" role="status" aria-label="Loading" />}>
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
         <Route path="/auth" element={user ? <Navigate to="/dashboard" /> : <Auth />} />
@@ -110,6 +134,7 @@ function App() {
         <Route path="/curriculum" element={<CurriculumPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
       {/* The helper, above every screen.
 
           Mounted here rather than inside each page because it is one

@@ -11,7 +11,7 @@
  * than the syllabus's: what is going wrong comes before what is next.
  */
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   forgetHelperContext, setHelperContext,
@@ -26,6 +26,7 @@ import School from './School'
 import Subjects from './Subjects'
 import Tutor from '../components/Tutor'
 import SyllabusLearn from './Learn'
+import { loadLessons, lessonsReady, onLessonsLoaded } from '../lib/education/library/lessons/load'
 import { readinessOf, subjectById } from '../lib/education/subjects'
 import { subjectOfTopic, syllabusFor } from '../lib/education/syllabus'
 import KidApp from './KidApp'
@@ -250,6 +251,30 @@ export default function Study() {
     const s = loadSession()
     return s?.activeLearnerId ? attemptsFor(s.activeLearnerId) : []
   })
+
+  /**
+   * This learner's stage of the lesson library, fetched before any lesson is
+   * asked for.
+   *
+   * The library is split by stage and loaded on demand, because the whole of
+   * it was being downloaded by every visitor to the front page. This is the
+   * place that load belongs: a profile has been chosen, so the stage is
+   * known, and this screen is allowed to wait where a `useMemo` inside
+   * `Learn` is not.
+   *
+   * `loadLessons` never rejects, so this cannot leave a learner stuck on the
+   * loading bar. A chunk that fails to arrive leaves the registry empty for
+   * that stage and the topic is taught by the tutor from its outline, which
+   * is the same fallback as a topic nobody has written yet.
+   */
+  const stageReady = useSyncExternalStore(
+    onLessonsLoaded,
+    () => !profile || lessonsReady(profile.stage),
+  )
+
+  useEffect(() => {
+    if (profile) void loadLessons(profile.stage)
+  }, [profile])
 
   /**
    * Where the session says they belong, when the URL says nothing.
@@ -685,6 +710,13 @@ export default function Study() {
    * named, and a topic id that belongs to nothing, which still bounces.
    */
   const chosen = subjectById(profile.stage, addressed ?? profile.subjectId)
+  /* Wait for this stage's lessons before deciding what to serve. Without
+     this the registry is empty on the first visit to a course and every
+     topic falls back to the tutor, which looks to a learner like the written
+     lesson having disappeared. The bar is the same one route changes use. */
+  if (!stageReady) {
+    return <div className="nx-route-loading" role="status" aria-label="Loading lessons" />
+  }
   const written = chosen && readinessOf(profile.stage, chosen) === 'written'
     ? WRITTEN[`${profile.stage}:${chosen.id}` as keyof typeof WRITTEN] ?? null
     : null

@@ -30,8 +30,17 @@ Work in blocks of roughly seven to twelve topics, one subject at a time.
 ## Where lessons live
 
 One file per block in `src/lib/education/library/lessons/`, registered by a
-single import line in that folder's `index.ts`. The syllabus outlines are
-already complete for SHS and are not to be edited.
+single import line in **`src/lib/education/library/lessons/by-stage/shs.ts`**.
+
+Not `index.ts`. The library is now split by stage and loaded on demand, so
+`index.ts` only pulls in the four `by-stage` files and exists for the
+coverage scripts. A lesson registered there instead of in `by-stage/shs.ts`
+passes every check and is never served to a learner, which is the worst kind
+of mistake this repository can make: silent, and invisible to the person who
+made it.
+
+The syllabus outlines are already complete for SHS and are not to be
+edited.
 
 ## The shape of a lesson
 

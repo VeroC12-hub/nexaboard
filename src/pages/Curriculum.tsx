@@ -34,7 +34,7 @@
  * other thirty. `resolve` in `syllabus.ts` is what makes that true.
  */
 
-import { useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { useSchoolAuth } from '../lib/school/useSchoolAuth'
 import { can } from '../lib/school/permissions'
 import { idFor, keepCurriculum, schoolCurricula } from '../lib/education/curriculum-store'
@@ -43,6 +43,7 @@ import {
   allPending, allPendingOutlines, approveOutline,
 } from '../lib/education/generated-store'
 import { hasTaught } from '../lib/education/taught-registry'
+import { loadLessons, lessonsReady, onLessonsLoaded } from '../lib/education/library/lessons/load'
 import { allLearners, saveLearner } from '../lib/education/accounts'
 import { NATIONAL } from '../lib/education/syllabus'
 import { allTopics, type Syllabus } from '../lib/education/syllabus'
@@ -160,6 +161,16 @@ function Desk({ by }: { by: string }) {
   const [chosen, setChosen] = useState<string | null>(null)
   const [subject, setSubject] = useState('')
   const [stage, setStage] = useState<Stage>('primary')
+  /* The lessons for whichever stage is being looked at.
+
+     This screen asks `hasTaught` whether a topic already has a written
+     lesson, and uses the answer to decide what still needs generating. The
+     library is loaded one stage at a time now, so without this the answer is
+     no for everything and a head teacher is invited to generate several
+     hundred lessons that already exist. Nothing here waits on it: the list
+     renders at once and corrects itself when the chunk lands. */
+  const lessonsIn = useSyncExternalStore(onLessonsLoaded, () => lessonsReady(stage))
+  useEffect(() => { void loadLessons(stage) }, [stage])
   const [year, setYear] = useState('Basic 1')
   const [askedFor, setAskedFor] = useState('')
 
@@ -552,7 +563,7 @@ function Desk({ by }: { by: string }) {
                   {p.syllabus.subject} · {yearsOf(p.syllabus)}
                 </p>
                 {allTopics(p.syllabus).map(t => {
-                  const already = done.has(t.id) || hasTaught(t.id)
+                  const already = done.has(t.id) || (lessonsIn && hasTaught(t.id))
                   return (
                     <div
                       key={t.id}

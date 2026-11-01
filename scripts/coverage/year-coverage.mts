@@ -4,6 +4,14 @@ import { syllabusFor, allTopics } from '../../src/lib/education/syllabus'
 import { hasTaught } from '../../src/lib/education/taught-registry'
 import type { Stage } from '../../src/lib/education/learner'
 
+/* The whole lesson library, in one import.
+
+   The app loads lessons one stage at a time, so importing `subjects.ts` no
+   longer fills the registry the way it used to. A script runs in node with
+   no download to pay for and needs every stage, so it asks for all of them
+   explicitly. Without this line the counts below are silently zero. */
+import '../../src/lib/education/library/lessons/index'
+
 const STAGES: Stage[] = ['creche', 'primary', 'jhs', 'shs', 'tvet', 'uni']
 for (const stage of STAGES) {
   const years = new Map<string, { n: number, done: number }>()
