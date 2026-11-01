@@ -126,6 +126,26 @@ no detail that a four year old has to squint at. One idea per drawing.
 - Four to six rows is usually right. Twenty rows is a reference sheet and
   belongs in `extension` or nowhere.
 
+## The third pass: mathematics
+
+For JHS and SHS lessons only, and while you are in the file anyway.
+
+Those lessons spell their mathematics out in words, because the house style
+used to say the renderer showed plain text. It does not: lesson prose is set
+with KaTeX, and the words were costing the reader far more than the dollars
+would have. Convert the expressions as you go.
+
+    before   log base a of b equals c, and log(x to the n) is n log x
+    after    $\log_a b = c$, and $\log(x^n) = n\log x$
+
+The explanation around the expressions stays prose. "Add 7 to both sides" is
+a sentence. Creche, KG and primary keep words, because those lessons are
+read aloud to a child who cannot read. Captions, `alt` text and table cells
+keep words everywhere, for the same reason.
+
+If a conversion is not obvious, leave it. A lesson with some expressions set
+and some spelled out is still better than one with a broken equation in it.
+
 ## House style
 
 Unchanged from the lesson brief, and it still applies to anything you write,

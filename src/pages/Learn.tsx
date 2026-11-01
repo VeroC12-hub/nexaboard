@@ -25,7 +25,8 @@
 
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import '../styles/study.css'
-import Prose from '../components/Prose'
+import Prose, { Line } from '../components/Prose'
+import WorkedSteps from '../components/WorkedSteps'
 import { blocksOf } from '../components/blocks'
 import { readImage } from '../lib/education/lesson-blocks'
 import BlockAsk from '../components/BlockAsk'
@@ -1704,17 +1705,23 @@ function Lesson({
                         <thead>
                           <tr>
                             {piece.table.columns.map((c, j) => (
-                              <th key={j} scope="col">{c}</th>
+                              <th key={j} scope="col"><Line text={c} /></th>
                             ))}
                           </tr>
                         </thead>
                         <tbody>
                           {piece.table.rows.map((row, j) => (
                             <tr key={j}>
+                              {/* Through the maths renderer: a table of laws is
+                                  the one place a lesson is almost entirely
+                                  equations, and printing their source would
+                                  be worse than the paragraph it replaced. */}
                               {row.map((cell, k) => (
                                 k === 0
-                                  ? <th key={k} scope="row">{cell}</th>
-                                  : <td key={k}>{cell}</td>
+                                  ? <th key={k} scope="row"><Line text={cell} /></th>
+                                  : <td key={k} data-label={piece.table!.columns[k]}>
+                                      <Line text={cell} />
+                                    </td>
                               ))}
                             </tr>
                           ))}
@@ -1728,11 +1735,16 @@ function Lesson({
 
                   {piece.worked && (
                     <div className="nx-worked">
-                      <p className="nx-worked-ask">{piece.worked.ask}</p>
-                      <ol className="nx-worked-steps">
-                        {piece.worked.steps.map((st, j) => <li key={j}>{st}</li>)}
-                      </ol>
-                      <p className="nx-worked-answer">{piece.worked.answer}</p>
+                      <p className="nx-worked-ask"><Line text={piece.worked.ask} /></p>
+                      <WorkedSteps steps={piece.worked.steps} />
+                      {/* Labelled, because without it the answer reads as
+                          another numbered step: the steps are an ordered
+                          list and the answer sat directly under the last
+                          one in the same type. */}
+                      <p className="nx-worked-answer">
+                        <span className="nx-worked-label">Answer</span>
+                        <Line text={piece.worked.answer} />
+                      </p>
                     </div>
                   )}
 

@@ -16,8 +16,23 @@ function syllables(word: string): number {
   return Math.max(1, n)
 }
 
+/**
+ * Mathematics, removed before the prose is scored.
+ *
+ * Since the house style changed, a JHS or SHS lesson writes its equations
+ * as LaTeX in dollar signs, and LaTeX is not prose: `\log_a b = c` has no
+ * syllables a reader pronounces, and counting it as words makes a clear
+ * lesson look unreadable and an unreadable one look fine. A reader meets an
+ * equation as one object, so it is removed rather than approximated, and
+ * what is left is the sentence around it, which is the thing this check is
+ * actually about.
+ */
+const withoutMaths = (text: string) =>
+  text.replace(/\$\$[^$]*\$\$/g, ' ').replace(/\$[^$\n]*\$/g, ' ')
+
 /** Flesch-Kincaid grade: the US school year someone needs to read it. */
-function grade(text: string) {
+function grade(raw: string) {
+  const text = withoutMaths(raw)
   const sentences = text.split(/[.!?]+/).map(s => s.trim()).filter(Boolean)
   const words = text.split(/\s+/).map(w => w.replace(/[^A-Za-z'-]/g, '')).filter(Boolean)
   if (!sentences.length || !words.length) return null

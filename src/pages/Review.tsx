@@ -91,7 +91,9 @@ function Lesson({ t }: { t: Taught }) {
                 Level {w.level}. {w.ask}
               </p>
               <ol style={{ margin: '0 0 4px', paddingLeft: 22 }}>
-                {w.steps.map((s, j) => <li key={j}>{s}</li>)}
+                {w.steps.map((s, j) => (
+                  <li key={j}>{typeof s === 'string' ? s : `${s.math}${s.why ? `  (${s.why})` : ''}`}</li>
+                ))}
               </ol>
               <p style={{ margin: 0 }}>{w.answer}</p>
             </div>

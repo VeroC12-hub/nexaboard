@@ -137,9 +137,33 @@ Never use em dashes or en dashes in lesson prose. Commas, colons, or the word
 Apostrophes in lesson prose are the typographic character, written directly
 inside single quoted TypeScript strings. No escapes.
 
-Mathematics is written in words and plain ASCII, never LaTeX: "n(A union B)
-equals n(A) plus n(B) minus n(A intersect B)", "x squared", "the square root
-of 2". The renderer shows plain text.
+Mathematics is written as LaTeX inside dollar signs, and this REPLACES the
+earlier rule that said the opposite.
+
+The earlier rule said to spell everything out, on the grounds that the
+renderer shows plain text. That was wrong: lesson prose goes through
+`Prose`, which sets `$...$` with KaTeX, exactly as the tutor's own output is
+set. Spelling it out produced lines like "log(xy) is log x plus log y,
+log(x over y) is log x minus log y, log(x to the n) is n log x", which is
+the hardest kind of text to read and the reason the mathematics in this
+library is unreadable on a phone.
+
+So: `$x^2$`, `$\sqrt{2}$`, `$\log_a b = c$`, `$n(A \cup B) = n(A) + n(B) -
+n(A \cap B)$`. Display maths, for a result standing on its own line, goes
+in double dollars: `$$ax^2 + bx + c = 0$$`.
+
+Three qualifications.
+
+Ordinary prose stays prose. "Add 7 to both sides" is a sentence, not an
+equation, and wrapping it in dollars helps nobody. Use maths for the
+expressions and the equations, not for the explanation around them.
+
+Creche, KG and primary keep words. Those lessons are read aloud to a child
+who cannot read, and an equation in a spoken line is unreadable twice over.
+Everything from JHS upwards uses LaTeX.
+
+Captions, `alt` text and table cells keep words, for the same reason: they
+are read aloud or read by a screen reader.
 
 `mechanism` is the heart of each lesson and the part that cannot be
 skimped. It says why the method works and names the specific place marks are

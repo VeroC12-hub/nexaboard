@@ -228,6 +228,14 @@
      the same size, so both are set for it rather than inherited. */
   font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
   font-variation-settings: 'opsz' 14;
+  /* Stated, and the stylesheet now loads it.
+
+     The page asked for a normal weight and the font file only carried 600
+     and 700, so every paragraph of every lesson was set in a display serif
+     at semibold. That is the real reason a lesson looked like a slab: not
+     the length of the paragraphs but the weight of them, a whole screen of
+     text shouting at the same volume as its own headings. */
+  font-weight: 400;
   font-size: 17px;
   line-height: 1.78;
   max-width: 66ch;
@@ -647,3 +655,191 @@
 /* A table section needs no separate heading rule: the caption is the
    heading, and printing both repeats the same words twice. */
 .nx-piece.is-table .nx-piece-head { display: none; }
+
+/* "Answer", set small and quiet above the answer itself, so a worked example
+   reads as question, working, answer rather than as a list with a stray item
+   at the end. */
+.nx-worked-label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nx-ink-2);
+}
+
+/* Room under the lesson for the helper button.
+
+   The helper floats bottom right above every screen, and at the end of a
+   lesson it sat on top of the last paragraph: the one place a learner is
+   most likely to be reading carefully, covered by the button they would
+   press if they could not. */
+.nx-taught,
+.nx-lesson-body { padding-bottom: 88px; }
+
+/* A section heading carries more weight than the body it introduces. It was
+   16px against a 17px body, which made the structure of a long lesson
+   invisible: a reader scrolling for "Why it works" had nothing to catch. */
+.nx-piece-head {
+  font-size: 19px;
+  letter-spacing: -0.01em;
+}
+
+.nx-piece + .nx-piece { margin-top: 34px; }
+
+/* Air between paragraphs.
+
+   A lesson is read, not skimmed, and the gap between paragraphs is what
+   tells a reader that one thought has finished. 18px under a 30px line was
+   not enough to register as a break at all. */
+.sch-read .nx-lesson-p,
+.sch-read .nx-ai-p { margin-bottom: 26px; }
+
+.sch-read .nx-lesson-p:last-child,
+.sch-read .nx-ai-p:last-child { margin-bottom: 0; }
+
+/* ── working, one line at a time ───────────────────────────────────────────
+
+   A maths worked example is not a list of sentences, it is a column of
+   equations with reasons beside them, and it is read by running down the
+   left edge. So the number is small and out of the way, the mathematics is
+   the largest thing on the line, and the reason is secondary type under it.
+
+   The row scrolls on its own if an equation is wider than the phone, for the
+   same reason a table does: a long equation must not widen the lesson. */
+
+.nx-steps {
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.nx-step {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 0 10px;
+  padding: 12px 0;
+}
+
+.nx-step + .nx-step { border-top: 1px solid var(--nx-line); }
+
+.nx-step-n {
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.9;
+  color: var(--nx-ink-3, var(--nx-ink-2));
+  opacity: 0.75;
+}
+
+.nx-step-body { min-width: 0; }
+
+/* The equation. Left aligned rather than centred: a column of centred
+   equations cannot be scanned, because each one starts somewhere different. */
+.nx-step-math {
+  display: block;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--nx-ink);
+}
+
+.nx-step-math .katex-display { margin: 0; text-align: left; }
+.nx-step-math .katex-display > .katex { text-align: left; }
+
+.nx-step-why {
+  margin: 4px 0 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--nx-ink-2);
+}
+
+/* A step that is a sentence rather than an equation, inside an example that
+   has both. Set as ordinary text so it does not pretend to be working. */
+.nx-step-said {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--nx-ink);
+}
+
+/* An expression KaTeX could not read, shown as its source rather than as an
+   error, the same rule `Prose` follows. */
+.nx-step-raw {
+  display: block;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 15px;
+  color: var(--nx-ink);
+}
+
+/* Maths inside a table cell.
+
+   KaTeX sets its own font size relative to the text around it, which in a
+   table is smaller than body text, so without this the equations in a table
+   of laws come out noticeably smaller than the same equations in the
+   working above them. */
+.nx-table .katex { font-size: 1.05em; }
+.nx-table td, .nx-table th { white-space: normal; }
+
+/* A table on a phone.
+
+   Three columns of mathematics do not fit in 390px and never will. Side
+   scrolling a table is tolerable for numbers and poor for equations, because
+   the row heading scrolls away and the reader loses which law they are
+   looking at.
+
+   So below 560px each row becomes a small block: the row heading on its own
+   line, then one line per column with its heading in front of it. The table
+   is longer and it is readable, which is the right trade on the device most
+   of these learners own. */
+@media (max-width: 560px) {
+  .nx-table-wrap { overflow-x: visible; }
+
+  /* A caption inside a table whose rows have been turned into blocks keeps
+     `display: table-caption`, which makes it shrink to the width of a column
+     that no longer exists: the heading came out one word per line. */
+  .nx-table-cap { display: block; }
+
+  .nx-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+  .nx-table,
+  .nx-table tbody,
+  .nx-table tr,
+  .nx-table th,
+  .nx-table td { display: block; width: auto; }
+
+  .nx-table tbody tr { padding: 4px 0 10px; }
+  .nx-table tbody tr:nth-child(even) { background: var(--nx-cream); }
+  .nx-table tbody tr + tr { border-top: 1px solid var(--nx-line); }
+
+  .nx-table tbody th {
+    padding: 12px 16px 4px;
+    font-size: 16px;
+  }
+
+  .nx-table tbody td {
+    padding: 4px 16px;
+    border: 0;
+  }
+
+  /* The column heading, in front of the value it belongs to, so a row that
+     has lost its header row still says what each line is. */
+  .nx-table tbody td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 1px;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--nx-ink-2);
+    opacity: 0.8;
+  }
+
+  .nx-table tbody tr + tr th,
+  .nx-table tbody tr + tr td { border-top: 0; }
+}

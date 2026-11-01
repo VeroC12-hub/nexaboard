@@ -991,22 +991,66 @@ teach({
   },
 
   idea:
-    'The index laws: '
-    + 'multiplying powers of the same base adds the indices, '
-    + 'dividing subtracts them, '
-    + 'a power of a power multiplies them, '
-    + 'the index 0 gives 1, '
-    + 'a negative index gives the reciprocal, '
-    + 'and a fractional index is a root. '
-    + 'A logarithm answers the question "what index?". '
-    + 'log base a of b equals c means exactly a to the power c equals b. '
-    + 'The laws follow: '
-    + 'log(xy) is log x plus log y, '
-    + 'log(x over y) is log x minus log y, '
-    + 'log(x to the n) is n log x, '
-    + 'log of 1 is 0 in any base, '
-    + 'and log base a of a is 1. '
-    + 'The argument of a logarithm must be positive.',
+    'A logarithm is an index. '
+    + 'That is the whole topic in one sentence, and everything else follows '
+    + 'from it. '
+    + '$\\log_a b = c$ is another way of writing $a^c = b$, '
+    + 'so the question "what is $\\log_2 8$?" is the question '
+    + '"2 to what power is 8?". '
+    + 'Because a logarithm is an index, every index law has a logarithm law '
+    + 'standing behind it, which is why the table below has two columns '
+    + 'rather than two lists to learn. '
+    + 'One restriction has a reason worth knowing: '
+    + 'the argument of a logarithm must be positive, '
+    + 'because no power of a positive base is ever negative or zero.',
+
+  tables: [{
+    caption: 'Each index law, and the logarithm law that is the same fact',
+    columns: ['What you do', 'Index law', 'Logarithm law'],
+    rows: [
+      ['Multiply', '$a^m \\times a^n = a^{m+n}$', '$\\log(xy) = \\log x + \\log y$'],
+      ['Divide', '$a^m \\div a^n = a^{m-n}$', '$\\log\\frac{x}{y} = \\log x - \\log y$'],
+      ['Raise to a power', '$(a^m)^n = a^{mn}$', '$\\log(x^n) = n\\log x$'],
+      ['Nothing', '$a^0 = 1$', '$\\log_a 1 = 0$'],
+      ['The base itself', '$a^1 = a$', '$\\log_a a = 1$'],
+      ['Invert', '$a^{-n} = \\frac{1}{a^n}$', '$\\log\\frac{1}{x} = -\\log x$'],
+      ['Take a root', '$a^{1/n} = \\sqrt[n]{a}$', '$\\log\\sqrt[n]{x} = \\frac{1}{n}\\log x$'],
+    ],
+    note: 'Learn the left two columns and the right one is free.',
+  }],
+
+  figure: {
+    alt: 'The same fact written two ways: 2 to the power 3 equals 8 on the '
+      + 'left, and log base 2 of 8 equals 3 on the right, with arrows '
+      + 'showing that the index 3 in one is the answer in the other.',
+    svg: '<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="120" y="80" font-size="40" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<text x="146" y="58" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">3</text>'
+      + '<text x="200" y="80" font-size="40" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">= 8</text>'
+      + '<text x="470" y="80" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">log</text>'
+      + '<text x="516" y="90" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<text x="566" y="80" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">8 =</text>'
+      + '<text x="614" y="80" font-size="34" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">3</text>'
+      + '<path d="M170 44 C 300 10, 480 10, 600 48" stroke="#0f8a4d" '
+      + 'stroke-dasharray="5 5"/>'
+      + '<path d="M592 40 L600 50 L588 52" stroke="#0f8a4d"/>'
+      + '<text x="320" y="140" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the index is the answer</text>'
+      + '<text x="320" y="196" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">'
+      + 'one fact, two ways of writing it</text>'
+      + '<line x1="60" y1="222" x2="580" y2="222" stroke="currentColor" '
+      + 'stroke-opacity="0.25"/>'
+      + '</svg>',
+  },
 
   mechanism:
     'The sentence that makes this topic easy is that a logarithm IS an '
@@ -1063,33 +1107,40 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Evaluate log base 3 of 81.',
+      ask: 'Evaluate $\\log_3 81$.',
       steps: [
-        'Ask: 3 to what power is 81?',
-        '3, 9, 27, 81.',
+        { math: '\\log_3 81 = x', why: 'Name the answer first.' },
+        { math: '3^x = 81', why: 'A logarithm is an index. Write it as one.' },
+        { math: '3,\\; 9,\\; 27,\\; 81', why: 'Count the powers of 3 up to 81.' },
+        { math: 'x = 4', why: '81 is the fourth one.' },
       ],
-      answer: '4.',
+      answer: '$\\log_3 81 = 4$',
     },
     {
       level: 4,
-      ask: 'Simplify log 8 + log 5 - log 4, all base ten.',
+      ask: 'Simplify $\\log 8 + \\log 5 - \\log 4$, all base ten.',
       steps: [
-        'Adding logs multiplies: log 40.',
-        'Subtracting divides: log 10.',
-        'log base 10 of 10 is 1.',
+        { math: '\\log 8 + \\log 5 = \\log 40',
+          why: 'Adding logarithms multiplies the numbers.' },
+        { math: '\\log 40 - \\log 4 = \\log 10',
+          why: 'Subtracting divides them.' },
+        { math: '\\log_{10} 10 = 1',
+          why: 'The logarithm of the base itself is always 1.' },
       ],
-      answer: '1.',
+      answer: '$1$',
     },
     {
       level: 5,
-      ask: 'Solve 3 to the power x equals 20, to two decimal places.',
+      ask: 'Solve $3^x = 20$, to two decimal places.',
       steps: [
-        'The unknown is in the exponent, so take logs.',
-        'x log 3 = log 20.',
-        'x = log 20 / log 3.',
+        { math: '3^x = 20', why: 'The unknown is in the exponent, so no amount of algebra on the base will reach it.' },
+        { math: '\\log 3^x = \\log 20', why: 'Take logarithms of both sides.' },
+        { math: 'x\\log 3 = \\log 20',
+          why: 'The power law brings the exponent down. This is the whole purpose of the method.' },
+        { math: 'x = \\frac{\\log 20}{\\log 3}', why: 'Now it is linear in $x$.' },
+        { math: 'x = 2.73', why: 'To two decimal places.' },
       ],
-      answer: 'About 2.73. '
-        + 'Logarithms exist to bring an exponent down like this.',
+      answer: '$x = 2.73$',
     },
   ],
 

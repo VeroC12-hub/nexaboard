@@ -176,9 +176,86 @@ function plain(text: string): string[] {
       && lines.every(l => l.length <= 64 && /[.!?:]$/.test(l))
     if (script) { blocks.push(...lines); continue }
 
-    blocks.push(lines.join(' '))
+    blocks.push(...breathe(lines.join(' ')))
   }
   return blocks
+}
+
+/**
+ * Breaking a very long run of prose into paragraphs.
+ *
+ * ── Why this is needed, and why here ───────────────────────────────────────
+ *
+ * A stored lesson is written as one TypeScript string, sentence after
+ * sentence, with no blank lines anywhere: that is what the lesson files look
+ * like and there is no good way for them to look otherwise. The renderer
+ * split paragraphs on blank lines, found none, and produced one paragraph.
+ * The result on a phone is a three hundred word grey slab, which is the
+ * single biggest reason the library read as a wall of text.
+ *
+ * It is fixed here rather than in the content because it is a rendering
+ * decision, it fixes all 589 lessons at once including the ones the cloud
+ * writes tonight, and because paragraph breaks in a source string would be
+ * invisible to the person writing them.
+ *
+ * ── The rule ───────────────────────────────────────────────────────────────
+ *
+ * Only long runs are touched: under about forty words a paragraph is already
+ * a paragraph, and breaking it would make the page twitchy. Above that,
+ * break at sentence ends into chunks of roughly three to four sentences,
+ * which is the length a reader can hold.
+ *
+ * Two things it must not do. It must not split inside mathematics, because a
+ * full stop inside `$...$` is not the end of anything, and it must not split
+ * after an abbreviation, because `e.g.` is not a sentence end either. Both
+ * are guarded below. When in doubt it leaves the text alone: a long
+ * paragraph is a poor read, and a sentence cut in half is a broken one.
+ */
+const ABBREVIATION = /(?:^|\s)(?:[A-Z]|No|Mr|Mrs|Ms|Dr|Prof|St|Fig|eg|ie|etc|vs|approx)\.$/i
+
+/** Roughly how many characters of prose a paragraph should carry. */
+const PARAGRAPH = 320
+
+/** Below this, the text is already short enough to read in one go. */
+const LEAVE_ALONE = 480
+
+export function breathe(text: string): string[] {
+  if (text.length <= LEAVE_ALONE) return [text]
+
+  /* Sentence ends, but only outside mathematics. Walking the string is
+     clumsier than a regular expression and is the only way to know whether
+     a given full stop is inside a pair of dollars. */
+  const ends: number[] = []
+  let maths = false
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i]
+    if (c === '$') { maths = !maths; continue }
+    if (maths) continue
+    if (c !== '.' && c !== '?' && c !== '!') continue
+    /* A sentence end is followed by a space and then something that starts
+       one: a capital, a digit, or an opening quote. */
+    const after = text.slice(i + 1, i + 3)
+    if (!/^\s[A-Z0-9“‘"'(]/.test(after)) continue
+    if (ABBREVIATION.test(text.slice(Math.max(0, i - 12), i + 1))) continue
+    ends.push(i + 1)
+  }
+
+  if (ends.length < 3) return [text]
+
+  const out: string[] = []
+  let from = 0
+  for (const end of ends) {
+    if (end - from < PARAGRAPH) continue
+    out.push(text.slice(from, end).trim())
+    from = end
+  }
+  const rest = text.slice(from).trim()
+  if (!rest) return out.length ? out : [text]
+  /* A short tail is joined to the paragraph before it rather than left to
+     sit alone, which looks like a mistake. */
+  if (out.length && rest.length < 120) out[out.length - 1] += ' ' + rest
+  else out.push(rest)
+  return out.length ? out : [text]
 }
 
 /**

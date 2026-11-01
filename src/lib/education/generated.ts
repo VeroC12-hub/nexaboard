@@ -30,7 +30,7 @@
 import type { Provenance } from './capability'
 import type { Stage } from './learner'
 import type { Strand, SubStrand, Syllabus, Topic } from './syllabus'
-import type { LessonTable, Taught, Trap, Worked } from './taught'
+import type { LessonTable, Taught, Trap, Worked, WorkedStep } from './taught'
 import type { Question } from './course'
 import { cleanSvg } from './visuals'
 
@@ -176,7 +176,20 @@ function readWorked(v: unknown): Worked | null {
   const w = v as Record<string, unknown>
   const ask = str(w.ask)
   const answer = str(w.answer)
-  const steps = strList(w.steps)
+  /* Either shape: a sentence, or a line of mathematics with its reason. The
+     second is what a maths topic should produce, and the first is what every
+     lesson written before it did. */
+  const steps = (Array.isArray(w.steps) ? w.steps : [])
+    .map((raw): string | WorkedStep | null => {
+      if (typeof raw === 'string') return raw.trim() || null
+      if (!raw || typeof raw !== 'object') return null
+      const o = raw as Record<string, unknown>
+      const math = str(o.math)
+      if (!math) return null
+      const why = str(o.why)
+      return why ? { math, why } : { math }
+    })
+    .filter((x): x is string | WorkedStep => x !== null)
   /* A worked example with no steps is an answer, and an answer with no working
      is the one thing a worked example exists not to be. */
   if (!ask || !answer || !steps.length) return null

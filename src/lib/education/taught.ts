@@ -67,9 +67,35 @@ export interface Worked {
   /** 1 easiest to 5 hardest, matching the bands the adaptive model uses. */
   level: number
   ask: string
-  /** One line per step. Never skip the line that shows the substitution. */
-  steps: string[]
+  /**
+   * One step at a time.
+   *
+   * A step is either a sentence, as every lesson written so far has it, or a
+   * line of mathematics with the reason for it. The second form is what a
+   * learner actually needs from a maths topic and what a teacher writes on a
+   * board: the line changes, and beside it is why it changed.
+   *
+   * Written as sentences, the working disappears into prose. “Subtract 2x
+   * from both sides to get 3x minus 7 equals 8” asks a reader to find the
+   * equation inside the sentence, reconstruct it, and compare it with the one
+   * before. Set as `{ math, why }` the equation is on its own line, in
+   * mathematical notation, and the reason sits under it in smaller type, so
+   * the page can be followed down the left edge without reading a word.
+   *
+   * Both forms are allowed on purpose: 589 lessons are written in the first,
+   * and a step that genuinely is a sentence, “check the argument of every
+   * logarithm is positive”, should stay one.
+   */
+  steps: Array<string | WorkedStep>
   answer: string
+}
+
+/** One line of working: what the mathematics became, and why. */
+export interface WorkedStep {
+  /** The line itself, as LaTeX without the dollar signs: `3x = 15`. */
+  math: string
+  /** Why that line follows from the one above, in a few words. */
+  why?: string
 }
 
 /** A mistake people actually make, and what it comes from. */
