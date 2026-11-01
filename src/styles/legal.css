@@ -1,0 +1,53 @@
+/* The privacy notice and the terms.
+
+   Set as a document rather than as a screen of the app: one column, generous
+   measure, large type. These are the two pages somebody reads carefully and
+   often on a phone, sometimes to decide whether to trust the thing with
+   their child, so they are the wrong place to be clever with layout. */
+
+.lg-page {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 32px 20px 96px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #1e293b;
+  background: #fff;
+}
+
+.lg-nav { font-size: 15px; margin-bottom: 28px; }
+.lg-nav a { color: #2563eb; text-decoration: none; }
+.lg-nav a:hover { text-decoration: underline; }
+.lg-sep { color: #94a3b8; margin: 0 8px; }
+
+.lg-title { margin: 0 0 6px; font-size: 32px; line-height: 1.2; color: #0f172a; }
+.lg-updated { margin: 0 0 28px; font-size: 14.5px; color: #64748b; }
+.lg-lead { font-size: 18px; color: #0f172a; }
+
+.lg-page h2 {
+  margin: 34px 0 10px;
+  font-size: 20px;
+  line-height: 1.3;
+  color: #0f172a;
+}
+
+.lg-page p { margin: 0 0 14px; }
+.lg-page strong { color: #0f172a; }
+
+/* A placeholder nobody can miss. These are the parts only the owner can
+   state, and shipping with one still on the page should be embarrassing
+   rather than easy. */
+.lg-todo {
+  padding: 12px 14px;
+  border-left: 4px solid #d97706;
+  background: #fffbeb;
+  color: #78350f;
+  font-size: 15.5px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .lg-page { background: #0b1220; color: #cbd5e1; }
+  .lg-title, .lg-page h2, .lg-lead, .lg-page strong { color: #f1f5f9; }
+  .lg-todo { background: #27200c; color: #fcd34d; }
+}

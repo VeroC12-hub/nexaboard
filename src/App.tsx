@@ -36,6 +36,8 @@ const Review = lazy(() => import('./pages/Review'))
 const CurriculumPage = lazy(() => import('./pages/Curriculum'))
 const LessonPreview = lazy(() => import('./pages/LessonPreview'))
 const Front = lazy(() => import('./pages/Front'))
+const Privacy = lazy(() => import('./pages/Legal').then(m => ({ default: m.Privacy })))
+const Terms = lazy(() => import('./pages/Legal').then(m => ({ default: m.Terms })))
 
 
 function App() {
@@ -142,6 +144,11 @@ function App() {
             docs/NEXAEDU_OPEN_ISSUES.md. */}
         <Route path="/review" element={<Review />} />
         <Route path="/curriculum" element={<CurriculumPage />} />
+        {/* Reachable without an account and without a connection, because
+            somebody deciding whether to trust this with their child reads
+            them before signing up, not after. */}
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       </Suspense>

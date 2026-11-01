@@ -1253,3 +1253,29 @@
   .ne-slab { font-size: clamp(34px, 9vw, 46px); }
   .ne-work-body { min-height: 240px; }
 }
+
+/* The consent line above the sign up button.
+
+   Full size text, not fine print: it is a statement somebody is making about
+   themselves and about a child, and shrinking it would be a way of hoping it
+   is not read. The links open in a new tab so a half filled form is not lost
+   to reading the privacy notice. */
+.ne-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 18px 0 4px;
+  font-size: 15px;
+  line-height: 1.55;
+  cursor: pointer;
+}
+
+.ne-consent input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  accent-color: #2563eb;
+}
+
+.ne-consent a { color: #2563eb; }

@@ -99,6 +99,20 @@ export default function CreateProfile({
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  /**
+   * Who says this account may exist.
+   *
+   * A platform whose users are mostly children cannot let an account appear
+   * with nobody having said they are allowed to make it. Under the Data
+   * Protection Act the lawful basis for a child's data rests on the parent,
+   * guardian or school, and until this box there was no point at which
+   * anybody claimed to be one.
+   *
+   * Deliberately unticked. A box that arrives ticked records nothing except
+   * that the person did not untick it, which is worth nothing if it is ever
+   * questioned, and is not consent in any sense that matters.
+   */
+  const [consent, setConsent] = useState(false)
   const [busy, setBusy] = useState(false)
   const [problem, setProblem] = useState<string | null>(null)
 
@@ -150,6 +164,10 @@ export default function CreateProfile({
       return
     }
 
+    if (!consent) {
+      return setProblem('Please confirm you are eighteen or older, and that '
+        + 'you are the parent, guardian or school of any child you add.')
+    }
     if (!name.trim()) return setProblem(`${nameLabel} is needed, so you can sign back in.`)
     const pw = passwordProblem(password)
     if (pw) return setProblem(pw)
@@ -353,6 +371,21 @@ export default function CreateProfile({
           </div>
 
           {problem && <p className="ne-bad">{problem}</p>}
+
+          <label className="ne-consent">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={e => setConsent(e.target.checked)}
+            />
+            <span>
+              I am 18 or older, and I am the parent, guardian or school of
+              any child I add. I have read the{' '}
+              <a href="/privacy" target="_blank" rel="noreferrer">privacy notice</a>
+              {' '}and the{' '}
+              <a href="/terms" target="_blank" rel="noreferrer">terms</a>.
+            </span>
+          </label>
 
           <div className="ne-make-go">
             <button className="ne-btn ne-btn-go" disabled={busy} onClick={submit}>
