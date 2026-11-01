@@ -50,15 +50,68 @@ already complete for SHS and are not to be edited.
       traps: [{ mistake: string, why: string }],
       extension: string,
       figure: { alt: string, svg: string },
+      tables: [{
+        caption: string, columns: string[], rows: string[][], note?: string,
+      }],
       questions: [{
         id: string, ask: string, kind: 'choice' | 'numeric',
         options: string[], answer: string, teach: string, level: number,
       }],
     })
 
-`figure` is optional and belongs only where a picture genuinely carries the
-idea. `topicId` must match the syllabus id exactly or the address check
-fails.
+`topicId` must match the syllabus id exactly or the address check fails.
+
+## Pictures and tables are not optional any more
+
+This is the rule that changed most recently, and it is the most important one
+on the page. At the time it was written, 462 of 508 finished lessons were
+paragraphs and nothing else: 46 figures in the whole library and not one
+table. A learner opening any of them meets a wall of text, and in subjects
+that are mostly spatial, geometry, apparatus, maps, circuits, cells, graphs,
+the text is doing work a drawing would do better.
+
+**Every lesson you write now carries at least one of a figure or a table**,
+and most carry both. The test is not decoration, it is this: look at the
+`idea` and the `mechanism` you have written and ask whether any part of it is
+describing a shape, a position, a process with stages, or a set of values. If
+it describes a shape or a position, that part belongs in `figure`. If it
+lists values, properties, differences or forms, that part belongs in a table
+and should come out of the prose entirely.
+
+    tables: [{
+      caption: 'What each soil type does with water',
+      columns: ['Soil', 'Drainage', 'Holds nutrients', 'Best for'],
+      rows: [
+        ['Sandy', 'Very fast', 'Poorly', 'Cassava, groundnut'],
+        ['Clay', 'Very slow', 'Well', 'Rice in valley bottoms'],
+        ['Loam', 'Moderate', 'Well', 'Maize, vegetables'],
+      ],
+      note: 'Loam is the mixture, which is why it is the one farmers want.',
+    }]
+
+Rules for a table. Two columns at least and two rows at least, or it is a
+sentence written sideways. Every row the same length as `columns`. The first
+column is what the row is about, because it is rendered as the row heading.
+The `caption` is required and is a sentence, not a label: it is read aloud in
+place of the table for a learner on the spoken lesson, so "What each soil
+type does with water" and never "Table 1". Cells are plain text, short, no
+markup. Four to six rows is usually right; a table of twenty rows is a
+reference sheet and belongs in `extension` or nowhere.
+
+Rules for a figure. Hand written SVG, no external images, no fonts that may
+not exist, and a `viewBox` so it scales. Label the parts in the drawing
+itself, because a diagram whose labels live in the prose is two things the
+learner has to join up. `alt` is a full sentence describing what the drawing
+shows, not "diagram of a triangle": it is what a blind learner is given
+instead of the picture. Keep it plain: lines, circles, rectangles, text, one
+or two colours. The renderer strips anything executable, so a clever SVG will
+simply not appear.
+
+Check your block with:
+
+    npx tsx scripts/coverage/visual-coverage.mts shs
+
+Your subject must not be sitting at zero when you finish.
 
 Read `shs-maths-number.ts` in that folder before writing anything. It is the
 reference for SHS: match its register, its density and its house style. For a
@@ -116,6 +169,10 @@ From the repository root:
    `npx tsx scripts/coverage/_worst.mts "SHS 1" 40`.
 5. `npx tsx scripts/coverage/taught-coverage.mts` to confirm the block
    landed.
+6. `npx tsx scripts/coverage/visual-coverage.mts shs` to confirm the subject
+   you just wrote is not at zero figures and zero tables. This one reports
+   rather than fails, because failing it would block the whole library until
+   several hundred older lessons are backfilled, so it is on you to read it.
 
 Never commit a secret. `.env` and `.env.local` are ignored and stay that
 way; no key value is ever printed or committed. Check `git diff --cached`

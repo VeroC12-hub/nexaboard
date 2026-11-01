@@ -1682,6 +1682,50 @@ function Lesson({
                     ) : null
                   })()}
 
+                  {/* A table.
+
+                      Rendered as a real table element rather than as styled
+                      divs, because the element is what carries the meaning to
+                      anything that is not a pair of eyes: a screen reader
+                      announces the column a cell belongs to, and a learner on
+                      the spoken lesson gets the caption read in place of the
+                      grid. The cells are plain strings and React escapes
+                      them, so unlike the figure beside it there is nothing
+                      here to sanitise.
+
+                      The wrapper scrolls on its own. A six column table on a
+                      phone has to go somewhere, and the alternative, letting
+                      it widen the page, breaks every other lesson on the
+                      screen. */}
+                  {piece.table && (
+                    <div className="nx-table-wrap">
+                      <table className="nx-table">
+                        <caption className="nx-table-cap">{piece.table.caption}</caption>
+                        <thead>
+                          <tr>
+                            {piece.table.columns.map((c, j) => (
+                              <th key={j} scope="col">{c}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {piece.table.rows.map((row, j) => (
+                            <tr key={j}>
+                              {row.map((cell, k) => (
+                                k === 0
+                                  ? <th key={k} scope="row">{cell}</th>
+                                  : <td key={k}>{cell}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {piece.table.note && (
+                        <p className="nx-table-note">{piece.table.note}</p>
+                      )}
+                    </div>
+                  )}
+
                   {piece.worked && (
                     <div className="nx-worked">
                       <p className="nx-worked-ask">{piece.worked.ask}</p>

@@ -569,3 +569,81 @@
   gap: 10px;
   flex-wrap: wrap;
 }
+
+/* ── tables ────────────────────────────────────────────────────────────────
+
+   A table is the one part of a lesson that cannot be made narrower by
+   rewriting it, so the wrapper scrolls instead of the page. Without this a
+   six column table widens the whole lesson on a phone and every paragraph
+   beside it goes off the screen.
+
+   The first cell of each row is a row header, set bold, because that is what
+   the row is about and a reader scanning down the left edge is looking for
+   it. Alternating row shading rather than a grid of lines: fewer rules on the
+   page, and on a small screen the shading survives being scrolled sideways
+   while a left hand border does not. */
+
+.nx-table-wrap {
+  max-width: 62ch;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--nx-line);
+  border-radius: 12px;
+  background: var(--nx-paper, #fff);
+}
+
+.nx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--nx-ink-2);
+}
+
+.nx-table-cap {
+  caption-side: top;
+  text-align: left;
+  padding: 12px 16px 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--nx-ink);
+  border-bottom: 1px solid var(--nx-line);
+}
+
+.nx-table th,
+.nx-table td {
+  padding: 10px 16px;
+  text-align: left;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.nx-table thead th {
+  font-weight: 700;
+  color: var(--nx-ink);
+  background: var(--nx-cream);
+  border-bottom: 1px solid var(--nx-line);
+}
+
+.nx-table tbody th {
+  font-weight: 700;
+  color: var(--nx-ink);
+}
+
+.nx-table tbody tr + tr th,
+.nx-table tbody tr + tr td { border-top: 1px solid var(--nx-line); }
+
+.nx-table tbody tr:nth-child(even) { background: var(--nx-cream); }
+
+.nx-table-note {
+  margin: 0;
+  padding: 10px 16px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--nx-ink-3, var(--nx-ink-2));
+  border-top: 1px solid var(--nx-line);
+}
+
+/* A table section needs no separate heading rule: the caption is the
+   heading, and printing both repeats the same words twice. */
+.nx-piece.is-table .nx-piece-head { display: none; }

@@ -30,7 +30,7 @@
 import type { Provenance } from './capability'
 import type { Stage } from './learner'
 import type { Strand, SubStrand, Syllabus, Topic } from './syllabus'
-import type { Taught, Trap, Worked } from './taught'
+import type { LessonTable, Taught, Trap, Worked } from './taught'
 import type { Question } from './course'
 import { cleanSvg } from './visuals'
 
@@ -189,6 +189,37 @@ function readWorked(v: unknown): Worked | null {
   }
 }
 
+/**
+ * A table the tutor wrote.
+ *
+ * Rejected unless it is rectangular, because a ragged table is worse than no
+ * table: a row with a cell missing silently shifts every value after it into
+ * the wrong column, and the learner cannot see that it happened. Short rows
+ * are padded and long ones are cut rather than dropping the table, since a
+ * model that produced good data and miscounted one cell has still produced
+ * good data.
+ *
+ * A caption is required for the reason given on `LessonTable`: it is what a
+ * spoken lesson reads in place of the grid, so a table without one is
+ * inaudible rather than merely unlabelled.
+ */
+function readTable(v: unknown): LessonTable | null {
+  if (!v || typeof v !== 'object') return null
+  const t = v as Record<string, unknown>
+  const caption = str(t.caption)
+  const columns = strList(t.columns)
+  if (!caption || columns.length < 2) return null
+
+  const rows = (Array.isArray(t.rows) ? t.rows : [])
+    .map(r => strList(r))
+    .filter(r => r.length > 0)
+    .map(r => columns.map((_, i) => r[i] ?? ''))
+  /* One row is a sentence written sideways. */
+  if (rows.length < 2) return null
+
+  return { caption, columns, rows, ...(str(t.note) ? { note: str(t.note)! } : {}) }
+}
+
 function readTrap(v: unknown): Trap | null {
   if (!v || typeof v !== 'object') return null
   const t = v as Record<string, unknown>
@@ -256,6 +287,10 @@ export function readTaught(raw: string, topicId: string): Taught | null {
   const svg = figureRaw ? cleanSvg(String(figureRaw.svg ?? '')) : null
   const alt = figureRaw ? str(figureRaw.alt) : null
 
+  const tables = Array.isArray(obj.tables)
+    ? obj.tables.map(readTable).filter((t): t is LessonTable => t !== null)
+    : []
+
   const worked = Array.isArray(obj.worked)
     ? obj.worked.map(readWorked).filter((w): w is Worked => w !== null)
     : []
@@ -282,6 +317,7 @@ export function readTaught(raw: string, topicId: string): Taught | null {
     /* A figure needs both halves: the drawing, and the words a screen reader
        and a blind learner get instead of it. */
     ...(svg && alt ? { figure: { alt, svg } } : {}),
+    ...(tables.length ? { tables } : {}),
     ...(questions.length ? { questions } : {}),
   }
 }

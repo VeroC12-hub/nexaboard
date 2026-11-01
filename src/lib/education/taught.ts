@@ -133,7 +133,53 @@ export interface Taught {
   extension?: string
   /** What to draw, for a learner who is shown things rather than told them. */
   figure?: { alt: string, svg: string }
+  /**
+   * The parts of the lesson that are a table rather than a paragraph.
+   *
+   * ── Why this exists ─────────────────────────────────────────────────────
+   *
+   * Until this field there was nowhere in a lesson to put data, so everything
+   * tabular was written out as sentences: the properties of three soil types,
+   * the differences between two systems of government, a frequency
+   * distribution, the endings of a verb. Prose is the wrong shape for all of
+   * them. A reader comparing two things in a paragraph has to hold both in
+   * their head and do the comparing themselves, which is exactly the work a
+   * table does for them, and a learner scanning for one value has to read the
+   * whole thing.
+   *
+   * It is also what made the library read as a wall of text. A lesson is not
+   * improved by breaking prose into shorter paragraphs; it is improved by
+   * moving the parts that were never prose out of it.
+   *
+   * ── Why it is data and not markup ───────────────────────────────────────
+   *
+   * Cells are plain strings and the renderer escapes them, so a table cannot
+   * carry HTML, cannot carry a script, and cannot be styled differently from
+   * one lesson to the next. That keeps every table in the library looking the
+   * same, keeps it readable on a phone, and means a table can be read aloud,
+   * searched and checked by the coverage scripts in the same way as the rest
+   * of a lesson. `figure` takes an SVG because a diagram genuinely is a
+   * drawing; a table is not.
+   */
+  tables?: LessonTable[]
   questions?: Question[]
+}
+
+/**
+ * One table inside a lesson.
+ *
+ * `caption` is not decoration. It is read aloud in place of the table for a
+ * learner using the spoken lesson, it is the accessible name for a screen
+ * reader, and it is what makes a table that has scrolled out of view still
+ * make sense. Every table has one.
+ */
+export interface LessonTable {
+  caption: string
+  columns: string[]
+  /** One array per row, each the same length as `columns`. */
+  rows: string[][]
+  /** An aside under the table: a unit, a source, a caveat. */
+  note?: string
 }
 
 /* ── assembling one for a learner ─────────────────────────────────────────── */
@@ -141,7 +187,7 @@ export interface Taught {
 /** One piece of an assembled lesson, ready to render. */
 export interface Piece {
   kind: 'idea' | 'mechanism' | 'recap' | 'method' | 'worked' | 'traps'
-    | 'extension' | 'figure' | 'question'
+    | 'extension' | 'figure' | 'table' | 'question'
   heading: string
   /** Set for the prose kinds. */
   text?: string
@@ -149,6 +195,7 @@ export interface Piece {
   lines?: string[]
   worked?: Worked
   figure?: { alt: string, svg: string }
+  table?: LessonTable
   question?: Question
 }
 
@@ -300,6 +347,21 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     ? { kind: 'figure', heading: 'Picture it', figure: t.figure }
     : null
 
+  /**
+   * The tables.
+   *
+   * A learner who asked for the gist gets the first one and no more. That is
+   * not a trimmed version of the lesson: a table is usually the densest thing
+   * in it, so for somebody who wants the short form it is often the only part
+   * worth keeping, while a second and third table is the detail they said
+   * they did not want.
+   *
+   * The heading comes from the caption, because a column of sections all
+   * headed "Table" tells a reader nothing about which one to look at.
+   */
+  const tables: Piece[] = (gist ? (t.tables ?? []).slice(0, 1) : t.tables ?? [])
+    .map(table => ({ kind: 'table' as const, heading: table.caption, table }))
+
   /* One question inside the lesson, for somebody who learns by doing. The rest
      of the questions belong to practice, not here. */
   const first = (t.questions ?? [])
@@ -320,7 +382,7 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     why.push('it opens with something to try, because you learn from the mistake')
     pieces = [
       question ?? worked!,
-      recap, idea, mechanism, method,
+      recap, idea, mechanism, ...tables, method,
       question ? worked : null,
       ...workedMore,
       traps, figure, extension,
@@ -330,7 +392,7 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     pieces = [
       recap,
       shows ? figure : null,
-      worked, idea, mechanism, method,
+      worked, idea, mechanism, ...tables, method,
       ...workedMore,
       traps,
       shows ? null : figure,
@@ -342,7 +404,7 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     pieces = [
       recap,
       shows ? figure : null,
-      idea, mechanism, method, worked,
+      idea, mechanism, ...tables, method, worked,
       ...workedMore,
       traps,
       shows ? null : figure,
