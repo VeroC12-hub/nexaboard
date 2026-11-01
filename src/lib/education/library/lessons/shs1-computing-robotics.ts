@@ -522,13 +522,14 @@ teach({
   ],
 
   extension:
-    'A loop inside a loop multiplies the passes: '
-    + 'an outer loop of 3 holding an inner loop of 4 runs the inner body '
-    + '12 times. '
-    + 'Trace a nested loop by letting the inner one finish completely '
-    + 'before the outer counter moves, '
-    + 'and label the rows outer 1, inner 1 to 4, then outer 2, '
-    + 'or the table becomes unreadable and the marks go with it.',
+    'A loop inside a loop multiplies the passes. '
+    + 'An outer loop of 3 holding an inner loop of 4 '
+    + 'runs the inner body 12 times. '
+    + 'Trace it by letting the inner loop finish '
+    + 'before the outer counter moves. '
+    + 'Label the rows outer 1, inner 1 to 4, then outer 2. '
+    + 'Done any other way the table cannot be read, '
+    + 'and the marks go with it.',
 
   figure: {
     alt: 'Two flowcharts side by side. On the left, a selection: a diamond '
@@ -2116,16 +2117,15 @@ teach({
   ],
 
   extension:
-    'Speed is usually controlled by pulse width modulation '
-    + 'rather than by lowering the voltage. '
+    'Speed is usually set by pulse width modulation, '
+    + 'not by lowering the voltage. '
     + 'The supply is switched fully on and fully off '
-    + 'many hundreds of times a second, '
-    + 'and the fraction of the time it is on, called the duty cycle, '
-    + 'sets the average power. '
-    + 'The gain is efficiency: '
-    + 'a switch that is fully on or fully off wastes almost nothing, '
-    + 'while a resistor dropping the voltage turns the difference '
-    + 'into heat.',
+    + 'many hundreds of times a second. '
+    + 'The share of the time it is on is the duty cycle. '
+    + 'That share sets the average power. '
+    + 'The gain is efficiency. '
+    + 'A switch that is fully on or fully off wastes almost nothing. '
+    + 'A resistor that drops the voltage turns the difference into heat.',
 
   figure: {
     alt: 'Three shafts drawn side by side to compare the movement each '
