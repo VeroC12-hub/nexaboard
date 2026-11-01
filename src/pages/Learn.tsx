@@ -53,6 +53,7 @@ import { assemble } from '../lib/education/taught'
 import { askRetell } from '../lib/education/ai'
 
 import { taughtFor } from '../lib/education/taught-registry'
+import { ownTaughtFor } from '../lib/education/generated-store'
 import { mediumBrief } from '../lib/education/medium'
 import {
   leadsWith, localPlan, planIsStale, rank, readPlan, savePlan, savedPlan,
@@ -824,8 +825,17 @@ function Lesson({
    * year. See `taught.ts` for why that is parts rather than prose.
    */
   const stored = useMemo(() => {
-    const t = taughtFor(topic.id)
-    return t ? { taught: t, ...assemble(t, learner.profile) } : null
+    /* The shared library first, and a learner's own lesson only where it has
+       nothing. A lesson a person wrote and a teacher passed outranks one the
+       tutor wrote for one reader, so the order is not arbitrary.
+
+       `mine` travels with it because the two cannot be told apart later and
+       they must not be said the same way: one was checked by a teacher and
+       the other was not, and the screen says so either way. */
+    const shared = taughtFor(topic.id)
+    const t = shared ?? ownTaughtFor(topic.id, learner.profile.id)
+    if (!t) return null
+    return { taught: t, mine: !shared, ...assemble(t, learner.profile) }
     /* The profile is stable for the life of this screen, and a re-teach
        arrives as a new key rather than as a changed prop. */
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1501,13 +1511,15 @@ function Lesson({
               <p className="nx-fineprint nx-taught-why">
                 {retelling
                   ? 'Being written for you...'
-                  : 'Written for you from the lesson your teacher approved. '}
+                  : stored.mine
+                    ? 'Written for you from your own saved lesson. '
+                    : 'Written for you from the lesson your teacher approved. '}
                 {!retelling && (
                   <button
                     type="button"
                     className="nx-link"
                     onClick={() => setShowOriginal(true)}>
-                    Show me the approved words
+                    {stored.mine ? 'Show me the saved words' : 'Show me the approved words'}
                   </button>
                 )}
               </p>
@@ -1519,13 +1531,27 @@ function Lesson({
             <div className="nx-taught">
               {showOriginal && (
                 <p className="nx-fineprint nx-taught-why">
-                  This is the lesson as your teacher approved it.{' '}
+                  {stored.mine
+                    ? 'This is your saved lesson, as the tutor wrote it.'
+                    : 'This is the lesson as your teacher approved it.'}{' '}
                   <button
                     type="button"
                     className="nx-link"
                     onClick={() => setShowOriginal(false)}>
                     Back to yours
                   </button>
+                </p>
+              )}
+              {/* Quiet, and present whenever it is true.
+
+                  A learner reading their own saved lesson is reading
+                  something no teacher has checked, and they are entitled to
+                  know that without being warned at length about it. One
+                  line in the fine print, in the same place the other
+                  provenance lines go. */}
+              {!showOriginal && stored.mine && (
+                <p className="nx-fineprint nx-taught-why">
+                  Your own lesson, written by the tutor. No teacher has checked it.
                 </p>
               )}
               {stored.pieces.map((piece, i) => (

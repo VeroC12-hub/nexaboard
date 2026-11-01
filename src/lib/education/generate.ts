@@ -51,6 +51,15 @@ export async function generateTaught(
     /** The outcomes this topic stands on, so the recap names a real one. */
     builds?: string[]
     place?: string
+    /**
+     * The learner this lesson is for, when it is for one learner.
+     *
+     * Given, the lesson is theirs: kept against their id, served only to
+     * them, and theirs to accept or ask again for. Omitted, it is a school's
+     * and waits for a teacher, which is what every caller did before this
+     * existed and so is still the default.
+     */
+    forLearner?: string
   },
   signal?: AbortSignal,
 ): Promise<Taught> {
@@ -81,6 +90,9 @@ export async function generateTaught(
     at: new Date().toISOString(),
     curriculum: r.curriculum ?? NATIONAL,
     year: r.year,
+    ...(r.forLearner
+      ? { audience: 'PERSONAL' as const, forLearner: r.forLearner }
+      : {}),
   })
 
   return taught

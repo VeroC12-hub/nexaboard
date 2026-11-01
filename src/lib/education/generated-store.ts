@@ -31,6 +31,19 @@ import type { Taught } from './taught'
 const LESSONS = 'nexaedu_generated_lessons_v1'
 const OUTLINES = 'nexaedu_generated_outlines_v1'
 
+/**
+ * Who a generated lesson is for.
+ *
+ * SHARED is the school case this module was built for: a teacher generated a
+ * lesson for a class, and it waits for a teacher to read it before any child
+ * sees it.
+ *
+ * PERSONAL is one learner asking the tutor for a lesson for themselves. The
+ * difference is not a permission level, it is that there is nobody else in
+ * the room. See the note on `acceptOwn`.
+ */
+export type Audience = 'SHARED' | 'PERSONAL'
+
 /** What is known about a generated lesson besides the lesson itself. */
 export interface Pending {
   taught: Taught
@@ -40,10 +53,22 @@ export interface Pending {
   curriculum: string
   /** The year group it was written for, which a reviewer needs to judge it. */
   year: string
+  /**
+   * Whose lesson this is.
+   *
+   * Optional, and read as SHARED when missing, because every row written
+   * before this field existed was a school's.
+   */
+  audience?: Audience
+  /** The learner who asked for it. PERSONAL rows only, and required there. */
+  forLearner?: string
   /** Who approved it, and when. Absent until somebody has. */
   approvedBy?: string
   approvedAt?: string
 }
+
+/** A row's audience, with the default applied. */
+const audienceOf = (p: Pending): Audience => p.audience ?? 'SHARED'
 
 function read<T>(key: string, fallback: T): T {
   try {
@@ -60,11 +85,20 @@ function write(key: string, value: unknown) {
 
 export const allPending = (): Pending[] => read<Pending[]>(LESSONS, [])
 
-/** Everything still waiting to be read, newest first. */
+/**
+ * Everything still waiting for a teacher to read it, newest first.
+ *
+ * PERSONAL rows are excluded, and that exclusion is the point of this change
+ * rather than an optimisation. A learner's own lesson is not in a teacher's
+ * queue, because the learner is the only person who is going to read it and
+ * the only person it is for. Putting it here would ask a teacher to approve
+ * material for a child who is not theirs and has already read it.
+ */
 export const awaitingReview = (): Pending[] =>
-  allPending().filter(p => !p.taught.approved).reverse()
+  allPending().filter(p => audienceOf(p) === 'SHARED' && !p.taught.approved).reverse()
 
-export const reviewed = (): Pending[] => allPending().filter(p => p.taught.approved)
+export const reviewed = (): Pending[] =>
+  allPending().filter(p => audienceOf(p) === 'SHARED' && p.taught.approved)
 
 /**
  * Keep a freshly generated lesson.
@@ -77,12 +111,109 @@ export const reviewed = (): Pending[] => allPending().filter(p => p.taught.appro
  */
 export function keep(p: Pending): Pending[] {
   const rows = allPending()
-  const existing = rows.find(r => r.taught.topicId === p.taught.topicId)
+  /* Scoped by owner as well as by topic. A school's Photosynthesis and a
+     learner's own Photosynthesis are two different lessons for two different
+     readers, and the older code would have had the second silently replace
+     the first. */
+  const mine = (r: Pending) =>
+    r.taught.topicId === p.taught.topicId
+    && audienceOf(r) === audienceOf(p)
+    && r.forLearner === p.forLearner
+  const existing = rows.find(mine)
   if (existing?.taught.approved) return rows
-  const rest = rows.filter(r => r.taught.topicId !== p.taught.topicId)
-  const next = [...rest, p]
+  const next = [...rows.filter(r => !mine(r)), p]
   write(LESSONS, next)
   return next
+}
+
+/* ── a learner's own lessons ──────────────────────────────────────────────── */
+
+/**
+ * The lesson this learner asked the tutor for and then said was fine.
+ *
+ * ── Why this exists at all ──────────────────────────────────────────────────
+ *
+ * Approval was built for a school, and for a school it is right: a head
+ * teacher vouches for what their pupils are shown, so `taughtFor` refuses
+ * anything unread and the material waits.
+ *
+ * For somebody who subscribes on their own it was not a safeguard, it was a
+ * dead end. There is no teacher. The lesson they had just asked for went into
+ * a queue to be read by a person who does not exist, the topic fell back to
+ * the primer, and nothing would ever release it. The one case the approval
+ * gate could not describe was the case of one person learning by themselves.
+ *
+ * So for a personal lesson the learner is the approver, which is not a
+ * loosening of the rule but the same rule applied honestly: the person who
+ * vouches for the material is the person it is for. They read it, they can
+ * ask for it again until it suits them, and when they say it suits them it is
+ * saved and served back to them next time.
+ *
+ * What approval still does is gate sharing. A personal lesson never enters
+ * the registry the whole platform reads, so accepting it cannot put it in
+ * front of anybody else. That is why this is a lookup of its own rather than
+ * a relaxation of `taughtFor`.
+ */
+export function ownTaughtFor(topicId: string, learnerId: string): Taught | null {
+  const row = allPending().find(r =>
+    audienceOf(r) === 'PERSONAL'
+    && r.forLearner === learnerId
+    && r.taught.topicId === topicId
+    && r.taught.approved)
+  return row ? row.taught : null
+}
+
+/** The draft this learner is looking at but has not yet said yes to. */
+export function ownDraftFor(topicId: string, learnerId: string): Taught | null {
+  const row = allPending().find(r =>
+    audienceOf(r) === 'PERSONAL'
+    && r.forLearner === learnerId
+    && r.taught.topicId === topicId
+    && !r.taught.approved)
+  return row ? row.taught : null
+}
+
+/**
+ * Keep a lesson the tutor wrote for one learner, unaccepted.
+ *
+ * Replaces whatever draft was there, because asking again means the last one
+ * did not suit and keeping both would only ask the learner to choose between
+ * two things they did not want. An accepted lesson is left alone: saying yes
+ * is the deliberate act here, and regenerating must not quietly undo it.
+ */
+export function keepOwn(p: Omit<Pending, 'audience'> & { forLearner: string }): void {
+  keep({ ...p, audience: 'PERSONAL' })
+}
+
+/**
+ * The learner says this one suits them.
+ *
+ * The only thing that saves a personal lesson. Deliberately not `approve`:
+ * that word is a teacher's act with a teacher's consequences, and this one
+ * reaches nobody but the person who made it.
+ */
+export function acceptOwn(topicId: string, learnerId: string): boolean {
+  const rows = allPending()
+  const row = rows.find(r =>
+    audienceOf(r) === 'PERSONAL'
+    && r.forLearner === learnerId
+    && r.taught.topicId === topicId)
+  if (!row) return false
+  row.taught = { ...row.taught, approved: true }
+  row.approvedBy = learnerId
+  row.approvedAt = new Date().toISOString()
+  write(LESSONS, rows)
+  /* Not registered. The registry is what every learner on the device reads,
+     and this lesson is one person's. `ownTaughtFor` serves it instead. */
+  return true
+}
+
+/** The learner says it does not suit. Dropped, and the tutor can try again. */
+export function discardOwn(topicId: string, learnerId: string): void {
+  write(LESSONS, allPending().filter(r => !(
+    audienceOf(r) === 'PERSONAL'
+    && r.forLearner === learnerId
+    && r.taught.topicId === topicId)))
 }
 
 /**
@@ -177,6 +308,11 @@ export function loadApproved(): { lessons: number, outlines: number } {
   let lessons = 0
   for (const row of allPending()) {
     if (!row.taught.approved) continue
+    /* A personal lesson is served by `ownTaughtFor` to the one learner it
+       belongs to. Registering it here would hand one learner's material to
+       everybody who uses the device, which is the single thing accepting it
+       must not be able to do. */
+    if (audienceOf(row) === 'PERSONAL') continue
     if (isRegistered(row.taught.topicId)) continue
     teach(row.taught)
     lessons++
