@@ -14,7 +14,15 @@
          file: WhatsApp will not render an SVG, and a relative path resolves
          against the scraper rather than the site. -->
     <meta name="description" content="Ghana's curriculum, taught. Every stage from creche to SHS, with lessons that work offline and a tutor that answers at eleven at night." />
-    <meta name="theme-color" content="#2563eb" />
+    <meta name="theme-color" content="#0a162e" />
+
+    <!-- Installable, and the icons a home screen uses. Android crops to
+         whatever shape the launcher prefers, which is why there is a
+         maskable pair with the artwork inside the middle two thirds. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="NexaBoard" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="NexaBoard" />

@@ -57,6 +57,32 @@ void (async () => {
   } catch { /* The app is already running on what the device held. */ }
 })()
 
+/**
+ * Register the service worker, which is what makes a second visit work with
+ * no connection.
+ *
+ * After the render, never before: registration is a network fetch and the
+ * first paint must not wait on it. In development it is skipped and any
+ * worker left over from a production build on the same origin is removed,
+ * because a cached shell is the single most confusing thing that can happen
+ * while editing, serving yesterday's bundle while the editor shows today's.
+ *
+ * Failure is silent on purpose. A browser in private mode, or one with
+ * workers disabled by policy, simply gets the app without offline support,
+ * which is what every visitor had before this existed.
+ */
+if ('serviceWorker' in navigator) {
+  if (import.meta.env.PROD) {
+    window.addEventListener('load', () => {
+      void navigator.serviceWorker.register('/sw.js').catch(() => {})
+    })
+  } else {
+    void navigator.serviceWorker.getRegistrations()
+      .then(all => all.forEach(r => void r.unregister()))
+      .catch(() => {})
+  }
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
