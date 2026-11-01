@@ -231,7 +231,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
           try {
             audioCtxRef.current.createMediaStreamSource(remoteStream).connect(mixDestRef.current)
             connectedStreamsRef.current.add(peerCallId)
-          } catch { }
+          } catch { /* the peer went away mid negotiation */ }
         }
       }
 
@@ -619,7 +619,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
       osc.connect(gain)
       gain.connect(ctx.destination)
       osc.start()
-    } catch { }
+    } catch { /* already closed, or never opened */ }
 
     const onVisibility = () => {
       if (!localStreamRef.current) return
@@ -641,7 +641,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
     return () => {
       document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('pagehide', onVisibility)
-      try { osc?.stop(); ctx?.close() } catch { }
+      try { osc?.stop(); ctx?.close() } catch { /* already stopped */ }
     }
   }, [])
 
@@ -803,7 +803,7 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
             }).catch(() => {})
           }
         }
-      } catch { }
+      } catch { /* that track has ended */ }
     })
     screenSendersRef.current.clear()
 
@@ -825,7 +825,8 @@ export default function VideoCallNative({ sessionId, isTeacher, userId, displayN
 
     const connectStream = (id: string, stream: MediaStream) => {
       if (connectedStreamsRef.current.has(id)) return
-      try { ctx.createMediaStreamSource(stream).connect(dest); connectedStreamsRef.current.add(id) } catch { }
+      try { ctx.createMediaStreamSource(stream).connect(dest); connectedStreamsRef.current.add(id) }
+      catch { /* this stream carries no audio track */ }
     }
 
     if (localStreamRef.current) connectStream('local', localStreamRef.current)

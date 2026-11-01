@@ -991,3 +991,82 @@
   background: var(--nx-ink);
   border-color: var(--nx-ink);
 }
+
+/* ── what the lesson is made of ────────────────────────────────────────────
+
+   A strip of the part names, before the lesson starts. It is the cheapest
+   answer to "this is a wall of text": the wall is the same length, but a
+   reader can see it has five parts, which part they are in, and how to get
+   to the one they came back for.
+
+   Horizontally scrollable rather than wrapped, so on a phone it stays one
+   line and does not become a block of its own above the lesson. */
+
+.nx-contents {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 26px;
+  padding-bottom: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nx-contents::-webkit-scrollbar { display: none; }
+
+.nx-contents-item {
+  flex: 0 0 auto;
+  padding: 7px 13px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--nx-ink-2);
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid var(--nx-line);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.nx-contents-item:hover { color: var(--nx-ink); border-color: var(--nx-ink-2); }
+
+/* Jumping to a part should not put its heading under the top of the screen. */
+.nx-piece { scroll-margin-top: 16px; }
+
+/* ── traps, as the warnings they are ───────────────────────────────────── */
+
+/* They were a bulleted list in the same type as everything else, which is an
+   odd way to set the one section whose entire job is "this is where people
+   lose marks". Each is now its own card with a mark against it. */
+.nx-piece.is-traps .nx-piece-lines { list-style: none; padding-left: 0; }
+
+.nx-piece.is-traps .nx-piece-lines li {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 12px 14px 12px 40px;
+  background: #fff;
+  border: 1px solid var(--nx-line);
+  border-left: 3px solid #c8433a;
+  border-radius: 12px;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.nx-piece.is-traps .nx-piece-lines li::before {
+  content: '!';
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #c8433a;
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}

@@ -1767,8 +1767,29 @@ function Lesson({
                   </button>
                 </div>
               )}
+              {/* What this lesson is made of, before any of it.
+
+                  A lesson arrives as five or six parts and a learner
+                  meeting it for the first time cannot see that: they see
+                  the first paragraph and a scroll bar, which is what makes
+                  it read as a wall of text however well the parts are set.
+                  Naming them costs one line, turns the scroll into
+                  something with a shape, and gives anybody coming back to a
+                  topic a way to the part they actually wanted.
+
+                  Only when there are at least three, since listing two
+                  headings above two headings tells nobody anything. */}
+              {stored.pieces.length >= 3 && (
+                <nav className="nx-contents" aria-label="In this lesson">
+                  {stored.pieces.map((piece, i) => (
+                    <a key={i} className="nx-contents-item" href={`#lesson-part-${i}`}>
+                      {piece.heading}
+                    </a>
+                  ))}
+                </nav>
+              )}
               {stored.pieces.map((piece, i) => (
-                <section key={i} className={`nx-piece is-${piece.kind}`}>
+                <section key={i} id={`lesson-part-${i}`} className={`nx-piece is-${piece.kind}`}>
                   <h3 className="nx-piece-head">{piece.heading}</h3>
 
                   {piece.text && <Prose text={piece.text} className="nx-lesson-p" />}

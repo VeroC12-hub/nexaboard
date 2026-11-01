@@ -212,7 +212,7 @@ export default function CodeEditor({ sessionId, isTeacher, canEdit, participantI
     }
     setRunning(true)
     setOutput('Running...\n')
-    let result = ''
+    let result: string
     try {
       const py = await loadPyodide()
       py.runPython(`import sys, io\nsys.stdout = io.StringIO()\nsys.stderr = io.StringIO()`)

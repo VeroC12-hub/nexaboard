@@ -1441,7 +1441,7 @@ export default function RichTextEditor({
 
         {/* Text-to-speech — available to everyone */}
         <button
-          onMouseDown={e => { e.preventDefault(); speaking ? stopSpeaking() : speakContent() }}
+          onMouseDown={e => { e.preventDefault(); if (speaking) stopSpeaking(); else speakContent() }}
           title={speaking ? 'Stop reading' : 'Select text to read just that part, or read the whole document'}
           className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${speaking ? 'bg-[#1b2b4b] text-white border-[#1b2b4b]' : 'text-[#1b2b4b] bg-white border-green-200 hover:bg-[#f3fcf0]'}`}>
           {speaking ? <VolumeX size={13} /> : <Volume2 size={13} />}
