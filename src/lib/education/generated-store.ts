@@ -24,6 +24,9 @@
  */
 
 import { isRegistered, reteach, teach } from './taught-registry'
+import {
+  queueLesson, queueLessonGone, queueOutline,
+} from './review-sync'
 import { register } from './syllabus'
 import type { Syllabus } from './syllabus'
 import type { Taught } from './taught'
@@ -123,6 +126,7 @@ export function keep(p: Pending): Pending[] {
   if (existing?.taught.approved) return rows
   const next = [...rows.filter(r => !mine(r)), p]
   write(LESSONS, next)
+  queueLesson(p)
   return next
 }
 
@@ -203,6 +207,7 @@ export function acceptOwn(topicId: string, learnerId: string): boolean {
   row.approvedBy = learnerId
   row.approvedAt = new Date().toISOString()
   write(LESSONS, rows)
+  queueLesson(row)
   /* Not registered. The registry is what every learner on the device reads,
      and this lesson is one person's. `ownTaughtFor` serves it instead. */
   return true
@@ -214,6 +219,7 @@ export function discardOwn(topicId: string, learnerId: string): void {
     audienceOf(r) === 'PERSONAL'
     && r.forLearner === learnerId
     && r.taught.topicId === topicId)))
+  queueLessonGone(topicId, learnerId)
 }
 
 /**
@@ -232,6 +238,7 @@ export function approve(topicId: string, by: string): boolean {
   row.approvedBy = by
   row.approvedAt = new Date().toISOString()
   write(LESSONS, rows)
+  queueLesson(row)
   /* `reteach` and not `teach`: if this topic was already registered it is the
      same lesson in its unapproved form, and replacing it is the whole point of
      approving. A collision between two different lessons cannot arise here. */
@@ -248,6 +255,7 @@ export function approve(topicId: string, by: string): boolean {
  */
 export function reject(topicId: string): void {
   write(LESSONS, allPending().filter(r => r.taught.topicId !== topicId))
+  queueLessonGone(topicId)
 }
 
 /* ── outlines ─────────────────────────────────────────────────────────────── */
@@ -269,6 +277,7 @@ export function keepOutline(p: PendingOutline): void {
     `${r.syllabus.curriculum}:${r.syllabus.stage}:${r.syllabus.subjectId}` !== key
     || Boolean(r.approvedAt))
   write(OUTLINES, [...rest, p])
+  queueOutline(p)
 }
 
 /**
@@ -288,8 +297,79 @@ export function approveOutline(curriculum: string, stage: string, subjectId: str
   row.approvedBy = by
   row.approvedAt = new Date().toISOString()
   write(OUTLINES, rows)
+  queueOutline(row)
   register(row.syllabus)
   return true
+}
+
+/* ── what the server knows ───────────────────────────────────────────────── */
+
+/** The key a lesson is one of: a topic, for one audience, for one owner. */
+const lessonKey = (p: Pending) =>
+  `${audienceOf(p)}:${p.forLearner ?? ''}:${p.taught.topicId}`
+
+const outlineKey = (p: PendingOutline) =>
+  `${p.syllabus.curriculum}:${p.syllabus.stage}:${p.syllabus.subjectId}`
+
+/**
+ * Which of two copies of the same lesson to keep.
+ *
+ * Approval wins first, because it is the expensive fact and the one a person
+ * made deliberately: a device that has not heard about an approval must not
+ * undo it by being written later. Between two approved copies, or two
+ * unapproved ones, the newer wins.
+ */
+function newer(a: Pending, b: Pending): Pending {
+  if (Boolean(a.taught.approved) !== Boolean(b.taught.approved)) {
+    return a.taught.approved ? a : b
+  }
+  const at = (p: Pending) => p.approvedAt ?? p.at
+  return at(a) >= at(b) ? a : b
+}
+
+/**
+ * Fold the server's rows into the device's.
+ *
+ * A union and not a replacement, in both directions. The device may hold a
+ * lesson approved while the connection was down and not yet sent; the server
+ * may hold one approved on another device. Dropping either side would lose
+ * somebody's reading, so both are kept and `newer` decides the overlap.
+ *
+ * Nothing here deletes. A row the server does not have is a row that has not
+ * reached it yet, which is indistinguishable from a row that was deleted
+ * elsewhere, and of those two readings only one is safe.
+ */
+export function mergeFromServer(
+  lessons: Pending[],
+  outlines: PendingOutline[],
+): { lessons: number, outlines: number } {
+  const byKey = new Map<string, Pending>()
+  for (const row of allPending()) byKey.set(lessonKey(row), row)
+  for (const row of lessons) {
+    const key = lessonKey(row)
+    const have = byKey.get(key)
+    byKey.set(key, have ? newer(have, row) : row)
+  }
+  write(LESSONS, [...byKey.values()])
+
+  const outByKey = new Map<string, PendingOutline>()
+  for (const row of allPendingOutlines()) outByKey.set(outlineKey(row), row)
+  for (const row of outlines) {
+    const key = outlineKey(row)
+    const have = outByKey.get(key)
+    /* Same rule, with approval as the tie break: an approved outline is a
+       person's decision and outranks an unapproved copy of itself. */
+    if (!have) { outByKey.set(key, row); continue }
+    if (Boolean(have.approvedAt) !== Boolean(row.approvedAt)) {
+      outByKey.set(key, have.approvedAt ? have : row)
+    } else {
+      outByKey.set(key, (have.approvedAt ?? have.at) >= (row.approvedAt ?? row.at)
+        ? have : row)
+    }
+  }
+  write(OUTLINES, [...outByKey.values()])
+
+  return { lessons: byKey.size, outlines: outByKey.size }
 }
 
 /* ── putting the approved ones back on startup ────────────────────────────── */

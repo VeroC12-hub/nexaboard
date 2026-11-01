@@ -24,6 +24,7 @@
  */
 
 import { defineCurriculum, NATIONAL, type Curriculum } from './syllabus'
+import { queueCurriculum } from './review-sync'
 
 const CURRICULA = 'nexaedu_curricula_v1'
 
@@ -65,8 +66,34 @@ export function keepCurriculum(c: Curriculum): Curriculum | null {
   if (c.id === NATIONAL) return null
   const rest = schoolCurricula().filter(x => x.id !== c.id)
   write(CURRICULA, [...rest, c])
+  queueCurriculum(c)
   defineCurriculum(c)
   return c
+}
+
+/**
+ * Fold in the curricula this account has defined on its other devices.
+ *
+ * A union, like the one in `generated-store.ts` and for the same reason: a
+ * curriculum typed on a phone while the connection was down has not reached
+ * the server yet, and that is not distinguishable from one deleted elsewhere.
+ * The national one is refused here as it is everywhere else, so a row that
+ * claimed to be it could not take effect even if one existed.
+ *
+ * Each one is put into use as it lands, because that is what makes a school's
+ * subjects appear without a reload.
+ */
+export function mergeCurricula(rows: Curriculum[]): number {
+  const byId = new Map<string, Curriculum>()
+  for (const c of schoolCurricula()) byId.set(c.id, c)
+  for (const c of rows) {
+    if (c.id === NATIONAL) continue
+    byId.set(c.id, c)
+  }
+  const all = [...byId.values()]
+  write(CURRICULA, all)
+  for (const c of all) defineCurriculum(c)
+  return all.length
 }
 
 export function forgetCurriculum(id: string): void {

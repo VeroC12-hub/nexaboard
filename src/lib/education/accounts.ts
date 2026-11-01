@@ -139,7 +139,14 @@ const uuidMap = () => read<Record<string, string>>(IDS, {})
 const rememberUuid = (code: string, uuid: string) =>
   write(IDS, { ...uuidMap(), [code]: uuid })
 /** The database key for a learner, or null when this device has never synced. */
-const uuidFor = (code: string): string | null => uuidMap()[code] ?? null
+/**
+ * The database id for a learner code, if this device has seen one.
+ *
+ * Exported for `review-sync.ts`, which has the same problem every writer here
+ * has: learner ids in the app are the codes this module issues, and every
+ * foreign key is to `auth.users`.
+ */
+export const uuidFor = (code: string): string | null => uuidMap()[code] ?? null
 
 export function saveLearner(p: LearnerProfile) {
   const list = allLearners().filter(l => l.id !== p.id)
