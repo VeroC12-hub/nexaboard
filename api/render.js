@@ -32,6 +32,7 @@
 import { submit as localSubmit, poll as localPoll, LOCAL_TAG } from './render-local.js';
 import { submit as freeSubmit, poll as freePoll, FREE_TAG } from './render-free.js';
 import { submit as aiSubmit, poll as aiPoll, OPENAI_TAG } from './render-openai.js';
+import { submit as gSubmit, poll as gPoll, GOOGLE_TAG } from './render-google.js';
 
 const FAL = 'https://queue.fal.run';
 
@@ -42,6 +43,10 @@ const FAL = 'https://queue.fal.run';
  *           paid per render, needs FAL_KEY.
  *   openai  gpt-image, clean and billed per image, on its own list of models.
  *           See render-openai.js.
+ *   google  Gemini for images and Veo for clips, both on one Google AI
+ *           Studio key, which is the key most people in Ghana already
+ *           have. The only paid route that does video without a second
+ *           billing relationship. See render-google.js.
  *   free    real images from FLUX with no key and no bill, watermarked, and
  *           no video at all. See render-free.js for what it costs instead.
  *   local   a test double that makes no pictures. Offline and instant.
@@ -61,6 +66,10 @@ const FAL = 'https://queue.fal.run';
  *                               the account is out or the API is down.
  *   EDU_RENDERER=openai         no fallback, for judging quality honestly.
  *   EDU_RENDERER=fal            when FAL_KEY exists and video is wanted.
+ *   EDU_RENDERER=google,free    the one to use with a Google AI Studio
+ *                               key: Gemini pictures, Veo clips, and a
+ *                               watermarked picture rather than none when
+ *                               the free tier is spent for the day.
  *
  * A single value still works and still means exactly that one, so nothing
  * that was configured before behaves differently today.
@@ -105,7 +114,8 @@ function configured(res) {
     error: 'No renderer is configured for this deployment, so lessons have '
       + 'diagrams but no photographs or video. EDU_RENDERER=free gives real '
       + 'images with no key, EDU_RENDERER=openai gives clean images with '
-      + 'OPENAI_API_KEY, FAL_KEY gives images and video, and '
+      + 'OPENAI_API_KEY, EDU_RENDERER=google gives images and Veo clips '
+      + 'with GOOGLE_API_KEY, FAL_KEY gives images and video, and '
       + 'EDU_RENDERER=local gives placeholders for testing. The diagrams are '
       + 'drawn by the tutor itself and need none of them.',
   });
@@ -198,6 +208,10 @@ export default async function handler(req, res) {
         if (name === 'local') return { ...localSubmit(kind, prompt) };
         if (name === 'free') return freeSubmit(kind, prompt);
         if (name === 'openai') return await aiSubmit(kind, prompt);
+        /* Gemini for a picture, Veo for a clip, both on one key. The only
+           route here that can make a clip without a second billing
+           relationship. */
+        if (name === 'google') return await gSubmit(kind, prompt);
         if (name === 'fal') {
           if (!process.env.FAL_KEY) return { error: 'fal needs FAL_KEY.' };
           const model = MODELS[kind];
@@ -264,6 +278,11 @@ export default async function handler(req, res) {
           return;
         }
         res.status(200).json(await freePoll(id));
+        return;
+      }
+
+      if (id.startsWith(GOOGLE_TAG + '|')) {
+        res.status(200).json(await gPoll(id));
         return;
       }
 
