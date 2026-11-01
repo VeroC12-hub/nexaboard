@@ -843,3 +843,135 @@
   .nx-table tbody tr + tr th,
   .nx-table tbody tr + tr td { border-top: 0; }
 }
+
+/* ── a list of topics ──────────────────────────────────────────────────────
+
+   The old list was headings and sentences: nothing on the page said a row
+   could be opened, and people reported the topics as not clickable, which
+   is a fair description of something that looks like a paragraph. A row is
+   now a card with an arrow, it lifts on hover and presses in on tap, and
+   the strand above it is a quiet label rather than a title competing with
+   the rows for the first tap. */
+
+.nx-strand { margin-bottom: 30px; }
+
+.nx-strand-name {
+  margin: 0 0 4px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--nx-ink-2);
+}
+
+.nx-strand-purpose {
+  margin: 0 0 18px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--nx-ink-2);
+}
+
+.nx-topics { margin: 0 0 20px; padding: 0; list-style: none; }
+
+.nx-topic + .nx-topic { margin-top: 10px; }
+
+.nx-topic-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 16px 16px 18px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--nx-line);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color .12s ease, box-shadow .12s ease, transform .06s ease;
+}
+
+.nx-topic-btn:hover {
+  border-color: var(--nx-ink-2);
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.06);
+}
+
+/* Pressed, which on a phone is the only feedback there is: no hover state
+   exists, so without this a tap feels like nothing happened until the next
+   screen paints. */
+.nx-topic-btn:active { transform: scale(0.995); }
+
+.nx-topic-btn:focus-visible {
+  outline: 2px solid var(--nx-accent, #2563eb);
+  outline-offset: 2px;
+}
+
+.nx-topic-main { flex: 1 1 auto; min-width: 0; }
+
+.nx-topic-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+
+.nx-topic-title {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-weight: 600;
+  font-size: 17.5px;
+  line-height: 1.35;
+  color: var(--nx-ink);
+}
+
+.nx-topic-outcome {
+  display: block;
+  margin-top: 4px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--nx-ink-2);
+}
+
+.nx-topic-go { flex: 0 0 auto; color: var(--nx-ink-2); opacity: 0.6; }
+.nx-topic-btn:hover .nx-topic-go { opacity: 1; }
+
+/* ── the pager ─────────────────────────────────────────────────────────── */
+
+.nx-part-count {
+  margin: 0 0 14px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--nx-ink-2);
+}
+
+.nx-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 26px 0 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--nx-line);
+}
+
+.nx-pager-btn {
+  padding: 12px 20px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--nx-ink);
+  background: #fff;
+  border: 1px solid var(--nx-line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.nx-pager-btn.is-go {
+  color: #fff;
+  background: var(--nx-ink);
+  border-color: var(--nx-ink);
+}
+
+.nx-pager-btn:disabled { opacity: 0.35; cursor: default; }
+
+.nx-pager-where {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 13.5px;
+  color: var(--nx-ink-2);
+}

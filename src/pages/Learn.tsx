@@ -210,12 +210,24 @@ function TopicRow({ topic, done, onOpen }: {
 }) {
   return (
     <li className="nx-topic">
+      {/* The arrow is not decoration. The list had nothing on it that said
+          a row could be opened: the title was a heading, the outcome was a
+          sentence, and the only affordance was a cursor nobody on a phone
+          can see. People reported the topics as not clickable, which is a
+          fair description of a thing that looks like a paragraph. */}
       <button className="nx-topic-btn" onClick={() => onOpen(topic)}>
-        <span className="nx-topic-head">
-          <span className="nx-topic-title">{topic.title}</span>
-          {done && <span className="nx-topic-done">worked on</span>}
+        <span className="nx-topic-main">
+          <span className="nx-topic-head">
+            <span className="nx-topic-title">{topic.title}</span>
+            {done && <span className="nx-topic-done">worked on</span>}
+          </span>
+          <span className="nx-topic-outcome">{topic.outcome}</span>
         </span>
-        <span className="nx-topic-outcome">{topic.outcome}</span>
+        <svg className="nx-topic-go" viewBox="0 0 20 20" width="20" height="20"
+          aria-hidden="true">
+          <path d="M7 4 L13 10 L7 16" fill="none" stroke="currentColor"
+            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
     </li>
   )
@@ -377,6 +389,36 @@ export default function Learn({
   const everything = useMemo(() => allTopics(syllabus), [syllabus])
   const mine = useMemo(() => topicsFor(syllabus, profile.level), [syllabus, profile.level])
   const shown = wholeSubject ? everything : mine
+
+  /**
+   * The subject, cut into parts: one strand each, with its topics.
+   *
+   * Computed once rather than inside the render, because the pager needs to
+   * know how many parts there are before it can draw itself, and because an
+   * empty strand must not become an empty page somebody has to click past.
+   */
+  const parts = useMemo(() => syllabus.strands
+    .map(strand => ({
+      strand,
+      rows: strand.subStrands
+        .map(ss => ({ ss, topics: ss.topics.filter(t => shown.includes(t)) }))
+        .filter(r => r.topics.length),
+    }))
+    .filter(p => p.rows.length), [syllabus, shown])
+
+  const [partAt, setPartAt] = useState(0)
+
+  /* Showing the whole subject changes how many parts there are, so a learner
+     left on part five of five would land on an empty page. */
+  const lastPart = Math.max(0, parts.length - 1)
+  const atPart = Math.min(partAt, lastPart)
+
+  /* Moving to the next part starts it at the top. Keeping the scroll
+     position means arriving in the middle of a list that just changed under
+     you, which reads as the page having jumped. */
+  const toTop = useCallback(() => {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }) } catch { /* older browser */ }
+  }, [])
 
   /* Which topics they have already worked on, from their own attempts, so the
      outline shows progress without needing a separate record of it. */
@@ -614,17 +656,29 @@ export default function Learn({
             </button>
           </div>
 
-          {syllabus.strands.map(strand => {
-            const rows = strand.subStrands
-              .map(ss => ({ ss, topics: ss.topics.filter(t => shown.includes(t)) }))
-              .filter(r => r.topics.length)
-            if (!rows.length) return null
+          {/* One part at a time.
+
+              A subject put every strand, every sub strand and every topic on
+              one page, which for a full SHS subject is a scroll of forty
+              headings. A learner opening it cannot see what the subject is
+              made of, and the first thing they meet is the middle of
+              something. One strand per page with a pager makes the shape of
+              the subject visible and the page the length of a page. */}
+          {parts.length > 1 && (
+            <p className="nx-part-count">
+              Part {atPart + 1} of {parts.length}
+            </p>
+          )}
+
+          {parts.slice(atPart, atPart + 1).map(({ strand, rows }) => {
             return (
-              <section key={strand.id} style={{ marginBottom: 34 }}>
-                <h2 className="nx-display" style={{ fontSize: 22, margin: '0 0 4px' }}>
-                  {strand.name}
-                </h2>
-                <p className="nx-fineprint" style={{ margin: '0 0 16px' }}>{strand.purpose}</p>
+              <section key={strand.id} className="nx-strand">
+                {/* Set as a label rather than as a title. A big serif
+                    heading directly above a list of tappable rows reads as
+                    the first and most important of them, and tapping it
+                    does nothing. */}
+                <p className="nx-strand-name">{strand.name}</p>
+                <p className="nx-strand-purpose">{strand.purpose}</p>
                 {rows.map(({ ss, topics }) => (
                   <div key={ss.id} style={{ marginBottom: 18 }}>
                     <p className="nx-mark" style={{ margin: '0 0 8px' }}>{ss.name}</p>
@@ -650,6 +704,26 @@ export default function Learn({
               </section>
             )
           })}
+
+          {/* The pager. Next is the control a learner asked for and the one
+              every reading app has: it moves through the subject without
+              making them find their place in a scroll. */}
+          {parts.length > 1 && (
+            <nav className="nx-pager" aria-label="Parts of this subject">
+              <button className="nx-pager-btn" disabled={atPart === 0}
+                onClick={() => { setPartAt(Math.max(0, atPart - 1)); toTop() }}>
+                Back
+              </button>
+              <span className="nx-pager-where">
+                {atPart + 1} / {parts.length}
+              </span>
+              <button className="nx-pager-btn is-go"
+                disabled={atPart >= lastPart}
+                onClick={() => { setPartAt(Math.min(lastPart, atPart + 1)); toTop() }}>
+                Next part
+              </button>
+            </nav>
+          )}
         </div>
       </div>
     </div>
