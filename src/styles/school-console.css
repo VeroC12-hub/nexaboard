@@ -624,3 +624,46 @@
 
   .sk-manage { gap: 14px; }
 }
+
+/* ── the same affordances as the rest of the platform ──────────────────────
+
+   The console is staff facing, so it gets the restrained version rather than
+   the learner's card and arrow: these rows already are cards, and they carry
+   other controls on the right that an arrow would crowd.
+
+   What was missing is everything that says the name opens a student. There
+   was no hover on the row, no press anywhere, and no focus ring at all,
+   which matters more here than on a learner screen: a teacher working
+   through a class list with a keyboard had no way to see where they were. */
+
+.sk-row {
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.sk-row:hover {
+  border-color: var(--ink-soft);
+  box-shadow: 0 1px 8px rgb(15 23 42 / 0.05);
+}
+
+.sk-row-open { transition: transform 60ms ease; }
+
+/* The name underlines on hover, which is the oldest and least ambiguous
+   signal that a piece of text opens something. */
+.sk-row-open:hover .sk-row-name { text-decoration: underline; }
+
+.sk-row-open:active { transform: scale(0.995); }
+
+.sk-row-open:focus-visible,
+.sk-back:focus-visible {
+  outline: 2px solid var(--ink-soft);
+  outline-offset: 2px;
+}
+
+/* Keyboard focus on every other control in the console, which had none.
+   A staff tool is used by people who do not reach for the mouse. */
+.sk-tab:focus-visible,
+.sk-btn:focus-visible,
+.sk-chip:focus-visible {
+  outline: 2px solid var(--ink-soft);
+  outline-offset: 2px;
+}
