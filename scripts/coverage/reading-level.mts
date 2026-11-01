@@ -43,6 +43,11 @@ for (const stage of STAGES)
 
 /* What a child in each year can actually read, as a school grade. */
 const EXPECT: Record<string, number> = {
+  /* Creche and Nursery were missing, for the same reason JHS was: a year
+     group with no expectation here reads as a pass. Nobody in either year
+     can read at all, so the content is spoken to them and the number is 0,
+     which still catches a lesson written in paragraphs by mistake. */
+  'Creche': 0, 'Nursery': 0,
   'KG 1': 0, 'KG 2': 0, 'Basic 1': 1, 'Basic 2': 2, 'Basic 3': 3,
   'Basic 4': 4, 'Basic 5': 5, 'Basic 6': 6,
   /* JHS and SHS were missing, so the one JHS lesson written so far sat at
@@ -52,7 +57,25 @@ const EXPECT: Record<string, number> = {
   'SHS 1': 10, 'SHS 2': 11, 'SHS 3': 12,
 }
 
+/**
+ * Years where nothing is read by the learner at all.
+ *
+ * In Creche, Nursery and KG, every line is SPOKEN to the child, and the
+ * `mechanism` of those lessons is deliberately addressed to the adult doing
+ * the speaking: it is the sentence that says what the child is actually
+ * learning and what to do when it goes wrong. Measuring that against a
+ * three year old's reading level measures the wrong reader.
+ *
+ * So those mechanisms are scored separately, against an adult, rather than
+ * dropped. Dropping them would hide a lesson that had quietly been written
+ * in paragraphs, which is the thing this check exists to catch.
+ */
+const SPOKEN = new Set(['Creche', 'Nursery', 'KG 1', 'KG 2'])
+/** What an adult helper can comfortably read. */
+const ADULT = 9
+
 const rows: Array<{ year: string, id: string, part: string, g: number, wps: number }> = []
+const adultRows: typeof rows = []
 for (const t of allTaught()) {
   const year = yearOf.get(t.topicId) ?? '?'
   const parts: Array<[string, string]> = [['idea', t.idea]]
@@ -61,7 +84,10 @@ for (const t of allTaught()) {
   parts.push(['method', t.method.join(' ')])
   for (const [part, text] of parts) {
     const r = grade(text)
-    if (r) rows.push({ year, id: t.topicId, part, g: r.grade, wps: r.wordsPerSentence })
+    if (!r) continue
+    const row = { year, id: t.topicId, part, g: r.grade, wps: r.wordsPerSentence }
+    if (part === 'mechanism' && SPOKEN.has(year)) adultRows.push(row)
+    else rows.push(row)
   }
 }
 
@@ -85,3 +111,15 @@ for (const [year, rs] of [...byYear].sort()) {
     + `${worst.id}/${worst.part} ${worst.g.toFixed(1)}${flag}`)
 }
 console.log(`\n${over} year group(s) above what a child that age can read alone.`)
+
+/* The adult facing mechanisms of the spoken years, scored against an adult. */
+if (adultRows.length) {
+  const avg = adultRows.reduce((a, r) => a + r.g, 0) / adultRows.length
+  const worst = adultRows.reduce((a, r) => (r.g > a.g ? r : a))
+  const bad = adultRows.filter(r => r.g > ADULT)
+  console.log(
+    `\nspoken years: ${adultRows.length} adult facing mechanism(s), `
+    + `avg grade ${avg.toFixed(1)} against ${ADULT} for an adult helper, `
+    + `worst ${worst.id} ${worst.g.toFixed(1)}`)
+  for (const r of bad) console.log(`  TOO HARD for a helper: ${r.id} ${r.g.toFixed(1)}`)
+}
