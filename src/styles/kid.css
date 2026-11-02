@@ -210,6 +210,45 @@
 /* Five or more subjects wrap rather than shrinking below a tappable size. */
 .kid-tiles.is-many { row-gap: 12px; }
 
+/* Four subjects or fewer, which in practice means KG.
+
+   The grid is four across because primary has nine subjects and JHS has more,
+   and four columns is the only way to fit them in the panel. KG has exactly
+   four, and four across turned its picker into a row of 56px icons along the
+   top of a half empty panel: the smallest targets in the whole app, on the one
+   stage whose learners cannot read the labels and have the least accurate aim.
+   Two across gives each subject a quarter of the panel instead of a sixteenth,
+   and gives "Our World Our People" a line it fits on. */
+.kid-tiles.is-few {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.kid-tiles.is-few .kid-tile {
+  min-height: 0;
+  padding: 14px 6px;
+  gap: 10px;
+}
+
+.kid-tiles.is-few .kid-tile-art {
+  width: 84px;
+  height: 84px;
+  border-radius: 24px;
+}
+
+.kid-tiles.is-few .kid-tile-name {
+  font-size: 15px;
+  /* No reserved lines at all, unlike the four across grid.
+
+     The reservation exists there because eight tiles sit in one row, so a name
+     that takes a second line makes its tile taller than the seven beside it and
+     the row looks broken. Two across has rows: a name that wraps grows its own
+     row and the one tile sharing it, and the pictures stay aligned. Reserving
+     anything here just adds a blank line under every short name, which at this
+     size was 19px of nothing four times over. */
+  min-height: 0;
+}
+
 .kid-tile {
   font: inherit;
   border: 0;
@@ -925,6 +964,10 @@
 @media (max-width: 380px) {
   .kid-tiles { gap: 4px; padding: 10px 6px; }
   .kid-tile-art { width: 50px; height: 50px; }
+  /* Two across survives the smallest phone: four subjects on a 360px screen
+     are 165px wide here rather than 80px, which is the whole point. */
+  .kid-tiles.is-few { gap: 8px; }
+  .kid-tiles.is-few .kid-tile-art { width: 66px; height: 66px; }
   .kid-badges { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1139,6 +1182,21 @@
   .kid-tile-art { width: 64px; height: 64px; border-radius: 20px; }
 
   .kid-tile-name { font-size: 14.5px; }
+
+  /* The KG picker gets the room a laptop has. Four tiles across 600px of
+     panel are 110px of picture each, which is a target a four year old hits
+     with a trackpad. */
+  .kid-tiles.is-few { gap: 14px; padding: 20px 18px; }
+
+  .kid-tiles.is-few .kid-tile { min-height: 0; padding: 18px 8px; }
+
+  .kid-tiles.is-few .kid-tile-art {
+    width: 110px;
+    height: 110px;
+    border-radius: 30px;
+  }
+
+  .kid-tiles.is-few .kid-tile-name { font-size: 16px; }
 
   /* A list of 78px rows across 1040px is mostly empty row, so the lists go
      two across. Still one tap, still the whole row. */

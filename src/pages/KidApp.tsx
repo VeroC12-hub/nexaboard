@@ -119,7 +119,8 @@ function Home({ profile, subjects, standing, onOpen, carryOn, suggested, onSubje
 
       {/* The subjects, as pictures. Tapping one opens it here: there is no
           longer a separate Learn tab showing the same four tiles. */}
-      <div className={`kid-tiles${subjects.length > 4 ? ' is-many' : ''}`}>
+      <div className={`kid-tiles${
+        subjects.length > 4 ? ' is-many' : ' is-few'}`}>
         {subjects.map(sub => (
           <button key={sub.id} className="kid-tile" onClick={() => onSubject(sub.id)}>
             <span className="kid-tile-art"><Tile art={sub.art} /></span>
@@ -127,6 +128,52 @@ function Home({ profile, subjects, standing, onOpen, carryOn, suggested, onSubje
           </button>
         ))}
       </div>
+
+      {/* What to do next, under the thing you pick a subject with.
+
+          These two used to sit in the right hand column beneath the day's
+          progress, which put the child's two actions below the grown up's
+          report of them, and on a laptop left the whole field under the
+          picker empty. The split is now plain: this column is what a child
+          does, the one beside it is how it is going. */}
+      {carryOn && (
+        <>
+          <KidHead title="Carry on" />
+          <button
+            className="kid-row"
+            onClick={() => onOpen(carryOn.subject.id, carryOn.topic.id)}>
+            <span className="kid-row-art"><Tile art={carryOn.subject.art} size={36} /></span>
+            <span className="kid-row-body">
+              <span className="kid-row-title">{carryOn.topic.title}</span>
+              <span className="kid-row-sub">{carryOn.subject.name}</span>
+            </span>
+            <span className="kid-go" aria-hidden><Icon mark="play" size={18} /></span>
+          </button>
+        </>
+      )}
+
+      {suggested.length > 0 && (
+        <>
+          <KidHead title="Something new" />
+          <div className="kid-two">
+            {suggested.map(({ subject, topic }) => (
+              <button
+                key={topic.id}
+                className="kid-card"
+                onClick={() => onOpen(subject.id, topic.id)}>
+                {/* The character alone. A friend and a subject symbol in the
+                    same panel were two marks competing in 92 pixels; the
+                    subject is already named on the line below. */}
+                <span className="kid-card-art">
+                  <Pal who={subject.pal} size={68} mood="wave" />
+                </span>
+                <span className="kid-card-name">{topic.title}</span>
+                <span className="kid-card-sub">{subject.name}</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
 
         </div>
         <div className="kid-col is-side">
@@ -174,46 +221,6 @@ function Home({ profile, subjects, standing, onOpen, carryOn, suggested, onSubje
         <span className="kid-row-sub" style={{ marginTop: 0 }}>this week</span>
       </div>
 
-      {carryOn && (
-        <>
-          <KidHead title="Carry on" />
-          <button
-            className="kid-row"
-            onClick={() => onOpen(carryOn.subject.id, carryOn.topic.id)}>
-            <span className="kid-row-art"><Tile art={carryOn.subject.art} size={36} /></span>
-            <span className="kid-row-body">
-              <span className="kid-row-title">{carryOn.topic.title}</span>
-              <span className="kid-row-sub">{carryOn.subject.name}</span>
-            </span>
-            <span className="kid-go" aria-hidden><Icon mark="play" size={18} /></span>
-          </button>
-        </>
-      )}
-
-      {suggested.length > 0 && (
-        <>
-          <KidHead title="Something new" />
-          <div className="kid-two">
-            {suggested.map(({ subject, topic }) => (
-              <button
-                key={topic.id}
-                className="kid-card"
-                onClick={() => onOpen(subject.id, topic.id)}>
-                {/* A friend in the art panel, so this is not a pale block with
-                    a small symbol floating in the middle of it. */}
-                {/* The character alone. A friend and a subject symbol in the
-                    same panel were two marks competing in 92 pixels; the
-                    subject is already named on the line below. */}
-                <span className="kid-card-art">
-                  <Pal who={subject.pal} size={68} mood="wave" />
-                </span>
-                <span className="kid-card-name">{topic.title}</span>
-                <span className="kid-card-sub">{subject.name}</span>
-              </button>
-            ))}
-          </div>
-        </>
-      )}
         </div>
       </div>
     </>
