@@ -56,12 +56,8 @@ teach({
     + 'The ballots are counted at the polling station, '
     + 'in front of the parties’ agents. '
     + 'Then the Electoral Commission declares the result. '
-    + 'Several things keep an election honest. '
-    + 'An independent commission. '
-    + 'A secret ballot. '
-    + 'Agents and observers watching the count. '
-    + 'A published register. '
-    + 'And courts that will hear a dispute. '
+    + 'Several things around the vote are what keep it honest, '
+    + 'and each of them stops something particular. '
     + 'One more thing matters most of all. '
     + 'The losing side accepts the result, '
     + 'and power changes hands without violence.',
@@ -181,6 +177,93 @@ teach({
     + 'Those have the form of an election without the substance. '
     + 'So look at the safeguards, not only at the vote.',
 
+  figure: {
+    alt: 'The stages of an election drawn in order: register at eighteen, '
+      + 'campaign, vote by secret ballot, count at the polling station '
+      + 'with the parties’ agents watching, and the result declared. A '
+      + 'last arrow leads back to the hardest stage, the losing side '
+      + 'accepting the result and handing the country over, which happens '
+      + 'only when courts, a free press and a fixed next date make losing '
+      + 'survivable.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the vote is the middle of it, not the whole of it</text>'
+      + '<path d="M 20 60 H 128 V 110 H 20 Z"/>'
+      + '<text x="74" y="82" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">register</text>'
+      + '<text x="74" y="99" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">at eighteen</text>'
+      + '<path d="M 134 85 H 158" stroke-width="2"/>'
+      + '<path d="M 166 85 L 150 78 L 150 92 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 172 60 H 280 V 110 H 172 Z"/>'
+      + '<text x="226" y="90" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">campaign</text>'
+      + '<path d="M 286 85 H 310" stroke-width="2"/>'
+      + '<path d="M 318 85 L 302 78 L 302 92 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 324 60 H 432 V 110 H 324 Z" stroke="#0f8a4d"/>'
+      + '<text x="378" y="82" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">vote, by</text>'
+      + '<text x="378" y="99" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">secret ballot</text>'
+      + '<path d="M 438 85 H 462" stroke-width="2"/>'
+      + '<path d="M 470 85 L 454 78 L 454 92 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 476 60 H 620 V 110 H 476 Z" stroke="#0f8a4d"/>'
+      + '<text x="548" y="82" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">count at the station,</text>'
+      + '<text x="548" y="99" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">agents watching</text>'
+      + '<path d="M 548 110 V 134" stroke-width="2"/>'
+      + '<path d="M 548 142 L 541 126 L 555 126 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 440 144 H 620 V 190 H 440 Z"/>'
+      + '<text x="530" y="172" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the result is declared</text>'
+      + '<path d="M 436 167 H 400" stroke-width="2"/>'
+      + '<path d="M 392 167 L 408 160 L 408 174 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 200 144 H 388 V 190 H 200 Z" stroke="#0f8a4d"/>'
+      + '<text x="294" y="164" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">the losing side accepts it</text>'
+      + '<text x="294" y="182" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">and hands the country over</text>'
+      + '<text x="320" y="238" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">that last step is the hard one, and it happens</text>'
+      + '<text x="320" y="262" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">only when losing is survivable</text>'
+      + '<path d="M 60 286 H 580 V 384 H 60 Z" stroke-dasharray="7 6" stroke-width="2"/>'
+      + '<text x="320" y="310" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">so the things around the vote carry the weight:</text>'
+      + '<text x="320" y="334" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">courts that will hear your case,</text>'
+      + '<text x="320" y="356" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">a press that will still print what you say,</text>'
+      + '<text x="320" y="376" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and a fixed date when you may try again</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each safeguard, and what it is there to stop',
+      columns: ['Safeguard', 'What it stops', 'What happens without it'],
+      rows: [
+        [
+          'An independent commission',
+          'A government counting its own votes',
+          'A team refereeing the match it is playing in',
+        ],
+        [
+          'A secret ballot',
+          'Anybody knowing how you voted',
+          'Your vote can be bought, or punished',
+        ],
+        [
+          'Agents and observers at the count',
+          'Figures changed after the vote',
+          'Nobody outside can check the count',
+        ],
+        [
+          'A published register',
+          'Names added or removed quietly',
+          'No way to tell who was entitled to vote',
+        ],
+        [
+          'Courts that hear disputes',
+          'A grievance with nowhere to go',
+          'The street is the only route left',
+        ],
+        [
+          'A fixed date for the next one',
+          'Losing being final',
+          'The loser has nothing to wait for',
+        ],
+      ],
+      note: 'Read the last column down and it is one argument: each '
+        + 'safeguard is a reason the losing side can afford to accept the '
+        + 'result.',
+    },
+  ],
   questions: [
     {
       id: 'dem-1',
@@ -247,11 +330,8 @@ teach({
 
   idea:
     'Conflict is a serious disagreement between groups. '
-    + 'In Ghana the common causes are few and concrete. '
-    + 'Disputes over land and boundaries. '
-    + 'Contested chieftaincy succession. '
-    + 'Competition over water, grazing and mining land. '
-    + 'And grievances about unequal development. '
+    + 'In Ghana the common causes are few and concrete, '
+    + 'and every one of them is a thing that can be settled. '
     + 'Conflicts have been resolved in several ways. '
     + 'Elders and other chiefs mediate. '
     + 'Committees of inquiry are set up. '
@@ -382,6 +462,111 @@ teach({
     + 'A published rule for sharing royalties. '
     + 'Each of those removes a dispute before it has sides.',
 
+  figure: {
+    alt: 'A disputed succession to a stool drawn in red at the centre, with '
+      + 'one family on the left and another on the right, each pointing at '
+      + 'it. The note under them says they line up along family and town '
+      + 'because those are the lines that already existed. Below, a curfew '
+      + 'in red stops the fighting and leaves the dispute waiting, while a '
+      + 'determination of the rightful line in green settles the thing '
+      + 'itself.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">identity is the shape the conflict takes, not its cause</text>'
+      + '<path d="M 220 60 H 420 V 128 H 220 Z" stroke="#c8433a"/>'
+      + '<text x="320" y="86" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">the thing actually in dispute:</text>'
+      + '<text x="320" y="110" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">who succeeds to the stool</text>'
+      + '<circle cx="56" cy="88" r="12"/>'
+      + '<path d="M 56 100 V 122"/>'
+      + '<path d="M 44 110 H 68"/>'
+      + '<path d="M 56 122 L 47 142"/>'
+      + '<path d="M 56 122 L 65 142"/>'
+      + '<circle cx="96" cy="88" r="12"/>'
+      + '<path d="M 96 100 V 122"/>'
+      + '<path d="M 84 110 H 108"/>'
+      + '<path d="M 96 122 L 87 142"/>'
+      + '<path d="M 96 122 L 105 142"/>'
+      + '<circle cx="136" cy="88" r="12"/>'
+      + '<path d="M 136 100 V 122"/>'
+      + '<path d="M 124 110 H 148"/>'
+      + '<path d="M 136 122 L 127 142"/>'
+      + '<path d="M 136 122 L 145 142"/>'
+      + '<text x="96" y="162" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">one family</text>'
+      + '<path d="M 160 100 H 200" stroke-width="2"/>'
+      + '<path d="M 210 100 L 192 92 L 192 108 Z" fill="currentColor" stroke="none"/>'
+      + '<circle cx="504" cy="88" r="12"/>'
+      + '<path d="M 504 100 V 122"/>'
+      + '<path d="M 492 110 H 516"/>'
+      + '<path d="M 504 122 L 495 142"/>'
+      + '<path d="M 504 122 L 513 142"/>'
+      + '<circle cx="544" cy="88" r="12"/>'
+      + '<path d="M 544 100 V 122"/>'
+      + '<path d="M 532 110 H 556"/>'
+      + '<path d="M 544 122 L 535 142"/>'
+      + '<path d="M 544 122 L 553 142"/>'
+      + '<circle cx="584" cy="88" r="12"/>'
+      + '<path d="M 584 100 V 122"/>'
+      + '<path d="M 572 110 H 596"/>'
+      + '<path d="M 584 122 L 575 142"/>'
+      + '<path d="M 584 122 L 593 142"/>'
+      + '<text x="544" y="162" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the other</text>'
+      + '<path d="M 480 100 H 440" stroke-width="2"/>'
+      + '<path d="M 430 100 L 448 92 L 448 108 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="320" y="178" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">they line up along family and town because</text>'
+      + '<text x="320" y="196" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">those are the lines that already existed</text>'
+      + '<path d="M 20 220 H 300 V 304 H 20 Z" stroke="#c8433a"/>'
+      + '<text x="160" y="246" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">a curfew</text>'
+      + '<text x="160" y="270" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">stops the fighting, and the</text>'
+      + '<text x="160" y="290" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">dispute waits for it to lift</text>'
+      + '<path d="M 340 220 H 620 V 304 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="480" y="246" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">a determination of the line</text>'
+      + '<text x="480" y="270" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">settles the thing itself, and</text>'
+      + '<text x="480" y="290" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">there is nothing left to fight over</text>'
+      + '<text x="320" y="348" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so ask what is actually in dispute,</text>'
+      + '<text x="320" y="374" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">because that is the thing somebody can settle</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What is actually in dispute in each case, and what settles '
+        + 'it',
+      columns: [
+        'What is in dispute',
+        'How it looks from outside',
+        'What has actually settled it',
+      ],
+      rows: [
+        [
+          'Who succeeds to a stool',
+          'Two families at war',
+          'A determination of the rightful line',
+        ],
+        [
+          'Where a boundary runs',
+          'Two towns at war',
+          'A survey both sides accept',
+        ],
+        [
+          'Who may farm or graze the land',
+          'Farmers against herders',
+          'An agreement on use, written down',
+        ],
+        [
+          'Who gets what is under the land',
+          'One group against another',
+          'A share of the royalties settled and paid',
+        ],
+        [
+          'Unequal development',
+          'A region resenting the rest',
+          'Roads, schools and clinics that arrive',
+        ],
+      ],
+      note: 'A curfew is in none of these rows. It stops the fighting, '
+        + 'which is worth doing, and leaves the dispute exactly where it '
+        + 'was.',
+    },
+  ],
   questions: [
     {
       id: 'cfl-1',
@@ -458,14 +643,9 @@ teach({
     + 'Schooling and literacy. '
     + 'Access to clean water, electricity and health care. '
     + 'And how much of the work is skilled. '
-    + 'Ghana’s main obstacles are these. '
-    + 'Resources are exported raw rather than processed. '
-    + 'Roads are poor and power is unreliable. '
-    + 'There is corruption. '
-    + 'Debt has to be serviced. '
-    + 'A few export crops and minerals carry the economy, '
-    + 'and their prices move. '
-    + 'And trained people leave for other countries.',
+    + 'Ghana’s main obstacles are few, '
+    + 'and each one blocks a particular thing the country could '
+    + 'otherwise do.',
 
   mechanism:
     'The temptation is to define development as a list of things '
@@ -587,6 +767,81 @@ teach({
     + 'It is the stewardship argument from RME, '
     + 'put in the language of economics.',
 
+  figure: {
+    alt: 'On the left, in red, a skyline of tall buildings labelled as '
+      + 'borrowed for, leaving the look of the thing and the debt. On the '
+      + 'right, in green, a ticked list of what the people here can do: '
+      + 'feed themselves, treat their illnesses, teach their children, and '
+      + 'make things rather than only dig things up.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the tall buildings are a consequence, not a cause</text>'
+      + '<path d="M 24 54 H 300 V 240 H 24 Z" stroke="#c8433a"/>'
+      + '<path d="M 48 120 H 96 V 212 H 48 Z" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 108 86 H 156 V 212 H 108 Z" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 168 142 H 216 V 212 H 168 Z" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 228 178 H 276 V 212 H 228 Z" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 40 212 H 284" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="162" y="80" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">borrowed for</text>'
+      + '<text x="162" y="232" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">the look of it, and the debt</text>'
+      + '<path d="M 340 54 H 616 V 240 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="478" y="80" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">what the people here can do</text>'
+      + '<path d="M 362 100 L 372 112 L 392 90" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="404" y="110" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">feed themselves</text>'
+      + '<path d="M 362 134 L 372 146 L 392 124" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="404" y="144" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">treat their illnesses</text>'
+      + '<path d="M 362 168 L 372 180 L 392 158" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="404" y="178" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">teach their children</text>'
+      + '<path d="M 362 202 L 372 214 L 392 192" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="404" y="212" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">make things, not only</text>'
+      + '<text x="404" y="230" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">dig things up</text>'
+      + '<text x="320" y="292" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so the indicators are about people, not buildings:</text>'
+      + '<text x="320" y="318" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">how long they live, how many babies survive,</text>'
+      + '<text x="320" y="344" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">how many can read, whether the water is safe</text>'
+      + '<text x="320" y="380" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">income alone can rise while most people get nothing</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each obstacle, the thing it blocks, and what would move it',
+      columns: ['Obstacle', 'What it blocks', 'What would change it'],
+      rows: [
+        [
+          'Resources exported raw',
+          'Making things, not only digging them up',
+          'Processing here, so the wages are paid here',
+        ],
+        [
+          'Poor roads and unreliable power',
+          'Promising a customer a delivery date',
+          'Supply and roads a workshop can plan around',
+        ],
+        [
+          'Corruption',
+          'Getting a road for what it actually cost',
+          'Accounts that anybody may inspect',
+        ],
+        [
+          'Debt to be serviced',
+          'Spending this year’s taxes on this year',
+          'Borrowing only for what will earn',
+        ],
+        [
+          'A few crops and minerals carrying it',
+          'Surviving a fall in one price',
+          'More things to sell',
+        ],
+        [
+          'Trained people leaving',
+          'Treating and teaching people here',
+          'Work and pay worth staying for',
+        ],
+      ],
+      note: 'Not one of these is answered by feeling differently about it. '
+        + 'Each blocks something particular, which is what makes it '
+        + 'answerable.',
+    },
+  ],
   questions: [
     {
       id: 'dev-1',
@@ -656,14 +911,8 @@ teach({
     + 'and infant deaths have fallen. '
     + 'Migration within Ghana is mainly from the north to the south '
     + 'and from rural areas to the cities. '
-    + 'The push factors are '
-    + 'one short farming season, '
-    + 'poor soils in places, '
-    + 'few paid jobs, '
-    + 'and fewer schools and clinics. '
-    + 'The pull factors are '
-    + 'paid work, markets, schooling, health care, '
-    + 'and relatives already there. '
+    + 'Every such movement has two halves, a push and a pull, '
+    + 'and it needs both of them. '
     + 'The effects are crowded cities, pressure on housing, water and '
     + 'sanitation, '
     + 'and villages left with the very young and the old.',
@@ -784,6 +1033,86 @@ teach({
     + 'And trained people are lost, '
     + 'which the country feels as a cost.',
 
+  figure: {
+    alt: 'The same woman drawn three times. With a red push arrow behind '
+      + 'her and a green pull arrow ahead of her, she goes to Accra. With '
+      + 'the push alone there is nowhere to go, so she stays. With the '
+      + 'pull alone she is doing well where she is, so she stays.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">a push alone moves nobody, and so does a pull alone</text>'
+      + '<text x="20" y="118" font-size="15" text-anchor="start" fill="currentColor" stroke="none">a push and a pull</text>'
+      + '<path d="M 170 118 H 212" stroke="#c8433a"/>'
+      + '<path d="M 222 118 L 204 109 L 204 127 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="196" y="102" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">push</text>'
+      + '<circle cx="262" cy="96" r="13" stroke="currentColor"/>'
+      + '<path d="M 262 109 V 134" stroke="currentColor"/>'
+      + '<path d="M 248 120 H 276" stroke="currentColor"/>'
+      + '<path d="M 262 134 L 252 154" stroke="currentColor"/>'
+      + '<path d="M 262 134 L 272 154" stroke="currentColor"/>'
+      + '<path d="M 304 118 H 346" stroke="#0f8a4d"/>'
+      + '<path d="M 356 118 L 338 109 L 338 127 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="330" y="102" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">pull</text>'
+      + '<text x="510" y="124" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">she goes to Accra</text>'
+      + '<text x="20" y="228" font-size="15" text-anchor="start" fill="currentColor" stroke="none">a push only</text>'
+      + '<path d="M 170 228 H 212" stroke="#c8433a"/>'
+      + '<path d="M 222 228 L 204 219 L 204 237 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="196" y="212" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">push</text>'
+      + '<circle cx="262" cy="206" r="13" stroke="currentColor"/>'
+      + '<path d="M 262 219 V 244" stroke="currentColor"/>'
+      + '<path d="M 248 230 H 276" stroke="currentColor"/>'
+      + '<path d="M 262 244 L 252 264" stroke="currentColor"/>'
+      + '<path d="M 262 244 L 272 264" stroke="currentColor"/>'
+      + '<text x="510" y="234" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">nowhere to go, so she stays</text>'
+      + '<text x="20" y="338" font-size="15" text-anchor="start" fill="currentColor" stroke="none">a pull only</text>'
+      + '<circle cx="262" cy="316" r="13" stroke="currentColor"/>'
+      + '<path d="M 262 329 V 354" stroke="currentColor"/>'
+      + '<path d="M 248 340 H 276" stroke="currentColor"/>'
+      + '<path d="M 262 354 L 252 374" stroke="currentColor"/>'
+      + '<path d="M 262 354 L 272 374" stroke="currentColor"/>'
+      + '<path d="M 304 338 H 346" stroke="#0f8a4d"/>'
+      + '<path d="M 356 338 L 338 329 L 338 347 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="330" y="322" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">pull</text>'
+      + '<text x="510" y="344" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">doing well here, so she stays</text>'
+      + '<text x="320" y="394" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the north has one rainy season, so months with no farm work: that is the push</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The push and the pull, set against each other reason by '
+        + 'reason',
+      columns: [
+        'Reason',
+        'The push, where they leave',
+        'The pull, where they go',
+      ],
+      rows: [
+        [
+          'Work',
+          'Few paid jobs, and months with no farm work',
+          'Paid work, and markets to sell in',
+        ],
+        [
+          'Land',
+          'One short farming season, and poor soils in places',
+          'A living that does not wait on one rainy season',
+        ],
+        [
+          'Schooling',
+          'Fewer schools',
+          'Schools, and further ones after them',
+        ],
+        ['Health care', 'Fewer clinics', 'Hospitals and clinics'],
+        [
+          'People',
+          'Those who could have helped have gone already',
+          'Relatives already there to arrive to',
+        ],
+      ],
+      note: 'A migration needs a row to be true on both sides. A bad '
+        + 'harvest alone moves nobody who has nowhere to go.',
+    },
+  ],
   questions: [
     {
       id: 'pop-1',
