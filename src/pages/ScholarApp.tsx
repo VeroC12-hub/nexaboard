@@ -86,7 +86,7 @@ export default function ScholarApp({
    * all thirty three would be the same fault the subject chooser already had.
    */
   const papers = useMemo<Paper[]>(() => {
-    const allowed = timetableFor(profile.stage, profile.programme)
+    const allowed = timetableFor(profile.stage, profile.programme, profile.electives)
     return subjectsFor(profile.stage)
       .filter(s => !allowed || allowed.includes(s.id))
       .map(s => {
@@ -330,7 +330,7 @@ export default function ScholarApp({
               </p>
             )}
 
-            <Papers papers={papers} onOpen={onOpenSubject} />
+            <Papers papers={papers} onOpen={onOpenSubject} split />
           </div>
         ) : (
           <div className="sch-grid">
@@ -437,13 +437,40 @@ export default function ScholarApp({
 
 /* ── the pieces ───────────────────────────────────────────────────────────── */
 
-function Papers({ papers, empty, onOpen }: {
+function Papers({ papers, empty, onOpen, split }: {
   papers: Paper[]
   empty?: string
   onOpen: (subjectId: string, topicId?: string) => void
+  /**
+   * Core and elective under their own headings.
+   *
+   * A Ghanaian timetable is not one list of subjects, it is four everybody
+   * sits and the ones this learner chose, and a learner checking they have
+   * the right electives had to read a badge on every card to tell which was
+   * which. Off by default, because the short list on the dashboard reads
+   * better as one group.
+   */
+  split?: boolean
 }) {
   if (!papers.length) {
     return <p className="sch-none">{empty ?? 'No subjects have an outline for your year yet.'}</p>
+  }
+
+  if (split) {
+    const core = papers.filter(p => p.band !== 'elective')
+    const elective = papers.filter(p => p.band === 'elective')
+    /* Only when there is something in both. A list that is all core does
+       not need a heading saying so. */
+    if (core.length && elective.length) {
+      return (
+        <>
+          <p className="sch-band">Core, everybody sits these</p>
+          <Papers papers={core} onOpen={onOpen} />
+          <p className="sch-band">Your electives</p>
+          <Papers papers={elective} onOpen={onOpen} />
+        </>
+      )
+    }
   }
 
   return (

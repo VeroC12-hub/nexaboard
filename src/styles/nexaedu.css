@@ -1312,3 +1312,47 @@
   line-height: 1.6;
   color: var(--ink-2);
 }
+
+/* Choosing electives.
+
+   Checkboxes rather than a multi select, because a learner picking four
+   subjects from nine wants to see all nine at once and tick them, and a
+   multi select on a phone hides eight of them behind a tap. Wrapped chips
+   so the list stays two or three lines rather than nine. */
+.ne-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ne-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px 9px 11px;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.ne-pick:hover { border-color: var(--ink-2); }
+
+.ne-pick input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--green);
+}
+
+/* Chosen, and obviously so at a glance: a learner checking they have the
+   right four should not have to read nine checkbox states. */
+.ne-pick.is-on {
+  border-color: var(--green);
+  background: var(--nx-green-soft, #eaf5ee);
+  font-weight: 600;
+}

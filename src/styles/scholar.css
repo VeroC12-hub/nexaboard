@@ -545,3 +545,22 @@
   .sch-burger:active,
   .sch-who:active { transform: none; }
 }
+
+/* The heading over each band of subjects.
+
+   A Ghanaian timetable is four subjects everybody sits plus the ones this
+   learner chose, and the two were one undifferentiated grid where the only
+   clue was a badge on each card. A learner checking they have the right
+   electives should be able to find them by looking, not by reading
+   fourteen badges. */
+.sch-band {
+  margin: 26px 0 12px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.sch-band:first-child { margin-top: 0; }

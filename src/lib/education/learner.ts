@@ -190,6 +190,21 @@ export interface LearnerProfile {
    */
   programme: string | null
   /**
+   * The electives this learner actually sits, by subject id.
+   *
+   * The course decides what is ON OFFER; this is what they chose from it.
+   * General Science offers nine subjects between its own electives and the
+   * ones commonly taken alongside, and a learner sits four of them, so
+   * without this a science student's subject page is more than twice the
+   * length of their real timetable.
+   *
+   * Four is the normal number and more is allowed, because some schools let
+   * a strong learner add a fifth. Empty or absent means the course's whole
+   * list, which is what everybody had before this existed and what somebody
+   * who has not decided yet should see.
+   */
+  electives?: string[]
+  /**
    * Whose curriculum this learner follows.
    *
    * Absent for the great majority, who follow the national one, and

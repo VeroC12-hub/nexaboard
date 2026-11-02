@@ -134,9 +134,37 @@ export const asksProgramme = (stage: Stage): boolean => programmesFor(stage).len
  * alongside. Returns null where the stage has no courses, which means show
  * everything, which is correct for primary and junior high.
  */
-export function timetableFor(stage: Stage, programmeId: string | null | undefined): string[] | null {
+export function timetableFor(
+  stage: Stage,
+  programmeId: string | null | undefined,
+  /**
+   * The electives this learner actually chose, if they have.
+   *
+   * The course says what is on offer and this says what was taken. A
+   * science student is offered nine and sits four, so without it their
+   * subject page is more than twice their real timetable. Empty or absent
+   * falls back to the whole course, which is right for somebody who has
+   * not chosen yet and is what every profile made before this had.
+   *
+   * Anything chosen that the course does not offer is still honoured. A
+   * school that lets a science student add Geography has not made a
+   * mistake, and silently dropping it would be the app telling a learner
+   * they are not taking a subject they sit.
+   */
+  chosen?: string[] | null,
+): string[] | null {
   if (!asksProgramme(stage)) return null
   const p = programmeById(stage, programmeId)
   if (!p) return null
+  if (chosen && chosen.length) return [...SHS_CORE, ...chosen]
   return [...SHS_CORE, ...p.electives, ...(p.also ?? [])]
 }
+
+/** Everything a course puts on the table, electives and the usual additions. */
+export function electivesOffered(stage: Stage, programmeId: string | null | undefined): string[] {
+  const p = programmeById(stage, programmeId)
+  return p ? [...p.electives, ...(p.also ?? [])] : []
+}
+
+/** How many electives a learner normally sits. More is allowed; see below. */
+export const ELECTIVES_NORMALLY = 4

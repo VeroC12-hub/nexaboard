@@ -30,7 +30,8 @@ import {
   type Choice, type LearnerProfile, type Stage,
 } from '../lib/education/learner'
 import {
-  asksProgramme, programmeById, programmesFor,
+  asksProgramme, electivesOffered, ELECTIVES_NORMALLY, programmeById,
+  programmesFor,
 } from '../lib/education/programmes'
 import { subjectById } from '../lib/education/subjects'
 import {
@@ -355,13 +356,62 @@ export default function CreateProfile({
                     hint={electivesOf(p.stage, p.programme)}>
                     <Select
                       value={p.programme ?? ''}
-                      onChange={c => set('programme', c || null)}
+                      /* Changing course clears the electives with it. A
+                         science learner who switches to General Arts does
+                         not still sit Physics, and leaving the old picks in
+                         place would show her a timetable her school does
+                         not teach. */
+                      onChange={c => setP(d => ({
+                        ...d, programme: c || null, electives: [],
+                      }))}
                       options={[
                         { value: '', label: 'All subjects, I will choose later' },
                         ...programmesFor(p.stage).map(c => ({
                           value: c.id, label: c.name,
                         })),
                       ]} />
+                  </Field>
+                )}
+                {/* Which of them she actually sits.
+
+                    The course says what is on offer; this says what was
+                    taken. General Science offers nine between its own
+                    electives and the ones commonly added, and a learner
+                    sits four, so without this her subject page is more
+                    than twice her real timetable.
+
+                    Four is named as the normal number rather than enforced
+                    as a limit, because some schools let a strong learner
+                    add a fifth, and an app that refuses what her school
+                    allows is wrong in a way she cannot work around.
+
+                    Choosing nothing is allowed and means the whole course,
+                    which is what somebody who has not decided yet should
+                    see rather than an empty timetable. */}
+                {asksProgramme(p.stage) && p.programme && (
+                  <Field label="Your electives"
+                    hint={`${(p.electives ?? []).length} chosen. `
+                      + `Most learners take ${ELECTIVES_NORMALLY}, and some `
+                      + 'schools allow more.'}>
+                    <div className="ne-picks">
+                      {electivesOffered(p.stage, p.programme).map(id => {
+                        const subject = subjectById(p.stage, id)
+                        if (!subject) return null
+                        const on = (p.electives ?? []).includes(id)
+                        return (
+                          <label key={id} className={`ne-pick${on ? ' is-on' : ''}`}>
+                            <input
+                              type="checkbox"
+                              checked={on}
+                              onChange={e => set('electives', e.target.checked
+                                ? [...(p.electives ?? []), id]
+                                : (p.electives ?? []).filter(x => x !== id))}
+                            />
+                            <span>{subject.name}</span>
+                          </label>
+                        )
+                      })}
+                    </div>
                   </Field>
                 )}
 
