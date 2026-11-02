@@ -580,8 +580,8 @@ teach({
     + 'Children have further rights: '
     + 'to a name, to education, to health care, '
     + 'and to protection from work that harms them. '
-    + 'Each right carries a responsibility, '
-    + 'because a right is only real while other people keep to it.',
+    + 'Each right carries a responsibility. '
+    + 'A right is only real while other people keep to it.',
 
   mechanism:
     'Rights and duties are taught as two lists, '

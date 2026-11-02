@@ -53,13 +53,8 @@ teach({
     + 'and it is the smallest piece of data a computer holds. '
     + 'Eight bits make one byte, '
     + 'which is enough to store one character of text. '
-    + 'A kilobyte is about a thousand bytes, '
-    + 'a megabyte about a thousand kilobytes, '
-    + 'a gigabyte about a thousand megabytes, '
-    + 'and a terabyte about a thousand gigabytes. '
-    + 'So a page of text is a few kilobytes, '
-    + 'a photograph is a few megabytes, '
-    + 'and an hour of video is a few gigabytes.',
+    + 'Every unit above the byte is about a thousand times '
+    + 'the one below it.',
 
   mechanism:
     'The unit names are easy and the sizes are what people get wrong, '
@@ -171,6 +166,73 @@ teach({
     + 'which is why a photograph saved twice can look worse than the '
     + 'original.',
 
+  figure: {
+    alt: 'A page of text drawn beside a photograph. The page holds about '
+      + 'two thousand characters at one byte each, which comes to about 2 '
+      + 'kilobytes. The photograph is drawn as a grid of tiny squares, '
+      + 'about two million dots at three bytes each, which comes to about '
+      + '6 megabytes, so one photograph is about three thousand pages.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the machine stores every dot, not the idea of a picture</text>'
+      + '<path d="M 40 60 H 190 V 240 H 40 Z"/>'
+      + '<path d="M 58 86 H 172" stroke-width="2"/>'
+      + '<path d="M 58 108 H 172" stroke-width="2"/>'
+      + '<path d="M 58 130 H 172" stroke-width="2"/>'
+      + '<path d="M 58 152 H 172" stroke-width="2"/>'
+      + '<path d="M 58 174 H 172" stroke-width="2"/>'
+      + '<path d="M 58 196 H 172" stroke-width="2"/>'
+      + '<path d="M 58 218 H 128" stroke-width="2"/>'
+      + '<text x="115" y="272" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">a page of text</text>'
+      + '<text x="115" y="294" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">about two thousand characters,</text>'
+      + '<text x="115" y="312" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">one byte each</text>'
+      + '<text x="115" y="338" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">about 2 kilobytes</text>'
+      + '<path d="M 330 60 H 600 V 240 H 330 Z"/>'
+      + '<path d="M 360 60 V 240" stroke-width="1"/>'
+      + '<path d="M 390 60 V 240" stroke-width="1"/>'
+      + '<path d="M 420 60 V 240" stroke-width="1"/>'
+      + '<path d="M 450 60 V 240" stroke-width="1"/>'
+      + '<path d="M 480 60 V 240" stroke-width="1"/>'
+      + '<path d="M 510 60 V 240" stroke-width="1"/>'
+      + '<path d="M 540 60 V 240" stroke-width="1"/>'
+      + '<path d="M 570 60 V 240" stroke-width="1"/>'
+      + '<path d="M 330 90 H 600" stroke-width="1"/>'
+      + '<path d="M 330 120 H 600" stroke-width="1"/>'
+      + '<path d="M 330 150 H 600" stroke-width="1"/>'
+      + '<path d="M 330 180 H 600" stroke-width="1"/>'
+      + '<path d="M 330 210 H 600" stroke-width="1"/>'
+      + '<text x="465" y="272" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">a photograph</text>'
+      + '<text x="465" y="294" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">about two million dots,</text>'
+      + '<text x="465" y="312" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">three bytes each</text>'
+      + '<text x="465" y="338" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">about 6 megabytes</text>'
+      + '<text x="320" y="378" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so one photograph is about three thousand pages</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The storage units, each about a thousand times the one '
+        + 'above it',
+      columns: ['Unit', 'How big it is', 'About enough for'],
+      rows: [
+        ['Bit', 'A single 0 or 1', 'The smallest piece there is'],
+        ['Byte', 'Eight bits', 'One character of text'],
+        ['Kilobyte', 'About a thousand bytes', 'Half a page of writing'],
+        ['Megabyte', 'About a thousand kilobytes', 'Part of one photograph'],
+        [
+          'Gigabyte',
+          'About a thousand megabytes',
+          'A couple of hundred photographs',
+        ],
+        [
+          'Terabyte',
+          'About a thousand gigabytes',
+          'Hundreds of hours of video',
+        ],
+      ],
+      note: 'This is why a full phone is almost never full of messages. '
+        + 'Look at the photographs and the video first.',
+    },
+  ],
   questions: [
     {
       id: 'sto-1',
@@ -234,9 +296,7 @@ teach({
     + 'A cell can hold text, a number, or a formula. '
     + 'A formula begins with an equals sign '
     + 'and may refer to other cells: =B4+C4. '
-    + 'SUM adds a range: =SUM(B2:B10). '
-    + 'AVERAGE gives the mean of a range, '
-    + 'and MAX and MIN give the largest and smallest. '
+    + 'A few named functions work on a whole range of cells at once. '
     + 'A chart can be made from a range of cells, '
     + 'and it updates when the cells do.',
 
@@ -351,6 +411,74 @@ teach({
     + 'which is why one formula can fill a hundred rows. '
     + 'When a reference should not move, it is fixed with dollar signs.',
 
+  figure: {
+    alt: 'A small spreadsheet of crop figures with columns A to D and rows '
+      + '1 to 5. In row 4 the cells B4 and C4, holding 300 and 450, are '
+      + 'ringed in green, and cell D4 holds the formula =B4+C4 rather than '
+      + 'a number, so changing either figure corrects the total by itself.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">a formula stores where to look, not what it found</text>'
+      + '<text x="165" y="58" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">A</text>'
+      + '<text x="255" y="58" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">B</text>'
+      + '<text x="345" y="58" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">C</text>'
+      + '<text x="435" y="58" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">D</text>'
+      + '<text x="108" y="96" font-size="14" text-anchor="end" fill="currentColor" stroke="none">1</text>'
+      + '<text x="108" y="136" font-size="14" text-anchor="end" fill="currentColor" stroke="none">2</text>'
+      + '<text x="108" y="176" font-size="14" text-anchor="end" fill="currentColor" stroke="none">3</text>'
+      + '<text x="108" y="216" font-size="14" text-anchor="end" fill="currentColor" stroke="none">4</text>'
+      + '<text x="108" y="256" font-size="14" text-anchor="end" fill="currentColor" stroke="none">5</text>'
+      + '<path d="M 120 70 V 270" stroke-width="2"/>'
+      + '<path d="M 210 70 V 270" stroke-width="2"/>'
+      + '<path d="M 300 70 V 270" stroke-width="2"/>'
+      + '<path d="M 390 70 V 270" stroke-width="2"/>'
+      + '<path d="M 480 70 V 270" stroke-width="2"/>'
+      + '<path d="M 120 70 H 480" stroke-width="2"/>'
+      + '<path d="M 120 110 H 480" stroke-width="2"/>'
+      + '<path d="M 120 150 H 480" stroke-width="2"/>'
+      + '<path d="M 120 190 H 480" stroke-width="2"/>'
+      + '<path d="M 120 230 H 480" stroke-width="2"/>'
+      + '<path d="M 120 270 H 480" stroke-width="2"/>'
+      + '<text x="165" y="96" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Crop</text>'
+      + '<text x="255" y="96" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Term 1</text>'
+      + '<text x="345" y="96" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Term 2</text>'
+      + '<text x="435" y="96" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Total</text>'
+      + '<text x="165" y="136" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Cassava</text>'
+      + '<text x="255" y="136" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">200</text>'
+      + '<text x="345" y="136" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">260</text>'
+      + '<text x="435" y="136" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">=B2+C2</text>'
+      + '<text x="165" y="176" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Yam</text>'
+      + '<text x="255" y="176" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">180</text>'
+      + '<text x="345" y="176" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">150</text>'
+      + '<text x="435" y="176" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">=B3+C3</text>'
+      + '<text x="165" y="216" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Maize</text>'
+      + '<path d="M 212 192 H 298 V 228 H 212 Z" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="255" y="216" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">300</text>'
+      + '<path d="M 302 192 H 388 V 228 H 302 Z" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="345" y="216" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">450</text>'
+      + '<text x="435" y="216" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">=B4+C4</text>'
+      + '<text x="165" y="256" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Total</text>'
+      + '<text x="435" y="256" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">=SUM(D2:D4)</text>'
+      + '<text x="320" y="306" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">=B4+C4 means: add whatever is in B4 to whatever is in C4</text>'
+      + '<text x="320" y="332" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">so change the 300, and the total corrects itself</text>'
+      + '<text x="320" y="368" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">typing =300+450 instead throws all of that away</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The functions worth knowing, and what each gives back',
+      columns: ['Function', 'What it gives', 'Written as'],
+      rows: [
+        ['SUM', 'The total of everything in a range', '=SUM(B2:B10)'],
+        ['AVERAGE', 'The mean of a range', '=AVERAGE(B2:B10)'],
+        ['MAX', 'The largest value in a range', '=MAX(B2:B10)'],
+        ['MIN', 'The smallest value in a range', '=MIN(B2:B10)'],
+      ],
+      note: 'Each one takes a range, which names a region rather than '
+        + 'listing cells. Insert a row inside the range and the formula '
+        + 'takes it in without being rewritten.',
+    },
+  ],
   questions: [
     {
       id: 'spr-1',
@@ -417,11 +545,8 @@ teach({
     + 'a picture, a chart or a table. '
     + 'Type should be large enough to read from the back of the room. '
     + 'One idea belongs on one slide. '
-    + 'Transitions and animations exist and are almost always a '
-    + 'distraction. '
-    + 'The speaker gives the information; '
-    + 'the slides show the things that are better seen than described, '
-    + 'such as a photograph, a graph or a map.',
+    + 'The whole skill is dividing the work between what you say '
+    + 'and what the screen shows.',
 
   mechanism:
     'Almost every bad presentation has the same fault, '
@@ -535,6 +660,81 @@ teach({
     + 'Give it out at the end, '
     + 'because given out at the start it is read instead of you.',
 
+  figure: {
+    alt: 'Two slides side by side. The one on the left, in red, is the '
+      + 'whole talk written out in lines of text, which the audience reads '
+      + 'faster than anybody can speak. The one on the right, in green, '
+      + 'carries a heading and a single picture of an eroded field, '
+      + 'leaving the speaker to say the rest.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">if the slides say it all, you were not needed in the room</text>'
+      + '<path d="M 24 56 H 300 V 226 H 24 Z" stroke="#c8433a"/>'
+      + '<path d="M 42 82 H 282" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 42 100 H 282" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 42 118 H 282" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 42 136 H 282" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 42 154 H 282" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 42 172 H 282" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 42 190 H 282" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 42 208 H 210" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="162" y="252" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the whole talk, written out</text>'
+      + '<text x="162" y="276" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">they read it faster than you speak,</text>'
+      + '<text x="162" y="294" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">finish it, and stop listening</text>'
+      + '<path d="M 340 56 H 616 V 226 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="478" y="88" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">The eroded field</text>'
+      + '<path d="M 380 104 H 576 V 206 H 380 Z" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 380 180 L 428 140 L 470 172 L 520 122 L 576 158" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<circle cx="412" cy="126" r="13" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="478" y="252" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">one thing they must see</text>'
+      + '<text x="478" y="276" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">you say the rest, and the picture</text>'
+      + '<text x="478" y="294" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">does what words cannot</text>'
+      + '<text x="320" y="340" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">write the talk first, then ask which parts</text>'
+      + '<text x="320" y="366" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">somebody has to see rather than hear</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What belongs on the screen, what belongs in the speech, and '
+        + 'what belongs nowhere',
+      columns: ['What you have to get across', 'Where it goes', 'Why'],
+      rows: [
+        [
+          'An explanation, or an argument',
+          'You say it',
+          'Speech is good at reasons given in order',
+        ],
+        [
+          'A photograph of the eroded field',
+          'On the screen',
+          'Describing it takes far longer than seeing it',
+        ],
+        [
+          'A graph showing the rise',
+          'On the screen',
+          'The shape is the point',
+        ],
+        [
+          'A map of where the rivers run',
+          'On the screen',
+          'Position cannot be said',
+        ],
+        [
+          'Your whole talk, written out',
+          'Nowhere',
+          'They read it, finish, and stop listening',
+        ],
+        [
+          'Transitions and animations',
+          'Nowhere',
+          'They take attention and give nothing back',
+        ],
+      ],
+      note: 'Large type is not only a courtesy. It limits how many words '
+        + 'fit, which forces the discipline the rest of the table '
+        + 'describes.',
+    },
+  ],
   questions: [
     {
       id: 'prs-1',
@@ -598,11 +798,8 @@ teach({
   idea:
     'A network is two or more computers joined so that they can share: '
     + 'files, a printer, an internet connection, or messages. '
-    + 'A local area network, or LAN, covers one building or site, '
-    + 'and is usually joined by cable or by wifi. '
-    + 'A wide area network, or WAN, joins places far apart, '
-    + 'using lines rented from a telecommunications company. '
-    + 'The internet is the largest WAN there is. '
+    + 'Networks are named by how far they reach: '
+    + 'a local area network, or LAN, and a wide area network, or WAN. '
     + 'To join a network a device needs '
     + 'a physical or wireless connection, '
     + 'a network interface, '
@@ -717,6 +914,88 @@ teach({
     + 'and every machine shares with every other, '
     + 'which is simpler to set up and much harder to control.',
 
+  figure: {
+    alt: 'On the left, a LAN inside one building: three machines and a '
+      + 'printer joined to a switch by cable the owner owns. On the right, '
+      + 'another LAN in another town. Between them, two routers joined by '
+      + 'a red dashed line marked as a rented link, slower and shared with '
+      + 'other people, which is what makes the pair of them a WAN.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">a LAN is yours; a WAN crosses land you do not own</text>'
+      + '<text x="140" y="60" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">LAN: one building</text>'
+      + '<path d="M 20 72 H 260 V 250 H 20 Z" stroke="#0f8a4d" stroke-dasharray="8 6" stroke-width="2"/>'
+      + '<path d="M 96 92 H 184 V 126 H 96 Z"/>'
+      + '<text x="140" y="114" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">switch</text>'
+      + '<path d="M 118 126 L 70 164" stroke-width="2"/>'
+      + '<path d="M 140 126 V 164" stroke-width="2"/>'
+      + '<path d="M 162 126 L 210 164" stroke-width="2"/>'
+      + '<path d="M 38 168 H 102 V 200 H 38 Z" stroke-width="2"/>'
+      + '<text x="70" y="190" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">machine</text>'
+      + '<path d="M 108 168 H 172 V 200 H 108 Z" stroke-width="2"/>'
+      + '<text x="140" y="190" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">machine</text>'
+      + '<path d="M 178 168 H 242 V 200 H 178 Z" stroke-width="2"/>'
+      + '<text x="210" y="190" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">printer</text>'
+      + '<text x="140" y="228" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">your own cable, fast,</text>'
+      + '<text x="140" y="244" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">and nobody else on it</text>'
+      + '<path d="M 276 92 H 364 V 126 H 276 Z"/>'
+      + '<text x="320" y="114" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">router</text>'
+      + '<path d="M 260 109 H 270" stroke-width="2"/>'
+      + '<path d="M 364 109 H 420" stroke="#c8433a" stroke-width="2" stroke-dasharray="7 5"/>'
+      + '<path d="M 428 109 L 410 99 L 410 119 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="382" y="146" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">a rented line,</text>'
+      + '<text x="382" y="164" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">slower, and shared</text>'
+      + '<text x="530" y="60" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">WAN: another town</text>'
+      + '<path d="M 440 72 H 620 V 250 H 440 Z" stroke-dasharray="8 6" stroke-width="2"/>'
+      + '<path d="M 486 92 H 574 V 126 H 486 Z"/>'
+      + '<text x="530" y="114" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">router</text>'
+      + '<path d="M 508 126 L 480 164" stroke-width="2"/>'
+      + '<path d="M 552 126 L 580 164" stroke-width="2"/>'
+      + '<path d="M 448 168 H 512 V 200 H 448 Z" stroke-width="2"/>'
+      + '<text x="480" y="190" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">machine</text>'
+      + '<path d="M 548 168 H 612 V 200 H 548 Z" stroke-width="2"/>'
+      + '<text x="580" y="190" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">machine</text>'
+      + '<text x="530" y="228" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">another LAN, which</text>'
+      + '<text x="530" y="244" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">somebody else owns</text>'
+      + '<text x="320" y="306" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">every machine needs an address as much as it needs a wire:</text>'
+      + '<text x="320" y="332" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">without the wire nothing arrives,</text>'
+      + '<text x="320" y="358" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and without the address nobody knows whose it is</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'A LAN and a WAN differ in distance, and the rest follows '
+        + 'from that',
+      columns: ['Question', 'LAN', 'WAN'],
+      rows: [
+        [
+          'How far it reaches',
+          'One building or site',
+          'Between towns or countries',
+        ],
+        [
+          'Who owns the line',
+          'You do',
+          'A telephone company, and you rent it',
+        ],
+        ['How fast', 'Fast', 'Slower'],
+        ['Shared with strangers', 'No', 'Yes, with other people’s traffic'],
+        [
+          'Joined through',
+          'A switch, by cable or wifi',
+          'A router, by the rented line',
+        ],
+        [
+          'An example',
+          'The machines in one classroom',
+          'The internet, the largest there is',
+        ],
+      ],
+      note: 'Only the first row is a definition. Every row under it is a '
+        + 'consequence of it, which is why the same file copies in a '
+        + 'second across a room and takes minutes from abroad.',
+    },
+  ],
   questions: [
     {
       id: 'net-1',
@@ -785,11 +1064,8 @@ teach({
     + 'It asks you for a password, '
     + 'or asks you to put details on a page, '
     + 'or asks for a one time code. '
-    + 'Other common tricks are easy to list. '
-    + 'A prize you never entered for. '
-    + 'A job that asks you to pay a fee. '
-    + 'A friend’s account asking for money. '
-    + 'A file that installs something when you open it. '
+    + 'The other common tricks differ in the story they tell '
+    + 'and not in their shape. '
     + 'To protect an account, '
     + 'use a long password and use it nowhere else. '
     + 'Turn on a second step at login where it is offered. '
@@ -925,6 +1201,77 @@ teach({
     + 'Any stranger who needs an answer from you at once '
     + 'has just told you to take your time.',
 
+  figure: {
+    alt: 'A message in red saying an account will be closed today and '
+      + 'demanding a code at once. Two paths lead away from it. The red '
+      + 'one, where you hurry, ends with the code sent, the attacker able '
+      + 'to act as you, and the account gone. The green one, where you '
+      + 'wait ten minutes and ring the bank on the number you already had, '
+      + 'ends with nothing lost.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">every scam needs you to act before you think</text>'
+      + '<path d="M 170 48 H 470 V 124 H 170 Z" stroke="#c8433a"/>'
+      + '<text x="320" y="74" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">Your account will be closed TODAY.</text>'
+      + '<text x="320" y="96" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">Send the code now to keep it open.</text>'
+      + '<text x="320" y="116" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">the hurry is not part of the story, it is the trick</text>'
+      + '<path d="M 320 124 V 150" stroke-width="2"/>'
+      + '<path d="M 260 158 L 190 158" stroke="#c8433a"/>'
+      + '<path d="M 320 150 L 260 158" stroke="#c8433a"/>'
+      + '<path d="M 182 158 L 200 148 L 200 168 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 380 158 L 450 158" stroke="#0f8a4d"/>'
+      + '<path d="M 320 150 L 380 158" stroke="#0f8a4d"/>'
+      + '<path d="M 458 158 L 440 148 L 440 168 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 20 176 H 250 V 286 H 20 Z" stroke="#c8433a"/>'
+      + '<text x="135" y="202" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">you hurry</text>'
+      + '<text x="135" y="228" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">you send the code,</text>'
+      + '<text x="135" y="248" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">and they are now you</text>'
+      + '<text x="135" y="272" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">the account is gone</text>'
+      + '<path d="M 390 176 H 620 V 286 H 390 Z" stroke="#0f8a4d"/>'
+      + '<text x="505" y="202" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">you wait ten minutes</text>'
+      + '<text x="505" y="228" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">you ring the bank on the</text>'
+      + '<text x="505" y="248" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">number you already had</text>'
+      + '<text x="505" y="272" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">nothing is lost</text>'
+      + '<text x="320" y="326" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so the hurry itself is the alarm,</text>'
+      + '<text x="320" y="352" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and almost nothing honest is spoiled by waiting</text>'
+      + '<text x="320" y="382" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">no bank will ever ask for your code, because only you have it</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The common tricks, and what gives each of them away',
+      columns: ['The trick', 'What it asks you for', 'What gives it away'],
+      rows: [
+        [
+          'A message from your bank',
+          'A password, or a one time code',
+          'No bank ever asks for either of those',
+        ],
+        [
+          'A prize you never entered for',
+          'A fee, or your details',
+          'You cannot win what you never entered',
+        ],
+        [
+          'A job offer',
+          'A payment before you start',
+          'Work pays you; you do not pay it',
+        ],
+        [
+          'A friend’s account asking for money',
+          'Money, and quickly',
+          'Ring them on the number you already had',
+        ],
+        [
+          'A file sent to you',
+          'That you open it',
+          'It installs something when you do',
+        ],
+      ],
+      note: 'The stories differ and the shape does not: every one of them '
+        + 'needs you to act before you think.',
+    },
+  ],
   questions: [
     {
       id: 'saf-1',
@@ -993,14 +1340,8 @@ teach({
     + 'where every step is clear, '
     + 'the order is fixed, '
     + 'and the list comes to an end. '
-    + 'A flowchart is an algorithm drawn. '
-    + 'An oval marks the start and the stop. '
-    + 'A parallelogram is input or output. '
-    + 'A rectangle is a process, such as a calculation. '
-    + 'A diamond is a decision, '
-    + 'and it has exactly two exits, labelled yes and no. '
-    + 'Arrows show the order, '
-    + 'and an arrow may lead backwards to make a loop. '
+    + 'A flowchart is the same algorithm drawn, '
+    + 'with a different shape for each kind of step. '
     + 'Pseudocode writes the same thing in short plain sentences '
     + 'instead of shapes.',
 
@@ -1115,6 +1456,73 @@ teach({
     + 'The algorithm is the thinking; '
     + 'the language is only how it is written down.',
 
+  figure: {
+    alt: 'A flowchart that totals a set of marks. An oval marked START '
+      + 'leads to a rectangle setting the total to zero, then a '
+      + 'parallelogram reading a mark, then a rectangle adding it to the '
+      + 'total, then a diamond asking whether there are more marks. Its '
+      + 'yes exit loops back in green to the reading step, and its no exit '
+      + 'leads to a parallelogram printing the total and an oval marked '
+      + 'STOP.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">a shape for each kind of step, and every path reaching a stop</text>'
+      + '<ellipse cx="200" cy="64" rx="52" ry="18"/>'
+      + '<text x="200" y="70" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">START</text>'
+      + '<path d="M 200 82 V 94" stroke-width="2"/>'
+      + '<path d="M 200 102 L 193 86 L 207 86 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 120 104 H 280 V 136 H 120 Z"/>'
+      + '<text x="200" y="125" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">total = 0</text>'
+      + '<path d="M 200 136 V 142" stroke-width="2"/>'
+      + '<path d="M 200 150 L 193 134 L 207 134 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 134 152 L 280 152 L 266 184 L 120 184 Z"/>'
+      + '<text x="200" y="173" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">READ a mark</text>'
+      + '<path d="M 200 184 V 190" stroke-width="2"/>'
+      + '<path d="M 200 198 L 193 182 L 207 182 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 108 200 H 292 V 232 H 108 Z"/>'
+      + '<text x="200" y="221" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">total = total + mark</text>'
+      + '<path d="M 200 232 V 236" stroke-width="2"/>'
+      + '<path d="M 200 244 L 193 228 L 207 228 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 200 244 L 278 274 L 200 304 L 122 274 Z"/>'
+      + '<text x="200" y="279" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">more marks?</text>'
+      + '<path d="M 122 274 H 56 V 168 H 110" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 118 168 L 102 161 L 102 175 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="88" y="262" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">yes</text>'
+      + '<path d="M 278 274 H 374" stroke-width="2"/>'
+      + '<path d="M 382 274 L 366 267 L 366 281 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="326" y="262" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">no</text>'
+      + '<path d="M 400 258 L 546 258 L 532 290 L 386 290 Z"/>'
+      + '<text x="466" y="279" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">PRINT total</text>'
+      + '<path d="M 466 290 V 306" stroke-width="2"/>'
+      + '<path d="M 466 314 L 459 298 L 473 298 Z" fill="currentColor" stroke="none"/>'
+      + '<ellipse cx="466" cy="334" rx="52" ry="18"/>'
+      + '<text x="466" y="340" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">STOP</text>'
+      + '<text x="320" y="382" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">trace every route with your finger: each one must reach STOP</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The flowchart shapes, and the rule each one is marked on',
+      columns: ['Shape', 'What it means', 'The rule that is tested'],
+      rows: [
+        ['Oval', 'The start, and the stop', 'Every path must reach a stop'],
+        ['Parallelogram', 'Input, or output', 'Say what is read or written'],
+        [
+          'Rectangle',
+          'A process, such as a calculation',
+          'One step, with no judgement left in it',
+        ],
+        ['Diamond', 'A decision', 'Exactly two exits, both labelled'],
+        [
+          'Arrow',
+          'The order the steps run in',
+          'One leading backwards makes a loop',
+        ],
+      ],
+      note: 'Write the steps in words before drawing any of these, because '
+        + 'neat boxes hide a vague step and plain sentences do not.',
+    },
+  ],
   questions: [
     {
       id: 'flw-1',
@@ -1302,6 +1710,85 @@ teach({
     + 'It is how a program works through a grid, '
     + 'such as the rows and columns of a table.',
 
+  figure: {
+    alt: 'The three structures drawn side by side. Sequence is three boxes '
+      + 'one under another. Selection is a diamond asking whether '
+      + 'something is true, with a yes branch and a no branch that do '
+      + 'different things and then join again. Repetition is a box '
+      + 'followed by a diamond asking whether to go again, whose yes exit '
+      + 'loops back in green to the box and whose no exit carries on.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">every program ever written is these three, combined</text>'
+      + '<text x="110" y="58" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">sequence</text>'
+      + '<path d="M 60 76 H 160 V 108 H 60 Z"/>'
+      + '<text x="110" y="97" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">step 1</text>'
+      + '<path d="M 110 108 V 118" stroke-width="2"/>'
+      + '<path d="M 110 126 L 103 110 L 117 110 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 60 128 H 160 V 160 H 60 Z"/>'
+      + '<text x="110" y="149" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">step 2</text>'
+      + '<path d="M 110 160 V 170" stroke-width="2"/>'
+      + '<path d="M 110 178 L 103 162 L 117 162 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 60 180 H 160 V 212 H 60 Z"/>'
+      + '<text x="110" y="201" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">step 3</text>'
+      + '<text x="110" y="248" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">one after another,</text>'
+      + '<text x="110" y="266" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">in order</text>'
+      + '<text x="320" y="58" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">selection</text>'
+      + '<path d="M 320 76 L 376 102 L 320 128 L 264 102 Z"/>'
+      + '<text x="320" y="107" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">is it true?</text>'
+      + '<path d="M 264 102 H 244 V 140" stroke-width="2"/>'
+      + '<path d="M 244 148 L 237 132 L 251 132 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="238" y="90" font-size="13" text-anchor="end" fill="currentColor" stroke="none">yes</text>'
+      + '<path d="M 376 102 H 396 V 140" stroke-width="2"/>'
+      + '<path d="M 396 148 L 389 132 L 403 132 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="402" y="90" font-size="13" text-anchor="start" fill="currentColor" stroke="none">no</text>'
+      + '<path d="M 204 150 H 284 V 182 H 204 Z"/>'
+      + '<text x="244" y="171" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">do this</text>'
+      + '<path d="M 356 150 H 436 V 182 H 356 Z"/>'
+      + '<text x="396" y="171" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">or this</text>'
+      + '<path d="M 244 182 V 202 H 396 V 182" stroke-width="2"/>'
+      + '<path d="M 320 202 V 216" stroke-width="2"/>'
+      + '<path d="M 320 224 L 313 208 L 327 208 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="320" y="248" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">one way or the other,</text>'
+      + '<text x="320" y="266" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">never both</text>'
+      + '<text x="520" y="58" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">repetition</text>'
+      + '<path d="M 470 76 H 570 V 108 H 470 Z"/>'
+      + '<text x="520" y="97" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">do this</text>'
+      + '<path d="M 520 108 V 118" stroke-width="2"/>'
+      + '<path d="M 520 126 L 513 110 L 527 110 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 520 128 L 576 154 L 520 180 L 464 154 Z"/>'
+      + '<text x="520" y="159" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">again?</text>'
+      + '<path d="M 576 154 H 598 V 92 H 574" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 566 92 L 582 85 L 582 99 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="604" y="148" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">yes</text>'
+      + '<path d="M 520 180 V 200" stroke-width="2"/>'
+      + '<path d="M 520 208 L 513 192 L 527 192 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="506" y="200" font-size="13" text-anchor="end" fill="currentColor" stroke="none">no</text>'
+      + '<text x="520" y="248" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">round again until</text>'
+      + '<text x="520" y="266" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">something stops it</text>'
+      + '<text x="320" y="322" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so if you can trace all three, you can read any program</text>'
+      + '<text x="320" y="356" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">and a loop whose body never changes the test</text>'
+      + '<text x="320" y="378" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">runs forever: the commonest bug there is</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'A trace of a short loop, written down one pass at a time',
+      columns: ['After this step', 'count', 'total', 'Output'],
+      rows: [
+        ['total is set to 0 and count to 1', '1', '0', ''],
+        ['First pass round the loop', '2', '1', ''],
+        ['Second pass', '3', '3', ''],
+        ['Third pass', '4', '6', ''],
+        ['count is now 4, so the loop stops', '4', '6', ''],
+        ['print total', '4', '6', '6'],
+      ],
+      note: 'The loop traced here adds count to total, adds one to count, '
+        + 'and goes round again while count is 3 or less. Notice that the '
+        + 'count which stopped it is one more than the last one used, '
+        + 'which is where the off by one error comes from.',
+    },
+  ],
   questions: [
     {
       id: 'ssr-1',
