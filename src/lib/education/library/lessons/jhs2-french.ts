@@ -45,19 +45,13 @@ teach({
   },
 
   idea:
-    'To describe a family: '
-    + 'J’ai deux frères et une soeur, meaning I have two brothers and a '
-    + 'sister. '
-    + 'Mon père est agriculteur. Ma mère est enseignante. '
-    + 'Mon is used before a masculine noun, ma before a feminine one, '
-    + 'and mes before any plural. '
-    + 'To describe a person: '
-    + 'Elle est grande et mince. Il est petit. Elle est gentille. '
-    + 'To describe a place: '
+    'Almost all description in French runs through two verbs, '
+    + 'être for what somebody is and avoir for what they have, '
+    + 'and most of this topic is choosing between them. '
+    + 'Mon, ma and mes, meaning my, change with the noun '
+    + 'in the same way the article does. '
     + 'Il y a means there is or there are, '
-    + 'as in Il y a trois salles de classe. '
-    + 'J’habite à Kumasi means I live in Kumasi. '
-    + 'Ma maison est près de l’école means my house is near the school.',
+    + 'and J’habite à Kumasi means I live in Kumasi.',
 
   mechanism:
     'Two verbs carry almost all description in French, '
@@ -159,6 +153,82 @@ teach({
     + 'Notice that un becomes de after a negative, '
     + 'which is a rule with no English equivalent at all.',
 
+  figure: {
+    alt: 'What you want to say drawn in a box at the top, with two arrows '
+      + 'leading down. One goes to être, to be, for what somebody is: elle '
+      + 'est grande, ma mère est enseignante. The other goes to avoir, to '
+      + 'have, for what they have: j’ai deux frères, j’ai douze ans. A '
+      + 'dashed red note warns that English blurs the two, saying I am '
+      + 'twelve where French says I have twelve years.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">ask first: is it what they are, or what they have?</text>'
+      + '<path d="M 230 42 H 410 V 84 H 230 Z"/>'
+      + '<text x="320" y="69" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">what you want to say</text>'
+      + '<path d="M 270 84 L 180 124" stroke-width="2"/>'
+      + '<path d="M 170 128 L 186 116 L 192 130 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 370 84 L 460 124" stroke-width="2"/>'
+      + '<path d="M 470 128 L 448 130 L 454 116 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 24 134 H 300 V 176 H 24 Z" stroke="#0f8a4d"/>'
+      + '<text x="162" y="161" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">être, to be</text>'
+      + '<text x="162" y="196" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">for what somebody IS:</text>'
+      + '<text x="162" y="216" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Elle est grande.</text>'
+      + '<text x="162" y="236" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Ma mère est enseignante.</text>'
+      + '<path d="M 340 134 H 616 V 176 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="478" y="161" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">avoir, to have</text>'
+      + '<text x="478" y="196" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">for what somebody HAS:</text>'
+      + '<text x="478" y="216" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">J’ai deux frères.</text>'
+      + '<text x="478" y="236" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">J’ai douze ans.</text>'
+      + '<path d="M 90 258 H 550 V 310 H 90 Z" stroke="#c8433a" stroke-dasharray="7 6" stroke-width="2"/>'
+      + '<text x="320" y="280" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">English blurs the two: it says I AM twelve</text>'
+      + '<text x="320" y="300" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">where French says I HAVE twelve years</text>'
+      + '<text x="320" y="340" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">and il y a, there is or there are, never changes for number:</text>'
+      + '<text x="320" y="364" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">il y a une salle and il y a trois salles are both correct,</text>'
+      + '<text x="320" y="386" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">which makes it the most useful phrase of the year</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Which of the two verbs each sentence needs',
+      columns: ['In English', 'In French', 'Which verb, and why'],
+      rows: [
+        [
+          'She is tall and slim',
+          'Elle est grande et mince',
+          'être: it is what she is',
+        ],
+        [
+          'My mother is a teacher',
+          'Ma mère est enseignante',
+          'être: it is what she is',
+        ],
+        [
+          'I have two brothers and a sister',
+          'J’ai deux frères et une soeur',
+          'avoir: it is what I have',
+        ],
+        [
+          'I am twelve years old',
+          'J’ai douze ans',
+          'avoir: in French you have the years',
+        ],
+      ],
+      note: 'Asking which of the two you need, before every sentence, '
+        + 'removes the commonest error in the topic.',
+    },
+    {
+      caption: 'My changes with the noun, exactly as the article does',
+      columns: ['Before', 'The form', 'Example'],
+      rows: [
+        ['A masculine noun', 'mon', 'mon père'],
+        ['A feminine noun', 'ma', 'ma mère'],
+        ['Any plural', 'mes', 'mes frères, mes soeurs'],
+      ],
+      note: 'Il y a is the exception that makes life easy: it does not '
+        + 'change for number at all, so il y a une salle and il y a trois '
+        + 'salles are both correct.',
+    },
+  ],
   questions: [
     {
       id: 'dsc-1',
@@ -220,21 +290,12 @@ teach({
   },
 
   idea:
-    'An adjective agrees with the noun it describes. '
-    + 'The basic rule adds -e for feminine, '
-    + '-s for masculine plural, '
-    + 'and -es for feminine plural: '
-    + 'un garçon intelligent, une fille intelligente, '
-    + 'des garçons intelligents, des filles intelligentes. '
-    + 'An adjective already ending in -e does not add another: '
-    + 'mince stays mince. '
-    + 'Some are irregular: '
-    + 'beau becomes belle, vieux becomes vieille, '
-    + 'blanc becomes blanche, gentil becomes gentille. '
-    + 'Most adjectives follow the noun. '
-    + 'A small group goes before it, '
-    + 'including grand, petit, bon, mauvais, beau, joli, jeune, vieux, '
-    + 'nouveau and long.',
+    'An adjective agrees with the noun it describes, '
+    + 'in gender and in number, '
+    + 'so you have to know the gender of the noun before you can do '
+    + 'anything at all. '
+    + 'A few adjectives make their feminine irregularly. '
+    + 'Most adjectives follow the noun, and a small group goes before it.',
 
   mechanism:
     'Agreement is simple and it depends completely on something from last '
@@ -348,6 +409,76 @@ teach({
     + 'so un garçon et une fille intelligents. '
     + 'It is worth knowing because it looks like an error and is not.',
 
+  figure: {
+    alt: 'The rule, add -e if the noun is feminine, leading down to the '
+      + 'question of which this noun is. Two answers follow: in red, you '
+      + 'learned table, so the rule has nothing to work on; in green, you '
+      + 'learned la table, so la petite table comes straight away. '
+      + 'Beneath, most adjectives go after the noun, as in une fille '
+      + 'intelligente, and a small group goes before it, as in une belle '
+      + 'fille.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the adjective rule needs a fact that lives with the noun</text>'
+      + '<path d="M 180 42 H 460 V 84 H 180 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="69" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">add -e if the noun is feminine</text>'
+      + '<path d="M 320 84 V 104" stroke-width="2"/>'
+      + '<path d="M 320 114 L 312 96 L 328 96 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 200 118 H 440 V 158 H 200 Z"/>'
+      + '<text x="320" y="144" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">but which is this noun?</text>'
+      + '<path d="M 260 158 L 170 196" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 160 200 L 176 188 L 182 202 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 380 158 L 470 196" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 480 200 L 458 202 L 464 188 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 24 206 H 300 V 272 H 24 Z" stroke="#c8433a"/>'
+      + '<text x="162" y="232" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">you learned table</text>'
+      + '<text x="162" y="256" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">the rule has nothing to work on</text>'
+      + '<path d="M 340 206 H 616 V 272 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="478" y="232" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">you learned la table</text>'
+      + '<text x="478" y="256" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">la petite table, straight away</text>'
+      + '<path d="M 24 296 H 616" stroke-dasharray="7 6" stroke-width="1.5"/>'
+      + '<text x="162" y="326" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">most go after the noun</text>'
+      + '<text x="162" y="350" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">une fille intelligente</text>'
+      + '<text x="478" y="326" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">a small group goes before it</text>'
+      + '<text x="478" y="350" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">une belle fille</text>'
+      + '<text x="320" y="384" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the group that goes before: grand, petit, bon, mauvais, beau, joli, jeune, vieux, nouveau, long</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What an adjective adds, according to its noun',
+      columns: ['The noun is', 'What is added', 'Example'],
+      rows: [
+        ['Masculine singular', 'Nothing', 'un garçon intelligent'],
+        ['Feminine singular', '-e', 'une fille intelligente'],
+        ['Masculine plural', '-s', 'des garçons intelligents'],
+        ['Feminine plural', '-es', 'des filles intelligentes'],
+        [
+          'Any of these, if the adjective already ends in -e',
+          'No second -e',
+          'un garçon mince, une fille mince',
+        ],
+      ],
+      note: 'This rule depends completely on last year’s work. If the '
+        + 'gender was never learned with the noun, the rule is useless '
+        + 'however well you know it.',
+    },
+    {
+      caption: 'The feminine form of each adjective, and where it stands',
+      columns: ['Adjective', 'Feminine form', 'Where it goes'],
+      rows: [
+        ['intelligent', 'intelligente', 'After the noun, like most'],
+        ['mince', 'mince', 'After the noun'],
+        ['blanc', 'blanche', 'After the noun'],
+        ['gentil', 'gentille', 'After the noun'],
+        ['beau', 'belle', 'Before the noun'],
+        ['vieux', 'vieille', 'Before the noun'],
+        ['grand, petit, bon', 'grande, petite, bonne', 'Before the noun'],
+      ],
+      note: 'The small group that goes before the noun is grand, petit, '
+        + 'bon, mauvais, beau, joli, jeune, vieux, nouveau and long.',
+    },
+  ],
   questions: [
     {
       id: 'adj-1',
@@ -414,13 +545,8 @@ teach({
     + 'know. '
     + 'Then read the questions, '
     + 'then read again looking for each answer. '
-    + 'A question starting with Qui asks who, '
-    + 'Que or Quoi asks what, '
-    + 'Où asks where, '
-    + 'Quand asks when, '
-    + 'Pourquoi asks why, '
-    + 'Combien asks how many, '
-    + 'and Comment asks how. '
+    + 'Each question word tells you what kind of thing the answer is, '
+    + 'so it narrows what you are hunting for before you start. '
     + 'Answer in a complete sentence, '
     + 'and you can build most of the answer from the words of the question '
     + 'itself.',
@@ -541,6 +667,64 @@ teach({
     + 'A list teaches the word alone. '
     + 'And a word alone is exactly how a false friend catches you.',
 
+  figure: {
+    alt: 'The sentence Le pêcheur répare son filet, with répare ringed in '
+      + 'green as the verb, leading down to somebody is repairing '
+      + 'something, and from there to the two words left to place: who, le '
+      + 'pêcheur, and what, son filet. Beside it in red, hunting every '
+      + 'unknown word first collects meanings with nothing to hang them '
+      + 'on.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">find the verb, and the rest of the sentence falls into place</text>'
+      + '<text x="70" y="94" font-size="22" text-anchor="start" fill="currentColor" stroke="none">Le pêcheur</text>'
+      + '<text x="212" y="94" font-size="22" text-anchor="start" fill="#0f8a4d" stroke="none">répare</text>'
+      + '<path d="M 204 70 H 304 V 104 H 204 Z" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="316" y="94" font-size="22" text-anchor="start" fill="currentColor" stroke="none">son filet.</text>'
+      + '<path d="M 254 108 V 136" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 254 146 L 246 128 L 262 128 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 120 150 H 390 V 190 H 120 Z" stroke="#0f8a4d"/>'
+      + '<text x="255" y="175" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">somebody is repairing something</text>'
+      + '<path d="M 160 190 L 120 220" stroke-width="2"/>'
+      + '<path d="M 112 226 L 124 210 L 134 224 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="110" y="250" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">who? le pêcheur</text>'
+      + '<path d="M 350 190 L 390 220" stroke-width="2"/>'
+      + '<path d="M 398 226 L 376 224 L 386 210 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="400" y="250" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">what? son filet</text>'
+      + '<text x="255" y="282" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">and only two words were left to place</text>'
+      + '<path d="M 440 60 H 620 V 268 H 440 Z" stroke="#c8433a" stroke-dasharray="7 6" stroke-width="2"/>'
+      + '<text x="530" y="88" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">hunting every word</text>'
+      + '<text x="530" y="106" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">first does the opposite</text>'
+      + '<text x="530" y="142" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">pêcheur ... ?</text>'
+      + '<text x="530" y="166" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">filet ... ?</text>'
+      + '<text x="530" y="190" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">son ... ?</text>'
+      + '<text x="530" y="226" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">meanings collected,</text>'
+      + '<text x="530" y="244" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">with nothing to hang</text>'
+      + '<text x="530" y="262" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">them on</text>'
+      + '<path d="M 24 314 H 616" stroke-dasharray="7 6" stroke-width="1.5"/>'
+      + '<text x="320" y="344" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and read in three passes: the whole text once without stopping,</text>'
+      + '<text x="320" y="366" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">then the questions, then again looking for each answer</text>'
+      + '<text x="320" y="390" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">most of your answer can be built from the words of the question itself</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each question word, and the kind of answer it is asking for',
+      columns: ['Question word', 'It asks', 'So the answer is'],
+      rows: [
+        ['Qui', 'who', 'A person'],
+        ['Que, or Quoi', 'what', 'A thing, or an action'],
+        ['Où', 'where', 'A place'],
+        ['Quand', 'when', 'A time'],
+        ['Pourquoi', 'why', 'A reason, usually beginning parce que'],
+        ['Combien', 'how many, or how much', 'A number'],
+        ['Comment', 'how', 'A way of doing something'],
+      ],
+      note: 'Most of the answer can be built from the words of the question '
+        + 'itself, which is why answering in a complete sentence is '
+        + 'easier than it looks.',
+    },
+  ],
   questions: [
     {
       id: 'rfr-1',
