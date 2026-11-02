@@ -121,6 +121,63 @@ teach({
     + 'because you are then comparing six short things instead of reading '
     + 'it all again.',
 
+  figure: {
+    alt: 'Three boxes in a row standing for the three paragraphs of '
+      + 'one passage, labelled mosquitoes, gutters and what to do. '
+      + 'Three arrows run down from them into a single box holding '
+      + 'the one idea all three share, stopping mosquitoes near the '
+      + 'home. Underneath, a note says that a flood in paragraph 2 '
+      + 'is the part you remember, but it covers one paragraph, so '
+      + 'it is a detail.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">One passage, three paragraphs</text>'
+      + '<rect x="16" y="44" width="184" height="84"/>'
+      + '<text x="108" y="78" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">Paragraph 1</text>'
+      + '<text x="108" y="104" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">mosquitoes</text>'
+      + '<rect x="228" y="44" width="184" height="84"/>'
+      + '<text x="320" y="78" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">Paragraph 2</text>'
+      + '<text x="320" y="104" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">gutters</text>'
+      + '<rect x="440" y="44" width="184" height="84"/>'
+      + '<text x="532" y="78" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">Paragraph 3</text>'
+      + '<text x="532" y="104" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">what to do</text>'
+      + '<line x1="108" y1="128" x2="240" y2="196"/>'
+      + '<line x1="320" y1="128" x2="320" y2="196"/>'
+      + '<line x1="532" y1="128" x2="400" y2="196"/>'
+      + '<polygon points="240,206 233,193 247,193" fill="currentColor" stroke="none"/>'
+      + '<polygon points="320,206 313,193 327,193" fill="currentColor" stroke="none"/>'
+      + '<polygon points="400,206 393,193 407,193" fill="currentColor" stroke="none"/>'
+      + '<rect x="90" y="212" width="460" height="74" stroke="#0f8a4d"/>'
+      + '<text x="320" y="242" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the one idea all three share:</text>'
+      + '<text x="320" y="270" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">stopping mosquitoes near the home</text>'
+      + '<text x="320" y="330" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">A flood in paragraph 2 is the part you remember,</text>'
+      + '<text x="320" y="356" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">but it covers one paragraph, so it is a detail.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Four answers to the same passage, tested against every '
+      + 'paragraph',
+    columns: [
+      'An answer somebody gave',
+      'Does it cover every paragraph?',
+      'What it is',
+    ],
+    rows: [
+      ['How mosquitoes breed', 'Paragraph 1 only', 'A detail'],
+      ['Somebody got malaria', 'Paragraph 2 only', 'A detail'],
+      [
+        'It is about health',
+        'Yes, and a hundred other passages too',
+        'Too broad to be useful',
+      ],
+      [
+        'How to stop mosquitoes breeding at home',
+        'Yes, all three',
+        'The main idea',
+      ],
+    ],
+    note: 'An answer has to pass both ways: it must cover the last '
+      + 'paragraph, and it must not fit every passage ever written.',
+  }],
   questions: [
     {
       id: 'mi-1',
@@ -184,9 +241,8 @@ teach({
 
   idea:
     'A paragraph is a group of sentences about one idea. '
-    + 'The first sentence usually says what the idea is. '
-    + 'The sentences after it add to that idea: a reason, an example, '
-    + 'a detail. '
+    + 'The first sentence usually says what the idea is, '
+    + 'and every sentence after it adds to that same idea. '
     + 'When you move to a new idea, you start a new paragraph.',
 
   mechanism:
@@ -270,6 +326,53 @@ teach({
     + 'Try it on a page from a textbook. '
     + 'If it works, the writer planned their paragraphs.',
 
+  figure: {
+    alt: 'Two blocks of writing with a gap between them. The first '
+      + 'is headed Why I like my school and the second Why I like '
+      + 'Saturdays, each with lines standing for its sentences. Two '
+      + 'arrows point into the gap, which is labelled the blank '
+      + 'line, and a note underneath says the gap is how the reader '
+      + 'knows a new thought began.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Two ideas, so two paragraphs</text>'
+      + '<rect x="60" y="48" width="520" height="118" stroke="#0f8a4d"/>'
+      + '<text x="80" y="76" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">Why I like my school</text>'
+      + '<line x1="80" y1="96" x2="560" y2="96" stroke-width="2"/>'
+      + '<line x1="80" y1="118" x2="560" y2="118" stroke-width="2"/>'
+      + '<line x1="80" y1="140" x2="400" y2="140" stroke-width="2"/>'
+      + '<text x="320" y="196" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">the blank line</text>'
+      + '<line x1="200" y1="190" x2="248" y2="190" stroke="#0f8a4d"/>'
+      + '<polygon points="248,190 235,184 235,196" fill="#0f8a4d" stroke="none"/>'
+      + '<line x1="440" y1="190" x2="392" y2="190" stroke="#0f8a4d"/>'
+      + '<polygon points="392,190 405,184 405,196" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="60" y="214" width="520" height="118" stroke="#0f8a4d"/>'
+      + '<text x="80" y="242" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">Why I like Saturdays</text>'
+      + '<line x1="80" y1="262" x2="560" y2="262" stroke-width="2"/>'
+      + '<line x1="80" y1="284" x2="560" y2="284" stroke-width="2"/>'
+      + '<line x1="80" y1="306" x2="340" y2="306" stroke-width="2"/>'
+      + '<text x="320" y="370" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">The gap is how the reader knows a new thought began.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'One paragraph about liking school, and the job each sentence '
+      + 'does in it',
+    columns: [
+      'The sentence',
+      'Its job',
+    ],
+    rows: [
+      ['I like my school for three reasons.', 'States the one idea'],
+      ['The teachers explain a thing twice if you ask.', 'A reason'],
+      ['Mr Mensah stayed behind to help me with fractions.', 'An example'],
+      ['The classrooms stay cool in the afternoon.', 'A detail'],
+      [
+        'My brother plays football on Saturdays.',
+        'Does not belong, so it starts the next paragraph',
+      ],
+    ],
+    note: 'Every sentence but the last belongs to the one idea. The last '
+      + 'one is about something else, however true it is.',
+  }],
   questions: [
     {
       id: 'pg-1',
@@ -338,8 +441,8 @@ teach({
 
   mechanism:
     'Most verbs make the past by adding ed, '
-    + 'and the ones that do not are the ones you use most: '
-    + 'go becomes went, eat becomes ate, see becomes saw. '
+    + 'and the ones that do not are the ones you use most, '
+    + 'as the table below shows. '
     + 'It is the same reason feet is not foots. '
     + 'The commonest words kept their old shapes, '
     + 'because words used every day are said too often to be tidied up. '
@@ -416,6 +519,52 @@ teach({
     + 'English uses those constantly, and you already say them correctly '
     + 'without being taught.',
 
+  figure: {
+    alt: 'A line running left to right with an arrow at the end, '
+      + 'marked at three points. The first is yesterday, I walked, '
+      + 'the past. The middle is today, I walk, the present. The '
+      + 'last is tomorrow, I will walk, the future. Underneath, a '
+      + 'note says the verb is the word that changes to say when, '
+      + 'that only the past adds ed, and that the future adds the '
+      + 'word will.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<line x1="40" y1="200" x2="580" y2="200" stroke-width="4"/>'
+      + '<polygon points="600,200 578,189 578,211" fill="currentColor" stroke="none"/>'
+      + '<line x1="140" y1="186" x2="140" y2="214"/>'
+      + '<line x1="320" y1="186" x2="320" y2="214"/>'
+      + '<line x1="500" y1="186" x2="500" y2="214"/>'
+      + '<text x="140" y="134" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">yesterday</text>'
+      + '<text x="140" y="166" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">I walked</text>'
+      + '<text x="140" y="248" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the past</text>'
+      + '<text x="320" y="134" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">today</text>'
+      + '<text x="320" y="166" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">I walk</text>'
+      + '<text x="320" y="248" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the present</text>'
+      + '<text x="500" y="134" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">tomorrow</text>'
+      + '<text x="500" y="166" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">I will walk</text>'
+      + '<text x="500" y="248" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the future</text>'
+      + '<text x="320" y="322" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">The verb is the word that changes to say when.</text>'
+      + '<text x="320" y="352" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Only the past adds ed. The future adds the word will.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Five verbs in the past, the present and the future',
+    columns: [
+      'The verb',
+      'Yesterday',
+      'Today',
+      'Tomorrow',
+    ],
+    rows: [
+      ['walk', 'walked', 'walk', 'will walk'],
+      ['play', 'played', 'play', 'will play'],
+      ['go', 'went', 'go', 'will go'],
+      ['eat', 'ate', 'eat', 'will eat'],
+      ['see', 'saw', 'see', 'will see'],
+    ],
+    note: 'The first two add ed. The last three change shape instead, and '
+      + 'they are among the words you say most often, which is why you '
+      + 'already know them by ear.',
+  }],
   questions: [
     {
       id: 'tn-1',
@@ -474,11 +623,8 @@ teach({
 
   idea:
     'Punctuation marks are instructions for the reader. '
-    + 'A capital says a sentence or a name begins here. '
-    + 'A full stop says the thought has ended. '
-    + 'A question mark says this is asking. '
-    + 'A comma says pause briefly. '
-    + 'An apostrophe shows owning, or a missing letter.',
+    + 'Each one tells them something different '
+    + 'about how to read what you wrote.',
 
   mechanism:
     'Punctuation is not decoration added at the end. '
@@ -560,6 +706,60 @@ teach({
     + 'which caused expensive arguments about what a sentence meant. '
     + 'Punctuation is how a writer removes doubt.',
 
+  figure: {
+    alt: 'Two boxes side by side holding the same four words. The '
+      + 'left box, drawn in green, reads Let us eat, Kofi, and is '
+      + 'labelled as speaking to Kofi. The right box, drawn in red, '
+      + 'reads Let us eat Kofi, and is labelled as making Kofi the '
+      + 'meal. Underneath, a note says a punctuation mark is part '
+      + 'of what the words say, so leaving one out can change the '
+      + 'meaning.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="34" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">One comma is the whole difference.</text>'
+      + '<rect x="24" y="60" width="276" height="112" stroke="#0f8a4d"/>'
+      + '<text x="162" y="104" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">Let us eat, Kofi.</text>'
+      + '<text x="162" y="144" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">You are speaking to Kofi.</text>'
+      + '<text x="162" y="204" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">The comma marks the person</text>'
+      + '<text x="162" y="228" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">you are talking to.</text>'
+      + '<rect x="340" y="60" width="276" height="112" stroke="#c8433a"/>'
+      + '<text x="478" y="104" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">Let us eat Kofi.</text>'
+      + '<text x="478" y="144" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">Kofi is now the meal.</text>'
+      + '<text x="478" y="204" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">With no comma the sentence</text>'
+      + '<text x="478" y="228" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">says something else.</text>'
+      + '<text x="320" y="300" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">A punctuation mark is not decoration.</text>'
+      + '<text x="320" y="330" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">It is part of what the words say,</text>'
+      + '<text x="320" y="360" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so leaving one out can change the meaning.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What each punctuation mark tells the reader',
+    columns: [
+      'Mark',
+      'What it tells the reader',
+      'Example',
+    ],
+    rows: [
+      [
+        'Capital letter',
+        'A sentence begins here, or this is a name',
+        'Ama went to Accra on Monday.',
+      ],
+      ['Full stop', 'The thought has ended', 'She came home late.'],
+      ['Question mark', 'This one is asking', 'Where is my book?'],
+      [
+        'Comma',
+        'Pause here, or separate the things in a list',
+        'We bought rice, beans and fish.',
+      ],
+      [
+        'Apostrophe',
+        'Owning, or a letter left out',
+        'Ama’s book. Do not becomes don’t.',
+      ],
+    ],
+    note: 'Two mangoes needs no apostrophe. An apostrophe on a plural is '
+      + 'the commonest mistake of all.',
+  }],
   questions: [
     {
       id: 'pn-1',
@@ -617,9 +817,8 @@ teach({
 
   idea:
     'English spelling looks random and mostly is not. '
-    + 'Words that sound alike are often spelled alike: '
-    + 'light, night, right, sight. '
-    + 'Learn one pattern and you can spell a family of words.',
+    + 'Words that sound alike are often spelled alike. '
+    + 'Learn one pattern and you can spell a whole family of words.',
 
   mechanism:
     'Patterns are worth more than single words, '
@@ -704,6 +903,46 @@ teach({
     + 'Words that came from French, Latin and Greek often follow their own '
     + 'patterns, so the oddness has reasons behind it.',
 
+  figure: {
+    alt: 'The letters i g h t in a box at the top, labelled one '
+      + 'pattern, with five lines spreading down from it to the '
+      + 'words light, night, right, sight and fight. Underneath, a '
+      + 'note says that learning the pattern once lets you spell a '
+      + 'word in the family you have never written.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<rect x="240" y="40" width="160" height="70" stroke="#0f8a4d"/>'
+      + '<text x="320" y="86" font-size="30" text-anchor="middle" fill="#0f8a4d" stroke="none">ight</text>'
+      + '<text x="320" y="142" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">one pattern</text>'
+      + '<line x1="320" y1="156" x2="80" y2="214"/>'
+      + '<line x1="320" y1="156" x2="200" y2="214"/>'
+      + '<line x1="320" y1="156" x2="320" y2="214"/>'
+      + '<line x1="320" y1="156" x2="440" y2="214"/>'
+      + '<line x1="320" y1="156" x2="560" y2="214"/>'
+      + '<text x="80" y="248" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">light</text>'
+      + '<text x="200" y="248" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">night</text>'
+      + '<text x="320" y="248" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">right</text>'
+      + '<text x="440" y="248" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">sight</text>'
+      + '<text x="560" y="248" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">fight</text>'
+      + '<text x="320" y="316" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Learn the pattern once and you can spell</text>'
+      + '<text x="320" y="344" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a word in the family you have never written.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Four spelling patterns and the words each one gives you',
+    columns: [
+      'Pattern',
+      'The sound',
+      'Words it spells',
+    ],
+    rows: [
+      ['ight', 'as in night', 'light, right, sight, fight, might'],
+      ['tch', 'as in catch', 'match, fetch, witch, stitch'],
+      ['ould', 'as in could', 'would, should'],
+      ['tion', 'as in nation', 'station, action, portion, question'],
+    ],
+    note: 'The words that break a pattern are nearly always common ones, '
+      + 'so you meet them often enough to learn them by sight.',
+  }],
   questions: [
     {
       id: 'sp-1',
