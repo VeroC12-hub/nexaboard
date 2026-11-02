@@ -49,10 +49,8 @@ teach({
     + 'A good point has three parts: '
     + 'the claim, the reason it holds, and evidence for it. '
     + 'A rebuttal answers what the other side said. '
-    + 'You open by stating your side, '
-    + 'give your points in order of strength, '
-    + 'answer the main point against you, '
-    + 'and close by saying what the debate turns on. '
+    + 'A speech goes in a fixed order, '
+    + 'and the part that decides the debate is the rebuttal. '
     + 'You speak to the chair and the audience, '
     + 'and you answer arguments rather than people.',
 
@@ -69,11 +67,10 @@ teach({
     + 'Write down the best case against you, as well as its own supporters '
     + 'could put it, '
     + 'and then answer that. '
-    + 'There are three honest ways to answer a point: '
-    + 'show the fact is wrong, '
-    + 'accept the fact but show it does not lead where they claim, '
-    + 'or accept the whole point and show that your side outweighs it. '
-    + 'That third one is the most useful and the least used, '
+    + 'There are three honest ways to answer a point, '
+    + 'and they differ in how much of it you are willing to grant. '
+    + 'The third one, granting the whole point and outweighing it, '
+    + 'is the most useful and the least used, '
     + 'because learners think admitting anything is losing. '
     + 'It is not. '
     + '"Yes, school uniform costs money, and it costs less than the clothes '
@@ -170,6 +167,99 @@ teach({
     + 'which is only possible if you were listening rather than reading '
     + 'notes.',
 
+  figure: {
+    alt: 'The other side’s three points drawn as bars of increasing height. '
+      + 'On the left, in red, the shortest bar is struck through and the '
+      + 'tallest is left standing, which is what most speakers do. On the '
+      + 'right, in green, the tallest bar is the one struck through.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">a debate turns on whether you answered their strongest point</text>'
+      + '<text x="140" y="60" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">what most speakers do</text>'
+      + '<path d="M 40 186 H 94 V 230 H 40 Z" stroke="#c8433a"/>'
+      + '<text x="67" y="252" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">their</text>'
+      + '<text x="67" y="268" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">weak</text>'
+      + '<path d="M 32 238 L 102 178" stroke="#c8433a" stroke-width="5"/>'
+      + '<path d="M 120 144 H 174 V 230 H 120 Z" stroke="#c8433a"/>'
+      + '<text x="147" y="252" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">their</text>'
+      + '<text x="147" y="268" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">middling</text>'
+      + '<path d="M 200 90 H 254 V 230 H 200 Z" stroke="#c8433a"/>'
+      + '<text x="227" y="252" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">their</text>'
+      + '<text x="227" y="268" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">strongest</text>'
+      + '<text x="140" y="300" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">the easy one is knocked down,</text>'
+      + '<text x="140" y="318" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">and the big one is still standing,</text>'
+      + '<text x="140" y="336" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">which tells the judges you have no answer</text>'
+      + '<text x="460" y="60" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">what wins</text>'
+      + '<path d="M 360 186 H 414 V 230 H 360 Z" stroke="#0f8a4d"/>'
+      + '<text x="387" y="252" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">their</text>'
+      + '<text x="387" y="268" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">weak</text>'
+      + '<path d="M 440 144 H 494 V 230 H 440 Z" stroke="#0f8a4d"/>'
+      + '<text x="467" y="252" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">their</text>'
+      + '<text x="467" y="268" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">middling</text>'
+      + '<path d="M 520 90 H 574 V 230 H 520 Z" stroke="#0f8a4d"/>'
+      + '<text x="547" y="252" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">their</text>'
+      + '<text x="547" y="268" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">strongest</text>'
+      + '<path d="M 512 238 L 582 82" stroke="#0f8a4d" stroke-width="5"/>'
+      + '<text x="460" y="300" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">take the one they were relying on,</text>'
+      + '<text x="460" y="318" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">and the judges watched you do it</text>'
+      + '<text x="320" y="370" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so prepare from the other side: write their best case as well</text>'
+      + '<text x="320" y="390" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">as its own supporters could put it, and then answer that</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The order a debate speech goes in, and what each part is '
+        + 'for',
+      columns: ['Part', 'What you do', 'Why'],
+      rows: [
+        [
+          'Open',
+          'State the motion and which side you are on',
+          'Nobody can follow you until they know where you stand',
+        ],
+        [
+          'Your points',
+          'Strongest first, each with a claim, a reason and evidence',
+          'The first one is the one they remember',
+        ],
+        [
+          'Rebuttal',
+          'Answer the strongest point against you',
+          'Avoiding it tells the judges you have no answer to it',
+        ],
+        [
+          'Close',
+          'Say what the whole debate turns on',
+          'It leaves the judges holding your question, not theirs',
+        ],
+      ],
+      note: 'A claim with a number, an example or a named case behind it is '
+        + 'worth several claims without one.',
+    },
+    {
+      caption: 'The three honest ways to answer a point against you',
+      columns: ['The answer', 'What you are granting', 'How it sounds'],
+      rows: [
+        [
+          'Show the fact is wrong',
+          'Nothing',
+          'That figure is from 1990, not from last year',
+        ],
+        [
+          'Grant the fact, deny what follows',
+          'The fact only',
+          'True, and it does not make them unfair',
+        ],
+        [
+          'Grant the point, and outweigh it',
+          'The whole point',
+          'Yes, uniform costs money, and it costs less than the clothes it replaces',
+        ],
+      ],
+      note: 'Learners avoid the third because they think granting anything '
+        + 'is losing. It is not, and it is the one that wins exchanges.',
+    },
+  ],
   questions: [
     {
       id: 'deb-1',
@@ -236,14 +326,9 @@ teach({
   idea:
     'A listening test plays something once, or sometimes twice, '
     + 'and asks questions on it. '
-    + 'Questions about detail want a fact: a name, a number, a reason '
-    + 'given. '
-    + 'Questions about attitude want how the speaker felt: '
-    + 'approving, doubtful, annoyed, amused, regretful. '
-    + 'Detail is carried by the words themselves. '
-    + 'Attitude is carried by tone of voice, '
-    + 'by which words the speaker chose, '
-    + 'and sometimes by what they did not say.',
+    + 'The questions come in two kinds, '
+    + 'and the answers to the two are carried in different places, '
+    + 'which is why they need different kinds of attention.',
 
   mechanism:
     'The whole difficulty of a listening test is that it does not wait for '
@@ -358,6 +443,91 @@ teach({
     + 'view. '
     + 'One initial beside each note is enough.',
 
+  figure: {
+    alt: 'The recording drawn as a row of sentences running left to right, '
+      + 'with the preparation done in a green box before it begins. '
+      + 'Underneath, a red box spans three sentences to show that writing '
+      + 'out one full sentence loses the next three, while below that '
+      + 'three green ticks catch single words, Tema, 6am, lorry broke, and '
+      + 'miss nothing.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the recording does not wait, so the work is done before it starts</text>'
+      + '<path d="M 16 70 H 196 V 150 H 16 Z" stroke="#0f8a4d"/>'
+      + '<text x="106" y="94" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">before it starts</text>'
+      + '<text x="106" y="116" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">read every question and</text>'
+      + '<text x="106" y="132" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">turn each into one thing</text>'
+      + '<text x="106" y="148" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">to listen for</text>'
+      + '<path d="M 204 110 H 232" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 242 110 L 224 101 L 224 119 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 252 90 H 624 V 130 H 252 Z"/>'
+      + '<path d="M 314 90 V 130" stroke-width="1.5"/>'
+      + '<path d="M 376 90 V 130" stroke-width="1.5"/>'
+      + '<path d="M 438 90 V 130" stroke-width="1.5"/>'
+      + '<path d="M 500 90 V 130" stroke-width="1.5"/>'
+      + '<path d="M 562 90 V 130" stroke-width="1.5"/>'
+      + '<text x="438" y="78" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the recording, one sentence after another</text>'
+      + '<path d="M 314 160 H 500 V 196 H 314 Z" stroke="#c8433a"/>'
+      + '<text x="407" y="182" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">writing out one full sentence</text>'
+      + '<path d="M 376 140 V 156" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="407" y="218" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">and the next three went past</text>'
+      + '<text x="407" y="236" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">while the pen was moving</text>'
+      + '<path d="M 283 262 V 278" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="283" y="296" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">Tema</text>'
+      + '<path d="M 407 262 V 278" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="407" y="296" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">6am</text>'
+      + '<path d="M 531 262 V 278" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="531" y="296" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">lorry broke</text>'
+      + '<path d="M 252 262 H 624" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="438" y="320" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">single words, and nothing is missed</text>'
+      + '<text x="320" y="364" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">detail is in the words themselves; attitude is in the word</text>'
+      + '<text x="320" y="386" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the speaker chose instead of the plain one</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The two kinds of question, and where each answer is carried',
+      columns: ['Question', 'What it wants', 'Where the answer is'],
+      rows: [
+        [
+          'About detail',
+          'A fact: a name, a number, a reason given',
+          'In the words themselves',
+        ],
+        [
+          'About attitude',
+          'How the speaker felt: approving, doubtful, annoyed, amused, regretful',
+          'In the tone, in the words chosen, and in what was left unsaid',
+        ],
+      ],
+      note: 'Read every question before the recording starts and turn each '
+        + 'one into a single thing to listen for. After that you are '
+        + 'waiting for those things rather than following everything '
+        + 'equally.',
+    },
+    {
+      caption: 'The same fact reported two ways, and the attitude in the '
+        + 'difference',
+      columns: [
+        'The plain word',
+        'The word chosen instead',
+        'What the choice carries',
+      ],
+      rows: [
+        [
+          'The scheme was abandoned',
+          'The scheme collapsed',
+          'Judgement: it fell of its own weight',
+        ],
+        ['He spoke for an hour', 'He went on for an hour', 'Impatience'],
+        ['She asked again', 'She kept on asking', 'Annoyance'],
+        ['The price went up', 'The price shot up', 'Alarm'],
+      ],
+      note: 'Both columns report the same fact, so the attitude is in the '
+        + 'choice and nowhere else. Pointing at the chosen word is what '
+        + 'the mark is for.',
+    },
+  ],
   questions: [
     {
       id: 'lis-1',
@@ -424,9 +594,8 @@ teach({
 
   idea:
     'A summary gives the points of a passage in fewer words. '
-    + 'You keep each separate point once. '
-    + 'You drop examples, repetition, description, '
-    + 'figures of speech and anything the question did not ask about. '
+    + 'You keep each separate point once, and you drop the support '
+    + 'under it. '
     + 'You write in your own words, '
     + 'in continuous prose rather than a list, '
     + 'in the third person, '
@@ -545,6 +714,67 @@ teach({
     + 'which is faster to use and must not be handed in when a summary was '
     + 'asked for.',
 
+  figure: {
+    alt: 'Three bars against a dashed line marking the word limit. The '
+      + 'passage is the longest. Shortening every sentence and keeping all '
+      + 'of them, in red, still crosses the limit, and an arrow shows that '
+      + 'the part beyond it is not marked. Keeping one sentence per point '
+      + 'and cutting the support, in green, ends well inside the limit.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">cut by kind, not by length</text>'
+      + '<path d="M 400 54 V 326" stroke-dasharray="8 6" stroke-width="2"/>'
+      + '<text x="406" y="48" font-size="14" text-anchor="start" fill="currentColor" stroke="none">the word limit</text>'
+      + '<text x="30" y="88" font-size="14" text-anchor="start" fill="currentColor" stroke="none">the passage</text>'
+      + '<path d="M 30 100 H 600 V 136 H 30 Z"/>'
+      + '<text x="315" y="122" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">every point, and all the support under each one</text>'
+      + '<text x="30" y="178" font-size="14" text-anchor="start" fill="#c8433a" stroke="none">every sentence shortened, and all of them kept</text>'
+      + '<path d="M 30 190 H 520 V 226 H 30 Z" stroke="#c8433a"/>'
+      + '<text x="275" y="212" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">still over the limit, and no points stand out in it</text>'
+      + '<path d="M 520 236 L 408 236" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 400 236 L 416 230 L 416 242 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="462" y="256" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">this part is not marked</text>'
+      + '<text x="30" y="294" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">one sentence kept per point, and the support cut</text>'
+      + '<path d="M 30 306 H 330 V 342 H 30 Z" stroke="#0f8a4d"/>'
+      + '<text x="180" y="328" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">inside the limit, and every point in it</text>'
+      + '<text x="320" y="378" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">ask of every sentence: is this a new point,</text>'
+      + '<text x="320" y="396" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">or support for a point already made? Support goes.</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What to keep and what to cut, decided by kind and not by '
+        + 'length',
+      columns: ['What it is', 'Keep or cut', 'Why'],
+      rows: [
+        [
+          'A new point',
+          'Keep it, once',
+          'The points are what a summary is made of',
+        ],
+        [
+          'A second sentence saying the same thing',
+          'Cut',
+          'It is support for a point already made',
+        ],
+        ['An example', 'Cut', 'It is support'],
+        ['A description', 'Cut, almost always', 'It is support'],
+        [
+          'A figure of speech',
+          'Cut',
+          'It is the writer’s manner, and not their point',
+        ],
+        [
+          'Anything the question did not ask about',
+          'Cut',
+          'It earns nothing and spends the words you have',
+        ],
+      ],
+      note: 'When a paragraph makes one point with three illustrations, one '
+        + 'sentence survives the whole paragraph. That is what makes a '
+        + 'summary short without losing anything that counts.',
+    },
+  ],
   questions: [
     {
       id: 'sum-1',
@@ -865,15 +1095,11 @@ teach({
   },
 
   idea:
-    'Plot is the chain of events, and the links matter as much as the '
-    + 'events: '
-    + 'this happened, so that happened. '
-    + 'Character is the people, '
-    + 'and a character is shown by what they do, say and choose, '
-    + 'not by the writer calling them brave. '
-    + 'Setting is the place and time, '
-    + 'and it is not scenery: it limits what can happen. '
-    + 'Theme is what the work is about underneath the story. '
+    'Prose and drama are read for four things: '
+    + 'plot, character, setting and theme. '
+    + 'None of the four is a label to be attached. '
+    + 'Each is a question to be asked of the text, '
+    + 'and each answer has to carry a moment from the text with it. '
     + 'In drama there is no narrator, '
     + 'so everything reaches you through dialogue, action and stage '
     + 'directions. '
@@ -990,6 +1216,83 @@ teach({
     + 'or against themselves. '
     + 'Naming the conflict usually explains the plot and the theme at once.',
 
+  figure: {
+    alt: 'Two pairs of answers compared. He is proud, in red, is an '
+      + 'adjective the marker cannot check; he is proud because he refuses '
+      + 'his brother’s help even as the farm fails, in green, is the same '
+      + 'claim with a choice made under pressure behind it. Below, it is '
+      + 'set in a village, in red, is a label; everyone knows everyone so '
+      + 'the secret cannot be kept, in green, has the setting driving the '
+      + 'plot.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">never a claim without the moment that proves it</text>'
+      + '<text x="30" y="60" font-size="14" text-anchor="start" fill="currentColor" stroke="none">about a character</text>'
+      + '<path d="M 24 72 H 300 V 124 H 24 Z" stroke="#c8433a"/>'
+      + '<text x="162" y="104" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">He is proud.</text>'
+      + '<text x="162" y="146" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">an adjective, and the marker</text>'
+      + '<text x="162" y="164" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">has no way to check it</text>'
+      + '<path d="M 340 72 H 616 V 124 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="478" y="94" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">He is proud: he refuses his</text>'
+      + '<text x="478" y="114" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">brother’s help even as the farm fails.</text>'
+      + '<text x="478" y="146" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the same claim, with a choice</text>'
+      + '<text x="478" y="164" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">he made under pressure behind it</text>'
+      + '<path d="M 24 186 H 616" stroke-dasharray="7 6" stroke-width="1.5"/>'
+      + '<text x="30" y="222" font-size="14" text-anchor="start" fill="currentColor" stroke="none">about the setting</text>'
+      + '<path d="M 24 234 H 300 V 286 H 24 Z" stroke="#c8433a"/>'
+      + '<text x="162" y="265" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">It is set in a village.</text>'
+      + '<text x="162" y="308" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">a label, and nothing follows</text>'
+      + '<text x="162" y="326" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">from it</text>'
+      + '<path d="M 340 234 H 616 V 286 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="478" y="256" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">Everyone knows everyone, so the</text>'
+      + '<text x="478" y="276" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">secret cannot be kept for long.</text>'
+      + '<text x="478" y="308" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the setting is driving the plot,</text>'
+      + '<text x="478" y="326" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">which is what the question wants</text>'
+      + '<text x="320" y="370" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">adjectives are not evidence; what a person does</text>'
+      + '<text x="320" y="390" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">under pressure is</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four elements, the question to ask of each, and what '
+        + 'counts as evidence',
+      columns: [
+        'Element',
+        'What it is',
+        'The question to ask',
+        'What counts as evidence',
+      ],
+      rows: [
+        [
+          'Plot',
+          'The chain of events, and the links between them',
+          'What made this happen?',
+          'The earlier event that caused it',
+        ],
+        [
+          'Character',
+          'The people in it',
+          'What did they do under pressure?',
+          'A choice they made, never an adjective',
+        ],
+        [
+          'Setting',
+          'The place and the time',
+          'What does it make possible, or impossible?',
+          'Something the story could not do anywhere else',
+        ],
+        [
+          'Theme',
+          'What the work is about underneath the story',
+          'What keeps coming back?',
+          'Two or three separate moments that share it',
+        ],
+      ],
+      note: 'Setting is the one most often wasted. Writing that a story is '
+        + 'set in a village and stopping treats it as scenery, when it is '
+        + 'one of the things driving the plot.',
+    },
+  ],
   questions: [
     {
       id: 'prd-1',
@@ -1056,22 +1359,12 @@ teach({
   },
 
   idea:
-    'A formal letter is written to somebody in an official position. '
-    + 'The layout is: your address at the top right, '
-    + 'the date under it, '
-    + 'the receiver’s name and address on the left, '
-    + 'the salutation, '
-    + 'a subject heading in capitals or underlined, '
-    + 'the body in paragraphs, '
-    + 'then the closing and your signature with your name under it. '
-    + 'If you do not know the name, write Dear Sir or Dear Madam '
-    + 'and close with Yours faithfully. '
-    + 'If you do know it, write Dear Mr Mensah '
-    + 'and close with Yours sincerely. '
-    + 'An informal letter to a friend or relative keeps your address and '
-    + 'the date, '
-    + 'drops the receiver’s address and the heading, '
-    + 'uses Dear Kofi, and closes with something like Yours affectionately.',
+    'A formal letter is written to somebody in an official position, '
+    + 'and its layout carries marks of its own. '
+    + 'An informal letter to a friend or a relative '
+    + 'keeps some of that furniture and drops the rest. '
+    + 'The salutation and the closing go together as a pair, '
+    + 'and mixing them is the commonest error in the topic.',
 
   mechanism:
     'The layout carries marks of its own, '
@@ -1184,6 +1477,76 @@ teach({
     + 'And every claim in it should be something the reader could '
     + 'check.',
 
+  figure: {
+    alt: 'A formal letter laid out on a page, with the parts that carry '
+      + 'layout marks drawn in green: your address at the top right, the '
+      + 'date under it, the receiver’s address on the left, Dear Sir, an '
+      + 'underlined subject heading, and Yours faithfully above the '
+      + 'signature. The body is drawn plain, and lines join Dear Sir to '
+      + 'the note that there is no name, and to Yours faithfully as its '
+      + 'pair.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the layout carries marks of its own, so do the furniture first</text>'
+      + '<path d="M 110 40 H 430 V 392 H 110 Z" stroke-width="2"/>'
+      + '<path d="M 310 66 H 412" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 330 84 H 412" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 346 102 H 412" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 348 128 H 412" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 128 158 H 250" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 128 176 H 236" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 128 194 H 214" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="128" y="230" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">Dear Sir,</text>'
+      + '<text x="128" y="262" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">REQUEST FOR A TRANSCRIPT</text>'
+      + '<path d="M 128 268 H 322" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 128 292 H 412" stroke-width="2"/>'
+      + '<path d="M 128 310 H 412" stroke-width="2"/>'
+      + '<path d="M 128 328 H 356" stroke-width="2"/>'
+      + '<text x="128" y="358" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">Yours faithfully,</text>'
+      + '<path d="M 128 376 C 146 362, 160 388, 178 370 S 206 376, 220 366" stroke-width="2"/>'
+      + '<text x="446" y="88" font-size="13" text-anchor="start" fill="currentColor" stroke="none">your address</text>'
+      + '<text x="446" y="132" font-size="13" text-anchor="start" fill="currentColor" stroke="none">the date</text>'
+      + '<text x="446" y="180" font-size="13" text-anchor="start" fill="currentColor" stroke="none">who it goes to</text>'
+      + '<text x="446" y="230" font-size="13" text-anchor="start" fill="currentColor" stroke="none">salutation</text>'
+      + '<text x="446" y="266" font-size="13" text-anchor="start" fill="currentColor" stroke="none">subject heading</text>'
+      + '<text x="446" y="314" font-size="13" text-anchor="start" fill="currentColor" stroke="none">the body, with the</text>'
+      + '<text x="446" y="332" font-size="13" text-anchor="start" fill="currentColor" stroke="none">business in sentence one</text>'
+      + '<text x="446" y="358" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">closing: faithfully,</text>'
+      + '<text x="446" y="376" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">because Dear Sir</text>'
+      + '<text x="20" y="230" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">no name,</text>'
+      + '<text x="20" y="248" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">so Sir</text>'
+      + '<path d="M 76 226 H 104" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 436 354 H 418" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 436 226 H 418" stroke="#0f8a4d" stroke-width="2"/>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What goes in a formal letter, and what an informal one does '
+        + 'instead',
+      columns: ['Part', 'Formal letter', 'Informal letter'],
+      rows: [
+        ['Your address and the date', 'Top right', 'Top right, the same'],
+        ['The receiver’s address', 'On the left, under the date', 'Left out'],
+        ['Subject heading', 'In capitals, or underlined', 'Left out'],
+        ['Salutation', 'Dear Sir, or Dear Mr Mensah', 'Dear Kofi'],
+        [
+          'Closing',
+          'Yours faithfully, or Yours sincerely',
+          'Yours affectionately, or something like it',
+        ],
+        [
+          'Register',
+          'No contractions, no slang, the business in sentence one',
+          'Anything you would say aloud',
+        ],
+      ],
+      note: 'Faithfully goes with Dear Sir, because you are being faithful '
+        + 'to an office rather than to a person. Sincerely goes with a '
+        + 'name, because sincerity is something between people. Dear Sir '
+        + 'with Yours sincerely is a contradiction.',
+    },
+  ],
   questions: [
     {
       id: 'ltr-1',
