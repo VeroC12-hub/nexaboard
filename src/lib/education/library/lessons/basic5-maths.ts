@@ -115,6 +115,52 @@ teach({
     + 'If 387 times 21 should be roughly 400 times 20, that is about 8,000. '
     + 'An answer of 812 or 81,270 is wrong and you knew it in two seconds.',
 
+  figure: {
+    alt: 'A number line from 380 to 390 with a tick for every whole number. '
+      + '387 is marked with a green dot. The gap from 387 to 390 is marked '
+      + 'as three, and the gap back to 380 is marked as seven, so 387 is '
+      + 'nearer 390.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">which neighbour is nearer</text>'
+      + '<line x1="40" y1="208" x2="600" y2="208" stroke-width="4"/>'
+      + '<line x1="60" y1="196" x2="60" y2="220"/>'
+      + '<text x="60" y="254" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">380</text>'
+      + '<line x1="112" y1="196" x2="112" y2="220"/>'
+      + '<line x1="164" y1="196" x2="164" y2="220"/>'
+      + '<line x1="216" y1="196" x2="216" y2="220"/>'
+      + '<line x1="268" y1="196" x2="268" y2="220"/>'
+      + '<line x1="320" y1="196" x2="320" y2="220"/>'
+      + '<text x="320" y="254" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">385</text>'
+      + '<line x1="372" y1="196" x2="372" y2="220"/>'
+      + '<line x1="424" y1="196" x2="424" y2="220"/>'
+      + '<line x1="476" y1="196" x2="476" y2="220"/>'
+      + '<line x1="528" y1="196" x2="528" y2="220"/>'
+      + '<line x1="580" y1="196" x2="580" y2="220"/>'
+      + '<text x="580" y="254" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">390</text>'
+      + '<circle cx="424" cy="208" r="12" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="424" y="164" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">387</text>'
+      + '<line x1="60" y1="300" x2="424" y2="300" stroke-width="3"/>'
+      + '<line x1="60" y1="292" x2="60" y2="308"/>'
+      + '<line x1="424" y1="292" x2="424" y2="308"/>'
+      + '<text x="242" y="330" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">seven away</text>'
+      + '<line x1="424" y1="300" x2="580" y2="300" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="580" y1="292" x2="580" y2="308" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="502" y="330" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">three away</text>'
+      + '<text x="320" y="378" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">so 387 to the nearest ten is '
+      + '390</text></svg>',
+  },
   questions: [
     {
       id: 'rd-1',
@@ -174,12 +220,9 @@ teach({
   mechanism:
     'Here is the part that is really being taught. '
     + 'The arithmetic always gives the same answer, and the story does not. '
-    + '26 children and 4 to a car gives 6 remainder 2, '
-    + 'and the answer is 7 cars, because the last two still need a ride. '
-    + '26 cedis shared between 4 gives 6 each, '
-    + 'and the 2 left over might be shared further or kept. '
-    + '26 metres of rope cut into 4 metre lengths gives 6 lengths, '
-    + 'and the remainder is simply offcut. '
+    + 'Whether the leftover has to be carried, kept, shared further '
+    + 'or thrown away is decided by what the question is about, '
+    + 'and nothing in the division itself can tell you. '
     + 'Same sum, three different answers. '
     + 'The arithmetic is the easy half.',
 
@@ -255,6 +298,90 @@ teach({
     + 'That is right for rope and cloth and wrong for cars, '
     + 'and knowing which is which is the whole skill.',
 
+  figure: {
+    alt: '26 counters sorted into six groups of four, with two counters left '
+      + 'over on their own in a green box. Under them it says 26 divided by '
+      + '4 is 6, with 2 left over.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">26 shared into fours</text>'
+      + '<polygon points="48,118 124,118 124,212 48,212" stroke-width="3"/>'
+      + '<circle cx="68" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="104" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="68" cy="182" r="13" fill="currentColor"/>'
+      + '<circle cx="104" cy="182" r="13" fill="currentColor"/>'
+      + '<polygon points="144,118 220,118 220,212 144,212" '
+      + 'stroke-width="3"/>'
+      + '<circle cx="164" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="200" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="164" cy="182" r="13" fill="currentColor"/>'
+      + '<circle cx="200" cy="182" r="13" fill="currentColor"/>'
+      + '<polygon points="240,118 316,118 316,212 240,212" '
+      + 'stroke-width="3"/>'
+      + '<circle cx="260" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="296" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="260" cy="182" r="13" fill="currentColor"/>'
+      + '<circle cx="296" cy="182" r="13" fill="currentColor"/>'
+      + '<polygon points="336,118 412,118 412,212 336,212" '
+      + 'stroke-width="3"/>'
+      + '<circle cx="356" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="392" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="356" cy="182" r="13" fill="currentColor"/>'
+      + '<circle cx="392" cy="182" r="13" fill="currentColor"/>'
+      + '<polygon points="432,118 508,118 508,212 432,212" '
+      + 'stroke-width="3"/>'
+      + '<circle cx="452" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="488" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="452" cy="182" r="13" fill="currentColor"/>'
+      + '<circle cx="488" cy="182" r="13" fill="currentColor"/>'
+      + '<polygon points="528,118 604,118 604,212 528,212" '
+      + 'stroke-width="3"/>'
+      + '<circle cx="548" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="584" cy="146" r="13" fill="currentColor"/>'
+      + '<circle cx="548" cy="182" r="13" fill="currentColor"/>'
+      + '<circle cx="584" cy="182" r="13" fill="currentColor"/>'
+      + '<polygon points="250,250 390,250 390,318 250,318" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="300" cy="284" r="13" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="340" cy="284" r="13" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="320" y="354" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">six groups of four, and 2 left '
+      + 'over</text></svg>',
+  },
+  tables: [{
+    caption: 'The same sum three times, and three different answers',
+    columns: [
+      'The story',
+      'The sum',
+      'What the 2 left over means',
+      'The answer',
+    ],
+    rows: [
+      [
+        '26 children, 4 to a car',
+        '6 remainder 2',
+        'They still need a ride',
+        '7 cars',
+      ],
+      [
+        '26 cedis shared between 4',
+        '6 remainder 2',
+        'Share it further, or keep it',
+        '6 cedis each',
+      ],
+      [
+        '26 metres of rope cut into 4 metre lengths',
+        '6 remainder 2',
+        'It is offcut',
+        '6 lengths',
+      ],
+    ],
+    note: 'The arithmetic is the easy half. Reading the question again is '
+      + 'the other half.',
+  }],
   questions: [
     {
       id: 'dr-1',
@@ -309,9 +436,8 @@ teach({
 
   idea:
     'A factor of a number divides into it with nothing left over. '
-    + 'The factors of 12 are 1, 2, 3, 4, 6 and 12. '
-    + 'A multiple is what you get when you multiply: '
-    + 'the multiples of 3 are 3, 6, 9, 12 and on for ever. '
+    + 'A multiple is what you get when you multiply the number by '
+    + 'something. '
     + 'Factors are finite. Multiples are not.',
 
   mechanism:
@@ -397,6 +523,73 @@ teach({
     + 'Every other number can be built by multiplying primes together, '
     + 'and in only one way, which is a surprisingly deep fact.',
 
+  figure: {
+    alt: 'The factors of 12 drawn as three pairs, each pair joined by a '
+      + 'dotted green line marked times makes 12: 1 with 12, 2 with 6, and '
+      + '3 with 4. Under them it says test upwards until the pairs meet, '
+      + 'and then you are finished.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="54" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the factors of 12 come in '
+      + 'pairs</text><polygon points="110,130 190,130 190,182 110,182"/>'
+      + '<text x="150" y="166" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<polygon points="450,130 530,130 530,182 450,182"/>'
+      + '<text x="490" y="166" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">12</text>'
+      + '<line x1="196" y1="156" x2="250" y2="156" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<line x1="390" y1="156" x2="444" y2="156" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<text x="320" y="162" font-size="17" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">times makes 12</text>'
+      + '<polygon points="110,200 190,200 190,252 110,252"/>'
+      + '<text x="150" y="236" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<polygon points="450,200 530,200 530,252 450,252"/>'
+      + '<text x="490" y="236" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">6</text>'
+      + '<line x1="196" y1="226" x2="250" y2="226" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<line x1="390" y1="226" x2="444" y2="226" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<text x="320" y="232" font-size="17" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">times makes 12</text>'
+      + '<polygon points="110,270 190,270 190,322 110,322"/>'
+      + '<text x="150" y="306" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3</text>'
+      + '<polygon points="450,270 530,270 530,322 450,322"/>'
+      + '<text x="490" y="306" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4</text>'
+      + '<line x1="196" y1="296" x2="250" y2="296" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<line x1="390" y1="296" x2="444" y2="296" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<text x="320" y="302" font-size="17" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">times makes 12</text>'
+      + '<text x="320" y="378" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">test upwards until the pairs '
+      + 'meet, then you are finished</text></svg>',
+  },
+  tables: [{
+    caption: 'How factors and multiples differ',
+    columns: ['Question', 'Factors of 12', 'Multiples of 3'],
+    rows: [
+      ['What they are', '1, 2, 3, 4, 6 and 12', '3, 6, 9, 12, 15 and on'],
+      [
+        'How you find them',
+        'Divide 12 and look for no remainder',
+        'Count up in threes',
+      ],
+      [
+        'How many there are',
+        'Six of them, and that is all',
+        'They never run out',
+      ],
+    ],
+    note: 'Factors are finite. Multiples are not.',
+  }],
   questions: [
     {
       id: 'fm-1',
@@ -537,6 +730,57 @@ teach({
     + 'so you may have more simplifying to do at the end, '
     + 'but it always works and it never requires a guess.',
 
+  figure: {
+    alt: 'A half and a quarter drawn as two bars of the same whole. The half '
+      + 'is then cut down the middle so that it is two quarters, and the '
+      + 'two bars together make three quarters of the whole. Under it says '
+      + 'make the pieces the same size, then count them.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a half plus a quarter</text>'
+      + '<polygon points="50,80 160,80 160,132 50,132" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="160,80 270,80 270,132 160,132" stroke-width="3"/>'
+      + '<text x="160" y="158" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">one half</text>'
+      + '<text x="320" y="116" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">plus</text>'
+      + '<polygon points="370,80 425,80 425,132 370,132" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="425,80 480,80 480,132 425,132" stroke-width="3"/>'
+      + '<polygon points="480,80 535,80 535,132 480,132" stroke-width="3"/>'
+      + '<polygon points="535,80 590,80 590,132 535,132" stroke-width="3"/>'
+      + '<text x="480" y="158" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">one quarter</text>'
+      + '<line x1="320" y1="182" x2="320" y2="222"/>'
+      + '<polyline points="310,209 320,222 330,209"/>'
+      + '<polygon points="50,244 105,244 105,296 50,296" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="105,244 160,244 160,296 105,296" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="160,244 215,244 215,296 160,296" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="215,244 270,244 270,296 215,296" '
+      + 'stroke-width="3"/>'
+      + '<text x="160" y="322" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">two quarters</text>'
+      + '<text x="320" y="280" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">plus</text>'
+      + '<polygon points="370,244 425,244 425,296 370,296" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="425,244 480,244 480,296 425,296" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="480,244 535,244 535,296 480,296" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="535,244 590,244 590,296 535,296" '
+      + 'stroke-width="3"/>'
+      + '<text x="480" y="322" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">one quarter</text>'
+      + '<text x="320" y="376" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">now the pieces match: three '
+      + 'quarters</text></svg>',
+  },
   questions: [
     {
       id: 'af-1',
@@ -622,8 +866,7 @@ teach({
     'To compare, write the numbers with their points lined up.',
     'Compare the tenths first, then the hundredths.',
     'Pad with noughts if it helps: 0.5 becomes 0.50.',
-    'Learn the common ones: 0.5 is a half, 0.25 a quarter, 0.75 three '
-      + 'quarters.',
+    'Learn the common ones by heart. They save working anything out.',
   ],
 
   worked: [
@@ -682,6 +925,62 @@ teach({
     + 'are there because there are 100 pesewas in a cedi. '
     + 'Every rule here you have been applying at the market for years.',
 
+  figure: {
+    alt: 'A number line from 0 to 1 marked in tenths. 0.45 is marked in red '
+      + 'just before the fifth tick and 0.5 is marked in green on it, so '
+      + '0.5 sits further to the right. Under it says compare the tenths '
+      + 'first: four tenths is less than five tenths.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">which is bigger, 0.45 or '
+      + '0.5</text>'
+      + '<line x1="50" y1="208" x2="590" y2="208" stroke-width="4"/>'
+      + '<line x1="50" y1="196" x2="50" y2="220"/>'
+      + '<line x1="104" y1="196" x2="104" y2="220"/>'
+      + '<line x1="158" y1="196" x2="158" y2="220"/>'
+      + '<line x1="212" y1="196" x2="212" y2="220"/>'
+      + '<line x1="266" y1="196" x2="266" y2="220"/>'
+      + '<line x1="320" y1="196" x2="320" y2="220"/>'
+      + '<line x1="374" y1="196" x2="374" y2="220"/>'
+      + '<line x1="428" y1="196" x2="428" y2="220"/>'
+      + '<line x1="482" y1="196" x2="482" y2="220"/>'
+      + '<line x1="536" y1="196" x2="536" y2="220"/>'
+      + '<line x1="590" y1="196" x2="590" y2="220"/>'
+      + '<text x="50" y="256" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">0</text>'
+      + '<text x="590" y="256" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<text x="320" y="256" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">0.5</text>'
+      + '<circle cx="293" cy="208" r="11" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<text x="250" y="160" font-size="20" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">0.45</text>'
+      + '<circle cx="320" cy="208" r="11" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="372" y="160" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">0.5</text>'
+      + '<text x="320" y="332" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">four tenths is less than five '
+      + 'tenths</text>'
+      + '<text x="320" y="366" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">so the digits after it cannot '
+      + 'rescue it</text></svg>',
+  },
+  tables: [{
+    caption: 'The same amount written as a fraction, a decimal and a '
+      + 'percentage',
+    columns: ['Fraction', 'Decimal', 'Percentage'],
+    rows: [
+      ['One tenth', '0.1', '10 per cent'],
+      ['One quarter', '0.25', '25 per cent'],
+      ['One half', '0.5', '50 per cent'],
+      ['Three quarters', '0.75', '75 per cent'],
+    ],
+    note: 'These four are worth knowing by heart, because they turn up '
+      + 'constantly and save working anything out.',
+  }],
   questions: [
     {
       id: 'dc-1',
@@ -740,10 +1039,8 @@ teach({
     + '12 take away 7 is 5, so the missing number is 5.',
 
   mechanism:
-    'Every operation has an opposite that cancels it. '
-    + 'Adding and subtracting undo each other. '
-    + 'Multiplying and dividing undo each other. '
-    + 'So if something was added to the box, you subtract to get the box '
+    'Every operation has an opposite that cancels it, '
+    + 'so if something was added to the box, you subtract to get the box '
     + 'alone. '
     + 'This is exactly what algebra does later with letters instead of boxes, '
     + 'which is why it is worth doing properly now: '
@@ -821,6 +1118,53 @@ teach({
     + 'it in JHS. '
     + 'Nothing about the method changes, only the symbol in the gap.',
 
+  figure: {
+    alt: 'The number sentence 7 plus a box equals 12, with a green arrow '
+      + 'beneath it showing the undoing: 12 take away 7 is 5. The box is '
+      + 'then filled in with 5 and the sentence is checked.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">what was done to it, and what '
+      + 'undoes that</text>'
+      + '<text x="110" y="160" font-size="44" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">7</text>'
+      + '<text x="190" y="160" font-size="40" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">plus</text>'
+      + '<polygon points="255,112 315,112 315,172 255,172" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="400" y="160" font-size="36" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">equals</text>'
+      + '<text x="530" y="160" font-size="44" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">12</text>'
+      + '<line x1="530" y1="186" x2="530" y2="230" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<line x1="285" y1="230" x2="530" y2="230" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<line x1="285" y1="230" x2="285" y2="248" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<polyline points="275,234 285,254 295,234" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="410" y="288" font-size="21" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">take the 7 away from the 12</text>'
+      + '<text x="320" y="344" font-size="36" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">12 take away 7 is 5</text>'
+      + '<text x="320" y="384" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">so the box is 5, and 7 plus 5 is '
+      + '12</text></svg>',
+  },
+  tables: [{
+    caption: 'Each operation, and the one that undoes it',
+    columns: ['If this was done to the gap', 'Do this to the other side'],
+    rows: [
+      ['Something was added', 'Subtract it'],
+      ['Something was subtracted', 'Add it'],
+      ['It was multiplied', 'Divide'],
+      ['It was divided', 'Multiply'],
+    ],
+    note: 'This is exactly what algebra does later with letters instead of '
+      + 'boxes, which is why the habit is worth forming now.',
+  }],
   questions: [
     {
       id: 'mn-1',
@@ -873,9 +1217,8 @@ teach({
 
   idea:
     'An angle measures how much something has turned. '
-    + 'The corner of a book or a door frame is a right angle, 90 degrees. '
-    + 'An angle smaller than that is acute. '
-    + 'One larger than that, but less than a straight line, is obtuse.',
+    + 'You name one by comparing its opening with a square corner, '
+    + 'such as the corner of a book or a door frame.',
 
   mechanism:
     'The thing to understand is that an angle is about turn, not about '
@@ -957,6 +1300,54 @@ teach({
     + 'Those two facts let you work out an angle you cannot reach to measure, '
     + 'which is how surveyors and builders use them.',
 
+  figure: {
+    alt: 'Two angles with exactly the same opening, one drawn with short '
+      + 'arms and one with long arms. Both are marked as the same angle in '
+      + 'green. A red dotted line joins the far ends of each pair of arms, '
+      + 'with a note that these far gaps differ while the angle does not.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="48" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the same angle, drawn two '
+      + 'ways</text><line x1="80" y1="300" x2="200" y2="300"/>'
+      + '<line x1="80" y1="300" x2="184" y2="240"/>'
+      + '<path d="M 116 300 A 36 36 0 0 0 111 282" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="140" y="346" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">short arms</text>'
+      + '<line x1="330" y1="300" x2="600" y2="300"/>'
+      + '<line x1="330" y1="300" x2="564" y2="165"/>'
+      + '<path d="M 366 300 A 36 36 0 0 0 361 282" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="450" y="346" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">long arms</text>'
+      + '<text x="320" y="382" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">the opening at the point is the '
+      + 'angle</text>'
+      + '<line x1="184" y1="240" x2="200" y2="300" stroke="#c8433a" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<line x1="564" y1="165" x2="600" y2="300" stroke="#c8433a" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<text x="620" y="124" font-size="17" text-anchor="end" '
+      + 'fill="#c8433a" stroke="none">these far gaps differ,</text>'
+      + '<text x="620" y="148" font-size="17" text-anchor="end" '
+      + 'fill="#c8433a" stroke="none">the angle does not</text></svg>',
+  },
+  tables: [{
+    caption: 'Naming an angle by comparing it with a square corner',
+    columns: ['The opening', 'Its name', 'In degrees'],
+    rows: [
+      ['Smaller than a square corner', 'Acute', 'Less than 90'],
+      ['Exactly a square corner', 'Right angle', '90'],
+      [
+        'Bigger, but less than a straight line',
+        'Obtuse',
+        'More than 90 and less than 180',
+      ],
+    ],
+    note: 'The corner of a book or a door frame is a square corner, so you '
+      + 'can carry one about with you.',
+  }],
   questions: [
     {
       id: 'an-1',
@@ -1013,16 +1404,15 @@ teach({
   idea:
     'Perimeter is the distance round the edge of a shape. '
     + 'Area is the amount of surface inside it. '
-    + 'For a rectangle 5 metres by 3 metres, '
-    + 'the perimeter is 16 metres and the area is 15 square metres.',
+    + 'They are different kinds of thing, '
+    + 'which is why they are measured in different units '
+    + 'and why knowing one tells you very little about the other.',
 
   mechanism:
-    'They are different kinds of thing, and that is why the units differ. '
-    + 'Perimeter is a length, so it is measured in metres. '
-    + 'Area is a covering, so it is measured in squares: square metres. '
-    + 'You can see why by thinking about what each is for. '
-    + 'Fencing a field needs the perimeter, because fence is sold by length. '
-    + 'Laying tiles needs the area, because tiles cover surface. '
+    'Perimeter is a length and area is a covering, '
+    + 'which is why one is counted in metres and the other in squares. '
+    + 'You can see the difference by asking what each is for: '
+    + 'fence is sold by length and tiles cover surface. '
     + 'The most useful thing to know is that they do not move together: '
     + 'two fields with the same perimeter can have very different areas.',
 
@@ -1098,6 +1488,86 @@ teach({
     + 'the field square, '
     + 'which is a piece of mathematics with an immediate use.',
 
+  figure: {
+    alt: 'Two rectangles tiled into unit squares. The first is five by three '
+      + 'and holds fifteen squares. The second is seven by one and holds '
+      + 'seven. Both have their edges traced in green and both edges '
+      + 'measure sixteen, so the same perimeter goes with very different '
+      + 'areas.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the same perimeter, different '
+      + 'areas</text>'
+      + '<polygon points="60,100 100,100 100,140 60,140" stroke-width="2"/>'
+      + '<polygon points="60,140 100,140 100,180 60,180" stroke-width="2"/>'
+      + '<polygon points="60,180 100,180 100,220 60,220" stroke-width="2"/>'
+      + '<polygon points="100,100 140,100 140,140 100,140" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="100,140 140,140 140,180 100,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="100,180 140,180 140,220 100,220" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="140,100 180,100 180,140 140,140" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="140,140 180,140 180,180 140,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="140,180 180,180 180,220 140,220" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="180,100 220,100 220,140 180,140" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="180,140 220,140 220,180 180,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="180,180 220,180 220,220 180,220" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="220,100 260,100 260,140 220,140" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="220,140 260,140 260,180 220,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="220,180 260,180 260,220 220,220" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="60,100 260,100 260,220 60,220" stroke="#0f8a4d" '
+      + 'stroke-width="5"/>'
+      + '<text x="160" y="252" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">edge: 16 metres</text>'
+      + '<text x="160" y="282" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">inside: 15 squares</text>'
+      + '<polygon points="340,140 380,140 380,180 340,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="380,140 420,140 420,180 380,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="420,140 460,140 460,180 420,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="460,140 500,140 500,180 460,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="500,140 540,140 540,180 500,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="540,140 580,140 580,180 540,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="580,140 620,140 620,180 580,180" '
+      + 'stroke-width="2"/>'
+      + '<polygon points="340,140 620,140 620,180 340,180" stroke="#0f8a4d" '
+      + 'stroke-width="5"/>'
+      + '<text x="480" y="252" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">edge: 16 metres</text>'
+      + '<text x="480" y="282" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">inside: 7 squares</text>'
+      + '<text x="320" y="350" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">fencing needs the edge, tiling '
+      + 'needs the inside</text></svg>',
+  },
+  tables: [{
+    caption: 'How perimeter and area differ',
+    columns: ['Question', 'Perimeter', 'Area'],
+    rows: [
+      ['What it is', 'The distance round the edge', 'The surface inside'],
+      ['What it is measured in', 'Metres', 'Square metres'],
+      ['What you need it for', 'Fencing a field', 'Laying tiles'],
+      ['For a 5 metre by 3 metre rectangle', '16 metres', '15 square metres'],
+    ],
+    note: 'They do not move together. Two fields with the same perimeter can '
+      + 'have very different areas.',
+  }],
   questions: [
     {
       id: 'pa-1',
