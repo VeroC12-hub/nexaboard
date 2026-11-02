@@ -47,19 +47,12 @@ teach({
   },
 
   idea:
-    'The greetings are bonjour, used all through the day, '
-    + 'bonsoir in the evening, '
-    + 'and salut, which is informal and used only with friends. '
-    + 'To take leave: au revoir, and à bientôt for see you soon. '
-    + 'To ask a name politely: Comment vous appelez-vous? '
-    + 'To a friend: Comment t’appelles-tu? '
-    + 'To answer: Je m’appelle Ama. '
-    + 'Other useful lines are Ça va? for how are you, '
-    + 'answered Ça va bien, merci; '
-    + 'Comment allez-vous? which is the polite form of the same question; '
-    + 'J’ai douze ans for I am twelve years old; '
-    + 'and Je suis ghanéen for a boy or Je suis ghanéenne for a girl. '
-    + 'Enchanté, or enchantée if you are a girl, means pleased to meet you.',
+    'The first lesson is a small set of fixed lines, '
+    + 'and one choice that runs underneath all of them. '
+    + 'French has two words where English has only you, '
+    + 'so before you greet anybody you have already decided '
+    + 'how well you know them. '
+    + 'Several of the lines also change ending for a boy and for a girl.',
 
   mechanism:
     'The thing to get right from the first lesson is tu and vous, '
@@ -163,6 +156,85 @@ teach({
     + 'D’où venez-vous? and Où habitez-vous? '
     + 'Both are in the vous form, and both take the same decision first.',
 
+  figure: {
+    alt: 'The English word you drawn in one box at the top, said to a '
+      + 'child, a friend, a teacher and a minister alike, with two arrows '
+      + 'leading down to the two French words that share its work. Tu is '
+      + 'for one person you are familiar with, and asks Comment '
+      + 't’appelles-tu. Vous is for a stranger, an older person, somebody '
+      + 'in authority, or more than one person, and asks Comment vous '
+      + 'appelez-vous.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">English has one you, and French makes you choose</text>'
+      + '<path d="M 250 44 H 390 V 90 H 250 Z"/>'
+      + '<text x="320" y="73" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">you</text>'
+      + '<text x="320" y="110" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">said to a child, a friend, a teacher, a minister</text>'
+      + '<path d="M 280 120 L 180 160" stroke-width="2"/>'
+      + '<path d="M 170 164 L 186 152 L 192 166 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 360 120 L 460 160" stroke-width="2"/>'
+      + '<path d="M 470 164 L 448 166 L 454 152 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 24 170 H 300 V 216 H 24 Z" stroke="#0f8a4d"/>'
+      + '<text x="162" y="200" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">tu</text>'
+      + '<text x="162" y="238" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">one person you are familiar with:</text>'
+      + '<text x="162" y="256" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">a friend, a child, a close relative</text>'
+      + '<text x="162" y="288" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">Comment t’appelles-tu?</text>'
+      + '<path d="M 340 170 H 616 V 216 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="478" y="200" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">vous</text>'
+      + '<text x="478" y="238" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">a stranger, an older person, somebody</text>'
+      + '<text x="478" y="256" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">in authority, or more than one person</text>'
+      + '<text x="478" y="288" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">Comment vous appelez-vous?</text>'
+      + '<text x="320" y="330" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">it is not one word swapped: the verb changes with it,</text>'
+      + '<text x="320" y="352" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so you decide before you open your mouth</text>'
+      + '<text x="320" y="384" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">being too polite is barely noticed; using tu to a stranger is</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The lines to know first, and when each is used',
+      columns: ['To say', 'In French', 'When'],
+      rows: [
+        ['Hello', 'Bonjour', 'All through the day'],
+        ['Good evening', 'Bonsoir', 'In the evening'],
+        ['Hi', 'Salut', 'Only with friends'],
+        ['Goodbye', 'Au revoir', 'Any parting'],
+        ['See you soon', 'À bientôt', 'When you expect to meet again'],
+        ['My name is Ama', 'Je m’appelle Ama', 'Answering either form'],
+        [
+          'I am twelve years old',
+          'J’ai douze ans',
+          'Note that French has the age rather than being it',
+        ],
+        [
+          'Pleased to meet you',
+          'Enchanté, or enchantée if you are a girl',
+          'On being introduced',
+        ],
+      ],
+      note: 'Je suis ghanéen for a boy and je suis ghanéenne for a girl '
+        + 'change the same way enchanté does.',
+    },
+    {
+      caption: 'The same question asked with tu and with vous',
+      columns: ['', 'With tu', 'With vous'],
+      rows: [
+        [
+          'Who it is for',
+          'One person you are familiar with: a friend, a child, a relative',
+          'A stranger, an older person, somebody in authority, or several people',
+        ],
+        [
+          'What is your name?',
+          'Comment t’appelles-tu?',
+          'Comment vous appelez-vous?',
+        ],
+        ['How are you?', 'Ça va?', 'Comment allez-vous?'],
+      ],
+      note: 'It is not one word swapped: the verb changes with it, so the '
+        + 'choice is made before you open your mouth. Being too polite is '
+        + 'barely noticed, and using tu to a stranger is.',
+    },
+  ],
   questions: [
     {
       id: 'gfr-1',
@@ -225,15 +297,9 @@ teach({
   idea:
     'Every noun in French belongs to one of two classes, '
     + 'called masculine and feminine. '
-    + 'The definite article, meaning the, is le before a masculine noun, '
-    + 'la before a feminine one, '
-    + 'and les before any plural: le livre, la table, les livres, les '
-    + 'tables. '
-    + 'Before a noun starting with a vowel or a silent h, '
-    + 'both le and la shorten to l’: l’école, l’homme. '
-    + 'The indefinite article, meaning a or an, '
-    + 'is un for masculine and une for feminine: un stylo, une porte. '
-    + 'The plural of un and une is des, meaning some: des stylos. '
+    + 'The article in front of the noun changes with that class, '
+    + 'and so does the article for a or an, '
+    + 'and so does the plural. '
     + 'The gender is a fact about the word, '
     + 'and it is learned together with the word.',
 
@@ -346,6 +412,85 @@ teach({
     + 'so le petit livre, la petite table, les petits livres. '
     + 'Every one of those depends on knowing the gender first.',
 
+  figure: {
+    alt: 'The wrong gender guessed once, in red, carried along a row: le '
+      + 'table becomes le petit table becomes il est petit, one guess and '
+      + 'three errors. Beneath it the same row in green, la table, la '
+      + 'petite table, elle est petite. At the bottom a vocabulary list '
+      + 'with the bare word table struck through and la table written '
+      + 'beside it.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">one wrong gender does not stop at the article</text>'
+      + '<text x="30" y="60" font-size="14" text-anchor="start" fill="#c8433a" stroke="none">guess it wrong once</text>'
+      + '<path d="M 24 74 H 160 V 114 H 24 Z" stroke="#c8433a"/>'
+      + '<text x="92" y="100" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">le table</text>'
+      + '<path d="M 168 94 H 192" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 202 94 L 184 85 L 184 103 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 212 74 H 388 V 114 H 212 Z" stroke="#c8433a"/>'
+      + '<text x="300" y="100" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">le petit table</text>'
+      + '<path d="M 396 94 H 420" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 430 94 L 412 85 L 412 103 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 440 74 H 616 V 114 H 440 Z" stroke="#c8433a"/>'
+      + '<text x="528" y="100" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">il est petit</text>'
+      + '<text x="320" y="140" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">one guess, and three errors</text>'
+      + '<text x="30" y="186" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">learn it with the noun</text>'
+      + '<path d="M 24 200 H 160 V 240 H 24 Z" stroke="#0f8a4d"/>'
+      + '<text x="92" y="226" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">la table</text>'
+      + '<path d="M 168 220 H 192" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 202 220 L 184 211 L 184 229 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 212 200 H 388 V 240 H 212 Z" stroke="#0f8a4d"/>'
+      + '<text x="300" y="226" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">la petite table</text>'
+      + '<path d="M 396 220 H 420" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 430 220 L 412 211 L 412 229 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 440 200 H 616 V 240 H 440 Z" stroke="#0f8a4d"/>'
+      + '<text x="528" y="226" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">elle est petite</text>'
+      + '<text x="320" y="266" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the gender reaches the adjective and the pronoun too</text>'
+      + '<path d="M 170 292 H 470 V 356 H 170 Z" stroke-width="2"/>'
+      + '<text x="320" y="312" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">your vocabulary list</text>'
+      + '<text x="252" y="340" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">table</text>'
+      + '<path d="M 222 332 H 282" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="382" y="340" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">la table</text>'
+      + '<text x="320" y="384" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the gender is a fact about the word, so never write the noun alone</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The articles, which change with the gender and with the '
+        + 'number',
+      columns: ['Meaning', 'Masculine', 'Feminine', 'Plural'],
+      rows: [
+        ['the', 'le livre', 'la table', 'les livres, les tables'],
+        [
+          'the, before a vowel or a silent h',
+          'l’homme',
+          'l’école',
+          'les hommes, les écoles',
+        ],
+        [
+          'a, an, and some in the plural',
+          'un stylo',
+          'une porte',
+          'des stylos, des portes',
+        ],
+      ],
+      note: 'There is no reason a table is feminine. The gender is a class '
+        + 'the word sits in, not a claim about the thing, which is why '
+        + 'the same object has different genders in different languages.',
+    },
+    {
+      caption: 'One wrong gender does not stop at the article',
+      columns: ['Masculine', 'Feminine', 'What the gender reached'],
+      rows: [
+        ['le livre', 'la table', 'The article'],
+        ['le petit livre', 'la petite table', 'The adjective as well'],
+        ['il est petit', 'elle est petite', 'And the pronoun'],
+      ],
+      note: 'So guessing the article costs you several errors rather than '
+        + 'one. Write la table in your vocabulary list, and never table '
+        + 'alone.',
+    },
+  ],
   questions: [
     {
       id: 'gen-1',
@@ -413,18 +558,12 @@ teach({
     + 'and that form is called the infinitive: parler, finir, vendre. '
     + 'To use it you remove that ending and add one for the person '
     + 'speaking. '
-    + 'Regular -er verbs are the largest group. '
-    + 'Their endings are -e, -es, -e, -ons, -ez and -ent. '
-    + 'So parler gives je parle, tu parles, il parle. '
-    + 'Then nous parlons, vous parlez, ils parlent. '
-    + 'Three verbs are irregular. '
-    + 'They matter more than all the others. '
-    + 'Être means to be. '
-    + 'It goes je suis, tu es, il est, nous sommes, vous êtes, ils sont. '
-    + 'Avoir means to have. '
-    + 'It goes j’ai, tu as, il a, nous avons, vous avez, ils ont. '
-    + 'Aller means to go. '
-    + 'It goes je vais, tu vas, il va, nous allons, vous allez, ils vont.',
+    + 'Regular -er verbs are the largest group, '
+    + 'and their six endings are the same for every verb in it, '
+    + 'so they are learned once and used on thousands of verbs. '
+    + 'Three verbs are irregular, '
+    + 'and they matter more than all the others together: '
+    + 'être, to be; avoir, to have; and aller, to go.',
 
   mechanism:
     'There are two things worth understanding here, '
@@ -527,6 +666,88 @@ teach({
     + 'Je vais manger, nous allons partir. '
     + 'This is the first payment on the hour spent learning aller.',
 
+  figure: {
+    alt: 'The infinitive parler with a dashed line cutting off its -er '
+      + 'ending, leaving the stem parl in a green box. Six arrows fan out '
+      + 'from the stem to the six endings, -e, -es, -e, -ons, -ez and '
+      + '-ent, each giving its form: je parle, tu parles, il parle, nous '
+      + 'parlons, vous parlez, ils parlent.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">one stem, six endings, and the endings never change</text>'
+      + '<text x="92" y="88" font-size="26" text-anchor="middle" fill="currentColor" stroke="none">parler</text>'
+      + '<text x="92" y="112" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">the infinitive</text>'
+      + '<path d="M 104 62 V 96" stroke="#c8433a" stroke-width="2" stroke-dasharray="5 4"/>'
+      + '<text x="128" y="70" font-size="12" text-anchor="start" fill="#c8433a" stroke="none">cut off the -er</text>'
+      + '<path d="M 40 136 H 144 V 178 H 40 Z" stroke="#0f8a4d"/>'
+      + '<text x="92" y="164" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">parl</text>'
+      + '<text x="92" y="196" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">the stem</text>'
+      + '<path d="M 152 157 C 200 157, 210 86, 258 86" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 268 86 L 250 77 L 250 95 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="286" y="92" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">-e</text>'
+      + '<text x="360" y="92" font-size="16" text-anchor="start" fill="currentColor" stroke="none">je parle</text>'
+      + '<text x="520" y="92" font-size="13" text-anchor="start" fill="currentColor" stroke="none">je</text>'
+      + '<path d="M 152 157 C 200 157, 210 132, 258 132" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 268 132 L 250 123 L 250 141 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="286" y="138" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">-es</text>'
+      + '<text x="360" y="138" font-size="16" text-anchor="start" fill="currentColor" stroke="none">tu parles</text>'
+      + '<text x="520" y="138" font-size="13" text-anchor="start" fill="currentColor" stroke="none">tu</text>'
+      + '<path d="M 152 157 C 200 157, 210 178, 258 178" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 268 178 L 250 169 L 250 187 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="286" y="184" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">-e</text>'
+      + '<text x="360" y="184" font-size="16" text-anchor="start" fill="currentColor" stroke="none">il parle</text>'
+      + '<text x="520" y="184" font-size="13" text-anchor="start" fill="currentColor" stroke="none">il, elle</text>'
+      + '<path d="M 152 157 C 200 157, 210 224, 258 224" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 268 224 L 250 215 L 250 233 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="286" y="230" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">-ons</text>'
+      + '<text x="360" y="230" font-size="16" text-anchor="start" fill="currentColor" stroke="none">nous parlons</text>'
+      + '<text x="520" y="230" font-size="13" text-anchor="start" fill="currentColor" stroke="none">nous</text>'
+      + '<path d="M 152 157 C 200 157, 210 270, 258 270" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 268 270 L 250 261 L 250 279 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="286" y="276" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">-ez</text>'
+      + '<text x="360" y="276" font-size="16" text-anchor="start" fill="currentColor" stroke="none">vous parlez</text>'
+      + '<text x="520" y="276" font-size="13" text-anchor="start" fill="currentColor" stroke="none">vous</text>'
+      + '<path d="M 152 157 C 200 157, 210 316, 258 316" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 268 316 L 250 307 L 250 325 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="286" y="322" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">-ent</text>'
+      + '<text x="360" y="322" font-size="16" text-anchor="start" fill="currentColor" stroke="none">ils parlent</text>'
+      + '<text x="520" y="322" font-size="13" text-anchor="start" fill="currentColor" stroke="none">ils, elles</text>'
+      + '<text x="320" y="370" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the ending carries who is doing it, and these six are the</text>'
+      + '<text x="320" y="392" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">same for every regular -er verb in the language</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The six endings of a regular -er verb, shown on parler',
+      columns: ['Person', 'Ending', 'The form', 'In English'],
+      rows: [
+        ['je', '-e', 'je parle', 'I speak'],
+        ['tu', '-es', 'tu parles', 'you speak, to one person you know'],
+        ['il, elle', '-e', 'il parle', 'he speaks, she speaks'],
+        ['nous', '-ons', 'nous parlons', 'we speak'],
+        ['vous', '-ez', 'vous parlez', 'you speak, politely or to several'],
+        ['ils, elles', '-ent', 'ils parlent', 'they speak'],
+      ],
+      note: 'The ending carries who is doing the action, which is why the '
+        + 'table is not six separate words. It is one stem with six '
+        + 'endings, and the endings never change.',
+    },
+    {
+      caption: 'The three irregular verbs the other tenses are built from',
+      columns: ['Person', 'être, to be', 'avoir, to have', 'aller, to go'],
+      rows: [
+        ['je', 'je suis', 'j’ai', 'je vais'],
+        ['tu', 'tu es', 'tu as', 'tu vas'],
+        ['il, elle', 'il est', 'il a', 'il va'],
+        ['nous', 'nous sommes', 'nous avons', 'nous allons'],
+        ['vous', 'vous êtes', 'vous avez', 'vous allez'],
+        ['ils, elles', 'ils sont', 'ils ont', 'ils vont'],
+      ],
+      note: 'Avoir makes the perfect, j’ai mangé, I have eaten. Aller makes '
+        + 'the near future, je vais manger, I am going to eat. That is '
+        + 'why these three are worth real effort now.',
+    },
+  ],
   questions: [
     {
       id: 'prf-1',
@@ -588,19 +809,12 @@ teach({
   },
 
   idea:
-    'One to ten: un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix. '
-    + 'Eleven to sixteen have their own words: '
-    + 'onze, douze, treize, quatorze, quinze, seize. '
-    + 'Then dix-sept, dix-huit, dix-neuf, and vingt for twenty. '
-    + 'The tens are vingt, trente, quarante, cinquante, soixante, '
-    + 'soixante-dix, quatre-vingts, quatre-vingt-dix, cent. '
-    + 'For the time: Il est trois heures, it is three o’clock; '
-    + 'Il est trois heures et demie, half past three; '
-    + 'Il est midi for noon and Il est minuit for midnight. '
-    + 'For a price: Ça coûte combien? and Ça coûte vingt cedis. '
-    + 'For a date: the day first, then the month, with le in front, '
-    + 'as in le douze mai. '
-    + 'The first of the month is le premier, not le un.',
+    'The numbers up to sixteen each have their own word, '
+    + 'and after that French builds them. '
+    + 'The building is regular as far as sixty nine, '
+    + 'and then it changes twice before a hundred. '
+    + 'The time, a price and a date are each a short fixed pattern '
+    + 'with a number dropped into it.',
 
   mechanism:
     'French numbers look harder than they are because of one stretch, '
@@ -706,6 +920,101 @@ teach({
     + 'which is why the seventy to ninety nine stretch is worth settling '
     + 'now.',
 
+  figure: {
+    alt: 'The numbers from 1 to 100 drawn as a bar in four bands. Up to 16 '
+      + 'each number has its own word; from there to 69 it is the ten and '
+      + 'then the unit; from 69 to 79, in red, French counts on from '
+      + 'sixty; and from 79 to 100, also in red, it starts again from four '
+      + 'twenties. Two boxes below give the arithmetic: soixante-dix is '
+      + 'sixty ten, 60 + 10 = 70, and quatre-vingt-dix is four twenty ten, '
+      + '4 x 20 + 10 = 90.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">French numbers break twice, and both breaks are arithmetic</text>'
+      + '<path d="M 40 150 H 132 V 184 H 40 Z" stroke="currentColor"/>'
+      + '<text x="86" y="208" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">each has</text>'
+      + '<text x="86" y="224" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">its own word</text>'
+      + '<path d="M 132 150 H 435 V 184 H 132 Z" stroke="currentColor"/>'
+      + '<text x="283" y="208" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">the ten, then</text>'
+      + '<text x="283" y="224" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">the unit</text>'
+      + '<path d="M 435 150 H 492 V 184 H 435 Z" stroke="#c8433a"/>'
+      + '<text x="463" y="208" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">counting on</text>'
+      + '<text x="463" y="224" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">from sixty</text>'
+      + '<path d="M 492 150 H 612 V 184 H 492 Z" stroke="#c8433a"/>'
+      + '<text x="552" y="208" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">four twenties,</text>'
+      + '<text x="552" y="224" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">then counting on</text>'
+      + '<path d="M 40 140 V 150" stroke-width="2"/>'
+      + '<text x="40" y="132" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<path d="M 132 140 V 150" stroke-width="2"/>'
+      + '<text x="132" y="132" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">16</text>'
+      + '<path d="M 435 140 V 150" stroke-width="2"/>'
+      + '<text x="435" y="132" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">69</text>'
+      + '<path d="M 492 140 V 150" stroke-width="2"/>'
+      + '<text x="492" y="132" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">79</text>'
+      + '<path d="M 612 140 V 150" stroke-width="2"/>'
+      + '<text x="612" y="132" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">100</text>'
+      + '<text x="320" y="96" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">un, deux, trois ... and then it stops being regular</text>'
+      + '<path d="M 40 262 H 310 V 330 H 40 Z" stroke="#c8433a"/>'
+      + '<text x="175" y="286" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">soixante-dix</text>'
+      + '<text x="175" y="308" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">sixty ten, which is 60 + 10 = 70</text>'
+      + '<path d="M 342 262 H 612 V 330 H 342 Z" stroke="#c8433a"/>'
+      + '<text x="477" y="286" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">quatre-vingt-dix</text>'
+      + '<text x="477" y="308" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">four twenty ten, 4 x 20 + 10 = 90</text>'
+      + '<text x="320" y="368" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so there is nothing to memorise above sixty nine.</text>'
+      + '<text x="320" y="390" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">There is one thing to understand, and it is addition.</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The numbers, and how each stretch of them is built',
+      columns: ['From', 'In French', 'How it is built'],
+      rows: [
+        [
+          '1 to 10',
+          'un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix',
+          'Each has its own word',
+        ],
+        [
+          '11 to 16',
+          'onze, douze, treize, quatorze, quinze, seize',
+          'Each has its own word',
+        ],
+        ['17 to 19', 'dix-sept, dix-huit, dix-neuf', 'Ten, then the unit'],
+        [
+          '21 to 69',
+          'trente-quatre is thirty four',
+          'The ten, then the unit, all the way',
+        ],
+        [
+          '70 to 79',
+          'soixante-dix is seventy, soixante-onze is seventy one',
+          'Counting on from sixty',
+        ],
+        [
+          '80 to 99',
+          'quatre-vingts is eighty, quatre-vingt-dix is ninety',
+          'Four twenties, and then counting on',
+        ],
+      ],
+      note: 'The tens themselves are vingt, trente, quarante, cinquante, '
+        + 'soixante, soixante-dix, quatre-vingts, quatre-vingt-dix and '
+        + 'cent.',
+    },
+    {
+      caption: 'The time, a price and a date, each a fixed pattern',
+      columns: ['To say', 'In French'],
+      rows: [
+        ['It is three o’clock', 'Il est trois heures'],
+        ['It is half past three', 'Il est trois heures et demie'],
+        ['It is noon, it is midnight', 'Il est midi, il est minuit'],
+        ['How much does it cost?', 'Ça coûte combien?'],
+        ['It costs twenty cedis', 'Ça coûte vingt cedis'],
+        ['The twelfth of May', 'le douze mai, with the day before the month'],
+        ['The first of May', 'le premier mai, and never le un'],
+      ],
+      note: 'Heures is always there, even where English leaves o’clock out.',
+    },
+  ],
   questions: [
     {
       id: 'num-1',
