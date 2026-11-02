@@ -132,6 +132,40 @@ teach({
     + 'Tell the same story but finish it a different way. '
     + 'What would happen then?',
 
+  figure: {
+    alt: 'A grown up on the left and a child on the right with an arrow '
+      + 'between them, labelled I told it and now you tell it. Three boxes '
+      + 'along the bottom hold the beginning, the middle and the end.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">now you tell it back</text>'
+      + '<circle cx="140" cy="96" r="30"/>'
+      + '<line x1="140" y1="126" x2="140" y2="198"/>'
+      + '<line x1="95" y1="156" x2="185" y2="156"/>'
+      + '<line x1="140" y1="198" x2="113" y2="258"/>'
+      + '<line x1="140" y1="198" x2="167" y2="258"/>'
+      + '<line x1="230" y1="176" x2="350" y2="176"/>'
+      + '<polyline points="337,166 350,176 337,186"/>'
+      + '<circle cx="440" cy="116" r="24"/>'
+      + '<line x1="440" y1="140" x2="440" y2="198"/>'
+      + '<line x1="404" y1="164" x2="476" y2="164"/>'
+      + '<line x1="440" y1="198" x2="418" y2="246"/>'
+      + '<line x1="440" y1="198" x2="462" y2="246"/>'
+      + '<text x="140" y="284" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">I told it</text>'
+      + '<text x="440" y="284" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">now you tell it</text>'
+      + '<polygon points="40,310 200,310 200,366 40,366"/>'
+      + '<text x="120" y="346" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the beginning</text>'
+      + '<polygon points="240,310 400,310 400,366 240,366"/>'
+      + '<text x="320" y="346" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the middle</text>'
+      + '<polygon points="440,310 600,310 600,366 440,366"/>'
+      + '<text x="520" y="346" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the end</text></svg>',
+  },
   questions: [
     {
       id: 'rt-1',
@@ -268,6 +302,36 @@ teach({
     + 'Push them together. '
     + 'Stop.',
 
+  figure: {
+    alt: 'Three green stones spread far apart with arrows pushing them '
+      + 'towards each other, labelled three sounds. An arrow points down to '
+      + 'the same three stones touching inside a green ring, labelled one '
+      + 'word.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">push the sounds together</text>'
+      + '<circle cx="120" cy="150" r="34" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="320" cy="150" r="34" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="520" cy="150" r="34" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="170" y1="150" x2="270" y2="150" stroke="#0f8a4d"/>'
+      + '<polyline points="257,140 270,150 257,160" stroke="#0f8a4d"/>'
+      + '<line x1="470" y1="150" x2="370" y2="150" stroke="#0f8a4d"/>'
+      + '<polyline points="383,140 370,150 383,160" stroke="#0f8a4d"/>'
+      + '<text x="320" y="232" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">three sounds</text>'
+      + '<line x1="320" y1="256" x2="320" y2="292"/>'
+      + '<polyline points="310,279 320,292 330,279"/>'
+      + '<ellipse cx="320" cy="340" rx="134" ry="54" stroke="#0f8a4d" '
+      + 'stroke-width="4"/><circle cx="252" cy="340" r="34"/>'
+      + '<circle cx="320" cy="340" r="34"/>'
+      + '<circle cx="388" cy="340" r="34"/>'
+      + '<text x="528" y="350" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">one word</text></svg>',
+  },
   questions: [
     {
       id: 'bl-1',
@@ -392,6 +456,30 @@ teach({
     + 'Three stones for cat. '
     + 'How many stones for stop?',
 
+  figure: {
+    alt: 'A green ring labelled one word at the top, with an arrow pointing '
+      + 'down to three separate stones in a row, labelled first, middle and '
+      + 'last.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">pull the word apart</text>'
+      + '<ellipse cx="320" cy="136" rx="135" ry="50" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="320" y="148" font-size="30" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">one word</text>'
+      + '<line x1="320" y1="196" x2="320" y2="246"/>'
+      + '<polyline points="310,233 320,246 330,233"/>'
+      + '<circle cx="150" cy="310" r="38"/>'
+      + '<circle cx="320" cy="310" r="38"/>'
+      + '<circle cx="490" cy="310" r="38"/>'
+      + '<text x="150" y="382" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">first</text>'
+      + '<text x="320" y="382" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">middle</text>'
+      + '<text x="490" y="382" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">last</text></svg>',
+  },
   questions: [
     {
       id: 'pa-1',
@@ -520,6 +608,27 @@ teach({
     + 'm, a, t. '
     + 'You just read a word.',
 
+  figure: {
+    alt: 'A large letter m with a green arrow pointing from it to the green '
+      + 'sound mmm, and a mango drawn beside them. Under it says mango '
+      + 'starts with mmm.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the sound, not the name</text>'
+      + '<text x="110" y="240" font-size="130" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">m</text>'
+      + '<line x1="196" y1="200" x2="300" y2="200" stroke="#0f8a4d"/>'
+      + '<polyline points="287,190 300,200 287,210" stroke="#0f8a4d"/>'
+      + '<text x="390" y="216" font-size="52" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">mmm</text>'
+      + '<ellipse cx="545" cy="200" rx="44" ry="36"/>'
+      + '<line x1="545" y1="166" x2="551" y2="150"/>'
+      + '<text x="545" y="272" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">mango</text>'
+      + '<text x="320" y="348" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">mango starts with mmm</text></svg>',
+  },
   questions: [
     {
       id: 'sp-1',
@@ -664,6 +773,29 @@ teach({
     + 'Now a short sentence. '
     + 'The cat sat.',
 
+  figure: {
+    alt: 'The letters c, a and t set well apart with a green arrow running '
+      + 'underneath from left to right. Below them it says now push them '
+      + 'together, and under that the word cat is written in green with the '
+      + 'letters joined up.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">say each sound, left to '
+      + 'right</text>'
+      + '<text x="150" y="180" font-size="80" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">c</text>'
+      + '<text x="320" y="180" font-size="80" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a</text>'
+      + '<text x="490" y="180" font-size="80" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">t</text>'
+      + '<line x1="90" y1="226" x2="560" y2="226" stroke="#0f8a4d"/>'
+      + '<polyline points="547,216 560,226 547,236" stroke="#0f8a4d"/>'
+      + '<text x="320" y="286" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">now push them together</text>'
+      + '<text x="320" y="364" font-size="72" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">cat</text></svg>',
+  },
   questions: [
     {
       id: 'rs-1',
@@ -799,6 +931,34 @@ teach({
     'Now write your name on your own work, every time. '
     + 'Now try writing your other name too.',
 
+  figure: {
+    alt: 'The name Ama written on a ruled line, with the capital A in green '
+      + 'and a bracket under it marked a big one, and the ma in plain ink '
+      + 'with a bracket marked small letters. A green arrow to the right '
+      + 'shows which way the writing goes.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a big letter first, then small '
+      + 'ones</text>'
+      + '<line x1="90" y1="190" x2="560" y2="190" stroke-dasharray="8 8"/>'
+      + '<line x1="90" y1="250" x2="560" y2="250"/>'
+      + '<text x="130" y="250" font-size="96" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">A</text>'
+      + '<text x="215" y="250" font-size="68" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">ma</text>'
+      + '<polyline points="126,268 126,286 206,286 206,268" '
+      + 'stroke="#0f8a4d"/>'
+      + '<text x="160" y="318" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">a big one</text>'
+      + '<polyline points="214,268 214,286 340,286 340,268"/>'
+      + '<text x="290" y="352" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">small letters</text>'
+      + '<line x1="410" y1="228" x2="556" y2="228" stroke="#0f8a4d"/>'
+      + '<polyline points="543,218 556,228 543,238" stroke="#0f8a4d"/>'
+      + '<text x="483" y="212" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">this way</text></svg>',
+  },
   questions: [
     {
       id: 'wm-1',
@@ -937,6 +1097,32 @@ teach({
     + 'Leave a small space between the letters. '
     + 'Now leave a bigger space between two words.',
 
+  figure: {
+    alt: 'A large letter c drawn between two ruled lines as a path to '
+      + 'follow, with a green dot at the top right where the pencil starts '
+      + 'and an arrowhead where it finishes. It is labelled start here and '
+      + 'sit it on the line, and under it says c, a and d all start this '
+      + 'way.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="48" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">start at the same place, go the '
+      + 'same way</text>'
+      + '<line x1="90" y1="180" x2="560" y2="180" stroke-dasharray="8 8"/>'
+      + '<line x1="90" y1="308" x2="560" y2="308"/>'
+      + '<path d="M 296 214 Q 234 184 204 232 Q 182 272 228 290 Q 262 300 '
+      + '296 282" stroke-width="8"/>'
+      + '<polyline points="284,301 296,282 274,285" stroke-width="7"/>'
+      + '<circle cx="296" cy="214" r="12" stroke="#0f8a4d" stroke-width="4" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="326" y="206" font-size="22" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">start here</text>'
+      + '<text x="430" y="340" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">sit it on the line</text>'
+      + '<text x="320" y="376" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">c, a and d all start this way</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'wl-1',
