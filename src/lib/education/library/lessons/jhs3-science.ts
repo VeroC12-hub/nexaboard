@@ -46,20 +46,11 @@ teach({
   },
 
   idea:
-    'Acids taste sour, turn blue litmus red, '
-    + 'and give a pH below 7. '
-    + 'Bases, and the soluble ones called alkalis, '
-    + 'feel soapy, turn red litmus blue, '
-    + 'and give a pH above 7. '
-    + 'A neutral substance has a pH of 7. '
-    + 'Neutralisation is an acid reacting with a base '
-    + 'to give a salt and water. '
-    + 'The salt takes its first name from the metal in the base '
-    + 'and its second from the acid: '
-    + 'hydrochloric acid gives chlorides, '
-    + 'sulphuric acid gives sulphates, '
-    + 'and nitric acid gives nitrates. '
-    + 'An acid with a carbonate also gives carbon dioxide.',
+    'Acids and bases sit on opposite sides of neutral, and a handful of '
+    + 'simple tests will tell you which side a substance is on. '
+    + 'Neutralisation is an acid reacting with a base to give a salt '
+    + 'and water, and the name of that salt can be worked out every '
+    + 'time rather than remembered.',
 
   mechanism:
     'Naming the salt looks like memory and is a rule with two halves, '
@@ -171,6 +162,85 @@ teach({
     + 'can be less corrosive than a dilute strong one, '
     + 'and why strength and concentration are different words.',
 
+  figure: {
+    alt: 'A pH scale from 0 to 14. Everything below 7 is marked acid, 7 '
+      + 'is marked neutral and everything above 7 is marked alkali. '
+      + 'Lemon sits near 2, rain near 6, pure water at 7, soap near 9 '
+      + 'and lime near 13.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">which side of 7, and how far from it</text>'
+      + '<line x1="60" y1="150" x2="580" y2="150" stroke-width="5"/>'
+      + '<line x1="60.0" y1="140" x2="60.0" y2="160"/>'
+      + '<line x1="97.1" y1="140" x2="97.1" y2="160"/>'
+      + '<line x1="134.2" y1="140" x2="134.2" y2="160"/>'
+      + '<line x1="171.3" y1="140" x2="171.3" y2="160"/>'
+      + '<line x1="208.4" y1="140" x2="208.4" y2="160"/>'
+      + '<line x1="245.5" y1="140" x2="245.5" y2="160"/>'
+      + '<line x1="282.6" y1="140" x2="282.6" y2="160"/>'
+      + '<line x1="319.7" y1="140" x2="319.7" y2="160"/>'
+      + '<line x1="356.8" y1="140" x2="356.8" y2="160"/>'
+      + '<line x1="393.9" y1="140" x2="393.9" y2="160"/>'
+      + '<line x1="431.0" y1="140" x2="431.0" y2="160"/>'
+      + '<line x1="468.1" y1="140" x2="468.1" y2="160"/>'
+      + '<line x1="505.2" y1="140" x2="505.2" y2="160"/>'
+      + '<line x1="542.3" y1="140" x2="542.3" y2="160"/>'
+      + '<line x1="579.4" y1="140" x2="579.4" y2="160"/>'
+      + '<text x="60.0" y="186" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<text x="319.7" y="186" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">7</text>'
+      + '<text x="579.4" y="186" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">14</text>'
+      + '<text x="170" y="118" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">acid</text>'
+      + '<text x="320" y="118" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">neutral</text>'
+      + '<text x="470" y="118" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">alkali</text>'
+      + '<line x1="60" y1="150" x2="260" y2="150" stroke="#c8433a" stroke-width="4"/>'
+      + '<line x1="320" y1="150" x2="580" y2="150" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="134" y="222" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">lemon</text>'
+      + '<line x1="134" y1="196" x2="134" y2="210"/>'
+      + '<text x="245" y="222" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">rain</text>'
+      + '<line x1="245" y1="196" x2="245" y2="210"/>'
+      + '<text x="319" y="222" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">pure water</text>'
+      + '<line x1="319" y1="196" x2="319" y2="210"/>'
+      + '<text x="431" y="222" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">soap</text>'
+      + '<line x1="431" y1="196" x2="431" y2="210"/>'
+      + '<text x="542" y="222" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">lime</text>'
+      + '<line x1="542" y1="196" x2="542" y2="210"/>'
+      + '<text x="320" y="274" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">blue litmus turns red in an acid</text>'
+      + '<text x="320" y="300" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">red litmus turns blue in an alkali</text>'
+      + '<text x="320" y="344" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">but litmus gives the same red for a weak acid and a dangerous one</text>'
+      + '<text x="320" y="376" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so for how far, use universal indicator or a pH meter</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The tests that tell an acid from an alkali',
+      columns: ['The test', 'Acid', 'Neutral', 'Base or alkali'],
+      rows: [
+        ['Taste or feel', 'Sour', 'Neither', 'Soapy'],
+        ['Blue litmus', 'Turns red', 'No change', 'No change'],
+        ['Red litmus', 'No change', 'No change', 'Turns blue'],
+        ['pH', 'Below 7', 'Exactly 7', 'Above 7'],
+      ],
+      note: 'Litmus tells you which side of 7 you are on and nothing more. '
+        + 'For how far, you need universal indicator or a pH meter.',
+    },
+    {
+      caption: 'Naming the salt: the first word from the base, the second from '
+        + 'the acid',
+      columns: [
+        'The acid',
+        'The ending its salt takes',
+        'With sodium hydroxide it gives',
+      ],
+      rows: [
+        ['Hydrochloric acid', 'chloride', 'Sodium chloride'],
+        ['Sulphuric acid', 'sulphate', 'Sodium sulphate'],
+        ['Nitric acid', 'nitrate', 'Sodium nitrate'],
+      ],
+      note: 'The metal in the base is what stays, so the first word is '
+        + 'always the metal. An acid with a carbonate gives off carbon '
+        + 'dioxide as well as the salt and water.',
+    },
+  ],
   questions: [
     {
       id: 'acd-1',
@@ -371,6 +441,90 @@ teach({
     + 'The reason a closed system can keep going at all '
     + 'is that there is no such thing as waste in it.',
 
+  figure: {
+    alt: 'The nitrogen cycle drawn as four stores joined by labelled '
+      + 'arrows: nitrogen in the air becomes nitrates in the soil by '
+      + 'fixing, the nitrates are taken up by roots and built into '
+      + 'protein, decay returns it to the soil as ammonia, nitrifying '
+      + 'bacteria turn that back into nitrates, and denitrifying '
+      + 'bacteria return nitrogen to the air.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">a cycle is its arrows, and every arrow is a process</text>'
+      + '<path d="M 240 56 H 400 V 104 H 240 Z"/>'
+      + '<text x="320" y="86" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">nitrogen in the air</text>'
+      + '<path d="M 40 170 H 210 V 218 H 40 Z"/>'
+      + '<text x="125" y="194" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">nitrates</text>'
+      + '<text x="125" y="212" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">in the soil</text>'
+      + '<path d="M 430 170 H 600 V 218 H 430 Z"/>'
+      + '<text x="515" y="194" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">protein</text>'
+      + '<text x="515" y="212" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">in plants and animals</text>'
+      + '<path d="M 240 288 H 400 V 336 H 240 Z"/>'
+      + '<text x="320" y="312" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">ammonia</text>'
+      + '<text x="320" y="330" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">in the soil</text>'
+      + '<line x1="250" y1="100" x2="152" y2="166"/>'
+      + '<line x1="152" y1="166" x2="156.2" y2="156.9"/>'
+      + '<line x1="152" y1="166" x2="162.0" y2="165.5"/>'
+      + '<text x="268" y="126" font-size="13" text-anchor="start" fill="currentColor" stroke="none">fixing, by bacteria</text>'
+      + '<text x="268" y="146" font-size="13" text-anchor="start" fill="currentColor" stroke="none">and by lightning</text>'
+      + '<line x1="214" y1="186" x2="426" y2="186" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="426" y1="186" x2="417.4" y2="191.2" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="426" y1="186" x2="417.4" y2="180.8" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="320" y="170" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">taken up by roots, and built into protein</text>'
+      + '<line x1="502" y1="222" x2="400" y2="300"/>'
+      + '<line x1="400" y1="300" x2="403.7" y2="290.7"/>'
+      + '<line x1="400" y1="300" x2="409.9" y2="298.9"/>'
+      + '<text x="498" y="268" font-size="13" text-anchor="start" fill="currentColor" stroke="none">decay, by decomposers</text>'
+      + '<line x1="252" y1="306" x2="160" y2="222"/>'
+      + '<line x1="160" y1="222" x2="169.8" y2="224.0"/>'
+      + '<line x1="160" y1="222" x2="162.9" y2="231.6"/>'
+      + '<text x="152" y="272" font-size="13" text-anchor="end" fill="currentColor" stroke="none">nitrifying bacteria</text>'
+      + '<line x1="70" y1="166" x2="70" y2="82" stroke="#c8433a" stroke-width="4"/>'
+      + '<line x1="70" y1="82" x2="234" y2="82" stroke="#c8433a" stroke-width="4"/>'
+      + '<line x1="234" y1="82" x2="225.4" y2="87.2" stroke="#c8433a" stroke-width="4"/>'
+      + '<line x1="234" y1="82" x2="225.4" y2="76.8" stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="152" y="68" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">denitrifying bacteria</text>'
+      + '<text x="320" y="376" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">four fifths of the air is nitrogen, and a plant can still starve of it</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Every arrow of the carbon cycle, and the process that drives '
+        + 'it',
+      columns: ['From', 'To', 'The process'],
+      rows: [
+        ['The air', 'Plants', 'Photosynthesis'],
+        ['Plants', 'Animals', 'Eating'],
+        ['Plants and animals', 'The air', 'Respiration'],
+        ['Dead plants and animals', 'The air', 'Decay, by decomposers'],
+        ['Wood, and fossil fuel', 'The air', 'Burning'],
+      ],
+      note: 'The last row is the one that shifted the balance, because '
+        + 'fossil fuel had held its carbon out of the cycle for millions '
+        + 'of years.',
+    },
+    {
+      caption: 'Every arrow of the nitrogen cycle, and the process that drives '
+        + 'it',
+      columns: ['From', 'To', 'The process'],
+      rows: [
+        [
+          'Nitrogen in the air',
+          'Nitrates in the soil',
+          'Fixing, by bacteria and by lightning',
+        ],
+        ['Nitrates in the soil', 'Protein in plants', 'Taken up by the roots'],
+        ['Protein in plants', 'Protein in animals', 'Eating'],
+        ['Dead plants and animals', 'Ammonia in the soil', 'Decay'],
+        ['Ammonia in the soil', 'Nitrates in the soil', 'Nitrifying bacteria'],
+        ['Nitrates in the soil', 'Nitrogen in the air', 'Denitrifying bacteria'],
+      ],
+      note: 'The first row is the one that makes the rest make sense. '
+        + 'Nitrogen gas is held together too tightly for a plant to use, '
+        + 'so something must break it apart, and only bacteria, lightning '
+        + 'and factories can.',
+    },
+  ],
   questions: [
     {
       id: 'cyc-1',
@@ -431,15 +585,8 @@ teach({
   idea:
     'Excretion is the removal of waste produced by the body’s own '
     + 'reactions. '
-    + 'The kidneys filter the blood, '
-    + 'removing urea, excess water and excess salts as urine, '
-    + 'which is stored in the bladder. '
-    + 'Urea is made in the liver from excess amino acids. '
-    + 'The lungs excrete carbon dioxide and some water vapour. '
-    + 'The skin excretes water and salts in sweat, '
-    + 'and sweating also cools the body. '
-    + 'The kidneys also control the amount of water in the blood, '
-    + 'which is why urine is concentrated when you have drunk little. '
+    + 'Three organs do it, each removing a different waste, and the '
+    + 'kidneys also control how much water the blood holds. '
     + 'Egestion, the removal of undigested food in faeces, '
     + 'is not excretion, '
     + 'because that material was never part of the body’s reactions.',
@@ -555,6 +702,93 @@ teach({
     + 'Wastes diffuse out and what should stay does not, '
     + 'which is diffusion put to work.',
 
+  figure: {
+    alt: 'A body with the gut drawn as a tube running straight through '
+      + 'it from top to bottom, so what is inside the tube was never '
+      + 'part of the body. Inside the body, the liver makes urea and '
+      + 'the kidney removes it, which is excretion, while what leaves '
+      + 'down the tube is egestion.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">where was the waste made?</text>'
+      + '<ellipse cx="200" cy="210" rx="110" ry="140"/>'
+      + '<line x1="116" y1="120" x2="88" y2="108"/>'
+      + '<text x="84" y="104" font-size="14" text-anchor="end" fill="currentColor" stroke="none">the body</text>'
+      + '<path d="M 176 96 H 224 V 326 H 176 Z" stroke="#c8433a"/>'
+      + '<line x1="200" y1="330" x2="200" y2="354" stroke="#c8433a"/>'
+      + '<line x1="200" y1="354" x2="194.8" y2="345.4" stroke="#c8433a"/>'
+      + '<line x1="200" y1="354" x2="205.2" y2="345.4" stroke="#c8433a"/>'
+      + '<text x="200" y="376" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">the gut, a tube running through you</text>'
+      + '<circle cx="140" cy="170" r="24" stroke="#0f8a4d"/>'
+      + '<text x="140" y="175" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">liver</text>'
+      + '<circle cx="260" cy="240" r="24" stroke="#0f8a4d"/>'
+      + '<text x="260" y="245" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">kidney</text>'
+      + '<line x1="158" y1="186" x2="240" y2="228" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="240" y1="228" x2="230.0" y2="228.7" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="240" y1="228" x2="234.7" y2="219.5" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="330" y="196" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">urea, made inside you</text>'
+      + '<text x="330" y="216" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">so removing it is excretion</text>'
+      + '<text x="330" y="288" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">the fibre was never absorbed</text>'
+      + '<text x="330" y="308" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">so removing it is egestion</text>'
+      + '<text x="320" y="394" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">excretion is your own chemistry, egestion is what passed through</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each organ, what it removes, and where that waste was made',
+      columns: ['Organ', 'What it removes', 'Where that waste came from'],
+      rows: [
+        [
+          'Kidneys',
+          'Urea, excess water and excess salts, as urine',
+          'Urea is made in the liver out of excess amino acids',
+        ],
+        [
+          'Lungs',
+          'Carbon dioxide, and some water vapour',
+          'Made in every cell by respiration',
+        ],
+        [
+          'Skin',
+          'Water and salts, in sweat',
+          'From the blood, and the sweating cools you as well',
+        ],
+      ],
+      note: 'The kidneys do a second job that is just as important: they '
+        + 'control how much water the blood holds, which is why urine is '
+        + 'dark and concentrated when you have drunk little.',
+    },
+    {
+      caption: 'Excretion and egestion, which the examination keeps apart',
+      columns: ['The question', 'Excretion', 'Egestion'],
+      rows: [
+        [
+          'What is removed',
+          'Urea, carbon dioxide, excess salts',
+          'Undigested food, as faeces',
+        ],
+        [
+          'Where it was made',
+          'Inside you, by your own reactions',
+          'Nowhere. It was never made by you',
+        ],
+        [
+          'Was it ever part of you',
+          'Yes, it was carried in your blood',
+          'No, it passed down the gut',
+        ],
+        [
+          'What happens if it stays',
+          'It poisons you within days',
+          'It is uncomfortable, and not poisonous',
+        ],
+      ],
+      note: 'Urea above a certain level in the blood damages tissue, and '
+        + 'carbon dioxide dissolves to make the blood acidic, which stops '
+        + 'enzymes working. That is why kidney failure kills so quickly '
+        + 'without dialysis.',
+    },
+  ],
   questions: [
     {
       id: 'exc-1',
@@ -624,9 +858,8 @@ teach({
     + 'is carried in phloem tissue '
     + 'to growing points, roots, fruits and stores, '
     + 'which is called translocation. '
-    + 'Xylem carries water upwards only. '
-    + 'Phloem carries food up or down, '
-    + 'depending on where it is needed.',
+    + 'The two tissues do opposite jobs, and keeping them apart is '
+    + 'most of this topic.',
 
   mechanism:
     'The question that makes this topic interesting '
@@ -738,6 +971,94 @@ teach({
     + 'Water still rises, so the leaves live for a while, '
     + 'but no food can reach the roots.',
 
+  figure: {
+    alt: 'A plant with two tubes drawn up its stem. The xylem carries '
+      + 'water one way only, from the roots to the leaves, where it '
+      + 'evaporates away and drags the whole column up behind it. The '
+      + 'phloem beside it carries food either up or down, to wherever '
+      + 'it is needed.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">water is pulled up, not pushed</text>'
+      + '<path d="M 300 330 L 300 120"/>'
+      + '<path d="M 340 330 L 340 120"/>'
+      + '<path d="M 300 120 Q 230 60 170 110 Q 240 150 300 128 Z"/>'
+      + '<path d="M 340 120 Q 410 60 470 110 Q 400 150 340 128 Z"/>'
+      + '<line x1="300" y1="330" x2="240" y2="376"/>'
+      + '<line x1="340" y1="330" x2="400" y2="376"/>'
+      + '<line x1="320" y1="330" x2="320" y2="380"/>'
+      + '<text x="320" y="396" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">root hairs take water in by osmosis</text>'
+      + '<line x1="310" y1="310" x2="310" y2="130" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="260" y="240" font-size="13" text-anchor="end" fill="#0f8a4d" stroke="none">xylem</text>'
+      + '<line x1="258" y1="236" x2="304" y2="230"/>'
+      + '<line x1="330" y1="310" x2="330" y2="130" stroke-width="4"/>'
+      + '<text x="386" y="268" font-size="13" text-anchor="start" fill="currentColor" stroke="none">phloem</text>'
+      + '<line x1="384" y1="264" x2="336" y2="258"/>'
+      + '<line x1="220" y1="98" x2="180" y2="62" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="180" y1="62" x2="189.8" y2="63.9" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="180" y1="62" x2="182.9" y2="71.6" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="420" y1="98" x2="460" y2="62" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="460" y1="62" x2="457.1" y2="71.6" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="460" y1="62" x2="450.2" y2="63.9" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="320" y="54" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">water evaporates away, and drags the column up</text>'
+      + '<line x1="310" y1="150" x2="310" y2="112" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="310" y1="112" x2="315.2" y2="120.6" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="310" y1="112" x2="304.8" y2="120.6" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="330" y1="190" x2="330" y2="150"/>'
+      + '<line x1="330" y1="150" x2="335.2" y2="158.6"/>'
+      + '<line x1="330" y1="150" x2="324.8" y2="158.6"/>'
+      + '<line x1="330" y1="230" x2="330" y2="270"/>'
+      + '<line x1="330" y1="270" x2="324.8" y2="261.4"/>'
+      + '<line x1="330" y1="270" x2="335.2" y2="261.4"/>'
+      + '<text x="470" y="200" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">xylem goes up only</text>'
+      + '<text x="470" y="222" font-size="13" text-anchor="start" fill="currentColor" stroke="none">phloem goes either way</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Xylem and phloem, which do opposite jobs',
+      columns: ['The question', 'Xylem', 'Phloem'],
+      rows: [
+        [
+          'What it carries',
+          'Water, and the minerals dissolved in it',
+          'Food made in the leaves',
+        ],
+        ['Which way', 'Upwards only', 'Up or down, to wherever it is needed'],
+        ['Living or dead', 'Dead, hollow and strengthened', 'Living'],
+        ['What the movement is called', 'The transpiration stream', 'Translocation'],
+      ],
+      note: 'Xylem is plumbing. Phloem is delivery, and where the sugar is '
+        + 'wanted changes through the year, which is why it has to go '
+        + 'both ways.',
+    },
+    {
+      caption: 'What makes transpiration faster, and what follows for the '
+        + 'plant',
+      columns: ['The condition', 'Why it speeds evaporation up', 'What the plant does'],
+      rows: [
+        ['Heat', 'Warm water evaporates faster', 'Takes up more water from the soil'],
+        [
+          'Wind',
+          'Moist air is carried away from the leaf',
+          'Takes up more water from the soil',
+        ],
+        [
+          'Dry air',
+          'There is more room in it for vapour',
+          'Takes up more water from the soil',
+        ],
+        [
+          'Not enough water at the roots',
+          'The pull continues whatever the roots can supply',
+          'Wilts, and closes its stomata, so it also stops growing',
+        ],
+      ],
+      note: 'Closing the stomata saves water and shuts carbon dioxide out '
+        + 'at the same time, which is why a plant short of water stops '
+        + 'growing as well as wilting.',
+    },
+  ],
   questions: [
     {
       id: 'trp-1',
@@ -808,9 +1129,8 @@ teach({
     + 'measured in newtons per square metre, called pascals. '
     + 'The same force spread over a larger area gives less pressure, '
     + 'and concentrated on a smaller area gives more. '
-    + 'In a liquid, pressure increases with depth, '
-    + 'depends on the density of the liquid, '
-    + 'and acts equally in all directions at a given depth. '
+    + 'A liquid presses too, and how hard depends on how deep you are '
+    + 'and on what the liquid is. '
     + 'The atmosphere exerts pressure too, '
     + 'which is why a sucker sticks and a drinking straw works.',
 
@@ -923,6 +1243,87 @@ teach({
     + 'So a larger piston feels the same pressure on a bigger area, '
     + 'and that gives a larger force.',
 
+  figure: {
+    alt: 'The same hand pressing with 20 newtons on two blades. The '
+      + 'sharp blade concentrates that force on a tiny area along its '
+      + 'edge, so the pressure is enormous and it cuts. The blunt blade '
+      + 'spreads the same force over a wide edge, so the pressure is '
+      + 'low and it does not.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">the same force, and a different area</text>'
+      + '<line x1="160" y1="70" x2="160" y2="110"/>'
+      + '<line x1="160" y1="110" x2="154.8" y2="101.4"/>'
+      + '<line x1="160" y1="110" x2="165.2" y2="101.4"/>'
+      + '<text x="160" y="56" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the same hand, 20 N</text>'
+      + '<path d="M 120 114 L 200 114 L 170 170 L 150 170 Z"/>'
+      + '<line x1="150" y1="170" x2="170" y2="170" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="160" y="198" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">a sharp edge</text>'
+      + '<text x="160" y="222" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">a tiny area</text>'
+      + '<text x="160" y="244" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">so the pressure is enormous</text>'
+      + '<text x="160" y="268" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">it cuts</text>'
+      + '<line x1="470" y1="70" x2="470" y2="110"/>'
+      + '<line x1="470" y1="110" x2="464.8" y2="101.4"/>'
+      + '<line x1="470" y1="110" x2="475.2" y2="101.4"/>'
+      + '<text x="470" y="56" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the same hand, 20 N</text>'
+      + '<path d="M 420 114 L 520 114 L 506 170 L 434 170 Z"/>'
+      + '<line x1="434" y1="170" x2="506" y2="170" stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="470" y="198" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">a blunt edge</text>'
+      + '<text x="470" y="222" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">a wide area</text>'
+      + '<text x="470" y="244" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">so the pressure is low</text>'
+      + '<text x="470" y="268" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">it does not cut</text>'
+      + '<text x="320" y="324" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">nothing about the force changed</text>'
+      + '<text x="320" y="354" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">pressure is force divided by area, so the area did it</text>'
+      + '<text x="320" y="390" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">ask whether the designer wanted high pressure or low</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What the designer wanted, and how the area delivers it',
+      columns: ['The thing', 'High pressure or low', 'How the area does it'],
+      rows: [
+        ['A knife edge', 'High', 'A tiny area along the edge'],
+        [
+          'A drawing pin',
+          'High at the point, low under the thumb',
+          'A point one end and a wide top the other',
+        ],
+        [
+          'A nail',
+          'High at the point, low at the head',
+          'A point to enter the wood, a wide head to take the hammer',
+        ],
+        ['A tractor tyre', 'Low', 'Wide, so the weight is spread and it does not sink'],
+        ['The foot of a camel', 'Low', 'Broad, so it does not sink in sand'],
+      ],
+      note: 'The force is usually fixed and the area is the design choice, '
+        + 'so when a question asks why something is shaped as it is, the '
+        + 'area explains itself.',
+    },
+    {
+      caption: 'Pressure in a liquid, and what each fact explains',
+      columns: ['The fact', 'Why it is true', 'What it explains'],
+      rows: [
+        [
+          'It increases with depth',
+          'More liquid lies above you',
+          'A dam wall is thicker at the bottom, and water sprays further from a lower hole',
+        ],
+        [
+          'It acts in every direction',
+          'Not only downwards',
+          'Water pushes outwards on the dam, and a diver feels it on every side',
+        ],
+        [
+          'It depends on the density of the liquid',
+          'A denser liquid weighs more for the same depth',
+          'The sea presses harder than fresh water at the same depth',
+        ],
+      ],
+      note: 'The atmosphere presses too, which is why a sucker sticks and '
+        + 'why a drinking straw works at all.',
+    },
+  ],
   questions: [
     {
       id: 'prs-1',
@@ -996,12 +1397,9 @@ teach({
     + 'and can divide it between several ropes. '
     + 'An inclined plane, a wedge and a screw '
     + 'all let a load rise gradually. '
-    + 'Mechanical advantage is the load divided by the effort. '
-    + 'Velocity ratio is the distance the effort moves '
-    + 'divided by the distance the load moves. '
-    + 'Efficiency is the useful work out divided by the work in, '
-    + 'as a percentage, '
-    + 'and it is always less than 100 because of friction.',
+    + 'Three numbers describe how well a machine does it, one about '
+    + 'the forces, one about the distances, and one about how much is '
+    + 'wasted on the way.',
 
   mechanism:
     'The misconception this topic exists to remove '
@@ -1119,6 +1517,89 @@ teach({
     + 'and the efficiency depends on friction. '
     + 'That is a clean way to see that the two are different quantities.',
 
+  figure: {
+    alt: 'A pulley system written as two sides of a sum. You pull with '
+      + '50 newtons through 4 metres, which is 200, and the load of 200 '
+      + 'newtons rises 1 metre, which is also 200. The work is the same '
+      + 'on both sides: the machine has only traded force against '
+      + 'distance.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">a machine never reduces the work</text>'
+      + '<path d="M 60 70 H 290 V 210 H 60 Z" stroke="#0f8a4d"/>'
+      + '<text x="175" y="98" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">you pull</text>'
+      + '<text x="175" y="130" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">50 N</text>'
+      + '<text x="175" y="166" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">through</text>'
+      + '<text x="175" y="196" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">4 metres</text>'
+      + '<path d="M 350 70 H 580 V 210 H 350 Z"/>'
+      + '<text x="465" y="98" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the load rises</text>'
+      + '<text x="465" y="130" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">200 N</text>'
+      + '<text x="465" y="166" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">through</text>'
+      + '<text x="465" y="196" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">1 metre</text>'
+      + '<text x="175" y="256" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">50 × 4 is 200</text>'
+      + '<text x="465" y="256" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">200 × 1 is 200</text>'
+      + '<line x1="60" y1="278" x2="580" y2="278"/>'
+      + '<text x="320" y="312" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the work is exactly the same</text>'
+      + '<text x="320" y="346" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">less force, and more distance, is the whole of it</text>'
+      + '<text x="320" y="382" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so the effort always moves further than the load</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three numbers, what each is about, and how to find it',
+      columns: ['Quantity', 'What it is about', 'How to find it'],
+      rows: [
+        ['Mechanical advantage', 'The forces', 'The load divided by the effort'],
+        [
+          'Velocity ratio',
+          'The distances',
+          'How far the effort moves, divided by how far the load moves',
+        ],
+        [
+          'Efficiency',
+          'How much is wasted',
+          'The mechanical advantage divided by the velocity ratio, as a percentage',
+        ],
+      ],
+      note: 'Efficiency is always below 100 per cent, because some of your '
+        + 'work goes into friction and into lifting the machine itself. A '
+        + 'claim of 100, or more, is an arithmetic error rather than a '
+        + 'good machine.',
+    },
+    {
+      caption: 'Each simple machine, what it gives you and what it costs',
+      columns: ['Machine', 'What it does for you', 'What it costs you'],
+      rows: [
+        [
+          'Lever',
+          'A small effort moves a large load',
+          'The effort moves much further than the load',
+        ],
+        [
+          'Pulley system',
+          'Divides the force between several ropes',
+          'You pull that many metres of rope through your hands',
+        ],
+        [
+          'Inclined plane',
+          'The load rises gradually',
+          'The load travels a much longer path',
+        ],
+        [
+          'Wedge',
+          'Turns a push along into a split sideways',
+          'It must travel in for the split to widen',
+        ],
+        [
+          'Screw',
+          'An inclined plane wrapped round and round',
+          'Many turns for a small rise',
+        ],
+      ],
+      note: 'Every row trades the same way, because work is force times '
+        + 'distance and a machine can only move the trade, never win it.',
+    },
+  ],
   questions: [
     {
       id: 'mch-1',
@@ -1189,13 +1670,10 @@ teach({
     + 'Voltage, or potential difference, is the push that drives it, '
     + 'measured in volts with a voltmeter placed across a component. '
     + 'Resistance, in ohms, opposes the current, '
-    + 'and V = IR relates the three. '
-    + 'In a series circuit there is one path: '
-    + 'the current is the same everywhere '
-    + 'and the voltages across the components add to the supply. '
-    + 'In a parallel circuit there are branches: '
-    + 'the voltage across each branch is the same as the supply '
-    + 'and the currents in the branches add. '
+    + 'and $V = IR$ relates the three. '
+    + 'A circuit is wired either in series, with one path, or in '
+    + 'parallel, with a branch for each component, and which one it is '
+    + 'decides what is shared and what divides. '
     + 'A current in a wire makes a magnetic field, '
     + 'and a coil round an iron core makes an electromagnet, '
     + 'which can be switched off.',
@@ -1316,6 +1794,111 @@ teach({
     + 'making a current by moving a wire in a field. '
     + 'The two are the same relationship run in opposite directions.',
 
+  figure: {
+    alt: 'Two circuits. The series circuit has one path through both '
+      + 'lamps, so the current is the same everywhere and the voltages '
+      + 'across the lamps add to the supply. The parallel circuit has a '
+      + 'branch for each lamp, each one straight across the supply, so '
+      + 'each lamp gets the full voltage.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">ask which quantity is shared, then use V = IR</text>'
+      + '<path d="M 50 90 H 290 V 220 H 50 Z"/>'
+      + '<line x1="156" y1="90" x2="166" y2="90"/>'
+      + '<line x1="166" y1="76" x2="166" y2="104"/>'
+      + '<line x1="174" y1="83" x2="174" y2="97"/>'
+      + '<line x1="174" y1="90" x2="184" y2="90"/>'
+      + '<circle cx="110" cy="220" r="14"/>'
+      + '<line x1="100" y1="210" x2="120" y2="230"/>'
+      + '<line x1="120" y1="210" x2="100" y2="230"/>'
+      + '<circle cx="230" cy="220" r="14"/>'
+      + '<line x1="220" y1="210" x2="240" y2="230"/>'
+      + '<line x1="240" y1="210" x2="220" y2="230"/>'
+      + '<text x="170" y="68" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">series</text>'
+      + '<text x="170" y="254" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">one path, so the current</text>'
+      + '<text x="170" y="274" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">is the same everywhere</text>'
+      + '<text x="170" y="300" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">and the voltages add up</text>'
+      + '<text x="170" y="330" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">one lamp fails and both</text>'
+      + '<text x="170" y="350" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">go out</text>'
+      + '<path d="M 360 90 H 580 V 220 H 360 Z"/>'
+      + '<line x1="456" y1="90" x2="466" y2="90"/>'
+      + '<line x1="466" y1="76" x2="466" y2="104"/>'
+      + '<line x1="474" y1="83" x2="474" y2="97"/>'
+      + '<line x1="474" y1="90" x2="484" y2="90"/>'
+      + '<line x1="420" y1="90" x2="420" y2="220"/>'
+      + '<line x1="520" y1="90" x2="520" y2="220"/>'
+      + '<circle cx="420" cy="155" r="14"/>'
+      + '<line x1="410" y1="145" x2="430" y2="165"/>'
+      + '<line x1="430" y1="145" x2="410" y2="165"/>'
+      + '<circle cx="520" cy="155" r="14"/>'
+      + '<line x1="510" y1="145" x2="530" y2="165"/>'
+      + '<line x1="530" y1="145" x2="510" y2="165"/>'
+      + '<text x="470" y="68" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">parallel</text>'
+      + '<text x="470" y="254" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">each branch is straight</text>'
+      + '<text x="470" y="274" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">across the supply, so each</text>'
+      + '<text x="470" y="294" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">gets the full voltage</text>'
+      + '<text x="470" y="330" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">one lamp fails and the</text>'
+      + '<text x="470" y="350" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">other keeps working</text>'
+      + '<text x="320" y="392" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">which is why house lights are wired in parallel</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Series and parallel, and which quantity is shared in each',
+      columns: ['The question', 'Series', 'Parallel'],
+      rows: [
+        ['How many paths are there', 'One', 'One for every branch'],
+        [
+          'The current',
+          'The same everywhere, because every charge passes everything',
+          'It divides, so the branch currents add to the total',
+        ],
+        [
+          'The voltage',
+          'It is used up along the way, so the voltages add to the supply',
+          'Each branch gets the full supply voltage',
+        ],
+        [
+          'If one lamp fails',
+          'The path breaks and everything goes out',
+          'The other branches keep working',
+        ],
+        [
+          'Where you meet it',
+          'A fuse, which must carry the whole current to break it',
+          'House lights, and every socket in a building',
+        ],
+      ],
+      note: 'Say which quantity is shared before any calculation, and the '
+        + 'rest is $V = IR$ applied to one component at a time.',
+    },
+    {
+      caption: 'The three quantities, their units and their meters',
+      columns: ['Quantity', 'Unit', 'How it is measured', 'Where it goes'],
+      rows: [
+        [
+          'Current',
+          'Ampere',
+          'An ammeter',
+          'In the circuit, so the current passes through it',
+        ],
+        [
+          'Voltage',
+          'Volt',
+          'A voltmeter',
+          'Across the component, between its two ends',
+        ],
+        [
+          'Resistance',
+          'Ohm',
+          'Worked out, as voltage divided by current',
+          'Not measured directly in this syllabus',
+        ],
+      ],
+      note: 'An ammeter goes in the path and a voltmeter goes across it. '
+        + 'Swapping them is the commonest wiring mistake in a practical.',
+    },
+  ],
   questions: [
     {
       id: 'ele-1',
@@ -1378,16 +1961,9 @@ teach({
     + 'Medicines are drugs used properly. '
     + 'Drug abuse is use in the wrong amount, for the wrong reason, '
     + 'or without prescription. '
-    + 'Stimulants, such as those in cocaine and amphetamines, '
-    + 'speed up the nervous system. '
-    + 'Depressants, including alcohol, slow it down. '
-    + 'Narcotics such as heroin dull pain and cause strong dependence. '
-    + 'Tobacco harms the lungs, heart and circulation, '
-    + 'and nicotine is strongly addictive. '
-    + 'Cannabis affects memory, concentration and mental health. '
-    + 'Tolerance means more is needed for the same effect. '
-    + 'Dependence means the body or mind needs it to function. '
-    + 'Withdrawal is what happens when it stops.',
+    + 'Drugs are grouped by what they do to the nervous system, and '
+    + 'three words describe what long use does to a person: tolerance, '
+    + 'dependence and withdrawal.',
 
   mechanism:
     'Dependence is usually explained as weakness, '
@@ -1505,6 +2081,117 @@ teach({
     + 'The risk comes from the place and the company '
     + 'where the habit was formed.',
 
+  figure: {
+    alt: 'A line marked normal. Before the drug, the body sits on it. '
+      + 'The drug pushes the body above the line, and the body adjusts '
+      + 'to push back down, so the same dose does less, which is '
+      + 'tolerance. When the drug stops, the adjustment is still '
+      + 'pushing with nothing to push against, so the person drops '
+      + 'below normal and feels ill, which is withdrawal.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">the body pushes back, and that is the whole of it</text>'
+      + '<line x1="60" y1="150" x2="580" y2="150"/>'
+      + '<text x="60" y="142" font-size="13" text-anchor="start" fill="currentColor" stroke="none">normal</text>'
+      + '<circle cx="130" cy="150" r="10" fill="currentColor"/>'
+      + '<text x="130" y="240" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">before</text>'
+      + '<text x="130" y="266" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">nothing pushing</text>'
+      + '<line x1="300" y1="150" x2="300" y2="108" stroke="#c8433a" stroke-width="4"/>'
+      + '<line x1="300" y1="108" x2="305.2" y2="116.6" stroke="#c8433a" stroke-width="4"/>'
+      + '<line x1="300" y1="108" x2="294.8" y2="116.6" stroke="#c8433a" stroke-width="4"/>'
+      + '<circle cx="300" cy="104" r="10" fill="#c8433a" stroke="#c8433a"/>'
+      + '<text x="300" y="86" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">pushed up</text>'
+      + '<line x1="336" y1="104" x2="336" y2="146" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="336" y1="146" x2="330.8" y2="137.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="336" y1="146" x2="341.2" y2="137.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="352" y="112" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">the body adjusts</text>'
+      + '<text x="352" y="132" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">and pushes back</text>'
+      + '<text x="300" y="240" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the drug arrives</text>'
+      + '<text x="300" y="266" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">so the same dose now does less</text>'
+      + '<text x="300" y="286" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">which is tolerance</text>'
+      + '<line x1="500" y1="150" x2="500" y2="190" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="500" y1="190" x2="494.8" y2="181.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="500" y1="190" x2="505.2" y2="181.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<circle cx="500" cy="196" r="10" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="500" y="240" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the drug stops</text>'
+      + '<text x="500" y="266" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the adjustment is still there</text>'
+      + '<text x="500" y="286" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">with nothing to push against</text>'
+      + '<text x="500" y="308" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">which is withdrawal</text>'
+      + '<text x="320" y="344" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so the person feels the opposite of what the drug did</text>'
+      + '<text x="320" y="370" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and feels ill until the adjustment unwinds</text>'
+      + '<text x="320" y="394" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">which is why stopping is physically hard, and not merely deciding</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The kinds of drug, and what each one does',
+      columns: [
+        'Kind',
+        'What it does to the nervous system',
+        'Examples',
+        'What it harms most',
+      ],
+      rows: [
+        [
+          'Stimulants',
+          'Speeds it up',
+          'Cocaine, amphetamines',
+          'The heart, sleep and mental health',
+        ],
+        [
+          'Depressants',
+          'Slows it down',
+          'Alcohol',
+          'The liver, judgement, and an unborn child',
+        ],
+        [
+          'Narcotics',
+          'Dulls pain, and causes strong dependence',
+          'Heroin',
+          'Breathing, and almost every part of a life',
+        ],
+        [
+          'Tobacco',
+          'Nicotine is a stimulant, and strongly addictive',
+          'Cigarettes',
+          'The lungs, the heart and the circulation',
+        ],
+        [
+          'Cannabis',
+          'Alters how things are perceived',
+          'Cannabis',
+          'Memory, concentration and mental health',
+        ],
+      ],
+      note: 'Medicines are drugs used properly. Drug abuse is use in the '
+        + 'wrong amount, for the wrong reason, or without a prescription.',
+    },
+    {
+      caption: 'Tolerance, dependence and withdrawal, and why each one happens',
+      columns: ['The word', 'What it means', 'Why it happens'],
+      rows: [
+        [
+          'Tolerance',
+          'More is needed for the same effect',
+          'The body has adjusted to push back, so the same dose does less',
+        ],
+        [
+          'Dependence',
+          'The body or the mind needs it to work normally',
+          'With the adjustment in place, the drug is what makes things feel normal',
+        ],
+        [
+          'Withdrawal',
+          'Feeling ill when it stops',
+          'The adjustment is still there with nothing to push against',
+        ],
+      ],
+      note: 'After the adjustment, the drug is being taken to feel normal '
+        + 'rather than to feel good. The decision that matters is the '
+        + 'first one, because it is the only one made by a body that has '
+        + 'not yet adjusted.',
+    },
+  ],
   questions: [
     {
       id: 'drg-1',
@@ -1570,19 +2257,11 @@ teach({
   },
 
   idea:
-    'Water pollution in Ghana includes mercury and silt from galamsey, '
-    + 'sewage, and waste dumped into gutters and lagoons. '
-    + 'Air pollution includes smoke from burning waste and bush, '
-    + 'vehicle exhaust, and dust. '
-    + 'Land pollution includes plastic waste, '
-    + 'which does not rot, '
-    + 'and chemicals from careless dumping. '
-    + 'Conservation means using a resource so that it continues: '
-    + 'protected forest reserves, '
-    + 'closed seasons on fishing, '
-    + 'tree planting, '
-    + 'reclaiming mined land, '
-    + 'and reducing, reusing and recycling waste. '
+    'Pollution in Ghana comes in three kinds, of the water, the air and '
+    + 'the land, and each has its own sources and its own way of '
+    + 'reaching people. '
+    + 'Conservation is the other side of it: using a resource so that '
+    + 'it continues. '
     + 'Evaluating a response means saying what it would actually change, '
     + 'what it would cost, '
     + 'and whether it could be enforced.',
@@ -1704,6 +2383,109 @@ teach({
     + 'is collected by people who were never asked to care about litter. '
     + 'Designing responses that way is the most useful idea in the topic.',
 
+  figure: {
+    alt: 'A chain of four boxes. Mercury leaves a mine, enters the '
+      + 'river, passes into the fish, and reaches a person who never '
+      + 'went near a mine. The harm arrives a long way from where the '
+      + 'pollutant was put.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">a pollutant is rarely harmful where it is put</text>'
+      + '<path d="M 40 90 H 170 V 150 H 40 Z" stroke="#c8433a"/>'
+      + '<text x="105" y="116" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">a mine</text>'
+      + '<text x="105" y="138" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">mercury</text>'
+      + '<line x1="174" y1="120" x2="216" y2="120" stroke="#c8433a"/>'
+      + '<line x1="216" y1="120" x2="207.4" y2="125.2" stroke="#c8433a"/>'
+      + '<line x1="216" y1="120" x2="207.4" y2="114.8" stroke="#c8433a"/>'
+      + '<path d="M 220 90 H 350 V 150 H 220 Z" stroke="#c8433a"/>'
+      + '<text x="285" y="124" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the river</text>'
+      + '<line x1="354" y1="120" x2="396" y2="120" stroke="#c8433a"/>'
+      + '<line x1="396" y1="120" x2="387.4" y2="125.2" stroke="#c8433a"/>'
+      + '<line x1="396" y1="120" x2="387.4" y2="114.8" stroke="#c8433a"/>'
+      + '<path d="M 400 90 H 530 V 150 H 400 Z" stroke="#c8433a"/>'
+      + '<text x="465" y="124" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the fish</text>'
+      + '<path d="M 220 230 H 420 V 290 H 220 Z" stroke="#c8433a"/>'
+      + '<line x1="465" y1="154" x2="424" y2="226" stroke="#c8433a"/>'
+      + '<line x1="424" y1="226" x2="423.8" y2="216.0" stroke="#c8433a"/>'
+      + '<line x1="424" y1="226" x2="432.7" y2="221.1" stroke="#c8433a"/>'
+      + '<text x="320" y="256" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">a person who never</text>'
+      + '<text x="320" y="278" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">went near a mine</text>'
+      + '<text x="320" y="336" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">naming that chain is what turns a list of pollutants</text>'
+      + '<text x="320" y="364" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">into an answer about why pollution matters</text>'
+      + '<text x="320" y="394" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and the same chain runs from burning waste to a child’s lungs</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Pollution in Ghana, where it comes from, and who it reaches',
+      columns: ['Kind', 'Where it comes from', 'Who it reaches, and how'],
+      rows: [
+        [
+          'Water',
+          'Mercury and silt from galamsey, sewage, waste tipped into gutters and lagoons',
+          'Anybody eating fish from that river, however far away',
+        ],
+        [
+          'Air',
+          'Smoke from burning waste and bush, vehicle exhaust, dust',
+          'The lungs of children in the next street',
+        ],
+        [
+          'Land',
+          'Plastic that does not rot, and chemicals from careless dumping',
+          'Crops grown in it, and gutters that block and then flood',
+        ],
+      ],
+      note: 'Conservation is using a resource so that it continues: '
+        + 'protected forest reserves, closed seasons on fishing, tree '
+        + 'planting, reclaiming mined land, and reducing, reusing and '
+        + 'recycling waste.',
+    },
+    {
+      caption: 'Judging a response by three questions rather than describing '
+        + 'it',
+      columns: [
+        'The response',
+        'Would it change what anybody does',
+        'What does it cost, and who pays',
+        'Can it be enforced',
+      ],
+      rows: [
+        [
+          'A deposit refunded when a bottle is returned',
+          'Yes, because it pays the person who returns it',
+          'A small amount at purchase, given back',
+          'It needs no inspector at all',
+        ],
+        [
+          'A reserve that the community beside it earns from',
+          'Yes, the people living there defend it',
+          'Setting it up, and income afterwards',
+          'Enforced by the people who benefit',
+        ],
+        [
+          'Banning plastic bags',
+          'Yes, if there is a substitute',
+          'A cost moved onto traders and shoppers',
+          'Hard, unless that cost is accepted',
+        ],
+        [
+          'Tree planting with nobody responsible for watering',
+          'No',
+          'Cheap, and wasted',
+          'There is nothing to enforce, and nothing survives',
+        ],
+        [
+          'A rule forbidding what is already forbidden',
+          'No',
+          'Nothing',
+          'It was not being enforced before either',
+        ],
+      ],
+      note: 'A law that needs an inspector at every riverbank at night is '
+        + 'not a law, it is an intention.',
+    },
+  ],
   questions: [
     {
       id: 'pol-1',
