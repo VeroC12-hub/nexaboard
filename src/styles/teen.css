@@ -498,21 +498,12 @@
   transition: background-color 120ms ease, transform 60ms ease;
 }
 
-.teen-row::after {
-  content: '';
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  width: 9px;
-  height: 9px;
-  margin-top: -5px;
-  border-right: 2px solid currentColor;
-  border-top: 2px solid currentColor;
-  transform: rotate(45deg);
-  opacity: 0.4;
-}
+/* No arrow is drawn here. These rows already carry `.teen-chev` in the
+   markup, and adding one in CSS put two on every row: the point was to give
+   a flat row the sign that it opens something, and this skin already had
+   one. The press and focus states below are what it was actually missing. */
 
-.teen-row:hover::after { opacity: 0.85; }
+.teen-row:hover .teen-chev { opacity: 1; }
 
 .teen-row:active { background: var(--wash); transform: scale(0.997); }
 
@@ -520,5 +511,5 @@
 
 /* A row that is a statement rather than a control, such as a line in the
    week summary, must not grow an arrow. */
-.teen-week > .teen-row-sub::after,
-.teen-row.is-flat::after { content: none; }
+/* A row that is a statement rather than a control keeps no press state. */
+.teen-row.is-flat:active { transform: none; background: none; }
