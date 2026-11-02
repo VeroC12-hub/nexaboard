@@ -373,7 +373,18 @@ export default function Study() {
     if (!read) { swapGate(landing); return }
     const needsLearner = read.gate.at === 'subjects' || read.gate.at === 'course'
     if (needsLearner && !profile) { swapGate(landing); return }
-    if (read.gate.at === 'roll' && !account) swapGate(landing)
+    if (read.gate.at === 'roll' && !account) { swapGate(landing); return }
+    /* A bare /study is the front page for a visitor and the wrong page for
+       everybody else.
+
+       `gateOfPath` maps /study to the front page unconditionally, and the
+       URL outranks the session, so a learner who bookmarked /study, tapped
+       the wordmark, or simply typed the address was shown the sales page
+       for a product they had already signed up to, with their own work one
+       unexplained tap away. The comment in App.tsx says the front page is
+       for a visitor who is not signed in; this is the line that makes that
+       true. */
+    if (read.gate.at === 'front' && landing.at !== 'front') swapGate(landing)
   }, [read, profile, account, landing, swapGate])
 
 
