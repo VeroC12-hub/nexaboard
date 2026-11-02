@@ -34,9 +34,8 @@ teach({
 
   idea:
     'Everything around you is a solid, a liquid or a gas. '
-    + 'A stone keeps its own shape wherever you put it. '
-    + 'Water takes the shape of the cup. '
-    + 'Air spreads out until it fills the whole room.',
+    + 'What tells them apart is what happens to the shape '
+    + 'when you move the thing from one container to another.',
 
   mechanism:
     'The difference is how tightly the tiny parts are held together. '
@@ -119,6 +118,89 @@ teach({
     + 'You will not meet it in a kitchen, but it is worth knowing the three '
     + 'you see every day are not the whole list.',
 
+  figure: {
+    alt: 'Three boxes showing how the tiny parts sit. In the solid, drawn '
+      + 'first, they are locked in a neat grid. In the liquid they still '
+      + 'touch but lie loosely, with a flat surface and a space above it. '
+      + 'In the gas they are far apart, each with a short line showing it '
+      + 'moving.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="30,110 160,110 160,296 30,296"/>'
+      + '<circle cx="56" cy="150" r="11"/><circle cx="82" cy="150" r="11"/>'
+      + '<circle cx="108" cy="150" r="11"/>'
+      + '<circle cx="134" cy="150" r="11"/>'
+      + '<circle cx="56" cy="176" r="11"/><circle cx="82" cy="176" r="11"/>'
+      + '<circle cx="108" cy="176" r="11"/>'
+      + '<circle cx="134" cy="176" r="11"/>'
+      + '<circle cx="56" cy="202" r="11"/><circle cx="82" cy="202" r="11"/>'
+      + '<circle cx="108" cy="202" r="11"/>'
+      + '<circle cx="134" cy="202" r="11"/>'
+      + '<circle cx="56" cy="228" r="11"/><circle cx="82" cy="228" r="11"/>'
+      + '<circle cx="108" cy="228" r="11"/>'
+      + '<circle cx="134" cy="228" r="11"/>'
+      + '<text x="95" y="328" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">solid</text>'
+      + '<text x="95" y="356" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">locked in place</text>'
+      + '<polygon points="222,110 352,110 352,296 222,296"/>'
+      + '<circle cx="236" cy="196" r="11"/>'
+      + '<circle cx="260" cy="212" r="11"/>'
+      + '<circle cx="284" cy="196" r="11"/>'
+      + '<circle cx="308" cy="212" r="11"/>'
+      + '<circle cx="332" cy="198" r="11"/>'
+      + '<circle cx="248" cy="232" r="11"/>'
+      + '<circle cx="272" cy="230" r="11"/>'
+      + '<circle cx="296" cy="234" r="11"/>'
+      + '<circle cx="320" cy="232" r="11"/>'
+      + '<circle cx="258" cy="256" r="11"/>'
+      + '<circle cx="284" cy="258" r="11"/>'
+      + '<circle cx="310" cy="254" r="11"/>'
+      + '<line x1="224" y1="184" x2="350" y2="184"/>'
+      + '<text x="287" y="328" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">liquid</text>'
+      + '<text x="287" y="356" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">touching, but sliding</text>'
+      + '<polygon points="440,110 614,110 614,296 440,296"/>'
+      + '<circle cx="470" cy="142" r="11"/>'
+      + '<line x1="483" y1="136" x2="496" y2="130"/>'
+      + '<circle cx="532" cy="168" r="11"/>'
+      + '<line x1="545" y1="162" x2="558" y2="156"/>'
+      + '<circle cx="572" cy="136" r="11"/>'
+      + '<line x1="585" y1="130" x2="598" y2="124"/>'
+      + '<circle cx="482" cy="222" r="11"/>'
+      + '<line x1="495" y1="216" x2="508" y2="210"/>'
+      + '<circle cx="546" cy="244" r="11"/>'
+      + '<line x1="559" y1="238" x2="572" y2="232"/>'
+      + '<circle cx="578" cy="200" r="11"/>'
+      + '<line x1="591" y1="194" x2="604" y2="188"/>'
+      + '<circle cx="506" cy="276" r="11"/>'
+      + '<line x1="519" y1="270" x2="532" y2="264"/>'
+      + '<circle cx="558" cy="278" r="11"/>'
+      + '<line x1="571" y1="272" x2="584" y2="266"/>'
+      + '<text x="527" y="328" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">gas</text>'
+      + '<text x="527" y="356" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">far apart, moving fast</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What each state does with its shape and its container',
+    columns: [
+      'State',
+      'Its own shape',
+      'What it does in a container',
+      'Example',
+    ],
+    rows: [
+      ['Solid', 'Keeps it', 'Sits there unchanged', 'A stone'],
+      ['Liquid', 'Loses it', 'Takes the shape, stays at the bottom', 'Water'],
+      ['Gas', 'Loses it', 'Fills the whole container', 'Air'],
+    ],
+    note: 'Heat is what loosens the hold between the tiny parts, which is '
+      + 'how one of these becomes another without becoming a different '
+      + 'substance.',
+  }],
   questions: [
     {
       id: 'som-1',
@@ -352,11 +434,10 @@ teach({
   },
 
   idea:
-    'Every living thing goes through stages. '
-    + 'A bean starts as a seed, sprouts, grows, flowers and makes new seeds. '
-    + 'A mosquito goes egg, larva, pupa, adult. '
-    + 'A butterfly goes egg, caterpillar, pupa, adult. '
-    + 'Then it begins again.',
+    'Every living thing goes through stages, in order, '
+    + 'and the last stage makes a new beginning. '
+    + 'That is what a life cycle is: '
+    + 'not a line from birth to death but a ring that comes round.',
 
   mechanism:
     'Notice that the mosquito and the butterfly have the same four stages, '
@@ -440,6 +521,57 @@ teach({
     + 'Scientists call the big change metamorphosis, '
     + 'and it is worth asking why some animals do it and others do not.',
 
+  figure: {
+    alt: 'The four stages of a butterfly drawn as a ring, with green arrows '
+      + 'running round it: egg, then caterpillar, then pupa, then adult, '
+      + 'and from the adult back to the egg. In the middle it says it '
+      + 'begins again.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<ellipse cx="320" cy="96" rx="84" ry="36"/>'
+      + '<text x="320" y="103" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">egg</text>'
+      + '<ellipse cx="516" cy="212" rx="84" ry="36"/>'
+      + '<text x="516" y="219" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">caterpillar</text>'
+      + '<ellipse cx="320" cy="328" rx="84" ry="36"/>'
+      + '<text x="320" y="335" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">pupa</text>'
+      + '<ellipse cx="124" cy="212" rx="84" ry="36"/>'
+      + '<text x="124" y="219" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">adult</text>'
+      + '<path d="M 404 112 Q 470 132 500 174" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<polyline points="482,160 504,180 496,154" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<path d="M 500 250 Q 470 292 404 312" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<polyline points="424,298 400,316 424,322" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<path d="M 236 312 Q 170 292 140 250" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<polyline points="158,264 136,244 144,270" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<path d="M 140 174 Q 170 132 236 112" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<polyline points="216,126 240,108 216,102" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="320" y="206" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">it begins</text>'
+      + '<text x="320" y="230" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">again</text></svg>',
+  },
+  tables: [{
+    caption: 'The stages each of these goes through, in order',
+    columns: ['Living thing', 'First', 'Next', 'Then', 'Last'],
+    rows: [
+      ['Bean', 'Seed', 'Sprout', 'Growing plant', 'Flowers, then new seeds'],
+      ['Mosquito', 'Egg', 'Larva in water', 'Pupa', 'Adult that flies'],
+      ['Butterfly', 'Egg', 'Caterpillar', 'Pupa', 'Adult that drinks nectar'],
+    ],
+    note: 'The mosquito and the butterfly share the same four stages, and in '
+      + 'both the young one looks nothing like the adult.',
+  }],
   questions: [
     {
       id: 'lc-1',
@@ -501,10 +633,9 @@ teach({
   },
 
   idea:
-    'You have different teeth for different jobs. '
-    + 'The flat ones at the front cut, and they are called incisors. '
-    + 'The pointed ones beside them tear, and they are canines. '
-    + 'The broad ones at the back grind, and they are molars.',
+    'You have different teeth in different places, '
+    + 'and the shape of each one tells you the job it does: '
+    + 'flat for cutting, pointed for tearing, broad for grinding.',
 
   mechanism:
     'Decay is not caused by sugar directly. '
@@ -591,6 +722,57 @@ teach({
     + 'They work best on the surfaces they can reach, '
     + 'which is the same limit a brush has.',
 
+  figure: {
+    alt: 'Two timelines of one afternoon. In the first, one sweet is eaten '
+      + 'slowly, and a long red bar underneath shows acid attacking the '
+      + 'teeth the whole afternoon. In the second the same sweets are eaten '
+      + 'at once, and the red bar is one short block. Under them it says '
+      + 'how often you eat sugar matters more than how much.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="42" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the same sweets, two different '
+      + 'afternoons</text><line x1="70" y1="138" x2="580" y2="138"/>'
+      + '<circle cx="110" cy="118" r="11" fill="currentColor"/>'
+      + '<circle cx="192" cy="118" r="11" fill="currentColor"/>'
+      + '<circle cx="274" cy="118" r="11" fill="currentColor"/>'
+      + '<circle cx="356" cy="118" r="11" fill="currentColor"/>'
+      + '<circle cx="438" cy="118" r="11" fill="currentColor"/>'
+      + '<circle cx="520" cy="118" r="11" fill="currentColor"/>'
+      + '<text x="70" y="90" font-size="18" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">one at a time, all '
+      + 'afternoon</text>'
+      + '<polygon points="96,150 540,150 540,184 96,184" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="318" y="174" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">acid on the teeth all '
+      + 'afternoon</text><line x1="70" y1="276" x2="580" y2="276"/>'
+      + '<circle cx="104" cy="256" r="11" fill="currentColor"/>'
+      + '<circle cx="128" cy="256" r="11" fill="currentColor"/>'
+      + '<circle cx="152" cy="256" r="11" fill="currentColor"/>'
+      + '<circle cx="176" cy="256" r="11" fill="currentColor"/>'
+      + '<circle cx="200" cy="256" r="11" fill="currentColor"/>'
+      + '<circle cx="224" cy="256" r="11" fill="currentColor"/>'
+      + '<text x="70" y="228" font-size="18" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">all at once</text>'
+      + '<polygon points="96,288 240,288 240,322 96,322" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="168" y="312" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">one short attack</text>'
+      + '<text x="320" y="366" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">how often you eat sugar matters more '
+      + 'than how much</text></svg>',
+  },
+  tables: [{
+    caption: 'Which teeth do which job',
+    columns: ['Tooth', 'What it looks like', 'What it does'],
+    rows: [
+      ['Incisor', 'Flat, at the front', 'Cuts'],
+      ['Canine', 'Pointed, beside the incisors', 'Tears'],
+      ['Molar', 'Broad, at the back', 'Grinds'],
+    ],
+    note: 'The shape of a tooth tells you the job it was made for.',
+  }],
   questions: [
     {
       id: 'th-1',
@@ -673,8 +855,7 @@ teach({
     'Ask how rough each one is.',
     'Rougher means more friction and a quicker stop.',
     'Ask whether friction is helping or hindering here.',
-    'To cut friction: make it smoother, or add oil, or use wheels.',
-    'To raise friction: make it rougher, or press harder.',
+    'Then make it rougher or smoother, depending on which you want.',
   ],
 
   worked: [
@@ -734,6 +915,57 @@ teach({
     + 'rub hard enough and long enough and the heat is enough to light dry '
     + 'grass.',
 
+  figure: {
+    alt: 'The same ball rolling on two floors. On the rough floor, drawn as '
+      + 'a jagged line, it stops early, and a red arrow from it points back '
+      + 'against the way it was going, labelled friction pushes back. On '
+      + 'the smooth floor it travels much further before stopping.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<path d="M 60 226 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l '
+      + '9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 '
+      + '8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 '
+      + 'l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l 9 -8 l 9 8 l '
+      + '9 -8 l 9 8"/><circle cx="96" cy="198" r="20"/>'
+      + '<circle cx="250" cy="198" r="20"/>'
+      + '<line x1="124" y1="198" x2="224" y2="198" stroke="#0f8a4d"/>'
+      + '<polyline points="211,188 224,198 211,208" stroke="#0f8a4d"/>'
+      + '<line x1="240" y1="180" x2="208" y2="162" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<polyline points="224,160 204,160 212,178" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="252" y="156" font-size="17" text-anchor="start" '
+      + 'fill="#c8433a" stroke="none">friction pushes back</text>'
+      + '<text x="250" y="276" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">rough floor: it stops '
+      + 'soon</text>'
+      + '<line x1="60" y1="340" x2="600" y2="340" stroke-width="4"/>'
+      + '<circle cx="96" cy="318" r="20"/>'
+      + '<circle cx="520" cy="318" r="20"/>'
+      + '<line x1="124" y1="318" x2="494" y2="318" stroke="#0f8a4d"/>'
+      + '<polyline points="481,308 494,318 481,328" stroke="#0f8a4d"/>'
+      + '<text x="320" y="384" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">smooth floor: it goes much '
+      + 'further</text></svg>',
+  },
+  tables: [{
+    caption: 'How to get more friction, and how to get less',
+    columns: ['You want', 'What to do', 'Where you see it'],
+    rows: [
+      [
+        'More friction',
+        'Rougher surfaces, or press harder',
+        'Shoe soles, and brakes',
+      ],
+      [
+        'Less friction',
+        'Smoother surfaces, oil, or wheels',
+        'A bicycle chain, a trolley',
+      ],
+    ],
+    note: 'Friction is neither good nor bad. Which one you want depends '
+      + 'entirely on the job.',
+  }],
   questions: [
     {
       id: 'fp-1',
@@ -792,10 +1024,9 @@ teach({
   },
 
   idea:
-    'A magnet pulls some metals and ignores everything else. '
-    + 'It pulls iron and steel. '
-    + 'It does not pull aluminium, copper, wood, plastic or glass. '
-    + 'Every magnet has two ends called poles.',
+    'A magnet pulls some things and ignores everything else, '
+    + 'and what decides it is not whether the thing is metal. '
+    + 'Every magnet has two ends, called poles.',
 
   mechanism:
     'The part people get wrong is thinking a magnet attracts all metals. '
@@ -875,6 +1106,66 @@ teach({
     + 'which is why a compass needle always swings to point the same way. '
     + 'The needle is a small magnet being pulled by a very large one.',
 
+  figure: {
+    alt: 'Two pairs of bar magnets with their ends named N and S. In the top '
+      + 'pair an S faces an N and green arrows point them together, '
+      + 'labelled opposite ends pull. In the bottom pair an N faces an N '
+      + 'and red arrows point them apart, labelled matching ends push.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="40,90 190,90 190,146 40,146"/>'
+      + '<line x1="115" y1="90" x2="115" y2="146"/>'
+      + '<text x="78" y="128" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">N</text>'
+      + '<text x="153" y="128" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">S</text>'
+      + '<polygon points="290,90 440,90 440,146 290,146"/>'
+      + '<line x1="365" y1="90" x2="365" y2="146"/>'
+      + '<text x="328" y="128" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">N</text>'
+      + '<text x="403" y="128" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">S</text>'
+      + '<line x1="196" y1="118" x2="236" y2="118" stroke="#0f8a4d"/>'
+      + '<polyline points="223,108 236,118 223,128" stroke="#0f8a4d"/>'
+      + '<line x1="284" y1="118" x2="244" y2="118" stroke="#0f8a4d"/>'
+      + '<polyline points="257,108 244,118 257,128" stroke="#0f8a4d"/>'
+      + '<text x="540" y="124" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">they pull</text>'
+      + '<polygon points="40,230 190,230 190,286 40,286"/>'
+      + '<line x1="115" y1="230" x2="115" y2="286"/>'
+      + '<text x="78" y="268" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">S</text>'
+      + '<text x="153" y="268" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">N</text>'
+      + '<polygon points="290,230 440,230 440,286 290,286"/>'
+      + '<line x1="365" y1="230" x2="365" y2="286"/>'
+      + '<text x="328" y="268" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">N</text>'
+      + '<text x="403" y="268" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">S</text>'
+      + '<line x1="236" y1="258" x2="196" y2="258" stroke="#c8433a"/>'
+      + '<polyline points="209,248 196,258 209,268" stroke="#c8433a"/>'
+      + '<line x1="244" y1="258" x2="284" y2="258" stroke="#c8433a"/>'
+      + '<polyline points="271,248 284,258 271,268" stroke="#c8433a"/>'
+      + '<text x="540" y="264" font-size="20" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">they push</text>'
+      + '<text x="320" y="358" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">opposite ends pull, matching '
+      + 'ends push</text></svg>',
+  },
+  tables: [{
+    caption: 'What a magnet pulls and what it ignores',
+    columns: ['Material', 'Does a magnet pull it'],
+    rows: [
+      ['Iron', 'Yes'],
+      ['Steel', 'Yes'],
+      ['Aluminium', 'No'],
+      ['Copper', 'No'],
+      ['Wood, plastic, glass', 'No'],
+    ],
+    note: 'What matters is iron, not metal in general, which is why a coin '
+      + 'can be metal and still not stick.',
+  }],
   questions: [
     {
       id: 'mg-1',
@@ -932,10 +1223,10 @@ teach({
   },
 
   idea:
-    'Everything that works needs energy. '
-    + 'In Ghana it comes from the sun, from water behind a dam, from wind, '
-    + 'from wood and charcoal, and from gas and oil. '
-    + 'Some of those come back by themselves and some do not.',
+    'Everything that works needs energy, '
+    + 'and in Ghana it reaches us from several different places. '
+    + 'The question worth asking about each of them is the same one: '
+    + 'will there be as much of it tomorrow.',
 
   mechanism:
     'The test for renewable is simple: '
@@ -1019,6 +1310,76 @@ teach({
     + 'Even oil is ancient plants that grew in sunlight. '
     + 'The exception is nuclear, which comes from the atoms themselves.',
 
+  figure: {
+    alt: 'One question with three answers. From the question will there be '
+      + 'as much of it tomorrow, one arrow leads to yes, which is renewable '
+      + 'and names the sun, a river and wind. Another leads to no, which is '
+      + 'not renewable and names gas and oil. A third leads to wood and '
+      + 'charcoal, which are renewable only if the trees are replanted.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="160,56 480,56 480,118 160,118"/>'
+      + '<text x="320" y="84" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">will there be as much of '
+      + 'it</text>'
+      + '<text x="320" y="108" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">tomorrow, on its own</text>'
+      + '<line x1="130" y1="130" x2="510" y2="130"/>'
+      + '<line x1="130" y1="130" x2="130" y2="184" stroke="#0f8a4d"/>'
+      + '<polyline points="120,171 130,184 140,171" stroke="#0f8a4d"/>'
+      + '<line x1="320" y1="130" x2="320" y2="184"/>'
+      + '<polyline points="310,171 320,184 330,171"/>'
+      + '<line x1="510" y1="130" x2="510" y2="184" stroke="#c8433a"/>'
+      + '<polyline points="500,171 510,184 520,171" stroke="#c8433a"/>'
+      + '<polygon points="30,190 230,190 230,300 30,300" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="130" y="218" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">yes</text>'
+      + '<text x="130" y="248" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the sun, a river,</text>'
+      + '<text x="130" y="272" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the wind</text>'
+      + '<text x="130" y="330" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">renewable</text>'
+      + '<polygon points="234,190 406,190 406,300 234,300"/>'
+      + '<text x="320" y="218" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">only if replanted</text>'
+      + '<text x="320" y="252" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">wood and</text>'
+      + '<text x="320" y="276" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">charcoal</text>'
+      + '<text x="320" y="330" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">it depends on us</text>'
+      + '<polygon points="410,190 610,190 610,300 410,300" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="510" y="218" font-size="20" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">no</text>'
+      + '<text x="510" y="252" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">gas and oil</text>'
+      + '<text x="510" y="330" font-size="19" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">not renewable</text></svg>',
+  },
+  tables: [{
+    caption: 'Which sources of energy come back and which run down',
+    columns: ['Source', 'Does it come back on its own', 'So it is'],
+    rows: [
+      ['The sun', 'Yes, it rises again', 'Renewable'],
+      ['A river behind a dam', 'Yes, it keeps flowing', 'Renewable'],
+      ['Wind', 'Yes', 'Renewable'],
+      [
+        'Wood and charcoal',
+        'Only if trees are replanted and given years',
+        'Renewable only if it is replanted',
+      ],
+      [
+        'Gas and oil',
+        'No, it took millions of years to form',
+        'Not renewable',
+      ],
+    ],
+    note: 'Cut trees faster than they grow back and a renewable source stops '
+      + 'being one.',
+  }],
   questions: [
     {
       id: 'se-1',
@@ -1076,11 +1437,9 @@ teach({
   },
 
   idea:
-    'Food does three different jobs. '
-    + 'Some foods give energy: rice, yam, plantain, kenkey, oil. '
-    + 'Some build the body: fish, beans, eggs, meat, groundnuts. '
-    + 'Some protect it: fruit and vegetables. '
-    + 'A balanced meal has something from each group.',
+    'Food does three different jobs: '
+    + 'it gives energy, it builds the body, and it protects it. '
+    + 'A balanced meal has something doing each of them.',
 
   mechanism:
     'Balance matters because the jobs cannot stand in for each other. '
@@ -1098,9 +1457,9 @@ teach({
   method: [
     'Look at the plate.',
     'Find the energy food. There is usually plenty.',
-    'Find the building food. Fish, beans, eggs, meat, groundnuts.',
-    'Find the protecting food. Fruit or vegetables.',
-    'Any group missing? That is what the meal needs.',
+    'Find the building food.',
+    'Find the protecting food.',
+    'Any job missing? That is what the meal needs.',
     'Add water. It is needed for everything the body does.',
   ],
 
@@ -1162,6 +1521,58 @@ teach({
     + 'The combination was worked out by cooks long before anybody wrote '
     + 'down the science.',
 
+  figure: {
+    alt: 'Two plates. The first is divided into three parts named energy, '
+      + 'building and protecting, and is labelled a balanced meal. The '
+      + 'second holds only energy food, with the other two parts empty and '
+      + 'marked in red, and is labelled full, but two jobs are not being '
+      + 'done.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="160" cy="180" r="110"/>'
+      + '<circle cx="160" cy="180" r="96"/>'
+      + '<line x1="160" y1="84" x2="160" y2="276"/>'
+      + '<line x1="160" y1="180" x2="256" y2="180"/>'
+      + '<text x="112" y="174" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">energy</text>'
+      + '<text x="206" y="148" font-size="16" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">building</text>'
+      + '<text x="206" y="222" font-size="16" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">protecting</text>'
+      + '<text x="160" y="334" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">a balanced meal</text>'
+      + '<circle cx="470" cy="180" r="110"/>'
+      + '<circle cx="470" cy="180" r="96"/>'
+      + '<line x1="470" y1="84" x2="470" y2="276"/>'
+      + '<line x1="470" y1="180" x2="566" y2="180"/>'
+      + '<text x="422" y="174" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">energy</text>'
+      + '<line x1="502" y1="128" x2="546" y2="172" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="546" y1="128" x2="502" y2="172" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="502" y1="200" x2="546" y2="244" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="546" y1="200" x2="502" y2="244" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="470" y="334" font-size="20" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">full, but two jobs undone</text>'
+      + '<text x="320" y="380" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">being full and being fed are not '
+      + 'the same</text></svg>',
+  },
+  tables: [{
+    caption: 'The three jobs food does, and which foods do them',
+    columns: ['The job', 'Foods that do it'],
+    rows: [
+      ['Gives energy', 'Rice, yam, plantain, kenkey, oil'],
+      ['Builds the body', 'Fish, beans, eggs, meat, groundnuts'],
+      ['Protects it', 'Fruit and vegetables'],
+    ],
+    note: 'A balanced meal has something from each, because the three jobs '
+      + 'cannot stand in for one another. Water is needed for everything '
+      + 'the body does.',
+  }],
   questions: [
     {
       id: 'fn-1',
@@ -1220,9 +1631,9 @@ teach({
   },
 
   idea:
-    'Some waste rots away: peelings, leaves, food scraps. '
-    + 'Some does not: plastic, glass, metal, batteries. '
-    + 'What you should do with waste depends on which kind it is.',
+    'Some waste rots away and some does not, '
+    + 'and that one question decides what should be done with it. '
+    + 'So the sorting is not tidiness. It is the whole of the job.',
 
   mechanism:
     'Two common habits cause most of the harm, and both have a clear reason. '
@@ -1243,11 +1654,10 @@ teach({
 
   method: [
     'Sort the waste as you make it, not later.',
-    'Peelings and food scraps: these rot and can go on a compost heap.',
-    'Plastic bottles, glass, metal tins: keep them for collection or reuse.',
-    'Never burn plastic.',
-    'Never put anything in a gutter.',
-    'Batteries and medicines need special handling. Ask an adult.',
+    'Ask of each piece: will this rot away?',
+    'If it rots, it can go on a compost heap.',
+    'If it does not, keep it for collection or for reuse.',
+    'Never burn plastic, and never put anything in a gutter.',
   ],
 
   worked: [
@@ -1307,6 +1717,67 @@ teach({
     + 'That turns a waste problem into something useful, '
     + 'and it costs nothing but a corner of the yard and some patience.',
 
+  figure: {
+    alt: 'Two things people do with waste, both drawn in red. Burning '
+      + 'plastic leads to smoke, and smoke leads to the lungs of whoever is '
+      + 'standing near. Waste in a gutter leads to a blocked gutter, then a '
+      + 'flooded street, then mosquitoes. Under them it says the waste has '
+      + 'not gone anywhere, it has moved to where it does more damage.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="40" y="86" font-size="20" text-anchor="start" '
+      + 'fill="#c8433a" stroke="none">burning plastic</text>'
+      + '<polygon points="40,100 220,100 220,158 40,158" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="130" y="134" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">smoke</text>'
+      + '<line x1="226" y1="129" x2="282" y2="129" stroke="#c8433a"/>'
+      + '<polyline points="269,119 282,129 269,139" stroke="#c8433a"/>'
+      + '<polygon points="288,100 468,100 468,158 288,158" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="378" y="134" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">into the lungs</text>'
+      + '<text x="40" y="222" font-size="20" text-anchor="start" '
+      + 'fill="#c8433a" stroke="none">waste in a gutter</text>'
+      + '<polygon points="40,236 190,236 190,294 40,294" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="115" y="270" font-size="17" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">it blocks</text>'
+      + '<line x1="196" y1="265" x2="232" y2="265" stroke="#c8433a"/>'
+      + '<polyline points="219,255 232,265 219,275" stroke="#c8433a"/>'
+      + '<polygon points="238,236 388,236 388,294 238,294" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="313" y="270" font-size="17" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">the street floods</text>'
+      + '<line x1="394" y1="265" x2="430" y2="265" stroke="#c8433a"/>'
+      + '<polyline points="417,255 430,265 417,275" stroke="#c8433a"/>'
+      + '<polygon points="436,236 586,236 586,294 436,294" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="511" y="270" font-size="17" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">mosquitoes</text>'
+      + '<text x="320" y="350" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the waste has not gone '
+      + 'anywhere</text>'
+      + '<text x="320" y="378" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">it has moved to where it does '
+      + 'more damage</text></svg>',
+  },
+  tables: [{
+    caption: 'What to do with each kind of waste',
+    columns: ['Waste', 'Does it rot', 'What to do with it'],
+    rows: [
+      ['Peelings, leaves, food scraps', 'Yes', 'Put it on a compost heap'],
+      ['Plastic bottles', 'No', 'Keep it for collection or reuse'],
+      ['Glass and metal tins', 'No', 'Keep it for collection or reuse'],
+      [
+        'Batteries and medicines',
+        'No',
+        'These need special handling, so ask an adult',
+      ],
+    ],
+    note: 'Never burn plastic, and never put anything in a gutter. Neither '
+      + 'of those makes the waste go away.',
+  }],
   questions: [
     {
       id: 'wa-1',
