@@ -15,15 +15,12 @@
    Shared by all three interfaces, tinted by each one's own variables.
    =========================================================================== */
 
-.nx-pager {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 22px 0 6px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line, #e8e2d3);
-}
+/* The outline's pager is NOT here. It was, as a second `.nx-pager` block with
+   the same specificity as the one in read.css, and because this file is
+   imported after that one it quietly won: read.css carried the pager's
+   buttons and spacing, this carried its box, and an edit to the box in
+   read.css did nothing at all. Nothing in the markup of a lesson page uses
+   `.nx-pager`, so the duplicate was removed rather than reconciled. */
 
 .nx-page-btn {
   font: inherit;

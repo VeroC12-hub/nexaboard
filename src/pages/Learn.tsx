@@ -406,13 +406,13 @@ export default function Learn({
   const shown = wholeSubject ? everything : mine
 
   /**
-   * The subject, cut into parts: one strand each, with its topics.
+   * The subject, cut into strands, each with only this learner's topics.
    *
    * Computed once rather than inside the render, because the pager needs to
    * know how many parts there are before it can draw itself, and because an
    * empty strand must not become an empty page somebody has to click past.
    */
-  const parts = useMemo(() => syllabus.strands
+  const sections = useMemo(() => syllabus.strands
     .map(strand => ({
       strand,
       rows: strand.subStrands
@@ -420,6 +420,39 @@ export default function Learn({
         .filter(r => r.topics.length),
     }))
     .filter(p => p.rows.length), [syllabus, shown])
+
+  /**
+   * Those strands packed into pages.
+   *
+   * One strand per page was the first try, and on a real subject it made
+   * pages of wildly different sizes: SHS 2 Mathematics came out as 2, 6, 5,
+   * 1 and 2 topics, so Mensuration had a page to itself with a single row on
+   * it and three of the five pages ended well short of the window. A learner
+   * pressing Next four times to see sixteen topics is working the pager
+   * rather than reading the subject.
+   *
+   * So a page now fills to a size instead of to a heading. Strands are never
+   * split, because a strand is the unit the curriculum teaches in and half of
+   * one is not a thing; a page simply keeps taking whole strands until it
+   * holds enough, and a short tail joins the page before it rather than
+   * standing alone.
+   */
+  const parts = useMemo(() => {
+    const enough = 4
+    const made: Array<typeof sections> = []
+    let page: typeof sections = []
+    let held = 0
+    for (const part of sections) {
+      page.push(part)
+      held += part.rows.reduce((n, r) => n + r.topics.length, 0)
+      if (held >= enough) { made.push(page); page = []; held = 0 }
+    }
+    if (page.length) {
+      if (made.length && held < 3) made[made.length - 1].push(...page)
+      else made.push(page)
+    }
+    return made
+  }, [sections])
 
   const [partAt, setPartAt] = useState(0)
 
@@ -645,109 +678,147 @@ export default function Learn({
           </span>
         </header>
 
-        <div className="nx-body">
-          <h1 className="nx-display" style={{ fontSize: 'clamp(30px,5vw,44px)', margin: '0 0 10px' }}>
-            {syllabus.subject}
-          </h1>
-          <p className="nx-lede" style={{ margin: '0 0 6px' }}>
-            {shown.length} {shown.length === 1 ? 'topic' : 'topics'}
-            {wholeSubject
-              ? ` across the whole subject, in ${syllabus.strands.length} parts.`
-              : ` for ${profile.level}.`}
-            {' '}Pick one and it will be taught to you.
-          </p>
-          {/* How this learner is being taught, and why.
-              Shown because a parent whose child is given video and no reading
-              deserves to know a decision was made rather than wonder whether
-              the app is broken. It is also the only way anybody can tell that
-              two learners are no longer getting the same thing. */}
-          <p className="nx-plan-line">
-            <b>How you are being taught:</b> {plan.because}
-            {plan.source === 'stated' && ' This will change as your tutor learns you.'}
-          </p>
+        {/* The sheet.
 
-          {/* Where the material came from, never hidden. */}
-          {syllabus.note && (
-            <p className="nx-fineprint" style={{ margin: '0 0 26px' }}>{syllabus.note}</p>
-          )}
-
-          <div style={{ marginBottom: 28 }}>
-            <button className="nx-link" onClick={() => setWholeSubject(w => !w)}>
+            It was missing here and nowhere else, and that single omission
+            was most of why this screen looked wrong: the header above is
+            capped at 940px and centred, every lesson and question screen
+            is a column, and the outline between them ran the full width of
+            the window. On a 1440px laptop that made each topic a 1330px
+            card carrying one line of text, which is not a list, it is a
+            series of horizon-wide bars. The sheet also draws the margin
+            rule the rest of the written screens are set against. */}
+        <main className="nx-sheet">
+          <div className="nx-body">
+            <h1 className="nx-display" style={{ fontSize: 'clamp(30px,5vw,44px)', margin: '0 0 10px' }}>
+              {syllabus.subject}
+            </h1>
+            <p className="nx-lede" style={{ margin: '0 0 6px' }}>
+              {shown.length} {shown.length === 1 ? 'topic' : 'topics'}
               {wholeSubject
-                ? `Show only ${profile.level}`
-                : 'Show the whole subject'}
-            </button>
-          </div>
-
-          {/* One part at a time.
-
-              A subject put every strand, every sub strand and every topic on
-              one page, which for a full SHS subject is a scroll of forty
-              headings. A learner opening it cannot see what the subject is
-              made of, and the first thing they meet is the middle of
-              something. One strand per page with a pager makes the shape of
-              the subject visible and the page the length of a page. */}
-          {parts.length > 1 && (
-            <p className="nx-part-count">
-              Part {atPart + 1} of {parts.length}
+                ? ' across the whole subject.'
+                : ` for ${profile.level}.`}
+              {' '}Pick one and it will be taught to you.
             </p>
-          )}
+            {/* How this learner is being taught, and why.
+                Shown because a parent whose child is given video and no reading
+                deserves to know a decision was made rather than wonder whether
+                the app is broken. It is also the only way anybody can tell that
+                two learners are no longer getting the same thing. */}
+            <p className="nx-plan-line">
+              <b>How you are being taught:</b> {plan.because}
+              {plan.source === 'stated' && ' This will change as your tutor learns you.'}
+            </p>
 
-          {parts.slice(atPart, atPart + 1).map(({ strand, rows }) => {
-            return (
-              <section key={strand.id} className="nx-strand">
-                {/* Set as a label rather than as a title. A big serif
-                    heading directly above a list of tappable rows reads as
-                    the first and most important of them, and tapping it
-                    does nothing. */}
-                <p className="nx-strand-name">{strand.name}</p>
-                <p className="nx-strand-purpose">{strand.purpose}</p>
-                {rows.map(({ ss, topics }) => (
-                  <div key={ss.id} style={{ marginBottom: 18 }}>
-                    <p className="nx-mark" style={{ margin: '0 0 8px' }}>{ss.name}</p>
-                    <ul className="nx-topics">
-                      {topics.map(t => (
-                        <TopicRow key={t.id} topic={t} done={worked.has(t.id)}
-                          onOpen={() => setView(
-                            /* For creche and early primary the game IS the
-                               lesson, and the prose is the note the adult
-                               sitting with them reads. Opening a topic should
-                               therefore start the game, not a wall of text a
-                               five year old cannot read. */
-                            /* What leads is what this learner's plan says
-                               leads, which is the whole point of the plan.
-                               Her year decides nothing here any more. */
-                            leadsWith(plan) === 'game' && playable(profile.stage, t.title)
-                              ? { at: 'game', topicId: t.id, attempt: 0 }
-                              : { at: 'lesson', topicId: t.id, attempt: 0, askedFor: '' })} />
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </section>
-            )
-          })}
+            {/* Where the material came from, never hidden. */}
+            {syllabus.note && (
+              <p className="nx-fineprint" style={{ margin: '0 0 26px' }}>{syllabus.note}</p>
+            )}
 
-          {/* The pager. Next is the control a learner asked for and the one
-              every reading app has: it moves through the subject without
-              making them find their place in a scroll. */}
-          {parts.length > 1 && (
-            <nav className="nx-pager" aria-label="Parts of this subject">
-              <button className="nx-pager-btn" disabled={atPart === 0}
-                onClick={() => { setPartAt(Math.max(0, atPart - 1)); toTop() }}>
-                Back
+            <div style={{ marginBottom: 28 }}>
+              <button className="nx-link" onClick={() => setWholeSubject(w => !w)}>
+                {wholeSubject
+                  ? `Show only ${profile.level}`
+                  : 'Show the whole subject'}
               </button>
-              <span className="nx-pager-where">
-                {atPart + 1} / {parts.length}
-              </span>
-              <button className="nx-pager-btn is-go"
-                disabled={atPart >= lastPart}
-                onClick={() => { setPartAt(Math.min(lastPart, atPart + 1)); toTop() }}>
-                Next part
-              </button>
-            </nav>
-          )}
-        </div>
+            </div>
+
+            {/* A page at a time.
+
+                A subject put every strand, every sub strand and every topic on
+                one page, which for a full SHS subject is a scroll of forty
+                headings. A learner opening it cannot see what the subject is
+                made of, and the first thing they meet is the middle of
+                something. A pager makes the shape of the subject visible and
+                the page the length of a page. */}
+            {parts.length > 1 && (
+              <p className="nx-part-count">
+                Part {atPart + 1} of {parts.length}
+              </p>
+            )}
+
+            {(parts[atPart] ?? []).map(({ strand, rows }) => {
+              return (
+                <section key={strand.id} className="nx-strand">
+                  {/* The strand, as the heading it is.
+
+                      It was a 12.5px uppercase grey label, on the reasoning
+                      that a serif heading sitting directly on top of tappable
+                      rows reads as the first and most important of them. The
+                      worry was fair and the cure was worse: the biggest thing
+                      on the page became the subject, which never changes and
+                      is already in the bar above, while the one thing the
+                      pager actually moves was the smallest text on the page.
+                      Pressing Next looked like nothing had happened.
+
+                      A heading does not have to be quiet to stay a heading. It
+                      has to not look like a row, and a row here is a white card
+                      with an arrow on it. */}
+                  <h2 className="nx-strand-name">{strand.name}</h2>
+                  <p className="nx-strand-purpose">{strand.purpose}</p>
+                  {rows.map(({ ss, topics }) => (
+                    <div key={ss.id} style={{ marginBottom: 18 }}>
+                      <p className="nx-mark" style={{ margin: '0 0 8px' }}>{ss.name}</p>
+                      <ul className="nx-topics">
+                        {topics.map(t => (
+                          <TopicRow key={t.id} topic={t} done={worked.has(t.id)}
+                            onOpen={() => setView(
+                              /* For creche and early primary the game IS the
+                                 lesson, and the prose is the note the adult
+                                 sitting with them reads. Opening a topic should
+                                 therefore start the game, not a wall of text a
+                                 five year old cannot read. */
+                              /* What leads is what this learner's plan says
+                                 leads, which is the whole point of the plan.
+                                 Her year decides nothing here any more. */
+                              leadsWith(plan) === 'game' && playable(profile.stage, t.title)
+                                ? { at: 'game', topicId: t.id, attempt: 0 }
+                                : { at: 'lesson', topicId: t.id, attempt: 0, askedFor: '' })} />
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </section>
+              )
+            })}
+
+            {/* The pager. Next is the control a learner asked for and the one
+                every reading app has: it moves through the subject without
+                making them find their place in a scroll.
+
+                It names where it is going. "Next part" told a learner that
+                something would change but not what, which on a page whose
+                heading used to be a 12.5px label meant they could press it and
+                not be sure they had moved.
+
+                The narrow label is not those words shortened. A phone has room
+                for one of the two, and on a phone the heading arrives at the
+                top of the next screen anyway. */}
+            {parts.length > 1 && (
+              <nav className="nx-pager" aria-label="Parts of this subject">
+                <button className="nx-pager-btn" disabled={atPart === 0}
+                  onClick={() => { setPartAt(Math.max(0, atPart - 1)); toTop() }}>
+                  Back
+                </button>
+                <span className="nx-pager-where">
+                  {atPart + 1} / {parts.length}
+                </span>
+                <button className="nx-pager-btn is-go"
+                  disabled={atPart >= lastPart}
+                  onClick={() => { setPartAt(Math.min(lastPart, atPart + 1)); toTop() }}>
+                  <span className="nx-pager-wide">
+                    {/* On the last part there is nothing to name, and the
+                        button is disabled anyway. */}
+                    {parts[atPart + 1]
+                      ? `Next: ${parts[atPart + 1][0].strand.name}`
+                      : 'Next part'}
+                  </span>
+                  <span className="nx-pager-narrow">Next part</span>
+                </button>
+              </nav>
+            )}
+          </div>
+        </main>
       </div>
     </div>
   )

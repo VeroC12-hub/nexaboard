@@ -855,18 +855,27 @@
 
 .nx-strand { margin-bottom: 30px; }
 
+.nx-strand + .nx-strand { margin-top: 34px; }
+
+/* The strand name, which is the main topic and for a while was the smallest
+   text on the page: see the comment where it is rendered. It is now the
+   heading of the part, in the page's serif, large enough to be seen before
+   anything else in the body. It cannot be mistaken for one of the rows
+   underneath because a row is a white card with an arrow, and this is set on
+   the page itself with its purpose line between the two. */
 .nx-strand-name {
-  margin: 0 0 4px;
-  font-family: Inter, system-ui, sans-serif;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--nx-ink-2);
+  margin: 0 0 6px;
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-size: clamp(22px, 3.4vw, 27px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--nx-ink);
 }
 
 .nx-strand-purpose {
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   font-size: 15.5px;
   line-height: 1.55;
   color: var(--nx-ink-2);
@@ -940,12 +949,19 @@
   color: var(--nx-ink-2);
 }
 
+/* The bottom margin is clearance, not taste. The help bubble is fixed to the
+   bottom right corner of the window, 58px across and 22px up from the edge,
+   so anything that ends at the bottom right of a scrolled page ends up
+   underneath it: "Next part" was measured half covered, with the middle of
+   the button returning the help button from elementFromPoint. Ending the
+   page above that corner is the only fix that holds at every window height,
+   because the bubble follows the window and the pager follows the page. */
 .nx-pager {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin: 26px 0 8px;
+  margin: 26px 0 96px;
   padding-top: 18px;
   border-top: 1px solid var(--nx-line);
 }
@@ -963,9 +979,22 @@
 }
 
 .nx-pager-btn.is-go {
+  max-width: 52%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: #fff;
   background: var(--nx-ink);
   border-color: var(--nx-ink);
+}
+
+/* Which of the two Next labels this window has room for. */
+.nx-pager-narrow { display: none; }
+
+@media (max-width: 620px) {
+  .nx-pager-wide { display: none; }
+  .nx-pager-narrow { display: inline; }
+  .nx-pager-btn.is-go { max-width: none; }
 }
 
 .nx-pager-btn:disabled { opacity: 0.35; cursor: default; }
