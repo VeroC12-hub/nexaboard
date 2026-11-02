@@ -208,6 +208,20 @@
 .nx-h1 { font-size: clamp(34px, 5.2vw, 52px); }
 .nx-h2 { font-size: clamp(25px, 3.4vw, 33px); }
 .nx-lede { font-size: 19px; color: var(--ink-soft); max-width: 54ch; line-height: 1.6; }
+
+/* Fine print: where material came from, what the tutor decided and why, the
+   note under a figure. It had no base rule at all, only `.kid` and `.teen`
+   ones, so on every screen outside those two skins it inherited the body and
+   came out at 17.5px in full ink. On the outline that made "A standard SHS
+   outline, until your school adds its own" the heaviest line in the preamble,
+   darker than the lede above it and the same size as a topic title, for a
+   sentence whose whole job is to be available and not read. */
+.nx-fineprint {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 68ch;
+}
 .nx-prose { max-width: var(--measure); }
 .nx-prose p { margin: 0 0 1.15em; }
 
@@ -717,6 +731,11 @@
    parent whose child is given video and no reading deserves to know that a
    decision was made rather than wonder whether the app is broken. */
 .nx-plan-line {
+  /* Capped, because it is small type and it was running the full width of the
+     sheet: 13.5px over 892px put about 130 characters on a line, half again
+     the longest measure anybody reads comfortably, and it made the quietest
+     box on the page the widest thing in the preamble. */
+  max-width: 78ch;
   margin: 0 0 22px;
   padding: 11px 14px;
   border-left: 3px solid #f2b517;
