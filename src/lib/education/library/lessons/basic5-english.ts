@@ -113,6 +113,34 @@ teach({
     + 'Watch one you found hard to follow and you will often find there '
     + 'were eight.',
 
+  figure: {
+    alt: 'Three boxes stacked down the page with arrows running from '
+      + 'each to the next. The top box is the opening, which says '
+      + 'what the talk is about. The middle box is the largest and '
+      + 'holds three smaller boxes marked Point 1, Point 2 and '
+      + 'Point 3. The bottom box is the closing, which says what it '
+      + 'came to.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<rect x="130" y="18" width="380" height="58"/>'
+      + '<text x="320" y="42" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">Opening</text>'
+      + '<text x="320" y="66" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">say what the talk is about</text>'
+      + '<line x1="320" y1="76" x2="320" y2="104"/>'
+      + '<polygon points="320,116 313,103 327,103" fill="currentColor" stroke="none"/>'
+      + '<rect x="50" y="120" width="540" height="160" stroke="#0f8a4d"/>'
+      + '<text x="320" y="146" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">Middle: three points</text>'
+      + '<rect x="74" y="162" width="152" height="100" stroke="#0f8a4d"/>'
+      + '<text x="150" y="218" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Point 1</text>'
+      + '<rect x="244" y="162" width="152" height="100" stroke="#0f8a4d"/>'
+      + '<text x="320" y="218" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Point 2</text>'
+      + '<rect x="414" y="162" width="152" height="100" stroke="#0f8a4d"/>'
+      + '<text x="490" y="218" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Point 3</text>'
+      + '<line x1="320" y1="280" x2="320" y2="308"/>'
+      + '<polygon points="320,320 313,307 327,307" fill="currentColor" stroke="none"/>'
+      + '<rect x="130" y="324" width="380" height="58"/>'
+      + '<text x="320" y="348" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">Closing</text>'
+      + '<text x="320" y="372" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">say what it came to</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'gt-1',
@@ -266,6 +294,38 @@ teach({
     + 'Once you start noticing it, you will see how little a strong writer '
     + 'actually states outright.',
 
+  figure: {
+    alt: 'Two columns side by side. On the left, headed an '
+      + 'inference, a box holding the words his voice shook, '
+      + 'underlined, with an arrow down to the conclusion he was '
+      + 'frightened, and a note that you can point at the words. On '
+      + 'the right, headed a guess, a box holding he walked to '
+      + 'school, with an arrow down to his family is poor, and a '
+      + 'note that no words say that.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="160" y="28" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">an inference</text>'
+      + '<rect x="16" y="44" width="288" height="92"/>'
+      + '<text x="160" y="74" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">The passage says:</text>'
+      + '<text x="160" y="108" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">his voice shook</text>'
+      + '<line x1="68" y1="118" x2="252" y2="118" stroke="#0f8a4d"/>'
+      + '<line x1="160" y1="136" x2="160" y2="178"/>'
+      + '<polygon points="160,190 153,177 167,177" fill="currentColor" stroke="none"/>'
+      + '<rect x="16" y="194" width="288" height="72" stroke="#0f8a4d"/>'
+      + '<text x="160" y="238" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">he was frightened</text>'
+      + '<text x="160" y="300" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">You can point at the words,</text>'
+      + '<text x="160" y="322" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">so you can defend it.</text>'
+      + '<text x="480" y="28" font-size="19" text-anchor="middle" fill="#c8433a" stroke="none">a guess</text>'
+      + '<rect x="336" y="44" width="288" height="92"/>'
+      + '<text x="480" y="74" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">The passage says:</text>'
+      + '<text x="480" y="108" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">he walked to school</text>'
+      + '<line x1="480" y1="136" x2="480" y2="178"/>'
+      + '<polygon points="480,190 473,177 487,177" fill="#c8433a" stroke="none"/>'
+      + '<rect x="336" y="194" width="288" height="72" stroke="#c8433a"/>'
+      + '<text x="480" y="238" font-size="19" text-anchor="middle" fill="#c8433a" stroke="none">his family is poor</text>'
+      + '<text x="480" y="300" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">No words say that. You</text>'
+      + '<text x="480" y="322" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">brought it from your head.</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'if-1',
@@ -338,13 +398,8 @@ teach({
 
   mechanism:
     'Writers leave clues without meaning to, '
-    + 'and there are a few shapes worth recognising. '
-    + 'Sometimes the meaning follows directly, after a comma or the word '
-    + '"which". '
-    + 'Sometimes an example comes next, after "such as". '
-    + 'Sometimes a contrast gives it away, after "but" or "unlike". '
-    + 'And sometimes the rest of the sentence only lets a certain kind of '
-    + 'word fit. '
+    + 'and there are a few shapes worth recognising, '
+    + 'which the table below sets out. '
     + 'You will rarely get the exact dictionary meaning this way, '
     + 'and you will usually get close enough to keep reading, '
     + 'which is the point.',
@@ -355,9 +410,7 @@ teach({
 
   method: [
     'Read the whole sentence, then the one after it.',
-    'Is the meaning given straight out? Look after a comma or "which".',
-    'Is there an example? Look after "such as" or "for instance".',
-    'Is there a contrast? Look after "but", "unlike" or "however".',
+    'Look for a clue near the word, using the table of clues.',
     'Guess a meaning and put it in place of the word.',
     'Does the sentence still make sense? Then you are close enough.',
     'For an important word, check a dictionary afterwards.',
@@ -421,6 +474,60 @@ teach({
     + 'You met words repeatedly in context until the meaning settled. '
     + 'Reading widely works for exactly this reason.',
 
+  figure: {
+    alt: 'The word arid in a box at the top, marked as a word the '
+      + 'reader does not know. Below it a wider box holds the words '
+      + 'next to it in the sentence, so dry that nothing would '
+      + 'grow, with an arrow pointing up from those words to the '
+      + 'unknown word. Underneath, three lines say to try your '
+      + 'meaning in place of the word and see whether the sentence '
+      + 'still makes sense.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="40" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">a word you do not know</text>'
+      + '<rect x="248" y="56" width="144" height="62" stroke="#c8433a"/>'
+      + '<text x="320" y="98" font-size="26" text-anchor="middle" fill="#c8433a" stroke="none">arid</text>'
+      + '<line x1="320" y1="182" x2="320" y2="130"/>'
+      + '<polygon points="320,118 313,131 327,131" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="56" y="186" width="528" height="82" stroke="#0f8a4d"/>'
+      + '<text x="320" y="216" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the words next to it:</text>'
+      + '<text x="320" y="248" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">so dry that nothing would grow</text>'
+      + '<text x="320" y="308" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Try your meaning in place of the word.</text>'
+      + '<text x="320" y="336" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Does the sentence still make sense?</text>'
+      + '<text x="320" y="364" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Then you are close enough to read on.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'The clues a sentence leaves about a word you do not know',
+    columns: [
+      'Clue in the sentence',
+      'Words to look for',
+      'Example',
+    ],
+    rows: [
+      [
+        'The meaning, straight out',
+        'a comma, or "which"',
+        'arid, so dry that nothing would grow',
+      ],
+      [
+        'An example of it',
+        '"such as", "for instance"',
+        'tubers such as yam and cocoyam',
+      ],
+      [
+        'A contrast with it',
+        '"but", "unlike", "however"',
+        'unlike his talkative sister, he was taciturn',
+      ],
+      [
+        'What else could fit',
+        'none, use the whole sentence',
+        'she tethered the goat to the post',
+      ],
+    ],
+    note: 'Context gets you close enough to keep reading. For a word you '
+      + 'mean to use yourself, check a dictionary afterwards.',
+  }],
   questions: [
     {
       id: 'vc-1',
@@ -480,10 +587,9 @@ teach({
   },
 
   idea:
-    'A story has three parts. '
-    + 'The beginning introduces who it is about and what they want. '
-    + 'The middle is where something goes wrong. '
-    + 'The ending is where it is settled, one way or the other.',
+    'A story has three parts: a beginning, a middle and an ending. '
+    + 'The middle is where something goes wrong, '
+    + 'and without that there is nothing to tell.',
 
   mechanism:
     'The middle is the story. '
@@ -570,6 +676,50 @@ teach({
     + 'and the ending leaves him worse off than when he started. '
     + 'The structure is older than any book.',
 
+  figure: {
+    alt: 'A line running left to right that climbs to a peak in the '
+      + 'middle and comes down again. The peak is marked with a dot '
+      + 'and labelled something goes wrong. Two dashed lines divide '
+      + 'the page into three parts, labelled Beginning, who and '
+      + 'what they want, Middle, the trouble and what they do, and '
+      + 'Ending, somebody has changed.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polyline points="30,252 120,246 220,172 320,92 420,132 520,222 610,246" stroke-width="4"/>'
+      + '<circle cx="320" cy="92" r="11" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="320" y="62" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">something goes wrong</text>'
+      + '<line x1="215" y1="72" x2="215" y2="272" stroke-width="2" stroke-dasharray="6 6"/>'
+      + '<line x1="425" y1="72" x2="425" y2="272" stroke-width="2" stroke-dasharray="6 6"/>'
+      + '<text x="112" y="302" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">Beginning</text>'
+      + '<text x="112" y="328" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">who, and what they want</text>'
+      + '<text x="320" y="302" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">Middle</text>'
+      + '<text x="320" y="328" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the trouble, and what they do</text>'
+      + '<text x="522" y="302" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">Ending</text>'
+      + '<text x="522" y="328" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">somebody has changed</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What each part of a story has to do',
+    columns: [
+      'Part',
+      'What happens there',
+      'How much space',
+    ],
+    rows: [
+      ['Beginning', 'Who it is about, and what they want', 'A paragraph'],
+      [
+        'Middle',
+        'Something goes wrong, and they deal with it',
+        'Most of the story',
+      ],
+      [
+        'Ending',
+        'It is settled, and somebody has changed',
+        'A paragraph or two',
+      ],
+    ],
+    note: 'The middle is the part to plan first, because everything else '
+      + 'follows from what goes wrong.',
+  }],
   questions: [
     {
       id: 'nr-1',
@@ -722,6 +872,52 @@ teach({
     + 'The layout is stricter because the reader does not know you '
     + 'and is judging partly on whether you got it right.',
 
+  figure: {
+    alt: 'A sheet of paper with each part of an informal letter '
+      + 'labelled by an arrow from the right. At the top right is '
+      + 'the address, House 12, Nsawam Road, Adabraka, Accra, with '
+      + 'the date 4 May 2026 under it. On the left is the greeting, '
+      + 'Dear Auntie Akos, then two blocks of lines standing for '
+      + 'paragraphs, the first labelled why you wrote and the '
+      + 'second one idea. At the bottom left is the closing, Your '
+      + 'loving nephew, and the name Kwame.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<rect x="40" y="14" width="360" height="370" stroke-width="2"/>'
+      + '<text x="384" y="52" font-size="14" text-anchor="end" fill="currentColor" stroke="none">House 12, Nsawam Road</text>'
+      + '<text x="384" y="72" font-size="14" text-anchor="end" fill="currentColor" stroke="none">Adabraka, Accra</text>'
+      + '<text x="384" y="116" font-size="14" text-anchor="end" fill="currentColor" stroke="none">4 May 2026</text>'
+      + '<text x="56" y="154" font-size="15" text-anchor="start" fill="currentColor" stroke="none">Dear Auntie Akos,</text>'
+      + '<line x1="56" y1="186" x2="380" y2="186" stroke-width="2"/>'
+      + '<line x1="56" y1="204" x2="380" y2="204" stroke-width="2"/>'
+      + '<line x1="56" y1="222" x2="280" y2="222" stroke-width="2"/>'
+      + '<line x1="56" y1="252" x2="380" y2="252" stroke-width="2"/>'
+      + '<line x1="56" y1="270" x2="380" y2="270" stroke-width="2"/>'
+      + '<line x1="56" y1="288" x2="320" y2="288" stroke-width="2"/>'
+      + '<text x="56" y="322" font-size="15" text-anchor="start" fill="currentColor" stroke="none">Your loving nephew,</text>'
+      + '<text x="56" y="356" font-size="15" text-anchor="start" fill="currentColor" stroke="none">Kwame</text>'
+      + '<line x1="434" y1="62" x2="412" y2="62"/>'
+      + '<polygon points="404,62 417,56 417,68" fill="currentColor" stroke="none"/>'
+      + '<text x="444" y="67" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">your address</text>'
+      + '<line x1="434" y1="116" x2="412" y2="116"/>'
+      + '<polygon points="404,116 417,110 417,122" fill="currentColor" stroke="none"/>'
+      + '<text x="444" y="121" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">the date</text>'
+      + '<line x1="434" y1="154" x2="412" y2="154"/>'
+      + '<polygon points="404,154 417,148 417,160" fill="currentColor" stroke="none"/>'
+      + '<text x="444" y="159" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">greeting</text>'
+      + '<line x1="434" y1="204" x2="412" y2="204"/>'
+      + '<polygon points="404,204 417,198 417,210" fill="currentColor" stroke="none"/>'
+      + '<text x="444" y="209" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">why you wrote</text>'
+      + '<line x1="434" y1="270" x2="412" y2="270"/>'
+      + '<polygon points="404,270 417,264 417,276" fill="currentColor" stroke="none"/>'
+      + '<text x="444" y="275" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">one idea</text>'
+      + '<line x1="434" y1="322" x2="412" y2="322"/>'
+      + '<polygon points="404,322 417,316 417,328" fill="currentColor" stroke="none"/>'
+      + '<text x="444" y="327" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">closing</text>'
+      + '<line x1="434" y1="356" x2="412" y2="356"/>'
+      + '<polygon points="404,356 417,350 417,362" fill="currentColor" stroke="none"/>'
+      + '<text x="444" y="361" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">your name</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'lw-1',
@@ -784,10 +980,8 @@ teach({
 
   idea:
     'The verb changes to match its subject. '
-    + 'One boy runs. Two boys run. '
-    + 'Notice that the s moves: '
-    + 'the single subject has no s and its verb does, '
-    + 'and the plural subject has the s and its verb does not.',
+    + 'Whether the subject is one thing or more than one '
+    + 'decides which form of the verb you use.',
 
   mechanism:
     'Nearly every mistake here comes from matching the verb to the nearest '
@@ -870,6 +1064,58 @@ teach({
     + 'In Ghanaian and British usage either form is often accepted, '
     + 'and what matters is choosing one and keeping to it in a piece.',
 
+  figure: {
+    alt: 'The sentence The box of mangoes is heavy, with the words '
+      + 'of mangoes crossed out inside a box labelled cover this, '
+      + 'and a curved arrow running over the crossed out words from '
+      + 'The box to is, labelled one box, so is. Below it the '
+      + 'sentence with those words removed, The box is heavy. Below '
+      + 'that the wrong version, The box of mangoes are heavy, '
+      + 'struck through and labelled as matching the nearest noun '
+      + 'instead of the subject.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Cover the words between the subject and the verb.</text>'
+      + '<text x="120" y="150" font-size="24" text-anchor="start" fill="currentColor" stroke="none">The box</text>'
+      + '<text x="245" y="150" font-size="24" text-anchor="start" fill="currentColor" stroke="none">of mangoes</text>'
+      + '<text x="410" y="150" font-size="24" text-anchor="start" fill="currentColor" stroke="none">is heavy.</text>'
+      + '<rect x="238" y="122" width="134" height="38" stroke="#c8433a"/>'
+      + '<line x1="238" y1="122" x2="372" y2="160" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="238" y1="160" x2="372" y2="122" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="305" y="184" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">cover this</text>'
+      + '<path d="M 158 112 Q 300 62 442 112" stroke="#0f8a4d"/>'
+      + '<polygon points="442,116 435,103 449,103" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="300" y="52" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">one box, so is</text>'
+      + '<text x="320" y="248" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">What is left settles it:</text>'
+      + '<text x="320" y="288" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">The box is heavy.</text>'
+      + '<text x="320" y="344" font-size="20" text-anchor="middle" fill="#c8433a" stroke="none">The box of mangoes are heavy.</text>'
+      + '<line x1="118" y1="338" x2="522" y2="338" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="320" y="374" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">this matches the nearest noun, not the subject</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'How the verb changes when the subject is one thing or more '
+      + 'than one',
+    columns: [
+      'Subject',
+      'One or more?',
+      'Verb',
+      'The sentence',
+    ],
+    rows: [
+      ['The boy', 'One', 'runs', 'The boy runs.'],
+      ['The boys', 'More than one', 'run', 'The boys run.'],
+      ['The box of mangoes', 'One', 'is', 'The box of mangoes is heavy.'],
+      [
+        'The boxes of mangoes',
+        'More than one',
+        'are',
+        'The boxes of mangoes are heavy.',
+      ],
+    ],
+    note: 'Notice that the s moves across. The single subject has no s '
+      + 'and its verb does, and the plural subject has the s and its '
+      + 'verb does not.',
+  }],
   questions: [
     {
       id: 'sv-1',
@@ -937,10 +1183,8 @@ teach({
   mechanism:
     'Here is the part that is rarely taught and matters most. '
     + 'Describing words are often a sign that you chose a weak word first. '
-    + '"He walked quickly" is three words doing what "he hurried" does in '
-    + 'two, '
-    + 'and the two word version is stronger. '
-    + '"A very big house" is weaker than "a mansion". '
+    + 'The table below puts a few of them beside the one stronger word '
+    + 'that does the same job in fewer words. '
     + 'So the test is not whether a describing word is correct. '
     + 'It is whether a better noun or verb would make it unnecessary.',
 
@@ -1013,6 +1257,50 @@ teach({
     + 'Take a paragraph you have written, cut every adjective and adverb, '
     + 'and put back only the ones you genuinely miss.',
 
+  figure: {
+    alt: 'Two rows. The top row shows the words the red bag, with '
+      + 'red labelled adjective and bag labelled noun, and a curved '
+      + 'arrow running from red to bag over the heading an '
+      + 'adjective describes a noun. The bottom row shows she ran '
+      + 'quickly, with ran labelled verb and quickly labelled '
+      + 'adverb, and a curved arrow running from quickly back to '
+      + 'ran over the heading an adverb describes a verb.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="40" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">An adjective describes a noun</text>'
+      + '<text x="240" y="110" font-size="24" text-anchor="start" fill="currentColor" stroke="none">the</text>'
+      + '<text x="300" y="110" font-size="24" text-anchor="start" fill="#0f8a4d" stroke="none">red</text>'
+      + '<text x="370" y="110" font-size="24" text-anchor="start" fill="currentColor" stroke="none">bag</text>'
+      + '<path d="M 318 86 Q 353 56 388 86" stroke="#0f8a4d"/>'
+      + '<polygon points="388,90 381,77 395,77" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="318" y="142" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">adjective</text>'
+      + '<text x="390" y="142" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">noun</text>'
+      + '<text x="320" y="218" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">An adverb describes a verb</text>'
+      + '<text x="208" y="288" font-size="24" text-anchor="start" fill="currentColor" stroke="none">she</text>'
+      + '<text x="278" y="288" font-size="24" text-anchor="start" fill="currentColor" stroke="none">ran</text>'
+      + '<text x="348" y="288" font-size="24" text-anchor="start" fill="#0f8a4d" stroke="none">quickly</text>'
+      + '<path d="M 390 264 Q 343 234 296 264" stroke="#0f8a4d"/>'
+      + '<polygon points="296,268 289,255 303,255" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="296" y="320" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">verb</text>'
+      + '<text x="390" y="320" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">adverb</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'A weak word with a describing word beside the single stronger '
+      + 'word that replaces both',
+    columns: [
+      'Weak version',
+      'Stronger version',
+    ],
+    rows: [
+      ['walked quickly', 'hurried'],
+      ['said loudly', 'shouted'],
+      ['looked carefully at', 'studied'],
+      ['a very big house', 'a mansion'],
+      ['very tired', 'worn out'],
+    ],
+    note: 'Before you keep a describing word, ask whether a better noun '
+      + 'or verb would make it unnecessary.',
+  }],
   questions: [
     {
       id: 'aa-1',
@@ -1151,6 +1439,39 @@ teach({
     + 'and saying which it is makes your opinion far more useful '
     + 'to somebody whose taste differs from yours.',
 
+  figure: {
+    alt: 'Three numbered boxes in a row, headed three things to '
+      + 'cover: what it was about, meaning who it is about and what '
+      + 'the problem is; what you thought, and the reason you '
+      + 'thought it; and who would enjoy it and who would not. '
+      + 'Below them a fourth box labelled the ending is crossed '
+      + 'out, with the words leave the ending out, it is the thing '
+      + 'they would be reading for.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">Three things to cover</text>'
+      + '<rect x="16" y="58" width="192" height="130" stroke="#0f8a4d"/>'
+      + '<text x="112" y="88" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">1</text>'
+      + '<text x="112" y="124" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">What it was about</text>'
+      + '<text x="112" y="150" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">who it is about, and</text>'
+      + '<text x="112" y="172" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">what the problem is</text>'
+      + '<rect x="224" y="58" width="192" height="130" stroke="#0f8a4d"/>'
+      + '<text x="320" y="88" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">2</text>'
+      + '<text x="320" y="124" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">What you thought</text>'
+      + '<text x="320" y="150" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and the reason you</text>'
+      + '<text x="320" y="172" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">thought it</text>'
+      + '<rect x="432" y="58" width="192" height="130" stroke="#0f8a4d"/>'
+      + '<text x="528" y="88" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<text x="528" y="124" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Who would enjoy it</text>'
+      + '<text x="528" y="150" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and who would</text>'
+      + '<text x="528" y="172" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">not</text>'
+      + '<rect x="200" y="248" width="240" height="56" stroke="#c8433a"/>'
+      + '<text x="320" y="284" font-size="20" text-anchor="middle" fill="#c8433a" stroke="none">the ending</text>'
+      + '<line x1="200" y1="248" x2="440" y2="304" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="200" y1="304" x2="440" y2="248" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="320" y="340" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">Leave the ending out.</text>'
+      + '<text x="320" y="366" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">It is the thing they would be reading for.</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'brp-1',
