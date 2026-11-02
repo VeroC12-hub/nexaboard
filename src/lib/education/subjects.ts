@@ -19,6 +19,7 @@
 
 import type { Stage } from './learner'
 import { hasSyllabus, sizeOf, syllabusFor } from './syllabus'
+import { timetableFor } from './programmes'
 /* Loads every outline into the registry. Imported here because this is the
    module every screen already goes through to find out what there is to study. */
 import './library/syllabus'
@@ -38,6 +39,19 @@ export interface Subject {
   name: string
   /** Shown under the name, to tell near neighbours apart. */
   note?: string
+  /**
+   * Taught by some schools and not others.
+   *
+   * Below senior high there are no electives: a JHS learner sits the whole
+   * list. But schools do add subjects, and the three marked at JHS are the
+   * ones they actually add, so showing them to everybody would put subjects
+   * on a timetable most learners do not sit, while leaving them out means a
+   * learner who does sit them cannot find them at all.
+   *
+   * So they are listed and hidden until chosen. `subjectsForLearner` is
+   * what applies that.
+   */
+  optional?: boolean
   /** SHS distinguishes the four everyone sits from the ones they choose. */
   band?: 'core' | 'elective'
   /**
@@ -105,6 +119,29 @@ export const SUBJECTS: Record<Stage, Subject[]> = {
     { id: 'ghl', name: 'Ghanaian Language' },
     { id: 'rme', name: 'Religious and Moral Education' },
     { id: 'french', name: 'French' },
+
+    /* Taught by some schools and not all, so they are offered rather than
+       assumed. Creative Arts and Design and Physical and Health Education
+       are in the JHS curriculum and are not timetabled everywhere, and
+       Arabic is taught where French is not. */
+    {
+      id: 'creative-arts',
+      name: 'Creative Arts and Design',
+      note: 'Taught by some schools',
+      optional: true,
+    },
+    {
+      id: 'phe',
+      name: 'Physical and Health Education',
+      note: 'Taught by some schools',
+      optional: true,
+    },
+    {
+      id: 'arabic',
+      name: 'Arabic',
+      note: 'Taught by some schools, often instead of French',
+      optional: true,
+    },
   ],
   /**
    * Senior high, from the curriculum NaCCA published for the 2024/2025 roll
@@ -225,6 +262,45 @@ export const SUBJECTS: Record<Stage, Subject[]> = {
 }
 
 export const subjectsFor = (stage: Stage): Subject[] => SUBJECTS[stage] ?? []
+
+/**
+ * The subjects to put in front of ONE learner.
+ *
+ * `subjectsFor` is the stage's whole catalogue and is the wrong thing to
+ * show anybody: at senior high it is every elective in the country, and at
+ * JHS it includes the three subjects only some schools teach. Two rules,
+ * and this is the only place either is applied:
+ *
+ *   course     senior high narrows to core plus this learner's electives,
+ *              through `timetableFor`. Every other stage teaches its whole
+ *              list to everybody, which is what a Ghanaian primary or JHS
+ *              timetable does.
+ *
+ *   optional   a subject some schools add is hidden until this learner says
+ *              they take it. Listed rather than removed, so somebody who
+ *              does sit Arabic can find it.
+ *
+ * Anything chosen is honoured even where the course does not offer it,
+ * because a school that lets a science learner add Geography has not made
+ * a mistake and the app should not tell her she is not taking a subject she
+ * sits.
+ */
+export function subjectsForLearner(
+  stage: Stage,
+  programme?: string | null,
+  chosen?: string[] | null,
+): Subject[] {
+  const picked = chosen ?? []
+  const allowed = timetableFor(stage, programme, picked)
+  return subjectsFor(stage).filter(subject => {
+    if (subject.optional && !picked.includes(subject.id)) return false
+    return !allowed || allowed.includes(subject.id) || picked.includes(subject.id)
+  })
+}
+
+/** The subjects at this stage that only some schools teach. */
+export const extrasFor = (stage: Stage): Subject[] =>
+  subjectsFor(stage).filter(s => s.optional)
 
 export function subjectById(stage: Stage, id: string | null): Subject | null {
   if (!id) return null

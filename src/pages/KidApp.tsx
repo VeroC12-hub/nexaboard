@@ -33,7 +33,7 @@ import { BadgeArt, Icon, Pal, Sparkles, Tile, type TileArt } from '../components
 import { palAt, palFor, type Friend } from '../components/kid/cast'
 import GrownUpGate from '../components/kid/GrownUpGate'
 import { artFor } from '../components/kid/subjectArt'
-import { subjectsFor } from '../lib/education/subjects'
+import { subjectsForLearner } from '../lib/education/subjects'
 import { allTopics, syllabusFor, topicsFor, type Topic } from '../lib/education/syllabus'
 import { ackBadges, freshBadges, standingOf, type Standing } from '../lib/education/rewards'
 import { playable } from '../lib/education/heavy'
@@ -605,7 +605,7 @@ export default function KidApp({
   const worked = useMemo(() => new Set(attempts.map(a => a.objectiveId)), [attempts])
 
   const subjects = useMemo<KidSubject[]>(() => {
-    return subjectsFor(profile.stage).map(s => {
+    return subjectsForLearner(profile.stage, profile.programme, profile.electives).map(s => {
       const syllabus = syllabusFor(profile.stage, s.id, profile.curriculum)
       const topics = syllabus ? topicsFor(syllabus, profile.level) : []
       /* Their year may hold nothing for a subject that starts later, in which

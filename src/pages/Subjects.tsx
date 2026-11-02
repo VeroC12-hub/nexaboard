@@ -46,7 +46,7 @@
 import { useMemo, useState } from 'react'
 import '../styles/nexaedu.css'
 import {
-  NOTE_EXAMPLES, readinessOf, shapeOf, subjectsFor,
+  NOTE_EXAMPLES, readinessOf, shapeOf, subjectsForLearner,
   type Readiness, type Subject,
 } from '../lib/education/subjects'
 import type { LearnerProfile, Stage } from '../lib/education/learner'
@@ -175,7 +175,7 @@ export default function Subjects({
   /** Present when a parent or school opened this learner, so they can go back. */
   onBack?: () => void
 }) {
-  const all = subjectsFor(profile.stage)
+  const all = subjectsForLearner(profile.stage, profile.programme, profile.electives)
   const courses = programmesFor(profile.stage)
   const [chosen, setChosen] = useState<string | null>(profile.subjectId)
   const [note, setNote] = useState(

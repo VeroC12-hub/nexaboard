@@ -27,7 +27,7 @@ import { useMemo, useState } from 'react'
 import '../styles/teen.css'
 import { Icon, Tile, type TileArt } from '../components/kid/art'
 import { artFor } from '../components/kid/subjectArt'
-import { subjectsFor } from '../lib/education/subjects'
+import { subjectsForLearner } from '../lib/education/subjects'
 import { allTopics, syllabusFor, topicsFor, type Topic } from '../lib/education/syllabus'
 import { standingOf } from '../lib/education/rewards'
 import { localPlan, savedPlan } from '../lib/education/plan'
@@ -62,7 +62,7 @@ export default function TeenApp({
   const worked = useMemo(() => new Set(attempts.map(a => a.objectiveId)), [attempts])
 
   const courses = useMemo<Course[]>(() => {
-    return subjectsFor(profile.stage).map(s => {
+    return subjectsForLearner(profile.stage, profile.programme, profile.electives).map(s => {
       const syllabus = syllabusFor(profile.stage, s.id, profile.curriculum)
       const mine = syllabus ? topicsFor(syllabus, profile.level) : []
       const topics = mine.length ? mine : (syllabus ? allTopics(syllabus) : [])

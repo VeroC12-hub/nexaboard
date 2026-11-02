@@ -24,7 +24,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import '../styles/scholar.css'
 import { Icon, type Mark } from '../components/kid/art'
-import { subjectsFor } from '../lib/education/subjects'
+import { subjectsForLearner } from '../lib/education/subjects'
 import { asksProgramme, programmeById, timetableFor } from '../lib/education/programmes'
 import { allTopics, syllabusFor, topicsFor, type Topic } from '../lib/education/syllabus'
 import { standingOf, weekStart } from '../lib/education/rewards'
@@ -87,7 +87,7 @@ export default function ScholarApp({
    */
   const papers = useMemo<Paper[]>(() => {
     const allowed = timetableFor(profile.stage, profile.programme, profile.electives)
-    return subjectsFor(profile.stage)
+    return subjectsForLearner(profile.stage, profile.programme, profile.electives)
       .filter(s => !allowed || allowed.includes(s.id))
       .map(s => {
         const syllabus = syllabusFor(profile.stage, s.id, profile.curriculum)
