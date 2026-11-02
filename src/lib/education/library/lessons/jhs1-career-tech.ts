@@ -49,20 +49,11 @@ teach({
   idea:
     'Technical drawing is done with instruments because a drawing is a '
     + 'measurement, not a picture. '
-    + 'The drawing board holds the paper square. '
-    + 'The tee square slides along its edge and draws horizontal lines. '
-    + 'A set square stood on the tee square draws verticals, '
-    + 'and its own angles give 30, 45, 60 and 90 degrees. '
-    + 'The compasses draw circles and arcs, '
-    + 'the dividers step off equal distances, '
-    + 'the protractor measures any angle, '
-    + 'and the scale rule measures length. '
-    + 'The line types carry information. '
-    + 'A thick continuous line is a visible outline. '
-    + 'A thin continuous line is a construction, projection or dimension '
-    + 'line. '
-    + 'A thin dashed line is a hidden edge. '
-    + 'A thin chain of long and short dashes is a centre line.',
+    + 'Each instrument does one job that free drawing cannot do at all. '
+    + 'The lines carry information too. '
+    + 'A reader who is not in the room has to be able to tell '
+    + 'your working from the object itself, '
+    + 'so the two are drawn differently.',
 
   mechanism:
     'Everything in this topic follows from one fact: '
@@ -172,6 +163,118 @@ teach({
     + 'It only works if the whole drawing is square, '
     + 'which is what the tee square was for all along.',
 
+  figure: {
+    alt: 'A block with a hole through it, drawn with all four line types: a '
+      + 'thick continuous outline for the block, thin dashed lines for the '
+      + 'hidden edges of the hole, a thin chain of long and short dashes '
+      + 'for the centre line through it, and thin continuous lines with '
+      + 'arrows dimensioning the width as 60. A legend beside it names '
+      + 'each of the four.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the lines tell a reader who is not in the room</text>'
+      + '<path d="M 170 56 V 214" stroke-width="1.5" stroke-dasharray="20 5 4 5"/>'
+      + '<path d="M 60 76 H 280 V 196 H 60 Z" stroke-width="5"/>'
+      + '<path d="M 150 76 V 196" stroke-width="1.5" stroke-dasharray="9 7"/>'
+      + '<path d="M 190 76 V 196" stroke-width="1.5" stroke-dasharray="9 7"/>'
+      + '<path d="M 60 202 V 252" stroke-width="1.5"/>'
+      + '<path d="M 280 202 V 252" stroke-width="1.5"/>'
+      + '<path d="M 68 244 H 272" stroke-width="1.5"/>'
+      + '<path d="M 60 244 L 76 239 L 76 249 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 280 244 L 264 239 L 264 249 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="170" y="236" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">60</text>'
+      + '<text x="170" y="282" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">a block with a hole through it</text>'
+      + '<path d="M 340 86 H 440" stroke-width="5"/>'
+      + '<text x="452" y="91" font-size="13" text-anchor="start" fill="currentColor" stroke="none">a visible outline</text>'
+      + '<path d="M 340 136 H 440" stroke-width="1.5"/>'
+      + '<text x="452" y="133" font-size="13" text-anchor="start" fill="currentColor" stroke="none">construction, projection</text>'
+      + '<text x="452" y="151" font-size="13" text-anchor="start" fill="currentColor" stroke="none">or dimension</text>'
+      + '<path d="M 340 186 H 440" stroke-width="1.5" stroke-dasharray="9 7"/>'
+      + '<text x="452" y="191" font-size="13" text-anchor="start" fill="currentColor" stroke="none">a hidden edge</text>'
+      + '<path d="M 340 236 H 440" stroke-width="1.5" stroke-dasharray="20 5 4 5"/>'
+      + '<text x="452" y="233" font-size="13" text-anchor="start" fill="currentColor" stroke="none">a centre line: a position,</text>'
+      + '<text x="452" y="251" font-size="13" text-anchor="start" fill="currentColor" stroke="none">not an edge at all</text>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">thick is the object, thin is your working</text>'
+      + '<text x="320" y="360" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">so draw everything thin and light, and thicken</text>'
+      + '<text x="320" y="382" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">the outline only once the drawing is right</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each instrument, and the job that only it can do',
+      columns: ['Instrument', 'What it does', 'What it gives you'],
+      rows: [
+        [
+          'Drawing board',
+          'Holds the paper square',
+          'The edge that everything else is registered against',
+        ],
+        [
+          'Tee square',
+          'Draws horizontal lines',
+          'Every line parallel to every other, without measuring',
+        ],
+        [
+          'Set square',
+          'Draws verticals, and 30, 45, 60 and 90 degrees',
+          'Angles taken from the board, not from your hand',
+        ],
+        [
+          'Compasses',
+          'Draws circles and arcs',
+          'A curve that is a measurement',
+        ],
+        [
+          'Dividers',
+          'Steps off equal distances',
+          'The same distance repeated without reading it off',
+        ],
+        [
+          'Protractor',
+          'Measures any angle',
+          'The angles the set square does not have',
+        ],
+        [
+          'Scale rule',
+          'Measures length',
+          'Lengths read off at the drawing’s own scale',
+        ],
+      ],
+      note: 'The tee square does not draw a straighter line than a ruler. '
+        + 'It draws one parallel to every line it drew before, and that '
+        + 'is lost the moment it leaves the edge of the board.',
+    },
+    {
+      caption: 'What each kind of line means to the person reading the '
+        + 'drawing',
+      columns: ['Line', 'What it means', 'Drawn how'],
+      rows: [
+        [
+          'Visible outline',
+          'A real edge of the object',
+          'Thick and continuous',
+        ],
+        [
+          'Construction or dimension',
+          'Your working, and the sizes',
+          'Thin and continuous',
+        ],
+        [
+          'Hidden edge',
+          'An edge that is there, behind something',
+          'Thin and dashed',
+        ],
+        [
+          'Centre line',
+          'A position, and not an edge at all',
+          'Thin, long and short dashes',
+        ],
+      ],
+      note: 'Thick is the object and thin is your working, which is why you '
+        + 'draw thin and light throughout and thicken the outline only '
+        + 'when the drawing is right.',
+    },
+  ],
   questions: [
     {
       id: 'dri-1',
@@ -240,16 +343,9 @@ teach({
   },
 
   idea:
-    'The marking tools come first: '
-    + 'the rule measures, the try square marks a right angle and tests one, '
-    + 'the marking gauge lines parallel to an edge, '
-    + 'the scriber marks metal. '
-    + 'For cutting: the tenon saw cuts across wood, '
-    + 'the hacksaw cuts metal, the chisel pares and cuts waste, '
-    + 'the file smooths metal, the plane smooths wood. '
-    + 'For holding: the vice and the clamp. '
-    + 'For driving: the hammer, the mallet for a chisel handle, '
-    + 'and the screwdriver that fits the screw. '
+    'Workshop tools are sorted by the job they do: '
+    + 'marking, cutting, smoothing, holding and driving. '
+    + 'Each one is made for its own job and is dangerous in another. '
     + 'The safety rules are not a separate list. '
     + 'Each one belongs to a tool and to the injury that tool causes.',
 
@@ -360,6 +456,79 @@ teach({
     + 'What changes is that a machine does not stop when you let go, '
     + 'so guards and a known stop switch replace your reactions.',
 
+  figure: {
+    alt: 'A tool slips, drawn in red at the top, with the note that the '
+      + 'only question left is where your hand was. Two boxes follow. In '
+      + 'the red one your hand was on the work, so the tool lands on it. '
+      + 'In the green one the work was in a vice, so the tool lands on the '
+      + 'bench. Below, the rules are sorted into the two things they do: '
+      + 'stop the slip, or move the hand.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">every workshop injury has the same shape</text>'
+      + '<path d="M 220 46 H 420 V 86 H 220 Z" stroke="#c8433a"/>'
+      + '<text x="320" y="71" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">a tool slips</text>'
+      + '<text x="320" y="106" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and the only question left is where your hand was</text>'
+      + '<path d="M 300 86 L 180 126" stroke-width="2"/>'
+      + '<path d="M 170 130 L 186 118 L 192 132 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 340 86 L 460 126" stroke-width="2"/>'
+      + '<path d="M 470 130 L 448 132 L 454 118 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 20 136 H 300 V 232 H 20 Z" stroke="#c8433a"/>'
+      + '<text x="160" y="162" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">your hand was on the work</text>'
+      + '<text x="160" y="190" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">so the tool lands on it</text>'
+      + '<text x="160" y="216" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">this is nearly every injury</text>'
+      + '<path d="M 340 136 H 620 V 232 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="480" y="162" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the work was in a vice</text>'
+      + '<text x="480" y="190" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">so the tool lands on the bench</text>'
+      + '<text x="480" y="216" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">and the slip costs you nothing</text>'
+      + '<text x="320" y="272" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so every real rule does one of two things</text>'
+      + '<path d="M 20 288 H 300 V 376 H 20 Z" stroke-dasharray="7 6" stroke-width="2"/>'
+      + '<text x="160" y="312" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">stop the slip</text>'
+      + '<text x="160" y="336" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">keep the edge sharp, because a blunt</text>'
+      + '<text x="160" y="353" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">one must be forced; use the tool made</text>'
+      + '<text x="160" y="370" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">for the job; check the handle is sound</text>'
+      + '<path d="M 340 288 H 620 V 376 H 340 Z" stroke-dasharray="7 6" stroke-width="2"/>'
+      + '<text x="480" y="312" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">move the hand</text>'
+      + '<text x="480" y="336" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">hold the work in a vice or a clamp;</text>'
+      + '<text x="480" y="353" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">cut away from your body; keep both</text>'
+      + '<text x="480" y="370" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">hands behind the cutting edge</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The tools grouped by their job, and what the wrong one does',
+      columns: ['The job', 'The tools for it', 'What the wrong tool does'],
+      rows: [
+        [
+          'Mark out',
+          'Rule, try square, marking gauge, scriber for metal',
+          'A line that is not square, and everything after it is wrong',
+        ],
+        [
+          'Cut',
+          'Tenon saw across wood, hacksaw for metal, chisel to pare',
+          'A wood saw blunts on metal; a hacksaw tears the wood',
+        ],
+        [
+          'Smooth',
+          'Plane for wood, file for metal',
+          'A file clogs on wood; a plane is ruined on metal',
+        ],
+        [
+          'Hold',
+          'Vice and clamp',
+          'Your hand holds it instead, which is where the tool lands',
+        ],
+        [
+          'Drive',
+          'Hammer for nails, mallet on a chisel, the screwdriver that fits',
+          'A steel hammer splits the chisel handle, and it lets go',
+        ],
+      ],
+      note: 'A blunt chisel is more dangerous than a sharp one, because a '
+        + 'blunt one has to be forced, and force is what makes it jump.',
+    },
+  ],
   questions: [
     {
       id: 'too-1',
@@ -425,10 +594,8 @@ teach({
   },
 
   idea:
-    'A balanced meal contains a carbohydrate for energy, '
-    + 'a protein for growth and repair, '
-    + 'a vegetable or fruit for vitamins, minerals and fibre, '
-    + 'and a small amount of fat or oil. '
+    'A balanced meal takes one food from each of four groups, '
+    + 'and each group is there for a different reason. '
     + 'Planning means choosing one food from each group, '
     + 'checking what it costs, and checking you can cook it in the time '
     + 'you have. '
@@ -548,6 +715,80 @@ teach({
     + 'costs less than buying three different ones, '
     + 'and in season produce is cheapest at exactly the time it is best.',
 
+  figure: {
+    alt: 'Raw chicken, the knife and board it was cut on, and the salad '
+      + 'drawn in a row, with the path from the board to the salad crossed '
+      + 'out in red. Below, the safe order of work in three steps: prepare '
+      + 'the salad first while everything is clean, wash hands, knife and '
+      + 'board, and only then handle the raw chicken, which is cooked all '
+      + 'the way through.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the knife that cut raw chicken carries it to the salad</text>'
+      + '<path d="M 20 60 H 170 V 124 H 20 Z" stroke="#c8433a"/>'
+      + '<text x="95" y="88" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">raw chicken</text>'
+      + '<text x="95" y="110" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">carries bacteria</text>'
+      + '<path d="M 178 92 H 222" stroke="#c8433a"/>'
+      + '<path d="M 232 92 L 214 83 L 214 101 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 242 60 H 398 V 124 H 242 Z"/>'
+      + '<text x="320" y="88" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the same knife,</text>'
+      + '<text x="320" y="110" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">board and hand</text>'
+      + '<path d="M 406 92 H 450" stroke="#c8433a"/>'
+      + '<path d="M 460 92 L 442 83 L 442 101 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 416 74 L 450 110" stroke="#c8433a" stroke-width="4"/>'
+      + '<path d="M 450 74 L 416 110" stroke="#c8433a" stroke-width="4"/>'
+      + '<path d="M 470 60 H 620 V 124 H 470 Z" stroke="#0f8a4d"/>'
+      + '<text x="545" y="88" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the salad</text>'
+      + '<text x="545" y="110" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">never cooked at all</text>'
+      + '<text x="320" y="162" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">cooking kills the bacteria, so the order you work in matters</text>'
+      + '<path d="M 20 184 H 200 V 262 H 20 Z" stroke="#0f8a4d"/>'
+      + '<text x="110" y="212" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">1</text>'
+      + '<text x="110" y="236" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">prepare the salad</text>'
+      + '<text x="110" y="254" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">first, while all is clean</text>'
+      + '<path d="M 208 222 H 242" stroke-width="2"/>'
+      + '<path d="M 252 222 L 234 213 L 234 231 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 260 184 H 380 V 262 H 260 Z"/>'
+      + '<text x="320" y="212" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="320" y="236" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">wash hands, knife</text>'
+      + '<text x="320" y="254" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and board</text>'
+      + '<path d="M 388 222 H 422" stroke-width="2"/>'
+      + '<path d="M 432 222 L 414 213 L 414 231 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 440 184 H 620 V 262 H 440 Z" stroke="#c8433a"/>'
+      + '<text x="530" y="212" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">3</text>'
+      + '<text x="530" y="236" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">then the raw chicken,</text>'
+      + '<text x="530" y="254" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">cooked all the way through</text>'
+      + '<text x="320" y="316" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the chicken is safe once it is cooked,</text>'
+      + '<text x="320" y="342" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and the salad was never going to be cooked,</text>'
+      + '<text x="320" y="368" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">which is why the salad is done first</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four groups, what each is for, and a cheap food in it',
+      columns: ['Group', 'What it is for', 'A cheap food in that group'],
+      rows: [
+        ['Carbohydrate', 'Energy', 'Rice, yam, kenkey, gari'],
+        [
+          'Protein',
+          'Growth and repair',
+          'Beans, groundnuts, eggs, dried fish',
+        ],
+        [
+          'Vegetable or fruit',
+          'Vitamins, minerals and fibre',
+          'Kontomire, garden eggs, pawpaw',
+        ],
+        [
+          'Fat or oil',
+          'Energy, and a small amount is enough',
+          'Palm oil, groundnut oil',
+        ],
+      ],
+      note: 'A budget is met by moving within a group, never by deleting '
+        + 'one. Every food in the last column is cheap, and two of them '
+        + 'sit in the group people drop first.',
+    },
+  ],
   questions: [
     {
       id: 'mea-1',
@@ -613,15 +854,10 @@ teach({
   },
 
   idea:
-    'A temporary stitch holds cloth in place while you work: '
-    + 'tacking, which is a long running stitch meant to be removed. '
-    + 'The joining stitches are the running stitch, '
-    + 'which is quick and weak, '
-    + 'and the backstitch, '
-    + 'where the needle goes back over the previous stitch each time, '
-    + 'making an unbroken line of thread and a strong seam. '
-    + 'The finishing stitches close an edge: '
-    + 'hemming, slip stitch and blanket stitch. '
+    'Stitches do three different jobs. '
+    + 'A temporary stitch holds cloth in place while you work. '
+    + 'A joining stitch makes the seam itself. '
+    + 'A finishing stitch closes or neatens an edge. '
     + 'A seam is where two pieces are joined. '
     + 'A plain seam is stitched then pressed open, '
     + 'and its raw edges must be neatened, '
@@ -741,6 +977,105 @@ teach({
     + 'when you move to a machine. '
     + 'Only the joining gets faster.',
 
+  figure: {
+    alt: 'The two joining stitches drawn from the side, through the cloth. '
+      + 'In the running stitch the thread on the surface is a row of '
+      + 'separate pieces, with one marked in red because breaking it opens '
+      + 'the seam beside it. In the backstitch the thread on the surface '
+      + 'is one unbroken green line, because the needle comes up ahead and '
+      + 'goes back into the end of the last stitch.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">seen from the side: where the thread actually runs</text>'
+      + '<text x="20" y="62" font-size="16" text-anchor="start" fill="currentColor" stroke="none">running stitch</text>'
+      + '<text x="20" y="82" font-size="13" text-anchor="start" fill="currentColor" stroke="none">the surface thread is in separate pieces</text>'
+      + '<path d="M 60 104 H 580" stroke-width="2"/>'
+      + '<path d="M 60 122 H 580" stroke-width="2"/>'
+      + '<path d="M 70 96 H 130" stroke="currentColor" stroke-width="4"/>'
+      + '<path d="M 70 96 V 130" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 130 96 V 130" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 130 130 H 190" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 190 96 H 250" stroke="currentColor" stroke-width="4"/>'
+      + '<path d="M 190 96 V 130" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 250 96 V 130" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 250 130 H 310" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 310 96 H 370" stroke="#c8433a" stroke-width="4"/>'
+      + '<path d="M 310 96 V 130" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 370 96 V 130" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 370 130 H 430" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 430 96 H 490" stroke="currentColor" stroke-width="4"/>'
+      + '<path d="M 430 96 V 130" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 490 96 V 130" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 490 130 H 550" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 326 86 L 354 68" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="360" y="66" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">break this one piece and</text>'
+      + '<text x="360" y="84" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">the seam opens beside it</text>'
+      + '<text x="320" y="156" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">dashed where the thread is underneath the cloth</text>'
+      + '<text x="20" y="208" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">backstitch</text>'
+      + '<text x="20" y="228" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">the surface thread is one unbroken line</text>'
+      + '<path d="M 60 252 H 580" stroke-width="2"/>'
+      + '<path d="M 60 270 H 580" stroke-width="2"/>'
+      + '<path d="M 70 244 H 550" stroke="#0f8a4d" stroke-width="5"/>'
+      + '<path d="M 70 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 70 278 H 190" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 130 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 130 278 H 250" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 190 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 190 278 H 310" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 250 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 250 278 H 370" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 310 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 310 278 H 430" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 370 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 370 278 H 490" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 430 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 430 278 H 550" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 490 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 490 278 H 610" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/>'
+      + '<path d="M 550 244 V 278" stroke="currentColor" stroke-width="2"/>'
+      + '<text x="320" y="304" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the needle comes up ahead and goes back into the last stitch</text>'
+      + '<text x="320" y="348" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so a pull is shared along the whole seam</text>'
+      + '<text x="320" y="374" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">instead of landing on one stitch</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each stitch, the job it does, and how much pull it will '
+        + 'take',
+      columns: ['Stitch', 'What it is for', 'How strong'],
+      rows: [
+        [
+          'Tacking',
+          'Holding cloth still while you sew',
+          'None, and it is meant to come out',
+        ],
+        [
+          'Running stitch',
+          'Joining, quickly',
+          'Weak: the surface thread is in pieces',
+        ],
+        [
+          'Backstitch',
+          'Joining anywhere it will be pulled',
+          'Strong: the surface thread is unbroken',
+        ],
+        ['Hemming', 'Closing a folded edge', 'Enough for an edge'],
+        [
+          'Slip stitch',
+          'Closing an edge almost invisibly',
+          'Enough for an edge',
+        ],
+        [
+          'Blanket stitch',
+          'Finishing a raw edge',
+          'It holds the cut threads from fraying',
+        ],
+      ],
+      note: 'A cut edge is threads with nothing beyond them, so they work '
+        + 'loose with every wash and the cloth frays inwards towards your '
+        + 'stitching. Neatening gives them something to hold.',
+    },
+  ],
   questions: [
     {
       id: 'sti-1',
