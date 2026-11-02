@@ -214,8 +214,6 @@ teach({
   mechanism:
     'Here is what makes a conversation keep going. '
     + 'You have to give the other person something to answer. '
-    + 'Say only "I am fine" and the talk stops there. '
-    + 'Say "I am fine. And you?" and it carries on. '
     + 'So the skill is not knowing more words. '
     + 'It is handing the turn back.',
 
@@ -292,6 +290,76 @@ teach({
     + 'Count how often the turn changes hands. '
     + 'You will find it is much more often than you expected. '
     + 'That is what makes it a conversation and not two speeches.',
+
+  figure: {
+    alt: 'Two panels, each showing arrows passing between you and the '
+      + 'other person. In the first the arrows keep alternating: '
+      + 'greeting, reply, I am fine and you, their answer, and on it goes. '
+      + 'In the second the arrows stop after I am fine, with nothing to '
+      + 'answer and a bar across the end. Underneath, a note that the '
+      + 'skill is not knowing more words, it is handing the turn back.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Handing the turn back</text>'
+      + '<rect x="20" y="48" width="290" height="238" stroke="#0f8a4d"/>'
+      + '<text x="62" y="72" font-size="14" text-anchor="start" fill="currentColor" stroke="none">you</text>'
+      + '<text x="268" y="72" font-size="14" text-anchor="end" fill="currentColor" stroke="none">them</text>'
+      + '<text x="165" y="102" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">greeting</text>'
+      + '<line x1="62" y1="112" x2="240" y2="112"/>'
+      + '<polygon points="252,112 236,105 236,119" fill="currentColor" stroke="none"/>'
+      + '<text x="165" y="140" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">reply</text>'
+      + '<line x1="268" y1="150" x2="90" y2="150"/>'
+      + '<polygon points="78,150 94,143 94,157" fill="currentColor" stroke="none"/>'
+      + '<text x="165" y="178" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">I am fine. And you?</text>'
+      + '<line x1="62" y1="188" x2="240" y2="188" stroke="#0f8a4d"/>'
+      + '<polygon points="252,188 236,181 236,195" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="165" y="216" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">their answer</text>'
+      + '<line x1="268" y1="226" x2="90" y2="226"/>'
+      + '<polygon points="78,226 94,219 94,233" fill="currentColor" stroke="none"/>'
+      + '<text x="165" y="254" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">and on it goes</text>'
+      + '<line x1="62" y1="264" x2="240" y2="264" stroke="#0f8a4d"/>'
+      + '<polygon points="252,264 236,257 236,271" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="330" y="48" width="290" height="238" stroke="#c8433a"/>'
+      + '<text x="372" y="72" font-size="14" text-anchor="start" fill="currentColor" stroke="none">you</text>'
+      + '<text x="578" y="72" font-size="14" text-anchor="end" fill="currentColor" stroke="none">them</text>'
+      + '<text x="475" y="102" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">greeting</text>'
+      + '<line x1="372" y1="112" x2="550" y2="112"/>'
+      + '<polygon points="562,112 546,105 546,119" fill="currentColor" stroke="none"/>'
+      + '<text x="475" y="140" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">reply</text>'
+      + '<line x1="578" y1="150" x2="400" y2="150"/>'
+      + '<polygon points="388,150 404,143 404,157" fill="currentColor" stroke="none"/>'
+      + '<text x="475" y="178" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">I am fine.</text>'
+      + '<line x1="372" y1="188" x2="550" y2="188" stroke="#c8433a"/>'
+      + '<polygon points="562,188 546,181 546,195" fill="#c8433a" stroke="none"/>'
+      + '<text x="475" y="234" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">nothing to answer</text>'
+      + '<line x1="400" y1="258" x2="550" y2="258" stroke="#c8433a" stroke-width="7"/>'
+      + '<text x="320" y="334" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">The skill is not knowing more words.</text>'
+      + '<text x="320" y="366" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">It is handing the turn back.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'The same four answers, with and without the turn handed back',
+    columns: [
+      'They asked',
+      'An answer that stops it',
+      'An answer that keeps it going',
+    ],
+    rows: [
+      ['How are you?', 'I am fine', 'I am fine. And you?'],
+      [
+        'Where are you going?',
+        'To the market',
+        'To the market. Do you need anything?',
+      ],
+      ['Did you eat?', 'Yes', 'Yes, I ate rice. What did you eat?'],
+      [
+        'Is your mother well?',
+        'She is well',
+        'She is well, thank you. And yours?',
+      ],
+    ],
+    note: 'Nothing in the last column uses a harder word than the middle '
+      + 'one. It only adds a question.',
+  }],
 
   questions: [
     {
@@ -439,6 +507,79 @@ teach({
     + 'Then read it back to them. '
     + 'If they hear what they said, your spelling worked. '
     + 'That is the real test, and it does not need a teacher.',
+
+  figure: {
+    alt: 'Three boxes in a row with arrows between them: say it slowly '
+      + 'and listen for each sound, write a letter for each sound you '
+      + 'heard, and read it back out loud slowly. An arrow runs from the '
+      + 'third box back round to the first, labelled a sound with no '
+      + 'letter shows up at once. Underneath, a note that your hand is '
+      + 'used to English and will write e in place of open e while you '
+      + 'are thinking, and that your ear will not.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">How to check your own writing</text>'
+      + '<rect x="20" y="66" width="180" height="112"/>'
+      + '<text x="110" y="104" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">say it slowly</text>'
+      + '<text x="110" y="132" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">and listen for</text>'
+      + '<text x="110" y="154" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">each sound</text>'
+      + '<line x1="206" y1="122" x2="222" y2="122"/>'
+      + '<polygon points="234,122 218,115 218,129" fill="currentColor" stroke="none"/>'
+      + '<rect x="240" y="66" width="180" height="112"/>'
+      + '<text x="330" y="104" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">write a letter</text>'
+      + '<text x="330" y="132" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">for each sound</text>'
+      + '<text x="330" y="154" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">you heard</text>'
+      + '<line x1="426" y1="122" x2="442" y2="122"/>'
+      + '<polygon points="454,122 438,115 438,129" fill="currentColor" stroke="none"/>'
+      + '<rect x="460" y="66" width="160" height="112" stroke="#0f8a4d"/>'
+      + '<text x="540" y="104" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">read it back</text>'
+      + '<text x="540" y="132" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">out loud,</text>'
+      + '<text x="540" y="154" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">slowly</text>'
+      + '<polyline points="540,182 540,214 110,214 110,194" stroke="#0f8a4d"/>'
+      + '<polygon points="110,182 102,200 118,200" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="325" y="240" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">a sound with no letter shows up at once</text>'
+      + '<text x="320" y="300" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Your hand is used to English, and it writes</text>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">e for ɛ while you are busy thinking.</text>'
+      + '<text x="320" y="372" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">Your ear will not.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Five things to get right in a sentence, and how you check '
+      + 'each one',
+    columns: [
+      'What to get right',
+      'How you check it',
+      'What it looks like when it is wrong',
+    ],
+    rows: [
+      [
+        'A letter for every sound',
+        'Read it aloud, slowly',
+        'You say a sound that has no letter',
+      ],
+      [
+        'The extra letters',
+        'Look at every ɛ and every ɔ',
+        'An e or an o where it should not be',
+      ],
+      [
+        'A capital at the start',
+        'Look at the first letter',
+        'The sentence has no beginning',
+      ],
+      [
+        'A full stop at the end',
+        'Look at the last mark',
+        'This sentence runs into the next one',
+      ],
+      [
+        'That it says what you meant',
+        'Read it to somebody at home',
+        'They hear something you did not say',
+      ],
+    ],
+    note: 'Only the last row needs another person. The first four you can '
+      + 'do by yourself, out loud.',
+  }],
 
   questions: [
     {
@@ -694,9 +835,8 @@ teach({
     'Typing with one finger works, so why learn this? '
     + 'Because of where your eyes are. '
     + 'One finger means hunting, and hunting means watching the keys. '
-    + 'While you watch the keys you are not reading your own writing. '
-    + 'With both hands on the home row your fingers know where to go, '
-    + 'and your eyes stay on the screen. '
+    + 'With both hands on the home row your fingers already know where to '
+    + 'go. '
     + 'The point is not speed. It is that you can see what you are writing.',
 
   recap:
@@ -769,6 +909,82 @@ teach({
     + 'The same thing happens when you learn to ride a bicycle. '
     + 'You cannot explain how you balance, and you do it anyway. '
     + 'Typing gets there with practice, and only with practice.',
+
+  figure: {
+    alt: 'A keyboard drawn as three rows of keys with a space bar below. '
+      + 'Only the middle row is labelled, a s d f g h j k l and the key '
+      + 'beside it, and the eight resting keys a s d f and j k l are '
+      + 'marked. Small dots sit on the f and the j. The four left keys are '
+      + 'labelled left hand and the four right keys right hand, and the '
+      + 'space bar is labelled either thumb. Underneath, a note to feel '
+      + 'for the bumps on f and j so your eyes never leave the screen.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Where your fingers live</text>'
+      + '<rect x="50" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="102" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="154" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="206" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="258" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="310" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="362" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="414" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="466" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="518" y="56" width="48" height="44" rx="5"/>'
+      + '<rect x="62" y="108" width="48" height="44" rx="5" stroke="#0f8a4d"/>'
+      + '<text x="86" y="137" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">a</text>'
+      + '<rect x="114" y="108" width="48" height="44" rx="5" stroke="#0f8a4d"/>'
+      + '<text x="138" y="137" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">s</text>'
+      + '<rect x="166" y="108" width="48" height="44" rx="5" stroke="#0f8a4d"/>'
+      + '<text x="190" y="137" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">d</text>'
+      + '<rect x="218" y="108" width="48" height="44" rx="5" stroke="#0f8a4d"/>'
+      + '<text x="242" y="133" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">f</text>'
+      + '<circle cx="242" cy="145" r="5" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<rect x="270" y="108" width="48" height="44" rx="5"/>'
+      + '<text x="294" y="137" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">g</text>'
+      + '<rect x="322" y="108" width="48" height="44" rx="5"/>'
+      + '<text x="346" y="137" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">h</text>'
+      + '<rect x="374" y="108" width="48" height="44" rx="5" stroke="#0f8a4d"/>'
+      + '<text x="398" y="133" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">j</text>'
+      + '<circle cx="398" cy="145" r="5" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<rect x="426" y="108" width="48" height="44" rx="5" stroke="#0f8a4d"/>'
+      + '<text x="450" y="137" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">k</text>'
+      + '<rect x="478" y="108" width="48" height="44" rx="5" stroke="#0f8a4d"/>'
+      + '<text x="502" y="137" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">l</text>'
+      + '<rect x="530" y="108" width="48" height="44" rx="5" stroke="#0f8a4d"/>'
+      + '<rect x="74" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="126" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="178" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="230" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="282" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="334" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="386" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="438" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="490" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="542" y="160" width="48" height="44" rx="5"/>'
+      + '<rect x="160" y="212" width="320" height="38" rx="5"/>'
+      + '<text x="320" y="237" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">space, either thumb</text>'
+      + '<text x="164" y="286" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">left hand rests here</text>'
+      + '<text x="476" y="286" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">right hand rests here</text>'
+      + '<text x="320" y="332" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">Feel the two bumps, on f and on j.</text>'
+      + '<text x="320" y="364" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Then your eyes never leave the screen.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'One finger against both hands, and where your eyes end up',
+    columns: ['The question', 'One finger', 'Both hands, home row'],
+    rows: [
+      [
+        'How does the finger find a key?',
+        'By hunting for it',
+        'It already knows',
+      ],
+      ['Where are your eyes?', 'On the keyboard', 'On the screen'],
+      ['Can you read what you wrote?', 'Not while typing', 'Yes, as you go'],
+      ['When do you spot a mistake?', 'When you look up', 'Straight away'],
+      ['Does it get faster?', 'A little', 'A great deal'],
+    ],
+    note: 'The point was never the last row. It is the second one.',
+  }],
 
   questions: [
     {
