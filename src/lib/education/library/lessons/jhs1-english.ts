@@ -137,6 +137,60 @@ teach({
     + 'You listen for their weakest point, name it, then give your own. '
     + 'The notes stay short for the same reason as before.',
 
+  figure: {
+    alt: 'Two speakers. The first holds a page of full sentences, keeps '
+      + 'their eyes down on it, and their voice is drawn as a flat '
+      + 'line. The second holds a small card of notes, looks at the '
+      + 'people, and their voice is drawn as a line that rises and '
+      + 'falls.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">notes let you look up, and a page does not</text>'
+      + '<circle cx="140" cy="86" r="20" stroke="#c8433a"/>'
+      + '<line x1="140" y1="106" x2="140" y2="182" stroke="#c8433a"/>'
+      + '<line x1="116" y1="132" x2="164" y2="132" stroke="#c8433a"/>'
+      + '<line x1="140" y1="182" x2="122" y2="222" stroke="#c8433a"/>'
+      + '<line x1="140" y1="182" x2="158" y2="222" stroke="#c8433a"/>'
+      + '<path d="M 96 110 H 184 V 174 H 96 Z" stroke="#c8433a"/>'
+      + '<text x="140" y="248" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">a page of sentences, held up</text>'
+      + '<line x1="206" y1="100" x2="300" y2="100" stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="252" y="84" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">the voice flattens</text>'
+      + '<text x="140" y="276" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">your eyes stay on the page</text>'
+      + '<circle cx="420" cy="86" r="20" stroke="#0f8a4d"/>'
+      + '<line x1="420" y1="106" x2="420" y2="182" stroke="#0f8a4d"/>'
+      + '<line x1="396" y1="132" x2="444" y2="132" stroke="#0f8a4d"/>'
+      + '<line x1="420" y1="182" x2="402" y2="222" stroke="#0f8a4d"/>'
+      + '<line x1="420" y1="182" x2="438" y2="222" stroke="#0f8a4d"/>'
+      + '<path d="M 404 152 H 436 V 172 H 404 Z" stroke="#0f8a4d"/>'
+      + '<text x="420" y="248" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">a card of short notes, held low</text>'
+      + '<path d="M 470 100 Q 492 72 514 100 Q 536 128 558 92" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="512" y="64" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">it rises and falls</text>'
+      + '<text x="420" y="276" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">your eyes are on the people</text>'
+      + '<text x="320" y="324" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the notes hold the order of your points, nothing more</text>'
+      + '<text x="320" y="354" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">so you make the sentence at the moment you say it</text>'
+      + '<text x="320" y="386" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and there is nothing on the card to lose your place in</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What to say instead, when the talk is a formal one',
+      columns: ['Not this', 'This', 'Why'],
+      rows: [
+        [
+          'can’t, don’t, won’t',
+          'cannot, do not, will not',
+          'The short forms belong in talk between friends',
+        ],
+        ['gonna, wanna', 'going to, want to', 'They are not written English at all'],
+        ['guy, stuff', 'person, things', 'Slang narrows who you are speaking to'],
+        ['yeah, nope', 'yes, no', 'The same reason, and it costs nothing'],
+        ['kids', 'children', 'Formal does not mean hard, only chosen'],
+      ],
+      note: 'Formal English is not grander English. It is the English that '
+        + 'everybody in the hall can follow, including the people who do '
+        + 'not know you.',
+    },
+  ],
   questions: [
     {
       id: 'spk-1',
@@ -309,6 +363,84 @@ teach({
     + 'It still needs evidence from the passage, '
     + 'but now your judgement is part of the answer.',
 
+  figure: {
+    alt: 'One line of a passage, His hands shook as he opened the '
+      + 'letter, with two branches below it. The literal branch asks '
+      + 'what his hands did, and you can point at the words. The '
+      + 'inferential branch asks how he felt, which the passage never '
+      + 'says.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">can you point at the words?</text>'
+      + '<path d="M 90 62 H 550 V 106 H 90 Z"/>'
+      + '<text x="320" y="90" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">His hands shook as he opened the letter.</text>'
+      + '<line x1="250" y1="106" x2="190" y2="148"/>'
+      + '<line x1="390" y1="106" x2="450" y2="148"/>'
+      + '<path d="M 60 152 H 300 V 252 H 60 Z" stroke="#0f8a4d"/>'
+      + '<text x="180" y="178" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">a literal question</text>'
+      + '<text x="180" y="204" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">what did his hands do?</text>'
+      + '<text x="180" y="228" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">point at the words, and stop</text>'
+      + '<path d="M 340 152 H 580 V 252 H 340 Z"/>'
+      + '<text x="460" y="178" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">an inferential question</text>'
+      + '<text x="460" y="204" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">how did he feel?</text>'
+      + '<text x="460" y="228" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the passage never says it</text>'
+      + '<text x="320" y="292" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the passage shows you instead of telling you</text>'
+      + '<text x="320" y="324" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">so the mark is the answer plus the line it rests on</text>'
+      + '<text x="320" y="362" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">an inference comes from the passage: not a guess, not an opinion</text>'
+      + '<text x="320" y="390" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and showing is always stronger than telling</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The two kinds of question, and how each one is marked',
+      columns: [
+        'The question',
+        'Where the answer is',
+        'The test',
+        'What earns the mark',
+      ],
+      rows: [
+        [
+          'Literal',
+          'In one line of the passage',
+          'Can you point at the words? Yes',
+          'That line, put into your own words',
+        ],
+        [
+          'Inferential',
+          'Nowhere, but it follows from the passage',
+          'Can you point at the words? No',
+          'What it shows, and the lines it rests on',
+        ],
+      ],
+      note: 'The answer alone is worth little on an inferential question. '
+        + 'The answer with its evidence is worth the mark.',
+    },
+    {
+      caption: 'Lines that show instead of telling, and what each one is '
+        + 'hiding',
+      columns: ['The passage says', 'It never says', 'So the question is'],
+      rows: [
+        [
+          'His hands shook as he opened the letter',
+          'He was afraid',
+          'How did he feel, and how do you know',
+        ],
+        [
+          'She pushed her plate away untouched',
+          'She was upset, or unwell',
+          'Why did she not eat',
+        ],
+        [
+          'He counted the coins twice before paying',
+          'He was short of money',
+          'What does this tell you about him',
+        ],
+      ],
+      note: 'Writers do this on purpose. Every row on the left is the '
+        + 'evidence your answer has to quote.',
+    },
+  ],
   questions: [
     {
       id: 'inf-1',
@@ -470,6 +602,47 @@ teach({
     + 'The sentence is the only thing that tells you so, '
     + 'which is why covering the word and reading on is the whole skill.',
 
+  figure: {
+    alt: 'The sentence The crowd was thick near the gate, written again '
+      + 'with the word thick covered by a gap. Three words are tried in '
+      + 'the gap: packed, which fits the sentence and the passage, '
+      + 'noisy, which fits the gap but not the passage, and stupid, '
+      + 'which is the usual meaning and does not fit at all.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">cover the word, and ask what would fit</text>'
+      + '<text x="320" y="94" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">The crowd was thick near the gate.</text>'
+      + '<text x="150" y="158" font-size="20" text-anchor="start" fill="currentColor" stroke="none">The crowd was</text>'
+      + '<line x1="304" y1="164" x2="400" y2="164" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="410" y="158" font-size="20" text-anchor="start" fill="currentColor" stroke="none">near the gate.</text>'
+      + '<text x="200" y="214" font-size="17" text-anchor="start" fill="#0f8a4d" stroke="none">packed</text>'
+      + '<text x="310" y="214" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">fits, and fits the passage</text>'
+      + '<text x="200" y="248" font-size="17" text-anchor="start" fill="#c8433a" stroke="none">noisy</text>'
+      + '<text x="310" y="248" font-size="15" text-anchor="start" fill="#c8433a" stroke="none">fits the gap, but not the passage</text>'
+      + '<text x="200" y="282" font-size="17" text-anchor="start" fill="#c8433a" stroke="none">stupid</text>'
+      + '<text x="310" y="282" font-size="15" text-anchor="start" fill="#c8433a" stroke="none">the usual meaning, and it does not fit</text>'
+      + '<text x="320" y="334" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">whatever you would naturally put in the gap is close</text>'
+      + '<text x="320" y="364" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">then put your word back, and read the lines either side</text>'
+      + '<text x="320" y="392" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">one word is safest, because the marker is testing a swap</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The same word in different company, and what it means each '
+        + 'time',
+      columns: ['The sentence', 'What thick means there'],
+      rows: [
+        ['The crowd was thick near the gate', 'Closely packed together'],
+        ['The soup was thick', 'Not runny'],
+        ['The forest was thick', 'Dense, and hard to walk through'],
+        ['He was rather thick about it', 'Slow to understand'],
+        ['They are thick with each other', 'Close friends'],
+      ],
+      note: 'Meaning is not stored inside a word. It is settled by the '
+        + 'words around it, which is exactly why the question asks for '
+        + 'the meaning as used in the passage.',
+    },
+  ],
   questions: [
     {
       id: 'voc-1',
@@ -646,6 +819,75 @@ teach({
     + 'side. '
     + 'The habit of deciding the ending first matters even more there.',
 
+  figure: {
+    alt: 'A box at the top holding what changed, marked as the thing to '
+      + 'decide first, with an arrow down to a row of four boxes, point '
+      + 'one to point four, which lead across to it. One point is one '
+      + 'paragraph.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">plan backwards, from what changed</text>'
+      + '<path d="M 200 66 H 440 V 122 H 200 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="92" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">what changed</text>'
+      + '<text x="320" y="112" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">decide this one first</text>'
+      + '<line x1="320" y1="126" x2="320" y2="158" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="320" y1="158" x2="314.8" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="320" y1="158" x2="325.2" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="320" y="182" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">then pick the four points that get the reader there</text>'
+      + '<path d="M 30 210 H 154 V 262 H 30 Z"/>'
+      + '<text x="92" y="242" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">point one</text>'
+      + '<path d="M 182 210 H 306 V 262 H 182 Z"/>'
+      + '<text x="244" y="242" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">point two</text>'
+      + '<path d="M 334 210 H 458 V 262 H 334 Z"/>'
+      + '<text x="396" y="242" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">point three</text>'
+      + '<path d="M 486 210 H 610 V 262 H 486 Z"/>'
+      + '<text x="548" y="242" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">point four</text>'
+      + '<line x1="156" y1="236" x2="180" y2="236"/>'
+      + '<line x1="180" y1="236" x2="171.4" y2="241.2"/>'
+      + '<line x1="180" y1="236" x2="171.4" y2="230.8"/>'
+      + '<line x1="308" y1="236" x2="332" y2="236"/>'
+      + '<line x1="332" y1="236" x2="323.4" y2="241.2"/>'
+      + '<line x1="332" y1="236" x2="323.4" y2="230.8"/>'
+      + '<line x1="460" y1="236" x2="484" y2="236"/>'
+      + '<line x1="484" y1="236" x2="475.4" y2="241.2"/>'
+      + '<line x1="484" y1="236" x2="475.4" y2="230.8"/>'
+      + '<text x="320" y="298" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">one point is one paragraph, so the paragraphs come free</text>'
+      + '<text x="320" y="334" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and the last sentence of one leans towards the first of the next</text>'
+      + '<text x="320" y="362" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">so you never need a word like furthermore</text>'
+      + '<text x="320" y="394" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">without a plan you reach the end of the page before the end of the story</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'A narrative essay and a descriptive essay, side by side',
+      columns: ['The question', 'Narrative essay', 'Descriptive essay'],
+      rows: [
+        [
+          'What it does',
+          'Tells what happened, and what changed',
+          'Makes the reader see a place, a person or an event',
+        ],
+        [
+          'How it is ordered',
+          'Events in the order they happened',
+          'Details gathered round one subject',
+        ],
+        [
+          'What the first paragraph does',
+          'Puts the reader where it starts',
+          'Names what is being described',
+        ],
+        [
+          'What the last paragraph does',
+          'Says what changed',
+          'Leaves the reader with one clear picture',
+        ],
+      ],
+      note: 'Both need a plan written before the first sentence, and in '
+        + 'both the last paragraph says something rather than announcing '
+        + 'that the writing has finished.',
+    },
+  ],
   questions: [
     {
       id: 'ess-1',
@@ -709,16 +951,11 @@ teach({
   },
 
   idea:
-    'Words are sorted by the job they do in a sentence. '
-    + 'A noun names. '
-    + 'A pronoun stands in for a noun. '
-    + 'A verb says what is done or what is. '
-    + 'An adjective describes a noun. '
-    + 'An adverb tells you more about a verb, an adjective or another '
-    + 'adverb. '
-    + 'A preposition shows position or relation: in, on, before, with. '
-    + 'A conjunction joins: and, but, because. '
-    + 'An interjection is a cry standing on its own: oh, alas.',
+    'Words are sorted by the job they do in a sentence, and there are '
+    + 'eight of those jobs. '
+    + 'A word is not born into one of them: the same word can take a '
+    + 'different job in a different sentence, '
+    + 'which is what the examination is really testing.',
 
   mechanism:
     'The same word can belong to different parts of speech in different '
@@ -820,6 +1057,81 @@ teach({
     + 'because it describes "man". '
     + 'The rule is the same: name the job, not the word.',
 
+  figure: {
+    alt: 'The same word in two sentences. In The water is cold the word '
+      + 'water is underlined and names a thing, so it is a noun. In '
+      + 'Water the plants the same word is underlined and tells '
+      + 'somebody to act, so it is a verb.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">the word did not change, the job changed</text>'
+      + '<text x="320" y="100" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">The water is cold.</text>'
+      + '<line x1="265" y1="110" x2="322" y2="110" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="300" y="136" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">it names a thing, so here it is a noun</text>'
+      + '<text x="320" y="206" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">Water the plants.</text>'
+      + '<line x1="226" y1="216" x2="284" y2="216" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="312" y="242" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">it tells somebody to act, so here it is a verb</text>'
+      + '<text x="320" y="300" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so the question is never what is this word</text>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">but what is this word doing here</text>'
+      + '<text x="320" y="366" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">find the word it works with and the answer is decided</text>'
+      + '<text x="320" y="394" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">an adjective has a noun beside it, a preposition has one after it</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The eight parts of speech, and the partner that gives each one '
+        + 'away',
+      columns: ['Part of speech', 'Its job', 'Find it by', 'Examples'],
+      rows: [
+        [
+          'Noun',
+          'Names a thing',
+          'It is what the sentence is about, or what is acted on',
+          'Tamale, water, kindness',
+        ],
+        [
+          'Pronoun',
+          'Stands in for a noun',
+          'It replaces a name already given',
+          'he, she, it, they',
+        ],
+        [
+          'Verb',
+          'Says what is done, or what is',
+          'It is what the subject does',
+          'run, water, is',
+        ],
+        [
+          'Adjective',
+          'Describes a noun',
+          'There is a noun beside it',
+          'cold, thick, Ghanaian',
+        ],
+        [
+          'Adverb',
+          'Tells more about a verb, adjective or adverb',
+          'There is one of those three beside it',
+          'slowly, very, often',
+        ],
+        [
+          'Preposition',
+          'Shows position or relation',
+          'There is a noun straight after it',
+          'in, on, before, with',
+        ],
+        ['Conjunction', 'Joins two parts', 'It sits between them', 'and, but, because'],
+        [
+          'Interjection',
+          'A cry standing on its own',
+          'It stands alone, often with an exclamation mark',
+          'oh, alas',
+        ],
+      ],
+      note: 'Name the partner and the part of speech is already settled, '
+        + 'which is why the same word can be two different parts in two '
+        + 'different sentences.',
+    },
+  ],
   questions: [
     {
       id: 'pos-1',
@@ -881,15 +1193,11 @@ teach({
 
   idea:
     'Tense tells the reader when something happened. '
-    + 'Aspect tells the reader how it sat in time. '
-    + 'The simple form states it: "I ate". '
-    + 'The continuous form shows it going on: "I was eating". '
-    + 'The perfect form shows it finished but still counting now: '
-    + '"I have eaten". '
-    + 'And the two can combine: "I had been eating" was going on before '
-    + 'something else in the past. '
-    + 'Each time has all four forms, which is why there seem to be so many '
-    + 'tenses.',
+    + 'Aspect tells the reader how it sat in time: stated plainly, '
+    + 'going on, finished but still counting, or going on before '
+    + 'something else. '
+    + 'Each time has all four of those forms, which is why there seem '
+    + 'to be so many tenses.',
 
   mechanism:
     'There are not twelve things to learn. '
@@ -985,6 +1293,74 @@ teach({
     + '"I am tired" becomes "she said she was tired". '
     + 'It only works if you can already name the tense you are moving.',
 
+  figure: {
+    alt: 'A time line with now marked near its right hand end. Above it, '
+      + 'I lost my pen is drawn as a single dot back in the past, '
+      + 'closed off. Below it, I have lost my pen starts at the same '
+      + 'dot but runs forward as an arrow that reaches now, which is '
+      + 'why yesterday fits the first and not the second.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="34" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">the perfect keeps the event open</text>'
+      + '<line x1="60" y1="220" x2="580" y2="220" stroke-width="4"/>'
+      + '<line x1="470" y1="196" x2="470" y2="244" stroke-width="3"/>'
+      + '<text x="470" y="268" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">now</text>'
+      + '<text x="66" y="268" font-size="14" text-anchor="start" fill="currentColor" stroke="none">earlier</text>'
+      + '<text x="574" y="268" font-size="14" text-anchor="end" fill="currentColor" stroke="none">later</text>'
+      + '<circle cx="200" cy="160" r="9" fill="currentColor"/>'
+      + '<line x1="200" y1="169" x2="200" y2="218"/>'
+      + '<text x="200" y="136" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">I lost my pen</text>'
+      + '<text x="200" y="112" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">a closed event, back there</text>'
+      + '<text x="200" y="88" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">so yesterday fits</text>'
+      + '<line x1="200" y1="222" x2="200" y2="291"/>'
+      + '<circle cx="200" cy="300" r="9" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<line x1="200" y1="300" x2="460" y2="300" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="460" y1="300" x2="451.4" y2="305.2" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="460" y1="300" x2="451.4" y2="294.8" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="330" y="332" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">I have lost my pen</text>'
+      + '<text x="330" y="358" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">back there, and the result still reaches now</text>'
+      + '<text x="330" y="384" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">so yesterday does not fit: it would close the event</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Every form of one verb, by when it happened and how it sits in '
+        + 'time',
+      columns: ['How it sits', 'Past', 'Present', 'Future'],
+      rows: [
+        ['Simple', 'I ate', 'I eat', 'I will eat'],
+        ['Continuous', 'I was eating', 'I am eating', 'I will be eating'],
+        ['Perfect', 'I had eaten', 'I have eaten', 'I will have eaten'],
+        [
+          'Perfect continuous',
+          'I had been eating',
+          'I have been eating',
+          'I will have been eating',
+        ],
+      ],
+      note: 'Three times multiplied by four forms gives twelve. You never '
+        + 'learn twelve of anything: you answer two questions, when, and '
+        + 'how it sits.',
+    },
+    {
+      caption: 'Why I have lost it yesterday is wrong',
+      columns: ['The sentence', 'What it is saying', 'Can you add yesterday'],
+      rows: [
+        [
+          'I lost my pen',
+          'A past event, closed off',
+          'Yes, because the event is finished with',
+        ],
+        [
+          'I have lost my pen',
+          'A past event with a present result: the pen is still missing',
+          'No, because yesterday closes the event and the perfect keeps it open',
+        ],
+      ],
+      note: 'The perfect is not really about when the thing happened. It is '
+        + 'about whether it still counts at the moment you are speaking.',
+    },
+  ],
   questions: [
     {
       id: 'ten-1',
@@ -1054,13 +1430,10 @@ teach({
 
   idea:
     'Punctuation shows the reader how a sentence is built. '
-    + 'A full stop ends a statement. '
-    + 'A comma separates items in a list, '
-    + 'or marks off an extra part the sentence could do without. '
-    + 'A colon says: what follows explains what came before. '
-    + 'A semicolon joins two complete statements that belong together. '
-    + 'An apostrophe does two jobs: it shows ownership, as in '
-    + 'the boy’s book, or it stands for a missing letter, as in don’t.',
+    + 'Each mark names a different boundary inside it, and the '
+    + 'apostrophe is the one that does two separate jobs: '
+    + 'it shows ownership, as in the boy’s book, '
+    + 'or it stands for a missing letter, as in don’t.',
 
   mechanism:
     'Nearly every punctuation mistake comes from one belief: '
@@ -1169,6 +1542,78 @@ teach({
     + 'Every rule there is the same idea again, '
     + 'that the mark shows where one part ends and another begins.',
 
+  figure: {
+    alt: 'The sentence My uncle, who lives in Tamale, is a tailor, with '
+      + 'the part between the two commas boxed and an arrow down to the '
+      + 'same sentence with that part removed. My uncle is a tailor is '
+      + 'still a complete sentence, so the commas belong.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">commas mark boundaries, not where you breathe</text>'
+      + '<text x="320" y="104" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">My uncle, who lives in Tamale, is a tailor.</text>'
+      + '<path d="M 218 84 H 388 V 112 H 218 Z" stroke="#0f8a4d"/>'
+      + '<line x1="303" y1="122" x2="303" y2="156" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="294" y1="156" x2="288.8" y2="147.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="294" y1="156" x2="299.2" y2="147.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="320" y="178" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">take that part out</text>'
+      + '<text x="320" y="226" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">My uncle is a tailor.</text>'
+      + '<text x="320" y="262" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">still a complete sentence, so the commas belong</text>'
+      + '<text x="320" y="312" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">you pause for breath where no mark belongs</text>'
+      + '<text x="320" y="344" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so use the test, and not your ear</text>'
+      + '<text x="320" y="384" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">it’s is only ever it is; its is ownership and needs no mark</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each mark, the boundary it shows, and a sentence using it',
+      columns: ['Mark', 'What it shows', 'An example'],
+      rows: [
+        ['Full stop', 'The end of a statement', 'The bus left.'],
+        ['Comma', 'Items in a list', 'We bought rice, beans and oil.'],
+        [
+          'A pair of commas',
+          'An extra part the sentence could do without',
+          'My uncle, who lives in Tamale, is a tailor.',
+        ],
+        [
+          'Colon',
+          'What follows explains what came before',
+          'She had one worry: the rain.',
+        ],
+        [
+          'Semicolon',
+          'Two complete statements that belong together',
+          'The rain stopped; the match went on.',
+        ],
+        ['Apostrophe, for ownership', 'Who the thing belongs to', 'the boy’s book'],
+        [
+          'Apostrophe, for a missing letter',
+          'Where a letter was taken out',
+          'do not becomes don’t',
+        ],
+      ],
+      note: 'Every mark in this table marks a boundary in the sentence. Not '
+        + 'one of them marks a place to breathe.',
+    },
+    {
+      caption: 'its and it’s, which are the two most often swapped',
+      columns: ['Which one', 'What it is', 'The test'],
+      rows: [
+        [
+          'it’s',
+          'Only ever it is, or it has',
+          'Read it aloud as it is. If the sentence still works, keep the mark',
+        ],
+        [
+          'its',
+          'Ownership, like his and hers',
+          'It is already a possessive word, so it needs no mark at all',
+        ],
+      ],
+      note: 'The dog wagged its tail. It’s a long walk home. Those are the '
+        + 'only two patterns there are.',
+    },
+  ],
   questions: [
     {
       id: 'pun-1',
