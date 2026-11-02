@@ -1156,7 +1156,7 @@
      sentence it belongs to, which reads as a stray picture rather than as
      somebody saying hello. */
   .kid-hello {
-    margin: 8px 0 26px;
+    margin: 6px 0 16px;
     justify-content: flex-start;
     gap: 18px;
     max-width: 720px;
@@ -1168,6 +1168,24 @@
   }
 
   .kid-mascot { margin: -14px 0 0 0; }
+
+  /* The greeting is furniture, and it was 138px of it above the thing a child
+     came to the page for.
+
+     The sentence wrapped to two 36px lines because it was held to 20ch while
+     the column beside it is 650px wide, and the character set the row height
+     at 96px whatever the text did. One line and a smaller friend put the
+     picker 50px further up the page, which is 50px of the scroll this screen
+     should not have. */
+  .kid-ask {
+    font-size: 31px;
+    max-width: 30ch;
+  }
+
+  .kid-mascot > svg {
+    width: 74px;
+    height: 74px;
+  }
 
   /* Room to breathe rather than four more tiles. Eight subjects at 64px with
      a 14px name is a panel a child can aim at from a laptop's trackpad. */
@@ -1186,17 +1204,47 @@
   /* The KG picker gets the room a laptop has. Four tiles across 600px of
      panel are 110px of picture each, which is a target a four year old hits
      with a trackpad. */
-  .kid-tiles.is-few { gap: 14px; padding: 20px 18px; }
+  .kid-tiles.is-few { gap: 12px; padding: 14px; }
 
-  .kid-tiles.is-few .kid-tile { min-height: 0; padding: 18px 8px; }
+  .kid-tiles.is-few .kid-tile { min-height: 0; padding: 12px 8px; }
 
+  /* 74px rather than the 110px this started at.
+
+     Four 110px pictures, the greeting and what to do next came to 216px more
+     than a 1440 by 900 window has, and the picture is the piece with room to
+     give: the whole screen now ends above the tab bar instead of two cards
+     sitting behind it. Still a third larger than the 56px these tiles were,
+     and still the largest target on any screen in the app. */
   .kid-tiles.is-few .kid-tile-art {
-    width: 110px;
-    height: 110px;
-    border-radius: 30px;
+    width: 74px;
+    height: 74px;
+    border-radius: 22px;
   }
 
   .kid-tiles.is-few .kid-tile-name { font-size: 16px; }
+
+  /* The last thing on the page needs no gap under it, and the card's picture
+     panel is the one piece of this screen that is purely decorative, so it
+     gives up its height before anything a child reads or taps. */
+  .kid-two { margin-bottom: 0; }
+
+  .kid-card-art { height: 64px; }
+
+  .kid-card-art > svg { width: 48px; height: 48px; }
+
+  /* The heading over the suggestions, and the gap under it. Both are small
+     and both are between the picker and the cards, which is the stretch of
+     this page with the least to say. */
+  .kid-head { margin-bottom: 6px; }
+
+  .kid-mascot > svg { width: 62px; height: 62px; }
+
+  /* `.kid` already reserves 84px below everything for the 77px tab bar, so
+     this one's 16px was a second clearance under the first: 100px of gap for a
+     bar that needs 84, which is what the page was finally overflowing by. The
+     phone keeps it, where the extra space under the last card is the only
+     thing telling a thumb the list has ended. */
+  .kid-page { padding-bottom: 0; }
 
   /* A list of 78px rows across 1040px is mostly empty row, so the lists go
      two across. Still one tap, still the whole row. */
