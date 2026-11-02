@@ -108,6 +108,30 @@ export const SUBJECTS: Record<Stage, Subject[]> = {
     { id: 'rme', name: 'Religious and Moral Education' },
     { id: 'computing', name: 'Computing' },
     { id: 'arts', name: 'Creative Arts' },
+
+    /* Added by some primary schools and not by others, so they are offered
+       rather than assumed, exactly as at JHS. French is timetabled from
+       Basic 4 in schools that teach it, Arabic is taught where French is
+       not, and Physical Education is timetabled in some schools and left to
+       games afternoons in others. */
+    {
+      id: 'french',
+      name: 'French',
+      note: 'Taught by some schools',
+      optional: true,
+    },
+    {
+      id: 'arabic',
+      name: 'Arabic',
+      note: 'Taught by some schools, often instead of French',
+      optional: true,
+    },
+    {
+      id: 'phe',
+      name: 'Physical Education',
+      note: 'Taught by some schools',
+      optional: true,
+    },
   ],
   jhs: [
     { id: 'maths', name: 'Mathematics', written: true },
