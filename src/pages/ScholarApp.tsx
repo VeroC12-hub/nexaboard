@@ -21,13 +21,14 @@
  * job of reading a reference rather than copying one.
  */
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import '../styles/scholar.css'
 import { Icon, type Mark } from '../components/kid/art'
 import { subjectsForLearner } from '../lib/education/subjects'
 import { asksProgramme, programmeById, timetableFor } from '../lib/education/programmes'
 import { allTopics, syllabusFor, topicsFor, type Topic } from '../lib/education/syllabus'
 import { standingOf, weekStart } from '../lib/education/rewards'
+import { earningsFor, onPoints } from '../lib/education/points'
 import { localPlan, savedPlan } from '../lib/education/plan'
 import { asksFor } from '../lib/education/ask'
 import type { Attempt } from '../lib/education/mastery'
@@ -113,7 +114,10 @@ export default function ScholarApp({
       .filter(p => p.topics.length > 0)
   }, [profile.stage, profile.level, profile.programme, attempts, worked])
 
-  const standing = useMemo(() => standingOf(attempts, profile.stage), [attempts, profile.stage])
+  const earnings = useSyncExternalStore(onPoints, () => earningsFor(profile.id))
+  const standing = useMemo(
+    () => standingOf(attempts, profile.stage, earnings),
+    [attempts, profile.stage, earnings])
 
   const plan = useMemo(() => {
     const first = papers[0]

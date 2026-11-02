@@ -23,13 +23,14 @@
  * theirs.
  */
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useSyncExternalStore } from 'react'
 import '../styles/teen.css'
 import { Icon, Tile, type TileArt } from '../components/kid/art'
 import { artFor } from '../components/kid/subjectArt'
 import { subjectsForLearner } from '../lib/education/subjects'
 import { allTopics, syllabusFor, topicsFor, type Topic } from '../lib/education/syllabus'
 import { standingOf } from '../lib/education/rewards'
+import { earningsFor, onPoints } from '../lib/education/points'
 import { localPlan, savedPlan } from '../lib/education/plan'
 import { asksFor } from '../lib/education/ask'
 import type { Attempt } from '../lib/education/mastery'
@@ -80,7 +81,13 @@ export default function TeenApp({
     }).filter(c => c.topics.length > 0)
   }, [profile.stage, profile.level, worked])
 
-  const standing = useMemo(() => standingOf(attempts, profile.stage), [attempts, profile.stage])
+  /* Lessons, games and films, which live in the ledger rather than being
+     derived from answers: see `points.ts`. Read on every render of this
+     screen, which is where a learner comes back to after finishing one. */
+  const earnings = useSyncExternalStore(onPoints, () => earningsFor(profile.id))
+  const standing = useMemo(
+    () => standingOf(attempts, profile.stage, earnings),
+    [attempts, profile.stage, earnings])
 
   /** Read, not decided, so this screen reports the tutor's choice. */
   const plan = useMemo(() => {

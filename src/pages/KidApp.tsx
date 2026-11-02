@@ -27,7 +27,7 @@
  *   hover is indistinguishable from a picture.
  */
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import { KidBar, KidHead, KidShell, type KidTab } from '../components/kid/Shell'
 import { BadgeArt, Icon, Pal, Sparkles, Tile, type TileArt } from '../components/kid/art'
 import { palAt, palFor, type Friend } from '../components/kid/cast'
@@ -36,6 +36,7 @@ import { artFor } from '../components/kid/subjectArt'
 import { subjectsForLearner } from '../lib/education/subjects'
 import { allTopics, syllabusFor, topicsFor, type Topic } from '../lib/education/syllabus'
 import { ackBadges, freshBadges, standingOf, type Standing } from '../lib/education/rewards'
+import { earningsFor, onPoints } from '../lib/education/points'
 import { playable } from '../lib/education/heavy'
 import { localPlan, savedPlan } from '../lib/education/plan'
 import { asksFor } from '../lib/education/ask'
@@ -623,9 +624,10 @@ export default function KidApp({
     }).filter(s => s.topics.length > 0)
   }, [profile.stage, profile.level, worked])
 
+  const earnings = useSyncExternalStore(onPoints, () => earningsFor(profile.id))
   const standing = useMemo(
-    () => standingOf(attempts, profile.stage),
-    [attempts, profile.stage])
+    () => standingOf(attempts, profile.stage, earnings),
+    [attempts, profile.stage, earnings])
 
   /**
    * How this learner is taught, for the grown up's screen to say out loud.

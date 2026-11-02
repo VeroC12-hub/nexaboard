@@ -36,27 +36,34 @@
  */
 
 import type { Attempt } from './mastery'
+import { xpOf, type Earning } from './points'
 
 /* ── points ───────────────────────────────────────────────────────────────── */
 
 /**
  * What an answer is worth.
  *
- * A wrong answer still earns, at a third of the rate. A child who tried eight
- * questions and got three right has done more work than one who tried three
- * and got three right, and a scheme that pays nothing for a wrong answer
- * teaches them to stop when they are unsure. That is the opposite of what the
- * points are for.
+ * Only a right one, by the owner's decision. The earlier scheme paid a third
+ * of the rate for a wrong answer, on the reasoning that trying eight and
+ * getting three right is more work than trying three, and that paying nothing
+ * teaches a child to stop when unsure.
+ *
+ * That reasoning was sound while answers were the only thing that paid. They
+ * are not any more: a lesson, a game and a film all earn through `points.ts`,
+ * so effort is still rewarded, and these points can mean what a learner
+ * assumes they mean, which is how many questions they got right.
  */
 export const XP_RIGHT = 10
-export const XP_TRIED = 3
+export const XP_TRIED = 0
 
 /** Points from one set of attempts. */
 export function xpFrom(attempts: Attempt[]): number {
   let xp = 0
   for (const a of attempts) {
     if (a.isCorrect === true) xp += XP_RIGHT
-    /* An attempt awaiting marking is work done, so it pays the trying rate. */
+    /* Wrong, or not marked yet, pays `XP_TRIED`, which is now nought. The
+       branch is kept rather than deleted so that putting a value back is one
+       number and not a rewrite. */
     else if (a.isCorrect === false || a.isCorrect === null) xp += XP_TRIED
   }
   return xp
@@ -131,7 +138,18 @@ export interface DailyGoal {
   xp: number
 }
 
-export function dailyGoal(attempts: Attempt[], stage: string, now = Date.now()): DailyGoal {
+export function dailyGoal(
+  attempts: Attempt[],
+  stage: string,
+  /* What was earned away from the question screen: lessons, games, films.
+     Empty for a caller that has not got them, which keeps every existing
+     call correct rather than merely compiling. */
+  earnings: Earning[] = [],
+  /* Last, and defaulted, so a component never writes `Date.now()` in its
+     own render: calling it there is impure and the React compiler rejects
+     it. The default is evaluated inside this module instead. */
+  now = Date.now(),
+): DailyGoal {
   const t = today(now)
   const mine = attempts.filter(a => dayOf(a.at) === t)
   const goal = goalFor(stage)
@@ -141,7 +159,11 @@ export function dailyGoal(attempts: Attempt[], stage: string, now = Date.now()):
     goal,
     part: goal > 0 ? Math.min(1, done / goal) : 0,
     met: done >= goal,
-    xp: xpFrom(mine),
+    /* Earnings are filtered with this module's own `dayOf` rather than by
+       comparing date strings. A day here is local midnight to local
+       midnight, and a second notion of what a day is would mean a child
+       losing points at the boundary between them. */
+    xp: xpFrom(mine) + xpOf(earnings.filter(e => dayOf(e.at) === t)),
   }
 }
 
@@ -314,13 +336,19 @@ export interface Standing {
   topics: number
 }
 
-export function standingOf(attempts: Attempt[], stage: string, now = Date.now()): Standing {
+export function standingOf(
+  attempts: Attempt[],
+  stage: string,
+  /** Lessons, games and films. See `points.ts` for why these are stored. */
+  earnings: Earning[] = [],
+  now = Date.now(),
+): Standing {
   const badges = badgesFrom(attempts)
   return {
-    xp: xpFrom(attempts),
+    xp: xpFrom(attempts) + xpOf(earnings),
     daysLearned: daysLearned(attempts, now),
     week: daysThisWeek(attempts, now),
-    goal: dailyGoal(attempts, stage, now),
+    goal: dailyGoal(attempts, stage, earnings, now),
     badges,
     earned: badges.filter(b => b.earned).length,
     next: nextBadge(attempts),

@@ -27,6 +27,7 @@ import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'rea
 import '../styles/study.css'
 import Prose, { Line } from '../components/Prose'
 import WorkedSteps from '../components/WorkedSteps'
+import { award } from '../lib/education/points'
 import { blocksOf } from '../components/blocks'
 import { readImage } from '../lib/education/lesson-blocks'
 import BlockAsk from '../components/BlockAsk'
@@ -594,7 +595,15 @@ export default function Learn({
           onAgain={asked => setView({
             at: 'lesson', topicId: topic.id, attempt: attempt + 1, askedFor: asked,
           })}
-          onPractise={() => setView({ at: 'practice', topicId: topic.id, attempt: 0 })}
+          onPractise={() => {
+            /* Reaching the bottom of a lesson and pressing on is what
+               finishing it looks like from here. There is no scroll
+               tracking and no timer: both are guesses, and a learner who
+               read the lesson and tapped the next thing has plainly read
+               it. Paid once per topic, by `award`. */
+            award(profile.id, 'lesson', topic.id)
+            setView({ at: 'practice', topicId: topic.id, attempt: 0 })
+          }}
           onPlay={playable(profile.stage, topic.title) || gameFor(profile.stage, topic.title)
             ? () => setView({ at: 'game', topicId: topic.id, attempt: 0 })
             : undefined}
@@ -2190,7 +2199,7 @@ function Lesson({
                   the one moment they are most likely to stop. */}
               {!young && next && onOpenTopic && (
                 <button className="nx-btn nx-btn-next"
-                  onClick={() => onOpenTopic(next.id)}>
+                  onClick={() => { award(learner.profile.id, 'lesson', topic.id); onOpenTopic(next.id) }}>
                   Next: {next.title}
                 </button>
               )}
