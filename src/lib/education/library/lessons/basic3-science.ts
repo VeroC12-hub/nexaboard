@@ -216,17 +216,15 @@ teach({
   },
 
   idea:
-    'Things are made of materials. Metal, wood, glass, cloth, plastic. '
-    + 'Each material behaves in its own way. '
-    + 'Metal carries heat. Glass lets light through. Cloth bends. '
-    + 'The material is chosen for what the thing has to do.',
+    'Things are made of materials. '
+    + 'Each material behaves in its own way, '
+    + 'and that behaviour is the whole reason it was chosen. '
+    + 'The material is picked for what the thing has to do.',
 
   mechanism:
     'So you can work backwards. '
     + 'Look at any object and ask what job it does. '
     + 'The job tells you why that material was picked. '
-    + 'A cooking pot has to sit in fire and get hot. '
-    + 'Metal does that. Plastic would melt. '
     + 'A window has to let you see out and keep the rain off. '
     + 'Glass does both. Wood does only one. '
     + 'Nobody chose at random.',
@@ -298,6 +296,73 @@ teach({
     + 'Metal and glass can be melted and made into something new. '
     + 'That is recycling. '
     + 'It works because melting changes the shape and not the material.',
+
+  figure: {
+    alt: 'A cooking pot sitting over a fire. The body of the pot is '
+      + 'labelled metal, which carries the heat. The handle sticking out '
+      + 'of the side is labelled wood, which brings no heat to your hand. '
+      + 'Underneath, a note that the pot must carry heat and the handle '
+      + 'must not, so the maker used two materials.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">One object, two materials, two jobs</text>'
+      + '<rect x="424" y="146" width="100" height="28" rx="8" stroke="#0f8a4d"/>'
+      + '<text x="476" y="134" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">wood</text>'
+      + '<text x="476" y="202" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">no heat to your hand</text>'
+      + '<path d="M 200 130 L 420 130 L 400 230 L 220 230 Z"/>'
+      + '<line x1="194" y1="130" x2="426" y2="130" stroke-width="6"/>'
+      + '<text x="310" y="176" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">metal</text>'
+      + '<text x="310" y="204" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">carries the heat</text>'
+      + '<path d="M 246 268 Q 256 240 266 268 Q 276 240 286 268" stroke="#c8433a"/>'
+      + '<path d="M 300 268 Q 310 236 320 268 Q 330 236 340 268" stroke="#c8433a"/>'
+      + '<path d="M 354 268 Q 364 240 374 268 Q 384 240 394 268" stroke="#c8433a"/>'
+      + '<text x="320" y="292" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">fire</text>'
+      + '<text x="320" y="334" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">The pot must carry heat. The handle must not.</text>'
+      + '<text x="320" y="366" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">So the maker used two materials.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Five materials, what each one does and what it is used for',
+    columns: [
+      'Material',
+      'What it does',
+      'What it cannot do',
+      'So it is used for',
+    ],
+    rows: [
+      [
+        'Metal',
+        'Carries heat, stays whole in fire',
+        'Let light through',
+        'Cooking pots, roofing sheets',
+      ],
+      [
+        'Glass',
+        'Lets light through, keeps rain out',
+        'Bend, or take a knock',
+        'Windows, bottles',
+      ],
+      [
+        'Wood',
+        'Holds its shape, does not carry heat',
+        'Sit in a fire',
+        'Handles, chairs, doors',
+      ],
+      [
+        'Cloth',
+        'Bends, and lets air through',
+        'Hold a shape on its own',
+        'Clothes, bags',
+      ],
+      [
+        'Plastic',
+        'Bends a little, keeps water out',
+        'Sit near heat without melting',
+        'Buckets, bowls, chairs',
+      ],
+    ],
+    note: 'Clay belongs on this list too, and it is the one Ghanaian '
+      + 'potters have used longest of all.',
+  }],
 
   questions: [
     {

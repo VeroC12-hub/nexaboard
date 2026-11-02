@@ -124,6 +124,67 @@ teach({
     + 'That is called fluency. '
     + 'It is built one word at a time.',
 
+  figure: {
+    alt: 'The sentence My mother was at the shop, with each word in its '
+      + 'own box. My, was, at and the are marked as known on sight, and '
+      + 'mother and shop are left plain. Below it a bar shows where your '
+      + 'mind goes while you read the line, with a small part given to '
+      + 'sounding out and a much larger part given to what it means. '
+      + 'Underneath, a note that each word you know on sight gives that '
+      + 'time back, and that these words come up the most.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Four words out of six, known on sight</text>'
+      + '<rect x="70" y="84" width="60" height="56" stroke="#0f8a4d"/>'
+      + '<text x="100" y="120" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">My</text>'
+      + '<rect x="140" y="84" width="120" height="56"/>'
+      + '<text x="200" y="120" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">mother</text>'
+      + '<rect x="270" y="84" width="70" height="56" stroke="#0f8a4d"/>'
+      + '<text x="305" y="120" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">was</text>'
+      + '<rect x="350" y="84" width="50" height="56" stroke="#0f8a4d"/>'
+      + '<text x="375" y="120" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">at</text>'
+      + '<rect x="410" y="84" width="60" height="56" stroke="#0f8a4d"/>'
+      + '<text x="440" y="120" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">the</text>'
+      + '<rect x="480" y="84" width="90" height="56"/>'
+      + '<text x="525" y="120" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">shop.</text>'
+      + '<text x="320" y="170" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">the marked words need no sounding out</text>'
+      + '<text x="320" y="214" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">where your mind goes while you read the line</text>'
+      + '<rect x="70" y="230" width="170" height="42" stroke="#c8433a"/>'
+      + '<text x="155" y="257" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">sounding out</text>'
+      + '<rect x="240" y="230" width="330" height="42" stroke="#0f8a4d"/>'
+      + '<text x="405" y="257" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">what the sentence means</text>'
+      + '<text x="320" y="320" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Each word you know on sight</text>'
+      + '<text x="320" y="348" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">gives that time back.</text>'
+      + '<text x="320" y="382" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">And these words come up the most.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Six words that come up in nearly every sentence, and why '
+      + 'each is learned whole',
+    columns: ['Word', 'Sounding it out gives', 'Why it is learned whole'],
+    rows: [
+      [
+        'the',
+        't, h, e run together',
+        'The letters do not make their usual sounds',
+      ],
+      ['was', 'Something like wass', 'The a and the s both misbehave'],
+      ['to', 'Something like toe', 'The o does not say its usual sound'],
+      ['you', 'y, o, u run together', 'None of the three letters helps'],
+      [
+        'and',
+        'and, which is correct',
+        'It sounds out fine, and it is everywhere',
+      ],
+      [
+        'is',
+        'is, which is correct',
+        'It sounds out fine, and it is everywhere',
+      ],
+    ],
+    note: 'The last two do sound out properly. They are here because they '
+      + 'come up so often that even a correct sounding out costs too much.',
+  }],
+
   questions: [
     {
       id: 'sw-1',

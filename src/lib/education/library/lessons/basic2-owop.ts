@@ -39,12 +39,9 @@ teach({
   },
 
   idea:
-    'A home runs on jobs. The jobs get shared out. '
-    + 'Someone earns the money. Someone cooks. '
-    + 'Someone fetches water. Someone sweeps. '
-    + 'Someone minds the small ones. '
+    'A home runs on jobs, and the jobs get shared out. '
     + 'Homes are not all made of the same people. '
-    + 'But every home has these jobs in it. '
+    + 'But every home has the same jobs in it. '
     + 'And everyone old enough does some of them.',
 
   mechanism:
@@ -53,8 +50,6 @@ teach({
     + 'And it tells you something else. '
     + 'When one job is left undone, everyone feels it. '
     + 'Not just the person who usually does it. '
-    + 'Say nobody fetches water. '
-    + 'Then nobody can wash. And nobody can cook. '
     + 'The jobs hold each other up.',
 
   recap:
@@ -128,6 +123,60 @@ teach({
     + 'The teacher does one job. So does the nurse. '
     + 'So does the farmer. So does the driver. '
     + 'We all lean on each one of them.',
+
+  figure: {
+    alt: 'A box reading fetching water sits at the top with a cross drawn '
+      + 'through it. Three arrows run down from it to three boxes, '
+      + 'cooking, washing and drinking, and all three are marked as '
+      + 'stopped. Underneath, a note that nobody fetches the water and all '
+      + 'three stop, so one job undone is never only one job.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">The jobs hold each other up</text>'
+      + '<rect x="230" y="70" width="180" height="70"/>'
+      + '<text x="320" y="112" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">fetching water</text>'
+      + '<line x1="236" y1="76" x2="404" y2="134" stroke="#c8433a"/>'
+      + '<line x1="404" y1="76" x2="236" y2="134" stroke="#c8433a"/>'
+      + '<line x1="300" y1="146" x2="128" y2="186" stroke="#c8433a"/>'
+      + '<polygon points="118,190 134,180 136,196" fill="#c8433a" stroke="none"/>'
+      + '<line x1="320" y1="146" x2="320" y2="186" stroke="#c8433a"/>'
+      + '<polygon points="320,198 312,180 328,180" fill="#c8433a" stroke="none"/>'
+      + '<line x1="340" y1="146" x2="512" y2="186" stroke="#c8433a"/>'
+      + '<polygon points="522,190 506,180 504,196" fill="#c8433a" stroke="none"/>'
+      + '<rect x="40" y="202" width="160" height="66" stroke="#c8433a"/>'
+      + '<text x="120" y="242" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">cooking</text>'
+      + '<rect x="240" y="202" width="160" height="66" stroke="#c8433a"/>'
+      + '<text x="320" y="242" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">washing</text>'
+      + '<rect x="440" y="202" width="160" height="66" stroke="#c8433a"/>'
+      + '<text x="520" y="242" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">drinking</text>'
+      + '<text x="320" y="320" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">Nobody fetches the water, and all three stop.</text>'
+      + '<text x="320" y="354" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">One job undone is never only one job.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'The jobs in a home, and what stops when one is not done',
+    columns: ['The job', 'What it is for', 'What stops without it'],
+    rows: [
+      ['Earning money', 'Buying the food', 'There is nothing to cook'],
+      [
+        'Fetching water',
+        'Cooking, washing and drinking',
+        'All three of those',
+      ],
+      ['Cooking', 'Feeding everybody', 'Nobody eats'],
+      [
+        'Sweeping',
+        'Keeping the place clean',
+        'The dirt stays, and people fall ill',
+      ],
+      [
+        'Minding the small ones',
+        'Keeping them safe',
+        'A grown up stops their own job to do it',
+      ],
+    ],
+    note: 'Read the last column. Not one of these stops only the person '
+      + 'who usually does it.',
+  }],
 
   questions: [
     {
@@ -378,8 +427,7 @@ teach({
 
   idea:
     'A rule says what to do, or what not to do, in a place where many people '
-    + 'are together. Walk, do not run in the corridor. Put up your hand before '
-    + 'you speak. Every rule exists because somebody got hurt, or because '
+    + 'are together. Every rule exists because somebody got hurt, or because '
     + 'nothing could get done, before there was one.',
 
   mechanism:
@@ -388,9 +436,7 @@ teach({
     + 'A rule is an answer to a problem. '
     + 'So ask one question about any rule. '
     + 'What goes wrong if nobody follows it? '
-    + 'Picture thirty children all talking at once. '
-    + 'Nobody is heard. Not even the one who started. '
-    + 'The hand up rule is what gives that child a turn.',
+    + 'The answer is what the rule was made for.',
 
   recap:
     'Many people share your school: your class, the other classes, the '
@@ -468,6 +514,72 @@ teach({
     + 'People the town chooses make them. '
     + 'And a law can be changed. '
     + 'When the reason behind it stops being a good one.',
+
+  figure: {
+    alt: 'Two panels of five children. In the first, all five are '
+      + 'talking at once, with a mark above every head, and nobody is '
+      + 'heard. In the second, one child has a hand raised, it is one at a '
+      + 'time, and that child gets a turn. Underneath, a note that a rule '
+      + 'is not somebody being strict, it is an answer to a problem.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">What the hand up rule is for</text>'
+      + '<rect x="20" y="50" width="290" height="216" stroke="#c8433a"/>'
+      + '<text x="165" y="78" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">everybody talks at once</text>'
+      + '<path d="M 50 126 Q 60 112 70 126" stroke="#c8433a"/>'
+      + '<circle cx="60" cy="160" r="22"/>'
+      + '<path d="M 100 126 Q 110 112 120 126" stroke="#c8433a"/>'
+      + '<circle cx="110" cy="160" r="22"/>'
+      + '<path d="M 150 126 Q 160 112 170 126" stroke="#c8433a"/>'
+      + '<circle cx="160" cy="160" r="22"/>'
+      + '<path d="M 200 126 Q 210 112 220 126" stroke="#c8433a"/>'
+      + '<circle cx="210" cy="160" r="22"/>'
+      + '<path d="M 250 126 Q 260 112 270 126" stroke="#c8433a"/>'
+      + '<circle cx="260" cy="160" r="22"/>'
+      + '<text x="165" y="218" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">all five talking</text>'
+      + '<text x="165" y="246" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">nobody is heard</text>'
+      + '<rect x="330" y="50" width="290" height="216" stroke="#0f8a4d"/>'
+      + '<text x="475" y="78" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">one hand up</text>'
+      + '<circle cx="370" cy="160" r="22"/>'
+      + '<circle cx="420" cy="160" r="22"/>'
+      + '<circle cx="470" cy="160" r="22" stroke="#0f8a4d"/>'
+      + '<line x1="470" y1="138" x2="470" y2="118" stroke="#0f8a4d"/>'
+      + '<circle cx="470" cy="108" r="9" stroke="#0f8a4d"/>'
+      + '<circle cx="520" cy="160" r="22"/>'
+      + '<circle cx="570" cy="160" r="22"/>'
+      + '<text x="475" y="218" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">one at a time</text>'
+      + '<text x="475" y="246" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">that one gets a turn</text>'
+      + '<text x="320" y="320" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">A rule is not somebody being strict.</text>'
+      + '<text x="320" y="356" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">A rule is an answer to a problem.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Four school rules, and what goes wrong without each one',
+    columns: ['The rule', 'What goes wrong without it', 'Who it protects most'],
+    rows: [
+      [
+        'Walk, do not run in the corridor',
+        'People knock into each other',
+        'The smallest children',
+      ],
+      [
+        'Put your hand up before you speak',
+        'Everybody talks and nobody is heard',
+        'The quiet ones',
+      ],
+      [
+        'Nobody leaves the compound at break',
+        'A child reaches the road unnoticed',
+        'Every child, including that one',
+      ],
+      [
+        'Line up before you come in',
+        'The doorway jams and nobody gets in',
+        'Everybody, equally',
+      ],
+    ],
+    note: 'The last column is the useful one. A rule almost always '
+      + 'protects whoever has the least say.',
+  }],
 
   questions: [
     {
