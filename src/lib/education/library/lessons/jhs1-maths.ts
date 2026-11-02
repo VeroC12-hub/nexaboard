@@ -42,14 +42,13 @@ teach({
     'Place value does not stop at thousands. '
     + 'Each place is worth ten times the one to its right, for ever. '
     + 'When numbers get large or small, standard form writes them compactly: '
-    + 'a number between 1 and 10, multiplied by a power of ten. '
-    + '45,000 becomes 4.5 times 10 to the fourth.',
+    + 'a number between 1 and 10, multiplied by a power of ten.',
 
   mechanism:
     'Standard form exists because very large and very small numbers are hard '
     + 'to read and easy to miscount. '
     + 'Writing 0.00000045 invites somebody to lose a nought. '
-    + 'Writing it as 4.5 times 10 to the minus seven does not, '
+    + 'Writing it as $4.5 \\times 10^{-7}$ does not, '
     + 'and it makes two numbers instantly comparable: '
     + 'you compare the powers first and only look at the digits if those tie. '
     + 'The rule for finding the power is not arbitrary. '
@@ -79,7 +78,7 @@ teach({
         'Place the point after the 4: 4.5',
         'The point moved 4 places to the left.',
       ],
-      answer: '4.5 times 10 to the power 4.',
+      answer: '$4.5 \\times 10^4$.',
     },
     {
       level: 4,
@@ -89,11 +88,11 @@ teach({
         'The point moved 3 places to the right.',
         'Moving right makes the power negative.',
       ],
-      answer: '3.2 times 10 to the power negative 3.',
+      answer: '$3.2 \\times 10^{-3}$.',
     },
     {
       level: 5,
-      ask: 'Which is larger, 3.1 times 10 to the 5, or 9.8 times 10 to the 4?',
+      ask: 'Which is larger, $3.1 \\times 10^5$ or $9.8 \\times 10^4$?',
       steps: [
         'Compare the powers first: 5 beats 4.',
         'A larger power wins regardless of the digits in front.',
@@ -105,7 +104,7 @@ teach({
   traps: [
     {
       mistake: 'Leaving more than one digit before the point.',
-      why: '45 times 10 cubed is the right value and is not standard form. '
+      why: '$45 \\times 10^3$ is the right value and is not standard form. '
         + 'Exactly one non-zero digit goes before the point.',
     },
     {
@@ -126,6 +125,55 @@ teach({
     + 'written out in full would be unreadable and easy to mistype. '
     + 'Calculators show it as E notation for the same reason.',
 
+  figure: {
+    alt: 'Two numbers with the decimal point moved. In 45000 the point '
+      + 'moves four places left to sit between the 4 and the 5, so the '
+      + 'power of ten is 4. In 0.0032 it moves three places right to '
+      + 'sit between the 3 and the 2, so the power of ten is negative '
+      + '3.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="40" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">moving the point, and counting the moves</text>'
+      + '<text x="120" y="124" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<text x="155" y="124" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">5</text>'
+      + '<text x="190" y="124" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<text x="225" y="124" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<text x="260" y="124" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<text x="288" y="124" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">.</text>'
+      + '<line x1="284" y1="150" x2="138" y2="150" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="138" y1="150" x2="146.6" y2="144.8" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="138" y1="150" x2="146.6" y2="155.2" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="211" y="180" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">4 jumps left</text>'
+      + '<text x="470" y="124" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">so the power is 4</text>'
+      + '<text x="120" y="254" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<text x="143" y="254" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">.</text>'
+      + '<text x="166" y="254" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<text x="201" y="254" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<text x="236" y="254" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<text x="271" y="254" font-size="30" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<line x1="145" y1="280" x2="253" y2="280" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="253" y1="280" x2="244.4" y2="285.2" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="253" y1="280" x2="244.4" y2="274.8" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="199" y="310" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">3 jumps right</text>'
+      + '<text x="470" y="254" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">so the power is negative 3</text>'
+      + '<text x="320" y="366" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">moved left: positive power. moved right: negative power.</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The same numbers written in ordinary form and in standard form',
+      columns: ['Ordinary form', 'Standard form', 'Power of ten'],
+      rows: [
+        ['45,000', '4.5 times 10 to the power 4', 'Positive 4'],
+        ['310,000', '3.1 times 10 to the power 5', 'Positive 5'],
+        ['98,000', '9.8 times 10 to the power 4', 'Positive 4'],
+        ['0.0032', '3.2 times 10 to the power negative 3', 'Negative 3'],
+        ['0.00000045', '4.5 times 10 to the power negative 7', 'Negative 7'],
+      ],
+      note: 'Every one of these is a number between 1 and 10 multiplied by '
+        + 'a power of ten. That is the whole definition.',
+    },
+  ],
   questions: [
     {
       id: 'wn-1',
@@ -189,14 +237,10 @@ teach({
     'Everybody is told that two minuses make a plus and almost nobody is told '
     + 'why, which is exactly why it is misremembered under pressure. '
     + 'Think about money. '
-    + 'If somebody takes away a debt of 5 cedis that you owed, '
-    + 'you are 5 cedis better off. '
-    + 'Taking away a negative has left you with more. '
-    + 'That is what subtracting a negative means, and it is why it adds. '
-    + 'For multiplication, 3 times negative 4 is three lots of a debt of 4, '
-    + 'which is a debt of 12. '
-    + 'And negative 3 times negative 4 is the opposite of that, '
-    + 'because the extra minus reverses it. '
+    + 'A negative is a debt, and taking a debt away leaves you better off, '
+    + 'which is what subtracting a negative means and why it adds. '
+    + 'Multiplying works the same way: a count of debts is a bigger debt, '
+    + 'and an extra minus in front reverses whatever you had. '
     + 'The number line says the same thing: a minus turns you round, '
     + 'and two turns put you facing the way you started.',
 
@@ -270,6 +314,85 @@ teach({
     + 'that leaves you better off. '
     + 'If the rule ever slips, ask what it would mean in money.',
 
+  figure: {
+    alt: 'A number line from negative 8 to 8. An arrow above it starts '
+      + 'at 5 and moves three places right to 8, labelled as '
+      + 'subtracting negative 3. Below it, a red box saying you owe 3 '
+      + 'cedis, an arrow saying the debt is taken off you, and a green '
+      + 'box saying you are 3 better off, so 5 minus negative 3 is 8.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">subtracting a negative moves you right</text>'
+      + '<line x1="60" y1="150" x2="580" y2="150" stroke-width="4"/>'
+      + '<line x1="60.0" y1="140" x2="60.0" y2="160"/>'
+      + '<line x1="92.5" y1="140" x2="92.5" y2="160"/>'
+      + '<line x1="125.0" y1="140" x2="125.0" y2="160"/>'
+      + '<line x1="157.5" y1="140" x2="157.5" y2="160"/>'
+      + '<line x1="190.0" y1="140" x2="190.0" y2="160"/>'
+      + '<line x1="222.5" y1="140" x2="222.5" y2="160"/>'
+      + '<line x1="255.0" y1="140" x2="255.0" y2="160"/>'
+      + '<line x1="287.5" y1="140" x2="287.5" y2="160"/>'
+      + '<line x1="320.0" y1="140" x2="320.0" y2="160"/>'
+      + '<line x1="352.5" y1="140" x2="352.5" y2="160"/>'
+      + '<line x1="385.0" y1="140" x2="385.0" y2="160"/>'
+      + '<line x1="417.5" y1="140" x2="417.5" y2="160"/>'
+      + '<line x1="450.0" y1="140" x2="450.0" y2="160"/>'
+      + '<line x1="482.5" y1="140" x2="482.5" y2="160"/>'
+      + '<line x1="515.0" y1="140" x2="515.0" y2="160"/>'
+      + '<line x1="547.5" y1="140" x2="547.5" y2="160"/>'
+      + '<line x1="580.0" y1="140" x2="580.0" y2="160"/>'
+      + '<text x="60.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">-8</text>'
+      + '<text x="125.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">-6</text>'
+      + '<text x="190.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">-4</text>'
+      + '<text x="255.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">-2</text>'
+      + '<text x="320.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<text x="385.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="450.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<text x="515.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">6</text>'
+      + '<text x="580.0" y="184" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">8</text>'
+      + '<circle cx="482.5" cy="150" r="8" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="455" y="118" font-size="19" text-anchor="end" fill="currentColor" stroke="none">start at 5</text>'
+      + '<line x1="482.5" y1="112" x2="580.0" y2="112" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="580.0" y1="112" x2="571.4" y2="117.2" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="580.0" y1="112" x2="571.4" y2="106.8" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="531" y="96" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">3 right</text>'
+      + '<text x="320" y="224" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">the same thing in money</text>'
+      + '<text x="320" y="250" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the debt is taken off you</text>'
+      + '<path d="M 60 266 H 250 V 332 H 60 Z" stroke="#c8433a"/>'
+      + '<text x="155" y="296" font-size="19" text-anchor="middle" fill="#c8433a" stroke="none">you owe 3 cedis</text>'
+      + '<text x="155" y="318" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">that is negative 3</text>'
+      + '<line x1="258" y1="299" x2="382" y2="299"/>'
+      + '<line x1="382" y1="299" x2="373.4" y2="304.2"/>'
+      + '<line x1="382" y1="299" x2="373.4" y2="293.8"/>'
+      + '<path d="M 390 266 H 580 V 332 H 390 Z" stroke="#0f8a4d"/>'
+      + '<text x="485" y="296" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">you are 3 better off</text>'
+      + '<text x="485" y="318" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">that is plus 3</text>'
+      + '<text x="320" y="366" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">so 5 minus negative 3 is 8</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four sign rules read as money',
+      columns: ['The line', 'What it means in money', 'The answer'],
+      rows: [
+        [
+          '5 minus negative 3',
+          'A debt of 3 is taken off you',
+          '8, so you are better off',
+        ],
+        [
+          'negative 3 plus negative 4',
+          'A second debt of 4 arrives',
+          'negative 7, a bigger debt',
+        ],
+        ['3 times negative 4', 'Three separate debts of 4', 'negative 12'],
+        ['negative 6 times negative 4', 'Six debts of 4 taken off you', '24'],
+      ],
+      note: 'If a sign rule ever slips, ask what the line would mean in '
+        + 'money. The two minuses rule belongs to subtracting and '
+        + 'multiplying, never to adding.',
+    },
+  ],
   questions: [
     {
       id: 'int-1',
@@ -412,6 +535,47 @@ teach({
     + 'Significant figures are how a scientist states how much they actually '
     + 'know.',
 
+  figure: {
+    alt: 'The sum 387 times 21 with each number rounded to one '
+      + 'significant figure, giving 400 times 20, which is about 8,000. '
+      + 'Beside it three possible answers: 812 marked far too small, '
+      + '8,127 marked about right, and 81,270 marked ten times too big.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="40" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">the estimate is a net that catches a big slip</text>'
+      + '<text x="150" y="100" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">387 times 21</text>'
+      + '<line x1="150" y1="118" x2="150" y2="158"/>'
+      + '<line x1="150" y1="158" x2="144.8" y2="149.4"/>'
+      + '<line x1="150" y1="158" x2="155.2" y2="149.4"/>'
+      + '<text x="150" y="186" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">400 times 20</text>'
+      + '<text x="150" y="222" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">each rounded to one figure</text>'
+      + '<text x="150" y="268" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">about 8,000</text>'
+      + '<line x1="300" y1="70" x2="300" y2="370"/>'
+      + '<text x="330" y="100" font-size="19" text-anchor="start" fill="currentColor" stroke="none">an answer of</text>'
+      + '<text x="340" y="150" font-size="24" text-anchor="start" fill="#c8433a" stroke="none">812</text>'
+      + '<text x="400" y="150" font-size="19" text-anchor="start" fill="#c8433a" stroke="none">far too small</text>'
+      + '<text x="340" y="204" font-size="24" text-anchor="start" fill="#0f8a4d" stroke="none">8,127</text>'
+      + '<text x="430" y="204" font-size="19" text-anchor="start" fill="#0f8a4d" stroke="none">about right</text>'
+      + '<text x="340" y="258" font-size="24" text-anchor="start" fill="#c8433a" stroke="none">81,270</text>'
+      + '<text x="445" y="258" font-size="19" text-anchor="start" fill="#c8433a" stroke="none">ten times too big</text>'
+      + '<text x="330" y="320" font-size="18" text-anchor="start" fill="currentColor" stroke="none">and you knew it in two seconds,</text>'
+      + '<text x="330" y="348" font-size="18" text-anchor="start" fill="currentColor" stroke="none">without checking a single step</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Rounding 3,847 to each number of significant figures',
+      columns: ['Figures kept', 'It becomes', 'Why'],
+      rows: [
+        ['One', '4,000', 'The next digit is 8, so round up'],
+        ['Two', '3,800', 'The next digit is 4, so leave it'],
+        ['Three', '3,850', 'The next digit is 7, so round up'],
+        ['Four', '3,847', 'Nothing is left to drop'],
+      ],
+      note: 'The noughts hold the places. Rounding to two figures gives '
+        + '3,800 and never 38.',
+    },
+  ],
   questions: [
     {
       id: 'sf-1',
@@ -468,9 +632,8 @@ teach({
   idea:
     'The four operations on fractions follow different rules, '
     + 'and that is what makes them confusing. '
-    + 'Adding needs the bottoms to match. '
-    + 'Multiplying does not. '
-    + 'Dividing flips the second fraction over and then multiplies.',
+    + 'The one worth understanding rather than memorising is division, '
+    + 'because the flip has a reason behind it.',
 
   mechanism:
     'The flip is the one worth understanding, '
@@ -559,6 +722,54 @@ teach({
     + 'Every one of those is the question "how many of these fit into that", '
     + 'which is why the answers come out larger than you expect.',
 
+  figure: {
+    alt: 'A bar three units long, drawn above the same bar cut into six '
+      + 'half units numbered 1 to 6, which shows that six halves fit '
+      + 'into 3, so 3 divided by one half is 6.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="40" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">dividing asks how many of these fit into that</text>'
+      + '<text x="60" y="84" font-size="19" text-anchor="start" fill="currentColor" stroke="none">a length of 3</text>'
+      + '<path d="M 60 96 H 540 V 156 H 60 Z"/>'
+      + '<line x1="220" y1="96" x2="220" y2="156"/>'
+      + '<line x1="380" y1="96" x2="380" y2="156"/>'
+      + '<text x="140" y="134" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="300" y="134" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="460" y="134" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="60" y="196" font-size="19" text-anchor="start" fill="#0f8a4d" stroke="none">the same length cut into halves</text>'
+      + '<path d="M 60 208 H 540 V 268 H 60 Z" stroke="#0f8a4d"/>'
+      + '<line x1="140" y1="208" x2="140" y2="268" stroke="#0f8a4d"/>'
+      + '<line x1="220" y1="208" x2="220" y2="268" stroke="#0f8a4d"/>'
+      + '<line x1="300" y1="208" x2="300" y2="268" stroke="#0f8a4d"/>'
+      + '<line x1="380" y1="208" x2="380" y2="268" stroke="#0f8a4d"/>'
+      + '<line x1="460" y1="208" x2="460" y2="268" stroke="#0f8a4d"/>'
+      + '<text x="100" y="246" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">1</text>'
+      + '<text x="180" y="246" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">2</text>'
+      + '<text x="260" y="246" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<text x="340" y="246" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">4</text>'
+      + '<text x="420" y="246" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">5</text>'
+      + '<text x="500" y="246" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">6</text>'
+      + '<text x="320" y="306" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">six halves fit into 3</text>'
+      + '<text x="320" y="344" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">so 3 divided by one half is 6, which is 3 times 2</text>'
+      + '<text x="320" y="378" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">halves are small, so many of them fit</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each operation needs, and what it does to the size of the '
+        + 'answer',
+      columns: ['Operation', 'Bottoms must match', 'Worked on a half', 'The answer'],
+      rows: [
+        ['Add', 'Yes', 'one half plus one quarter', 'Three quarters, larger'],
+        ['Subtract', 'Yes', 'one half minus one quarter', 'One quarter, smaller'],
+        ['Multiply', 'No', '3 times one half', 'One and a half, smaller than 3'],
+        ['Divide', 'No', '3 divided by one half', '6, larger than 3'],
+      ],
+      note: 'Multiplying by a fraction below one makes the answer smaller. '
+        + 'Dividing by one makes it larger, because you are asking how '
+        + 'many of them fit in.',
+    },
+  ],
   questions: [
     {
       id: 'fo-1',
@@ -621,14 +832,12 @@ teach({
 
   mechanism:
     'Two things cause almost every mistake here, and brackets fix both. '
-    + 'The first is a negative value: '
-    + 'substituting negative 2 into a squared without a bracket '
-    + 'gives negative 4 instead of 4. '
-    + 'The second is an implied multiplication: '
-    + '2a means 2 times a, and writing 23 when a is 3 is a slip that looks '
-    + 'plausible. '
-    + 'Writing 2 times (3) makes both impossible. '
-    + 'The habit costs a second and removes a whole class of error.',
+    + 'The first is a negative value, which loses its sign when it is '
+    + 'squared without one. '
+    + 'The second is an implied multiplication: 2a means 2 times a, and '
+    + 'running the two digits together looks perfectly plausible on the '
+    + 'page. '
+    + 'A bracket makes both of them impossible to write.',
 
   recap:
     'You can use a letter to stand for a number, '
@@ -701,6 +910,56 @@ teach({
     + 'The algebra is trivial and the marks are lost on signs and on the '
     + 'order, which is exactly what the bracket habit protects.',
 
+  figure: {
+    alt: 'The expression 3p squared plus 2q, with p as 2 and q as 5, '
+      + 'rewritten with a bracket where each letter was, as 3 times (2) '
+      + 'squared plus 2 times (5). Then the order of operations: powers '
+      + 'first giving 3 times 4 plus 2 times 5, then multiplying to '
+      + 'give 12 plus 10, then adding to give 22.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="38" font-size="23" text-anchor="middle" fill="currentColor" stroke="none">put a bracket where each letter was</text>'
+      + '<text x="250" y="100" font-size="27" text-anchor="start" fill="currentColor" stroke="none">3p</text>'
+      + '<text x="284" y="84" font-size="17" text-anchor="start" fill="currentColor" stroke="none">2</text>'
+      + '<text x="295" y="100" font-size="27" text-anchor="start" fill="currentColor" stroke="none">+ 2q</text>'
+      + '<text x="320" y="132" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">with p as 2 and q as 5</text>'
+      + '<line x1="320" y1="146" x2="320" y2="180"/>'
+      + '<line x1="320" y1="180" x2="314.8" y2="171.4"/>'
+      + '<line x1="320" y1="180" x2="325.2" y2="171.4"/>'
+      + '<text x="200" y="214" font-size="27" text-anchor="start" fill="#0f8a4d" stroke="none">3 × (2)</text>'
+      + '<text x="297" y="198" font-size="17" text-anchor="start" fill="#0f8a4d" stroke="none">2</text>'
+      + '<text x="308" y="214" font-size="27" text-anchor="start" fill="#0f8a4d" stroke="none">+ 2 × (5)</text>'
+      + '<text x="150" y="272" font-size="19" text-anchor="start" fill="currentColor" stroke="none">powers first</text>'
+      + '<text x="320" y="272" font-size="19" text-anchor="start" fill="currentColor" stroke="none">3 × 4 + 2 × 5</text>'
+      + '<text x="150" y="308" font-size="19" text-anchor="start" fill="currentColor" stroke="none">then multiply</text>'
+      + '<text x="320" y="308" font-size="19" text-anchor="start" fill="currentColor" stroke="none">12 + 10</text>'
+      + '<text x="150" y="344" font-size="19" text-anchor="start" fill="currentColor" stroke="none">then add</text>'
+      + '<text x="320" y="344" font-size="19" text-anchor="start" fill="#0f8a4d" stroke="none">22</text>'
+      + '<text x="320" y="384" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">only the p is squared, because only the p is in a bracket</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Two mistakes the bracket makes impossible to write',
+      columns: ['Expression', 'The value', 'Without a bracket', 'With a bracket'],
+      rows: [
+        [
+          'x squared',
+          'x is negative 2',
+          'negative 2 squared, read as negative 4',
+          '(negative 2) squared, which is 4',
+        ],
+        ['2a', 'a is 3', '23, the two digits run together', '2 times (3), which is 6'],
+        [
+          '3p squared',
+          'p is 2',
+          '3 times 2, all squared, which is 36',
+          '3 times (2) squared, which is 12',
+        ],
+      ],
+      note: 'The habit costs a second and removes a whole class of error.',
+    },
+  ],
   questions: [
     {
       id: 'sub-1',
@@ -754,10 +1013,11 @@ teach({
   },
 
   idea:
-    'Simplifying means collecting terms that are alike. '
-    + '3x plus 5x is 8x. '
-    + 'But 3x plus 3x squared stays as it is, '
-    + 'because those are not the same kind of thing.',
+    'Simplifying means collecting terms that are alike, '
+    + 'which means terms carrying the same letter raised to the same '
+    + 'power. '
+    + 'Terms that do not match are left exactly where they are, '
+    + 'because they are not the same kind of thing.',
 
   mechanism:
     'The reason is what the letters stand for. '
@@ -837,6 +1097,45 @@ teach({
     + 'before you check a single number, '
     + 'and it is the same reasoning as refusing to add x to x squared.',
 
+  figure: {
+    alt: 'A line labelled x beside a square of side x labelled x '
+      + 'squared. The line is marked as a length of 3 metres and the '
+      + 'square as an area of 3 square metres, with a note that 3 '
+      + 'metres plus 3 square metres is not 6 of anything, so 3x plus '
+      + '3x squared stays as it is.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="40" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">x is a length and x squared is an area</text>'
+      + '<line x1="70" y1="150" x2="250" y2="150" stroke-width="4"/>'
+      + '<line x1="70" y1="138" x2="70" y2="162"/>'
+      + '<line x1="250" y1="138" x2="250" y2="162"/>'
+      + '<text x="160" y="130" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">x</text>'
+      + '<text x="160" y="188" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">a length</text>'
+      + '<text x="160" y="214" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">3 metres</text>'
+      + '<path d="M 380 90 H 530 V 240 H 380 Z"/>'
+      + '<text x="455" y="80" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">x</text>'
+      + '<text x="366" y="172" font-size="18" text-anchor="end" fill="currentColor" stroke="none">x</text>'
+      + '<text x="455" y="172" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">x squared</text>'
+      + '<text x="455" y="272" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">an area</text>'
+      + '<text x="455" y="298" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">3 square metres</text>'
+      + '<text x="320" y="348" font-size="21" text-anchor="middle" fill="#c8433a" stroke="none">3 metres plus 3 square metres is not 6 of anything</text>'
+      + '<text x="320" y="382" font-size="21" text-anchor="middle" fill="#0f8a4d" stroke="none">so 3x plus 3x squared stays as it is</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Which pairs of terms can be collected, and which cannot',
+      columns: ['The pair', 'Same letter', 'Same power', 'Collect them'],
+      rows: [
+        ['3x and 5x', 'Yes', 'Yes', 'Yes, giving 8x'],
+        ['4a and minus 2a', 'Yes', 'Yes', 'Yes, giving 2a'],
+        ['4a and 3b', 'No', 'Yes', 'No, they stay separate'],
+        ['3x and 3x squared', 'Yes', 'No', 'No, a length and an area'],
+      ],
+      note: 'An answer with two terms left in it, like 2a plus 3b, is '
+        + 'finished rather than stuck.',
+    },
+  ],
   questions: [
     {
       id: 'ct-1',
@@ -978,6 +1277,59 @@ teach({
     + 'and it is the reason both of these methods are reliable. '
     + 'Without uniqueness, two people could get two different HCFs.',
 
+  figure: {
+    alt: 'Two factor trees side by side. 12 splits into 2 and 6, and the '
+      + '6 into 2 and 3, so 12 is 2 times 2 times 3. 18 splits into 2 '
+      + 'and 9, and the 9 into 3 and 3, so 18 is 2 times 3 times 3. The '
+      + 'shared blocks are one 2 and one 3, giving a highest common '
+      + 'factor of 6, and every block at its highest count gives a '
+      + 'lowest common multiple of 36.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">one breakdown, two answers</text>'
+      + '<text x="170" y="80" font-size="26" text-anchor="middle" fill="currentColor" stroke="none">12</text>'
+      + '<line x1="170" y1="92" x2="120" y2="130"/>'
+      + '<line x1="170" y1="92" x2="220" y2="130"/>'
+      + '<text x="112" y="152" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">2</text>'
+      + '<text x="228" y="152" font-size="26" text-anchor="middle" fill="currentColor" stroke="none">6</text>'
+      + '<line x1="228" y1="170" x2="190" y2="206"/>'
+      + '<line x1="228" y1="170" x2="268" y2="206"/>'
+      + '<text x="182" y="228" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">2</text>'
+      + '<text x="274" y="228" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<text x="170" y="266" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">12 is 2 × 2 × 3</text>'
+      + '<text x="470" y="80" font-size="26" text-anchor="middle" fill="currentColor" stroke="none">18</text>'
+      + '<line x1="470" y1="92" x2="420" y2="130"/>'
+      + '<line x1="470" y1="92" x2="520" y2="130"/>'
+      + '<text x="412" y="152" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">2</text>'
+      + '<text x="528" y="152" font-size="26" text-anchor="middle" fill="currentColor" stroke="none">9</text>'
+      + '<line x1="528" y1="170" x2="490" y2="206"/>'
+      + '<line x1="528" y1="170" x2="568" y2="206"/>'
+      + '<text x="482" y="228" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<text x="574" y="228" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<text x="470" y="266" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">18 is 2 × 3 × 3</text>'
+      + '<text x="320" y="316" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">shared blocks: one 2 and one 3, so the HCF is 6</text>'
+      + '<text x="320" y="350" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">highest count of each block: 2 × 2 × 3 × 3, so the LCM is 36</text>'
+      + '<text x="320" y="384" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">check: 6 times 36 is 216, and 12 times 18 is 216</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Reading the HCF and the LCM off one pair of breakdowns',
+      columns: [
+        'Prime',
+        'How many in 12',
+        'How many in 18',
+        'The HCF takes',
+        'The LCM takes',
+      ],
+      rows: [
+        ['2', 'Two', 'One', 'One, the lower count', 'Two, the higher count'],
+        ['3', 'One', 'Two', 'One, the lower count', 'Two, the higher count'],
+      ],
+      note: 'The lower count for the HCF and the higher count for the LCM. '
+        + 'That one difference is the whole of both methods.',
+    },
+  ],
   questions: [
     {
       id: 'hcf-1',
@@ -1065,22 +1417,22 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Solve 2x plus 5 equals 17.',
+      ask: 'Solve $2x + 5 = 17$.',
       steps: [
-        'The 5 was added last, so take 5 from both sides: 2x equals 12.',
+        'The 5 was added last, so take 5 from both sides: $2x = 12$.',
         'Divide both sides by 2.',
       ],
-      answer: 'x equals 6. Check: 2 times 6 plus 5 is 17.',
+      answer: '$x = 6$. Check: 2 times 6 plus 5 is 17.',
     },
     {
       level: 4,
-      ask: 'Solve 5x minus 3 equals 2x plus 9.',
+      ask: 'Solve $5x - 3 = 2x + 9$.',
       steps: [
-        'Take 2x from both sides: 3x minus 3 equals 9.',
-        'Add 3 to both sides: 3x equals 12.',
+        'Take 2x from both sides: $3x - 3 = 9$.',
+        'Add 3 to both sides: $3x = 12$.',
         'Divide both sides by 3.',
       ],
-      answer: 'x equals 4. Check: 20 minus 3 is 17, and 8 plus 9 is 17.',
+      answer: '$x = 4$. Check: 20 minus 3 is 17, and 8 plus 9 is 17.',
     },
     {
       level: 5,
@@ -1103,7 +1455,7 @@ teach({
     },
     {
       mistake: 'Undoing in the wrong order.',
-      why: 'For 2x plus 5, the 5 went on last, so it comes off first. '
+      why: 'For $2x + 5$, the 5 went on last, so it comes off first. '
         + 'Dividing by 2 first means dividing the 5 too.',
     },
     {
@@ -1120,6 +1472,52 @@ teach({
     + 'do the same to both sides, and undo in reverse order. '
     + 'The operations get harder. The principle never changes.',
 
+  figure: {
+    alt: 'A balance in three stages. First the left pan holds 2x plus 5 '
+      + 'and the right pan holds 17. Taking 5 from both sides leaves 2x '
+      + 'against 12. Dividing both sides by 2 leaves x equals 6, and '
+      + 'the check is that 2 times 6 plus 5 is 17.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">an equation balances, so do the same to both sides</text>'
+      + '<path d="M 140 56 H 270 V 88 H 140 Z"/>'
+      + '<text x="205" y="79" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">2x + 5</text>'
+      + '<path d="M 370 56 H 500 V 88 H 370 Z"/>'
+      + '<text x="435" y="79" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">17</text>'
+      + '<line x1="120" y1="92" x2="520" y2="92" stroke-width="4"/>'
+      + '<path d="M 320 92 L 300 124 L 340 124 Z"/>'
+      + '<text x="320" y="146" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">take 5 from both sides</text>'
+      + '<line x1="320" y1="152" x2="320" y2="170" stroke="#0f8a4d"/>'
+      + '<line x1="320" y1="170" x2="314.8" y2="161.4" stroke="#0f8a4d"/>'
+      + '<line x1="320" y1="170" x2="325.2" y2="161.4" stroke="#0f8a4d"/>'
+      + '<path d="M 140 176 H 270 V 208 H 140 Z"/>'
+      + '<text x="205" y="199" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">2x</text>'
+      + '<path d="M 370 176 H 500 V 208 H 370 Z"/>'
+      + '<text x="435" y="199" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">12</text>'
+      + '<line x1="120" y1="212" x2="520" y2="212" stroke-width="4"/>'
+      + '<path d="M 320 212 L 300 244 L 340 244 Z"/>'
+      + '<text x="320" y="266" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">divide both sides by 2</text>'
+      + '<line x1="320" y1="272" x2="320" y2="290" stroke="#0f8a4d"/>'
+      + '<line x1="320" y1="290" x2="314.8" y2="281.4" stroke="#0f8a4d"/>'
+      + '<line x1="320" y1="290" x2="325.2" y2="281.4" stroke="#0f8a4d"/>'
+      + '<text x="320" y="322" font-size="26" text-anchor="middle" fill="#0f8a4d" stroke="none">x = 6</text>'
+      + '<text x="320" y="356" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">check: 2 times 6 plus 5 is 17</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each thing done to the unknown, and the step that undoes it',
+      columns: ['Done to the unknown', 'The step that undoes it'],
+      rows: [
+        ['Added 5', 'Take 5 from both sides'],
+        ['Took 3 away', 'Add 3 to both sides'],
+        ['Multiplied by 2', 'Divide both sides by 2'],
+        ['Divided by 4', 'Multiply both sides by 4'],
+      ],
+      note: 'The last thing done to the unknown is the first thing undone, '
+        + 'which is why the order runs backwards.',
+    },
+  ],
   questions: [
     {
       id: 'le-1',
@@ -1177,12 +1575,10 @@ teach({
   },
 
   idea:
-    'A few angle facts solve most problems. '
-    + 'Angles on a straight line add to 180 degrees. '
-    + 'Angles at a point add to 360. '
-    + 'Where a line crosses two parallel lines, '
-    + 'corresponding and alternate angles are equal, '
-    + 'and co-interior angles add to 180.',
+    'A few angle facts solve most problems at this level. '
+    + 'Each one is tied to something you can look for in the diagram: '
+    + 'a straight line, a full turn, or a pair of lines marked parallel. '
+    + 'Finding the fact is the work, and naming it is the mark.',
 
   mechanism:
     'At JHS the answer alone stops being enough, and that is deliberate. '
@@ -1268,6 +1664,51 @@ teach({
     + 'Draw a line through one vertex parallel to the opposite side '
     + 'and the three angles of the triangle land on that straight line.',
 
+  figure: {
+    alt: 'Two parallel lines, each marked with an arrow, crossed by a '
+      + 'slanting line. The angle below the upper parallel on one side '
+      + 'of the slant and the angle above the lower parallel on the '
+      + 'other side form a Z shape, and both are marked 70 degrees, '
+      + 'because alternate angles between parallel lines are equal.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">the Z shape: alternate angles are equal</text>'
+      + '<line x1="70" y1="140" x2="570" y2="140"/>'
+      + '<line x1="70" y1="270" x2="570" y2="270"/>'
+      + '<path d="M 108 132 L 120 140 L 108 148"/>'
+      + '<path d="M 108 262 L 120 270 L 108 278"/>'
+      + '<line x1="170" y1="330" x2="430" y2="80"/>'
+      + '<line x1="240" y1="140" x2="368" y2="140" stroke="#0f8a4d" stroke-width="5"/>'
+      + '<line x1="368" y1="140" x2="232" y2="270" stroke="#0f8a4d" stroke-width="5"/>'
+      + '<line x1="232" y1="270" x2="360" y2="270" stroke="#0f8a4d" stroke-width="5"/>'
+      + '<text x="323" y="162" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">70</text>'
+      + '<text x="292" y="252" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">70</text>'
+      + '<text x="75" y="120" font-size="16" text-anchor="start" fill="currentColor" stroke="none">arrows mark these lines parallel</text>'
+      + '<text x="320" y="360" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">so if one of them is 70 degrees, so is the other</text>'
+      + '<text x="320" y="388" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">no measuring: the drawing is a sketch, the facts are the truth</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each angle fact, and the shape in the diagram that signals it',
+      columns: ['The fact', 'What to look for', 'The angles'],
+      rows: [
+        [
+          'Angles on a straight line',
+          'Two angles meeting on one line',
+          'Add to 180 degrees',
+        ],
+        ['Angles at a point', 'Angles filling one full turn', 'Add to 360 degrees'],
+        ['Vertically opposite angles', 'Two lines crossing', 'Equal'],
+        ['Alternate angles', 'A Z shape between the parallels', 'Equal'],
+        ['Corresponding angles', 'An F shape between the parallels', 'Equal'],
+        ['Co-interior angles', 'A C shape between the parallels', 'Add to 180 degrees'],
+      ],
+      note: 'The last three count only where arrows mark the lines '
+        + 'parallel. Write the fact beside every step, because the marks '
+        + 'are given for the reason.',
+    },
+  ],
   questions: [
     {
       id: 'ang-1',
@@ -1327,18 +1768,17 @@ teach({
 
   idea:
     'The angles inside a triangle always add to 180 degrees. '
-    + 'For a polygon with n sides, they add to n minus 2, times 180. '
-    + 'Triangles are named by their sides: equilateral, isosceles, scalene, '
-    + 'or by their angles: acute, right, obtuse.',
+    + 'For a polygon with n sides they add to $(n - 2) \\times 180$. '
+    + 'A triangle also carries two names, one taken from its sides and '
+    + 'one from its angles.',
 
   mechanism:
     'The polygon formula is not something to memorise. '
     + 'Take any polygon, pick one corner, and draw lines from it to every '
     + 'other corner. '
-    + 'A quadrilateral splits into 2 triangles, a pentagon into 3, '
-    + 'a hexagon into 4. '
-    + 'Always two fewer than the number of sides. '
-    + 'Each triangle contributes 180, so the total is (n minus 2) times 180. '
+    + 'You always get two fewer triangles than the shape has sides. '
+    + 'Each triangle contributes 180 degrees, so the total is '
+    + '$(n - 2) \\times 180$. '
     + 'If you forget the formula you can rebuild it on the page in ten '
     + 'seconds, which is better than remembering it.',
 
@@ -1412,6 +1852,79 @@ teach({
     + 'Walk right round the outside of the shape and you have turned through '
     + 'one full circle, which is why.',
 
+  figure: {
+    alt: 'A quadrilateral, a pentagon and a hexagon, each with lines '
+      + 'drawn from one corner to every other corner. The quadrilateral '
+      + 'splits into 2 triangles and its angles add to 360 degrees, the '
+      + 'pentagon into 3 and 540 degrees, and the hexagon into 4 and '
+      + '720 degrees.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">split from one corner, and count the triangles</text>'
+      + '<path d="M 60 220 L 70 110 L 190 90 L 200 210 Z"/>'
+      + '<line x1="60" y1="220" x2="190" y2="90" stroke="#0f8a4d"/>'
+      + '<text x="130" y="258" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">4 sides</text>'
+      + '<text x="130" y="284" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">2 triangles</text>'
+      + '<text x="130" y="310" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">360 degrees</text>'
+      + '<path d="M 320 83 L 389 133 L 362 213 L 278 213 L 252 133 Z"/>'
+      + '<line x1="320" y1="83" x2="362" y2="213" stroke="#0f8a4d"/>'
+      + '<line x1="320" y1="83" x2="278" y2="213" stroke="#0f8a4d"/>'
+      + '<text x="320" y="258" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">5 sides</text>'
+      + '<text x="320" y="284" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">3 triangles</text>'
+      + '<text x="320" y="310" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">540 degrees</text>'
+      + '<path d="M 500 83 L 562 119 L 562 191 L 500 227 L 438 191 L 438 119 Z"/>'
+      + '<line x1="500" y1="83" x2="562" y2="191" stroke="#0f8a4d"/>'
+      + '<line x1="500" y1="83" x2="500" y2="227" stroke="#0f8a4d"/>'
+      + '<line x1="500" y1="83" x2="438" y2="191" stroke="#0f8a4d"/>'
+      + '<text x="500" y="258" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">6 sides</text>'
+      + '<text x="500" y="284" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">4 triangles</text>'
+      + '<text x="500" y="310" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">720 degrees</text>'
+      + '<text x="320" y="352" font-size="21" text-anchor="middle" fill="#0f8a4d" stroke="none">always two fewer triangles than sides</text>'
+      + '<text x="320" y="384" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">and each triangle gives 180 degrees</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Splitting each polygon into triangles from one corner',
+      columns: [
+        'Shape',
+        'Sides',
+        'Triangles',
+        'Angles add to',
+        'Each angle if regular',
+      ],
+      rows: [
+        ['Triangle', '3', '1', '180 degrees', '60 degrees'],
+        ['Quadrilateral', '4', '2', '360 degrees', '90 degrees'],
+        ['Pentagon', '5', '3', '540 degrees', '108 degrees'],
+        ['Hexagon', '6', '4', '720 degrees', '120 degrees'],
+      ],
+      note: 'Only a regular polygon has equal angles. The total is the same '
+        + 'either way; the share is not.',
+    },
+    {
+      caption: 'The two ways of naming a triangle',
+      columns: ['Name', 'Named from', 'The test'],
+      rows: [
+        [
+          'Equilateral',
+          'Its sides',
+          'All three sides equal, so every angle is 60 degrees',
+        ],
+        [
+          'Isosceles',
+          'Its sides',
+          'Two sides equal, so the two angles under them are equal',
+        ],
+        ['Scalene', 'Its sides', 'No two sides equal'],
+        ['Acute', 'Its angles', 'Every angle under 90 degrees'],
+        ['Right', 'Its angles', 'One angle exactly 90 degrees'],
+        ['Obtuse', 'Its angles', 'One angle over 90 degrees'],
+      ],
+      note: 'A triangle carries one name from each column, so a triangle '
+        + 'can be isosceles and right at the same time.',
+    },
+  ],
   questions: [
     {
       id: 'tp-1',
@@ -1464,12 +1977,11 @@ teach({
   },
 
   idea:
-    'Each shape has its own area formula. '
-    + 'A triangle is half the base times the height. '
-    + 'A parallelogram is base times height. '
-    + 'A trapezium is half the sum of the two parallel sides, times the '
-    + 'height. '
-    + 'In all of them, height means the perpendicular height.',
+    'Each shape has its own area formula, and every one of them is the '
+    + 'rectangle in disguise. '
+    + 'In all of them, height means the perpendicular height: the '
+    + 'straight up distance from the base to the top, at a right angle '
+    + 'to the base.',
 
   mechanism:
     'The commonest error in this whole topic is using the slanted side as '
@@ -1557,6 +2069,55 @@ teach({
     + 'Two identical triangles make a parallelogram. '
     + 'Two identical trapeziums make a parallelogram as well.',
 
+  figure: {
+    alt: 'A triangle with a base of 10 cm, a perpendicular height of 6 '
+      + 'cm drawn from the apex down to the base and marked with a '
+      + 'right angle, and a slanting side of 8 cm marked as not the '
+      + 'height. Half of 10 times 6 gives 30 square centimetres.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="40" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">the height is the perpendicular one, never the slant</text>'
+      + '<path d="M 120 300 L 480 300 L 400 130 Z"/>'
+      + '<line x1="400" y1="130" x2="400" y2="300" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<path d="M 400 282 L 382 282 L 382 300" stroke="#0f8a4d"/>'
+      + '<text x="492" y="200" font-size="21" text-anchor="start" fill="#0f8a4d" stroke="none">height 6 cm</text>'
+      + '<line x1="120" y1="300" x2="400" y2="130" stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="250" y="176" font-size="20" text-anchor="end" fill="#c8433a" stroke="none">slant 8 cm</text>'
+      + '<text x="250" y="200" font-size="18" text-anchor="end" fill="#c8433a" stroke="none">not the height</text>'
+      + '<text x="300" y="332" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">base 10 cm</text>'
+      + '<text x="320" y="372" font-size="21" text-anchor="middle" fill="#0f8a4d" stroke="none">half of 10 times 6 is 30 square centimetres</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The area formula for each shape, and what counts as its height',
+      columns: ['Shape', 'Area', 'The base', 'The height'],
+      rows: [
+        ['Rectangle', 'Length times width', 'Either side', 'The other side'],
+        [
+          'Triangle',
+          'Half the base times the height',
+          'Any side you choose',
+          'Perpendicular to that side',
+        ],
+        [
+          'Parallelogram',
+          'Base times height',
+          'Either parallel side',
+          'Perpendicular gap between them',
+        ],
+        [
+          'Trapezium',
+          'Half the sum of the parallel sides, times the height',
+          'The two parallel sides',
+          'Perpendicular gap between them',
+        ],
+      ],
+      note: 'Height never means the slanted side. The slant is longer, so '
+        + 'it gives an answer that is too large and looks perfectly '
+        + 'worked out.',
+    },
+  ],
   questions: [
     {
       id: 'pj-1',
@@ -1702,6 +2263,64 @@ teach({
     + 'and that is true of surveys in newspapers as much as in a classroom. '
     + 'The first question to ask of any statistic is who it came from.',
 
+  figure: {
+    alt: 'Two boxes. The left one, holding sixteen figures, is labelled '
+      + 'the whole school, which is what you wanted to describe. The '
+      + 'right one, holding eight figures, is labelled at the football '
+      + 'pitch, which is who you actually asked. The numbers come back '
+      + 'exact and about the wrong people.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">who you asked decides what the numbers mean</text>'
+      + '<path d="M 50 90 H 290 V 290 H 50 Z"/>'
+      + '<text x="170" y="120" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the whole school</text>'
+      + '<circle cx="90" cy="160" r="9"/>'
+      + '<circle cx="140" cy="160" r="9"/>'
+      + '<circle cx="190" cy="160" r="9"/>'
+      + '<circle cx="240" cy="160" r="9"/>'
+      + '<circle cx="90" cy="196" r="9"/>'
+      + '<circle cx="140" cy="196" r="9"/>'
+      + '<circle cx="190" cy="196" r="9"/>'
+      + '<circle cx="240" cy="196" r="9"/>'
+      + '<circle cx="90" cy="232" r="9"/>'
+      + '<circle cx="140" cy="232" r="9"/>'
+      + '<circle cx="190" cy="232" r="9"/>'
+      + '<circle cx="240" cy="232" r="9"/>'
+      + '<circle cx="90" cy="268" r="9"/>'
+      + '<circle cx="140" cy="268" r="9"/>'
+      + '<circle cx="190" cy="268" r="9"/>'
+      + '<circle cx="240" cy="268" r="9"/>'
+      + '<path d="M 350 90 H 590 V 290 H 350 Z" stroke="#c8433a"/>'
+      + '<text x="470" y="120" font-size="19" text-anchor="middle" fill="#c8433a" stroke="none">at the football pitch</text>'
+      + '<circle cx="400" cy="190" r="9" stroke="#c8433a"/>'
+      + '<circle cx="450" cy="190" r="9" stroke="#c8433a"/>'
+      + '<circle cx="500" cy="190" r="9" stroke="#c8433a"/>'
+      + '<circle cx="550" cy="190" r="9" stroke="#c8433a"/>'
+      + '<circle cx="400" cy="240" r="9" stroke="#c8433a"/>'
+      + '<circle cx="450" cy="240" r="9" stroke="#c8433a"/>'
+      + '<circle cx="500" cy="240" r="9" stroke="#c8433a"/>'
+      + '<circle cx="550" cy="240" r="9" stroke="#c8433a"/>'
+      + '<text x="170" y="320" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">what you wanted to describe</text>'
+      + '<text x="470" y="320" font-size="18" text-anchor="middle" fill="#c8433a" stroke="none">who you actually asked</text>'
+      + '<text x="320" y="358" font-size="20" text-anchor="middle" fill="#c8433a" stroke="none">the numbers come back exact, and about the wrong people</text>'
+      + '<text x="320" y="390" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">a fair sample has to look like the group you describe</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The favourite sport of 50 learners in one JHS 1 class',
+      columns: ['Sport', 'Frequency'],
+      rows: [
+        ['Football', '21'],
+        ['Athletics', '9'],
+        ['Volleyball', '8'],
+        ['Handball', '7'],
+        ['Table tennis', '5'],
+      ],
+      note: 'The frequencies add to 50, which is the number of learners '
+        + 'asked. That check is the one that catches a lost answer.',
+    },
+  ],
   questions: [
     {
       id: 'co-1',
