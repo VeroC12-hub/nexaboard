@@ -124,6 +124,50 @@ teach({
     + 'Do not start at ten. '
     + 'Seven, six, five.',
 
+  figure: {
+    alt: 'Ten bars standing side by side on a line, falling like a staircase '
+      + 'from a bar of ten on the left to a bar of one on the right. The '
+      + 'number under each bar reads ten, nine, eight and so on down to '
+      + 'one, and a green arrow under them runs left to right labelled down '
+      + 'by one each time.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="37,70 73,70 73,260 37,260"/>'
+      + '<polygon points="97,89 133,89 133,260 97,260"/>'
+      + '<polygon points="157,108 193,108 193,260 157,260"/>'
+      + '<polygon points="217,127 253,127 253,260 217,260"/>'
+      + '<polygon points="277,146 313,146 313,260 277,260"/>'
+      + '<polygon points="337,165 373,165 373,260 337,260"/>'
+      + '<polygon points="397,184 433,184 433,260 397,260"/>'
+      + '<polygon points="457,203 493,203 493,260 457,260"/>'
+      + '<polygon points="517,222 553,222 553,260 517,260"/>'
+      + '<polygon points="577,241 613,241 613,260 577,260"/>'
+      + '<line x1="30" y1="260" x2="610" y2="260"/>'
+      + '<text x="55" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">10</text>'
+      + '<text x="115" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">9</text>'
+      + '<text x="175" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">8</text>'
+      + '<text x="235" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">7</text>'
+      + '<text x="295" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">6</text>'
+      + '<text x="355" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">5</text>'
+      + '<text x="415" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4</text>'
+      + '<text x="475" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3</text>'
+      + '<text x="535" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<text x="595" y="292" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<line x1="40" y1="330" x2="600" y2="330" stroke="#0f8a4d"/>'
+      + '<polyline points="587,320 600,330 587,340" stroke="#0f8a4d"/>'
+      + '<text x="320" y="376" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">down by one each time</text></svg>',
+  },
   questions: [
     {
       id: 'cb-1',
@@ -255,6 +299,29 @@ teach({
     + 'Count them. Still four. '
     + 'Only adding or taking away changes the number.',
 
+  figure: {
+    alt: 'Four stones close together in a row labelled four. An arrow points '
+      + 'down to the same four stones spread right across the page, '
+      + 'labelled still four.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="80" cy="110" r="22"/>'
+      + '<circle cx="132" cy="110" r="22"/>'
+      + '<circle cx="184" cy="110" r="22"/>'
+      + '<circle cx="236" cy="110" r="22"/>'
+      + '<text x="158" y="175" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">four</text>'
+      + '<text x="480" y="118" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">I move them</text>'
+      + '<line x1="320" y1="205" x2="320" y2="252"/>'
+      + '<polyline points="310,239 320,252 330,239"/>'
+      + '<circle cx="70" cy="300" r="22"/>'
+      + '<circle cx="220" cy="300" r="22"/>'
+      + '<circle cx="370" cy="300" r="22"/>'
+      + '<circle cx="520" cy="300" r="22"/>'
+      + '<text x="320" y="372" font-size="30" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">still four</text></svg>',
+  },
   questions: [
     {
       id: 'sm-1',
@@ -382,6 +449,34 @@ teach({
     + 'Count up twice. '
     + 'Now two less.',
 
+  figure: {
+    alt: 'Three rows of stones. The middle row has four stones and is '
+      + 'labelled four. The top row has three stones and a dotted empty '
+      + 'place where the fourth was, labelled one less is three. The bottom '
+      + 'row has four stones and a green fifth one, labelled one more is '
+      + 'five.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="70" cy="90" r="22"/><circle cx="122" cy="90" r="22"/>'
+      + '<circle cx="174" cy="90" r="22"/>'
+      + '<circle cx="226" cy="90" r="22" stroke-dasharray="7 7"/>'
+      + '<text x="300" y="100" font-size="26" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">one less is three</text>'
+      + '<circle cx="70" cy="190" r="22"/>'
+      + '<circle cx="122" cy="190" r="22"/>'
+      + '<circle cx="174" cy="190" r="22"/>'
+      + '<circle cx="226" cy="190" r="22"/>'
+      + '<text x="300" y="200" font-size="26" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">four</text>'
+      + '<circle cx="70" cy="290" r="22"/>'
+      + '<circle cx="122" cy="290" r="22"/>'
+      + '<circle cx="174" cy="290" r="22"/>'
+      + '<circle cx="226" cy="290" r="22"/>'
+      + '<circle cx="278" cy="290" r="22" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="330" y="300" font-size="26" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">one more is five</text></svg>',
+  },
   questions: [
     {
       id: 'om-1',
@@ -507,6 +602,37 @@ teach({
     + 'Count back two. Four, three. '
     + 'The answer is three.',
 
+  figure: {
+    alt: 'Five mangoes in a row at the top labelled five to start. An arrow '
+      + 'points down to three mangoes drawn in green on the left, labelled '
+      + 'three left, while two mangoes sit far away on the right inside a '
+      + 'dotted box labelled taken away.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<ellipse cx="90" cy="100" rx="28" ry="24"/>'
+      + '<ellipse cx="160" cy="100" rx="28" ry="24"/>'
+      + '<ellipse cx="230" cy="100" rx="28" ry="24"/>'
+      + '<ellipse cx="300" cy="100" rx="28" ry="24"/>'
+      + '<ellipse cx="370" cy="100" rx="28" ry="24"/>'
+      + '<text x="540" y="110" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">five to start</text>'
+      + '<line x1="230" y1="148" x2="230" y2="192"/>'
+      + '<polyline points="220,179 230,192 240,179"/>'
+      + '<ellipse cx="90" cy="270" rx="28" ry="24" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<ellipse cx="160" cy="270" rx="28" ry="24" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<ellipse cx="230" cy="270" rx="28" ry="24" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="160" y="345" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">three left</text>'
+      + '<polygon points="430,228 600,228 600,312 430,312" '
+      + 'stroke-dasharray="8 8"/>'
+      + '<ellipse cx="485" cy="270" rx="28" ry="24"/>'
+      + '<ellipse cx="550" cy="270" rx="28" ry="24"/>'
+      + '<text x="515" y="348" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">taken away</text></svg>',
+  },
   questions: [
     {
       id: 'ta-1',
@@ -635,6 +761,43 @@ teach({
     + 'Use two numbers. '
     + 'Then ask me the question.',
 
+  figure: {
+    alt: 'At the top it asks whether more came or some went. The first row '
+      + 'shows three stones, an arrow, and then five stones with the two '
+      + 'new ones drawn in green, labelled more came. The second row shows '
+      + 'four stones, an arrow, and then three stones with a dotted empty '
+      + 'place, labelled some went.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">did more come, or did some '
+      + 'go</text><circle cx="60" cy="140" r="20"/>'
+      + '<circle cx="110" cy="140" r="20"/>'
+      + '<circle cx="160" cy="140" r="20"/>'
+      + '<line x1="200" y1="140" x2="250" y2="140"/>'
+      + '<polyline points="237,130 250,140 237,150"/>'
+      + '<circle cx="290" cy="140" r="20"/>'
+      + '<circle cx="340" cy="140" r="20"/>'
+      + '<circle cx="390" cy="140" r="20"/>'
+      + '<circle cx="440" cy="140" r="20" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="490" cy="140" r="20" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="390" y="200" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">more came</text>'
+      + '<circle cx="60" cy="280" r="20"/>'
+      + '<circle cx="110" cy="280" r="20"/>'
+      + '<circle cx="160" cy="280" r="20"/>'
+      + '<circle cx="210" cy="280" r="20"/>'
+      + '<line x1="250" y1="280" x2="300" y2="280"/>'
+      + '<polyline points="287,270 300,280 287,290"/>'
+      + '<circle cx="340" cy="280" r="20"/>'
+      + '<circle cx="390" cy="280" r="20"/>'
+      + '<circle cx="440" cy="280" r="20"/>'
+      + '<circle cx="490" cy="280" r="20" stroke-dasharray="6 6"/>'
+      + '<text x="390" y="340" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">some went</text></svg>',
+  },
   questions: [
     {
       id: 'ns-1',
@@ -767,6 +930,37 @@ teach({
     + 'Three each and one left over. '
     + 'What could you do with the last one?',
 
+  figure: {
+    alt: 'Six stones in a row at the top labelled six to share. Two arrows '
+      + 'lead down from them, one to the left and one to the right, into '
+      + 'two rings labelled you and me. Each ring holds three stones, and '
+      + 'under them it says three each, the same.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="160" cy="80" r="20"/><circle cx="210" cy="80" r="20"/>'
+      + '<circle cx="260" cy="80" r="20"/><circle cx="310" cy="80" r="20"/>'
+      + '<circle cx="360" cy="80" r="20"/><circle cx="410" cy="80" r="20"/>'
+      + '<text x="540" y="90" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">six to share</text>'
+      + '<line x1="270" y1="110" x2="205" y2="205"/>'
+      + '<polyline points="223,193 205,205 209,183"/>'
+      + '<line x1="310" y1="110" x2="400" y2="205"/>'
+      + '<polyline points="380,196 400,205 393,184"/>'
+      + '<ellipse cx="180" cy="310" rx="115" ry="60"/>'
+      + '<text x="180" y="232" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">you</text>'
+      + '<circle cx="154" cy="296" r="20"/>'
+      + '<circle cx="206" cy="296" r="20"/>'
+      + '<circle cx="180" cy="340" r="20"/>'
+      + '<ellipse cx="460" cy="310" rx="115" ry="60"/>'
+      + '<text x="460" y="232" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">me</text>'
+      + '<circle cx="434" cy="296" r="20"/>'
+      + '<circle cx="486" cy="296" r="20"/>'
+      + '<circle cx="460" cy="340" r="20"/>'
+      + '<text x="320" y="394" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">three each, the same</text></svg>',
+  },
   questions: [
     {
       id: 'se-1',
@@ -899,6 +1093,30 @@ teach({
     + 'One, two, one, two. '
     + 'Now clap a pattern: loud, soft, loud, soft.',
 
+  figure: {
+    alt: 'A row of shapes going circle, square, circle, square, then a '
+      + 'dotted empty place with a question mark, then a green circle. A '
+      + 'bracket under the first two shapes says this part repeats, and '
+      + 'under the row it says a circle comes next.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="70" cy="150" r="28"/>'
+      + '<polygon points="132,122 188,122 188,178 132,178"/>'
+      + '<circle cx="250" cy="150" r="28"/>'
+      + '<polygon points="312,122 368,122 368,178 312,178"/>'
+      + '<circle cx="440" cy="150" r="28" stroke-dasharray="8 8"/>'
+      + '<text x="440" y="164" font-size="38" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">?</text>'
+      + '<line x1="478" y1="150" x2="516" y2="150" stroke="#0f8a4d"/>'
+      + '<polyline points="503,140 516,150 503,160" stroke="#0f8a4d"/>'
+      + '<circle cx="556" cy="150" r="28" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<polyline points="38,190 38,208 192,208 192,190"/>'
+      + '<text x="115" y="240" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">this part repeats</text>'
+      + '<text x="400" y="320" font-size="30" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">a circle comes next</text></svg>',
+  },
   questions: [
     {
       id: 'pt-1',
@@ -1026,6 +1244,29 @@ teach({
     + 'Put things on the other side '
     + 'until the two sides are level.',
 
+  figure: {
+    alt: 'A balance with its beam tipped down on the right. A big box hangs '
+      + 'from the high left side and a small stone drawn in green hangs '
+      + 'from the low right side. Above it says the heavier one goes down, '
+      + 'and the stone is labelled small stone, heavier.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="55" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the heavier one goes down</text>'
+      + '<line x1="110" y1="180" x2="530" y2="270"/>'
+      + '<line x1="320" y1="225" x2="320" y2="282"/>'
+      + '<polygon points="320,282 288,340 352,340"/>'
+      + '<line x1="240" y1="340" x2="400" y2="340"/>'
+      + '<line x1="140" y1="186" x2="140" y2="225"/>'
+      + '<polygon points="95,225 185,225 185,285 95,285"/>'
+      + '<text x="140" y="318" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">big box</text>'
+      + '<line x1="500" y1="265" x2="500" y2="302"/>'
+      + '<circle cx="500" cy="325" r="22" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="500" y="374" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">small stone, heavier</text></svg>',
+  },
   questions: [
     {
       id: 'hl-1',
@@ -1155,6 +1396,30 @@ teach({
     + 'Now half of six stones. '
     + 'Half means two parts the same.',
 
+  figure: {
+    alt: 'Three cups side by side. The first is filled to the brim and '
+      + 'labelled full, the second is filled to about the middle and '
+      + 'labelled about half, and the third has nothing in it and is '
+      + 'labelled empty. Under them it says half is as much empty as full.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="92,158 168,158 160,288 100,288" fill="#0f8a4d" '
+      + 'fill-opacity="0.25" stroke="none"/>'
+      + '<polygon points="90,150 170,150 160,290 100,290"/>'
+      + '<text x="130" y="332" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">full</text>'
+      + '<polygon points="285,225 355,225 350,288 290,288" fill="#0f8a4d" '
+      + 'fill-opacity="0.25" stroke="none"/>'
+      + '<polygon points="280,150 360,150 350,290 290,290"/>'
+      + '<text x="320" y="332" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">about half</text>'
+      + '<polygon points="470,150 550,150 540,290 480,290"/>'
+      + '<text x="510" y="332" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">empty</text>'
+      + '<text x="320" y="380" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">half is as much empty as full</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'fe2-1',
@@ -1278,6 +1543,31 @@ teach({
     + 'How much altogether? '
     + 'Could you buy something with that?',
 
+  figure: {
+    alt: 'Three coins of different sizes in a row, the middle one the '
+      + 'biggest. The numbers on them are ten, twenty and fifty pesewas, so '
+      + 'the biggest coin is not the one worth most. A green arrow under '
+      + 'them runs left to right, labelled in order by the number of '
+      + 'pesewas, not the size.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">look at the number on the '
+      + 'coin</text><circle cx="110" cy="170" r="52"/>'
+      + '<text x="110" y="186" font-size="38" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">10</text>'
+      + '<circle cx="320" cy="170" r="70"/>'
+      + '<text x="320" y="188" font-size="44" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">20</text>'
+      + '<circle cx="520" cy="170" r="48"/>'
+      + '<text x="520" y="185" font-size="36" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">50</text>'
+      + '<line x1="60" y1="316" x2="590" y2="316" stroke="#0f8a4d"/>'
+      + '<polyline points="577,306 590,316 577,326" stroke="#0f8a4d"/>'
+      + '<text x="320" y="366" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">in order by the number of pesewas, '
+      + 'not the size</text></svg>',
+  },
   questions: [
     {
       id: 'kn-1',
@@ -1401,6 +1691,31 @@ teach({
     + 'Three stones, and write 3. '
     + 'Now write them in order from 0 to 10.',
 
+  figure: {
+    alt: 'The figures 1, 7 and 2 drawn as paths to follow. Each one has a '
+      + 'green dot where the pencil starts at the top and an arrowhead '
+      + 'where it finishes, so the direction to write in is shown. Above it '
+      + 'says start at the top, and under it says always the same way.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="58" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">start at the top</text>'
+      + '<line x1="110" y1="110" x2="110" y2="274" stroke-width="6"/>'
+      + '<polyline points="99,258 110,280 121,258" stroke-width="6"/>'
+      + '<circle cx="110" cy="110" r="11" stroke="#0f8a4d" stroke-width="4" '
+      + 'fill="#0f8a4d"/>'
+      + '<polyline points="250,110 352,110 302,262" stroke-width="6"/>'
+      + '<polyline points="300,238 302,262 320,244" stroke-width="6"/>'
+      + '<circle cx="250" cy="110" r="11" stroke="#0f8a4d" stroke-width="4" '
+      + 'fill="#0f8a4d"/>'
+      + '<path d="M 452 152 Q 474 104 514 120 Q 548 136 508 192 L 458 252 L '
+      + '548 252" stroke-width="6"/>'
+      + '<polyline points="532,241 552,252 532,263" stroke-width="6"/>'
+      + '<circle cx="452" cy="152" r="11" stroke="#0f8a4d" stroke-width="4" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="320" y="345" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">always the same way</text></svg>',
+  },
   questions: [
     {
       id: 'wn2-1',
