@@ -54,12 +54,11 @@ teach({
     + 'and that 0.5, a half and 50% are three ways of writing one amount.',
 
   method: [
-    'To find 10%, divide by 10.',
-    'To find 20%, find 10% and double it.',
-    'To find 5%, find 10% and halve it.',
-    'To find 50%, halve the amount.',
-    'To find 25%, halve it twice.',
-    'For an awkward percentage, build it from 10%, 5% and 1%.',
+    'Decide which easy percentage you can build this one from.',
+    'Work out that easy one first.',
+    'Then double it, halve it, or add two of them together.',
+    'For 35%, find 25% and 10% and add them.',
+    'Check the answer looks sensible before you write it down.',
   ],
 
   worked: [
@@ -118,6 +117,57 @@ teach({
     + 'and why understanding this one idea properly is worth real money '
     + 'later.',
 
+  figure: {
+    alt: 'Two marks converted so that both are out of a hundred. '
+      + '17 over 25 has an arrow labelled times 4 leading to 68 over 100, '
+      + 'which is 68 per cent and is marked as the better mark. '
+      + '33 over 50 has an arrow labelled times 2 leading to 66 over 100, '
+      + 'which is 66 per cent. A note underneath says that out of 25 '
+      + 'against out of 50 tells you nothing at a glance.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Make both bottom numbers 100</text>'
+      + '<text x="90" y="106" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">17</text>'
+      + '<line x1="62" y1="118" x2="118" y2="118"/>'
+      + '<text x="90" y="152" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">25</text>'
+      + '<text x="188" y="104" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">times 4</text>'
+      + '<line x1="146" y1="118" x2="228" y2="118"/>'
+      + '<polygon points="238,118 224,111 224,125" fill="currentColor" stroke="none"/>'
+      + '<text x="286" y="106" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">68</text>'
+      + '<line x1="248" y1="118" x2="324" y2="118"/>'
+      + '<text x="286" y="152" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">100</text>'
+      + '<text x="360" y="128" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">is</text>'
+      + '<text x="432" y="130" font-size="28" text-anchor="middle" fill="#0f8a4d" stroke="none">68%</text>'
+      + '<text x="548" y="130" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">the better mark</text>'
+      + '<text x="90" y="236" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">33</text>'
+      + '<line x1="62" y1="248" x2="118" y2="248"/>'
+      + '<text x="90" y="282" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">50</text>'
+      + '<text x="188" y="234" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">times 2</text>'
+      + '<line x1="146" y1="248" x2="228" y2="248"/>'
+      + '<polygon points="238,248 224,241 224,255" fill="currentColor" stroke="none"/>'
+      + '<text x="286" y="236" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">66</text>'
+      + '<line x1="248" y1="248" x2="324" y2="248"/>'
+      + '<text x="286" y="282" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">100</text>'
+      + '<text x="360" y="258" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">is</text>'
+      + '<text x="432" y="260" font-size="28" text-anchor="middle" fill="currentColor" stroke="none">66%</text>'
+      + '<text x="320" y="342" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Out of 25 against out of 50 tells you nothing</text>'
+      + '<text x="320" y="368" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">at a glance. Out of 100 against out of 100 does.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Percentages you can work out in your head, and what each one '
+      + 'does to 240 cedis',
+    columns: ['Percentage', 'What to do', '240 cedis becomes'],
+    rows: [
+      ['50%', 'Halve it', '120 cedis'],
+      ['25%', 'Halve it twice', '60 cedis'],
+      ['10%', 'Divide by 10', '24 cedis'],
+      ['20%', 'Find 10%, then double it', '48 cedis'],
+      ['5%', 'Find 10%, then halve it', '12 cedis'],
+      ['1%', 'Divide by 100', '2 cedis 40 pesewas'],
+    ],
+    note: 'Any awkward percentage is built from these. 35% is the 25% row '
+      + 'and the 10% row added together, so 60 and 24 is 84 cedis.',
+  }],
   questions: [
     {
       id: 'pc-1',
@@ -260,6 +310,49 @@ teach({
     + 'because what matters is the relationship between the parts '
     + 'rather than the amounts.',
 
+  figure: {
+    alt: 'Fifty cedis drawn as five equal boxes of ten cedis each in a '
+      + 'row. A bracket under the first three boxes is labelled three '
+      + 'shares, 30 cedis, and a bracket under the last two is labelled '
+      + 'two shares, 20 cedis. A warning underneath says do not divide by '
+      + '3, divide by 3 and 2 together, and a check says 30 and 20 add '
+      + 'back to 50.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">50 cedis in the ratio 3 to 2</text>'
+      + '<text x="320" y="62" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">first cut it into 5 equal shares</text>'
+      + '<rect x="46" y="78" width="100" height="70"/>'
+      + '<text x="96" y="122" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">10</text>'
+      + '<rect x="158" y="78" width="100" height="70"/>'
+      + '<text x="208" y="122" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">10</text>'
+      + '<rect x="270" y="78" width="100" height="70"/>'
+      + '<text x="320" y="122" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">10</text>'
+      + '<rect x="382" y="78" width="100" height="70"/>'
+      + '<text x="432" y="122" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">10</text>'
+      + '<rect x="494" y="78" width="100" height="70"/>'
+      + '<text x="544" y="122" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">10</text>'
+      + '<polyline points="46,166 46,178 370,178 370,166" stroke="#0f8a4d"/>'
+      + '<line x1="208" y1="178" x2="208" y2="190" stroke="#0f8a4d"/>'
+      + '<text x="208" y="214" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">3 shares is 30 cedis</text>'
+      + '<polyline points="382,166 382,178 594,178 594,166" stroke="#0f8a4d"/>'
+      + '<line x1="488" y1="178" x2="488" y2="190" stroke="#0f8a4d"/>'
+      + '<text x="488" y="214" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">2 shares is 20 cedis</text>'
+      + '<text x="320" y="286" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">Do not divide by 3.</text>'
+      + '<text x="320" y="314" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">Divide by 3 and 2 together, which is 5.</text>'
+      + '<text x="320" y="366" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Check: 30 and 20 add back to 50.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'The same 60 oranges shared in four different ratios',
+    columns: ['Ratio', 'Shares in total', 'One share', 'Each person gets'],
+    rows: [
+      ['1 to 1', '2', '30 oranges', '30 and 30'],
+      ['3 to 2', '5', '12 oranges', '36 and 24'],
+      ['5 to 1', '6', '10 oranges', '50 and 10'],
+      ['1 to 2 to 3', '6', '10 oranges', '10, 20 and 30'],
+    ],
+    note: 'The total number of shares changes every time, so one share '
+      + 'changes with it. That is why you add the parts before you divide.',
+  }],
   questions: [
     {
       id: 'rt-1',
@@ -398,6 +491,57 @@ teach({
     + 'the area of any rectangle is length times width, written A equals lw. '
     + 'One line that covers every rectangle that has ever existed.',
 
+  figure: {
+    alt: 'Two boxes with an arrow between them. The left box, headed '
+      + 'arithmetic, lists three separate sums: three pens at 2 cedis is '
+      + '6, at 3 cedis is 9, at 5 cedis is 15, and so on for ever. The '
+      + 'right box, headed algebra, holds the single line 3p, with a note '
+      + 'that a pen costs p cedis and that this covers every price at '
+      + 'once. Underneath, a note that 3p means 3 times p, with a warning '
+      + 'that it does not mean 3 and p.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">One line instead of endless sums</text>'
+      + '<rect x="20" y="48" width="252" height="176"/>'
+      + '<text x="146" y="76" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">arithmetic</text>'
+      + '<text x="146" y="112" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">3 pens at 2 cedis is 6</text>'
+      + '<text x="146" y="140" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">3 pens at 3 cedis is 9</text>'
+      + '<text x="146" y="168" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">3 pens at 5 cedis is 15</text>'
+      + '<text x="146" y="200" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and so on, for ever</text>'
+      + '<line x1="284" y1="136" x2="344" y2="136"/>'
+      + '<polygon points="354,136 340,129 340,143" fill="currentColor" stroke="none"/>'
+      + '<rect x="366" y="48" width="252" height="176" stroke="#0f8a4d"/>'
+      + '<text x="492" y="76" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">algebra</text>'
+      + '<text x="492" y="136" font-size="40" text-anchor="middle" fill="currentColor" stroke="none">3p</text>'
+      + '<text x="492" y="172" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">a pen costs p cedis</text>'
+      + '<text x="492" y="200" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">covers every price at once</text>'
+      + '<text x="320" y="278" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">3p means 3 times p. The times sign is left out.</text>'
+      + '<text x="320" y="316" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">It does not mean 3 and p.</text>'
+      + '<text x="320" y="364" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">To find p, undo what was done to it.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Finding the letter by undoing what was done to it',
+    columns: [
+      'The sentence',
+      'What was done to the letter',
+      'Undo it by',
+      'The letter is',
+    ],
+    rows: [
+      ['p plus 7 is 12', '7 was added', 'Taking away 7', 'p is 5'],
+      ['p take away 4 is 9', '4 was taken away', 'Adding 4', 'p is 13'],
+      ['3p is 12', 'Multiplied by 3', 'Dividing by 3', 'p is 4'],
+      ['p divided by 2 is 8', 'Divided by 2', 'Multiplying by 2', 'p is 16'],
+      [
+        '2n plus 5 is 17',
+        'Times 2, then 5 added',
+        'Take away 5, then divide by 2',
+        'n is 6',
+      ],
+    ],
+    note: 'Every row is checked by putting the answer back in. 3 times 4 '
+      + 'is 12, so p is 4 is right.',
+  }],
   questions: [
     {
       id: 'lf-1',
@@ -458,11 +602,7 @@ teach({
     + 'The bottom layer is 4 by 3, which is 12 cubes. '
     + 'The box is 2 cubes high, so there are two such layers: 24 cubes. '
     + 'That is why you multiply three numbers, '
-    + 'and why the unit is cubic: you are counting cubes. '
-    + 'It also explains the jump from area: '
-    + 'area counts squares covering a surface, volume counts cubes filling '
-    + 'a space. '
-    + 'Two measurements for area, three for volume.',
+    + 'and why the unit is cubic: you are counting cubes.',
 
   recap:
     'You can find the area of a rectangle by multiplying two sides, '
@@ -533,6 +673,59 @@ teach({
     + 'That is why the kitchen and the mathematics classroom agree, '
     + 'and it is a definition rather than a coincidence.',
 
+  figure: {
+    alt: 'A box 4 cm by 3 cm by 2 cm shown twice. Looking down on it, a '
+      + 'grid 4 squares by 3 squares is labelled 4 by 3 is 12 cubes in one '
+      + 'layer. Looking at it from the side, a grid 4 squares by 2 squares '
+      + 'is labelled 2 layers high. Underneath, 12 cubes in a layer and 2 '
+      + 'layers is 24 cubes, which is 24 cubic centimetres, and a note '
+      + 'that three measurements are why the unit is cubic.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Counting the cubes that fill the box</text>'
+      + '<text x="120" y="64" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">looking down on it</text>'
+      + '<rect x="40" y="78" width="160" height="120"/>'
+      + '<line x1="80" y1="78" x2="80" y2="198" stroke-width="2"/>'
+      + '<line x1="120" y1="78" x2="120" y2="198" stroke-width="2"/>'
+      + '<line x1="160" y1="78" x2="160" y2="198" stroke-width="2"/>'
+      + '<line x1="40" y1="118" x2="200" y2="118" stroke-width="2"/>'
+      + '<line x1="40" y1="158" x2="200" y2="158" stroke-width="2"/>'
+      + '<text x="120" y="226" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">4 by 3 is 12 cubes</text>'
+      + '<text x="120" y="250" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">in one layer</text>'
+      + '<text x="470" y="64" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">looking at it from the side</text>'
+      + '<rect x="390" y="78" width="160" height="80"/>'
+      + '<line x1="430" y1="78" x2="430" y2="158" stroke-width="2"/>'
+      + '<line x1="470" y1="78" x2="470" y2="158" stroke-width="2"/>'
+      + '<line x1="510" y1="78" x2="510" y2="158" stroke-width="2"/>'
+      + '<line x1="390" y1="118" x2="550" y2="118" stroke-width="2"/>'
+      + '<text x="470" y="226" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">2 layers high</text>'
+      + '<text x="320" y="302" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">12 cubes in a layer, and 2 layers, is 24 cubes.</text>'
+      + '<text x="320" y="340" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">24 cubic centimetres</text>'
+      + '<text x="320" y="376" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Three measurements, so the unit is cubic.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Length, area and volume: how many measurements each needs '
+      + 'and what each unit means',
+    columns: [
+      'You are finding',
+      'Measurements needed',
+      'What you are counting',
+      'Unit',
+    ],
+    rows: [
+      ['Length of a side', '1', 'Centimetres end to end', 'Centimetres'],
+      [
+        'Area of a surface',
+        '2',
+        'Squares covering it',
+        'Square centimetres',
+      ],
+      ['Volume of a space', '3', 'Cubes filling it', 'Cubic centimetres'],
+    ],
+    note: 'One more direction each time, so one more measurement and one '
+      + 'more word on the unit. The unit is how a reader knows which of '
+      + 'the three you found.',
+  }],
   questions: [
     {
       id: 'vl-1',
@@ -599,8 +792,6 @@ teach({
   mechanism:
     'The mean is useful because it turns many numbers into one, '
     + 'and dangerous for exactly the same reason. '
-    + 'Consider four children with 2, 3, 3 and 40 sweets. '
-    + 'The mean is 12, and not one child has anything close to 12. '
     + 'One extreme value drags it away from everybody. '
     + 'So the mean describes the group well when the values are close '
     + 'together '
@@ -681,6 +872,46 @@ teach({
     + 'which describes that group far better than 12 does. '
     + 'That is why reports about incomes usually give both.',
 
+  figure: {
+    alt: 'Four bars showing how many sweets four children have: 2, 3, 3 '
+      + 'and 40. The first three bars are very short and the fourth is '
+      + 'very tall. A broken line across the picture marks the mean at 12. '
+      + 'It passes well above the three short bars and far below the tall '
+      + 'one, and a note says not one child has 12.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Four children, and the mean of their sweets</text>'
+      + '<rect x="70" y="278" width="70" height="12"/>'
+      + '<rect x="190" y="272" width="70" height="18"/>'
+      + '<rect x="310" y="272" width="70" height="18"/>'
+      + '<rect x="430" y="50" width="70" height="240" stroke="#c8433a"/>'
+      + '<line x1="40" y1="290" x2="600" y2="290"/>'
+      + '<line x1="40" y1="218" x2="600" y2="218" stroke="#c8433a" stroke-dasharray="9 7"/>'
+      + '<text x="596" y="208" font-size="15" text-anchor="end" fill="#c8433a" stroke="none">the mean, 12</text>'
+      + '<text x="105" y="314" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="225" y="314" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<text x="345" y="314" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<text x="465" y="314" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">40</text>'
+      + '<text x="320" y="340" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">sweets each child has</text>'
+      + '<text x="320" y="376" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">Not one child has 12.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Two groups with the same mean, one described well by it and '
+      + 'one described badly',
+    columns: [
+      'The numbers',
+      'Total',
+      'Mean',
+      'Does the mean describe them?',
+    ],
+    rows: [
+      ['11, 12, 12, 13', '48', '12', 'Yes, all four are near 12'],
+      ['2, 3, 3, 40', '48', '12', 'No, not one of them is near 12'],
+    ],
+    note: 'Four numbers each time, adding to 48, so the mean is 12 both '
+      + 'times. Two completely different groups. That is why you look at '
+      + 'the numbers and not only at the mean.',
+  }],
   questions: [
     {
       id: 'av-1',
@@ -738,10 +969,11 @@ teach({
   },
 
   idea:
-    'Some things are certain: the sun will rise. '
-    + 'Some are impossible: a goat will not lay an egg. '
-    + 'Most sit between, and we call them likely or unlikely. '
-    + 'Chance is about describing where something sits.',
+    'Some things are certain, some are impossible, '
+    + 'and most sit between. '
+    + 'We call those likely or unlikely. '
+    + 'Chance is about describing where something sits, '
+    + 'and then counting the ways it could happen.',
 
   mechanism:
     'The idea worth fixing now is that the past does not change the future '
@@ -822,6 +1054,59 @@ teach({
     + 'rather than arguing about whether something is likely, '
     + 'and that is where the JHS work begins.',
 
+  figure: {
+    alt: 'Five coins in a row have all landed heads. An arrow leads from '
+      + 'them to the next toss, drawn as one larger coin split down the '
+      + 'middle with heads on one side and tails on the other. A note says '
+      + 'it is still one chance in two, exactly as before, and a warning '
+      + 'says tails is not due because the coin does not know.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">A coin has no memory</text>'
+      + '<circle cx="70" cy="96" r="28"/>'
+      + '<text x="70" y="104" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">H</text>'
+      + '<circle cx="140" cy="96" r="28"/>'
+      + '<text x="140" y="104" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">H</text>'
+      + '<circle cx="210" cy="96" r="28"/>'
+      + '<text x="210" y="104" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">H</text>'
+      + '<circle cx="280" cy="96" r="28"/>'
+      + '<text x="280" y="104" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">H</text>'
+      + '<circle cx="350" cy="96" r="28"/>'
+      + '<text x="350" y="104" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">H</text>'
+      + '<text x="210" y="158" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">five tosses already done</text>'
+      + '<line x1="390" y1="96" x2="438" y2="96"/>'
+      + '<polygon points="448,96 434,89 434,103" fill="currentColor" stroke="none"/>'
+      + '<circle cx="528" cy="96" r="46" stroke="#0f8a4d"/>'
+      + '<line x1="528" y1="50" x2="528" y2="142" stroke="#0f8a4d"/>'
+      + '<text x="506" y="104" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">H</text>'
+      + '<text x="550" y="104" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">T</text>'
+      + '<text x="528" y="170" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">the next toss</text>'
+      + '<text x="320" y="238" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">Still one chance in two, exactly as before.</text>'
+      + '<text x="320" y="294" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">Tails is not due. The coin does not know</text>'
+      + '<text x="320" y="320" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">what it did last time.</text>'
+      + '<text x="320" y="368" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">Each toss is a fresh event with the same two outcomes.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Where different events sit between impossible and certain',
+    columns: ['Event', 'Where it sits', 'Ways it can happen'],
+    rows: [
+      ['A goat lays an egg', 'Impossible', 'None at all'],
+      [
+        'Drawing blue from 9 red and 1 blue',
+        'Unlikely',
+        '1 way out of 10',
+      ],
+      ['A coin landing heads', 'An even chance', '1 way out of 2'],
+      [
+        'Drawing red from 9 red and 1 blue',
+        'Likely',
+        '9 ways out of 10',
+      ],
+      ['The sun rising tomorrow', 'Certain', 'There is no other way'],
+    ],
+    note: 'The last column is the useful one. Likely and unlikely are '
+      + 'feelings until you have counted the ways.',
+  }],
   questions: [
     {
       id: 'ch-1',
@@ -898,12 +1183,11 @@ teach({
     + 'A discussion is that, interrupted, and with somebody answering back.',
 
   method: [
-    'State your view in one sentence.',
-    'Give one reason for it.',
-    'Then stop and listen.',
+    'State your view in one sentence, and give one reason for it.',
+    'Then stop and listen all the way through.',
     'Before replying, say their point back in your own words.',
+    'Check with them that you got it right.',
     'Answer the reason they gave, not the one you wish they had given.',
-    'Say when they have made a good point. It costs nothing.',
     'Disagree with what was said, never with the person who said it.',
   ],
 
@@ -960,6 +1244,57 @@ teach({
     + 'Nobody can accuse you of misunderstanding, '
     + 'and everybody listening knows you have actually thought about it.',
 
+  figure: {
+    alt: 'Two panels, each holding the same three remarks. In the panel '
+      + 'headed a discussion, A says school should start later, B replies '
+      + 'that A is saying pupils would be more awake, and A agrees that is '
+      + 'the point. In the panel headed an argument, A says the same '
+      + 'thing, B replies that A wants pupils to do no work at all, and A '
+      + 'says that is not what was said. Underneath, the test: say their '
+      + 'point back, and if they agree you got it right, you are '
+      + 'discussing.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">The test for a discussion</text>'
+      + '<rect x="20" y="44" width="290" height="248" stroke="#0f8a4d"/>'
+      + '<text x="165" y="72" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">a discussion</text>'
+      + '<rect x="36" y="88" width="258" height="44" rx="8"/>'
+      + '<text x="165" y="116" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">A: school should start later</text>'
+      + '<rect x="36" y="146" width="258" height="62" rx="8"/>'
+      + '<text x="165" y="170" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">B: you are saying pupils</text>'
+      + '<text x="165" y="192" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">would be more awake</text>'
+      + '<rect x="36" y="222" width="258" height="44" rx="8" stroke="#0f8a4d"/>'
+      + '<text x="165" y="250" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">A: yes, that is my point</text>'
+      + '<rect x="330" y="44" width="290" height="248" stroke="#c8433a"/>'
+      + '<text x="475" y="72" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">an argument</text>'
+      + '<rect x="346" y="88" width="258" height="44" rx="8"/>'
+      + '<text x="475" y="116" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">A: school should start later</text>'
+      + '<rect x="346" y="146" width="258" height="62" rx="8"/>'
+      + '<text x="475" y="170" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">B: so you want pupils to</text>'
+      + '<text x="475" y="192" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">do no work at all</text>'
+      + '<rect x="346" y="222" width="258" height="44" rx="8" stroke="#c8433a"/>'
+      + '<text x="475" y="250" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">A: that is not what I said</text>'
+      + '<text x="320" y="334" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Say their point back to them. If they agree you</text>'
+      + '<text x="320" y="360" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">got it right, you are having a discussion.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'The same six moments in a discussion and in an argument',
+    columns: ['The moment', 'In a discussion', 'In an argument'],
+    rows: [
+      ['Who is speaking', 'One at a time', 'Both at once'],
+      ['While they speak', 'You listen to the end', 'You plan your reply'],
+      [
+        'What you answer',
+        'The reason they gave',
+        'A version easier to beat',
+      ],
+      ['What you disagree with', 'The point', 'The person'],
+      ['When they are right', 'You say so', 'You change the subject'],
+      ['At the end', 'Both of you know more', 'Nobody has moved'],
+    ],
+    note: 'Every entry in the middle column is harder in the moment and '
+      + 'worth more afterwards.',
+  }],
   questions: [
     {
       id: 'ds-1',
@@ -1044,8 +1379,8 @@ teach({
     'Read the whole passage first.',
     'Find the main idea of each paragraph and note it in a few words.',
     'Put your notes aside and write from them, not from the passage.',
-    'Cut every example.',
-    'Cut anything said twice.',
+    'Go through what you wrote and cut whatever the meaning survives '
+      + 'without.',
     'Read your summary. Does somebody who has not read the original '
       + 'understand what it said?',
   ],
@@ -1107,6 +1442,90 @@ teach({
     + 'and that is worth knowing before an examination rather than during '
     + 'one.',
 
+  figure: {
+    alt: 'Three panels with arrows between them. The first, headed the '
+      + 'passage, is eight lines of writing. The second, headed cross out '
+      + 'what the meaning survives without, is the same eight lines with '
+      + 'four of them marked in the margin. The third, headed the summary, '
+      + 'is the four lines that are left. Underneath, the test: take '
+      + 'something out and ask whether the passage still means the same, '
+      + 'and if it does, it was detail.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">A summary keeps the point and drops the rest</text>'
+      + '<rect x="20" y="48" width="170" height="202"/>'
+      + '<text x="105" y="74" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the passage</text>'
+      + '<line x1="36" y1="100" x2="174" y2="100" stroke-width="2"/>'
+      + '<line x1="36" y1="122" x2="174" y2="122" stroke-width="2"/>'
+      + '<line x1="36" y1="144" x2="174" y2="144" stroke-width="2"/>'
+      + '<line x1="36" y1="166" x2="174" y2="166" stroke-width="2"/>'
+      + '<line x1="36" y1="188" x2="174" y2="188" stroke-width="2"/>'
+      + '<line x1="36" y1="210" x2="174" y2="210" stroke-width="2"/>'
+      + '<line x1="36" y1="232" x2="120" y2="232" stroke-width="2"/>'
+      + '<line x1="200" y1="150" x2="232" y2="150"/>'
+      + '<polygon points="242,150 228,143 228,157" fill="currentColor" stroke="none"/>'
+      + '<rect x="252" y="48" width="170" height="202"/>'
+      + '<text x="337" y="74" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">cross out the detail</text>'
+      + '<line x1="282" y1="100" x2="406" y2="100" stroke-width="2"/>'
+      + '<line x1="282" y1="122" x2="406" y2="122" stroke-width="2"/>'
+      + '<line x1="282" y1="144" x2="406" y2="144" stroke-width="2"/>'
+      + '<line x1="282" y1="166" x2="406" y2="166" stroke-width="2"/>'
+      + '<line x1="282" y1="188" x2="406" y2="188" stroke-width="2"/>'
+      + '<line x1="282" y1="210" x2="406" y2="210" stroke-width="2"/>'
+      + '<line x1="282" y1="232" x2="356" y2="232" stroke-width="2"/>'
+      + '<line x1="262" y1="117" x2="274" y2="127" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="274" y1="117" x2="262" y2="127" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="262" y1="139" x2="274" y2="149" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="274" y1="139" x2="262" y2="149" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="262" y1="183" x2="274" y2="193" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="274" y1="183" x2="262" y2="193" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="262" y1="227" x2="274" y2="237" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="274" y1="227" x2="262" y2="237" stroke="#c8433a" stroke-width="2"/>'
+      + '<line x1="432" y1="150" x2="464" y2="150"/>'
+      + '<polygon points="474,150 460,143 460,157" fill="currentColor" stroke="none"/>'
+      + '<rect x="484" y="48" width="136" height="202" stroke="#0f8a4d"/>'
+      + '<text x="552" y="74" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">the summary</text>'
+      + '<line x1="498" y1="100" x2="606" y2="100" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<line x1="498" y1="122" x2="606" y2="122" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<line x1="498" y1="144" x2="606" y2="144" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="320" y="296" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Take something out. Does the passage still</text>'
+      + '<text x="320" y="322" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">mean the same?</text>'
+      + '<text x="320" y="364" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">If it does, it was detail.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What stays in a summary and what goes',
+    columns: ['Part of the passage', 'Keep or cut', 'Why'],
+    rows: [
+      [
+        'The main idea of a paragraph',
+        'Keep',
+        'It is what the passage said',
+      ],
+      [
+        'An example of that idea',
+        'Cut',
+        'The idea it shows is stated elsewhere',
+      ],
+      ['Anything said twice', 'Cut', 'The second time adds nothing'],
+      [
+        'How a thing looked',
+        'Cut',
+        'The meaning survives without it',
+      ],
+      [
+        'A number the argument rests on',
+        'Keep',
+        'Remove it and the point collapses',
+      ],
+      [
+        'A quotation that proves a point',
+        'Cut',
+        'Say what it proved, in your own words',
+      ],
+    ],
+    note: 'The test for every row is the same. Take it out and see '
+      + 'whether the meaning changed.',
+  }],
   questions: [
     {
       id: 'sm-1',
@@ -1175,14 +1594,16 @@ teach({
 
   mechanism:
     'They fail in different ways, which is the useful thing to know. '
-    + 'A description fails when it has no order: '
-    + 'the reader cannot assemble a picture from details arriving at random, '
-    + 'so you go top to bottom, or near to far, and keep to it. '
-    + 'An explanation fails when it assumes something, '
-    + 'because the reader stops at the gap and cannot continue. '
-    + 'So a description needs an order and an explanation needs completeness, '
-    + 'and testing each one has a different question: '
-    + 'can they picture it, and can they do it.',
+    + 'A reader cannot assemble a picture from details arriving at random, '
+    + 'so a description needs an order: top to bottom, or near to far, '
+    + 'and then keep to it. '
+    + 'An explanation is different. '
+    + 'The reader stops dead at the first gap and cannot go on, '
+    + 'so nothing may be left out. '
+    + 'Which is why the person who wrote it is the worst person to test '
+    + 'it: '
+    + 'you know the task, so you fill the gap without noticing it is '
+    + 'there.',
 
   recap:
     'You can describe an object so somebody could pick it out, '
@@ -1195,8 +1616,8 @@ teach({
     'Describing: name what makes this one different from similar things.',
     'Explaining: one action per step, in order.',
     'Explaining: assume nothing. List what is needed first.',
-    'Test a description by asking somebody to draw it.',
-    'Test an explanation by asking somebody to follow it.',
+    'Test it on somebody who does not already know the thing.',
+    'Watch where they stop. That is where your writing failed.',
   ],
 
   worked: [
@@ -1252,10 +1673,74 @@ teach({
   extension:
     'Almost all technical writing is these two skills, '
     + 'and so is most of a science examination answer. '
-    + '"Describe what happens" and "explain why it happens" '
-    + 'are different questions, and answering the wrong one scores nothing '
-    + 'however well it is written.',
+    + 'Knowing which of the two you have been asked for '
+    + 'is worth more marks than writing either one beautifully.',
 
+  figure: {
+    alt: 'Two panels. The left panel, headed describing, so the reader can '
+      + 'picture it, holds three boxes in order: top, a red roof; middle, '
+      + 'two windows; bottom, a blue door. A note says that with no order '
+      + 'there is no picture. The right panel, headed explaining, so the '
+      + 'reader can do it, holds step one, wash the maize, then a broken '
+      + 'box where a step was never written, then step three, leave it to '
+      + 'ferment. A note says the reader stops at the gap.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Two jobs, and how each one fails</text>'
+      + '<rect x="20" y="44" width="290" height="246"/>'
+      + '<text x="165" y="72" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">describing</text>'
+      + '<text x="165" y="96" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">so the reader can picture it</text>'
+      + '<rect x="46" y="112" width="238" height="36"/>'
+      + '<text x="165" y="136" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">1. top: a red roof</text>'
+      + '<rect x="46" y="158" width="238" height="36"/>'
+      + '<text x="165" y="182" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">2. middle: two windows</text>'
+      + '<rect x="46" y="204" width="238" height="36"/>'
+      + '<text x="165" y="228" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">3. bottom: a blue door</text>'
+      + '<text x="165" y="268" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">With no order, no picture.</text>'
+      + '<rect x="330" y="44" width="290" height="246"/>'
+      + '<text x="475" y="72" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">explaining</text>'
+      + '<text x="475" y="96" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">so the reader can do it</text>'
+      + '<rect x="356" y="112" width="238" height="36"/>'
+      + '<text x="475" y="136" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">1. wash the maize</text>'
+      + '<rect x="356" y="158" width="238" height="36" stroke="#c8433a" stroke-dasharray="7 6"/>'
+      + '<text x="475" y="182" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">2. the step nobody wrote</text>'
+      + '<rect x="356" y="204" width="238" height="36"/>'
+      + '<text x="475" y="228" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">3. leave it to ferment</text>'
+      + '<text x="475" y="268" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">The reader stops at the gap.</text>'
+      + '<text x="320" y="334" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Test a description by asking somebody to draw it.</text>'
+      + '<text x="320" y="364" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Test an explanation by asking somebody to follow it.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'A description and an explanation, compared',
+    columns: [
+      'The question',
+      'A description',
+      'An explanation',
+    ],
+    rows: [
+      ['What is its job?', 'The reader pictures it', 'The reader can do it'],
+      [
+        'What must it have?',
+        'An order you keep to',
+        'Every step, nothing assumed',
+      ],
+      [
+        'How does it fail?',
+        'Details arrive at random',
+        'A gap the reader stops at',
+      ],
+      [
+        'How do you test it?',
+        'Ask somebody to draw it',
+        'Ask somebody to follow it',
+      ],
+      [
+        'What does the exam call it?',
+        'Describe what happens',
+        'Explain why it happens',
+      ],
+    ],
+  }],
   questions: [
     {
       id: 'de-1',
