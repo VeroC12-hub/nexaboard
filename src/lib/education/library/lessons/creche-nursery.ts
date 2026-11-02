@@ -113,6 +113,35 @@ teach({
     + 'Five stones. Five bottle tops. '
     + 'Say one number for each one.',
 
+  figure: {
+    alt: 'Five big stones in a row with the numbers one to five written '
+      + 'above them, one number over each stone. A green arrow runs under '
+      + 'the row from left to right. The first stone is labelled one is '
+      + 'first and the last is labelled five is last.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="90" cy="190" r="34"/>'
+      + '<circle cx="200" cy="190" r="34"/>'
+      + '<circle cx="310" cy="190" r="34"/>'
+      + '<circle cx="420" cy="190" r="34"/>'
+      + '<circle cx="530" cy="190" r="34"/>'
+      + '<text x="90" y="118" font-size="42" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<text x="200" y="118" font-size="42" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<text x="310" y="118" font-size="42" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3</text>'
+      + '<text x="420" y="118" font-size="42" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4</text>'
+      + '<text x="530" y="118" font-size="42" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">5</text>'
+      + '<line x1="50" y1="272" x2="570" y2="272" stroke="#0f8a4d"/>'
+      + '<polyline points="557,262 570,272 557,282" stroke="#0f8a4d"/>'
+      + '<text x="120" y="332" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">one is first</text>'
+      + '<text x="510" y="332" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">five is last</text></svg>',
+  },
   questions: [
     {
       id: 'c5-1',
@@ -221,6 +250,24 @@ teach({
     + 'Say the name of your town. '
     + 'Say it after your own name.',
 
+  figure: {
+    alt: 'A child standing on the left with a large speech bubble beside '
+      + 'them. The bubble holds the name Ama. Under the child it says say '
+      + 'your name.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="170" cy="120" r="45"/>'
+      + '<line x1="170" y1="165" x2="170" y2="275"/>'
+      + '<line x1="113" y1="210" x2="227" y2="210"/>'
+      + '<line x1="170" y1="275" x2="138" y2="340"/>'
+      + '<line x1="170" y1="275" x2="202" y2="340"/>'
+      + '<ellipse cx="450" cy="150" rx="140" ry="72"/>'
+      + '<polyline points="320,128 246,196 318,170"/>'
+      + '<text x="450" y="166" font-size="46" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">Ama</text>'
+      + '<text x="170" y="388" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">say your name</text></svg>',
+  },
   questions: [
     {
       id: 'nm-1',
@@ -318,6 +365,45 @@ teach({
     + 'Feel it going up and down. '
     + 'That is you breathing.',
 
+  figure: {
+    alt: 'A child drawn facing you, with lines running out to labels that '
+      + 'give each part and what it does: eyes see, nose smells and hands '
+      + 'hold on the left, ears hear, mouth talks and legs walk on the '
+      + 'right.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="320" cy="100" r="55"/>'
+      + '<circle cx="265" cy="100" r="13"/>'
+      + '<circle cx="375" cy="100" r="13"/>'
+      + '<circle cx="302" cy="88" r="6" fill="currentColor"/>'
+      + '<circle cx="338" cy="88" r="6" fill="currentColor"/>'
+      + '<line x1="320" y1="96" x2="320" y2="112"/>'
+      + '<path d="M 303 122 Q 320 136 337 122"/>'
+      + '<line x1="320" y1="155" x2="320" y2="265"/>'
+      + '<line x1="250" y1="195" x2="390" y2="195"/>'
+      + '<circle cx="243" cy="195" r="13"/>'
+      + '<circle cx="397" cy="195" r="13"/>'
+      + '<line x1="320" y1="265" x2="275" y2="355"/>'
+      + '<line x1="320" y1="265" x2="365" y2="355"/>'
+      + '<line x1="176" y1="78" x2="292" y2="86"/>'
+      + '<text x="170" y="86" font-size="22" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">eyes see</text>'
+      + '<line x1="176" y1="146" x2="304" y2="114"/>'
+      + '<text x="170" y="154" font-size="22" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">nose smells</text>'
+      + '<line x1="176" y1="200" x2="228" y2="196"/>'
+      + '<text x="170" y="208" font-size="22" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">hands hold</text>'
+      + '<line x1="466" y1="78" x2="384" y2="92"/>'
+      + '<text x="472" y="86" font-size="22" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">ears hear</text>'
+      + '<line x1="466" y1="134" x2="340" y2="126"/>'
+      + '<text x="472" y="142" font-size="22" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">mouth talks</text>'
+      + '<line x1="466" y1="324" x2="372" y2="342"/>'
+      + '<text x="472" y="332" font-size="22" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">legs walk</text></svg>',
+  },
   questions: [
     {
       id: 'bd-1',
@@ -420,6 +506,40 @@ teach({
     + 'Now sing it slow. '
     + 'Now sing it quietly.',
 
+  figure: {
+    alt: 'A grown up and a child standing side by side with three green '
+      + 'music notes floating above them. Beside them it says sing '
+      + 'together, then clap, and under them it says the same words every '
+      + 'time.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="170" cy="130" r="42"/>'
+      + '<line x1="170" y1="172" x2="170" y2="282"/>'
+      + '<line x1="116" y1="217" x2="224" y2="217"/>'
+      + '<line x1="170" y1="282" x2="138" y2="345"/>'
+      + '<line x1="170" y1="282" x2="202" y2="345"/>'
+      + '<circle cx="320" cy="175" r="30"/>'
+      + '<line x1="320" y1="205" x2="320" y2="315"/>'
+      + '<line x1="278" y1="250" x2="362" y2="250"/>'
+      + '<line x1="320" y1="315" x2="288" y2="345"/>'
+      + '<line x1="320" y1="315" x2="352" y2="345"/>'
+      + '<ellipse cx="250" cy="92" rx="12" ry="9" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="262" y1="92" x2="262" y2="54" stroke="#0f8a4d"/>'
+      + '<ellipse cx="300" cy="116" rx="12" ry="9" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="312" y1="116" x2="312" y2="78" stroke="#0f8a4d"/>'
+      + '<ellipse cx="358" cy="86" rx="12" ry="9" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="370" y1="86" x2="370" y2="48" stroke="#0f8a4d"/>'
+      + '<text x="500" y="176" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">sing together</text>'
+      + '<text x="500" y="222" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">then clap</text>'
+      + '<text x="320" y="388" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the same words every time</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'sg-1',
@@ -519,6 +639,52 @@ teach({
     'Now count ten things. '
     + 'Ten stones. Touch each one once.',
 
+  figure: {
+    alt: 'The numbers one to ten written in a line above a ruled line with a '
+      + 'tick under each number. The six has a green ring round it and a '
+      + 'green arrow runs from it to the right, labelled start at six and '
+      + 'carry on.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="50" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<text x="110" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<text x="170" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3</text>'
+      + '<text x="230" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4</text>'
+      + '<text x="290" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">5</text>'
+      + '<text x="350" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">6</text>'
+      + '<text x="410" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">7</text>'
+      + '<text x="470" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">8</text>'
+      + '<text x="530" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">9</text>'
+      + '<text x="590" y="170" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">10</text>'
+      + '<line x1="25" y1="205" x2="615" y2="205"/>'
+      + '<line x1="50" y1="198" x2="50" y2="212"/>'
+      + '<line x1="110" y1="198" x2="110" y2="212"/>'
+      + '<line x1="170" y1="198" x2="170" y2="212"/>'
+      + '<line x1="230" y1="198" x2="230" y2="212"/>'
+      + '<line x1="290" y1="198" x2="290" y2="212"/>'
+      + '<line x1="350" y1="198" x2="350" y2="212"/>'
+      + '<line x1="410" y1="198" x2="410" y2="212"/>'
+      + '<line x1="470" y1="198" x2="470" y2="212"/>'
+      + '<line x1="530" y1="198" x2="530" y2="212"/>'
+      + '<line x1="590" y1="198" x2="590" y2="212"/>'
+      + '<circle cx="350" cy="160" r="34" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="390" y1="265" x2="605" y2="265" stroke="#0f8a4d"/>'
+      + '<polyline points="592,255 605,265 592,275" stroke="#0f8a4d"/>'
+      + '<text x="610" y="316" font-size="24" text-anchor="end" '
+      + 'fill="#0f8a4d" stroke="none">start at six and carry on</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'c10-1',
@@ -629,6 +795,42 @@ teach({
     + 'Count the windows. '
     + 'Point at each one once.',
 
+  figure: {
+    alt: 'Five stones in a row with the numbers one to five above them, one '
+      + 'number over each stone, and a short green line joining each number '
+      + 'down to its own stone. Above it says one number for one stone and '
+      + 'below it says touch each one once.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="58" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">one number for one stone</text>'
+      + '<text x="100" y="140" font-size="32" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<text x="200" y="140" font-size="32" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<text x="300" y="140" font-size="32" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3</text>'
+      + '<text x="400" y="140" font-size="32" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4</text>'
+      + '<text x="500" y="140" font-size="32" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">5</text>'
+      + '<line x1="100" y1="152" x2="100" y2="168" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="200" y1="152" x2="200" y2="168" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="300" y1="152" x2="300" y2="168" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="400" y1="152" x2="400" y2="168" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="500" y1="152" x2="500" y2="168" stroke="#0f8a4d" '
+      + 'stroke-width="4"/><circle cx="100" cy="200" r="30"/>'
+      + '<circle cx="200" cy="200" r="30"/>'
+      + '<circle cx="300" cy="200" r="30"/>'
+      + '<circle cx="400" cy="200" r="30"/>'
+      + '<circle cx="500" cy="200" r="30"/>'
+      + '<text x="320" y="330" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">touch each one once</text></svg>',
+  },
   questions: [
     {
       id: 'tc-1',
@@ -745,6 +947,52 @@ teach({
     + 'A window may be a square. '
     + 'What else can you find?',
 
+  figure: {
+    alt: 'A circle, a square and a triangle in a row, with a green dot on '
+      + 'every corner. Each is named, and under the name it says what to '
+      + 'count: no corners for the circle, four sides for the square and '
+      + 'three sides for the triangle. A fourth shape below is the same '
+      + 'triangle lying on its side, labelled still a triangle.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="110" cy="140" r="55"/>'
+      + '<polygon points="230,85 340,85 340,195 230,195"/>'
+      + '<circle cx="230" cy="85" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="340" cy="85" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="340" cy="195" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="230" cy="195" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/><polygon points="470,85 415,195 525,195"/>'
+      + '<circle cx="470" cy="85" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="415" cy="195" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="525" cy="195" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="110" y="240" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">circle</text>'
+      + '<text x="285" y="240" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">square</text>'
+      + '<text x="470" y="240" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">triangle</text>'
+      + '<text x="110" y="276" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">no corners</text>'
+      + '<text x="285" y="276" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">four sides</text>'
+      + '<text x="470" y="276" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">three sides</text>'
+      + '<polygon points="150,310 150,390 232,350"/>'
+      + '<circle cx="150" cy="310" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="150" cy="390" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="232" cy="350" r="8" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="420" y="358" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">still a triangle</text></svg>',
+  },
   questions: [
     {
       id: 'sh-1',
@@ -851,6 +1099,42 @@ teach({
     + 'Tell me where you hid it. '
     + 'Use one of the words.',
 
+  figure: {
+    alt: 'The same green cup drawn four times with a table. In the first it '
+      + 'stands on the table and is labelled on, in the second it is under '
+      + 'the table, in the third it is beside the table, and in the fourth '
+      + 'a stone sits inside it. Under them it says now say where it is.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<line x1="25" y1="170" x2="135" y2="170"/>'
+      + '<line x1="35" y1="170" x2="35" y2="230"/>'
+      + '<line x1="125" y1="170" x2="125" y2="230"/>'
+      + '<polygon points="60,135 100,135 96,168 64,168" stroke="#0f8a4d" '
+      + 'stroke-width="4" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<text x="80" y="274" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">on</text>'
+      + '<line x1="185" y1="170" x2="295" y2="170"/>'
+      + '<line x1="195" y1="170" x2="195" y2="230"/>'
+      + '<line x1="285" y1="170" x2="285" y2="230"/>'
+      + '<polygon points="220,180 260,180 256,213 224,213" stroke="#0f8a4d" '
+      + 'stroke-width="4" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<text x="240" y="274" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">under</text>'
+      + '<line x1="357" y1="170" x2="433" y2="170"/>'
+      + '<line x1="367" y1="170" x2="367" y2="230"/>'
+      + '<line x1="423" y1="170" x2="423" y2="230"/>'
+      + '<polygon points="445,185 485,185 481,218 449,218" stroke="#0f8a4d" '
+      + 'stroke-width="4" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<text x="400" y="274" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">beside</text>'
+      + '<polygon points="534,150 586,150 580,220 540,220" stroke="#0f8a4d" '
+      + 'stroke-width="4" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<circle cx="560" cy="196" r="15"/>'
+      + '<text x="560" y="274" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">in</text>'
+      + '<text x="320" y="348" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">now say where it is</text></svg>',
+  },
   questions: [
     {
       id: 'ps-1',
