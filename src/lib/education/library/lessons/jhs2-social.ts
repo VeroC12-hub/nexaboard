@@ -47,14 +47,9 @@ teach({
   idea:
     'Environmental degradation means the land, water or air is being '
     + 'damaged faster than it can recover. '
-    + 'Galamsey, which is small scale mining without a licence, '
-    + 'strips topsoil, leaves open pits, '
-    + 'and puts mercury and silt into rivers such as the Pra, '
-    + 'the Ankobra and the Birim. '
-    + 'Deforestation removes the trees whose roots hold the soil '
-    + 'and whose shade keeps it moist. '
-    + 'Other forms are sand winning, overgrazing, bush burning, '
-    + 'and dumping waste into gutters and lagoons. '
+    + 'Ghana has it in several forms at once, '
+    + 'and the best known is galamsey, '
+    + 'which is small scale mining without a licence. '
     + 'The effects reach further than the site: '
     + 'poisoned drinking water, '
     + 'treatment plants shut down, '
@@ -180,6 +175,93 @@ teach({
     + 'So a licensed operation must put money down in advance, '
     + 'and the cost cannot be walked away from.',
 
+  figure: {
+    alt: 'A river drawn across the page. Above its left end is a galamsey '
+      + 'pit, marked in red, with an arrow of mercury and silt running '
+      + 'down into the water. The river is clean upstream of the pit and '
+      + 'red all the way downstream, where three marks along it show the '
+      + 'water plant having to shut, the fish gone and the farm flooded, '
+      + 'and a child drinking the water and falling ill later.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">the gain stops at the pit, the cost goes downstream</text>'
+      + '<text x="95" y="66" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the gain</text>'
+      + '<text x="95" y="84" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">stops here</text>'
+      + '<path d="M 40 100 H 150 V 160 H 40 Z" stroke="#c8433a"/>'
+      + '<text x="95" y="124" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">galamsey</text>'
+      + '<text x="95" y="146" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">pit</text>'
+      + '<path d="M 95 160 V 230" stroke="#c8433a"/>'
+      + '<path d="M 95 240 L 86 222 L 104 222 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="112" y="188" font-size="14" text-anchor="start" fill="#c8433a" stroke="none">mercury</text>'
+      + '<text x="112" y="206" font-size="14" text-anchor="start" fill="#c8433a" stroke="none">and silt</text>'
+      + '<path d="M 20 250 H 95" stroke-width="9"/>'
+      + '<text x="52" y="234" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">clean</text>'
+      + '<path d="M 95 250 H 618" stroke="#c8433a" stroke-width="9"/>'
+      + '<text x="356" y="234" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">the Pra, the Ankobra, the Birim</text>'
+      + '<path d="M 190 256 V 280" stroke-width="2"/>'
+      + '<text x="190" y="300" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the water plant</text>'
+      + '<text x="190" y="318" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">must shut</text>'
+      + '<path d="M 370 256 V 280" stroke-width="2"/>'
+      + '<text x="370" y="300" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the fish are gone</text>'
+      + '<text x="370" y="318" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and the farm floods</text>'
+      + '<path d="M 545 256 V 280" stroke-width="2"/>'
+      + '<text x="545" y="300" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">a child drinks it</text>'
+      + '<text x="545" y="318" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and falls ill later</text>'
+      + '<text x="320" y="362" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">nobody downstream was asked, and nobody downstream was paid</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Who gains from each kind of damage, and who pays for it',
+      columns: [
+        'Form',
+        'What it does',
+        'Who gains, and when',
+        'Who pays, and when',
+      ],
+      rows: [
+        [
+          'Galamsey',
+          'Mercury and silt in the Pra, Ankobra and Birim',
+          'The miner, today',
+          'Towns downstream, for years',
+        ],
+        [
+          'Deforestation',
+          'Removes the roots that hold the soil',
+          'Whoever sells the timber or clears the land',
+          'Farmers whose soil washes away',
+        ],
+        [
+          'Bush burning',
+          'Clears land fast, and burns the soil life with it',
+          'The farmer, who saves three weeks',
+          'The same farm, in later seasons',
+        ],
+        [
+          'Sand winning',
+          'Takes the sand from land and riverbed',
+          'The seller and the builder',
+          'The town that floods afterwards',
+        ],
+        [
+          'Overgrazing',
+          'Eats the cover down to bare ground',
+          'The herd owner, this season',
+          'Everybody, once the land turns to dust',
+        ],
+        [
+          'Dumping in gutters',
+          'Blocks the drains and kills the lagoon',
+          'Whoever did not pay for collection',
+          'The town, at the next heavy rain',
+        ],
+      ],
+      note: 'The third column is always sooner, and narrower, than the '
+        + 'fourth. That is the whole problem, and it is why a rule on its '
+        + 'own does not fix it.',
+    },
+  ],
   questions: [
     {
       id: 'env-1',
@@ -251,15 +333,8 @@ teach({
   idea:
     'Ghana’s constitution of 1992 is the supreme law, '
     + 'and any law or act that conflicts with it is void. '
-    + 'It sets up three arms of government. '
-    + 'The legislature, which is Parliament, makes the laws '
-    + 'and approves taxes and spending. '
-    + 'The executive, which is the President, ministers and the civil '
-    + 'service, '
-    + 'carries the laws out and runs the country day to day. '
-    + 'The judiciary, which is the courts headed by the Supreme Court, '
-    + 'interprets the law, settles disputes, '
-    + 'and can declare an act unconstitutional. '
+    + 'It sets up three arms of government, '
+    + 'each with its own work and its own limits. '
     + 'The constitution also guarantees fundamental human rights '
     + 'and sets up independent bodies such as the Electoral Commission '
     + 'and the Commission on Human Rights and Administrative Justice.',
@@ -274,13 +349,10 @@ teach({
     + 'and rule that the arrest was lawful. '
     + 'Nothing in that chain could be challenged, '
     + 'because the same hands hold every link. '
-    + 'Separation breaks the chain. '
-    + 'Parliament makes the law, '
-    + 'but the courts can strike it down if it breaks the constitution. '
-    + 'The President carries it out, '
-    + 'but Parliament controls the money and must approve the ministers. '
-    + 'The courts interpret it, '
-    + 'but the judges did not write the law they are interpreting. '
+    + 'Separation breaks the chain, '
+    + 'because no one arm can carry that sequence through by itself: '
+    + 'whoever makes a law is not the one who rules on it, '
+    + 'and whoever carries it out does not control the money. '
     + 'So each arm needs the others to finish anything, '
     + 'and that is the whole design. '
     + 'This is also why the constitution is supreme rather than just '
@@ -373,6 +445,69 @@ teach({
     + 'so that decisions are made nearer the people affected. '
     + 'It is called decentralisation.',
 
+  figure: {
+    alt: 'Parliament, the President and the courts drawn as three boxes in '
+      + 'a triangle, all of them under the 1992 constitution. An arrow '
+      + 'from the courts up to Parliament is labelled that the courts can '
+      + 'strike down an unlawful law, and an arrow from Parliament down to '
+      + 'the President is labelled that Parliament approves his money and '
+      + 'his ministers.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">why the three jobs are not in one pair of hands</text>'
+      + '<text x="320" y="54" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">all three sit under the 1992 constitution</text>'
+      + '<path d="M 230 72 H 410 V 132 H 230 Z"/>'
+      + '<text x="320" y="96" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Parliament</text>'
+      + '<text x="320" y="118" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">makes the laws</text>'
+      + '<path d="M 24 250 H 204 V 310 H 24 Z"/>'
+      + '<text x="114" y="274" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the President</text>'
+      + '<text x="114" y="296" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">carries them out</text>'
+      + '<path d="M 436 250 H 616 V 310 H 436 Z"/>'
+      + '<text x="526" y="274" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the courts</text>'
+      + '<text x="526" y="296" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">interpret them</text>'
+      + '<path d="M 472 250 L 384 142"/>'
+      + '<path d="M 378 134 L 396 139 L 384 150 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="502" y="196" font-size="13" text-anchor="start" fill="currentColor" stroke="none">can strike down</text>'
+      + '<text x="502" y="214" font-size="13" text-anchor="start" fill="currentColor" stroke="none">an unlawful law</text>'
+      + '<path d="M 268 140 L 168 242"/>'
+      + '<path d="M 162 250 L 166 232 L 179 243 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="24" y="186" font-size="13" text-anchor="start" fill="currentColor" stroke="none">approves his</text>'
+      + '<text x="24" y="204" font-size="13" text-anchor="start" fill="currentColor" stroke="none">money and his</text>'
+      + '<text x="24" y="222" font-size="13" text-anchor="start" fill="currentColor" stroke="none">ministers</text>'
+      + '<text x="320" y="356" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the same hands never make a law, enforce it and judge it</text>'
+      + '<text x="320" y="382" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">so each one needs the other two to finish anything</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each arm of government does, and what holds it in '
+        + 'check',
+      columns: ['Arm', 'Who it is', 'What it does', 'What checks it'],
+      rows: [
+        [
+          'Legislature',
+          'Parliament',
+          'Makes laws, approves taxes and spending',
+          'The courts can strike its laws down',
+        ],
+        [
+          'Executive',
+          'The President, ministers, the civil service',
+          'Carries the laws out and runs the country',
+          'Parliament holds the money and approves the ministers',
+        ],
+        [
+          'Judiciary',
+          'The courts, headed by the Supreme Court',
+          'Interprets the law and settles disputes',
+          'It did not write the law it is interpreting',
+        ],
+      ],
+      note: 'The constitution is harder to amend than an ordinary law is to '
+        + 'pass. That is what makes it a check rather than a statement of '
+        + 'intent.',
+    },
+  ],
   questions: [
     {
       id: 'cst-1',
@@ -445,12 +580,8 @@ teach({
     + 'Children have further rights: '
     + 'to a name, to education, to health care, '
     + 'and to protection from work that harms them. '
-    + 'Each right carries a responsibility. '
-    + 'The right to free speech carries the duty not to defame or incite. '
-    + 'The right to education carries the duty to attend and to let others '
-    + 'learn. '
-    + 'The right to vote carries the duty to be peaceful about the result. '
-    + 'And the right to public services carries the duty to pay tax.',
+    + 'Each right carries a responsibility, '
+    + 'because a right is only real while other people keep to it.',
 
   mechanism:
     'Rights and duties are taught as two lists, '
@@ -563,6 +694,116 @@ teach({
     + 'without needing to afford a court case. '
     + 'A right with no affordable way to claim it is incomplete.',
 
+  figure: {
+    alt: 'One pupil, drawn in red, is talking and claiming free speech. The '
+      + 'rest of the class, drawn in green, are claiming their right to '
+      + 'learn. The two claims meet in the middle of the picture and '
+      + 'cross, because both are real rights and there is only one room.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">two real rights, and only one room</text>'
+      + '<circle cx="110" cy="128" r="20" stroke="#c8433a"/>'
+      + '<path d="M 110 148 V 179" stroke="#c8433a"/>'
+      + '<path d="M 85 163 H 135" stroke="#c8433a"/>'
+      + '<path d="M 110 179 L 93 199" stroke="#c8433a"/>'
+      + '<path d="M 110 179 L 127 199" stroke="#c8433a"/>'
+      + '<path d="M 136 120 L 154 112" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 138 130 L 158 130" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 136 140 L 154 148" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="110" y="286" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">one pupil talking,</text>'
+      + '<text x="110" y="306" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">claiming free speech</text>'
+      + '<circle cx="430" cy="118" r="11" stroke="#0f8a4d"/>'
+      + '<path d="M 430 129 V 146" stroke="#0f8a4d"/>'
+      + '<path d="M 417 137 H 443" stroke="#0f8a4d"/>'
+      + '<path d="M 430 146 L 421 157" stroke="#0f8a4d"/>'
+      + '<path d="M 430 146 L 439 157" stroke="#0f8a4d"/>'
+      + '<circle cx="478" cy="118" r="11" stroke="#0f8a4d"/>'
+      + '<path d="M 478 129 V 146" stroke="#0f8a4d"/>'
+      + '<path d="M 465 137 H 491" stroke="#0f8a4d"/>'
+      + '<path d="M 478 146 L 469 157" stroke="#0f8a4d"/>'
+      + '<path d="M 478 146 L 487 157" stroke="#0f8a4d"/>'
+      + '<circle cx="526" cy="118" r="11" stroke="#0f8a4d"/>'
+      + '<path d="M 526 129 V 146" stroke="#0f8a4d"/>'
+      + '<path d="M 513 137 H 539" stroke="#0f8a4d"/>'
+      + '<path d="M 526 146 L 517 157" stroke="#0f8a4d"/>'
+      + '<path d="M 526 146 L 535 157" stroke="#0f8a4d"/>'
+      + '<circle cx="574" cy="118" r="11" stroke="#0f8a4d"/>'
+      + '<path d="M 574 129 V 146" stroke="#0f8a4d"/>'
+      + '<path d="M 561 137 H 587" stroke="#0f8a4d"/>'
+      + '<path d="M 574 146 L 565 157" stroke="#0f8a4d"/>'
+      + '<path d="M 574 146 L 583 157" stroke="#0f8a4d"/>'
+      + '<circle cx="430" cy="186" r="11" stroke="#0f8a4d"/>'
+      + '<path d="M 430 197 V 214" stroke="#0f8a4d"/>'
+      + '<path d="M 417 205 H 443" stroke="#0f8a4d"/>'
+      + '<path d="M 430 214 L 421 225" stroke="#0f8a4d"/>'
+      + '<path d="M 430 214 L 439 225" stroke="#0f8a4d"/>'
+      + '<circle cx="478" cy="186" r="11" stroke="#0f8a4d"/>'
+      + '<path d="M 478 197 V 214" stroke="#0f8a4d"/>'
+      + '<path d="M 465 205 H 491" stroke="#0f8a4d"/>'
+      + '<path d="M 478 214 L 469 225" stroke="#0f8a4d"/>'
+      + '<path d="M 478 214 L 487 225" stroke="#0f8a4d"/>'
+      + '<circle cx="526" cy="186" r="11" stroke="#0f8a4d"/>'
+      + '<path d="M 526 197 V 214" stroke="#0f8a4d"/>'
+      + '<path d="M 513 205 H 539" stroke="#0f8a4d"/>'
+      + '<path d="M 526 214 L 517 225" stroke="#0f8a4d"/>'
+      + '<path d="M 526 214 L 535 225" stroke="#0f8a4d"/>'
+      + '<circle cx="574" cy="186" r="11" stroke="#0f8a4d"/>'
+      + '<path d="M 574 197 V 214" stroke="#0f8a4d"/>'
+      + '<path d="M 561 205 H 587" stroke="#0f8a4d"/>'
+      + '<path d="M 574 214 L 565 225" stroke="#0f8a4d"/>'
+      + '<path d="M 574 214 L 583 225" stroke="#0f8a4d"/>'
+      + '<text x="502" y="286" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the rest of the class,</text>'
+      + '<text x="502" y="306" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">claiming their right to learn</text>'
+      + '<path d="M 184 196 H 258" stroke="#c8433a"/>'
+      + '<path d="M 266 196 L 248 186 L 248 206 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="216" y="180" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">to speak</text>'
+      + '<path d="M 396 196 H 322" stroke="#0f8a4d"/>'
+      + '<path d="M 314 196 L 332 186 L 332 206 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="364" y="180" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">to learn</text>'
+      + '<path d="M 280 186 L 300 206"/>'
+      + '<path d="M 300 186 L 280 206"/>'
+      + '<text x="320" y="348" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">there is somewhere else to talk,</text>'
+      + '<text x="320" y="374" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">and nowhere else to have that lesson</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each right, the duty that comes with it, and what happens '
+        + 'when the duty is dropped',
+      columns: [
+        'Right',
+        'The duty that comes with it',
+        'When the duty is dropped',
+      ],
+      rows: [
+        [
+          'Free speech',
+          'Not to defame or incite',
+          'A rumour that ruins somebody',
+        ],
+        [
+          'Education',
+          'To attend, and to let others learn',
+          'One pupil talking through the lesson',
+        ],
+        [
+          'To vote',
+          'To stay peaceful about the result',
+          'Violence when the count goes the other way',
+        ],
+        ['Public services', 'To pay tax', 'A clinic with no medicine in it'],
+        [
+          'Property',
+          'Not to take what is another person’s',
+          'Theft, and nobody able to keep anything',
+        ],
+        ['Life and liberty', 'Not to harm or detain anybody', 'Mob justice'],
+      ],
+      note: 'Read any row across and it is one thing, not two: the duty in '
+        + 'the middle column is what makes the right in the first column '
+        + 'real.',
+    },
+  ],
   questions: [
     {
       id: 'rgt-1',
@@ -633,18 +874,10 @@ teach({
 
   idea:
     'Production is making goods or providing services to satisfy wants. '
-    + 'It needs four factors. '
-    + 'Land means everything nature provides: '
-    + 'the ground, water, minerals, forests. '
-    + 'Labour is human effort, of hand and of mind. '
-    + 'Capital is anything made by people in order to produce something '
-    + 'else: '
-    + 'tools, a machine, a building, a delivery van. '
-    + 'The entrepreneur brings the other three together, '
-    + 'decides what to produce, and carries the risk of being wrong. '
-    + 'Each factor earns a reward: '
-    + 'rent for land, wages for labour, interest for capital, '
-    + 'and profit for the entrepreneur.',
+    + 'It needs four factors, and each of them earns its own reward. '
+    + 'Three of the four are paid whatever happens. '
+    + 'The fourth, the entrepreneur, brings the other three together, '
+    + 'decides what to produce, and carries the risk of being wrong.',
 
   mechanism:
     'Two things in this topic are consistently got wrong, '
@@ -761,6 +994,83 @@ teach({
     + 'and its costs are boredom '
     + 'and a worker who can do only one part of the job.',
 
+  figure: {
+    alt: 'Four boxes on the left, land, labour, capital and the '
+      + 'entrepreneur, with arrows running from all four into a box marked '
+      + 'the bakery, and an arrow out of it to bread that is sold or not '
+      + 'sold. A line runs back from the bread to the entrepreneur, '
+      + 'because rent, wages and interest are paid first and profit is '
+      + 'whatever is left.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">four factors in, bread out, and each factor paid</text>'
+      + '<path d="M 16 54 H 166 V 98 H 16 Z"/>'
+      + '<text x="91" y="76" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">land</text>'
+      + '<text x="91" y="92" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the plot it stands on</text>'
+      + '<path d="M 16 110 H 166 V 154 H 16 Z"/>'
+      + '<text x="91" y="132" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">labour</text>'
+      + '<text x="91" y="148" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the baker</text>'
+      + '<path d="M 16 166 H 166 V 210 H 16 Z"/>'
+      + '<text x="91" y="188" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">capital</text>'
+      + '<text x="91" y="204" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the oven and the van</text>'
+      + '<path d="M 16 222 H 166 V 266 H 16 Z" stroke="#0f8a4d"/>'
+      + '<text x="91" y="244" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the entrepreneur</text>'
+      + '<text x="91" y="260" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">she borrowed for it</text>'
+      + '<path d="M 172 76 L 234 136"/>'
+      + '<path d="M 172 132 L 234 152"/>'
+      + '<path d="M 172 188 L 234 168"/>'
+      + '<path d="M 172 244 L 234 184" stroke="#0f8a4d"/>'
+      + '<path d="M 242 160 L 224 150 L 224 170 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 258 120 H 398 V 200 H 258 Z"/>'
+      + '<text x="328" y="155" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the bakery</text>'
+      + '<text x="328" y="178" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">brings them together</text>'
+      + '<path d="M 404 160 H 448"/>'
+      + '<path d="M 456 160 L 438 150 L 438 170 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 470 128 H 620 V 192 H 470 Z" stroke="#0f8a4d"/>'
+      + '<text x="545" y="155" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">bread, sold</text>'
+      + '<text x="545" y="178" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">or not sold</text>'
+      + '<path d="M 545 192 V 300 H 100 V 276"/>'
+      + '<path d="M 91 266 L 82 284 L 100 284 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">rent, wages and interest are paid first</text>'
+      + '<text x="320" y="358" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">profit is whatever is left, and it may be nothing</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four factors, what each earns, and what each one is in '
+        + 'a village bakery',
+      columns: ['Factor', 'What it is', 'Its reward', 'In a bakery'],
+      rows: [
+        [
+          'Land',
+          'Whatever nature gives: ground, water, minerals, forest',
+          'Rent',
+          'The plot the bakery stands on',
+        ],
+        [
+          'Labour',
+          'Human effort, of hand and of mind',
+          'Wages',
+          'The baker, and whoever sells',
+        ],
+        [
+          'Capital',
+          'A made thing used to produce something else',
+          'Interest',
+          'The oven, the bowls, the van',
+        ],
+        [
+          'Entrepreneur',
+          'Whoever decides what to produce and loses if nobody buys',
+          'Profit',
+          'The woman who borrowed for the oven',
+        ],
+      ],
+      note: 'Profit is the only reward that is not agreed in advance, '
+        + 'because it is what is left once the other three are paid, and '
+        + 'it may be nothing.',
+    },
+  ],
   questions: [
     {
       id: 'pro-1',
@@ -822,8 +1132,8 @@ teach({
   idea:
     'Money is anything generally accepted in exchange for goods and '
     + 'services. '
-    + 'It works as a medium of exchange, a measure of value, '
-    + 'a store of value, and a standard for future payment. '
+    + 'It does four separate jobs, '
+    + 'and a question usually turns on which of them is being done. '
     + 'A commercial bank accepts deposits, keeps money safe, '
     + 'transfers it, and lends it. '
     + 'The Bank of Ghana is the central bank: '
@@ -940,6 +1250,69 @@ teach({
     + 'the number on it does not change. '
     + 'This is the strongest argument for saving where interest is paid.',
 
+  figure: {
+    alt: 'The saver, the bank and the borrower drawn as three boxes in a '
+      + 'row. A deposit goes from the saver into the bank and the bank '
+      + 'lends it on to the borrower, while interest comes back from the '
+      + 'borrower to the bank and a smaller amount of interest from the '
+      + 'bank to the saver, the bank keeping the difference.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the money you deposit is the money somebody else borrows</text>'
+      + '<path d="M 30 135 H 170 V 215 H 30 Z"/>'
+      + '<text x="100" y="182" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the saver</text>'
+      + '<path d="M 250 135 H 390 V 215 H 250 Z"/>'
+      + '<text x="320" y="170" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the bank</text>'
+      + '<text x="320" y="196" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">keeps the difference</text>'
+      + '<path d="M 470 135 H 610 V 215 H 470 Z"/>'
+      + '<text x="540" y="182" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the borrower</text>'
+      + '<path d="M 176 160 H 230"/>'
+      + '<path d="M 240 160 L 222 150 L 222 170 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="210" y="146" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">deposit</text>'
+      + '<path d="M 244 192 H 190"/>'
+      + '<path d="M 180 192 L 198 182 L 198 202 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="210" y="232" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">interest</text>'
+      + '<path d="M 396 160 H 450"/>'
+      + '<path d="M 460 160 L 442 150 L 442 170 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="430" y="146" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">lends it</text>'
+      + '<path d="M 464 192 H 410"/>'
+      + '<path d="M 400 192 L 418 182 L 418 202 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="430" y="232" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">more interest</text>'
+      + '<text x="320" y="300" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so borrowing always costs more than saving earns,</text>'
+      + '<text x="320" y="328" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and the bank cannot pay everybody back on one day,</text>'
+      + '<text x="320" y="356" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">which is why confidence matters so much</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four jobs money does',
+      columns: ['Job', 'What it means', 'An example'],
+      rows: [
+        [
+          'Medium of exchange',
+          'It is accepted for anything, so you need not swap goods',
+          'Buying kenkey with cedis',
+        ],
+        [
+          'Measure of value',
+          'It lets two different things be compared',
+          'A goat priced against a bag of maize',
+        ],
+        [
+          'Store of value',
+          'It keeps its worth, so you can hold it for later',
+          'Saving this month for fees in January',
+        ],
+        [
+          'Standard for future payment',
+          'A debt can be fixed now and settled later',
+          'Agreeing a loan to be repaid after harvest',
+        ],
+      ],
+      note: 'Money holds its value only while people trust it, which is why '
+        + 'the first row is the one the other three rest on.',
+    },
+  ],
   questions: [
     {
       id: 'mon-1',
@@ -1008,10 +1381,8 @@ teach({
 
   idea:
     'Adolescence is the stage between childhood and adulthood. '
-    + 'The body changes first. '
-    + 'Hormones bring growth and body hair, '
-    + 'a deeper voice in boys, '
-    + 'and breast development and periods in girls. '
+    + 'The body changes first, driven by hormones, '
+    + 'and it runs to a different timetable in boys and in girls. '
     + 'Feelings change too. '
     + 'They become stronger and turn faster. '
     + 'You notice yourself more. '
@@ -1144,6 +1515,56 @@ teach({
     + 'plainly, without apologising and without arguing. '
     + 'It is learned by practising the sentence before you need it.',
 
+  figure: {
+    alt: 'Two bars drawn against the same stretch of time. The upper bar, '
+      + 'starting early, is the body being able to reproduce. The lower '
+      + 'bar, in green and starting much later, is everything else being '
+      + 'ready: schooling finished, work, income and judgement. A red '
+      + 'arrow between the two starting points marks a gap of about ten '
+      + 'years in which a person is able and not yet prepared.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the body is ready long before anything else is</text>'
+      + '<text x="76" y="128" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">childhood</text>'
+      + '<path d="M 130 100 H 606 V 148 H 130 Z"/>'
+      + '<text x="368" y="130" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the body is able to reproduce</text>'
+      + '<line x1="130" y1="100" x2="130" y2="290" stroke-dasharray="6 6" stroke-width="2"/>'
+      + '<path d="M 430 170 H 606 V 218 H 430 Z" stroke="#0f8a4d"/>'
+      + '<text x="518" y="200" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">everything else is ready</text>'
+      + '<line x1="430" y1="170" x2="430" y2="290" stroke="#0f8a4d" stroke-dasharray="6 6" stroke-width="2"/>'
+      + '<text x="518" y="240" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">schooling finished, work,</text>'
+      + '<text x="518" y="258" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">income, judgement</text>'
+      + '<path d="M 142 262 H 418" stroke="#c8433a"/>'
+      + '<path d="M 132 262 L 150 252 L 150 272 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 428 262 L 410 252 L 410 272 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="280" y="246" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">about ten years</text>'
+      + '<text x="280" y="290" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">able, and not yet prepared</text>'
+      + '<text x="320" y="344" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a decision made inside the gap can decide</text>'
+      + '<text x="320" y="370" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the next forty years, and it lands hardest on the girl</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The physical changes of adolescence, and when each one '
+        + 'appears',
+      columns: ['Change', 'In boys', 'In girls'],
+      rows: [
+        [
+          'Growth spurt',
+          'Yes, and usually later',
+          'Yes, and usually earlier',
+        ],
+        ['Body hair', 'Yes', 'Yes'],
+        ['Voice', 'Deepens noticeably', 'Changes very little'],
+        ['Breasts', 'No', 'Develop'],
+        ['Periods', 'No', 'Begin'],
+        ['Able to reproduce', 'Yes, from puberty', 'Yes, from puberty'],
+      ],
+      note: 'The emotional and social changes arrive at the same time as '
+        + 'these, which is why the stage feels like several things '
+        + 'happening at once.',
+    },
+  ],
   questions: [
     {
       id: 'ado-1',
