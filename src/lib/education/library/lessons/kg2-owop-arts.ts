@@ -127,6 +127,44 @@ teach({
     + 'What would you have to learn first? '
     + 'Who could you ask about it?',
 
+  figure: {
+    alt: 'Three workers shown by what they do. A nurse with a cross, a '
+      + 'farmer with a maize plant and a tailor with a shirt, each with an '
+      + 'arrow pointing down to what they do for us. Under them it says '
+      + 'what would we do without them.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">their work reaches you</text>'
+      + '<text x="110" y="98" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a nurse</text>'
+      + '<line x1="86" y1="152" x2="134" y2="152" stroke-width="8"/>'
+      + '<line x1="110" y1="128" x2="110" y2="176" stroke-width="8"/>'
+      + '<line x1="110" y1="200" x2="110" y2="250"/>'
+      + '<polyline points="100,237 110,250 120,237"/>'
+      + '<text x="110" y="296" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">looks after us</text>'
+      + '<text x="320" y="98" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a farmer</text>'
+      + '<line x1="320" y1="186" x2="320" y2="108"/>'
+      + '<path d="M 320 140 Q 286 126 284 150 Q 306 156 320 140"/>'
+      + '<path d="M 320 124 Q 354 110 356 134 Q 334 140 320 124"/>'
+      + '<line x1="320" y1="200" x2="320" y2="250"/>'
+      + '<polyline points="310,237 320,250 330,237"/>'
+      + '<text x="320" y="296" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">grows our food</text>'
+      + '<text x="530" y="98" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a tailor</text>'
+      + '<polygon points="510,120 530,112 550,120 570,128 576,146 562,150 '
+      + '562,186 498,186 498,150 484,146 490,128"/>'
+      + '<line x1="530" y1="212" x2="530" y2="250"/>'
+      + '<polyline points="520,237 530,250 540,237"/>'
+      + '<text x="530" y="296" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">makes our clothes</text>'
+      + '<text x="320" y="362" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">what would we do without '
+      + 'them</text></svg>',
+  },
   questions: [
     {
       id: 'ph-1',
@@ -267,6 +305,47 @@ teach({
     + 'And the name of the grown up who looks after you. '
     + 'Then anybody can help you get home.',
 
+  figure: {
+    alt: 'Four things drawn in red that are not for touching: a flame, a '
+      + 'knife, a medicine bottle and an electric socket. Below them a '
+      + 'green box says if you are not sure, ask first, and telling never '
+      + 'gets you into trouble.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">not for touching</text>'
+      + '<path d="M 100 196 Q 74 162 98 120 Q 104 146 118 136 Q 140 162 124 '
+      + '192 Z" stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="100" y="234" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">fire</text>'
+      + '<polygon points="220,190 276,134 286,144 240,196" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<line x1="216" y1="194" x2="200" y2="206" stroke="#c8433a" '
+      + 'stroke-width="6"/>'
+      + '<text x="248" y="234" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a knife</text>'
+      + '<polygon points="386,150 414,150 414,196 386,196" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<polygon points="394,134 406,134 406,150 394,150" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="400" y="234" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">medicine</text>'
+      + '<polygon points="508,140 580,140 580,196 508,196" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="532" cy="162" r="6" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="556" cy="162" r="6" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="544" y="234" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">electricity</text>'
+      + '<polygon points="60,264 580,264 580,344 60,344" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="320" y="298" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">if you are not sure, ask first</text>'
+      + '<text x="320" y="330" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">telling never gets you into '
+      + 'trouble</text></svg>',
+  },
   questions: [
     {
       id: 'sf-1',
@@ -398,6 +477,50 @@ teach({
     + 'Why is it kept? '
     + 'How long has it been kept?',
 
+  figure: {
+    alt: 'Four things that happen on a special day: a bowl of special food, '
+      + 'special clothes, a drum for the drumming, and two visitors. Under '
+      + 'them it says other families keep other days, and those are special '
+      + 'too.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">what happens on that day</text>'
+      + '<polygon points="70,150 134,150 127,196 77,196"/>'
+      + '<circle cx="86" cy="142" r="9"/><circle cx="102" cy="142" r="9"/>'
+      + '<circle cx="118" cy="142" r="9"/>'
+      + '<text x="102" y="240" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">special food</text>'
+      + '<polygon points="230,124 250,116 270,124 290,132 296,150 282,154 '
+      + '282,190 218,190 218,154 204,150 210,132"/>'
+      + '<text x="250" y="240" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">special clothes</text>'
+      + '<ellipse cx="400" cy="126" rx="34" ry="12"/>'
+      + '<line x1="366" y1="126" x2="372" y2="196"/>'
+      + '<line x1="434" y1="126" x2="428" y2="196"/>'
+      + '<path d="M 372 196 Q 400 210 428 196"/>'
+      + '<line x1="382" y1="136" x2="388" y2="190"/>'
+      + '<line x1="400" y1="136" x2="406" y2="190"/>'
+      + '<line x1="418" y1="136" x2="424" y2="190"/>'
+      + '<text x="400" y="240" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">drumming</text>'
+      + '<circle cx="520" cy="112" r="16"/>'
+      + '<line x1="520" y1="128" x2="520" y2="166"/>'
+      + '<line x1="496" y1="144" x2="544" y2="144"/>'
+      + '<line x1="520" y1="166" x2="506" y2="198"/>'
+      + '<line x1="520" y1="166" x2="534" y2="198"/>'
+      + '<circle cx="562" cy="122" r="14"/>'
+      + '<line x1="562" y1="136" x2="562" y2="170"/>'
+      + '<line x1="541" y1="150" x2="583" y2="150"/>'
+      + '<line x1="562" y1="170" x2="549" y2="198"/>'
+      + '<line x1="562" y1="170" x2="575" y2="198"/>'
+      + '<text x="540" y="240" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">visitors</text>'
+      + '<text x="320" y="306" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">other families keep other days</text>'
+      + '<text x="320" y="342" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">those are special too</text></svg>',
+  },
   questions: [
     {
       id: 'ce-1',
@@ -535,6 +658,40 @@ teach({
     + 'Look at them every day for a week. '
     + 'What happened?',
 
+  figure: {
+    alt: 'Three things side by side. A watered plant drawn in green standing '
+      + 'up, labelled it lives. A plant that was not watered, drawn in red '
+      + 'and drooping, labelled it dies. A stone, labelled not alive.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">what if it had no water</text>'
+      + '<polygon points="70,258 146,258 139,312 77,312"/>'
+      + '<line x1="108" y1="258" x2="108" y2="180" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<path d="M 108 212 Q 74 198 72 222 Q 94 228 108 212" '
+      + 'stroke="#0f8a4d" stroke-width="4"/>'
+      + '<path d="M 108 196 Q 142 182 144 206 Q 122 212 108 196" '
+      + 'stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="108" y="346" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">watered</text>'
+      + '<text x="108" y="380" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">it lives</text>'
+      + '<polygon points="272,258 348,258 341,312 279,312"/>'
+      + '<path d="M 310 258 Q 306 206 266 200" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<path d="M 300 224 Q 268 218 262 242 Q 288 248 300 224" '
+      + 'stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="310" y="346" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">not watered</text>'
+      + '<text x="310" y="380" font-size="22" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">it dies</text>'
+      + '<polygon points="468,302 480,250 524,234 560,258 554,300"/>'
+      + '<text x="512" y="346" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a stone</text>'
+      + '<text x="512" y="380" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">not alive</text></svg>',
+  },
   questions: [
     {
       id: 'wn3-1',
@@ -670,6 +827,67 @@ teach({
     + 'Pour them out. '
     + 'You have just stopped some mosquitoes.',
 
+  figure: {
+    alt: 'A chain of four boxes with arrows between them. A ball of rubbish '
+      + 'over the words rubbish in the gutter, a puddle over the words '
+      + 'water stands still, a mosquito over the words mosquitoes breed, '
+      + 'and a sad face over the words people get sick, the last box drawn '
+      + 'in red. Under it says so hold it until you find a bin.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">rubbish in the gutter makes '
+      + 'people sick</text>'
+      + '<polygon points="58,132 64,108 86,98 102,114 98,136 76,144"/>'
+      + '<line x1="70" y1="112" x2="84" y2="126"/>'
+      + '<line x1="88" y1="110" x2="78" y2="134"/>'
+      + '<ellipse cx="240" cy="130" rx="38" ry="14"/>'
+      + '<ellipse cx="400" cy="128" rx="17" ry="7"/>'
+      + '<line x1="417" y1="128" x2="434" y2="121"/>'
+      + '<path d="M 396 122 Q 378 102 366 116"/>'
+      + '<path d="M 402 122 Q 390 100 376 106"/>'
+      + '<line x1="390" y1="134" x2="380" y2="148"/>'
+      + '<line x1="402" y1="134" x2="392" y2="148"/>'
+      + '<line x1="412" y1="134" x2="402" y2="148"/>'
+      + '<circle cx="560" cy="122" r="22" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="552" cy="116" r="4" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<circle cx="568" cy="116" r="4" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<path d="M 550 134 Q 560 124 570 134" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="18,170 142,170 142,258 18,258"/>'
+      + '<text x="80" y="208" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">rubbish</text>'
+      + '<text x="80" y="236" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">in the gutter</text>'
+      + '<polygon points="178,170 302,170 302,258 178,258"/>'
+      + '<text x="240" y="208" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">water</text>'
+      + '<text x="240" y="236" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">stands still</text>'
+      + '<line x1="146" y1="214" x2="174" y2="214"/>'
+      + '<polyline points="161,204 174,214 161,224"/>'
+      + '<polygon points="338,170 462,170 462,258 338,258"/>'
+      + '<text x="400" y="208" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">mosquitoes</text>'
+      + '<text x="400" y="236" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">breed</text>'
+      + '<line x1="306" y1="214" x2="334" y2="214"/>'
+      + '<polyline points="321,204 334,214 321,224"/>'
+      + '<polygon points="498,170 622,170 622,258 498,258" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="560" y="208" font-size="20" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">people</text>'
+      + '<text x="560" y="236" font-size="20" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">get sick</text>'
+      + '<line x1="466" y1="214" x2="494" y2="214"/>'
+      + '<polyline points="481,204 494,214 481,224"/>'
+      + '<text x="320" y="332" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">so hold it until you find a '
+      + 'bin</text></svg>',
+  },
   questions: [
     {
       id: 'cp-1',
@@ -801,6 +1019,38 @@ teach({
     + 'Can you make the wheels turn? '
     + 'Can you make it stand up on its own?',
 
+  figure: {
+    alt: 'Along the top, the things that are there: a carton, four bottle '
+      + 'tops, a piece of string and an old tin, labelled what you have. An '
+      + 'arrow points down to a lorry made out of them, with the bottle '
+      + 'tops as its wheels. Under it says now pull it, does it hold.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">look at what you have, then '
+      + 'decide</text><polygon points="50,88 130,88 130,140 50,140"/>'
+      + '<circle cx="170" cy="114" r="13"/>'
+      + '<circle cx="202" cy="114" r="13"/>'
+      + '<circle cx="234" cy="114" r="13"/>'
+      + '<circle cx="266" cy="114" r="13"/>'
+      + '<path d="M 300 100 Q 320 132 342 102 Q 364 130 386 104"/>'
+      + '<polygon points="420,96 468,96 468,140 420,140"/>'
+      + '<ellipse cx="444" cy="96" rx="24" ry="8"/>'
+      + '<text x="556" y="120" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">what you have</text>'
+      + '<line x1="320" y1="168" x2="320" y2="208"/>'
+      + '<polyline points="310,195 320,208 330,195"/>'
+      + '<polygon points="170,240 300,240 300,290 170,290"/>'
+      + '<polygon points="300,256 338,256 348,290 300,290"/>'
+      + '<circle cx="205" cy="300" r="15"/>'
+      + '<circle cx="265" cy="300" r="15"/>'
+      + '<circle cx="326" cy="300" r="15"/>'
+      + '<text x="440" y="280" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a lorry</text>'
+      + '<text x="320" y="364" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">now pull it, does it hold</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'ms-1',
@@ -932,6 +1182,39 @@ teach({
     + 'What happens? '
     + 'Stay in your parts and work it out.',
 
+  figure: {
+    alt: 'Two people facing each other across a market counter, one labelled '
+      + 'the seller and one labelled the buyer. A green double headed arrow '
+      + 'curves between them along the bottom, labelled now swap.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="44" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">stay in your part until we '
+      + 'finish</text><circle cx="140" cy="150" r="26"/>'
+      + '<line x1="140" y1="176" x2="140" y2="238"/>'
+      + '<line x1="101" y1="202" x2="179" y2="202"/>'
+      + '<line x1="140" y1="238" x2="117" y2="290"/>'
+      + '<line x1="140" y1="238" x2="163" y2="290"/>'
+      + '<circle cx="500" cy="150" r="26"/>'
+      + '<line x1="500" y1="176" x2="500" y2="238"/>'
+      + '<line x1="461" y1="202" x2="539" y2="202"/>'
+      + '<line x1="500" y1="238" x2="477" y2="290"/>'
+      + '<line x1="500" y1="238" x2="523" y2="290"/>'
+      + '<polygon points="246,206 394,206 394,226 246,226"/>'
+      + '<line x1="256" y1="226" x2="256" y2="286"/>'
+      + '<line x1="384" y1="226" x2="384" y2="286"/>'
+      + '<text x="320" y="196" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the market</text>'
+      + '<text x="140" y="326" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the seller</text>'
+      + '<text x="500" y="326" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the buyer</text>'
+      + '<path d="M 200 350 Q 320 392 440 350" stroke="#0f8a4d"/>'
+      + '<polyline points="216,344 200,350 208,364" stroke="#0f8a4d"/>'
+      + '<polyline points="424,344 440,350 432,364" stroke="#0f8a4d"/>'
+      + '<text x="320" y="338" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">now swap</text></svg>',
+  },
   questions: [
     {
       id: 'pp-1',
