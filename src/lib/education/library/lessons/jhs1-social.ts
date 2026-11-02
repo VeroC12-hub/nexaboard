@@ -50,9 +50,6 @@ teach({
     + 'so it is wholly north of the equator and wholly in the tropics. '
     + 'The Greenwich meridian, which is 0 degrees longitude, '
     + 'passes through the country near Tema. '
-    + 'The land is mostly below 500 metres. '
-    + 'The highest ground is in the Akwapim Togo ranges in the east, '
-    + 'where Mount Afadja reaches about 885 metres. '
     + 'The country has 16 regions, '
     + 'and its largest river is the Volta.',
 
@@ -145,6 +142,74 @@ teach({
     + 'makes Ghana a route to the sea for Burkina Faso and Mali, '
     + 'which have no coast of their own.',
 
+  figure: {
+    alt: 'A simplified map of Ghana with Burkina Faso to the north, Côte '
+      + 'd’Ivoire to the west, Togo to the east and the Gulf of Guinea to '
+      + 'the south. Dashed lines mark 4 degrees north along the coast and '
+      + '11 degrees north along the top, and a dashed vertical line marks '
+      + '0 degrees longitude passing near Tema. A green band in the east '
+      + 'marks the Akwapim Togo ranges, and an arrow inside the country '
+      + 'points south to show the way the rivers run.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">wholly north of the equator, and mostly low</text>'
+      + '<text x="330" y="70" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Burkina Faso</text>'
+      + '<line x1="130" y1="92" x2="540" y2="92" stroke-dasharray="7 6"/>'
+      + '<text x="124" y="88" font-size="14" text-anchor="end" fill="currentColor" stroke="none">11 degrees north</text>'
+      + '<line x1="130" y1="306" x2="540" y2="306" stroke-dasharray="7 6"/>'
+      + '<text x="124" y="302" font-size="14" text-anchor="end" fill="currentColor" stroke="none">4 degrees north</text>'
+      + '<path d="M 215 92 H 445 L 428 200 L 420 306 L 240 310 L 224 200 Z"/>'
+      + '<text x="172" y="196" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Côte</text>'
+      + '<text x="172" y="214" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">d’Ivoire</text>'
+      + '<text x="500" y="160" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Togo</text>'
+      + '<line x1="370" y1="80" x2="370" y2="344" stroke-dasharray="4 7"/>'
+      + '<text x="378" y="360" font-size="14" text-anchor="start" fill="currentColor" stroke="none">0 degrees longitude</text>'
+      + '<circle cx="370" cy="307" r="6" fill="currentColor" stroke="none"/>'
+      + '<text x="354" y="296" font-size="14" text-anchor="end" fill="currentColor" stroke="none">Tema</text>'
+      + '<path d="M 400 130 L 412 208 L 404 284" stroke="#0f8a4d" stroke-width="7"/>'
+      + '<line x1="411" y1="250" x2="452" y2="256" stroke="#0f8a4d"/>'
+      + '<text x="456" y="252" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">Akwapim Togo</text>'
+      + '<text x="456" y="270" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">ranges, the highest</text>'
+      + '<text x="456" y="288" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">ground in Ghana</text>'
+      + '<path d="M 288 120 L 296 190 L 288 250 L 298 288"/>'
+      + '<path d="M 300 296 L 288 281 L 302 277 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="268" y="160" font-size="14" text-anchor="end" fill="currentColor" stroke="none">rivers</text>'
+      + '<text x="268" y="178" font-size="14" text-anchor="end" fill="currentColor" stroke="none">run south</text>'
+      + '<text x="276" y="334" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Gulf of Guinea</text>'
+      + '<text x="320" y="388" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the coast faces south, so the rain and the ports are there</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The shape of the land, and what each part of it decides',
+      columns: ['Part of the country', 'Height', 'What that decides'],
+      rows: [
+        [
+          'Most of the country',
+          'Below 500 metres',
+          'Low, so rivers reach the sea easily',
+        ],
+        [
+          'Akwapim Togo ranges, in the east',
+          'About 885 metres at Mount Afadja',
+          'The highest ground in Ghana',
+        ],
+        [
+          'Kwahu plateau, in the middle',
+          'Raised above the land around it',
+          'Divides rivers running to the Volta from those running to the coast',
+        ],
+        [
+          'Coastal plains, in the south',
+          'Near sea level',
+          'Deep water at Tema and Takoradi, so ports',
+        ],
+      ],
+      note: 'Relief is worth learning as causes rather than heights: it is '
+        + 'why the rivers run the way they do, and why the ports are '
+        + 'where they are.',
+    },
+  ],
   questions: [
     {
       id: 'loc-1',
@@ -215,9 +280,8 @@ teach({
     + 'and has a single rainy season followed by a long dry one, '
     + 'including the harmattan, which is a dry dusty wind from the '
     + 'north east. '
-    + 'The vegetation follows the rain: rainforest in the wet south west, '
-    + 'then transitional woodland, then guinea savanna, '
-    + 'then the drier sudan savanna in the far north east.',
+    + 'The vegetation follows the rain, and the crops follow the '
+    + 'vegetation.',
 
   mechanism:
     'The whole difference between north and south comes from one thing, '
@@ -233,13 +297,10 @@ teach({
     + 'A place in the far north is reached only at the top of the journey, '
     + 'so it gets one rainy season and a much longer dry one. '
     + 'Then everything else follows in order. '
-    + 'More rain for more of the year keeps trees alive, so the south is '
-    + 'forest. '
-    + 'Less rain, for less of the year, suits grass with scattered trees, '
-    + 'so the north is savanna. '
-    + 'Cocoa needs steady rain and shade, so it is grown in the forest belt. '
-    + 'Millet, sorghum, yam and shea stand a long dry season, '
-    + 'so they are northern crops. '
+    + 'More rain, for more of the year, keeps trees alive, '
+    + 'and less rain suits grass with scattered trees, '
+    + 'so each belt ends up growing the crops that can stand its own dry '
+    + 'season. '
     + 'And a farmer in the north has one planting season instead of two, '
     + 'which is why irrigation and dams matter more there.',
 
@@ -322,6 +383,72 @@ teach({
     + 'This is why farmers watch the timing of the rain, not only the '
     + 'amount.',
 
+  figure: {
+    alt: 'Three drawings of Ghana side by side, each a tall rectangle with '
+      + 'north at the top and south at the bottom. In March a green band '
+      + 'of rain lies across the south, in August it has moved to the '
+      + 'north, and in October it is back across the south, so the south '
+      + 'is under it twice and the far north only once.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">one belt of rain, moving north and then back</text>'
+      + '<path d="M 60 80 H 180 V 300 H 60 Z"/>'
+      + '<text x="120" y="68" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">north</text>'
+      + '<text x="120" y="320" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">south</text>'
+      + '<path d="M 60 236 H 180 V 288 H 60 Z" stroke="#0f8a4d" stroke-width="6"/>'
+      + '<text x="120" y="268" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">rain belt</text>'
+      + '<text x="120" y="352" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">March</text>'
+      + '<text x="120" y="374" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">over the south</text>'
+      + '<path d="M 260 80 H 380 V 300 H 260 Z"/>'
+      + '<text x="320" y="68" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">north</text>'
+      + '<text x="320" y="320" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">south</text>'
+      + '<path d="M 260 92 H 380 V 144 H 260 Z" stroke="#0f8a4d" stroke-width="6"/>'
+      + '<text x="320" y="124" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">rain belt</text>'
+      + '<text x="320" y="352" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">August</text>'
+      + '<text x="320" y="374" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">over the north</text>'
+      + '<path d="M 460 80 H 580 V 300 H 460 Z"/>'
+      + '<text x="520" y="68" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">north</text>'
+      + '<text x="520" y="320" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">south</text>'
+      + '<path d="M 460 236 H 580 V 288 H 460 Z" stroke="#0f8a4d" stroke-width="6"/>'
+      + '<text x="520" y="268" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">rain belt</text>'
+      + '<text x="520" y="352" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">October</text>'
+      + '<text x="520" y="374" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">over the south again</text>'
+      + '<path d="M 196 200 H 240" stroke="#0f8a4d"/>'
+      + '<path d="M 248 200 L 230 190 L 230 210 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="218" y="184" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">north</text>'
+      + '<path d="M 396 200 H 440" stroke="#0f8a4d"/>'
+      + '<path d="M 448 200 L 430 190 L 430 210 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="418" y="184" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">back</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What follows from how often the rain belt passes overhead',
+      columns: ['What the rain decides', 'The south', 'The far north'],
+      rows: [
+        [
+          'Times the rain belt passes',
+          'Twice, going up and coming back',
+          'Once, at the top of its journey',
+        ],
+        ['Rainy seasons', 'Two, a major and a minor', 'One'],
+        ['Dry season', 'Short', 'Long, with the harmattan'],
+        [
+          'Vegetation',
+          'Rainforest, then woodland',
+          'Guinea savanna, then sudan savanna',
+        ],
+        [
+          'Crops that suit it',
+          'Cocoa, plantain, cocoyam',
+          'Millet, sorghum, yam, shea',
+        ],
+        ['Planting seasons a year', 'Two', 'One, unless there is irrigation'],
+      ],
+      note: 'Every row under the first one is a consequence of the first '
+        + 'one.',
+    },
+  ],
   questions: [
     {
       id: 'cli-1',
@@ -392,10 +519,9 @@ teach({
   idea:
     'A resource is anything from the land, the water or the people that '
     + 'can be used to meet a need. '
-    + 'Ghana’s main ones are gold, cocoa, crude oil, timber, bauxite, '
-    + 'manganese, diamonds, limestone, salt, fish, '
-    + 'and the water of the Volta, which makes electricity at Akosombo. '
-    + 'Gold, cocoa and oil earn most of the foreign money. '
+    + 'Gold, cocoa and crude oil earn most of Ghana’s foreign money. '
+    + 'Manganese, diamonds, limestone and salt are mined as well, '
+    + 'and the water of the Volta makes electricity at Akosombo. '
     + 'Cocoa and fishing employ far more people than mining does. '
     + 'And almost all of it leaves the country raw.',
 
@@ -503,6 +629,92 @@ teach({
     + 'Gold and oil do not renew at all, '
     + 'so a country living on them is spending something it cannot replace.',
 
+  figure: {
+    alt: 'The same cocoa beans following two paths. On the upper path, in '
+      + 'red, the beans are shipped out raw and processed abroad, and '
+      + 'Ghana is paid once, for a bean. On the lower path, in green, a '
+      + 'factory in Ghana makes them into chocolate, and Ghana is paid for '
+      + 'the bar and pays wages every month.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">the same beans, and where the money stops</text>'
+      + '<path d="M 24 74 H 160 V 136 H 24 Z"/>'
+      + '<text x="92" y="100" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">cocoa beans</text>'
+      + '<text x="92" y="122" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">grown in Ghana</text>'
+      + '<path d="M 170 105 H 214" stroke="#c8433a"/>'
+      + '<path d="M 222 105 L 204 95 L 204 115 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 232 74 H 400 V 136 H 232 Z" stroke="#c8433a"/>'
+      + '<text x="316" y="100" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">shipped out raw,</text>'
+      + '<text x="316" y="122" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">processed abroad</text>'
+      + '<path d="M 410 105 H 454" stroke="#c8433a"/>'
+      + '<path d="M 462 105 L 444 95 L 444 115 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="548" y="96" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">Ghana is paid</text>'
+      + '<text x="548" y="118" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">once, for a bean</text>'
+      + '<path d="M 24 234 H 160 V 296 H 24 Z"/>'
+      + '<text x="92" y="260" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">cocoa beans</text>'
+      + '<text x="92" y="282" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">grown in Ghana</text>'
+      + '<path d="M 170 265 H 214" stroke="#0f8a4d"/>'
+      + '<path d="M 222 265 L 204 255 L 204 275 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 232 234 H 400 V 296 H 232 Z" stroke="#0f8a4d"/>'
+      + '<text x="316" y="260" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">a factory here makes</text>'
+      + '<text x="316" y="282" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">it into chocolate</text>'
+      + '<path d="M 410 265 H 454" stroke="#0f8a4d"/>'
+      + '<path d="M 462 265 L 444 255 L 444 275 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="548" y="248" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">Ghana is paid for</text>'
+      + '<text x="548" y="270" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the bar, and wages</text>'
+      + '<text x="548" y="292" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">are paid every month</text>'
+      + '<line x1="24" y1="176" x2="616" y2="176" stroke-dasharray="6 6"/>'
+      + '<text x="320" y="352" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the gap between the bean and the bar is the added value,</text>'
+      + '<text x="320" y="378" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">and it is kept by whoever does the processing</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Where each resource comes from, how it earns now, and what '
+        + 'it could become',
+      columns: [
+        'Resource',
+        'Where it is found',
+        'How it earns now',
+        'If processed here',
+      ],
+      rows: [
+        [
+          'Gold',
+          'Obuasi and Tarkwa',
+          'Exported, mostly unrefined',
+          'Refined gold and jewellery',
+        ],
+        [
+          'Cocoa',
+          'The forest belt in the south',
+          'Exported as raw beans',
+          'Chocolate and cocoa butter',
+        ],
+        [
+          'Crude oil',
+          'Offshore, west of Takoradi',
+          'Exported crude',
+          'Fuel, cooking gas, plastic',
+        ],
+        ['Bauxite', 'Awaso', 'Exported as ore', 'Aluminium'],
+        [
+          'Timber',
+          'The forest belt',
+          'Exported as logs and sawn wood',
+          'Furniture and doors',
+        ],
+        [
+          'Fish',
+          'The sea and Lake Volta',
+          'Eaten at home, and it employs many',
+          'Smoked and tinned fish',
+        ],
+      ],
+      note: 'The last column is the value Ghana does not yet keep, because '
+        + 'it is earned by whoever does the processing.',
+    },
+  ],
   questions: [
     {
       id: 'res-1',
@@ -572,11 +784,8 @@ teach({
     + 'An extended family is that household together with grandparents, '
     + 'aunts, uncles, cousins and in laws, '
     + 'counted as one family even when they live apart. '
-    + 'Descent means the line a family traces itself through. '
-    + 'In a matrilineal system the line runs through the mother, '
-    + 'as among the Akan. '
-    + 'In a patrilineal system it runs through the father, '
-    + 'as among the Ewe, the Ga, the Dagomba and most northern groups. '
+    + 'Descent means the line a family traces itself through, '
+    + 'and Ghana has both of the two systems. '
     + 'The family feeds and houses its members, brings up children, '
     + 'teaches them how to behave, and supports those who cannot work.',
 
@@ -590,9 +799,6 @@ teach({
     + 'That is why in the older Akan practice a man’s property passed to '
     + 'his sister’s children rather than to his own, '
     + 'and why a maternal uncle carried real authority over a boy. '
-    + 'In a patrilineal system the same reasoning gives the opposite '
-    + 'answer: the son is in his father’s line, so he inherits from his '
-    + 'father. '
     + 'Neither system is confused about family. '
     + 'They answer one question, which line counts, '
     + 'and then everything else follows from that one answer. '
@@ -677,6 +883,99 @@ teach({
     + 'Families settle it by agreement, '
     + 'which is why custom changes faster than people expect.',
 
+  figure: {
+    alt: 'Two family trees of the same man side by side. On the left, '
+      + 'descent traced through the mother as among the Akan, the green '
+      + 'line holds the mother, the man, his sister and his sister’s son, '
+      + 'while his own son is in red, outside it, in his wife’s line. On '
+      + 'the right, descent traced through the father as among the Ewe, Ga '
+      + 'and Dagomba, the green line holds the father, the man and the '
+      + 'man’s own son, while his sister’s son is in red, outside it.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">which line a man’s own son stands in</text>'
+      + '<text x="158" y="60" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">traced through the mother</text>'
+      + '<text x="158" y="80" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">as among the Akan</text>'
+      + '<circle cx="158" cy="126" r="26" stroke="#0f8a4d"/>'
+      + '<text x="158" y="131" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">mother</text>'
+      + '<path d="M 140 146 L 104 184" stroke="#0f8a4d"/>'
+      + '<path d="M 176 146 L 212 184" stroke="#0f8a4d"/>'
+      + '<circle cx="98" cy="208" r="26" stroke="#0f8a4d"/>'
+      + '<text x="98" y="206" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the</text>'
+      + '<text x="98" y="222" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">man</text>'
+      + '<circle cx="218" cy="208" r="26" stroke="#0f8a4d"/>'
+      + '<text x="218" y="206" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">his</text>'
+      + '<text x="218" y="222" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">sister</text>'
+      + '<path d="M 98 234 V 270" stroke="#c8433a"/>'
+      + '<circle cx="98" cy="296" r="26" stroke="#c8433a"/>'
+      + '<text x="98" y="294" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">his</text>'
+      + '<text x="98" y="310" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">son</text>'
+      + '<text x="98" y="346" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">in his wife’s line</text>'
+      + '<path d="M 218 234 V 270" stroke="#0f8a4d"/>'
+      + '<circle cx="218" cy="296" r="26" stroke="#0f8a4d"/>'
+      + '<text x="218" y="294" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">her</text>'
+      + '<text x="218" y="310" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">son</text>'
+      + '<text x="218" y="346" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">in the man’s line</text>'
+      + '<line x1="320" y1="50" x2="320" y2="360" stroke-dasharray="6 7"/>'
+      + '<text x="482" y="60" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">traced through the father</text>'
+      + '<text x="482" y="80" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">as among the Ewe, Ga and Dagomba</text>'
+      + '<circle cx="482" cy="126" r="26" stroke="#0f8a4d"/>'
+      + '<text x="482" y="131" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">father</text>'
+      + '<path d="M 464 146 L 428 184" stroke="#0f8a4d"/>'
+      + '<path d="M 500 146 L 536 184" stroke="#0f8a4d"/>'
+      + '<circle cx="422" cy="208" r="26" stroke="#0f8a4d"/>'
+      + '<text x="422" y="206" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the</text>'
+      + '<text x="422" y="222" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">man</text>'
+      + '<circle cx="542" cy="208" r="26" stroke="#0f8a4d"/>'
+      + '<text x="542" y="206" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">his</text>'
+      + '<text x="542" y="222" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">sister</text>'
+      + '<path d="M 422 234 V 270" stroke="#0f8a4d"/>'
+      + '<circle cx="422" cy="296" r="26" stroke="#0f8a4d"/>'
+      + '<text x="422" y="294" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">his</text>'
+      + '<text x="422" y="310" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">son</text>'
+      + '<text x="422" y="346" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">in the man’s line</text>'
+      + '<path d="M 542 234 V 270" stroke="#c8433a"/>'
+      + '<circle cx="542" cy="296" r="26" stroke="#c8433a"/>'
+      + '<text x="542" y="294" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">her</text>'
+      + '<text x="542" y="310" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">son</text>'
+      + '<text x="542" y="346" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">in her husband’s line</text>'
+      + '<text x="320" y="386" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the green circles are one line, and in the old custom they inherited</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The same man’s relatives, counted in each of the two '
+        + 'systems',
+      columns: ['Question about him', 'Matrilineal', 'Patrilineal'],
+      rows: [
+        ['The line runs through', 'His mother', 'His father'],
+        [
+          'Groups in Ghana',
+          'The Akan',
+          'Ewe, Ga, Dagomba and most northern groups',
+        ],
+        ['His own son is in', 'His wife’s line', 'His own line'],
+        [
+          'His sister’s son is in',
+          'His own line',
+          'His sister’s husband’s line',
+        ],
+        [
+          'In the old custom, who inherited from him',
+          'His sister’s children',
+          'His own children',
+        ],
+        [
+          'Who held authority over a boy',
+          'His mother’s brother',
+          'His father',
+        ],
+      ],
+      note: 'Ghanaian law now provides for a spouse and children in both '
+        + 'systems, so the last two rows describe custom rather than the '
+        + 'law today.',
+    },
+  ],
   questions: [
     {
       id: 'fam-1',
@@ -744,9 +1043,8 @@ teach({
     + 'language, beliefs, values, greetings, and ideas about right and '
     + 'wrong. '
     + 'Nobody is born with it. '
-    + 'It is learned, and the learning is called socialisation. '
-    + 'The family teaches first, then the school, '
-    + 'then friends of the same age, religious groups, and the media.',
+    + 'It is learned, and the learning is called socialisation, '
+    + 'and several different teachers take a hand in it.',
 
   mechanism:
     'Culture is learned, and that one fact answers most questions about it. '
@@ -848,6 +1146,69 @@ teach({
     + 'which is how cassava, football and the English language all became '
     + 'Ghanaian.',
 
+  figure: {
+    alt: 'A child drawn in the middle of a circle, with five arrows '
+      + 'pointing in at it, numbered in the order the child meets them: '
+      + 'the family first, then the school, then friends of the same age, '
+      + 'then the religious group, and last the media, whose arrow is '
+      + 'drawn thicker and in green because its share is growing.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">nobody is born with culture, so somebody teaches it</text>'
+      + '<circle cx="320" cy="212" r="48"/>'
+      + '<text x="320" y="208" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the</text>'
+      + '<text x="320" y="228" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">child</text>'
+      + '<text x="320" y="70" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">1 the family, first of all</text>'
+      + '<path d="M 320 82 V 156"/>'
+      + '<path d="M 320 164 L 310 146 L 330 146 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="596" y="138" font-size="16" text-anchor="end" fill="currentColor" stroke="none">2 the school</text>'
+      + '<path d="M 520 150 L 374 194"/>'
+      + '<path d="M 374 194 L 393 196 L 389 182 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="596" y="318" font-size="16" text-anchor="end" fill="currentColor" stroke="none">3 friends of the same age</text>'
+      + '<path d="M 500 300 L 372 238"/>'
+      + '<path d="M 372 238 L 391 240 L 385 252 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="44" y="318" font-size="16" text-anchor="start" fill="currentColor" stroke="none">4 the religious group</text>'
+      + '<path d="M 148 300 L 270 238"/>'
+      + '<path d="M 270 238 L 257 252 L 251 240 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="44" y="132" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">5 the media</text>'
+      + '<text x="44" y="152" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">and its share is growing</text>'
+      + '<path d="M 160 172 L 264 196" stroke="#0f8a4d" stroke-width="6"/>'
+      + '<path d="M 264 196 L 244 199 L 248 185 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="320" y="366" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">when one teacher takes more of the child’s day,</text>'
+      + '<text x="320" y="390" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">what is passed on changes</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Who teaches the child, in the order the child meets them',
+      columns: [
+        'Agent',
+        'When it reaches the child',
+        'What it mainly teaches',
+      ],
+      rows: [
+        ['The family', 'From birth', 'Language, manners, right and wrong'],
+        [
+          'The school',
+          'From the day school starts',
+          'Knowledge, rules, working with others',
+        ],
+        [
+          'Friends of the same age',
+          'Once the child has friends',
+          'How to get on with people outside the family',
+        ],
+        ['The religious group', 'Through childhood', 'Beliefs and values'],
+        [
+          'The media',
+          'Early now, and for more hours than before',
+          'Dress, music, speech and ideas from everywhere',
+        ],
+      ],
+      note: 'The last row is the one that has changed most, which is the '
+        + 'better answer to why culture is changing.',
+    },
+  ],
   questions: [
     {
       id: 'cul-1',
