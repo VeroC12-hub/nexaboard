@@ -45,16 +45,14 @@ teach({
   },
 
   idea:
-    'The purpose of a passage is what the writer set out to do: '
-    + 'inform, explain, persuade, entertain, warn, criticise, or appeal. '
-    + 'Tone is the writer’s attitude to the subject: '
-    + 'approving, critical, amused, sarcastic, regretful, '
-    + 'urgent, detached, affectionate. '
-    + 'Tone is carried by the choice of words, '
-    + 'by what is emphasised, '
-    + 'and by what is left out. '
-    + 'Mood is what the reader is made to feel, '
-    + 'which is not always the same as the writer’s own attitude.',
+    'Purpose, tone and mood are three different questions about one '
+    + 'passage. '
+    + 'Purpose is what the writer set out to do, '
+    + 'tone is their attitude to the subject, '
+    + 'and mood is what the reader is made to feel, '
+    + 'which is not always the same thing. '
+    + 'All three are answered from the page '
+    + 'rather than from how the passage struck you.',
 
   mechanism:
     'Tone questions look like opinion and have a right answer, '
@@ -165,6 +163,112 @@ teach({
     + 'because the differences between them are all choices. '
     + 'This is how the same skill is used on news reports and on history.',
 
+  figure: {
+    alt: 'The plain sentence the minister explained the delay shown in a '
+      + 'dashed box as the version that was available. Beneath it the '
+      + 'sentence the writer chose, the minister offered yet another '
+      + 'explanation for the delay, with offered and yet another each '
+      + 'ringed in red as the two words carrying the irritation. At the '
+      + 'bottom, a report of a protest with the words saying what it was '
+      + 'about boxed out, because what is never said is evidence too.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">every sentence had a plain version, and it was not used</text>'
+      + '<text x="30" y="60" font-size="13" text-anchor="start" fill="currentColor" stroke="none">the plain version, which was available</text>'
+      + '<path d="M 24 72 H 440 V 110 H 24 Z" stroke-dasharray="7 6" stroke-width="2"/>'
+      + '<text x="232" y="96" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">The minister explained the delay.</text>'
+      + '<text x="30" y="150" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">what the writer chose instead</text>'
+      + '<path d="M 24 162 H 616 V 200 H 24 Z" stroke="#c8433a"/>'
+      + '<text x="44" y="186" font-size="16" text-anchor="start" fill="currentColor" stroke="none">The minister</text>'
+      + '<text x="156" y="186" font-size="16" text-anchor="start" fill="#c8433a" stroke="none">offered</text>'
+      + '<text x="230" y="186" font-size="16" text-anchor="start" fill="#c8433a" stroke="none">yet another</text>'
+      + '<text x="344" y="186" font-size="16" text-anchor="start" fill="currentColor" stroke="none">explanation for the delay.</text>'
+      + '<path d="M 150 166 H 222 V 196 H 150 Z" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 226 166 H 338 V 196 H 226 Z" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="244" y="224" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">the same event reported, and the irritation is in these two words</text>'
+      + '<path d="M 24 264 H 616" stroke-dasharray="7 6" stroke-width="1.5"/>'
+      + '<text x="30" y="300" font-size="13" text-anchor="start" fill="currentColor" stroke="none">and what is never said is evidence too</text>'
+      + '<path d="M 24 312 H 616 V 352 H 24 Z" stroke-width="2"/>'
+      + '<text x="44" y="338" font-size="15" text-anchor="start" fill="currentColor" stroke="none">A report of a protest that never says</text>'
+      + '<path d="M 356 318 H 486 V 346 H 356 Z" stroke="#c8433a" stroke-dasharray="6 5" stroke-width="2"/>'
+      + '<text x="421" y="338" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">what it was about</text>'
+      + '<text x="496" y="338" font-size="15" text-anchor="start" fill="currentColor" stroke="none">has taken a side.</text>'
+      + '<text x="320" y="384" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so point at the word, and the tone stops being an opinion</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Purpose, tone and mood, and where the evidence for each '
+        + 'sits',
+      columns: [
+        'Which',
+        'What it is',
+        'The question to ask',
+        'Where the evidence is',
+      ],
+      rows: [
+        [
+          'Purpose',
+          'What the writer set out to do',
+          'What did they want the reader to do?',
+          'Whether reasons are given, and whether objections are answered',
+        ],
+        [
+          'Tone',
+          'The writer’s attitude to the subject',
+          'Which word did they choose instead of the plain one?',
+          'In the words chosen, and in what is left out',
+        ],
+        [
+          'Mood',
+          'What the reader is made to feel',
+          'How does this leave me?',
+          'In the whole effect, which need not match the tone',
+        ],
+      ],
+      note: 'An answer saying the tone is critical is a guess. An answer '
+        + 'saying the tone is critical, shown by yet another, which '
+        + 'suggests the explanations have become routine, is a reading.',
+    },
+    {
+      caption: 'The purposes a passage can have, and how each one shows',
+      columns: ['Purpose', 'What the writer wants', 'How you can tell'],
+      rows: [
+        [
+          'Inform',
+          'The reader to know something',
+          'Facts given, with no conclusion pressed',
+        ],
+        [
+          'Explain',
+          'The reader to understand how or why',
+          'Causes and steps, set out in order',
+        ],
+        [
+          'Persuade',
+          'The reader to change their mind',
+          'Reasons given, and objections answered',
+        ],
+        [
+          'Entertain',
+          'The reader to enjoy it',
+          'Humour, surprise, or a story carried for its own sake',
+        ],
+        [
+          'Warn',
+          'The reader to be careful',
+          'A consequence held up where it can be seen',
+        ],
+        [
+          'Criticise',
+          'The reader to think less of something',
+          'Loaded words where plain ones were available',
+        ],
+      ],
+      note: 'A passage can do two of these at once, which is why the '
+        + 'question worth asking is what it mainly wanted.',
+    },
+  ],
   questions: [
     {
       id: 'pur-1',
@@ -231,16 +335,11 @@ teach({
 
   idea:
     'A poem says something, and says it in a particular shape. '
-    + 'A stanza is a group of lines. '
-    + 'Rhyme is matching sounds at line ends, '
-    + 'and rhythm is the beat of the lines. '
-    + 'Repetition brings a word or a line back. '
-    + 'Alliteration repeats a first consonant, '
-    + 'and onomatopoeia uses a word that sounds like its meaning. '
-    + 'Imagery is the pictures the poem makes, '
-    + 'often through simile, metaphor and personification. '
-    + 'The theme is what the poem is about underneath its subject. '
-    + 'The persona is the voice speaking, '
+    + 'The devices that make the shape are few, '
+    + 'and naming one earns almost nothing on its own: '
+    + 'a question about a device always asks what it is doing. '
+    + 'The theme is what the poem is about underneath its subject, '
+    + 'and the persona is the voice speaking, '
     + 'which is not always the poet.',
 
   mechanism:
@@ -357,6 +456,95 @@ teach({
     + 'the line breaks and the few repetitions carry more weight, '
     + 'because they are the only structure there is.',
 
+  figure: {
+    alt: 'Two orders of work side by side. In red, hunting for devices '
+      + 'first gives there is alliteration in line three and there is a '
+      + 'simile in line six, which is true and earns almost no marks '
+      + 'because nothing is doing anything. In green, reading aloud and '
+      + 'saying in plain words what happens comes first, so that the long '
+      + 'vowels and the repeated line then have work to do.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the order of work decides whether the devices mean anything</text>'
+      + '<text x="160" y="58" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">spotting first</text>'
+      + '<path d="M 20 72 H 300 V 116 H 20 Z" stroke="#c8433a"/>'
+      + '<text x="160" y="99" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">hunt for devices</text>'
+      + '<path d="M 160 116 V 132" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 160 142 L 152 124 L 168 124 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 20 144 H 300 V 200 H 20 Z" stroke="#c8433a"/>'
+      + '<text x="160" y="168" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">there is alliteration in line three,</text>'
+      + '<text x="160" y="188" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">there is a simile in line six</text>'
+      + '<path d="M 160 200 V 216" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 160 226 L 152 208 L 168 208 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 20 228 H 300 V 284 H 20 Z" stroke="#c8433a"/>'
+      + '<text x="160" y="252" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">all true, and almost no marks:</text>'
+      + '<text x="160" y="272" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">nothing is doing anything</text>'
+      + '<text x="480" y="58" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">meaning first</text>'
+      + '<path d="M 340 72 H 620 V 116 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="480" y="92" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">read it aloud, twice, and say</text>'
+      + '<text x="480" y="110" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">in plain words what happens</text>'
+      + '<path d="M 480 116 V 132" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 480 142 L 472 124 L 488 124 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 340 144 H 620 V 200 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="480" y="168" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">it is a slow, heavy journey,</text>'
+      + '<text x="480" y="188" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">and the speaker is weary of it</text>'
+      + '<path d="M 480 200 V 216" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 480 226 L 472 208 L 488 208 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 340 228 H 620 V 284 H 340 Z" stroke="#0f8a4d"/>'
+      + '<text x="480" y="252" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">now the long vowels and the</text>'
+      + '<text x="480" y="272" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">repeated line have work to do</text>'
+      + '<text x="320" y="326" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the same device in a poem about a storm does something else,</text>'
+      + '<text x="320" y="348" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so form and meaning are never two separate answers</text>'
+      + '<text x="320" y="382" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and the persona is not the poet: it may be a child, a soldier, or a river</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each device, what it is, and the kind of thing to say it '
+        + 'does',
+      columns: ['Device', 'What it is', 'What to say it is doing'],
+      rows: [
+        [
+          'Stanza',
+          'A group of lines',
+          'Where the poem turns, and what each group holds',
+        ],
+        [
+          'Rhyme',
+          'Matching sounds at the ends of lines',
+          'Binds lines together, and can make an ending feel settled',
+        ],
+        [
+          'Rhythm',
+          'The beat of the lines',
+          'Fast or slow, so the reader feels the subject',
+        ],
+        [
+          'Repetition',
+          'A word or a line brought back',
+          'Insists, or wears the reader down, depending on the poem',
+        ],
+        [
+          'Alliteration',
+          'The same first consonant repeated',
+          'Holds words together so they are heard as one',
+        ],
+        [
+          'Onomatopoeia',
+          'A word that sounds like its meaning',
+          'Puts the sound itself into the poem',
+        ],
+        [
+          'Imagery',
+          'The pictures the poem makes',
+          'What the reader sees, and what seeing it makes them feel',
+        ],
+      ],
+      note: 'The same device does different work in different poems, so '
+        + 'work out what the poem is about first and the devices will '
+        + 'have something to be doing.',
+    },
+  ],
   questions: [
     {
       id: 'poe-1',
@@ -431,11 +619,8 @@ teach({
     + 'One paragraph states the strongest objection and answers it. '
     + 'The conclusion restates the position, '
     + 'and adds nothing new. '
-    + 'An expository essay explains instead: '
-    + 'how something works, what caused something, '
-    + 'how two things compare. '
-    + 'It is organised by the subject rather than by strength of argument, '
-    + 'and it takes no side.',
+    + 'An expository essay explains instead, and takes no side, '
+    + 'so the two are built to different plans.',
 
   mechanism:
     'Two decisions shape an argumentative essay '
@@ -555,6 +740,84 @@ teach({
     + 'or it is right and outweighed. '
     + 'The third is the most useful and the least used.',
 
+  figure: {
+    alt: 'The reasons of an essay drawn as bars whose height is their '
+      + 'strength. In red, the best point comes first and the case '
+      + 'declines, so the reader leaves at the weakest part of it. In '
+      + 'green, the second strongest comes first, the weak one is buried '
+      + 'in the middle, and the strongest comes last, so the reader leaves '
+      + 'at the strongest part.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the reader remembers the last thing they read</text>'
+      + '<text x="20" y="54" font-size="14" text-anchor="start" fill="#c8433a" stroke="none">best point first, and declining from there</text>'
+      + '<path d="M 30 70 H 114 V 150 H 30 Z" stroke="#c8433a"/>'
+      + '<text x="72" y="168" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">strongest</text>'
+      + '<path d="M 142 86 H 226 V 150 H 142 Z" stroke="#c8433a"/>'
+      + '<text x="184" y="168" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">strong</text>'
+      + '<path d="M 254 102 H 338 V 150 H 254 Z" stroke="#c8433a"/>'
+      + '<text x="296" y="168" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">middling</text>'
+      + '<path d="M 366 118 H 450 V 150 H 366 Z" stroke="#c8433a"/>'
+      + '<text x="408" y="168" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">weak</text>'
+      + '<path d="M 492 110 H 516" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 526 110 L 508 101 L 508 119 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="582" y="88" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">and they leave at</text>'
+      + '<text x="582" y="106" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">the weakest part</text>'
+      + '<text x="582" y="124" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">of your case</text>'
+      + '<text x="20" y="204" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">second best first, weak in the middle, best last</text>'
+      + '<path d="M 30 236 H 114 V 300 H 30 Z" stroke="#0f8a4d"/>'
+      + '<text x="72" y="318" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">strong</text>'
+      + '<path d="M 142 268 H 226 V 300 H 142 Z" stroke="#0f8a4d"/>'
+      + '<text x="184" y="318" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">weak</text>'
+      + '<path d="M 254 252 H 338 V 300 H 254 Z" stroke="#0f8a4d"/>'
+      + '<text x="296" y="318" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">middling</text>'
+      + '<path d="M 366 220 H 450 V 300 H 366 Z" stroke="#0f8a4d"/>'
+      + '<text x="408" y="318" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">strongest</text>'
+      + '<path d="M 492 260 H 516" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 526 260 L 508 251 L 508 269 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="582" y="238" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">and they leave at</text>'
+      + '<text x="582" y="256" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">the strongest part</text>'
+      + '<text x="582" y="274" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">of your case</text>'
+      + '<text x="320" y="358" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and one paragraph states the strongest objection and answers it,</text>'
+      + '<text x="320" y="380" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">because an essay that never mentions it reads as one that cannot</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'An argument and an exposition are built to different plans',
+      columns: ['Question', 'An argumentative essay', 'An expository essay'],
+      rows: [
+        [
+          'What it does',
+          'States a position and supports it',
+          'Explains how, or why, or how two things compare',
+        ],
+        [
+          'Does it take a side?',
+          'Yes, and says so in the introduction',
+          'No',
+        ],
+        [
+          'How it is ordered',
+          'By the strength of the reasons',
+          'By the subject itself',
+        ],
+        [
+          'The objection paragraph',
+          'Essential: state the strongest one and answer it',
+          'Not needed, because there is no opponent',
+        ],
+        [
+          'The conclusion',
+          'Restates the position, and adds nothing new',
+          'Draws the explanation together',
+        ],
+      ],
+      note: 'Learners leave the objection out, believing that mentioning it '
+        + 'helps the opponent. The examiner already knows it, so an essay '
+        + 'that never mentions it reads as one that cannot answer it.',
+    },
+  ],
   questions: [
     {
       id: 'arg-1',
@@ -623,10 +886,8 @@ teach({
     + 'and what is recommended. '
     + 'It is written in the past tense, in the third person, '
     + 'and it keeps the writer’s feelings out. '
-    + 'An article is written for a particular readership, '
-    + 'in a magazine or a newspaper. '
-    + 'It has a headline, an opening that makes the reader continue, '
-    + 'and it may carry opinion and a personal voice.',
+    + 'An article is written for a particular readership instead, '
+    + 'and almost every rule changes with the reader.',
 
   mechanism:
     'A report is defined by its reader, '
@@ -742,6 +1003,85 @@ teach({
     + 'It is judged entirely on whether somebody absent '
     + 'can carry out their part from it.',
 
+  figure: {
+    alt: 'A report laid out on a page: a title saying what it reports, the '
+      + 'writer’s name and the date, then the facts numbered in the order '
+      + 'the reader needs them, from what happened through to what is '
+      + 'recommended. A box holding how upsetting I found it is dashed in '
+      + 'red and crossed out, because the reader cannot act on the '
+      + 'writer’s feelings.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">a report is written for somebody who was not there</text>'
+      + '<path d="M 110 42 H 420 V 324 H 110 Z" stroke-width="2"/>'
+      + '<text x="265" y="68" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">REPORT ON THE FLOODING</text>'
+      + '<path d="M 148 76 H 382" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="265" y="96" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">by A. Mensah, 14 June</text>'
+      + '<path d="M 126 114 H 404" stroke-width="2"/>'
+      + '<text x="136" y="140" font-size="13" text-anchor="start" fill="currentColor" stroke="none">1  what happened</text>'
+      + '<text x="136" y="164" font-size="13" text-anchor="start" fill="currentColor" stroke="none">2  where, and when</text>'
+      + '<text x="136" y="188" font-size="13" text-anchor="start" fill="currentColor" stroke="none">3  who was involved</text>'
+      + '<text x="136" y="212" font-size="13" text-anchor="start" fill="currentColor" stroke="none">4  how it happened</text>'
+      + '<text x="136" y="236" font-size="13" text-anchor="start" fill="currentColor" stroke="none">5  what was done</text>'
+      + '<text x="136" y="260" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">6  what is recommended</text>'
+      + '<path d="M 136 282 H 394 V 312 H 136 Z" stroke="#c8433a" stroke-dasharray="6 5" stroke-width="2"/>'
+      + '<text x="265" y="302" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">how upsetting I found it</text>'
+      + '<path d="M 402 284 L 430 310" stroke="#c8433a" stroke-width="4"/>'
+      + '<path d="M 430 284 L 402 310" stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="446" y="138" font-size="13" text-anchor="start" fill="currentColor" stroke="none">the facts in the order</text>'
+      + '<text x="446" y="156" font-size="13" text-anchor="start" fill="currentColor" stroke="none">the reader needs them,</text>'
+      + '<text x="446" y="174" font-size="13" text-anchor="start" fill="currentColor" stroke="none">in the third person</text>'
+      + '<text x="446" y="192" font-size="13" text-anchor="start" fill="currentColor" stroke="none">and the past tense</text>'
+      + '<text x="446" y="238" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">because the reader</text>'
+      + '<text x="446" y="256" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">has to act on it</text>'
+      + '<text x="446" y="298" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">out: they cannot</text>'
+      + '<text x="446" y="316" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">act on your feelings</text>'
+      + '<text x="320" y="358" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the test: could somebody who was absent now explain it to a third person?</text>'
+      + '<text x="320" y="382" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">if something is missing they must guess, and a guess is worse than a gap</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'A report and an article differ because their readers differ',
+      columns: ['Question', 'A report', 'An article'],
+      rows: [
+        [
+          'Who reads it',
+          'Somebody who was not there and has to act on it',
+          'A readership you chose for yourself',
+        ],
+        [
+          'Its heading',
+          'A title saying what it reports',
+          'A headline that makes them read on',
+        ],
+        [
+          'Person and tense',
+          'Third person, past tense',
+          'Whatever suits that readership',
+        ],
+        [
+          'Your own feelings',
+          'Kept out: nobody can act on them',
+          'Allowed, and often the whole point',
+        ],
+        [
+          'How it ends',
+          'With what was done and what is recommended',
+          'However you choose to end it',
+        ],
+        [
+          'The test of it',
+          'Could an absent reader now explain it to a third person?',
+          'Would your reader have kept reading?',
+        ],
+      ],
+      note: 'A report is useful even when nothing dramatic happened, '
+        + 'because the reader learns what the situation is. If something '
+        + 'is missing they must guess, and a guess in a report is worse '
+        + 'than a gap.',
+    },
+  ],
   questions: [
     {
       id: 'rep-1',
@@ -812,19 +1152,11 @@ teach({
     + 'She said, "I am tired." '
     + 'Indirect speech reports: '
     + 'She said that she was tired. '
-    + 'Three kinds of change are needed. '
-    + 'The tense moves back: '
-    + 'am becomes was, went becomes had gone, will becomes would. '
-    + 'The pronouns change to match the new speaker: '
-    + 'I becomes he or she, my becomes his or her, we becomes they. '
-    + 'And words tied to the moment of speaking change: '
-    + 'now becomes then, today becomes that day, '
-    + 'here becomes there, this becomes that, '
-    + 'tomorrow becomes the next day, '
-    + 'yesterday becomes the day before. '
-    + 'A question becomes a reported question with asked and no question '
-    + 'mark, '
-    + 'and a command becomes told plus to.',
+    + 'Three kinds of word have to change, '
+    + 'and all three change for the same reason: '
+    + 'the tense, the pronouns, '
+    + 'and the words tied to the moment of speaking. '
+    + 'A question and a command change in one further way each.',
 
   mechanism:
     'The three changes look like three lists to memorise '
@@ -943,6 +1275,101 @@ teach({
     + 'the accuracy of the pronoun and the time word '
     + 'decides whether the report means what the speaker meant.',
 
+  figure: {
+    alt: 'Ama drawn in Tamale on Tuesday saying I am tired, here, today, '
+      + 'with the note that every one of those words takes its meaning '
+      + 'from her. An arrow leads to the report, made later and somewhere '
+      + 'else. Keeping the same words, shown dashed in red, makes them '
+      + 'point at you; moving them to she was tired, there, that day, '
+      + 'shown in green, makes them point back at her.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">you are no longer standing where the speaker stood</text>'
+      + '<path d="M 24 60 H 266 V 108 H 24 Z" stroke="#0f8a4d"/>'
+      + '<text x="145" y="90" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">I am tired, here, today</text>'
+      + '<path d="M 145 108 V 126" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<circle cx="145" cy="140" r="14" stroke="currentColor"/>'
+      + '<path d="M 145 154 V 182" stroke="currentColor"/>'
+      + '<path d="M 130 166 H 160" stroke="currentColor"/>'
+      + '<path d="M 145 182 L 134 204" stroke="currentColor"/>'
+      + '<path d="M 145 182 L 156 204" stroke="currentColor"/>'
+      + '<text x="145" y="236" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">Ama, in Tamale,</text>'
+      + '<text x="145" y="256" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">on Tuesday</text>'
+      + '<text x="145" y="286" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">every one of those words</text>'
+      + '<text x="145" y="304" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">takes its meaning from her</text>'
+      + '<path d="M 286 180 H 352" stroke="currentColor" stroke-width="2"/>'
+      + '<path d="M 362 180 L 344 171 L 344 189 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="324" y="164" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">reported later,</text>'
+      + '<text x="324" y="208" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">somewhere else</text>'
+      + '<path d="M 374 60 H 616 V 108 H 374 Z" stroke="#c8433a" stroke-dasharray="6 5"/>'
+      + '<text x="495" y="90" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">I am tired, here, today</text>'
+      + '<text x="495" y="128" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">keep them and they point at you</text>'
+      + '<path d="M 374 150 H 616 V 198 H 374 Z" stroke="#0f8a4d"/>'
+      + '<text x="495" y="180" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">she was tired, there, that day</text>'
+      + '<text x="495" y="218" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">move them and they point back at her</text>'
+      + '<path d="M 374 174 C 326 174, 290 216, 202 206" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 192 205 L 210 198 L 208 216 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="495" y="282" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">so ask of every word: does it</text>'
+      + '<text x="495" y="300" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">depend on who is speaking,</text>'
+      + '<text x="495" y="318" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">or where, or when?</text>'
+      + '<text x="320" y="360" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">if it does, it has to move, and there is nothing else to remember</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What has to move, and what each word depended on',
+      columns: [
+        'Kind of word',
+        'In direct speech',
+        'In indirect speech',
+        'What it depended on',
+      ],
+      rows: [
+        ['Tense', 'I am tired', 'she was tired', 'Her present is your past'],
+        [
+          'Tense',
+          'I went',
+          'she had gone',
+          'The same, one step further back',
+        ],
+        ['Pronoun', 'I, my, we', 'she, her, they', 'Who was speaking'],
+        ['Place', 'here, this', 'there, that', 'Where she was standing'],
+        ['Time', 'now, today', 'then, that day', 'When she spoke'],
+        [
+          'Time',
+          'tomorrow, yesterday',
+          'the next day, the day before',
+          'The same',
+        ],
+      ],
+      note: 'Ask of each word: does this depend on who is speaking, or '
+        + 'where, or when? If it does, it has to move, and there is '
+        + 'nothing else to remember.',
+    },
+    {
+      caption: 'What a statement, a question and a command each become',
+      columns: ['Direct speech', 'Indirect speech', 'What else changes'],
+      rows: [
+        [
+          'She said, I am tired.',
+          'She said that she was tired.',
+          'Nothing besides',
+        ],
+        [
+          'She asked, Are you ready?',
+          'She asked whether he was ready.',
+          'The question mark goes, and so does the inversion',
+        ],
+        [
+          'She said, Close the door.',
+          'She told him to close the door.',
+          'Said becomes told, and the verb takes to',
+        ],
+      ],
+      note: 'The quotation marks go in every case, because you are no '
+        + 'longer quoting.',
+    },
+  ],
   questions: [
     {
       id: 'spe-1',
