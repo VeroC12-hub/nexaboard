@@ -48,14 +48,9 @@ teach({
   idea:
     'In 2 to the power 5, the 2 is the base and the 5 is the index. '
     + 'It means 2 multiplied by itself 5 times. '
-    + 'The laws are these. '
-    + 'To multiply powers of the same base, add the indices. '
-    + 'To divide them, subtract. '
-    + 'To raise a power to another power, multiply the indices. '
-    + 'Any number except 0, raised to the power 0, is 1. '
-    + 'A negative index means the reciprocal: '
-    + '2 to the power negative 3 is 1 over 2 to the power 3, which is one '
-    + 'eighth.',
+    + 'There are five laws, and not one of them has to be memorised: '
+    + 'each appears by itself as soon as you write the powers out in '
+    + 'full.',
 
   mechanism:
     'There is nothing to memorise here, '
@@ -161,6 +156,71 @@ teach({
     + 'The same reasoning that forced the 0 and negative cases forces this '
     + 'one.',
 
+  figure: {
+    alt: 'Two cubed times 2 to the fourth, written out in full as a '
+      + 'bracket of three twos times a bracket of four twos. Counting '
+      + 'them gives seven twos, which is 2 to the seventh, so the '
+      + 'indices were added without anybody being told to add them.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">write the twos out and the law appears</text>'
+      + '<text x="282" y="90" font-size="22" text-anchor="start" fill="currentColor" stroke="none">2</text>'
+      + '<text x="298" y="76" font-size="14" text-anchor="start" fill="currentColor" stroke="none">3</text>'
+      + '<text x="314" y="90" font-size="22" text-anchor="start" fill="currentColor" stroke="none">×  2</text>'
+      + '<text x="358" y="76" font-size="14" text-anchor="start" fill="currentColor" stroke="none">4</text>'
+      + '<line x1="320" y1="106" x2="320" y2="136"/>'
+      + '<line x1="320" y1="136" x2="314.8" y2="127.4"/>'
+      + '<line x1="320" y1="136" x2="325.2" y2="127.4"/>'
+      + '<text x="320" y="166" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">(2 × 2 × 2) × (2 × 2 × 2 × 2)</text>'
+      + '<line x1="150" y1="184" x2="490" y2="184" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="320" y="210" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">count them: seven twos</text>'
+      + '<line x1="320" y1="224" x2="320" y2="252" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="320" y1="252" x2="314.8" y2="243.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="320" y1="252" x2="325.2" y2="243.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="300" y="286" font-size="24" text-anchor="start" fill="#0f8a4d" stroke="none">2</text>'
+      + '<text x="318" y="268" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">7</text>'
+      + '<text x="320" y="334" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">so you added the indices, and nobody had to tell you</text>'
+      + '<text x="320" y="368" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">division is the same picture, with twos cancelling</text>'
+      + '<text x="320" y="394" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and the index 0 and the negative index both follow from it</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each law of indices, and what it looks like written out in '
+        + 'full',
+      columns: ['The law', 'An example', 'Why it is true'],
+      rows: [
+        [
+          'Multiplying, same base: add the indices',
+          '2 cubed times 2 to the fourth is 2 to the seventh',
+          'Write both out and count the twos. There are seven',
+        ],
+        [
+          'Dividing, same base: subtract the indices',
+          '2 to the fifth over 2 squared is 2 cubed',
+          'Two twos cancel from each side, and three are left',
+        ],
+        [
+          'A power of a power: multiply the indices',
+          '2 cubed, all squared, is 2 to the sixth',
+          'Three twos, taken twice over, is six twos',
+        ],
+        [
+          'An index of 0: the answer is 1',
+          '2 to the power 0 is 1',
+          '2 cubed over 2 cubed is 8 over 8, and the rule says 2 to the 0',
+        ],
+        [
+          'A negative index: take the reciprocal',
+          '2 to the power negative 3 is one eighth',
+          '2 squared over 2 to the fifth cancels to 1 over 2 cubed',
+        ],
+      ],
+      note: 'Not one of these is a convention somebody chose. The last two '
+        + 'are forced by the division rule, or arithmetic would '
+        + 'contradict itself.',
+    },
+  ],
   questions: [
     {
       id: 'ind-1',
@@ -224,11 +284,8 @@ teach({
     + '1 and 10, multiplied by a power of ten. '
     + 'So 4300 becomes 4.3 times 10 to the power 3, '
     + 'and 0.0043 becomes 4.3 times 10 to the power negative 3. '
-    + 'To multiply two numbers in standard form, '
-    + 'multiply the front parts and add the powers. '
-    + 'To divide, divide the front parts and subtract the powers. '
-    + 'If the front part comes out at 10 or more, move the point again and '
-    + 'adjust the power.',
+    + 'Multiplying and dividing two of them is two separate jobs done '
+    + 'at once: one on the front parts, and one on the powers.',
 
   mechanism:
     'The power of ten is not a separate fact to remember. '
@@ -337,6 +394,80 @@ teach({
     + 'the second is a thousand times the first, '
     + 'which you read off the powers without doing any arithmetic.',
 
+  figure: {
+    alt: 'Three times ten to the fourth multiplied by four times ten '
+      + 'cubed. The front parts give 3 times 4, which is 12, and the '
+      + 'powers give 4 plus 3, which is 7. That makes 12 times ten to '
+      + 'the seventh, which is not standard form because 12 is not '
+      + 'between 1 and 10, so the point moves one place left to give '
+      + '1.2 times ten to the eighth.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">front parts multiply, powers add</text>'
+      + '<text x="130" y="92" font-size="20" text-anchor="start" fill="currentColor" stroke="none">3 × 10</text>'
+      + '<text x="196" y="78" font-size="14" text-anchor="start" fill="currentColor" stroke="none">4</text>'
+      + '<text x="300" y="92" font-size="20" text-anchor="start" fill="currentColor" stroke="none">×</text>'
+      + '<text x="360" y="92" font-size="20" text-anchor="start" fill="currentColor" stroke="none">4 × 10</text>'
+      + '<text x="426" y="78" font-size="14" text-anchor="start" fill="currentColor" stroke="none">3</text>'
+      + '<line x1="140" y1="110" x2="200" y2="110" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="370" y1="110" x2="430" y2="110" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="255" y="134" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">3 times 4 is 12</text>'
+      + '<line x1="206" y1="72" x2="300" y2="60"/>'
+      + '<line x1="432" y1="72" x2="350" y2="60"/>'
+      + '<text x="325" y="52" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">4 plus 3 is 7</text>'
+      + '<line x1="320" y1="160" x2="320" y2="192"/>'
+      + '<line x1="320" y1="192" x2="314.8" y2="183.4"/>'
+      + '<line x1="320" y1="192" x2="325.2" y2="183.4"/>'
+      + '<text x="320" y="224" font-size="22" text-anchor="middle" fill="#c8433a" stroke="none">12 × 10</text>'
+      + '<text x="378" y="210" font-size="14" text-anchor="start" fill="#c8433a" stroke="none">7</text>'
+      + '<text x="320" y="254" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">not standard form: 12 is not between 1 and 10</text>'
+      + '<line x1="320" y1="270" x2="320" y2="300" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="320" y1="300" x2="314.8" y2="291.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="320" y1="300" x2="325.2" y2="291.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="320" y="334" font-size="22" text-anchor="middle" fill="#0f8a4d" stroke="none">1.2 × 10</text>'
+      + '<text x="386" y="320" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">8</text>'
+      + '<text x="320" y="384" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the point moved one place left, so the power went up by one</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What to do with the front parts, and what to do with the '
+        + 'powers',
+      columns: ['Operation', 'The front parts', 'The powers', 'Example'],
+      rows: [
+        [
+          'Multiply',
+          'Multiply them',
+          'Add them',
+          '3 times 10 to the 4, times 4 times 10 cubed, is 1.2 times 10 to the 8',
+        ],
+        [
+          'Divide',
+          'Divide them',
+          'Subtract them',
+          '8 times 10 to the 5, over 2 times 10 squared, is 4 times 10 cubed',
+        ],
+      ],
+      note: 'If the front part comes out at 10 or more, move the point one '
+        + 'place left and add 1 to the power. 12 times 10 to the 7 is the '
+        + 'right value and is not standard form.',
+    },
+    {
+      caption: 'The sign of the power is a check you get for nothing',
+      columns: ['The number', 'In standard form', 'The power'],
+      rows: [
+        ['4300', '4.3 times 10 cubed', 'Positive, because the number is large'],
+        [
+          '0.0043',
+          '4.3 times 10 to the power negative 3',
+          'Negative, because the number is below 1',
+        ],
+      ],
+      note: 'A large number with a negative power means you moved the point '
+        + 'the wrong way, and you can see that without redoing the '
+        + 'question.',
+    },
+  ],
   questions: [
     {
       id: 'stf-1',
@@ -400,12 +531,8 @@ teach({
   },
 
   idea:
-    'A base is how many units you gather before starting a new column. '
-    + 'Base ten bundles by ten, so its columns are 1, 10, 100, 1000. '
-    + 'Base two bundles by two, so its columns are 1, 2, 4, 8, 16. '
-    + 'Base five bundles by five: 1, 5, 25, 125. '
-    + 'A base only uses digits below itself, '
-    + 'so base two uses 0 and 1 only, and base five uses 0 to 4. '
+    'A base is how many units you gather before starting a new column, '
+    + 'and the columns and the digits allowed both follow from it. '
     + 'To change to base ten, multiply each digit by its column value and '
     + 'add. '
     + 'To change from base ten, divide by the base again and again, '
@@ -517,6 +644,74 @@ teach({
     + 'One hexadecimal digit is exactly four binary digits. '
     + 'So it shortens a long binary number without changing it.',
 
+  figure: {
+    alt: 'Three rows of columns. Base ten has columns 1000, 100, 10 and '
+      + '1. Base two has 16, 8, 4, 2 and 1. Base five has 125, 25, 5 '
+      + 'and 1. In every row each column is the base multiplied by the '
+      + 'column to its right.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">write the column values down first</text>'
+      + '<text x="60" y="82" font-size="16" text-anchor="start" fill="currentColor" stroke="none">base ten</text>'
+      + '<path d="M 180 62 H 580 V 108 H 180 Z"/>'
+      + '<line x1="280" y1="62" x2="280" y2="108"/>'
+      + '<line x1="380" y1="62" x2="380" y2="108"/>'
+      + '<line x1="480" y1="62" x2="480" y2="108"/>'
+      + '<text x="230" y="92" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">1000</text>'
+      + '<text x="330" y="92" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">100</text>'
+      + '<text x="430" y="92" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">10</text>'
+      + '<text x="530" y="92" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="60" y="182" font-size="16" text-anchor="start" fill="currentColor" stroke="none">base two</text>'
+      + '<path d="M 180 162 H 580 V 208 H 180 Z"/>'
+      + '<line x1="260" y1="162" x2="260" y2="208"/>'
+      + '<line x1="340" y1="162" x2="340" y2="208"/>'
+      + '<line x1="420" y1="162" x2="420" y2="208"/>'
+      + '<line x1="500" y1="162" x2="500" y2="208"/>'
+      + '<text x="220" y="192" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">16</text>'
+      + '<text x="300" y="192" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">8</text>'
+      + '<text x="380" y="192" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<text x="460" y="192" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="540" y="192" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="60" y="282" font-size="16" text-anchor="start" fill="currentColor" stroke="none">base five</text>'
+      + '<path d="M 180 262 H 580 V 308 H 180 Z"/>'
+      + '<line x1="280" y1="262" x2="280" y2="308"/>'
+      + '<line x1="380" y1="262" x2="380" y2="308"/>'
+      + '<line x1="480" y1="262" x2="480" y2="308"/>'
+      + '<text x="230" y="292" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">125</text>'
+      + '<text x="330" y="292" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">25</text>'
+      + '<text x="430" y="292" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">5</text>'
+      + '<text x="530" y="292" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="320" y="348" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">each column is the base times the column to its right</text>'
+      + '<text x="320" y="384" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so 1101 in base two is 8 plus 4 plus 1, which is 13</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The digits and the column values of each base',
+      columns: ['Base', 'Digits it may use', 'Its columns, from the right'],
+      rows: [
+        ['Ten', '0 to 9', '1, 10, 100, 1000'],
+        ['Two', '0 and 1', '1, 2, 4, 8, 16'],
+        ['Five', '0 to 4', '1, 5, 25, 125'],
+      ],
+      note: 'A base never uses a digit as large as itself. Write the column '
+        + 'values on the page before any conversion and the rest is '
+        + 'arithmetic you already know.',
+    },
+    {
+      caption: 'The same four amounts written in three different bases',
+      columns: ['In base ten', 'In base two', 'In base five'],
+      rows: [
+        ['4', '100', '4'],
+        ['7', '111', '12'],
+        ['13', '1101', '23'],
+        ['25', '11001', '100'],
+      ],
+      note: 'Nothing about the amount changed from column to column. Only '
+        + 'the size of the bundle changed, and we bundle by ten only '
+        + 'because we have ten fingers.',
+    },
+  ],
   questions: [
     {
       id: 'bas-1',
@@ -691,6 +886,55 @@ teach({
     + 'which is not the same as 30 per cent, '
     + 'because each year is a percentage of a larger amount than the last.',
 
+  figure: {
+    alt: 'One hundred increased by 10 per cent gives 110. Taking 10 per '
+      + 'cent off 110 removes 11, not 10, so it lands on 99 and not '
+      + 'back on 100. Dividing 110 by 1.1 gives exactly 100, which is '
+      + 'how a change is undone.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">the second percentage is of a different number</text>'
+      + '<text x="90" y="104" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">100</text>'
+      + '<line x1="140" y1="98" x2="250" y2="98"/>'
+      + '<line x1="250" y1="98" x2="241.4" y2="103.2"/>'
+      + '<line x1="250" y1="98" x2="241.4" y2="92.8"/>'
+      + '<text x="195" y="78" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">add 10 per cent</text>'
+      + '<text x="195" y="122" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">which is 10</text>'
+      + '<text x="300" y="104" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">110</text>'
+      + '<line x1="350" y1="98" x2="460" y2="98" stroke="#c8433a" stroke-width="3"/>'
+      + '<line x1="460" y1="98" x2="451.4" y2="103.2" stroke="#c8433a" stroke-width="3"/>'
+      + '<line x1="460" y1="98" x2="451.4" y2="92.8" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="405" y="78" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">take 10 per cent off</text>'
+      + '<text x="405" y="122" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">but now that is 11</text>'
+      + '<text x="516" y="104" font-size="24" text-anchor="middle" fill="#c8433a" stroke="none">99</text>'
+      + '<text x="320" y="176" font-size="18" text-anchor="middle" fill="#c8433a" stroke="none">so you land on 99, and not back on 100</text>'
+      + '<text x="300" y="244" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">110</text>'
+      + '<line x1="350" y1="238" x2="460" y2="238" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="460" y1="238" x2="451.4" y2="243.2" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="460" y1="238" x2="451.4" y2="232.8" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="405" y="218" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">divide by 1.1</text>'
+      + '<text x="516" y="244" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">100</text>'
+      + '<text x="320" y="306" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">undo a change by dividing by its multiplier</text>'
+      + '<text x="320" y="344" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a rise of 20 per cent is multiplying by 1.2</text>'
+      + '<text x="320" y="374" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and a fall of 20 per cent is multiplying by 0.8</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The multiplier for each change, and how to undo it',
+      columns: ['The change', 'Multiply by', 'To undo it'],
+      rows: [
+        ['An increase of 20 per cent', '1.2', 'Divide by 1.2'],
+        ['A decrease of 20 per cent', '0.8', 'Divide by 0.8'],
+        ['An increase of 5 per cent', '1.05', 'Divide by 1.05'],
+        ['A decrease of 15 per cent', '0.85', 'Divide by 0.85'],
+      ],
+      note: 'A percentage is always of the original. That is why undoing a '
+        + 'change means dividing by the multiplier, and why a shop that '
+        + 'raises a price by 20 per cent and later takes 20 per cent off '
+        + 'is not back where it started.',
+    },
+  ],
   questions: [
     {
       id: 'pcc-1',
@@ -760,11 +1004,9 @@ teach({
     + 'then give 120 and 80. '
     + 'A rate compares amounts of different kinds, '
     + 'such as 12 cedis per kilo or 60 kilometres per hour. '
-    + 'Two quantities are in direct proportion when doubling one doubles '
-    + 'the other, '
-    + 'so dividing one by the other always gives the same number. '
-    + 'They are in inverse proportion when doubling one halves the other, '
-    + 'so multiplying them always gives the same number.',
+    + 'Two quantities can also be tied together, so that changing one '
+    + 'changes the other in a fixed way, and there are two kinds of '
+    + 'that.',
 
   mechanism:
     'The idea that makes every ratio question easy is the share. '
@@ -865,6 +1107,62 @@ teach({
     + 'on the ground. '
     + 'Every scale drawing question is the share method applied to length.',
 
+  figure: {
+    alt: 'A bar of 200 divided into five equal shares of 40. The first '
+      + 'three shares are marked as one side of the ratio, giving 120, '
+      + 'and the remaining two as the other, giving 80.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">a ratio of 3 to 2 means five equal shares</text>'
+      + '<path d="M 60 86 H 580 V 156 H 60 Z"/>'
+      + '<line x1="164" y1="86" x2="164" y2="156"/>'
+      + '<line x1="268" y1="86" x2="268" y2="156"/>'
+      + '<line x1="372" y1="86" x2="372" y2="156"/>'
+      + '<line x1="476" y1="86" x2="476" y2="156"/>'
+      + '<text x="112" y="128" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">40</text>'
+      + '<text x="216" y="128" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">40</text>'
+      + '<text x="320" y="128" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">40</text>'
+      + '<text x="424" y="128" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">40</text>'
+      + '<text x="528" y="128" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">40</text>'
+      + '<line x1="60" y1="172" x2="368" y2="172" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="214" y="198" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">three shares, so 120</text>'
+      + '<line x1="372" y1="172" x2="580" y2="172"/>'
+      + '<text x="476" y="198" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">two shares, so 80</text>'
+      + '<text x="320" y="250" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">add the parts first: 3 and 2 make 5 shares</text>'
+      + '<text x="320" y="282" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">then 200 divided by 5 is 40, and one share is all you need</text>'
+      + '<text x="320" y="334" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">double the first quantity and watch the second</text>'
+      + '<text x="320" y="364" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">if it doubles, that is direct. if it halves, that is inverse</text>'
+      + '<text x="320" y="392" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">direct keeps the quotient fixed, inverse keeps the product fixed</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Direct and inverse proportion, and the one test that tells '
+        + 'them apart',
+      columns: ['The question', 'Direct proportion', 'Inverse proportion'],
+      rows: [
+        ['Double the first quantity', 'The second doubles too', 'The second halves'],
+        [
+          'An example',
+          'Two kilos cost twice what one kilo costs',
+          'Two workers take half the time one worker takes',
+        ],
+        [
+          'What stays the same',
+          'One divided by the other',
+          'The two multiplied together',
+        ],
+        [
+          'Your own check',
+          'The quotient is the same for every pair',
+          'The product is the same for every pair',
+        ],
+      ],
+      note: 'If 4 workers take 6 days, the product is 24, so 3 workers must '
+        + 'take 8 days, because 3 times 8 is also 24. That is a check you '
+        + 'can run on your own answer.',
+    },
+  ],
   questions: [
     {
       id: 'rat-1',
@@ -1032,6 +1330,78 @@ teach({
     + 'the sequence is quadratic and its nth term contains n squared. '
     + '1, 4, 9, 16 is the clearest case.',
 
+  figure: {
+    alt: 'Two rows of numbers. The top row is 3n, giving 3, 6, 9 and 12. '
+      + 'The bottom row is the sequence 5, 8, 11 and 14. An arrow '
+      + 'between each pair is marked plus 2, so the nth term is 3n plus '
+      + '2.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">compare it with 3n, and read off the difference</text>'
+      + '<text x="80" y="110" font-size="16" text-anchor="start" fill="currentColor" stroke="none">3n gives</text>'
+      + '<text x="80" y="182" font-size="16" text-anchor="start" fill="currentColor" stroke="none">ours gives</text>'
+      + '<text x="260" y="110" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<text x="260" y="182" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">5</text>'
+      + '<line x1="260" y1="124" x2="260" y2="158" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="260" y1="158" x2="254.8" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="260" y1="158" x2="265.2" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="284" y="148" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">plus 2</text>'
+      + '<text x="360" y="110" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">6</text>'
+      + '<text x="360" y="182" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">8</text>'
+      + '<line x1="360" y1="124" x2="360" y2="158" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="360" y1="158" x2="354.8" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="360" y1="158" x2="365.2" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="384" y="148" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">plus 2</text>'
+      + '<text x="460" y="110" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">9</text>'
+      + '<text x="460" y="182" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">11</text>'
+      + '<line x1="460" y1="124" x2="460" y2="158" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="460" y1="158" x2="454.8" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="460" y1="158" x2="465.2" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="484" y="148" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">plus 2</text>'
+      + '<text x="560" y="110" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">12</text>'
+      + '<text x="560" y="182" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">14</text>'
+      + '<line x1="560" y1="124" x2="560" y2="158" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="560" y1="158" x2="554.8" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="560" y1="158" x2="565.2" y2="149.4" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="584" y="148" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">plus 2</text>'
+      + '<text x="320" y="244" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the differences are 3, so it climbs at the rate of 3n</text>'
+      + '<text x="320" y="278" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">and every term is 2 more than 3n</text>'
+      + '<text x="320" y="318" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">so the nth term is 3n plus 2</text>'
+      + '<text x="320" y="356" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">that is a comparison, and not a guess</text>'
+      + '<text x="320" y="386" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">shorter still: put n equal to 1 in 3n and see how far off you are</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What the differences tell you, and what to do with each kind',
+      columns: ['What the differences do', 'What kind of sequence it is', 'What to do'],
+      rows: [
+        [
+          'They are all the same',
+          'Linear',
+          'The nth term is that difference times n, plus a fixed number',
+        ],
+        [
+          'They change by a fixed amount themselves',
+          'Quadratic',
+          'Look at the differences of the differences',
+        ],
+        [
+          'Each term is the one before multiplied by a fixed number',
+          'Geometric',
+          'Ask what it is multiplied by, not what is added',
+        ],
+        [
+          'They follow nothing regular',
+          'Neither of those',
+          'Look for another pattern, such as square numbers or primes',
+        ],
+      ],
+      note: 'The first row is the only one where dn plus c applies, so '
+        + 'checking the differences first also tells you when the method '
+        + 'does not work.',
+    },
+  ],
   questions: [
     {
       id: 'seq-1',
@@ -1215,6 +1585,84 @@ teach({
     + 'Temperature during a day does. '
     + 'Favourite subjects do not.',
 
+  figure: {
+    alt: 'The same two marks, 94 and 98, drawn as bars twice. On the '
+      + 'left the vertical axis starts at 0 and the two bars look '
+      + 'almost the same height. On the right the axis starts at 90 and '
+      + 'one bar looks twice the other, although nothing in the numbers '
+      + 'has changed.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">the bars did not change, the axis did</text>'
+      + '<line x1="80" y1="250" x2="80" y2="90" stroke-width="3"/>'
+      + '<line x1="80" y1="250" x2="280" y2="250" stroke-width="3"/>'
+      + '<path d="M 120 100 H 170 V 250 H 120 Z"/>'
+      + '<path d="M 200 93 H 250 V 250 H 200 Z"/>'
+      + '<text x="68" y="254" font-size="13" text-anchor="end" fill="currentColor" stroke="none">0</text>'
+      + '<text x="68" y="110" font-size="13" text-anchor="end" fill="currentColor" stroke="none">90</text>'
+      + '<text x="68" y="94" font-size="13" text-anchor="end" fill="currentColor" stroke="none">100</text>'
+      + '<text x="145" y="272" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Ama</text>'
+      + '<text x="225" y="272" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Kofi</text>'
+      + '<text x="180" y="302" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">axis from 0</text>'
+      + '<text x="180" y="326" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">a small difference</text>'
+      + '<line x1="380" y1="250" x2="380" y2="90" stroke-width="3"/>'
+      + '<line x1="380" y1="250" x2="580" y2="250" stroke-width="3"/>'
+      + '<path d="M 420 186 H 470 V 250 H 420 Z"/>'
+      + '<path d="M 500 122 H 550 V 250 H 500 Z"/>'
+      + '<text x="368" y="254" font-size="13" text-anchor="end" fill="currentColor" stroke="none">90</text>'
+      + '<text x="368" y="94" font-size="13" text-anchor="end" fill="currentColor" stroke="none">100</text>'
+      + '<text x="445" y="272" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Ama</text>'
+      + '<text x="525" y="272" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Kofi</text>'
+      + '<text x="480" y="302" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">axis from 90</text>'
+      + '<text x="480" y="326" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">the same two marks, 94 and 98</text>'
+      + '<text x="320" y="366" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">nothing in the second chart is false</text>'
+      + '<text x="320" y="392" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">it is the axis that is lying, so read the axis first</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Which chart to use, and the question that decides it',
+      columns: ['The data', 'Does it add to a whole that matters', 'The chart'],
+      rows: [
+        ['The marks of five pupils', 'No, there is no meaningful total', 'Bar chart'],
+        [
+          'How a family spends its income',
+          'Yes, and the share is the interesting part',
+          'Pie chart',
+        ],
+        [
+          'The rainfall in each month of a year',
+          'No, a yearly total is not the point',
+          'Bar chart',
+        ],
+        [
+          'The religions of everybody in a class',
+          'Yes, every pupil is in exactly one group',
+          'Pie chart',
+        ],
+        ['The bicycles counted in four villages', 'No', 'Pictogram, or a bar chart'],
+      ],
+      note: 'Every chart needs a title, labels, and a stated scale or key. '
+        + 'Without them the drawing cannot be read at all.',
+    },
+    {
+      caption: 'Working out the angle of each sector of a pie chart',
+      columns: [
+        'What the money went on',
+        'Amount in cedis',
+        'Share of the total',
+        'Its angle',
+      ],
+      rows: [
+        ['Food', '200', 'One half', '180 degrees'],
+        ['Rent', '100', 'One quarter', '90 degrees'],
+        ['School fees', '60', 'Fifteen hundredths', '54 degrees'],
+        ['Transport', '40', 'One tenth', '36 degrees'],
+      ],
+      note: 'Divide the amount by the total of 400 and multiply by 360. The '
+        + 'check is free: the angles must add to 360, and these do.',
+    },
+  ],
   questions: [
     {
       id: 'cha-1',
@@ -1273,14 +1721,11 @@ teach({
   },
 
   idea:
-    'An average is one number standing for a list. '
-    + 'The mean is the sum divided by how many there are. '
-    + 'The median is the middle value once the list is in order, '
-    + 'and with an even count it is the mean of the middle two. '
-    + 'The mode is the value that appears most often, '
-    + 'and a list can have more than one mode, or none. '
-    + 'The range is not an average: it is the largest minus the smallest, '
-    + 'and it describes the spread.',
+    'An average is one number standing for a whole list, and there are '
+    + 'three of them, each found differently and each fair in a '
+    + 'different situation. '
+    + 'The range is not an average at all: it describes the spread '
+    + 'rather than the middle.',
 
   mechanism:
     'The examination asks which average is fair, '
@@ -1386,6 +1831,83 @@ teach({
     + 'You use the midpoint of each group instead, '
     + 'which gives an estimate and should be called one.',
 
+  figure: {
+    alt: 'Five wages marked on a line. Four workers are bunched together '
+      + 'between 400 and 450, and the owner is far out at 5,000. The '
+      + 'median sits with the four workers at 430, and the mean has '
+      + 'been pulled out to about 1,340, which is more than any worker '
+      + 'earns.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">one large value pulls the mean and leaves the median</text>'
+      + '<line x1="60" y1="220" x2="580" y2="220" stroke-width="4"/>'
+      + '<circle cx="60" cy="220" r="3" fill="currentColor"/>'
+      + '<circle cx="66" cy="220" r="3" fill="currentColor"/>'
+      + '<circle cx="72" cy="220" r="3" fill="currentColor"/>'
+      + '<circle cx="78" cy="220" r="3" fill="currentColor"/>'
+      + '<line x1="92" y1="192" x2="78" y2="212"/>'
+      + '<text x="96" y="170" font-size="14" text-anchor="start" fill="currentColor" stroke="none">four workers,</text>'
+      + '<text x="96" y="190" font-size="14" text-anchor="start" fill="currentColor" stroke="none">on 400 to 450</text>'
+      + '<circle cx="574" cy="220" r="9" fill="#c8433a" stroke="#c8433a"/>'
+      + '<text x="574" y="170" font-size="14" text-anchor="end" fill="#c8433a" stroke="none">the owner,</text>'
+      + '<text x="574" y="190" font-size="14" text-anchor="end" fill="#c8433a" stroke="none">on 5,000</text>'
+      + '<line x1="72" y1="206" x2="72" y2="300" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="84" y="322" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">the median, 430</text>'
+      + '<text x="84" y="344" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">the typical worker, exactly</text>'
+      + '<line x1="166" y1="206" x2="166" y2="252" stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="178" y="270" font-size="15" text-anchor="start" fill="#c8433a" stroke="none">the mean, about 1,340</text>'
+      + '<text x="178" y="292" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">more than any worker earns, so it describes nobody</text>'
+      + '<text x="320" y="384" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the median only cares about position in the order</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three averages and the range, and when each one is fair',
+      columns: ['Measure', 'How to find it', 'When it is the fair one'],
+      rows: [
+        [
+          'Mean',
+          'Add them all and divide by how many there are',
+          'When the values are fairly even',
+        ],
+        [
+          'Median',
+          'Put them in order and take the middle one, or the mean of the middle two',
+          'When one or two values are far from the rest',
+        ],
+        [
+          'Mode',
+          'The value that appears most often',
+          'When the data is categories rather than numbers',
+        ],
+        [
+          'Range',
+          'The largest minus the smallest',
+          'Never. It is not an average at all: it describes the spread',
+        ],
+      ],
+      note: 'There is no such thing as an average favourite subject, but '
+        + 'there is a most common one, and that is exactly what a '
+        + 'shopkeeper needs.',
+    },
+    {
+      caption: 'The same five wages, measured four ways',
+      columns: ['Measure', 'Its value', 'Who or what it describes'],
+      rows: [
+        [
+          'Mean',
+          'About 1,340 cedis',
+          'Nobody in the room, because the owner pulls it upwards',
+        ],
+        ['Median', '430 cedis', 'The typical worker, exactly'],
+        ['Mode', 'There is none', 'Nothing, because no wage repeats'],
+        ['Range', '4,600 cedis', 'How far apart the top and the bottom are'],
+      ],
+      note: 'The wages are 400, 420, 430, 450 and the owner on 5,000. The '
+        + 'mean uses every value, which is its strength until one value '
+        + 'is extreme.',
+    },
+  ],
   questions: [
     {
       id: 'avg-1',
