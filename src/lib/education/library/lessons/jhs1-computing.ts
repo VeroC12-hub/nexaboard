@@ -260,11 +260,8 @@ teach({
     + 'it starts the machine, manages memory and storage, '
     + 'handles the keyboard and screen, '
     + 'and decides which program runs when. '
-    + 'Utilities such as antivirus and backup tools are system software too. '
-    + 'Application software does a particular job for the user: '
-    + 'a word processor, a spreadsheet, a browser, a music player, a game. '
-    + 'You choose your applications. '
-    + 'You cannot work without an operating system.',
+    + 'Application software does a particular job for the user, '
+    + 'and it reaches the machine only by asking the operating system.',
 
   mechanism:
     'The reason the split exists is that nobody could write an application '
@@ -361,6 +358,76 @@ teach({
     + 'It has an operating system, and the apps on it are applications. '
     + 'This is why an app must be built separately for each kind of phone.',
 
+  figure: {
+    alt: 'Three boxes along the top, a word processor, a browser and a '
+      + 'game, each with an arrow running down into one green box beneath '
+      + 'them, the operating system, which is the one that knows the '
+      + 'hardware. A single arrow runs from there down to a third box, the '
+      + 'hardware: disk, screen and keyboard. A red line down the side, '
+      + 'crossed out, shows that an application never reaches the hardware '
+      + 'directly.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">an application never touches the hardware itself</text>'
+      + '<path d="M 120 58 H 240 V 112 H 120 Z"/>'
+      + '<text x="180" y="82" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">word</text>'
+      + '<text x="180" y="100" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">processor</text>'
+      + '<path d="M 260 58 H 380 V 112 H 260 Z"/>'
+      + '<text x="320" y="91" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">browser</text>'
+      + '<path d="M 400 58 H 520 V 112 H 400 Z"/>'
+      + '<text x="460" y="91" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">a game</text>'
+      + '<text x="60" y="91" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">you chose</text>'
+      + '<text x="60" y="109" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">these</text>'
+      + '<path d="M 180 112 V 144" stroke-width="2"/>'
+      + '<path d="M 180 154 L 172 136 L 188 136 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 320 112 V 144" stroke-width="2"/>'
+      + '<path d="M 320 154 L 312 136 L 328 136 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 460 112 V 144" stroke-width="2"/>'
+      + '<path d="M 460 154 L 452 136 L 468 136 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="240" y="138" font-size="13" text-anchor="end" fill="currentColor" stroke="none">they ask</text>'
+      + '<path d="M 120 158 H 520 V 222 H 120 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="186" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">the operating system</text>'
+      + '<text x="320" y="210" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">it is the one that knows the hardware</text>'
+      + '<path d="M 320 222 V 254" stroke-width="2"/>'
+      + '<path d="M 320 264 L 312 246 L 328 246 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 120 268 H 520 V 326 H 120 Z"/>'
+      + '<text x="320" y="302" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the hardware: disk, screen, keyboard</text>'
+      + '<path d="M 540 84 V 296 H 532" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 528 288 L 546 292 L 534 303 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 528 178 L 552 202" stroke="#c8433a"/>'
+      + '<path d="M 552 178 L 528 202" stroke="#c8433a"/>'
+      + '<text x="562" y="184" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">never</text>'
+      + '<text x="562" y="202" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">directly</text>'
+      + '<text x="320" y="366" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so a program runs only on the system it asked in</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The two kinds of software, told apart by who they serve',
+      columns: ['Question to ask', 'System software', 'Application software'],
+      rows: [
+        ['Who it serves', 'The machine', 'You'],
+        [
+          'Examples',
+          'The operating system, antivirus, backup tools',
+          'Word processor, spreadsheet, browser, game',
+        ],
+        [
+          'Do you choose it?',
+          'No, the machine must have one',
+          'Yes, you install what you want',
+        ],
+        [
+          'When it starts',
+          'First, before anything else can run',
+          'Later, and only when you open it',
+        ],
+        ['If it fails', 'Everything stops at once', 'You lose that one job'],
+      ],
+      note: 'The last row is the reason for all the others: everything goes '
+        + 'through the operating system, so everything depends on it.',
+    },
+  ],
   questions: [
     {
       id: 'sof-1',
@@ -430,12 +497,8 @@ teach({
     + 'A folder, also called a directory, holds files and other folders, '
     + 'so the whole store is a tree. '
     + 'The path is the route down that tree to one file. '
-    + 'You can copy a file, which leaves the original where it was, '
-    + 'or move it, which does not. '
-    + 'Renaming changes the name only. '
-    + 'Deleting usually puts the file in a bin, '
-    + 'from which it can be restored, '
-    + 'until the bin is emptied.',
+    + 'There are only a few things you can do to a file, '
+    + 'and just one of them cannot be undone.',
 
   mechanism:
     'Files get lost for one reason: '
@@ -541,6 +604,66 @@ teach({
     + 'If the disk fails, both go together. '
     + 'The copy has to be on another disk or another machine to count.',
 
+  figure: {
+    alt: 'A folder tree drawn as an indented list. Documents holds JHS 1 '
+      + 'and Photos, JHS 1 holds Science and Social, and Science holds one '
+      + 'file in green called water cycle notes, with its extension '
+      + 'labelled as the part that says which program opens it. '
+      + 'Underneath, the route down the tree to that file is written out '
+      + 'as the path.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the store is a tree, and a path is a route down it</text>'
+      + '<text x="40" y="82" font-size="16" text-anchor="start" fill="currentColor" stroke="none">Documents</text>'
+      + '<path d="M 48 92 V 282" stroke-width="2"/>'
+      + '<path d="M 48 116 H 76" stroke-width="2"/>'
+      + '<text x="82" y="122" font-size="16" text-anchor="start" fill="currentColor" stroke="none">JHS 1</text>'
+      + '<path d="M 90 132 V 242" stroke-width="2"/>'
+      + '<path d="M 90 156 H 118" stroke-width="2"/>'
+      + '<text x="124" y="162" font-size="16" text-anchor="start" fill="currentColor" stroke="none">Science</text>'
+      + '<path d="M 132 172 V 196" stroke-width="2"/>'
+      + '<path d="M 132 196 H 160" stroke-width="2"/>'
+      + '<text x="166" y="202" font-size="16" text-anchor="start" fill="#0f8a4d" stroke="none">water-cycle-notes.docx</text>'
+      + '<path d="M 90 236 H 118" stroke-width="2"/>'
+      + '<text x="124" y="242" font-size="16" text-anchor="start" fill="currentColor" stroke="none">Social</text>'
+      + '<path d="M 48 276 H 76" stroke-width="2"/>'
+      + '<text x="82" y="282" font-size="16" text-anchor="start" fill="currentColor" stroke="none">Photos</text>'
+      + '<path d="M 400 198 H 428" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="434" y="192" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">the extension says</text>'
+      + '<text x="434" y="210" font-size="13" text-anchor="start" fill="#0f8a4d" stroke="none">which program opens it</text>'
+      + '<text x="320" y="320" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the path to that one file is</text>'
+      + '<text x="320" y="348" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">Documents / JHS 1 / Science / water-cycle-notes.docx</text>'
+      + '<text x="320" y="382" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so decide the folder before you press save, not after</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each thing you can do to a file actually does',
+      columns: [
+        'What you do',
+        'What happens to the original',
+        'What you are left with',
+      ],
+      rows: [
+        ['Copy', 'It stays where it was', 'Two files, in two places'],
+        ['Move', 'It leaves that place', 'One file, in the new place'],
+        [
+          'Rename',
+          'It stays, under a new name',
+          'One file, in the same place',
+        ],
+        ['Delete', 'It goes to the bin', 'One file in the bin, restorable'],
+        [
+          'Empty the bin',
+          'The space is free to be written over',
+          'Nothing the keyboard can bring back',
+        ],
+      ],
+      note: 'Only the last row is final, which is why the bin is the first '
+        + 'place to look for something missing and the last thing to '
+        + 'empty.',
+    },
+  ],
   questions: [
     {
       id: 'fil-1',
@@ -612,16 +735,9 @@ teach({
     'A word processor is an application for writing documents. '
     + 'You type, and then you can change what you typed without writing it '
     + 'out again. '
-    + 'Formatting changes how text looks: '
-    + 'bold, italic, size, alignment, spacing. '
-    + 'A style is a named set of formatting, such as Heading 1 or Normal, '
-    + 'applied to whole paragraphs. '
-    + 'A table arranges information in rows and columns. '
-    + 'The header and footer are strips at the top and bottom of every '
-    + 'page, '
-    + 'which is where page numbers belong. '
-    + 'Spell check marks words it does not recognise, '
-    + 'and it is not always right.',
+    + 'That alone is the gain over a pen, '
+    + 'and the rest of the application exists to hold a long document '
+    + 'together.',
 
   mechanism:
     'There is one idea here worth more than every button, '
@@ -731,6 +847,74 @@ teach({
     + 'and the same document can be turned into a web page '
     + 'with its structure intact.',
 
+  figure: {
+    alt: 'The same page drawn twice. On the left, in red, the heading was '
+      + 'made by selecting it and pressing bold, and the machine sees only '
+      + 'thick words. On the right, in green, the Heading 1 style was '
+      + 'applied, and the machine sees a heading, so every heading can '
+      + 'change at once, a table of contents can be built, and a screen '
+      + 'reader can announce it. The two pages look identical.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">bold makes words thick; a style says what they are</text>'
+      + '<path d="M 30 50 H 290 V 208 H 30 Z" stroke="#c8433a"/>'
+      + '<text x="160" y="88" font-size="18" font-weight="bold" text-anchor="middle" fill="currentColor" stroke="none">My Report</text>'
+      + '<path d="M 52 116 H 268" stroke-width="2"/>'
+      + '<path d="M 52 138 H 268" stroke-width="2"/>'
+      + '<path d="M 52 160 H 214" stroke-width="2"/>'
+      + '<text x="160" y="194" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">you selected it and pressed bold</text>'
+      + '<path d="M 350 50 H 610 V 208 H 350 Z" stroke="#0f8a4d"/>'
+      + '<text x="480" y="88" font-size="18" font-weight="bold" text-anchor="middle" fill="currentColor" stroke="none">My Report</text>'
+      + '<path d="M 372 116 H 588" stroke-width="2"/>'
+      + '<path d="M 372 138 H 588" stroke-width="2"/>'
+      + '<path d="M 372 160 H 534" stroke-width="2"/>'
+      + '<text x="480" y="194" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">you applied the Heading 1 style</text>'
+      + '<text x="160" y="240" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the machine sees</text>'
+      + '<text x="160" y="262" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">thick words, and nothing more</text>'
+      + '<text x="480" y="240" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the machine sees</text>'
+      + '<text x="480" y="262" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">a heading, so</text>'
+      + '<text x="480" y="284" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">every heading changes at once,</text>'
+      + '<text x="480" y="302" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">a table of contents can be built,</text>'
+      + '<text x="480" y="320" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">and a screen reader can announce it</text>'
+      + '<text x="320" y="356" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the two pages look identical,</text>'
+      + '<text x="320" y="380" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and only one of them means anything</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The parts of a word processor, and what each one is for',
+      columns: ['Part', 'What it is', 'What it is for'],
+      rows: [
+        [
+          'Formatting',
+          'Bold, italic, size, alignment, spacing',
+          'Changing how one piece of text looks',
+        ],
+        [
+          'A style',
+          'A named set of formatting, such as Heading 1',
+          'Saying what a paragraph is, so all of them change together',
+        ],
+        [
+          'A table',
+          'Rows and columns',
+          'Information that has two directions to it',
+        ],
+        [
+          'Header and footer',
+          'Strips at the top and bottom of every page',
+          'Anything that repeats, such as page numbers',
+        ],
+        [
+          'Spell check',
+          'A list of the words the machine knows',
+          'Catching typing errors, and it is not always right',
+        ],
+      ],
+      note: 'The second row is the one that matters most. A style names '
+        + 'what something is; everything else only changes how it looks.',
+    },
+  ],
   questions: [
     {
       id: 'wrd-1',
@@ -797,13 +981,12 @@ teach({
 
   idea:
     'The internet is a network joining computers all over the world. '
-    + 'The services that run on it are separate things: '
-    + 'the world wide web, email, messaging, video calls, file transfer. '
+    + 'The services that run on it are separate things, '
+    + 'and each one does a different job. '
     + 'A browser is an application that asks another computer, '
     + 'called a server, for a page, '
     + 'and then draws the page that comes back. '
     + 'The address bar holds the address of the page. '
-    + 'An email needs an address with an at sign, a subject, and a message. '
     + 'A search engine is itself a service: '
     + 'it visits pages in advance, keeps a list of what is on them, '
     + 'and searches that list when you ask.',
@@ -922,6 +1105,75 @@ teach({
     + 'so somebody watching the network cannot read it. '
     + 'It says nothing about whether the page is honest.',
 
+  figure: {
+    alt: 'The internet drawn as a road, with five boxes travelling along '
+      + 'it: the world wide web in green, email, messaging, video calls '
+      + 'and file transfer. The road itself is labelled as the network, '
+      + 'and the web is marked as the one service people usually mean when '
+      + 'they say the internet.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the internet is the road, the services are the traffic</text>'
+      + '<path d="M 16 128 H 624"/>'
+      + '<path d="M 16 272 H 624"/>'
+      + '<path d="M 26 172 H 130 V 228 H 26 Z" stroke="#0f8a4d"/>'
+      + '<text x="78" y="196" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">the world</text>'
+      + '<text x="78" y="214" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">wide web</text>'
+      + '<path d="M 148 172 H 252 V 228 H 148 Z"/>'
+      + '<text x="200" y="205" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">email</text>'
+      + '<path d="M 270 172 H 374 V 228 H 270 Z"/>'
+      + '<text x="322" y="205" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">messaging</text>'
+      + '<path d="M 392 172 H 496 V 228 H 392 Z"/>'
+      + '<text x="444" y="196" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">video</text>'
+      + '<text x="444" y="214" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">calls</text>'
+      + '<path d="M 514 172 H 618 V 228 H 514 Z"/>'
+      + '<text x="566" y="196" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">file</text>'
+      + '<text x="566" y="214" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">transfer</text>'
+      + '<text x="320" y="152" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the internet: the network itself</text>'
+      + '<text x="320" y="258" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">each service is a separate thing running on it</text>'
+      + '<text x="78" y="306" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">people mean this</text>'
+      + '<text x="78" y="324" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">when they say</text>'
+      + '<text x="78" y="342" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the internet</text>'
+      + '<text x="360" y="316" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">which is why email still works</text>'
+      + '<text x="360" y="340" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">when a website is down</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The services that run on the internet, and what each one '
+        + 'needs',
+      columns: ['Service', 'What it does', 'What it needs'],
+      rows: [
+        [
+          'The world wide web',
+          'Shows pages you ask a server for',
+          'A browser, and the address of the page',
+        ],
+        [
+          'Email',
+          'Carries a message that waits until it is read',
+          'An address with an at sign, and a subject',
+        ],
+        [
+          'Messaging',
+          'Short messages, back and forth, now',
+          'An app, and the other person reachable',
+        ],
+        [
+          'Video calls',
+          'Sound and picture both ways, live',
+          'A camera, and enough data',
+        ],
+        [
+          'File transfer',
+          'Moves a whole file to another machine',
+          'Somewhere at the other end to put it',
+        ],
+      ],
+      note: 'All five run on the same network, which is why one of them can '
+        + 'be down while the others are working.',
+    },
+  ],
   questions: [
     {
       id: 'net-1',
