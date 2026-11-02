@@ -3,13 +3,24 @@
  *
  * Written to be spoken to a six or seven year old. See `basic1-maths.ts`.
  *
- * ── Why several of these have no figure ─────────────────────────────────────
+ * ── Why these carry pictures now, when they used to carry none ─────────────
  *
- * Drawing, singing and drama are done, not looked at. A diagram of a child
- * singing teaches nothing, and `taught.ts` makes `figure` optional for exactly
- * this reason. Where a picture genuinely carries the idea, the colour wheel
- * and the weaving pattern, there is one. Where it would only decorate, there
- * is none, and the lesson is shorter for it.
+ * This file used to say that drawing, singing and drama are done rather than
+ * looked at, so a diagram of a child singing teaches nothing and four lessons
+ * here had no figure at all. Half of that is still right: a picture of
+ * somebody doing the activity would be decoration, and `taught.ts` makes
+ * `figure` optional for exactly that reason.
+ *
+ * What it missed is that the thing worth drawing was never the activity. It
+ * is the idea underneath: the remembered cup against the real one, how much
+ * of the group you can still hear when you sing loudly against softly, where
+ * two actors stand relative to the people watching, a pattern woven in
+ * against a pattern stamped on. Those are shapes and positions, and they are
+ * what each mechanism is actually about.
+ *
+ * Tables did not exist in the library when this file was written, which is
+ * why it had none. The crafts lesson in particular was three different forms
+ * described one after another inside a paragraph.
  *
  * `source: 'WRITTEN'` and `approved: true` because a person wrote and read
  * every line.
@@ -108,6 +119,55 @@ teach({
     + 'comparing lengths against it. You do not need that yet, but the habit '
     + 'behind it, comparing one part against another before drawing, is the '
     + 'same habit you are building now.',
+
+  figure: {
+    alt: 'Two drawings of a cup side by side. The remembered cup is tall '
+      + 'and thin with a big round handle, and is marked as taller than it '
+      + 'is wide. The real cup on the table is short and wide with only a '
+      + 'sliver of handle showing, and is marked as wider than it is tall. '
+      + 'Underneath, a note that memory gives the same shape every time, '
+      + 'so look up again.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">The cup you remember, and the cup on the table</text>'
+      + '<text x="160" y="66" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">from memory</text>'
+      + '<rect x="120" y="86" width="80" height="140" stroke="#c8433a"/>'
+      + '<path d="M 200 116 Q 248 156 200 196" stroke="#c8433a"/>'
+      + '<line x1="120" y1="248" x2="200" y2="248" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="160" y="272" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">taller than it is wide</text>'
+      + '<text x="480" y="66" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">looking at it</text>'
+      + '<rect x="396" y="150" width="168" height="76" stroke="#0f8a4d"/>'
+      + '<path d="M 564 170 Q 578 188 564 206" stroke="#0f8a4d"/>'
+      + '<line x1="396" y1="248" x2="564" y2="248" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="480" y="272" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">wider than it is tall</text>'
+      + '<text x="320" y="326" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Memory gives the same simple shape every time.</text>'
+      + '<text x="320" y="360" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">So look up again. Then again.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Drawing what you can see, instead of what you know is there',
+    columns: ['What you know', 'What you can see from here', 'What you draw'],
+    rows: [
+      [
+        'The cup has a big handle',
+        'A thin sliver at the side',
+        'The thin sliver',
+      ],
+      ['The cup is round at the top', 'A flat oval', 'The flat oval'],
+      [
+        'A plate is a circle',
+        'A long thin shape, edge on',
+        'The long thin shape',
+      ],
+      [
+        'The table is a rectangle',
+        'Wider at the front than the back',
+        'Wider at the front',
+      ],
+    ],
+    note: 'The middle column changes the moment you move your head. The '
+      + 'first column never changes, which is exactly why it is no use to '
+      + 'you.',
+  }],
 
   questions: [
     {
@@ -314,10 +374,9 @@ teach({
   approved: true,
 
   idea:
-    'Ghana has crafts that have been made here for a very long time. Kente is '
-    + 'cloth woven in narrow strips and sewn together. Adinkra cloth is '
-    + 'printed with stamped symbols, and each symbol carries a meaning. '
-    + 'Pottery is made by hand from clay and then fired.',
+    'Ghana has crafts that have been made here for a very long time. Kente, '
+    + 'adinkra cloth and pottery are three of them, and each one is made in '
+    + 'a completely different way.',
 
   mechanism:
     'These are not only decoration. An adinkra symbol is a saying with a '
@@ -332,9 +391,8 @@ teach({
 
   method: [
     'Look at the piece and ask how it was made: woven, printed or shaped?',
-    'Woven means made of threads crossing each other.',
-    'Printed means a stamp pressed on top of finished cloth.',
-    'Shaped means built by hand from clay.',
+    'Find the pattern, and ask whether it is part of the material or sitting '
+      + 'on top of it.',
     'Then ask what it says, because most of these patterns mean something.',
   ],
 
@@ -394,6 +452,79 @@ teach({
     'Different regions are known for different crafts, and the materials come '
     + 'from what is nearby: clay from the riverbank, dye from bark. Looking at '
     + 'what a craft is made of usually tells you where it came from.',
+
+  figure: {
+    alt: 'Two panels. The first, kente woven in, shows threads crossing '
+      + 'over and under each other, with a note that the pattern is made '
+      + 'of the threads themselves. The second, adinkra stamped on, shows '
+      + 'a stamp above a piece of finished cloth that already carries '
+      + 'marks, with an arrow pressing down, and a note that the stamp '
+      + 'goes onto cloth that already exists. Underneath, a note that each '
+      + 'adinkra stamp has a name and a saying behind it.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Woven in, or stamped on</text>'
+      + '<rect x="20" y="48" width="290" height="226" stroke="#0f8a4d"/>'
+      + '<text x="165" y="78" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">kente: woven in</text>'
+      + '<line x1="60" y1="100" x2="60" y2="196" stroke-width="5"/>'
+      + '<line x1="90" y1="100" x2="90" y2="196" stroke-width="5"/>'
+      + '<line x1="120" y1="100" x2="120" y2="196" stroke-width="5"/>'
+      + '<line x1="150" y1="100" x2="150" y2="196" stroke-width="5"/>'
+      + '<line x1="180" y1="100" x2="180" y2="196" stroke-width="5"/>'
+      + '<line x1="210" y1="100" x2="210" y2="196" stroke-width="5"/>'
+      + '<line x1="240" y1="100" x2="240" y2="196" stroke-width="5"/>'
+      + '<line x1="270" y1="100" x2="270" y2="196" stroke-width="5"/>'
+      + '<line x1="46" y1="118" x2="284" y2="118" stroke="#0f8a4d" stroke-width="5"/>'
+      + '<line x1="46" y1="142" x2="284" y2="142" stroke-width="5"/>'
+      + '<line x1="46" y1="166" x2="284" y2="166" stroke="#0f8a4d" stroke-width="5"/>'
+      + '<line x1="46" y1="190" x2="284" y2="190" stroke-width="5"/>'
+      + '<text x="165" y="230" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the pattern is made of</text>'
+      + '<text x="165" y="254" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the threads themselves</text>'
+      + '<rect x="330" y="48" width="290" height="226" stroke="#0f8a4d"/>'
+      + '<text x="475" y="78" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">adinkra: stamped on</text>'
+      + '<rect x="440" y="94" width="70" height="32"/>'
+      + '<text x="475" y="116" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">stamp</text>'
+      + '<line x1="475" y1="130" x2="475" y2="140" stroke="#0f8a4d"/>'
+      + '<polygon points="475,152 467,134 483,134" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="360" y="158" width="230" height="58"/>'
+      + '<circle cx="392" cy="187" r="11" stroke="#0f8a4d"/>'
+      + '<rect x="424" y="176" width="22" height="22" stroke="#0f8a4d"/>'
+      + '<circle cx="552" cy="187" r="11" stroke="#0f8a4d"/>'
+      + '<text x="475" y="238" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the stamp is pressed onto</text>'
+      + '<text x="475" y="262" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">cloth that already exists</text>'
+      + '<text x="320" y="320" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Each adinkra stamp has a name</text>'
+      + '<text x="320" y="348" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and a saying behind it.</text>'
+      + '<text x="320" y="382" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">So the cloth speaks without words.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Three Ghanaian crafts, and where each one gets its pattern',
+    columns: [
+      'Craft',
+      'Made from',
+      'How it is made',
+      'Where the pattern comes from',
+    ],
+    rows: [
+      [
+        'Kente',
+        'Thread',
+        'Woven in narrow strips, then sewn',
+        'Woven in, as the cloth is made',
+      ],
+      [
+        'Adinkra',
+        'Cloth and dye',
+        'Stamps pressed on finished cloth',
+        'Stamped on afterwards',
+      ],
+      [
+        'Pottery',
+        'Clay',
+        'Shaped by hand, then fired',
+        'Pressed into the clay while it is wet',
+      ],
+    ],
+  }],
 
   questions: [
     {
@@ -838,6 +969,70 @@ teach({
     + 'leader hands the beat over at a fixed moment, so the group always knows '
     + 'exactly when to come in.',
 
+  figure: {
+    alt: 'Two panels, each with two bars showing how much you hear. When '
+      + 'you sing loudly, the bar for your own voice is tall and the bar '
+      + 'for the group is very short, and you cannot hear them. When you '
+      + 'sing a little softer, the two bars are close to the same height, '
+      + 'and now you can match them. Underneath, a note that your own '
+      + 'voice is loudest inside your own head, so singing softer is the '
+      + 'only way to hear where the group is.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Why the good singers are not the loudest</text>'
+      + '<rect x="20" y="48" width="290" height="224" stroke="#c8433a"/>'
+      + '<text x="165" y="78" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">you sing loudly</text>'
+      + '<rect x="70" y="106" width="70" height="110" stroke="#c8433a"/>'
+      + '<rect x="190" y="192" width="70" height="24"/>'
+      + '<line x1="50" y1="216" x2="280" y2="216"/>'
+      + '<text x="105" y="238" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">your voice</text>'
+      + '<text x="225" y="238" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the group</text>'
+      + '<text x="165" y="262" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">you cannot hear them</text>'
+      + '<rect x="330" y="48" width="290" height="224" stroke="#0f8a4d"/>'
+      + '<text x="475" y="78" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">you sing a little softer</text>'
+      + '<rect x="380" y="152" width="70" height="64" stroke="#0f8a4d"/>'
+      + '<rect x="500" y="136" width="70" height="80"/>'
+      + '<line x1="360" y1="216" x2="590" y2="216"/>'
+      + '<text x="415" y="238" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">your voice</text>'
+      + '<text x="535" y="238" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the group</text>'
+      + '<text x="475" y="262" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">now you can match them</text>'
+      + '<text x="320" y="320" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Your own voice is loudest inside your own head.</text>'
+      + '<text x="320" y="356" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">Softer is the only way to hear the group.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Five ways a group comes apart, and what each one sounds like',
+    columns: ['What went wrong', 'What it sounds like', 'Who notices first'],
+    rows: [
+      [
+        'One voice started early',
+        'A single voice alone, then the rest',
+        'Everybody',
+      ],
+      [
+        'Somebody is too loud',
+        'The group spreading out behind them',
+        'Everybody but them',
+      ],
+      [
+        'The starting note was missed',
+        'Sour, with all the words right',
+        'Anybody listening',
+      ],
+      [
+        'Somebody breathed mid word',
+        'A word broken in half',
+        'The person beside them',
+      ],
+      [
+        'The leader changed speed',
+        'The answer coming in late',
+        'The group answering',
+      ],
+    ],
+    note: 'Read the last column. The one person who cannot hear the '
+      + 'problem is usually the one causing it.',
+  }],
+
   questions: [
     {
       id: 'sing-1',
@@ -1044,10 +1239,9 @@ teach({
 
   mechanism:
     'A play is made for the people watching, not for the people in it. That '
-    + 'single fact decides almost everything: why you face outwards instead of '
-    + 'turning your back, why you speak louder than you would at home, and why '
-    + 'you wait for the other person to finish. If the audience cannot hear or '
-    + 'see it, it did not happen, however well you did it.',
+    + 'single fact decides almost everything else about where you stand and '
+    + 'how you speak. If the audience cannot hear or see it, it did not '
+    + 'happen, however well you did it.',
 
   recap:
     'You already answer in full sentences and speak up so people can hear. A '
@@ -1098,17 +1292,18 @@ teach({
   traps: [
     {
       mistake: 'Turning your back on the audience.',
-      why: 'They cannot hear you then. Stay partly facing out, even when '
-        + 'speaking to somebody on stage.',
+      why: 'Stay partly facing out, even when you are speaking to somebody '
+        + 'on stage with you.',
     },
     {
       mistake: 'Speaking at your normal volume.',
-      why: 'A room swallows a voice. Speak to the person furthest from you.',
+      why: 'Speak to the person furthest from you, and everybody in '
+        + 'between will hear you as well.',
     },
     {
       mistake: 'Dropping out of your part when it is not your turn.',
-      why: 'The audience is watching the whole stage, not only whoever is '
-        + 'speaking.',
+      why: 'A moment of being yourself is the moment they stop believing '
+        + 'the story.',
     },
   ],
 
@@ -1117,6 +1312,73 @@ teach({
     + 'the storyteller or singing a line back. A play can invite that too, and '
     + 'when it does the audience stops being only watchers and becomes part of '
     + 'the telling.',
+
+  figure: {
+    alt: 'A stage seen from above, drawn twice, with the audience as a '
+      + 'row of people along the bottom of each. In the first, two actors '
+      + 'face each other directly, so both have their backs to the '
+      + 'audience, and they cannot be heard. In the second, the two actors '
+      + 'turn partly towards each other and partly out towards the '
+      + 'audience, and they can be heard. Underneath, a note that if the '
+      + 'audience cannot hear it or see it, it did not happen.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Where to stand, seen from above</text>'
+      + '<rect x="20" y="46" width="290" height="222" stroke="#c8433a"/>'
+      + '<text x="165" y="76" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">facing each other</text>'
+      + '<circle cx="110" cy="136" r="24" stroke="#c8433a"/>'
+      + '<line x1="134" y1="136" x2="154" y2="136" stroke="#c8433a"/>'
+      + '<circle cx="220" cy="136" r="24" stroke="#c8433a"/>'
+      + '<line x1="196" y1="136" x2="176" y2="136" stroke="#c8433a"/>'
+      + '<line x1="46" y1="212" x2="284" y2="212" stroke-width="5"/>'
+      + '<circle cx="100" cy="232" r="8"/>'
+      + '<circle cx="165" cy="232" r="8"/>'
+      + '<circle cx="230" cy="232" r="8"/>'
+      + '<text x="165" y="258" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the audience</text>'
+      + '<rect x="330" y="46" width="290" height="222" stroke="#0f8a4d"/>'
+      + '<text x="475" y="76" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">partly facing out</text>'
+      + '<circle cx="420" cy="136" r="24" stroke="#0f8a4d"/>'
+      + '<line x1="440" y1="150" x2="458" y2="162" stroke="#0f8a4d"/>'
+      + '<circle cx="530" cy="136" r="24" stroke="#0f8a4d"/>'
+      + '<line x1="510" y1="150" x2="492" y2="162" stroke="#0f8a4d"/>'
+      + '<line x1="356" y1="212" x2="594" y2="212" stroke-width="5"/>'
+      + '<circle cx="410" cy="232" r="8"/>'
+      + '<circle cx="475" cy="232" r="8"/>'
+      + '<circle cx="540" cy="232" r="8"/>'
+      + '<text x="475" y="258" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the audience</text>'
+      + '<text x="165" y="296" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">they cannot hear you</text>'
+      + '<text x="475" y="296" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">they can hear you</text>'
+      + '<text x="320" y="344" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">If the audience cannot hear it or see it,</text>'
+      + '<text x="320" y="374" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">it did not happen.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'One fact about a play, and the four rules that follow from it',
+    columns: ['The rule', 'Why it follows', 'What happens if you break it'],
+    rows: [
+      [
+        'Face partly outwards',
+        'The audience is in front of you',
+        'They cannot hear or see you',
+      ],
+      [
+        'Speak to the person furthest away',
+        'A room swallows a voice',
+        'The back rows miss the story',
+      ],
+      [
+        'Wait for the other person to finish',
+        'Two voices at once are neither',
+        'Both lines are lost',
+      ],
+      [
+        'Stay in your part while silent',
+        'They watch the whole stage',
+        'They see a child, not your character',
+      ],
+    ],
+    note: 'Every rule is the same fact in a different place. A play is '
+      + 'made for the people watching, not the people in it.',
+  }],
 
   questions: [
     {
