@@ -33,7 +33,7 @@ import {
   asksProgramme, electivesOffered, ELECTIVES_NORMALLY, programmeById,
   programmesFor,
 } from '../lib/education/programmes'
-import { subjectById } from '../lib/education/subjects'
+import { extrasFor, subjectById } from '../lib/education/subjects'
 import {
   createAccount, emailProblem, handleTaken, passwordProblem, SignUpError,
   type AccountKind, type Created,
@@ -406,6 +406,36 @@ export default function CreateProfile({
                               onChange={e => set('electives', e.target.checked
                                 ? [...(p.electives ?? []), id]
                                 : (p.electives ?? []).filter(x => x !== id))}
+                            />
+                            <span>{subject.name}</span>
+                          </label>
+                        )
+                      })}
+                    </div>
+                  </Field>
+                )}
+                {/* Subjects some schools add, for the stages that have no
+                    electives.
+
+                    A JHS learner sits the whole list, so there is nothing to
+                    choose, except that schools do add Creative Arts and
+                    Design, Physical and Health Education, and Arabic where
+                    French is not taught. Those are hidden until somebody
+                    says they take them, so this is where they say it. */}
+                {!asksProgramme(p.stage) && extrasFor(p.stage).length > 0 && (
+                  <Field label="Extra subjects"
+                    hint="Only if your school teaches them.">
+                    <div className="ne-picks">
+                      {extrasFor(p.stage).map(subject => {
+                        const on = (p.electives ?? []).includes(subject.id)
+                        return (
+                          <label key={subject.id} className={`ne-pick${on ? ' is-on' : ''}`}>
+                            <input
+                              type="checkbox"
+                              checked={on}
+                              onChange={e => set('electives', e.target.checked
+                                ? [...(p.electives ?? []), subject.id]
+                                : (p.electives ?? []).filter(x => x !== subject.id))}
                             />
                             <span>{subject.name}</span>
                           </label>
