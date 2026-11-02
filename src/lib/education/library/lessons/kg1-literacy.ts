@@ -126,6 +126,34 @@ teach({
     + 'They will need the names. '
     + 'They will need to know where it happened.',
 
+  figure: {
+    alt: 'Three boxes in a row with arrows between them, numbered one, two '
+      + 'and three, and labelled first, then, and at the end. Above them it '
+      + 'says tell it in order.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">tell it in order</text>'
+      + '<polygon points="40,110 190,110 190,250 40,250"/>'
+      + '<text x="115" y="212" font-size="86" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<line x1="196" y1="180" x2="239" y2="180"/>'
+      + '<polyline points="226,170 239,180 226,190"/>'
+      + '<polygon points="245,110 395,110 395,250 245,250"/>'
+      + '<text x="320" y="212" font-size="86" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<line x1="401" y1="180" x2="444" y2="180"/>'
+      + '<polyline points="431,170 444,180 431,190"/>'
+      + '<polygon points="450,110 600,110 600,250 450,250"/>'
+      + '<text x="525" y="212" font-size="86" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3</text>'
+      + '<text x="115" y="298" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">first</text>'
+      + '<text x="320" y="298" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">then</text>'
+      + '<text x="525" y="298" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">at the end</text></svg>',
+  },
   questions: [
     {
       id: 'tw-1',
@@ -236,6 +264,30 @@ teach({
     + 'Say them back. '
     + 'Then do them in order.',
 
+  figure: {
+    alt: 'A green one beside a cup on its own, then an arrow, then a green '
+      + 'two beside the same cup standing on a table. The first is labelled '
+      + 'pick up the cup and the second is labelled put it on the table.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">listen to both, then move</text>'
+      + '<text x="80" y="234" font-size="56" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">1</text>'
+      + '<polygon points="165,180 215,180 208,250 172,250"/>'
+      + '<line x1="255" y1="215" x2="330" y2="215"/>'
+      + '<polyline points="317,205 330,215 317,225"/>'
+      + '<text x="380" y="234" font-size="56" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">2</text>'
+      + '<line x1="430" y1="250" x2="570" y2="250"/>'
+      + '<line x1="442" y1="250" x2="442" y2="320"/>'
+      + '<line x1="558" y1="250" x2="558" y2="320"/>'
+      + '<polygon points="478,180 538,180 531,248 485,248"/>'
+      + '<text x="190" y="356" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">pick up the cup</text>'
+      + '<text x="500" y="356" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">put it on the table</text></svg>',
+  },
   questions: [
     {
       id: 'f2-1',
@@ -346,6 +398,32 @@ teach({
     + 'Ask me what I think happens next. '
     + 'Then ask me why.',
 
+  figure: {
+    alt: 'A page of writing whose last line trails off into three dots, with '
+      + 'a thought bubble beside it holding a question mark, labelled what '
+      + 'happens next. Under them it says and why do you think so.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the story stops here</text>'
+      + '<polygon points="60,86 290,86 290,250 60,250"/>'
+      + '<line x1="84" y1="122" x2="266" y2="122"/>'
+      + '<line x1="84" y1="152" x2="266" y2="152"/>'
+      + '<line x1="84" y1="182" x2="266" y2="182"/>'
+      + '<line x1="84" y1="212" x2="180" y2="212"/>'
+      + '<text x="224" y="222" font-size="38" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">...</text>'
+      + '<circle cx="316" cy="240" r="8"/>'
+      + '<circle cx="338" cy="222" r="12"/>'
+      + '<circle cx="366" cy="198" r="16"/>'
+      + '<ellipse cx="480" cy="152" rx="128" ry="66"/>'
+      + '<text x="480" y="176" font-size="64" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">?</text>'
+      + '<text x="480" y="258" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">what happens next</text>'
+      + '<text x="320" y="342" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">and why do you think so</text></svg>',
+  },
   questions: [
     {
       id: 'wn-1',
@@ -459,6 +537,31 @@ teach({
     + 'Cup ends with p. '
     + 'What does your name end with?',
 
+  figure: {
+    alt: 'The words Kofi and kente written side by side with the first '
+      + 'letter of each in green and a green bracket under it. A green line '
+      + 'curves from one to the other, and under them it says the same '
+      + 'first sound.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">listen to the first bit</text>'
+      + '<text x="60" y="186" font-size="56" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">K</text>'
+      + '<text x="100" y="186" font-size="56" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">ofi</text>'
+      + '<polyline points="56,202 56,220 100,220 100,202" '
+      + 'stroke="#0f8a4d"/>'
+      + '<text x="340" y="186" font-size="56" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">k</text>'
+      + '<text x="376" y="186" font-size="56" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">ente</text>'
+      + '<polyline points="336,202 336,220 376,220 376,202" '
+      + 'stroke="#0f8a4d"/>'
+      + '<path d="M 78 240 Q 210 290 356 240" stroke="#0f8a4d"/>'
+      + '<text x="320" y="342" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">the same first sound</text></svg>',
+  },
   questions: [
     {
       id: 'fs-1',
@@ -582,6 +685,61 @@ teach({
     + 'Three claps, and it is a town. '
     + 'Now clap the longest name you know.',
 
+  figure: {
+    alt: 'The name Kumasi written in three parts, Ku, ma and si, with a '
+      + 'dotted line between the parts and a green clap drawn under each '
+      + 'part. Under them it says three claps.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">clap each part</text>'
+      + '<text x="130" y="190" font-size="54" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">Ku</text>'
+      + '<text x="310" y="190" font-size="54" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">ma</text>'
+      + '<text x="480" y="190" font-size="54" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">si</text>'
+      + '<line x1="215" y1="145" x2="215" y2="200" stroke-dasharray="7 7"/>'
+      + '<line x1="395" y1="145" x2="395" y2="200" stroke-dasharray="7 7"/>'
+      + '<line x1="142" y1="271" x2="157" y2="275" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="133" y1="280" x2="137" y2="295" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="122" y1="276" x2="110" y2="288" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="118" y1="265" x2="103" y2="261" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="127" y1="256" x2="123" y2="241" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="138" y1="260" x2="150" y2="248" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="322" y1="271" x2="337" y2="275" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="313" y1="280" x2="317" y2="295" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="302" y1="276" x2="290" y2="288" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="298" y1="265" x2="283" y2="261" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="307" y1="256" x2="303" y2="241" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="318" y1="260" x2="330" y2="248" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="492" y1="271" x2="507" y2="275" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="483" y1="280" x2="487" y2="295" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="472" y1="276" x2="460" y2="288" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="468" y1="265" x2="453" y2="261" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="477" y1="256" x2="473" y2="241" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="488" y1="260" x2="500" y2="248" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="320" y="350" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">three claps</text></svg>',
+  },
   questions: [
     {
       id: 'cs-1',
@@ -715,6 +873,30 @@ teach({
     + 'Somebody wrote all of it, '
     + 'and it all says something.',
 
+  figure: {
+    alt: 'A page with a picture at the top and three lines of writing below '
+      + 'it. A green arrow runs along under the first line from left to '
+      + 'right, and beside the page it says the marks say the words. Under '
+      + 'it says tomorrow they say the same thing.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="60,80 420,80 420,330 60,330"/>'
+      + '<polygon points="92,104 388,104 388,186 92,186"/>'
+      + '<circle cx="140" cy="144" r="20"/>'
+      + '<polygon points="250,118 210,168 290,168"/>'
+      + '<line x1="96" y1="222" x2="384" y2="222"/>'
+      + '<line x1="96" y1="276" x2="384" y2="276"/>'
+      + '<line x1="96" y1="312" x2="300" y2="312"/>'
+      + '<line x1="96" y1="244" x2="340" y2="244" stroke="#0f8a4d"/>'
+      + '<polyline points="327,234 340,244 327,254" stroke="#0f8a4d"/>'
+      + '<text x="520" y="250" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the marks</text>'
+      + '<text x="520" y="278" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">say the words</text>'
+      + '<text x="320" y="372" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">tomorrow they say the same '
+      + 'thing</text></svg>',
+  },
   questions: [
     {
       id: 'pm-1',
@@ -844,6 +1026,32 @@ teach({
     + 'Do any of them appear in yours? '
     + 'Which letters do you both have?',
 
+  figure: {
+    alt: 'The name Ama on the left with its first letter A in green, and a '
+      + 'sign on the right reading Akwaaba with its first letter A in green '
+      + 'as well. The name is labelled your name and the sign is labelled a '
+      + 'sign, and under them it says the same letter in both.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">find your letter somewhere '
+      + 'else</text>'
+      + '<text x="70" y="196" font-size="60" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">A</text>'
+      + '<text x="118" y="196" font-size="60" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">ma</text>'
+      + '<text x="150" y="250" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">your name</text>'
+      + '<polygon points="330,126 600,126 600,222 330,222"/>'
+      + '<text x="372" y="190" font-size="40" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">A</text>'
+      + '<text x="404" y="190" font-size="40" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">kwaaba</text>'
+      + '<text x="465" y="266" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a sign</text>'
+      + '<text x="320" y="348" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">the same letter in both</text></svg>',
+  },
   questions: [
     {
       id: 'lt-1',
@@ -976,6 +1184,42 @@ teach({
     + 'Those marks say what you just said. '
     + 'Now I can read them back to you.',
 
+  figure: {
+    alt: 'A sheet of paper with a child drawing on it, a sun, a house and a '
+      + 'person. An arrow points from three green questions, who, what and '
+      + 'where, back to the drawing. Under it says your drawing keeps the '
+      + 'story.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="50,90 340,90 340,330 50,330"/>'
+      + '<circle cx="105" cy="142" r="24"/>'
+      + '<line x1="137" y1="142" x2="149" y2="142"/>'
+      + '<line x1="128" y1="165" x2="136" y2="173"/>'
+      + '<line x1="105" y1="174" x2="105" y2="186"/>'
+      + '<line x1="82" y1="165" x2="74" y2="173"/>'
+      + '<line x1="73" y1="142" x2="61" y2="142"/>'
+      + '<line x1="82" y1="119" x2="74" y2="111"/>'
+      + '<line x1="105" y1="110" x2="105" y2="98"/>'
+      + '<line x1="128" y1="119" x2="136" y2="111"/>'
+      + '<polygon points="205,205 305,205 305,292 205,292"/>'
+      + '<polygon points="255,160 195,205 315,205"/>'
+      + '<circle cx="140" cy="232" r="16"/>'
+      + '<line x1="140" y1="248" x2="140" y2="286"/>'
+      + '<line x1="116" y1="262" x2="164" y2="262"/>'
+      + '<line x1="140" y1="286" x2="126" y2="312"/>'
+      + '<line x1="140" y1="286" x2="154" y2="312"/>'
+      + '<line x1="445" y1="212" x2="370" y2="212"/>'
+      + '<polyline points="383,202 370,212 383,222"/>'
+      + '<text x="530" y="162" font-size="30" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">who</text>'
+      + '<text x="530" y="214" font-size="30" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">what</text>'
+      + '<text x="530" y="266" font-size="30" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">where</text>'
+      + '<text x="320" y="372" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">your drawing keeps the story</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'ds-1',
