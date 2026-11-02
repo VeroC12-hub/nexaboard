@@ -1181,18 +1181,14 @@ teach({
   },
 
   idea:
-    'A database is an organised store of data. '
-    + 'In a table, each row is a record, '
-    + 'holding everything about one thing: one pupil, one book, one sale. '
-    + 'Each column is a field, '
-    + 'holding the same kind of fact for every record: '
-    + 'name, class, date of birth. '
-    + 'A field has a data type: text, number, date, yes or no. '
-    + 'A primary key is a field whose value is different for every record, '
-    + 'so it identifies one record exactly. '
-    + 'A query selects the records meeting a condition, '
-    + 'and may sort them. '
-    + 'A report presents the result for people to read.',
+    'A database is an organised store of data, '
+    + 'held as a table of rows and columns rather than as paragraphs. '
+    + 'That is the whole gain: '
+    + 'data in a table can be asked questions, '
+    + 'and data in a paragraph cannot. '
+    + 'The words for its parts are few, '
+    + 'and the design question that comes before all of them '
+    + 'is what one row is going to stand for.',
 
   mechanism:
     'The design question comes before everything '
@@ -1306,6 +1302,102 @@ teach({
     + 'That is the whole reason databases exist rather than one big '
     + 'spreadsheet.',
 
+  figure: {
+    alt: 'A table of three pupils with the columns PupilNo, Surname, Other '
+      + 'names, Class and Date of birth. PupilNo is marked in green as the '
+      + 'primary key, and two of the pupils share the surname Mensah, '
+      + 'which is why a name cannot be the key. Below, a single field '
+      + 'holding Kofi Mensah, Form 2B is crossed out in red, because three '
+      + 'facts in one field make it impossible to list Form 2B or to sort '
+      + 'by surname.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">one row is one thing, and one field is one fact</text>'
+      + '<text x="90" y="52" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">the primary key</text>'
+      + '<path d="M 40 62 V 202" stroke-width="2"/>'
+      + '<path d="M 140 62 V 202" stroke-width="2"/>'
+      + '<path d="M 250 62 V 202" stroke-width="2"/>'
+      + '<path d="M 360 62 V 202" stroke-width="2"/>'
+      + '<path d="M 440 62 V 202" stroke-width="2"/>'
+      + '<path d="M 600 62 V 202" stroke-width="2"/>'
+      + '<path d="M 40 62 H 600" stroke-width="2"/>'
+      + '<path d="M 40 96 H 600" stroke-width="2"/>'
+      + '<path d="M 40 131 H 600" stroke-width="2"/>'
+      + '<path d="M 40 166 H 600" stroke-width="2"/>'
+      + '<path d="M 40 202 H 600" stroke-width="2"/>'
+      + '<text x="90" y="85" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">PupilNo</text>'
+      + '<text x="195" y="85" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Surname</text>'
+      + '<text x="305" y="85" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Other names</text>'
+      + '<text x="400" y="85" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Class</text>'
+      + '<text x="520" y="85" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Date of birth</text>'
+      + '<text x="90" y="119" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">2301</text>'
+      + '<text x="195" y="119" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Mensah</text>'
+      + '<text x="305" y="119" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Kofi</text>'
+      + '<text x="400" y="119" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">2B</text>'
+      + '<text x="520" y="119" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">12 April 2010</text>'
+      + '<text x="90" y="154" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">2302</text>'
+      + '<text x="195" y="154" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Mensah</text>'
+      + '<text x="305" y="154" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Ama</text>'
+      + '<text x="400" y="154" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">2B</text>'
+      + '<text x="520" y="154" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">3 March 2010</text>'
+      + '<text x="90" y="189" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">2303</text>'
+      + '<text x="195" y="189" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Owusu</text>'
+      + '<text x="305" y="189" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Yaa</text>'
+      + '<text x="400" y="189" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">3A</text>'
+      + '<text x="520" y="189" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">21 July 2009</text>'
+      + '<text x="120" y="226" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">each row is one record:</text>'
+      + '<text x="120" y="244" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">one pupil</text>'
+      + '<text x="330" y="226" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">each column is one field:</text>'
+      + '<text x="330" y="244" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">the same fact in every row</text>'
+      + '<text x="530" y="226" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">two pupils share a surname,</text>'
+      + '<text x="530" y="244" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">so a name cannot be the key</text>'
+      + '<path d="M 150 274 H 450 V 312 H 150 Z" stroke="#c8433a"/>'
+      + '<text x="300" y="298" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">Kofi Mensah, Form 2B</text>'
+      + '<path d="M 468 278 L 496 308" stroke="#c8433a"/>'
+      + '<path d="M 496 278 L 468 308" stroke="#c8433a"/>'
+      + '<text x="320" y="340" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">three facts in one field looks tidy, and now nobody can list</text>'
+      + '<text x="320" y="360" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">Form 2B or sort by surname: the machine sees one piece of text</text>'
+      + '<text x="320" y="388" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">data in a table can be asked questions; data in a paragraph cannot</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The words for the parts of a database, in a table of pupils',
+      columns: ['Word', 'What it is', 'In a table of pupils'],
+      rows: [
+        ['Record', 'One row: everything about one thing', 'One pupil'],
+        [
+          'Field',
+          'One column: the same fact in every record',
+          'Surname, or class',
+        ],
+        [
+          'Data type',
+          'What kind of value a field may hold',
+          'Text, number, date, yes or no',
+        ],
+        [
+          'Primary key',
+          'A field whose value differs in every record',
+          'The pupil number, never the name',
+        ],
+        [
+          'Query',
+          'A question picking out the records that match',
+          'Every pupil in Form 2B',
+        ],
+        [
+          'Report',
+          'The result laid out for people to read',
+          'A class list to pin up',
+        ],
+      ],
+      note: 'Decide what one record stands for before any of this. One '
+        + 'pupil per row and one mark per row are both correct designs, '
+        + 'for different questions, and mixing them leaves a table nobody '
+        + 'can read.',
+    },
+  ],
   questions: [
     {
       id: 'dba-1',
@@ -1371,12 +1463,7 @@ teach({
     'Long periods at a screen cause eye strain. '
     + 'They also cause pain in the back, the neck and the wrists, '
     + 'and tiredness. '
-    + 'The remedies are simple. '
-    + 'Put the screen at eye level. '
-    + 'Use a chair that supports your back. '
-    + 'Keep your wrists straight while typing. '
-    + 'Have good light with no glare. '
-    + 'And take regular breaks away from the screen. '
+    + 'The remedies are simple, and each one answers a particular ache. '
     + 'Plagiarism is presenting somebody else’s work as your own. '
     + 'Copyright protects what people have written, drawn, '
     + 'recorded or programmed. '
@@ -1504,6 +1591,60 @@ teach({
     + 'usually including giving credit. '
     + 'They are a formal version of exactly the same rule.',
 
+  figure: {
+    alt: 'The same paragraph taken from the same book, shown twice. On the '
+      + 'left, in red, it has no source named under it, which is a lie '
+      + 'about who did the work. On the right, in green, the source is '
+      + 'named under it, which is ordinary honest work.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the wrong is in the claim, not in the use</text>'
+      + '<text x="320" y="56" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the same paragraph, taken from the same book</text>'
+      + '<path d="M 24 76 H 300 V 250 H 24 Z" stroke="#c8433a"/>'
+      + '<path d="M 44 104 H 280" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 44 126 H 280" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 44 148 H 280" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 44 170 H 220" stroke="#c8433a" stroke-width="2"/>'
+      + '<text x="162" y="206" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">no source named</text>'
+      + '<text x="162" y="232" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">a lie about who did the work</text>'
+      + '<path d="M 340 76 H 616 V 250 H 340 Z" stroke="#0f8a4d"/>'
+      + '<path d="M 360 104 H 596" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 360 126 H 596" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 360 148 H 596" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 360 170 H 536" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="478" y="206" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the source named under it</text>'
+      + '<text x="478" y="232" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">ordinary honest work</text>'
+      + '<text x="320" y="296" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">everybody uses other people’s work:</text>'
+      + '<text x="320" y="322" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">that is what reading is for</text>'
+      + '<text x="320" y="356" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">what is forbidden is saying you thought of it,</text>'
+      + '<text x="320" y="378" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and naming the source is the whole difference</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What aches after a long stretch at a screen, and what '
+        + 'answers it',
+      columns: ['What aches', 'Why it aches', 'What answers it'],
+      rows: [
+        [
+          'Eyes',
+          'Focused at one distance, and glare on the screen',
+          'Look far off now and then, and light that does not reflect',
+        ],
+        ['Neck', 'The head held at one angle', 'The screen at eye level'],
+        [
+          'Back',
+          'Sitting in one shape',
+          'A chair that supports it, and standing up',
+        ],
+        ['Wrists', 'Bent while typing', 'Keep them straight'],
+        ['All of it', 'Not moving at all', 'A short break every half hour'],
+      ],
+      note: 'The last row is the real cause and the others are only how '
+        + 'dearly it costs you. A muscle held still aches whether you are '
+        + 'typing or praying.',
+    },
+  ],
   questions: [
     {
       id: 'eth-1',
@@ -1580,9 +1721,8 @@ teach({
     + 'until you find the first point where a value is not what you '
     + 'expected. '
     + 'The error is at or just before that point. '
-    + 'Printing the value of a variable partway through '
-    + 'is the simplest way to see inside a running program. '
-    + 'Change one thing at a time, and test after each change.',
+    + 'A few rules make this fast, and ignoring any of them makes it an '
+    + 'afternoon.',
 
   mechanism:
     'Beginners debug by reading the whole program hoping to spot the '
@@ -1703,6 +1843,83 @@ teach({
     + 'When something breaks, '
     + 'you already know it is in the piece you just added.',
 
+  figure: {
+    alt: 'Seven lines of a program drawn as a stack of boxes. The first '
+      + 'three are green, the lines you are certain are right. The seventh '
+      + 'is red, where the value is already wrong. A bracket marks the '
+      + 'three lines between them as where the fault must be, and a green '
+      + 'arrow points at the middle one, because printing the value there '
+      + 'removes half of what is left to search.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">work in from both ends, and halve what is left</text>'
+      + '<path d="M 200 50 H 440 V 86 H 200 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="73" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">line 1</text>'
+      + '<path d="M 200 90 H 440 V 126 H 200 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="113" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">line 2</text>'
+      + '<path d="M 200 130 H 440 V 166 H 200 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="153" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">line 3</text>'
+      + '<text x="190" y="100" font-size="13" text-anchor="end" fill="#0f8a4d" stroke="none">you are certain</text>'
+      + '<text x="190" y="118" font-size="13" text-anchor="end" fill="#0f8a4d" stroke="none">these are right</text>'
+      + '<path d="M 200 170 H 440 V 206 H 200 Z"/>'
+      + '<text x="320" y="193" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">line 4</text>'
+      + '<path d="M 200 210 H 440 V 246 H 200 Z"/>'
+      + '<text x="320" y="233" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">line 5</text>'
+      + '<path d="M 200 250 H 440 V 286 H 200 Z"/>'
+      + '<text x="320" y="273" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">line 6</text>'
+      + '<path d="M 200 290 H 440 V 326 H 200 Z" stroke="#c8433a"/>'
+      + '<text x="320" y="313" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">line 7</text>'
+      + '<text x="190" y="306" font-size="13" text-anchor="end" fill="#c8433a" stroke="none">here the value</text>'
+      + '<text x="190" y="324" font-size="13" text-anchor="end" fill="#c8433a" stroke="none">is already wrong</text>'
+      + '<path d="M 452 170 H 468 V 286 H 452" stroke-width="2"/>'
+      + '<text x="478" y="214" font-size="14" text-anchor="start" fill="currentColor" stroke="none">the fault is</text>'
+      + '<text x="478" y="232" font-size="14" text-anchor="start" fill="currentColor" stroke="none">somewhere in</text>'
+      + '<text x="478" y="250" font-size="14" text-anchor="start" fill="currentColor" stroke="none">these three</text>'
+      + '<text x="120" y="196" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">print the value</text>'
+      + '<text x="120" y="214" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">in the middle one</text>'
+      + '<path d="M 56 236 H 190" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 198 236 L 182 229 L 182 243 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="120" y="264" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">and half of it goes</text>'
+      + '<text x="320" y="366" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the machine did exactly what you wrote,</text>'
+      + '<text x="320" y="388" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so the fault is in the text and it is findable</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The rules of finding an error, and what each one saves',
+      columns: ['Rule', 'Why it works', 'What ignoring it costs'],
+      rows: [
+        [
+          'Make it happen reliably first',
+          'You cannot fix what you cannot repeat',
+          'Changing things at random',
+        ],
+        [
+          'Find the last point you are certain of',
+          'The fault is between there and the first wrong value',
+          'Reading the whole program hoping to spot it',
+        ],
+        [
+          'Print a value partway through',
+          'It is the simplest way to see inside',
+          'Guessing what the machine is holding',
+        ],
+        [
+          'Change one thing at a time',
+          'You learn something either way',
+          'It works and you do not know why',
+        ],
+        [
+          'Suspect the line you are surest of',
+          'Nobody looks hard at a line they trust',
+          'The error survives every pass you make',
+        ],
+      ],
+      note: 'A bug is always a difference between what you meant and what '
+        + 'you wrote. The machine did exactly what the text said, so the '
+        + 'fault is in the text and it can be found.',
+    },
+  ],
   questions: [
     {
       id: 'dbg-1',
@@ -1765,13 +1982,10 @@ teach({
   idea:
     'An HTML page is plain text with tags in angle brackets. '
     + 'The page is wrapped in html, with a head and a body. '
-    + 'The head holds the title, which appears on the browser tab. '
-    + 'The body holds what is shown. '
-    + 'h1 to h6 mark headings, '
-    + 'p marks a paragraph, '
-    + 'ul and li make a list, '
-    + 'a with an href makes a link, '
-    + 'and img with a src and an alt shows an image. '
+    + 'The head holds information about the page '
+    + 'and the body holds what is shown. '
+    + 'Each tag says what a piece of the page IS, '
+    + 'and there are only a few worth learning. '
     + 'Most tags open and close, '
     + 'and img does not, because it has no content inside it. '
     + 'The file is saved with an html extension and opened in a browser.',
@@ -1886,6 +2100,74 @@ teach({
     + 'One stylesheet can change the look of a hundred pages at once, '
     + 'which is only possible because the HTML said what things ARE.',
 
+  figure: {
+    alt: 'On the left, the HTML a learner writes, from the opening html tag '
+      + 'down to the closing one. On the right, the page a browser draws '
+      + 'from it, with green lines joining each tag to the thing it '
+      + 'produced: the title to the browser tab, the h1 to the large '
+      + 'heading, the p to the paragraph, and the li to the bulleted item.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">a tag says what a thing IS, and the browser decides how it looks</text>'
+      + '<text x="150" y="52" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the file you write</text>'
+      + '<path d="M 20 62 H 300 V 290 H 20 Z" stroke-width="2"/>'
+      + '<text x="32" y="86" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="currentColor" stroke="none">&lt;html&gt;</text>'
+      + '<text x="48" y="103" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="currentColor" stroke="none">&lt;head&gt;</text>'
+      + '<text x="64" y="120" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="#0f8a4d" stroke="none">&lt;title&gt;Cocoa&lt;/title&gt;</text>'
+      + '<text x="48" y="137" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="currentColor" stroke="none">&lt;/head&gt;</text>'
+      + '<text x="48" y="154" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="currentColor" stroke="none">&lt;body&gt;</text>'
+      + '<text x="64" y="171" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="#0f8a4d" stroke="none">&lt;h1&gt;Cocoa&lt;/h1&gt;</text>'
+      + '<text x="64" y="188" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="#0f8a4d" stroke="none">&lt;p&gt;It grows in the forest.&lt;/p&gt;</text>'
+      + '<text x="64" y="205" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="currentColor" stroke="none">&lt;ul&gt;</text>'
+      + '<text x="80" y="222" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="#0f8a4d" stroke="none">&lt;li&gt;beans&lt;/li&gt;</text>'
+      + '<text x="64" y="239" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="currentColor" stroke="none">&lt;/ul&gt;</text>'
+      + '<text x="48" y="256" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="currentColor" stroke="none">&lt;/body&gt;</text>'
+      + '<text x="32" y="273" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace" text-anchor="start" fill="currentColor" stroke="none">&lt;/html&gt;</text>'
+      + '<text x="480" y="52" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">what the browser draws</text>'
+      + '<path d="M 350 62 H 620 V 290 H 350 Z" stroke-width="2"/>'
+      + '<path d="M 350 90 H 620" stroke-width="2"/>'
+      + '<path d="M 362 68 H 456 V 90 H 362 Z" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="409" y="84" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">Cocoa</text>'
+      + '<text x="372" y="138" font-size="24" text-anchor="start" fill="#0f8a4d" stroke="none">Cocoa</text>'
+      + '<text x="372" y="176" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">It grows in the forest.</text>'
+      + '<circle cx="382" cy="212" r="4" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="398" y="217" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">beans</text>'
+      + '<path d="M 304 97 H 336 V 80 H 348" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 304 182 H 320 V 130 H 348" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 304 199 H 326 V 170 H 348" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 304 233 H 332 V 210 H 348" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="320" y="330" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">h1 does not mean make this big: it means this is the main heading,</text>'
+      + '<text x="320" y="352" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so a search engine treats it as the subject</text>'
+      + '<text x="320" y="374" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and a screen reader announces it as one</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The tags worth learning, and what each one says a thing is',
+      columns: ['Tag', 'What it says the thing is', 'Does it close?'],
+      rows: [
+        [
+          'html, head, body',
+          'The page, its information, and what is shown',
+          'Yes',
+        ],
+        ['title', 'The name of the page, shown on the browser tab', 'Yes'],
+        ['h1 to h6', 'A heading, h1 being the main one', 'Yes'],
+        ['p', 'A paragraph', 'Yes'],
+        ['ul and li', 'A list, and one item in it', 'Yes'],
+        ['a, with an href', 'A link, and where it goes', 'Yes'],
+        [
+          'img, with a src and an alt',
+          'An image, where it is, and what it shows',
+          'No, it holds nothing inside it',
+        ],
+      ],
+      note: 'The alt is the one learners leave empty. It is what a blind '
+        + 'reader hears and what appears when the image fails to load, so '
+        + 'a page of images without it is unusable to one reader and '
+        + 'meaningless to another.',
+    },
+  ],
   questions: [
     {
       id: 'web-1',
