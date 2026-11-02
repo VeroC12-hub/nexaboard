@@ -36,9 +36,9 @@ teach({
   idea:
     'A map of Ghana uses symbols: a dot for a town, a line for a river, '
     + 'a different line for a road or a border. '
-    + 'The key explains them. '
-    + 'The north arrow tells you which way the map is turned. '
-    + 'The scale tells you what a distance on the paper means on the ground.',
+    + 'Around the edge of the map sit the parts that tell you '
+    + 'how to read those symbols, which way the map is turned, '
+    + 'and what a distance on the paper means on the ground.',
 
   mechanism:
     'The key is the part people skip and the part that matters most, '
@@ -58,7 +58,7 @@ teach({
   method: [
     'Read the key first. Learn what each symbol means on this map.',
     'Find the north arrow.',
-    'With north known, south is opposite, east is right of north, west left.',
+    'With north found, the other three directions follow from it.',
     'Find a place you know, to orient yourself.',
     'To find a place, use the directions from somewhere you know.',
     'To judge distance, use the scale.',
@@ -119,6 +119,61 @@ teach({
     + 'which is useful and takes something away: '
     + 'you stop building a picture of how places sit relative to each other. '
     + 'A paper map is harder and teaches you the country better.',
+
+  figure: {
+    alt: 'A map on the left holding a wavy line, a thick straight line, a '
+      + 'broken line, two dots for towns and a north arrow. A key on the '
+      + 'right lists the same four symbols and says what each one means on '
+      + 'this map: a town, a river, a road, a border. Underneath, a note '
+      + 'that the same symbol means something else on the next map.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Read the key before the map</text>'
+      + '<rect x="20" y="46" width="380" height="252"/>'
+      + '<path d="M 40 96 Q 100 74 160 104 Q 220 134 280 114 Q 334 98 388 124"/>'
+      + '<line x1="40" y1="212" x2="388" y2="190" stroke-width="6"/>'
+      + '<line x1="210" y1="56" x2="236" y2="288" stroke-dasharray="10 8"/>'
+      + '<circle cx="120" cy="156" r="7" fill="currentColor"/>'
+      + '<text x="120" y="182" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Town</text>'
+      + '<circle cx="312" cy="248" r="7" fill="currentColor"/>'
+      + '<text x="312" y="274" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Town</text>'
+      + '<line x1="66" y1="282" x2="66" y2="250"/>'
+      + '<polygon points="66,238 58,256 74,256" fill="currentColor" stroke="none"/>'
+      + '<text x="66" y="228" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">N</text>'
+      + '<rect x="420" y="46" width="200" height="252" stroke="#0f8a4d"/>'
+      + '<text x="520" y="76" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">key</text>'
+      + '<circle cx="444" cy="108" r="7" fill="currentColor"/>'
+      + '<text x="468" y="113" font-size="14" text-anchor="start" fill="currentColor" stroke="none">a town</text>'
+      + '<path d="M 434 152 Q 444 140 454 152 Q 464 164 474 152"/>'
+      + '<text x="486" y="157" font-size="14" text-anchor="start" fill="currentColor" stroke="none">a river</text>'
+      + '<line x1="434" y1="196" x2="474" y2="196" stroke-width="6"/>'
+      + '<text x="486" y="201" font-size="14" text-anchor="start" fill="currentColor" stroke="none">a road</text>'
+      + '<line x1="434" y1="240" x2="474" y2="240" stroke-dasharray="10 8"/>'
+      + '<text x="486" y="245" font-size="14" text-anchor="start" fill="currentColor" stroke="none">a border</text>'
+      + '<text x="520" y="282" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">on this map only</text>'
+      + '<text x="320" y="340" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">The same symbol means something else</text>'
+      + '<text x="320" y="370" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">on the next map.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Once you have found north, the other three directions follow',
+    columns: [
+      'Direction',
+      'Where it is, with north up',
+      'Travelling that way in Ghana',
+    ],
+    rows: [
+      ['North', 'Up the page', 'Towards Tamale and Bolgatanga'],
+      ['South', 'Down the page', 'Towards Accra and the sea'],
+      ['East', 'To the right', 'Towards Ho and the Togo border'],
+      [
+        'West',
+        'To the left',
+        'Towards Sunyani and the Ivorian border',
+      ],
+    ],
+    note: 'Direction is always from somewhere. Kumasi is north of Accra '
+      + 'and south of Tamale, both at the same time.',
+  }],
 
   questions: [
     {
@@ -252,9 +307,8 @@ teach({
     },
     {
       mistake: 'Thinking everything changed on the day.',
-      why: 'Governing changed hands. '
-        + 'Roads, schools, trade and poverty were all still there the next '
-        + 'morning.',
+      why: 'A government changing hands is one thing changing. '
+        + 'Everything else was work that began the next morning.',
     },
     {
       mistake: 'Treating one account as the whole truth.',
@@ -268,6 +322,86 @@ teach({
     + 'and Ghana’s example was cited in several of them. '
     + 'Tracing which countries followed, and how soon, '
     + 'shows what the black star was actually pointing at.',
+
+  figure: {
+    alt: 'A long line with five marks along it, labelled newspapers, '
+      + 'parties, strikes, elections and negotiation, gathered under a '
+      + 'bracket that reads years of organising, by very many people. At '
+      + 'the far end of the line a larger mark reads 6 March 1957, with '
+      + 'Britain no longer governs beneath it. Underneath, a note that '
+      + 'people disagree about how much credit belongs to whom, and that '
+      + 'the disagreement is what history is.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Not one act, and not one person</text>'
+      + '<line x1="60" y1="200" x2="600" y2="200"/>'
+      + '<line x1="95" y1="190" x2="95" y2="210"/>'
+      + '<text x="95" y="174" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">newspapers</text>'
+      + '<line x1="180" y1="190" x2="180" y2="210"/>'
+      + '<text x="180" y="232" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">parties</text>'
+      + '<line x1="265" y1="190" x2="265" y2="210"/>'
+      + '<text x="265" y="174" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">strikes</text>'
+      + '<line x1="350" y1="190" x2="350" y2="210"/>'
+      + '<text x="350" y="232" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">elections</text>'
+      + '<line x1="435" y1="190" x2="435" y2="210"/>'
+      + '<text x="435" y="174" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">negotiation</text>'
+      + '<circle cx="545" cy="200" r="11" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="545" y="162" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">6 March 1957</text>'
+      + '<text x="545" y="234" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">Britain no longer governs</text>'
+      + '<polyline points="95,258 95,272 435,272 435,258"/>'
+      + '<line x1="265" y1="272" x2="265" y2="284"/>'
+      + '<text x="265" y="306" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">years of organising, by very many people</text>'
+      + '<text x="320" y="352" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">People disagree about how much credit belongs to whom.</text>'
+      + '<text x="320" y="380" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">That disagreement is what history is.</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What independence changed on the day, and what it did not',
+      columns: ['Thing', 'Changed that day?', 'What was actually so'],
+      rows: [
+        ['Who governed', 'Yes', 'Britain no longer did'],
+        [
+          'The name of the country',
+          'Yes',
+          'The Gold Coast became Ghana',
+        ],
+        ['The flag and the anthem', 'Yes', 'Both were new'],
+        [
+          'The roads and the schools',
+          'No',
+          'The same ones, the next morning',
+        ],
+        ['How much money people had', 'No', 'Poverty was still there'],
+        [
+          'What the rest of Africa did',
+          'Not yet',
+          'Many followed within ten years',
+        ],
+      ],
+      note: 'The first three happened in one day. The rest was work that '
+        + 'started on the second day and is not finished.',
+    },
+    {
+      caption: 'The six men detained in 1948, known since as the Big Six',
+      columns: ['Name', 'Worth knowing'],
+      rows: [
+        ['Kwame Nkrumah', 'Led the first government after 1957'],
+        [
+          'J. B. Danquah',
+          'A lawyer, and among those who gave the country its name',
+        ],
+        ['Ako Adjei', 'Invited Nkrumah back to the Gold Coast'],
+        [
+          'Edward Akufo-Addo',
+          'Later a chief justice, and then president',
+        ],
+        ['Emmanuel Obetsebi-Lamptey', 'A lawyer and organiser in Accra'],
+        ['William Ofori Atta', 'An organiser, and later a minister'],
+      ],
+      note: 'Their faces are on the cedi notes. Very many more people '
+        + 'worked for independence and were never named at all.',
+    },
+  ],
 
   questions: [
     {
@@ -417,6 +551,55 @@ teach({
     + 'That is how proverbs have always been passed on, '
     + 'and it is why they carry more than their words.',
 
+  figure: {
+    alt: 'Two boxes, one above the other. The top box is the picture a '
+      + 'proverb paints, a river, a goat, a drum. An arrow runs down from '
+      + 'it labelled stands for, into the bottom box, which is the '
+      + 'situation it is used in, and which is the whole point. '
+      + 'Underneath, a note that describing the top box only has explained '
+      + 'nothing.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">A proverb has two layers</text>'
+      + '<rect x="110" y="50" width="420" height="88"/>'
+      + '<text x="320" y="80" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the picture it paints</text>'
+      + '<text x="320" y="116" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">a river, a goat, a drum</text>'
+      + '<line x1="320" y1="150" x2="320" y2="192"/>'
+      + '<polygon points="320,206 312,188 328,188" fill="currentColor" stroke="none"/>'
+      + '<text x="340" y="182" font-size="15" text-anchor="start" fill="currentColor" stroke="none">stands for</text>'
+      + '<rect x="110" y="214" width="420" height="88" stroke="#0f8a4d"/>'
+      + '<text x="320" y="244" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the situation it is used in</text>'
+      + '<text x="320" y="280" font-size="21" text-anchor="middle" fill="#0f8a4d" stroke="none">which is the whole point</text>'
+      + '<text x="320" y="348" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">Describe the top box only,</text>'
+      + '<text x="320" y="376" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">and you have explained nothing.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Five things somebody might say about one proverb, and how '
+      + 'far each one gets',
+    columns: ['What you say about it', 'Which layer', 'Explained yet?'],
+    rows: [
+      ['It mentions a river', 'The picture', 'No'],
+      [
+        'Rivers are deep and move fast',
+        'Still the picture',
+        'No',
+      ],
+      ['It is about being patient', 'The meaning, in part', 'Nearly'],
+      [
+        'You say it to somebody rushing a job',
+        'The situation',
+        'Yes',
+      ],
+      [
+        'Here is somebody using it, and why',
+        'The situation',
+        'Yes, and they can copy it',
+      ],
+    ],
+    note: 'The first two rows are where most explanations stop, which is '
+      + 'exactly why most explanations fail.',
+  }],
+
   questions: [
     {
       id: 'pv-1',
@@ -502,9 +685,8 @@ teach({
   method: [
     'Read the title and decide what you will say.',
     'Write three or four points in the order you will make them.',
-    'Write an opening paragraph that says what the piece is about.',
-    'One paragraph per point.',
-    'Write a closing paragraph.',
+    'Write one paragraph for each, with an opening and a closing around '
+      + 'them.',
     'Read the whole thing aloud, slowly.',
     'Check each extra letter as you go.',
   ],
@@ -568,6 +750,61 @@ teach({
     + 'Anywhere they hesitate is a place your spelling or your sentence '
     + 'went wrong, '
     + 'and they will find things you could read past a dozen times.',
+
+  figure: {
+    alt: 'Two boxes on the left hold the letters open e and open o, under '
+      + 'the heading what you meant. An arrow leads to two boxes on the '
+      + 'right holding plain e and plain o, under the heading what your '
+      + 'hand wrote. Underneath, a note that years of English make the '
+      + 'hand reach for the familiar letter, that your eye skims straight '
+      + 'past it because your eye made the mistake, and that reading aloud '
+      + 'catches it because your ear did not.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">What your hand does while you think</text>'
+      + '<text x="160" y="64" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">what you meant</text>'
+      + '<rect x="70" y="80" width="80" height="80"/>'
+      + '<text x="110" y="138" font-size="44" text-anchor="middle" fill="currentColor" stroke="none">ɛ</text>'
+      + '<rect x="170" y="80" width="80" height="80"/>'
+      + '<text x="210" y="138" font-size="44" text-anchor="middle" fill="currentColor" stroke="none">ɔ</text>'
+      + '<line x1="272" y1="120" x2="336" y2="120"/>'
+      + '<polygon points="348,120 330,112 330,128" fill="currentColor" stroke="none"/>'
+      + '<text x="480" y="64" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">what your hand wrote</text>'
+      + '<rect x="390" y="80" width="80" height="80" stroke="#c8433a"/>'
+      + '<text x="430" y="138" font-size="44" text-anchor="middle" fill="#c8433a" stroke="none">e</text>'
+      + '<rect x="490" y="80" width="80" height="80" stroke="#c8433a"/>'
+      + '<text x="530" y="138" font-size="44" text-anchor="middle" fill="#c8433a" stroke="none">o</text>'
+      + '<text x="320" y="212" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Years of English make the hand reach</text>'
+      + '<text x="320" y="238" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">for the familiar letter.</text>'
+      + '<text x="320" y="288" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Your eye skims straight past it,</text>'
+      + '<text x="320" y="314" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">because your eye made the mistake.</text>'
+      + '<text x="320" y="364" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">So read it aloud. Your ear did not.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What each paragraph of a composition is for',
+    columns: ['Paragraph', 'What it does', 'How you know it went wrong'],
+    rows: [
+      [
+        'The opening',
+        'Says what the piece is about',
+        'The reader still does not know the topic',
+      ],
+      ['Point one', 'Makes your first point', 'It makes two points'],
+      ['Point two', 'Makes your second point', 'It repeats the first'],
+      [
+        'Point three',
+        'Makes your third point',
+        'It has wandered off the title',
+      ],
+      [
+        'The closing',
+        'Ties the points together',
+        'It introduces something new',
+      ],
+    ],
+    note: 'Write the middle paragraphs from your plan. If a paragraph is '
+      + 'not one of your points, it should not be there at all.',
+  }],
 
   questions: [
     {
@@ -637,10 +874,8 @@ teach({
   mechanism:
     'The rule that explains all the others is that formatting works by '
     + 'contrast. '
-    + 'Bold text stands out because most of the text is not bold. '
-    + 'Bold half the page and nothing stands out at all. '
-    + 'The same is true of headings, colours and underlining: '
-    + 'each one is a signal, and signals only work when they are rare. '
+    + 'Each thing you add is a signal, '
+    + 'and a signal only works when it is rare. '
     + 'This is why a document with six fonts and four colours is harder to '
     + 'read than a plain one, even though more effort went into it.',
 
@@ -712,6 +947,64 @@ teach({
     + 'It will usually be three or four: heading, body, caption, and one for '
     + 'emphasis. '
     + 'Restraint is what makes it readable.',
+
+  figure: {
+    alt: 'Two pages side by side. The first has one thick heading line, '
+      + 'plain body lines and two words thickened, and is labelled one '
+      + 'heading, two bold words. The second has every line thickened and '
+      + 'is labelled everything emphasised. Underneath, a note that on the '
+      + 'left your eye goes straight to the heading and on the right it '
+      + 'has nowhere to go.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">A signal only works when it is rare</text>'
+      + '<rect x="30" y="48" width="260" height="252" stroke="#0f8a4d"/>'
+      + '<line x1="50" y1="80" x2="200" y2="80" stroke="#0f8a4d" stroke-width="8"/>'
+      + '<line x1="50" y1="116" x2="270" y2="116" stroke-width="2"/>'
+      + '<line x1="50" y1="140" x2="270" y2="140" stroke-width="2"/>'
+      + '<line x1="50" y1="164" x2="270" y2="164" stroke-width="2"/>'
+      + '<line x1="50" y1="188" x2="118" y2="188" stroke="#0f8a4d" stroke-width="7"/>'
+      + '<line x1="126" y1="188" x2="270" y2="188" stroke-width="2"/>'
+      + '<line x1="50" y1="212" x2="270" y2="212" stroke-width="2"/>'
+      + '<line x1="50" y1="236" x2="270" y2="236" stroke-width="2"/>'
+      + '<line x1="50" y1="260" x2="206" y2="260" stroke-width="2"/>'
+      + '<text x="160" y="288" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">one heading, two bold words</text>'
+      + '<rect x="350" y="48" width="260" height="252" stroke="#c8433a"/>'
+      + '<line x1="370" y1="80" x2="520" y2="80" stroke="#c8433a" stroke-width="8"/>'
+      + '<line x1="370" y1="116" x2="590" y2="116" stroke-width="7"/>'
+      + '<line x1="370" y1="140" x2="590" y2="140" stroke="#c8433a" stroke-width="7"/>'
+      + '<line x1="370" y1="164" x2="590" y2="164" stroke-width="7"/>'
+      + '<line x1="370" y1="188" x2="590" y2="188" stroke="#c8433a" stroke-width="7"/>'
+      + '<line x1="370" y1="212" x2="590" y2="212" stroke-width="7"/>'
+      + '<line x1="370" y1="236" x2="590" y2="236" stroke="#c8433a" stroke-width="7"/>'
+      + '<line x1="370" y1="260" x2="526" y2="260" stroke-width="7"/>'
+      + '<text x="480" y="288" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">everything emphasised</text>'
+      + '<text x="320" y="342" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">On the left, your eye goes straight to the heading.</text>'
+      + '<text x="320" y="372" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">On the right, it has nowhere to go.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Each formatting tool, what it signals, and what too much of '
+      + 'it does',
+    columns: ['Tool', 'What it signals', 'Too much of it'],
+    rows: [
+      ['A heading', 'A new part begins here', 'The parts stop being parts'],
+      ['Bold', 'These few words matter most', 'Nothing matters most'],
+      ['A blank line', 'One idea has ended', 'The page falls apart'],
+      [
+        'A second font',
+        'This text is a different kind',
+        'It stops looking like one document',
+      ],
+      ['A colour', 'Look here', 'Nowhere is worth looking'],
+      [
+        'A picture',
+        'Here is what words cannot show',
+        'It takes attention from what does',
+      ],
+    ],
+    note: 'The middle column is why you format after typing. You cannot '
+      + 'tell what matters most until it is all there.',
+  }],
 
   questions: [
     {
@@ -866,6 +1159,69 @@ teach({
     + 'you have one source twice, not two sources. '
     + 'Checking where each got it from is the next step up in this skill.',
 
+  figure: {
+    alt: 'A page you found on the left, with arrows leading it through '
+      + 'three boxes in turn. The first asks who wrote it, noting that a '
+      + 'ministry is answerable and nobody is not. The second asks when, '
+      + 'noting that out of date is not wrong and is harder to spot. The '
+      + 'third asks who agrees, noting that two independent sources beat '
+      + 'one confident one. Underneath, a note that none of this needs '
+      + 'expertise, it needs the habit of asking, and that appearing in a '
+      + 'search result proves nothing.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Three questions before you believe it</text>'
+      + '<rect x="16" y="130" width="130" height="70"/>'
+      + '<text x="81" y="160" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">a page</text>'
+      + '<text x="81" y="182" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">you found</text>'
+      + '<line x1="150" y1="165" x2="166" y2="165"/>'
+      + '<polygon points="176,165 162,158 162,172" fill="currentColor" stroke="none"/>'
+      + '<rect x="180" y="110" width="130" height="112"/>'
+      + '<text x="245" y="144" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">who wrote it?</text>'
+      + '<text x="245" y="174" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">a ministry is</text>'
+      + '<text x="245" y="192" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">answerable,</text>'
+      + '<text x="245" y="210" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">nobody is not</text>'
+      + '<line x1="314" y1="165" x2="330" y2="165"/>'
+      + '<polygon points="340,165 326,158 326,172" fill="currentColor" stroke="none"/>'
+      + '<rect x="344" y="110" width="130" height="112"/>'
+      + '<text x="409" y="144" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">when?</text>'
+      + '<text x="409" y="174" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">out of date is</text>'
+      + '<text x="409" y="192" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">not wrong, and</text>'
+      + '<text x="409" y="210" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">harder to spot</text>'
+      + '<line x1="478" y1="165" x2="494" y2="165"/>'
+      + '<polygon points="504,165 490,158 490,172" fill="currentColor" stroke="none"/>'
+      + '<rect x="508" y="110" width="118" height="112"/>'
+      + '<text x="567" y="144" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">who agrees?</text>'
+      + '<text x="567" y="174" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">two independent</text>'
+      + '<text x="567" y="192" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">sources beat</text>'
+      + '<text x="567" y="210" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">one sure one</text>'
+      + '<text x="320" y="288" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">None of this needs expertise.</text>'
+      + '<text x="320" y="318" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">It needs the habit of asking.</text>'
+      + '<text x="320" y="366" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Appearing in a search result proves nothing.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Two pages giving different figures, put through the three '
+      + 'questions',
+    columns: ['The question', 'Page A', 'Page B'],
+    rows: [
+      ['Who wrote it?', 'A statistical service', 'No author given'],
+      ['When was it written?', 'Last year', 'No date given'],
+      [
+        'Who else says it?',
+        'Two other sources agree',
+        'Nothing else says it',
+      ],
+      [
+        'So what do you do?',
+        'Use it, and say where from',
+        'Treat it as a lead, not a source',
+      ],
+    ],
+    note: 'Page B is not necessarily wrong. It is something you have no '
+      + 'way to judge, which is a different problem and still a reason '
+      + 'not to use it.',
+  }],
+
   questions: [
     {
       id: 'sr-1',
@@ -955,9 +1311,8 @@ teach({
     'Drag the blocks into that order.',
     'Run it and watch.',
     'Something you repeat? Replace the copies with a repeat block.',
-    'When it misbehaves, do not guess. Run it slowly.',
-    'Watch for the first step where it does something you did not expect.',
-    'Fix that one thing and run it again.',
+    'When it misbehaves, do not guess. Find the first surprise, fix that '
+      + 'one thing, and run it again.',
   ],
 
   worked: [
@@ -998,8 +1353,8 @@ teach({
   traps: [
     {
       mistake: 'Guessing at the fix and changing several things at once.',
-      why: 'Then you do not know which change helped. '
-        + 'Change one thing and run it again.',
+      why: 'Then you do not know which change helped, '
+        + 'and you have probably added a second fault.',
     },
     {
       mistake: 'Copying blocks instead of using repeat.',
@@ -1009,7 +1364,7 @@ teach({
     {
       mistake: 'Deleting it all and starting again when it misbehaves.',
       why: 'You lose the working parts along with the broken one, '
-        + 'and you learn nothing about what went wrong.',
+        + 'and the same fault comes back next time.',
     },
   ],
 
@@ -1020,6 +1375,75 @@ teach({
     + 'The blocks are not a toy version. '
     + 'They are the same ideas with the typing removed, '
     + 'so you can think about the logic instead of the spelling.',
+
+  figure: {
+    alt: 'Two ways of drawing a square. On the left, eight blocks in a '
+      + 'column alternating move 100 and turn 90. On the right, three '
+      + 'blocks: a repeat 4 times block holding one move 100 and one turn '
+      + '90. A note says that to make a pentagon instead you change the 4 '
+      + 'to a 5 on the right, and all eight blocks on the left.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Say it once</text>'
+      + '<rect x="20" y="46" width="270" height="276" stroke="#c8433a"/>'
+      + '<text x="155" y="72" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">eight blocks</text>'
+      + '<rect x="55" y="84" width="200" height="24"/>'
+      + '<text x="155" y="101" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">move 100</text>'
+      + '<rect x="55" y="112" width="200" height="24"/>'
+      + '<text x="155" y="129" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">turn 90</text>'
+      + '<rect x="55" y="140" width="200" height="24"/>'
+      + '<text x="155" y="157" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">move 100</text>'
+      + '<rect x="55" y="168" width="200" height="24"/>'
+      + '<text x="155" y="185" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">turn 90</text>'
+      + '<rect x="55" y="196" width="200" height="24"/>'
+      + '<text x="155" y="213" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">move 100</text>'
+      + '<rect x="55" y="224" width="200" height="24"/>'
+      + '<text x="155" y="241" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">turn 90</text>'
+      + '<rect x="55" y="252" width="200" height="24"/>'
+      + '<text x="155" y="269" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">move 100</text>'
+      + '<rect x="55" y="280" width="200" height="24"/>'
+      + '<text x="155" y="297" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">turn 90</text>'
+      + '<rect x="350" y="46" width="270" height="276" stroke="#0f8a4d"/>'
+      + '<text x="485" y="72" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">three blocks</text>'
+      + '<rect x="380" y="90" width="210" height="112" stroke="#0f8a4d"/>'
+      + '<text x="485" y="116" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">repeat 4 times</text>'
+      + '<rect x="400" y="128" width="170" height="24"/>'
+      + '<text x="485" y="145" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">move 100</text>'
+      + '<rect x="400" y="160" width="170" height="24"/>'
+      + '<text x="485" y="177" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">turn 90</text>'
+      + '<text x="485" y="240" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">Want a pentagon instead?</text>'
+      + '<text x="485" y="270" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">Change the 4 to a 5.</text>'
+      + '<text x="485" y="300" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">On the left, change all eight.</text>'
+      + '<text x="320" y="364" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Copies are where mistakes hide. You always miss one.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Four things you could do when a program misbehaves',
+    columns: ['What you could do', 'What you learn', 'What it costs'],
+    rows: [
+      [
+        'Guess, and change three blocks',
+        'Nothing, even if it works',
+        'You cannot tell which one mattered',
+      ],
+      [
+        'Delete it all and start again',
+        'Nothing at all',
+        'The working parts go too',
+      ],
+      [
+        'Run it slowly and watch',
+        'Where the first surprise is',
+        'A minute',
+      ],
+      [
+        'Change one block and run it',
+        'Whether that block was it',
+        'A minute',
+      ],
+    ],
+    note: 'The bottom two rows are slower for one minute and faster for '
+      + 'the rest of the afternoon.',
+  }],
 
   questions: [
     {
