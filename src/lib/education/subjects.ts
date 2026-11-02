@@ -108,6 +108,11 @@ export const SUBJECTS: Record<Stage, Subject[]> = {
     { id: 'rme', name: 'Religious and Moral Education' },
     { id: 'computing', name: 'Computing' },
     { id: 'arts', name: 'Creative Arts' },
+    /* History of Ghana is a subject in its own right from Basic 1, not a
+       corner of Our World Our People, and it was missing from this list
+       entirely. Standard rather than optional: every primary school
+       timetables it. */
+    { id: 'history', name: 'History' },
 
     /* Added by some primary schools and not by others, so they are offered
        rather than assumed, exactly as at JHS. French is timetabled from

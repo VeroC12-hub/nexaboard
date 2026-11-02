@@ -1539,3 +1539,199 @@ register({
     },
   ],
 })
+
+/* ── History ─────────────────────────────────────────────────────────────────
+
+   History of Ghana is a subject in its own right from Basic 1, and it was
+   missing from this library entirely: not thin, absent. A primary learner
+   could not open it because there was nothing to open, and because a subject
+   with no outline is filtered out of the subject list, nobody could see that
+   it was missing either.
+
+   Sequenced the way the curriculum does it, which is not chronological: it
+   starts with the child's own family and community and works outward, because
+   a seven year old has no use for 1957 and every use for who their
+   grandparents are. The dates arrive in Basic 5 and 6, by which time there is
+   something for them to attach to.
+
+   MODEL and the standard note, like every other outline here: an honest
+   outline of the national curriculum, not a school's own. */
+
+register({
+  subjectId: 'history',
+  stage: 'primary',
+  subject: 'History',
+  source: 'MODEL',
+  note: NOTE,
+  strands: [
+    {
+      id: 'my-history',
+      name: 'My Own History',
+      purpose: 'Where a child comes from, before any nation is mentioned.',
+      subStrands: [
+        {
+          id: 'family-story',
+          name: 'Family and community',
+          topics: [
+            {
+              id: 'my-family-history',
+              title: 'The story of my family',
+              outcome: 'Say who is in your family and name two things that '
+                + 'happened before you were born.',
+              year: 'Basic 1',
+            },
+            {
+              id: 'my-community-history',
+              title: 'How my community began',
+              outcome: 'Ask an elder how your town or village started and '
+                + 'retell what they said.',
+              year: 'Basic 2',
+              needs: ['my-family-history'],
+            },
+            {
+              id: 'then-and-now',
+              title: 'Then and now',
+              outcome: 'Compare how people lived in your community long ago '
+                + 'with how they live today.',
+              year: 'Basic 3',
+              needs: ['my-community-history'],
+            },
+          ],
+        },
+        {
+          id: 'knowing-the-past',
+          name: 'How we know',
+          topics: [
+            {
+              id: 'sources-primary',
+              title: 'Where history comes from',
+              outcome: 'Name three places history comes from: people who were '
+                + 'there, things they left behind, and what was written down.',
+              year: 'Basic 4',
+            },
+            {
+              id: 'oral-tradition-primary',
+              title: 'Stories handed down',
+              outcome: 'Explain why a story told by a grandparent is evidence, '
+                + 'and why two people may remember it differently.',
+              year: 'Basic 5',
+              needs: ['sources-primary'],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'our-people',
+      name: 'The People of Ghana',
+      purpose: 'Who was here, where they came from, and how they lived.',
+      subStrands: [
+        {
+          id: 'origins',
+          name: 'Origins and settlement',
+          topics: [
+            {
+              id: 'ethnic-groups-primary',
+              title: 'The peoples of Ghana',
+              outcome: 'Name the major ethnic groups and say roughly where in '
+                + 'Ghana each one settled.',
+              year: 'Basic 3',
+            },
+            {
+              id: 'migration-primary',
+              title: 'How people came to settle here',
+              outcome: 'Tell the migration story of one group and give one '
+                + 'reason people moved.',
+              year: 'Basic 4',
+              needs: ['ethnic-groups-primary'],
+            },
+            {
+              id: 'old-states-primary',
+              title: 'The old states',
+              outcome: 'Name two states that existed before Ghana, such as '
+                + 'Asante or Dagbon, and say what each was known for.',
+              year: 'Basic 5',
+              needs: ['migration-primary'],
+            },
+          ],
+        },
+        {
+          id: 'ways-of-life',
+          name: 'How people lived',
+          topics: [
+            {
+              id: 'chieftaincy-primary',
+              title: 'Chiefs and how they ruled',
+              outcome: 'Describe what a chief does and how a chief is chosen.',
+              year: 'Basic 4',
+            },
+            {
+              id: 'trade-primary',
+              title: 'Trade and the market',
+              outcome: 'Explain what was traded across the Sahara and why salt '
+                + 'and gold mattered.',
+              year: 'Basic 5',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'europeans-and-after',
+      name: 'Europeans, Colonial Rule and Independence',
+      purpose: 'How Ghana was taken, how it resisted, and how it was won back.',
+      subStrands: [
+        {
+          id: 'europeans-arrive',
+          name: 'The Europeans arrive',
+          topics: [
+            {
+              id: 'national-symbols-primary',
+              title: 'The flag, the anthem and the coat of arms',
+              outcome: 'Explain what each colour of the flag stands for and '
+                + 'what the symbols mean.',
+              year: 'Basic 2',
+            },
+            {
+              id: 'forts-primary',
+              title: 'The forts and castles',
+              outcome: 'Say who built the coastal forts and what they were '
+                + 'used for, including the trade in people.',
+              year: 'Basic 5',
+            },
+            {
+              id: 'colonial-rule-primary',
+              title: 'British rule',
+              outcome: 'Explain how the Gold Coast came under British rule and '
+                + 'name one way people resisted it.',
+              year: 'Basic 6',
+              needs: ['forts-primary'],
+            },
+          ],
+        },
+        {
+          id: 'independence',
+          name: 'Independence and after',
+          topics: [
+            {
+              id: 'independence-primary',
+              title: 'Independence, 1957',
+              outcome: 'Say when Ghana became independent, who led it, and why '
+                + 'the date matters.',
+              year: 'Basic 6',
+              needs: ['colonial-rule-primary'],
+            },
+            {
+              id: 'ghana-since-primary',
+              title: 'Ghana since independence',
+              outcome: 'Name two things that have changed in Ghana since 1957 '
+                + 'and one thing that has stayed the same.',
+              year: 'Basic 6',
+              needs: ['independence-primary'],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+})
