@@ -687,8 +687,16 @@ export default function Learn({
             the window. On a 1440px laptop that made each topic a 1330px
             card carrying one line of text, which is not a list, it is a
             series of horizon-wide bars. The sheet also draws the margin
-            rule the rest of the written screens are set against. */}
-        <main className="nx-sheet">
+            width of the window.
+
+            Plain, because the margin is where a tick, a cross or a teacher's
+            note goes and this screen writes none: it reserved 112px down the
+            left of the page, drew a rule beside it and put nothing in it
+            ever. All that empty strip did was push the body out of the middle
+            and out of line with the header above it, which is most of why the
+            screen looked askew. Without it the title sits directly under the
+            wordmark and the page is even on both sides. */}
+        <main className="nx-sheet is-plain">
           <div className="nx-body">
             <h1 className="nx-display" style={{ fontSize: 'clamp(30px,5vw,44px)', margin: '0 0 10px' }}>
               {syllabus.subject}
@@ -712,16 +720,8 @@ export default function Learn({
 
             {/* Where the material came from, never hidden. */}
             {syllabus.note && (
-              <p className="nx-fineprint" style={{ margin: '0 0 26px' }}>{syllabus.note}</p>
+              <p className="nx-fineprint" style={{ margin: '0 0 4px' }}>{syllabus.note}</p>
             )}
-
-            <div style={{ marginBottom: 28 }}>
-              <button className="nx-link" onClick={() => setWholeSubject(w => !w)}>
-                {wholeSubject
-                  ? `Show only ${profile.level}`
-                  : 'Show the whole subject'}
-              </button>
-            </div>
 
             {/* A page at a time.
 
@@ -731,11 +731,21 @@ export default function Learn({
                 made of, and the first thing they meet is the middle of
                 something. A pager makes the shape of the subject visible and
                 the page the length of a page. */}
-            {parts.length > 1 && (
+            {/* One row where three stacked blocks used to be: which part this
+                is, and the only control on the screen that changes what the
+                list holds. They belong together because they are both about
+                the list, and the rule under them is where the page stops
+                explaining itself and starts being a list. */}
+            <div className="nx-outline-bar">
               <p className="nx-part-count">
-                Part {atPart + 1} of {parts.length}
+                {parts.length > 1 ? `Part ${atPart + 1} of ${parts.length}` : ''}
               </p>
-            )}
+              <button className="nx-link" onClick={() => setWholeSubject(w => !w)}>
+                {wholeSubject
+                  ? `Show only ${profile.level}`
+                  : 'Show the whole subject'}
+              </button>
+            </div>
 
             {(parts[atPart] ?? []).map(({ strand, rows }) => {
               return (

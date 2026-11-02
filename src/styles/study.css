@@ -131,6 +131,16 @@
 
 .nx-body { margin-left: calc(var(--margin-w) + 28px); }
 
+/* A sheet with nothing in its margin.
+
+   The margin column exists for what a teacher writes beside the work: the
+   ticks and crosses down a page of questions, a note on a lesson. A screen
+   that never writes there should not reserve it, because an empty 112px
+   strip with a rule beside it pushes the body off centre and out of line
+   with the header, and the reader reads that as the page being crooked. */
+.nx-sheet.is-plain::before { display: none; }
+.nx-sheet.is-plain > .nx-body { margin-left: 0; }
+
 /* Anything that belongs to the teacher's pen sits in the margin. */
 .nx-in-margin {
   position: absolute;
@@ -177,6 +187,12 @@
 
   .nx-top > .nx-mark { flex: 1 1 100%; order: 3; }
   .nx-top > span:last-child { margin-left: auto; white-space: nowrap; }
+
+  /* The header's gutter narrows here and the sheet's did not, so on a phone
+     the wordmark sat 8px left of the title under it. Same misalignment as the
+     margin strip caused on a laptop, eight pixels instead of a hundred and
+     twelve, and just as visible because the two are one above the other. */
+  .nx-sheet { padding-inline: 16px; }
 }
 
 .nx-wordmark {

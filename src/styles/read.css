@@ -940,6 +940,20 @@
 
 /* ── the pager ─────────────────────────────────────────────────────────── */
 
+/* The line above the list: the part on the left, the one control on the
+   right, and a rule under the pair. */
+.nx-outline-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 26px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--nx-line);
+}
+
+.nx-outline-bar .nx-part-count { margin: 0; }
+
 .nx-part-count {
   margin: 0 0 14px;
   font-family: Inter, system-ui, sans-serif;
