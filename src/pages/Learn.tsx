@@ -708,20 +708,37 @@ export default function Learn({
                 : ` for ${profile.level}.`}
               {' '}Pick one and it will be taught to you.
             </p>
-            {/* How this learner is being taught, and why.
-                Shown because a parent whose child is given video and no reading
-                deserves to know a decision was made rather than wonder whether
-                the app is broken. It is also the only way anybody can tell that
-                two learners are no longer getting the same thing. */}
-            <p className="nx-plan-line">
-              <b>How you are being taught:</b> {plan.because}
-              {plan.source === 'stated' && ' This will change as your tutor learns you.'}
-            </p>
+            {/* What the page knows about itself: how this learner is being
+                taught and where the material came from. Both are kept, for
+                the same reason as before, a parent whose child is given video
+                and no reading deserves to know a decision was made, and
+                nobody can tell two learners are getting different things
+                unless the page says so.
 
-            {/* Where the material came from, never hidden. */}
-            {syllabus.note && (
-              <p className="nx-fineprint" style={{ margin: '0 0 4px' }}>{syllabus.note}</p>
-            )}
+                They used to be two unlike blocks stacked under the title: a
+                cream panel with an amber bar down its left side, then a loose
+                sentence. The panel was the only coloured thing on a page made
+                to look like paper, and a yellow-barred box under a heading is
+                the shape every browser and every form uses for a warning, so
+                the calmest sentence on the screen read as the alarming one.
+                Same two facts, set as what they are: a short record at the
+                head of a document, label beside value, hairlines above and
+                below, no fill and no colour. */}
+            <dl className="nx-meta">
+              <div className="nx-meta-row">
+                <dt>How you are taught</dt>
+                <dd>
+                  {plan.because}
+                  {plan.source === 'stated' && ' This will change as your tutor learns you.'}
+                </dd>
+              </div>
+              {syllabus.note && (
+                <div className="nx-meta-row">
+                  <dt>Syllabus</dt>
+                  <dd>{syllabus.note}</dd>
+                </div>
+              )}
+            </dl>
 
             {/* A page at a time.
 

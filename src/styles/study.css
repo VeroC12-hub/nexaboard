@@ -727,26 +727,65 @@
 .nx-words-fold[open] .nx-words-sum::before { transform: rotate(90deg); }
 .nx-words-sum:hover { color: #14243a; }
 
-/* How this learner is being taught, and why, in one line. Shown because a
-   parent whose child is given video and no reading deserves to know that a
-   decision was made rather than wonder whether the app is broken. */
-.nx-plan-line {
-  /* Capped, because it is small type and it was running the full width of the
-     sheet: 13.5px over 892px put about 130 characters on a line, half again
-     the longest measure anybody reads comfortably, and it made the quietest
-     box on the page the widest thing in the preamble. */
-  max-width: 78ch;
-  margin: 0 0 22px;
-  padding: 11px 14px;
-  border-left: 3px solid #f2b517;
-  background: #fffdf5;
-  border-radius: 0 10px 10px 0;
-  font-size: 13.5px;
-  line-height: 1.55;
-  color: #46536b;
+/* The record at the head of the outline: how this learner is being taught,
+   and which syllabus the topics come from.
+
+   This replaces `.nx-plan-line`, a cream panel with an amber bar down its
+   left edge. The information was right and the dress was wrong: it was the
+   only filled, coloured block on a page built to look like paper, and a
+   yellow-barred box sitting under a heading is the exact shape a browser or
+   a form uses to tell you something is wrong, so the quietest sentence on
+   the screen was the one that looked urgent.
+
+   Set as a record instead. Label and value on one line, the label in the
+   same small monospace face the page already uses for annotations, hairlines
+   top and bottom, nothing filled. It reads as provenance at the top of a
+   document, which is what it is, and it stops competing with the title. */
+.nx-meta {
+  margin: 14px 0 0;
+  padding: 12px 0 2px;
+  /* The rule runs the full width of the sheet so that it lines up with the
+     one under the bar below it. Capping the block instead left a 630px
+     hairline directly above an 892px one, which is the kind of thing nobody
+     names but everybody sees. The measure is held on the value instead. */
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 9px;
 }
 
-.nx-plan-line b { color: #14243a; font-weight: 600; }
+.nx-meta-row {
+  display: grid;
+  /* The label column is fixed so two rows line up as a column of labels
+     rather than two sentences that happen to start with bold words. */
+  grid-template-columns: 136px 1fr;
+  gap: 14px;
+  align-items: baseline;
+}
+
+.nx-meta dt {
+  font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  /* It sits beside 13.5px prose, so it needs nudging to sit on the same
+     optical line as the first word of the value. */
+  padding-top: 1px;
+}
+
+.nx-meta dd {
+  margin: 0;
+  max-width: 72ch;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* On a phone 136px of label beside a value leaves the value about twenty
+   characters wide, so the label goes above its value instead. */
+@media (max-width: 560px) {
+  .nx-meta-row { grid-template-columns: 1fr; gap: 3px; }
+}
 
 /* ── Tables, charts, facts and try-it, inside a lesson ───────────────────────
    A lesson is not only prose. A comparison belongs in a table, data belongs in
