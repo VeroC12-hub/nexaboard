@@ -607,18 +607,10 @@ teach({
   },
 
   idea:
-    'A simile compares two things using like or as: '
-    + 'he ran like a hunted animal. '
-    + 'A metaphor states the comparison directly: '
-    + 'he was a hunted animal. '
-    + 'Personification gives human qualities or actions to something that '
-    + 'is not human: '
-    + 'the wind tore at the roof. '
-    + 'Hyperbole exaggerates on purpose. '
-    + 'Irony says the opposite of what is meant, '
-    + 'and the listener is expected to hear it. '
-    + 'An idiom means something its words do not say, '
-    + 'and a proverb states a general truth in a fixed form.',
+    'A figure of speech says a thing in a way the plain words would not. '
+    + 'The figures in the syllabus are few and each has its own job, '
+    + 'and a question about one of them almost always asks for its '
+    + 'effect rather than for its name.',
 
   mechanism:
     'Naming the figure is the easy half and the half worth fewest marks. '
@@ -731,6 +723,85 @@ teach({
     + 'then every line adds to one piece of personification, '
     + 'which is called an extended metaphor.',
 
+  figure: {
+    alt: 'He was frightened drawn in one box, with the note that it names '
+      + 'the feeling and does nothing else. Beside it, in green, he was a '
+      + 'hunted animal, with three ticked notes running down from it: the '
+      + 'fear is physical rather than described, something is now chasing '
+      + 'him, and he is prey, so the sentence is about power as well as '
+      + 'fear.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">naming the figure is the easy half; the marks are in the effect</text>'
+      + '<path d="M 24 60 H 294 V 118 H 24 Z"/>'
+      + '<text x="159" y="96" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">he was frightened</text>'
+      + '<text x="159" y="148" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">it names the feeling,</text>'
+      + '<text x="159" y="168" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and that is all it does</text>'
+      + '<path d="M 346 60 H 616 V 118 H 346 Z" stroke="#0f8a4d"/>'
+      + '<text x="481" y="96" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">he was a hunted animal</text>'
+      + '<path d="M 352 140 L 362 152 L 382 130" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="394" y="150" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">the fear is physical,</text>'
+      + '<text x="394" y="168" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">not described</text>'
+      + '<path d="M 352 196 L 362 208 L 382 186" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="394" y="206" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">something is now</text>'
+      + '<text x="394" y="224" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">chasing him</text>'
+      + '<path d="M 352 252 L 362 264 L 382 242" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="394" y="262" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">he is prey, so it is</text>'
+      + '<text x="394" y="280" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">about power too</text>'
+      + '<text x="159" y="226" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">a simile holds the two</text>'
+      + '<text x="159" y="244" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">things apart: he ran LIKE</text>'
+      + '<text x="159" y="262" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">a hunted animal</text>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a metaphor collapses the two, so every quality transfers,</text>'
+      + '<text x="320" y="356" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">which is why it is usually the stronger of the two</text>'
+      + '<text x="320" y="386" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">write the effect, not the name: that is where the marks are</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each figure of speech, an example of it, and what it does',
+      columns: ['Figure', 'Example', 'What it does'],
+      rows: [
+        [
+          'Simile',
+          'He ran like a hunted animal',
+          'Holds the two things apart and says they resemble each other',
+        ],
+        [
+          'Metaphor',
+          'He was a hunted animal',
+          'Collapses the two, so every quality transfers',
+        ],
+        [
+          'Personification',
+          'The wind tore at the roof',
+          'Gives a human action to something that is not human',
+        ],
+        [
+          'Hyperbole',
+          'I have told you a thousand times',
+          'Exaggerates on purpose, and is not meant to be believed',
+        ],
+        [
+          'Irony',
+          'Wonderful weather, said in a downpour',
+          'Says the opposite, and expects the listener to hear it',
+        ],
+        [
+          'Idiom',
+          'He let the cat out of the bag',
+          'Means something its own words do not say',
+        ],
+        [
+          'Proverb',
+          'The rain does not fall on one roof alone',
+          'States a general truth in a fixed form',
+        ],
+      ],
+      note: 'Irony is the one you cannot name from the sentence alone, '
+        + 'because it depends on the situation: the same two words on a '
+        + 'fine day are not irony at all.',
+    },
+  ],
   questions: [
     {
       id: 'fig-1',
@@ -1172,18 +1243,11 @@ teach({
   },
 
   idea:
-    'A phrase is a group of words with no verb of its own: '
-    + 'in the blue shirt, after the rain. '
-    + 'A clause has a subject and a verb: '
-    + 'the rain stopped. '
-    + 'A main clause makes sense on its own. '
-    + 'A subordinate clause has a subject and verb '
-    + 'but cannot stand alone: because the rain stopped. '
-    + 'A simple sentence is one main clause. '
-    + 'A compound sentence joins two main clauses with and, but, or or so. '
-    + 'A complex sentence has one main clause '
-    + 'and at least one subordinate clause, '
-    + 'joined by a word such as because, although, when, if or who.',
+    'A phrase and a clause are told apart by one thing. '
+    + 'A clause has a verb of its own, and a phrase does not. '
+    + 'A clause that makes sense alone is a main clause, '
+    + 'and one that does not is subordinate. '
+    + 'Sentences are then named by how many of each they hold.',
 
   mechanism:
     'The test for every question in this topic is the same, '
@@ -1294,6 +1358,86 @@ teach({
     + 'It is the longest form that stays readable, '
     + 'and beyond it a sentence should be split.',
 
+  figure: {
+    alt: 'On the left, a compound sentence drawn as two boxes of the same '
+      + 'size, it rained and we stayed inside, joined by and, so the two '
+      + 'facts weigh the same. On the right, a complex sentence drawn as '
+      + 'one large green box holding the main clause, we stayed inside, '
+      + 'with a smaller box beneath it holding because it rained, which '
+      + 'cannot stand alone.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">and joins two ideas; because ranks one under the other</text>'
+      + '<text x="180" y="62" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">compound</text>'
+      + '<path d="M 24 82 H 152 V 142 H 24 Z"/>'
+      + '<text x="88" y="118" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">it rained</text>'
+      + '<text x="180" y="118" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and</text>'
+      + '<path d="M 208 82 H 336 V 142 H 208 Z"/>'
+      + '<text x="272" y="110" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">we stayed</text>'
+      + '<text x="272" y="130" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">inside</text>'
+      + '<text x="180" y="170" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">two boxes the same size:</text>'
+      + '<text x="180" y="190" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the facts weigh the same</text>'
+      + '<text x="490" y="62" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">complex</text>'
+      + '<path d="M 386 82 H 610 V 142 H 386 Z" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="498" y="110" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">we stayed inside</text>'
+      + '<text x="498" y="132" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the main clause</text>'
+      + '<path d="M 498 176 V 152" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 498 144 L 491 160 L 505 160 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 420 178 H 576 V 228 H 420 Z" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<text x="498" y="200" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">because it rained</text>'
+      + '<text x="498" y="220" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">it cannot stand alone</text>'
+      + '<text x="490" y="256" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">one is ranked under the other,</text>'
+      + '<text x="490" y="276" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">and it gives the reason for it</text>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so a complex sentence does what a compound one cannot:</text>'
+      + '<text x="320" y="356" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">it says which of the two ideas matters</text>'
+      + '<text x="320" y="384" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and the test for a clause is always the same: has it a verb of its own?</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Phrase or clause, decided by the verb and never by the '
+        + 'length',
+      columns: [
+        'Group of words',
+        'Has a verb of its own?',
+        'Can it stand alone?',
+        'So it is',
+      ],
+      rows: [
+        ['in the blue shirt', 'No', 'No', 'A phrase'],
+        [
+          'the man in the long blue shirt from Tamale',
+          'No',
+          'No',
+          'Still a phrase, however long',
+        ],
+        ['he left', 'Yes', 'Yes', 'A clause, and a whole sentence'],
+        ['because the rain stopped', 'Yes', 'No', 'A subordinate clause'],
+      ],
+      note: 'The test takes five seconds and it never changes: look for a '
+        + 'verb of its own.',
+    },
+    {
+      caption: 'The three kinds of sentence, and what each one is made of',
+      columns: ['Sentence', 'What it holds', 'Example'],
+      rows: [
+        ['Simple', 'One main clause', 'The rain stopped.'],
+        [
+          'Compound',
+          'Two main clauses, joined by and, but, or or so',
+          'The rain stopped and we went out.',
+        ],
+        [
+          'Complex',
+          'A main clause and at least one subordinate clause',
+          'Because the rain stopped, we went out.',
+        ],
+      ],
+      note: 'Only the complex sentence ranks its ideas. It rained and we '
+        + 'stayed inside gives the two facts equal weight; because it '
+        + 'rained, we stayed inside says one caused the other.',
+    },
+  ],
   questions: [
     {
       id: 'sen-1',
@@ -1374,17 +1518,10 @@ teach({
     + 'and that is a rule of thumb mistaken for a rule. '
     + 'The passive is the right choice in three situations, '
     + 'and knowing them is what the examination is testing. '
-    + 'First, when nobody knows who did it: '
-    + '"the shop was robbed last night" is the only honest sentence '
-    + 'available, '
-    + 'because naming a doer would be inventing one. '
-    + 'Second, when the receiver is the important thing: '
-    + '"the bridge was completed in 1965" is about the bridge, '
-    + 'and who built it is a detail. '
-    + 'Third, in scientific writing, '
-    + 'where "the mixture was heated" keeps the attention on the procedure '
-    + 'rather than on the person holding the flask. '
-    + 'So the passive is not weak. It is a tool with three jobs. '
+    + 'In each of the three the doer is either genuinely unknown '
+    + 'or simply beside the point, '
+    + 'so leaving it out loses the reader nothing. '
+    + 'The passive is not weak. It is a tool with three jobs. '
     + 'But it also has one dishonest use, and you should be able to name '
     + 'it. '
     + 'Because the passive allows the doer to be left out, '
@@ -1477,6 +1614,70 @@ teach({
     + 'which is a neat way of seeing that the passive works by promoting '
     + 'the object.',
 
+  figure: {
+    alt: 'The boy broke the window drawn as three boxes, then the same '
+      + 'sentence again in the passive. A red curve carries the window '
+      + 'from the end of the active sentence to the front of the passive '
+      + 'one, and a green curve carries the boy from the front to the '
+      + 'back, where the dashed box round by the boy shows that it can be '
+      + 'dropped altogether.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the object moves to the front, and the doer goes to the back</text>'
+      + '<text x="30" y="68" font-size="15" text-anchor="start" fill="currentColor" stroke="none">active</text>'
+      + '<path d="M 60 82 H 196 V 128 H 60 Z"/>'
+      + '<text x="128" y="110" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">The boy</text>'
+      + '<text x="128" y="146" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">the doer</text>'
+      + '<path d="M 212 82 H 326 V 128 H 212 Z"/>'
+      + '<text x="269" y="110" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">broke</text>'
+      + '<path d="M 342 82 H 510 V 128 H 342 Z"/>'
+      + '<text x="426" y="110" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">the window</text>'
+      + '<text x="426" y="146" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">what it happened to</text>'
+      + '<path d="M 380 170 C 340 212, 200 196, 130 232" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 122 236 L 140 226 L 144 240 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 150 170 C 240 230, 420 212, 500 234" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 508 236 L 490 244 L 492 228 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="30" y="244" font-size="15" text-anchor="start" fill="currentColor" stroke="none">passive</text>'
+      + '<path d="M 60 252 H 228 V 298 H 60 Z"/>'
+      + '<text x="144" y="280" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">The window</text>'
+      + '<path d="M 244 252 H 400 V 298 H 244 Z"/>'
+      + '<text x="322" y="280" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">was broken</text>'
+      + '<text x="322" y="316" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">be, plus the past participle</text>'
+      + '<path d="M 416 252 H 552 V 298 H 416 Z" stroke-dasharray="7 6" stroke="#0f8a4d"/>'
+      + '<text x="484" y="280" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">by the boy</text>'
+      + '<text x="484" y="316" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">and this can be dropped</text>'
+      + '<text x="320" y="356" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">that dropping is what makes the passive useful</text>'
+      + '<text x="320" y="382" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">when nobody knows who did it, and dishonest when somebody does</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three jobs the passive does, and why it is right for '
+        + 'each',
+      columns: ['The situation', 'The sentence', 'Why the passive'],
+      rows: [
+        [
+          'Nobody knows who did it',
+          'The shop was robbed last night',
+          'Naming a doer would be inventing one',
+        ],
+        [
+          'The receiver is what the sentence is about',
+          'The bridge was completed in 1965',
+          'The bridge is the subject of the paragraph, not the builders',
+        ],
+        [
+          'Scientific writing',
+          'The mixture was heated',
+          'The procedure matters, not the person holding the flask',
+        ],
+      ],
+      note: 'There is a fourth use of it and that one is dishonest. Because '
+        + 'the passive lets the doer be left out, it can hide who is '
+        + 'responsible: mistakes were made admits a fault and names '
+        + 'nobody.',
+    },
+  ],
   questions: [
     {
       id: 'voi-1',
@@ -1545,15 +1746,9 @@ teach({
   idea:
     'Concord means the subject and the verb agree in number. '
     + 'The boy runs. The boys run. '
-    + 'Words between the subject and the verb do not affect it: '
-    + 'the box of nails is heavy, because the subject is box, not nails. '
-    + 'Two subjects joined by and take a plural verb. '
-    + 'Either, neither, each, every, everybody, somebody and nobody '
-    + 'all take a singular verb. '
-    + 'With either or and neither nor, '
-    + 'the verb agrees with the nearer subject. '
-    + 'A collective noun such as team takes a singular verb '
-    + 'when it acts as one body.',
+    + 'Almost all of the difficulty is in finding the subject, '
+    + 'because other words can sit between it and the verb, '
+    + 'and because some words that look plural are not.',
 
   mechanism:
     'Nearly every concord error has one cause: '
@@ -1661,6 +1856,77 @@ teach({
     + 'That is why "every pupil must bring their book" is disputed. '
     + '"All pupils must bring their books" is not.',
 
+  figure: {
+    alt: 'The sentence a box of nails are heavy written out, with a red '
+      + 'curve running from nails to are to show the ear agreeing the verb '
+      + 'with the nearest noun. Beneath it the same sentence with of nails '
+      + 'boxed out in dashes, leaving a box is heavy, and a green curve '
+      + 'running from box straight to is.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">cover what sits between, and the subject is obvious</text>'
+      + '<text x="140" y="110" font-size="22" text-anchor="start" fill="currentColor" stroke="none">A box</text>'
+      + '<text x="212" y="110" font-size="22" text-anchor="start" fill="currentColor" stroke="none">of nails</text>'
+      + '<text x="310" y="110" font-size="22" text-anchor="start" fill="#c8433a" stroke="none">are</text>'
+      + '<text x="362" y="110" font-size="22" text-anchor="start" fill="currentColor" stroke="none">heavy</text>'
+      + '<path d="M 255 122 C 262 152, 310 152, 322 124" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 324 118 L 314 132 L 328 134 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="290" y="174" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">the ear agrees the verb with the nearest noun,</text>'
+      + '<text x="290" y="192" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">and nails is not the subject</text>'
+      + '<path d="M 60 222 H 580" stroke-dasharray="7 6" stroke-width="1.5"/>'
+      + '<text x="140" y="288" font-size="22" text-anchor="start" fill="#0f8a4d" stroke="none">A box</text>'
+      + '<path d="M 208 266 H 300 V 296 H 208 Z" stroke-dasharray="6 5" stroke-width="2"/>'
+      + '<text x="254" y="289" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">. . .</text>'
+      + '<text x="310" y="288" font-size="22" text-anchor="start" fill="#0f8a4d" stroke="none">is</text>'
+      + '<text x="352" y="288" font-size="22" text-anchor="start" fill="currentColor" stroke="none">heavy</text>'
+      + '<path d="M 182 262 C 200 232, 300 232, 318 260" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 320 266 L 308 254 L 322 250 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="254" y="330" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">cover it with your finger and read it again:</text>'
+      + '<text x="254" y="348" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">a box is heavy</text>'
+      + '<text x="320" y="384" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">of, with, together with, as well as and including all start such an interruption</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The concord rules, each with the sentence that tests it',
+      columns: ['Rule', 'The sentence', 'Why'],
+      rows: [
+        [
+          'Words between the subject and the verb change nothing',
+          'The box of nails is heavy',
+          'The subject is box, and not nails',
+        ],
+        [
+          'Two subjects joined by and take a plural verb',
+          'Kofi and Ama are here',
+          'There are two of them',
+        ],
+        [
+          'Each, every, either and neither take a singular verb',
+          'Each of the boys is counted',
+          'They pick the boys out one at a time',
+        ],
+        [
+          'Everybody, somebody and nobody take a singular verb',
+          'Nobody was ready',
+          'It is one person, whoever that person is',
+        ],
+        [
+          'With either or and neither nor, the verb follows the nearer subject',
+          'Neither the teacher nor the pupils were ready',
+          'And neither the pupils nor the teacher was ready',
+        ],
+        [
+          'A collective noun acting as one body takes a singular verb',
+          'The team is winning',
+          'The team is doing one thing together',
+        ],
+      ],
+      note: 'Every phrase beginning with of, with, together with, as well '
+        + 'as or including is an interruption of the first kind, and not '
+        + 'one of them changes the subject.',
+    },
+  ],
   questions: [
     {
       id: 'cnc-1',
