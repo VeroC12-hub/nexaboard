@@ -119,6 +119,53 @@ teach({
     + 'That is why very large numbers are still readable: '
     + 'you never read more than three digits at a time.',
 
+  figure: {
+    alt: 'The number 4,271 split into its four places, each digit in its own '
+      + 'box named thousands, hundreds, tens and ones. A green comma stands '
+      + 'between the thousands box and the hundreds box, labelled the comma '
+      + 'is not part of the number, it is there so your eye can find the '
+      + 'thousands.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="56" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">each place is worth ten of the '
+      + 'one beside it</text>'
+      + '<polygon points="60,150 180,150 180,230 60,230"/>'
+      + '<text x="120" y="212" font-size="48" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4</text>'
+      + '<text x="120" y="262" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">thousands</text>'
+      + '<polygon points="200,150 320,150 320,230 200,230"/>'
+      + '<text x="260" y="212" font-size="48" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<text x="260" y="262" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">hundreds</text>'
+      + '<polygon points="320,150 440,150 440,230 320,230"/>'
+      + '<text x="380" y="212" font-size="48" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">7</text>'
+      + '<text x="380" y="262" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">tens</text>'
+      + '<polygon points="440,150 560,150 560,230 440,230"/>'
+      + '<text x="500" y="212" font-size="48" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<text x="500" y="262" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">ones</text>'
+      + '<text x="190" y="212" font-size="48" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">,</text>'
+      + '<line x1="190" y1="240" x2="190" y2="300" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="320" y="326" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">the comma is not part of the '
+      + 'number</text>'
+      + '<text x="320" y="352" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">it is there so your eye finds the '
+      + 'thousands</text>'
+      + '<line x1="584" y1="118" x2="60" y2="118" stroke="#0f8a4d"/>'
+      + '<polyline points="73,108 60,118 73,128" stroke="#0f8a4d"/>'
+      + '<text x="320" y="104" font-size="18" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">ten times bigger at every step this '
+      + 'way</text></svg>',
+  },
   questions: [
     {
       id: 'ln-1',
@@ -260,6 +307,43 @@ teach({
     + 'The amount shrank, and yet you add to find the start. '
     + 'Work backwards and the same question still guides you.',
 
+  figure: {
+    alt: 'At the top, in red and crossed out, the idea that altogether means '
+      + 'add and left means take away. Below it, in green, the question '
+      + 'that works instead: did the amount end up bigger or smaller. '
+      + 'Bigger leads to you added, and smaller leads to you took away.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<line x1="76" y1="84" x2="112" y2="120" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<line x1="112" y1="84" x2="76" y2="120" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<polygon points="140,70 570,70 570,134 140,134" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="355" y="96" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">altogether means add,</text>'
+      + '<text x="355" y="122" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">left means take away</text>'
+      + '<text x="355" y="168" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">key words will catch you</text>'
+      + '<polygon points="140,196 500,196 500,260 140,260" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="320" y="224" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">did the amount end up</text>'
+      + '<text x="320" y="248" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">bigger, or smaller</text>'
+      + '<line x1="200" y1="262" x2="200" y2="322" stroke="#0f8a4d"/>'
+      + '<polyline points="190,309 200,322 210,309" stroke="#0f8a4d"/>'
+      + '<line x1="440" y1="262" x2="440" y2="322" stroke="#0f8a4d"/>'
+      + '<polyline points="430,309 440,322 450,309" stroke="#0f8a4d"/>'
+      + '<polygon points="90,326 310,326 310,384 90,384"/>'
+      + '<text x="200" y="362" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">bigger: you added</text>'
+      + '<polygon points="330,326 550,326 550,384 330,384"/>'
+      + '<text x="440" y="362" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">smaller: you took away</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'wp-1',
@@ -405,6 +489,43 @@ teach({
     + '30 times 20, 30 times 6, 4 times 20 and 4 times 6. '
     + 'Add all four. That is all long multiplication ever is.',
 
+  figure: {
+    alt: 'A rectangle 34 wide and 6 tall, cut into two parts: one 30 wide '
+      + 'holding 180 and one 4 wide holding 24. Under it says 180 and 24 '
+      + 'make 204, so 34 times 6 is 204.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">34 times 6, split by the '
+      + 'places</text>'
+      + '<polygon points="60,120 450,120 450,260 60,260" stroke-width="3" '
+      + 'fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="450,120 530,120 530,260 450,260" '
+      + 'stroke-width="3"/>'
+      + '<line x1="450" y1="120" x2="450" y2="260" stroke-width="4"/>'
+      + '<text x="255" y="86" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">30</text>'
+      + '<text x="490" y="86" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4</text>'
+      + '<text x="255" y="200" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">180</text>'
+      + '<text x="490" y="200" font-size="30" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">24</text>'
+      + '<text x="36" y="198" font-size="22" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">6</text>'
+      + '<line x1="44" y1="120" x2="44" y2="260" stroke-width="3"/>'
+      + '<line x1="38" y1="120" x2="50" y2="120"/>'
+      + '<line x1="38" y1="260" x2="50" y2="260"/>'
+      + '<line x1="60" y1="100" x2="450" y2="100" stroke-width="3"/>'
+      + '<line x1="450" y1="100" x2="530" y2="100" stroke-width="3"/>'
+      + '<line x1="60" y1="94" x2="60" y2="106"/>'
+      + '<line x1="450" y1="94" x2="450" y2="106"/>'
+      + '<line x1="530" y1="94" x2="530" y2="106"/>'
+      + '<text x="320" y="304" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">180 and 24 make 204</text>'
+      + '<text x="320" y="352" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">so 34 times 6 is 204</text></svg>',
+  },
   questions: [
     {
       id: 'lm-1',
@@ -460,16 +581,14 @@ teach({
 
   idea:
     'Dividing means two different things, and they agree. '
-    + 'Sharing: 12 mangoes between 3 children, so each child gets 4. '
-    + 'Grouping: 12 mangoes into bags of 3, so you fill 4 bags. '
-    + 'Both are 12 divided by 3, and both answer 4.',
+    + 'You can split an amount between people, which is sharing, '
+    + 'or pack it into groups of a fixed size, which is grouping. '
+    + 'The sum is the same either way, and the answer means '
+    + 'something different.',
 
   mechanism:
-    'The two look different because the 3 means a different thing each time. '
-    + 'In sharing, the 3 is the number of people and the answer is how many '
-    + 'each gets. '
-    + 'In grouping, the 3 is the size of a group and the answer is how many '
-    + 'groups there are. '
+    'The two look different because the 3 means a different thing each time, '
+    + 'so the answer does too. '
     + 'They agree because 4 groups of 3 and 3 groups of 4 are the same '
     + 'twelve, which you already know from equal groups. '
     + 'Knowing both matters because word problems come in both shapes.',
@@ -546,6 +665,82 @@ teach({
     + 'because the last two still need a ride. '
     + 'The arithmetic gives 6 remainder 2; the situation decides the answer.',
 
+  figure: {
+    alt: 'Twelve counters arranged two ways. On the left they are shared '
+      + 'between three children, making three groups of four. On the right '
+      + 'they are packed into bags of three, making four bags. Both are '
+      + 'twelve divided by three and both answer four.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="190" y="50" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">shared between 3</text>'
+      + '<ellipse cx="90" cy="180" rx="42" ry="40"/>'
+      + '<circle cx="72" cy="164" r="11" fill="currentColor"/>'
+      + '<circle cx="108" cy="164" r="11" fill="currentColor"/>'
+      + '<circle cx="72" cy="196" r="11" fill="currentColor"/>'
+      + '<circle cx="108" cy="196" r="11" fill="currentColor"/>'
+      + '<ellipse cx="190" cy="180" rx="42" ry="40"/>'
+      + '<circle cx="172" cy="164" r="11" fill="currentColor"/>'
+      + '<circle cx="208" cy="164" r="11" fill="currentColor"/>'
+      + '<circle cx="172" cy="196" r="11" fill="currentColor"/>'
+      + '<circle cx="208" cy="196" r="11" fill="currentColor"/>'
+      + '<ellipse cx="290" cy="180" rx="42" ry="40"/>'
+      + '<circle cx="272" cy="164" r="11" fill="currentColor"/>'
+      + '<circle cx="308" cy="164" r="11" fill="currentColor"/>'
+      + '<circle cx="272" cy="196" r="11" fill="currentColor"/>'
+      + '<circle cx="308" cy="196" r="11" fill="currentColor"/>'
+      + '<text x="190" y="266" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3 groups of 4</text>'
+      + '<line x1="360" y1="80" x2="360" y2="300" stroke-dasharray="7 7"/>'
+      + '<text x="510" y="50" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">into bags of 3</text>'
+      + '<polygon points="400,142 446,142 446,226 400,226"/>'
+      + '<circle cx="423" cy="162" r="10" fill="currentColor"/>'
+      + '<circle cx="423" cy="186" r="10" fill="currentColor"/>'
+      + '<circle cx="423" cy="210" r="10" fill="currentColor"/>'
+      + '<polygon points="458,142 504,142 504,226 458,226"/>'
+      + '<circle cx="481" cy="162" r="10" fill="currentColor"/>'
+      + '<circle cx="481" cy="186" r="10" fill="currentColor"/>'
+      + '<circle cx="481" cy="210" r="10" fill="currentColor"/>'
+      + '<polygon points="516,142 562,142 562,226 516,226"/>'
+      + '<circle cx="539" cy="162" r="10" fill="currentColor"/>'
+      + '<circle cx="539" cy="186" r="10" fill="currentColor"/>'
+      + '<circle cx="539" cy="210" r="10" fill="currentColor"/>'
+      + '<polygon points="574,142 620,142 620,226 574,226"/>'
+      + '<circle cx="597" cy="162" r="10" fill="currentColor"/>'
+      + '<circle cx="597" cy="186" r="10" fill="currentColor"/>'
+      + '<circle cx="597" cy="210" r="10" fill="currentColor"/>'
+      + '<text x="510" y="266" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4 bags of 3</text>'
+      + '<text x="320" y="346" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">both are 12 divided by 3, and both '
+      + 'answer 4</text></svg>',
+  },
+  tables: [{
+    caption: 'The two shapes a division question comes in',
+    columns: [
+      'Kind',
+      'The question',
+      'What the 3 means',
+      'What the answer means',
+    ],
+    rows: [
+      [
+        'Sharing',
+        '12 mangoes between 3 children',
+        'The number of children',
+        'How many each one gets',
+      ],
+      [
+        'Grouping',
+        '12 mangoes into bags of 3',
+        'The size of a bag',
+        'How many bags there are',
+      ],
+    ],
+    note: 'Both are 12 divided by 3 and both answer 4, so the arithmetic '
+      + 'never tells you which shape you are in. The question does.',
+  }],
   questions: [
     {
       id: 'ds-1',
@@ -599,10 +794,10 @@ teach({
   },
 
   idea:
-    'One half and two quarters are the same amount of cake. '
-    + 'So are four eighths. '
-    + 'They look like different fractions because the cake was cut into '
-    + 'different numbers of pieces, not because there is more cake.',
+    'Two fractions can look completely different and be the same '
+    + 'amount of cake. '
+    + 'They look different because the cake was cut into different '
+    + 'numbers of pieces, not because there is more cake.',
 
   mechanism:
     'Here is why multiplying top and bottom by the same number is allowed. '
@@ -686,6 +881,66 @@ teach({
     + 'but you can turn the half into two quarters first. '
     + 'That is the next topic, and this is the tool it needs.',
 
+  figure: {
+    alt: 'The same bar drawn three times, cut into two pieces, then four, '
+      + 'then eight. The shaded part is exactly the same length every time, '
+      + 'and is named one half, two quarters and four eighths.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the same amount, cut three '
+      + 'ways</text>'
+      + '<polygon points="70,80 240,80 240,134 70,134" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="240,80 410,80 410,134 240,134" stroke-width="3"/>'
+      + '<text x="426" y="114" font-size="19" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">one half</text>'
+      + '<polygon points="70,176 155,176 155,230 70,230" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="155,176 240,176 240,230 155,230" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="240,176 325,176 325,230 240,230" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="325,176 410,176 410,230 325,230" '
+      + 'stroke-width="3"/>'
+      + '<text x="426" y="210" font-size="19" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">two quarters</text>'
+      + '<polygon points="70,272 112,272 112,326 70,326" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="112,272 155,272 155,326 112,326" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="155,272 198,272 198,326 155,326" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="198,272 240,272 240,326 198,326" stroke="#0f8a4d" '
+      + 'stroke-width="3" fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="240,272 282,272 282,326 240,326" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="282,272 325,272 325,326 282,326" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="325,272 368,272 368,326 325,326" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="368,272 410,272 410,326 368,326" '
+      + 'stroke-width="3"/>'
+      + '<text x="426" y="306" font-size="19" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">four eighths</text>'
+      + '<line x1="240" y1="70" x2="240" y2="340" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<text x="320" y="376" font-size="20" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">the shaded part never changes '
+      + 'length</text></svg>',
+  },
+  tables: [{
+    caption: 'The same amount of cake, cut three ways',
+    columns: ['Fraction', 'Pieces in the whole', 'Pieces you have'],
+    rows: [
+      ['One half', '2', '1'],
+      ['Two quarters', '4', '2'],
+      ['Four eighths', '8', '4'],
+    ],
+    note: 'Each step cuts every piece in two, so the pieces are half the '
+      + 'size and there are twice as many. That is why doing it to only '
+      + 'one of the two numbers is wrong.',
+  }],
   questions: [
     {
       id: 'eq-1',
@@ -750,10 +1005,8 @@ teach({
 
   mechanism:
     'There are two kinds of rule and you should check for both. '
-    + 'An adding rule changes by the same amount each step: 3, 7, 11, 15, '
-    + 'always four more. '
-    + 'A multiplying rule changes by the same times each step: 2, 6, 18, 54, '
-    + 'always three times. '
+    + 'One changes by the same amount at each step '
+    + 'and the other changes by the same multiple. '
     + 'Test for adding first by subtracting neighbours. '
     + 'If those differences are not the same, try dividing neighbours instead. '
     + 'One of the two usually falls out.',
@@ -826,6 +1079,80 @@ teach({
     + 'That kind of rule lets you find the hundredth term in one step, '
     + 'and it is where algebra begins.',
 
+  figure: {
+    alt: 'Two sequences with the step written over each arrow. The first '
+      + 'runs 3, 7, 11, 15 with add 4 over every arrow. The second runs 2, '
+      + '6, 18, 54 with times 3 over every arrow.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">subtract neighbours first, and '
+      + 'if that fails divide them</text>'
+      + '<text x="90" y="166" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3</text>'
+      + '<text x="240" y="166" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">7</text>'
+      + '<line x1="108" y1="154" x2="192" y2="154" stroke="#0f8a4d"/>'
+      + '<polyline points="179,144 192,154 179,164" stroke="#0f8a4d"/>'
+      + '<text x="150" y="140" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">add 4</text>'
+      + '<text x="390" y="166" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">11</text>'
+      + '<line x1="258" y1="154" x2="342" y2="154" stroke="#0f8a4d"/>'
+      + '<polyline points="329,144 342,154 329,164" stroke="#0f8a4d"/>'
+      + '<text x="300" y="140" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">add 4</text>'
+      + '<text x="540" y="166" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">15</text>'
+      + '<line x1="408" y1="154" x2="492" y2="154" stroke="#0f8a4d"/>'
+      + '<polyline points="479,144 492,154 479,164" stroke="#0f8a4d"/>'
+      + '<text x="450" y="140" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">add 4</text>'
+      + '<text x="320" y="222" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the differences match, so the '
+      + 'rule is add 4</text>'
+      + '<text x="90" y="318" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<text x="240" y="318" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">6</text>'
+      + '<line x1="108" y1="306" x2="192" y2="306" stroke="#0f8a4d"/>'
+      + '<polyline points="179,296 192,306 179,316" stroke="#0f8a4d"/>'
+      + '<text x="150" y="292" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">times 3</text>'
+      + '<text x="390" y="318" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">18</text>'
+      + '<line x1="258" y1="306" x2="342" y2="306" stroke="#0f8a4d"/>'
+      + '<polyline points="329,296 342,306 329,316" stroke="#0f8a4d"/>'
+      + '<text x="300" y="292" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">times 3</text>'
+      + '<text x="540" y="318" font-size="34" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">54</text>'
+      + '<line x1="408" y1="306" x2="492" y2="306" stroke="#0f8a4d"/>'
+      + '<polyline points="479,296 492,306 479,316" stroke="#0f8a4d"/>'
+      + '<text x="450" y="292" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">times 3</text>'
+      + '<text x="320" y="374" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">these do not, but dividing gives '
+      + '3 every time</text></svg>',
+  },
+  tables: [{
+    caption: 'The two kinds of rule, and how to test for each',
+    columns: ['Kind of rule', 'How to test for it', 'An example'],
+    rows: [
+      [
+        'Adding',
+        'Subtract each term from the next',
+        '3, 7, 11, 15: always four more',
+      ],
+      [
+        'Multiplying',
+        'Divide each term by the one before',
+        '2, 6, 18, 54: always three times',
+      ],
+    ],
+    note: 'Test for the adding kind first. If the differences do not match, '
+      + 'try dividing instead, and one of the two usually falls out.',
+  }],
   questions: [
     {
       id: 'fr-1',
@@ -967,6 +1294,40 @@ teach({
     + 'so the change is 14. '
     + 'It is the same answer reached the easier way.',
 
+  figure: {
+    alt: 'A bar standing for the twenty cedis handed over, cut into two '
+      + 'parts: thirteen cedis fifty for the total and six cedis fifty for '
+      + 'the change. A green arrow under it shows the change added back to '
+      + 'the total, coming to the twenty that was handed over.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">check the change by adding it '
+      + 'back</text>'
+      + '<polygon points="60,120 420,120 420,190 60,190" stroke-width="3" '
+      + 'fill="#0f8a4d" fill-opacity="0.18"/>'
+      + '<polygon points="420,120 580,120 580,190 420,190" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="240" y="164" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">13.50</text>'
+      + '<text x="500" y="164" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">6.50</text>'
+      + '<text x="240" y="108" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the total</text>'
+      + '<text x="500" y="108" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">the change</text>'
+      + '<line x1="60" y1="218" x2="580" y2="218" stroke-width="3"/>'
+      + '<line x1="60" y1="210" x2="60" y2="226"/>'
+      + '<line x1="580" y1="210" x2="580" y2="226"/>'
+      + '<text x="320" y="254" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">you handed over 20.00</text>'
+      + '<text x="320" y="318" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">6.50 added back to 13.50 is '
+      + '20.00</text>'
+      + '<text x="320" y="364" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">if it does not come back to what '
+      + 'you paid, something is wrong</text></svg>',
+  },
   questions: [
     {
       id: 'mn-1',
