@@ -122,6 +122,19 @@ export const SUBJECTS: Record<Stage, Subject[]> = {
     { id: 'english', name: 'English Language', band: 'core' },
     { id: 'general-science', name: 'General Science', band: 'core' },
     { id: 'social', name: 'Social Studies', band: 'core' },
+    /* Core, on the owner's say so.
+
+       The published reports say a learner takes four core subjects and
+       none of them names the four, and NaCCA publishes per subject rather
+       than a core list, so this could not be confirmed from a source. It
+       is recorded here as a decision rather than a fact, because somebody
+       reading this file later deserves to know which it was. */
+    {
+      id: 'ict',
+      name: 'ICT',
+      note: 'Core: using a computer, and what it is for',
+      band: 'core',
+    },
     {
       id: 'core-peh',
       name: 'Physical Education and Health',
@@ -144,8 +157,17 @@ export const SUBJECTS: Record<Stage, Subject[]> = {
     { id: 'literature', name: 'Literature in English', band: 'elective' },
     { id: 'rme', name: 'Religious and Moral Education', band: 'elective' },
 
-    { id: 'computing', name: 'Computing', band: 'elective' },
-    { id: 'ict', name: 'ICT', band: 'elective' },
+    /* Computing is the elective: programming, systems, computer science.
+       ICT is the core subject above. Both have NaCCA documents and the two
+       names are close enough that a learner cannot tell them apart without
+       being told, so each says what it is. */
+    {
+      id: 'computing',
+      name: 'Computing',
+      note: 'Elective: programming and computer science',
+      band: 'elective',
+    },
+
     { id: 'robotics', name: 'Robotics', band: 'elective' },
     { id: 'engineering', name: 'Engineering', band: 'elective' },
     {

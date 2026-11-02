@@ -52,7 +52,8 @@ export interface Programme {
  * left out, because it is timetabled and taught, and a learner looking for it
  * should find it.
  */
-export const SHS_CORE = ['maths', 'english', 'general-science', 'social', 'core-peh']
+export const SHS_CORE = ['maths', 'english', 'general-science', 'social',
+  'ict', 'core-peh']
 
 const SHS_PROGRAMMES: Programme[] = [
   {
