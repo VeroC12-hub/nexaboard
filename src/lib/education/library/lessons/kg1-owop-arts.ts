@@ -121,6 +121,50 @@ teach({
     + 'Grandparents. Aunts. Uncles. Cousins. '
     + 'Name one of them and say where they live.',
 
+  figure: {
+    alt: 'Three people side by side, each with the thing they do for the '
+      + 'family beside them. One has a cooking pot and is labelled cooks, '
+      + 'one has a bucket and is labelled fetches water, and the smallest '
+      + 'has a broom and is labelled in green I sweep. Under them it says '
+      + 'and you do something too.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">everybody does something</text>'
+      + '<circle cx="110" cy="100" r="28"/>'
+      + '<line x1="110" y1="128" x2="110" y2="195"/>'
+      + '<line x1="68" y1="156" x2="152" y2="156"/>'
+      + '<line x1="110" y1="195" x2="85" y2="251"/>'
+      + '<line x1="110" y1="195" x2="135" y2="251"/>'
+      + '<polygon points="166,206 216,206 209,250 173,250"/>'
+      + '<line x1="160" y1="206" x2="222" y2="206"/>'
+      + '<line x1="180" y1="194" x2="176" y2="178"/>'
+      + '<line x1="200" y1="194" x2="204" y2="178"/>'
+      + '<text x="145" y="300" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">cooks</text>'
+      + '<circle cx="320" cy="100" r="28"/>'
+      + '<line x1="320" y1="128" x2="320" y2="195"/>'
+      + '<line x1="278" y1="156" x2="362" y2="156"/>'
+      + '<line x1="320" y1="195" x2="295" y2="251"/>'
+      + '<line x1="320" y1="195" x2="345" y2="251"/>'
+      + '<polygon points="376,200 416,200 409,250 383,250"/>'
+      + '<path d="M 376 200 Q 396 174 416 200"/>'
+      + '<text x="356" y="300" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">fetches water</text>'
+      + '<circle cx="530" cy="112" r="24"/>'
+      + '<line x1="530" y1="136" x2="530" y2="194"/>'
+      + '<line x1="494" y1="160" x2="566" y2="160"/>'
+      + '<line x1="530" y1="194" x2="508" y2="242"/>'
+      + '<line x1="530" y1="194" x2="552" y2="242"/>'
+      + '<line x1="580" y1="196" x2="592" y2="258"/>'
+      + '<line x1="584" y1="254" x2="600" y2="266"/>'
+      + '<line x1="588" y1="248" x2="604" y2="258"/>'
+      + '<line x1="592" y1="242" x2="606" y2="250"/>'
+      + '<text x="560" y="300" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">I sweep</text>'
+      + '<text x="320" y="360" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">and you do something too</text></svg>',
+  },
   questions: [
     {
       id: 'fm-1',
@@ -241,6 +285,48 @@ teach({
     + 'What makes you think so? '
     + 'Ask them if you are right.',
 
+  figure: {
+    alt: 'Four faces in a row showing happy, sad, angry and afraid. Under '
+      + 'them a green box holds the sentence I am angry because he took my '
+      + 'cup.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">say the feeling and why</text>'
+      + '<circle cx="100" cy="140" r="44"/>'
+      + '<circle cx="84" cy="130" r="5" fill="currentColor"/>'
+      + '<circle cx="116" cy="130" r="5" fill="currentColor"/>'
+      + '<path d="M 78 150 Q 100 176 122 150"/>'
+      + '<text x="100" y="222" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">happy</text>'
+      + '<circle cx="250" cy="140" r="44"/>'
+      + '<circle cx="234" cy="130" r="5" fill="currentColor"/>'
+      + '<circle cx="266" cy="130" r="5" fill="currentColor"/>'
+      + '<path d="M 228 166 Q 250 142 272 166"/>'
+      + '<text x="250" y="222" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">sad</text>'
+      + '<circle cx="400" cy="140" r="44"/>'
+      + '<circle cx="384" cy="130" r="5" fill="currentColor"/>'
+      + '<circle cx="416" cy="130" r="5" fill="currentColor"/>'
+      + '<line x1="382" y1="162" x2="418" y2="162"/>'
+      + '<line x1="376" y1="122" x2="392" y2="132"/>'
+      + '<line x1="424" y1="122" x2="408" y2="132"/>'
+      + '<text x="400" y="222" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">angry</text>'
+      + '<circle cx="550" cy="140" r="44"/>'
+      + '<circle cx="534" cy="130" r="5" fill="currentColor"/>'
+      + '<circle cx="566" cy="130" r="5" fill="currentColor"/>'
+      + '<circle cx="550" cy="162" r="9"/>'
+      + '<path d="M 528 118 Q 534 110 542 116"/>'
+      + '<path d="M 558 116 Q 566 110 572 118"/>'
+      + '<text x="550" y="222" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">afraid</text>'
+      + '<polygon points="70,266 570,266 570,334 70,334" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="320" y="310" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">I am angry because he took my '
+      + 'cup</text></svg>',
+  },
   questions: [
     {
       id: 'fe-1',
@@ -364,6 +450,36 @@ teach({
     + 'Your region is in Ghana. '
     + 'Say all three: your town, your region, your country.',
 
+  figure: {
+    alt: 'Three places side by side: a school with a flag, two market '
+      + 'stalls, and a river. Each is named underneath, and below them it '
+      + 'says say the name of your town.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">what is in your town</text>'
+      + '<polygon points="60,150 210,150 210,270 60,270"/>'
+      + '<polygon points="115,220 155,220 155,270 115,270"/>'
+      + '<line x1="135" y1="104" x2="135" y2="150"/>'
+      + '<polygon points="135,108 178,120 135,132"/>'
+      + '<text x="135" y="312" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the school</text>'
+      + '<polygon points="260,170 340,170 330,190 270,190"/>'
+      + '<line x1="272" y1="190" x2="272" y2="270"/>'
+      + '<line x1="328" y1="190" x2="328" y2="270"/>'
+      + '<polygon points="350,170 430,170 420,190 360,190"/>'
+      + '<line x1="362" y1="190" x2="362" y2="270"/>'
+      + '<line x1="418" y1="190" x2="418" y2="270"/>'
+      + '<text x="345" y="312" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the market</text>'
+      + '<path d="M 490 150 Q 540 190 500 230 Q 470 258 510 272"/>'
+      + '<path d="M 540 150 Q 590 190 550 230 Q 520 258 560 272"/>'
+      + '<text x="525" y="312" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the river</text>'
+      + '<text x="320" y="366" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">say the name of your town</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'ht-1',
@@ -480,6 +596,49 @@ teach({
     + 'Eggs. Milk. Meat. Help with work. '
     + 'What do the planted plants give us?',
 
+  figure: {
+    alt: 'A goat on the left with a green bowl of food beside it, labelled '
+      + 'somebody feeds it and kept. A lizard on the right with nothing '
+      + 'beside it, labelled nobody feeds it and not kept. A dotted line '
+      + 'separates them.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">does somebody feed it</text>'
+      + '<ellipse cx="110" cy="166" rx="42" ry="24"/>'
+      + '<circle cx="160" cy="148" r="15"/>'
+      + '<line x1="154" y1="136" x2="146" y2="120"/>'
+      + '<line x1="166" y1="136" x2="164" y2="118"/>'
+      + '<line x1="82" y1="186" x2="82" y2="214"/>'
+      + '<line x1="98" y1="186" x2="98" y2="214"/>'
+      + '<line x1="124" y1="186" x2="124" y2="214"/>'
+      + '<line x1="138" y1="186" x2="138" y2="214"/>'
+      + '<line x1="68" y1="160" x2="54" y2="148"/>'
+      + '<polygon points="206,198 256,198 249,230 213,230" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="218" cy="210" r="6" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="232" cy="210" r="6" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="246" cy="210" r="6" stroke="#0f8a4d" stroke-width="2" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="160" y="286" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">somebody feeds it</text>'
+      + '<text x="160" y="330" font-size="30" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">kept</text>'
+      + '<line x1="320" y1="90" x2="320" y2="344" stroke-dasharray="8 8"/>'
+      + '<ellipse cx="470" cy="170" rx="38" ry="16"/>'
+      + '<circle cx="516" cy="166" r="13"/>'
+      + '<path d="M 434 170 Q 400 178 384 160 Q 374 146 384 136"/>'
+      + '<line x1="444" y1="180" x2="426" y2="204"/>'
+      + '<line x1="444" y1="180" x2="458" y2="206"/>'
+      + '<line x1="496" y1="180" x2="482" y2="206"/>'
+      + '<line x1="496" y1="180" x2="514" y2="204"/>'
+      + '<text x="470" y="286" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">nobody feeds it</text>'
+      + '<text x="470" y="330" font-size="30" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">not kept</text></svg>',
+  },
   questions: [
     {
       id: 'pa-1',
@@ -598,6 +757,48 @@ teach({
     + 'Which one are we in now? '
     + 'What grows in the rainy season?',
 
+  figure: {
+    alt: 'A rain cloud on the left with an arrow pointing to an umbrella, '
+      + 'labelled carry it. Below, the sun with an arrow pointing to a hat, '
+      + 'labelled wear it.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">look at the sky, then '
+      + 'decide</text>'
+      + '<path d="M 78 164 Q 58 140 84 124 Q 86 94 120 98 Q 148 88 162 114 '
+      + 'Q 194 112 194 140 Q 194 162 174 164 Z"/>'
+      + '<line x1="96" y1="174" x2="89" y2="200"/>'
+      + '<line x1="126" y1="174" x2="119" y2="200"/>'
+      + '<line x1="156" y1="174" x2="149" y2="200"/>'
+      + '<line x1="212" y1="148" x2="300" y2="148"/>'
+      + '<polyline points="287,138 300,148 287,158"/>'
+      + '<path d="M 334 162 A 48 48 0 0 1 430 162" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="382" y1="162" x2="382" y2="216" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<path d="M 382 216 Q 382 232 366 228" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="510" y="170" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">carry it</text>'
+      + '<circle cx="110" cy="300" r="26"/>'
+      + '<line x1="144" y1="300" x2="158" y2="300"/>'
+      + '<line x1="134" y1="324" x2="144" y2="334"/>'
+      + '<line x1="110" y1="334" x2="110" y2="348"/>'
+      + '<line x1="86" y1="324" x2="76" y2="334"/>'
+      + '<line x1="76" y1="300" x2="62" y2="300"/>'
+      + '<line x1="86" y1="276" x2="76" y2="266"/>'
+      + '<line x1="110" y1="266" x2="110" y2="252"/>'
+      + '<line x1="134" y1="276" x2="144" y2="266"/>'
+      + '<line x1="212" y1="300" x2="300" y2="300"/>'
+      + '<polyline points="287,290 300,300 287,310"/>'
+      + '<path d="M 348 306 A 36 26 0 0 1 418 306" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="330" y1="306" x2="436" y2="306" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="510" y="312" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">wear it</text></svg>',
+  },
   questions: [
     {
       id: 'we-1',
@@ -733,6 +934,36 @@ teach({
     + 'Can you see the handle now? '
     + 'Draw what you can actually see.',
 
+  figure: {
+    alt: 'A cup with a handle on the left, labelled the cup. Beside it the '
+      + 'drawing in two steps: first the big shape of the cup on its own, '
+      + 'then an arrow, then the same shape with the handle added in green. '
+      + 'Under it says keep looking at the cup.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">big shape first, then the '
+      + 'parts</text><polygon points="70,130 140,130 133,240 77,240"/>'
+      + '<path d="M 140 156 Q 182 176 140 206"/>'
+      + '<text x="105" y="290" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the cup</text>'
+      + '<text x="205" y="146" font-size="34" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">1</text>'
+      + '<polygon points="240,130 310,130 303,240 247,240"/>'
+      + '<text x="275" y="290" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the big shape</text>'
+      + '<line x1="330" y1="185" x2="380" y2="185"/>'
+      + '<polyline points="367,175 380,185 367,195"/>'
+      + '<text x="398" y="146" font-size="34" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">2</text>'
+      + '<polygon points="430,130 500,130 493,240 437,240"/>'
+      + '<path d="M 500 156 Q 542 176 500 206" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="465" y="290" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">then the handle</text>'
+      + '<text x="320" y="352" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">keep looking at the cup</text></svg>',
+  },
   questions: [
     {
       id: 'dw-1',
@@ -862,6 +1093,39 @@ teach({
     + 'Push your thumb into the middle. '
     + 'Pinch the walls thinner all the way round.',
 
+  figure: {
+    alt: 'Four things hands do to clay: a ball, a long roll like a snake, a '
+      + 'lump with a piece pinched out of it, and two lumps with green '
+      + 'arrows pressing them together. Each is named underneath.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">roll, pinch, press, join</text>'
+      + '<circle cx="85" cy="164" r="40"/>'
+      + '<text x="85" y="252" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a ball</text>'
+      + '<path d="M 192 172 Q 222 140 252 172 Q 282 202 312 170" '
+      + 'stroke-width="14"/>'
+      + '<text x="250" y="252" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a snake</text>'
+      + '<circle cx="405" cy="170" r="38"/>'
+      + '<circle cx="440" cy="140" r="16"/>'
+      + '<line x1="456" y1="122" x2="486" y2="122" stroke="#0f8a4d"/>'
+      + '<polyline points="473,112 486,122 473,132" stroke="#0f8a4d"/>'
+      + '<text x="412" y="252" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">pinch a bit out</text>'
+      + '<circle cx="545" cy="166" r="28"/>'
+      + '<circle cx="585" cy="166" r="28"/>'
+      + '<line x1="488" y1="166" x2="512" y2="166" stroke="#0f8a4d"/>'
+      + '<polyline points="499,156 512,166 499,176" stroke="#0f8a4d"/>'
+      + '<line x1="632" y1="166" x2="614" y2="166" stroke="#0f8a4d"/>'
+      + '<polyline points="627,156 614,166 627,176" stroke="#0f8a4d"/>'
+      + '<text x="562" y="252" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">press to join</text>'
+      + '<text x="320" y="330" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">these four make anything</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'cy-1',
@@ -990,6 +1254,62 @@ teach({
     + 'Big steps for the loud part. '
     + 'Small steps for the quiet part.',
 
+  figure: {
+    alt: 'Three pictures. Under three green notes crowded together a person '
+      + 'stands, labelled fast. Under two green notes far apart another '
+      + 'stands, labelled slow. Under a note with a red cross through it a '
+      + 'third stands, labelled stop. Below it says when the music stops, '
+      + 'you stop.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">move the way the music '
+      + 'goes</text>'
+      + '<ellipse cx="76" cy="100" rx="11" ry="8" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="87" y1="100" x2="87" y2="66" stroke="#0f8a4d"/>'
+      + '<ellipse cx="104" cy="92" rx="11" ry="8" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="115" y1="92" x2="115" y2="58" stroke="#0f8a4d"/>'
+      + '<ellipse cx="132" cy="102" rx="11" ry="8" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="143" y1="102" x2="143" y2="68" stroke="#0f8a4d"/>'
+      + '<circle cx="110" cy="170" r="24"/>'
+      + '<line x1="110" y1="194" x2="110" y2="252"/>'
+      + '<line x1="74" y1="218" x2="146" y2="218"/>'
+      + '<line x1="110" y1="252" x2="88" y2="300"/>'
+      + '<line x1="110" y1="252" x2="132" y2="300"/>'
+      + '<text x="110" y="336" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">fast</text>'
+      + '<ellipse cx="286" cy="96" rx="11" ry="8" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="297" y1="96" x2="297" y2="62" stroke="#0f8a4d"/>'
+      + '<ellipse cx="350" cy="96" rx="11" ry="8" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="361" y1="96" x2="361" y2="62" stroke="#0f8a4d"/>'
+      + '<circle cx="320" cy="170" r="24"/>'
+      + '<line x1="320" y1="194" x2="320" y2="252"/>'
+      + '<line x1="284" y1="218" x2="356" y2="218"/>'
+      + '<line x1="320" y1="252" x2="298" y2="300"/>'
+      + '<line x1="320" y1="252" x2="342" y2="300"/>'
+      + '<text x="320" y="336" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">slow</text>'
+      + '<ellipse cx="520" cy="96" rx="11" ry="8" fill="currentColor"/>'
+      + '<line x1="531" y1="96" x2="531" y2="62"/>'
+      + '<line x1="496" y1="76" x2="556" y2="116" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<line x1="556" y1="76" x2="496" y2="116" stroke="#c8433a" '
+      + 'stroke-width="5"/><circle cx="530" cy="170" r="24"/>'
+      + '<line x1="530" y1="194" x2="530" y2="252"/>'
+      + '<line x1="494" y1="218" x2="566" y2="218"/>'
+      + '<line x1="530" y1="252" x2="508" y2="300"/>'
+      + '<line x1="530" y1="252" x2="552" y2="300"/>'
+      + '<text x="530" y="336" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">stop</text>'
+      + '<text x="320" y="380" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">when the music stops, you stop</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'mm-1',
