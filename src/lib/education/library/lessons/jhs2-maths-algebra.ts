@@ -49,15 +49,12 @@ teach({
 
   idea:
     'To expand a single bracket, multiply each term inside by the term '
-    + 'outside: '
-    + '3(x + 4) becomes 3x + 12. '
-    + 'For two brackets, each term in the first multiplies each term in the '
-    + 'second, '
-    + 'so (x + 2)(x + 5) gives four products: '
-    + 'x squared, 5x, 2x and 10, '
-    + 'which collect to x squared + 7x + 10. '
-    + 'A negative outside a bracket multiplies every term inside, '
-    + 'so -2(x - 3) becomes -2x + 6.',
+    + 'outside, so $3(x + 4)$ becomes $3x + 12$. '
+    + 'For two brackets, each term in the first multiplies each term in '
+    + 'the second, which is why $(x + 2)(x + 5)$ gives four products '
+    + 'and not three. '
+    + 'A negative outside a bracket multiplies every term inside it, '
+    + 'so $-2(x - 3)$ becomes $-2x + 6$.',
 
   mechanism:
     'Expanding is one rule applied as many times as there are pairs, '
@@ -165,6 +162,46 @@ teach({
     + 'which is not x squared + a squared, '
     + 'as expanding it properly shows.',
 
+  figure: {
+    alt: 'A box two cells wide and two cells tall, with x and 2 along '
+      + 'the top and x and 5 down the side. The four cells hold x '
+      + 'squared, 2x, 5x and 10, which collect to x squared plus 7x '
+      + 'plus 10.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="23" text-anchor="middle" fill="currentColor" stroke="none">the box: one cell for every pair of terms</text>'
+      + '<text x="230" y="86" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">x</text>'
+      + '<text x="390" y="86" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">+ 2</text>'
+      + '<text x="140" y="150" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">x</text>'
+      + '<text x="140" y="250" font-size="24" text-anchor="middle" fill="currentColor" stroke="none">+ 5</text>'
+      + '<path d="M 180 110 H 500 V 290 H 180 Z"/>'
+      + '<line x1="340" y1="110" x2="340" y2="290"/>'
+      + '<line x1="180" y1="200" x2="500" y2="200"/>'
+      + '<text x="260" y="162" font-size="26" text-anchor="middle" fill="#0f8a4d" stroke="none">x</text>'
+      + '<text x="276" y="146" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">2</text>'
+      + '<text x="420" y="162" font-size="26" text-anchor="middle" fill="#0f8a4d" stroke="none">2x</text>'
+      + '<text x="260" y="254" font-size="26" text-anchor="middle" fill="#0f8a4d" stroke="none">5x</text>'
+      + '<text x="420" y="254" font-size="26" text-anchor="middle" fill="#0f8a4d" stroke="none">10</text>'
+      + '<text x="320" y="330" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">four cells, so four products, every time</text>'
+      + '<text x="320" y="364" font-size="21" text-anchor="middle" fill="#0f8a4d" stroke="none">collect them: x squared, 7x and 10</text>'
+      + '<text x="320" y="392" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">if you have three products, you have missed one</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four products in (x + 2)(x + 5), and where each comes from',
+      columns: ['From the first bracket', 'From the second bracket', 'Their product'],
+      rows: [
+        ['x', 'x', 'x squared'],
+        ['x', '5', '5x'],
+        ['2', 'x', '2x'],
+        ['2', '5', '10'],
+      ],
+      note: 'Two terms in each bracket always gives exactly four products. '
+        + 'Collect the 5x and the 2x and the answer is x squared plus 7x '
+        + 'plus 10.',
+    },
+  ],
   questions: [
     {
       id: 'exp-1',
@@ -338,6 +375,57 @@ teach({
     + 'It is the same reverse reasoning: '
     + 'the two numbers are what you would have had in the two brackets.',
 
+  figure: {
+    alt: 'Two arrows between 6x plus 9 and 3 open bracket 2x plus 3 '
+      + 'close bracket, one labelled factorise and the other expand, so '
+      + 'expanding your answer checks it. Below, 4x squared broken into '
+      + '2 times 2 times x times x and 6x into 2 times 3 times x, with '
+      + 'the shared 2 times x marked, which is the 2x taken outside.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="23" text-anchor="middle" fill="currentColor" stroke="none">factorising is expanding, run backwards</text>'
+      + '<text x="160" y="92" font-size="25" text-anchor="middle" fill="currentColor" stroke="none">6x + 9</text>'
+      + '<text x="480" y="92" font-size="25" text-anchor="middle" fill="currentColor" stroke="none">3(2x + 3)</text>'
+      + '<line x1="230" y1="80" x2="400" y2="80" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="400" y1="80" x2="391.4" y2="85.2" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="400" y1="80" x2="391.4" y2="74.8" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="315" y="62" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">factorise</text>'
+      + '<line x1="400" y1="112" x2="230" y2="112"/>'
+      + '<line x1="230" y1="112" x2="238.6" y2="106.8"/>'
+      + '<line x1="230" y1="112" x2="238.6" y2="117.2"/>'
+      + '<text x="315" y="134" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">expand</text>'
+      + '<text x="320" y="192" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">and the second arrow is how you check the first</text>'
+      + '<text x="160" y="254" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">4x squared</text>'
+      + '<text x="160" y="288" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">is 2 × 2 × x × x</text>'
+      + '<text x="480" y="254" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">6x</text>'
+      + '<text x="480" y="288" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">is 2 × 3 × x</text>'
+      + '<path d="M 240 268 H 400 V 300 H 240 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="290" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">shared: 2 × x</text>'
+      + '<text x="320" y="344" font-size="21" text-anchor="middle" fill="#0f8a4d" stroke="none">so take out 2x, leaving 2x(2x + 3)</text>'
+      + '<text x="320" y="380" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">take out everything shared, or the question is not done</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Finding the highest common factor, number and letter '
+        + 'separately',
+      columns: ['Expression', 'Number shared', 'Letter shared', 'Factorised'],
+      rows: [
+        ['6x + 9', '3', 'None', '3(2x + 3)'],
+        ['4x squared + 6x', '2', 'x', '2x(2x + 3)'],
+        ['10ab + 15b', '5', 'b', '5b(2a + 3)'],
+        [
+          'ax + ay + bx + by',
+          'None, until you group',
+          'None, until you group',
+          '(x + y)(a + b)',
+        ],
+      ],
+      note: 'Expand your own answer and compare it with the original. If it '
+        + 'does not come back, you are wrong, and you know before the '
+        + 'marker does.',
+    },
+  ],
   questions: [
     {
       id: 'fac-1',
@@ -421,9 +509,7 @@ teach({
     + 'An equation is a claim that two amounts are the same, '
     + 'so there must be a sentence in the question making that claim. '
     + 'Hunt for it. '
-    + 'It is nearly always a total: '
-    + 'altogether, in all, the sum of, the perimeter is. '
-    + 'Sometimes it is a comparison: as much as, the same as. '
+    + 'It is nearly always a total, and sometimes a comparison. '
     + 'Once you have found that sentence, '
     + 'the two sides of your equation are already written in the question. '
     + 'And the last step is the one most often dropped. '
@@ -524,6 +610,48 @@ teach({
     + 'Then find the two separate statements of equality in the '
     + 'question.',
 
+  figure: {
+    alt: 'A word problem, five more sheep than goats and 23 animals '
+      + 'altogether, with the word altogether underlined as the place '
+      + 'the equals sign comes from. Then three steps: let x be the '
+      + 'goats, the sheep are x plus 5, and the total gives x plus x '
+      + 'plus 5 equals 23. Solving gives 9 goats, and the question '
+      + 'asked for the 14 sheep.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="36" font-size="23" text-anchor="middle" fill="currentColor" stroke="none">three steps, and the equals sign is in the words</text>'
+      + '<text x="40" y="84" font-size="17" text-anchor="start" fill="currentColor" stroke="none">There are five more sheep than goats,</text>'
+      + '<text x="40" y="110" font-size="17" text-anchor="start" fill="currentColor" stroke="none">and 23 animals altogether.</text>'
+      + '<line x1="168" y1="122" x2="264" y2="122" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="284" y="116" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">this is the equals sign</text>'
+      + '<text x="60" y="176" font-size="17" text-anchor="start" fill="currentColor" stroke="none">one</text>'
+      + '<text x="130" y="176" font-size="18" text-anchor="start" fill="currentColor" stroke="none">let x be the goats, the thing you know least about</text>'
+      + '<text x="60" y="218" font-size="17" text-anchor="start" fill="currentColor" stroke="none">two</text>'
+      + '<text x="130" y="218" font-size="18" text-anchor="start" fill="currentColor" stroke="none">then the sheep are x + 5</text>'
+      + '<text x="60" y="260" font-size="17" text-anchor="start" fill="currentColor" stroke="none">three</text>'
+      + '<text x="130" y="260" font-size="18" text-anchor="start" fill="currentColor" stroke="none">the total sentence gives x + (x + 5) = 23</text>'
+      + '<text x="320" y="312" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">solving gives x = 9, so there are 9 goats</text>'
+      + '<text x="320" y="348" font-size="20" text-anchor="middle" fill="#c8433a" stroke="none">but the question asked for the sheep, which is 14</text>'
+      + '<text x="320" y="384" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">answer what was asked, in the units it was asked in</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The words that tell you where the equals sign goes',
+      columns: ['The words in the question', 'What they are telling you'],
+      rows: [
+        ['Altogether, in all', 'Add the parts, and that total is one side'],
+        ['The sum of', 'Add the quantities named'],
+        ['The perimeter is', 'Add every side, and set it equal to the number'],
+        ['As much as, the same as', 'The two amounts named are equal'],
+        ['Five more than', 'Add 5 to the other quantity'],
+        ['Twice as many as', 'Multiply the other quantity by 2'],
+      ],
+      note: 'The last two rows build the quantities. The first four are '
+        + 'where the equals sign comes from, and every word problem has '
+        + 'one of them somewhere.',
+    },
+  ],
   questions: [
     {
       id: 'wte-1',
@@ -614,11 +742,8 @@ teach({
     + 'and is the pair (2, 5). '
     + 'Nothing is added or lost between them; only the layout changes. '
     + 'Finding the rule is where care is needed. '
-    + 'Learners look at the first pair and guess. '
-    + 'From (1, 3) you might guess add 2, or multiply by 3. '
-    + 'Both fit. '
-    + 'Then (2, 5) decides it: add 2 gives 4, which is wrong, '
-    + 'and 2n + 1 gives 5, which is right. '
+    + 'Learners look at the first pair and guess, and more than one '
+    + 'rule always survives a single pair. '
     + 'So the rule is never settled by one pair, '
     + 'and you have to test any candidate on all of them. '
     + 'The order of an ordered pair matters for the same reason '
@@ -709,6 +834,88 @@ teach({
     + 'A linear rule like 2n + 1 gives a straight line, '
     + 'and the 2 is its steepness.',
 
+  figure: {
+    alt: 'The same relation shown three ways. As a mapping, with arrows '
+      + 'from 1, 2, 3 and 4 to 3, 5, 7 and 9. As a table, with the '
+      + 'inputs in one row and the outputs in the next. As the ordered '
+      + 'pairs (1, 3), (2, 5), (3, 7) and (4, 9). The rule is 2n plus '
+      + '1.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="34" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">one relation, three shapes, the same information</text>'
+      + '<text x="110" y="78" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">as a mapping</text>'
+      + '<path d="M 50 96 H 100 V 286 H 50 Z"/>'
+      + '<path d="M 170 96 H 220 V 286 H 170 Z"/>'
+      + '<text x="75" y="130" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="195" y="130" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<line x1="104" y1="124" x2="166" y2="124" stroke="#0f8a4d"/>'
+      + '<line x1="166" y1="124" x2="157.4" y2="129.2" stroke="#0f8a4d"/>'
+      + '<line x1="166" y1="124" x2="157.4" y2="118.8" stroke="#0f8a4d"/>'
+      + '<text x="75" y="174" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="195" y="174" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">5</text>'
+      + '<line x1="104" y1="168" x2="166" y2="168" stroke="#0f8a4d"/>'
+      + '<line x1="166" y1="168" x2="157.4" y2="173.2" stroke="#0f8a4d"/>'
+      + '<line x1="166" y1="168" x2="157.4" y2="162.8" stroke="#0f8a4d"/>'
+      + '<text x="75" y="218" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<text x="195" y="218" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">7</text>'
+      + '<line x1="104" y1="212" x2="166" y2="212" stroke="#0f8a4d"/>'
+      + '<line x1="166" y1="212" x2="157.4" y2="217.2" stroke="#0f8a4d"/>'
+      + '<line x1="166" y1="212" x2="157.4" y2="206.8" stroke="#0f8a4d"/>'
+      + '<text x="75" y="262" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<text x="195" y="262" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">9</text>'
+      + '<line x1="104" y1="256" x2="166" y2="256" stroke="#0f8a4d"/>'
+      + '<line x1="166" y1="256" x2="157.4" y2="261.2" stroke="#0f8a4d"/>'
+      + '<line x1="166" y1="256" x2="157.4" y2="250.8" stroke="#0f8a4d"/>'
+      + '<text x="350" y="78" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">as a table</text>'
+      + '<path d="M 264 108 H 460 V 180 H 264 Z"/>'
+      + '<line x1="264" y1="144" x2="460" y2="144"/>'
+      + '<line x1="300" y1="108" x2="300" y2="180"/>'
+      + '<text x="282" y="132" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">n</text>'
+      + '<text x="282" y="168" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">out</text>'
+      + '<text x="332" y="132" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="364" y="132" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="396" y="132" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<text x="428" y="132" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<text x="332" y="168" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<text x="364" y="168" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">5</text>'
+      + '<text x="396" y="168" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">7</text>'
+      + '<text x="428" y="168" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">9</text>'
+      + '<text x="530" y="78" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">as ordered pairs</text>'
+      + '<text x="530" y="128" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">(1, 3)  (2, 5)</text>'
+      + '<text x="530" y="162" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">(3, 7)  (4, 9)</text>'
+      + '<text x="530" y="212" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">input first, always</text>'
+      + '<text x="530" y="236" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">because (5, 2) is</text>'
+      + '<text x="530" y="258" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">somewhere else</text>'
+      + '<text x="320" y="318" font-size="21" text-anchor="middle" fill="#0f8a4d" stroke="none">the rule is 2n + 1, and nothing is lost between the three</text>'
+      + '<text x="320" y="354" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">one pair never settles a rule, because add 2 fits (1, 3) too</text>'
+      + '<text x="320" y="386" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">test every candidate on every pair</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The relation 2n plus 1, written as a table',
+      columns: ['Input n', 'Output'],
+      rows: [
+        ['1', '3'],
+        ['2', '5'],
+        ['3', '7'],
+        ['4', '9'],
+      ],
+      note: 'Each input has exactly one output, so this relation is a '
+        + 'function.',
+    },
+    {
+      caption: 'Why one pair cannot settle a rule, and two can',
+      columns: ['The pair', 'Add 2 gives', '2n plus 1 gives'],
+      rows: [
+        ['(1, 3)', '3, which fits', '3, which fits'],
+        ['(2, 5)', '4, which is wrong', '5, which fits'],
+        ['(3, 7)', '5, which is wrong', '7, which fits'],
+      ],
+      note: 'Both rules survive the first pair. The second pair is what '
+        + 'decides, so test every candidate on every pair you were given.',
+    },
+  ],
   questions: [
     {
       id: 'map-1',
@@ -767,20 +974,12 @@ teach({
   },
 
   idea:
-    'A construction is an exact drawing made with compasses and a straight '
-    + 'edge. '
-    + 'To bisect a line, open the compasses to more than half its length, '
-    + 'draw arcs from both ends, and join where they cross. '
-    + 'That line is also perpendicular to the original. '
-    + 'To construct 60 degrees, draw an arc from the vertex, '
-    + 'then from where it meets the line draw an arc of the same radius, '
-    + 'and join the vertex to the crossing. '
-    + 'To bisect an angle, draw an arc across both arms, '
-    + 'then equal arcs from those two points, and join the vertex to where '
-    + 'they cross. '
-    + 'Bisecting 60 gives 30, and bisecting a straight angle gives 90. '
-    + 'The arcs are left on the page, because they are the proof that the '
-    + 'drawing was constructed.',
+    'A construction is an exact drawing made with compasses and a '
+    + 'straight edge, and nothing in it is measured. '
+    + 'Every one of them rests on the same property: an arc holds all '
+    + 'the points at one fixed distance from its centre. '
+    + 'The arcs are left on the page, because they are the proof that '
+    + 'the drawing was constructed rather than measured.',
 
   mechanism:
     'Everything in this topic comes from one property of the compasses: '
@@ -896,6 +1095,71 @@ teach({
     + 'Constructing a triangle from three given sides uses arcs alone, '
     + 'and it is why three sides fix a triangle completely.',
 
+  figure: {
+    alt: 'A base line with the vertex marked. An arc of radius r is '
+      + 'drawn from the vertex, and an equal arc from where it crosses '
+      + 'the line. The two arcs meet at a point that is r from both, so '
+      + 'joining all three gives a triangle with three sides of length '
+      + 'r, three equal angles, and therefore an angle of exactly 60 '
+      + 'degrees at the vertex.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="34" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">an arc is every point at one fixed distance</text>'
+      + '<line x1="100" y1="300" x2="560" y2="300" stroke-width="4"/>'
+      + '<circle cx="180" cy="300" r="7" fill="currentColor"/>'
+      + '<text x="180" y="330" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the vertex</text>'
+      + '<path d="M 340 300 A 160 160 0 0 1 180 140" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="372" y="252" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">arc of radius r, from the vertex</text>'
+      + '<circle cx="340" cy="300" r="7" fill="currentColor"/>'
+      + '<path d="M 180 140 A 160 160 0 0 1 340 300" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<circle cx="260" cy="161" r="7" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="260" y="134" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">an equal arc, from there</text>'
+      + '<line x1="180" y1="300" x2="260" y2="161" stroke-width="4"/>'
+      + '<line x1="260" y1="161" x2="340" y2="300"/>'
+      + '<text x="223" y="276" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">60</text>'
+      + '<text x="150" y="230" font-size="15" text-anchor="end" fill="currentColor" stroke="none">r</text>'
+      + '<text x="320" y="212" font-size="15" text-anchor="start" fill="currentColor" stroke="none">r</text>'
+      + '<text x="260" y="318" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">r</text>'
+      + '<text x="320" y="362" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">three sides of length r, so three equal angles</text>'
+      + '<text x="320" y="390" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">and three equal angles adding to 180 is exactly 60 each</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each construction is drawn from, and what it gives you',
+      columns: ['To construct', 'What you draw', 'What you get'],
+      rows: [
+        [
+          'A perpendicular bisector',
+          'Equal arcs from both ends of the line, then join the crossings',
+          'The line cut in half, and at a right angle to it',
+        ],
+        [
+          'An angle of 60 degrees',
+          'An arc from the vertex, then an equal arc from where it crosses',
+          'An exact 60, out of an equilateral triangle',
+        ],
+        [
+          'An angle of 30 degrees',
+          'Construct 60, then bisect it',
+          'Half of an exact 60',
+        ],
+        [
+          'An angle of 90 degrees',
+          'Bisect a straight line at the point you want',
+          'An exact right angle',
+        ],
+        [
+          'An angle bisector',
+          'An arc across both arms, then equal arcs from those two points',
+          'The angle cut into two equal halves',
+        ],
+      ],
+      note: 'Never change the radius in the middle of a step, and leave '
+        + 'every arc on the page. A measured 60 is about 60, and a '
+        + 'constructed 60 is 60.',
+    },
+  ],
   questions: [
     {
       id: 'con-1',
@@ -964,7 +1228,7 @@ teach({
 
   idea:
     'In a right angled triangle, '
-    + 'a squared plus b squared equals c squared, '
+    + '$a^2 + b^2 = c^2$, '
     + 'where c is the hypotenuse, the side opposite the right angle. '
     + 'To find the hypotenuse, square the two shorter sides, add them, '
     + 'and take the square root. '
@@ -1085,6 +1349,55 @@ teach({
     + 'and so is any multiple of them, such as 6, 8, 10. '
     + 'Recognising them saves the arithmetic.',
 
+  figure: {
+    alt: 'A right angled triangle with sides of 3 cm, 4 cm and 5 cm, '
+      + 'with a square drawn on each side. The square on the 3 cm side '
+      + 'holds 9, the square on the 4 cm side holds 16, and the square '
+      + 'on the 5 cm side holds 25, so the two smaller squares together '
+      + 'fill the largest one.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">the squares on the two short sides fill the big one</text>'
+      + '<path d="M 215 266 L 293 266 L 215 162 Z" stroke-width="4"/>'
+      + '<path d="M 215 266 L 227 266 L 227 254"/>'
+      + '<path d="M 215 266 H 293 V 344 H 215 Z"/>'
+      + '<text x="254" y="312" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">9</text>'
+      + '<text x="254" y="362" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the 3 cm side</text>'
+      + '<path d="M 111 162 H 215 V 266 H 111 Z"/>'
+      + '<text x="163" y="220" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">16</text>'
+      + '<text x="103" y="220" font-size="15" text-anchor="end" fill="currentColor" stroke="none">the 4 cm side</text>'
+      + '<path d="M 293 266 L 215 162 L 293 58 L 371 162 Z"/>'
+      + '<text x="293" y="170" font-size="24" text-anchor="middle" fill="#0f8a4d" stroke="none">25</text>'
+      + '<text x="381" y="170" font-size="15" text-anchor="start" fill="currentColor" stroke="none">the 5 cm side</text>'
+      + '<text x="320" y="388" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">9 plus 16 is 25, and that is the whole of it</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Which way round to use it, and how to check the answer',
+      columns: ['What you are looking for', 'What you do', 'The check'],
+      rows: [
+        [
+          'The hypotenuse, c',
+          'Square both short sides, add, then take the square root',
+          'It must come out longer than either of them',
+        ],
+        [
+          'A shorter side',
+          'Square c, subtract the square of the known side, then square root',
+          'It must come out shorter than c',
+        ],
+        [
+          'Whether a corner is square',
+          'Square all three sides and see whether the two smaller add to the largest',
+          'A 3, 4, 5 corner gives 9 plus 16 is 25',
+        ],
+      ],
+      note: 'Find the hypotenuse before any arithmetic. It is the longest '
+        + 'side and it lies opposite the right angle, so you identify it '
+        + 'by looking rather than by calculating.',
+    },
+  ],
   questions: [
     {
       id: 'pyt-1',
@@ -1147,18 +1460,10 @@ teach({
   },
 
   idea:
-    'The centre is the middle point. '
-    + 'The radius is the distance from centre to edge. '
-    + 'The diameter is a straight line through the centre, '
-    + 'and it is twice the radius. '
-    + 'The circumference is the distance all the way round. '
-    + 'A chord joins two points on the edge without passing through the '
-    + 'centre. '
-    + 'An arc is part of the edge, a sector is a slice between two radii, '
-    + 'and a segment is the piece cut off by a chord. '
-    + 'The circumference is pi times the diameter, '
-    + 'and the area is pi times the radius squared. '
-    + 'Pi is about 3.14, or 22 over 7 for a quick calculation.',
+    'A circle has a named part for every piece of it, and two formulas '
+    + 'that between them answer almost every question. '
+    + 'The circumference is $\\pi d$ and the area is $\\pi r^2$. '
+    + 'Pi is about 3.14, or 22 over 7 when the numbers suit it.',
 
   mechanism:
     'The single most common error in this topic is mixing the radius and '
@@ -1176,7 +1481,7 @@ teach({
     + 'distance across. '
     + 'A tin, a bucket, a bottle top: the answer is always about 3.14. '
     + 'That constant ratio is pi, '
-    + 'and the formula C = pi d is nothing more than that measurement '
+    + 'and the formula $C = \\pi d$ is nothing more than that measurement '
     + 'rearranged. '
     + 'It is a fact about every circle, not a rule somebody invented. '
     + 'The area formula explains the units too. '
@@ -1271,6 +1576,71 @@ teach({
     + 'So a 90 degree sector has a quarter of the area '
     + 'and its arc is a quarter of the circumference.',
 
+  figure: {
+    alt: 'A circle with its centre marked, a diameter drawn across it, a '
+      + 'radius from the centre to the edge, a chord joining two points '
+      + 'on the edge, the segment the chord cuts off, a sector between '
+      + 'two radii and the arc that closes it. Beside it, circumference '
+      + 'is pi times the diameter and area is pi times the radius times '
+      + 'the radius.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">every part of a circle, and the two formulas</text>'
+      + '<circle cx="250" cy="200" r="105"/>'
+      + '<circle cx="250" cy="200" r="5" fill="currentColor"/>'
+      + '<line x1="256" y1="206" x2="286" y2="232"/>'
+      + '<text x="290" y="238" font-size="13" text-anchor="start" fill="currentColor" stroke="none">centre</text>'
+      + '<line x1="145" y1="200" x2="355" y2="200"/>'
+      + '<text x="192" y="222" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">diameter</text>'
+      + '<line x1="250" y1="200" x2="324" y2="126" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="302" y="164" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">radius</text>'
+      + '<line x1="250" y1="88" x2="250" y2="96"/>'
+      + '<text x="250" y="80" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">circumference</text>'
+      + '<line x1="177" y1="274" x2="323" y2="274" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="250" y="262" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">chord</text>'
+      + '<line x1="250" y1="290" x2="250" y2="320"/>'
+      + '<text x="250" y="338" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">segment</text>'
+      + '<line x1="250" y1="200" x2="151" y2="164"/>'
+      + '<line x1="250" y1="200" x2="214" y2="101"/>'
+      + '<text x="206" y="158" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">sector</text>'
+      + '<line x1="142" y1="112" x2="168" y2="124"/>'
+      + '<text x="138" y="108" font-size="13" text-anchor="end" fill="currentColor" stroke="none">arc</text>'
+      + '<text x="480" y="136" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">circumference is pi × diameter</text>'
+      + '<text x="480" y="174" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">area is pi × radius × radius</text>'
+      + '<text x="480" y="212" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and pi is about 3.14, or 22 over 7</text>'
+      + '<text x="480" y="256" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">so write down the radius and the</text>'
+      + '<text x="480" y="278" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">diameter before you touch a formula</text>'
+      + '<text x="320" y="382" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">double the radius and the area goes up four times, not two</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The parts of a circle, and what each one is',
+      columns: ['Part', 'What it is'],
+      rows: [
+        ['Centre', 'The middle point'],
+        ['Radius', 'The distance from the centre to the edge'],
+        ['Diameter', 'A straight line through the centre, twice the radius'],
+        ['Circumference', 'The distance all the way round the edge'],
+        ['Chord', 'A line joining two points on the edge, missing the centre'],
+        ['Arc', 'Any part of the edge'],
+        ['Sector', 'A slice between two radii'],
+        ['Segment', 'The piece a chord cuts off'],
+      ],
+      note: 'A sector is cut by two radii and a segment by one chord, which '
+        + 'is the whole difference between them.',
+    },
+    {
+      caption: 'The two formulas, and which length each one wants',
+      columns: ['You want', 'The formula', 'It wants', 'The unit'],
+      rows: [
+        ['Circumference', 'pi times the diameter', 'The diameter', 'Centimetres'],
+        ['Area', 'pi times the radius squared', 'The radius', 'Square centimetres'],
+      ],
+      note: 'The two formulas want different lengths, and that is the one '
+        + 'cause of nearly every wrong answer in this topic.',
+    },
+  ],
   questions: [
     {
       id: 'cir-1',
@@ -1335,11 +1705,8 @@ teach({
     'The horizontal axis is the x axis and the vertical is the y axis, '
     + 'crossing at the origin, (0, 0). '
     + 'A point is written (x, y), with the across value first. '
-    + 'The four quadrants are: '
-    + 'top right, where x and y are both positive; '
-    + 'top left, x negative and y positive; '
-    + 'bottom left, both negative; '
-    + 'bottom right, x positive and y negative. '
+    + 'The plane is cut into four quadrants, and which one a point lands '
+    + 'in is decided entirely by the signs of its two numbers. '
     + 'The distance between two points is found by taking the difference '
     + 'in x and the difference in y '
     + 'and using Pythagoras on them.',
@@ -1450,6 +1817,51 @@ teach({
     + 'That works because the middle is halfway in each direction on its '
     + 'own.',
 
+  figure: {
+    alt: 'A pair of axes crossing at the origin, with the four quadrants '
+      + 'labelled by the signs of their coordinates. The points (2, 5) '
+      + 'and (6, 1) are plotted, and a horizontal line and a vertical '
+      + 'line between them make a right angled triangle whose '
+      + 'hypotenuse is the distance from one point to the other.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="22" text-anchor="middle" fill="currentColor" stroke="none">across first, then up, and never the other way</text>'
+      + '<line x1="60" y1="210" x2="580" y2="210" stroke-width="3"/>'
+      + '<line x1="320" y1="56" x2="320" y2="370" stroke-width="3"/>'
+      + '<text x="594" y="216" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">x</text>'
+      + '<text x="320" y="46" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">y</text>'
+      + '<text x="306" y="230" font-size="13" text-anchor="end" fill="currentColor" stroke="none">(0, 0)</text>'
+      + '<text x="548" y="66" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">both positive</text>'
+      + '<text x="190" y="104" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">x negative, y positive</text>'
+      + '<text x="190" y="304" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">both negative</text>'
+      + '<text x="450" y="304" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">x positive, y negative</text>'
+      + '<circle cx="372" cy="80" r="6" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="366" y="68" font-size="14" text-anchor="end" fill="#0f8a4d" stroke="none">(2, 5)</text>'
+      + '<circle cx="476" cy="184" r="6" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="488" y="196" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">(6, 1)</text>'
+      + '<line x1="372" y1="80" x2="476" y2="80"/>'
+      + '<line x1="476" y1="80" x2="476" y2="184"/>'
+      + '<line x1="372" y1="80" x2="476" y2="184" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="424" y="70" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the difference in x</text>'
+      + '<text x="488" y="136" font-size="13" text-anchor="start" fill="currentColor" stroke="none">the difference in y</text>'
+      + '<text x="320" y="392" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the join is a hypotenuse, so the distance is Pythagoras</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The sign of each coordinate in each quadrant',
+      columns: ['Quadrant', 'Where it is', 'x', 'y', 'A point in it'],
+      rows: [
+        ['First', 'Top right', 'Positive', 'Positive', '(3, 2)'],
+        ['Second', 'Top left', 'Negative', 'Positive', '(-3, 2)'],
+        ['Third', 'Bottom left', 'Negative', 'Negative', '(-3, -2)'],
+        ['Fourth', 'Bottom right', 'Positive', 'Negative', '(3, -2)'],
+      ],
+      note: 'The quadrants are numbered anticlockwise from the top right. '
+        + 'Read the last column across, not down: (3, 2) and (2, 3) are '
+        + 'different places.',
+    },
+  ],
   questions: [
     {
       id: 'coo-1',
