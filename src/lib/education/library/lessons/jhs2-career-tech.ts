@@ -46,21 +46,12 @@ teach({
   },
 
   idea:
-    'To construct a triangle given three sides, '
-    + 'draw one side as a base, '
-    + 'then draw an arc of the second length from one end '
-    + 'and an arc of the third from the other, '
-    + 'and join the crossing point to both ends. '
-    + 'A triangle given two sides and the included angle '
-    + 'needs that angle constructed first. '
-    + 'A square is constructed from one side, '
-    + 'using perpendiculars and equal arcs. '
-    + 'A regular hexagon fits inside a circle '
-    + 'whose radius equals the side, '
-    + 'so stepping the radius round the circumference marks all six '
-    + 'corners. '
-    + 'Dividing a line into equal parts is done with parallel lines, '
-    + 'never by measuring.',
+    'Geometric construction builds a figure from the sizes you are given, '
+    + 'using compasses and a straight edge, and measuring nothing. '
+    + 'The constructions in the syllabus are few, '
+    + 'and every one of them works the same way: '
+    + 'an arc marks all the points a given distance from somewhere, '
+    + 'and a corner is where two such arcs cross.',
 
   mechanism:
     'Every construction in the syllabus comes from one fact about arcs, '
@@ -180,6 +171,81 @@ teach({
     + 'It works for any number, including ones a ruler cannot divide '
     + 'neatly.',
 
+  figure: {
+    alt: 'On the left, a triangle built from three given sides: an arc of 5 '
+      + 'cm swung from A and an arc of 7 cm swung from B cross at C, which '
+      + 'is marked as the only point that is both distances at once. On '
+      + 'the right, a regular hexagon inside its circle, with all six '
+      + 'radii drawn, because the side of the hexagon equals the radius '
+      + 'and the compasses step round it exactly six times.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">an arc marks every point that far from the centre</text>'
+      + '<path d="M 176 224 A 130 130 0 0 0 39 128" stroke-width="1.5"/>'
+      + '<path d="M 192 98 A 170 170 0 0 0 90 200" stroke-width="1.5"/>'
+      + '<path d="M 50 258 H 250" stroke-width="4"/>'
+      + '<path d="M 50 258 L 120 148" stroke-width="4"/>'
+      + '<path d="M 250 258 L 120 148" stroke-width="4"/>'
+      + '<text x="40" y="278" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">A</text>'
+      + '<text x="262" y="278" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">B</text>'
+      + '<text x="120" y="136" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">C</text>'
+      + '<circle cx="120" cy="148" r="5" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="16" y="116" font-size="12" text-anchor="start" fill="currentColor" stroke="none">5 cm from A</text>'
+      + '<text x="200" y="88" font-size="12" text-anchor="start" fill="currentColor" stroke="none">7 cm from B</text>'
+      + '<text x="150" y="292" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">C is the only point that is both</text>'
+      + '<circle cx="480" cy="168" r="88" stroke-width="1.5"/>'
+      + '<path d="M 568 168 L 524 92 L 436 92 L 392 168 L 436 244 L 524 244 Z" stroke-width="4"/>'
+      + '<path d="M 480 168 L 568 168" stroke-width="1.5"/>'
+      + '<circle cx="568" cy="168" r="4" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 480 168 L 524 92" stroke-width="1.5"/>'
+      + '<circle cx="524" cy="92" r="4" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 480 168 L 436 92" stroke-width="1.5"/>'
+      + '<circle cx="436" cy="92" r="4" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 480 168 L 392 168" stroke-width="1.5"/>'
+      + '<circle cx="392" cy="168" r="4" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 480 168 L 436 244" stroke-width="1.5"/>'
+      + '<circle cx="436" cy="244" r="4" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 480 168 L 524 244" stroke-width="1.5"/>'
+      + '<circle cx="524" cy="244" r="4" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="480" y="292" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the side equals the radius, so step</text>'
+      + '<text x="480" y="310" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the compasses six times round</text>'
+      + '<text x="320" y="352" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so nothing is measured: each point is fixed</text>'
+      + '<text x="320" y="378" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">by the two distances it has to satisfy</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each construction, and what fixes the points in it',
+      columns: ['To construct', 'Given', 'How each point is fixed'],
+      rows: [
+        ['A triangle', 'Three sides', 'The apex is where the two arcs cross'],
+        [
+          'A triangle',
+          'Two sides and the angle between them',
+          'Construct the angle first, then step off the two sides',
+        ],
+        [
+          'A square',
+          'One side',
+          'A perpendicular at each end, then equal arcs',
+        ],
+        [
+          'A regular hexagon',
+          'The side',
+          'Its circle has that radius, so step it six times round',
+        ],
+        [
+          'Equal parts of a line',
+          'How many parts',
+          'Parallel lines across it, and never by measuring',
+        ],
+      ],
+      note: 'Three sides fix a triangle completely, because there is only '
+        + 'one crossing point. Three angles do not, because you may then '
+        + 'build it any size you like, which is what similar triangles '
+        + 'are.',
+    },
+  ],
   questions: [
     {
       id: 'gdr-1',
@@ -253,9 +319,9 @@ teach({
     + 'and a marking gauge for lines parallel to an edge. '
     + 'Cut on the waste side of the line, '
     + 'so the line itself survives for you to work down to. '
-    + 'Wood joints include the butt, lap, housing, '
-    + 'mortise and tenon, and dovetail. '
-    + 'Metal is joined by rivets, nuts and bolts, soldering or welding. '
+    + 'Wood and metal are each joined in several ways, '
+    + 'and the choice turns on how much strength the job needs '
+    + 'and whether it must ever come apart again. '
     + 'A tolerance is the allowed difference from the stated size.',
 
   mechanism:
@@ -373,6 +439,130 @@ teach({
     + 'so the joint resists twisting as well as pulling. '
     + 'A butt joint has neither, which is why it needs a nail or a screw.',
 
+  figure: {
+    alt: 'The same marked board drawn twice, with the waste shaded on both. '
+      + 'On the left the saw cut sits on the marked line, so half the slot '
+      + 'is taken out of the piece and the line goes with it. On the right '
+      + 'the cut sits beside the line on the waste side, so the line '
+      + 'survives and the last of the waste can be pared down to it.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the saw takes out a slot about a millimetre wide</text>'
+      + '<text x="165" y="60" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">cut on the line</text>'
+      + '<path d="M 40 78 H 290 V 176 H 40 Z" stroke-width="3"/>'
+      + '<path d="M 206 90 L 218 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 206 102 L 230 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 206 114 L 242 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 206 126 L 254 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 206 138 L 266 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 206 150 L 278 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 206 162 L 290 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 206 174 L 290 90" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 216 176 L 290 102" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 228 176 L 290 114" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 240 176 L 290 126" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 252 176 L 290 138" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 264 176 L 290 150" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 276 176 L 290 162" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 288 176 L 290 174" stroke="currentColor" stroke-width="1.5"/>'
+      + '<text x="248" y="196" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">waste</text>'
+      + '<path d="M 196 78 V 176" stroke="#c8433a" stroke-width="9"/>'
+      + '<path d="M 196 70 V 184" stroke="currentColor" stroke-width="1.5"/>'
+      + '<text x="120" y="216" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">half the slot comes out of</text>'
+      + '<text x="120" y="234" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">your piece, and the line</text>'
+      + '<text x="120" y="252" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">goes with it</text>'
+      + '<text x="475" y="60" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">cut beside it, on the waste</text>'
+      + '<path d="M 350 78 H 600 V 176 H 350 Z" stroke-width="3"/>'
+      + '<path d="M 512 90 L 524 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 512 102 L 536 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 512 114 L 548 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 512 126 L 560 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 512 138 L 572 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 512 150 L 584 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 512 162 L 596 78" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 512 174 L 600 86" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 522 176 L 600 98" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 534 176 L 600 110" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 546 176 L 600 122" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 558 176 L 600 134" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 570 176 L 600 146" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 582 176 L 600 158" stroke="currentColor" stroke-width="1.5"/>'
+      + '<path d="M 594 176 L 600 170" stroke="currentColor" stroke-width="1.5"/>'
+      + '<text x="556" y="196" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">waste</text>'
+      + '<path d="M 512 78 V 176" stroke="#0f8a4d" stroke-width="9"/>'
+      + '<path d="M 506 70 V 184" stroke="currentColor" stroke-width="1.5"/>'
+      + '<text x="430" y="216" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the line survives, and you</text>'
+      + '<text x="430" y="234" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">pare the last of the waste</text>'
+      + '<text x="430" y="252" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">down to it</text>'
+      + '<text x="320" y="306" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">you can take wood off and you cannot put it back,</text>'
+      + '<text x="320" y="332" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so the time is spent before the cut, not after it</text>'
+      + '<text x="320" y="368" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">shade the waste first, so you cannot forget which side it is</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The wood joints, and the work each one suits',
+      columns: ['Joint', 'What it is', 'Where it suits'],
+      rows: [
+        [
+          'Butt',
+          'Two square ends simply meeting',
+          'Quickest and weakest: it needs nails, screws or glue',
+        ],
+        [
+          'Lap',
+          'Each piece cut half away so they overlap',
+          'Stronger, because there is far more gluing area',
+        ],
+        [
+          'Housing',
+          'A trench cut across one piece for the other',
+          'A shelf into an upright',
+        ],
+        [
+          'Mortise and tenon',
+          'A tongue on one piece into a hole in the other',
+          'A frame: a table, a stool, a door',
+        ],
+        [
+          'Dovetail',
+          'Splayed pins that cannot be pulled straight out',
+          'A drawer front, which is pulled every day',
+        ],
+      ],
+      note: 'The strength of a joint is mostly the area of the surfaces '
+        + 'being held together, which is why the butt joint is the weak '
+        + 'one.',
+    },
+    {
+      caption: 'How metal is joined, and when each is used',
+      columns: ['Method', 'What it does', 'When it is used'],
+      rows: [
+        [
+          'Rivets',
+          'A pin spread at both ends to clamp the pieces',
+          'A permanent joint without heat',
+        ],
+        [
+          'Nuts and bolts',
+          'Clamps the pieces, and undoes again',
+          'Anything you may need to take apart',
+        ],
+        [
+          'Soldering',
+          'Joins with a softer metal melted between',
+          'Light work, and electrical joints',
+        ],
+        [
+          'Welding',
+          'Melts the two pieces so they run together',
+          'The strongest, where nothing must ever move',
+        ],
+      ],
+      note: 'Only welding makes the two pieces into one. The rest hold two '
+        + 'pieces against each other, which is why a bolt can be undone.',
+    },
+  ],
   questions: [
     {
       id: 'wmt-1',
@@ -442,17 +632,10 @@ teach({
   idea:
     'Food spoils because bacteria, yeasts and moulds grow on it, '
     + 'and because the food’s own enzymes keep working. '
-    + 'Drying in the sun or over a fire removes the water they need. '
-    + 'Salting and sugaring draw water out of the food and out of the '
-    + 'organisms. '
-    + 'Smoking dries the surface and leaves substances that discourage '
-    + 'growth. '
-    + 'Cooling slows everything down; freezing stops most of it. '
-    + 'Canning and bottling heat the food to kill organisms '
-    + 'and then seal it so none can get back in. '
-    + 'Fermenting encourages harmless organisms '
-    + 'which make the food too acidic for harmful ones. '
-    + 'Frying and covering with oil keep air away.',
+    + 'Those organisms need particular conditions to grow: '
+    + 'water, warmth, food, usually air, '
+    + 'and a range of acidity they can live in. '
+    + 'Every method of preserving food takes one of those away.',
 
   mechanism:
     'Preservation looks like a list of unrelated traditions '
@@ -565,6 +748,100 @@ teach({
     + 'So the milk keeps for days rather than months, '
     + 'and it still has to be kept cold.',
 
+  figure: {
+    alt: 'Bacteria, yeasts and moulds drawn in the middle, with four things '
+      + 'they need pointing in at them: water, warmth, air, and an acidity '
+      + 'they can live in. The arrow from water is crossed out in red and '
+      + 'labelled with the methods that remove it, dry it, salt it, smoke '
+      + 'it, to show that taking away any one of the four is enough.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">they need all of these, and you only have to remove one</text>'
+      + '<ellipse cx="320" cy="208" rx="86" ry="54"/>'
+      + '<text x="320" y="196" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">bacteria, yeasts</text>'
+      + '<text x="320" y="218" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and moulds</text>'
+      + '<path d="M 30 62 H 170 V 110 H 30 Z" stroke="#c8433a"/>'
+      + '<text x="100" y="92" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">water</text>'
+      + '<path d="M 170 110 L 244 172" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 252 178 L 232 174 L 242 162 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 192 128 L 220 156" stroke="#c8433a" stroke-width="5"/>'
+      + '<path d="M 220 128 L 192 156" stroke="#c8433a" stroke-width="5"/>'
+      + '<text x="150" y="150" font-size="13" text-anchor="end" fill="#c8433a" stroke="none">dry it, salt it,</text>'
+      + '<text x="150" y="168" font-size="13" text-anchor="end" fill="#c8433a" stroke="none">smoke it</text>'
+      + '<path d="M 470 62 H 610 V 110 H 470 Z"/>'
+      + '<text x="540" y="92" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">warmth</text>'
+      + '<path d="M 470 110 L 396 172" stroke-width="2"/>'
+      + '<path d="M 388 178 L 398 162 L 408 174 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="490" y="150" font-size="13" text-anchor="start" fill="currentColor" stroke="none">cool it,</text>'
+      + '<text x="490" y="168" font-size="13" text-anchor="start" fill="currentColor" stroke="none">freeze it</text>'
+      + '<path d="M 30 300 H 170 V 348 H 30 Z"/>'
+      + '<text x="100" y="330" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">air</text>'
+      + '<path d="M 170 300 L 244 244" stroke-width="2"/>'
+      + '<path d="M 252 238 L 242 254 L 232 242 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="150" y="268" font-size="13" text-anchor="end" fill="currentColor" stroke="none">seal it, or cover</text>'
+      + '<text x="150" y="286" font-size="13" text-anchor="end" fill="currentColor" stroke="none">it with oil</text>'
+      + '<path d="M 450 300 H 610 V 348 H 450 Z"/>'
+      + '<text x="530" y="324" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">acidity they</text>'
+      + '<text x="530" y="344" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">can live in</text>'
+      + '<path d="M 450 300 L 396 244" stroke-width="2"/>'
+      + '<path d="M 388 238 L 406 244 L 396 256 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="490" y="268" font-size="13" text-anchor="start" fill="currentColor" stroke="none">ferment it, so the</text>'
+      + '<text x="490" y="286" font-size="13" text-anchor="start" fill="currentColor" stroke="none">harmless ones win</text>'
+      + '<text x="320" y="374" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">canning is the one that kills first and then seals,</text>'
+      + '<text x="320" y="394" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">which is why a dented or swollen tin is dangerous</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each method takes away, and what it leaves untouched',
+      columns: ['Method', 'What it takes away', 'What it does not do'],
+      rows: [
+        [
+          'Drying',
+          'The water they need',
+          'It kills nothing, so re-wetted food spoils quickly',
+        ],
+        [
+          'Salting or sugaring',
+          'Water, pulled out of the organisms themselves',
+          'It kills nothing either',
+        ],
+        [
+          'Smoking',
+          'Surface water, and it leaves substances they dislike',
+          'It does not reach far inside the food',
+        ],
+        [
+          'Cooling',
+          'Warmth, so everything slows',
+          'It kills nothing, which is why a day without power matters',
+        ],
+        [
+          'Freezing',
+          'Warmth, so growth almost stops',
+          'Thawed food is fresh food again, and must not be refrozen',
+        ],
+        [
+          'Canning and bottling',
+          'The organisms by heat, then the air by a seal',
+          'It fails completely if the seal fails',
+        ],
+        [
+          'Fermenting',
+          'The acidity harmful organisms need',
+          'It depends on the harmless ones winning first',
+        ],
+        [
+          'Frying, or covering with oil',
+          'The air',
+          'It does not kill what is already inside',
+        ],
+      ],
+      note: 'Knowing what a method does not stop is as useful as knowing '
+        + 'what it does. That is why a dented or swollen tin is '
+        + 'dangerous: the seal was the second half of the method.',
+    },
+  ],
   questions: [
     {
       id: 'fpr-1',
@@ -630,14 +907,9 @@ teach({
   },
 
   idea:
-    'Clothes last longer when they are treated according to their fibre. '
-    + 'Cotton and linen take hot water, strong soap and a hot iron. '
-    + 'Wool must be washed in cool water, squeezed rather than rubbed, '
-    + 'and dried flat, '
-    + 'because heat and rubbing make it shrink and felt. '
-    + 'Silk needs mild soap and a cool iron. '
-    + 'Synthetics such as polyester wash easily '
-    + 'but melt or glaze under a hot iron. '
+    'Clothes last longer when they are treated according to their fibre, '
+    + 'because the fibres are different materials '
+    + 'and each is ruined by a different thing. '
     + 'Clothes should be sorted by colour and fibre before washing, '
     + 'stains treated before the main wash, '
     + 'and garments mended before they are washed again. '
@@ -760,6 +1032,81 @@ teach({
     + 'and a synthetic melts into a hard bead. '
     + 'It is done on a loose thread, never on the garment.',
 
+  figure: {
+    alt: 'Two wool fibres drawn twice. In green, after cool water and '
+      + 'squeezing, their scales lie flat and the fibres slide past each '
+      + 'other at their full length. In red, after hot water and rubbing, '
+      + 'the scales have opened and meshed into each other, and an arrow '
+      + 'underneath shows the pair is now markedly shorter.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">a wool fibre has scales, and they only lock one way</text>'
+      + '<text x="160" y="62" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">cool water, squeezed</text>'
+      + '<text x="160" y="82" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the scales lie flat and slide past each other</text>'
+      + '<path d="M 40 130 L 56 118 L 72 130 L 88 118 L 104 130 L 120 118 L 136 130 L 152 118 L 168 130 L 184 118 L 200 130 L 216 118 L 232 130 L 248 118 L 264 130 L 280 118" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 40 130 H 280" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 40 176 L 56 164 L 72 176 L 88 164 L 104 176 L 120 164 L 136 176 L 152 164 L 168 176 L 184 164 L 200 176 L 216 164 L 232 176 L 248 164 L 264 176 L 280 164" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 40 176 H 280" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 40 208 H 272" stroke="#0f8a4d" stroke-width="1.5"/>'
+      + '<path d="M 40 208 L 54 203 L 54 213 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 280 208 L 266 203 L 266 213 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="160" y="232" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the length you bought</text>'
+      + '<text x="480" y="62" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">hot water, rubbed</text>'
+      + '<text x="480" y="82" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">the scales open, catch on each other and lock</text>'
+      + '<path d="M 400 130 L 406 152 L 412 130 L 418 152 L 424 130 L 430 152 L 436 130 L 442 152 L 448 130 L 454 152 L 460 130 L 466 152 L 472 130 L 478 152 L 484 130 L 490 152 L 496 130 L 502 152 L 508 130 L 514 152 L 520 130" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 400 130 H 520" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 406 178 L 412 156 L 418 178 L 424 156 L 430 178 L 436 156 L 442 178 L 448 156 L 454 178 L 460 156 L 466 178 L 472 156 L 478 178 L 484 156 L 490 178 L 496 156 L 502 178 L 508 156 L 514 178" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 400 178 H 520" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 400 208 H 512" stroke="#c8433a" stroke-width="1.5"/>'
+      + '<path d="M 400 208 L 414 203 L 414 213 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 520 208 L 506 203 L 506 213 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="460" y="232" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">and the length afterwards</text>'
+      + '<path d="M 300 150 H 360" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 372 150 L 352 141 L 352 159 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="334" y="138" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">heat and</text>'
+      + '<text x="334" y="178" font-size="12" text-anchor="middle" fill="#c8433a" stroke="none">rubbing</text>'
+      + '<text x="320" y="294" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the garment becomes smaller and denser,</text>'
+      + '<text x="320" y="320" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and it does not come back: that is felting</text>'
+      + '<text x="320" y="358" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">synthetics are plastic, so a hot iron does not scorch them,</text>'
+      + '<text x="320" y="378" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">it melts them, and the shiny patch cannot be mended either</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each fibre, what it is made of, and the one thing that '
+        + 'ruins it',
+      columns: ['Fibre', 'What it is', 'How to treat it', 'What ruins it'],
+      rows: [
+        [
+          'Cotton and linen',
+          'Cellulose, from plants',
+          'Hot water, strong soap, a hot iron',
+          'Very little, which is why it is treated as the normal case',
+        ],
+        [
+          'Wool',
+          'Protein, with tiny scales on every fibre',
+          'Cool water, squeeze rather than rub, dry flat',
+          'Heat and rubbing: the scales lock, and it felts',
+        ],
+        [
+          'Silk',
+          'Protein, and smooth',
+          'Mild soap, a cool iron',
+          'Strong soap, and a hot iron',
+        ],
+        [
+          'Polyester and other synthetics',
+          'Plastic, drawn out into threads',
+          'Washes easily, a warm iron at most',
+          'A hot iron melts it, leaving a shiny patch or a hole',
+        ],
+      ],
+      note: 'None of this is about tidiness. It is about which changes can '
+        + 'be undone and which cannot, and felting and melting are both '
+        + 'the second kind.',
+    },
+  ],
   questions: [
     {
       id: 'clo-1',
@@ -829,13 +1176,9 @@ teach({
     + 'what they queue or wait for, '
     + 'what spoils or is wasted, '
     + 'and what is only available at certain times. '
-    + 'Then you test the idea by asking '
-    + 'who exactly would buy, '
-    + 'how many of them there are, '
-    + 'what they pay now, '
-    + 'who else supplies it, '
-    + 'and what you would need to start: '
-    + 'skill, equipment, space, materials, money. '
+    + 'Then you test the idea with a handful of hard questions, '
+    + 'and a real answer to each of them is what turns it from '
+    + 'a thought into a plan. '
     + 'A good idea is one where the need is real, '
     + 'the supply is poor, '
     + 'and the starting requirement is within reach.',
@@ -962,6 +1305,89 @@ teach({
     + 'Most ideas fail on something nobody could have predicted, '
     + 'and a small test finds it before the money is spent.',
 
+  figure: {
+    alt: 'Two chains of reasoning side by side. The red one starts from '
+      + 'what business could I do, reaches a provision shop, a hairdresser '
+      + 'or a mobile money stand, and ends with four of them already on '
+      + 'that road and the need already met. The green one starts from '
+      + 'what do people here find difficult, reaches tomatoes spoiling '
+      + 'before market day and nobody repairing phone screens, and ends '
+      + 'with a real need nobody has met, which is what an opportunity is.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">start at the need, not at the list of businesses</text>'
+      + '<path d="M 16 44 H 306 V 92 H 16 Z" stroke="#c8433a"/>'
+      + '<text x="161" y="64" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">what business</text>'
+      + '<text x="161" y="82" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">could I do?</text>'
+      + '<path d="M 161 92 V 110" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 161 120 L 153 102 L 169 102 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 16 122 H 306 V 194 H 16 Z" stroke="#c8433a"/>'
+      + '<text x="161" y="146" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">a provision shop,</text>'
+      + '<text x="161" y="166" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">a hairdresser, a</text>'
+      + '<text x="161" y="186" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">mobile money stand</text>'
+      + '<path d="M 161 194 V 212" stroke="#c8433a" stroke-width="2"/>'
+      + '<path d="M 161 222 L 153 204 L 169 204 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 16 224 H 306 V 296 H 16 Z" stroke="#c8433a"/>'
+      + '<text x="161" y="248" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">four of them are on</text>'
+      + '<text x="161" y="268" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">that road already, and</text>'
+      + '<text x="161" y="288" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">the need is already met</text>'
+      + '<path d="M 334 44 H 624 V 92 H 334 Z" stroke="#0f8a4d"/>'
+      + '<text x="479" y="64" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">what do people here</text>'
+      + '<text x="479" y="82" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">find difficult?</text>'
+      + '<path d="M 479 92 V 110" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 479 120 L 471 102 L 487 102 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 334 122 H 624 V 194 H 334 Z" stroke="#0f8a4d"/>'
+      + '<text x="479" y="146" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">tomatoes spoil before</text>'
+      + '<text x="479" y="166" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">market day; nobody here</text>'
+      + '<text x="479" y="186" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">repairs a phone screen</text>'
+      + '<path d="M 479 194 V 212" stroke="#0f8a4d" stroke-width="2"/>'
+      + '<path d="M 479 222 L 471 204 L 487 204 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 334 224 H 624 V 296 H 334 Z" stroke="#0f8a4d"/>'
+      + '<text x="479" y="248" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">a real need, and a reason</text>'
+      + '<text x="479" y="268" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">nobody has met it yet:</text>'
+      + '<text x="479" y="288" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">that is an opportunity</text>'
+      + '<text x="320" y="334" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">then the honest test: a need you cannot supply is not yours,</text>'
+      + '<text x="320" y="356" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and that is not a failure of the idea.</text>'
+      + '<text x="320" y="382" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">It is a reason to learn rather than a business to start today</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The questions that test an idea before you spend anything '
+        + 'on it',
+      columns: ['The question', 'Why it is asked', 'A bad answer'],
+      rows: [
+        [
+          'Who exactly would buy it?',
+          'A real buyer has a name and a place',
+          'Everybody',
+        ],
+        [
+          'How many of them are there?',
+          'It decides whether the thing is worth doing at all',
+          'Not knowing, and not finding out',
+        ],
+        [
+          'What do they pay now, and to whom?',
+          'It gives you both the price and the rival',
+          'Nothing, because there is no such thing yet',
+        ],
+        [
+          'Who else supplies it, and how well?',
+          'Poor supply is the opening; good supply is a wall',
+          'Four of them on the same road',
+        ],
+        [
+          'What would you need to start?',
+          'Skill, equipment, space, materials, money',
+          'Something you have none of and no way to get',
+        ],
+      ],
+      note: 'If only the last question fails, the idea is still sound. It '
+        + 'is then a reason to learn a skill rather than a business to '
+        + 'start this month.',
+    },
+  ],
   questions: [
     {
       id: 'biz-1',
