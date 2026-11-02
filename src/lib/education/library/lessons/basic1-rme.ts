@@ -30,21 +30,17 @@ teach({
 
   idea:
     'Every faith tells how the world began. '
-    + 'Christians read it in the Bible. '
-    + 'God made the world in six days. He rested on the seventh. '
-    + 'Muslims read it in the Qur’an. '
-    + 'Allah made the heavens and the earth and all that is in them. '
-    + 'In Ghanaian traditional religion, Onyame made all things. '
-    + 'Those stories are not read from a book. '
-    + 'Elders tell them.',
+    + 'Christians are taught that God made the world in six days, '
+    + 'and rested on the seventh. '
+    + 'Muslims are taught that Allah made the heavens and the earth '
+    + 'and all that is in them. '
+    + 'In Ghanaian traditional religion, Onyame made all things.',
 
   mechanism:
     'These stories are not the same. '
     + 'They were never meant to be. '
     + 'Each one belongs to its own people. '
     + 'Each is told that people’s own way. '
-    + 'Some are written down and read aloud. '
-    + 'Some pass from an elder to a child by speaking. '
     + 'But they all answer one question. The same question. '
     + 'That is why you can learn them side by side.',
 
@@ -117,6 +113,50 @@ teach({
     + 'Not just the ones here in Ghana. All of them. '
     + 'So people everywhere ask the same question. '
     + 'Why does everyone ask it? That is a big question on its own.',
+
+  figure: {
+    alt: 'Three pictures in a row: a book marked the Bible, a book marked '
+      + 'the Qur’an, and an elder standing with a child. Arrows run '
+      + 'down from all three into one box that reads how the world began, '
+      + 'with a note that all three answer this.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">Where the account is kept</text>'
+      + '<rect x="60" y="62" width="120" height="90"/>'
+      + '<line x1="120" y1="62" x2="120" y2="152"/>'
+      + '<text x="120" y="182" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the Bible</text>'
+      + '<rect x="260" y="62" width="120" height="90"/>'
+      + '<line x1="320" y1="62" x2="320" y2="152"/>'
+      + '<text x="320" y="182" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">the Qur’an</text>'
+      + '<circle cx="490" cy="84" r="22"/>'
+      + '<line x1="490" y1="106" x2="490" y2="152"/>'
+      + '<circle cx="550" cy="106" r="15"/>'
+      + '<line x1="550" y1="121" x2="550" y2="152"/>'
+      + '<line x1="462" y1="152" x2="578" y2="152"/>'
+      + '<text x="520" y="182" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">an elder telling</text>'
+      + '<line x1="120" y1="196" x2="214" y2="234"/>'
+      + '<polygon points="224,238 208,230 212,244" fill="currentColor" stroke="none"/>'
+      + '<line x1="320" y1="196" x2="320" y2="234"/>'
+      + '<polygon points="320,244 312,230 328,230" fill="currentColor" stroke="none"/>'
+      + '<line x1="520" y1="196" x2="426" y2="234"/>'
+      + '<polygon points="416,238 432,230 428,244" fill="currentColor" stroke="none"/>'
+      + '<rect x="100" y="252" width="440" height="100" stroke="#0f8a4d"/>'
+      + '<text x="320" y="296" font-size="21" text-anchor="middle" fill="#0f8a4d" stroke="none">how the world began</text>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">all three answer this</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Where each faith keeps its account of creation',
+    columns: ['Faith', 'Who it names as creator', 'How the account is kept'],
+    rows: [
+      ['Christianity', 'God', 'Written in the Bible, read aloud'],
+      ['Islam', 'Allah', 'Written in the Qur’an, read aloud'],
+      [
+        'Ghanaian traditional religion',
+        'Onyame',
+        'Spoken by elders to children',
+      ],
+    ],
+  }],
 
   questions: [
     {
@@ -253,6 +293,54 @@ teach({
     + 'They give the land and the fish time to recover. '
     + 'Science has a name for this now. A closed season. '
     + 'People here were doing it long before it had a name.',
+
+  figure: {
+    alt: 'Two pictures of a house beside a gutter. In the first the '
+      + 'gutter is clear and an arrow shows the rain running away along '
+      + 'it. In the second the gutter is blocked with rubbish, and an '
+      + 'arrow shows the water turning back and going into the house. '
+      + 'Underneath, a note that every blocked gutter is made of single '
+      + 'pieces of rubbish, and that yours is one of them.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">One piece of rubbish, and the gutter</text>'
+      + '<rect x="20" y="52" width="290" height="208" stroke="#0f8a4d"/>'
+      + '<text x="165" y="80" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">a clear gutter</text>'
+      + '<polygon points="44,124 74,100 104,124" fill="none"/>'
+      + '<rect x="44" y="124" width="60" height="56"/>'
+      + '<line x1="44" y1="192" x2="286" y2="192"/>'
+      + '<line x1="44" y1="220" x2="286" y2="220"/>'
+      + '<line x1="130" y1="206" x2="252" y2="206" stroke="#0f8a4d"/>'
+      + '<polygon points="262,206 246,198 246,214" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="165" y="248" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">the rain runs away</text>'
+      + '<rect x="330" y="52" width="290" height="208" stroke="#c8433a"/>'
+      + '<text x="475" y="80" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">a blocked gutter</text>'
+      + '<polygon points="354,124 384,100 414,124" fill="none"/>'
+      + '<rect x="354" y="124" width="60" height="56"/>'
+      + '<line x1="354" y1="192" x2="596" y2="192"/>'
+      + '<line x1="354" y1="220" x2="596" y2="220"/>'
+      + '<circle cx="510" cy="206" r="10" stroke="#c8433a"/>'
+      + '<circle cx="534" cy="206" r="10" stroke="#c8433a"/>'
+      + '<circle cx="556" cy="204" r="8" stroke="#c8433a"/>'
+      + '<polyline points="490,206 400,206 400,176" stroke="#c8433a"/>'
+      + '<polygon points="400,166 392,182 408,182" fill="#c8433a" stroke="none"/>'
+      + '<text x="475" y="248" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">the water goes into the house</text>'
+      + '<text x="320" y="304" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Every blocked gutter is made of</text>'
+      + '<text x="320" y="332" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">single pieces of rubbish.</text>'
+      + '<text x="320" y="374" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">Yours is one of them.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Things near you, what spoils them, and who is harmed',
+    columns: ['The thing', 'What spoils it', 'Who is harmed'],
+    rows: [
+      ['A gutter', 'Rubbish thrown in', 'The homes it floods'],
+      ['A stream', 'Washing and soap in it', 'Everybody who drinks it'],
+      ['A tree', 'Cutting it down', 'Everybody who sat in the shade'],
+      ['Good soil', 'Burning the grass off it', 'The farmer next year'],
+    ],
+    note: 'The person harmed is often somebody you will never meet. That '
+      + 'is what makes it a wrong, and not only waste.',
+  }],
 
   questions: [
     {
@@ -467,12 +555,8 @@ teach({
   idea:
     'A festival is a special day. It comes once every year. '
     + 'It helps people remember something big. '
-    + 'Christians keep Christmas. It remembers the birth of Jesus. '
-    + 'They keep Easter too. It remembers his death and his rising. '
-    + 'Muslims keep Eid al-Fitr. It comes at the end of the fasting month. '
-    + 'They keep Eid al-Adha. It remembers how Ibrahim obeyed Allah. '
-    + 'Ghana has its own festivals. Homowo and Odwira are two. '
-    + 'They give thanks for the harvest.',
+    + 'Christians, Muslims and the peoples of Ghana '
+    + 'each keep their own festivals.',
 
   mechanism:
     'A festival works because it comes back. '
@@ -551,6 +635,48 @@ teach({
     + 'And a good crop is a thing to thank God for. '
     + 'The farming year and the festival year move together.',
 
+  figure: {
+    alt: 'Three boxes in a row standing for this year, next year and the '
+      + 'year after. Each box has a dot marked at the same place along it, '
+      + 'and each dot is labelled Homowo. Arrows run from one box to the '
+      + 'next. Underneath, a note that you see it again and again, and '
+      + 'that this is how you learn it without anybody teaching you.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="34" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">The same day, every year</text>'
+      + '<rect x="30" y="92" width="180" height="70"/>'
+      + '<text x="120" y="120" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">this year</text>'
+      + '<circle cx="165" cy="144" r="10" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="165" y="190" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">Homowo</text>'
+      + '<line x1="214" y1="127" x2="222" y2="127"/>'
+      + '<polygon points="232,127 218,120 218,134" fill="currentColor" stroke="none"/>'
+      + '<rect x="230" y="92" width="180" height="70"/>'
+      + '<text x="320" y="120" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">next year</text>'
+      + '<circle cx="365" cy="144" r="10" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="365" y="190" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">Homowo</text>'
+      + '<line x1="414" y1="127" x2="422" y2="127"/>'
+      + '<polygon points="432,127 418,120 418,134" fill="currentColor" stroke="none"/>'
+      + '<rect x="430" y="92" width="180" height="70"/>'
+      + '<text x="520" y="120" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the year after</text>'
+      + '<circle cx="565" cy="144" r="10" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="565" y="190" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">Homowo</text>'
+      + '<text x="320" y="258" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">You see it again and again.</text>'
+      + '<text x="320" y="306" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">That is how you learn it,</text>'
+      + '<text x="320" y="336" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">without anybody teaching you.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Festivals kept in Ghana, and what each one remembers',
+    columns: ['Festival', 'Whose it is', 'What it remembers'],
+    rows: [
+      ['Christmas', 'Christians', 'The birth of Jesus'],
+      ['Easter', 'Christians', 'His death and his rising'],
+      ['Eid al-Fitr', 'Muslims', 'The end of the fasting month'],
+      ['Eid al-Adha', 'Muslims', 'How Ibrahim obeyed Allah'],
+      ['Homowo', 'The Ga people', 'Living through a hungry time'],
+      ['Odwira', 'The Akan people', 'Thanks for the harvest'],
+    ],
+  }],
+
   questions: [
     {
       id: 'fes-1',
@@ -598,12 +724,8 @@ teach({
 
   idea:
     'Christians follow the teaching of Jesus Christ. '
-    + 'He taught people to love God. '
-    + 'And to love your neighbour as you love yourself. '
     + 'Muslims follow the teaching brought by the Prophet Muhammad, '
     + 'peace be upon him. '
-    + 'He taught that there is one God. '
-    + 'And that we owe others mercy and charity. '
     + 'Ghanaian traditional religion has no one founder. '
     + 'It has been passed down by elders, priests and families.',
 
@@ -685,6 +807,65 @@ teach({
     + 'others what you would want done to you. Finding that agreement does not '
     + 'make the faiths the same, but it is worth noticing where they meet.',
 
+  figure: {
+    alt: 'Two panels. In the first, headed a faith with a founder, a '
+      + 'person stands beside a book, and an arrow runs from the person to '
+      + 'the book, which is labelled his words, written. In the second, '
+      + 'headed a faith with no founder, three people stand in a line '
+      + 'labelled elder, parent and child, with arrows passing along from '
+      + 'one to the next. Underneath, a note that both ways carry the '
+      + 'teaching and only store it in different places.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">Two ways a teaching is carried</text>'
+      + '<rect x="20" y="54" width="290" height="212"/>'
+      + '<text x="165" y="84" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a faith with a founder</text>'
+      + '<circle cx="80" cy="132" r="24"/>'
+      + '<line x1="80" y1="156" x2="80" y2="198"/>'
+      + '<line x1="112" y1="152" x2="152" y2="152"/>'
+      + '<polygon points="162,152 148,145 148,159" fill="currentColor" stroke="none"/>'
+      + '<rect x="172" y="120" width="100" height="64"/>'
+      + '<line x1="222" y1="120" x2="222" y2="184"/>'
+      + '<text x="222" y="212" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">his words, written</text>'
+      + '<text x="165" y="246" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">people go back to the words</text>'
+      + '<rect x="330" y="54" width="290" height="212"/>'
+      + '<text x="475" y="84" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a faith with no founder</text>'
+      + '<circle cx="390" cy="130" r="24"/>'
+      + '<circle cx="475" cy="134" r="20"/>'
+      + '<circle cx="556" cy="138" r="16"/>'
+      + '<line x1="418" y1="131" x2="446" y2="133"/>'
+      + '<polygon points="456,133 442,126 441,140" fill="currentColor" stroke="none"/>'
+      + '<line x1="498" y1="135" x2="528" y2="137"/>'
+      + '<polygon points="538,137 524,130 523,144" fill="currentColor" stroke="none"/>'
+      + '<text x="390" y="184" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">elder</text>'
+      + '<text x="475" y="184" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">parent</text>'
+      + '<text x="556" y="184" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">child</text>'
+      + '<text x="475" y="246" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">the teaching lives in people</text>'
+      + '<text x="320" y="316" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Both ways carry the teaching.</text>'
+      + '<text x="320" y="356" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">They store it in different places.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Who each faith follows, and one thing that is taught',
+    columns: ['Faith', 'Who it follows', 'One thing taught'],
+    rows: [
+      [
+        'Christianity',
+        'Jesus Christ',
+        'Love your neighbour as you love yourself',
+      ],
+      [
+        'Islam',
+        'The Prophet Muhammad, peace be upon him',
+        'There is one God, and mercy is owed to others',
+      ],
+      [
+        'Ghanaian traditional religion',
+        'No one founder',
+        'Passed on by elders, priests and families',
+      ],
+    ],
+  }],
+
   questions: [
     {
       id: 'lead-1',
@@ -742,12 +923,10 @@ teach({
 
   mechanism:
     'That last part is the whole reason. '
-    + 'Being believed takes a long time to build. '
-    + 'It takes one day to lose. '
-    + 'You tell one lie and you are caught. '
-    + 'It does not just cost you that day. '
-    + 'It costs you every day after, when you need someone to believe you. '
-    + 'A lie never wins you as much as it takes away.',
+    + 'Being believed takes a long time to build, and one day to lose. '
+    + 'So a lie does not just cost you the day you told it. '
+    + 'It costs you every day after, when you need someone to believe '
+    + 'you.',
 
   recap:
     'You told the truth once and nobody believed you. '
@@ -815,6 +994,44 @@ teach({
     + 'the law: it damages something everybody depends on, not only the person '
     + 'lied about.',
 
+  figure: {
+    alt: 'A line showing how much people believe you, rising slowly step '
+      + 'by step across many days, then dropping straight to the bottom at '
+      + 'one lie, then rising slowly again from there. The slow climb is '
+      + 'labelled built slowly, day by day, the drop is labelled one lie, '
+      + 'lost in a day, and the second climb is labelled and slow all over '
+      + 'again. Underneath, a note that a lie never wins you as much as it '
+      + 'takes away.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">Being believed</text>'
+      + '<text x="60" y="58" font-size="14" text-anchor="start" fill="currentColor" stroke="none">how much people believe you</text>'
+      + '<line x1="60" y1="70" x2="60" y2="300"/>'
+      + '<line x1="60" y1="300" x2="600" y2="300"/>'
+      + '<polyline points="60,292 110,262 160,228 210,192 260,152 300,112" stroke="#0f8a4d"/>'
+      + '<text x="92" y="112" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">built slowly,</text>'
+      + '<text x="92" y="136" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">day by day</text>'
+      + '<line x1="300" y1="112" x2="300" y2="292" stroke="#c8433a"/>'
+      + '<polygon points="300,296 292,280 308,280" fill="#c8433a" stroke="none"/>'
+      + '<text x="314" y="196" font-size="15" text-anchor="start" fill="#c8433a" stroke="none">one lie,</text>'
+      + '<text x="314" y="220" font-size="15" text-anchor="start" fill="#c8433a" stroke="none">lost in a day</text>'
+      + '<polyline points="300,292 360,282 420,268 480,252 540,238 600,222"/>'
+      + '<text x="470" y="186" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">and slow all over again</text>'
+      + '<text x="320" y="348" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">A lie never wins you as much</text>'
+      + '<text x="320" y="378" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">as it takes away.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What each choice costs today, and what it costs afterwards',
+    columns: ['What you did', 'What it costs today', 'What it costs after'],
+    rows: [
+      ['Broke a cup and said so', 'You are told off once', 'Nothing, it is over'],
+      ['Broke a cup and hid it', 'Nothing today', 'Being the one who hid it'],
+      ['Told the truth and were punished', 'The punishment', 'Nothing, it ends'],
+      ['Told a lie and were caught', 'Nothing today', 'Nobody believes you'],
+    ],
+    note: 'Look down the last column. That is the one that lasts.',
+  }],
+
   questions: [
     {
       id: 'hon-1',
@@ -862,11 +1079,9 @@ teach({
 
   idea:
     'Respect means you treat a person as someone who matters. '
-    + 'With elders, you greet them well. You listen. '
-    + 'You do what you are asked, and you do not argue. '
-    + 'With children your own age, you take turns. You do not mock them. '
-    + 'With people who are not like you, there is no change at all. '
-    + 'You treat them just as well as you treat your own.',
+    + 'It looks a little different with an elder '
+    + 'and with a child your own age. '
+    + 'With somebody who is not like you, it does not change at all.',
 
   mechanism:
     'Respect is not the same as fear. That matters. '
@@ -885,8 +1100,7 @@ teach({
     'Greet first, properly for who they are.',
     'Listen without interrupting, even if you disagree.',
     'Do what an elder asks, then ask why afterwards if you need to.',
-    'Take turns with children your own age.',
-    'Treat somebody from another faith or tribe exactly as you treat your own.',
+    'If what you are asked is wrong, say no politely and tell an adult.',
   ],
 
   worked: [
@@ -946,6 +1160,53 @@ teach({
     + 'What makes that work is not a law. '
     + 'It is plain daily respect. '
     + 'Each person keeping it is what holds it up.',
+
+  figure: {
+    alt: 'Two panels. In the panel headed respect, the answer is polite '
+      + 'both when somebody is watching and when nobody is watching. In '
+      + 'the panel headed fear, the answer is polite when somebody is '
+      + 'watching and not polite when nobody is watching. Underneath, a '
+      + 'note to watch what you do when nobody is checking, because that '
+      + 'is the real answer.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="32" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">Respect, or fear?</text>'
+      + '<rect x="20" y="56" width="290" height="204" stroke="#0f8a4d"/>'
+      + '<text x="165" y="86" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">respect</text>'
+      + '<text x="165" y="124" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">somebody watching:</text>'
+      + '<text x="165" y="154" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">polite</text>'
+      + '<text x="165" y="196" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">nobody watching:</text>'
+      + '<text x="165" y="226" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">polite</text>'
+      + '<rect x="330" y="56" width="290" height="204" stroke="#c8433a"/>'
+      + '<text x="475" y="86" font-size="18" text-anchor="middle" fill="#c8433a" stroke="none">fear</text>'
+      + '<text x="475" y="124" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">somebody watching:</text>'
+      + '<text x="475" y="154" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">polite</text>'
+      + '<text x="475" y="196" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">nobody watching:</text>'
+      + '<text x="475" y="226" font-size="20" text-anchor="middle" fill="#c8433a" stroke="none">not polite</text>'
+      + '<text x="320" y="308" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">Watch what you do when</text>'
+      + '<text x="320" y="336" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">nobody is checking.</text>'
+      + '<text x="320" y="378" font-size="19" text-anchor="middle" fill="#0f8a4d" stroke="none">That is the real answer.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What respect looks like with different people',
+    columns: ['Who you are with', 'What you do', 'What you never do'],
+    rows: [
+      ['An elder', 'Greet them, and listen', 'Argue back at once'],
+      ['A child your own age', 'Take turns', 'Mock them'],
+      [
+        'A new child from elsewhere',
+        'The same as everybody else',
+        'Treat them as less',
+      ],
+      [
+        'Somebody of another faith',
+        'The same as your own',
+        'Leave them outside',
+      ],
+    ],
+    note: 'The middle column changes with who you are with. It never '
+      + 'changes because of where somebody is from.',
+  }],
 
   questions: [
     {
@@ -1058,8 +1319,7 @@ teach({
   traps: [
     {
       mistake: 'Doing a job badly so it is over quickly.',
-      why: 'It comes back, and you do it twice. Doing it properly once is '
-        + 'less work.',
+      why: 'The job is still there tomorrow, and now you do it twice.',
     },
     {
       mistake: 'Waiting to feel like starting.',
@@ -1077,6 +1337,46 @@ teach({
     + 'Each one practised a single thing for years. '
     + 'Ask how long it took them to get good. '
     + 'Their answer teaches you more about work than any saying.',
+
+  figure: {
+    alt: 'Two long lines, one for a farmer and one for you. On the '
+      + 'farmer’s line, plant is marked at the near end and harvest at '
+      + 'the far end, with the whole gap between them labelled nothing to '
+      + 'see yet. On your line, practise reading today is at the near end '
+      + 'and read well next year at the far end, with the same gap between '
+      + 'them. Underneath, a note that one habit carries you across, which '
+      + 'is finishing what you started.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">The reward comes late</text>'
+      + '<text x="320" y="64" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">a farmer</text>'
+      + '<text x="330" y="96" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">nothing to see yet</text>'
+      + '<line x1="60" y1="112" x2="600" y2="112"/>'
+      + '<line x1="60" y1="100" x2="60" y2="124"/>'
+      + '<line x1="600" y1="100" x2="600" y2="124"/>'
+      + '<text x="60" y="146" font-size="15" text-anchor="start" fill="currentColor" stroke="none">plant</text>'
+      + '<text x="600" y="146" font-size="15" text-anchor="end" fill="#0f8a4d" stroke="none">harvest</text>'
+      + '<text x="320" y="200" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">you</text>'
+      + '<text x="330" y="232" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">nothing to see yet</text>'
+      + '<line x1="60" y1="248" x2="600" y2="248"/>'
+      + '<line x1="60" y1="236" x2="60" y2="260"/>'
+      + '<line x1="600" y1="236" x2="600" y2="260"/>'
+      + '<text x="60" y="282" font-size="15" text-anchor="start" fill="currentColor" stroke="none">practise reading today</text>'
+      + '<text x="600" y="282" font-size="15" text-anchor="end" fill="#0f8a4d" stroke="none">read well next year</text>'
+      + '<text x="320" y="338" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">One habit carries you across:</text>'
+      + '<text x="320" y="374" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">finishing what you started.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Two ways to do a job, and what happens after',
+    columns: ['The job', 'Done quickly and badly', 'Done properly once'],
+    rows: [
+      ['Sweeping the room', 'You sweep it again tomorrow', 'It is finished'],
+      ['Washing a pot', 'Somebody hands it back', 'It is put away'],
+      ['Your homework', 'The teacher sets it again', 'You have learned it'],
+      ['Weeding the farm', 'The weeds take the maize', 'The maize grows'],
+    ],
+    note: 'The last column is less work in the end, every single time.',
+  }],
 
   questions: [
     {
@@ -1133,9 +1433,8 @@ teach({
 
   mechanism:
     'Paying back feels fair. But look at what happens next. '
-    + 'Now the other person has something to pay back too. '
-    + 'So they hit back. Then you hit back. '
-    + 'The quarrel runs on and on. '
+    + 'Now the other person has something to pay back too, '
+    + 'and the quarrel runs on and on. '
     + 'In the end nobody even remembers how it started. '
     + 'Forgiving is the only move that stops it. '
     + 'That is why it takes strength, not weakness.',
@@ -1213,6 +1512,56 @@ teach({
     + 'It is still used today, beside the courts. '
     + 'Why does it last? Because both sides get to speak. '
     + 'Both sides are heard. That is what makes it hold.',
+
+  figure: {
+    alt: 'On the left, a loop with you hit back written at the top and '
+      + 'they hit back at the bottom, with arrows carrying it round, '
+      + 'labelled round and round. On the right, you forgive with a '
+      + 'straight arrow running down into a solid bar, labelled it stops. '
+      + 'Underneath, a note that in the end nobody even remembers how it '
+      + 'started, and that this is why forgiving takes strength.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">Paying back never ends</text>'
+      + '<ellipse cx="170" cy="162" rx="110" ry="80" stroke="#c8433a"/>'
+      + '<text x="170" y="108" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">you hit back</text>'
+      + '<text x="170" y="226" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">they hit back</text>'
+      + '<polygon points="60,146 52,162 68,162" fill="#c8433a" stroke="none"/>'
+      + '<polygon points="280,178 272,162 288,162" fill="#c8433a" stroke="none"/>'
+      + '<text x="170" y="274" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">round and round</text>'
+      + '<text x="470" y="108" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">you forgive</text>'
+      + '<line x1="470" y1="126" x2="470" y2="198" stroke="#0f8a4d"/>'
+      + '<polygon points="470,212 462,194 478,194" fill="#0f8a4d" stroke="none"/>'
+      + '<line x1="408" y1="222" x2="532" y2="222" stroke="#0f8a4d" stroke-width="7"/>'
+      + '<text x="470" y="262" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">it stops</text>'
+      + '<text x="320" y="318" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">In the end nobody even remembers</text>'
+      + '<text x="320" y="346" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">how it started.</text>'
+      + '<text x="320" y="384" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">That is why forgiving takes strength.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What you do next after a quarrel, and where it ends',
+    columns: [
+      'What you do next',
+      'What they can do next',
+      'Where it ends',
+    ],
+    rows: [
+      ['Pay them back', 'Pay you back', 'It does not end'],
+      ['Say nothing and keep it', 'Nothing, and wait', 'It waits for later'],
+      [
+        'Say sorry, with a but after it',
+        'Argue with the but',
+        'Back where you started',
+      ],
+      ['Say sorry, and stop there', 'Accept it', 'It is finished'],
+      [
+        'Ask an elder to hear you both',
+        'Speak, and be heard',
+        'Settled, and both let go',
+      ],
+    ],
+    note: 'Two of these five finish it. The other three keep it alive.',
+  }],
 
   questions: [
     {
