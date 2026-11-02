@@ -1243,6 +1243,34 @@ teach({
     + 'Start with who. '
     + 'Then ask one starting with where.',
 
+  figure: {
+    alt: 'Three question words in green, each over a picture of the kind of '
+      + 'answer it asks for. Who stands over a person, what stands over a '
+      + 'cup, and where stands over a house. Under each picture it says a '
+      + 'person, a thing and a place.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="110" y="80" font-size="36" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">who</text>'
+      + '<circle cx="110" cy="150" r="24"/>'
+      + '<line x1="110" y1="174" x2="110" y2="232"/>'
+      + '<line x1="74" y1="198" x2="146" y2="198"/>'
+      + '<line x1="110" y1="232" x2="88" y2="280"/>'
+      + '<line x1="110" y1="232" x2="132" y2="280"/>'
+      + '<text x="110" y="340" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a person</text>'
+      + '<text x="320" y="80" font-size="36" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">what</text>'
+      + '<polygon points="292,150 348,150 340,240 300,240"/>'
+      + '<text x="320" y="340" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a thing</text>'
+      + '<text x="530" y="80" font-size="36" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">where</text>'
+      + '<polygon points="496,180 564,180 564,248 496,248"/>'
+      + '<polygon points="530,136 486,180 574,180"/>'
+      + '<text x="530" y="340" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a place</text></svg>',
+  },
   questions: [
     {
       id: 'aq-1',
@@ -1345,6 +1373,42 @@ teach({
     + 'This time, say what happens next '
     + 'before I say it.',
 
+  figure: {
+    alt: 'Three boxes in a row with arrows between them, holding the '
+      + 'questions who, what they did, and the end. Above them it says '
+      + 'after the story, ask. Below, a grown up and a child stand '
+      + 'together, with the words listen all the way to the end.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="28" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">after the story, ask</text>'
+      + '<polygon points="40,110 200,110 200,210 40,210"/>'
+      + '<text x="120" y="172" font-size="32" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">who</text>'
+      + '<line x1="206" y1="160" x2="234" y2="160"/>'
+      + '<polyline points="221,150 234,160 221,170"/>'
+      + '<polygon points="240,110 400,110 400,210 240,210"/>'
+      + '<text x="320" y="167" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">what they did</text>'
+      + '<line x1="406" y1="160" x2="434" y2="160"/>'
+      + '<polyline points="421,150 434,160 421,170"/>'
+      + '<polygon points="440,110 600,110 600,210 440,210"/>'
+      + '<text x="520" y="170" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the end</text>'
+      + '<circle cx="150" cy="240" r="26"/>'
+      + '<line x1="150" y1="266" x2="150" y2="328"/>'
+      + '<line x1="111" y1="292" x2="189" y2="292"/>'
+      + '<line x1="150" y1="328" x2="127" y2="380"/>'
+      + '<line x1="150" y1="328" x2="173" y2="380"/>'
+      + '<circle cx="262" cy="262" r="20"/>'
+      + '<line x1="262" y1="282" x2="262" y2="330"/>'
+      + '<line x1="232" y1="302" x2="292" y2="302"/>'
+      + '<line x1="262" y1="330" x2="244" y2="370"/>'
+      + '<line x1="262" y1="330" x2="280" y2="370"/>'
+      + '<text x="462" y="332" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">listen all the way to the '
+      + 'end</text></svg>',
+  },
   questions: [
     {
       id: 'st-1',
@@ -1447,6 +1511,42 @@ teach({
     + 'It does not have to mean anything. '
     + 'Zat rhymes with cat.',
 
+  figure: {
+    alt: 'Two pairs of words. The first pair is cat and hat, with the ending '
+      + 'at in green on both and a green tick beside them, labelled they '
+      + 'rhyme. The second pair is cat and dog, with the endings left plain '
+      + 'and a red cross beside them, labelled they do not.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">do they end the same</text>'
+      + '<text x="90" y="160" font-size="48" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">c</text>'
+      + '<text x="118" y="160" font-size="48" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">at</text>'
+      + '<text x="270" y="160" font-size="48" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">h</text>'
+      + '<text x="302" y="160" font-size="48" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">at</text>'
+      + '<polyline points="432,150 452,172 492,120" stroke="#0f8a4d" '
+      + 'stroke-width="7"/>'
+      + '<text x="560" y="168" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">they rhyme</text>'
+      + '<text x="90" y="300" font-size="48" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">c</text>'
+      + '<text x="118" y="300" font-size="48" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">at</text>'
+      + '<text x="270" y="300" font-size="48" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">d</text>'
+      + '<text x="302" y="300" font-size="48" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">og</text>'
+      + '<line x1="434" y1="268" x2="490" y2="318" stroke="#c8433a" '
+      + 'stroke-width="7"/>'
+      + '<line x1="490" y1="268" x2="434" y2="318" stroke="#c8433a" '
+      + 'stroke-width="7"/>'
+      + '<text x="560" y="302" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">they do not</text></svg>',
+  },
   questions: [
     {
       id: 'rh-1',
@@ -1562,6 +1662,32 @@ teach({
     + 'from the pictures. '
     + 'Turn the pages as you go.',
 
+  figure: {
+    alt: 'An open book with lines of writing on both pages. The left page is '
+      + 'labelled look here first and the right page is labelled then here. '
+      + 'A green arrow runs under the book from left to right, labelled we '
+      + 'go this way.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="52" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the front is this way up</text>'
+      + '<polygon points="90,112 315,96 315,290 90,274"/>'
+      + '<polygon points="325,96 550,112 550,274 325,290"/>'
+      + '<line x1="110" y1="212" x2="292" y2="212"/>'
+      + '<line x1="110" y1="238" x2="292" y2="238"/>'
+      + '<line x1="110" y1="264" x2="292" y2="264"/>'
+      + '<line x1="348" y1="212" x2="530" y2="212"/>'
+      + '<line x1="348" y1="238" x2="530" y2="238"/>'
+      + '<line x1="348" y1="264" x2="530" y2="264"/>'
+      + '<text x="200" y="170" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">look here first</text>'
+      + '<text x="440" y="170" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">then here</text>'
+      + '<line x1="120" y1="332" x2="520" y2="332" stroke="#0f8a4d"/>'
+      + '<polyline points="507,322 520,332 507,342" stroke="#0f8a4d"/>'
+      + '<text x="320" y="378" font-size="26" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">we go this way</text></svg>',
+  },
   questions: [
     {
       id: 'hb-1',
@@ -1671,6 +1797,36 @@ teach({
     + 'Try to keep it straight. '
     + 'Now join three dots.',
 
+  figure: {
+    alt: 'A pencil lying across the page with its point at the bottom left. '
+      + 'Three green dots show where the fingers go, labelled this finger '
+      + 'on top, thumb, and and this one under. Below it says hold it near '
+      + 'the point.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">pinch it with three '
+      + 'fingers</text>'
+      + '<line x1="420" y1="88" x2="258" y2="298" stroke-width="14"/>'
+      + '<polygon points="252,294 264,302 240,322"/>'
+      + '<line x1="256" y1="146" x2="320" y2="164"/>'
+      + '<circle cx="327" cy="166" r="11" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="250" y="152" font-size="22" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">this finger on top</text>'
+      + '<line x1="256" y1="202" x2="294" y2="200"/>'
+      + '<circle cx="301" cy="199" r="11" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="250" y="208" font-size="22" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">thumb</text>'
+      + '<line x1="394" y1="296" x2="352" y2="238"/>'
+      + '<circle cx="344" cy="230" r="11" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="400" y="302" font-size="22" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">and this one under</text>'
+      + '<text x="320" y="378" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">hold it near the point</text></svg>',
+  },
   questions: [
     {
       id: 'hp-1',
@@ -1783,6 +1939,54 @@ teach({
     + 'and bath every day. '
     + 'Wash a cut at once.',
 
+  figure: {
+    alt: 'Four steps in a row with arrows between them. A tap running '
+      + 'labelled wet, a bar of soap with bubbles labelled soap, two hands '
+      + 'pressed together with a green music note labelled rub and sing, '
+      + 'and the tap again labelled rinse. Under them it says wash before '
+      + 'you eat and after the toilet.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<line x1="57" y1="102" x2="83" y2="102" stroke-width="7"/>'
+      + '<line x1="70" y1="102" x2="70" y2="152" stroke-width="9"/>'
+      + '<line x1="70" y1="152" x2="100" y2="152" stroke-width="9"/>'
+      + '<line x1="100" y1="152" x2="100" y2="166" stroke-width="9"/>'
+      + '<line x1="92" y1="178" x2="87" y2="204"/>'
+      + '<line x1="100" y1="178" x2="95" y2="204"/>'
+      + '<line x1="108" y1="178" x2="103" y2="204"/>'
+      + '<text x="85" y="252" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">wet</text>'
+      + '<line x1="135" y1="170" x2="192" y2="170"/>'
+      + '<polyline points="179,160 192,170 179,180"/>'
+      + '<polygon points="222,150 290,150 290,196 222,196"/>'
+      + '<circle cx="236" cy="126" r="9"/><circle cx="258" cy="112" r="9"/>'
+      + '<circle cx="280" cy="128" r="9"/>'
+      + '<text x="256" y="252" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">soap</text>'
+      + '<line x1="306" y1="170" x2="356" y2="170"/>'
+      + '<polyline points="343,160 356,170 343,180"/>'
+      + '<ellipse cx="415" cy="180" rx="44" ry="24"/>'
+      + '<ellipse cx="437" cy="160" rx="44" ry="24"/>'
+      + '<ellipse cx="400" cy="108" rx="11" ry="8" stroke="#0f8a4d" '
+      + 'fill="#0f8a4d"/>'
+      + '<line x1="411" y1="108" x2="411" y2="74" stroke="#0f8a4d"/>'
+      + '<text x="425" y="252" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">rub and sing</text>'
+      + '<line x1="496" y1="170" x2="532" y2="170"/>'
+      + '<polyline points="519,160 532,170 519,180"/>'
+      + '<line x1="572" y1="102" x2="598" y2="102" stroke-width="7"/>'
+      + '<line x1="585" y1="102" x2="585" y2="152" stroke-width="9"/>'
+      + '<line x1="585" y1="152" x2="555" y2="152" stroke-width="9"/>'
+      + '<line x1="555" y1="152" x2="555" y2="166" stroke-width="9"/>'
+      + '<line x1="547" y1="178" x2="542" y2="204"/>'
+      + '<line x1="555" y1="178" x2="550" y2="204"/>'
+      + '<line x1="563" y1="178" x2="558" y2="204"/>'
+      + '<text x="570" y="252" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">rinse</text>'
+      + '<text x="320" y="334" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">wash before you eat and after the '
+      + 'toilet</text></svg>',
+  },
   questions: [
     {
       id: 'kc-1',
@@ -1896,6 +2100,42 @@ teach({
     + 'Add a little black. '
     + 'It goes darker.',
 
+  figure: {
+    alt: 'Two rows of colour mixing. In the first a blue circle and a yellow '
+      + 'circle lead by an arrow to a green circle. In the second a red '
+      + 'circle and a yellow circle lead to an orange circle. Each circle '
+      + 'is named underneath.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="48" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">mix two and see</text>'
+      + '<circle cx="90" cy="120" r="38" fill="#1d4ed8"/>'
+      + '<text x="90" y="186" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">blue</text>'
+      + '<text x="160" y="132" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">and</text>'
+      + '<circle cx="230" cy="120" r="38" fill="#e0a500"/>'
+      + '<text x="230" y="186" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">yellow</text>'
+      + '<line x1="286" y1="120" x2="346" y2="120"/>'
+      + '<polyline points="333,110 346,120 333,130"/>'
+      + '<circle cx="410" cy="120" r="38" fill="#0f8a4d"/>'
+      + '<text x="410" y="186" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">green</text>'
+      + '<circle cx="90" cy="268" r="38" fill="#c8433a"/>'
+      + '<text x="90" y="334" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">red</text>'
+      + '<text x="160" y="280" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">and</text>'
+      + '<circle cx="230" cy="268" r="38" fill="#e0a500"/>'
+      + '<text x="230" y="334" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">yellow</text>'
+      + '<line x1="286" y1="268" x2="346" y2="268"/>'
+      + '<polyline points="333,258 346,268 333,278"/>'
+      + '<circle cx="410" cy="268" r="38" fill="#d97415"/>'
+      + '<text x="410" y="334" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">orange</text></svg>',
+  },
   questions: [
     {
       id: 'cl-1',
@@ -2008,6 +2248,55 @@ teach({
     + 'Now stamp instead of clapping. '
     + 'Now clap a slow song and a fast one.',
 
+  figure: {
+    alt: 'Two lines of beats. On the top line seven green beats are spaced '
+      + 'evenly apart, labelled keep the beat. On the bottom line the red '
+      + 'beats start evenly and then crowd closer and closer together, '
+      + 'labelled not like this, it speeds up.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="50" font-size="28" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the same gap every time</text>'
+      + '<line x1="40" y1="150" x2="600" y2="150"/>'
+      + '<circle cx="70" cy="150" r="14" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="150" cy="150" r="14" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="230" cy="150" r="14" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="310" cy="150" r="14" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="390" cy="150" r="14" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="470" cy="150" r="14" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<circle cx="550" cy="150" r="14" stroke="#0f8a4d" stroke-width="3" '
+      + 'fill="#0f8a4d"/>'
+      + '<text x="320" y="228" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">keep the beat</text>'
+      + '<line x1="40" y1="294" x2="600" y2="294"/>'
+      + '<circle cx="70" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<circle cx="165" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<circle cx="250" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<circle cx="325" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<circle cx="390" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<circle cx="445" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<circle cx="490" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<circle cx="525" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<circle cx="550" cy="294" r="14" stroke="#c8433a" stroke-width="3" '
+      + 'fill="#c8433a"/>'
+      + '<text x="320" y="356" font-size="24" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">not like this, it speeds up</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'bt-1',
