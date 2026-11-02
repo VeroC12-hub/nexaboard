@@ -1298,3 +1298,17 @@
 }
 
 .ne-consent a { color: #2563eb; }
+
+/* The two lines under the consent box saying what is actually kept.
+
+   Smaller than the consent itself, which is a statement the person makes,
+   but not fine print: it is set at a size somebody reads rather than skips,
+   because a learner deciding whether to trust this with their schoolwork
+   should get the answer here and not only behind a link. */
+.ne-consent-note {
+  margin: 8px 0 0 28px;
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}

@@ -165,8 +165,10 @@ export default function CreateProfile({
     }
 
     if (!consent) {
-      return setProblem('Please confirm you are eighteen or older, and that '
-        + 'you are the parent, guardian or school of any child you add.')
+      return setProblem(isLearner
+        ? 'Please confirm you have read the privacy notice and the terms.'
+        : 'Please confirm you are eighteen or older, and that you are the '
+          + 'parent, guardian or school of any child you add.')
     }
     if (!name.trim()) return setProblem(`${nameLabel} is needed, so you can sign back in.`)
     const pw = passwordProblem(password)
@@ -372,6 +374,21 @@ export default function CreateProfile({
 
           {problem && <p className="ne-bad">{problem}</p>}
 
+          {/* The consent a learner signs is not the consent a parent signs.
+
+              One line asking the person to confirm they are eighteen and
+              the guardian of any child they add was put on all three tabs,
+              and on the learner tab it is wrong in the way that matters: a
+              fourteen year old signing themselves up cannot truthfully tick
+              it, and under the Data Protection Act they could not give that
+              consent even if they did. Asking a child to tick an adult's box
+              is worse than asking nothing, because it produces a record
+              saying an adult agreed when none did.
+
+              So the learner is asked what a learner can actually answer:
+              either they are an adult, or somebody responsible for them
+              knows about this. The platform cannot verify either, and says
+              so plainly rather than pretending the tick is proof. */}
           <label className="ne-consent">
             <input
               type="checkbox"
@@ -379,13 +396,46 @@ export default function CreateProfile({
               onChange={e => setConsent(e.target.checked)}
             />
             <span>
-              I am 18 or older, and I am the parent, guardian or school of
-              any child I add. I have read the{' '}
+              {isLearner ? (
+                /* No age sentence on the learner tab, by the owner's
+                   decision. A pupil signing up for themselves is asked only
+                   to have read the two documents, which is something they
+                   can answer truthfully and which costs them one tick.
+
+                   The trade, stated so nobody has to rediscover it: there
+                   is then no record of a guardian's basis for a child's
+                   data, which is the thing a school or the Data Protection
+                   Commission would ask about. The parent and school tabs
+                   still carry it, and if that question is ever asked the
+                   answer is a guardian contact field here, not a stronger
+                   sentence. */
+                <>I have read the{' '}</>
+              ) : (
+                <>
+                  I am 18 or older, and I am the parent, guardian or school
+                  of any child I add. I have read the{' '}
+                </>
+              )}
               <a href="/privacy" target="_blank" rel="noreferrer">privacy notice</a>
               {' '}and the{' '}
               <a href="/terms" target="_blank" rel="noreferrer">terms</a>.
             </span>
           </label>
+
+          {/* What is held about them, in two lines, where they are being
+              asked to hand it over. A link to a notice is the lawful
+              minimum and almost nobody opens one; a learner deciding
+              whether to trust this with their schoolwork deserves the
+              answer on the page they are deciding on. */}
+          {isLearner && (
+            <p className="ne-consent-note">
+              We keep your name, your year, how you like to be taught, and
+              the questions you answer, which is what decides what you are
+              taught next. No date of birth, no address, no phone number, no
+              photograph. Your work stays on this device and on your own
+              account, and nobody else can see it unless you join a school.
+            </p>
+          )}
 
           <div className="ne-make-go">
             <button className="ne-btn ne-btn-go" disabled={busy} onClick={submit}>
