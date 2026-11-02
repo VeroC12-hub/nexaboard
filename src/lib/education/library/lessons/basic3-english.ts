@@ -44,7 +44,7 @@ teach({
   mechanism:
     'Here is the test for a good description. '
     + 'Could a stranger find the thing using only your words? '
-    + 'If ten bags are on the table, "a bag" helps nobody. '
+    + 'If five bags are on the table, "a bag" helps nobody. '
     + 'So pick the things that are true of yours and not of the others. '
     + 'Those are the useful words. The rest is filling.',
 
@@ -100,8 +100,8 @@ teach({
   traps: [
     {
       mistake: 'Saying how you feel about the thing instead of what it looks like.',
-      why: '"A nice bag" tells nobody which bag. '
-        + 'Nice is in your head. Red is on the bag.',
+      why: 'A listener cannot see what you feel. '
+        + 'They can see what is on the bag.',
     },
     {
       mistake: 'Listing everything you can see.',
@@ -121,6 +121,51 @@ teach({
     + 'The test never changes. '
     + 'Could somebody follow your words and get it right?',
 
+  figure: {
+    alt: 'Five plain bags drawn in a row on a table. The third bag has a '
+      + 'broken strap, and it is labelled broken strap. Underneath, saying '
+      + 'a bag is marked as fitting all five, so nobody can tell which one '
+      + 'you mean, and saying the bag with the broken strap is marked as '
+      + 'fitting one, so somebody can find it.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Five bags on the table</text>'
+      + '<rect x="24" y="56" width="80" height="78"/>'
+      + '<path d="M 44 56 Q 64 26 84 56"/>'
+      + '<rect x="148" y="56" width="80" height="78"/>'
+      + '<path d="M 168 56 Q 188 26 208 56"/>'
+      + '<rect x="272" y="56" width="80" height="78" stroke="#0f8a4d"/>'
+      + '<path d="M 292 56 Q 300 36 307 30" stroke="#0f8a4d"/>'
+      + '<path d="M 332 56 Q 324 36 317 30" stroke="#0f8a4d"/>'
+      + '<rect x="396" y="56" width="80" height="78"/>'
+      + '<path d="M 416 56 Q 436 26 456 56"/>'
+      + '<rect x="520" y="56" width="80" height="78"/>'
+      + '<path d="M 540 56 Q 560 26 580 56"/>'
+      + '<line x1="312" y1="134" x2="312" y2="144" stroke="#0f8a4d"/>'
+      + '<text x="312" y="164" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">broken strap</text>'
+      + '<text x="320" y="216" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">You say "a bag"</text>'
+      + '<text x="320" y="242" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">That fits all five. Nobody can tell which.</text>'
+      + '<line x1="140" y1="268" x2="500" y2="268" stroke-width="2"/>'
+      + '<text x="320" y="310" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">You say "the bag with the broken strap"</text>'
+      + '<text x="320" y="336" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">That fits one. Now they can find it.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Four things you could say about a bag, and whether each one '
+      + 'helps',
+    columns: ['What you say', 'Does it help?', 'Why'],
+    rows: [
+      ['A nice bag', 'No', 'Nice is in your head, not on the bag'],
+      ['A bag', 'No', 'It fits all five bags on the table'],
+      ['A red bag', 'Sometimes', 'Only if no other bag is red'],
+      [
+        'A red bag with a broken strap',
+        'Yes',
+        'Only one bag has that strap',
+      ],
+    ],
+    note: 'The words that help are the ones true of yours and not true of '
+      + 'the others.',
+  }],
   questions: [
     {
       id: 'desc-1',
@@ -181,11 +226,8 @@ teach({
 
   mechanism:
     'The marks on the page are there for your voice. '
-    + 'A full stop means drop your voice and pause. '
-    + 'A comma means a small pause, no drop. '
-    + 'A question mark means lift your voice at the end. '
-    + 'Read a page with no pauses and listen to it. '
-    + 'The words all run together and the meaning is lost. '
+    + 'Read a page with no pauses at all and listen to it. '
+    + 'The words run together and the meaning is lost. '
     + 'That is what the marks are for.',
 
   recap:
@@ -257,6 +299,39 @@ teach({
     + 'They slow down at the exciting part. '
     + 'None of that is in the words. It is all in how they read them.',
 
+  figure: {
+    alt: 'Three short sentences, each with a line drawn under it to show '
+      + 'what the voice does. Under Ama went home the line runs level and '
+      + 'then drops at the full stop. Under Are you coming the line runs '
+      + 'level and then lifts at the question mark. Under Ama, come here '
+      + 'the line stays level with a small upright tick at the comma for a '
+      + 'short breath.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">The marks are there for your voice</text>'
+      + '<text x="36" y="96" font-size="19" text-anchor="start" fill="currentColor" stroke="none">Ama went home.</text>'
+      + '<polyline points="36,124 170,124 200,152" stroke="#0f8a4d"/>'
+      + '<text x="236" y="140" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">full stop: the voice drops</text>'
+      + '<text x="36" y="216" font-size="19" text-anchor="start" fill="currentColor" stroke="none">Are you coming?</text>'
+      + '<polyline points="36,244 170,244 200,216" stroke="#0f8a4d"/>'
+      + '<text x="236" y="238" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">question mark: the voice lifts</text>'
+      + '<text x="36" y="326" font-size="19" text-anchor="start" fill="currentColor" stroke="none">Ama, come here.</text>'
+      + '<line x1="36" y1="354" x2="180" y2="354" stroke="#0f8a4d"/>'
+      + '<line x1="76" y1="342" x2="76" y2="366" stroke="#0f8a4d"/>'
+      + '<text x="236" y="348" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">comma: a small breath only</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What each mark tells your voice to do',
+    columns: ['Mark', 'How long you stop', 'Your voice'],
+    rows: [
+      ['A comma', 'A small breath', 'Stays level'],
+      ['A full stop', 'A real pause', 'Drops'],
+      ['A question mark', 'A real pause', 'Lifts at the end'],
+      ['An exclamation mark', 'A real pause', 'Gets stronger'],
+    ],
+    note: 'Nothing on the page ever tells you to read fast. The marks only '
+      + 'tell you to stop, or to change your voice.',
+  }],
   questions: [
     {
       id: 'ral-1',
@@ -396,6 +471,50 @@ teach({
     + 'That is harder, and it is still not guessing. '
     + 'You can still point at the two lines you used.',
 
+  figure: {
+    alt: 'A box holding four lines of a passage about Kofi and his brown '
+      + 'dog Bono, with the first line ringed. Below the box is the '
+      + 'question what colour is the dog, and an arrow runs from the '
+      + 'question round the outside of the box to the ringed line. Beside '
+      + 'the passage a thought bubble saying I know a dog that is black is '
+      + 'crossed out and marked as being in your head. Underneath, the '
+      + 'answer brown, with a note that you can point at the line, so you '
+      + 'are not guessing.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">The answer is in the passage</text>'
+      + '<rect x="24" y="44" width="400" height="150"/>'
+      + '<rect x="32" y="56" width="384" height="30" stroke="#0f8a4d"/>'
+      + '<text x="44" y="78" font-size="16" text-anchor="start" fill="currentColor" stroke="none">Kofi has a brown dog called Bono.</text>'
+      + '<text x="44" y="112" font-size="16" text-anchor="start" fill="currentColor" stroke="none">It sleeps under his bed.</text>'
+      + '<text x="44" y="144" font-size="16" text-anchor="start" fill="currentColor" stroke="none">Bono eats rice and bones.</text>'
+      + '<text x="44" y="176" font-size="16" text-anchor="start" fill="currentColor" stroke="none">He takes Bono out every day.</text>'
+      + '<ellipse cx="534" cy="100" rx="96" ry="56"/>'
+      + '<text x="534" y="94" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">I know a dog</text>'
+      + '<text x="534" y="118" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">that is black</text>'
+      + '<line x1="472" y1="60" x2="596" y2="140" stroke="#c8433a"/>'
+      + '<line x1="596" y1="60" x2="472" y2="140" stroke="#c8433a"/>'
+      + '<text x="534" y="186" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">That is in your head.</text>'
+      + '<polyline points="224,236 10,236 10,71 26,71" stroke="#0f8a4d"/>'
+      + '<polygon points="36,71 22,64 22,78" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="224" y="258" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">What colour is the dog?</text>'
+      + '<text x="320" y="312" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">Brown. It is in the first line.</text>'
+      + '<text x="320" y="344" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">You can point at it, so you did not guess.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What to hunt for in the passage, question word by question '
+      + 'word',
+    columns: ['The question asks', 'Hunt for', 'An answer might be'],
+    rows: [
+      ['Who', 'A name', 'Kofi'],
+      ['What colour', 'A colour word', 'brown'],
+      ['Where', 'A place', 'the market'],
+      ['When', 'A day or a time', 'on Saturday'],
+      ['Why', 'The word because or the word so', 'because it rained'],
+    ],
+    note: 'If the word is not there, read the lines around where it should '
+      + 'be. The passage may say it another way.',
+  }],
   questions: [
     {
       id: 'aft-1',
@@ -473,12 +592,10 @@ teach({
     + 'This is about how a naming word changes when there is more than one.',
 
   method: [
-    'Most words: add s. One cat, two cats.',
-    'Word ends in s, x, ch or sh: add es. One box, two boxes.',
-    'Word ends in a consonant then y: change the y to i and add es. '
-      + 'One baby, two babies.',
-    'Some words change shape: one foot, two feet. One child, two children.',
-    'A few do not change at all: one sheep, two sheep.',
+    'Ask first: is it one, or more than one?',
+    'More than one? Look at how the word ends.',
+    'The last letters decide what you add.',
+    'Then check it is not one of the old words that change shape instead.',
     'Not sure? Say it out loud. Your ear often knows.',
   ],
 
@@ -539,6 +656,44 @@ teach({
     + 'You cannot have one trouser. '
     + 'Things made of two matching parts often work this way.',
 
+  figure: {
+    alt: 'Two boxes side by side. The left box holds old words said every '
+      + 'day, foot, child, man and tooth, and says they change shape to '
+      + 'feet, children, men and teeth. The right box holds newer words, '
+      + 'phone, bus, car and radio, and says they all simply take s or es. '
+      + 'Underneath, a note that the odd words are the ones you hear most, '
+      + 'so your ear will learn them.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="28" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">Why a few words are odd</text>'
+      + '<rect x="20" y="48" width="286" height="196" stroke="#0f8a4d"/>'
+      + '<text x="163" y="78" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">old words you say every day</text>'
+      + '<text x="163" y="116" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">foot    child</text>'
+      + '<text x="163" y="150" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">man    tooth</text>'
+      + '<text x="163" y="190" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">they change shape:</text>'
+      + '<text x="163" y="218" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">feet, children, men, teeth</text>'
+      + '<rect x="334" y="48" width="286" height="196"/>'
+      + '<text x="477" y="78" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">newer words</text>'
+      + '<text x="477" y="116" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">phone    bus</text>'
+      + '<text x="477" y="150" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">car    radio</text>'
+      + '<text x="477" y="190" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">they all take s or es:</text>'
+      + '<text x="477" y="218" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">phones, buses, cars, radios</text>'
+      + '<text x="320" y="296" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">The odd words are the ones you hear most.</text>'
+      + '<text x="320" y="326" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">So your ear will learn them for you.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'How a naming word changes when there is more than one',
+    columns: ['Kind of word', 'What happens', 'One', 'More than one'],
+    rows: [
+      ['Most words', 'Add s', 'cat', 'cats'],
+      ['Ends in s, x, ch or sh', 'Add es', 'box', 'boxes'],
+      ['Ends in a letter then y', 'The y becomes ies', 'baby', 'babies'],
+      ['An old everyday word', 'The whole word changes', 'foot', 'feet'],
+      ['A few animals', 'Nothing changes', 'sheep', 'sheep'],
+    ],
+    note: 'Say it out loud before you write it. Nobody can say boxs, which '
+      + 'is why box takes es.',
+  }],
   questions: [
     {
       id: 'plu-1',
@@ -612,9 +767,8 @@ teach({
     'Open the book at any full page.',
     'Start reading it to yourself.',
     'Hold up one finger for each word you cannot read.',
-    'Got to five fingers before the end of the page? Too hard for now.',
-    'No fingers at all? It may be too easy, so look for a longer one.',
-    'One to three fingers is about right.',
+    'Count your fingers when you reach the end of the page.',
+    'That number tells you whether the book is right for you today.',
     'Also ask: do you actually want to know what happens?',
   ],
 
@@ -678,6 +832,55 @@ teach({
     + 'It will feel easy now. '
     + 'That is how you can see your own reading growing.',
 
+  figure: {
+    alt: 'A drawing of a hand with its four fingers and thumb numbered one '
+      + 'to five, under a note that you hold up one finger for each word '
+      + 'on the page you cannot read. Below it a scale in four parts: no '
+      + 'hard words is too easy, one to three is just right, four is '
+      + 'nearly too hard, and five or more is too hard. Underneath, a note '
+      + 'that too hard today does not mean you are a bad reader, it means '
+      + 'this book is wrong for today.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="26" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">The five finger test</text>'
+      + '<rect x="252" y="100" width="124" height="46" rx="10"/>'
+      + '<rect x="258" y="44" width="22" height="58" rx="10"/>'
+      + '<text x="269" y="80" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<rect x="288" y="44" width="22" height="58" rx="10"/>'
+      + '<text x="299" y="80" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<rect x="318" y="44" width="22" height="58" rx="10"/>'
+      + '<text x="329" y="80" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<rect x="348" y="44" width="22" height="58" rx="10"/>'
+      + '<text x="359" y="80" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<rect x="380" y="108" width="52" height="22" rx="10"/>'
+      + '<text x="406" y="124" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">5</text>'
+      + '<text x="320" y="178" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">One finger for each word you cannot read</text>'
+      + '<rect x="40" y="206" width="100" height="48"/>'
+      + '<text x="90" y="237" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<rect x="140" y="206" width="190" height="48" stroke="#0f8a4d"/>'
+      + '<text x="235" y="237" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">1 to 3</text>'
+      + '<rect x="330" y="206" width="100" height="48"/>'
+      + '<text x="380" y="237" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<rect x="430" y="206" width="170" height="48" stroke="#c8433a"/>'
+      + '<text x="515" y="237" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">5 or more</text>'
+      + '<text x="90" y="280" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">too easy</text>'
+      + '<text x="235" y="280" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">just right</text>'
+      + '<text x="380" y="280" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">nearly</text>'
+      + '<text x="515" y="280" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">too hard</text>'
+      + '<text x="320" y="330" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">Too hard today does not mean you read badly.</text>'
+      + '<text x="320" y="358" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">It means this book is wrong for today.</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'What the number of hard words on a page tells you',
+    columns: ['Hard words on one page', 'What it means', 'What to do'],
+    rows: [
+      ['None at all', 'Too easy for you', 'Look for a longer book'],
+      ['One to three', 'About right', 'Take it'],
+      ['Four', 'Getting hard', 'Take it if you want the story'],
+      ['Five or more', 'Too hard for now', 'Put it back, try next term'],
+    ],
+    note: 'The test works on any book, in any language, at any age.',
+  }],
   questions: [
     {
       id: 'book-1',
