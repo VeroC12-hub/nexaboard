@@ -40,6 +40,35 @@ const Privacy = lazy(() => import('./pages/Legal').then(m => ({ default: m.Priva
 const Terms = lazy(() => import('./pages/Legal').then(m => ({ default: m.Terms })))
 
 
+/**
+ * Whether this is the Learning-Pal domain rather than the whiteboard one.
+ *
+ * ── Why the host decides anything at all ───────────────────────────────────
+ *
+ * One deployment serves two products. Phase one is the whiteboard: the
+ * landing page, the dashboard, a live class. Phase two is the education
+ * product: the learner app and the school console. They share a build, a
+ * branch and a lesson library, and keeping them in one project is what
+ * makes that possible.
+ *
+ * What they must not share is a front door. Somebody who types
+ * learning-pal.com has come for the teaching, and landing them on a pitch
+ * for a classroom whiteboard is the wrong answer, while the existing
+ * vercel.app address must keep opening exactly what it opens today.
+ *
+ * ── Why here and not in vercel.json ───────────────────────────────────────
+ *
+ * Because this is a single page app whose every path is rewritten to
+ * index.html. A host rewrite to /study would be rewritten straight back to
+ * index.html with the address bar still reading /, and the router would
+ * render the landing page anyway. The router is where the decision can
+ * actually be made, and it works in development too.
+ */
+const LEARNING_PAL = /(^|\.)learning-pal\.com$/i
+
+const onLearningPal = (): boolean =>
+  typeof window !== 'undefined' && LEARNING_PAL.test(window.location.hostname)
+
 function App() {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
@@ -92,7 +121,14 @@ function App() {
       <Boundary>
       <Suspense fallback={<div className="nx-route-loading" role="status" aria-label="Loading" />}>
       <Routes>
-        <Route path="/" element={<Landing user={user} />} />
+        {/* The front door depends on which door it is. On learning-pal.com
+            the root is the learner app; everywhere else it is the
+            whiteboard landing page it has always been. */}
+        <Route path="/" element={
+          onLearningPal()
+            ? <Navigate to="/study" replace />
+            : <Landing user={user} />
+        } />
         <Route path="/auth" element={user ? <Navigate to="/dashboard" /> : <Auth />} />
         <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/auth" />} />
         <Route path="/session/:id" element={user ? <Session user={user} /> : <Navigate to="/auth" />} />
