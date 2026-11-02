@@ -107,7 +107,7 @@ export default function TeenApp({
     <div className="teen">
       <div className="teen-bar">
         <div className="teen-bar-in">
-          <span className="teen-wordmark">NEXA<span>·</span>EDU</span>
+          <span className="teen-wordmark"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
           <span className="teen-count is-xp" title="Points">
             <Icon mark="star" size={18} /> {standing.xp}
           </span>

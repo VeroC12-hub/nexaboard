@@ -291,7 +291,7 @@ function Bar({ isSchool, count, who, onAdd, onSignOut }: {
   return (
     <div className="gd-bar">
       <div className="gd-bar-in">
-        <span className="gd-wordmark">NEXA<i>·</i>EDU</span>
+        <span className="gd-wordmark"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
         <span className="gd-role">{isSchool ? 'School' : 'Parent'}</span>
         {count > 0 && <span className="gd-role">{count} in your care</span>}
         <span className="gd-bar-spacer" />

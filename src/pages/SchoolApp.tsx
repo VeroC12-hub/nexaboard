@@ -37,7 +37,7 @@ type ScreenId =
 function Brand({ tag }: { tag?: string }) {
   return (
     <span className="nb-brand">
-      NEXA<span className="dot">•</span>EDU
+      <span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span>
       {tag && <span className="tag">{tag}</span>}
     </span>
   )
@@ -2134,7 +2134,7 @@ function NoSchema({
         <div style={{ marginBottom: 20 }}><Brand /></div>
         <h1>The database is not set up yet</h1>
         <p>
-          NEXA•EDU is connected to Supabase, but the tables do not exist. Run{' '}
+          Learning-Pal is connected to Supabase, but the tables do not exist. Run{' '}
           <code style={{ fontSize: 12.5 }}>supabase/RUN_ME_all_migrations.sql</code> then{' '}
           <code style={{ fontSize: 12.5 }}>RUN_ME_2_accounts.sql</code> in the SQL editor.
         </p>
@@ -4162,7 +4162,7 @@ function Messages() {
           <Panel title="Reply" pad>
             {sent ? (
               <p style={{ margin: 0, fontSize: 13.5, color: 'var(--good)' }}>
-                Sent to {open.from}. They will see it next time they open NEXA•EDU.
+                Sent to {open.from}. They will see it next time they open Learning-Pal.
               </p>
             ) : (
               <>

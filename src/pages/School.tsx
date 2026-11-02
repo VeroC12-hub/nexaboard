@@ -565,7 +565,7 @@ export default function School({
     <div className="gd">
       <div className="gd-bar">
         <div className="gd-bar-in">
-          <span className="gd-wordmark">NEXA<i>·</i>EDU</span>
+          <span className="gd-wordmark"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
           <span className="gd-role">School</span>
           <span className="gd-bar-spacer" />
           <button

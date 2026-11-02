@@ -143,14 +143,28 @@
   white-space: nowrap;
 }
 
-.lp-mark b { color: var(--lp-blue); font-weight: 800; }
-.lp-mark i { color: var(--lp-orange); font-style: normal; font-weight: 800; }
-.lp-mark em { color: var(--lp-orange); font-style: normal; font-weight: 800; }
+/* The parts are selected with the element in front of the class so these
+   beat the older wordmark rules they now sit inside: `.sch-brand-name i`
+   and `.teen-wordmark span` both style what used to be the dot, and at
+   equal specificity the later stylesheet was winning and painting the
+   hyphen the wrong colour. */
+span.lp-mark b { color: var(--lp-blue); font-weight: 800; }
+span.lp-mark i { color: var(--lp-orange); font-style: normal; font-weight: 800; }
+span.lp-mark em { color: var(--lp-orange); font-style: normal; font-weight: 800; }
 
-/* On a dark band the blue goes muddy, so both halves lighten. */
-.nx-dark .lp-mark b,
-.ne-dark .lp-mark b { color: #7cc0e8; }
-.nx-dark .lp-mark i,
-.nx-dark .lp-mark em,
-.ne-dark .lp-mark i,
-.ne-dark .lp-mark em { color: #f6a95c; }
+/* On a dark rail or bar the blue goes muddy and the orange goes brown, so
+   both halves lighten. The learner dashboard rail, the teen bar and the
+   school console are all dark navy. */
+.sch-rail span.lp-mark b,
+.teen-bar span.lp-mark b,
+.nx-dark span.lp-mark b,
+.ne-dark span.lp-mark b { color: #7cc0e8; }
+
+.sch-rail span.lp-mark i,
+.sch-rail span.lp-mark em,
+.teen-bar span.lp-mark i,
+.teen-bar span.lp-mark em,
+.nx-dark span.lp-mark i,
+.nx-dark span.lp-mark em,
+.ne-dark span.lp-mark i,
+.ne-dark span.lp-mark em { color: #f6a95c; }

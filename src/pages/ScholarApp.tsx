@@ -206,7 +206,7 @@ export default function ScholarApp({
           {/* Wrapped. Making the brand row a flex container to place the close
               button turned NEXA, the dot and EDU into three separate flex
               items and spread the wordmark across the whole drawer. */}
-          <span className="sch-brand-name">NEXA<i>·</i>EDU</span>
+          <span className="sch-brand-name"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
           {/* A way out from inside the drawer.
 
               Opened on a phone, the rail covered the burger that opened it and
