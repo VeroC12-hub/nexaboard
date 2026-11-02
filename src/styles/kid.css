@@ -1211,3 +1211,26 @@
 
   .kid-banner { padding: 20px 24px; }
 }
+
+/* A wide laptop takes three. Nine games in two columns is five rows, which is
+   just over the fold on a 1440 by 900 window, so the list ended with one card
+   alone below the edge: the one arrangement that makes a child scroll to learn
+   there was nothing worth scrolling for. Three columns is three rows with room
+   to spare. The titles wrap more at this width, and a row that takes two lines
+   only grows its own row. */
+@media (min-width: 1200px) {
+  .kid-list { grid-template-columns: repeat(3, 1fr); }
+
+  /* No clamp in a three column list.
+
+     Two lines is the right limit for a full width row, where a third line
+     would mean a title long enough to be a paragraph. At a third of the width
+     the honest titles reach three lines on their own, and the clamp cut
+     "Moving things does not change how many" to "how...", which asks a child
+     who is still learning to read to guess at the game. A row that needs a
+     third line grows its own row and the two beside it. */
+  .kid-list .kid-row-title {
+    display: block;
+    overflow: visible;
+  }
+}

@@ -275,25 +275,30 @@ function SubjectPage({ subject, attempts, worked, onOpen, onBack }: Seen & {
           <Pal who={subject.pal} size={68} mood="rest" />
           <span>Nothing here. Try another one.</span>
         </div>
-      ) : shown.map((t, i) => {
-        const mine = attempts.filter(a => a.objectiveId === t.id)
-        const right = mine.filter(a => a.isCorrect === true).length
-        return (
-          <button key={t.id} className="kid-row" onClick={() => onOpen(subject.id, t.id)}>
-            {/* A friend per row rather than the subject's symbol repeated.
-                The subject is already named in the banner above, so four
-                identical tiles down the page carried no information at all,
-                and these are decoration that does not claim any: nothing
-                about the character says anything about the topic. */}
-            <span className="kid-row-art"><Pal who={palAt(i)} size={38} mood="wave" /></span>
-            <span className="kid-row-body">
-              <span className="kid-row-title">{t.title}</span>
-              <KidBar done={right} total={Math.max(10, right)} />
-            </span>
-            <span className="kid-go" aria-hidden><Icon mark="play" size={18} /></span>
-          </button>
-        )
-      })}
+      ) : (
+        <div className="kid-list">
+          {shown.map((t, i) => {
+            const mine = attempts.filter(a => a.objectiveId === t.id)
+            const right = mine.filter(a => a.isCorrect === true).length
+            return (
+              <button key={t.id} className="kid-row" onClick={() => onOpen(subject.id, t.id)}>
+                {/* A friend per row rather than the subject's symbol repeated.
+                    The subject is already named in the banner above, so four
+                    identical tiles down the page carried no information at
+                    all, and these are decoration that does not claim any:
+                    nothing about the character says anything about the
+                    topic. */}
+                <span className="kid-row-art"><Pal who={palAt(i)} size={38} mood="wave" /></span>
+                <span className="kid-row-body">
+                  <span className="kid-row-title">{t.title}</span>
+                  <KidBar done={right} total={Math.max(10, right)} />
+                </span>
+                <span className="kid-go" aria-hidden><Icon mark="play" size={18} /></span>
+              </button>
+            )
+          })}
+        </div>
+      )}
     </>
   )
 }
@@ -326,21 +331,31 @@ function Play({ profile, subjects, onOpen }: Seen) {
           <Pal who="bird" size={68} mood="rest" />
           <span>No games for your topics yet. There are lessons waiting though.</span>
         </div>
-      ) : rows.slice(0, 12).map(({ subject, topic }, i) => (
-        <button
-          key={topic.id}
-          className="kid-row"
-          onClick={() => onOpen(subject.id, topic.id)}>
-          {/* By position, so the row above and below are never the same
-              friend. Hashing the id put two of the same next to each other. */}
-          <span className="kid-row-art"><Pal who={palAt(i)} size={40} mood="wave" /></span>
-          <span className="kid-row-body">
-            <span className="kid-row-title">{topic.title}</span>
-            <span className="kid-row-sub">{subject.name}</span>
-          </span>
-          <span className="kid-go" aria-hidden><Icon mark="play" size={18} /></span>
-        </button>
-      ))}
+      ) : (
+        /* Two across on a laptop, one on a phone: see `.kid-list`. Eight games
+           as one column of full width rows is 700px of mostly empty row, so
+           the last three were below the fold on a screen with room for all of
+           them, and a child had to scroll to find out the list had not
+           ended. */
+        <div className="kid-list">
+          {rows.slice(0, 12).map(({ subject, topic }, i) => (
+            <button
+              key={topic.id}
+              className="kid-row"
+              onClick={() => onOpen(subject.id, topic.id)}>
+              {/* By position, so the row above and below are never the same
+                  friend. Hashing the id put two of the same next to each
+                  other. */}
+              <span className="kid-row-art"><Pal who={palAt(i)} size={40} mood="wave" /></span>
+              <span className="kid-row-body">
+                <span className="kid-row-title">{topic.title}</span>
+                <span className="kid-row-sub">{subject.name}</span>
+              </span>
+              <span className="kid-go" aria-hidden><Icon mark="play" size={18} /></span>
+            </button>
+          ))}
+        </div>
+      )}
     </>
   )
 }
@@ -741,7 +756,16 @@ export default function KidApp({
       days={standing.daysLearned}
       /* The header's door asks the question rather than leaving. */
       onSignOut={() => setAskGrownUp(true)}
-      onTab={t => { onPanel(t); if (t !== 'home') onSubject(null) }}>
+      /* Just the panel.
+
+         This used to also call `onSubject(null)` for any tab but Home, to
+         close an open subject on the way out. Both of those are one gate and
+         one address, so that was a second navigation that landed on
+         /study/subjects a moment after the first had reached
+         /study/subjects/play, and the second one won: every tab but Learn
+         bounced straight back to Home. `onPanel` already clears the subject,
+         because the gate it builds carries no subject id. */
+      onTab={onPanel}>
 
       {tab === 'home' && (openSubject
         ? <SubjectPage {...seen} subject={openSubject} onBack={() => onSubject(null)} />
