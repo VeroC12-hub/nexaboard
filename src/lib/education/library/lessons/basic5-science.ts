@@ -41,10 +41,6 @@ teach({
 
   mechanism:
     'Every way of separating a mixture works by exploiting a difference. '
-    + 'Sieving uses a difference in size. '
-    + 'Filtering uses the fact that a liquid passes through paper and a '
-    + 'solid does not. '
-    + 'Evaporating uses the fact that water becomes a gas and salt does not. '
     + 'So the question is never "how do I separate this". '
     + 'It is "what is different about these two things", '
     + 'and the method follows from the answer.',
@@ -56,11 +52,9 @@ teach({
 
   method: [
     'Look at the mixture and name the parts.',
-    'Ask what is different about them.',
-    'Different size: sieve, or pick by hand.',
-    'Solid floating in a liquid: filter it.',
-    'Solid dissolved in a liquid: boil the liquid away.',
-    'Iron mixed in: use a magnet.',
+    'Ask what is different about them: size, weight, dissolving, magnetism.',
+    'Choose the way of separating that uses that difference.',
+    'Check it: if the solid dissolved, filtering will not catch it.',
   ],
 
   worked: [
@@ -120,6 +114,65 @@ teach({
     + 'That is why filtered water still has to be boiled, '
     + 'and it is a point worth remembering in the lesson on clean water.',
 
+  figure: {
+    alt: 'Three ways of separating a mixture. A sieve with large pieces held '
+      + 'on the mesh and small ones falling through. A funnel lined with '
+      + 'paper, holding the solid back while the liquid drips into a '
+      + 'beaker. A pan over a flame with steam rising and the dissolved '
+      + 'solid left behind.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="60,136 164,136 154,174 70,174"/>'
+      + '<line x1="70" y1="174" x2="154" y2="174" stroke-width="3" '
+      + 'stroke-dasharray="7 7"/><circle cx="86" cy="124" r="10"/>'
+      + '<circle cx="112" cy="122" r="10"/>'
+      + '<circle cx="138" cy="126" r="10"/>'
+      + '<circle cx="90" cy="202" r="4" fill="currentColor"/>'
+      + '<circle cx="112" cy="216" r="4" fill="currentColor"/>'
+      + '<circle cx="134" cy="200" r="4" fill="currentColor"/>'
+      + '<text x="112" y="326" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">sieve</text>'
+      + '<text x="112" y="356" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">big from small</text>'
+      + '<polygon points="272,132 368,132 332,192 308,192"/>'
+      + '<circle cx="306" cy="152" r="6" fill="currentColor"/>'
+      + '<circle cx="320" cy="146" r="6" fill="currentColor"/>'
+      + '<circle cx="334" cy="154" r="6" fill="currentColor"/>'
+      + '<circle cx="320" cy="208" r="4" fill="currentColor"/>'
+      + '<circle cx="320" cy="226" r="4" fill="currentColor"/>'
+      + '<polygon points="288,240 352,240 346,292 294,292"/>'
+      + '<text x="320" y="326" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">filter</text>'
+      + '<text x="320" y="356" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">solid from liquid</text>'
+      + '<polygon points="482,206 578,206 568,252 492,252"/>'
+      + '<path d="M 508 196 Q 496 174 510 152 Q 520 136 512 120"/>'
+      + '<path d="M 552 196 Q 540 174 554 152 Q 564 136 556 120"/>'
+      + '<polygon points="506,240 515,240 515,249 506,249"/>'
+      + '<polygon points="524,240 533,240 533,249 524,249"/>'
+      + '<polygon points="542,240 551,240 551,249 542,249"/>'
+      + '<line x1="486" y1="300" x2="574" y2="300"/>'
+      + '<polygon points="486,300 496,266 506,300"/>'
+      + '<polygon points="520,300 530,266 540,300"/>'
+      + '<polygon points="554,300 564,266 574,300"/>'
+      + '<text x="530" y="326" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">boil it away</text>'
+      + '<text x="530" y="356" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">dissolved from liquid</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Which difference each way of separating uses',
+    columns: ['Mixture', 'What is different', 'What to do'],
+    rows: [
+      ['Stones in rice', 'Size and weight', 'Pick them out, or sieve'],
+      ['Sand in water', 'Sand does not dissolve', 'Filter it'],
+      ['Salt in water', 'Salt does not evaporate', 'Boil the water away'],
+      ['Iron filings in sand', 'Iron is pulled by a magnet', 'Use a magnet'],
+    ],
+    note: 'Filtering cannot take out the salt, because dissolved salt goes '
+      + 'through the paper with the water.',
+  }],
   questions: [
     {
       id: 'mx-1',
@@ -264,6 +317,42 @@ teach({
     + 'It is not that any one hot year proves anything. '
     + 'It is that the average of thousands of records has moved.',
 
+  figure: {
+    alt: 'A graph of temperature against years. A jagged line jumps up and '
+      + 'down from year to year, and a smooth green line drawn through it '
+      + 'slopes gently upward. One high point of the jagged line is ringed '
+      + 'in red and labelled one hot day, and the key under the graph says '
+      + 'the green line is the pattern across many years.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="42" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">one day is a fact, many years '
+      + 'are a climate</text><line x1="80" y1="80" x2="80" y2="300"/>'
+      + '<line x1="80" y1="300" x2="610" y2="300"/>'
+      + '<text x="80" y="72" font-size="19" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">temperature</text>'
+      + '<text x="600" y="328" font-size="19" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">years</text>'
+      + '<polyline points="90,235 100,250 110,213 120,216 130,182 140,190 '
+      + '150,211 160,213 170,249 180,222 190,220 200,196 210,174 220,200 '
+      + '230,193 240,233 250,230 260,218 270,214 280,171 290,189 300,181 '
+      + '310,207 320,231 330,214 340,226 350,182 360,180 370,178 380,179 '
+      + '390,221 400,209 410,227 420,201 430,175 440,180 450,160 460,201 '
+      + '470,203 480,216 490,218 500,178 510,184 520,154 530,175 540,195 '
+      + '550,199 560,225 570,188 580,186 590,162"/>'
+      + '<line x1="90" y1="214" x2="590" y2="183" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<circle cx="280" cy="171" r="15" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="296" y1="163" x2="348" y2="131" stroke="#c8433a"/>'
+      + '<text x="354" y="127" font-size="19" text-anchor="start" '
+      + 'fill="#c8433a" stroke="none">one hot day</text>'
+      + '<line x1="90" y1="358" x2="134" y2="358" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="142" y="364" font-size="19" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">the pattern across many years</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'wcl-1',
@@ -344,12 +433,10 @@ teach({
     + 'This is how the body gets at those.',
 
   method: [
-    'Start at the mouth: teeth break food up, spit begins to soften it.',
-    'The gullet carries it down to the stomach.',
-    'The stomach churns it and adds juices.',
-    'The small intestine breaks it down further and absorbs the goodness.',
-    'The large intestine takes back water from what is left.',
-    'The rest leaves the body as waste.',
+    'Follow the food in order, from the mouth to the end of the tube.',
+    'At each part, say what happens to the food there.',
+    'Remember that almost all the absorbing is in the small intestine.',
+    'Whatever cannot be broken down leaves the body as waste.',
   ],
 
   worked: [
@@ -409,6 +496,51 @@ teach({
     + 'Spread flat it would cover far more than you would guess from the '
     + 'size of a person.',
 
+  figure: {
+    alt: 'The gut drawn as one long tube. Food enters at the mouth, goes '
+      + 'down the gullet into the stomach, then through the coiled small '
+      + 'intestine, then the wider large intestine, and what is left leaves '
+      + 'at the end. Each part is named.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="170" cy="60" r="22"/>'
+      + '<text x="206" y="66" font-size="20" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">mouth</text>'
+      + '<line x1="170" y1="82" x2="170" y2="146" stroke-width="13"/>'
+      + '<text x="206" y="122" font-size="20" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">gullet</text>'
+      + '<path d="M 170 146 Q 236 150 240 192 Q 242 230 190 234 Q 144 236 '
+      + '142 192 Q 142 162 170 146 Z"/>'
+      + '<text x="266" y="196" font-size="20" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">stomach</text>'
+      + '<path d="M 190 234 Q 124 246 132 272 Q 142 298 206 290 Q 268 282 '
+      + '270 308 Q 272 334 196 334" stroke-width="10"/>'
+      + '<text x="300" y="292" font-size="20" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">small intestine</text>'
+      + '<path d="M 196 334 Q 272 346 300 368" stroke-width="17"/>'
+      + '<text x="336" y="374" font-size="20" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">large intestine</text>'
+      + '<line x1="170" y1="24" x2="170" y2="44" stroke="#0f8a4d"/>'
+      + '<polyline points="160,31 170,44 180,31" stroke="#0f8a4d"/>'
+      + '<text x="170" y="20" font-size="18" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">food in</text></svg>',
+  },
+  tables: [{
+    caption: 'What happens to food at each part of the gut',
+    columns: ['Part', 'What happens there'],
+    rows: [
+      ['Mouth', 'Teeth break the food up and spit begins to soften it'],
+      ['Gullet', 'Carries it down to the stomach'],
+      ['Stomach', 'Churns it and adds juices'],
+      [
+        'Small intestine',
+        'Breaks it down further, and takes the goodness into the blood',
+      ],
+      ['Large intestine', 'Takes back water from what is left'],
+    ],
+    note: 'Almost all the absorbing happens in the small intestine, which is '
+      + 'narrow rather than short.',
+  }],
   questions: [
     {
       id: 'dg-1',
@@ -559,6 +691,45 @@ teach({
     + 'which is why it gets harder to climb stairs long before anything '
     + 'else shows.',
 
+  figure: {
+    alt: 'A head with the nose marked, a windpipe running down from it and '
+      + 'splitting into two lungs. A green arrow points out of the lungs '
+      + 'labelled oxygen into the blood, and a second arrow points into the '
+      + 'lungs labelled carbon dioxide out of the blood, with a note that '
+      + 'both happen at once in the same place.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="150" cy="78" r="42"/>'
+      + '<circle cx="138" cy="92" r="5" fill="currentColor"/>'
+      + '<circle cx="162" cy="92" r="5" fill="currentColor"/>'
+      + '<line x1="234" y1="92" x2="170" y2="92"/>'
+      + '<text x="242" y="98" font-size="20" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">nose</text>'
+      + '<line x1="150" y1="120" x2="150" y2="178" stroke-width="13"/>'
+      + '<line x1="150" y1="178" x2="112" y2="208" stroke-width="11"/>'
+      + '<line x1="150" y1="178" x2="188" y2="208" stroke-width="11"/>'
+      + '<line x1="234" y1="148" x2="160" y2="148"/>'
+      + '<text x="242" y="154" font-size="20" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">windpipe</text>'
+      + '<path d="M 112 204 Q 62 242 70 302 Q 78 342 120 334 Q 144 328 142 '
+      + '282 Q 140 234 112 204 Z"/>'
+      + '<path d="M 188 204 Q 238 242 230 302 Q 222 342 180 334 Q 156 328 '
+      + '158 282 Q 160 234 188 204 Z"/>'
+      + '<text x="150" y="372" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">lungs</text>'
+      + '<line x1="252" y1="248" x2="336" y2="248" stroke="#0f8a4d"/>'
+      + '<polyline points="323,238 336,248 323,258" stroke="#0f8a4d"/>'
+      + '<text x="346" y="254" font-size="19" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">oxygen into the blood</text>'
+      + '<line x1="336" y1="302" x2="252" y2="302"/>'
+      + '<polyline points="265,292 252,302 265,312"/>'
+      + '<text x="346" y="308" font-size="18" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">carbon dioxide out of the '
+      + 'blood</text>'
+      + '<text x="346" y="352" font-size="18" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">both at once, in the same '
+      + 'place</text></svg>',
+  },
   questions: [
     {
       id: 'br-1',
@@ -712,6 +883,54 @@ teach({
     + 'A web is harder to draw and much harder to break, '
     + 'because when one food runs out there are others.',
 
+  figure: {
+    alt: 'A food chain drawn left to right as four named boxes, grass, '
+      + 'grasshopper, lizard and hawk, joined by green arrows that point '
+      + 'from the food towards the eater. The sun is drawn above the grass '
+      + 'with a green dotted arrow down to it. Above the chain it says the '
+      + 'arrow points the way the energy goes, and below it says every '
+      + 'chain starts with a plant.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="44" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">the arrow points the way the energy '
+      + 'goes</text><circle cx="77" cy="110" r="22"/>'
+      + '<line x1="107" y1="110" x2="119" y2="110"/>'
+      + '<line x1="98" y1="131" x2="107" y2="140"/>'
+      + '<line x1="77" y1="140" x2="77" y2="152"/>'
+      + '<line x1="56" y1="131" x2="47" y2="140"/>'
+      + '<line x1="47" y1="110" x2="35" y2="110"/>'
+      + '<line x1="56" y1="89" x2="47" y2="80"/>'
+      + '<line x1="77" y1="80" x2="77" y2="68"/>'
+      + '<line x1="98" y1="89" x2="107" y2="80"/>'
+      + '<text x="150" y="116" font-size="18" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">the sun</text>'
+      + '<line x1="77" y1="156" x2="77" y2="186" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<polyline points="69,176 77,194 85,176" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<polygon points="15,200 139,200 139,270 15,270"/>'
+      + '<text x="77" y="242" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">grass</text>'
+      + '<polygon points="177,200 301,200 301,270 177,270"/>'
+      + '<text x="239" y="242" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">grasshopper</text>'
+      + '<line x1="143" y1="235" x2="173" y2="235" stroke="#0f8a4d"/>'
+      + '<polyline points="160,225 173,235 160,245" stroke="#0f8a4d"/>'
+      + '<polygon points="339,200 463,200 463,270 339,270"/>'
+      + '<text x="401" y="242" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">lizard</text>'
+      + '<line x1="305" y1="235" x2="335" y2="235" stroke="#0f8a4d"/>'
+      + '<polyline points="322,225 335,235 322,245" stroke="#0f8a4d"/>'
+      + '<polygon points="501,200 625,200 625,270 501,270"/>'
+      + '<text x="563" y="242" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">hawk</text>'
+      + '<line x1="467" y1="235" x2="497" y2="235" stroke="#0f8a4d"/>'
+      + '<polyline points="484,225 497,235 484,245" stroke="#0f8a4d"/>'
+      + '<text x="320" y="330" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">every chain starts with a '
+      + 'plant</text></svg>',
+  },
   questions: [
     {
       id: 'fc-1',
@@ -856,6 +1075,55 @@ teach({
     + 'and it fails at night and under cloud, '
     + 'which is the whole history of timekeeping in one sentence.',
 
+  figure: {
+    alt: 'A lamp, an upright object and a wall in a line. Straight rays from '
+      + 'the far lamp just graze the top and bottom of the object and mark '
+      + 'a shadow on the wall. Dotted green rays from a second lamp placed '
+      + 'nearer the object spread more steeply and mark a taller green '
+      + 'shadow. Under it says move the light closer and the shadow grows.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<line x1="560" y1="56" x2="560" y2="344" stroke-width="4"/>'
+      + '<text x="596" y="70" font-size="19" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">wall</text>'
+      + '<polygon points="324,160 338,160 338,240 324,240"/>'
+      + '<text x="331" y="268" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">object</text>'
+      + '<circle cx="70" cy="200" r="18"/>'
+      + '<line x1="94" y1="200" x2="106" y2="200"/>'
+      + '<line x1="87" y1="217" x2="95" y2="225"/>'
+      + '<line x1="70" y1="224" x2="70" y2="236"/>'
+      + '<line x1="53" y1="217" x2="45" y2="225"/>'
+      + '<line x1="46" y1="200" x2="34" y2="200"/>'
+      + '<line x1="53" y1="183" x2="45" y2="175"/>'
+      + '<line x1="70" y1="176" x2="70" y2="164"/>'
+      + '<line x1="87" y1="183" x2="95" y2="175"/>'
+      + '<line x1="70" y1="200" x2="560" y2="125"/>'
+      + '<line x1="70" y1="200" x2="560" y2="275"/>'
+      + '<text x="96" y="258" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">lamp far away</text>'
+      + '<line x1="556" y1="125" x2="556" y2="275" stroke-width="9"/>'
+      + '<circle cx="200" cy="200" r="15" stroke="#0f8a4d" '
+      + 'stroke-width="3"/><line x1="221" y1="200" x2="231" y2="200"/>'
+      + '<line x1="215" y1="215" x2="222" y2="222"/>'
+      + '<line x1="200" y1="221" x2="200" y2="231"/>'
+      + '<line x1="185" y1="215" x2="178" y2="222"/>'
+      + '<line x1="179" y1="200" x2="169" y2="200"/>'
+      + '<line x1="185" y1="185" x2="178" y2="178"/>'
+      + '<line x1="200" y1="179" x2="200" y2="169"/>'
+      + '<line x1="215" y1="185" x2="222" y2="178"/>'
+      + '<line x1="200" y1="200" x2="560" y2="89" stroke="#0f8a4d" '
+      + 'stroke-width="2" stroke-dasharray="7 7"/>'
+      + '<line x1="200" y1="200" x2="560" y2="311" stroke="#0f8a4d" '
+      + 'stroke-width="2" stroke-dasharray="7 7"/>'
+      + '<text x="200" y="252" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">lamp near</text>'
+      + '<line x1="572" y1="89" x2="572" y2="311" stroke="#0f8a4d" '
+      + 'stroke-width="9"/>'
+      + '<text x="320" y="376" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">move the light closer and the shadow '
+      + 'grows</text></svg>',
+  },
   questions: [
     {
       id: 'ls-1',
@@ -920,9 +1188,7 @@ teach({
   idea:
     'Heat moves from the hotter thing to the cooler one, always. '
     + 'Put a metal spoon in hot soup and the handle warms. '
-    + 'A wooden spoon does not. '
-    + 'Metal is a good conductor of heat. '
-    + 'Wood, plastic and air are poor ones, called insulators.',
+    + 'A wooden spoon does not.',
 
   mechanism:
     'Heat moving from hot to cold is the rule with no exceptions, '
@@ -942,8 +1208,7 @@ teach({
   method: [
     'Decide which thing is hotter.',
     'Heat will move from it to the cooler thing.',
-    'To move heat quickly, use a conductor: metal.',
-    'To stop heat moving, use an insulator: wood, plastic, cloth, air.',
+    'To move heat quickly use a conductor. To stop it use an insulator.',
     'Remember that still air is a good insulator, '
       + 'which is why loose cloth keeps you warm.',
   ],
@@ -1009,6 +1274,51 @@ teach({
     + 'It keeps hot things hot and cold things cold by the same trick, '
     + 'because both are just slowing heat down.',
 
+  figure: {
+    alt: 'A bowl of hot soup with two spoons standing in it. A green arrow '
+      + 'runs up the metal spoon to its handle, labelled the handle gets '
+      + 'hot. The wooden spoon has no arrow and is labelled the handle '
+      + 'stays cool. Under it says heat always moves from the hotter thing '
+      + 'to the cooler one.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="200,234 440,234 410,300 230,300"/>'
+      + '<path d="M 282 226 Q 270 204 284 182 Q 294 166 286 150"/>'
+      + '<path d="M 360 226 Q 348 204 362 182 Q 372 166 364 150"/>'
+      + '<text x="320" y="330" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">hot soup</text>'
+      + '<line x1="300" y1="272" x2="212" y2="142" stroke-width="9"/>'
+      + '<ellipse cx="206" cy="134" rx="15" ry="10"/>'
+      + '<line x1="272" y1="236" x2="226" y2="168" stroke="#0f8a4d" '
+      + 'stroke-width="5"/>'
+      + '<polyline points="228,184 222,162 242,166" stroke="#0f8a4d" '
+      + 'stroke-width="5"/>'
+      + '<text x="176" y="180" font-size="20" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">metal</text>'
+      + '<text x="176" y="206" font-size="18" text-anchor="end" '
+      + 'fill="#0f8a4d" stroke="none">it gets hot</text>'
+      + '<line x1="340" y1="272" x2="428" y2="142" stroke-width="11"/>'
+      + '<ellipse cx="434" cy="134" rx="15" ry="10"/>'
+      + '<text x="464" y="180" font-size="20" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">wood</text>'
+      + '<text x="464" y="206" font-size="18" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">it stays cool</text>'
+      + '<text x="320" y="376" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">heat moves from the hotter thing to '
+      + 'the cooler one</text></svg>',
+  },
+  tables: [{
+    caption: 'Which materials carry heat and which hold it back',
+    columns: ['Material', 'Carries heat', 'So it is used for'],
+    rows: [
+      ['Metal', 'Very well', 'Cooking pots, and spoons for stirring'],
+      ['Wood', 'Poorly', 'Handles that have to be held'],
+      ['Plastic', 'Poorly', 'Kettle handles and cool box lids'],
+      ['Still air', 'Poorly', 'Loose cloth and a blanket'],
+    ],
+    note: 'A material that carries heat well is a conductor. One that holds '
+      + 'it back is an insulator.',
+  }],
   questions: [
     {
       id: 'ht-1',
@@ -1076,14 +1386,12 @@ teach({
     'Every infectious disease has a route, '
     + 'and the way to prevent it is to cut the route rather than to fight '
     + 'the germ. '
-    + 'Malaria travels by mosquito, '
-    + 'so a net over the bed cuts the route at the moment of biting, '
-    + 'and emptying standing water cuts it earlier by preventing the '
-    + 'mosquito existing. '
-    + 'Cholera travels from waste to mouth, '
-    + 'so safe toilets cut it at the start, '
-    + 'treating water cuts it in the middle, '
-    + 'and washing hands cuts it at the end. '
+    + 'A net cuts the malaria route at the moment of biting, '
+    + 'and emptying standing water cuts the same route earlier, '
+    + 'by preventing the mosquito existing at all. '
+    + 'That is the shape of it: '
+    + 'one route, several places to cut, '
+    + 'and the one to choose is whichever is possible where you are. '
     + 'Find the route and you find every point where it can be broken.',
 
   recap:
@@ -1097,8 +1405,6 @@ teach({
     'List every point along that route.',
     'At each point, ask what would break it.',
     'Choose the ones that are possible where you live.',
-    'For malaria: sleep under a treated net and empty standing water.',
-    'For cholera: drink safe water, use a toilet, wash hands with soap.',
   ],
 
   worked: [
@@ -1162,6 +1468,65 @@ teach({
     + 'and break as many as you can. '
     + 'That is what public health is, and it is mostly not about medicine.',
 
+  figure: {
+    alt: 'Two roads drawn one above the other. The malaria road runs from '
+      + 'standing water to a mosquito to a person. The cholera road runs '
+      + 'from human waste to water or food to the mouth. Under them it says '
+      + 'find the road and you find every place it can be cut.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="40" y="88" font-size="20" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">malaria</text>'
+      + '<text x="40" y="228" font-size="20" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">cholera</text>'
+      + '<polygon points="40,100 190,100 190,170 40,170"/>'
+      + '<text x="115" y="142" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">standing water</text>'
+      + '<polygon points="240,100 390,100 390,170 240,170"/>'
+      + '<text x="315" y="142" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a mosquito</text>'
+      + '<line x1="196" y1="135" x2="234" y2="135"/>'
+      + '<polyline points="221,125 234,135 221,145"/>'
+      + '<polygon points="440,100 590,100 590,170 440,170"/>'
+      + '<text x="515" y="142" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a person</text>'
+      + '<line x1="396" y1="135" x2="434" y2="135"/>'
+      + '<polyline points="421,125 434,135 421,145"/>'
+      + '<polygon points="40,240 190,240 190,310 40,310"/>'
+      + '<text x="115" y="282" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">human waste</text>'
+      + '<polygon points="240,240 390,240 390,310 240,310"/>'
+      + '<text x="315" y="282" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">water or food</text>'
+      + '<line x1="196" y1="275" x2="234" y2="275"/>'
+      + '<polyline points="221,265 234,275 221,285"/>'
+      + '<polygon points="440,240 590,240 590,310 440,310"/>'
+      + '<text x="515" y="282" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the mouth</text>'
+      + '<line x1="396" y1="275" x2="434" y2="275"/>'
+      + '<polyline points="421,265 434,275 421,285"/>'
+      + '<text x="320" y="358" font-size="22" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">find the road and you find every '
+      + 'place it can be cut</text></svg>',
+  },
+  tables: [{
+    caption: 'How each disease travels, and where its road can be cut',
+    columns: ['Disease', 'How it travels', 'Where to cut the road'],
+    rows: [
+      [
+        'Malaria',
+        'The bite of an infected mosquito',
+        'Sleep under a treated net, and empty standing water',
+      ],
+      [
+        'Cholera',
+        'Human waste reaching food or water',
+        'Use a toilet, treat the water, wash hands with soap',
+      ],
+    ],
+    note: 'Cutting the road works at any point along it, so the one to '
+      + 'choose is whichever is possible where you live.',
+  }],
   questions: [
     {
       id: 'dis-1',
@@ -1237,14 +1602,11 @@ teach({
   mechanism:
     'This is the most important distinction in the topic, '
     + 'and it kills people who get it wrong. '
-    + 'Filtering through cloth removes mud, leaves and grit, '
-    + 'which makes water look clean. '
     + 'Germs are far smaller than the holes in any cloth, '
-    + 'so they pass straight through. '
-    + 'Boiling does the opposite: it leaves the water looking the same '
-    + 'and kills the germs. '
-    + 'You usually want both, in that order: '
-    + 'filter so the water is clear, then boil so it is safe.',
+    + 'so straining cannot catch them however clear the water looks. '
+    + 'That is why the two steps are not alternatives. '
+    + 'You want both, in that order: '
+    + 'strain so the water is clear, then boil so it is safe.',
 
   recap:
     'You know that filtering separates a solid from a liquid, '
@@ -1319,6 +1681,68 @@ teach({
     + 'It is slower and less certain than boiling, '
     + 'and it costs no fuel, which matters when fuel is scarce.',
 
+  figure: {
+    alt: 'On the left, water poured through a cloth: the lumps of dirt are '
+      + 'held on top while tiny germs pass straight through into the jar '
+      + 'below. On the right, the same water boiling over a flame with the '
+      + 'germs inside it crossed out in red. Under it says strain it until '
+      + 'it is clear, then boil it until it is safe.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">clear water is not the same as '
+      + 'safe water</text>'
+      + '<line x1="80" y1="152" x2="240" y2="152" stroke-width="3" '
+      + 'stroke-dasharray="7 7"/>'
+      + '<text x="74" y="148" font-size="18" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">cloth</text>'
+      + '<circle cx="130" cy="139" r="9"/><circle cx="154" cy="135" r="9"/>'
+      + '<circle cx="178" cy="141" r="9"/>'
+      + '<circle cx="126" cy="176" r="3" fill="currentColor"/>'
+      + '<circle cx="158" cy="190" r="3" fill="currentColor"/>'
+      + '<circle cx="190" cy="172" r="3" fill="currentColor"/>'
+      + '<circle cx="140" cy="206" r="3" fill="currentColor"/>'
+      + '<circle cx="176" cy="210" r="3" fill="currentColor"/>'
+      + '<polygon points="120,222 200,222 194,292 126,292"/>'
+      + '<text x="160" y="320" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the dirt stops</text>'
+      + '<text x="160" y="346" font-size="19" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">the germs go through</text>'
+      + '<polygon points="408,198 532,198 520,262 420,262"/>'
+      + '<circle cx="432" cy="212" r="6"/><circle cx="464" cy="206" r="6"/>'
+      + '<circle cx="500" cy="212" r="6"/>'
+      + '<line x1="414" y1="302" x2="526" y2="302"/>'
+      + '<polygon points="414,302 424,268 434,302"/>'
+      + '<polygon points="460,302 470,268 480,302"/>'
+      + '<polygon points="506,302 516,268 526,302"/>'
+      + '<line x1="431" y1="231" x2="449" y2="249" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="449" y1="231" x2="431" y2="249" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="461" y1="223" x2="479" y2="241" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="479" y1="223" x2="461" y2="241" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="491" y1="233" x2="509" y2="251" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="509" y1="233" x2="491" y2="251" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="470" y="336" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">boiling kills them</text>'
+      + '<text x="320" y="382" font-size="21" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">strain it until it is clear, then '
+      + 'boil it until it is safe</text></svg>',
+  },
+  tables: [{
+    caption: 'What straining does to water and what boiling does',
+    columns: ['What you do', 'Takes out what you can see', 'Kills the germs'],
+    rows: [
+      ['Let it settle, or strain it through clean cloth', 'Yes', 'No'],
+      ['Boil it for about a minute', 'No', 'Yes'],
+    ],
+    note: 'Germs are far smaller than the holes in any cloth, which is why '
+      + 'clear water can still make you ill.',
+  }],
   questions: [
     {
       id: 'ws-1',
@@ -1384,17 +1808,16 @@ teach({
     'Soil is more than dirt. '
     + 'It holds water, it holds air, and it holds the substances a plant '
     + 'needs to grow. '
-    + 'Sandy soil lets water run straight through. '
-    + 'Clay soil holds water and goes hard. '
-    + 'Loam is a mixture of both and suits most crops.',
+    + 'Which of those it does well depends on what it is made of, '
+    + 'and you can tell by squeezing a wet handful of it.',
 
   mechanism:
     'A plant needs two things from soil that pull against each other: '
     + 'water, and air at the roots. '
-    + 'Sand gives plenty of air and loses the water. '
-    + 'Clay holds the water and squeezes out the air. '
-    + 'Loam is good precisely because it does both adequately '
-    + 'rather than either perfectly. '
+    + 'Hold the water and you squeeze out the air; '
+    + 'let the air in and the water drains away. '
+    + 'That is the whole of why loam is wanted: '
+    + 'it does both adequately rather than either perfectly. '
     + 'There is a second idea underneath: '
     + 'a crop takes substances out of the soil, '
     + 'and if nothing puts them back the soil grows poorer each year. '
@@ -1476,6 +1899,67 @@ teach({
     + 'Farmers rotated crops for that reason long before anybody could '
     + 'explain it.',
 
+  figure: {
+    alt: 'The squeeze test on three handfuls of wet soil. The first has '
+      + 'fallen apart into loose grains and is labelled sandy. The second '
+      + 'has stayed as one sticky lump and is labelled clay. The third has '
+      + 'broken into a few crumbs and is labelled loam. Under it says loam '
+      + 'holds water and still lets air in.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="26" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">squeeze a wet handful</text>'
+      + '<circle cx="64" cy="156" r="6" fill="currentColor"/>'
+      + '<circle cx="80" cy="186" r="6" fill="currentColor"/>'
+      + '<circle cx="96" cy="144" r="6" fill="currentColor"/>'
+      + '<circle cx="104" cy="176" r="6" fill="currentColor"/>'
+      + '<circle cx="118" cy="160" r="6" fill="currentColor"/>'
+      + '<circle cx="124" cy="192" r="6" fill="currentColor"/>'
+      + '<circle cx="136" cy="150" r="6" fill="currentColor"/>'
+      + '<circle cx="144" cy="180" r="6" fill="currentColor"/>'
+      + '<circle cx="156" cy="166" r="6" fill="currentColor"/>'
+      + '<circle cx="72" cy="200" r="6" fill="currentColor"/>'
+      + '<circle cx="112" cy="204" r="6" fill="currentColor"/>'
+      + '<circle cx="152" cy="202" r="6" fill="currentColor"/>'
+      + '<text x="110" y="248" font-size="21" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">falls apart</text>'
+      + '<text x="110" y="286" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">sandy</text>'
+      + '<polygon points="282,190 278,158 300,138 336,138 358,160 352,192 '
+      + '320,206"/><path d="M 300 156 Q 309 172 300 188"/>'
+      + '<path d="M 318 156 Q 327 172 318 188"/>'
+      + '<path d="M 336 156 Q 345 172 336 188"/>'
+      + '<text x="320" y="248" font-size="21" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a sticky lump</text>'
+      + '<text x="320" y="286" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">clay</text>'
+      + '<polygon points="486,184 492,158 518,152 526,176 508,192"/>'
+      + '<polygon points="532,182 542,156 568,162 564,188 540,194"/>'
+      + '<polygon points="502,202 528,196 542,212 518,224 500,218"/>'
+      + '<text x="530" y="248" font-size="21" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">crumbles</text>'
+      + '<text x="530" y="286" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">loam</text>'
+      + '<text x="320" y="350" font-size="22" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">loam holds water and still lets air '
+      + 'in</text></svg>',
+  },
+  tables: [{
+    caption: 'What each kind of soil does with water and with air',
+    columns: [
+      'Soil',
+      'What it does with water',
+      'Air at the roots',
+      'What that means',
+    ],
+    rows: [
+      ['Sandy', 'Runs straight through', 'Plenty', 'It dries out fast'],
+      ['Clay', 'Held, and the soil goes hard', 'Little', 'It waterlogs'],
+      ['Loam', 'Held, but it still drains', 'Enough', 'It suits most crops'],
+    ],
+    note: 'Loam is a mixture of the other two, which is why it does both '
+      + 'adequately rather than either perfectly.',
+  }],
   questions: [
     {
       id: 'sf-1',
