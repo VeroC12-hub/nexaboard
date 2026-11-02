@@ -30,6 +30,10 @@ import {
   type Choice, type LearnerProfile, type Stage,
 } from '../lib/education/learner'
 import {
+  asksProgramme, programmeById, programmesFor,
+} from '../lib/education/programmes'
+import { subjectById } from '../lib/education/subjects'
+import {
   createAccount, emailProblem, handleTaken, passwordProblem, SignUpError,
   type AccountKind, type Created,
 } from '../lib/education/accounts'
@@ -92,6 +96,20 @@ interface Props {
   onLearner?: (learner: LearnerProfile) => void
 }
 
+/**
+ * The electives of a course, named, for the line under the picker.
+ *
+ * From the subject list rather than a second description, so it cannot say
+ * one thing while the subject page shows another.
+ */
+function electivesOf(stage: Stage, id: string | null): string | undefined {
+  const course = programmeById(stage, id)
+  if (!course) return undefined
+  const names = [...course.electives, ...(course.also ?? [])]
+    .map(sid => subjectById(stage, sid)?.name)
+    .filter((n): n is string => Boolean(n))
+  return names.length ? `Core subjects plus ${names.join(', ')}` : undefined
+}
 export default function CreateProfile({
   stage: initial, onCreated, onSignIn, onBack, onlyLearner = false, onLearner,
 }: Props) {
@@ -310,6 +328,42 @@ export default function CreateProfile({
                       options={STAGE_YEARS[p.stage].map(y => ({ value: y, label: y }))} />
                   </Field>
                 </div>
+
+                {/* The course, where the stage has courses.
+
+                    Senior high is not a list of subjects, it is four core
+                    subjects plus the electives of one course, and every
+                    piece of machinery for that already existed:
+                    `programmes.ts`, `timetableFor`, and a `programme` field
+                    on the profile. Nothing ever asked, so it stayed null,
+                    and null means show everything: an SHS learner opened
+                    their subjects and found all thirty four, Aviation and
+                    Aerospace included, whatever they were actually
+                    offering.
+
+                    Asked here rather than left to the subject page because
+                    it is the one question on this form whose answer the
+                    learner certainly knows, and because it decides what the
+                    very next screen contains.
+
+                    The line under the picker names the electives of
+                    whichever course is selected, built from the subject
+                    list itself rather than written out again, so it cannot
+                    drift from what the subject page will actually show. */}
+                {asksProgramme(p.stage) && (
+                  <Field label="Your course"
+                    hint={electivesOf(p.stage, p.programme)}>
+                    <Select
+                      value={p.programme ?? ''}
+                      onChange={c => set('programme', c || null)}
+                      options={[
+                        { value: '', label: 'All subjects, I will choose later' },
+                        ...programmesFor(p.stage).map(c => ({
+                          value: c.id, label: c.name,
+                        })),
+                      ]} />
+                  </Field>
+                )}
 
                 <div className="ne-panel-rule"><span>How to teach you</span></div>
                 <div className="ne-grid2">

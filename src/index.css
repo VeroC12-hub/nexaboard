@@ -20,14 +20,28 @@
 * { box-sizing: border-box; }
 
 html, body, #root {
-  height: 100%;
+  /* `min-height`, not `height`.
+
+     At `height: 100%` the page is exactly one viewport tall whatever is
+     inside it, so every screen longer than the window left the document
+     ending at 100vh and the white below it showing through under the app.
+     On the learner dashboard and the kids home that is most of the page. */
+  min-height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Inter', system-ui, sans-serif;
-  background: #ffffff;
+  /* Cream, not white, and stated at the page level rather than on each
+     screen's own shell. The shells paint their own background; this is what
+     covers anything they do not reach: the gutter beside a narrow layout,
+     the strip under a short one, and the overscroll area at either end. */
+  background: var(--nx-paper, #faf7ee);
   color: #1b2b4b;
   -webkit-font-smoothing: antialiased;
 }
+
+/* The app fills the window even when a screen has little in it, so a short
+   page sits on cream rather than on a white band with cream above it. */
+#root { display: flow-root; min-height: 100dvh; }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #f3fcf0; }
