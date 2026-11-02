@@ -138,6 +138,96 @@ teach({
     + 'this stage is whether a chemical reaction was needed, and that is a good '
     + 'question to keep asking as the examples get harder.',
 
+  figure: {
+    alt: 'Three boxes. An element holds one kind of atom and nothing '
+      + 'simpler. A compound holds pairs of two different atoms, each '
+      + 'pair joined, in a fixed ratio. A mixture holds the same two '
+      + 'kinds of atom loose and in no particular proportion, each one '
+      + 'still itself.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">are they joined, or only sitting together?</text>'
+      + '<path d="M 40 70 H 200 V 220 H 40 Z"/>'
+      + '<text x="120" y="56" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">an element</text>'
+      + '<circle cx="80" cy="110" r="13"/>'
+      + '<circle cx="130" cy="104" r="13"/>'
+      + '<circle cx="168" cy="130" r="13"/>'
+      + '<circle cx="70" cy="160" r="13"/>'
+      + '<circle cx="120" cy="158" r="13"/>'
+      + '<circle cx="164" cy="184" r="13"/>'
+      + '<circle cx="96" cy="198" r="13"/>'
+      + '<text x="120" y="246" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">one kind of atom</text>'
+      + '<text x="120" y="268" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">and nothing simpler inside</text>'
+      + '<path d="M 240 70 H 400 V 220 H 240 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="56" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">a compound</text>'
+      + '<circle cx="280" cy="110" r="13" stroke="#0f8a4d"/>'
+      + '<circle cx="306" cy="110" r="8" stroke="#0f8a4d"/>'
+      + '<line x1="293" y1="110" x2="298" y2="110" stroke="#0f8a4d"/>'
+      + '<circle cx="340" cy="110" r="13" stroke="#0f8a4d"/>'
+      + '<circle cx="366" cy="110" r="8" stroke="#0f8a4d"/>'
+      + '<line x1="353" y1="110" x2="358" y2="110" stroke="#0f8a4d"/>'
+      + '<circle cx="280" cy="170" r="13" stroke="#0f8a4d"/>'
+      + '<circle cx="306" cy="170" r="8" stroke="#0f8a4d"/>'
+      + '<line x1="293" y1="170" x2="298" y2="170" stroke="#0f8a4d"/>'
+      + '<circle cx="340" cy="170" r="13" stroke="#0f8a4d"/>'
+      + '<circle cx="366" cy="170" r="8" stroke="#0f8a4d"/>'
+      + '<line x1="353" y1="170" x2="358" y2="170" stroke="#0f8a4d"/>'
+      + '<text x="320" y="246" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">joined, in a fixed ratio</text>'
+      + '<text x="320" y="268" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">and a new substance</text>'
+      + '<path d="M 440 70 H 600 V 220 H 440 Z" stroke="#c8433a"/>'
+      + '<text x="520" y="56" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">a mixture</text>'
+      + '<circle cx="478" cy="108" r="13" stroke="#c8433a"/>'
+      + '<circle cx="540" cy="98" r="13" stroke="#c8433a"/>'
+      + '<circle cx="586" cy="140" r="13" stroke="#c8433a"/>'
+      + '<circle cx="470" cy="164" r="13" stroke="#c8433a"/>'
+      + '<circle cx="560" cy="170" r="13" stroke="#c8433a"/>'
+      + '<circle cx="514" cy="200" r="13" stroke="#c8433a"/>'
+      + '<circle cx="520" cy="132" r="8" stroke="#c8433a"/>'
+      + '<circle cx="580" cy="190" r="8" stroke="#c8433a"/>'
+      + '<circle cx="462" cy="200" r="8" stroke="#c8433a"/>'
+      + '<circle cx="556" cy="128" r="8" stroke="#c8433a"/>'
+      + '<text x="520" y="246" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">not joined at all</text>'
+      + '<text x="520" y="268" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">and each one still itself</text>'
+      + '<text x="320" y="326" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">water is always two hydrogen to one oxygen</text>'
+      + '<text x="320" y="354" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and nothing you do by hand gets the hydrogen back out</text>'
+      + '<text x="320" y="390" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">a mixture needs only a physical method to part it</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'A compound and a mixture, settled by one question',
+      columns: ['The question', 'A compound', 'A mixture'],
+      rows: [
+        [
+          'Are the parts joined',
+          'Yes, they are bonded',
+          'No, they are only sitting together',
+        ],
+        [
+          'In what proportions',
+          'A fixed ratio, always',
+          'Whatever proportions you like',
+        ],
+        [
+          'How do you part them',
+          'Only by a chemical reaction',
+          'By a physical method, such as filtering',
+        ],
+        [
+          'Has it its own properties',
+          'Yes, it is a new substance',
+          'No, each part is still itself',
+        ],
+        [
+          'An example',
+          'Water, always two hydrogen to one oxygen',
+          'Sand in water, in any amounts at all',
+        ],
+      ],
+      note: 'Every other difference follows from the first row, so that is '
+        + 'the question to ask first.',
+    },
+  ],
   questions: [
     {
       id: 'ecm-1',

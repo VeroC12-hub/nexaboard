@@ -45,12 +45,8 @@ teach({
   },
 
   idea:
-    'An atom has a central nucleus containing protons, which are positive, '
-    + 'and neutrons, which have no charge. '
-    + 'Electrons, which are negative, move around the nucleus in shells. '
-    + 'The number of protons is the atomic number, '
-    + 'and it decides which element the atom is. '
-    + 'A neutral atom has as many electrons as protons. '
+    'An atom has a central nucleus with electrons moving round it in '
+    + 'shells, and three kinds of particle between them. '
     + 'The periodic table arranges elements by atomic number. '
     + 'A group is a vertical column, '
     + 'and a period is a horizontal row. '
@@ -162,6 +158,75 @@ teach({
     + 'Group 7 atoms gain one and become negative. '
     + 'This is why sodium and chlorine combine so readily.',
 
+  figure: {
+    alt: 'A lithium atom with two electrons in its first shell and one '
+      + 'in its second, beside a sodium atom with two, then eight, then '
+      + 'one. The last electron of each is marked, because both have a '
+      + 'single electron in the outer shell, which is why both sit in '
+      + 'group one.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">the outer shell is what the chemistry depends on</text>'
+      + '<circle cx="160" cy="180" r="14"/>'
+      + '<circle cx="160" cy="180" r="34"/>'
+      + '<circle cx="160.0" cy="146.0" r="6" fill="currentColor"/>'
+      + '<circle cx="160.0" cy="214.0" r="6" fill="currentColor"/>'
+      + '<circle cx="160" cy="180" r="64"/>'
+      + '<circle cx="160.0" cy="116.0" r="6" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="160" y="185" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Li</text>'
+      + '<text x="160" y="298" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">lithium, 2 then 1</text>'
+      + '<circle cx="460" cy="180" r="14"/>'
+      + '<circle cx="460" cy="180" r="34"/>'
+      + '<circle cx="460.0" cy="146.0" r="6" fill="currentColor"/>'
+      + '<circle cx="460.0" cy="214.0" r="6" fill="currentColor"/>'
+      + '<circle cx="460" cy="180" r="64"/>'
+      + '<circle cx="460.0" cy="116.0" r="6" fill="currentColor"/>'
+      + '<circle cx="505.3" cy="134.7" r="6" fill="currentColor"/>'
+      + '<circle cx="524.0" cy="180.0" r="6" fill="currentColor"/>'
+      + '<circle cx="505.3" cy="225.3" r="6" fill="currentColor"/>'
+      + '<circle cx="460.0" cy="244.0" r="6" fill="currentColor"/>'
+      + '<circle cx="414.7" cy="225.3" r="6" fill="currentColor"/>'
+      + '<circle cx="396.0" cy="180.0" r="6" fill="currentColor"/>'
+      + '<circle cx="414.7" cy="134.7" r="6" fill="currentColor"/>'
+      + '<circle cx="460" cy="180" r="94"/>'
+      + '<circle cx="460.0" cy="86.0" r="6" fill="#0f8a4d" stroke="#0f8a4d"/>'
+      + '<text x="460" y="185" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">Na</text>'
+      + '<text x="460" y="298" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">sodium, 2, 8 then 1</text>'
+      + '<text x="320" y="338" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">each has one electron left over in its outer shell</text>'
+      + '<text x="320" y="366" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">so both sit in group one, and both react with water</text>'
+      + '<text x="320" y="394" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the group number is the outer electrons, and that is the chemistry</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three particles in an atom, and where each one is',
+      columns: ['Particle', 'Its charge', 'Where it is'],
+      rows: [
+        ['Proton', 'Positive', 'In the nucleus'],
+        ['Neutron', 'None', 'In the nucleus'],
+        ['Electron', 'Negative', 'Moving round the nucleus, in shells'],
+      ],
+      note: 'The number of protons is the atomic number, and it decides '
+        + 'which element the atom is. A neutral atom has as many '
+        + 'electrons as protons.',
+    },
+    {
+      caption: 'How the electrons of the first few elements are arranged',
+      columns: ['Element', 'Electrons', 'Arranged as', 'Group'],
+      rows: [
+        ['Hydrogen', '1', '1', 'One'],
+        ['Helium', '2', '2, a full first shell', 'The noble gases'],
+        ['Lithium', '3', '2, then 1', 'One'],
+        ['Carbon', '6', '2, then 4', 'Four'],
+        ['Oxygen', '8', '2, then 6', 'Six'],
+        ['Neon', '10', '2, then 8, a full second shell', 'The noble gases'],
+        ['Sodium', '11', '2, then 8, then 1', 'One'],
+      ],
+      note: 'The noble gases are unreactive for one reason: the outer shell '
+        + 'is already full, so there is nothing to gain by reacting. One '
+        + 'explanation covers a whole column.',
+    },
+  ],
   questions: [
     {
       id: 'atm-1',
@@ -229,17 +294,11 @@ teach({
   },
 
   idea:
-    'Filtration separates an insoluble solid from a liquid. '
-    + 'It uses the difference in particle size. '
-    + 'Evaporation recovers a dissolved solid by driving the liquid off. '
-    + 'Simple distillation recovers the liquid instead. '
-    + 'The liquid is boiled and the vapour is cooled back. '
-    + 'Fractional distillation parts two liquids. '
-    + 'It works when they boil at different temperatures. '
-    + 'Chromatography parts substances that are dissolved. '
-    + 'They travel at different speeds through paper. '
-    + 'A magnet picks out magnetic material. '
-    + 'Decanting pours a liquid off a settled solid.',
+    'There are seven methods in this topic and only one idea behind '
+    + 'them: each one exploits a single difference between the parts of '
+    + 'the mixture, and nothing else. '
+    + 'The examination asks you to choose, so choosing is what to '
+    + 'practise.',
 
   mechanism:
     'Learners memorise the list and then cannot choose, '
@@ -351,6 +410,91 @@ teach({
     + 'The tall column in a refinery does what the laboratory apparatus '
     + 'does, at a size that pays.',
 
+  figure: {
+    alt: 'One question at the top, what is different about the parts, '
+      + 'with four branches below it. Difference in size gives '
+      + 'filtration, difference in boiling point gives evaporation or '
+      + 'distillation, two boiling points give fractional distillation, '
+      + 'and a difference in how strongly things cling to paper gives '
+      + 'chromatography.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">one question, and the method chooses itself</text>'
+      + '<path d="M 180 56 H 460 V 102 H 180 Z" stroke="#0f8a4d"/>'
+      + '<text x="320" y="84" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">what is different about the parts?</text>'
+      + '<line x1="230" y1="106" x2="130" y2="150"/>'
+      + '<line x1="130" y1="150" x2="135.8" y2="141.8"/>'
+      + '<line x1="130" y1="150" x2="139.9" y2="151.3"/>'
+      + '<line x1="290" y1="106" x2="262" y2="150"/>'
+      + '<line x1="262" y1="150" x2="262.3" y2="140.0"/>'
+      + '<line x1="262" y1="150" x2="270.9" y2="145.5"/>'
+      + '<line x1="350" y1="106" x2="378" y2="150"/>'
+      + '<line x1="378" y1="150" x2="369.1" y2="145.5"/>'
+      + '<line x1="378" y1="150" x2="377.7" y2="140.0"/>'
+      + '<line x1="410" y1="106" x2="510" y2="150"/>'
+      + '<line x1="510" y1="150" x2="500.1" y2="151.3"/>'
+      + '<line x1="510" y1="150" x2="504.2" y2="141.8"/>'
+      + '<text x="110" y="174" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">their size</text>'
+      + '<text x="110" y="198" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">sand in water</text>'
+      + '<text x="110" y="226" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">filtration</text>'
+      + '<text x="250" y="174" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">boiling point</text>'
+      + '<text x="250" y="198" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">salt in water</text>'
+      + '<text x="250" y="226" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">evaporation</text>'
+      + '<text x="250" y="248" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">or distillation</text>'
+      + '<text x="400" y="174" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">two boiling points</text>'
+      + '<text x="400" y="198" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">two liquids that mix</text>'
+      + '<text x="400" y="226" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">fractional</text>'
+      + '<text x="400" y="248" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">distillation</text>'
+      + '<text x="540" y="174" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">clinging</text>'
+      + '<text x="540" y="198" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the dyes in an ink</text>'
+      + '<text x="540" y="226" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">chromatography</text>'
+      + '<text x="320" y="312" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">filtering salt water is pointless</text>'
+      + '<text x="320" y="338" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">a dissolved particle is as small as a water particle</text>'
+      + '<text x="320" y="380" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">a mixture is not joined, so no chemical change is needed</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each method, the one difference it uses, and what it parts',
+      columns: ['Method', 'The difference it uses', 'What it parts'],
+      rows: [
+        [
+          'Filtration',
+          'Particle size',
+          'An insoluble solid from a liquid, such as sand from water',
+        ],
+        [
+          'Decanting',
+          'The solid has already settled',
+          'A liquid poured off a settled solid',
+        ],
+        [
+          'Evaporation',
+          'Boiling point, when you want the solid',
+          'A dissolved solid, such as salt out of salt water',
+        ],
+        [
+          'Simple distillation',
+          'Boiling point, when you want the liquid',
+          'The liquid, such as water out of salt water',
+        ],
+        [
+          'Fractional distillation',
+          'Two different boiling points',
+          'Two liquids that mix with each other',
+        ],
+        [
+          'Chromatography',
+          'How strongly each one clings to the paper',
+          'Dissolved substances, such as the dyes in an ink',
+        ],
+        ['A magnet', 'One part is magnetic', 'Iron filings out of sand'],
+      ],
+      note: 'Filtering salt water is pointless, because a dissolved '
+        + 'particle is as small as a water particle and goes straight '
+        + 'through. Ask what is different and the method chooses itself.',
+    },
+  ],
   questions: [
     {
       id: 'sep-1',
@@ -525,6 +669,58 @@ teach({
     + 'On that graph the slope is the acceleration '
     + 'and the area underneath is the distance travelled.',
 
+  figure: {
+    alt: 'A distance time graph with three lines. A steep line means '
+      + 'moving fast, a gentle line means moving slowly, and a '
+      + 'horizontal line high up the graph means far from the start and '
+      + 'not moving at all.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">the slope is the speed, not the height</text>'
+      + '<line x1="90" y1="300" x2="90" y2="70" stroke-width="3"/>'
+      + '<line x1="90" y1="300" x2="560" y2="300" stroke-width="3"/>'
+      + '<text x="74" y="80" font-size="14" text-anchor="end" fill="currentColor" stroke="none">distance</text>'
+      + '<text x="560" y="326" font-size="14" text-anchor="end" fill="currentColor" stroke="none">time</text>'
+      + '<line x1="90" y1="300" x2="200" y2="100" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="206" y="104" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">steep: moving fast</text>'
+      + '<line x1="90" y1="300" x2="330" y2="200" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="336" y="198" font-size="14" text-anchor="start" fill="#0f8a4d" stroke="none">gentle: moving slowly</text>'
+      + '<line x1="200" y1="100" x2="430" y2="100" stroke="#c8433a" stroke-width="4"/>'
+      + '<text x="436" y="104" font-size="14" text-anchor="start" fill="#c8433a" stroke="none">flat: not moving at all</text>'
+      + '<text x="320" y="364" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a line that is high and flat is far away and standing still</text>'
+      + '<text x="320" y="392" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">ask how much it rises for each step along, and that is the speed</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each part of a distance time graph tells you',
+      columns: ['What the line does', 'What it means'],
+      rows: [
+        ['It is steep', 'The object is moving fast'],
+        ['It is gentle', 'The object is moving slowly'],
+        ['It is horizontal', 'The object is not moving at all'],
+        [
+          'It is high up the graph',
+          'The object is far from the start, which says nothing about its speed',
+        ],
+      ],
+      note: 'The graph is not a picture of the speed. Its slope is the '
+        + 'speed, and reading the height instead is the mistake this '
+        + 'topic is set to catch.',
+    },
+    {
+      caption: 'Why averaging the two speeds gives the wrong answer',
+      columns: ['Part of the journey', 'Distance', 'Speed', 'Time it took'],
+      rows: [
+        ['The first part', '60 km', '60 km per hour', '1 hour'],
+        ['The second part', '60 km', '20 km per hour', '3 hours'],
+        ['The whole journey', '120 km', '30 km per hour', '4 hours'],
+      ],
+      note: 'The average of 60 and 20 is 40, and the real answer is 30, '
+        + 'because the slow part lasted longer and so counts for more. '
+        + 'Average speed is always total distance over total time.',
+    },
+  ],
   questions: [
     {
       id: 'mot-1',
@@ -698,6 +894,65 @@ teach({
     + 'so the same volume holds less mass, '
     + 'and the balloon becomes less dense than the air around it.',
 
+  figure: {
+    alt: 'A lump of steel sinking below the water line beside a ship '
+      + 'made of the same steel floating on it. The lump is steel all '
+      + 'through, at about 8 grams in each cubic centimetre, and the '
+      + 'ship is a steel shell round a large volume of air, which '
+      + 'brings it below 1 gram in each cubic centimetre.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">the same steel, and a different volume</text>'
+      + '<line x1="40" y1="200" x2="300" y2="200" stroke-width="3"/>'
+      + '<text x="50" y="190" font-size="13" text-anchor="start" fill="currentColor" stroke="none">water</text>'
+      + '<path d="M 150 238 H 194 V 274 H 150 Z" stroke="#c8433a"/>'
+      + '<text x="172" y="262" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">steel</text>'
+      + '<line x1="172" y1="196" x2="172" y2="232" stroke="#c8433a"/>'
+      + '<line x1="172" y1="232" x2="166.8" y2="223.4" stroke="#c8433a"/>'
+      + '<line x1="172" y1="232" x2="177.2" y2="223.4" stroke="#c8433a"/>'
+      + '<text x="172" y="306" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">a lump of steel</text>'
+      + '<text x="172" y="328" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">about 8 grams</text>'
+      + '<text x="172" y="348" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">in each cubic centimetre</text>'
+      + '<text x="172" y="372" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">so it sinks</text>'
+      + '<line x1="340" y1="200" x2="600" y2="200" stroke-width="3"/>'
+      + '<path d="M 410 180 L 530 180 L 510 236 L 430 236 Z" stroke="#0f8a4d"/>'
+      + '<line x1="410" y1="202" x2="530" y2="202" stroke="#0f8a4d"/>'
+      + '<text x="470" y="196" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">mostly air</text>'
+      + '<text x="470" y="306" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">a ship of the same steel</text>'
+      + '<text x="470" y="328" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">below 1 gram, counting the air</text>'
+      + '<text x="470" y="348" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">in each cubic centimetre</text>'
+      + '<text x="470" y="372" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">so it floats</text>'
+      + '<text x="320" y="92" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">density is mass for a given amount of space</text>'
+      + '<text x="320" y="120" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">so the air inside the ship counts in its volume</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Why a lump of steel sinks and a ship of the same steel floats',
+      columns: ['The question', 'A lump of steel', 'A ship'],
+      rows: [
+        [
+          'What it is',
+          'Steel all the way through',
+          'A steel shell round a very large volume of air',
+        ],
+        [
+          'Its density',
+          'About 8 grams in each cubic centimetre',
+          'Below 1, once the air inside is counted',
+        ],
+        ['Against water, at 1', 'Greater, so it sinks', 'Less, so it floats'],
+        [
+          'What would sink it',
+          'It has already sunk',
+          'Loading it until the mass rises, or holing it so water replaces the air',
+        ],
+      ],
+      note: 'Density is mass for a given amount of space, and not weight. A '
+        + 'lorry load of feathers weighs more than a nail, and the nail '
+        + 'is the one that sinks.',
+    },
+  ],
   questions: [
     {
       id: 'den-1',
@@ -760,15 +1015,9 @@ teach({
   },
 
   idea:
-    'Heat always moves from hotter to colder, by three means. '
-    + 'In conduction, particles vibrate harder and knock their neighbours, '
-    + 'passing the energy along without travelling themselves. '
-    + 'It works best in solids, especially metals. '
-    + 'In convection, the heated part of a liquid or gas expands, '
-    + 'becomes less dense, and rises, '
-    + 'while cooler fluid sinks to take its place, making a current. '
-    + 'In radiation, energy travels as waves '
-    + 'and needs no material at all, which is how the sun reaches us. '
+    'Heat always moves from hotter to colder, and it does it in three '
+    + 'ways that differ in one thing only: whether the matter itself '
+    + 'travels with the energy. '
     + 'Dark dull surfaces absorb and emit radiation best, '
     + 'and shiny light ones reflect it.',
 
@@ -885,6 +1134,92 @@ teach({
     + 'and silvered walls reflect radiation. '
     + 'Its design is the three mechanisms listed as three defences.',
 
+  figure: {
+    alt: 'Three panels. In conduction a spoon in hot soup grows warm '
+      + 'along its handle, although no metal travels. In convection the '
+      + 'water at the bottom of a pan rises and the cooler water sinks, '
+      + 'so the matter itself moves and carries its energy. In '
+      + 'radiation the sun warms you across empty space, where there is '
+      + 'no matter at all.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">did the matter itself move?</text>'
+      + '<path d="M 30 60 H 210 V 250 H 30 Z"/>'
+      + '<text x="120" y="86" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">conduction</text>'
+      + '<path d="M 56 196 L 68 240 L 172 240 L 184 196 Z"/>'
+      + '<line x1="58" y1="204" x2="182" y2="204"/>'
+      + '<text x="120" y="226" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">hot soup</text>'
+      + '<ellipse cx="96" cy="200" rx="15" ry="8"/>'
+      + '<line x1="106" y1="194" x2="180" y2="118" stroke-width="5"/>'
+      + '<line x1="112" y1="192" x2="172" y2="130" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="172" y1="130" x2="169.7" y2="139.7" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="172" y1="130" x2="162.3" y2="132.6" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="120" y="272" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">no metal travelled</text>'
+      + '<text x="120" y="292" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the energy was passed on</text>'
+      + '<text x="120" y="316" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">from particle to particle</text>'
+      + '<path d="M 230 60 H 410 V 250 H 230 Z"/>'
+      + '<text x="320" y="86" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">convection</text>'
+      + '<path d="M 260 130 L 272 230 L 368 230 L 380 130"/>'
+      + '<line x1="290" y1="220" x2="290" y2="150" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="290" y1="150" x2="295.2" y2="158.6" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="290" y1="150" x2="284.8" y2="158.6" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="350" y1="150" x2="350" y2="220"/>'
+      + '<line x1="350" y1="220" x2="344.8" y2="211.4"/>'
+      + '<line x1="350" y1="220" x2="355.2" y2="211.4"/>'
+      + '<text x="320" y="272" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">the water itself rose</text>'
+      + '<text x="320" y="292" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">and carried its energy</text>'
+      + '<text x="320" y="316" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">with it</text>'
+      + '<path d="M 430 60 H 610 V 250 H 430 Z"/>'
+      + '<text x="520" y="86" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">radiation</text>'
+      + '<circle cx="470" cy="150" r="24"/>'
+      + '<text x="470" y="155" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">sun</text>'
+      + '<line x1="498" y1="160" x2="556" y2="186" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="556" y1="186" x2="546.1" y2="187.2" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<line x1="556" y1="186" x2="550.3" y2="177.8" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<circle cx="572" cy="196" r="18"/>'
+      + '<text x="572" y="201" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">you</text>'
+      + '<text x="520" y="272" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">nothing between you</text>'
+      + '<text x="520" y="292" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">and no matter is needed</text>'
+      + '<text x="520" y="316" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">at all</text>'
+      + '<text x="320" y="364" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">conduction passes it on, convection carries it</text>'
+      + '<text x="320" y="392" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and radiation needs nothing to travel through</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three ways heat moves, and the question that tells them '
+        + 'apart',
+      columns: [
+        'The way',
+        'Did the matter itself move',
+        'Where it works',
+        'An example',
+      ],
+      rows: [
+        [
+          'Conduction',
+          'No. The energy is passed from particle to particle',
+          'Solids, and best of all in metals',
+          'The handle of a spoon standing in hot soup',
+        ],
+        [
+          'Convection',
+          'Yes. The heated fluid rises and carries its energy',
+          'Liquids and gases only',
+          'A pan of water heated from below',
+        ],
+        [
+          'Radiation',
+          'There is no matter there at all',
+          'Anywhere, including a vacuum',
+          'The sun warming you across empty space',
+        ],
+      ],
+      note: 'Conduction is poor in a gas, because the particles are too far '
+        + 'apart to knock each other often. That is why a blanket, a '
+        + 'thatched roof and a vacuum flask all work by trapping air.',
+    },
+  ],
   questions: [
     {
       id: 'hea-1',
@@ -1083,6 +1418,88 @@ teach({
     + 'That is total internal reflection, '
     + 'and it is how light travels along an optical fibre for kilometres.',
 
+  figure: {
+    alt: 'On the left, a ray striking a mirror with the normal drawn at '
+      + 'the point where it lands, and the angle of incidence equal to '
+      + 'the angle of reflection, both measured from the normal. On the '
+      + 'right, a ray entering water, bending towards the normal '
+      + 'because it slows down, with the path it would have taken drawn '
+      + 'beside it.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">measure from the normal, and bend when you slow</text>'
+      + '<line x1="40" y1="200" x2="280" y2="200" stroke-width="4"/>'
+      + '<line x1="160" y1="200" x2="160" y2="96" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="160" y="84" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the normal</text>'
+      + '<line x1="70" y1="112" x2="154" y2="196"/>'
+      + '<line x1="154" y1="196" x2="144.3" y2="193.6"/>'
+      + '<line x1="154" y1="196" x2="151.6" y2="186.3"/>'
+      + '<line x1="166" y1="196" x2="250" y2="112"/>'
+      + '<line x1="220" y1="142" x2="250" y2="112"/>'
+      + '<line x1="250" y1="112" x2="247.6" y2="121.7"/>'
+      + '<line x1="250" y1="112" x2="240.3" y2="114.4"/>'
+      + '<text x="132" y="160" font-size="13" text-anchor="end" fill="currentColor" stroke="none">i</text>'
+      + '<text x="190" y="160" font-size="13" text-anchor="start" fill="currentColor" stroke="none">r</text>'
+      + '<text x="160" y="234" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">a mirror</text>'
+      + '<text x="160" y="262" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">the two angles are equal</text>'
+      + '<text x="160" y="284" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">and both are measured from the normal</text>'
+      + '<line x1="360" y1="170" x2="600" y2="170" stroke-width="3"/>'
+      + '<text x="368" y="158" font-size="13" text-anchor="start" fill="currentColor" stroke="none">air</text>'
+      + '<text x="368" y="192" font-size="13" text-anchor="start" fill="currentColor" stroke="none">water</text>'
+      + '<line x1="480" y1="170" x2="480" y2="70" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="480" y="58" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">the normal</text>'
+      + '<line x1="410" y1="90" x2="474" y2="166"/>'
+      + '<line x1="474" y1="166" x2="464.5" y2="162.8"/>'
+      + '<line x1="474" y1="166" x2="472.4" y2="156.1"/>'
+      + '<line x1="480" y1="174" x2="512" y2="274"/>'
+      + '<line x1="512" y1="274" x2="504.5" y2="267.4"/>'
+      + '<line x1="512" y1="274" x2="514.3" y2="264.3"/>'
+      + '<line x1="480" y1="174" x2="544" y2="270"/>'
+      + '<text x="604" y="288" font-size="13" text-anchor="end" fill="currentColor" stroke="none">it would have gone here</text>'
+      + '<text x="430" y="240" font-size="13" text-anchor="end" fill="#0f8a4d" stroke="none">it bends towards</text>'
+      + '<text x="430" y="260" font-size="13" text-anchor="end" fill="#0f8a4d" stroke="none">the normal</text>'
+      + '<text x="480" y="312" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">because it slows down in water</text>'
+      + '<text x="320" y="356" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">one edge of the beam reaches the water first</text>'
+      + '<text x="320" y="384" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and slows first, exactly as a cart turns when one wheel hits sand</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Which way light bends, and why',
+      columns: ['Light goes', 'Its speed', 'Which way it bends'],
+      rows: [
+        ['From air into water', 'It slows down', 'Towards the normal'],
+        ['From water into air', 'It speeds up', 'Away from the normal'],
+        [
+          'Straight along the normal',
+          'It still changes',
+          'Not at all, because both edges slow at the same moment',
+        ],
+      ],
+      note: 'Angles in optics are measured from the normal and never from '
+        + 'the surface, because a curved mirror has no single surface '
+        + 'direction but has a normal at every point.',
+    },
+    {
+      caption: 'How the eye focuses on near and far objects',
+      columns: ['The object', 'How the light arrives', 'What the lens does'],
+      rows: [
+        [
+          'Near',
+          'Spreading out a lot',
+          'The muscles make it fatter, so it bends the light more',
+        ],
+        [
+          'Far',
+          'Almost parallel',
+          'The muscles let it become thinner, so it bends the light less',
+        ],
+      ],
+      note: 'Short sight and long sight are the lens bending by the wrong '
+        + 'amount, which is why spectacles correct them by doing some of '
+        + 'the bending in advance.',
+    },
+  ],
   questions: [
     {
       id: 'lgt-1',
@@ -1148,12 +1565,10 @@ teach({
     + 'and it travels by pushing the particles of the material around it, '
     + 'which push the next ones in turn. '
     + 'So sound needs a medium and cannot travel through a vacuum. '
-    + 'It travels fastest in solids, slower in liquids, slowest in gases, '
-    + 'because the particles are closer together in a solid. '
-    + 'Frequency is the number of vibrations per second, measured in hertz, '
-    + 'and a higher frequency is heard as a higher pitch. '
-    + 'Amplitude is how far the particles swing, '
-    + 'and a greater amplitude is heard as a louder sound. '
+    + 'How fast it travels depends on how close the particles of the '
+    + 'material are. '
+    + 'One vibration carries two separate properties, its frequency and '
+    + 'its amplitude, and each is heard as a different thing. '
     + 'An echo is sound reflected from a surface.',
 
   mechanism:
@@ -1266,6 +1681,75 @@ teach({
     + 'and to measure depth at sea, '
     + 'by timing the echo.',
 
+  figure: {
+    alt: 'A string drawn vibrating three ways. Plucked gently it makes a '
+      + 'small swing and a quiet note. Plucked hard it makes a bigger '
+      + 'swing and a loud note, at the same pitch. A shorter string '
+      + 'swings more times a second and makes a higher note at the same '
+      + 'loudness.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">pitch and loudness are two different things</text>'
+      + '<line x1="60" y1="110" x2="60" y2="170"/>'
+      + '<line x1="300" y1="110" x2="300" y2="170"/>'
+      + '<path d="M 60 140 Q 120 122 180 140 Q 240 158 300 140" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="180" y="92" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">plucked gently</text>'
+      + '<text x="180" y="196" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">small swing, so a quiet note</text>'
+      + '<line x1="60" y1="240" x2="60" y2="320"/>'
+      + '<line x1="300" y1="240" x2="300" y2="320"/>'
+      + '<path d="M 60 280 Q 120 234 180 280 Q 240 326 300 280" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="180" y="222" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">plucked hard</text>'
+      + '<text x="180" y="346" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">bigger swing, so a loud note</text>'
+      + '<text x="180" y="372" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">and the same note, because the string</text>'
+      + '<text x="180" y="392" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">swings the same number of times a second</text>'
+      + '<line x1="380" y1="240" x2="380" y2="320"/>'
+      + '<line x1="600" y1="240" x2="600" y2="320"/>'
+      + '<path d="M 380 280 Q 407 256 435 280 Q 462 304 490 280 Q 517 256 545 280 Q 572 304 600 280" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<text x="490" y="222" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">a shorter string</text>'
+      + '<text x="490" y="346" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">more swings a second</text>'
+      + '<text x="490" y="372" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">so a higher note, at the</text>'
+      + '<text x="490" y="392" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">same loudness as the first</text>'
+      + '<text x="490" y="140" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">frequency is heard as pitch</text>'
+      + '<text x="490" y="166" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">amplitude is heard as loudness</text>'
+      + '<text x="490" y="192" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">and neither one changes the other</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Pitch and loudness, which can be changed without each other',
+      columns: ['The question', 'Pitch', 'Loudness'],
+      rows: [
+        [
+          'What it depends on',
+          'The frequency, measured in hertz',
+          'The amplitude, which is how far the particles swing',
+        ],
+        [
+          'On a guitar string',
+          'Shorten it and it vibrates more often',
+          'Pluck it harder and it swings further',
+        ],
+        ['What you hear', 'A higher note', 'A louder note'],
+        ['Does changing it change the other', 'No', 'No'],
+      ],
+      note: 'They are two separate properties of one vibration, which is '
+        + 'why a string plucked hard is louder and not higher.',
+    },
+    {
+      caption: 'Where sound travels fastest, and why',
+      columns: ['The material', 'How close the particles are', 'The speed'],
+      rows: [
+        ['A solid', 'Nearly touching', 'Fastest'],
+        ['A liquid', 'Touching, but able to slide', 'Slower'],
+        ['A gas', 'Far apart', 'Slowest'],
+        ['A vacuum', 'There are none at all', 'No sound travels at all'],
+      ],
+      note: 'Sound is not a substance travelling. It is a push being handed '
+        + 'on, so there must be something there to hand it to, which is '
+        + 'why an alarm clock in a jar goes silent as the air is pumped '
+        + 'out while staying clearly visible.',
+    },
+  ],
   questions: [
     {
       id: 'snd-1',
