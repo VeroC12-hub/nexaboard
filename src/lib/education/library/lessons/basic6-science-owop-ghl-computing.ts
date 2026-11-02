@@ -35,11 +35,10 @@ teach({
   },
 
   idea:
-    'Some liquids are acidic: lime juice, vinegar, soured milk. '
-    + 'Some are basic: soap, wood ash water, baking soda. '
-    + 'Some are neutral, like pure water. '
-    + 'You find out which by using an indicator, a substance that changes '
-    + 'colour.',
+    'A liquid can be acidic, or basic, or neither of the two, '
+    + 'and you cannot tell by looking at it. '
+    + 'You find out which by using an indicator, '
+    + 'a substance that changes colour depending on what it is put in.',
 
   mechanism:
     'The reason an indicator matters is safety as much as science. '
@@ -124,6 +123,59 @@ teach({
     + 'It is why baking soda settles an acid stomach, '
     + 'and why lime juice takes the smell of fish off your hands.',
 
+  figure: {
+    alt: 'On the left, two red boxes reading taste it and touch it, each '
+      + 'with a red cross beside it and labelled these will injure you. An '
+      + 'arrow leads right to a test tube with a dropper above it, labelled '
+      + 'add a few drops and read the colour.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">how to tell, without touching '
+      + 'it</text><line x1="50" y1="110" x2="80" y2="140" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<line x1="80" y1="110" x2="50" y2="140" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<polygon points="96,98 300,98 300,152 96,152" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="198" y="134" font-size="22" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">taste it</text>'
+      + '<line x1="50" y1="202" x2="80" y2="232" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<line x1="80" y1="202" x2="50" y2="232" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<polygon points="96,190 300,190 300,244 96,244" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="198" y="226" font-size="22" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">touch it</text>'
+      + '<text x="176" y="294" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">these will injure you</text>'
+      + '<line x1="326" y1="170" x2="390" y2="170"/>'
+      + '<polyline points="377,160 390,170 377,180"/>'
+      + '<line x1="448" y1="72" x2="448" y2="104"/>'
+      + '<circle cx="448" cy="112" r="7" fill="currentColor"/>'
+      + '<polygon points="426,178 470,178 470,244 461,260 435,260 426,244" '
+      + 'fill="#0f8a4d" fill-opacity="0.2" stroke="none"/>'
+      + '<polygon points="424,130 472,130 472,244 462,262 434,262 '
+      + '424,244"/><path d="M 426 178 Q 448 168 470 178" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="448" y="300" font-size="18" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">add a few drops</text>'
+      + '<text x="448" y="326" font-size="18" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">and read the colour</text></svg>',
+  },
+  tables: [{
+    caption: 'Which everyday liquids are acidic and which are basic',
+    columns: ['Liquid', 'Which it is'],
+    rows: [
+      ['Lime juice, vinegar, soured milk', 'Acidic'],
+      ['Soap, wood ash water, baking soda', 'Basic'],
+      ['Pure water', 'Neutral'],
+    ],
+    note: 'The colours your own indicator gives depend on what you made it '
+      + 'from, so always test a known acid and a known base beside the '
+      + 'liquid you are asking about.',
+  }],
   questions: [
     {
       id: 'ab-1',
@@ -182,10 +234,9 @@ teach({
   },
 
   idea:
-    'A simple machine makes a job easier. '
-    + 'A lever lets you lift a heavy stone with a pole. '
-    + 'A ramp lets you raise a load without lifting it straight up. '
-    + 'A pulley lets you pull down to lift something up.',
+    'A simple machine makes a job easier, '
+    + 'and every one of them does it the same way: '
+    + 'it lets you use a smaller force over a longer distance.',
 
   mechanism:
     'None of them reduces the work. '
@@ -207,8 +258,6 @@ teach({
     'Identify the machine: lever, ramp, pulley, wheel.',
     'Ask what job it is making easier.',
     'Ask what you give up in exchange.',
-    'For a lever, a longer arm means less force needed.',
-    'For a ramp, a gentler slope means less force and a longer push.',
     'Remember the total work does not fall.',
   ],
 
@@ -264,6 +313,65 @@ teach({
     + 'and a chain working as a kind of pulley. '
     + 'Take any machine apart and you find these few ideas repeated.',
 
+  figure: {
+    alt: 'The same barrel raised to the same height two ways. Lifted '
+      + 'straight up it needs one short arrow drawn thick, marked a big '
+      + 'force over a short distance. Pushed up a ramp it needs a long thin '
+      + 'green arrow, marked a small force over a long distance. The height '
+      + 'gained is the same in both.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="44" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the same barrel, the same '
+      + 'height</text><line x1="40" y1="300" x2="600" y2="300"/>'
+      + '<line x1="190" y1="300" x2="190" y2="150" stroke-dasharray="7 7"/>'
+      + '<ellipse cx="190" cy="136" rx="30" ry="22"/>'
+      + '<line x1="150" y1="296" x2="150" y2="162" stroke-width="9"/>'
+      + '<polyline points="140,175 150,162 160,175" stroke-width="9"/>'
+      + '<text x="170" y="336" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">lifted straight up</text>'
+      + '<text x="130" y="200" font-size="17" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">a big force,</text>'
+      + '<text x="130" y="222" font-size="17" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">a short way</text>'
+      + '<polygon points="330,300 600,300 600,150"/>'
+      + '<ellipse cx="576" cy="128" rx="30" ry="22"/>'
+      + '<line x1="330" y1="300" x2="600" y2="150" stroke="#0f8a4d" '
+      + 'stroke-width="5"/>'
+      + '<polyline points="566,170 598,150 586,182" stroke="#0f8a4d" '
+      + 'stroke-width="5"/>'
+      + '<text x="466" y="336" font-size="18" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">pushed up the ramp</text>'
+      + '<text x="470" y="266" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a small force,</text>'
+      + '<text x="470" y="288" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a long way</text>'
+      + '<text x="590" y="228" font-size="17" text-anchor="end" '
+      + 'fill="currentColor" stroke="none">same height</text></svg>',
+  },
+  tables: [{
+    caption: 'What each machine gives you and what it costs',
+    columns: ['Machine', 'What it makes easier', 'What you give up'],
+    rows: [
+      [
+        'Lever',
+        'Lifting a heavy load with a pole',
+        'Your own end has to travel further',
+      ],
+      [
+        'Ramp',
+        'Raising a load without lifting it',
+        'You push it much further than the height gained',
+      ],
+      [
+        'Pulley',
+        'Pulling down instead of lifting up',
+        'The same bargain: more rope for less force',
+      ],
+    ],
+    note: 'None of them reduces the work. If the force got smaller, '
+      + 'something else got bigger.',
+  }],
   questions: [
     {
       id: 'sm6-1',
@@ -405,6 +513,54 @@ teach({
     + 'so one can fail and the others stay lit. '
     + 'House wiring is parallel, for exactly that reason.',
 
+  figure: {
+    alt: 'Two circuits. In the first the wire runs from the cell to the bulb '
+      + 'and back to the cell, a complete loop, and the bulb is lit. In the '
+      + 'second there is a gap in the wire marked in red, and the bulb is '
+      + 'dark, with a note that one break stops everything.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="60,130 260,130 260,280 60,280"/>'
+      + '<polygon points="136,262 184,262 184,298 136,298"/>'
+      + '<line x1="160" y1="262" x2="160" y2="250"/>'
+      + '<text x="160" y="330" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the cell</text>'
+      + '<circle cx="160" cy="130" r="26"/>'
+      + '<line x1="142" y1="112" x2="178" y2="148"/>'
+      + '<line x1="178" y1="112" x2="142" y2="148"/>'
+      + '<line x1="192" y1="130" x2="206" y2="130"/>'
+      + '<line x1="183" y1="153" x2="193" y2="163"/>'
+      + '<line x1="160" y1="162" x2="160" y2="176"/>'
+      + '<line x1="137" y1="153" x2="127" y2="163"/>'
+      + '<line x1="128" y1="130" x2="114" y2="130"/>'
+      + '<line x1="137" y1="107" x2="127" y2="97"/>'
+      + '<line x1="160" y1="98" x2="160" y2="84"/>'
+      + '<line x1="183" y1="107" x2="193" y2="97"/>'
+      + '<text x="160" y="62" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the bulb lights</text>'
+      + '<text x="160" y="206" font-size="18" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">a complete loop</text>'
+      + '<line x1="380" y1="130" x2="580" y2="130"/>'
+      + '<line x1="580" y1="130" x2="580" y2="280"/>'
+      + '<line x1="380" y1="280" x2="580" y2="280"/>'
+      + '<line x1="380" y1="130" x2="380" y2="182"/>'
+      + '<line x1="380" y1="228" x2="380" y2="280"/>'
+      + '<line x1="368" y1="182" x2="392" y2="182" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<line x1="368" y1="228" x2="392" y2="228" stroke="#c8433a" '
+      + 'stroke-width="5"/>'
+      + '<polygon points="456,262 504,262 504,298 456,298"/>'
+      + '<line x1="480" y1="262" x2="480" y2="250"/>'
+      + '<text x="480" y="330" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the cell</text>'
+      + '<circle cx="480" cy="130" r="26"/>'
+      + '<text x="480" y="62" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the bulb stays dark</text>'
+      + '<text x="480" y="200" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">one break</text>'
+      + '<text x="480" y="226" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">stops everything</text></svg>',
+  },
   questions: [
     {
       id: 'el-1',
@@ -473,9 +629,6 @@ teach({
     'How high a note sounds depends on how fast the vibration is. '
     + 'Faster gives a higher note. '
     + 'That single rule explains every instrument. '
-    + 'A short string vibrates faster than a long one, so it sounds higher. '
-    + 'A tight string vibrates faster than a slack one. '
-    + 'A small drum sounds higher than a large one. '
     + 'So when you want to predict what an unfamiliar instrument will sound '
     + 'like, '
     + 'you ask what is vibrating and how fast it can.',
@@ -549,6 +702,43 @@ teach({
     + 'hear it through the air. '
     + 'Tighter packed material carries a vibration more quickly.',
 
+  figure: {
+    alt: 'Two strings fixed between posts. The long one carries a slow wide '
+      + 'wave and is labelled slower, a lower note. The short one carries a '
+      + 'quick narrow wave drawn in green and is labelled faster, a higher '
+      + 'note.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="46" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">whatever vibrates faster sounds '
+      + 'higher</text>'
+      + '<line x1="70" y1="108" x2="70" y2="188" stroke-width="6"/>'
+      + '<line x1="540" y1="108" x2="540" y2="188" stroke-width="6"/>'
+      + '<path d="M 70 148 Q 129 122 188 148 Q 246 174 305 148 Q 364 122 '
+      + '422 148 Q 481 174 540 148" stroke-width="3"/>'
+      + '<text x="305" y="226" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">a long string: slower, a lower '
+      + 'note</text>'
+      + '<line x1="190" y1="280" x2="190" y2="360" stroke-width="6"/>'
+      + '<line x1="420" y1="280" x2="420" y2="360" stroke-width="6"/>'
+      + '<path d="M 190 320 Q 209 294 228 320 Q 248 346 267 320 Q 286 294 '
+      + '305 320 Q 324 346 343 320 Q 362 294 382 320 Q 401 346 420 320" '
+      + 'stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="305" y="396" font-size="19" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">a short string: faster, a higher '
+      + 'note</text></svg>',
+  },
+  tables: [{
+    caption: 'What to change to get a higher note or a lower one',
+    columns: ['What you change', 'Lower note', 'Higher note'],
+    rows: [
+      ['The length of a string', 'Long', 'Short'],
+      ['The tightness of a string', 'Slack', 'Tight'],
+      ['The size of a drum', 'Large', 'Small'],
+    ],
+    note: 'All three are the same rule underneath: whatever vibrates faster '
+      + 'sounds higher.',
+  }],
   questions: [
     {
       id: 'sn-1',
@@ -604,10 +794,9 @@ teach({
   idea:
     'First aid is the help given straight away, before any other help '
     + 'arrives. '
-    + 'For a small cut: wash your hands, press on it to stop the bleeding, '
-    + 'clean it, cover it. '
-    + 'For a small burn: cool running water for twenty minutes. '
-    + 'For anything more than small, fetch an adult at once.',
+    + 'Part of the skill is knowing where it stops: '
+    + 'for anything more than small, the right first aid '
+    + 'is to fetch an adult at once.',
 
   mechanism:
     'The twenty minutes of cool water on a burn is the instruction people '
@@ -692,6 +881,63 @@ teach({
     + 'What matters nearly as much is that everybody knows where it is, '
     + 'because a kit nobody can find in a hurry is not much use.',
 
+  figure: {
+    alt: 'Two burns side by side on the same timeline. The first is cooled '
+      + 'for two minutes and a long red bar after it shows the heat still '
+      + 'damaging the tissue. The second is cooled for twenty minutes, '
+      + 'drawn in green, and the damage stops where the cooling stops.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="44" font-size="24" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">cool a burn for twenty minutes, '
+      + 'not two</text>'
+      + '<text x="70" y="104" font-size="18" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">cooled for two minutes</text>'
+      + '<polygon points="70,118 126,118 126,152 70,152" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="98" y="142" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">cool</text>'
+      + '<polygon points="126,118 580,118 580,152 126,152" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<text x="353" y="142" font-size="17" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">the heat is still damaging the '
+      + 'tissue</text>'
+      + '<text x="70" y="244" font-size="18" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">cooled for twenty minutes</text>'
+      + '<polygon points="70,258 540,258 540,292 70,292" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="305" y="282" font-size="17" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">cool water, the whole twenty '
+      + 'minutes</text><polygon points="540,258 580,258 580,292 540,292"/>'
+      + '<text x="560" y="282" font-size="16" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">done</text>'
+      + '<text x="320" y="362" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the pain eases long before the '
+      + 'damage stops</text></svg>',
+  },
+  tables: [{
+    caption: 'What to do for a cut, for a burn, and for anything bigger',
+    columns: ['The injury', 'What to do', 'What never to do'],
+    rows: [
+      [
+        'A small cut',
+        'Press until it stops bleeding, then wash and cover it',
+        'Do not start before checking it is safe for you',
+      ],
+      [
+        'A small burn',
+        'Hold it under cool running water for twenty minutes',
+        'Put nothing else on it: no oil, no toothpaste, no ice',
+      ],
+      [
+        'Deep, large, on the face, or still bleeding',
+        'Fetch an adult at once',
+        'Do not try to manage it on your own',
+      ],
+    ],
+    note: 'Wash your own hands first if you can, because germs travel from '
+      + 'hands into a wound.',
+  }],
   questions: [
     {
       id: 'fa-1',
@@ -749,10 +995,10 @@ teach({
   },
 
   idea:
-    'A citizen has rights: to be educated, to be safe, to be heard, '
-    + 'to be treated equally. '
-    + 'Beside each one sits a duty. '
-    + 'You have a right to learn, and a duty not to stop others learning.',
+    'A citizen has rights, and beside every right sits a duty. '
+    + 'The duty is not a separate rule somebody added. '
+    + 'It is the same right, looked at from where everybody else is '
+    + 'standing.',
 
   mechanism:
     'The reason duties exist is not that somebody wants to limit you. '
@@ -835,6 +1081,61 @@ teach({
     + 'almost every duty is there so that somebody else’s right can be '
     + 'real.',
 
+  figure: {
+    alt: 'Two children facing each other, one speaking and one listening, '
+      + 'each with the words my right to be heard above them. Between them, '
+      + 'in green, it says so we take turns, and underneath it says the '
+      + 'duty is your own right seen from the other side.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<circle cx="140" cy="120" r="34"/>'
+      + '<line x1="140" y1="154" x2="140" y2="236"/>'
+      + '<line x1="89" y1="188" x2="191" y2="188"/>'
+      + '<line x1="140" y1="236" x2="109" y2="304"/>'
+      + '<line x1="140" y1="236" x2="171" y2="304"/>'
+      + '<circle cx="500" cy="120" r="34"/>'
+      + '<line x1="500" y1="154" x2="500" y2="236"/>'
+      + '<line x1="449" y1="188" x2="551" y2="188"/>'
+      + '<line x1="500" y1="236" x2="469" y2="304"/>'
+      + '<line x1="500" y1="236" x2="531" y2="304"/>'
+      + '<ellipse cx="244" cy="88" rx="66" ry="34"/>'
+      + '<text x="244" y="82" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">my right</text>'
+      + '<text x="244" y="104" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">to be heard</text>'
+      + '<ellipse cx="396" cy="88" rx="66" ry="34"/>'
+      + '<text x="396" y="82" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">my right</text>'
+      + '<text x="396" y="104" font-size="17" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">to be heard</text>'
+      + '<line x1="272" y1="232" x2="368" y2="232" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<polyline points="286,222 270,232 286,242" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<polyline points="354,222 370,232 354,242" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="320" y="290" font-size="24" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">so we take turns</text>'
+      + '<text x="320" y="356" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">the duty is your own '
+      + 'right</text>'
+      + '<text x="320" y="382" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">seen from the other side</text>'
+      + '</svg>',
+  },
+  tables: [{
+    caption: 'Each right, and the duty that sits beside it',
+    columns: ['Your right', 'The duty on the other side of it'],
+    rows: [
+      ['To be educated', 'Not to stop anybody else learning'],
+      ['To be safe', 'Not to make anybody else unsafe'],
+      ['To be heard', 'To let the others have their turn'],
+      ['To be treated equally', 'To treat the others equally'],
+    ],
+    note: 'Every one of these duties can be worked out from the right '
+      + 'itself, by asking what it would take for everybody to hold that '
+      + 'right at once.',
+  }],
   questions: [
     {
       id: 'ci-1',
@@ -988,6 +1289,61 @@ teach({
     + 'A good translator chooses what to lose and says so. '
     + 'Pretending nothing was lost is the worse option.',
 
+  figure: {
+    alt: 'Two ways of translating. Along the top, in red, translating as you '
+      + 'read leads to a sentence made of the right words that says the '
+      + 'wrong thing. Along the bottom, in green, four steps in order: read '
+      + 'the whole sentence, work out what it means, look away, then say it '
+      + 'as you naturally would.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="60,96 290,96 290,164 60,164" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="175" y="126" font-size="17" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">translate as you read</text>'
+      + '<text x="175" y="150" font-size="17" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">word by word</text>'
+      + '<line x1="296" y1="130" x2="346" y2="130" stroke="#c8433a"/>'
+      + '<polyline points="333,120 346,130 333,140" stroke="#c8433a"/>'
+      + '<polygon points="352,96 600,96 600,164 352,164" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="476" y="126" font-size="17" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">the right words,</text>'
+      + '<text x="476" y="150" font-size="17" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">the wrong meaning</text>'
+      + '<text x="320" y="212" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">carry the meaning across, not '
+      + 'the words</text>'
+      + '<polygon points="8,240 134,240 134,320 8,320" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="71" y="272" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">read the whole</text>'
+      + '<text x="71" y="296" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">sentence</text>'
+      + '<polygon points="172,240 298,240 298,320 172,320" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="235" y="272" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">work out what</text>'
+      + '<text x="235" y="296" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">it means</text>'
+      + '<line x1="136" y1="280" x2="170" y2="280" stroke="#0f8a4d"/>'
+      + '<polyline points="157,270 170,280 157,290" stroke="#0f8a4d"/>'
+      + '<polygon points="336,240 462,240 462,320 336,320" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="399" y="286" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">look away</text>'
+      + '<line x1="300" y1="280" x2="334" y2="280" stroke="#0f8a4d"/>'
+      + '<polyline points="321,270 334,280 321,290" stroke="#0f8a4d"/>'
+      + '<polygon points="500,240 626,240 626,320 500,320" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="563" y="272" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">say it as you</text>'
+      + '<text x="563" y="296" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">naturally would</text>'
+      + '<line x1="464" y1="280" x2="498" y2="280" stroke="#0f8a4d"/>'
+      + '<polyline points="485,270 498,280 485,290" stroke="#0f8a4d"/>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'tr-1',
@@ -1139,6 +1495,47 @@ teach({
     + 'If it does, your slides were supporting you. '
     + 'If it does not, they were carrying you, and the audience could tell.',
 
+  figure: {
+    alt: 'Two slides side by side. The one on the left is full of lines of '
+      + 'writing and is marked in red: they read it and stop listening. The '
+      + 'one on the right has a heading and three short words and is marked '
+      + 'in green: they glance, then look back at you.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<polygon points="60,100 290,100 290,290 60,290" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<line x1="84" y1="140" x2="210" y2="140" stroke="#0f8a4d" '
+      + 'stroke-width="6"/>'
+      + '<line x1="84" y1="184" x2="190" y2="184" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<line x1="84" y1="216" x2="200" y2="216" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<line x1="84" y1="248" x2="176" y2="248" stroke="#0f8a4d" '
+      + 'stroke-width="3"/>'
+      + '<text x="175" y="330" font-size="18" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">a heading and a few words</text>'
+      + '<text x="175" y="358" font-size="18" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">they glance, then look at you</text>'
+      + '<polygon points="350,100 580,100 580,290 350,290" stroke="#c8433a" '
+      + 'stroke-width="4"/>'
+      + '<line x1="374" y1="140" x2="556" y2="140" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="374" y1="166" x2="556" y2="166" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="374" y1="192" x2="556" y2="192" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="374" y1="218" x2="556" y2="218" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="374" y1="244" x2="556" y2="244" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<line x1="374" y1="270" x2="556" y2="270" stroke="#c8433a" '
+      + 'stroke-width="3"/>'
+      + '<text x="465" y="330" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">full sentences</text>'
+      + '<text x="465" y="358" font-size="18" text-anchor="middle" '
+      + 'fill="#c8433a" stroke="none">they read, and stop listening</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'pr-1',
@@ -1285,6 +1682,59 @@ teach({
     + 'Checking the range is not a beginner’s precaution. '
     + 'Professionals do it because professionals have been caught.',
 
+  figure: {
+    alt: 'A spreadsheet grid with columns named A, B and C and rows numbered '
+      + 'one to four. Three numbers are typed down column B, and the cell '
+      + 'under them holds a sum formula instead of a typed answer. An arrow '
+      + 'to the side says change a number and the total changes by itself.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="120" y="112" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">A</text>'
+      + '<text x="240" y="112" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">B</text>'
+      + '<text x="360" y="112" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">C</text>'
+      + '<line x1="60" y1="124" x2="420" y2="124"/>'
+      + '<text x="38" y="154" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">1</text>'
+      + '<line x1="60" y1="168" x2="420" y2="168"/>'
+      + '<text x="38" y="198" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">2</text>'
+      + '<line x1="60" y1="212" x2="420" y2="212"/>'
+      + '<text x="38" y="242" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">3</text>'
+      + '<line x1="60" y1="256" x2="420" y2="256"/>'
+      + '<text x="38" y="286" font-size="20" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">4</text>'
+      + '<line x1="60" y1="300" x2="420" y2="300"/>'
+      + '<line x1="60" y1="124" x2="60" y2="300"/>'
+      + '<line x1="180" y1="124" x2="180" y2="300"/>'
+      + '<line x1="300" y1="124" x2="300" y2="300"/>'
+      + '<line x1="420" y1="124" x2="420" y2="300"/>'
+      + '<text x="120" y="154" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">marks</text>'
+      + '<text x="240" y="198" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">12</text>'
+      + '<text x="240" y="242" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">15</text>'
+      + '<text x="240" y="286" font-size="19" text-anchor="middle" '
+      + 'fill="currentColor" stroke="none">9</text>'
+      + '<polygon points="180,300 300,300 300,344 180,344" stroke="#0f8a4d" '
+      + 'stroke-width="4"/>'
+      + '<text x="240" y="330" font-size="16" text-anchor="middle" '
+      + 'fill="#0f8a4d" stroke="none">=SUM(B2:B4)</text>'
+      + '<line x1="430" y1="190" x2="304" y2="190" stroke-dasharray="7 7"/>'
+      + '<text x="438" y="196" font-size="17" text-anchor="start" '
+      + 'fill="currentColor" stroke="none">this cell is B2</text>'
+      + '<line x1="430" y1="322" x2="304" y2="322" stroke="#0f8a4d" '
+      + 'stroke-width="3" stroke-dasharray="7 7"/>'
+      + '<text x="438" y="322" font-size="16" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">a formula, not an answer</text>'
+      + '<text x="438" y="348" font-size="16" text-anchor="start" '
+      + 'fill="#0f8a4d" stroke="none">so the total cannot drift</text>'
+      + '</svg>',
+  },
   questions: [
     {
       id: 'sp-1',
