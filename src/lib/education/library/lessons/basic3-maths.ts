@@ -571,18 +571,38 @@ teach({
 
   brief: {
     idea:
-      'A times table is facts you know without working them out. '
+      'A times table is facts you say straight out, without working them out. '
       + 'Turning them round gives the same answer, so each fact you learn '
       + 'is really two.',
     method: [
       'Learn one table at a time, out loud.',
       'Then practise it out of order.',
-      'Build from a fact you know: six eights is five eights and one more.',
+      'Build from a fact you already have: six eights is five eights and '
+        + 'one more.',
     ],
   },
 
+  why:
+    'At the market your mother buys 6 tins of tomatoes. '
+    + 'One tin costs 8 cedis. '
+    + 'The trader says the total at once, without writing anything. '
+    + 'You start counting: eight, sixteen, twenty four. '
+    + 'By the end you have lost your place and have to start again. '
+    + 'How does the trader get there in one breath?',
+
+  notation:
+    'The times sign is a small slanted cross, like the letter x. '
+    + 'So 6 x 8 is said "six times eight". '
+    + 'In class you will also hear it said "six eights". '
+    + 'The two numbers being multiplied are called the factors. '
+    + 'The answer is called the product. '
+    + 'The commonest mistake is to add instead of multiply '
+    + 'and write 14. '
+    + 'The sign says count eight six times, which is 48.',
+
   idea:
-    'A times table is a set of answers you know without working them out. Six '
+    'A times table is a set of answers you say straight out, without '
+    + 'working them out. Six '
     + 'sevens is forty two, and you say it the way you say your own age. '
     + 'Knowing them is not about being clever, it is about not having to count.',
 
@@ -604,9 +624,9 @@ teach({
     'Learn one table at a time, not all of them at once.',
     'Say it out loud, in order, until the order carries you.',
     'Then practise out of order, because that is how questions come.',
-    'Use what you know to reach what you do not. For six eights, do five '
-      + 'eights which is forty, then add one more eight.',
-    'Remember that turning it round gives the same answer, so each fact you '
+    'Build from a fact you already have to reach one you do not. For six '
+      + 'eights, do five eights which is forty, then add one more eight.',
+    'Turning it round gives the same answer, so each fact you '
       + 'learn is really two.',
   ],
 
@@ -621,7 +641,7 @@ teach({
     },
     {
       level: 2,
-      ask: 'You know 5 times 8 is 40. What is 6 times 8?',
+      ask: '5 times 8 is 40. What is 6 times 8?',
       steps: [
         'Six eights is one more eight than five eights.',
         '40 and 8.',

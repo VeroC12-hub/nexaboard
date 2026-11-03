@@ -1093,11 +1093,22 @@ teach({
       + 'what each choice costs, what your teaching requires, '
       + 'then decide and own the cost.',
     method: [
-      'Separate what you know from what you assume.',
+      'Separate the facts from what you are assuming.',
       'List who is affected and how.',
       'Name the cost of each option, including the one you choose.',
     ],
   },
+
+  why:
+    'During an end of term test your closest friend copies from the boy '
+    + 'beside her. '
+    + 'Afterwards the teacher asks the class, by name, '
+    + 'whether anybody saw anything. '
+    + 'You hold that you must not lie. '
+    + 'You also hold that you must not betray a friend. '
+    + 'Here, keeping one of those breaks the other, '
+    + 'and there is no third answer that keeps both. '
+    + 'So which one do you keep, and how would you decide it?',
 
   idea:
     'A moral decision is a choice about what is right to do. '
@@ -1120,8 +1131,8 @@ teach({
     + 'If a case had an obvious answer it would not be a dilemma, '
     + 'it would be a temptation, '
     + 'and those are a different problem: '
-    + 'with a temptation you already know what is right and do not want to '
-    + 'do it. '
+    + 'with a temptation the right thing is clear '
+    + 'and you simply do not want to do it. '
     + 'A real dilemma is where two things you genuinely believe collide. '
     + 'You believe you should be loyal to a friend '
     + 'and you believe you should not let somebody be hurt, '
@@ -1138,9 +1149,15 @@ teach({
     + 'is usually the wrong one.',
 
   recap:
-    'You have learned what each faith teaches about right conduct. '
-    + 'This is about the cases where those teachings are hard to apply '
-    + 'because two of them point different ways.',
+    'Every faith taught in Ghana sets out rules for how to treat people. '
+    + 'Christianity says do to others what you would want done to you. '
+    + 'Islam makes honesty in trade and care for the poor into duties. '
+    + 'Traditional Akan teaching holds that a person is a person through '
+    + 'other people, so harming a neighbour damages you as well. '
+    + 'Each of those is a rule about right conduct, '
+    + 'and most of the time only one of them is in play at once. '
+    + 'This lesson is about the cases where two are in play '
+    + 'and they point different ways.',
 
   method: [
     'State the problem in one sentence.',
@@ -1159,11 +1176,11 @@ teach({
       level: 3,
       ask: 'What is the difference between a temptation and a dilemma?',
       steps: [
-        'In one you know what is right.',
+        'In one the right thing is clear.',
         'In the other two rights conflict.',
       ],
-      answer: 'With a temptation you know what is right and do not want to '
-        + 'do it. '
+      answer: 'With a temptation the right thing is clear and you do not '
+        + 'want to do it. '
         + 'In a dilemma two things you believe point opposite ways.',
     },
     {

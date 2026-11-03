@@ -530,6 +530,26 @@ teach({
     ],
   },
 
+  why:
+    'A seller at Makola counts sachet water in packs of 30. '
+    + 'She has 4 full packs and 7 loose sachets. '
+    + 'On her paper she writes 4, then 7. '
+    + 'On your paper 47 means forty seven. '
+    + 'On hers it means 127. '
+    + 'Neither of you has made a mistake. '
+    + 'So what has to be known about a written number '
+    + 'before anybody can say what it is worth?',
+
+  notation:
+    'The base is written as a small number after the digits, sitting low. '
+    + 'So 1011 in base two is written 1011 with a small 2 at the end. '
+    + 'It is said "one, zero, one, one, base two", one digit at a time. '
+    + 'It is never said "one thousand and eleven", '
+    + 'because base two has no thousands column. '
+    + 'The small number is called the base. '
+    + 'The commonest way to lose a mark is to leave it off the answer, '
+    + 'because 1011 on its own is a different number in every base.',
+
   idea:
     'A base is how many units you gather before starting a new column, '
     + 'and the columns and the digits allowed both follow from it. '
@@ -542,7 +562,7 @@ teach({
 
   mechanism:
     'The reason base ten feels natural and base two feels strange '
-    + 'is only that you learned one of them first. '
+    + 'is only that one of them came first. '
     + 'Look at what 342 actually says. '
     + 'It says three hundreds, four tens, two units, '
     + 'and the columns are powers of ten because we bundle by ten. '
@@ -553,8 +573,7 @@ teach({
     + 'each column is the base multiplied by the column to its right. '
     + 'So the single thing to write down before any conversion is the '
     + 'column values. '
-    + 'Once they are on the page the question is arithmetic you already '
-    + 'know. '
+    + 'Once they are on the page the question is ordinary arithmetic. '
     + 'Base two matters beyond the examination for one reason. '
     + 'A wire is either carrying current or it is not, '
     + 'which gives two states and no more, '
@@ -562,8 +581,14 @@ teach({
     + 'Every file on every machine is a number written in base two.',
 
   recap:
-    'You know that in 342 the 3 means three hundreds. '
-    + 'That is place value, and this topic changes only one thing: '
+    'Place value means the position of a digit decides what it is worth. '
+    + 'Take 342. '
+    + 'The 2 sits in the units column, so it stands for 2. '
+    + 'The 4 sits in the tens column, so it stands for 40. '
+    + 'The 3 sits in the hundreds column, so it stands for 300. '
+    + 'Add those three and you are back to 342. '
+    + 'Each column is ten times the column to its right. '
+    + 'This topic changes one thing only: '
     + 'how many you gather before moving to the next column.',
 
   method: [
@@ -634,7 +659,7 @@ teach({
     {
       mistake: 'Converting without writing the column values first.',
       why: 'The columns are the whole method. '
-        + 'Written down, the rest is arithmetic you already know.',
+        + 'Written down, the rest is ordinary arithmetic.',
     },
   ],
 

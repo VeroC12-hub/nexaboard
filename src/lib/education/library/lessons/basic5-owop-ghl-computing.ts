@@ -71,7 +71,7 @@ teach({
     + 'another. '
     + 'Reading the map without the key is guessing, '
     + 'and it is confident guessing, which is worse. '
-    + 'North is the other anchor: once you know where north is, '
+    + 'North is the other anchor: once north is found on the map, '
     + 'the other three directions follow, and nothing else needs explaining.',
 
   recap:
@@ -89,8 +89,9 @@ teach({
     'Read the key first. Learn what each symbol means on this map.',
     'Find the north arrow.',
     'With north found, the other three directions follow from it.',
-    'Find a place you know, to orient yourself.',
-    'To find a place, use the directions from somewhere you know.',
+    'Find a place you can name, to get your bearings.',
+    'To find a new place, take its direction from a place you can '
+      + 'already name.',
     'To judge distance, use the scale.',
   ],
 
@@ -128,7 +129,7 @@ teach({
 
   traps: [
     {
-      mistake: 'Assuming you know what a symbol means.',
+      mistake: 'Taking a symbol to mean what it meant on another map.',
       why: 'The same symbol differs between maps. '
         + 'The key is not optional.',
     },

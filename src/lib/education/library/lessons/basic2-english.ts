@@ -34,17 +34,27 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher writes on the board: The cat is big. '
+    + 'You start on the first word and sound out the letters: t, h, e. '
+    + 'Run them together and it does not come out as "the". '
+    + 'You try again and it still does not. '
+    + 'Sounding out is the only way you have been shown, '
+    + 'and here it gives the wrong word. '
+    + 'So what do you do with a word that will not sound out?',
+
   idea:
     'Some words come up in nearly every sentence: the, and, is, to, you, was. '
-    + 'You do not sound those out. You know them the moment you see them, the '
-    + 'way you know your own name. Those are sight words.',
+    + 'You do not sound those out. Your eyes land on one and the word is '
+    + 'there at once, the way your own name is there at once. '
+    + 'Those are sight words.',
 
   mechanism:
     'This matters, and not because of speed. '
     + 'While you sound out "the", you are busy. '
     + 'You are not thinking about what the sentence means. '
     + 'Your mind can only be in one place at a time. '
-    + 'Each word you know on sight gives that time back. '
+    + 'Each word read on sight gives that time back. '
     + 'These words come up the most. '
     + 'So they steal the most time. '
     + 'That is why they are worth learning whole.',
@@ -68,9 +78,9 @@ teach({
       level: 1,
       ask: 'Read this: the cat is big.',
       steps: [
-        '"the" you know on sight. Do not sound it.',
+        '"the" is a sight word. Do not sound it.',
         '"cat" you can sound out: c, a, t.',
-        '"is" and "big" you know on sight.',
+        '"is" and "big" are read on sight too.',
       ],
       answer: 'The cat is big. Only one word out of four needed sounding out.',
     },

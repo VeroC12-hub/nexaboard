@@ -28,6 +28,14 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'At night you look up. '
+    + 'You see the moon. You see many stars. '
+    + 'You ask your grandmother who put them there. '
+    + 'She tells you a story. '
+    + 'Your friend asks at her house and hears a different story. '
+    + 'Which story do you learn in school?',
+
   idea:
     'Every faith tells how the world began. '
     + 'Christians are taught that God made the world in six days, '
@@ -45,10 +53,13 @@ teach({
     + 'That is why you can learn them side by side.',
 
   recap:
-    'You know where you come from. '
-    + 'You know your family. You know your town. '
-    + 'A creation story asks a much older question. '
-    + 'Where did everything come from?',
+    'In Ghana some people are Christians. '
+    + 'Some people are Muslims. '
+    + 'Some follow the religion of their grandfathers. '
+    + 'They pray in different places. '
+    + 'A story that tells where something came from is called an account. '
+    + 'Today you hear the account each of them gives '
+    + 'of how the world began.',
 
   method: [
     'Say whose account it is first: Christian, Muslim, or traditional.',

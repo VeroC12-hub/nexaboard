@@ -1769,7 +1769,7 @@ teach({
       + 'long before any European language. '
       + 'At the northern courts it was the language '
       + 'of scholarship, letters and records. '
-      + 'Today it is taught in makaranta and Islamic schools, '
+      + 'Today it is studied in makaranta and Islamic schools, '
       + 'and used in worship. '
       + 'It is also an official language '
       + 'of the United Nations and the African Union.',
@@ -1781,6 +1781,29 @@ teach({
       'Distinguish its religious use from its use as a language.',
     ],
   },
+
+  why:
+    'In a house in Nima a grandfather keeps a few old sheets of paper '
+    + 'covered in Arabic writing. '
+    + 'They are letters, and they are older than his own grandfather. '
+    + 'Nobody in the house can read them. '
+    + 'Now answer this: how did a language from Arabia come to be the '
+    + 'writing on paper kept in a Ghanaian family, '
+    + 'hundreds of years before anybody in that family sat in an English '
+    + 'classroom?',
+
+  notation:
+    'Two words in this topic are the ones examiners look for, '
+    + 'so say them correctly. '
+    + 'Makaranta is said "ma-ka-RAN-ta". '
+    + 'It is the Hausa word for the Quranic school '
+    + 'where children learn to read Arabic. '
+    + 'Ajami is said "a-JA-mee", '
+    + 'and it names the practice of writing a Ghanaian language, '
+    + 'such as Hausa or Dagbani, in Arabic letters instead of Roman ones. '
+    + 'The commonest way to lose a mark is to use Ajami for the Arabic '
+    + 'language itself. '
+    + 'Ajami is the script being borrowed, not the language.',
 
   idea:
     'Arabic reached what is now Ghana through the trans-Saharan trade. '
@@ -1800,9 +1823,9 @@ teach({
     + 'Arabic script was also used to write Ghanaian languages. '
     + 'Hausa above all. '
     + 'That practice is called Ajami. '
-    + 'Today Arabic is taught in makaranta and Quranic schools. '
-    + 'It is taught in Islamic basic and senior high schools, '
-    + 'and as an elective in the senior high curriculum. '
+    + 'Today Arabic is studied in makaranta and Quranic schools. '
+    + 'Islamic basic and senior high schools teach it, '
+    + 'and the senior high curriculum offers it as an elective. '
     + 'Muslims use it in worship throughout the country, '
     + 'most of all in the north '
     + 'and in the zongos of the southern cities. '
@@ -1844,13 +1867,13 @@ teach({
     + 'and Arabic as a language, '
     + 'and it should be made carefully and fairly. '
     + 'Arabic is the language of the Quran, '
-    + 'and that is why it has been taught in Ghana for so long: '
+    + 'and that is why Ghana has had it in its schools for so long: '
     + 'the makaranta system exists '
     + 'to teach recitation and reading. '
     + 'It is also an ordinary modern language, '
     + 'spoken by several hundred million people, '
     + 'used for newspapers, broadcasting, trade and diplomacy, '
-    + 'and taught in the senior high curriculum as a language subject '
+    + 'and offered in the senior high curriculum as a language subject '
     + 'alongside French and Spanish. '
     + 'Both are true at once, '
     + 'and the syllabus asks for both. '
@@ -1899,10 +1922,17 @@ teach({
     + 'The comparison is the argument.',
 
   recap:
-    'You know Arabic is the language of the Quran '
-    + 'and that it is spoken in North Africa and the Middle East. '
-    + 'This says how it came to Ghana, '
-    + 'what it was used for here, '
+    'Arabic is the language of North Africa and the Arabian peninsula. '
+    + 'It is official in Egypt, Morocco, Sudan, Saudi Arabia '
+    + 'and about twenty more countries. '
+    + 'It is written in its own script, from right to left. '
+    + 'It is also the language the Quran was written in, '
+    + 'and it is not translated for worship, '
+    + 'so a Muslim praying in Tamale says the same words '
+    + 'as a Muslim praying in Cairo. '
+    + 'That is why the language went wherever Islam went. '
+    + 'This lesson is about one place it went to: '
+    + 'how it reached Ghana, what it was used for here, '
     + 'and what it is worth to a Ghanaian now.',
 
   method: [

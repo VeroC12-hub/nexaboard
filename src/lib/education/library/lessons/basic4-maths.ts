@@ -579,6 +579,26 @@ teach({
     ],
   },
 
+  why:
+    'Your mother brings home 24 oranges. '
+    + 'Four of you are at home. '
+    + 'She says to share them so nobody gets more than anybody else. '
+    + 'Then she brings out bags that hold 6 oranges each '
+    + 'and asks how many bags she will need. '
+    + 'Both questions are about the same 24 oranges. '
+    + 'They are not the same question. '
+    + 'How do you answer them without dealing out every orange one by one?',
+
+  notation:
+    'The sign for dividing is a short line with a dot above and a dot below. '
+    + 'So 24 shared by 6 is written as 24, that sign, then 6, '
+    + 'and it is said "twenty four divided by six". '
+    + 'The number you start with is the total, and it is written first. '
+    + 'The number after the sign is either how many people are sharing '
+    + 'or how big each group is. '
+    + 'The commonest mistake is writing the two the wrong way round. '
+    + '24 divided by 6 is 4, and 6 divided by 24 is not.',
+
   idea:
     'Dividing means two different things, and they agree. '
     + 'You can split an amount between people, which is sharing, '
@@ -590,12 +610,16 @@ teach({
     'The two look different because the 3 means a different thing each time, '
     + 'so the answer does too. '
     + 'They agree because 4 groups of 3 and 3 groups of 4 are the same '
-    + 'twelve, which you already know from equal groups. '
+    + 'twelve, counted two different ways. '
     + 'Knowing both matters because word problems come in both shapes.',
 
   recap:
-    'You know equal groups, and you know your tables. '
-    + 'Division is those facts read backwards.',
+    'Equal groups means groups that all hold the same number. '
+    + 'Three bags with 4 oranges in each is 3 equal groups of 4. '
+    + 'Altogether that is 12 oranges, because 3 times 4 is 12. '
+    + 'A times table is a list of answers like that, said without counting. '
+    + 'Division is those same facts read backwards: '
+    + 'start from the 12 and the 4, and find the 3.',
 
   method: [
     'Read the problem and decide which kind it is.',

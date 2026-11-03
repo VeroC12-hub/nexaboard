@@ -384,9 +384,18 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher hands out five lines about a boy who walks to Kaneshie '
+    + 'market, then asks one question about them. '
+    + 'You read the lines and an answer comes into your head. '
+    + 'But you cannot tell whether you read it or thought it. '
+    + 'If it was only a thought, the mark is gone, '
+    + 'and nothing on the page tells you which it was. '
+    + 'So how do you make sure your answer came out of the passage?',
+
   idea:
     'When you answer a question about a passage, the answer is in the passage. '
-    + 'You do not guess it. You do not use what you already know. '
+    + 'You do not guess it. You do not use what is already in your head. '
     + 'You find the line it came from and point at it.',
 
   mechanism:
@@ -398,8 +407,13 @@ teach({
     + 'And it is how you catch yourself when you are wrong.',
 
   recap:
-    'You can read a short passage on your own. '
-    + 'Now you read it to find one thing in it.',
+    'A passage is a few sentences written one after another about one thing. '
+    + 'Here is one, two sentences long. '
+    + '"Kofi has a brown dog called Bono. It sleeps under the table." '
+    + 'Reading it means saying each word in order '
+    + 'until you know what it told you. '
+    + 'Up to now you read a passage to find out what it says. '
+    + 'Today you read it to find one thing inside it.',
 
   method: [
     'Read the whole passage once.',
@@ -434,10 +448,11 @@ teach({
     },
     {
       level: 3,
-      ask: 'A question asks what Ama ate. You know she likes rice. '
+      ask: 'A question asks what Ama ate. Rice is her favourite and you '
+        + 'remember that. '
         + 'The passage does not say what she ate. What do you write?',
       steps: [
-        'You know she likes rice. But that is in your head.',
+        'Rice is her favourite. But that is in your head.',
         'It is not in the passage.',
         'Hunt again to be sure.',
         'If the passage really does not say it, you cannot answer it.',
@@ -449,9 +464,9 @@ teach({
 
   traps: [
     {
-      mistake: 'Answering from what you already know.',
+      mistake: 'Answering from what is already in your head.',
       why: 'The question is about this passage. '
-        + 'What you know from home is not the answer here.',
+        + 'What you bring from home is not the answer here.',
     },
     {
       mistake: 'Reading only the question and then hunting.',

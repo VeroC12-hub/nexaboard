@@ -35,6 +35,13 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'A friend asks you to draw the water pot by the door. '
+    + 'You look at it once. Then you draw. '
+    + 'What comes out is round and tall, like a pot in a picture book. '
+    + 'The real pot is short and fat. '
+    + 'Why did your hand draw the wrong pot?',
+
   idea:
     'When you draw something that is in front of you, you draw what you can '
     + 'see, not what you remember. Look at the thing, then look at your paper, '
@@ -48,9 +55,15 @@ teach({
     + 'is what replaces the remembered shape with the real one.',
 
   recap:
-    'You know the names of the basic shapes. Most objects are made of a few '
-    + 'of them put together, and finding those shapes first makes the drawing '
-    + 'easier.',
+    'A circle is round all the way round, like the top of a tin. '
+    + 'A square has four sides and they are all the same length. '
+    + 'A rectangle has four sides too, but two are long and two are short. '
+    + 'A triangle has three sides. '
+    + 'Those are the basic shapes. '
+    + 'Look at a cup and you can see a circle at the top '
+    + 'and a rectangle under it. '
+    + 'Most things are a few of these shapes put together. '
+    + 'Finding the shapes first makes the drawing easier.',
 
   method: [
     'Put the object where you can see all of it without moving.',
@@ -86,10 +99,10 @@ teach({
     {
       level: 3,
       ask: 'The handle of the cup is pointing away from you, so you can barely '
-        + 'see it. Do you draw it big, as you know it is?',
+        + 'see it. Do you draw it big, the way it really is?',
       steps: [
-        'You know the handle is big. But you cannot see it from here.',
-        'Drawing what you know instead of what you see is the mistake.',
+        'The handle really is big. But you cannot see it from here.',
+        'Drawing what is in your head instead of what you see is the mistake.',
         'Draw the small sliver you can actually see.',
       ],
       answer: 'No. Draw only what you can see from where you are sitting.',

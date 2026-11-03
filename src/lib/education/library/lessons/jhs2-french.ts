@@ -289,6 +289,28 @@ teach({
     ],
   },
 
+  why:
+    'You are at Aflao, on the Togo border, '
+    + 'buying from a trader who speaks French. '
+    + 'You want to say "a small bag" and then "a small house". '
+    + 'In English the word small does not change between the two. '
+    + 'In French you must write petit for one of them and petite for the '
+    + 'other, and nothing in the English sentence tells you which. '
+    + 'What decides it is the noun. '
+    + 'This topic is how you work out which form to write.',
+
+  notation:
+    'A dictionary gives one form of the adjective: petit. '
+    + 'That form is called the masculine singular, '
+    + 'and it is the one you start from. '
+    + 'The letters added to it are called the ending, '
+    + 'so petite is petit plus the ending -e. '
+    + 'Out loud, the t in petit is silent and the t in petite is heard, '
+    + 'so the ending changes the sound as well as the spelling. '
+    + 'The commonest way to lose a mark is to add the ending for gender '
+    + 'and forget the one for number, '
+    + 'writing petite filles instead of petites filles.',
+
   idea:
     'An adjective agrees with the noun it describes, '
     + 'in gender and in number, '
@@ -298,16 +320,16 @@ teach({
     + 'Most adjectives follow the noun, and a small group goes before it.',
 
   mechanism:
-    'Agreement is simple and it depends completely on something from last '
-    + 'year, '
-    + 'which is why learners who skipped gender cannot do this topic at '
+    'Agreement is simple and it depends completely on one fact about the '
+    + 'noun: whether it is masculine or feminine. '
+    + 'A learner who does not have that fact cannot do this topic at '
     + 'all. '
     + 'To add -e for a feminine noun you have to know the noun is '
     + 'feminine, '
     + 'and that fact lives with the noun, '
     + 'which is why nouns are learned as la table and not as table. '
     + 'If the gender was never learned, '
-    + 'the adjective rule is useless however well you know it. '
+    + 'the adjective rule is useless however well it is memorised. '
     + 'So the first step of every agreement question is the noun. '
     + 'The position rule is the other half, '
     + 'and it is worth knowing that French and English differ here on '
@@ -328,14 +350,20 @@ teach({
     + 'rather than by feel.',
 
   recap:
-    'You learned in JHS 1 that every French noun is masculine or feminine, '
-    + 'and that the article shows which. '
-    + 'This is where that knowledge is spent: '
-    + 'the adjective has to match.',
+    'Every French noun is either masculine or feminine. '
+    + 'The word for "the" in front of it shows which one: '
+    + 'le for masculine, la for feminine. '
+    + 'So le livre, the book, is masculine, '
+    + 'and la table, the table, is feminine. '
+    + 'Nothing about a table is female. '
+    + 'The gender is a fact about the word, '
+    + 'so it is learned together with the word. '
+    + 'That gender is the thing an adjective has to match.',
 
   method: [
     'Find the noun.',
-    'Recall its gender from the article you learned it with.',
+    'Take its gender from the article in front of it: le is masculine, '
+      + 'la is feminine.',
     'Decide singular or plural.',
     'Add nothing for masculine singular.',
     'Add -e for feminine, -s for plural, -es for feminine plural.',
@@ -372,7 +400,7 @@ teach({
         + 'not apply this rule?',
       steps: [
         'The rule says add -e for a feminine noun.',
-        'So you must know whether the noun is feminine.',
+        'So the gender of the noun has to be found first.',
         'That fact belongs to the noun and is learned with it.',
         'Without it the rule cannot be applied at all.',
       ],

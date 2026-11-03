@@ -61,6 +61,16 @@ teach({
     ],
   },
 
+  why:
+    'Two accounts of the burning of Kumasi in 1874 sit side by side. '
+    + 'One is a letter written that week by a British officer '
+    + 'who was standing in the town. '
+    + 'The other is a chapter in a Ghanaian history textbook '
+    + 'printed in 2015. '
+    + 'They do not agree about who set the fire. '
+    + 'Both are in print and both look serious. '
+    + 'Which one do you believe, and on what grounds?',
+
   idea:
     'A primary source comes from the time of the events. '
     + 'It may also come from somebody who took part in them. '
@@ -114,8 +124,8 @@ teach({
     + 'and secondary for another. '
     + 'A textbook written in 1960 about the Asante wars '
     + 'is a secondary source for those wars. '
-    + 'It is a primary source for what was taught in Ghanaian schools '
-    + 'in 1960, '
+    + 'It is a primary source for how those wars were presented '
+    + 'in Ghanaian schools in 1960, '
     + 'and for the views of its author generation. '
     + 'Nothing about the book changed; the question changed. '
     + 'A candidate who makes that point '
@@ -157,9 +167,16 @@ teach({
     + 'The because clause is the mark.',
 
   recap:
-    'You know that history is found out from evidence. '
-    + 'This divides the evidence by when it was made, '
-    + 'and asks what each kind is good for.',
+    'History is not a story somebody remembered. '
+    + 'It is worked out from the things that survive from the past. '
+    + 'Ask who ruled Asante in 1850 and there is nobody left to ask, '
+    + 'because everybody alive then is dead. '
+    + 'What there is instead is a letter written at the court that year, '
+    + 'gold weights dug out of the ground at Kumasi, '
+    + 'and an account handed down by a linguist. '
+    + 'Each of those is a piece of evidence, '
+    + 'and all of history is built out of pieces like them. '
+    + 'This lesson sorts evidence by one thing only: when it was made.',
 
   method: [
     'Identify the event and the period being studied.',
@@ -277,7 +294,7 @@ teach({
     {
       mistake: 'Treating the classification as fixed for all questions.',
       why: 'A 1960 textbook is secondary for 1874 '
-        + 'and primary for what was taught in 1960.',
+        + 'and primary for how the subject was presented in 1960.',
     },
   ],
 
