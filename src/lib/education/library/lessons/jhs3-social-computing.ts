@@ -47,6 +47,17 @@ teach({
     ],
   },
 
+  why:
+    'In 2000, in 2008 and in 2016 a sitting government in Ghana '
+    + 'lost an election and handed over. '
+    + 'Elsewhere, a government that lost the count has stayed anyway, '
+    + 'and soldiers settled the matter instead. '
+    + 'The ballots were counted in both cases, and in both the losing '
+    + 'side knew it had lost. '
+    + 'In one the loser went home and in the other he did not. '
+    + 'What makes a losing president walk out of the building, and '
+    + 'which parts of an election exist to produce that one result?',
+
   idea:
     'Democracy means government by the people. '
     + 'In practice the people elect representatives. '
@@ -92,8 +103,16 @@ teach({
     + 'is being asked to referee a match it is playing in.',
 
   recap:
-    'You know the three arms of government and how each checks the others. '
-    + 'This is how the people doing those jobs are chosen, '
+    'Government in Ghana is divided into three arms. '
+    + 'The legislature, which is Parliament, makes the laws. '
+    + 'The executive, which is the President and the ministers, '
+    + 'carries them out. '
+    + 'The judiciary, which is the courts, decides what the law means '
+    + 'and whether it has been broken. '
+    + 'Each arm can stop the others. '
+    + 'Parliament can refuse a law the President wants, and a court '
+    + 'can rule that a law Parliament passed breaks the Constitution. '
+    + 'This lesson is how the people filling those jobs are chosen, '
     + 'and how they are made to leave.',
 
   method: [
@@ -328,6 +347,19 @@ teach({
     ],
   },
 
+  why:
+    'Two families in one town both say the land their houses stand '
+    + 'on was their grandfather’s. '
+    + 'Each has people who remember it that way and neither has a '
+    + 'paper. '
+    + 'The matter lies quiet for twenty years. '
+    + 'Then a road is built nearby and the land is worth money. '
+    + 'Within a month there is burning, and two people are dead over '
+    + 'a plot that neither family wanted in 1995. '
+    + 'Nothing about the land changed except its price. '
+    + 'What would have had to happen in 1995, and who could have made '
+    + 'it happen?',
+
   idea:
     'Conflict is a serious disagreement between groups. '
     + 'In Ghana the common causes are few and concrete, '
@@ -377,10 +409,20 @@ teach({
     + 'and the dispute is exactly where it was when the curfew lifts.',
 
   recap:
-    'You know what culture is '
-    + 'and that Ghana has many peoples, languages and systems of descent. '
-    + 'This looks at what happens when groups come into dispute, '
-    + 'and at what has actually settled such disputes.',
+    'Culture is the whole way a people live: their language, their '
+    + 'food, their dress, how they marry, how they bury their dead, '
+    + 'and who inherits what. '
+    + 'Ghana holds many such cultures. '
+    + 'More than seventy languages are spoken in it, and the systems '
+    + 'of descent differ. '
+    + 'Among the Akan a child belongs to the mother’s family and '
+    + 'inherits through her, while among the Ewe, the Ga and the '
+    + 'northern peoples descent and inheritance run through the '
+    + 'father. '
+    + 'None of that is a problem in itself, and all of it is held '
+    + 'strongly. '
+    + 'This lesson looks at what happens when groups come into '
+    + 'dispute, and at what has actually settled such disputes.',
 
   method: [
     'Name the conflict and where it happened.',
@@ -634,6 +676,34 @@ teach({
     ],
   },
 
+  why:
+    'Two towns of the same size stand an hour apart. '
+    + 'One has a tarred road, a clinic with a nurse, piped water, '
+    + 'electricity in most houses, and almost every child finishing '
+    + 'JHS. '
+    + 'The other has none of those, with the same number of people '
+    + 'and the same land. '
+    + 'Ask anybody in either town which is better off and the answer '
+    + 'comes without hesitating. '
+    + 'But a form has to be filled in, and it asks for a number. '
+    + 'What do you actually measure, and why is income on its own not '
+    + 'enough?',
+
+  notation:
+    'Development indicators are written as rates, and the rate has '
+    + 'to say what it is out of. '
+    + 'Income per person is written as GDP per capita, in dollars a '
+    + 'year. '
+    + 'Infant mortality is written per 1,000 live births, so 33 per '
+    + '1,000 means 33 babies in every thousand born. '
+    + 'Literacy and school enrolment are written as percentages, so '
+    + '79 percent. '
+    + 'The two are not interchangeable: 33 per 1,000 is 3.'
+    + '3 percent, and writing 33 percent instead overstates it '
+    + 'tenfold. '
+    + 'Giving a rate without saying what it is out of is the '
+    + 'commonest way to lose a mark.',
+
   idea:
     'Development means a people’s growing ability '
     + 'to meet their own needs and shape their own lives. '
@@ -685,10 +755,19 @@ teach({
     + 'is what turns the list into an explanation.',
 
   recap:
-    'You know Ghana’s resources and that selling them raw '
-    + 'leaves the added value elsewhere. '
-    + 'This asks the larger question: '
-    + 'what would it mean for the country to be developed?',
+    'Ghana’s resources are gold, bauxite, manganese, oil, timber, '
+    + 'cocoa and fish. '
+    + 'Most of them leave the country as they come out of the ground '
+    + 'or off the tree. '
+    + 'A tonne of raw cocoa beans sells for a few thousand dollars. '
+    + 'Turned into chocolate in Europe it is worth several times '
+    + 'that, and the difference is earned there and not here. '
+    + 'The same holds for gold sold as ore and bauxite sold '
+    + 'unrefined. '
+    + 'So the resource is ours and the value added to it is somebody '
+    + 'else’s. '
+    + 'This lesson asks the larger question: what would it mean for '
+    + 'the country to be developed?',
 
   method: [
     'Define development as capacity, not possessions.',
@@ -903,6 +982,28 @@ teach({
     ],
   },
 
+  why:
+    'A young man in Bolgatanga finishes JHS and goes to Accra to '
+    + 'work as a labourer, as his two brothers did before him. '
+    + 'He sleeps four to a room and sends money home. '
+    + 'He would rather be at home, and he says so. '
+    + 'His father’s land is still there and nobody is farming it. '
+    + 'Nothing forced him onto the bus and he did not want to go. '
+    + 'What made him go anyway, and what would have had to be true in '
+    + 'Bolgatanga for him to stay?',
+
+  notation:
+    'Population rates are written per 1,000 people a year. '
+    + 'A birth rate of 29 per 1,000 means 29 babies born for every '
+    + 'thousand people in that year, and a death rate of 7 per 1,000 '
+    + 'means 7 deaths. '
+    + 'The natural increase is the birth rate less the death rate, so '
+    + '29 less 7 is 22 per 1,000, which is the same thing as 2.'
+    + '2 percent. '
+    + 'Growth rates are usually written as that percentage instead. '
+    + 'Mixing per 1,000 with percent inside one subtraction is the '
+    + 'commonest way to lose a mark.',
+
   idea:
     'A population grows when the birth rate exceeds the death rate, '
     + 'and the growth of a particular place also depends on migration. '
@@ -948,9 +1049,16 @@ teach({
     + 'which is why the population and development topics belong together.',
 
   recap:
-    'You know why the north has one rainy season and the south two, '
-    + 'and what that means for farming. '
-    + 'This follows the consequence into where people live.',
+    'Rain does not fall the same way across Ghana. '
+    + 'The south gets two rainy seasons, one from about March to July '
+    + 'and a shorter one from September to November. '
+    + 'The north gets one, from about May to September, and then a '
+    + 'long dry spell. '
+    + 'So a southern farmer can take two harvests off the same land '
+    + 'in a year, and a northern farmer takes one. '
+    + 'That difference decides what can be grown, and how much a '
+    + 'family can earn from a season. '
+    + 'This lesson follows that consequence into where people live.',
 
   method: [
     'For growth, state the birth rate against the death rate.',
@@ -1180,6 +1288,18 @@ teach({
     ],
   },
 
+  why:
+    'A school keeps its pupils’ details in an exercise book, one '
+    + 'page per class, written by hand. '
+    + 'The headmaster is asked how many girls in the whole school are '
+    + 'over fifteen and have not paid their fees. '
+    + 'Everything he needs is written down somewhere in that book. '
+    + 'It takes him a day and a half and he is not sure he got it '
+    + 'right. '
+    + 'Nothing is missing from his records. '
+    + 'Why is the answer so hard to get out, and what about the way '
+    + 'it is stored makes it hard?',
+
   idea:
     'A database is an organised store of data, '
     + 'held as a table of rows and columns rather than as paragraphs. '
@@ -1222,10 +1342,16 @@ teach({
     + 'and data stored in a paragraph cannot.',
 
   recap:
-    'You have used a spreadsheet, '
-    + 'with rows, columns and formulas. '
-    + 'A database stores the same shape of data '
-    + 'and is built to be asked questions about it.',
+    'A spreadsheet is a grid of boxes called cells, in rows going '
+    + 'across and columns going down. '
+    + 'You type a number or a word into a cell. '
+    + 'You can also type a formula, which is an instruction beginning '
+    + 'with an equals sign that works something out from other cells, '
+    + 'so one reading equals B2 plus B3 shows the total of those two. '
+    + 'Change B2 and that total changes by itself. '
+    + 'A database holds data in the same shape, rows and columns, and '
+    + 'is built for a different purpose: to be asked questions about '
+    + 'what is in it.',
 
   method: [
     'Decide what one record stands for.',
@@ -1459,6 +1585,32 @@ teach({
     ],
   },
 
+  why:
+    'A student has a project due in the morning and finds a page '
+    + 'online that answers it well. '
+    + 'He copies three paragraphs, changes a few words, and hands it '
+    + 'in. '
+    + 'He gets a good mark. '
+    + 'Two weeks later the teacher finds the page, and he is given '
+    + 'zero. '
+    + 'So is another student who never saw the page but copied from '
+    + 'him. '
+    + 'Neither of them took money or a password. '
+    + 'What was actually taken, and from whom?',
+
+  notation:
+    'A source is named so that another person can find the exact '
+    + 'thing you used. '
+    + 'For a website that means the author if there is one, the title '
+    + 'of the page, the name of the site, the web address, and the '
+    + 'date you read it. '
+    + 'For a book it is the author, the title and the year. '
+    + 'Quotation marks go round any words that are not yours, with '
+    + 'the source beside them. '
+    + 'Changing a few words and leaving the source off is still '
+    + 'plagiarism, and it is the commonest way to lose every mark on '
+    + 'a piece of work.',
+
   idea:
     'Long periods at a screen cause eye strain. '
     + 'They also cause pain in the back, the neck and the wrists, '
@@ -1510,10 +1662,18 @@ teach({
     + 'friend.',
 
   recap:
-    'You know how to recognise a scam and protect an account. '
-    + 'This is the other half of digital citizenship: '
-    + 'looking after yourself at the machine, '
-    + 'and being honest about other people’s work.',
+    'A scam online is a message that tries to get money or a '
+    + 'password out of you by pretending to be somebody else. '
+    + 'The signs are steady. '
+    + 'It is urgent, it comes from an address that is nearly right, '
+    + 'it asks for something you would never be asked for, and it '
+    + 'offers something for nothing. '
+    + 'Protecting an account means a password nobody could guess, '
+    + 'never the same one twice, and never typed into a page you '
+    + 'reached by clicking a link in a message. '
+    + 'That is one half of using a computer safely and decently. '
+    + 'This lesson is the other half: looking after your own body at '
+    + 'the machine, and being honest about other people’s work.',
 
   method: [
     'Name the health risk.',
@@ -1709,6 +1869,18 @@ teach({
     ],
   },
 
+  why:
+    'A program is supposed to add up ten marks and give the '
+    + 'average. '
+    + 'It runs without complaining and prints 43.'
+    + '6 every single time, whatever marks are typed in. '
+    + 'Nothing is misspelled and the computer reports no error at '
+    + 'all. '
+    + 'The answer is simply wrong, and wrong in the same way every '
+    + 'time. '
+    + 'Where do you start, when the machine will not tell you which '
+    + 'line is at fault?',
+
   idea:
     'An error may stop a program running at all, '
     + 'because something is written wrongly, '
@@ -1759,9 +1931,18 @@ teach({
     + 'not in the machine’s mood.',
 
   recap:
-    'You can trace a program line by line '
-    + 'with a column for each variable. '
-    + 'Debugging is that skill aimed at a program that is already wrong.',
+    'Tracing a program means working through it by hand, one line '
+    + 'at a time, writing down what every variable holds after each '
+    + 'line. '
+    + 'Draw a table with a column for each variable, and one more '
+    + 'column for anything the program prints. '
+    + 'For a loop that adds 1 to a total three times, the total '
+    + 'column reads 0, then 1, then 2, then 3, and each step is there '
+    + 'to be seen. '
+    + 'Tracing shows what the program actually does, which is not '
+    + 'always what it was meant to do. '
+    + 'This lesson aims that skill at a program already known to be '
+    + 'wrong.',
 
   method: [
     'Write down exactly what you expected and what happened.',
@@ -1979,6 +2160,32 @@ teach({
     ],
   },
 
+  why:
+    'Open a web page in a browser and it shows a heading, some '
+    + 'paragraphs and a picture. '
+    + 'Then use View Source on that same page. '
+    + 'What appears is text full of pointed brackets, with the words '
+    + 'of the page buried inside it. '
+    + 'Both are the same page. '
+    + 'One is what you see and the other is what was actually sent. '
+    + 'What are all those brackets doing, and how does a page of '
+    + 'plain text come out with a big bold heading on it?',
+
+  notation:
+    'A tag is the name of a part of the page, written between two '
+    + 'pointed brackets, and it is said by its letters, so the p tag '
+    + 'is said “p tag” or “paragraph tag” and h1 is said “h one”. '
+    + 'Most tags come in a pair. '
+    + 'The opening tag is the name on its own, and the closing tag is '
+    + 'the same name with a forward slash in front of it, said “slash '
+    + 'p”. '
+    + 'Whatever sits between the two is the content that tag applies '
+    + 'to. '
+    + 'A few tags hold no content and so never close, img being the '
+    + 'one here. '
+    + 'Forgetting the slash on a closing tag, or not closing a tag at '
+    + 'all, is what makes a page come out wrong.',
+
   idea:
     'An HTML page is plain text with tags in angle brackets. '
     + 'The page is wrapped in html, with a head and a body. '
@@ -2021,9 +2228,17 @@ teach({
     + 'find the last part of the page that was still correct.',
 
   recap:
-    'You know what a browser does: '
-    + 'it asks a server for a page and draws what comes back. '
-    + 'This is what the page it receives is made of.',
+    'A browser is the program a web page is opened in, such as '
+    + 'Chrome or Firefox. '
+    + 'When an address is typed in, the browser sends a request '
+    + 'across the internet to a computer called a server, which holds '
+    + 'the page. '
+    + 'The server sends back a file. '
+    + 'The browser reads that file and draws on the screen what the '
+    + 'file says. '
+    + 'So the browser stores none of the page and invents none of it '
+    + 'either. '
+    + 'This lesson is about what is inside the file that comes back.',
 
   method: [
     'Write the content as plain text first.',
