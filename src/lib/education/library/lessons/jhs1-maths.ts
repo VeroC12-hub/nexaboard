@@ -1970,11 +1970,33 @@ teach({
       + 'Trapezium: half the sum of the parallel sides, times height. '
       + 'Height is always perpendicular.',
     method: [
-      'Identify the shape, or split a compound one into shapes you know.',
+      'Identify the shape, or split a compound one into the simple shapes '
+        + 'it is made of.',
       'Find the perpendicular height, not the slanted side.',
       'Apply the formula and keep the units square.',
     ],
   },
+
+  why:
+    'A farmer near Techiman wants to fence a plot. '
+    + 'He also wants to know how much seed to buy for it. '
+    + 'The plot is a triangle, because a stream cuts one corner off. '
+    + 'He can measure all three sides with a tape. '
+    + 'Those three measurements tell him how much fence to buy. '
+    + 'They do not tell him how much ground is inside. '
+    + 'So how much ground is there?',
+
+  notation:
+    'An area is written with a small 2 after the unit. '
+    + 'So 15 cm with a small 2 is said "fifteen square centimetres". '
+    + 'The small 2 is not a power to work out. '
+    + 'It is there to say the unit is a square. '
+    + 'A perimeter uses the plain unit, so 16 cm, said "sixteen '
+    + 'centimetres". '
+    + 'In a formula, base times height is written bh. '
+    + 'The letters sit side by side and the times sign is left out. '
+    + 'The commonest way to lose a mark is to give an area in cm '
+    + 'with no small 2.',
 
   idea:
     'Each shape has its own area formula, and every one of them is the '
@@ -1984,22 +2006,32 @@ teach({
     + 'to the base.',
 
   mechanism:
-    'The commonest error in this whole topic is using the slanted side as '
-    + 'the height, '
-    + 'and it happens because the diagram usually gives you that length. '
-    + 'Height means the straight up distance between the base and the top, '
-    + 'at a right angle to the base. '
-    + 'The slanted side is longer, so the answer comes out too large, '
-    + 'and the working looks perfectly correct. '
-    + 'The formulas are also connected rather than separate: '
-    + 'a parallelogram is a rectangle with a triangle moved from one end to '
-    + 'the other, which is why its area is still base times height, '
-    + 'and a triangle is half a parallelogram.',
+    'The commonest error in this whole topic '
+    + 'is using the slanted side as the height. '
+    + 'It happens because the diagram usually gives you that length. '
+    + 'Height means the straight up distance '
+    + 'between the base and the top. '
+    + 'It is measured at a right angle to the base. '
+    + 'The slanted side is longer. '
+    + 'So the answer comes out too large. '
+    + 'The working still looks correct, '
+    + 'which is why the error survives. '
+    + 'The formulas are also connected rather than separate. '
+    + 'A parallelogram is a rectangle '
+    + 'with a triangle moved from one end to the other. '
+    + 'That is why its area is still base times height. '
+    + 'And a triangle is half a parallelogram.',
 
   recap:
-    'You can find the area of a rectangle, '
-    + 'and you know why the unit is square. '
-    + 'These shapes are all built from that one.',
+    'Area is the amount of flat space inside a shape. '
+    + 'You count it in squares. '
+    + 'Take a rectangle 5 cm long and 3 cm wide. '
+    + 'It holds 3 rows of five one centimetre squares. '
+    + 'That is 15 squares, so the area is 15 square centimetres. '
+    + 'That is why the unit is square. '
+    + 'You are counting squares, not lengths. '
+    + 'Length times width works for the same reason. '
+    + 'Every shape in this lesson is built out of that one.',
 
   method: [
     'Name the shape. Split a compound shape into familiar ones.',
@@ -2048,8 +2080,8 @@ teach({
     {
       mistake: 'Using the slanted side as the height.',
       why: 'Height is perpendicular to the base. '
-        + 'The diagram often gives the slant precisely to see whether you '
-        + 'know the difference.',
+        + 'The diagram often gives the slant precisely to test whether '
+        + 'the difference is clear to you.',
     },
     {
       mistake: 'Forgetting the half in the triangle formula.',

@@ -1075,11 +1075,33 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher writes a short story in your own language on the board. '
+    + 'She asks you to read it aloud and you do, '
+    + 'word by word, without a mistake. '
+    + 'Then she asks what the boy in the story carried to the farm. '
+    + 'You cannot say. '
+    + 'You were busy getting the words right '
+    + 'and never took in what they meant. '
+    + 'How do you read a passage so that you can answer about it too?',
+
+  notation:
+    'Ghanaian languages are written with the same letters as English, '
+    + 'and a few more. '
+    + 'Twi adds ɛ, said like the e in "bed", '
+    + 'and ɔ, said like the o in "hot". '
+    + 'Ewe adds ɖ and ƒ. '
+    + 'Each extra letter stands for one sound, like all the others, '
+    + 'so you read it in the same way. '
+    + 'The commonest mistake is writing e where ɛ belongs, '
+    + 'because that makes a different word.',
+
   idea:
     'Reading a passage in your own language has two parts. '
     + 'First you read it aloud so a listener can follow. '
     + 'Then you answer questions about it, '
-    + 'and the answers come from the passage, not from what you already know.',
+    + 'and the answers come from the passage, '
+    + 'not from what is already in your head.',
 
   mechanism:
     'Reading aloud in your own language has one advantage over English, '
@@ -1094,9 +1116,14 @@ teach({
     + 'is worth far more than reading silently to yourself.',
 
   recap:
-    'You can read the letters of your language, including the extra ones, '
-    + 'and you know how to answer from a passage in English. '
-    + 'Both skills meet here.',
+    'A passage is a few sentences written one after another '
+    + 'about one thing. '
+    + 'Here is one in Twi: "Kofi kɔɔ afuom. Ɔde akutu baa fie." '
+    + 'That is two sentences. '
+    + 'Kofi went to the farm, and he brought oranges home. '
+    + 'Reading it means saying each word in order. '
+    + 'Answering about it means finding the line the answer sits in. '
+    + 'This lesson puts those two together in your own language.',
 
   method: [
     'Read the whole passage once, quietly, before reading it aloud.',
@@ -1153,7 +1180,8 @@ teach({
         + 'Read at talking speed.',
     },
     {
-      mistake: 'Answering from what you know rather than the passage.',
+      mistake: 'Answering from what is in your head rather than from the '
+        + 'passage.',
       why: 'The question is about this passage. '
         + 'If you cannot point at the line, it is a guess.',
     },

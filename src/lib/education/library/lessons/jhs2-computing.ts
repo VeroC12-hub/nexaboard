@@ -1581,6 +1581,30 @@ teach({
     ],
   },
 
+  why:
+    'A mobile money agent wants a small program to work out her charge. '
+    + 'Up to 50 cedis the fee is 50 pesewas. '
+    + 'Above 50 cedis it is one percent of the amount. '
+    + 'She also wants the program to run through a whole day of '
+    + 'transactions, one after another, and total the fees. '
+    + 'You can work out the fee for one transaction on paper. '
+    + 'But the program has to pick between two rules for each one, '
+    + 'and then do the same work again for the next. '
+    + 'Nothing written on that paper does either of those. '
+    + 'So how does a program choose, and how does it repeat?',
+
+  notation:
+    'Programs are planned in a plain form called pseudocode, '
+    + 'which is English laid out like code. '
+    + 'A choice is written "if ... then ... else ...", '
+    + 'and said "if, then, otherwise". '
+    + 'A loop is written "while ... do ..." or "for each ... do ...". '
+    + 'The lines belonging inside an if or a loop '
+    + 'are pushed in from the left margin. '
+    + 'That indentation is the only thing saying they are inside it. '
+    + 'The commonest way to lose a mark is to leave it out, '
+    + 'because then nobody can tell where the loop ends.',
+
   idea:
     'Sequence means one instruction after another, in order. '
     + 'Selection means choosing: '
@@ -1607,7 +1631,7 @@ teach({
     + 'and when a variable changes, '
     + 'write the new value in its column on a new row. '
     + 'Do not keep a value in your head, '
-    + 'and do not skip a line because you think you know what it does. '
+    + 'and do not skip a line because it looks obvious. '
     + 'That is the whole method, and it is slow on purpose. '
     + 'For a loop there are two questions you must be able to answer: '
     + 'what changes each time round, '
@@ -1624,11 +1648,18 @@ teach({
     + 'runs four times. '
     + 'Nobody gets these right by reasoning about them. '
     + 'They get them right by tracing, '
-    + 'which is why tracing is taught before writing.',
+    + 'which is why tracing comes before writing.',
 
   recap:
-    'You can write an algorithm as steps and draw it as a flowchart. '
-    + 'This runs it: '
+    'An algorithm is a list of steps that solves a problem, '
+    + 'written so that anybody who follows them gets the same result. '
+    + 'Here is one for making tea. '
+    + 'Boil the water. Put a tea bag in a cup. Pour the water in. '
+    + 'Wait two minutes. Take the bag out. '
+    + 'A flowchart is that same list drawn as boxes joined by arrows, '
+    + 'with a diamond wherever there is a choice to make. '
+    + 'Both of those say what should happen. '
+    + 'This lesson is about running it: '
     + 'the three structures a program is built from, '
     + 'and how to work out by hand what one will do.',
 
@@ -1699,7 +1730,7 @@ teach({
         + 'While less than 5, starting at 1, is four. Trace it.',
     },
     {
-      mistake: 'Assuming you know what a line does and skipping it.',
+      mistake: 'Deciding a line is obvious and skipping it.',
       why: 'The error is nearly always in a line you were sure about.',
     },
   ],

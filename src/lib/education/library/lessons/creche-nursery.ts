@@ -441,10 +441,16 @@ teach({
       + 'Sing the same words every time.',
     method: [
       'Listen to the song once.',
-      'Join in on the part you know.',
+      'Join in on the part you can sing.',
       'Sing to the end.',
     ],
   },
+
+  why:
+    'Everybody is singing a song. '
+    + 'You want to sing it too. '
+    + 'But you do not know the words yet. '
+    + 'How do you learn them?',
 
   idea:
     'We are going to sing. '
@@ -479,7 +485,7 @@ teach({
       level: 1,
       ask: 'What do you do first?',
       steps: [
-        'Before you sing, you must know the song.',
+        'Before you sing, listen to the song.',
       ],
       answer: 'Listen.',
     },
@@ -487,7 +493,7 @@ teach({
       level: 2,
       ask: 'The song stops before the last word. What do you do?',
       steps: [
-        'You know what comes next.',
+        'The next word is in your head.',
       ],
       answer: 'Say the last word yourself.',
     },

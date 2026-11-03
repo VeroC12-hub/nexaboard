@@ -2627,12 +2627,12 @@ teach({
       + 'how much can be assumed, '
       + 'which words need explaining, '
       + 'and how formal the register is. '
-      + 'A process is explained in order, step by step. '
+      + 'A process is set out in order, step by step. '
       + 'An issue is explained by its parts, '
       + 'with one aspect to a paragraph.',
     method: [
       'Name the readership before planning, and keep it in mind.',
-      'Decide whether it is a process, explained in order, or an issue, explained by parts.',
+      'Decide whether it is a process, set out in order, or an issue, set out by parts.',
       'Define any term the named reader would not know, on first use.',
     ],
   },
@@ -2659,7 +2659,7 @@ teach({
     + 'and it is not narrative, '
     + 'because it does not tell what happened to somebody. '
     + 'There are two common shapes. '
-    + 'A process is explained in order: '
+    + 'A process is set out in order: '
     + 'first this, then this, and the order is the structure. '
     + 'An issue is explained by its parts, '
     + 'one aspect to a paragraph, '
@@ -2724,8 +2724,8 @@ teach({
     + 'a usable set of instructions from an unusable one, '
     + 'and it is why a recipe lists the ingredients before the method. '
     + 'For an issue, the order is yours, '
-    + 'and the trap is to write everything you know '
-    + 'in the order you happen to know it. '
+    + 'and the trap is to write down everything in your head '
+    + 'in the order it happens to come out. '
     + 'Choose a principle of division and name it to yourself: '
     + 'causes then effects then responses; '
     + 'or past then present then future; '

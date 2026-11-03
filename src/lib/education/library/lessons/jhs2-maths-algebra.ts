@@ -477,11 +477,35 @@ teach({
       + 'Find the sentence in the question that says two things are equal, '
       + 'and that sentence is your equation.',
     method: [
-      'Let x be the thing you know least about.',
+      'Let x be the quantity the question says least about.',
       'Write the other quantities using x.',
       'Find the equals: a total, a comparison, or a result.',
     ],
   },
+
+  why:
+    'A trader at Kejetia keeps sheep and goats. '
+    + 'She tells you two things: '
+    + 'she has 5 more sheep than goats, and 31 animals altogether. '
+    + 'You want the number of goats. '
+    + 'You cannot count them, because you are not there, '
+    + 'and she has not told you either number on its own. '
+    + 'Trying numbers until one fits does work, '
+    + 'but in an examination it can take twenty tries. '
+    + 'So how do you turn those two sentences '
+    + 'into something you can just solve?',
+
+  notation:
+    'The sentence "let x be the number of goats" is called defining the '
+    + 'variable, and it is written out in words before any algebra. '
+    + 'The letter is called the variable. '
+    + 'x is only the usual choice, so g for goats is just as correct. '
+    + 'The equals sign says the amount on its left '
+    + 'and the amount on its right are the same number. '
+    + 'It does not mean "and then I worked out". '
+    + 'The commonest way to lose a mark is to leave out the "let" '
+    + 'sentence, because then nobody marking the script '
+    + 'knows what your x stands for.',
 
   idea:
     'A word problem becomes an equation in three steps. '
@@ -497,8 +521,8 @@ teach({
   mechanism:
     'Learners get stuck before the algebra starts, '
     + 'and almost always at the same place: choosing the letter. '
-    + 'The rule that unlocks it is to let x be the thing you know least '
-    + 'about, '
+    + 'The rule that unlocks it is to let x be the quantity the question '
+    + 'says least about, '
     + 'because everything else in the problem is then described in '
     + 'relation to it. '
     + 'If there are five more sheep than goats, '
@@ -519,13 +543,20 @@ teach({
     + 'Answer what was asked, in the units it was asked in.',
 
   recap:
-    'You can solve an equation once you have one. '
-    + 'This topic is entirely about getting from the words to the equation, '
-    + 'which is where the marks are lost.',
+    'An equation is a statement that two amounts are equal, '
+    + 'with a letter standing in for a number nobody has told you yet. '
+    + 'Here is one: 3x + 4 = 19. '
+    + 'Solving it means getting the letter alone on one side. '
+    + 'Take 4 off both sides and it becomes 3x = 15. '
+    + 'Divide both sides by 3 and it becomes x = 5. '
+    + 'Both moves work for the same reason: '
+    + 'the two sides stay equal as long as you do the same thing to each. '
+    + 'This topic is entirely about getting from the words to the '
+    + 'equation, which is where the marks are lost.',
 
   method: [
     'Read the whole question before writing anything.',
-    'Decide what you know least about and let x be that.',
+    'Find the quantity the question says least about, and let x be that.',
     'Write "let x be ..." in words on your page.',
     'Write every other quantity in terms of x.',
     'Find the sentence that says two amounts are equal.',
@@ -585,7 +616,7 @@ teach({
         + 'and marks are given for stating it.',
     },
     {
-      mistake: 'Choosing the quantity you know most about as x.',
+      mistake: 'Choosing the quantity the question says most about as x.',
       why: 'Then every other quantity is described by subtraction, '
         + 'which is where sign errors come from.',
     },

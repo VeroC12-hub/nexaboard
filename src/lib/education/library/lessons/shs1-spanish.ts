@@ -381,7 +381,7 @@ teach({
       + 'buenas noches in the evening. '
       + 'Me llamo introduces your name, '
       + 'and ¿cómo te llamas? asks for somebody else. '
-      + 'Tú is for somebody you know, '
+      + 'Tú is for a friend or somebody your own age, '
       + 'usted for somebody you must be polite to, '
       + 'and that choice changes the verb.',
     method: [
@@ -392,6 +392,29 @@ teach({
       'Write the opening and the closing question mark.',
     ],
   },
+
+  why:
+    'A Spanish team comes to your school for a match '
+    + 'and you are sent to meet them at the gate. '
+    + 'It is four in the afternoon. '
+    + 'You want to greet them, give your name, '
+    + 'and ask the coach for his. '
+    + 'In English one greeting does for the coach and for the players. '
+    + 'In Spanish the greeting depends on the hour, '
+    + 'and the word for "you" changes depending on whether you are '
+    + 'speaking to the coach or to a player your own age. '
+    + 'Use the wrong one on the coach and it sounds rude. '
+    + 'So which words do you use, and how do you tell them apart?',
+
+  notation:
+    'A written question in Spanish opens with an upside down question '
+    + 'mark and closes with the usual one: ¿cómo estás? '
+    + 'Both marks are needed, '
+    + 'and leaving off the first one is the commonest way to lose a mark. '
+    + 'The accent in días and in cómo is part of the spelling, '
+    + 'not decoration, so the word without it is simply misspelt. '
+    + 'The mark over the n in mañana is called a tilde. '
+    + 'It changes the sound to "ny", so mañana is said "ma-NYA-na".',
 
   idea:
     'Spanish greetings follow the clock. '
@@ -406,7 +429,7 @@ teach({
     + 'To introduce yourself: me llamo Kofi, '
     + 'which is literally I call myself Kofi, '
     + 'or soy Kofi. '
-    + 'To ask: ¿cómo te llamas? to somebody you know, '
+    + 'To ask: ¿cómo te llamas? to a friend or somebody your own age, '
     + 'and ¿cómo se llama usted? to somebody you must be polite to. '
     + 'Mucho gusto means pleased to meet you. '
     + 'To ask how somebody is: '
@@ -510,16 +533,23 @@ teach({
     + 'is marked as an error even when both forms are correct Spanish.',
 
   recap:
-    'You can greet somebody in English and in your own language, '
-    + 'and you know that some people are addressed with more respect. '
-    + 'Spanish marks that difference in the verb, '
-    + 'and this lesson shows how.',
+    'Ghanaian languages change the way you address somebody '
+    + 'according to respect. '
+    + 'In Twi you say wo ho te sɛn? to a friend, '
+    + 'and mo ho te sɛn? to an elder, '
+    + 'using the plural form for one person as a mark of respect. '
+    + 'English has lost that difference: '
+    + '"how are you" is said to a child and to a chief alike. '
+    + 'Spanish keeps it, '
+    + 'and it marks it twice over, '
+    + 'in the word for "you" and again in the verb that follows it. '
+    + 'That is the thing this lesson is built on.',
 
   method: [
     'Look at the time of day and choose the greeting.',
     'Check the gender: buenos días, buenas tardes, buenas noches.',
     'Decide tú or usted before you begin.',
-    'Remember that usted takes the same verb form as él.',
+    'Usted takes the same verb form as él.',
     'Use me, te, se with llamarse according to the person.',
     'Use tener, not ser, for age.',
     'Open every written question with the inverted mark.',

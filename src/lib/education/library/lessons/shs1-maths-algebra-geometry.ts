@@ -1182,11 +1182,34 @@ teach({
     method: [
       'Mark the angle you are working from.',
       'Label hypotenuse, opposite and adjacent from that angle.',
-      'Choose the ratio containing the side you know and the side you '
-        + 'want.',
+      'Choose the ratio containing the side you are given and the side '
+        + 'you want.',
       'Write the equation before touching the calculator.',
     ],
   },
+
+  why:
+    'A surveyor needs the height of the Independence Arch in Accra '
+    + 'and cannot climb it. '
+    + 'She stands 40 metres from its foot '
+    + 'and measures the angle up to the top. '
+    + 'It is 32 degrees. '
+    + 'So she has one length and one angle, and nothing else. '
+    + 'Pythagoras needs two sides, and she has one. '
+    + 'So how do 40 metres and 32 degrees between them give a height?',
+
+  notation:
+    'Sine is written sin, with no full stop, and said "sine". '
+    + 'So sin 30 is said "sine of thirty degrees". '
+    + 'cos is said "coss" and tan is said "tan". '
+    + 'The three letters are not multiplying anything. '
+    + 'sin 30 is a single number, not s times i times n times 30. '
+    + 'The angle in the expression is called the argument. '
+    + 'The commonest way to lose a mark is to write sin x = 0.5 '
+    + 'and then divide both sides by sin, which means nothing. '
+    + 'The angle is recovered with the inverse, '
+    + 'written sin with a small minus one above it, '
+    + 'and said "inverse sine".',
 
   idea:
     'In a right angled triangle the longest side, '
@@ -1223,7 +1246,7 @@ teach({
     + 'Write the labels on the diagram. '
     + 'Then choose the ratio by what the question gives you, '
     + 'not by habit: '
-    + 'if you know the opposite and want the hypotenuse, '
+    + 'if the opposite is given and the hypotenuse is wanted, '
     + 'the only ratio that holds both is sine. '
     + 'Writing the equation down before using the calculator matters, '
     + 'because an examination gives method marks for '
@@ -1246,10 +1269,21 @@ teach({
     + 'not 1 over sine.',
 
   recap:
-    'You have used Pythagoras to find a third side, '
-    + 'and similar triangles to find a length from a ratio. '
-    + 'This names the three ratios, '
-    + 'so an angle and one side are enough to find any other side.',
+    'A right angled triangle has one angle of exactly 90 degrees. '
+    + 'Pythagoras rule says that in such a triangle, '
+    + 'the longest side squared equals the other two sides squared '
+    + 'and added. '
+    + 'With short sides 3 and 4 that gives 9 plus 16, which is 25, '
+    + 'so the longest side is 5. '
+    + 'Two triangles are called similar when their three angles match. '
+    + 'One is then a scaled copy of the other, '
+    + 'so each side of the big one is the same multiple '
+    + 'of the matching side of the small one. '
+    + 'Put those two facts together and this follows: '
+    + 'in a right angled triangle, fix one of the other angles '
+    + 'and the ratio of any two sides is fixed too, '
+    + 'whatever size you draw the triangle. '
+    + 'This lesson names three of those ratios.',
 
   method: [
     'Draw the triangle and mark the right angle.',
@@ -1342,7 +1376,7 @@ teach({
   extension:
     'For triangles with no right angle '
     + 'the sine rule and the cosine rule extend these ideas, '
-    + 'and in SHS 2 the ratios are defined for any angle at all, '
+    + 'and later the ratios are defined for any angle at all, '
     + 'using a circle of radius 1 rather than a triangle. '
     + 'That is where sine of 150 degrees comes from.',
 

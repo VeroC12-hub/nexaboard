@@ -1199,6 +1199,17 @@ teach({
     ],
   },
 
+  why:
+    'Your uncle in Kumasi sends a message in Twi for your teacher, '
+    + 'who speaks only English. '
+    + 'You take the words one at a time '
+    + 'and write down what each one means. '
+    + 'What comes out is "Me I say that thing it finish", '
+    + 'and your teacher cannot read it. '
+    + 'Every single word is right and the sentence is wrong. '
+    + 'So what else has to change '
+    + 'when a sentence moves from one language to another?',
+
   idea:
     'Translating means saying in one language what was said in another. '
     + 'The thing to carry across is the meaning. '
@@ -1218,9 +1229,16 @@ teach({
     + 'language.',
 
   recap:
-    'You know that a proverb cannot be translated word for word '
-    + 'because the meaning lives in when it is used. '
-    + 'The same problem applies, more mildly, to ordinary sentences.',
+    'A proverb is a short saying that carries a lesson. '
+    + 'Take the Akan one: Obi nkyerɛ abɔfra Nyame. '
+    + 'Word for word that is "somebody not-show child God", '
+    + 'which is not English and means nothing. '
+    + 'What it actually says is that a child comes to know some things '
+    + 'without anybody teaching them. '
+    + 'So the words and the meaning are two different things, '
+    + 'and only one of them can cross into English. '
+    + 'The same problem turns up, more mildly, in ordinary sentences, '
+    + 'and that is what this lesson is about.',
 
   method: [
     'Read the whole sentence. Never translate as you read.',
@@ -1254,7 +1272,7 @@ teach({
     },
     {
       level: 6,
-      ask: 'How do you know your translation is good?',
+      ask: 'How can you tell your translation is good?',
       steps: [
         'Read it to somebody who speaks that language.',
         'Do not show them the original.',
@@ -1268,8 +1286,8 @@ teach({
   traps: [
     {
       mistake: 'Translating as you read.',
-      why: 'You commit to a shape before you know where the sentence is '
-        + 'going.',
+      why: 'You commit to a shape before the sentence has finished '
+        + 'telling you where it is going.',
     },
     {
       mistake: 'Keeping the original word order.',

@@ -53,8 +53,19 @@ teach({
     ],
   },
 
+  why:
+    'Behind your school a stream has been filling up with rubbish '
+    + 'and the water has turned brown. '
+    + 'At a durbar a pastor, an imam and the queen mother '
+    + 'are each asked to speak about it. '
+    + 'All three say the dumping must stop. '
+    + 'All three begin their reason with how the world was made. '
+    + 'But the three creation accounts are told as different stories. '
+    + 'So why do three different accounts '
+    + 'end in the same instruction about one stream?',
+
   idea:
-    'All three faiths taught in Ghana hold that the world did not come '
+    'The three faiths of Ghana all hold that the world did not come '
     + 'about by itself. '
     + 'It was made, by God, on purpose, '
     + 'and human beings are placed in it as caretakers rather than owners. '
@@ -82,9 +93,18 @@ teach({
     + 'and do not use the comparison to rank them.',
 
   recap:
-    'You have learned the creation story of your own faith. '
-    + 'This places it beside the other two taught in Ghana, '
-    + 'and asks what all three say about how we should treat the world.',
+    'Three faiths are followed across Ghana: '
+    + 'Christianity, Islam and African Traditional Religion. '
+    + 'Each one has an account of how the world began. '
+    + 'Christians read in Genesis that God made the world in six days '
+    + 'and rested on the seventh. '
+    + 'Muslims hold that Allah created the heavens and the earth '
+    + 'by His command, in six periods. '
+    + 'In Akan tradition Onyame made all things '
+    + 'and then set them in order. '
+    + 'This lesson puts the three side by side '
+    + 'and asks what each one says about how people should treat '
+    + 'the world.',
 
   method: [
     'Say what the three agree on: '
@@ -268,9 +288,20 @@ teach({
     ],
   },
 
+  why:
+    'On a Friday afternoon in Tamale the shops close '
+    + 'and men walk to the mosque. '
+    + 'On Sunday morning in Kumasi a church fills up '
+    + 'and the singing reaches the street. '
+    + 'Before a chief speaks at a durbar, '
+    + 'an elder pours a drink on the ground and says a few words. '
+    + 'All three of those are worship. '
+    + 'No two of them look anything alike. '
+    + 'So what makes them the same kind of act?',
+
   idea:
     'Worship is how people turn towards God, '
-    + 'and each faith taught in Ghana has its own forms for it: '
+    + 'and each of the three faiths in Ghana has its own forms for it: '
     + 'when it happens, where, what is done, and who leads. '
     + 'Those are what you learn, '
     + 'and you learn each as its own followers state it. '
@@ -301,9 +332,16 @@ teach({
     + 'not only the objects used.',
 
   recap:
-    'You know how your own family worships. '
-    + 'This describes the three forms taught in Ghana '
-    + 'and asks what each one requires of the person worshipping.',
+    'Worship means turning towards God on purpose, '
+    + 'in a way the faith has set out. '
+    + 'It is not the same thing as believing. '
+    + 'A Muslim praying at dawn facing Makkah is worshipping. '
+    + 'So is a Christian congregation singing on Sunday morning. '
+    + 'So is an elder pouring a libation before a meeting opens. '
+    + 'Three faiths are followed in Ghana: '
+    + 'Christianity, Islam and African Traditional Religion. '
+    + 'This lesson sets out the form each one uses, '
+    + 'and what each asks of the person worshipping.',
 
   method: [
     'Name the faith.',

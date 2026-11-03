@@ -1905,7 +1905,7 @@ teach({
     + 'and it is the one every working programmer uses. '
     + 'Find the last point at which you are CERTAIN everything is correct. '
     + 'Not where you think the bug is: '
-    + 'where you know things are still right. '
+    + 'where things are certainly still right. '
     + 'Then look at what happens next. '
     + 'The fault is between the last correct point and the first wrong '
     + 'one, '
@@ -1998,7 +1998,7 @@ teach({
   traps: [
     {
       mistake: 'Changing several things and running it again.',
-      why: 'If it works you have learned nothing, '
+      why: 'If it works you still do not know why, '
         + 'and you may have broken something else.',
     },
     {
@@ -2022,7 +2022,7 @@ teach({
     'Write a program in small pieces and test each one. '
     + 'That prevents most debugging altogether. '
     + 'When something breaks, '
-    + 'you already know it is in the piece you just added.',
+    + 'the fault is certainly in the piece you just added.',
 
   figure: {
     alt: 'Seven lines of a program drawn as a stack of boxes. The first '
