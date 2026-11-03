@@ -406,23 +406,47 @@ teach({
     ],
   },
 
+  why:
+    'A mason lays a plank across two drums '
+    + 'and stands a bag of cement on it, off to one side. '
+    + 'He wants to know how much of the load each drum is carrying, '
+    + 'because one of them is cracked. '
+    + 'The bag weighs the same wherever it sits. '
+    + 'But the two drums are plainly not taking equal shares. '
+    + 'How do you work out each share '
+    + 'from one weight and one distance?',
+
+  notation:
+    'A moment is written $M = F \\times d$ '
+    + 'and said "the moment equals force times distance". '
+    + 'Its unit is the newton metre, written N m with a space. '
+    + 'It is said "newton metre", never "newtons per metre". '
+    + 'The $d$ in the formula is the perpendicular distance '
+    + 'from the pivot to the line of the force. '
+    + 'It is not the length of the rod. '
+    + 'The commonest way to lose a mark is to use the length of the rod '
+    + 'when the force is at an angle to it.',
+
   idea:
     'The moment of a force about a point is '
     + '$$M = F \\times d,$$ '
-    + 'where $d$ is the perpendicular distance from the point to the line '
-    + 'of the force, measured in newton metres. '
+    + 'where $d$ is the perpendicular distance from the point '
+    + 'to the line of the force. '
+    + 'It is measured in newton metres. '
     + 'A body in equilibrium satisfies two conditions. '
-    + 'First, the vector sum of the forces is zero, so the upward forces '
-    + 'equal the downward forces and the same holds horizontally. '
-    + 'Second, by the principle of moments, the total clockwise moment '
-    + 'about any point equals the total anticlockwise moment about that '
-    + 'same point. '
-    + 'The weight of a uniform body acts at its centre of gravity, which '
-    + 'for a uniform rod is its midpoint. '
-    + 'Stability depends on the position of the centre of gravity and the '
-    + 'width of the base: a low centre of gravity over a wide base is '
-    + 'stable, which is why a loaded lorry tips on a bend and an empty one '
-    + 'does not.',
+    + 'First, the vector sum of the forces is zero. '
+    + 'So the upward forces equal the downward forces, '
+    + 'and the same holds horizontally. '
+    + 'Second, by the principle of moments, '
+    + 'the total clockwise moment about any point '
+    + 'equals the total anticlockwise moment about that same point. '
+    + 'The weight of a uniform body acts at its centre of gravity. '
+    + 'For a uniform rod that is its midpoint. '
+    + 'Stability depends on two things: '
+    + 'where the centre of gravity sits, and how wide the base is. '
+    + 'A low centre of gravity over a wide base is stable. '
+    + 'That is why a loaded lorry tips on a bend '
+    + 'and an empty one does not.',
 
   tables: [{
     caption: 'The two conditions for equilibrium and what each one gives you',
@@ -526,10 +550,16 @@ teach({
     + 'was available.',
 
   recap:
-    'You have balanced a seesaw and found that a bigger weight needs a '
-    + 'shorter arm. '
-    + 'This gives that rule a formula, '
-    + 'and adds the second condition that the forces must balance too.',
+    'Sit two children on a seesaw and the heavier one goes down. '
+    + 'Move the heavier one closer to the middle and it levels out. '
+    + 'A boy of 40 kg sitting 1 m from the middle '
+    + 'balances a girl of 20 kg sitting 2 m from it, '
+    + 'because 40 times 1 is the same as 20 times 2. '
+    + 'So what balances is not the weight on its own. '
+    + 'It is the weight multiplied by its distance from the pivot. '
+    + 'This lesson gives that rule a name and a formula. '
+    + 'It also adds a second condition: '
+    + 'the forces must balance as well.',
 
   method: [
     'Draw the body on its own, away from its supports.',

@@ -418,6 +418,23 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher writes six words on the board. '
+    + 'Ama, runs, market, sleeps, mango, carries. '
+    + 'She says to put them in two groups. '
+    + 'You can see they are not all the same kind of word. '
+    + 'But nobody has told you what the two groups are. '
+    + 'How would you split them?',
+
+  notation:
+    'A noun and a verb are not written in any special way. '
+    + 'But a teacher marks them with letters. '
+    + 'An n above a word means noun. '
+    + 'A v above it means verb. '
+    + 'Say them out loud as noun and verb, not as n and v. '
+    + 'The commonest mistake is to mark every word in the sentence. '
+    + 'Only some of them are nouns and verbs.',
+
   idea:
     'A noun is a naming word: a person, a place, a thing. Ama, market, mango, '
     + 'school. A verb is a doing word: runs, eats, sleeps, carries. Nearly '
@@ -425,15 +442,24 @@ teach({
     + 'something and say what it does.',
 
   mechanism:
-    'The reason these two matter more than other kinds of word is that they '
-    + 'are what a sentence is made of. Take the nouns and verbs out of a '
-    + 'sentence and nothing is left standing. That is also how you test a '
-    + 'word: if you can put "the" in front of it, it is probably a noun. If '
-    + 'you can say "I" before it, or "she" before it, it is probably a verb.',
+    'These two matter more than other kinds of word. '
+    + 'They are what a sentence is made of. '
+    + 'Take the nouns and the verbs out of a sentence '
+    + 'and nothing is left standing. '
+    + 'That also gives you a test. '
+    + 'Can you put "the" in front of the word? '
+    + 'Then it is probably a noun. '
+    + 'Can you say "I" or "she" before it? '
+    + 'Then it is probably a verb.',
 
   recap:
-    'A sentence names who or what, and says what they did. The naming part and '
-    + 'the doing part are exactly the noun and the verb.',
+    'A sentence is a group of words that says one whole thing. '
+    + 'Ama sells mangoes. '
+    + 'That sentence names somebody, Ama. '
+    + 'It also says what she does, sells. '
+    + 'Every sentence does those two jobs. '
+    + 'The naming part and the doing part '
+    + 'are what this lesson gives names to.',
 
   method: [
     'Read the sentence out loud.',

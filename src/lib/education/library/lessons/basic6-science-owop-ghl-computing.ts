@@ -1249,16 +1249,20 @@ teach({
     + 'because languages do not line up word by word.',
 
   mechanism:
-    'Languages differ in more than vocabulary. '
-    + 'They put words in different orders, '
-    + 'they have idioms that mean nothing literally, '
-    + 'and one language often has a single word where the other needs five. '
-    + 'So translating word by word produces something that is technically '
-    + 'made of the right words and says the wrong thing, or nothing. '
-    + 'The reliable method is to stop translating words at all: '
-    + 'read the whole sentence, understand it, look away, '
-    + 'and then say that meaning as you naturally would in the other '
-    + 'language.',
+    'Languages differ in more than words. '
+    + 'They put words in different orders. '
+    + 'They have idioms that mean nothing when taken literally. '
+    + 'One language often has a single word '
+    + 'where another needs five. '
+    + 'So translating word by word gives you something '
+    + 'made of the right words that says the wrong thing, '
+    + 'or nothing at all. '
+    + 'The reliable method is to stop translating words at all. '
+    + 'Read the whole sentence. '
+    + 'Understand it. '
+    + 'Look away. '
+    + 'Then say that meaning the way you naturally would '
+    + 'in the other language.',
 
   recap:
     'A proverb is a short saying that carries a lesson. '

@@ -571,14 +571,24 @@ teach({
     ],
   },
 
+  why:
+    'A pupil talks loudly all through a lesson. '
+    + 'Asked to stop, he says he has freedom of speech, '
+    + 'and he is right that the constitution gives him that. '
+    + 'The thirty pupils around him have a right to education, '
+    + 'and the constitution gives them that too. '
+    + 'Both claims are real. '
+    + 'They cannot both be satisfied in that room. '
+    + 'So how is a case like this decided?',
+
   idea:
-    'The constitution guarantees fundamental human rights: '
-    + 'life, personal liberty, dignity, '
-    + 'freedom of speech, assembly and religion, '
-    + 'equality before the law, education, '
+    'The constitution guarantees fundamental human rights. '
+    + 'They include life, personal liberty and dignity. '
+    + 'They include freedom of speech, assembly and religion. '
+    + 'They include equality before the law, education, '
     + 'and protection from discrimination. '
-    + 'Children have further rights: '
-    + 'to a name, to education, to health care, '
+    + 'Children have further rights. '
+    + 'They have a right to a name, to education, to health care, '
     + 'and to protection from work that harms them. '
     + 'Each right carries a responsibility. '
     + 'A right is only real while other people keep to it.',
@@ -613,9 +623,17 @@ teach({
     + 'because examination questions are often about exactly such a clash.',
 
   recap:
-    'You know you have a right to education and to be treated fairly. '
-    + 'This names the main rights '
-    + 'and shows why each comes with something you owe.',
+    'A right is something you may claim '
+    + 'and nobody may take from you. '
+    + 'In Ghana those claims are written down in one document, '
+    + 'the constitution, adopted in 1992. '
+    + 'Every law and every official has to obey it. '
+    + 'Chapter Five of it lists the rights a person holds here. '
+    + 'Because it is written, a right is not a favour '
+    + 'somebody grants you. '
+    + 'It is something a court can be asked to enforce. '
+    + 'This lesson names the main rights '
+    + 'and shows why each one comes with something you owe.',
 
   method: [
     'Name the right.',

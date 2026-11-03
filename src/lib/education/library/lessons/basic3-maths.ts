@@ -395,6 +395,24 @@ teach({
     ],
   },
 
+  why:
+    'You have 52 cedis and you owe your uncle 27. '
+    + 'You line the numbers up and start at the ones. '
+    + 'You have to take 7 away from 2. '
+    + 'There are not enough. '
+    + 'Nothing in the sum as it stands will change that. '
+    + 'So where do the extra ones come from?',
+
+  notation:
+    'The numbers are written one under the other, ones under ones. '
+    + 'A line goes under them. '
+    + 'The answer sits below the line. '
+    + 'To trade a ten, cross out the tens digit '
+    + 'and write one less above it. '
+    + 'Then write a small 1 in front of the ones digit. '
+    + 'Leave those marks on the page. '
+    + 'They are part of your working.',
+
   idea:
     'Sometimes the digit on top is smaller than the one below it, so you cannot '
     + 'take it away as it stands. You go next door to the tens, take one ten, '
@@ -412,8 +430,15 @@ teach({
     + 'You spent that ten.',
 
   recap:
-    'Carrying trades ten ones for one ten when a column overflows. This is the '
-    + 'same trade in the other direction, done when a column runs short.',
+    'Carrying is a trade you already do when a column holds too much. '
+    + 'Add 7 and 5 in the ones column and you get 12. '
+    + 'Twelve will not fit in one column. '
+    + 'So ten of those ones are traded for one ten. '
+    + 'That ten is carried next door. '
+    + 'The amount did not change. '
+    + 'Only the size of the pieces changed. '
+    + 'This lesson is the same trade the other way round, '
+    + 'done when a column runs short.',
 
   method: [
     'Write the numbers one under the other, ones under ones.',

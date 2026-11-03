@@ -232,10 +232,12 @@ teach({
     + 'What was on them?',
 
   idea:
-    'Germs are too small to see. They sit on your hands after you touch '
-    + 'things, and they go into you when your hand touches your food or your '
-    + 'mouth. Washing your hands with soap takes them off before they can '
-    + 'make that journey.',
+    'Germs are too small to see. '
+    + 'They sit on your hands after you touch things. '
+    + 'Then your hand touches your food. '
+    + 'Then it touches your mouth. '
+    + 'That is how they get into you. '
+    + 'Washing your hands with soap takes them off first.',
 
   mechanism:
     'Follow the path a germ takes. '

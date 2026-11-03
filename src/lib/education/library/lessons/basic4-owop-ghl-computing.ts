@@ -667,21 +667,39 @@ teach({
     ],
   },
 
+  why:
+    'A boy joins your class. '
+    + 'He is from Ho and he speaks Ewe at home. '
+    + 'He says his family travels every year '
+    + 'for a festival you have never heard of. '
+    + 'You both live in Ghana '
+    + 'and you both speak English at school. '
+    + 'So why is his year marked out differently from yours?',
+
   idea:
     'Ghana is made up of many peoples. '
     + 'Each has its own language, its own festivals and its own customs. '
     + 'All of them are Ghanaian.',
 
   mechanism:
-    'It is worth seeing what the festivals have in common. '
-    + 'Different stories, and the same three things underneath: '
-    + 'remember where we came from, give thanks, and gather everybody. '
-    + 'Knowing that makes a festival you have never attended easier to '
-    + 'understand.',
+    'It is worth seeing what the festivals share. '
+    + 'The stories are all different. '
+    + 'But the same three things sit under all of them. '
+    + 'They remember where the people came from. '
+    + 'They give thanks. '
+    + 'They gather everybody. '
+    + 'That makes a festival you have never attended easier to follow.',
 
   recap:
-    'You know what a festival is and that it comes once a year. '
-    + 'This is about whose festivals they are.',
+    'A festival is a day or a week when a whole people stop work '
+    + 'and mark something together. '
+    + 'There is drumming. '
+    + 'There is food. '
+    + 'People come home from far away for it. '
+    + 'Homowo is one. The Ga keep it. '
+    + 'Aboakyir is another, kept at Winneba. '
+    + 'Each festival belongs to a particular people. '
+    + 'This lesson is about whose each one is.',
 
   method: [
     'Name the group.',

@@ -391,22 +391,40 @@ teach({
     ],
   },
 
+  why:
+    'You are reading a story and you reach a word '
+    + 'you have never seen. '
+    + 'There is no dictionary in the room and nobody to ask. '
+    + 'You can stop, which means you never find out what happens. '
+    + 'Or you can jump over it and hope. '
+    + 'Neither of those is any good. '
+    + 'Is there a third thing you can do?',
+
   idea:
     'When you meet a word you do not know, '
     + 'do not stop and do not skip it. '
     + 'The sentence around it usually tells you roughly what it means.',
 
   mechanism:
-    'Writers leave clues without meaning to, '
-    + 'and there are a few shapes worth recognising, '
-    + 'which the table below sets out. '
-    + 'You will rarely get the exact dictionary meaning this way, '
-    + 'and you will usually get close enough to keep reading, '
-    + 'which is the point.',
+    'Writers leave clues without meaning to. '
+    + 'A few shapes are worth knowing, '
+    + 'and the table below sets them out. '
+    + 'You will rarely get the exact dictionary meaning this way. '
+    + 'You will usually get close enough to keep reading. '
+    + 'That is the point.',
 
   recap:
-    'You know how to answer from a passage by finding the right line. '
-    + 'This uses the lines around a word instead of the word itself.',
+    'A passage is a few sentences written one after another '
+    + 'about one thing. '
+    + 'When a question asks about it, '
+    + 'the answer is somewhere in those lines. '
+    + 'Your job is to find the line it sits in. '
+    + 'Take this one: "The soil was dry and nothing would grow." '
+    + 'Ask what the soil was like, '
+    + 'and the first half of that sentence answers it. '
+    + 'This lesson does something a bit different. '
+    + 'It uses the lines around a word '
+    + 'to work out the word itself.',
 
   method: [
     'Read the whole sentence, then the one after it.',

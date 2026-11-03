@@ -1912,10 +1912,13 @@ teach({
     + 'of a capital J, is the commonest way to lose a mark.',
 
   idea:
-    'Energy comes in forms: chemical, electrical, light, sound, heat, '
-    + 'and the energy of movement and of position. '
+    'Energy comes in forms. '
+    + 'There is chemical, electrical, light, sound and heat. '
+    + 'There is also the energy of movement '
+    + 'and the energy of position. '
     + 'Devices convert one form into another. '
-    + 'Energy is never created or destroyed, only changed.',
+    + 'Energy is never created or destroyed. '
+    + 'It is only changed.',
 
   mechanism:
     'Conservation of energy sounds like it should mean nothing runs out, '
