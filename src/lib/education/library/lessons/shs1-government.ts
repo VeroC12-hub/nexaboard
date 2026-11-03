@@ -67,6 +67,16 @@ teach({
     ],
   },
 
+  why:
+    'Ghana is one country, with one government and one flag. '
+    + 'Inside it are Akan, Ewe, Ga, Dagomba and many more, each '
+    + 'with its own language, its own chiefs and its own history. '
+    + 'Somalia is the reverse case: almost everybody there shares '
+    + 'one language and one ancestry, and the country has been at '
+    + 'war with itself for thirty years. '
+    + 'Sharing a country and being one people are clearly not the '
+    + 'same thing, so which of the two makes a state?',
+
   idea:
     'A state has four features. '
     + 'It has a defined territory with recognised boundaries. '
@@ -158,10 +168,17 @@ teach({
     + 'That structure is what the marking scheme follows.',
 
   recap:
-    'You know Ghana is an independent country with its own government. '
-    + 'This asks what makes a state a state, '
-    + 'how a nation differs, '
-    + 'and what independence actually amounts to.',
+    'Ghana is a country with its own government in Accra, its '
+    + 'own borders, and nobody outside able to give it orders. '
+    + 'That has been true since 1957. '
+    + 'Before 1957 the same land and the same people were there, '
+    + 'but the orders came from London. '
+    + 'So what changed in that year was not the land and not the '
+    + 'people. '
+    + 'It was who had the last word, and this lesson asks what '
+    + 'exactly has to be present for something to count as a '
+    + 'state, how a nation is a different thing, and what '
+    + 'independence really amounts to.',
 
   method: [
     'Define the state by its four features: territory, population, '
@@ -400,6 +417,16 @@ teach({
     ],
   },
 
+  why:
+    'In 1981 a group of soldiers took over the government of '
+    + 'Ghana by force. '
+    + 'They had the guns, so they could issue orders and have '
+    + 'them carried out. '
+    + 'Eleven years later the same leader stood in an election '
+    + 'and was voted in. '
+    + 'Nothing about his ability to command had changed between '
+    + 'those two moments, so what did he gain from the vote?',
+
   idea:
     'Power is the ability to make a person or group act '
     + 'in a way they would not otherwise choose. '
@@ -506,10 +533,16 @@ teach({
     + 'The ground is the mark.',
 
   recap:
-    'You know that a chief, a teacher and a police officer '
-    + 'can all tell you what to do. '
-    + 'This asks what entitles each of them, '
-    + 'and what a government needs besides the ability to compel.',
+    'An armed robber on the road can make you hand over your '
+    + 'money. '
+    + 'A police officer at a checkpoint can make you stop your '
+    + 'car. '
+    + 'Your father can tell you to be home by eight. '
+    + 'All three got you to do something you would not otherwise '
+    + 'have chosen, so all three had power over you. '
+    + 'But the officer and your father you would obey willingly, '
+    + 'and the robber only because of the gun, and that '
+    + 'difference is what this lesson is about.',
 
   method: [
     'Ask why compliance happened: fear or acceptance.',
@@ -742,6 +775,17 @@ teach({
     ],
   },
 
+  why:
+    'The 1992 Constitution says a President may serve only two '
+    + 'terms. '
+    + 'Nothing physical stops a sitting President from standing a '
+    + 'third time, because the army answers to him and the rule '
+    + 'is only words on paper. '
+    + 'Zimbabwe had rules of that kind too, and one man ruled '
+    + 'there for thirty-seven years. '
+    + 'So what makes a written limit hold in one country and fail '
+    + 'in another?',
+
   idea:
     'A constitution is the set of rules, written and unwritten, '
     + 'by which a state is governed. '
@@ -846,10 +890,19 @@ teach({
     + 'The evidence is the mark.',
 
   recap:
-    'You know Ghana has a written Constitution '
-    + 'with three arms of government. '
-    + 'This classifies constitutions generally, '
-    + 'and asks the harder question of whether the limits are real.',
+    'A constitution is the set of rules about how a country is '
+    + 'to be governed. '
+    + 'Ghana has one, agreed in 1992 and printed as a single '
+    + 'document. '
+    + 'It says who may make laws, who carries them out, who '
+    + 'judges them, and what a government may never do to a '
+    + 'citizen. '
+    + 'It also stands above ordinary law, so a law passed by '
+    + 'Parliament that contradicts it is void. '
+    + 'Not every country keeps its rules in one document like '
+    + 'that, and this lesson sorts constitutions into kinds '
+    + 'before asking the harder question of whether the limits in '
+    + 'them are real.',
 
   method: [
     'Define a constitution as the rules by which a state is governed.',
@@ -1098,6 +1151,17 @@ teach({
     ],
   },
 
+  why:
+    'A district assembly in Ghana can be given new powers, or '
+    + 'have them taken away, by an act of Parliament in Accra. '
+    + 'A state in Nigeria cannot: its powers are written into the '
+    + 'constitution, and the federal government cannot remove '
+    + 'them on its own. '
+    + 'On the map both countries have a centre and local units, '
+    + 'and some of the names are the same. '
+    + 'So where does the final say actually sit in each, and why '
+    + 'would a country choose one arrangement over the other?',
+
   idea:
     'The three systems differ in where sovereign power lies. '
     + 'In a unitary system all sovereign power rests '
@@ -1197,9 +1261,18 @@ teach({
     + 'provided each row compares the same feature across the systems.',
 
   recap:
-    'You know Ghana has district assemblies and a central government. '
-    + 'This asks where sovereign power actually sits, '
-    + 'and what the alternatives are.',
+    'Ghana is governed from Accra, and it is also governed '
+    + 'locally. '
+    + 'There are district assemblies, and they collect some '
+    + 'rates, build some roads and run some markets. '
+    + 'Their powers were handed to them by an act of Parliament, '
+    + 'which means Parliament can change those powers or take '
+    + 'them back by passing another act. '
+    + 'So the local bodies are real, and they are not independent '
+    + 'of the centre. '
+    + 'This lesson asks where the final power sits in different '
+    + 'countries, and what the alternatives to the arrangement '
+    + 'Ghana has actually are.',
 
   method: [
     'Ask where sovereign power lies.',

@@ -62,6 +62,16 @@ teach({
     ],
   },
 
+  why:
+    'The government has 100 million cedis and two proposals in '
+    + 'front of it: a new hospital in Tamale, or 200 kilometres '
+    + 'of feeder road tarred. '
+    + 'Both are needed and both have people waiting. '
+    + 'Choosing the hospital does not make the road cheaper or '
+    + 'less needed; the road simply does not get built. '
+    + 'What is the real price of that hospital, and how would you '
+    + 'put a number on it?',
+
   idea:
     'Human wants are unlimited. '
     + 'The resources for meeting them are limited. '
@@ -149,10 +159,17 @@ teach({
     + 'and the consequence of losing it is the second mark.',
 
   recap:
-    'You know that money runs out '
-    + 'and that you cannot buy everything you want. '
-    + 'This gives that the name scarcity, '
-    + 'and shows how to measure what a choice really cost.',
+    'You have 20 cedis and the whole day in front of you. '
+    + 'A plate of waakye is 15, the tro-tro home is 5, and '
+    + 'airtime is 10. '
+    + 'Any two of those together come to more than 20, so you '
+    + 'cannot have everything you want with what you have. '
+    + 'That is not bad luck or bad planning. '
+    + 'It is the ordinary condition, and it holds for a '
+    + 'household, a school and a government in exactly the same '
+    + 'way. '
+    + 'This lesson gives that condition its name, then shows how '
+    + 'to measure what a choice actually cost you.',
 
   method: [
     'Name the scarce resource and state how much there is.',
@@ -381,6 +398,15 @@ teach({
     ],
   },
 
+  why:
+    'When tomatoes run short in Accra the price rises, and '
+    + 'within a week more lorries are arriving from Burkina Faso. '
+    + 'Nobody in any office ordered those lorries. '
+    + 'When a hospital in Tamale runs short of beds, no price '
+    + 'rises and no beds arrive by themselves. '
+    + 'Why does one shortage correct itself and the other one '
+    + 'not?',
+
   idea:
     'An economic system is how a society answers '
     + 'its three questions. '
@@ -489,10 +515,17 @@ teach({
     + 'by answering only one of them.',
 
   recap:
-    'You know some things are sold in a market '
-    + 'and some are provided by government. '
-    + 'This says what each method is good at, '
-    + 'and why almost every country uses both.',
+    'Some things in Ghana are bought and sold. '
+    + 'Nobody orders a trader at Makola to stock tomatoes: she '
+    + 'stocks them because people buy them, and when tomatoes get '
+    + 'dear more traders bring them in. '
+    + 'Other things are not sold at all. '
+    + 'A public hospital and a government school are paid for out '
+    + 'of taxes and given out by rule rather than by price. '
+    + 'So two quite different ways of deciding who gets what are '
+    + 'running in the same country at once, and this lesson says '
+    + 'what each is good at and why almost every country uses '
+    + 'both.',
 
   method: [
     'State who owns the means of production.',
@@ -734,6 +767,15 @@ teach({
     ],
   },
 
+  why:
+    'One woman making kenkey by herself does the grinding, the '
+    + 'wrapping and the selling, and finishes perhaps 50 balls a '
+    + 'day. '
+    + 'Three women doing the same work, each taking one of the '
+    + 'three jobs, finish about 200. '
+    + 'Nobody worked harder and nothing new was bought. '
+    + 'Where did the extra 50 come from?',
+
   idea:
     'Production is any activity that creates value '
     + 'or satisfies a want, '
@@ -833,10 +875,17 @@ teach({
     + 'drawn from somewhere real.',
 
   recap:
-    'You know that farming needs land, seed, tools and work. '
-    + 'This names the four things every kind of production uses, '
-    + 'what each is paid, '
-    + 'and why splitting a job up raises output.',
+    'A maize farm needs four separate things. '
+    + 'It needs land, which is the soil and the rain that were '
+    + 'there before anybody arrived. '
+    + 'It needs seed, hoes and a store, which are things made '
+    + 'earlier and then used to produce with. '
+    + 'It needs work, which is the farmer and whoever he hires. '
+    + 'And it needs somebody deciding what to plant and carrying '
+    + 'the loss if the price falls. '
+    + 'This lesson gives each of those four its proper name, says '
+    + 'what each is paid, and then shows why splitting a job '
+    + 'between people raises what comes out of it.',
 
   method: [
     'Identify the item in question.',
@@ -1056,6 +1105,31 @@ teach({
     ],
   },
 
+  why:
+    'In the rainy season a bowl of tomatoes at Agbogbloshie '
+    + 'goes for 5 cedis. '
+    + 'In February the same bowl is 15. '
+    + 'No law was passed, no committee met, and no trader was '
+    + 'told what to charge. '
+    + 'Yet by about ten in the morning nearly every seller in '
+    + 'that market is asking close to the same price. '
+    + 'Who decided it?',
+
+  notation:
+    'Quantity is written Q and price P, and in economics the '
+    + 'price always goes on the upright axis with quantity along '
+    + 'the bottom, which is the reverse of what a maths lesson '
+    + 'would do. '
+    + 'A fall in price moves you along one demand curve, while a '
+    + 'change in income or in taste shifts the whole curve '
+    + 'sideways, and the two have different names: a movement '
+    + 'along, and a shift of. '
+    + 'Demand means willing and able to buy at a stated price, so '
+    + 'a quantity given with no price attached to it is not a '
+    + 'demand at all. '
+    + 'Confusing a movement along the curve with a shift of the '
+    + 'curve is the commonest way to lose a mark.',
+
   idea:
     'Demand is the quantity of a good '
     + 'that buyers are willing and able to buy at a given price. '
@@ -1169,10 +1243,17 @@ teach({
     + 'cannot easily go wrong.',
 
   recap:
-    'You have seen prices in a market rise and fall '
-    + 'and noticed people buying less when something is dear. '
-    + 'This turns that into two curves, '
-    + 'and shows how they settle on one price.',
+    'Prices in a market move. '
+    + 'Tomatoes are 5 cedis a bowl in the harvest season and 15 '
+    + 'out of it, and everybody knows that without being told. '
+    + 'Buyers react to those prices, so at 15 a bowl many of them '
+    + 'take half a bowl, buy onions instead, or go without. '
+    + 'Traders react too, because a high price brings more '
+    + 'lorries down to Accra. '
+    + 'So the amount people buy and the amount sellers bring both '
+    + 'change when the price changes. '
+    + 'This lesson puts each of those on a graph, then shows how '
+    + 'the two of them settle on one price.',
 
   method: [
     'Draw price on the vertical axis and quantity on the horizontal.',
