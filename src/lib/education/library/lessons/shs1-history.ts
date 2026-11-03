@@ -408,6 +408,16 @@ teach({
     ],
   },
 
+  why:
+    'Your grandmother says the family came to this village from '
+    + 'a place three days east, and that it happened four chiefs '
+    + 'ago. '
+    + 'No paper anywhere says so. '
+    + 'Now a land case before the chief turns on whether she is '
+    + 'right. '
+    + 'How do you test what she said, when the only record of it '
+    + 'is her voice?',
+
   idea:
     'Oral tradition is testimony about the past '
     + 'passed by word of mouth across generations. '
@@ -510,10 +520,15 @@ teach({
     + 'and whether that is a thing it keeps well.',
 
   recap:
-    'You know that histories were told before they were written, '
-    + 'and that elders keep accounts of the past. '
-    + 'This asks how far such accounts can be trusted, '
-    + 'and for which kinds of question.',
+    'Before paper came to this part of Africa, the past was '
+    + 'kept by speaking it. '
+    + 'At an Asante court the names of the past kings were '
+    + 'recited aloud at festivals. '
+    + 'A young man learned the list word for word from the man '
+    + 'before him, then recited it himself forty years later. '
+    + 'Nothing was ever written down, yet the names came through. '
+    + 'Keeping the past this way is called oral tradition, and '
+    + 'this lesson asks how far it can be trusted.',
 
   method: [
     'State what the tradition is being used to establish.',
@@ -768,6 +783,15 @@ teach({
     ],
   },
 
+  why:
+    'A trader writes in 1820 that the people of one town are '
+    + 'lazy farmers. '
+    + 'The same year a missionary writes that the same town feeds '
+    + 'itself well. '
+    + 'The trader had been refused credit in that town. '
+    + 'Which of the two tells you about the town, and how would '
+    + 'you decide?',
+
   idea:
     'To read a source critically is to examine it '
     + 'rather than simply believe or reject it. '
@@ -882,9 +906,16 @@ teach({
     + 'and had reason to misrepresent Y.',
 
   recap:
-    'You know that people tell a story to suit themselves. '
-    + 'This turns that into four questions to ask of any source, '
-    + 'and shows that a slanted source is still useful.',
+    'People shape an account to suit themselves. '
+    + 'A chief who lost a war tells his linguist that he was '
+    + 'betrayed, not beaten. '
+    + 'The officer who beat him writes home that the win was his '
+    + 'own doing. '
+    + 'Neither man is lying on purpose, and each leaves out what '
+    + 'does not help him. '
+    + 'An account bent by the interest of the person giving it is '
+    + 'called a biased source, and this lesson turns that into '
+    + 'four questions you ask of any source.',
 
   method: [
     'Name the author and their position.',
@@ -1128,6 +1159,15 @@ teach({
     ],
   },
 
+  why:
+    'The Asante say their ancestors came down from the savanna '
+    + 'into the forest. '
+    + 'The Ga say theirs came from the east along the coast. '
+    + 'Both are told as fact, and both were told for generations '
+    + 'before anybody wrote them down. '
+    + 'If the two disagreed about who reached a place first, how '
+    + 'would you find out which one is right?',
+
   idea:
     'The peoples of Ghana keep traditions of where they came from. '
     + 'Take the Akan first. '
@@ -1260,10 +1300,14 @@ teach({
     + 'and it cannot settle that.',
 
   recap:
-    'You know the main ethnic groups of Ghana and roughly where they '
-    + 'live. '
-    + 'This gives the accounts each keeps of how it got there, '
-    + 'and asks how far the accounts can be tested.',
+    'Ghana holds many peoples, and each sits in its own part of '
+    + 'the country. '
+    + 'The Akan are mostly in the forest and the south. '
+    + 'The Mole-Dagbani peoples are in the north. '
+    + 'None of them was always there, and each keeps an account '
+    + 'of the journey that brought it. '
+    + 'This lesson sets out those accounts and asks how far they '
+    + 'can be tested.',
 
   method: [
     'Name the group and state its tradition of origin.',
@@ -1508,6 +1552,17 @@ teach({
     ],
   },
 
+  why:
+    'Kwaman, Juaben, Bekwai, Mampong and Nsuta were five small '
+    + 'states in the forest. '
+    + 'Each had its own chief. '
+    + 'Each paid tribute to Denkyira, which was stronger than any '
+    + 'of them. '
+    + 'Within about thirty years they were one state, Asante, and '
+    + 'Denkyira was paying them. '
+    + 'What makes separate states with separate chiefs agree to '
+    + 'become one?',
+
   idea:
     'The Akan forest once held many small states. '
     + 'Among them were Kwaman, Juaben, Bekwai, '
@@ -1633,9 +1688,15 @@ teach({
     + 'the institution with its function is two or three.',
 
   recap:
-    'You know Asante was a powerful kingdom with Kumasi as its capital. '
-    + 'This asks how a set of separate small states became one, '
-    + 'and what kept them together afterwards.',
+    'A state is a people under one government, with land it '
+    + 'controls and a ruler it obeys. '
+    + 'Asante is one. '
+    + 'Its capital is Kumasi and its ruler is the Asantehene, who '
+    + 'sits on the Golden Stool. '
+    + 'Asante did not begin as one state. '
+    + 'In the forest around Kumasi there were once many small '
+    + 'states, each with its own chief, and this lesson is about '
+    + 'how they became one.',
 
   method: [
     'Describe the position before the union: small states under '
@@ -1892,6 +1953,14 @@ teach({
     ],
   },
 
+  why:
+    'The Ya Na at Yendi is the chief of Dagbon, and chiefs have '
+    + 'sat there for centuries. '
+    + 'Yet when new land is to be farmed, the first man asked is '
+    + 'not the Ya Na but the tendana, the priest of the land. '
+    + 'Both men hold real authority over the same ground. '
+    + 'How did one area come to have two kinds of ruler?',
+
   idea:
     'Northern Ghana held several centralised states '
     + 'before colonial rule. '
@@ -2019,11 +2088,13 @@ teach({
     + 'has described the chiefs and missed the state.',
 
   recap:
-    'You know that northern Ghana has paramount chiefs '
-    + 'such as the Ya Na at Yendi. '
-    + 'This gives the traditions behind those offices, '
-    + 'and shows how authority was shared '
-    + 'with the priests of the land.',
+    'A paramount chief is the highest chief of a whole area, '
+    + 'with lesser chiefs under him. '
+    + 'Dagbon in the north has one. '
+    + 'His title is the Ya Na and he sits at Yendi. '
+    + 'Mamprugu has the Nayiri at Nalerigu. '
+    + 'Offices like these are older than colonial rule, and this '
+    + 'lesson gives the traditions behind them.',
 
   method: [
     'Name the state, the capital and the title of the ruler.',
@@ -2271,6 +2342,15 @@ teach({
     ],
   },
 
+  why:
+    'In the Akan forest a thousand years ago there was no salt '
+    + 'at all, and meat could not be kept without it. '
+    + 'North of the desert there was salt in slabs the size of a '
+    + 'door, but no gold. '
+    + 'In the forest there was gold. '
+    + 'What happens when each side has plenty of the one thing '
+    + 'the other cannot get?',
+
   idea:
     'For many centuries goods crossed the Sahara '
     + 'between West and North Africa. '
@@ -2410,11 +2490,16 @@ teach({
     + 'and was the only means of preserving food.',
 
   recap:
-    'You know that Ghana takes its name from an old empire '
-    + 'that traded in gold. '
-    + 'This explains what was traded across the desert, '
-    + 'why both sides wanted it, '
-    + 'and what the trade did to the states involved.',
+    'The Sahara is a desert about fifteen hundred kilometres '
+    + 'across, lying between West Africa and North Africa. '
+    + 'Crossing it on foot is not possible, because there is no '
+    + 'water for days at a time. '
+    + 'A camel can go several days without drinking, and can '
+    + 'carry a load while it does. '
+    + 'So for centuries goods crossed the desert on camels, in '
+    + 'long lines called caravans. '
+    + 'This lesson is about what they carried, and what carrying '
+    + 'it did to the states at each end.',
 
   method: [
     'List what went north and what came south.',

@@ -32,6 +32,15 @@ teach({
     ],
   },
 
+  why:
+    'At the market gari is sold in an olonka and kerosene in a '
+    + 'bottle. '
+    + 'Pour the kerosene into a bowl and it lies flat and takes '
+    + 'the shape of the bowl. '
+    + 'Put a stone in the same bowl and it keeps its own shape. '
+    + 'Why does one of them take the shape of the bowl and the '
+    + 'other one not?',
+
   idea:
     'Everything around you is a solid, a liquid or a gas. '
     + 'What tells them apart is what happens to the shape '
@@ -48,8 +57,14 @@ teach({
     + 'and water becomes steam without ever becoming a different substance.',
 
   recap:
-    'You can sort things into groups once you know what you are sorting by. '
-    + 'Here you sort by what happens to the shape.',
+    'Sorting means putting things into groups by one rule. '
+    + 'Sort a pile of beans by colour and you get a red group and '
+    + 'a white group. '
+    + 'The rule there was colour. '
+    + 'In this lesson the rule is shape, and it asks what happens '
+    + 'to the shape of a thing when you move it to another '
+    + 'container. '
+    + 'That one rule splits everything into three groups.',
 
   method: [
     'Take the thing and put it in a different container.',
@@ -258,6 +273,15 @@ teach({
     ],
   },
 
+  why:
+    'In Tamale it does not rain for months, and then it rains '
+    + 'hard for weeks. '
+    + 'Nobody carries water up to the sky and nobody pours it '
+    + 'down. '
+    + 'The sea never empties and the rain never runs out. '
+    + 'So where does the rain come from, and how does the water '
+    + 'get back up there?',
+
   idea:
     'Water goes round and round and never runs out. '
     + 'The sun heats the sea and water rises into the air. '
@@ -276,9 +300,13 @@ teach({
     + 'None of it is new.',
 
   recap:
-    'You know that water can be a solid, a liquid or a gas, '
-    + 'and that heat is what moves it between them. '
-    + 'This is that, happening across a whole country.',
+    'Water can be three different things. '
+    + 'Put water in a freezer and it turns to ice, which is hard. '
+    + 'Warm the ice and it turns back to water. '
+    + 'Boil that water and it goes off into the air as steam. '
+    + 'Heat is what moves water between ice, water and steam, and '
+    + 'this lesson is that same change happening over a whole '
+    + 'country.',
 
   method: [
     'Start at the sea or a lake.',
@@ -433,6 +461,14 @@ teach({
     ],
   },
 
+  why:
+    'A mango seed thrown behind the house is small and hard. '
+    + 'Months later there is a little tree in that spot. '
+    + 'Years later the tree drops mangoes with the same kind of '
+    + 'seed inside. '
+    + 'How does a hard seed turn into a tree that makes more '
+    + 'seeds?',
+
   idea:
     'Every living thing goes through stages, in order, '
     + 'and the last stage makes a new beginning. '
@@ -451,8 +487,13 @@ teach({
     + 'a place without fighting over it.',
 
   recap:
-    'You know that living things grow and make more of themselves. '
-    + 'A life cycle is the shape that takes, stage by stage.',
+    'Living things make more of their own kind. '
+    + 'A hen lays an egg and a chick comes out of it. '
+    + 'The chick grows into a hen, and that hen lays eggs too. '
+    + 'So the same steps happen again and again, always in the '
+    + 'same order. '
+    + 'The order of those steps is what this lesson calls a life '
+    + 'cycle.',
 
   method: [
     'Find the beginning: an egg, or a seed.',
@@ -854,6 +895,13 @@ teach({
     ],
   },
 
+  why:
+    'Kick a ball on a smooth cement floor and it rolls a long '
+    + 'way. '
+    + 'Kick it the same way on sand and it stops quickly. '
+    + 'Nobody touched the ball after the kick. '
+    + 'So what stopped it on the sand?',
+
   idea:
     'Rub your hands together and they get warm. '
     + 'That rubbing is friction. '
@@ -871,9 +919,13 @@ teach({
     + 'Whether you want more or less depends entirely on the job.',
 
   recap:
-    'You know that a push can start, stop or turn something. '
-    + 'Friction is a push that is always there, '
-    + 'always against the direction of travel.',
+    'A push can make a thing move. '
+    + 'Push a ball on the floor and it rolls away. '
+    + 'A push can also stop a thing or turn it. '
+    + 'Hold your hand in front of the rolling ball and the push '
+    + 'of your hand stops it. '
+    + 'This lesson is about one push that is there all the time, '
+    + 'even when nobody is pushing.',
 
   method: [
     'Find the two surfaces that are rubbing.',
@@ -1048,6 +1100,13 @@ teach({
     ],
   },
 
+  why:
+    'Hold a magnet near an empty milk tin and it sticks. '
+    + 'Hold the same magnet near a one-cedi coin and nothing '
+    + 'happens. '
+    + 'Both of them are metal and both look shiny. '
+    + 'Why does the magnet pick up one and leave the other?',
+
   idea:
     'A magnet pulls some things and ignores everything else, '
     + 'and what decides it is not whether the thing is metal. '
@@ -1064,8 +1123,12 @@ teach({
     + 'which is the strangest and most useful thing about them.',
 
   recap:
-    'You can sort materials by what they do. '
-    + 'This is a test that sorts them into two groups very sharply.',
+    'Different materials behave in different ways. '
+    + 'A nail is hard, a rubber band stretches, and a plastic '
+    + 'spoon does not rust. '
+    + 'So materials can be put into groups by what they do. '
+    + 'In this lesson one simple test does the sorting, and it '
+    + 'puts everything into just two groups.',
 
   method: [
     'Take the magnet and touch it to the object.',
@@ -1247,6 +1310,15 @@ teach({
     ],
   },
 
+  why:
+    'The lights in your house come on when you press the '
+    + 'switch. '
+    + 'That electricity is made at Akosombo, where a wall holds '
+    + 'back a river and the water turns big machines. '
+    + 'In a dry year the water behind the wall drops low. '
+    + 'So what happens to your lights then, and where else could '
+    + 'the power come from?',
+
   idea:
     'Everything that works needs energy, '
     + 'and in Ghana it reaches us from several different places. '
@@ -1266,8 +1338,13 @@ teach({
     + 'Cut faster than they grow and a renewable source stops being one.',
 
   recap:
-    'You know that things need energy to move and to heat. '
-    + 'This asks where that energy came from before it reached you.',
+    'Nothing moves or heats by itself. '
+    + 'A tro-tro moves because it burns fuel. '
+    + 'A bulb lights because electricity flows into it. '
+    + 'Your body can run because you ate food. '
+    + 'The thing that makes each of these happen is called '
+    + 'energy, and this lesson asks where the energy came from '
+    + 'before it reached you.',
 
   method: [
     'Name the source.',
@@ -1461,6 +1538,15 @@ teach({
     ],
   },
 
+  why:
+    'Two children eat every day and neither of them goes '
+    + 'hungry. '
+    + 'One eats only banku. '
+    + 'The other eats banku with fish and kontomire. '
+    + 'The first child gets sick more often and grows slowly, '
+    + 'even though he ate enough, so what did his food not give '
+    + 'him?',
+
   idea:
     'Food does three different jobs: '
     + 'it gives energy, it builds the body, and it protects it. '
@@ -1476,8 +1562,12 @@ teach({
     + 'A plate of plain rice fills a stomach and does one job out of three.',
 
   recap:
-    'You know that living things need food to grow. '
-    + 'This is about which food does which part of that.',
+    'Living things need food. '
+    + 'A chick that is fed grows bigger every week. '
+    + 'A chick that is not fed stays small and then dies. '
+    + 'Food is what makes a body grow and keep going. '
+    + 'This lesson is about which food does which part of that '
+    + 'work.',
 
   method: [
     'Look at the plate.',
