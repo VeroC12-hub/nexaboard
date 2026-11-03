@@ -68,11 +68,13 @@ teach({
     + 'something else, which is the commonest way to lose a mark.',
 
   idea:
-    'Acids and bases sit on opposite sides of neutral, and a handful of '
-    + 'simple tests will tell you which side a substance is on. '
-    + 'Neutralisation is an acid reacting with a base to give a salt '
-    + 'and water, and the name of that salt can be worked out every '
-    + 'time rather than remembered.',
+    'Acids and bases sit on opposite sides of neutral. '
+    + 'A handful of simple tests will tell you '
+    + 'which side a substance is on. '
+    + 'Neutralisation is an acid reacting with a base. '
+    + 'It gives a salt and water. '
+    + 'The name of that salt can be worked out every time '
+    + 'rather than remembered.',
 
   mechanism:
     'Naming the salt looks like memory and is a rule with two halves, '

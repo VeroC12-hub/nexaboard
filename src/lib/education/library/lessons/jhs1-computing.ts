@@ -253,15 +253,26 @@ teach({
     ],
   },
 
+  why:
+    'You buy a new phone. '
+    + 'It has a screen, a battery and storage, '
+    + 'all of them better than your old one. '
+    + 'Switch it on with nothing installed '
+    + 'and it cannot take a photo, send a message or play a song. '
+    + 'Every part works. '
+    + 'Nothing happens. '
+    + 'What is missing?',
+
   idea:
     'Software is instructions, and it comes in two kinds. '
     + 'System software runs the computer itself. '
-    + 'The operating system is the chief example: '
-    + 'it starts the machine, manages memory and storage, '
-    + 'handles the keyboard and screen, '
-    + 'and decides which program runs when. '
-    + 'Application software does a particular job for the user, '
-    + 'and it reaches the machine only by asking the operating system.',
+    + 'The operating system is the chief example. '
+    + 'It starts the machine. '
+    + 'It manages memory and storage. '
+    + 'It handles the keyboard and the screen. '
+    + 'And it decides which program runs when. '
+    + 'Application software does a particular job for the user. '
+    + 'It reaches the machine only by asking the operating system.',
 
   mechanism:
     'The reason the split exists is that nobody could write an application '
@@ -284,9 +295,15 @@ teach({
     + 'while a broken application only loses you that one job.',
 
   recap:
-    'You know the difference between hardware, which you can touch, '
-    + 'and software, which you cannot. '
-    + 'This divides the software itself into two kinds.',
+    'A computer has two sides to it. '
+    + 'Hardware is the parts you can touch: '
+    + 'the screen, the keyboard, the box. '
+    + 'Software is the instructions inside, '
+    + 'which you cannot touch at all. '
+    + 'Hardware with no software does nothing, '
+    + 'like a radio with no station. '
+    + 'Software with no hardware has nothing to run on. '
+    + 'This lesson splits the software side itself into two kinds.',
 
   method: [
     'Ask who the software serves: the machine, or you.',

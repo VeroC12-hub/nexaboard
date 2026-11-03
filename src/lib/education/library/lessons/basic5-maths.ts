@@ -1431,6 +1431,24 @@ teach({
     ],
   },
 
+  why:
+    'A farmer has a rectangular plot 20 m long and 10 m wide. '
+    + 'He needs wire to fence it and seed to plant it. '
+    + 'The fence man asks how many metres. '
+    + 'The seed seller asks how many square metres. '
+    + 'He measured the same plot once. '
+    + 'Why does he have to give them two different numbers?',
+
+  notation:
+    'A perimeter is written in plain units, so 60 m. '
+    + 'That is said "sixty metres". '
+    + 'An area is written with a small 2 after the unit, '
+    + 'so 200 m with a small 2. '
+    + 'That is said "two hundred square metres". '
+    + 'The small 2 says the unit is a square. '
+    + 'It is not a number to work out. '
+    + 'The commonest mistake is giving an area in metres.',
+
   idea:
     'Perimeter is the distance round the edge of a shape. '
     + 'Area is the amount of surface inside it. '
@@ -1439,17 +1457,25 @@ teach({
     + 'and why knowing one tells you very little about the other.',
 
   mechanism:
-    'Perimeter is a length and area is a covering, '
-    + 'which is why one is counted in metres and the other in squares. '
-    + 'You can see the difference by asking what each is for: '
-    + 'fence is sold by length and tiles cover surface. '
-    + 'The most useful thing to know is that they do not move together: '
-    + 'two fields with the same perimeter can have very different areas.',
+    'Perimeter is a length. '
+    + 'Area is a covering. '
+    + 'That is why one is counted in metres and the other in squares. '
+    + 'Ask what each is for and the difference is plain. '
+    + 'Fence is sold by the length. '
+    + 'Tiles cover a surface. '
+    + 'The most useful thing to know is that the two do not move '
+    + 'together. '
+    + 'Two fields with the same perimeter '
+    + 'can have very different areas.',
 
   recap:
-    'You can measure in metres and centimetres, '
-    + 'and you can multiply two numbers. '
-    + 'That is everything this needs.',
+    'A metre is a length you can picture: '
+    + 'about the width of a doorway. '
+    + 'A centimetre is much smaller, '
+    + 'and a hundred of them make one metre. '
+    + 'You can measure a side with either. '
+    + 'You can also multiply two numbers, so 6 times 4 is 24. '
+    + 'A length and a multiplication are all this lesson needs.',
 
   method: [
     'For perimeter, add the lengths of all the sides.',

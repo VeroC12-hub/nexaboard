@@ -1567,11 +1567,21 @@ teach({
     ],
   },
 
+  why:
+    'Somebody messages you in a game. '
+    + 'They say they are a boy of eleven in Kumasi. '
+    + 'They are friendly all week. '
+    + 'Then they ask which school you go to '
+    + 'and what time you finish. '
+    + 'Nothing they said was rude. '
+    + 'Why should you still not answer?',
+
   idea:
-    'Some things must never be put online, '
-    + 'however friendly the person asking seems. '
-    + 'If anything online worries you or makes you uncomfortable, '
-    + 'tell an adult you trust straight away.',
+    'Some things must never be put online. '
+    + 'That holds however friendly the person asking seems. '
+    + 'If anything online worries you, '
+    + 'tell an adult you trust. '
+    + 'Tell them straight away.',
 
   mechanism:
     'The reason is that online you cannot tell who you are speaking to. '
@@ -1585,8 +1595,13 @@ teach({
     + 'and whatever they then do appears to be your doing.',
 
   recap:
-    'You know that you do not give your details to a stranger in the street. '
-    + 'This is the same rule, where you cannot see who you are talking to.',
+    'Online means joined to the internet, '
+    + 'so what you write can go to other machines. '
+    + 'Type a message on a phone and it leaves the phone at once. '
+    + 'Other people can save it. '
+    + 'You cannot take it back. '
+    + 'Once a thing has left, it is out of your hands for good. '
+    + 'That is the fact this lesson rests on.',
 
   method: [
     'Before you share anything, ask: could this help somebody find me?',

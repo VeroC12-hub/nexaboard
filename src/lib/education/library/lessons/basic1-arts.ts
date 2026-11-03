@@ -954,21 +954,36 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Your class sings one song together. '
+    + 'Everybody knows the words. '
+    + 'By the end some people are a whole line ahead. '
+    + 'Nobody sang a wrong word. '
+    + 'So why did it fall apart?',
+
   idea:
     'Singing together is not the same as singing loudly at the same time. You '
     + 'have to start together, keep the same speed, and sing the same notes. '
     + 'The most important thing is listening to the others while you sing.',
 
   mechanism:
-    'When you sing you hear your own voice inside your head, much louder than '
-    + 'you hear anyone else. So singing louder makes you hear the group less, '
-    + 'and drift further from them. Singing a little softer lets you hear '
-    + 'where everybody else is, which is the only way to match them. That is '
-    + 'why good singers in a group are rarely the loudest.',
+    'When you sing, you hear your own voice inside your head. '
+    + 'It is much louder in there than anybody else is. '
+    + 'So singing louder makes you hear the group less. '
+    + 'Then you drift further from them. '
+    + 'Sing a little softer and you can hear where everybody else is. '
+    + 'That is the only way to match them. '
+    + 'It is why the best singers in a group '
+    + 'are rarely the loudest.',
 
   recap:
-    'You already keep a beat. A song has one too, and it is what stops the '
-    + 'group drifting apart.',
+    'A beat is a steady pulse. '
+    + 'Tap your foot at the same speed over and over. '
+    + 'That is a beat. '
+    + 'A song has a beat running under it too. '
+    + 'Everyone in a group keeps the same one, '
+    + 'even when nobody is tapping out loud. '
+    + 'That shared beat is what stops the group drifting apart.',
 
   method: [
     'Listen to the starting note before you open your mouth.',

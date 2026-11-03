@@ -34,11 +34,21 @@ teach({
     ],
   },
 
+  why:
+    'Your mother calls from the next room. '
+    + 'She asks where your brother has gone. '
+    + 'You answer "farm". '
+    + 'She asks again. '
+    + 'You said a true word and she still does not know. '
+    + 'What was missing from your answer?',
+
   idea:
-    'A sentence tells somebody the whole thing. If I ask where you are going '
-    + 'and you say "market", I know one word. If you say "I am going to the '
-    + 'market", I know who is going and where. A sentence needs the person and '
-    + 'what they are doing.',
+    'A sentence tells somebody the whole thing. '
+    + 'Say I ask where you are going. '
+    + 'If you answer "market", I know one word. '
+    + 'If you answer "I am going to the market", '
+    + 'I know who is going and where. '
+    + 'A sentence needs the person and what they are doing.',
 
   mechanism:
     'One word makes the other person do the work. '
@@ -50,10 +60,14 @@ teach({
     + 'They just leave things out.',
 
   recap:
-    'Someone asks you a question. '
-    + 'They are waiting for you to speak. '
-    + 'Look at them. '
-    + 'Say it loud enough to be heard.',
+    'Talking is how you tell somebody something. '
+    + 'You open your mouth and words come out. '
+    + 'Say "water" and the person hears one word. '
+    + 'Say "I want water" and the person hears who wants it. '
+    + 'They hear what you want too. '
+    + 'Both of those are talking. '
+    + 'Only one of them tells the whole thing. '
+    + 'Today you learn to say the whole thing.',
 
   method: [
     'Listen to the question all the way to the end.',

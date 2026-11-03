@@ -1253,23 +1253,46 @@ teach({
     ],
   },
 
+  why:
+    'A bag holds 3 red beads and 5 white ones. '
+    + 'You draw one, then draw another '
+    + 'without putting the first back. '
+    + 'You want the chance that both are red. '
+    + 'The first draw is easy: 3 out of 8. '
+    + 'But by the second draw the bag is not the same bag. '
+    + 'How do you count a thing '
+    + 'whose odds change while you are counting it?',
+
+  notation:
+    '$P(A)$ is said "P of A". '
+    + 'It means the probability that event $A$ happens. '
+    + 'The symbol for "or" is a cup shape, '
+    + 'so $P(A \\cup B)$ is said "P of A or B". '
+    + 'The symbol for "and" is a cap shape, '
+    + 'so $P(A \\cap B)$ is said "P of A and B". '
+    + 'The vertical bar is said "given", '
+    + 'so $P(A \\mid B)$ is said "P of A given B". '
+    + 'The commonest way to lose a mark is to swap the cup and the cap. '
+    + 'Hold on to this: the cup holds more, and "or" is the bigger one.',
+
   idea:
     'For equally likely outcomes, the probability of an event is the '
     + 'number of favourable outcomes over the total. '
-    + 'Every probability lies between 0 and 1, and '
-    + '$P(\\text{not } A) = 1 - P(A)$. '
+    + 'Every probability lies between 0 and 1. '
+    + 'Also, $P(\\text{not } A) = 1 - P(A)$. '
     + 'For two events, '
-    + '$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B),$$ '
-    + 'where the overlap is subtracted because adding counted it twice. '
-    + 'Events are mutually exclusive when they cannot both happen, so '
-    + '$P(A \\cap B) = 0$. '
+    + '$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B).$$ '
+    + 'The overlap is subtracted because adding counted it twice. '
+    + 'Events are mutually exclusive when they cannot both happen, '
+    + 'so then $P(A \\cap B) = 0$. '
     + 'Conditional probability is '
-    + '$$P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)},$$ '
-    + 'the probability of $A$ given that $B$ has happened. '
-    + 'Rearranged it gives the multiplication law '
+    + '$$P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}.$$ '
+    + 'That is the probability of $A$ given that $B$ has happened. '
+    + 'Rearranged, it gives the multiplication law '
     + '$P(A \\cap B) = P(B)\\,P(A \\mid B)$. '
-    + 'Events are independent when one happening does not change the other, '
-    + 'and then and only then '
+    + 'Events are independent '
+    + 'when one happening does not change the other. '
+    + 'Then, and only then, '
     + '$P(A \\cap B) = P(A)\\,P(B)$.',
 
   tables: [{
@@ -1375,10 +1398,16 @@ teach({
     + 'is a common examination question.',
 
   recap:
-    'You have found simple probabilities by counting favourable outcomes '
-    + 'over total outcomes. '
-    + 'This handles two events at once, '
-    + 'where the hard part is whether the first one changes the second.',
+    'Probability is a number saying how likely something is. '
+    + 'Count the outcomes that would be a success, '
+    + 'then divide by the total number of outcomes, '
+    + 'so long as all of them are equally likely. '
+    + 'A bag holds 3 red beads and 5 white ones, so 8 in all. '
+    + 'The probability of drawing a red one is 3 over 8. '
+    + 'The probability of drawing a white one is 5 over 8. '
+    + 'The two add to 1, because one or the other must happen. '
+    + 'This lesson handles two events at once. '
+    + 'The hard part there is whether the first changes the second.',
 
   method: [
     'List or count the total number of equally likely outcomes.',

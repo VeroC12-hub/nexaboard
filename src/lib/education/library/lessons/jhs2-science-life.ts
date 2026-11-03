@@ -1673,11 +1673,34 @@ teach({
     ],
   },
 
+  why:
+    'Two children in one house fall ill in the same week. '
+    + 'One has malaria and the other has cholera. '
+    + 'The mother boils the drinking water '
+    + 'and the cholera does not come back. '
+    + 'She boils it all month '
+    + 'and the malaria comes back anyway. '
+    + 'Boiling water is good practice '
+    + 'and it stopped only one of the two. '
+    + 'Why did the same measure work for one disease '
+    + 'and not the other?',
+
+  notation:
+    'Communicable is said "com-MUNE-ik-able". '
+    + 'It means able to be passed from one person to another. '
+    + 'Non-communicable has non in front of it '
+    + 'and means it cannot be passed on. '
+    + 'Write each word out in full in an answer. '
+    + 'The commonest way to lose a mark is shortening them, '
+    + 'because a marker then cannot tell which of the two you meant.',
+
   idea:
-    'A communicable disease is caused by an organism and can be passed '
-    + 'on, and every one of them travels by a particular route. '
-    + 'A non-communicable disease cannot be caught from anybody, and '
-    + 'what brings it on is a set of risks rather than a single cause.',
+    'A communicable disease is caused by an organism '
+    + 'and can be passed on. '
+    + 'Every one of them travels by a particular route. '
+    + 'A non-communicable disease cannot be caught from anybody. '
+    + 'What brings it on is a set of risks '
+    + 'rather than a single cause.',
 
   mechanism:
     'Prevention is the part worth getting right, '
@@ -1710,8 +1733,18 @@ teach({
     + 'so there management replaces prevention.',
 
   recap:
-    'You have learned about keeping clean and sleeping under a net. '
-    + 'This explains why each of those works, '
+    'Some diseases are caused by living things '
+    + 'far too small to see. '
+    + 'They are called organisms. '
+    + 'They include bacteria, viruses, '
+    + 'and the parasite that causes malaria. '
+    + 'One of them gets inside a person, multiplies, '
+    + 'and the person falls ill. '
+    + 'Sleeping under a treated net works '
+    + 'because it keeps the mosquito off your skin while you sleep. '
+    + 'Washing hands with soap works '
+    + 'because it lifts organisms off before they reach the mouth. '
+    + 'This lesson explains why each of those works, '
     + 'by naming the route a disease travels.',
 
   method: [

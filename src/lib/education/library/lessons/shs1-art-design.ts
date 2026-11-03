@@ -1545,41 +1545,62 @@ teach({
     ],
   },
 
+  why:
+    'A visitor in Accra buys a strip of cloth '
+    + 'with black shapes stamped on it '
+    + 'and asks what the shapes mean. '
+    + 'The trader tells her they are African symbols. '
+    + 'She asks which symbol is which, '
+    + 'and nobody on the street can tell her. '
+    + 'The shapes are not decoration. '
+    + 'Each one has a name and a saying behind it. '
+    + 'So what does each one say, and who settled that?',
+
+  notation:
+    'The symbol names are Twi and they are said as they are written. '
+    + 'Gye Nyame is said "jeh N-yah-meh". '
+    + 'Sankofa is said "san-KOH-fa". '
+    + 'Dwennimmen is said "jwen-nee-men". '
+    + 'The dye, adinkra aduru, is said "a-DIN-kra a-DU-ru". '
+    + 'The commonest way to lose a mark is to give a meaning '
+    + 'without the name, '
+    + 'because the name is what says which symbol you mean.',
+
   idea:
     'Ghana has several art traditions '
     + 'in which the work carries meaning beyond its appearance. '
-    + 'Adinkra is a cloth printed with symbols, '
-    + 'associated with the Asante and the Gyaman, '
-    + 'and made at Ntonso and nearby. '
-    + 'The dye, adinkra aduru, is made from the bark of the badie tree '
-    + 'boiled down, '
-    + 'and the symbols are stamped with blocks cut from calabash. '
-    + 'Each symbol has a name and a meaning: '
+    + 'Adinkra is a cloth printed with symbols. '
+    + 'It is associated with the Asante and the Gyaman, '
+    + 'and it is made at Ntonso and nearby. '
+    + 'The dye is called adinkra aduru. '
+    + 'It is made from the bark of the badie tree, boiled down. '
+    + 'The symbols are stamped with blocks cut from calabash. '
+    + 'Each symbol has a name and a meaning. '
     + 'gye nyame refers to the supremacy of God, '
     + 'sankofa to returning for what has been left behind, '
     + 'dwennimmen, the ram horns, to strength with humility, '
     + 'nyansapo, the wisdom knot, to wisdom and ingenuity. '
     + 'Kente is a cloth woven in narrow strips on a horizontal loom '
-    + 'and sewn together, '
-    + 'associated with Bonwire in Asante and with the Ewe at Agbozume '
-    + 'and Kpetoe. '
-    + 'Each pattern has a name, '
-    + 'and the name usually carries a proverb or a historical '
-    + 'reference, '
-    + 'as with adwinasa, meaning that all the designs are used up. '
+    + 'and then sewn together. '
+    + 'It is associated with Bonwire in Asante, '
+    + 'and with the Ewe at Agbozume and Kpetoe. '
+    + 'Each pattern has a name. '
+    + 'The name usually carries a proverb or a piece of history, '
+    + 'as with adwinasa, '
+    + 'which means that all the designs are used up. '
     + 'Wood carving produces stools, '
     + 'the akuaba fertility figure with its flat disc head, '
     + 'masks, and figures for shrines. '
-    + 'A stool is not only furniture: '
-    + 'a chief stool holds the soul of the state, '
+    + 'A stool is not only furniture. '
+    + 'A chief stool holds the soul of the state, '
     + 'and each stool design has a name and a meaning. '
-    + 'Pottery, mostly made by women, '
-    + 'produces vessels for water, cooking and storage, '
+    + 'Pottery is mostly made by women. '
+    + 'It produces vessels for water, cooking and storage, '
     + 'built by hand and fired in an open fire. '
     + 'Brass casting by the lost wax method '
-    + 'produced the gold weights once used to weigh gold dust, '
-    + 'each a small figure or geometric form, '
-    + 'many of them illustrating proverbs. '
+    + 'produced the gold weights once used to weigh gold dust. '
+    + 'Each weight is a small figure or geometric form, '
+    + 'and many of them illustrate proverbs. '
     + 'Beadwork, basketry at Bolgatanga, '
     + 'and leatherwork in the north '
     + 'are further traditions.',
@@ -1679,11 +1700,16 @@ teach({
     + 'and who may use it.',
 
   recap:
-    'You have seen adinkra cloth and kente, '
-    + 'and know they are Ghanaian. '
-    + 'This asks how each is made, '
-    + 'what it says, '
-    + 'and when it is used.',
+    'Adinkra is cloth with black shapes stamped on it. '
+    + 'Each shape stands for a saying. '
+    + 'Kente is cloth woven in narrow strips, '
+    + 'then sewn edge to edge into one piece. '
+    + 'Both are worn, and both are worn most '
+    + 'at funerals, festivals and durbars. '
+    + 'A stamped pattern sits on top of the cloth. '
+    + 'A woven pattern is part of the cloth itself. '
+    + 'This lesson asks how each is made, '
+    + 'what it says, and when it is used.',
 
   method: [
     'Name the tradition, the people and the place.',

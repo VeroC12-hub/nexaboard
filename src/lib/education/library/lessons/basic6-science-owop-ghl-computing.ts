@@ -805,6 +805,15 @@ teach({
     ],
   },
 
+  why:
+    'Your little brother tips hot water on his arm. '
+    + 'He screams, you hold the arm under the tap, '
+    + 'and after two minutes he says it feels better. '
+    + 'You turn the tap off. '
+    + 'The next day the arm has blistered badly. '
+    + 'The water worked while it was running. '
+    + 'Why was two minutes not enough?',
+
   idea:
     'First aid is the help given straight away, before any other help '
     + 'arrives. '
@@ -813,22 +822,27 @@ teach({
     + 'is to fetch an adult at once.',
 
   mechanism:
-    'The twenty minutes of cool water on a burn is the instruction people '
-    + 'cut short, '
-    + 'and it is the one that matters most. '
-    + 'Heat keeps damaging tissue after the contact ends, '
-    + 'so cooling is not about comfort, it is about stopping the injury '
-    + 'continuing. '
-    + 'Two minutes feels like enough because the pain eases, '
-    + 'and the damage is still going on underneath. '
-    + 'The other rule behind all of this is that first aid has a limit: '
-    + 'knowing when to stop and get somebody is itself part of the skill, '
-    + 'not a failure of it.',
+    'The twenty minutes of cool water on a burn '
+    + 'is the instruction people cut short. '
+    + 'It is also the one that matters most. '
+    + 'Heat keeps damaging tissue after the contact ends. '
+    + 'So cooling is not about comfort. '
+    + 'It is about stopping the injury going on. '
+    + 'Two minutes feels like enough because the pain eases. '
+    + 'The damage underneath is still happening. '
+    + 'The other rule behind all of this '
+    + 'is that first aid has a limit. '
+    + 'Knowing when to stop and get somebody is part of the skill. '
+    + 'It is not a failure of it.',
 
   recap:
-    'You know that germs travel from hands to wounds, '
-    + 'and that washing with soap breaks that path. '
-    + 'That is why the first step is your own hands.',
+    'Germs are living things too small to see. '
+    + 'They sit on your hands and on anything you touch. '
+    + 'A cut is an opening in the skin, '
+    + 'and skin is what normally keeps germs out. '
+    + 'So germs on your hands can go straight into somebody else. '
+    + 'Washing with soap lifts them off your hands first. '
+    + 'That is why the first step in this lesson is your own hands.',
 
   method: [
     'Check it is safe for you before you help.',

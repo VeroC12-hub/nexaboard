@@ -254,6 +254,14 @@ teach({
     ],
   },
 
+  why:
+    'You write in your book: my sister. '
+    + 'Your teacher reads it and waits. '
+    + 'She asks, and what about your sister? '
+    + 'You wrote two true words about a real person. '
+    + 'She still says it is not finished. '
+    + 'What is missing when writing leaves the reader waiting?',
+
   idea:
     'A sentence tells somebody one whole thing. It names who or what, and says '
     + 'what they did or what they are. It starts with a capital letter and it '
@@ -261,16 +269,25 @@ teach({
     + 'sister" is not, because it leaves you waiting.',
 
   mechanism:
-    'The capital and the full stop are not decoration. They are where the '
-    + 'sentence begins and ends, and the reader needs both or the words run '
-    + 'into the next thought. Read a page with no full stops out loud and you '
-    + 'will hear the problem: you never know where to breathe. That is what '
-    + 'the marks are for, so they belong to the reader rather than to the '
-    + 'teacher.',
+    'The capital and the full stop are not decoration. '
+    + 'They show where the sentence begins and where it ends. '
+    + 'The reader needs both. '
+    + 'Without them the words run into the next thought. '
+    + 'Read a page with no full stops out loud and you will hear it. '
+    + 'You never know where to breathe. '
+    + 'That is what the marks are for. '
+    + 'They belong to the reader, not to the teacher.',
 
   recap:
-    'A capital letter is the big form of a letter: A for a, M for m. Every '
-    + 'letter has one, and names of people and places take one too.',
+    'A capital letter is the big form of a letter. '
+    + 'A is the big form of a. '
+    + 'M is the big form of m. '
+    + 'Every letter has one. '
+    + 'Names of people and places take a capital too, '
+    + 'so Ama and Accra both start with one. '
+    + 'A full stop is a single dot on the line. '
+    + 'This lesson uses both of those '
+    + 'to mark where a sentence starts and stops.',
 
   method: [
     'Decide the one thing you want to say.',
