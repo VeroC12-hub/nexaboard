@@ -632,10 +632,29 @@ teach({
     ],
   },
 
+  why:
+    'Your uncle has a hole in one tooth. '
+    + 'It hurts him when he drinks cold water. '
+    + 'He says he hardly eats sweets. '
+    + 'Your cousin eats a sweet nearly every day '
+    + 'and her teeth are fine. '
+    + 'The one who eats less sugar has the bad tooth. '
+    + 'Why?',
+
+  notation:
+    'The front cutting teeth are called incisors, said "IN-si-zors". '
+    + 'The pointed ones are canines, said "KAY-nines". '
+    + 'That word comes from the word for dog. '
+    + 'The grinding teeth at the back are molars, said "MOH-lars". '
+    + 'Do not swap canines and molars. '
+    + 'Hold on to the dog: a dog tears with its long pointed teeth.',
+
   idea:
-    'You have different teeth in different places, '
-    + 'and the shape of each one tells you the job it does: '
-    + 'flat for cutting, pointed for tearing, broad for grinding.',
+    'Your teeth are not all the same shape. '
+    + 'The front ones are flat and thin. They cut. '
+    + 'The ones beside them are pointed. They tear. '
+    + 'The big ones at the back are broad and flat on top. They grind. '
+    + 'The shape of a tooth tells you its job.',
 
   mechanism:
     'Decay is not caused by sugar directly. '
@@ -651,8 +670,14 @@ teach({
     + 'away.',
 
   recap:
-    'You know about germs and how washing removes them. '
-    + 'Teeth are the same problem in a place that is harder to reach.',
+    'Germs are living things too small to see. '
+    + 'They sit on your hands, on your skin and on your food. '
+    + 'Wash your hands with soap and water '
+    + 'and most of them are carried away. '
+    + 'That is why you wash before you eat. '
+    + 'Teeth have the same problem. '
+    + 'Germs sit on them too. '
+    + 'A tooth is a harder place to reach than a hand.',
 
   method: [
     'Brush twice a day. The night one matters most.',

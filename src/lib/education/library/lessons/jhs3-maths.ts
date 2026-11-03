@@ -1448,17 +1448,44 @@ teach({
     ],
   },
 
+  why:
+    'An adinkra stamp is cut once '
+    + 'and printed many times across a cloth. '
+    + 'The printer moves it a fixed step along the row each time. '
+    + 'For the border he turns it a quarter turn. '
+    + 'On the other half of the cloth he prints a mirror copy. '
+    + 'Every print comes from the same stamp, '
+    + 'so every print has the same shape and size. '
+    + 'You want to say where the next print will land '
+    + 'before it is made. '
+    + 'How do you describe the move exactly enough to predict it?',
+
+  notation:
+    'The shape you start with is called the object, '
+    + 'and its corners are labelled A, B and C. '
+    + 'The result is called the image, '
+    + 'and its corners are labelled A prime, B prime and C prime, '
+    + 'written with a small mark after each letter. '
+    + 'A translation vector is written as two numbers stacked in '
+    + 'brackets, the top one across and the bottom one up. '
+    + 'Two marks are commonly lost here. '
+    + 'One is writing the vector numbers the wrong way round. '
+    + 'The other is dropping the prime marks, '
+    + 'so the marker cannot tell object from image.',
+
   idea:
-    'Four transformations are set, '
-    + 'and each needs a particular piece of information '
-    + 'before it can be carried out at all: '
-    + 'a line, or a centre with an angle and a direction, '
-    + 'or a vector, or a centre with a scale factor. '
-    + 'Three of the four leave every length and every angle as it was, '
-    + 'so the image is congruent to the object. '
-    + 'The fourth, enlargement, changes the lengths '
-    + 'and leaves the angles alone, '
-    + 'so its image is similar rather than congruent.',
+    'Four transformations are set. '
+    + 'Each one needs a particular piece of information '
+    + 'before it can be done at all. '
+    + 'A reflection needs a line. '
+    + 'A rotation needs a centre, an angle and a direction. '
+    + 'A translation needs a vector. '
+    + 'An enlargement needs a centre and a scale factor. '
+    + 'Three of the four leave every length and every angle as it was. '
+    + 'Their image is congruent to the object. '
+    + 'The fourth one, enlargement, changes the lengths '
+    + 'and leaves the angles alone. '
+    + 'Its image is similar rather than congruent.',
 
   mechanism:
     'The mistake that costs marks is working on the whole shape at once, '
@@ -1478,9 +1505,17 @@ teach({
     + 'and you have found it without being told the answer.',
 
   recap:
-    'You can plot points in four quadrants. '
-    + 'This moves them by four rules, '
-    + 'and each rule is applied to one point at a time.',
+    'A grid has two number lines crossing at zero. '
+    + 'The flat one is the x axis and the upright one is the y axis. '
+    + 'A point is given as two numbers in brackets. '
+    + 'So (3, 2) means go 3 along and 2 up. '
+    + 'Numbers can be negative too, '
+    + 'which means go left or go down, '
+    + 'so (-3, -2) is 3 to the left and 2 down. '
+    + 'The two axes cut the grid into four parts called quadrants. '
+    + 'A point can sit in any of them. '
+    + 'This lesson moves such points by four rules, '
+    + 'one point at a time.',
 
   method: [
     'Identify the transformation and what information it needs.',

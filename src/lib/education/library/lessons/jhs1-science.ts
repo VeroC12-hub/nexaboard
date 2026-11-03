@@ -738,11 +738,23 @@ teach({
     + 'Why will the sun and the wind take that water when the cool '
     + 'day will not, and what is it that actually leaves the cloth?',
 
+  notation:
+    'All four stage names end in -tion, which is said "shun". '
+    + 'Evaporation is said "ee-vap-or-AY-shun". '
+    + 'Condensation is said "con-den-SAY-shun". '
+    + 'Precipitation is said "pre-sip-i-TAY-shun". '
+    + 'Each name is a change, not a place. '
+    + 'The commonest way to lose a mark is to swap the first two. '
+    + 'Hold on to this: evaporation goes up and out, '
+    + 'condensation comes back as drops.',
+
   idea:
-    'The water cycle has four stages: evaporation, condensation, '
-    + 'precipitation and collection. '
-    + 'At JHS the question is what the particles are doing at each '
-    + 'one, and the answer is always about energy.',
+    'The water cycle has four stages. '
+    + 'They are evaporation, condensation, precipitation and collection. '
+    + 'The names are long but the question behind each one is short. '
+    + 'What are the particles doing here? '
+    + 'The answer is always about energy. '
+    + 'Either they are gaining it or they are losing it.',
 
   mechanism:
     'Evaporation does not need boiling, and that confuses people. '

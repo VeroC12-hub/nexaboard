@@ -55,23 +55,50 @@ teach({
     ],
   },
 
+  why:
+    'A lorry loaded with cement rolls down the hill into Nsawam '
+    + 'and the driver brakes to a stop. '
+    + 'The brake drums come out too hot to touch. '
+    + 'Before the hill the lorry had speed and height, and no heat. '
+    + 'At the bottom it has no speed, no height, '
+    + 'and a great deal of heat. '
+    + 'Nothing was added to the lorry and nothing was taken off it. '
+    + 'So where did the speed go, and how much heat should there be?',
+
+  notation:
+    'E sub k is said "E sub k", '
+    + 'and the k is only a label for kinetic. '
+    + 'It is not a number multiplying anything. '
+    + 'The same goes for E sub p, for potential. '
+    + 'The Greek letter theta is said "THEE-ta" '
+    + 'and it stands for an angle. '
+    + 'The unit of work and of energy is the joule, '
+    + 'written J with a capital letter '
+    + 'because it is named after a person. '
+    + 'Two marks are commonly lost here: '
+    + 'leaving the unit off, '
+    + 'and giving a power in joules instead of watts.',
+
   idea:
     'Work is done when a force moves its point of application: '
     + '$$W = Fd\\cos\\theta,$$ '
-    + 'where $\\theta$ is the angle between the force and the movement, so '
-    + 'a force at right angles to the motion does no work at all. '
+    + 'where $\\theta$ is the angle between the force and the movement. '
+    + 'So a force at right angles to the motion does no work at all. '
     + 'Work is measured in joules. '
     + 'Kinetic energy is the energy of motion, '
-    + '$E_k = \\tfrac{1}{2}mv^{2}$, and gravitational potential energy is '
-    + 'the energy of position, $E_p = mgh$. '
+    + '$E_k = \\tfrac{1}{2}mv^{2}$. '
+    + 'Gravitational potential energy is the energy of position, '
+    + '$E_p = mgh$. '
     + 'The principle of conservation of energy says energy is neither '
-    + 'created nor destroyed but only changed from one form to another, so '
-    + 'for a body falling freely '
+    + 'made nor destroyed. '
+    + 'It only changes from one form to another. '
+    + 'So for a body falling freely '
     + '$$mgh = \\tfrac{1}{2}mv^{2}.$$ '
     + 'Power is the rate of doing work, '
     + '$P = \\frac{W}{t} = Fv$, measured in watts. '
-    + 'Efficiency is useful output over total input, as a percentage, and '
-    + 'is always below 100 per cent in a real machine.',
+    + 'Efficiency is useful output over total input, '
+    + 'written as a percentage. '
+    + 'In a real machine it is always below 100 per cent.',
 
   tables: [{
     caption: 'Where the energy goes in four everyday situations',
@@ -182,10 +209,20 @@ teach({
     + 'marks.',
 
   recap:
-    'You know that a moving body has kinetic energy and a raised one has '
-    + 'potential energy, and that work is force times distance. '
-    + 'This makes those into a single accounting rule '
-    + 'that solves problems without finding the acceleration.',
+    'Energy is what a thing has when it can make something else happen. '
+    + 'A moving body has energy because of its motion, '
+    + 'and that is called kinetic energy. '
+    + 'A lorry at 60 km per hour can push a wall over; '
+    + 'the same lorry parked cannot. '
+    + 'A raised body has energy because of where it is, '
+    + 'and that is called potential energy. '
+    + 'A block of concrete held two metres up can break a toe '
+    + 'that the same block resting on the ground cannot. '
+    + 'Work means a force moving something. '
+    + 'Push a crate 3 m with a steady force of 20 N '
+    + 'and the work done is 20 times 3, which is 60 joules. '
+    + 'This lesson makes those three into one accounting rule. '
+    + 'The rule solves problems without ever finding the acceleration.',
 
   method: [
     'Draw the situation and mark the start and end positions.',

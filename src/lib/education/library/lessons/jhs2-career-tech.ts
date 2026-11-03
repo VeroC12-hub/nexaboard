@@ -45,13 +45,36 @@ teach({
     ],
   },
 
+  why:
+    'A carpenter in Suame is asked for a triangular bracket. '
+    + 'The customer gives three lengths: 30 cm, 40 cm and 50 cm. '
+    + 'The carpenter has no protractor and no set square. '
+    + 'He has a ruler, a pencil and a pair of compasses. '
+    + 'He draws the 50 cm side easily. '
+    + 'Now the third corner has to go somewhere exact, '
+    + 'and nobody has given him any angles. '
+    + 'Where does that corner go?',
+
+  notation:
+    'Points are labelled with capital letters. '
+    + 'A triangle with corners A, B and C is called triangle ABC, '
+    + 'said "triangle A B C". '
+    + 'The side between A and B is written AB. '
+    + 'A length is written AB = 5 cm. '
+    + 'The arcs you draw are part of the answer, '
+    + 'not working to be rubbed out. '
+    + 'The commonest way to lose a mark is to clean them off, '
+    + 'because the marker then cannot see that the figure was built '
+    + 'rather than measured.',
+
   idea:
-    'Geometric construction builds a figure from the sizes you are given, '
-    + 'using compasses and a straight edge, and measuring nothing. '
-    + 'The constructions in the syllabus are few, '
-    + 'and every one of them works the same way: '
-    + 'an arc marks all the points a given distance from somewhere, '
-    + 'and a corner is where two such arcs cross.',
+    'Geometric construction builds a figure from the sizes you are given. '
+    + 'You use compasses and a straight edge. '
+    + 'You measure nothing. '
+    + 'The syllabus has only a few constructions. '
+    + 'Every one of them works the same way. '
+    + 'An arc marks all the points a given distance from somewhere. '
+    + 'A corner of the figure is where two such arcs cross.',
 
   mechanism:
     'Every construction in the syllabus comes from one fact about arcs, '
@@ -80,9 +103,19 @@ teach({
     + 'If it does not, your radius changed, and the drawing tells you so.',
 
   recap:
-    'You have constructed 60 and 90 degrees and their bisectors. '
-    + 'This uses the same arcs to build whole figures '
-    + 'from the measurements you are given.',
+    'A pair of compasses draws an arc at whatever width you set. '
+    + 'Set it to 4 cm, put the point on a line, '
+    + 'and the arc crosses that line exactly 4 cm away. '
+    + 'That one move builds angles. '
+    + 'Draw a line and open the compasses to any width. '
+    + 'Swing an arc from a point on the line. '
+    + 'Keep the same width and swing a second arc '
+    + 'from where the first one crossed. '
+    + 'Join the new crossing to your starting point. '
+    + 'The angle is exactly 60 degrees. '
+    + 'Bisecting means cutting in half, '
+    + 'and it is done with two equal arcs from the two ends. '
+    + 'This lesson uses those same arcs to build whole figures.',
 
   method: [
     'Read the given sizes and list them.',

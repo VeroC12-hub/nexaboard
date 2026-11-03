@@ -774,40 +774,60 @@ teach({
     ],
   },
 
+  why:
+    'A candidate writes a composition in Ewe. '
+    + 'The idiom is right, the proverbs are well placed, '
+    + 'and the story holds together. '
+    + 'All through the script she has written e for the open e, '
+    + 'because the pen was faster that way. '
+    + 'The content mark is full. '
+    + 'The accuracy mark is gone, '
+    + 'and the script reads as careless when it is not. '
+    + 'Why does one letter cost that much?',
+
+  notation:
+    'The open e is written as a backwards 3 and said "open e". '
+    + 'The open o is written as a reversed c and said "open o". '
+    + 'In Ewe the d with a curl and the f with a bar '
+    + 'each have their own key. '
+    + 'A high tone is written with an acute mark over the vowel '
+    + 'and a low tone with a grave mark. '
+    + 'The commonest way to lose a mark is to write e for the open e, '
+    + 'or o for the open o. '
+    + 'Each pair is two different letters, '
+    + 'so it is two different words.',
+
   idea:
-    'An orthography is the set of agreed conventions '
-    + 'for writing a language: '
-    + 'which letters are used, '
-    + 'how words are divided, '
-    + 'and how tone and nasalisation are shown. '
+    'An orthography is the agreed way of writing a language. '
+    + 'It sets which letters are used. '
+    + 'It sets how words are divided. '
+    + 'It sets how tone and nasalisation are shown. '
     + 'The Ghanaian orthographies use the Latin alphabet '
     + 'with letters added. '
-    + 'The open e and the open o '
-    + 'each have their own character '
+    + 'The open e and the open o each have a character of their own '
     + 'in Akan, Ewe, Ga, Dangme and others. '
-    + 'Ewe adds further letters, '
-    + 'including the ones for its f and v sounds made with the lips '
-    + 'and the character for its d sound made with the tongue curled. '
-    + 'Nasalisation is shown differently by different languages, '
-    + 'in some by a following n '
-    + 'and in others by a mark over the vowel. '
-    + 'Tone is marked in some orthographies and in some contexts, '
-    + 'usually with an acute mark for high and a grave for low, '
-    + 'and a learner must know what their own examination requires. '
-    + 'Word division is set by the orthography '
-    + 'and is not a matter of judgement: '
-    + 'a sequence written as one word in Akan '
-    + 'may be written as two in Ewe '
-    + 'even where the structures are similar. '
-    + 'Punctuation largely follows English practice, '
-    + 'with the full stop, comma, question mark and quotation marks '
-    + 'used as in English. '
-    + 'Capital letters are used for names and at the start of a '
-    + 'sentence. '
-    + 'The current orthographies were standardised '
-    + 'by committees working with the Bureau of Ghana Languages '
-    + 'and the universities, '
-    + 'which is why they are consistent across published material.',
+    + 'Ewe adds more letters still. '
+    + 'Among them are the ones for its f and v sounds made with the '
+    + 'lips, and the character for its d sound made with the tongue '
+    + 'curled. '
+    + 'Nasalisation is shown in different ways in different languages. '
+    + 'Some show it with an n after the vowel. '
+    + 'Others show it with a mark over the vowel. '
+    + 'Tone is marked in some orthographies and in some settings. '
+    + 'The usual marks are an acute for high and a grave for low. '
+    + 'A learner has to know what their own examination asks for. '
+    + 'Word division is set by the orthography. '
+    + 'It is not a matter of judgement. '
+    + 'A string written as one word in Akan '
+    + 'may be written as two in Ewe, '
+    + 'even where the two structures look alike. '
+    + 'Punctuation mostly follows English. '
+    + 'The full stop, comma, question mark and quotation marks '
+    + 'are used as in English. '
+    + 'Capital letters go on names and at the start of a sentence. '
+    + 'The orthographies in use now were settled by committees '
+    + 'working with the Bureau of Ghana Languages and the universities. '
+    + 'That is why they hold steady across published material.',
 
   mechanism:
     'This is the topic where the most marks are lost '
@@ -898,9 +918,17 @@ teach({
     + 'and reading aloud finds it.',
 
   recap:
-    'You can write your language and be understood. '
-    + 'This asks you to write it to the agreed standard, '
-    + 'with every letter and mark the orthography requires.',
+    'Your language is written with the Latin letters plus a few more. '
+    + 'Akan and Ewe both use the open e, '
+    + 'which looks like a backwards 3, '
+    + 'and the open o, which looks like a c turned round. '
+    + 'Ewe also has a d with a curl and an f with a bar. '
+    + 'Each of those stands for a sound English has no letter for, '
+    + 'so no English letter can stand in for it. '
+    + 'Write e where the open e belongs '
+    + 'and you have written a different word. '
+    + 'This lesson is about writing the language to the agreed '
+    + 'standard, with every letter and mark it asks for.',
 
   method: [
     'Learn the complete alphabet of your language.',

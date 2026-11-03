@@ -227,6 +227,13 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'You want to paint a green leaf. '
+    + 'You open the paint box. '
+    + 'There is red. There is yellow. There is blue. '
+    + 'There is no green. '
+    + 'What do you do?',
+
   idea:
     'Three colours cannot be made by mixing: red, yellow and blue. Everything '
     + 'else can. Mix red and yellow and you get orange. Yellow and blue gives '
@@ -234,15 +241,23 @@ teach({
     + 'and the ones you mix from them are called secondary.',
 
   mechanism:
-    'Mixing takes colour away rather than adding it. Each paint keeps back '
-    + 'some of the light and lets the rest through. Two paints together keep '
-    + 'back more than either did alone, which is why mixtures are always '
-    + 'darker than what went into them, and why mixing all of them gives you '
-    + 'mud rather than a bright new colour.',
+    'Mixing takes colour away. '
+    + 'It does not add it. '
+    + 'Light falls on the paint. '
+    + 'The paint keeps some of that light back. '
+    + 'It lets the rest come back to your eye. '
+    + 'Put two paints together and they keep back more '
+    + 'than one did alone. '
+    + 'So a mixture is always darker than the paints that went into it. '
+    + 'Mix all of them and you get mud, not a bright new colour.',
 
   recap:
-    'You can already name colours when you see them. Here you are learning '
-    + 'which ones come from which, which is a different question.',
+    'A colour is what you see when light comes back off a thing '
+    + 'to your eye. '
+    + 'The leaf is green. The sun is yellow. Blood is red. '
+    + 'You can point at a colour and say its name. '
+    + 'This lesson asks a new question. '
+    + 'Which colours come from which?',
 
   method: [
     'Decide which colour you want.',

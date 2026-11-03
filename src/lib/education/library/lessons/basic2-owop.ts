@@ -425,10 +425,22 @@ teach({
     ],
   },
 
+  why:
+    'It is break time. '
+    + 'Everybody runs out of class at once. '
+    + 'Two children knock each other down at the door. '
+    + 'One starts to cry. '
+    + 'Neither of them meant to. '
+    + 'How do you stop this happening again tomorrow?',
+
   idea:
-    'A rule says what to do, or what not to do, in a place where many people '
-    + 'are together. Every rule exists because somebody got hurt, or because '
-    + 'nothing could get done, before there was one.',
+    'A rule says what to do. '
+    + 'It can also say what not to do. '
+    + 'Rules are for places where many people are together. '
+    + 'Every rule has a reason. '
+    + 'Before the rule, somebody got hurt. '
+    + 'Or nothing could get done. '
+    + 'The rule came to stop that.',
 
   mechanism:
     'Hold on to this part. '
@@ -439,8 +451,12 @@ teach({
     + 'The answer is what the rule was made for.',
 
   recap:
-    'Many people share your school: your class, the other classes, the '
-    + 'teachers. What one person does there affects the others.',
+    'Many people share your school. '
+    + 'Your class. The other classes. The teachers. '
+    + 'What one person does there touches the others. '
+    + 'One child runs in the corridor. '
+    + 'Another child is knocked down. '
+    + 'That is why a school needs rules.',
 
   method: [
     'Say the rule in your own words.',

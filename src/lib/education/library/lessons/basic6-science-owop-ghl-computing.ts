@@ -994,6 +994,15 @@ teach({
     ],
   },
 
+  why:
+    'Your class has one football. '
+    + 'Everybody wants it at break. '
+    + 'On Monday three boys take it '
+    + 'and keep it for the whole break. '
+    + 'No school rule was broken. '
+    + 'Everybody has the same right to play. '
+    + 'So how can one right be real for all forty of you at once?',
+
   idea:
     'A citizen has rights, and beside every right sits a duty. '
     + 'The duty is not a separate rule somebody added. '
@@ -1011,8 +1020,17 @@ teach({
     + 'ask what it would take for everybody to have this at once.',
 
   recap:
-    'You know that rules exist because of what goes wrong without them, '
-    + 'and that a community has leaders answerable for different things.',
+    'A rule is an answer to a problem. '
+    + 'Cars keep to the right because two cars meeting head on '
+    + 'would crash. '
+    + 'The rule came after the crash, not before it. '
+    + 'A community also has people put in charge of different things. '
+    + 'The assembly member speaks for your area. '
+    + 'The head teacher runs the school. '
+    + 'The chief settles matters of custom. '
+    + 'Each one answers for a part of it, not for all of it. '
+    + 'This lesson is about what a citizen holds '
+    + 'and what a citizen owes.',
 
   method: [
     'Name the right.',

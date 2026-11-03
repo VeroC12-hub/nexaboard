@@ -371,11 +371,20 @@ teach({
     ],
   },
 
+  why:
+    'You are looking at a book. '
+    + 'There is a word in it you have never seen. '
+    + 'Nobody is here to tell you what it says. '
+    + 'What do you do?',
+
   idea:
-    'To read a word you do not know, say each sound in it and then run them '
-    + 'together. For mat, say mmm, a, t, then say it faster until it becomes '
-    + 'mat. That is called blending, and it is how you read a word nobody has '
-    + 'told you.',
+    'You see a word you do not know. '
+    + 'Say each sound in it. '
+    + 'For mat, say mmm, then a, then t. '
+    + 'Now say them faster. '
+    + 'They turn into mat. '
+    + 'That is called blending. '
+    + 'It is how you read a word nobody has told you.',
 
   mechanism:
     'The sounds are the word already. '
@@ -387,7 +396,10 @@ teach({
 
   recap:
     'Each letter stands for a sound. '
-    + 'You need the sounds before you can join them. '
+    + 'The letter m says mmm. '
+    + 'The letter a says ah. '
+    + 'The letter t says t. '
+    + 'You need those sounds before you can join them. '
     + 'Not sure of a letter? '
     + 'Say its sound on its own first.',
 

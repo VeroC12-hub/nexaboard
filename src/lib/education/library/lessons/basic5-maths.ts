@@ -1032,6 +1032,24 @@ teach({
     ],
   },
 
+  why:
+    'Your mother gives you money for the week. '
+    + 'You spend 7 cedis on Monday. '
+    + '18 cedis are left. '
+    + 'You want to know how much she gave you. '
+    + 'You cannot add up what you spent, '
+    + 'because you only spent some of it. '
+    + 'The number you want is the one nobody told you. '
+    + 'How do you get it back?',
+
+  notation:
+    'A missing number is written as an empty box. '
+    + 'So 7 plus box equals 12 is read '
+    + '"seven plus something equals twelve". '
+    + 'The box is the number you are hunting for. '
+    + 'The equals sign says both sides are the same amount. '
+    + 'The commonest mistake is to give the total instead of the box.',
+
   idea:
     'A number sentence with a gap, like 7 plus something equals 12, '
     + 'is asking what belongs in the gap. '
@@ -1039,18 +1057,30 @@ teach({
     + '12 take away 7 is 5, so the missing number is 5.',
 
   mechanism:
-    'Every operation has an opposite that cancels it, '
-    + 'so if something was added to the box, you subtract to get the box '
-    + 'alone. '
-    + 'This is exactly what algebra does later with letters instead of boxes, '
-    + 'which is why it is worth doing properly now: '
-    + 'the habit of asking "what was done to it, and what undoes that" '
-    + 'is the whole method, and it never changes.',
+    'Every sum has an opposite that cancels it. '
+    + 'Adding is cancelled by taking away. '
+    + 'Taking away is cancelled by adding. '
+    + 'Times is cancelled by sharing. '
+    + 'So if 7 was added to the box, '
+    + 'take 7 away and the box stands alone. '
+    + 'Later you will do the same thing with letters in place of boxes. '
+    + 'That is called algebra. '
+    + 'The habit is the same every time. '
+    + 'Ask what was done to the box. '
+    + 'Then ask what undoes that. '
+    + 'Those two questions are the whole method, '
+    + 'and they never change.',
 
   recap:
-    'You know that adding undoes subtracting, '
-    + 'because you have been using it to check your answers. '
-    + 'Here it does the work rather than the checking.',
+    'Adding and taking away are opposites. '
+    + 'Start with 5. '
+    + 'Add 3 and you have 8. '
+    + 'Now take 3 away and you are back at 5. '
+    + 'The taking away undid the adding. '
+    + 'Times and sharing work the same way. '
+    + '4 times 3 is 12, and 12 shared by 3 is 4 again. '
+    + 'Up to now you used that to check an answer. '
+    + 'Here it does the work.',
 
   method: [
     'Find the gap.',
