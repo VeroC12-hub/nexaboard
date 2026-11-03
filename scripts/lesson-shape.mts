@@ -71,6 +71,8 @@ interface Row {
   tables: number
   maths: boolean
   questionShown: boolean
+  why: boolean
+  notation: boolean
 }
 
 const rows: Row[] = []
@@ -95,6 +97,8 @@ for (const t of allTaught()) {
     tables: t.tables?.length ?? 0,
     maths: hasMaths(t),
     questionShown: pieces.some(p => p.kind === 'question'),
+    why: !!t.why,
+    notation: !!t.notation,
   })
 }
 
@@ -120,6 +124,8 @@ console.log(`Has a picture at all:      ${pct(r => r.figure)}`)
 console.log(`Picture in the last third: ${pct(r => r.figureAt !== null && r.figureAt >= Math.floor(r.pieces * 2 / 3))}`)
 console.log(`Has at least one table:    ${pct(r => r.tables > 0)}`)
 console.log(`Sets any mathematics:      ${pct(r => r.maths)}`)
+console.log(`Says what it is for:       ${pct(r => r.why)}`)
+console.log(`Says how to read it:       ${pct(r => r.notation)}`)
 console.log(`Question inside the lesson:${pct(r => r.questionShown)}`)
 console.log(``)
 

@@ -148,6 +148,42 @@ export interface Taught {
    * nothing; "an equation is a claim that two amounts are equal, so anything
    * you do to one you must do to the other" teaches the learner.
    */
+  /**
+   * What the topic is for, and the question the reader cannot answer yet.
+   *
+   * ── Why this field exists ──────────────────────────────────────────────
+   * Read a published textbook section on the same topic and the first thing
+   * on the page is not the definition. OpenStax opens its logarithm section
+   * with two earthquakes on the Richter scale, then poses an exponential
+   * equation the reader has no method for, and only then names the new tool.
+   * The teaching research says the same thing from the other side: studies
+   * of textbooks that open with the formal definition report that students
+   * treat the properties as rules imposed on them, and one calls the usual
+   * introduction out of the blue, with little connection to what the
+   * students have learned before.
+   *
+   * Every lesson in this library opened with the definition. "A logarithm is
+   * an index" is the first sentence of the logarithms lesson, addressed to
+   * somebody who has not been told what an index is or why anyone would want
+   * one. That is a lesson written for a reader who already knows the topic.
+   *
+   * So: one concrete situation a Ghanaian learner can picture, and one
+   * question in it that the topic exists to answer. Not a definition, not a
+   * list of uses, and not "this topic is important in everyday life".
+   */
+  why?: string
+  /**
+   * How to read the thing out loud, and what each part of it is called.
+   *
+   * A textbook gives notation its own stage before any rule: how the
+   * expression is said, which number is which, what the brackets mean. A
+   * learner who cannot say "log base 3 of 81" cannot ask about it, cannot
+   * check it with a friend, and cannot hear it in class. Naming the parts is
+   * also what makes the rules sayable rather than shapes to be copied.
+   *
+   * Only for topics that have notation. A lesson on soil types has none.
+   */
+  notation?: string
   mechanism?: string
   /** The prerequisite in one paragraph, for a learner who is catching up. */
   recap?: string
@@ -213,7 +249,7 @@ export interface LessonTable {
 /** One piece of an assembled lesson, ready to render. */
 export interface Piece {
   kind: 'idea' | 'mechanism' | 'recap' | 'method' | 'worked' | 'traps'
-    | 'extension' | 'figure' | 'table' | 'question'
+    | 'extension' | 'figure' | 'table' | 'question' | 'why' | 'notation'
   heading: string
   /** Set for the prose kinds. */
   text?: string
@@ -272,11 +308,27 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
   /* The short telling where the topic has one. A topic with no brief form
      falls back to the full wording rather than to nothing, because a shorter
      lesson is the point and an empty one is a bug. */
+  /* What it is for, before what it is.
+
+     Kept even for the gist: somebody asking what a thing is in one screen is
+     asking the question this field answers. Dropped for a learner who says
+     they are strong here and wants to be doing, who has already met the
+     topic and does not need persuading that it exists. */
+  const purpose: Piece | null = t.why && !(strong && doing)
+    ? { kind: 'why', heading: 'What it is for', text: t.why }
+    : null
+
   const idea: Piece = {
     kind: 'idea',
     heading: 'The idea',
     text: (gist && t.brief?.idea) || t.idea,
   }
+
+  /* How to say it. Not in the gist, where the reader wants the thing itself,
+     and not for a strong learner who is already reading it fluently. */
+  const notation: Piece | null = t.notation && !gist && !strong
+    ? { kind: 'notation', heading: 'How to read it', text: t.notation }
+    : null
   if (gist && t.brief?.idea) why.push('it is the short version, because you asked for the gist')
   else if (gist) why.push('you asked for the gist, and this topic has only the full telling')
 
@@ -463,7 +515,7 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     why.push('it opens with something to try, because you learn from the mistake')
     pieces = [
       question ?? worked!,
-      recap, idea, figure, mechanism, ...tableFirst, method,
+      purpose, recap, idea, notation, figure, mechanism, ...tableFirst, method,
       question ? worked : null,
       ...workedMore, ...tableRest,
       traps, extension,
@@ -471,9 +523,9 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
   } else if (p.approach === 'SHOW_FIRST') {
     why.push('it shows you one done first')
     pieces = [
-      recap,
+      purpose, recap,
       shows ? figure : null,
-      worked, idea,
+      worked, idea, notation,
       shows ? null : figure,
       mechanism, ...tableFirst, method,
       ...workedMore, ...tableRest,
@@ -483,9 +535,9 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     /* IDEA_FIRST, and the default. The idea in full before anything is
        touched, which is also the order a textbook uses. */
     pieces = [
-      recap,
+      purpose, recap,
       shows ? figure : null,
-      idea,
+      idea, notation,
       shows ? null : figure,
       mechanism, ...tableFirst, method, worked,
       ...workedMore, ...tableRest,
