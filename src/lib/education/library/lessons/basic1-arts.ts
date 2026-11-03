@@ -758,6 +758,23 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Four people are drumming at a funeral. '
+    + 'Each one is hitting a different pattern. '
+    + 'It should sound like a mess. '
+    + 'It does not. '
+    + 'It sounds like one thing. '
+    + 'What are all four of them holding on to?',
+
+  notation:
+    'Players count the beat out loud: one, two, three, four. '
+    + 'Then they start again at one. '
+    + 'One run of four counts is called a bar. '
+    + 'A count where you clap is a beat you play. '
+    + 'A count where you stay silent is called a rest. '
+    + 'The commonest mistake is to stop counting on a rest. '
+    + 'Keep the foot going right through it.',
+
   idea:
     'The beat is the steady pulse underneath music, like a heart. It does not '
     + 'change. The rhythm is the pattern of claps on top of it, and it can be '
@@ -765,11 +782,14 @@ teach({
     + 'the rhythm with your hands.',
 
   mechanism:
-    'The beat is what lets many people play together. Each person can play a '
-    + 'different rhythm, and it all fits because everyone is counting the same '
-    + 'steady pulse underneath. That is why a drummer who loses the beat '
-    + 'breaks the whole group, while one who plays a different rhythm does '
-    + 'not. The pulse is shared; the pattern is yours.',
+    'The beat is what lets many people play together. '
+    + 'Each person can play a different rhythm. '
+    + 'It all fits because everybody is counting '
+    + 'the same steady pulse underneath. '
+    + 'So a drummer who loses the beat breaks the whole group. '
+    + 'A drummer who plays a different rhythm does not. '
+    + 'The pulse is shared. '
+    + 'The pattern is yours.',
 
   recap:
     'Clap once for every step you take while walking. That is you keeping a '

@@ -446,23 +446,35 @@ teach({
     ],
   },
 
+  why:
+    'A big tree falls across the path to your farm. '
+    + 'Your father says it is not for the head teacher to move. '
+    + 'It is not for the pastor either. '
+    + 'He says to go and see the assembly member. '
+    + 'How did he know which one to go to?',
+
   idea:
     'A community has more than one leader, and they do different things. '
     + 'Each one is answerable for a different part of community life, '
     + 'and each one answers to a different set of people.',
 
   mechanism:
-    'The reason there is more than one is that no single person should hold '
-    + 'every kind of authority. '
-    + 'Each one is answerable to a different set of people, '
-    + 'and because of that each one can be questioned. '
-    + 'A community where one person decided everything '
-    + 'would have nobody left to appeal to.',
+    'There is more than one leader for a reason. '
+    + 'No single person should hold every kind of power. '
+    + 'Each leader answers to a different set of people. '
+    + 'Because of that, each one can be questioned. '
+    + 'In a town where one person decided everything, '
+    + 'there would be nobody left to appeal to.',
 
   recap:
-    'You know that rules exist to solve problems, '
-    + 'and that somebody has to make and keep them. '
-    + 'This is who those people are.',
+    'A rule is an answer to a problem. '
+    + 'Nobody may fetch water before six, '
+    + 'because the pump used to be crowded at five. '
+    + 'Somebody has to make a rule like that. '
+    + 'Somebody else has to see that it is kept. '
+    + 'In a town those two jobs belong to named people. '
+    + 'This lesson is about who those people are, '
+    + 'and what each one answers for.',
 
   method: [
     'Name the leader and their title.',

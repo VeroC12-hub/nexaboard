@@ -58,11 +58,15 @@ teach({
     + 'to lose a mark.',
 
   idea:
-    'A map of Ghana uses symbols: a dot for a town, a line for a river, '
-    + 'a different line for a road or a border. '
+    'A map of Ghana uses symbols. '
+    + 'A dot is a town. '
+    + 'A line is a river. '
+    + 'A different line is a road or a border. '
     + 'Around the edge of the map sit the parts that tell you '
-    + 'how to read those symbols, which way the map is turned, '
-    + 'and what a distance on the paper means on the ground.',
+    + 'how to read those symbols. '
+    + 'They also tell you which way the map is turned. '
+    + 'And they tell you what a distance on the paper '
+    + 'means on the ground.',
 
   mechanism:
     'The key is the part people skip and the part that matters most, '

@@ -233,10 +233,18 @@ teach({
     ],
   },
 
+  why:
+    'A mason has to get a drum of water onto the back of a pickup. '
+    + 'He cannot lift it. It is too heavy. '
+    + 'So he lays a plank from the ground to the tailboard '
+    + 'and rolls the drum up it instead. '
+    + 'The drum weighs the same either way. '
+    + 'So why can he roll what he cannot lift?',
+
   idea:
-    'A simple machine makes a job easier, '
-    + 'and every one of them does it the same way: '
-    + 'it lets you use a smaller force over a longer distance.',
+    'A simple machine makes a job easier. '
+    + 'Every one of them does it the same way. '
+    + 'It lets you use a smaller force over a longer distance.',
 
   mechanism:
     'None of them reduces the work. '
@@ -250,9 +258,15 @@ teach({
     + 'if it makes the force smaller, something else got bigger.',
 
   recap:
-    'You know that a push can start, stop or turn something, '
-    + 'and that friction resists movement. '
-    + 'Machines work with both.',
+    'A push or a pull is called a force. '
+    + 'A force can start a thing moving, stop it, or turn it. '
+    + 'Push a box across the floor and it also drags. '
+    + 'That drag is called friction, '
+    + 'and it works against the movement. '
+    + 'Lift a bucket of water and you feel its weight, '
+    + 'which is another force. '
+    + 'Machines work with all of these. '
+    + 'This lesson is about the ones that make a force easier to give.',
 
   method: [
     'Identify the machine: lever, ramp, pulley, wheel.',

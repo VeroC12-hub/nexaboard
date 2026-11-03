@@ -629,11 +629,30 @@ teach({
     ],
   },
 
+  why:
+    'You have 3 litres of palm oil and bottles that hold half a litre. '
+    + 'You want to know how many bottles you can fill. '
+    + 'Dividing usually makes a number smaller, '
+    + 'so 3 divided by a half ought to come out under 3. '
+    + 'But you can see with your own eyes that 3 litres '
+    + 'fills more than 3 half-litre bottles. '
+    + 'So why does dividing here make the answer bigger?',
+
+  notation:
+    'A fraction is written with one number above a line '
+    + 'and another below it. '
+    + 'The number on top is called the numerator. '
+    + 'The one below is the denominator. '
+    + 'So 3 over 4 is said "three quarters", '
+    + 'or "three over four" while you are working. '
+    + 'The commonest way to lose a mark in division '
+    + 'is to flip the first fraction instead of the second.',
+
   idea:
-    'The four operations on fractions follow different rules, '
-    + 'and that is what makes them confusing. '
-    + 'The one worth understanding rather than memorising is division, '
-    + 'because the flip has a reason behind it.',
+    'The four operations on fractions follow different rules. '
+    + 'That is what makes them confusing. '
+    + 'One of them is worth understanding instead of memorising. '
+    + 'It is division, because the flip has a reason behind it.',
 
   mechanism:
     'The flip is the one worth understanding, '
@@ -649,8 +668,17 @@ teach({
     + 'asking.',
 
   recap:
-    'You can find equivalent fractions and add fractions with different '
-    + 'bottoms. '
+    'A fraction is a number written as one number over another. '
+    + 'In three quarters, the 4 underneath says the whole was cut '
+    + 'into 4 equal parts. '
+    + 'The 3 on top says you have 3 of them. '
+    + 'Two fractions can be the same amount written differently. '
+    + 'Cut each quarter in two and three quarters becomes six eighths. '
+    + 'That is called an equivalent fraction, '
+    + 'and it is made by multiplying top and bottom '
+    + 'by the same number. '
+    + 'It is also how you add fractions with different bottoms: '
+    + 'turn them into eighths first, then add the tops. '
     + 'Multiplying and dividing are the two that are new here.',
 
   method: [

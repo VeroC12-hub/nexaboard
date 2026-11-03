@@ -795,16 +795,41 @@ teach({
     ],
   },
 
+  why:
+    'Your school lab has twenty computers and one printer. '
+    + 'Carrying each file across on a pen drive works, '
+    + 'but twenty pupils take the whole lesson doing it. '
+    + 'The printer cannot be moved from desk to desk, '
+    + 'and there is only the one. '
+    + 'How do twenty machines use one printer '
+    + 'without anybody getting up?',
+
+  notation:
+    'LAN is said as a word, "lan", '
+    + 'and it stands for local area network. '
+    + 'WAN is said "wan", for wide area network. '
+    + 'An address on a network is written as four numbers '
+    + 'with full stops between them, like 192.168.1.5. '
+    + 'It is said one number at a time: '
+    + '"one nine two dot one six eight dot one dot five". '
+    + 'Those full stops separate the numbers. '
+    + 'They are not decimal points. '
+    + 'The commonest way to lose a mark is to write LAN or WAN '
+    + 'without saying what the letters stand for.',
+
   idea:
-    'A network is two or more computers joined so that they can share: '
-    + 'files, a printer, an internet connection, or messages. '
-    + 'Networks are named by how far they reach: '
-    + 'a local area network, or LAN, and a wide area network, or WAN. '
-    + 'To join a network a device needs '
-    + 'a physical or wireless connection, '
-    + 'a network interface, '
-    + 'something to direct the traffic such as a switch or a router, '
-    + 'and an address so that data can be sent to it.',
+    'A network is two or more computers joined so that they can share. '
+    + 'They can share files, a printer, an internet connection, '
+    + 'or messages. '
+    + 'Networks are named by how far they reach. '
+    + 'One inside a single building is a local area network, or LAN. '
+    + 'One that spans distances is a wide area network, or WAN. '
+    + 'To join a network a device needs four things. '
+    + 'It needs a connection, by cable or wireless. '
+    + 'It needs a network interface. '
+    + 'It needs something to direct the traffic, '
+    + 'such as a switch or a router. '
+    + 'And it needs an address, so that data can be sent to it.',
 
   mechanism:
     'A network exists for one reason: '
@@ -835,10 +860,16 @@ teach({
     + 'rather than as one big machine somewhere.',
 
   recap:
-    'You know a browser asks another computer for a page. '
-    + 'This explains the joining that makes the asking possible, '
-    + 'and the difference between a network in one room and one across a '
-    + 'country.',
+    'A computer on its own can only use what is inside it. '
+    + 'A browser is a program that asks another computer, '
+    + 'somewhere else, to send it a page. '
+    + 'Type an address, press enter, '
+    + 'and the page arrives from a machine you have never seen. '
+    + 'For that to work the two machines have to be joined somehow. '
+    + 'Each one also has to be findable. '
+    + 'This lesson is about that joining. '
+    + 'It is also about why a network inside one room '
+    + 'behaves differently from one that crosses a country.',
 
   method: [
     'Say what is being shared and where it is.',

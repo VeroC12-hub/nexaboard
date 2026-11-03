@@ -1565,6 +1565,26 @@ teach({
     ],
   },
 
+  why:
+    'A school is picking prefects from eleven candidates. '
+    + 'First it needs a senior prefect, a deputy and a secretary, '
+    + 'which are three different posts. '
+    + 'Then, separately, it needs a three-person entertainment committee '
+    + 'with no posts in it. '
+    + 'Both times you are choosing 3 people out of 11. '
+    + 'The number of ways is not the same for the two, '
+    + 'and the difference is not small. '
+    + 'Why not, and which one is bigger?',
+
+  notation:
+    '$^nP_r$ is said "n P r" and $^nC_r$ is said "n C r". '
+    + 'In both of them, n is how many things are available '
+    + 'and r is how many are being taken. '
+    + 'The exclamation mark in $n!$ is not emphasis. '
+    + 'It is called factorial, so $5!$ is said "five factorial". '
+    + 'The commonest way to lose a mark is to put n and r the wrong way '
+    + 'round, so write both down before reaching for a formula.',
+
   idea:
     'Counting problems divide into two kinds. '
     + 'A permutation is an arrangement, and the order of the chosen items '
@@ -1574,9 +1594,10 @@ teach({
     + '$$^nC_r = \\frac{n!}{r!\\,(n-r)!}.$$ '
     + 'Here $n!$ means $n \\times (n-1) \\times \\dots \\times 1$, and '
     + '$0! = 1$ by definition. '
-    + 'The two are related by '
-    + '$^nC_r = \\frac{^nP_r}{r!}$, because every selection of $r$ items '
-    + 'can be ordered in $r!$ ways, so the permutation count has counted '
+    + 'The two are related by $^nC_r = \\frac{^nP_r}{r!}$. '
+    + 'The reason is that every selection of $r$ items '
+    + 'can be ordered in $r!$ ways, '
+    + 'so the permutation count has counted '
     + 'each selection $r!$ times over. '
     + 'The number of arrangements of $n$ items of which some are alike is '
     + '$\\frac{n!}{p!\\,q!}$, where $p$ and $q$ are the sizes of the '
@@ -1687,11 +1708,19 @@ teach({
     + 'what was counted more than once.',
 
   recap:
-    'You have listed outcomes and counted them, '
-    + 'and you have used the idea that two choices made one after another '
-    + 'multiply. '
-    + 'This gives you formulae for when listing them all would take all '
-    + 'day.',
+    'Counting by listing works when the list is short. '
+    + 'Two shirts and three trousers give six outfits, '
+    + 'and you can write all six down. '
+    + 'Shirt A with each of the three, '
+    + 'then shirt B with each of the three. '
+    + 'Notice what that was: 2 times 3. '
+    + 'When one choice is followed by another, '
+    + 'the numbers of ways multiply. '
+    + 'That is the whole of counting at this level. '
+    + 'But listing stops being possible very quickly. '
+    + 'Eight people in a row have 40320 orders, '
+    + 'and nobody writes those out. '
+    + 'This lesson gives formulae for exactly that case.',
 
   method: [
     'Ask: does swapping two chosen items give a different outcome?',

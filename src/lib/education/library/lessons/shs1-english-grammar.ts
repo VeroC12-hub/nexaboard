@@ -818,27 +818,48 @@ teach({
     ],
   },
 
+  why:
+    'Two sentences come up in an examination. '
+    + 'Let us eat, Kofi. '
+    + 'And: Let us eat Kofi. '
+    + 'The words are the same and in the same order. '
+    + 'One is an invitation to a meal. '
+    + 'The other is a plan to eat a boy. '
+    + 'The only difference is where one comma sits. '
+    + 'So what decides where a comma goes, '
+    + 'if it is not where you would pause for breath?',
+
+  notation:
+    'The marks have names, and it is worth being able to say them. '
+    + 'A semicolon is a full stop sitting on a comma, '
+    + 'said "semi-colon". '
+    + 'A colon is two dots, one above the other. '
+    + 'An apostrophe is a raised comma, said "a-POS-tro-fee". '
+    + 'Quotation marks, also called inverted commas, come in pairs. '
+    + 'The commonest way to lose a mark is to use an apostrophe '
+    + 'to make a plural, writing mango’s for more than one mango.',
+
   idea:
     'A full stop ends a statement. '
-    + 'A comma has four main uses: '
-    + 'separating items in a list, '
-    + 'marking off a phrase or clause that is extra, '
-    + 'coming before a conjunction that joins two main clauses, '
-    + 'and following an introductory element. '
-    + 'A semicolon joins two main clauses closely related in sense '
+    + 'A comma has four main uses. '
+    + 'It separates items in a list. '
+    + 'It marks off a phrase or clause that is extra. '
+    + 'It comes before a conjunction joining two main clauses. '
+    + 'And it follows an introductory element. '
+    + 'A semicolon joins two main clauses closely related in sense, '
     + 'with no conjunction: '
     + 'the rains failed; the harvest was poor. '
     + 'A colon introduces what follows, '
-    + 'a list, an explanation, or a quotation, '
-    + 'and what comes before it must be a complete clause. '
-    + 'An apostrophe shows possession, the boy’s book, '
-    + 'or a missing letter in a contraction, '
-    + 'and it never makes a plural. '
-    + 'In direct speech the spoken words sit inside quotation marks, '
-    + 'the punctuation that belongs to the speech goes inside them, '
-    + 'and a reporting clause is separated by a comma: '
+    + 'which may be a list, an explanation or a quotation. '
+    + 'What comes before a colon must be a complete clause. '
+    + 'An apostrophe shows possession, as in the boy’s book. '
+    + 'It also shows a missing letter in a contraction. '
+    + 'It never makes a plural. '
+    + 'In direct speech the spoken words sit inside quotation marks. '
+    + 'The punctuation belonging to the speech goes inside them. '
+    + 'A reporting clause is separated by a comma: '
     + 'the teacher said, I have marked the scripts. '
-    + 'Capital letters begin a sentence and every proper noun, '
+    + 'Capital letters begin a sentence and every proper noun: '
     + 'Kumasi, Akosombo, Tuesday, February.',
 
   mechanism:
@@ -889,9 +910,16 @@ teach({
     + 'because the speaker asked the question, not the writer.',
 
   recap:
-    'You have used the full stop, comma, question mark '
-    + 'and the apostrophe in contractions. '
-    + 'This adds the semicolon and the colon, '
+    'A punctuation mark is a sign in writing that is not a letter. '
+    + 'The full stop is a dot and it ends a sentence: The rains came. '
+    + 'The question mark ends a question: When did the rains come? '
+    + 'The comma is the small hook on the line. '
+    + 'Its plainest job is to separate items in a list: '
+    + 'rice, beans, oil and salt. '
+    + 'The apostrophe is a raised comma. '
+    + 'In a contraction it stands for a letter left out, '
+    + 'so do not becomes don’t with the apostrophe where the o was. '
+    + 'This lesson adds the semicolon and the colon, '
     + 'the commas that change meaning, '
     + 'and the punctuation of direct speech.',
 

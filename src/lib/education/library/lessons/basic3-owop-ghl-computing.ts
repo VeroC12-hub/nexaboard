@@ -39,6 +39,12 @@ teach({
     ],
   },
 
+  why:
+    'On Independence Day your school raises the flag. '
+    + 'Everybody stands still. '
+    + 'The flag is only cloth, with three bands and a star on it. '
+    + 'Why does a whole school stop for a piece of cloth?',
+
   idea:
     'Ghana has symbols that stand for the whole country. '
     + 'The flag has three bands: red, gold and green. '
@@ -56,9 +62,15 @@ teach({
     + 'told in colours so that everybody can read it.',
 
   recap:
-    'You know your community and the people in it. '
-    + 'A country is many communities together, '
-    + 'and these symbols belong to all of them at once.',
+    'Ghana is a country. '
+    + 'It is made of many towns and villages, '
+    + 'from Bolgatanga in the north to Cape Coast on the sea. '
+    + 'A symbol is a thing that stands for something bigger. '
+    + 'A cross on a building tells you it is a church. '
+    + 'The building is not the cross. '
+    + 'But the cross stands for it. '
+    + 'Ghana has symbols too. '
+    + 'They stand for the whole country at once.',
 
   method: [
     'Name the symbol.',

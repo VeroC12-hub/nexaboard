@@ -198,11 +198,21 @@ teach({
     ],
   },
 
+  why:
+    'You walk into the house. '
+    + 'Your grandmother is sitting there. '
+    + 'You say hello the way you say it to your friend. '
+    + 'She looks at you and says nothing. '
+    + 'You did greet her. '
+    + 'Why was it wrong?',
+
   idea:
-    'A greeting changes with the time of day and with who you are greeting. '
-    + 'In the morning you greet one way, in the afternoon another. And you '
-    + 'greet an elder with more respect than you greet a friend of your own '
-    + 'age. Getting it right is how you show you were brought up well.',
+    'A greeting changes with the time of day. '
+    + 'It changes with who you greet too. '
+    + 'In the morning you greet one way. '
+    + 'Later in the day you greet another way. '
+    + 'You greet an elder with more respect than a friend. '
+    + 'Getting it right shows you were brought up well.',
 
   mechanism:
     'A greeting is not just a sound. It shows respect. '
@@ -214,10 +224,14 @@ teach({
     + 'The noticing matters more than the words.',
 
   recap:
-    'You greet people at home already. '
-    + 'How do you greet your mother in the morning? '
-    + 'Now how do you call a friend across the yard? '
-    + 'They are not the same.',
+    'A greeting is the first thing you say to a person. '
+    + 'You say it before you say anything else. '
+    + 'In Twi, maakye means good morning. '
+    + 'In Ga, ojekoo means good morning. '
+    + 'In Ewe, ŋdi means good morning. '
+    + 'Each language has its own. '
+    + 'Each one has more than one, too. '
+    + 'This lesson helps you pick the right one.',
 
   method: [
     'Look at the person and stop what you are doing.',
