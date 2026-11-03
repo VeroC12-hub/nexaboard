@@ -31,6 +31,22 @@ teach({
     ],
   },
 
+  why:
+    'A shirt in the market is marked 80 cedis. '
+    + 'The trader says she will take 25% off it for you. '
+    + 'Your friend says the shop down the road is taking 20 cedis '
+    + 'off the same shirt. '
+    + 'Both of those sound like good offers, so which one leaves '
+    + 'more money in your pocket?',
+
+  notation:
+    'The % sign is said percent, so 25% is said twenty-five '
+    + 'percent. '
+    + 'It means out of every hundred, so 25% is 25 out of 100. '
+    + 'The sign is written after the number and never before it. '
+    + '25 is the commonest way to lose a mark, because 25% of 80 '
+    + 'is 20 while 25 times 80 is 2,000.',
+
   idea:
     'Per cent means out of a hundred. '
     + '50% means 50 out of every 100, which is a half. '
@@ -50,8 +66,13 @@ teach({
     + 'interest.',
 
   recap:
-    'You know that a fraction is parts of a whole, '
-    + 'and that 0.5, a half and 50% are three ways of writing one amount.',
+    'A fraction is a number of parts out of a whole. '
+    + 'Cut an orange into 4 equal parts, take 1, and you have '
+    + 'taken one quarter, written 1 over 4. '
+    + 'The same amount can be written in more than one way. '
+    + '5, and it is also 50%. '
+    + 'All three mean the same share of the same thing, and this '
+    + 'lesson is about the third of those ways.',
 
   method: [
     'Decide which easy percentage you can build this one from.',
@@ -221,6 +242,25 @@ teach({
     ],
   },
 
+  why:
+    'Two boys sell oranges together. '
+    + 'One put in 30 cedis to buy the oranges and the other put '
+    + 'in 20. '
+    + 'At the end of the day they have 100 cedis. '
+    + 'Splitting it 50 and 50 does not feel right to the first '
+    + 'boy, so how much should each of them take?',
+
+  notation:
+    'A ratio is written with a colon, so 3:2 is said three to '
+    + 'two. '
+    + 'The order matters: 3:2 means the first share gets 3 parts '
+    + 'and the second gets 2, while 2:3 is the other way round. '
+    + 'A ratio carries no units, because it only says how many '
+    + 'parts each one gets. '
+    + 'Forgetting to add the parts up is the commonest way to '
+    + 'lose a mark, because 3:2 means 5 parts altogether and not '
+    + '3.',
+
   idea:
     'A ratio describes how something is divided between two or more parts. '
     + 'Sharing 50 cedis in the ratio 3:2 means five shares in total: '
@@ -239,9 +279,15 @@ teach({
     + 'because one put in more, or worked longer, or owns more of it.',
 
   recap:
-    'You can divide an amount into equal parts, '
-    + 'and you can multiply. '
-    + 'A ratio is those two in sequence.',
+    'Dividing an amount into equal parts means sharing it so '
+    + 'that every part is the same size. '
+    + 'Share 50 cedis among 5 people equally and each gets 10 '
+    + 'cedis, because 50 divided by 5 is 10. '
+    + 'Multiplying then lets you give somebody more than one '
+    + 'part, so three parts of 10 cedis is 30 cedis. '
+    + 'This lesson does those two things one after the other. '
+    + 'That is how an amount gets shared unequally but still by a '
+    + 'fixed rule.',
 
   method: [
     'Add the numbers in the ratio. That is the number of shares.',
@@ -405,6 +451,25 @@ teach({
     ],
   },
 
+  why:
+    'A pen costs the same in every shop in your town, but '
+    + 'nobody will tell you the price. '
+    + 'What you do know is that three pens cost 6 cedis. '
+    + 'Tomorrow the price goes up and you will have to work the '
+    + 'whole thing out again from the start. '
+    + 'Is there a way to write the rule down once, so that it '
+    + 'still works after the price changes?',
+
+  notation:
+    'A letter standing for a number is usually a small letter, '
+    + 'such as p for the price of a pen. '
+    + 'A number written next to a letter means multiply, so 3p '
+    + 'means 3 times p. '
+    + 'The multiplication sign is left out on purpose, because it '
+    + 'looks too much like the letter x. '
+    + 'Writing 3p when you mean p plus 3 is the commonest way to '
+    + 'lose a mark.',
+
   idea:
     'A letter can stand for a number. '
     + 'If a pen costs p cedis, then three pens cost 3p. '
@@ -418,13 +483,19 @@ teach({
     + 'Algebra answers all of them at once: three pens cost 3p. '
     + 'You have written down the relationship rather than one instance of '
     + 'it. '
-    + 'Finding the value of the letter uses something you already know: '
+    + 'Finding the value of the letter takes one move: '
     + 'undo what was done to it, '
     + 'which is exactly the missing number method with a letter in the box.',
 
   recap:
-    'You can find a missing number by undoing. '
-    + 'The box has simply been replaced by a letter.',
+    'A missing number is found by undoing what was done to it. '
+    + 'If a box plus 4 is 10, then the box is 10 take away 4, '
+    + 'which is 6. '
+    + 'If 3 times a box is 12, then the box is 12 divided by 3, '
+    + 'which is 4. '
+    + 'Undoing means doing the opposite of whatever was done. '
+    + 'This lesson changes nothing about that except the shape on '
+    + 'the page, because the box becomes a letter.',
 
   method: [
     'Say the rule in words first.',
@@ -592,6 +663,25 @@ teach({
     ],
   },
 
+  why:
+    'A water tank for a school is a box 2 metres long, 1 metre '
+    + 'wide and 1 metre deep. '
+    + 'The headmaster has to tell the water company how much it '
+    + 'holds before they come to fill it. '
+    + 'Measuring the three sides was easy and he has done it. '
+    + 'How do three measurements turn into one amount of water?',
+
+  notation:
+    'Volume is written in cubic units, as cm with a small '
+    + 'raised 3, and that is said cubic centimetres. '
+    + 'Area uses a small raised 2 instead, and is said square '
+    + 'centimetres. '
+    + 'The small raised number tells you how many measurements '
+    + 'were multiplied together: 2 for a flat shape and 3 for a '
+    + 'solid. '
+    + 'Giving a volume in square centimetres is the commonest way '
+    + 'to lose a mark, even when the number itself is right.',
+
   idea:
     'Volume is the amount of space something takes up. '
     + 'For a box, multiply length by width by height. '
@@ -605,9 +695,15 @@ teach({
     + 'and why the unit is cubic: you are counting cubes.',
 
   recap:
-    'You can find the area of a rectangle by multiplying two sides, '
-    + 'and you know why the unit is square. '
-    + 'Volume is the same idea with one more direction.',
+    'The area of a rectangle is found by multiplying its two '
+    + 'sides. '
+    + 'A rectangle 4 cm by 3 cm has an area of 12 square '
+    + 'centimetres, because 12 squares of 1 cm each fit inside '
+    + 'it. '
+    + 'The unit is square because what you counted was squares. '
+    + 'This lesson counts the same way, but in one more '
+    + 'direction. '
+    + 'What gets counted is no longer a flat square but a cube.',
 
   method: [
     'Measure the length, the width and the height.',
@@ -783,6 +879,24 @@ teach({
     ],
   },
 
+  why:
+    'A teacher says the average score in the class test was 50. '
+    + 'Your friend hears that and says it means half the class '
+    + 'got 50. '
+    + 'But one learner scored 100 and eight scored 44, and the '
+    + 'average still comes out near 50. '
+    + 'So what does an average actually tell you, and what does '
+    + 'it hide?',
+
+  notation:
+    'The ordinary average is properly called the mean, and the '
+    + 'two words mean the same thing here. '
+    + 'It is worked out as the total divided by how many numbers '
+    + 'there are. '
+    + '5. '
+    + 'Dividing by the wrong count is the commonest way to lose a '
+    + 'mark, so count the numbers again before you divide.',
+
   idea:
     'The mean is what everybody would have '
     + 'if the total were shared out equally. '
@@ -800,9 +914,14 @@ teach({
     + 'them.',
 
   recap:
-    'You can add a list of numbers and divide. '
-    + 'That is all the arithmetic this needs. '
-    + 'The judgement is the hard part.',
+    'Adding a list of numbers means putting them all together '
+    + 'into one total. '
+    + 'Add 4, 6 and 8 and the total is 18. '
+    + 'Dividing shares a total out equally, so 18 divided by 3 is '
+    + '6 and three people would get 6 each. '
+    + 'That is all the arithmetic this lesson needs. '
+    + 'The hard part is not the working but deciding what the '
+    + 'answer tells you.',
 
   method: [
     'Add all the values to get the total.',
@@ -968,6 +1087,27 @@ teach({
     ],
   },
 
+  why:
+    'There are 10 sachets of water in a bowl and 3 of them are '
+    + 'warm. '
+    + 'You put your hand in without looking and take one. '
+    + 'Saying you will probably get a cold one does not tell '
+    + 'anybody how sure you are. '
+    + 'How do you say how likely the warm one is, using a number?',
+
+  notation:
+    'Chance is written as a fraction, so 3 out of 10 is written '
+    + '3 over 10. '
+    + 'The bottom number is the total number of things that could '
+    + 'happen. '
+    + 'The top number is how many of them count as the one you '
+    + 'are asking about. '
+    + 'A chance of 0 means it cannot happen and a chance of 1 '
+    + 'means it is certain, so every chance sits between 0 and 1. '
+    + 'A top number bigger than the bottom one is the commonest '
+    + 'way to lose a mark, because it would mean more than '
+    + 'certain.',
+
   idea:
     'Some things are certain, some are impossible, '
     + 'and most sit between. '
@@ -986,8 +1126,14 @@ teach({
     + 'Each toss is a fresh event with the same two outcomes.',
 
   recap:
-    'You know that a fraction describes part of a whole. '
-    + 'Chance uses the same idea: how many ways out of how many possible.',
+    'A fraction describes part of a whole. '
+    + 'Cut a loaf into 8 equal pieces, take 3, and you have 3 out '
+    + 'of 8, written 3 over 8. '
+    + 'The bottom number says how many equal parts there are '
+    + 'altogether, and the top says how many of them you mean. '
+    + 'This lesson uses exactly that. '
+    + 'The bottom number becomes how many things could happen, '
+    + 'and the top becomes how many of them are the one you want.',
 
   method: [
     'Ask: must it happen? Then it is certain.',
@@ -1163,6 +1309,16 @@ teach({
     ],
   },
 
+  why:
+    'In class two of you disagree about whether learners should '
+    + 'wear uniform. '
+    + 'You both have things to say, and you both say them loudly '
+    + 'at the same time. '
+    + 'Twenty minutes later nobody has changed their mind and '
+    + 'nothing is settled. '
+    + 'What makes the difference between an argument and a '
+    + 'discussion?',
+
   idea:
     'In a discussion people give their views and respond to each other. '
     + 'A view without a reason is just a preference. '
@@ -1179,8 +1335,16 @@ teach({
     + 'If you cannot, you are arguing with somebody who is not in the room.',
 
   recap:
-    'You can give a short talk with points and reasons. '
-    + 'A discussion is that, interrupted, and with somebody answering back.',
+    'A short talk is a few points, each with a reason behind '
+    + 'it. '
+    + 'Say that school should start later, then give the reason: '
+    + 'many learners walk an hour to get there. '
+    + 'The point is what you think, and the reason is why anybody '
+    + 'else should agree. '
+    + 'A discussion is built out of points and reasons in the '
+    + 'same way. '
+    + 'The difference is that other people are speaking too, and '
+    + 'what they say may change what you were going to say next.',
 
   method: [
     'State your view in one sentence, and give one reason for it.',
@@ -1355,6 +1519,15 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher gives you a full page about how cocoa is '
+    + 'grown and asks you to tell the class about it in four '
+    + 'sentences. '
+    + 'Everything on the page looks worth keeping. '
+    + 'Copy out the first four sentences and you miss nearly all '
+    + 'of it. '
+    + 'How do you decide what to drop?',
+
   idea:
     'A summary says what a passage said, in far fewer words. '
     + 'It keeps what mattered and drops the rest: '
@@ -1372,8 +1545,17 @@ teach({
     + 'summary that is half the original and summarises nothing.',
 
   recap:
-    'You can find the main idea of a passage and of each paragraph. '
-    + 'A summary is those main ideas, written out in order.',
+    'The main idea of a passage is what the whole thing is '
+    + 'mostly about. '
+    + 'Each paragraph has a main idea too, and it usually sits in '
+    + 'the first or the last sentence. '
+    + 'If a paragraph describes a market, with the noise, the '
+    + 'traders and the smell, the main idea is the market and the '
+    + 'rest are details. '
+    + 'So a passage of four paragraphs has four main ideas inside '
+    + 'it. '
+    + 'This lesson puts those main ideas together in order, and '
+    + 'that is what a summary is.',
 
   method: [
     'Read the whole passage first.',
