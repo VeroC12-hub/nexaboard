@@ -38,6 +38,16 @@ teach({
     ],
   },
 
+  why:
+    'Your baby brother cries and somebody has to feed him. '
+    + 'You can get your own food from the pot. '
+    + 'Your grandfather can get his own food too, '
+    + 'and somebody carries the heavy bucket for him. '
+    + 'All three of you live in the same house '
+    + 'and all three are treated differently. '
+    + 'Nobody decided that this morning. '
+    + 'What is it that changes, and what changes with it?',
+
   idea:
     'Everybody passes through the same stages. '
     + 'A baby, then a child, then a young person, then an adult, then an '
@@ -56,9 +66,17 @@ teach({
     + 'arriving back round.',
 
   recap:
-    'You know that a household shares out jobs, '
-    + 'and that different people do different ones. '
-    + 'Age is a large part of why.',
+    'In a house, the work is split up. '
+    + 'Somebody cooks, somebody sweeps, '
+    + 'somebody fetches water, somebody goes to the market. '
+    + 'If one person did all of it, '
+    + 'nothing would ever get finished. '
+    + 'So each person has jobs, '
+    + 'and the jobs are not the same for everybody. '
+    + 'A small child is not sent to the market with money, '
+    + 'and an old man is not sent to carry a full bucket. '
+    + 'This lesson is about the biggest reason '
+    + 'the jobs are different, which is age.',
 
   method: [
     'Name the stage you are describing.',
@@ -253,6 +271,31 @@ teach({
     ],
   },
 
+  why:
+    'A cousin from Tamale comes to stay in Takoradi '
+    + 'for the first time. '
+    + 'She says it rains too much '
+    + 'and the trees never stop. '
+    + 'You go to Tamale '
+    + 'and you cannot believe how far you can see. '
+    + 'Neither of you went to another country. '
+    + 'Both of you are in Ghana. '
+    + 'Why is one end of the same country wet and green '
+    + 'and the other end dry and open?',
+
+  notation:
+    'A map has a small arrow with an N at the top, '
+    + 'pointing north, '
+    + 'so that a reader knows which way round it goes. '
+    + 'It has a key, which is a small box '
+    + 'showing what each sign on the map means: '
+    + 'a blue line for a river, a green patch for forest. '
+    + 'And it has a scale, '
+    + 'saying how far one centimetre on the paper '
+    + 'stands for on the ground. '
+    + 'A map with no key cannot be read, '
+    + 'and the key is the commonest thing left off.',
+
   idea:
     'Ghana has the sea along its southern edge. '
     + 'Its biggest river is the Volta, '
@@ -271,8 +314,20 @@ teach({
     + 'and why the food differs as you travel.',
 
   recap:
-    'You can draw a map of your community and place things on it. '
-    + 'This is the same idea at the size of a country.',
+    'A map is a drawing of a place '
+    + 'as if you were looking down on it from above. '
+    + 'Draw your own community. '
+    + 'Put the road in as a line, '
+    + 'the school as a square beside it, '
+    + 'the market as another square, '
+    + 'and the stream as a wavy line. '
+    + 'Anybody from your town '
+    + 'can then point at their own house on your drawing. '
+    + 'A map is small and the real place is large, '
+    + 'so everything on it has to be in the right position '
+    + 'compared with everything else. '
+    + 'This lesson is that same drawing '
+    + 'at the size of a whole country.',
 
   method: [
     'Start with the sea along the south.',
@@ -904,6 +959,18 @@ teach({
     ],
   },
 
+  why:
+    'Your grandmother tells the Ananse story '
+    + 'about the pot of wisdom, '
+    + 'and the whole room laughs in the same two places. '
+    + 'You tell the same story to your class '
+    + 'and nobody laughs anywhere. '
+    + 'You left nothing out, '
+    + 'and you said it in the same language. '
+    + 'Something she does and you do not '
+    + 'is what makes the room laugh. '
+    + 'What is a story teller doing, besides saying the words?',
+
   idea:
     'A folktale is a story handed down by telling rather than writing. '
     + 'Many in Ghana are about Ananse the spider. '
@@ -922,9 +989,21 @@ teach({
     + 'far longer than one you were told.',
 
   recap:
-    'You can hold a conversation in your language '
-    + 'and you can read a passage aloud. '
-    + 'Telling a story needs both, plus remembering the order.',
+    'Two things come before a story can be told. '
+    + 'The first is talking with somebody: '
+    + 'you say something, they answer, '
+    + 'and each of you waits for a turn. '
+    + 'The second is saying written words out loud '
+    + 'so that a person at the back of the room '
+    + 'can hear each one, '
+    + 'which means saying them slowly '
+    + 'and opening your mouth. '
+    + 'Try one sentence both ways: '
+    + 'say it to yourself, then say it to the back wall, '
+    + 'and the second one is a different thing. '
+    + 'Telling a story needs both of those, and one more: '
+    + 'holding the order of the events in your head '
+    + 'while you are speaking.',
 
   method: [
     'Listen to the whole story before you try to tell it.',
@@ -1361,6 +1440,32 @@ teach({
     ],
   },
 
+  why:
+    'You type a whole page of work on a computer. '
+    + 'The light goes off. '
+    + 'When the power comes back the page is empty, '
+    + 'and the computer has no memory of it at all. '
+    + 'Your friend typed the same page, '
+    + 'pressed one thing, and hers is still there. '
+    + 'Nothing was broken and nothing was stolen. '
+    + 'What did she do, '
+    + 'and what is the difference between where your page was '
+    + 'and where hers was?',
+
+  notation:
+    'A file has a name, then a dot, '
+    + 'then a few letters saying what kind of file it is, '
+    + 'like report.docx or photo.jpg. '
+    + 'Those letters after the dot are called the extension, '
+    + 'and they tell the computer which program to open it with. '
+    + 'A file inside a folder is written '
+    + 'with the folder first and a stroke between, '
+    + 'as Homework/report.docx. '
+    + 'Changing the letters after the dot '
+    + 'does not change what the file is, '
+    + 'and it stops the file opening, '
+    + 'which is the commonest mistake.',
+
   idea:
     'While you are typing, your work is held in the computer’s memory, '
     + 'which empties when the power goes off. '
@@ -1380,9 +1485,16 @@ teach({
     + 'that is not a small detail. Save often.',
 
   recap:
-    'You know that some parts of a computer put information in '
-    + 'and some bring it out. '
-    + 'Storage is the part that keeps it.',
+    'A computer takes things in and puts things out. '
+    + 'The keyboard and the mouse put things in, '
+    + 'so they are called input devices. '
+    + 'The screen and the printer bring things out, '
+    + 'so they are called output devices. '
+    + 'Type a letter and it goes in through the keyboard '
+    + 'and comes out on the screen. '
+    + 'But the screen is only showing it, '
+    + 'and showing is not keeping. '
+    + 'This lesson is about the part of a computer that keeps things.',
 
   method: [
     'Choose Save, not just close.',
@@ -1776,6 +1888,31 @@ teach({
     ],
   },
 
+  why:
+    'Write down how to make tea, '
+    + 'and give it to somebody who has never made tea. '
+    + 'Forget to say "boil the water" '
+    + 'and they will put the leaves into cold water and wait. '
+    + 'Say "pour the water" before "boil the water" '
+    + 'and they will pour cold water in. '
+    + 'Nothing you wrote was untrue. '
+    + 'The tea is still wrong. '
+    + 'Why does the order of the steps matter '
+    + 'as much as the steps themselves?',
+
+  notation:
+    'A set of instructions is written as a numbered list, '
+    + 'one number for each step, starting at 1. '
+    + 'The numbers are not decoration. '
+    + 'They say the order, '
+    + 'and a reader does them from the top down. '
+    + 'One step holds one action, '
+    + 'so "boil the water and pour it" '
+    + 'should be two numbered steps and not one. '
+    + 'Putting two actions on one number '
+    + 'is the commonest mistake, '
+    + 'because a reader does the first and forgets the second.',
+
   idea:
     'A set of instructions tells somebody how to do a task, '
     + 'step by step, in order. '
@@ -1791,8 +1928,15 @@ teach({
     + 'because they seemed obvious.',
 
   recap:
-    'You can write a sentence that says one clear thing. '
-    + 'Each step here is one of those.',
+    'A sentence says one clear thing. '
+    + '"Open the tap." '
+    + 'You can read that and do it, '
+    + 'and there is nothing left to guess. '
+    + '"Open and then get it and put it" '
+    + 'says nothing anybody can act on. '
+    + 'Each step in this lesson is one sentence of the first kind: '
+    + 'one action, said plainly, nothing left to guess. '
+    + 'So writing a clear sentence is where this starts.',
 
   method: [
     'Say what the task is.',
@@ -1849,7 +1993,7 @@ teach({
     },
     {
       mistake: 'Testing it on yourself.',
-      why: 'You already know the task, '
+      why: 'The task is already in your own head, '
         + 'so you will step over every gap without seeing it.',
     },
   ],

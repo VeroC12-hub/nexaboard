@@ -47,6 +47,33 @@ teach({
     ],
   },
 
+  why:
+    'A man is fencing a rectangular plot. '
+    + 'One side of it is 3 metres. '
+    + 'The other side is 4 metres longer '
+    + 'than a length he has not measured yet, '
+    + 'and he calls that length $x$. '
+    + 'So the area is $3(x + 4)$ square metres. '
+    + 'The hardware shop wants the area '
+    + 'written out in terms of $x$, '
+    + 'because that is the form their price list takes. '
+    + 'He has an answer with brackets round it '
+    + 'and they will not take it. '
+    + 'How do you get rid of the brackets '
+    + 'without changing what the expression is worth?',
+
+  notation:
+    '$3(x + 4)$ is said "three, bracket, x plus four", '
+    + 'and the 3 sitting against the bracket means multiply, '
+    + 'with the multiplication sign left out. '
+    + '$3x$ means $3 \\times x$ for the same reason. '
+    + 'A minus sign in front of a bracket, '
+    + 'as in $-2(x - 3)$, '
+    + 'belongs to the whole bracket '
+    + 'and multiplies every term inside it, both of them. '
+    + 'Multiplying only the first term inside a bracket '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'To expand a single bracket, multiply each term inside by the term '
     + 'outside, so $3(x + 4)$ becomes $3x + 12$. '
@@ -81,9 +108,18 @@ teach({
     + 'and you never have to remember a special case about brackets at all.',
 
   recap:
-    'You know that 3 x 14 can be done as 3 x 10 plus 3 x 4. '
-    + 'That is expanding a bracket with numbers. '
-    + 'This does the same thing when one of the parts is a letter.',
+    'Work out $3 \\times 14$ without a long multiplication. '
+    + '14 is 10 and 4, '
+    + 'so three 14s are three 10s and three 4s: '
+    + '$30 + 12$, which is 42. '
+    + 'Written with a bracket, that is '
+    + '$3(10 + 4) = 3 \\times 10 + 3 \\times 4$. '
+    + 'The 3 was multiplied by each part inside the bracket, '
+    + 'one part at a time. '
+    + 'That is the whole of expanding a bracket, '
+    + 'and there it is done with numbers you can check. '
+    + 'This topic does exactly the same thing '
+    + 'when one of the parts inside is a letter.',
 
   method: [
     'Write the sign as part of each term before you start.',
@@ -785,6 +821,34 @@ teach({
     ],
   },
 
+  why:
+    'A photocopy shop charges 1 cedi to start, '
+    + 'then 20 pesewas a page. '
+    + 'Write the pages in one row and the price under it: '
+    + '10 pages, 3 cedis; 20 pages, 5 cedis; 50 pages, 11 cedis. '
+    + 'A customer asks the price of 35 pages, '
+    + 'which is not in the table. '
+    + 'The table is correct and it has no answer for her. '
+    + 'What is the thing standing behind that table, '
+    + 'and how do you write it down '
+    + 'so that it answers every number, '
+    + 'and not only the ones listed?',
+
+  notation:
+    'An ordered pair is written in round brackets '
+    + 'with the input first, as $(1, 3)$, '
+    + 'and "ordered" is the whole point, '
+    + 'because $(3, 1)$ is a different pair. '
+    + 'A mapping is drawn as two ovals '
+    + 'with arrows running from each input to its output, '
+    + 'and an arrow always points from input to output, '
+    + 'never back. '
+    + 'The arrow form $x \\mapsto 2x + 1$ '
+    + 'is read "x maps to two x plus one". '
+    + 'Drawing two arrows out of one input '
+    + 'is the commonest mistake, '
+    + 'because that is exactly what a function may not do.',
+
   idea:
     'A relation is a link between two sets. '
     + 'The first set holds the inputs, called the domain, '
@@ -821,9 +885,18 @@ teach({
     + 'because the relation cannot say what the output is.',
 
   recap:
-    'You have continued patterns and found rules like "add 3". '
-    + 'This gives that idea a structure: '
-    + 'inputs, outputs, and three ways of writing the link between them.',
+    'Look at the pair of lists '
+    + '1, 2, 3, 4 and 4, 5, 6, 7. '
+    + 'Each number in the second list '
+    + 'is 3 more than the one above it in the first, '
+    + 'so the rule linking them is "add 3". '
+    + 'Put 10 into that rule and 13 comes out. '
+    + 'The rule is one thing, '
+    + 'and it covers every number you care to put in, '
+    + 'not only the four that were written down. '
+    + 'This topic gives that idea a structure: '
+    + 'the numbers going in, the numbers coming out, '
+    + 'and three different ways of writing the link between them.',
 
   method: [
     'Write the inputs and outputs as a table first.',
@@ -1039,6 +1112,34 @@ teach({
     ],
   },
 
+  why:
+    'A mason has to set out the corner of a building '
+    + 'at exactly 90 degrees. '
+    + 'He has a long tape, a string and a nail, '
+    + 'and no protractor anywhere near big enough for a wall. '
+    + 'He could measure the angle '
+    + 'with a small protractor at the corner '
+    + 'and be half a degree out, '
+    + 'which over 10 metres puts the far end '
+    + 'nearly 9 centimetres wrong. '
+    + 'How do you produce an exact angle on the ground, '
+    + 'with no protractor at all?',
+
+  notation:
+    'In a construction the arcs are left on the page. '
+    + 'They are part of the answer, '
+    + 'not working to be rubbed out. '
+    + 'An arc is drawn with the compasses at one setting, '
+    + 'and that setting is never changed '
+    + 'in the middle of a step. '
+    + 'A line marked with two small strokes '
+    + 'is the same length as another line '
+    + 'marked with two small strokes, '
+    + 'and a small square at a corner means exactly 90 degrees. '
+    + 'Rubbing the arcs out is the commonest way to lose a mark, '
+    + 'because nothing is then left to show '
+    + 'the drawing was constructed and not measured.',
+
   idea:
     'A construction is an exact drawing made with compasses and a '
     + 'straight edge, and nothing in it is measured. '
@@ -1075,8 +1176,17 @@ teach({
     + 'measured.',
 
   recap:
-    'You can measure an angle with a protractor and draw one. '
-    + 'This produces exact angles instead of measured ones, '
+    'A protractor is a half circle of plastic '
+    + 'marked from 0 to 180 degrees. '
+    + 'To draw an angle of 60 degrees, draw a line, '
+    + 'put the centre hole of the protractor on one end of it, '
+    + 'line the zero up along the line, '
+    + 'find 60 on the scale, make a mark, and join it. '
+    + 'To measure an angle, do the same '
+    + 'and read the number off instead. '
+    + 'It works, and the answer is only as good '
+    + 'as your eye and the thickness of your pencil. '
+    + 'This topic produces exact angles instead of measured ones, '
     + 'using compasses alone.',
 
   method: [
@@ -1562,6 +1672,32 @@ teach({
     ],
   },
 
+  why:
+    'A carpenter is making a round table top '
+    + '1.2 metres across, '
+    + 'and he needs a strip of metal '
+    + 'to run all the way round the edge. '
+    + 'He has to buy the strip by the metre. '
+    + 'The distance across he can measure with a tape. '
+    + 'The distance round the edge he cannot, '
+    + 'because a tape will not lie flat on a curve in one piece. '
+    + 'Is there a fixed relation '
+    + 'between the distance across a circle '
+    + 'and the distance round it, for every circle there is?',
+
+  notation:
+    'The Greek letter $\\pi$ is said "pie" '
+    + 'and stands for one fixed number, about 3.14, '
+    + 'the same for every circle there is. '
+    + '$r$ is the radius, from the centre to the edge, '
+    + 'and $d$ is the diameter, right across through the centre, '
+    + 'so $d = 2r$. '
+    + 'In $\\pi r^2$ only the $r$ is squared, not the $\\pi$, '
+    + 'and the squaring is done before the multiplying. '
+    + 'A length comes out in metres and an area in square metres, '
+    + 'and giving an area in plain metres '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A circle has a named part for every piece of it, and two formulas '
     + 'that between them answer almost every question. '
@@ -1596,11 +1732,18 @@ teach({
     + 'A pizza of twice the radius is four times the pizza.',
 
   recap:
-    'You can find the area of a rectangle and the perimeter of a shape '
-    + 'with straight sides. '
-    + 'A circle has no straight sides, '
-    + 'so it needs pi, which is where the distance round relates to the '
-    + 'distance across.',
+    'The area of a rectangle is the length times the width, '
+    + 'so a rectangle 5 m by 3 m '
+    + 'has an area of 15 square metres, '
+    + 'which is 15 squares each one metre by one metre. '
+    + 'The perimeter is the distance all the way round, '
+    + 'found by adding the sides: '
+    + '$5 + 3 + 5 + 3$, which is 16 metres. '
+    + 'Both of those work because the sides are straight '
+    + 'and can each be measured one at a time. '
+    + 'A circle has no straight sides at all, '
+    + 'so neither method will even start, '
+    + 'and that is why it needs a number of its own, called pi.',
 
   method: [
     'Write down what you were given: radius or diameter.',
@@ -1804,6 +1947,31 @@ teach({
     ],
   },
 
+  why:
+    'Two boys agree to meet '
+    + '"by the big tree three streets up". '
+    + 'They meet at two different trees and wait an hour. '
+    + 'On a map of the same town '
+    + 'each of those trees has a pair of numbers, '
+    + 'and the two pairs are different, '
+    + 'so there is nothing left to argue about. '
+    + 'One pair of numbers fixes one point and no other. '
+    + 'How is that pair written, '
+    + 'and how do you measure the straight distance '
+    + 'between two of them?',
+
+  notation:
+    'A point is written as two numbers in round brackets '
+    + 'with a comma between, as $(3, 2)$, '
+    + 'and said "the point three, two". '
+    + 'The across number, called the $x$ coordinate, '
+    + 'always comes first. '
+    + 'The sign matters as much as the figure, '
+    + 'so $(3, -2)$ and $(-3, 2)$ are two different points '
+    + 'in two different quadrants. '
+    + 'Writing the up number first, or dropping a minus sign, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'The horizontal axis is the x axis and the vertical is the y axis, '
     + 'crossing at the origin, (0, 0). '
@@ -1840,10 +2008,19 @@ teach({
     + 'which is worth noticing because it saves worrying about it.',
 
   recap:
-    'You have plotted points in the first quadrant, '
-    + 'where both values are positive. '
-    + 'This extends to negative values, '
-    + 'and uses Pythagoras to measure between two points.',
+    'Draw two lines on squared paper, '
+    + 'one across and one up, meeting at a corner. '
+    + 'To find the point $(3, 2)$, start at that corner, '
+    + 'count 3 squares across, then 2 squares up, and mark it. '
+    + 'The across number is always said first. '
+    + 'The corner where the two lines meet is called the origin. '
+    + 'So far every point has been '
+    + 'to the right of it and above it, '
+    + 'where both numbers are positive. '
+    + 'This topic carries the two lines further, '
+    + 'back and down past the corner, '
+    + 'where the numbers go negative, '
+    + 'and then uses Pythagoras to measure between two points.',
 
   method: [
     'Draw both axes and number them evenly, including the negatives.',
