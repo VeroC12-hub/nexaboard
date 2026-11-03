@@ -44,6 +44,34 @@ teach({
     ],
   },
 
+  why:
+    'Two short pieces describe the same flood in Accra. '
+    + 'One says the water rose to the window '
+    + 'and the family waited on the roof for nine hours. '
+    + 'The other says that once again '
+    + 'the drains nobody cleared '
+    + 'have done exactly what everybody said they would. '
+    + 'Both are about the flood. '
+    + 'One wants you to feel something '
+    + 'and the other wants you to blame somebody. '
+    + 'A question asks what the writer’s attitude is, '
+    + 'and the answer "sad" earns almost nothing. '
+    + 'How do you name a writer’s attitude, '
+    + 'and prove it from the words on the page?',
+
+  notation:
+    'A quotation from the passage is copied exactly '
+    + 'and put inside speaking marks, '
+    + 'and three dots stand for words left out of the middle. '
+    + 'A line reference goes in brackets after it, as (line 7). '
+    + 'The three words of this topic '
+    + 'cannot be swapped for one another in an answer. '
+    + 'Purpose is what the writer set out to do. '
+    + 'Tone is the writer’s attitude. '
+    + 'Mood is what the reader is made to feel. '
+    + 'Answering a question about tone with a word for mood '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Purpose, tone and mood are three different questions about one '
     + 'passage. '
@@ -81,9 +109,20 @@ teach({
     + 'has taken a side without stating one.',
 
   recap:
-    'You can tell a literal question from an inferential one, '
-    + 'and you know a word can carry an attitude. '
-    + 'This asks you to name the attitude and to prove it from the text.',
+    'Some questions are answered by a passage in its own words. '
+    + 'If it says the market closed at noon, '
+    + 'a question about when it closed '
+    + 'is answered by putting your finger on that line. '
+    + 'Other questions are answered nowhere in the words, '
+    + 'and you work them out from what is there. '
+    + 'If a passage says a man counted his coins twice '
+    + 'before buying one loaf, '
+    + 'nothing says he is poor, and you can tell. '
+    + 'Single words carry attitude as well. '
+    + '"The crowd gathered" and "the mob gathered" '
+    + 'describe the same people and do not feel the same. '
+    + 'This topic asks you to name that attitude '
+    + 'and to prove it from the text.',
 
   method: [
     'Read the whole passage before judging it.',
@@ -333,6 +372,35 @@ teach({
     ],
   },
 
+  why:
+    'A poem about a dead father '
+    + 'has the line "the drum has no skin now". '
+    + 'Nothing in it is literally true. '
+    + 'A drum is mentioned and no drum has died. '
+    + 'A boy in class says it is a metaphor, '
+    + 'which is correct, '
+    + 'and he gets almost no mark for it. '
+    + 'The question asked what the line achieves. '
+    + 'Naming the tool is not saying what the tool did. '
+    + 'So what is a line like that actually doing, '
+    + 'and how do you say so?',
+
+  notation:
+    'A poem is set out in lines, '
+    + 'and a group of lines is a stanza, '
+    + 'which is not called a paragraph. '
+    + 'Lines are counted from the top of the whole poem, '
+    + 'so a quotation is referenced as (line 12). '
+    + 'A rhyme scheme is written as letters, '
+    + 'one letter for each line, '
+    + 'with the same letter where two lines rhyme, '
+    + 'so abab means the first and third rhyme '
+    + 'and the second and fourth do. '
+    + 'The voice speaking in a poem is the persona, '
+    + 'and it is not automatically the poet, '
+    + 'so writing "the poet feels" where the persona is a child '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A poem says something, and says it in a particular shape. '
     + 'The devices that make the shape are few, '
@@ -373,9 +441,19 @@ teach({
     + 'have missed the first thing on the page.',
 
   recap:
-    'You can identify figures of speech and say what each achieves. '
-    + 'A poem puts several of them to work at once, '
-    + 'and adds sound to the list.',
+    'A figure of speech says a thing '
+    + 'in a way that is not literally true, '
+    + 'so that the reader sees it better. '
+    + '"Her voice is a bell" is a metaphor, '
+    + 'because it calls one thing another. '
+    + '"Her voice is like a bell" is a simile, '
+    + 'because it uses the word like. '
+    + '"The wind pushed the door" is personification, '
+    + 'because the wind is given something a person does. '
+    + 'Naming the figure is the first step '
+    + 'and it is only the first step. '
+    + 'This topic puts several figures to work at once, '
+    + 'and adds the sound of the words to the list.',
 
   method: [
     'Read the poem aloud, twice.',
@@ -611,6 +689,22 @@ teach({
     ],
   },
 
+  why:
+    'A debate is held at school '
+    + 'on whether phones should be allowed in class. '
+    + 'A girl speaks for four minutes without notes '
+    + 'and the hall claps. '
+    + 'She is asked to write the same case as an essay, '
+    + 'and hands in one long block that goes round in circles. '
+    + 'It is marked down. '
+    + 'Nothing she wrote was untrue, '
+    + 'and all the same reasons are in there. '
+    + 'Speaking let her change direction '
+    + 'whenever the room reacted. '
+    + 'Paper does not. '
+    + 'What order does a written case have to be put in, '
+    + 'and why does the order itself carry marks?',
+
   idea:
     'An argumentative essay states a position and supports it. '
     + 'The introduction says what you are arguing. '
@@ -654,10 +748,19 @@ teach({
     + 'so the first thing to read is which one is wanted.',
 
   recap:
-    'You can plan an essay with paragraphs that link, '
-    + 'and you have argued a side in a debate. '
-    + 'This puts the debate on paper, '
-    + 'where the order of the reasons is visible and marked.',
+    'An essay is planned before it is written. '
+    + 'Decide the points you will make, '
+    + 'put them in an order, '
+    + 'and give each one its own paragraph. '
+    + 'A paragraph opens with a sentence saying what it is about, '
+    + 'and the sentences after it stay on that one thing. '
+    + 'Paragraphs are tied to each other '
+    + 'with a few words at the start: '
+    + '"another reason", "on the other hand", "because of this". '
+    + 'A reader who can see the joins can follow a case '
+    + 'even while disagreeing with it. '
+    + 'This topic puts a debate on paper, '
+    + 'where that order is visible and is marked.',
 
   method: [
     'Read the question and decide whether it wants an argument or an '
@@ -876,6 +979,35 @@ teach({
     ],
   },
 
+  why:
+    'A fire breaks out in a school store room. '
+    + 'The head teacher asks a prefect to write down what happened, '
+    + 'for the education office, '
+    + 'which will read it a week later. '
+    + 'The prefect writes that it was very frightening, '
+    + 'everybody was running everywhere, '
+    + 'and somebody must have left something on. '
+    + 'The office reads it and still does not know '
+    + 'what time it started, who was there, or what was lost. '
+    + 'Every word of it is honest. '
+    + 'What does a reader who was not there actually need, '
+    + 'and in what order?',
+
+  notation:
+    'A report carries a title at the top '
+    + 'saying what it reports, '
+    + 'and under that the writer’s name and the date, '
+    + 'usually written as the day, the month and the year. '
+    + 'The body is often broken up by small headings, '
+    + 'and numbered points are allowed in a report '
+    + 'where a letter would not allow them. '
+    + 'A report is written in the past tense '
+    + 'and in the third person, '
+    + 'so it says "the prefects were called" '
+    + 'and never "I called the prefects". '
+    + 'Slipping into the first person '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A report gives an account of an event or a matter investigated. '
     + 'It is headed with a title saying what it reports, '
@@ -923,9 +1055,19 @@ teach({
     + 'alone.',
 
   recap:
-    'You can write a formal letter and a summary. '
-    + 'A report is the same discipline applied to an event: '
-    + 'facts, in order, for a reader who was not present.',
+    'A formal letter has a fixed shape: '
+    + 'your address, the date, '
+    + 'the address you are writing to, a greeting, '
+    + 'the matter set out in order, and a signing off. '
+    + 'The shape is fixed so that a reader '
+    + 'can find each part without hunting for it. '
+    + 'A summary keeps only what matters. '
+    + 'Read a passage, decide which points carry it, '
+    + 'and write those in your own words with nothing added. '
+    + 'Both of those are about serving a reader '
+    + 'you cannot speak to. '
+    + 'This topic applies the same discipline to an event: '
+    + 'the facts, in order, for somebody who was not present.',
 
   method: [
     'Decide whether a report or an article was asked for.',
@@ -1147,6 +1289,34 @@ teach({
     ],
   },
 
+  why:
+    'On Monday Ama tells you: '
+    + '"I am coming here tomorrow." '
+    + 'On Wednesday, somewhere else, '
+    + 'your mother asks what Ama said. '
+    + 'Repeat it word for word '
+    + 'and you have said that Ama is coming to this place '
+    + 'on Thursday, '
+    + 'which is not what she meant at all. '
+    + 'Every one of those words was hers '
+    + 'and the message is now wrong. '
+    + 'Which words have to change '
+    + 'when what somebody said is moved '
+    + 'to another time and another place, and why those ones?',
+
+  notation:
+    'Direct speech puts the exact words inside speaking marks, '
+    + 'and the full stop, question mark or exclamation mark '
+    + 'goes inside the closing mark, not after it. '
+    + 'A comma comes before the opening mark '
+    + 'when the saying words come first: '
+    + 'She said, "I am tired." '
+    + 'Indirect speech takes the speaking marks away altogether '
+    + 'and usually puts the word that in their place, '
+    + 'and nothing in it is punctuated as speech. '
+    + 'Leaving the speaking marks on a reported sentence '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Direct speech quotes exactly: '
     + 'She said, "I am tired." '
@@ -1188,9 +1358,18 @@ teach({
     + 'so the word order goes back to normal and the question mark goes.',
 
   recap:
-    'You know the tenses and you can punctuate direct speech. '
-    + 'This reports what somebody said '
-    + 'from a different place and a different time.',
+    'A verb changes to say when something happened. '
+    + '"I am tired" is now. '
+    + '"I was tired" is finished. '
+    + '"I will be tired" has not happened yet. '
+    + 'Direct speech is the exact words somebody said. '
+    + 'It is written inside speaking marks, '
+    + 'with a comma before the opening mark '
+    + 'and the end punctuation inside the closing one: '
+    + 'She said, "I am tired." '
+    + 'This topic keeps both of those '
+    + 'and asks what has to happen to the words '
+    + 'when the exact ones are not repeated.',
 
   method: [
     'Read the direct speech and note who is speaking and when.',

@@ -62,6 +62,33 @@ teach({
     ],
   },
 
+  why:
+    'A long sum has to be worked out: '
+    + '1 over 1 times 2, plus 1 over 2 times 3, '
+    + 'plus 1 over 3 times 4, and on for a hundred terms. '
+    + 'As written, that is a hundred fractions '
+    + 'over a hundred different bottoms. '
+    + 'Now notice that 1 over 1 times 2 is the same as 1 minus a half, '
+    + 'and 1 over 2 times 3 is a half minus a third. '
+    + 'Written that way, almost every term cancels the next one '
+    + 'and the whole hundred collapses to two numbers. '
+    + 'How do you take a single fraction '
+    + 'and find the simpler ones it was made from?',
+
+  notation:
+    'The unknown tops are written as capital letters, A, B and C, '
+    + 'and each one stands for a number, not for an expression. '
+    + 'The line joining the original fraction to its split form '
+    + 'is an identity, true for every value of x, '
+    + 'and it is sometimes written with three bars instead of two '
+    + 'to say exactly that. '
+    + 'A fraction whose top is of lower degree than its bottom '
+    + 'is called proper, and the word is doing real work, '
+    + 'because an improper one has to be divided out first. '
+    + 'Writing Ax where the form needs only A, '
+    + 'or A where it needs Ax plus B, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Resolving into partial fractions '
     + 'is the reverse of adding fractions. '
@@ -156,10 +183,16 @@ teach({
     + 'adding them is the natural check.',
 
   recap:
-    'You have added two algebraic fractions '
-    + 'by putting them over a common denominator. '
-    + 'This runs that process backwards, '
-    + 'and it is the step that makes several later topics possible.',
+    'Two fractions are added by putting them over one bottom. '
+    + 'Take 1 over (x minus 1), plus 1 over (x plus 2). '
+    + 'The common bottom is (x minus 1)(x plus 2). '
+    + 'The first top becomes (x plus 2) '
+    + 'and the second becomes (x minus 1), '
+    + 'so the sum is (x plus 2) plus (x minus 1), '
+    + 'all over (x minus 1)(x plus 2), '
+    + 'which is (2x plus 1) over (x minus 1)(x plus 2). '
+    + 'One fraction has come out of two. '
+    + 'This topic runs that whole process backwards.',
 
   method: [
     'Check whether the fraction is proper; if not, divide out first.',
@@ -456,6 +489,36 @@ teach({
     ],
   },
 
+  why:
+    'A tin holds 20 sachets, packed by a machine '
+    + 'that gets one sachet in ten wrong. '
+    + 'A buyer wants the chance '
+    + 'that exactly 3 of the 20 are wrong. '
+    + 'The answer is one particular term '
+    + 'out of the expansion of a bracket raised to the power 20. '
+    + 'Multiplying that bracket out twenty times '
+    + 'to reach one term is a morning’s work, '
+    + 'and nobody does it. '
+    + 'Is there a way of writing down a single term '
+    + 'of such an expansion '
+    + 'without producing all the others first?',
+
+  notation:
+    'n choose r is written as the two numbers '
+    + 'one above the other inside a tall pair of brackets, '
+    + 'with no line between them, '
+    + 'and it is said "n choose r". '
+    + 'An exclamation mark after a number means factorial, '
+    + 'so 5! is said "five factorial" '
+    + 'and means 5 times 4 times 3 times 2 times 1, '
+    + 'and 0! is 1 by agreement. '
+    + 'In the general term r is counted from 0, '
+    + 'so the term with r equal to 2 is the third term, '
+    + 'not the second. '
+    + 'Taking the brackets of n choose r as a fraction, '
+    + 'because they look like one with the line missing, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A binomial is an expression of two terms, such as a plus b. '
     + 'Raising it to a power '
@@ -556,11 +619,17 @@ teach({
     + 'and two or three terms give several decimal places.',
 
   recap:
-    'You have expanded (a plus b) squared and (a plus b) cubed '
-    + 'by multiplying out, '
-    + 'and you have met Pascal’s triangle. '
-    + 'This gives a formula for any power, '
-    + 'and more usefully, for any single term of it.',
+    'Multiply out (a plus b) times (a plus b) '
+    + 'and you get a squared plus 2ab plus b squared. '
+    + 'Do it once more and (a plus b) cubed is '
+    + 'a cubed plus 3a squared b plus 3ab squared plus b cubed. '
+    + 'Write down only the numbers in front: '
+    + '1, 2, 1 for the square, and 1, 3, 3, 1 for the cube. '
+    + 'Stack those rows up, starting from a single 1, '
+    + 'and every number is the sum of the two directly above it. '
+    + 'That triangle of numbers is named after Pascal. '
+    + 'This topic gives a formula for any power at all, '
+    + 'and more usefully for any single term of one.',
 
   method: [
     'Identify a, b and n, keeping the whole of each term in brackets.',
@@ -856,6 +925,32 @@ teach({
     ],
   },
 
+  why:
+    'A trader’s profit on x bags, in cedis, '
+    + 'works out as x squared minus x minus 6. '
+    + 'She wants to know for which numbers of bags '
+    + 'she makes any profit at all, '
+    + 'which means where that expression is above zero. '
+    + 'Solve it as an equation and you get x equal to 3 '
+    + 'and x equal to minus 2, '
+    + 'which are the two places the profit is exactly nothing. '
+    + 'Those two numbers are not her answer. '
+    + 'They are only its edges. '
+    + 'How do you get from the places where an expression is zero '
+    + 'to the stretches where it is positive?',
+
+  notation:
+    'The sign points at the smaller side, '
+    + 'so x greater than 3 and 3 less than x say the same thing. '
+    + 'A line under the sign means "or equal to", '
+    + 'and it is said "greater than or equal to". '
+    + 'A solution set is written inside curly brackets, '
+    + 'and the upright bar inside it is said "such that". '
+    + 'On a number line a filled circle marks an end point '
+    + 'that is included, and an open circle one that is not. '
+    + 'Drawing a filled circle where the sign '
+    + 'has no line under it is the commonest way to lose a mark.',
+
   idea:
     'A quadratic inequality has the form '
     + 'a x squared plus b x plus c greater than 0, '
@@ -958,11 +1053,20 @@ teach({
     + 'intended.',
 
   recap:
-    'You have solved linear inequalities '
-    + 'and know that dividing by a negative reverses the sign. '
-    + 'This handles the quadratic and the rational cases, '
-    + 'where the sign of the expression changes '
-    + 'from region to region.',
+    'An inequality says one side is bigger or smaller '
+    + 'than the other, instead of equal to it. '
+    + 'Solve 2x plus 1 greater than 7 '
+    + 'the way you would solve an equation. '
+    + 'Take 1 off both sides to get 2x greater than 6, '
+    + 'then halve both sides to get x greater than 3. '
+    + 'One thing is different. '
+    + 'Multiplying or dividing both sides by a negative number '
+    + 'turns the sign round, '
+    + 'so from minus x greater than 2 you get x less than minus 2. '
+    + 'Check it with a number: '
+    + 'minus 5 is not greater than 2, and minus 5 is less than minus 2. '
+    + 'This topic takes that '
+    + 'and handles the cases where the expression is a quadratic.',
 
   method: [
     'Rearrange so that one side is zero.',
@@ -1288,6 +1392,34 @@ teach({
     ],
   },
 
+  why:
+    'A water pipe runs in a straight line across a plot. '
+    + 'A round tank of radius 8 metres is to be built '
+    + 'with its centre 10 metres from that line. '
+    + 'Will the tank cross the pipe or clear it? '
+    + 'Pacing it out and looking will not settle two metres '
+    + 'on a building site, '
+    + 'and digging to find out is expensive. '
+    + 'If the circle and the line are both written as equations, '
+    + 'the question becomes arithmetic. '
+    + 'How do you write a circle as an equation, '
+    + 'and what does that let you answer about it?',
+
+  notation:
+    'The centre of a circle is written as a point in brackets, '
+    + 'as (a, b), and the radius as a single letter r, '
+    + 'so the r squared on the right of the equation '
+    + 'is the square of the radius and not the radius. '
+    + 'In the general form the coefficients are written 2g and 2f, '
+    + 'with the 2 already inside them, '
+    + 'so the centre is at (minus g, minus f) '
+    + 'and not at (minus 2g, minus 2f). '
+    + 'Only x and y vary; '
+    + 'a, b, r, g, f and c are fixed numbers for a given circle. '
+    + 'Reading r squared as the radius, '
+    + 'or forgetting that the 2 is already in 2g, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'The equation of a circle with centre (a, b) and radius r '
     + 'is (x minus a) squared plus (y minus b) squared equals r squared. '
@@ -1395,12 +1527,23 @@ teach({
     + 'that makes a line touch a circle.',
 
   recap:
-    'You have used Pythagoras, '
-    + 'the distance between two points, '
-    + 'and the rule that perpendicular gradients multiply to minus 1. '
-    + 'This applies all three to one curve, '
-    + 'and the circle is the only curve '
-    + 'whose tangent needs no calculus.',
+    'Three facts carry this whole topic, '
+    + 'so they are worth having in front of you. '
+    + 'Pythagoras: in a right angled triangle, '
+    + 'the square on the longest side '
+    + 'equals the squares on the other two added, '
+    + 'so a triangle with sides 3 and 4 '
+    + 'has its longest side 5, because 9 plus 16 is 25. '
+    + 'The distance between two points follows from it. '
+    + 'Go across and up from one point to the other, '
+    + 'and the straight distance is the square root '
+    + 'of the across squared plus the up squared, '
+    + 'so from (1, 2) to (4, 6) it is the root of 9 plus 16, which is 5. '
+    + 'And two lines meet at a right angle '
+    + 'when their gradients multiply to minus 1, '
+    + 'so a line of gradient 2 is at right angles '
+    + 'to one of gradient minus a half. '
+    + 'This topic applies all three to one curve.',
 
   method: [
     'If the equation is in general form, complete the square in x and in y.',
@@ -2162,6 +2305,34 @@ teach({
     ],
   },
 
+  why:
+    'The depth of water at Tema harbour '
+    + 'rises and falls through the day, '
+    + 'and a model gives that depth '
+    + 'from the sine of an angle that grows with the hour. '
+    + 'A ship needs 9 metres to come in. '
+    + 'The pilot wants every time in the next day '
+    + 'when the depth is exactly 9 metres, '
+    + 'because the ship can enter between the first and the last. '
+    + 'Put the equation into a calculator and it gives one angle. '
+    + 'There are several times in the day, not one. '
+    + 'Where did the others go, and how do you find all of them?',
+
+  notation:
+    'sin x is written with no brackets and said "sine x", '
+    + 'and it is one thing, '
+    + 'not sin multiplied by x. '
+    + 'sin squared x has the 2 written after sin and before the x, '
+    + 'and it means the sine taken first and then squared, '
+    + 'so it is never the sine of x squared. '
+    + 'The inverse, written sin with a raised minus one, '
+    + 'is said "inverse sine" '
+    + 'and means the angle whose sine that is, '
+    + 'not one over the sine. '
+    + 'A range is stated in degrees, '
+    + 'and giving a solution outside the stated range '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A trigonometric equation is satisfied by many angles, '
     + 'because the functions repeat. '
@@ -2263,11 +2434,20 @@ teach({
     + 'and those have to be discarded with a word of explanation.',
 
   recap:
-    'You have found an angle from its sine or cosine '
-    + 'with a calculator, '
-    + 'and you know that the functions repeat. '
-    + 'This asks for every angle in a stated range, '
-    + 'which the calculator cannot give you.',
+    'Sine, cosine and tangent each turn an angle into a number. '
+    + 'Press sine of 30 degrees on a calculator and you get 0.5. '
+    + 'Going the other way, '
+    + 'press inverse sine of 0.5 '
+    + 'and the calculator gives back 30 degrees. '
+    + 'But the sine of 150 degrees is also 0.5, '
+    + 'and so is the sine of 390, and of 510. '
+    + 'The calculator hands back only one of those '
+    + 'and says nothing about the rest, '
+    + 'because these functions repeat: '
+    + 'sine and cosine come round again every 360 degrees '
+    + 'and tangent every 180. '
+    + 'This topic is how to find every angle in a stated range, '
+    + 'not only the one the calculator gives.',
 
   method: [
     'Reduce the equation to one function of one angle.',
