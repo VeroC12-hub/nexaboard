@@ -990,18 +990,46 @@ teach({
     ],
   },
 
+  why:
+    'Put 500 cedis in an account that adds 10 percent every year. '
+    + 'After one year you have 550. '
+    + 'After two years you have 605, '
+    + 'because the second 10 percent is taken on the larger amount. '
+    + 'Now answer this: how many years until the 500 becomes 1000? '
+    + 'You cannot work it out by dividing or by multiplying, '
+    + 'because the thing you are looking for is the number of times '
+    + 'the growth happens, not the amount. '
+    + 'It needs a different kind of tool. '
+    + 'A logarithm is that tool, '
+    + 'and that is what it was invented for.',
+
+  notation:
+    'The expression is written $\\log_3 81$ '
+    + 'and it is said "log base 3 of 81". '
+    + 'The small 3 sitting low is called the base. '
+    + 'The 81 is called the argument, or just the number. '
+    + 'The whole expression stands for one number, '
+    + 'which is the answer to "3 to what power gives 81?". '
+    + 'When no base is written, as in $\\log 40$, the base is ten, '
+    + 'because that is the one everybody agreed to leave out. '
+    + 'Say the base out loud anyway when you are working, '
+    + 'because a dropped base is the commonest way to lose a mark.',
+
   idea:
-    'A logarithm is an index. '
-    + 'That is the whole topic in one sentence, and everything else follows '
-    + 'from it. '
-    + '$\\log_a b = c$ is another way of writing $a^c = b$, '
-    + 'so the question "what is $\\log_2 8$?" is the question '
-    + '"2 to what power is 8?". '
-    + 'Because a logarithm is an index, every index law has a logarithm law '
-    + 'standing behind it, which is why the table below has two columns '
+    'A logarithm answers one question: '
+    + 'what power do I raise this number to, to get that number? '
+    + 'Ask "3 to what power gives 81?" and the answer is 4, '
+    + 'because 3 times 3 times 3 times 3 is 81. '
+    + 'Written down, that is $\\log_3 81 = 4$. '
+    + 'So a logarithm is an index: it is the power itself. '
+    + 'In general $\\log_a b = c$ is another way of writing $a^c = b$, '
+    + 'and the two say exactly the same thing. '
+    + 'Because a logarithm is an index, '
+    + 'every index law has a logarithm law standing behind it, '
+    + 'which is why the table below has two columns '
     + 'rather than two lists to learn. '
     + 'One restriction has a reason worth knowing: '
-    + 'the argument of a logarithm must be positive, '
+    + 'the number inside a logarithm must be positive, '
     + 'because no power of a positive base is ever negative or zero.',
 
   tables: [{
@@ -1087,10 +1115,19 @@ teach({
     + 'and discarding it is part of the answer.',
 
   recap:
-    'You know the laws of indices, including zero, negative and '
-    + 'fractional. '
-    + 'A logarithm is the index itself, made the subject, '
-    + 'so everything here follows from what you have.',
+    'An index is the small raised number that says '
+    + 'how many times to multiply a number by itself. '
+    + 'In $2^3$ the index is 3, '
+    + 'and it means 2 times 2 times 2, which is 8. '
+    + 'The 2 is called the base. '
+    + 'Four of these come up constantly here, so they are worth stating. '
+    + 'Anything to the power 1 is itself, so $5^1 = 5$. '
+    + 'Anything to the power 0 is 1, so $5^0 = 1$. '
+    + 'A negative index means one over the positive one, '
+    + 'so $2^{-3}$ is $\\frac{1}{2^3}$, which is one eighth. '
+    + 'An index of one half means the square root, '
+    + 'so $9^{1/2}$ is 3. '
+    + 'A logarithm is that index, asked for instead of given.',
 
   method: [
     'Rewrite any log statement as an index statement, or the reverse.',

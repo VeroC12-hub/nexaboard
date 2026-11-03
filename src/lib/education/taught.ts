@@ -513,9 +513,16 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     /* Attempt it cold, then find out why. The question if there is one,
        otherwise the worked example with its answer still to come. */
     why.push('it opens with something to try, because you learn from the mistake')
+    /* What it is for still comes before the cold attempt. Trying a thing
+       before being taught it is productive when the reader knows what is
+       being asked of them and fails at the method; it is just failure when
+       the question uses notation they have never seen. Seen on screen: this
+       lesson opened by asking for log base 2 of 32 of a reader who had not
+       yet been told what the notation means or why anyone would write it. */
     pieces = [
+      purpose,
       question ?? worked!,
-      purpose, recap, idea, notation, figure, mechanism, ...tableFirst, method,
+      recap, idea, notation, figure, mechanism, ...tableFirst, method,
       question ? worked : null,
       ...workedMore, ...tableRest,
       traps, extension,

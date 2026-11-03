@@ -227,6 +227,34 @@ That is the textbook sequence with our own names on it. The reader meets the
 need, then the groundwork, then the definition, then the notation, then the
 picture, and only then the reasoning.
 
+## The model, in the repository
+
+One lesson has been done by hand as the worked model: `indices-logs-shs`, in
+`src/lib/education/library/lessons/shs-maths-number.ts`. It is the lesson the
+owner read on screen and complained about, and it now carries all four
+changes. **Read it before writing anything.** It is the specification; this
+document is only the reasoning behind it.
+
+What to copy from it:
+
+- `why` opens with 500 cedis at 10 percent a year, works two years of it in
+  actual numbers, then asks how many years until it doubles and says plainly
+  that multiplying and dividing will not find it. A situation, a worked
+  instance, a question with no method. No mention of logarithms until the
+  last sentence.
+- `recap` teaches what an index is from nothing: the raised number, what it
+  means, 2 cubed worked out to 8, the name of the base, then the four cases
+  that come up here, each with a number done. It never says "you know".
+- `notation` says the expression out loud, names the base and the argument,
+  explains the missing base, and states the commonest way to lose a mark.
+- `idea` no longer opens by asserting that a logarithm is an index. It asks
+  the question a logarithm answers, answers it with 3 and 81, and only then
+  names what that makes it.
+
+Note the last one. Even with groundwork in front of it, a definition that
+opens by asserting an equivalence is still teaching backwards. Ask the
+question first, answer it concretely, name it third.
+
 ## Scope and the hard boundary
 
 Every stage, every subject, all 601 lessons. The two fields are additions to
