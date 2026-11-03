@@ -53,6 +53,32 @@ teach({
     ],
   },
 
+  why:
+    'A carpenter in Accra is sent a photograph of a stool and told '
+    + 'to make twenty of them. '
+    + 'The photograph shows exactly what it looks like. '
+    + 'He cannot start. '
+    + 'He has no way of telling how thick the top is, how far apart '
+    + 'the legs sit at the bottom, or how deep the joints go. '
+    + 'The photograph shows him everything and tells him nothing he '
+    + 'can measure. '
+    + 'What would have to be sent instead, and why can one picture '
+    + 'never be enough?',
+
+  notation:
+    'Each view has a name, said out loud as “front elevation”, “end '
+    + 'elevation” and “plan”. '
+    + 'The front elevation looks straight at the front, the end '
+    + 'elevation from the side, and the plan from directly above. '
+    + 'The thin lines running between the views are projection lines, '
+    + 'and they are left on the drawing. '
+    + 'The two standard arrangements are first angle and third angle '
+    + 'projection, each shown by its own symbol in the title block, '
+    + 'and a drawing with no symbol can be read the wrong way round. '
+    + 'Dimensions are written above the line, in millimetres, with '
+    + 'the unit stated once on the drawing rather than beside every '
+    + 'number.',
+
   idea:
     'An orthographic drawing gives separate views, '
     + 'each looking straight at the object from one direction. '
@@ -95,9 +121,19 @@ teach({
     + 'slightly out.',
 
   recap:
-    'You can use the instruments and draw the standard line types. '
-    + 'This arranges views of a solid object on the paper, '
-    + 'so that somebody else can build it.',
+    'Technical drawing is done with a few instruments, each for one '
+    + 'job. '
+    + 'The tee square rides along the edge of the board and draws '
+    + 'horizontal lines. '
+    + 'The set square rests on the tee square and draws vertical and '
+    + 'slanted ones. '
+    + 'The compass draws circles and arcs. '
+    + 'The line types carry meaning as well: a thick continuous line '
+    + 'is an edge you can see, a thin dashed line is an edge hidden '
+    + 'behind the object, and a thin chain line of long and short '
+    + 'dashes marks a centre. '
+    + 'This lesson arranges views of a solid object on the paper so '
+    + 'that somebody else can build it.',
 
   method: [
     'Decide the front view: the one showing the most about the object.',
@@ -321,6 +357,17 @@ teach({
     ],
   },
 
+  why:
+    'A student is told to make a stool and he starts sawing on the '
+    + 'first morning. '
+    + 'The legs come out well. '
+    + 'On the fourth day he finds the top he cut is too small for the '
+    + 'frame he built, and the wood he was given is finished. '
+    + 'Every cut he made was accurate. '
+    + 'He has an accurate stool that nobody can sit on. '
+    + 'What did he leave out, and at what point was it already too '
+    + 'late to fix?',
+
   idea:
     'A project runs in ten stages, in a fixed order, '
     + 'and the order is not a matter of preference: '
@@ -358,9 +405,17 @@ teach({
     + 'and a cheerful one shows nothing at all.',
 
   recap:
-    'You can draw, measure, mark, cut and join, '
-    + 'and you can work to a tolerance. '
-    + 'This puts all of it in order and adds the thinking at each end.',
+    'Marking out means carrying the sizes from the drawing onto the '
+    + 'material, with a rule, a try square and a marking knife, '
+    + 'before anything is cut. '
+    + 'Cutting and joining are the operations that follow: sawing, '
+    + 'filing, drilling, gluing, nailing, screwing. '
+    + 'A tolerance is how far a size is allowed to be out, written '
+    + 'like 50 mm plus or minus 1 mm, which accepts anything from 49 '
+    + 'to 51. '
+    + 'Those skills make one part at a time. '
+    + 'This lesson puts all of them in order and adds the thinking '
+    + 'that belongs at each end.',
 
   method: [
     'Write the brief in terms of what the article must do and for whom.',
@@ -592,6 +647,17 @@ teach({
     ],
   },
 
+  why:
+    'A seamstress in Kumasi is given cloth for a dress for a '
+    + 'wedding. '
+    + 'Her stitching is the best in the market and everybody says so. '
+    + 'The dress comes back because it will not go over the hips. '
+    + 'She took the measurements over a thin vest, and the customer '
+    + 'wears a fitted slip underneath. '
+    + 'Every stitch in that dress is perfect and the dress is '
+    + 'useless. '
+    + 'Where was it lost, and how early?',
+
   idea:
     'Whether a simple article will fit is decided before any stitching. '
     + 'The measurements are taken on the wearer, '
@@ -639,10 +705,16 @@ teach({
     + 'to.',
 
   recap:
-    'You can work the basic stitches and neaten a seam. '
-    + 'This makes a whole article, '
-    + 'where the measuring and cutting decide whether the sewing can '
-    + 'succeed.',
+    'The basic stitches are each worked by hand for a purpose. '
+    + 'Tacking is a long loose stitch that holds two pieces together '
+    + 'while you work, and it is pulled out afterwards. '
+    + 'Running stitch is small and even, and it joins two pieces for '
+    + 'good. '
+    + 'Neatening a seam means stopping the cut edge from fraying, by '
+    + 'overcasting it or turning it under. '
+    + 'All of that is sewing, done well or badly one seam at a time. '
+    + 'This lesson makes a whole article, where the measuring and the '
+    + 'cutting decide whether the sewing can succeed at all.',
 
   method: [
     'Take every measurement and write it down.',
@@ -900,6 +972,33 @@ teach({
     ],
   },
 
+  why:
+    'A woman sews school bags and sells each one for 40 cedis. '
+    + 'The cloth and the zip for one bag cost her 22 cedis, so she '
+    + 'counts 18 cedis of profit on every bag. '
+    + 'She sells thirty bags in a month and expects 540 cedis. '
+    + 'At the end of the month she has less than nothing, because the '
+    + 'rent on the stall, the electricity for the machine and the '
+    + 'fares to the cloth market all came out of it. '
+    + 'Her arithmetic was correct and she still lost money. '
+    + 'What did she fail to count, and how would she spread it over '
+    + 'thirty bags?',
+
+  notation:
+    'Money is written GH₵ 40 and said “forty cedis”, or as plain '
+    + '40.'
+    + '00 when the currency is named at the top of the column. '
+    + 'A price is written to two decimal places, so forty cedis fifty '
+    + 'pesewas is 40.'
+    + '50 and never 40.'
+    + '5. '
+    + 'A profit as a percentage is written like 25 percent, and you '
+    + 'must say what it is 25 percent of, because a mark-up on the '
+    + 'cost and a margin on the selling price are two different '
+    + 'numbers. '
+    + 'Writing a percentage without saying what it is taken on is the '
+    + 'commonest way to lose a mark.',
+
   idea:
     'Costing an article means adding up what it took to make. '
     + 'Direct materials are what went into it, '
@@ -943,9 +1042,17 @@ teach({
     + 'and neither of the two takes any notice of the other.',
 
   recap:
-    'You know the factors of production and that the entrepreneur bears '
-    + 'the risk. '
-    + 'This is the arithmetic that tells you whether the risk is paying.',
+    'Anything produced needs four things, called the factors of '
+    + 'production. '
+    + 'Land, which is the ground and what comes out of it. '
+    + 'Labour, which is the work people do. '
+    + 'Capital, which is the money, the tools and the machines. '
+    + 'And the entrepreneur, who brings the other three together and '
+    + 'decides what to make. '
+    + 'The entrepreneur is the one carrying the risk: if nobody buys, '
+    + 'the workers are still paid and the loss is hers. '
+    + 'This lesson is the arithmetic that tells her whether that risk '
+    + 'is paying.',
 
   method: [
     'List every material used, with its cost, including waste.',
@@ -1157,6 +1264,29 @@ teach({
     ],
   },
 
+  why:
+    'A man runs a provisions shop and knows his trade well. '
+    + 'Money comes in all day and goes into one tin, and he takes '
+    + 'from that same tin to buy stock and to buy food at home. '
+    + 'At the end of the year he cannot say whether the shop made '
+    + 'money or he simply spent less. '
+    + 'The shop was busy every single day. '
+    + 'He has no idea whether it was worth opening. '
+    + 'What would he have had to write down, and when?',
+
+  notation:
+    'A simple cash book has two sides, said “receipts” and '
+    + '“payments”, or “money in” and “money out”. '
+    + 'Each line carries the date, a description and an amount, and '
+    + 'the amounts go in one column, to two decimal places. '
+    + 'The totals sit at the bottom of each side, double underlined '
+    + 'to show that they are totals. '
+    + 'Money in less money out is the profit, and when money out is '
+    + 'the larger the answer is a loss and is written in brackets. '
+    + 'Putting a payment on the receipts side, or leaving a total '
+    + 'without its double underline, is the commonest way to lose a '
+    + 'mark.',
+
   idea:
     'A simple record has a date, a description and an amount, '
     + 'in two columns: money received and money paid out. '
@@ -1191,9 +1321,16 @@ teach({
     + 'is good.',
 
   recap:
-    'You can cost an article and set a price. '
-    + 'Records are how you find out whether the prices you set '
-    + 'are actually leaving you better off.',
+    'Costing an article means adding up what it took to make: the '
+    + 'materials that went into it, the hours of work valued at a '
+    + 'rate, and a share of the costs that belong to no single '
+    + 'article, such as rent. '
+    + 'Add those three and you have the total cost. '
+    + 'The selling price is that cost plus the profit you intend, '
+    + 'checked against what similar things actually sell for. '
+    + 'So a price is a decision taken in advance, out of estimates. '
+    + 'Records are how you find out afterwards whether the prices you '
+    + 'set are really leaving you better off.',
 
   method: [
     'Rule two columns: money in, money out.',
@@ -1429,6 +1566,32 @@ teach({
     ],
   },
 
+  why:
+    'A nurse at a clinic in Ho has to tell a grandmother that her '
+    + 'grandson must finish all fourteen days of his tablets, even '
+    + 'after he feels well. '
+    + 'The nurse says it in English and a bystander turns it into Ewe '
+    + 'word by word. '
+    + 'The grandmother nods, takes the tablets, and stops on day four '
+    + 'because the boy is fine. '
+    + 'Every single word was translated. '
+    + 'The instruction did not arrive. '
+    + 'What went missing between the two languages, and how would you '
+    + 'have carried it across?',
+
+  notation:
+    'Ghanaian languages are written with the ordinary letters, some '
+    + 'extra letters such as ɛ, ɔ and ŋ, and in some languages tone '
+    + 'marks above the vowel. '
+    + 'Each extra letter is a letter in its own right with its own '
+    + 'sound, so ɛ is the e in “bed” and ɔ is the o in “pot”. '
+    + 'A tone mark changes the word itself and not merely the music '
+    + 'of it. '
+    + 'When translating into a Ghanaian language, write every special '
+    + 'letter and every tone mark in full. '
+    + 'Dropping them because a keyboard is awkward is the commonest '
+    + 'way to lose a mark.',
+
   idea:
     'Translation carries the meaning of a passage '
     + 'from one language into another. '
@@ -1478,10 +1641,17 @@ teach({
     + 'you have carried across the structure instead of the meaning.',
 
   recap:
-    'You can read a passage in your language and answer on it, '
-    + 'and you know that proverbs are explained by meaning rather than '
-    + 'words. '
-    + 'Translation applies that to a whole passage, in both directions.',
+    'Reading a passage and answering on it means finding what the '
+    + 'passage actually says, not what you expected it to say. '
+    + 'A proverb inside such a passage cannot be handled word by '
+    + 'word. '
+    + '“The crab does not give birth to a bird” is not about crabs or '
+    + 'about birds. '
+    + 'It says that a child takes after the parent. '
+    + 'So the words of a proverb and the meaning of a proverb are two '
+    + 'different things, and the meaning is what you report. '
+    + 'This lesson applies that to a whole passage, in both '
+    + 'directions.',
 
   method: [
     'Read the whole passage and get its sense.',
@@ -1703,6 +1873,19 @@ teach({
     ],
   },
 
+  why:
+    'A girl in her final JHS year is two months from the '
+    + 'examination. '
+    + 'She is the first in her family likely to reach SHS, and her '
+    + 'mother has already paid part of the fees. '
+    + 'She is pregnant. '
+    + 'Nothing about her ability has changed, and the school has no '
+    + 'place for her next term. '
+    + 'A few weeks closed a door that eleven years of schooling '
+    + 'opened. '
+    + 'What were the choices in front of her before that, and on what '
+    + 'grounds would each faith have her choose?',
+
   idea:
     'Chastity means keeping sexual conduct within the limits '
     + 'that a person’s faith and community set. '
@@ -1740,10 +1923,18 @@ teach({
     + 'It is how anybody of any age keeps a decision they meant to keep.',
 
   recap:
-    'You described the changes of adolescence in Social Studies '
-    + 'and the reproductive system in Science. '
-    + 'This is what the three faiths teach about conduct, '
-    + 'and the reasons behind it.',
+    'Adolescence is the stretch of years in which a child’s body '
+    + 'turns into an adult’s. '
+    + 'In girls the breasts develop, the hips widen, and monthly '
+    + 'periods begin. '
+    + 'In boys the voice deepens, hair grows on the face and body, '
+    + 'and the shoulders broaden. '
+    + 'In both, the body becomes able to make a child, usually '
+    + 'several years before the person is ready to raise one. '
+    + 'That gap, between being able and being ready, is where this '
+    + 'lesson sits. '
+    + 'It is what the three faiths teach about conduct, and the '
+    + 'reasons they give for it.',
 
   method: [
     'State the teaching of each faith, in its own terms.',
@@ -1962,6 +2153,17 @@ teach({
     ],
   },
 
+  why:
+    'A nurse is posted to a clinic where the drugs arrive free from '
+    + 'government. '
+    + 'A woman brings a sick child and is told the medicine is '
+    + 'finished, and that she can buy it from the shop next door, '
+    + 'which belongs to a man the storekeeper is related to. '
+    + 'The drug is in the store the whole time. '
+    + 'No money was taken from government and the books balance. '
+    + 'Something was still stolen, and it was not money. '
+    + 'What was taken, and from whom?',
+
   idea:
     'All three faiths taught in Ghana honour honest work '
     + 'and condemn taking what is not earned, '
@@ -2002,9 +2204,19 @@ teach({
     + 'cannot be reformed from outside it.',
 
   recap:
-    'You know what the three faiths teach about honesty, '
-    + 'and you can argue a duty from a religious teaching. '
-    + 'This applies that to work and to public office.',
+    'Each of Ghana’s three main faiths forbids dishonesty in '
+    + 'plain terms. '
+    + 'Christianity has the commandments against stealing and against '
+    + 'bearing false witness. '
+    + 'Islam forbids cheating in weights and measures and holds the '
+    + 'trustworthy trader in high honour. '
+    + 'Ghanaian traditional belief holds that the ancestors and the '
+    + 'earth see what is done, and that a stolen thing brings trouble '
+    + 'on the household. '
+    + 'Arguing a duty from a teaching means three steps: name the '
+    + 'teaching, say what it requires, and show that the case in '
+    + 'front of you is that kind of case. '
+    + 'This lesson applies all of it to work and to public office.',
 
   method: [
     'State the teaching on honest work, with the faith.',
@@ -2248,6 +2460,18 @@ teach({
     ],
   },
 
+  why:
+    'Two families share a compound in Nima. '
+    + 'One prays five times a day and the other holds a loud service '
+    + 'on Sunday morning. '
+    + 'For years nothing happened. '
+    + 'Then a quarrel over a broken tap turned into shouting about '
+    + 'whose religion was the true one, and the two families have not '
+    + 'spoken for a year. '
+    + 'The tap cost twelve cedis to mend. '
+    + 'Why did a quarrel about plumbing become a quarrel about God, '
+    + 'and what would have had to be in place to stop it?',
+
   idea:
     'Tolerance means respecting the right of others '
     + 'to hold and practise a different faith, '
@@ -2287,10 +2511,18 @@ teach({
     + 'Agreeing with them was never required.',
 
   recap:
-    'You have compared what the three faiths teach '
-    + 'about creation, worship, God and conduct, '
-    + 'and reported each fairly without ranking them. '
-    + 'This asks why that discipline matters outside an examination.',
+    'Comparing Ghana’s three main faiths means setting their '
+    + 'teachings side by side, one question at a time. '
+    + 'On creation, Christianity and Islam both hold that one God '
+    + 'made the world deliberately, while Ghanaian traditional belief '
+    + 'holds that a Supreme Being made it and left lesser powers in '
+    + 'charge of parts of it. '
+    + 'On worship, one gathers on Sunday, one on Friday, and the '
+    + 'third at shrines and at household rites. '
+    + 'Reporting each fairly means saying what each holds in its own '
+    + 'terms, and not arranging the three from best to worst. '
+    + 'This lesson asks why that discipline matters outside an '
+    + 'examination hall.',
 
   method: [
     'Define tolerance as good treatment without agreement.',
@@ -2499,6 +2731,31 @@ teach({
     ],
   },
 
+  why:
+    'A trader from Aflao crosses into Lomé to buy cloth, as she '
+    + 'does every month. '
+    + 'She has the words for the colours and she can count to a '
+    + 'hundred in French. '
+    + 'At the stall she wants to ask whether the same cloth comes in '
+    + 'blue, and whether the price drops if she takes six. '
+    + 'She has every word and cannot build either question. '
+    + 'What is she missing, and why will more vocabulary not supply '
+    + 'it?',
+
+  notation:
+    'French uses accents, and they are part of the spelling. '
+    + 'é is an acute accent, said “ay”. '
+    + 'è is a grave accent, said like the e in “bed”. '
+    + 'ç is a cedilla, and it is said like an s. '
+    + 'Leave an accent off and the word is misspelled. '
+    + 'There are also two words for “you”: tu for one person close to '
+    + 'you, and vous for a stranger, an elder, or anybody serving '
+    + 'you. '
+    + 'S’il vous plaît is three words with an accent, and it is said '
+    + '“seel voo play”. '
+    + 'Using tu to a shopkeeper, or dropping s’il vous plaît, is the '
+    + 'commonest way to lose a mark in an oral.',
+
   idea:
     'Three situations come up, in the examination and in life: '
     + 'a shop, asking the way, and a restaurant. '
@@ -2539,10 +2796,17 @@ teach({
     + 'is how anybody manages in a language they are still learning.',
 
   recap:
-    'You can greet, introduce yourself, describe things, '
-    + 'and use numbers and prices. '
-    + 'This puts them to work in three situations '
-    + 'you would actually meet.',
+    'Greeting in French is bonjour in the daytime and bonsoir in '
+    + 'the evening. '
+    + 'Introducing yourself is je m’appelle, said “zhuh mappell”, '
+    + 'with your name after it. '
+    + 'Describing something uses c’est, said “say”, with an adjective '
+    + 'after it: c’est grand, c’est cher. '
+    + 'The numbers run un, deux, trois and so on up to dix, and a '
+    + 'price is said as the number with the currency after it. '
+    + 'Each of those is a single piece. '
+    + 'This lesson puts them to work in three situations you would '
+    + 'actually meet.',
 
   method: [
     'Greet first: bonjour, with monsieur or madame.',
@@ -2763,6 +3027,30 @@ teach({
     ],
   },
 
+  why:
+    'You can already say je mange, “I eat”, and you can say it '
+    + 'about today. '
+    + 'A pen friend in Abidjan asks what you did at Christmas and '
+    + 'what you will do at Easter. '
+    + 'Every word you need is already yours: the food, the family, '
+    + 'the town. '
+    + 'Not one of them can be put into yesterday or into next month. '
+    + 'The words are all there and the time is missing. '
+    + 'How do you move a French sentence off today?',
+
+  notation:
+    'The passé composé is said “passay compozay” and it is written '
+    + 'as two words, as in j’ai parlé. '
+    + 'The first word is the auxiliary, from avoir or être. '
+    + 'The second is the past participle. '
+    + 'For -er verbs the participle takes an acute accent, so parler '
+    + 'gives parlé, and parle with no accent is a different tense '
+    + 'altogether. '
+    + 'With être the participle agrees with the subject, so elle est '
+    + 'allée takes an extra e and elles sont allées takes es. '
+    + 'Leaving the accent off parlé, or forgetting the agreement '
+    + 'after être, is the commonest way to lose a mark.',
+
   idea:
     'The passé composé reports a completed past action, '
     + 'and it is built from two words: '
@@ -2790,7 +3078,7 @@ teach({
     + 'The other part says what happened, '
     + 'and that is the participle, which does not change for person. '
     + 'So the conjugation work is all in the first word, '
-    + 'which you already know, '
+    + 'which is the avoir or être set out above, '
     + 'and the second word is one form to learn per verb. '
     + 'That is why this tense is reachable at JHS 3 '
     + 'when it looks harder than the present. '
@@ -2806,14 +3094,22 @@ teach({
     + 'The near future is the easiest tense in French '
     + 'and is worth using as much as possible, '
     + 'because it needs nothing new: '
-    + 'aller, which you learned in JHS 1, plus the infinitive from the '
+    + 'aller, set out above, plus the infinitive from the '
     + 'dictionary. '
     + 'That is the second payment on the hour spent learning aller.',
 
   recap:
-    'You can conjugate regular -er verbs, '
-    + 'and you know être, avoir and aller in the present. '
-    + 'This builds the past and the future out of those three.',
+    'A regular -er verb changes its ending with the person. '
+    + 'Parler gives je parle, tu parles, il parle, nous parlons, vous '
+    + 'parlez, ils parlent. '
+    + 'Three verbs are irregular and have to be held as they are. '
+    + 'Être, to be, gives je suis, tu es, il est, nous sommes, vous '
+    + 'êtes, ils sont. '
+    + 'Avoir, to have, gives j’ai, tu as, il a, nous avons, vous '
+    + 'avez, ils ont. '
+    + 'Aller, to go, gives je vais, tu vas, il va, nous allons, vous '
+    + 'allez, ils vont. '
+    + 'This lesson builds the past and the future out of those three.',
 
   method: [
     'Decide whether the verb takes avoir or être.',
@@ -2891,7 +3187,7 @@ teach({
       + 'happened. The second row, the near future, is aller in the '
       + 'present plus the infinitive such as partir or manger. A note says '
       + 'the conjugation is all in the first box, and that the first box '
-      + 'is one you already know.',
+      + 'holds avoir, être or aller.',
     svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
       + 'fill="none" stroke="currentColor" stroke-width="2">'
       + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">both tenses are two words, not one</text>'
@@ -2915,7 +3211,7 @@ teach({
       + '<text x="435" y="282" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">partir, manger</text>'
       + '<path d="M 20 312 V 324 H 270 V 312" stroke="#0f8a4d" stroke-width="3"/>'
       + '<text x="320" y="352" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">the conjugating is all in the left box,</text>'
-      + '<text x="320" y="376" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">and the left box is one you already know</text>'
+      + '<text x="320" y="376" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">and the left box is avoir, être or aller</text>'
       + '</svg>',
   },
   tables: [
@@ -3030,6 +3326,34 @@ teach({
     ],
   },
 
+  why:
+    'You read a French passage about a market and understand every '
+    + 'line of it. '
+    + 'Then you are asked to write eight lines of your own about your '
+    + 'own market. '
+    + 'The words are all there, and you have read that shape a '
+    + 'hundred times. '
+    + 'What comes out has the right words with the wrong endings, and '
+    + 'a reader cannot tell whether you went to the market or are '
+    + 'going. '
+    + 'Recognising it was easy and producing it was not. '
+    + 'Why is writing harder than reading, and what exactly is being '
+    + 'marked?',
+
+  notation:
+    'A French letter has a fixed layout. '
+    + 'Your town and the date go at the top right, written like '
+    + 'Accra, le 3 mars 2026, and said “le trois mars”. '
+    + 'The greeting goes on the left: Cher for a man, Chère for a '
+    + 'woman, and Monsieur or Madame for somebody not known to you. '
+    + 'The closing changes with the reader, from Amitiés to a friend '
+    + 'to Je vous prie d’agréer, Monsieur, mes salutations '
+    + 'distinguées in a formal letter. '
+    + 'Accents are written in full throughout, including on the date '
+    + 'and in the greeting. '
+    + 'Writing Chere for Chère, or putting the date on the left, is '
+    + 'the commonest way to lose a mark.',
+
   idea:
     'Two forms are set: a letter and a short composition. '
     + 'A French letter has a layout that is fixed, '
@@ -3067,11 +3391,17 @@ teach({
     + 'even where the word is still readable.',
 
   recap:
-    'You can conjugate verbs in three tenses, '
-    + 'make adjectives agree, '
-    + 'and read a short French text. '
-    + 'This produces French of your own, '
-    + 'where accuracy is what is marked.',
+    'Three tenses are set. '
+    + 'The present, je parle, for what is happening now. '
+    + 'The passé composé, j’ai parlé, built from avoir or être plus '
+    + 'the participle, for what is finished. '
+    + 'The near future, je vais parler, built from aller plus the '
+    + 'infinitive, for what is about to happen. '
+    + 'An adjective also agrees with its noun: un grand garçon, une '
+    + 'grande fille, des grandes filles. '
+    + 'Reading French means recognising all of that on the page. '
+    + 'This lesson goes the other way: producing French of your own, '
+    + 'where the accuracy is what carries the marks.',
 
   method: [
     'Read the question and note the form: letter or composition.',
