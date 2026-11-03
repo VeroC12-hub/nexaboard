@@ -63,6 +63,29 @@ teach({
     ],
   },
 
+  why:
+    'Two players try out for the school football team. '
+    + 'One of them runs for the whole match without slowing down '
+    + 'and cannot reach a high ball. '
+    + 'The other jumps higher than anybody on the field '
+    + 'and is finished after twenty minutes. '
+    + 'The coach has to pick one and says they are both fit. '
+    + 'Fit at what? '
+    + 'One word is being used for several different things at once, '
+    + 'and a coach who cannot separate them cannot train anybody.',
+
+  notation:
+    'A test score is written as a figure with its unit, '
+    + 'and the unit is what says which test it was, '
+    + 'because 12 minutes and 12 metres are two different things. '
+    + 'The body mass index is written BMI, said as its three letters, '
+    + 'and it is mass in kilograms divided by height in metres squared, '
+    + 'so its unit is kilograms per metre squared, written kg/m2. '
+    + 'The heaviest lift a person can manage once '
+    + 'is written 1RM and said "one rep max". '
+    + 'Writing a score with no unit, so that nobody can tell '
+    + 'a time from a distance, is the commonest way to lose a mark.',
+
   idea:
     'Physical fitness is the ability to carry out daily activity '
     + 'without undue fatigue '
@@ -195,9 +218,18 @@ teach({
     + 'or the test and what it measures.',
 
   recap:
-    'You know that some people can run further '
-    + 'and others can lift more. '
-    + 'This divides fitness into its components, '
+    'A body can be asked to do several different things, '
+    + 'and being good at one of them does not mean being good at another. '
+    + 'A man who can carry a sack of cement up a flight of stairs '
+    + 'may not be able to run two kilometres. '
+    + 'A girl who runs two kilometres easily '
+    + 'may not be able to touch her toes. '
+    + 'These are not degrees of one quality. '
+    + 'They are separate qualities, '
+    + 'and each one can be measured on its own: '
+    + 'time a run, count the press ups, '
+    + 'measure how far the fingers reach. '
+    + 'This topic names those separate qualities '
     + 'and gives a test for each.',
 
   method: [
@@ -420,6 +452,31 @@ teach({
     ],
   },
 
+  why:
+    'A winger comes on at half time, cold, straight off the bench. '
+    + 'On his third stride something tears '
+    + 'at the back of his thigh '
+    + 'and he is out for six weeks. '
+    + 'He was the fittest player in the team. '
+    + 'The substitute who jogged and swung his legs for ten minutes '
+    + 'before coming on made the same stride and was fine. '
+    + 'What had those ten minutes changed inside the thigh, '
+    + 'and which injuries does it actually prevent?',
+
+  notation:
+    'The first treatment for a soft tissue injury '
+    + 'is said as the word RICE, '
+    + 'which is the first letters of rest, ice, compression '
+    + 'and elevation, and it is written in capitals for that reason. '
+    + 'A strain and a sprain are two different injuries, '
+    + 'a strain being a muscle or tendon and a sprain a ligament, '
+    + 'and one letter is the whole difference between them. '
+    + 'Stretching held still is called static stretching '
+    + 'and stretching while moving is dynamic, '
+    + 'and the dynamic one goes before activity, not after. '
+    + 'Writing sprain where you mean strain '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A warm up prepares the body for activity in three stages. '
     + 'The first is light continuous activity, '
@@ -552,9 +609,17 @@ teach({
     + 'is what it prevents and by what mechanism.',
 
   recap:
-    'You know that players run and stretch before a match. '
-    + 'This says what each part of that is doing, '
-    + 'and which injury it prevents.',
+    'A muscle makes a movement by shortening '
+    + 'and pulling on a bone. '
+    + 'It is joined to that bone by a tough cord called a tendon. '
+    + 'At a joint, the bones are held to each other by ligaments. '
+    + 'A muscle at rest is cool and stiff. '
+    + 'After a few minutes of easy movement it is warmer '
+    + 'and it stretches further, '
+    + 'which anybody can feel in their own legs after walking uphill. '
+    + 'Pulling hard on a cold, stiff muscle is what tears it. '
+    + 'This topic is what happens in those few minutes, '
+    + 'and which injuries it prevents.',
 
   method: [
     'Start with five to ten minutes of light continuous activity.',
@@ -784,6 +849,32 @@ teach({
     ],
   },
 
+  why:
+    'At an inter school meeting '
+    + 'a boy from Winneba wins the 400 metres by six metres '
+    + 'and is given nothing, '
+    + 'because he stepped out of his lane on the back straight. '
+    + 'In the next event the girl with the longest jump of the day '
+    + 'gets a red flag: '
+    + 'her shoe had crossed the front edge of the board '
+    + 'by two centimetres. '
+    + 'Both were the best on the field and neither scored. '
+    + 'Which rules decide whether an attempt counts at all, '
+    + 'and what is the technique that keeps you inside them?',
+
+  notation:
+    'A race is named by its distance in metres, '
+    + 'so the 100 means one hundred metres and is said "the hundred". '
+    + 'A time is written with a full stop before the hundredths, '
+    + 'so 10.42 is said "ten point four two seconds", '
+    + 'and a longer time puts the minutes first with a colon, '
+    + 'so 1:52.3 is said "one fifty two point three". '
+    + 'A jump or a throw is written to the nearest centimetre, '
+    + 'as 6.42 m. '
+    + 'A legal attempt is marked with a tick and a foul with a cross, '
+    + 'and writing a distance against a foul attempt '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Athletics has three divisions. '
     + 'Track events are races: '
@@ -922,9 +1013,19 @@ teach({
     + 'and the rule that would make an attempt a foul.',
 
   recap:
-    'You have run races and jumped at a school sports day. '
-    + 'This gives the technique in named phases '
-    + 'and the rules that decide whether an attempt counts.',
+    'Athletics is made of two sorts of event. '
+    + 'In a race everybody starts together '
+    + 'and the first to the line wins, '
+    + 'so the only thing measured is time. '
+    + 'In a jump or a throw each athlete takes a turn alone, '
+    + 'and what is measured is a distance or a height. '
+    + 'Because a race is one position against another, '
+    + 'where you run matters as much as how fast. '
+    + 'Because a jump is measured from a fixed mark, '
+    + 'where you take off matters as much as how far you go. '
+    + 'That is why both have rules '
+    + 'that can cancel a good performance entirely, '
+    + 'and this topic is the technique and those rules together.',
 
   method: [
     'Say whether the event is track, field or combined.',
@@ -1165,6 +1266,33 @@ teach({
     ],
   },
 
+  why:
+    'A mother in Agbogbloshie has 20 cedis for the day '
+    + 'and four children to feed. '
+    + 'She buys a large bowl of banku and a little pepper, '
+    + 'because it fills them and it is cheap. '
+    + 'Everybody eats and nobody is hungry at night. '
+    + 'Two of the children are small for their age '
+    + 'and tired at school. '
+    + 'The food was enough to fill them '
+    + 'and not enough to build them. '
+    + 'What has to be in a day of meals, '
+    + 'and how do you get all of it inside 20 cedis?',
+
+  notation:
+    'The energy in food is measured in kilocalories or kilojoules, '
+    + 'written kcal and kJ, '
+    + 'and one kilocalorie is about 4.2 kilojoules, '
+    + 'so the same food carries two very different looking figures. '
+    + 'A food label gives its figures per 100 grams, '
+    + 'so a figure on a packet is not the amount in the packet '
+    + 'unless the packet holds exactly 100 grams. '
+    + 'Nutrient amounts are written in grams, milligrams '
+    + 'or micrograms, written g, mg and mcg, '
+    + 'and a thousand of each goes into the one above it. '
+    + 'Mixing milligrams with grams on an iron or calcium figure '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A balanced diet supplies all the nutrients the body needs. '
     + 'It supplies them in the right proportions '
@@ -1290,11 +1418,20 @@ teach({
     + 'answers a cookery question, not a nutrition one.',
 
   recap:
-    'You know the food groups '
-    + 'and that a diet should contain all of them. '
-    + 'This asks you to build a day of meals from what is in the '
-    + 'market, '
-    + 'to a price, and to defend every choice.',
+    'Food does more than one job, '
+    + 'and no single food does all of them. '
+    + 'Some foods are mostly for energy, '
+    + 'like banku, rice, yam and plantain, '
+    + 'and those are the ones that fill you up. '
+    + 'Some are mostly for building and repairing the body, '
+    + 'like beans, groundnut, egg and fish. '
+    + 'Some are needed only in small amounts '
+    + 'and are needed every day, like green leaves and oranges, '
+    + 'and without them a person falls ill while still eating enough. '
+    + 'Water and fibre are needed as well. '
+    + 'A meal with all of those jobs covered is a balanced diet, '
+    + 'and this topic builds a day of them '
+    + 'from what is actually in the market, at a price.',
 
   method: [
     'List the nutrients that must be supplied.',
@@ -1536,6 +1673,31 @@ teach({
     ],
   },
 
+  why:
+    'A family in a town near Ada boils every drop of water they drink, '
+    + 'and nobody there gets cholera. '
+    + 'In the same month the two youngest have malaria twice. '
+    + 'The boiling was done properly '
+    + 'and it did nothing at all about the malaria. '
+    + 'A neighbour sleeps under a net and still gets cholera. '
+    + 'Each household did one right thing, '
+    + 'and each was protected from one disease and not the other. '
+    + 'Why does a measure that works perfectly against one disease '
+    + 'do nothing against another?',
+
+  notation:
+    'The two part scientific name of an organism '
+    + 'has the first word capitalised and the second one not, '
+    + 'and both in sloping letters where printing allows it, '
+    + 'as in Plasmodium falciparum. '
+    + 'The first word is the genus and the second is the species, '
+    + 'so the mosquito genus Anopheles takes a capital A. '
+    + 'A disease and the organism causing it are different words: '
+    + 'malaria is the disease and plasmodium is the organism. '
+    + 'Writing both words with capitals, '
+    + 'or the genus with a small letter, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Communicable diseases are caused by organisms '
     + 'and spread by identifiable routes. '
@@ -1680,9 +1842,20 @@ teach({
     + 'and then each measure with the step of the route it blocks.',
 
   recap:
-    'You know to wash your hands and to sleep under a net. '
-    + 'This says which disease each of those prevents, '
-    + 'and why a measure that misses the route does nothing.',
+    'Many diseases are caused by living things '
+    + 'far too small to see, '
+    + 'which get out of one person and into another. '
+    + 'They cannot jump. '
+    + 'Each kind has one way, or a few ways, of travelling: '
+    + 'in water that has been dirtied, '
+    + 'in the air from a cough, '
+    + 'in the bite of an insect, '
+    + 'or straight through the skin of a bare foot. '
+    + 'Boiling water kills what is in the water '
+    + 'and touches nothing in the air. '
+    + 'A net stops a mosquito and does nothing about dirty water. '
+    + 'So a measure works only against the way in that it blocks, '
+    + 'and this topic is which disease uses which way in.',
 
   method: [
     'Name the disease and its causative organism.',

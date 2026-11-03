@@ -34,6 +34,15 @@ teach({
     ],
   },
 
+  why:
+    'Two cups stand on the table. '
+    + 'One holds water with lime juice stirred into it. '
+    + 'The other holds water with washing soda stirred into it. '
+    + 'They look exactly the same. '
+    + 'Drinking the washing soda one would burn your mouth. '
+    + 'How do you find out which cup is which, '
+    + 'without tasting either of them?',
+
   idea:
     'A liquid can be acidic, or basic, or neither of the two, '
     + 'and you cannot tell by looking at it. '
@@ -52,9 +61,13 @@ teach({
     + 'which is why it replaced the old tests entirely.',
 
   recap:
-    'You know how to separate mixtures and that a solution is something '
-    + 'dissolved in water. '
-    + 'The liquids here are solutions.',
+    'Stir a spoon of salt into a cup of water and keep stirring. '
+    + 'The salt goes out of sight. '
+    + 'The water still tastes salty, so the salt is there. '
+    + 'Something spread right through water like that is called a solution. '
+    + 'The lime juice and the washing soda in this lesson are solutions. '
+    + 'Something is in the water that you cannot see, '
+    + 'and that is why looking at a cup tells you nothing.',
 
   method: [
     'Boil chopped red cabbage in water and keep the coloured liquid, '
@@ -442,6 +455,25 @@ teach({
     ],
   },
 
+  why:
+    'A torch has a good cell in it and a good bulb, '
+    + 'and it does not light. '
+    + 'Shake it and it flashes once, then stops. '
+    + 'Nothing is broken that you can see. '
+    + 'Something inside has to be touching and is not quite touching. '
+    + 'What has to be joined to what, for a bulb to light at all?',
+
+  notation:
+    'A circuit is drawn with signs instead of pictures, '
+    + 'and that drawing is called a circuit diagram. '
+    + 'A cell is one long thin line beside one short fat line. '
+    + 'A bulb is a circle with a cross in it. '
+    + 'A switch is a line with one end lifted off a dot. '
+    + 'Wires are drawn as straight lines, '
+    + 'and every line must run right up to the sign it joins, '
+    + 'because a line that stops short means a gap, '
+    + 'and that is the commonest mistake in a drawing.',
+
   idea:
     'To light a bulb you need a cell, wires and the bulb, '
     + 'joined in a complete loop. '
@@ -459,8 +491,16 @@ teach({
     + 'You trace the loop and find where it stops being a loop.',
 
   recap:
-    'You know that metals conduct and that wood and plastic do not. '
-    + 'Wires are metal inside plastic for exactly that reason.',
+    'Hold a metal spoon and a wooden spoon in the same hot water. '
+    + 'The metal one gets hot in your hand and the wooden one does not. '
+    + 'Heat passes through metal and will not pass through wood. '
+    + 'Electricity does the same thing. '
+    + 'It passes through metal. '
+    + 'It will not pass through wood, plastic or rubber. '
+    + 'A thing electricity passes through is called a conductor, '
+    + 'and a thing it will not pass through is called an insulator. '
+    + 'A wire is metal on the inside with plastic around it, '
+    + 'for exactly those two reasons.',
 
   method: [
     'Connect one wire from the cell to the bulb.',
@@ -633,6 +673,16 @@ teach({
     ],
   },
 
+  why:
+    'Stand at the back of the field while a teacher claps at the front. '
+    + 'You see the hands meet, '
+    + 'and the clap reaches you a moment later. '
+    + 'The light from the hands got to you first. '
+    + 'At night you can hear a drum from the next village '
+    + 'when you cannot see anything at all. '
+    + 'So the sound is not coming to you the way the light is. '
+    + 'What is it that actually travels from the drum to your ear?',
+
   idea:
     'Every sound comes from something vibrating. '
     + 'Pluck a string and you can see it shake. '
@@ -648,8 +698,14 @@ teach({
     + 'you ask what is vibrating and how fast it can.',
 
   recap:
-    'You know that your ears catch sound, '
-    + 'and that sound travels in the dark because it is not light.',
+    'Put your hands over your ears while somebody speaks. '
+    + 'The voice goes faint. '
+    + 'Take your hands away and it comes back, '
+    + 'so it is your ears that catch sound. '
+    + 'Now close your eyes instead and you can still hear everything. '
+    + 'Sound and light are two different things. '
+    + 'Sound crosses a dark room, and light does not cross a wall. '
+    + 'This lesson is about what sound is and where it starts.',
 
   method: [
     'Find the part that vibrates.',
@@ -1472,6 +1528,18 @@ teach({
     ],
   },
 
+  why:
+    'A pupil has to tell the class about the Volta Lake. '
+    + 'She writes down everything she knows on four slides, '
+    + 'in small letters, '
+    + 'and reads it out with her back half turned to the class. '
+    + 'Everybody has finished reading slide one '
+    + 'long before she reaches the end of it. '
+    + 'Nobody looks up and nobody remembers anything. '
+    + 'She did all the work and the talk still failed. '
+    + 'What are the slides for, '
+    + 'if not for holding what you want to say?',
+
   idea:
     'A presentation is a talk with slides. '
     + 'The slides are there to help the audience follow: '
@@ -1492,10 +1560,17 @@ teach({
     + 'you.',
 
   recap:
-    'You can give a short talk with three points and notes rather than a '
-    + 'script. '
-    + 'This adds slides, and the same rule applies: '
-    + 'they prompt, they do not script.',
+    'A short talk is easier to follow when it has only a few parts. '
+    + 'Pick three things you want the class to remember, '
+    + 'and say them in order, one at a time. '
+    + 'Hold a small card with just those three things on it, '
+    + 'three or four words each, '
+    + 'and look at the class while you talk. '
+    + 'Reading a whole page out loud sounds flat '
+    + 'and the class stops listening. '
+    + 'This lesson adds slides to that talk, '
+    + 'and the card rule holds for a slide too: '
+    + 'it reminds you, it does not say it for you.',
 
   method: [
     'Plan the talk first. Slides come after.',
@@ -1661,6 +1736,30 @@ teach({
     ],
   },
 
+  why:
+    'A class of 40 pupils is weighed for the health record. '
+    + 'The teacher wants the total and the average. '
+    + 'He adds the 40 numbers on paper, gets 1 248, and divides. '
+    + 'Then two pupils are weighed again, '
+    + 'because the first reading was wrong. '
+    + 'Now the whole adding has to be done over from the beginning. '
+    + 'Is there a way of writing the numbers down '
+    + 'so that correcting two of them fixes the total by itself?',
+
+  notation:
+    'Every box in the grid is a cell, '
+    + 'and its name is its column letter, then its row number, '
+    + 'so B3 is said "B three" and means column B, row 3. '
+    + 'A formula always starts with an equals sign, '
+    + 'so =B3+B4 is said "equals B three plus B four". '
+    + 'Without that equals sign at the front '
+    + 'the computer treats what you typed as plain words '
+    + 'and works nothing out at all. '
+    + 'A run of cells is written with two dots between the ends, '
+    + 'so B3:B10 means every cell from B3 down to B10. '
+    + 'Typing the row number before the column letter, as 3B, '
+    + 'is the commonest mistake.',
+
   idea:
     'A spreadsheet is a grid. '
     + 'Columns have letters, rows have numbers, '
@@ -1681,8 +1780,15 @@ teach({
     + 'updated.',
 
   recap:
-    'You can find a mean by adding and dividing, '
-    + 'and you know that a computer does exactly what it is told.',
+    'To find an average, add all the numbers, '
+    + 'then divide by how many numbers there are. '
+    + 'Four pupils weighing 30, 32, 34 and 36 kilograms '
+    + 'add up to 132, and 132 divided by 4 is 33 kilograms. '
+    + 'A computer can do that adding and dividing, '
+    + 'but only if it is told exactly which numbers to add. '
+    + 'It cannot look at a page and work out what you meant. '
+    + 'This lesson is about writing numbers somewhere '
+    + 'the computer can be told exactly where they are.',
 
   method: [
     'Put a heading at the top of each column.',
