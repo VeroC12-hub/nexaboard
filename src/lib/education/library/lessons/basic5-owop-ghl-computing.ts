@@ -33,6 +33,30 @@ teach({
     ],
   },
 
+  why:
+    'Somebody from Tamale is coming to your house for the first '
+    + 'time. '
+    + 'You draw them a map on a sheet of paper, with your house, the '
+    + 'school and the big road on it. '
+    + 'They telephone from the junction. '
+    + 'They cannot tell which way to turn, and they want to know how '
+    + 'much further it is. '
+    + 'Your map is correct and it still did not help them. '
+    + 'What is missing from it?',
+
+  notation:
+    'A scale is written like 1 cm to 10 km and said “one centimetre '
+    + 'to ten kilometres”. '
+    + 'It means one centimetre measured on the paper is ten '
+    + 'kilometres on the ground. '
+    + 'The key, which some maps call the legend, is the box that says '
+    + 'what each symbol stands for. '
+    + 'The compass, or north arrow, shows which way the map is '
+    + 'turned, and north is almost always up the page. '
+    + 'Measure a distance and leave the answer in centimetres instead '
+    + 'of turning it into kilometres, and that is the commonest way '
+    + 'to lose a mark.',
+
   idea:
     'A map of Ghana uses symbols: a dot for a town, a line for a river, '
     + 'a different line for a road or a border. '
@@ -51,9 +75,15 @@ teach({
     + 'the other three directions follow, and nothing else needs explaining.',
 
   recap:
-    'You can draw a map of your community from above, '
-    + 'and you know that the sea lies along Ghana’s south. '
-    + 'This adds the tools that let a stranger read your map.',
+    'A map is a drawing of a place as it looks from above, the way '
+    + 'a bird looking down would see it. '
+    + 'Draw your own school from above and the classroom blocks '
+    + 'become rectangles and the football field becomes a bigger one. '
+    + 'Ghana on a map is wide at the top and narrower at the bottom. '
+    + 'The sea runs all along the bottom edge, the south, which is '
+    + 'why Takoradi and Tema are ports and Bolgatanga is not. '
+    + 'This lesson adds the tools that let a stranger read a map you '
+    + 'have drawn.',
 
   method: [
     'Read the key first. Learn what each symbol means on this map.',
@@ -231,6 +261,17 @@ teach({
     ],
   },
 
+  why:
+    'Every 6 March the schools march, the flag goes up, and nobody '
+    + 'has to go to class. '
+    + 'Your grandmother says that when she was small the money in her '
+    + 'hand carried a picture of the Queen of England, and the men '
+    + 'who ran the town were sent out from London. '
+    + 'Now the money carries Ghanaian faces and the people who run '
+    + 'the town are Ghanaian. '
+    + 'Something changed, on one particular day. '
+    + 'What happened on that day, and who made it happen?',
+
   idea:
     'Ghana became independent from British rule on 6 March 1957. '
     + 'It was the first country in sub-Saharan Africa to do so, '
@@ -253,8 +294,13 @@ teach({
     + 'accounts written by people who were somewhere particular at the time.',
 
   recap:
-    'You know what the black star on the flag stands for. '
-    + 'This is the event it refers to.',
+    'The flag of Ghana has three bands and one black star in the '
+    + 'middle of the gold one. '
+    + 'Red stands for the blood of those who died in the struggle. '
+    + 'Gold stands for the wealth of the land, and green for its '
+    + 'forests and farms. '
+    + 'The black star stands for the freedom of African people. '
+    + 'This lesson is the event that star was put there for.',
 
   method: [
     'Give the date: 6 March 1957.',
@@ -463,6 +509,16 @@ teach({
     ],
   },
 
+  why:
+    'An elder is settling a quarrel between two brothers over their '
+    + 'father’s land. '
+    + 'He does not tell either of them that he is being greedy. '
+    + 'He says one sentence about a single broomstick and a bundle of '
+    + 'broomsticks. '
+    + 'Both brothers go quiet, and then they agree. '
+    + 'He never mentioned the land, the brothers or the quarrel. '
+    + 'Why did one sentence about brooms end an argument about land?',
+
   idea:
     'A proverb is a short, well known saying that carries a lesson. '
     + 'Ghanaian languages are rich in them, '
@@ -480,9 +536,15 @@ teach({
     + 'and what they would be saying about the person or the moment.',
 
   recap:
-    'You can hold a conversation and tell a folktale in your language, '
-    + 'and you know a folktale shows its lesson rather than stating it. '
-    + 'A proverb does the same in one sentence.',
+    'A folktale is a story told aloud, like the Ananse stories. '
+    + 'A folktale never finishes by saying “be careful who you '
+    + 'trust”. '
+    + 'It shows that instead, by letting Ananse trick somebody and '
+    + 'then get caught himself. '
+    + 'The listener works the lesson out from what happened in the '
+    + 'story. '
+    + 'A proverb does the same job as a whole folktale, in one '
+    + 'sentence.',
 
   method: [
     'Say the proverb exactly, in the language.',
@@ -660,6 +722,29 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher asks for a composition in your own language about '
+    + 'market day. '
+    + 'You could talk about market day for ten minutes without '
+    + 'stopping. '
+    + 'You sit down to write it and get three lines out, and two of '
+    + 'the words look wrong on the page even though they sound right '
+    + 'in your mouth. '
+    + 'Saying it was easy. '
+    + 'Writing it was not. '
+    + 'What does writing make you decide that speaking never asks of '
+    + 'you?',
+
+  notation:
+    'Ghanaian languages use the ordinary letters and a few extra '
+    + 'ones. '
+    + 'ɛ is said like the e in “bed”, and ɔ like the o in “pot”. '
+    + 'ŋ is the sound at the end of “sing”. '
+    + 'Each of those is a letter in its own right, not an e or an o '
+    + 'with a mark added to it. '
+    + 'Write e for ɛ, or o for ɔ, and you have written another word, '
+    + 'which is the commonest way to lose a mark in a composition.',
+
   idea:
     'A composition in your own language follows the same shape as one in '
     + 'English: '
@@ -678,9 +763,16 @@ teach({
     + 'not mistakes you thought your way into.',
 
   recap:
-    'You can write sentences in your language with the proper letters, '
-    + 'and you can plan paragraphs in English. '
-    + 'This puts the two together.',
+    'Ghanaian languages are written with the ordinary letters and a '
+    + 'few extra ones, such as ɛ, ɔ and ŋ. '
+    + 'Those extra letters are not decorations: “sɛ” and “se” are two '
+    + 'different words. '
+    + 'A paragraph is a group of sentences about one idea. '
+    + 'A plan is the list of those ideas, written down before you '
+    + 'start. '
+    + 'Plan first, then write one paragraph for each idea on the '
+    + 'list. '
+    + 'This lesson puts the proper letters and the planning together.',
 
   method: [
     'Read the title and decide what you will say.',
@@ -866,6 +958,18 @@ teach({
     ],
   },
 
+  why:
+    'Two pupils hand in a report on keeping the town clean. '
+    + 'They typed almost the same words. '
+    + 'One is a single block of text from the top of the page to the '
+    + 'bottom. '
+    + 'The other has a title in large bold letters, a heading over '
+    + 'each part, and a picture. '
+    + 'The teacher reads the second one properly and only glances at '
+    + 'the first. '
+    + 'The words were the same. '
+    + 'Why did the way it looked change what happened to it?',
+
   idea:
     'Formatting is how a document is laid out: '
     + 'headings, bold text, spacing, and pictures. '
@@ -880,8 +984,16 @@ teach({
     + 'read than a plain one, even though more effort went into it.',
 
   recap:
-    'You can type with both hands and save a file properly. '
-    + 'This is about what the document looks like once it is typed.',
+    'Typing with both hands means the left hand keeps to the left '
+    + 'half of the keyboard and the right hand to the right half, so '
+    + 'the fingers never cross over. '
+    + 'Saving a file means telling the computer to keep it: you '
+    + 'choose Save, give the file a name, and choose a folder to put '
+    + 'it in. '
+    + 'Without that, the work is gone when the machine goes off. '
+    + 'Typing puts the words in and saving keeps them. '
+    + 'This lesson is about something else: what the document looks '
+    + 'like once the words are there.',
 
   method: [
     'Type all the words first. Do not format as you go.',
@@ -1066,6 +1178,16 @@ teach({
     ],
   },
 
+  why:
+    'You are given homework on how many people live in Ghana. '
+    + 'You search, and the first page says 28 million. '
+    + 'The third page says 34 million. '
+    + 'Both look like proper websites, with headings and photographs. '
+    + 'They cannot both be right. '
+    + 'You cannot go out and count the people yourself. '
+    + 'So how do you choose between two pages that look equally '
+    + 'serious?',
+
   idea:
     'Searching has two halves, and the second is the hard one. '
     + 'First you find things. '
@@ -1086,9 +1208,16 @@ teach({
     + 'None of this needs expertise. It needs the habit of asking.',
 
   recap:
-    'You know not to share personal information online, '
-    + 'and you know that anybody can post anything. '
-    + 'This is the other side: deciding what to believe.',
+    'Personal information is anything that tells a stranger who you '
+    + 'are or where to find you: your full name, your house, your '
+    + 'school, your phone number, a photograph of you in uniform. '
+    + 'None of that goes into a website or to somebody you have not '
+    + 'met. '
+    + 'There is also nobody guarding what goes online. '
+    + 'Anybody with a phone can put up a page saying anything at all, '
+    + 'and no one checks it first. '
+    + 'This lesson is the other side of that: how to decide what to '
+    + 'believe.',
 
   method: [
     'Decide exactly what you want to know.',
@@ -1283,6 +1412,17 @@ teach({
     ],
   },
 
+  why:
+    'You send your younger brother to buy bread and he comes back '
+    + 'with bread. '
+    + 'You give a robot the same words and it stands still, because '
+    + 'you never said which direction, how far, or what to do when it '
+    + 'reaches the door. '
+    + 'Your brother filled in everything you left out. '
+    + 'The robot filled in nothing. '
+    + 'So what exactly do you have to say to something that fills in '
+    + 'nothing?',
+
   idea:
     'A program is a list of instructions a computer carries out in order. '
     + 'With blocks you build that list by snapping pieces together: '
@@ -1302,9 +1442,16 @@ teach({
     + 'Saying a thing once is how programs stay correct as they grow.',
 
   recap:
-    'You can write instructions in the right order. '
-    + 'One action per step. '
-    + 'And you know a computer fills in nothing you leave out.',
+    'Instructions have to be in the right order, with one action in '
+    + 'each step. '
+    + '“Boil the water, then pour it into the cup” works. '
+    + 'Turn those two round, and you are pouring cold water and '
+    + 'boiling an empty kettle. '
+    + 'A computer also fills in nothing of its own. '
+    + 'Ask a person to make tea and they will fetch a cup without '
+    + 'being told. '
+    + 'Ask a computer, and it will do nothing at all that you did not '
+    + 'write down.',
 
   method: [
     'Decide what you want to happen, in order.',
