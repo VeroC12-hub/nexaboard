@@ -1468,7 +1468,7 @@ teach({
   },
 
   why:
-    'A boy of fourteen who was easy to live with last year now '
+    'A boy of fourteen who was easy to live with a year ago now '
     + 'answers his mother sharply and shuts his door. '
     + 'He cannot say why, and neither can she. '
     + 'He has not decided to be difficult and nothing bad has '

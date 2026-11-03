@@ -32,11 +32,11 @@ teach({
     'Your teacher says that on Friday you will stand in front '
     + 'of the class for two minutes and talk about keeping the '
     + 'school clean. '
-    + 'You already know what you think about it. '
+    + 'You have an opinion about it already. '
     + 'But two minutes is a long time when you are standing up, '
     + 'and the first thing that happens is that your mind goes '
     + 'blank. '
-    + 'What do you say first, and how do you know when to stop?',
+    + 'What do you say first, and when do you stop?',
 
   idea:
     'A talk is not a paper read aloud. '

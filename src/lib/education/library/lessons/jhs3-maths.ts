@@ -1279,7 +1279,7 @@ teach({
     + 'The c is called the y intercept, and it is the value of y '
     + 'where the line crosses the upright axis. '
     + 'Reading m and c off the wrong way round is the commonest '
-    + 'way to lose a mark, so remember that c is the number '
+    + 'way to lose a mark, so hold on to this: c is the number '
     + 'sitting on its own.',
 
   idea:

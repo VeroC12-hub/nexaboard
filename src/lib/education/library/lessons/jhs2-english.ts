@@ -1179,8 +1179,8 @@ teach({
   why:
     'Your teacher asks what kind of person the main character '
     + 'is, and you say he is wicked. '
-    + 'She asks how you know and you say it was obvious from the '
-    + 'book. '
+    + 'She asks for your evidence and you say it was obvious from '
+    + 'the book. '
     + 'She marks the answer wrong, even though she agrees with '
     + 'you that he is wicked. '
     + 'Why is being right about a story not the same thing as '
