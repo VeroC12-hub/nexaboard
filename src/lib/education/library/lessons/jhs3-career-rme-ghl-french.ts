@@ -54,20 +54,16 @@ teach({
   },
 
   idea:
-    'An orthographic drawing gives separate views '
-    + 'looking straight at the object from different directions: '
-    + 'the front elevation, the plan from above, '
-    + 'and the end elevation from the side. '
+    'An orthographic drawing gives separate views, '
+    + 'each looking straight at the object from one direction. '
     + 'The views are lined up with each other, '
-    + 'so a feature in one can be followed into the next by projection '
-    + 'lines. '
-    + 'In first angle projection the plan is placed below the front view; '
-    + 'in third angle it is placed above. '
-    + 'A pictorial drawing shows the object as it looks: '
-    + 'isometric, with vertical lines upright and the others at 30 '
-    + 'degrees, '
-    + 'or oblique, with the front face true and the depth at an angle. '
-    + 'Hidden edges are shown with thin dashed lines in both.',
+    + 'so a feature in one can be followed into the next '
+    + 'along thin projection lines. '
+    + 'A pictorial drawing does the opposite: '
+    + 'it gives one view that looks solid. '
+    + 'The two are not alternatives to choose between. '
+    + 'One of them is for understanding and the other is for making, '
+    + 'and a job usually needs both.',
 
   mechanism:
     'The two kinds of drawing do opposite jobs, '
@@ -176,6 +172,88 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'Three views of a block with a round hole through it, laid out in '
+      + 'first angle projection. The front elevation is a rectangle with a '
+      + 'circle on it and centre lines crossing at the circle. The end '
+      + 'elevation sits to its right at the same heights, with the hidden '
+      + 'edges of the hole drawn as two dashed lines. The plan sits below '
+      + 'the front view at the same widths, with the hidden hole again '
+      + 'dashed. Thin projection lines run between the views, carrying a '
+      + 'height across and a width down, so no length is measured twice.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">three views, lined up, every length true</text>'
+      + '<line x1="230" y1="56" x2="288" y2="56" stroke-width="1"/>'
+      + '<line x1="230" y1="168" x2="288" y2="168" stroke-width="1"/>'
+      + '<line x1="60" y1="168" x2="60" y2="228" stroke-width="1"/>'
+      + '<line x1="230" y1="168" x2="230" y2="228" stroke-width="1"/>'
+      + '<rect x="60" y="56" width="170" height="112"/>'
+      + '<circle cx="145" cy="112" r="26"/>'
+      + '<line x1="46" y1="112" x2="244" y2="112" stroke-width="1" stroke-dasharray="14 4 3 4"/>'
+      + '<line x1="145" y1="42" x2="145" y2="182" stroke-width="1" stroke-dasharray="14 4 3 4"/>'
+      + '<text x="145" y="202" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">front elevation</text>'
+      + '<rect x="288" y="56" width="96" height="112"/>'
+      + '<line x1="288" y1="86" x2="384" y2="86" stroke-width="1" stroke-dasharray="7 5"/>'
+      + '<line x1="288" y1="138" x2="384" y2="138" stroke-width="1" stroke-dasharray="7 5"/>'
+      + '<line x1="276" y1="112" x2="396" y2="112" stroke-width="1" stroke-dasharray="14 4 3 4"/>'
+      + '<text x="336" y="202" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">end elevation</text>'
+      + '<rect x="60" y="228" width="170" height="96"/>'
+      + '<line x1="119" y1="228" x2="119" y2="324" stroke-width="1" stroke-dasharray="7 5"/>'
+      + '<line x1="171" y1="228" x2="171" y2="324" stroke-width="1" stroke-dasharray="7 5"/>'
+      + '<line x1="145" y1="214" x2="145" y2="338" stroke-width="1" stroke-dasharray="14 4 3 4"/>'
+      + '<text x="145" y="358" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">plan</text>'
+      + '<text x="404" y="100" font-size="14" fill="currentColor" stroke="none">dashed lines are</text>'
+      + '<text x="404" y="118" font-size="14" fill="currentColor" stroke="none">edges you cannot see</text>'
+      + '<text x="404" y="238" font-size="14" fill="#0f8a4d" stroke="none">the thin lines carry a</text>'
+      + '<text x="404" y="256" font-size="14" fill="#0f8a4d" stroke="none">height across, and a</text>'
+      + '<text x="404" y="274" font-size="14" fill="#0f8a4d" stroke="none">width down, so you</text>'
+      + '<text x="404" y="292" font-size="14" fill="#0f8a4d" stroke="none">never measure twice</text>'
+      + '<text x="320" y="384" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">first angle projection: the plan goes below the front view</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The two kinds of drawing, and the job each one can do',
+      columns: [
+        'Kind of drawing',
+        'What it shows',
+        'What it is for',
+        'What it cannot do',
+      ],
+      rows: [
+        [
+          'Orthographic',
+          'Separate flat views: the front elevation, the plan from above, '
+            + 'and the end elevation from the side',
+          'Making the thing, because every length in a view is the real '
+            + 'length and can be dimensioned',
+          'Tell you at a glance what the object is: three views have to '
+            + 'be read together',
+        ],
+        [
+          'Isometric, a pictorial',
+          'The object as it looks, with vertical lines upright and the '
+            + 'others at 30 degrees',
+          'Understanding at a glance, so it goes at the front of an '
+            + 'instruction sheet',
+          'Give a true measurement: some lines are at an angle and others '
+            + 'are shortened',
+        ],
+        [
+          'Oblique, a pictorial',
+          'The object as it looks, with the front face true and the depth '
+            + 'running off at an angle',
+          'Showing an object whose front face carries most of the detail',
+          'Give a true measurement anywhere but on that front face',
+        ],
+      ],
+      note: 'Hidden edges are thin dashed lines in all three. '
+        + 'First angle and third angle differ only in where the plan '
+        + 'goes: below the front view in first angle, above it in third.',
+    },
+  ],
+
   extension:
     'A sectional view cuts the object open. '
     + 'The cut surface is then shown hatched. '
@@ -244,32 +322,26 @@ teach({
   },
 
   idea:
-    'A design brief states what is needed and for whom. '
-    + 'Research finds out what exists already and what the user needs. '
-    + 'Several ideas are sketched, '
-    + 'then one is chosen with reasons. '
-    + 'A working drawing gives the dimensions and the materials. '
-    + 'A materials list and a cutting list say what to buy and in what '
-    + 'sizes. '
-    + 'A plan of work puts the operations in order. '
-    + 'The article is made, '
-    + 'then finished: smoothed, painted, oiled or varnished. '
-    + 'It is tested against the brief, '
-    + 'and the evaluation says how far it met it '
-    + 'and what would be done differently.',
+    'A project runs in ten stages, in a fixed order, '
+    + 'and the order is not a matter of preference: '
+    + 'each stage decides what the next one can be. '
+    + 'The thinking is at both ends. '
+    + 'It starts with a brief saying what is needed and for whom, '
+    + 'and it finishes with an evaluation saying how far the article met '
+    + 'that brief and what would be done differently. '
+    + 'The making is in the middle, '
+    + 'and it is the part that goes wrong when one of the early stages '
+    + 'was skipped.',
 
   mechanism:
     'The brief is the part learners write badly '
     + 'and everything downstream depends on it. '
-    + 'A brief that says "make a wooden stool" '
+    + 'A brief that names the object '
     + 'has decided the answer before asking the question, '
-    + 'and it cannot be used to judge the finished article. '
-    + 'A brief that says "a seat for a trader who sits for six hours '
-    + 'and must carry it home" '
-    + 'states what the thing must DO, '
-    + 'and now every later decision has something to be checked against: '
-    + 'it has to be comfortable for hours, and light enough to carry. '
-    + 'So the brief is written in terms of function and user, '
+    + 'and it cannot then be used to judge the finished article. '
+    + 'A brief written in terms of what the thing must do, and for whom, '
+    + 'gives every later decision something to be checked against. '
+    + 'So the brief states function and user, '
     + 'and the design follows from it rather than preceding it. '
     + 'The second thing worth insisting on is more than one idea. '
     + 'A learner who sketches one design and builds it '
@@ -280,13 +352,10 @@ teach({
     + 'because the choice has reasons in it. '
     + 'The evaluation is the part that is most often wasted '
     + 'and is the easiest to do well. '
-    + 'It is marked on honesty, not on how good the article is. '
-    + '"The joints were loose because I cut on the line instead of the '
-    + 'waste side, '
-    + 'and next time I would mark with a knife" '
-    + 'earns more than "my project came out very well", '
-    + 'because the first shows that the maker learned something '
-    + 'and the second shows nothing at all.',
+    + 'It is marked on honesty, not on how good the article is, '
+    + 'because an account of what went wrong and what you would change '
+    + 'shows that the maker learned something, '
+    + 'and a cheerful one shows nothing at all.',
 
   recap:
     'You can draw, measure, mark, cut and join, '
@@ -366,6 +435,97 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'The ten stages of a project in two numbered columns. Down the '
+      + 'left: the brief, research, three ideas, the chosen design, the '
+      + 'working drawing. Down the right: the materials and cutting list, '
+      + 'the plan of work, make and finish, test against the brief, '
+      + 'evaluate honestly. An arrow runs from the bottom of the left '
+      + 'column round to the top of the right. The brief, the three ideas '
+      + 'and the evaluation are drawn in green, as the three stages where '
+      + 'the marks actually are.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">ten stages, and the order is not a preference</text>'
+      + '<path d="M 155 274 V 300 H 604 V 40 H 468 V 44" stroke-width="1"/>'
+      + '<path d="M 460 42 L 468 56 L 476 42 Z" fill="currentColor" stroke="none"/>'
+      + '<circle cx="22" cy="76" r="12" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="22" y="82" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">1</text>'
+      + '<rect x="40" y="56" width="230" height="40" rx="5" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="52" y="81" font-size="14" fill="#0f8a4d" stroke="none">the brief: what it must do</text>'
+      + '<circle cx="22" cy="120" r="12"/>'
+      + '<text x="22" y="126" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<rect x="40" y="100" width="230" height="40" rx="5"/>'
+      + '<text x="52" y="125" font-size="14" fill="currentColor" stroke="none">research</text>'
+      + '<circle cx="22" cy="164" r="12" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="22" y="170" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<rect x="40" y="144" width="230" height="40" rx="5" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="52" y="169" font-size="14" fill="#0f8a4d" stroke="none">three rough ideas</text>'
+      + '<circle cx="22" cy="208" r="12"/>'
+      + '<text x="22" y="214" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<rect x="40" y="188" width="230" height="40" rx="5"/>'
+      + '<text x="52" y="213" font-size="14" fill="currentColor" stroke="none">one chosen, with reasons</text>'
+      + '<circle cx="22" cy="252" r="12"/>'
+      + '<text x="22" y="258" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">5</text>'
+      + '<rect x="40" y="232" width="230" height="40" rx="5"/>'
+      + '<text x="52" y="257" font-size="14" fill="currentColor" stroke="none">working drawing</text>'
+      + '<circle cx="332" cy="76" r="12"/>'
+      + '<text x="332" y="82" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">6</text>'
+      + '<rect x="350" y="56" width="230" height="40" rx="5"/>'
+      + '<text x="362" y="81" font-size="14" fill="currentColor" stroke="none">materials and cutting list</text>'
+      + '<circle cx="332" cy="120" r="12"/>'
+      + '<text x="332" y="126" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">7</text>'
+      + '<rect x="350" y="100" width="230" height="40" rx="5"/>'
+      + '<text x="362" y="125" font-size="14" fill="currentColor" stroke="none">plan of work</text>'
+      + '<circle cx="332" cy="164" r="12"/>'
+      + '<text x="332" y="170" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">8</text>'
+      + '<rect x="350" y="144" width="230" height="40" rx="5"/>'
+      + '<text x="362" y="169" font-size="14" fill="currentColor" stroke="none">make it, then finish it</text>'
+      + '<circle cx="332" cy="208" r="12"/>'
+      + '<text x="332" y="214" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">9</text>'
+      + '<rect x="350" y="188" width="230" height="40" rx="5"/>'
+      + '<text x="362" y="213" font-size="14" fill="currentColor" stroke="none">test against the brief</text>'
+      + '<circle cx="332" cy="252" r="12" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="332" y="258" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">10</text>'
+      + '<rect x="350" y="232" width="230" height="40" rx="5" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="362" y="257" font-size="14" fill="#0f8a4d" stroke="none">evaluate honestly</text>'
+      + '<text x="320" y="340" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">each stage decides what the next one can be</text>'
+      + '<text x="320" y="368" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">and the three in green are where the marks actually are</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three stages where the marks actually are, '
+        + 'and what wins or loses them',
+      columns: ['Stage', 'What earns the marks', 'What loses them'],
+      rows: [
+        [
+          'The brief',
+          'A seat for a trader who sits for six hours and must carry it '
+            + 'home: a statement of function and user',
+          'Make a wooden stool: it names the answer, '
+            + 'so nothing can be checked against it',
+        ],
+        [
+          'The ideas',
+          'Three rough sketches, and the reasons for choosing between '
+            + 'them',
+          'One sketch, then built. That is not designing, and it cannot '
+            + 'say why that shape',
+        ],
+        [
+          'The evaluation',
+          'The joints were loose because I cut on the line instead of the '
+            + 'waste side, and next time I would mark with a knife',
+          'My project came out very well',
+        ],
+      ],
+      note: 'Three rough sketches cost ten minutes, '
+        + 'and the evaluation is marked on honesty rather than on how '
+        + 'good the article turned out. Both are cheap marks.',
+    },
+  ],
+
   extension:
     'A prototype made in cheap material '
     + 'tests the design before the good timber is cut. '
@@ -433,20 +593,18 @@ teach({
   },
 
   idea:
-    'Making a simple article starts with measurements: '
-    + 'length, width or bust, waist, hip, and any others the article '
-    + 'needs, '
-    + 'taken over the clothes it will be worn with '
+    'Whether a simple article will fit is decided before any stitching. '
+    + 'The measurements are taken on the wearer, '
+    + 'length, width or bust, waist, hip, '
+    + 'and any others the article needs, '
+    + 'over the clothes it will be worn with, '
     + 'and written down. '
     + 'The pattern is laid on the fabric with the grain, '
-    + 'that is along the woven threads, '
-    + 'and pinned. '
-    + 'Seam allowances, usually one and a half centimetres, '
-    + 'and a hem allowance, are added before cutting. '
-    + 'The pieces are tacked together and fitted on the wearer, '
-    + 'then stitched, '
-    + 'then the raw edges are neatened and the hem is finished. '
-    + 'The article is pressed at each stage, not only at the end.',
+    + 'that is along the woven threads, and pinned. '
+    + 'The allowances are marked on before the scissors touch the cloth. '
+    + 'Only then is anything cut, '
+    + 'and the order of everything after that is not a preference '
+    + 'either.',
 
   mechanism:
     'Two things in this topic cannot be put right afterwards, '
@@ -474,7 +632,7 @@ teach({
     + 'A tacked garment can be taken apart in a minute. '
     + 'A stitched and neatened one has to be unpicked, '
     + 'and unpicking marks the cloth. '
-    + 'Pressing as you go is the step most often skipped '
+    + 'And pressing as you go is the step most often skipped '
     + 'and it is why home made articles look home made: '
     + 'a seam pressed open lies flat and takes the next seam accurately, '
     + 'and one left unpressed builds a bulge that every later seam adds '
@@ -558,6 +716,117 @@ teach({
       mistake: 'Leaving all the pressing to the end.',
       why: 'An unpressed seam builds a bulge '
         + 'that every later seam adds to.',
+    },
+  ],
+
+  figure: {
+    alt: 'Two squares of woven cloth, each drawn with thin lines showing '
+      + 'the threads running two ways. On the left a square pattern piece '
+      + 'is laid square with the threads and marked in green as on the '
+      + 'grain, which hardly stretches. On the right the same piece is '
+      + 'laid as a diamond across the threads and marked in red as off '
+      + 'the grain, which stretches, so the garment twists on the body.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">lay the pattern along the grain</text>'
+      + '<rect x="30" y="56" width="270" height="230"/>'
+      + '<line x1="75" y1="56" x2="75" y2="286" stroke-width="1"/>'
+      + '<line x1="120" y1="56" x2="120" y2="286" stroke-width="1"/>'
+      + '<line x1="165" y1="56" x2="165" y2="286" stroke-width="1"/>'
+      + '<line x1="210" y1="56" x2="210" y2="286" stroke-width="1"/>'
+      + '<line x1="255" y1="56" x2="255" y2="286" stroke-width="1"/>'
+      + '<line x1="30" y1="102" x2="300" y2="102" stroke-width="1"/>'
+      + '<line x1="30" y1="148" x2="300" y2="148" stroke-width="1"/>'
+      + '<line x1="30" y1="194" x2="300" y2="194" stroke-width="1"/>'
+      + '<line x1="30" y1="240" x2="300" y2="240" stroke-width="1"/>'
+      + '<rect x="90" y="96" width="150" height="150" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<line x1="165" y1="116" x2="165" y2="226" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 157 124 L 165 110 L 173 124 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 157 218 L 165 232 L 173 218 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="165" y="310" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">on the grain</text>'
+      + '<text x="165" y="332" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">it hardly stretches this way</text>'
+      + '<rect x="340" y="56" width="270" height="230"/>'
+      + '<line x1="385" y1="56" x2="385" y2="286" stroke-width="1"/>'
+      + '<line x1="430" y1="56" x2="430" y2="286" stroke-width="1"/>'
+      + '<line x1="475" y1="56" x2="475" y2="286" stroke-width="1"/>'
+      + '<line x1="520" y1="56" x2="520" y2="286" stroke-width="1"/>'
+      + '<line x1="565" y1="56" x2="565" y2="286" stroke-width="1"/>'
+      + '<line x1="340" y1="102" x2="610" y2="102" stroke-width="1"/>'
+      + '<line x1="340" y1="148" x2="610" y2="148" stroke-width="1"/>'
+      + '<line x1="340" y1="194" x2="610" y2="194" stroke-width="1"/>'
+      + '<line x1="340" y1="240" x2="610" y2="240" stroke-width="1"/>'
+      + '<path d="M 475 86 L 560 171 L 475 256 L 390 171 Z" stroke="#c8433a" stroke-width="3"/>'
+      + '<line x1="440" y1="136" x2="510" y2="206" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 432 144 L 436 130 L 450 134 Z" fill="#c8433a" stroke="none"/>'
+      + '<path d="M 518 198 L 514 212 L 500 208 Z" fill="#c8433a" stroke="none"/>'
+      + '<text x="475" y="310" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">off the grain</text>'
+      + '<text x="475" y="332" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">it stretches, and the garment twists</text>'
+      + '<text x="320" y="372" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">a piece cut the wrong way cannot be put right afterwards</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What goes on the cloth before the scissors do',
+      columns: ['What you mark', 'How much', 'Why'],
+      rows: [
+        [
+          'The measurement itself',
+          'Taken on the wearer, over the clothes the article will be worn '
+            + 'with',
+          'It is the size the finished article has to come out',
+        ],
+        [
+          'A seam allowance, on every edge that will be joined',
+          'Usually one and a half centimetres',
+          'It is the material the seam is made from, '
+            + 'and not a safety margin',
+        ],
+        [
+          'A hem allowance, on every edge that will be turned up',
+          'As the pattern states',
+          'The hem is made out of it, in the same way',
+        ],
+      ],
+      note: 'Cloth cut to the exact measurement has nothing left to make '
+        + 'a seam with, so the article comes out smaller than the person '
+        + 'by two seams on every side.',
+    },
+    {
+      caption: 'The order of making, and why each step has to come where '
+        + 'it does',
+      columns: ['Step', 'Why it comes here and not later'],
+      rows: [
+        [
+          'Measure, and write it down',
+          'Before buying cloth, because how much to buy depends on it',
+        ],
+        [
+          'Lay the pattern along the grain, and pin',
+          'Before cutting, because the direction cannot be changed '
+            + 'afterwards at all',
+        ],
+        [
+          'Mark the cutting lines, allowances included',
+          'Before cutting, because the allowance is part of what gets cut',
+        ],
+        [
+          'Tack the pieces, and fit on the wearer',
+          'Before stitching: it is the last point at which a mistake is '
+            + 'still cheap',
+        ],
+        [
+          'Stitch, pressing each seam as you finish it',
+          'Pressing now, because a later seam cannot flatten an earlier '
+            + 'one',
+        ],
+        [
+          'Neaten the raw edges and finish the hem',
+          'Last, once nothing more is going to be taken apart',
+        ],
+      ],
+      note: 'Nothing in this column is a convention. '
+        + 'Every one of them is a step that cannot be undone, '
+        + 'or can only be undone at a cost.',
     },
   ],
 
@@ -649,15 +918,13 @@ teach({
     'There is one mistake that closes small businesses, '
     + 'and it is costing the materials and forgetting the labour. '
     + 'A learner makes a stool, '
-    + 'spends 40 cedis on timber and nails, '
+    + 'spends on timber and nails, '
     + 'works a day and a half on it, '
-    + 'and prices it at 60 cedis because that feels like a good profit. '
-    + 'It is not a profit of 20 cedis. '
+    + 'and then prices it at whatever feels like a good profit on the '
+    + 'timber. '
+    + 'It is not a profit at all. '
     + 'The day and a half was worth something, '
-    + 'and if a day’s work is worth 30 cedis '
-    + 'then the stool cost 85 cedis to make '
-    + 'and has been sold at a loss of 25. '
-    + 'The money in hand hides it, '
+    + 'and the money in hand hides that, '
     + 'because cash came in and nobody counted the time going out. '
     + 'So labour is costed even when you did it yourself, '
     + 'at a rate you would accept from somebody else, '
@@ -670,14 +937,10 @@ teach({
     + 'divide by the number of articles you expect to make, '
     + 'and add that share to each. '
     + 'Pricing is then a separate decision from costing, '
-    + 'and both have to be satisfied. '
-    + 'Cost tells you the floor: '
-    + 'below it you are losing money however busy you are. '
-    + 'The market tells you the ceiling: '
-    + 'above it nobody buys however fair your arithmetic. '
-    + 'If the floor is above the ceiling, '
-    + 'the answer is not to work for nothing '
-    + 'but to change the article, the method, or the customer.',
+    + 'and both have to be satisfied at once. '
+    + 'Your cost sets a floor under the price '
+    + 'and the market sets a ceiling over it, '
+    + 'and neither of the two takes any notice of the other.',
 
   recap:
     'You know the factors of production and that the entrepreneur bears '
@@ -759,6 +1022,69 @@ teach({
     },
   ],
 
+  tables: [
+    {
+      caption: 'A stool, costed properly, in cedis',
+      columns: ['Line', 'How it is worked out', 'Cedis'],
+      rows: [
+        [
+          'Direct materials',
+          'Timber and nails, including the offcuts bought and not used',
+          '40',
+        ],
+        [
+          'Direct labour',
+          'A day and a half, at a rate you would accept from somebody '
+            + 'else',
+          '45',
+        ],
+        [
+          'Share of overheads',
+          'A month of rent, power and transport, divided by the articles '
+            + 'you expect to make',
+          '10',
+        ],
+        [
+          'Total cost',
+          'The three lines above, added',
+          '95',
+        ],
+        [
+          'Profit intended',
+          'Twenty per cent of the total cost',
+          '19',
+        ],
+        [
+          'Selling price',
+          'Cost plus profit',
+          '114',
+        ],
+      ],
+      note: 'The materials alone would have said 40. '
+        + 'Adding the labour and the share of overheads more than doubles '
+        + 'it, and that difference is what closes small businesses.',
+    },
+    {
+      caption: 'The two limits on a price, and what to do when they cross',
+      columns: ['The limit', 'What sets it', 'What it means'],
+      rows: [
+        [
+          'The floor',
+          'Your own total cost: materials, labour and the overhead share',
+          'Below it you lose money on every sale, however busy you are',
+        ],
+        [
+          'The ceiling',
+          'What articles like yours actually sell for',
+          'Above it nobody buys, however fair your arithmetic is',
+        ],
+      ],
+      note: 'If the floor comes out above the ceiling, '
+        + 'the answer is not to work for nothing. '
+        + 'It is to change the article, the method, or the customer.',
+    },
+  ],
+
   extension:
     'The break even point is the number of articles you must sell '
     + 'to cover your overheads for the month. '
@@ -834,15 +1160,12 @@ teach({
   idea:
     'A simple record has a date, a description and an amount, '
     + 'in two columns: money received and money paid out. '
-    + 'Sales are recorded as they happen. '
-    + 'Expenses include stock, materials, transport, rent, power, '
-    + 'repairs and wages. '
+    + 'Everything goes in on the day it happens. '
     + 'At the end of the month both columns are totalled, '
-    + 'and sales minus expenses is the profit or loss. '
-    + 'A stock record lists what is held, so shortages are noticed. '
-    + 'Receipts are kept as evidence of what was spent. '
-    + 'Money belonging to the business is kept apart '
-    + 'from the owner’s personal money.',
+    + 'and the money received less the money paid out '
+    + 'is the profit or the loss. '
+    + 'A stock record is kept beside it, so a shortage is noticed, '
+    + 'and every receipt is kept as evidence of what was spent.',
 
   mechanism:
     'The reason a trader can work hard for a year and be poorer '
@@ -857,17 +1180,9 @@ teach({
     + 'whether the work was worth doing. '
     + 'Without them there is only a feeling about how busy it has been, '
     + 'and busy and profitable are different things. '
-    + 'Recording on the day matters more than it looks. '
-    + 'Nobody remembers a week of small expenses, '
-    + 'and small expenses are where the money goes: '
-    + 'transport, a repair, a cheap tool, a little waste. '
-    + 'A record written up from memory on Friday '
-    + 'is always too kind to the week. '
-    + 'Keeping the money separate is the other habit worth building, '
-    + 'and it is the hardest. '
-    + 'If the business money and the household money are in one pocket, '
-    + 'the records cannot be right, '
-    + 'and the first sign of trouble is stock that cannot be replaced. '
+    + 'The habits that make a record worth keeping are all small, '
+    + 'and all of them are discipline rather than arithmetic, '
+    + 'which is exactly why they are the part people drop first. '
     + 'There is also a second use for records that traders discover late. '
     + 'Six months of them is evidence. '
     + 'They are what lets you ask a bank or a credit union for a loan, '
@@ -946,6 +1261,99 @@ teach({
       mistake: 'Judging a month by how busy it felt.',
       why: 'Busy and profitable are different. '
         + 'Only the totals say which it was.',
+    },
+  ],
+
+  figure: {
+    alt: 'A tall box standing for the money in a trader’s cash box, '
+      + 'divided by a line across it. The upper and larger part is drawn '
+      + 'in red and labelled as the cost of the stock that has to be '
+      + 'bought tomorrow to keep trading, which is not the trader’s to '
+      + 'spend. The smaller part below the line is drawn in green and '
+      + 'labelled the profit. The dividing line runs on past the box to a '
+      + 'green note saying that only the records tell you where the line '
+      + 'is.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">money in the box is not profit</text>'
+      + '<rect x="60" y="62" width="240" height="228" rx="6"/>'
+      + '<line x1="60" y1="210" x2="300" y2="210" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<line x1="300" y1="210" x2="330" y2="210" stroke="#0f8a4d" stroke-width="3" stroke-dasharray="7 5"/>'
+      + '<text x="180" y="104" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the cost of the stock</text>'
+      + '<text x="180" y="126" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">you have to buy</text>'
+      + '<text x="180" y="148" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">tomorrow to keep trading</text>'
+      + '<text x="180" y="180" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">not yours to spend</text>'
+      + '<text x="180" y="244" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">the profit</text>'
+      + '<text x="180" y="268" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">this part is yours</text>'
+      + '<text x="180" y="312" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the money in the box</text>'
+      + '<text x="340" y="196" font-size="16" fill="#0f8a4d" stroke="none">the records tell you</text>'
+      + '<text x="340" y="218" font-size="16" fill="#0f8a4d" stroke="none">where this line is</text>'
+      + '<text x="340" y="244" font-size="16" fill="#0f8a4d" stroke="none">and nothing else does</text>'
+      + '<text x="320" y="352" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">spend across the line and you are not taking a profit,</text>'
+      + '<text x="320" y="376" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">you are eating the business</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'One month of a small trading business, totalled, in cedis',
+      columns: ['Line', 'What it covers', 'Cedis'],
+      rows: [
+        [
+          'Money received',
+          'Every sale, recorded through the month on the day it happened',
+          '1840',
+        ],
+        [
+          'Money paid out: stock',
+          'Goods bought in order to be sold again',
+          '1120',
+        ],
+        [
+          'Money paid out: everything else',
+          'Transport, rent, power, one repair, and some waste',
+          '310',
+        ],
+        [
+          'Total paid out',
+          'The two lines above, added',
+          '1430',
+        ],
+        [
+          'Profit for the month',
+          'Money received, less money paid out',
+          '410',
+        ],
+      ],
+      note: 'That is the month closed. '
+        + 'The money in the box on an ordinary day is never this number, '
+        + 'because part of it is still the stock for tomorrow.',
+    },
+    {
+      caption: 'The three habits, and what goes wrong without each one',
+      columns: ['Habit', 'What goes wrong without it'],
+      rows: [
+        [
+          'Write each entry on the day it happens',
+          'Nobody remembers a week of small expenses, '
+            + 'and a record written up from memory on Friday '
+            + 'is always too kind to the week',
+        ],
+        [
+          'Keep every receipt',
+          'There is no evidence of what was spent, '
+            + 'so a figure somebody disputes cannot be settled',
+        ],
+        [
+          'Keep business money apart from your own',
+          'The records cannot be right, '
+            + 'and the first sign of trouble is stock that cannot be '
+            + 'replaced',
+        ],
+      ],
+      note: 'Small expenses are where the money goes: '
+        + 'transport, a repair, a cheap tool, a little waste. '
+        + 'Not one of them feels big enough to write down, '
+        + 'which is the whole of the problem.',
     },
   ],
 
