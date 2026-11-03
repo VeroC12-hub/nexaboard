@@ -45,6 +45,28 @@ teach({
     ],
   },
 
+  why:
+    'A woman selling koko squeezes too much lime into the pot and '
+    + 'the whole thing is now sharp and sour. '
+    + 'Somebody tells her to stir in a pinch of bicarbonate of soda, '
+    + 'and the sourness goes. '
+    + 'Nothing was poured away and nothing was lifted out. '
+    + 'Something was added, and the sour thing stopped being sour. '
+    + 'What happened to it, and how much would she have had to add to '
+    + 'stop exactly at not sour?',
+
+  notation:
+    'Acidity is written as a pH number and said “p H”, with a small '
+    + 'p and a capital H. '
+    + 'The scale runs from 0 to 14. '
+    + 'Below 7 is acid, 7 is neutral, and above 7 is a base. '
+    + 'A pH is one number with no unit, so “pH 3 units” is wrong. '
+    + 'In a formula the small number sits low and counts atoms, so '
+    + 'H2SO4 is said “H two S O four” and means two hydrogen atoms, '
+    + 'one sulphur and four oxygen. '
+    + 'Write those small numbers full size and you have written '
+    + 'something else, which is the commonest way to lose a mark.',
+
   idea:
     'Acids and bases sit on opposite sides of neutral, and a handful of '
     + 'simple tests will tell you which side a substance is on. '
@@ -63,7 +85,7 @@ teach({
     + 'hydrochloric gives chloride, sulphuric gives sulphate, '
     + 'nitric gives nitrate. '
     + 'So sodium hydroxide with hydrochloric acid gives sodium chloride, '
-    + 'and you did not have to remember that particular pair. '
+    + 'and no pair of names had to be memorised. '
     + 'Neutralisation itself is worth seeing as useful rather than '
     + 'abstract, '
     + 'because the examination asks for applications. '
@@ -81,10 +103,16 @@ teach({
     + 'one.',
 
   recap:
-    'You know about elements, compounds and mixtures, '
-    + 'and that atoms react through their outer electrons. '
-    + 'This is one family of reactions, '
-    + 'and the most useful one in daily life.',
+    'An element is a substance made of one kind of atom only, like '
+    + 'the iron in a nail or the oxygen in air. '
+    + 'A compound is two or more kinds of atom joined together, so '
+    + 'water is a compound of hydrogen and oxygen. '
+    + 'A mixture is substances sitting together without joining, like '
+    + 'sand stirred into water. '
+    + 'Atoms join and come apart using the electrons in their outer '
+    + 'shell, which is the loose part on the outside of an atom. '
+    + 'Acids and bases are one family of reactions between compounds, '
+    + 'and the most useful family in daily life.',
 
   method: [
     'Describe the test: which indicator, and the colour change.',
@@ -303,6 +331,29 @@ teach({
     ],
   },
 
+  why:
+    'A farmer at Techiman takes a maize harvest off the same plot '
+    + 'four years running and puts nothing back. '
+    + 'The first year fills his store. '
+    + 'The fourth gives thin stalks and pale yellow leaves. '
+    + 'The rain was the same and the sun was the same every year. '
+    + 'Something left that soil with the maize and did not come back. '
+    + 'What was it, and why does planting beans on the plot for one '
+    + 'season bring the maize back?',
+
+  notation:
+    'Carbon dioxide is written CO2 and said “C O two”, with the 2 '
+    + 'small and sitting low. '
+    + 'The C stands for one carbon atom and the O2 for two oxygen '
+    + 'atoms. '
+    + 'A nitrate is written NO3 with a minus sign after it, and said '
+    + 'simply “nitrate”. '
+    + 'Write those small numbers full size and you have named a '
+    + 'different substance, which is the commonest way to lose a '
+    + 'mark. '
+    + 'In a cycle diagram each arrow is said “becomes” or “is taken '
+    + 'up by”, and it has to point the way the atoms actually travel.',
+
   idea:
     'In the carbon cycle, '
     + 'plants take carbon dioxide from the air by photosynthesis. '
@@ -342,7 +393,7 @@ teach({
     + 'so something has to break them apart first. '
     + 'That is what fixing means, '
     + 'and only bacteria, lightning and factories can do it. '
-    + 'Once you know that, the rest follows. '
+    + 'Once that is clear, the rest follows. '
     + 'It explains why farmers plant legumes in rotation, '
     + 'because the bacteria in their root nodules fix nitrogen into the '
     + 'soil. '
@@ -358,10 +409,18 @@ teach({
     + 'which is why the balance has shifted.',
 
   recap:
-    'You know photosynthesis and respiration as opposite reactions, '
-    + 'and you know decomposers break down dead matter. '
-    + 'This follows the same atoms round, '
-    + 'through living things, soil and air.',
+    'Photosynthesis is what a green plant does in the light. '
+    + 'It takes carbon dioxide from the air and water from the soil '
+    + 'and builds them into sugar, giving out oxygen. '
+    + 'Respiration is the reverse of that, and every living thing '
+    + 'does it, day and night. '
+    + 'It takes sugar and oxygen, releases the energy held in the '
+    + 'sugar, and gives out carbon dioxide and water. '
+    + 'Decomposers are the bacteria and fungi that feed on dead '
+    + 'plants, dead animals and dung, breaking them down into simple '
+    + 'substances the soil can hold. '
+    + 'Those three processes move the same atoms round and round, and '
+    + 'this lesson follows them.',
 
   method: [
     'Draw the stores: air, plants, animals, soil, fossil fuel.',
@@ -582,6 +641,17 @@ teach({
     ],
   },
 
+  why:
+    'A man mixing concrete in Accra sweats all morning and drinks '
+    + 'nothing. '
+    + 'He passes very little urine, and what there is comes out dark. '
+    + 'That evening he drinks four sachets of water, and within the '
+    + 'hour he is passing plenty of it, almost colourless. '
+    + 'Nobody told his body to do that and he did not decide it. '
+    + 'Something measured the water in his blood and changed the '
+    + 'amount leaving his body. '
+    + 'What measured it, and how did it act on the answer?',
+
   idea:
     'Excretion is the removal of waste produced by the body’s own '
     + 'reactions. '
@@ -622,9 +692,17 @@ teach({
     + 'and that is the practical use of this lesson.',
 
   recap:
-    'You know respiration happens in every cell '
-    + 'and that digestion absorbs food into the blood. '
-    + 'This removes what those processes leave behind.',
+    'Respiration is the reaction inside a living cell that releases '
+    + 'energy from sugar. '
+    + 'It happens in every cell of the body, all the time, and it '
+    + 'leaves carbon dioxide and water behind. '
+    + 'Digestion is separate: it breaks food into pieces small enough '
+    + 'to pass through the thin wall of the small intestine into the '
+    + 'blood. '
+    + 'So the blood ends up carrying both useful things and the '
+    + 'leftovers of reactions. '
+    + 'Getting those leftovers out of the blood is what this lesson '
+    + 'is about.',
 
   method: [
     'Name the organ.',
@@ -841,9 +919,19 @@ teach({
     method: [
       'Say which tissue, which substance and which direction.',
       'Explain the rise of water by the pull from the leaves.',
-      'Remember that a plant has no pump.',
+      'A plant has no pump.',
     ],
   },
+
+  why:
+    'A mango tree in a compound stands twenty metres high. '
+    + 'Water goes in at the roots, underground, and leaves through '
+    + 'the leaves at the very top. '
+    + 'There is no pump anywhere in the tree and no part of it moves '
+    + 'at all. '
+    + 'Water does not run uphill on its own. '
+    + 'So what carries it twenty metres up, against its own weight, '
+    + 'all day, every day?',
 
   idea:
     'Water and dissolved minerals enter root hair cells from the soil, '
@@ -891,9 +979,18 @@ teach({
     + 'and that changes through the year.',
 
   recap:
-    'You know what photosynthesis makes and where, '
-    + 'and you know osmosis moves water across a membrane. '
-    + 'This moves both water and food around the whole plant.',
+    'A green leaf makes sugar out of carbon dioxide and water, '
+    + 'using the energy in sunlight. '
+    + 'That happens in the leaf, so the leaf is where a plant’s food '
+    + 'comes from. '
+    + 'Osmosis is the movement of water through a thin skin called a '
+    + 'membrane, and it always runs towards the side holding less '
+    + 'water. '
+    + 'Put a root hair cell full of strong sap against wet soil and '
+    + 'water crosses into the cell by osmosis, with nothing pushing '
+    + 'it. '
+    + 'This lesson moves that water, and that sugar, round the whole '
+    + 'plant.',
 
   method: [
     'Name the tissue: xylem for water, phloem for food.',
@@ -1123,6 +1220,26 @@ teach({
     ],
   },
 
+  why:
+    'A woman carries a basin of water on her head and the rim bites '
+    + 'into her scalp. '
+    + 'She slides a folded cloth underneath it and the same basin '
+    + 'stops hurting. '
+    + 'The basin weighs exactly what it weighed before. '
+    + 'Nothing was poured out of it. '
+    + 'Why does spreading the same load over a wider patch of her '
+    + 'head change what she feels, and by how much?',
+
+  notation:
+    'The rule is written $P = F/A$ and said “pressure equals force '
+    + 'divided by area”. '
+    + 'F is the force in newtons and A is the area in square metres. '
+    + 'The unit of pressure is the newton per square metre, written '
+    + 'N/m², and it has its own name, the pascal, written Pa. '
+    + 'The area has to be in square metres before you divide. '
+    + 'Putting centimetres in and writing pascals out is the '
+    + 'commonest way to lose a mark here.',
+
   idea:
     'Pressure is the force acting on each unit of area: '
     + 'force divided by area, '
@@ -1164,9 +1281,14 @@ teach({
     + 'and why water pushes outwards on the dam wall at all.',
 
   recap:
-    'You know what a force is and how to find an area. '
-    + 'Pressure is the first of those divided by the second, '
-    + 'and that one division explains a surprising number of designs.',
+    'A force is a push or a pull. '
+    + 'It is measured in newtons, written N, and a one kilogram bag '
+    + 'of sugar presses down with about 10 newtons. '
+    + 'Area is the amount of flat surface a thing covers. '
+    + 'For a rectangle it is length times breadth, so a plank 2 '
+    + 'metres by half a metre has an area of 1 square metre. '
+    + 'Pressure is that force divided by that area, and this one '
+    + 'division explains a surprising number of designs.',
 
   method: [
     'Write down the force in newtons.',
@@ -1385,9 +1507,42 @@ teach({
     method: [
       'Write the load, the effort and the two distances.',
       'Mechanical advantage is load over effort.',
-      'Remember that the effort always moves further than the load.',
+      'The effort always moves further than the load.',
     ],
   },
+
+  why:
+    'A trader has to get a drum of oil into the back of a truck. '
+    + 'She cannot lift it and she cannot make herself stronger. '
+    + 'She leans a plank from the ground to the truck bed, rolls the '
+    + 'drum up the plank, and it goes in. '
+    + 'She pushed with a force far smaller than the weight of the '
+    + 'drum. '
+    + 'Where did the missing force come from, and what did she have '
+    + 'to give up to get it?',
+
+  notation:
+    'Mechanical advantage is written M.'
+    + 'A. '
+    + 'and said “mechanical advantage”. '
+    + 'It is the load divided by the effort. '
+    + 'Both of those are forces in newtons, so the answer comes out '
+    + 'with no unit at all. '
+    + 'Velocity ratio, written V.'
+    + 'R.'
+    + ', is the distance the effort moves divided by the distance the '
+    + 'load moves, and it also has no unit. '
+    + 'Efficiency is M.'
+    + 'A. '
+    + 'divided by V.'
+    + 'R.'
+    + ', times 100, and it is a percentage. '
+    + 'Putting a unit on M.'
+    + 'A. '
+    + 'or V.'
+    + 'R.'
+    + ', or writing an efficiency above 100 percent, is the commonest '
+    + 'way to lose a mark.',
 
   idea:
     'A simple machine makes work easier '
@@ -1433,9 +1588,15 @@ teach({
     + 'and efficiency is the first divided by the second.',
 
   recap:
-    'You know what a force is, and that work is force times distance. '
-    + 'A machine rearranges those two '
-    + 'without changing their product.',
+    'A force is a push or a pull, measured in newtons. '
+    + 'Work is done when a force moves something, and the work is the '
+    + 'force times the distance moved. '
+    + 'Lift a 50 newton bucket 2 metres and you have done 100 units '
+    + 'of work, called joules. '
+    + 'The work does not get smaller because a machine was used. '
+    + 'A machine only rearranges the force and the distance, so you '
+    + 'push with less force over a longer distance and the two '
+    + 'multiplied together stay about the same.',
 
   method: [
     'Identify the machine: lever, pulley, inclined plane.',
@@ -1664,6 +1825,28 @@ teach({
     ],
   },
 
+  why:
+    'Two bulbs are wired into one torch and both shine normally. '
+    + 'The same two bulbs are wired into another torch a different '
+    + 'way, and both come out dim. '
+    + 'Same two bulbs, same two cells, same length of wire. '
+    + 'The only difference is how they are joined to each other. '
+    + 'Why does the arrangement change the brightness, and how would '
+    + 'you work out which way to wire it before you build it?',
+
+  notation:
+    'Current is measured in amperes, written A and said “amps”. '
+    + 'Voltage is measured in volts, written V. '
+    + 'Resistance is measured in ohms, written with the Greek letter '
+    + 'omega, which looks like a horseshoe. '
+    + 'The rule joining the three is $V = IR$, said “V equals I R”, '
+    + 'where V is the voltage, I is the current and R is the '
+    + 'resistance. '
+    + 'Note that current is written I and not C. '
+    + 'An ammeter goes in the circuit, in line with the component, '
+    + 'and a voltmeter goes across it. '
+    + 'Swapping those two round is the commonest way to lose a mark.',
+
   idea:
     'An electric current is a flow of charge round a complete circuit, '
     + 'measured in amperes with an ammeter placed in the circuit. '
@@ -1679,7 +1862,7 @@ teach({
     + 'which can be switched off.',
 
   mechanism:
-    'Series and parallel questions are answerable the moment you know '
+    'Series and parallel questions are answerable the moment you can say '
     + 'which quantity is shared, '
     + 'and guesswork otherwise. '
     + 'In series there is one path, '
@@ -1708,9 +1891,17 @@ teach({
     + 'which is why it is in bells, relays, motors and scrapyard cranes.',
 
   recap:
-    'You have met simple circuits and know a magnet attracts iron. '
-    + 'This measures what flows in a circuit, '
-    + 'and connects electricity to magnetism.',
+    'A circuit is a complete loop of wire with a source of '
+    + 'electricity in it. '
+    + 'Join a dry cell to a bulb with two wires and the bulb lights, '
+    + 'because the loop is closed. '
+    + 'Break that loop anywhere, by opening a switch or pulling one '
+    + 'wire off, and the bulb goes out at once. '
+    + 'A magnet is a piece of iron or steel that pulls other iron '
+    + 'towards it without touching it, which is what a magnet on a '
+    + 'door is doing. '
+    + 'This lesson measures what flows round that loop, and then '
+    + 'joins the loop to the magnet.',
 
   method: [
     'Draw the circuit with correct symbols.',
@@ -1956,6 +2147,18 @@ teach({
     ],
   },
 
+  why:
+    'A student takes tramadol before a football match because an '
+    + 'older boy says it kills pain and gives strength. '
+    + 'The first time, it does. '
+    + 'Three months later the same tablet does nothing, so he takes '
+    + 'two, then three. '
+    + 'On the day he takes none he cannot sleep and his hands shake. '
+    + 'The tablet never changed. '
+    + 'The amount that worked once now does nothing. '
+    + 'What changed inside him, and why does stopping make him worse '
+    + 'before it makes him better?',
+
   idea:
     'A drug is any substance that changes how the body works. '
     + 'Medicines are drugs used properly. '
@@ -1998,10 +2201,17 @@ teach({
     + 'adjusted.',
 
   recap:
-    'You know about communicable and non-communicable disease, '
-    + 'and about how the body keeps its conditions steady. '
-    + 'This is a case where a substance disturbs that steadiness '
-    + 'and the body adjusts around it.',
+    'A communicable disease passes from one person to another, like '
+    + 'cholera or tuberculosis. '
+    + 'A non-communicable disease does not pass between people at '
+    + 'all, like diabetes or high blood pressure. '
+    + 'The body also works constantly to hold its own conditions '
+    + 'steady. '
+    + 'Its temperature stays near 37 degrees Celsius and the water in '
+    + 'its blood is held level, whatever you do. '
+    + 'A drug is a substance that disturbs that steadiness, and the '
+    + 'body then adjusts itself around the drug. '
+    + 'That adjustment is what this lesson is about.',
 
   method: [
     'Name the drug and its class: stimulant, depressant, narcotic.',
@@ -2256,6 +2466,16 @@ teach({
     ],
   },
 
+  why:
+    'Children in the towns along the Pra river used to swim in it, '
+    + 'and families drew their water from it. '
+    + 'Now it runs brown all year round and the fish are few. '
+    + 'A galamsey pit three kilometres upstream was closed a year ago, '
+    + 'and the river is still brown. '
+    + 'The digging stopped and the water did not clear. '
+    + 'Why did stopping the cause not undo the damage, and what would '
+    + 'it actually take to clear that river?',
+
   idea:
     'Pollution in Ghana comes in three kinds, of the water, the air and '
     + 'the land, and each has its own sources and its own way of '
@@ -2297,10 +2517,16 @@ teach({
     + 'into an answer about why pollution matters.',
 
   recap:
-    'You explained galamsey and deforestation in Social Studies, '
-    + 'and you know how a disease travels by a route. '
-    + 'Pollution travels by routes too, '
-    + 'and this traces them.',
+    'Galamsey is small-scale gold mining done without a licence. '
+    + 'Miners dig pits beside rivers and use mercury to pick the gold '
+    + 'out, and the loose soil and the mercury wash into the water. '
+    + 'Deforestation is cutting forest down faster than it grows '
+    + 'back, usually for timber, farmland or charcoal. '
+    + 'A route is the path a harmful thing takes to reach a person: '
+    + 'mercury enters the river, a fish takes it in, and somebody '
+    + 'eats the fish. '
+    + 'Pollution travels along routes like that one, and this lesson '
+    + 'traces them.',
 
   method: [
     'Name the pollutant.',
