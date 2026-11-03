@@ -46,6 +46,26 @@ teach({
     ],
   },
 
+  why:
+    'A shop sells a fridge for 2,400 cedis cash. '
+    + 'On hire purchase it is 600 cedis deposit and then 180 '
+    + 'cedis a month for twelve months. '
+    + 'The signboard calls the hire purchase terms an easy offer. '
+    + 'Add the second one up and it comes to 2,760 cedis, so '
+    + 'which of the two is really cheaper, and by how much?',
+
+  notation:
+    'Percent is written with the % sign, so 15% is said fifteen '
+    + 'percent and means fifteen out of every hundred. '
+    + 'Cost price, selling price and marked price are shortened '
+    + 'to CP, SP and MP, each said as its letters. '
+    + 'In simple interest the amount saved or borrowed is the '
+    + 'principal, written P, the percentage a year is the rate, '
+    + 'R, and the time in years is T. '
+    + 'Taking the percentage of the wrong amount is the commonest '
+    + 'way to lose a mark, so write down what the percentage is '
+    + 'of before touching the calculator.',
+
   idea:
     'Five calculations are set in this topic, '
     + 'and four of them are a percentage of something. '
@@ -86,10 +106,16 @@ teach({
     + 'is whether having the thing now is worth that much.',
 
   recap:
-    'You can find a percentage of an amount '
-    + 'and work out a percentage change. '
-    + 'This applies both to money, '
-    + 'where the only difficulty is which amount the percentage is of.',
+    'A percentage is a number out of a hundred, so 15 percent '
+    + 'means 15 out of every 100. '
+    + 'To find 15 percent of 400 cedis, divide 400 by 100 to get '
+    + '4, then multiply by 15 to get 60 cedis. '
+    + 'A percentage change is always measured against the amount '
+    + 'you started from: a price going from 400 to 460 has risen '
+    + 'by 60, and 60 out of 400 is 15 percent. '
+    + 'This lesson is that same arithmetic applied to money, '
+    + 'where the only real difficulty is deciding which amount '
+    + 'the percentage is taken of.',
 
   method: [
     'Write down the cost price, marked price and selling price you are '
@@ -304,6 +330,24 @@ teach({
     ],
   },
 
+  why:
+    'At the market two oranges and three mangoes cost 13 cedis. '
+    + 'Three oranges and one mango cost 9 cedis. '
+    + 'The trader never tells you the price of one orange. '
+    + 'Both facts are about the same two prices, so how do you '
+    + 'get from the two of them down to one price each?',
+
+  notation:
+    'Two equations that must both be true at the same time are '
+    + 'called simultaneous equations. '
+    + 'They are written one under the other and labelled (1) and '
+    + '(2), so that the working can refer to them. '
+    + 'The answer is a pair of values, written as x equals 2, y '
+    + 'equals 3, and it has to fit both equations and not just '
+    + 'one. '
+    + 'Checking the pair in only one of the two equations is the '
+    + 'commonest way to lose a mark.',
+
   idea:
     'A pair of simultaneous equations is two equations '
     + 'that are both true for the same pair of values. '
@@ -338,10 +382,17 @@ teach({
     + 'arithmetic slip these questions produce.',
 
   recap:
-    'You can solve one equation with one unknown. '
-    + 'This has two unknowns, '
-    + 'which needs two equations, '
-    + 'and the work is getting down to one unknown.',
+    'An equation with one unknown has one answer, and you reach '
+    + 'it by undoing. '
+    + 'Take 3x plus 5 equals 20: subtract 5 from both sides to '
+    + 'get 3x equals 15, then divide both sides by 3 to get x '
+    + 'equals 5. '
+    + 'That worked because there was only one letter to find. '
+    + 'With two letters it does not: x plus y equals 10 has no '
+    + 'single answer, because x could be 4 and y 6, or x could be '
+    + '7 and y 3. '
+    + 'This lesson is about what a second equation adds, and all '
+    + 'the work goes into getting back down to one unknown.',
 
   method: [
     'Label the equations 1 and 2.',
@@ -532,7 +583,7 @@ teach({
 
   extension:
     'A word problem with two unknowns becomes a pair of equations. '
-    + 'The method is the one you know. '
+    + 'From there it is elimination or substitution, exactly as above. '
     + 'Name both letters. '
     + 'Write every quantity in terms of them. '
     + 'Then find the two separate statements of equality.',
@@ -598,6 +649,24 @@ teach({
     ],
   },
 
+  why:
+    'A tro-tro is licensed to carry at most 18 passengers. '
+    + 'Four seats are already taken by your family. '
+    + 'The mate keeps calling more people in from the roadside. '
+    + 'How many more can he take, and how do you write an answer '
+    + 'that is not one number but a whole range of them?',
+
+  notation:
+    'The four signs are read aloud as less than, greater than, '
+    + 'less than or equal to, and greater than or equal to. '
+    + 'The open end of the sign always faces the bigger side, so '
+    + 'three is less than seven is written $3 < 7$. '
+    + 'On a number line an unfilled circle at the end value means '
+    + 'that value is not included, and a filled circle means it '
+    + 'is. '
+    + 'Forgetting to turn the sign round after dividing by a '
+    + 'negative number is the commonest way to lose a mark.',
+
   idea:
     'An inequality says one side is less than, '
     + 'or greater than, or not more than, the other. '
@@ -637,10 +706,16 @@ teach({
     + 'because that catches a missed flip immediately.',
 
   recap:
-    'You can solve a linear equation by doing the same thing to both '
+    'An equation is solved by doing the same thing to both '
     + 'sides. '
-    + 'This is the same work with one extra rule, '
-    + 'and one picture explains the rule.',
+    + 'Take 2x plus 3 equals 11: subtract 3 from both sides to '
+    + 'get 2x equals 8, then divide both sides by 2 to get x '
+    + 'equals 4. '
+    + 'Doing the same thing to both sides keeps them equal, and '
+    + 'that is why the method is allowed at all. '
+    + 'This lesson solves statements that say less than or '
+    + 'greater than instead of equals. '
+    + 'The method is the same one, with a single extra rule.',
 
   method: [
     'Simplify both sides.',
@@ -889,6 +964,27 @@ teach({
     ],
   },
 
+  why:
+    'The area of a rectangle is its length times its width. '
+    + '8 metres. '
+    + 'The formula he knows gives the area once he has the '
+    + 'length, but here he has the area and wants the length. '
+    + 'How do you turn a formula round so that it gives you the '
+    + 'letter you actually need?',
+
+  notation:
+    'The letter standing alone on one side of a formula is '
+    + 'called the subject, and rearranging the formula so a '
+    + 'different letter stands alone is called changing the '
+    + 'subject. '
+    + 'A question asks it as make l the subject of A equals l '
+    + 'times w. '
+    + 'A letter appearing in two different terms has to be '
+    + 'collected into one term before it can be freed. '
+    + 'Stopping while the wanted letter is still on both sides is '
+    + 'the commonest way to lose a mark, because then it is not '
+    + 'the subject yet.',
+
   idea:
     'A formula such as $A = lw$ has $A$ as its subject, '
     + 'because $A$ is the letter standing alone. '
@@ -930,10 +1026,17 @@ teach({
     + 'and it is why factorising was worth learning.',
 
   recap:
-    'You can solve an equation by undoing operations '
-    + 'and you can factorise by taking out a common factor. '
-    + 'This uses both, '
-    + 'and the only difference is that the answer contains letters.',
+    'A formula is a rule written with letters, and the letter '
+    + 'standing alone on one side is called the subject. '
+    + 'In the area rule A equals l times w, the subject is A, so '
+    + 'the formula is ready to hand you an area. '
+    + 'An equation is rearranged by undoing: whatever was done to '
+    + 'a letter gets undone on both sides. '
+    + 'Taking out a common factor is the other tool needed here, '
+    + 'so 2x plus 2y can be written as 2 times the bracket x plus '
+    + 'y. '
+    + 'This lesson uses both, and the one new thing is that the '
+    + 'answer has letters in it instead of a number.',
 
   method: [
     'Write down which letter is to be the subject.',
@@ -1158,6 +1261,27 @@ teach({
     ],
   },
 
+  why:
+    'A mobile money agent charges 1 cedi to open a transfer '
+    + 'plus 2 cedis for every hundred cedis sent. '
+    + 'A customer sending 300 cedis pays 7, and one sending 500 '
+    + 'pays 11. '
+    + 'Write out every possible charge in a table and the table '
+    + 'never ends. '
+    + 'Is there a way to show all of them at once, so that any '
+    + 'charge can be read off without calculating it?',
+
+  notation:
+    'A straight line is written $y = mx + c$, said y equals em '
+    + 'x plus see. '
+    + 'The m is called the gradient and it says how steep the '
+    + 'line is, which is how far up it goes for one step across. '
+    + 'The c is called the y intercept, and it is the value of y '
+    + 'where the line crosses the upright axis. '
+    + 'Reading m and c off the wrong way round is the commonest '
+    + 'way to lose a mark, so remember that c is the number '
+    + 'sitting on its own.',
+
   idea:
     'A relation like $y = 2x + 1$ gives a $y$ for every $x$, '
     + 'and plotting those pairs gives a straight line. '
@@ -1192,10 +1316,17 @@ teach({
     + 'the distance already travelled when timing began.',
 
   recap:
-    'You can plot points in four quadrants '
-    + 'and you have met the rule of a mapping. '
-    + 'This draws the rule, '
-    + 'and reads two numbers back off the picture.',
+    'A point on a graph is fixed by two numbers, written as a '
+    + 'pair inside brackets. '
+    + 'The first says how far across and the second how far up, '
+    + 'so the point (3, 2) sits three to the right and two up '
+    + 'from where the axes cross. '
+    + 'On the other side of that crossing the numbers are '
+    + 'negative, so (-3, -2) is three to the left and two down. '
+    + 'A rule such as y equals 2x plus 1 hands you a y for every '
+    + 'x you pick: put x as 3 and y comes out as 7. '
+    + 'This lesson plots the pairs a rule like that produces, and '
+    + 'then reads the rule back off the picture.',
 
   method: [
     'Make a table with at least three values of x.',
@@ -1772,6 +1903,28 @@ teach({
     ],
   },
 
+  why:
+    'A fisherman leaves Elmina and sails until the land is out '
+    + 'of sight. '
+    + 'He has to tell the man on the radio which way he went, and '
+    + 'words such as a bit east of north are no use to anybody. '
+    + 'Later he has to come back to that same beach and not to '
+    + 'the next one along. '
+    + 'How do you state a direction as one exact number that '
+    + 'cannot be read two ways?',
+
+  notation:
+    'A bearing is written with three figures and said figure by '
+    + 'figure, so 075 is said zero seven five. '
+    + 'Three figures means the leading noughts are always '
+    + 'written, so due east is 090 and never 90. '
+    + 'It is measured from the north line and always turning '
+    + 'clockwise. '
+    + 'The bearing of B from A is measured standing at A, and '
+    + 'reading that the wrong way round is the commonest way to '
+    + 'lose a mark, so settle which point you are standing at '
+    + 'before drawing anything.',
+
   idea:
     'A bearing gives a direction as an angle from north, '
     + 'measured clockwise, and written with three figures. '
@@ -1810,10 +1963,16 @@ teach({
     + 'while forty five could be heard as four or five.',
 
   recap:
-    'You can measure an angle with a protractor '
-    + 'and you know the compass directions. '
-    + 'This gives directions as angles, '
-    + 'with three conventions that must all be kept.',
+    'An angle is measured in degrees. '
+    + 'You read one off a protractor by lining its base up with '
+    + 'one arm and seeing where the other arm cuts the scale. '
+    + 'A full turn is 360 degrees. '
+    + 'North, east, south and west are the four main compass '
+    + 'directions, and turning clockwise from north you pass east '
+    + 'at a quarter turn, south at a half turn and west at three '
+    + 'quarters. '
+    + 'This lesson gives a direction as one angle instead of a '
+    + 'word, and three rules have to be kept every single time.',
 
   method: [
     'Mark the starting point and draw a north line at it.',
@@ -2048,6 +2207,28 @@ teach({
     ],
   },
 
+  why:
+    '5 metres tall, and the label says 1,000 litres. '
+    + 'The family wants to know how many days that water lasts. '
+    + 'The painter wants to know how much paint covers the '
+    + 'outside. '
+    + 'One question is about the space inside and the other about '
+    + 'the skin around it, so how do you get two such different '
+    + 'answers out of the same tank?',
+
+  notation:
+    'A solid with the same cross section all along its length '
+    + 'is called a prism, and the flat shape at its end is the '
+    + 'cross section. '
+    + 'Volume is measured in cubic units, written as cm with a '
+    + 'small raised 3 and said centimetres cubed. '
+    + 'Surface area is measured in square units, written as cm '
+    + 'with a small raised 2 and said centimetres squared. '
+    + 'Those units are how a marker sees at a glance which of the '
+    + 'two you found, so giving a volume in square centimetres is '
+    + 'the commonest way to lose a mark even when the number is '
+    + 'right.',
+
   idea:
     'A prism has the same cross section all along its length, '
     + 'and its volume is the area of that cross section times the length. '
@@ -2090,9 +2271,17 @@ teach({
     + 'Area multiplies two, so it is square.',
 
   recap:
-    'You can find the area of a rectangle, a triangle and a circle. '
-    + 'This stacks those areas along a length to get a volume, '
-    + 'and adds up faces to get a surface area.',
+    'The area of a rectangle is its length times its width, so '
+    + 'a rectangle 5 cm by 3 cm covers 15 square centimetres. '
+    + 'The area of a triangle is half its base times its height, '
+    + 'so a base of 6 cm and a height of 4 cm gives 12 square '
+    + 'centimetres. '
+    + 'The area of a circle is pi times the radius times the '
+    + 'radius, so a radius of 7 cm gives about 154 square '
+    + 'centimetres. '
+    + 'Each of those is a flat shape with two measurements. '
+    + 'This lesson takes a flat shape and carries it along a '
+    + 'length to make a solid.',
 
   method: [
     'Identify the cross section: the face that repeats.',
@@ -2338,6 +2527,28 @@ teach({
     ],
   },
 
+  why:
+    'A family is building a three-bedroom house and the plan '
+    + 'has to fit on one sheet of paper. '
+    + 'The building is 12 metres long and the sheet is 30 '
+    + 'centimetres. '
+    + 'The mason must be able to measure a wall on the paper and '
+    + 'know what it is on the ground. '
+    + 'How do you shrink a whole building onto a page without a '
+    + 'single wall coming out wrong?',
+
+  notation:
+    'A scale is written as a ratio with no units, such as 1 to '
+    + '100, which is also written 1:100 and said one to one '
+    + 'hundred. '
+    + 'It means one unit measured on the drawing stands for a '
+    + 'hundred of the same units in real life. '
+    + 'A map scale such as 1:50 000 works the same way, so 1 cm '
+    + 'on the map is 50 000 cm, which is 500 m. '
+    + 'Leaving the units off a real-life answer is the commonest '
+    + 'way to lose a mark, because the scale itself carries none '
+    + 'to tell you.',
+
   idea:
     'A scale drawing represents something larger or smaller '
     + 'with every length reduced or increased in the same ratio. '
@@ -2379,9 +2590,14 @@ teach({
     + 'not to three decimal places it cannot support.',
 
   recap:
-    'You know ratio and you can measure accurately with a ruler and '
-    + 'protractor. '
-    + 'A scale drawing is a ratio applied to every length in a picture.',
+    'A ratio compares two amounts of the same kind. '
+    + 'Mix cement and sand in the ratio 1 to 3 and every headpan '
+    + 'of cement takes three headpans of sand, so 2 headpans of '
+    + 'cement take 6 of sand. '
+    + 'The ratio stays the same however much you mix. '
+    + 'A scale drawing applies one ratio to every length in a '
+    + 'picture, and this lesson is about drawing and reading such '
+    + 'pictures accurately.',
 
   method: [
     'Write the scale and decide the units you will work in.',
@@ -2625,6 +2841,27 @@ teach({
     ],
   },
 
+  why:
+    'A trader has 40 sachets of water in a box and 8 of them '
+    + 'are warm. '
+    + 'You reach in without looking and take one out. '
+    + 'Everybody says you will probably get a cold one, but '
+    + 'probably is not a number and nobody can check it. '
+    + 'How likely is warm, exactly, and how would you write that '
+    + 'down?',
+
+  notation:
+    'The probability of an event A is written P(A) and said the '
+    + 'probability of A. '
+    + 'It is always a number from 0 to 1, where 0 means it cannot '
+    + 'happen and 1 means it is certain, and it may be written as '
+    + 'a fraction, a decimal or a percentage. '
+    + 'The event not happening is written P(not A), and it is 1 '
+    + 'take away P(A). '
+    + 'Giving a probability bigger than 1, such as 6 over 4, is '
+    + 'the commonest way to lose a mark, because it means the top '
+    + 'and bottom have been swapped.',
+
   idea:
     'The probability of an event is '
     + 'the number of outcomes that give it, '
@@ -2666,10 +2903,16 @@ teach({
     + 'which is a check you can apply to any answer you get.',
 
   recap:
-    'You can write fractions and multiply them, '
-    + 'and you have met the idea that some things are more likely than '
-    + 'others. '
-    + 'This measures the likelihood as a number.',
+    'A fraction is one number written over another, and it '
+    + 'means that many of a number of equal parts. '
+    + 'So 1 over 6 means one part out of six equal parts. '
+    + 'Two fractions are multiplied by multiplying the tops and '
+    + 'multiplying the bottoms, so 1 over 2 times 1 over 3 is 1 '
+    + 'over 6. '
+    + 'Some things are more likely than others: rain in Kumasi in '
+    + 'June is more likely than rain in January. '
+    + 'This lesson puts a number on how likely something is, and '
+    + 'that number is a fraction.',
 
   method: [
     'List or count all the possible outcomes.',
