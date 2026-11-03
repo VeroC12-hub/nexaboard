@@ -50,6 +50,14 @@ teach({
     ],
   },
 
+  why:
+    'A mango tree in your compound flowers heavily every year '
+    + 'and sets hardly any fruit. '
+    + 'The tree is healthy and nothing has damaged the flowers. '
+    + 'A farmer nearby with the same variety fills baskets. '
+    + 'Flowering is clearly not the same thing as fruiting, so '
+    + 'what has to happen in between?',
+
   idea:
     'A flower has male and female parts. '
     + 'The stamen is male: an anther on a filament, '
@@ -90,9 +98,18 @@ teach({
     + 'Given one feature of either, you can work out the rest.',
 
   recap:
-    'You know a flower makes seeds and that bees visit flowers. '
-    + 'This names the parts and separates the two events: '
-    + 'pollen arriving, and nuclei joining.',
+    'A flower turns into a fruit with seeds in it. '
+    + 'Watch one mango flower for a few weeks and the petals '
+    + 'fall, the base swells, and a small green mango is left '
+    + 'where the flower stood. '
+    + 'Insects move from flower to flower after nectar, and they '
+    + 'carry dust from inside the flower on their bodies as they '
+    + 'go. '
+    + 'So something passes between flowers, and afterwards seeds '
+    + 'appear. '
+    + 'This lesson names the parts involved and separates two '
+    + 'events that are easy to run together: the dust arriving, '
+    + 'and the joining that follows it.',
 
   method: [
     'Name the male parts: anther and filament, making the stamen.',
@@ -606,6 +623,16 @@ teach({
     ],
   },
 
+  why:
+    'You eat a ball of kenkey, and an hour later you are no '
+    + 'longer hungry and you have energy to walk. '
+    + 'The kenkey is not sitting in your arms or your legs, and '
+    + 'nothing of the sort passed into them whole. '
+    + 'Somewhere between your mouth and your muscles it stopped '
+    + 'being kenkey. '
+    + 'Where does that happen, and what does the body do to it on '
+    + 'the way?',
+
   idea:
     'Digestion is one long tube, and the food is worked on differently '
     + 'at each stage of it. '
@@ -640,9 +667,18 @@ teach({
     + 'topic is: to increase the surface area.',
 
   recap:
-    'You know food is chewed, swallowed and digested, '
-    + 'and that the body takes what it needs. '
-    + 'This follows the route and names what breaks down where, and why.',
+    'Food that goes into your mouth is not the same food by the '
+    + 'time it is of any use to you. '
+    + 'You chew it, which breaks it into smaller pieces, and then '
+    + 'you swallow it. '
+    + 'Inside, it is broken down much further, into pieces small '
+    + 'enough to pass into the blood, and that breaking down is '
+    + 'called digestion. '
+    + 'The useful parts are taken into the body and the rest '
+    + 'leaves at the other end. '
+    + 'This lesson follows the route from one end to the other, '
+    + 'naming what breaks down where and why it has to happen '
+    + 'there.',
 
   method: [
     'List the organs in order: mouth, oesophagus, stomach, small '
@@ -878,6 +914,14 @@ teach({
     ],
   },
 
+  why:
+    'Cut your finger and bright red blood comes out in a slow '
+    + 'ooze. '
+    + 'Cut deeper in the wrong place and it comes out darker, in '
+    + 'spurts that match your pulse. '
+    + 'It is the same blood, pushed by the same heart. '
+    + 'So why does it leave the body in two such different ways?',
+
   idea:
     'The heart has four chambers, two above that receive blood and two '
     + 'below that pump it out, and three kinds of vessel carry it. '
@@ -914,9 +958,18 @@ teach({
     + 'and thin walls are its whole purpose rather than a weakness.',
 
   recap:
-    'You know the heart pumps blood and that blood carries oxygen. '
-    + 'This gives the route, the four chambers, '
-    + 'and why the three kinds of vessel are built differently.',
+    'The heart is a muscle in your chest that squeezes and '
+    + 'relaxes about seventy times a minute, and each squeeze '
+    + 'pushes blood out into tubes that run all over the body. '
+    + 'Blood carries oxygen, which it picks up in the lungs, and '
+    + 'it carries food from the gut. '
+    + 'Press two fingers on your wrist and the beat you feel is '
+    + 'that push arriving there. '
+    + 'So the blood is going round, and the heart is what drives '
+    + 'it. '
+    + 'This lesson gives the route it takes, the four chambers it '
+    + 'passes through, and why the three kinds of tube are built '
+    + 'differently.',
 
   method: [
     'Start at the right atrium with blood returning from the body.',
@@ -1148,6 +1201,15 @@ teach({
     ],
   },
 
+  why:
+    'Hold your breath and after a minute you cannot hold it any '
+    + 'longer, although nothing hurts. '
+    + 'Nobody can simply decide to stop breathing. '
+    + 'A runner at the end of a race goes on breathing hard for '
+    + 'several minutes, long after the running has stopped. '
+    + 'What does the body need so urgently, and what is it still '
+    + 'paying back after the race?',
+
   idea:
     'Air enters through the nose, down the trachea, '
     + 'which divides into two bronchi, '
@@ -1187,10 +1249,19 @@ teach({
     + 'Four features, one explanation.',
 
   recap:
-    'You know you breathe in oxygen and out carbon dioxide. '
-    + 'This explains how the air is moved, '
-    + 'how the gases cross into the blood, '
-    + 'and why breathing is not the same thing as respiration.',
+    'The air going into your nose holds more oxygen than the '
+    + 'air coming out, and the air coming out holds more carbon '
+    + 'dioxide. '
+    + 'You can show it: breathe out through a straw into '
+    + 'limewater and the limewater turns milky, which is the test '
+    + 'for carbon dioxide. '
+    + 'So something is taking oxygen out of the air and putting '
+    + 'carbon dioxide in. '
+    + 'That exchange happens inside your chest, every few '
+    + 'seconds, without you deciding any of it. '
+    + 'This lesson explains how the air is moved, how the gases '
+    + 'cross into the blood, and why breathing is not the same '
+    + 'thing as respiration.',
 
   method: [
     'Decide whether the question is about breathing or respiration.',

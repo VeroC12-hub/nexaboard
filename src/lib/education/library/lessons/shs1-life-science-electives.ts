@@ -69,6 +69,14 @@ teach({
     ],
   },
 
+  why:
+    'A burn on the arm heals and leaves skin a little different '
+    + 'from the skin around it. '
+    + 'Muscle damaged in a heart attack never heals that way at '
+    + 'all, because what replaces it does not beat. '
+    + 'Both are the same body repairing the same kind of damage. '
+    + 'Why can one part of you rebuild itself and another cannot?',
+
   idea:
     'The body is organised in levels. '
     + 'A cell is the smallest living unit. '
@@ -128,10 +136,18 @@ teach({
     + 'the question.',
 
   recap:
-    'You have met the cell and its parts, '
-    + 'and the idea that an organ such as the heart does one job. '
-    + 'This fills in the step between them, '
-    + 'and names the four kinds of tissue an organ is built from.',
+    'A cell is the smallest unit that is alive on its own. '
+    + 'Under a microscope a cheek cell is a bag with a membrane '
+    + 'round it, a nucleus holding the instructions, and '
+    + 'cytoplasm filling the rest. '
+    + 'An organ is a far larger structure that does one job, so '
+    + 'the heart pumps blood and the stomach holds and churns '
+    + 'food. '
+    + 'Between a single cell and a whole organ there is a step '
+    + 'with a name of its own. '
+    + 'Naming that step is where this lesson starts, and it then '
+    + 'sets out the four kinds of material an organ is built '
+    + 'from.',
 
   method: [
     'Decide which level the question is about: cell, tissue, organ or system.',
@@ -412,6 +428,29 @@ teach({
     ],
   },
 
+  why:
+    'A healthy person eats a bowl of waakye and the sugar in '
+    + 'their blood barely moves. '
+    + 'Someone with untreated diabetes eats the same bowl and '
+    + 'their blood sugar climbs high enough to damage their eyes '
+    + 'and kidneys. '
+    + 'The food was identical in both cases. '
+    + 'So what is the healthy body doing that the other one has '
+    + 'stopped doing?',
+
+  notation:
+    'Core temperature is written 37 °C and said thirty-seven '
+    + 'degrees Celsius. '
+    + 'Blood glucose is written 5 mmol/L and said five millimoles '
+    + 'per litre, where the slash is read as per and L stands for '
+    + 'litre. '
+    + 'The value the body aims at is called the set point, and '
+    + 'the mechanism that corrects any departure from it is '
+    + 'called negative feedback. '
+    + 'The word negative there does not mean bad: it means the '
+    + 'response acts against the change, and calling it positive '
+    + 'feedback is the commonest way to lose a mark.',
+
   idea:
     'Homeostasis is the keeping of the internal conditions of the body '
     + 'within a narrow range, '
@@ -477,10 +516,16 @@ teach({
     + 'Negative here means opposing, and it is what keeps you alive.',
 
   recap:
-    'You have met the idea that the body keeps its temperature steady '
-    + 'by sweating and shivering. '
-    + 'This gives that a general shape, with three named parts, '
-    + 'and applies the same shape to the sugar in your blood.',
+    'Your body temperature stays near one value all day. '
+    + 'Work in the sun and you sweat, because water evaporating '
+    + 'off your skin takes heat with it. '
+    + 'Sit in a cold room and you shiver, because shaking muscles '
+    + 'make heat. '
+    + 'Both of those begin without you deciding anything, and '
+    + 'both stop once the temperature is back where it was. '
+    + 'This lesson gives that arrangement a general shape with '
+    + 'three named parts, then applies the very same shape to the '
+    + 'sugar in your blood.',
 
   method: [
     'Name the variable being controlled and its set point.',
@@ -744,6 +789,29 @@ teach({
     ],
   },
 
+  why:
+    'A child has a fever and the chemist sells the mother '
+    + 'antibiotics. '
+    + 'The fever is from malaria, so the tablets do nothing and '
+    + 'the child gets worse. '
+    + 'Another child with the same fever has typhoid, and those '
+    + 'same tablets cure him. '
+    + 'Both children had a fever and both had an infection, so '
+    + 'why does one medicine work on one of them and not on the '
+    + 'other?',
+
+  notation:
+    'Sizes at this scale are given in micrometres, written µm, '
+    + 'and one micrometre is a thousandth of a millimetre. '
+    + 'A bacterium is about 1 µm across, and a virus is about a '
+    + 'hundred times smaller again. '
+    + 'The name of an organism is written with a capital on the '
+    + 'first word and a small letter on the second, as in '
+    + 'Plasmodium falciparum. '
+    + 'Writing bacteria when you mean a single one is the '
+    + 'commonest way to lose a mark: one is a bacterium and more '
+    + 'than one are bacteria.',
+
   idea:
     'A microorganism is a living thing too small to see without a microscope. '
     + 'A pathogen is one that causes disease. '
@@ -811,10 +879,17 @@ teach({
     + 'never by looking down an ordinary microscope.',
 
   recap:
-    'You have learned that germs cause disease, '
-    + 'and that washing hands and boiling water prevent it. '
-    + 'This divides germs into four groups '
-    + 'and shows why the treatment for one does nothing for another.',
+    'Some diseases are caused by living things far too small to '
+    + 'see. '
+    + 'Cholera comes from an organism living in dirty water, and '
+    + 'a boil comes from one living on the skin. '
+    + 'That is why washing with soap and boiling drinking water '
+    + 'prevent disease: both remove or kill the organism before '
+    + 'it can get in. '
+    + 'Those organisms are not all alike, even though ordinary '
+    + 'speech calls them all germs. '
+    + 'This lesson sorts them into four groups, and shows why a '
+    + 'medicine that cures one does nothing at all for another.',
 
   method: [
     'Ask first whether the organism is a cell.',
@@ -1777,6 +1852,27 @@ teach({
     ],
   },
 
+  why:
+    'Two learners run the same 400 metres. '
+    + 'One finishes breathing hard and is steady again within a '
+    + 'minute, while the other finishes breathing just as hard '
+    + 'and is still panting after five. '
+    + 'They are the same height and weight and they trained in '
+    + 'the same week. '
+    + 'What is measurably different between them, and which '
+    + 'number would show it?',
+
+  notation:
+    'Heart rate is given in beats per minute, written bpm. '
+    + 'The amount pushed out by one beat is the stroke volume, '
+    + 'given in millilitres, written mL. '
+    + 'Cardiac output is those two multiplied together, so 70 bpm '
+    + 'times 70 mL is 4,900 mL a minute, which is near 5 litres a '
+    + 'minute. '
+    + 'Giving a cardiac output in millilitres with no per minute '
+    + 'on the end is the commonest way to lose a mark, because an '
+    + 'output is an amount in a time and not simply an amount.',
+
   idea:
     'At rest a heart beats about 70 times a minute '
     + 'and pushes about 70 millilitres with each beat. '
@@ -1857,8 +1953,14 @@ teach({
     + 'has answered most of the question before saying anything else.',
 
   recap:
-    'You know that you breathe harder and your heart pounds when you run. '
-    + 'This says what is actually changing, by how much, '
+    'Run for a bus and two things happen that you can feel. '
+    + 'Your heart beats faster and harder, and you breathe more '
+    + 'often and more deeply. '
+    + 'Stop running and both settle back within a few minutes, '
+    + 'without you doing anything about it. '
+    + 'Those changes are not random: they are the body sending '
+    + 'more oxygen to the muscles that are using it. '
+    + 'This lesson says what exactly is changing, by how much, '
     + 'and what the body is responding to.',
 
   method: [
@@ -2926,6 +3028,28 @@ teach({
     ],
   },
 
+  why:
+    'A farmer near Navrongo has maize seed that needs 120 days '
+    + 'of rain to reach harvest. '
+    + 'The rains there last about 150 days, and in a poor year '
+    + 'rather less. '
+    + 'Plant three weeks late and the rain stops while the cobs '
+    + 'are still filling, and the crop is lost. '
+    + 'How does he decide what to plant, and when, from the '
+    + 'rainfall he can expect?',
+
+  notation:
+    'Rainfall is measured as a depth of water and written in '
+    + 'millimetres, so 1,200 mm a year means the rain would stand '
+    + '1,200 millimetres deep if none of it drained away. '
+    + 'A rainfall figure is always quoted with the period it '
+    + 'covers, because 100 mm in a month and 100 mm in a year '
+    + 'mean completely different things. '
+    + 'The growing season is given in days, counted from the '
+    + 'first reliable rains to the last. '
+    + 'Quoting a rainfall figure with no period attached to it is '
+    + 'the commonest way to lose a mark.',
+
   idea:
     'Ghana lies in the tropics, '
     + 'so temperature changes little through the year '
@@ -3021,11 +3145,18 @@ teach({
     + 'is the decision made hardest.',
 
   recap:
-    'You know Ghana has a rainy season and a dry season, '
-    + 'and that the north is drier than the south. '
-    + 'This turns that into the number a farmer actually uses, '
-    + 'the length of the growing season, '
-    + 'and shows what it rules in and out.',
+    'Ghana has a rainy season and a dry season rather than a '
+    + 'summer and a winter. '
+    + 'The temperature hardly changes through the year, and what '
+    + 'changes is the rain. '
+    + 'Accra and Kumasi get rain across far more of the year than '
+    + 'Bolgatanga does, so the south is wet where the north is '
+    + 'dry. '
+    + 'A farmer cannot plant on that description, though, because '
+    + 'what he needs is a number. '
+    + 'This lesson turns the pattern into the number he actually '
+    + 'uses, the length of the growing season, and shows what it '
+    + 'rules in and out.',
 
   method: [
     'Name the place and its zone.',
