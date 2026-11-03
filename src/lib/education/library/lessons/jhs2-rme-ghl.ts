@@ -54,19 +54,12 @@ teach({
   idea:
     'A steward is somebody left in charge of what belongs to another, '
     + 'and who must answer for it. '
-    + 'Christianity teaches that God placed people in the world to tend it, '
-    + 'and that the earth is the Lord’s. '
-    + 'Islam teaches that the human being is God’s trustee on earth, '
-    + 'that waste is forbidden, '
-    + 'and that the one who plants a tree is rewarded. '
-    + 'African Traditional Religion treats land, rivers and groves as held '
-    + 'in trust '
-    + 'from the ancestors and for those not yet born, '
-    + 'with sacred groves and closed days protecting particular places and '
-    + 'times. '
-    + 'All three therefore give a duty to care for the environment, '
-    + 'and all three treat destroying it as a wrong done to somebody, '
-    + 'not merely as a loss.',
+    + 'All three faiths taught in Ghana make the human being a steward of '
+    + 'the earth, each in its own words, '
+    + 'and each therefore gives a duty to care for it. '
+    + 'The important part is what follows from that. '
+    + 'If the earth was never yours, destroying it is a wrong done to '
+    + 'somebody, and not merely a loss.',
 
   mechanism:
     'The argument matters more than the examples, '
@@ -181,6 +174,79 @@ teach({
     + 'That is the practical use of a stewardship ethic: '
     + 'it speaks for what cannot speak.',
 
+  figure: {
+    alt: 'The stewardship argument drawn as three numbered steps down the '
+      + 'left: the earth was given and is not ours by making, what is held '
+      + 'in trust must be answered for, and so damaging it wrongs the one '
+      + 'who gave it. On the right the same case is stated two ways. In '
+      + 'red, galamsey is foolish because the water will run out, which '
+      + 'fails wherever somebody gains. In green, galamsey is wrong '
+      + 'because the river was never the miner’s to spend.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the argument, in three steps</text>'
+      + '<circle cx="26" cy="77" r="12"/>'
+      + '<text x="26" y="83" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<rect x="48" y="46" width="292" height="62" rx="6"/>'
+      + '<text x="60" y="74" font-size="16" fill="currentColor" stroke="none">the earth was given,</text>'
+      + '<text x="60" y="94" font-size="16" fill="currentColor" stroke="none">it is not ours by making</text>'
+      + '<line x1="194" y1="108" x2="194" y2="120"/>'
+      + '<path d="M 186 118 L 194 132 L 202 118 Z" fill="currentColor" stroke="none"/>'
+      + '<circle cx="26" cy="157" r="12"/>'
+      + '<text x="26" y="163" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<rect x="48" y="134" width="292" height="62" rx="6"/>'
+      + '<text x="60" y="162" font-size="16" fill="currentColor" stroke="none">what is held in trust</text>'
+      + '<text x="60" y="182" font-size="16" fill="currentColor" stroke="none">must be answered for</text>'
+      + '<line x1="194" y1="196" x2="194" y2="208"/>'
+      + '<path d="M 186 206 L 194 220 L 202 206 Z" fill="currentColor" stroke="none"/>'
+      + '<circle cx="26" cy="245" r="12" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="26" y="251" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<rect x="48" y="222" width="292" height="62" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="60" y="250" font-size="16" fill="#0f8a4d" stroke="none">so damaging it wrongs</text>'
+      + '<text x="60" y="270" font-size="16" fill="#0f8a4d" stroke="none">the one who gave it</text>'
+      + '<text x="492" y="64" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the same case, two claims</text>'
+      + '<rect x="360" y="78" width="265" height="84" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="492" y="104" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">galamsey is foolish,</text>'
+      + '<text x="492" y="124" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the water will run out</text>'
+      + '<text x="492" y="146" font-size="13" text-anchor="middle" fill="#c8433a" stroke="none">this fails wherever somebody gains</text>'
+      + '<rect x="360" y="184" width="265" height="84" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="492" y="210" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">galamsey is wrong,</text>'
+      + '<text x="492" y="230" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the river was never</text>'
+      + '<text x="492" y="250" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the miner’s to spend</text>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the second claim survives the case where somebody profits,</text>'
+      + '<text x="320" y="354" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and that is what makes it a religious argument</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each faith teaches about who the earth belongs to',
+      columns: ['Faith', 'What it teaches about the earth', 'Its own words'],
+      rows: [
+        [
+          'Christianity',
+          'God placed people in the world to tend it, '
+            + 'and the earth is the Lord’s',
+          'Tending what belongs to God',
+        ],
+        [
+          'Islam',
+          'The human being is God’s trustee on earth, waste is forbidden, '
+            + 'and the one who plants a tree is rewarded',
+          'Trustee, and the reward for planting',
+        ],
+        [
+          'African Traditional Religion',
+          'Land, rivers and groves are held in trust from the ancestors '
+            + 'and for those not yet born',
+          'Sacred groves, and closed days on a river',
+        ],
+      ],
+      note: 'Three different sets of words for one claim: '
+        + 'the earth is held, not owned. '
+        + 'Name the faith and use its own words when you write.',
+    },
+  ],
+
   questions: [
     {
       id: 'stw-1',
@@ -245,21 +311,16 @@ teach({
   },
 
   idea:
-    'Christianity affirms one God, the creator of all things. '
-    + 'God is eternal, all powerful, all knowing, and everywhere at once. '
-    + 'God is holy, just, merciful and loving. '
-    + 'God is known as Father, Son and Holy Spirit. '
-    + 'Islam affirms one God, Allah, with no partner and no equal. '
-    + 'God is the creator and the sustainer, '
-    + 'all powerful and all knowing. '
-    + 'God is most often named as the Compassionate and the Merciful. '
-    + 'African Traditional Religion affirms a Supreme Being, '
-    + 'called Onyame, Mawu, Nyonmo and other names. '
-    + 'He created all things and is the final judge. '
-    + 'He is too great to be approached lightly, '
-    + 'and is reached through lesser spirits and the ancestors. '
-    + 'So all three affirm one creator. '
-    + 'And all three call God supreme, powerful, knowing and merciful.',
+    'All three faiths taught in Ghana affirm one supreme God, '
+    + 'the creator of everything that exists, '
+    + 'more powerful and more knowing than any creature, '
+    + 'merciful, and the final judge. '
+    + 'That much they share, and it is more than learners expect. '
+    + 'What differs is the name used for God, '
+    + 'and what each faith holds about God beyond the shared part. '
+    + 'Both halves belong in an answer: '
+    + 'the agreement is a real finding, '
+    + 'and a comparison that hides the differences is not a comparison.',
 
   mechanism:
     'The honest way to compare teachings about God '
@@ -272,22 +333,15 @@ teach({
     + 'That agreement is a real finding and is worth stating as one. '
     + 'The particular parts are equally real '
     + 'and a comparison that hides them is not a comparison. '
-    + 'Christianity holds the doctrine of the Trinity, '
-    + 'one God in three persons, '
-    + 'which Islam explicitly rejects '
-    + 'in affirming that God has no partner. '
-    + 'Traditional religion approaches the Supreme Being through '
-    + 'intermediaries, '
-    + 'which the other two do differently or not at all. '
-    + 'Those are genuine differences between the faiths, '
-    + 'not misunderstandings to be smoothed over, '
-    + 'and an examination answer that reports them accurately '
+    + 'What each faith holds beyond the shared part '
+    + 'is a genuine difference between the faiths, '
+    + 'not a misunderstanding to be smoothed over, '
+    + 'and an examination answer that reports those accurately '
     + 'is better than one that pretends everybody agrees. '
     + 'There is one more thing worth noticing about attributes. '
-    + 'Each one is held because of something it explains. '
-    + 'God is called creator to explain why anything exists. '
-    + 'God is called just to explain why wrong matters. '
-    + 'God is called merciful to explain why wrong is not the last word. '
+    + 'Each one is held because of something it explains, '
+    + 'and asking what an attribute explains '
+    + 'is the quickest way to see why a faith insists on it. '
     + 'So an attribute is not a compliment. '
     + 'It is a claim, and each claim does work in the faith that holds it.',
 
@@ -368,6 +422,60 @@ teach({
     },
   ],
 
+  tables: [
+    {
+      caption: 'What each faith affirms about God, '
+        + 'and what each one holds that the others do not',
+      columns: [
+        'Faith',
+        'Name used for God',
+        'Attributes it affirms',
+        'What it holds that the others do not',
+      ],
+      rows: [
+        [
+          'Christianity',
+          'God',
+          'Creator of all things, eternal, all powerful, all knowing, '
+            + 'everywhere at once, holy, just, merciful and loving',
+          'God known as Father, Son and Holy Spirit: '
+            + 'one God in three persons',
+        ],
+        [
+          'Islam',
+          'Allah',
+          'Creator and sustainer, all powerful, all knowing, '
+            + 'most often named the Compassionate and the Merciful',
+          'God has no partner and no equal, '
+            + 'so one God in three persons is rejected',
+        ],
+        [
+          'African Traditional Religion',
+          'Onyame, Mawu, Nyonmo, and other names in other languages',
+          'Creator of all things, the final judge, '
+            + 'and too great to be approached lightly',
+          'The Supreme Being is reached through lesser spirits '
+            + 'and the ancestors',
+        ],
+      ],
+      note: 'The third column overlaps almost completely, '
+        + 'and the last one does not overlap at all. '
+        + 'Give both when a question asks you to compare.',
+    },
+    {
+      caption: 'What each attribute of God is there to explain',
+      columns: ['Attribute', 'What holding it explains'],
+      rows: [
+        ['Creator', 'Why anything exists at all'],
+        ['All powerful', 'Why what God promises can be done'],
+        ['Just', 'Why wrong matters, and is not simply unfortunate'],
+        ['Merciful', 'Why wrong is not the last word about a person'],
+      ],
+      note: 'An attribute is a claim, not praise, '
+        + 'and each claim does work in the faith that holds it.',
+    },
+  ],
+
   extension:
     'Every faith also faces the question of why a good and powerful God '
     + 'allows suffering, '
@@ -437,24 +545,14 @@ teach({
   },
 
   idea:
-    'A naming ceremony brings a child into the family and community. '
-    + 'It usually happens in the first days or weeks. '
-    + 'The name is given publicly, by an elder or at a religious '
-    + 'ceremony. '
-    + 'Puberty rites mark a girl reaching womanhood. '
-    + 'The Krobo dipo and the Akan bragoro are two of them. '
-    + 'They involve instruction, time apart, and a public presentation. '
-    + 'Marriage joins two people, and in Ghana it joins two families. '
-    + 'There are customary rites, '
-    + 'and often a religious ceremony and a legal registration as well. '
-    + 'Funeral rites mark death. '
-    + 'In much of Ghana they also settle the person’s standing among the '
-    + 'ancestors, '
-    + 'and what those left behind now owe. '
-    + 'Christianity and Islam have their own rites for the same stages. '
-    + 'Christians have baptism or christening, and confirmation. '
-    + 'Muslims have the aqiqah and naming on the seventh day, '
-    + 'the nikah, and the janazah prayer.',
+    'A rite of passage marks a person moving from one stage of life to '
+    + 'another, and it does the marking in public. '
+    + 'Four stages are marked in Ghana: '
+    + 'birth, reaching adulthood, marriage and death. '
+    + 'Every tradition taught here marks all four, '
+    + 'in its own form and with its own name for the rite. '
+    + 'The forms differ a great deal. '
+    + 'What the rites are for does not differ at all.',
 
   mechanism:
     'A rite of passage looks like a ceremony with objects and dances, '
@@ -560,6 +658,104 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'A rite of passage drawn as a line from left to right. It starts '
+      + 'at a box reading the old status, passes through three numbered '
+      + 'stages, separation from the old stage, instruction in what the '
+      + 'new stage requires, and presentation to the community, and ends '
+      + 'at a green box reading the new status. Below the line a row of '
+      + 'small figures stands for the community watching, with a note '
+      + 'that the watching is what makes the change binding.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">what every rite of passage does</text>'
+      + '<rect x="10" y="96" width="96" height="70" rx="6"/>'
+      + '<text x="58" y="124" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the old</text>'
+      + '<text x="58" y="144" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">status</text>'
+      + '<line x1="106" y1="131" x2="128" y2="131"/>'
+      + '<path d="M 126 123 L 142 131 L 126 139 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="144" y="96" width="120" height="70" rx="6"/>'
+      + '<circle cx="204" cy="78" r="12"/>'
+      + '<text x="204" y="84" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="204" y="124" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">separation</text>'
+      + '<text x="204" y="144" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">seclusion, new dress</text>'
+      + '<line x1="264" y1="131" x2="282" y2="131"/>'
+      + '<path d="M 280 123 L 296 131 L 280 139 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="298" y="96" width="120" height="70" rx="6"/>'
+      + '<circle cx="358" cy="78" r="12"/>'
+      + '<text x="358" y="84" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="358" y="124" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">instruction</text>'
+      + '<text x="358" y="144" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">what is now required</text>'
+      + '<line x1="418" y1="131" x2="436" y2="131"/>'
+      + '<path d="M 434 123 L 450 131 L 434 139 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="452" y="96" width="120" height="70" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<circle cx="512" cy="78" r="12" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="512" y="84" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<text x="512" y="118" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">presentation</text>'
+      + '<text x="512" y="138" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">shown in the new</text>'
+      + '<text x="512" y="156" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">status</text>'
+      + '<line x1="572" y1="131" x2="588" y2="131" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 586 123 L 602 131 L 586 139 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="616" y="124" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the</text>'
+      + '<text x="616" y="142" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">new</text>'
+      + '<text x="616" y="160" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">status</text>'
+      + '<circle cx="176" cy="254" r="11"/><line x1="176" y1="265" x2="176" y2="300"/>'
+      + '<circle cx="248" cy="254" r="11"/><line x1="248" y1="265" x2="248" y2="300"/>'
+      + '<circle cx="320" cy="254" r="11"/><line x1="320" y1="265" x2="320" y2="300"/>'
+      + '<circle cx="392" cy="254" r="11"/><line x1="392" y1="265" x2="392" y2="300"/>'
+      + '<circle cx="464" cy="254" r="11"/><line x1="464" y1="265" x2="464" y2="300"/>'
+      + '<line x1="320" y1="230" x2="320" y2="200"/>'
+      + '<path d="M 312 202 L 320 188 L 328 202 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="320" y="334" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">and the whole community watches</text>'
+      + '<text x="320" y="368" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">which is what makes the change binding on both sides</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four rites of passage, '
+        + 'and what each one leaves the person as',
+      columns: [
+        'The rite',
+        'When it happens',
+        'What is done',
+        'What the person is afterwards',
+      ],
+      rows: [
+        [
+          'Naming',
+          'In the first days or weeks of life',
+          'The name is given publicly, by an elder or at a religious '
+            + 'ceremony',
+          'A member of the family and the community, by name',
+        ],
+        [
+          'Puberty rites, such as the Krobo dipo and the Akan bragoro',
+          'At a girl reaching womanhood',
+          'Instruction, a time apart, and a public presentation',
+          'An adult woman, treated as one from that day',
+        ],
+        [
+          'Marriage',
+          'When two people, and two families, have agreed',
+          'Customary rites, often with a religious ceremony and a legal '
+            + 'registration as well',
+          'Married, with duties to a husband or wife and to two families',
+        ],
+        [
+          'Funeral rites',
+          'At death',
+          'Public mourning and burial, in the tradition’s own form',
+          'Placed among the ancestors, with duties owed by those left '
+            + 'behind',
+        ],
+      ],
+      note: 'Christianity and Islam mark the same four stages in their own '
+        + 'forms: baptism or christening and later confirmation; '
+        + 'and the aqiqah with naming on the seventh day, the nikah, '
+        + 'and the janazah prayer.',
+    },
+  ],
+
   extension:
     'Some rites have changed or faded, '
     + 'and schooling is part of the reason: '
@@ -629,26 +825,16 @@ teach({
   },
 
   idea:
-    'Jesus Christ was born in Bethlehem and grew up in Nazareth. '
-    + 'He was baptised by John. '
-    + 'He taught for about three years in Galilee and Judea, '
-    + 'and chose twelve disciples. '
-    + 'He taught love of God and of neighbour, even of enemies. '
-    + 'Religious and political leaders opposed him, '
-    + 'and he was crucified. '
-    + 'Christians hold that he rose again. '
-    + 'The Prophet Muhammad was born in Makkah about the year 570. '
-    + 'He worked as a trader. '
-    + 'He received the first revelation at about forty. '
-    + 'He taught that God is one, '
-    + 'and he taught prayer, charity and justice. '
-    + 'He faced persecution and moved to Madinah, '
-    + 'and later returned to Makkah. '
-    + 'African Traditional Religion has no single founder. '
-    + 'Its teaching is carried by priests, elders and chiefs, '
-    + 'through proverbs, taboos and custom. '
+    'A religious leader is answered as a life, and in order: '
+    + 'where they came from, how the mission began, what they taught, '
+    + 'who opposed it, '
+    + 'and what followers still do because of it. '
+    + 'Five parts, and the same five fit any leader in any tradition. '
+    + 'The two founders the syllabus names are Jesus Christ and the '
+    + 'Prophet Muhammad. '
     + 'Ghana has also had its own leaders and reformers '
-    + 'in each of these traditions.',
+    + 'in each of these traditions, '
+    + 'and their lives answer to the same five parts.',
 
   mechanism:
     'A question about a founder is almost never answered by the dates. '
@@ -668,13 +854,11 @@ teach({
     + 'which tells you the teaching had a cost attached from the start. '
     + 'In both cases the opposition explains the teaching. '
     + 'The consequence today is the part that makes the answer live. '
-    + 'Charity is not an idea in Islam, it is zakat, '
-    + 'a fixed share given annually, '
-    + 'and fasting in Ramadan is a month that visibly reorganises a city. '
-    + 'Forgiveness is not an idea in Christianity, '
-    + 'it is said in the prayer Christians repeat daily '
-    + 'and acted on in reconciliation between families. '
-    + 'Writing that is what shows you understood the teaching '
+    + 'Charity is not an idea in Islam '
+    + 'and forgiveness is not an idea in Christianity. '
+    + 'In both, the teaching has a named practice attached to it, '
+    + 'done on a schedule, by people who can be counted. '
+    + 'Naming that practice is what shows you understood the teaching '
     + 'rather than memorised a biography.',
 
   recap:
@@ -751,6 +935,98 @@ teach({
       mistake: 'Describing another faith in your own faith’s terms.',
       why: 'Each has its own vocabulary, '
         + 'and using the wrong one misreports it.',
+    },
+  ],
+
+  figure: {
+    alt: 'Five numbered stations on a line running left to right, giving '
+      + 'the order of an answer about a religious leader: background, '
+      + 'call, teaching, opposition, and what followers do today. The last '
+      + 'two stations are drawn in green under a bracket labelled as the '
+      + 'part that carries the marks, with a note that a teaching nobody '
+      + 'objected to was demanding nothing and a teaching nobody acts on '
+      + 'is only history.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">one life, in five parts, in this order</text>'
+      + '<line x1="40" y1="150" x2="600" y2="150"/>'
+      + '<path d="M 598 142 L 614 150 L 598 158 Z" fill="currentColor" stroke="none"/>'
+      + '<circle cx="66" cy="150" r="16"/>'
+      + '<text x="66" y="156" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="66" y="112" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">background</text>'
+      + '<text x="66" y="192" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">place, time,</text>'
+      + '<text x="66" y="208" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">family, work</text>'
+      + '<circle cx="186" cy="150" r="16"/>'
+      + '<text x="186" y="156" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="186" y="112" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">call</text>'
+      + '<text x="186" y="192" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">how the mission</text>'
+      + '<text x="186" y="208" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">began</text>'
+      + '<circle cx="306" cy="150" r="16"/>'
+      + '<text x="306" y="156" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<text x="306" y="112" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">teaching</text>'
+      + '<text x="306" y="192" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">in the leader’s</text>'
+      + '<text x="306" y="208" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">own terms</text>'
+      + '<circle cx="426" cy="150" r="16" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="426" y="156" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">4</text>'
+      + '<text x="426" y="112" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">opposition</text>'
+      + '<text x="426" y="192" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">who objected,</text>'
+      + '<text x="426" y="208" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">and why</text>'
+      + '<circle cx="546" cy="150" r="16" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="546" y="156" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">5</text>'
+      + '<text x="546" y="112" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">today</text>'
+      + '<text x="546" y="192" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">what followers</text>'
+      + '<text x="546" y="208" font-size="13" text-anchor="middle" fill="#0f8a4d" stroke="none">still do</text>'
+      + '<path d="M 400 236 V 248 H 572 V 236" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="486" y="276" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">the part that carries the marks</text>'
+      + '<text x="320" y="330" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">a teaching nobody objected to was demanding nothing,</text>'
+      + '<text x="320" y="356" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and a teaching nobody acts on is only history</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The two founders the syllabus names, '
+        + 'each life set out in the five parts an answer needs',
+      columns: [
+        'The part of the answer',
+        'Jesus Christ',
+        'The Prophet Muhammad',
+      ],
+      rows: [
+        [
+          'Background',
+          'Born in Bethlehem, grew up in Nazareth',
+          'Born in Makkah about the year 570, and worked as a trader',
+        ],
+        [
+          'Call',
+          'Baptised by John, then taught for about three years in Galilee '
+            + 'and Judea, and chose twelve disciples',
+          'Received the first revelation at about the age of forty',
+        ],
+        [
+          'Main teaching',
+          'Love of God, and of neighbour, even of enemies',
+          'That God is one, and prayer, charity and justice',
+        ],
+        [
+          'Opposition faced',
+          'Religious and political leaders opposed him and he was '
+            + 'crucified; Christians hold that he rose again',
+          'Persecution in Makkah, which led to the move to Madinah, '
+            + 'and a later return to Makkah',
+        ],
+        [
+          'What followers still do',
+          'Forgiveness is asked in the prayer repeated daily, '
+            + 'and acted on in reconciliation between families',
+          'Zakat, a fixed share given each year, '
+            + 'and fasting through the month of Ramadan',
+        ],
+      ],
+      note: 'African Traditional Religion is not in this table because it '
+        + 'has no single founder. For it the question becomes who carries '
+        + 'the teaching: priests, elders and chiefs, '
+        + 'through proverbs, taboos and custom.',
     },
   ],
 
@@ -851,19 +1127,10 @@ teach({
     + 'and you believe you should not let somebody be hurt, '
     + 'and your friend is about to hurt somebody. '
     + 'No amount of thinking makes both available. '
-    + 'What a method can do is stop the three ways people avoid deciding. '
-    + 'The first is confusing a fact with an assumption: '
-    + '"he probably did not mean it" is an assumption doing the work of a '
-    + 'fact, '
-    + 'and separating the two sometimes dissolves the dilemma entirely. '
-    + 'The second is counting only the people in front of you. '
-    + 'The friend is present and the person who would be hurt is not, '
-    + 'so listing everybody affected corrects a bias you cannot feel. '
-    + 'The third is pretending the chosen option is free. '
-    + 'Telling a teacher does cost your friendship. '
-    + 'Saying so is not weakness; '
-    + 'it is the difference between a decision and a story you tell '
-    + 'yourself. '
+    + 'What a method can do is stop the three ways people avoid deciding, '
+    + 'none of which feels like avoidance from the inside. '
+    + 'That is the reason it is written down rather than remembered: '
+    + 'a bias you cannot feel is one you have to check for on purpose. '
     + 'And there is one test that catches most self deception: '
     + 'could you say out loud, to everybody affected, what you are doing '
     + 'and why? '
@@ -955,6 +1222,77 @@ teach({
     {
       mistake: 'Choosing what only works while somebody does not know.',
       why: 'That is the clearest sign of the wrong answer.',
+    },
+  ],
+
+  figure: {
+    alt: 'A dilemma drawn as a fork. At the top, a box reading your friend '
+      + 'is about to hurt somebody. Two arrows lead down from it to two '
+      + 'options: stay loyal and say nothing, and tell a teacher. Under '
+      + 'each option is a red box giving its cost: somebody is hurt, and '
+      + 'you lose the friendship. A note at the bottom says there is no '
+      + 'third branch with nothing under it.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">a dilemma has no free branch</text>'
+      + '<rect x="170" y="48" width="300" height="52" rx="6"/>'
+      + '<text x="320" y="80" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">your friend is about to hurt somebody</text>'
+      + '<path d="M 260 100 L 172 141"/>'
+      + '<path d="M 166 145 L 178 132 L 184 145 Z" fill="currentColor" stroke="none"/>'
+      + '<path d="M 380 100 L 468 141"/>'
+      + '<path d="M 474 145 L 462 132 L 456 145 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="24" y="152" width="256" height="66" rx="6"/>'
+      + '<text x="152" y="180" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">stay loyal,</text>'
+      + '<text x="152" y="202" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">say nothing</text>'
+      + '<rect x="360" y="152" width="256" height="66" rx="6"/>'
+      + '<text x="488" y="180" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">tell a teacher</text>'
+      + '<line x1="152" y1="218" x2="152" y2="238"/>'
+      + '<path d="M 144 236 L 152 250 L 160 236 Z" fill="#c8433a" stroke="none"/>'
+      + '<line x1="488" y1="218" x2="488" y2="238"/>'
+      + '<path d="M 480 236 L 488 250 L 496 236 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="24" y="252" width="256" height="66" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="152" y="280" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the cost: somebody</text>'
+      + '<text x="152" y="302" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">is hurt</text>'
+      + '<rect x="360" y="252" width="256" height="66" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="488" y="280" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the cost: you lose</text>'
+      + '<text x="488" y="302" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the friendship</text>'
+      + '<text x="320" y="354" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">there is no third branch with nothing under it,</text>'
+      + '<text x="320" y="378" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so choose, and say which cost you are taking</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three ways people avoid deciding, '
+        + 'and what stops each one',
+      columns: [
+        'The way out people take',
+        'What it looks like',
+        'What stops it',
+      ],
+      rows: [
+        [
+          'Letting an assumption do a fact’s work',
+          'Saying he probably did not mean it, '
+            + 'and then treating that as known',
+          'Write what you know and what you are assuming '
+            + 'in two separate lists',
+        ],
+        [
+          'Counting only the people in front of you',
+          'The friend is standing there; '
+            + 'the person who would be hurt is not',
+          'List everybody affected, present or not',
+        ],
+        [
+          'Pretending the option you chose is free',
+          'Telling a teacher, and not admitting that it costs the '
+            + 'friendship',
+          'Name the cost of the option you chose, out loud',
+        ],
+      ],
+      note: 'Separating a fact from an assumption sometimes dissolves the '
+        + 'dilemma altogether, which is why it is the first row and not '
+        + 'the last.',
     },
   ],
 
