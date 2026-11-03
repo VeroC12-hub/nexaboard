@@ -147,6 +147,74 @@ Rules:
 
 Do not touch anything else in a lesson you rewrite a `recap` in.
 
+## The rule that covers all of the above
+
+> "The thing is referencing something which he is supposed to teach. There
+> should be no referencing, it should teach you from scratch for every topic."
+
+**A lesson teaches everything it uses.** If a topic needs the laws of
+indices, the lesson teaches the laws of indices, in as many sentences as that
+takes, and then goes on. It does not say "you know the laws of indices", it
+does not say "recall that", and it does not say "as you saw in Basic 5". A
+learner on a phone cannot go and find Basic 5. Pointing at a thing is not
+teaching it, and a lesson that points is a lesson that stops the reader dead
+at the one sentence they needed.
+
+Counted:
+
+    npx tsx scripts/coverage/from-scratch-check.mts
+
+    Lessons that point at something instead of teaching it: 350 of 601 (58%)
+    References in all: 488
+      435  "you know" / "you have met"
+       23  "covered elsewhere"
+       14  "recall that" / "remember that"
+       11  "last year" / "in Basic 5"
+        5  "you should know"
+
+Every one of those 488 is a place where a sentence of teaching is missing.
+Replace the reference with the teaching. The lesson gets longer, and that is
+correct: a lesson that is four sentences longer and teaches its own
+foundation is shorter than a lesson the reader cannot start.
+
+This applies to the subject outline as well as to the lesson. A strand or
+sub strand description that assumes the reader knows what the strand is about
+has the same fault in a smaller space.
+
+## Plain English
+
+> "The english is broken and too complex."
+
+Also measurable, and the check already existed:
+
+    npx tsx scripts/coverage/reading-level.mts
+
+The averages pass, which is why nobody caught this: every year group's
+average sits at or under the grade expected of it. The damage is in
+individual parts, which that report prints in its last column:
+
+    Basic 5   expected grade 5    missing-number/mechanism     grade 14.1
+    Basic 4   expected grade 4    teeth-and-care/idea          grade 10.9
+    Basic 6   expected grade 6    citizenship-primary/recap    grade 11.2
+    JHS 2     expected grade 8    geometric-drawing/idea       grade 12.2
+
+A ten year old is being handed a paragraph written at first year university
+level, inside a lesson whose average looks fine. Average is the wrong
+statistic for this: a reader does not read the average, they read the hardest
+paragraph and stop there.
+
+Rules, in order of how much they help:
+
+- One idea per sentence. Most of the over-grade parts are one sentence
+  carrying three clauses joined by commas and "which".
+- Short words where a short word exists. "Use" not "utilise", "about" not
+  "approximately", "so" not "consequently".
+- Say the thing before naming the thing. The concrete instance first, the
+  term for it second.
+- No sentence that cannot be read aloud in one breath.
+- Check the part, not the lesson. `reading-level.mts` names the worst part
+  of every year group; fix that one first and run it again.
+
 ## The order these take in the lesson
 
 `assemble` now produces, for the default learner:
@@ -213,8 +281,11 @@ Record them here so they are not lost, but they are separate jobs:
     npx tsx scripts/lesson-shape.mts
 
     npx tsx scripts/coverage/groundwork-check.mts
+    npx tsx scripts/coverage/from-scratch-check.mts
+    npx tsx scripts/coverage/reading-level.mts
 
-Both "Says what it is for" and "Says how to read it" should climb, "Opening
+"References in all" should fall towards zero and every year group's worst
+part should come down to within a grade of what is expected of it. Both "Says what it is for" and "Says how to read it" should climb, "Opening
 by asserting what the reader knows" should fall towards zero,, and the
 words-before-the-first-break numbers should fall as the picture and table
 gaps close. The target for `why` is every lesson. The target for `notation`
