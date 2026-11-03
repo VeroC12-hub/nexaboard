@@ -751,6 +751,35 @@ teach({
     ],
   },
 
+  why:
+    'Suppose a President loses an election and refuses to leave. '
+    + 'He still has the army and the police reporting to him. '
+    + 'What stops him? '
+    + 'Not a stronger man, '
+    + 'because that only puts a different man in the same position. '
+    + 'What stops him has to be a rule '
+    + 'that was already there before the quarrel started, '
+    + 'that he did not write, '
+    + 'and that he cannot change on his own. '
+    + 'Where does a rule like that come from, '
+    + 'and what makes it bind somebody who commands soldiers? '
+    + 'This topic is that question.',
+
+  notation:
+    'A piece of the Constitution is called an article, not a section. '
+    + 'It is cited as Article 2, '
+    + 'and a numbered part inside it goes in brackets: Article 2(1). '
+    + 'That is said "article two, sub one". '
+    + 'The word entrenched describes an article '
+    + 'that cannot be changed by Parliament alone. '
+    + 'The word supreme means that if any other law '
+    + 'disagrees with the Constitution, the other law is void, '
+    + 'which means it counts for nothing. '
+    + 'The commonest way to lose a mark '
+    + 'is to say a law is unconstitutional '
+    + 'without naming which arm of government decides that. '
+    + 'The courts do, and no one else.',
+
   idea:
     'A constitution is the body of rules setting out '
     + 'how a state is governed and what limits the government. '
@@ -856,9 +885,21 @@ teach({
     + 'where describing it vaguely is not.',
 
   recap:
-    'You know Ghana has a President, a Parliament and courts. '
-    + 'This says what each is for, '
-    + 'how each limits the others, '
+    'Ghana is run by three separate sets of people, not one. '
+    + 'The President is the head of state and of the government. '
+    + 'The President is elected by the whole country and runs it day to day. '
+    + 'Parliament is the group of members of parliament, '
+    + 'one elected from each constituency, '
+    + 'and it is Parliament that passes laws. '
+    + 'The courts are the judges, '
+    + 'from the district courts up to the Supreme Court, '
+    + 'and they decide what a law means '
+    + 'and whether somebody has broken it. '
+    + 'So a law begins in Parliament, '
+    + 'is carried out by the President and the ministers, '
+    + 'and is interpreted by the courts. '
+    + 'This lesson says what each of those three is for, '
+    + 'how each one holds the other two in check, '
     + 'and which parts of the Constitution are hardest to change.',
 
   method: [
@@ -867,7 +908,7 @@ teach({
     'For a check, write arm A does this to arm B.',
     'Name the specific power: budget approval, impeachment, judicial '
       + 'review.',
-    'Name the relevant body or article where you know it.',
+    'Name the relevant body or article wherever you can.',
     'For an evaluation, give one strength and one weakness, each with an '
       + 'example.',
     'Distinguish entrenched from ordinary provisions and give the '

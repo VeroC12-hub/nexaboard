@@ -681,6 +681,38 @@ teach({
     ],
   },
 
+  why:
+    'You are writing a program for a school to print report cards. '
+    + 'Each card needs the average of a pupil\u2019s marks. '
+    + 'There are nine subjects and six hundred pupils. '
+    + 'You write the four lines that work out an average, '
+    + 'then you copy them to the next place you need them, '
+    + 'and the next, until those four lines sit in the program '
+    + 'eleven times over. '
+    + 'Then the school says averages must now ignore the lowest mark. '
+    + 'You have to find and correct eleven copies, '
+    + 'and if you miss one, the program is wrong '
+    + 'and still runs without complaining. '
+    + 'How do you write those four lines once '
+    + 'and use them in eleven places? '
+    + 'That is what this topic is for.',
+
+  notation:
+    'A call is written as the name, then brackets holding the values: '
+    + 'areaOf(5, 3). '
+    + 'It is said "areaOf of five, three", '
+    + 'or just "call areaOf with five and three". '
+    + 'The brackets are not optional. '
+    + 'Written without them, areaOf names the function '
+    + 'instead of running it. '
+    + 'The values inside are the arguments, '
+    + 'and their order is what decides which parameter each one lands in. '
+    + 'areaOf(5, 3) and areaOf(3, 5) hand over the same two numbers '
+    + 'in opposite roles. '
+    + 'The commonest way to lose a mark '
+    + 'is to put the arguments in the wrong order, '
+    + 'because the program still runs and simply gives a wrong answer.',
+
   idea:
     'A function is a named block of statements '
     + 'that is written once and called wherever it is needed. '
@@ -733,14 +765,21 @@ teach({
     + 'name the type of each parameter and of the return value, '
     + 'and show one sample call with its arguments. '
     + 'The call is often a mark on its own, '
-    + 'because it proves you know which values go where.',
+    + 'because it is where the values are matched to the parameters.',
 
   recap:
-    'You have used a formula as a rule you apply to given values: '
-    + 'the area of a rectangle takes a length and a breadth '
-    + 'and gives back an area. '
-    + 'A function is that formula written so a program can call it, '
-    + 'with the length and breadth as its parameters.',
+    'A formula is a rule written once and used on many numbers. '
+    + 'The area of a rectangle is length times breadth. '
+    + 'Hand it 5 and 3 and it gives back 15. '
+    + 'Hand it 20 and 4 and it gives back 80. '
+    + 'The rule did not change; only the two numbers did. '
+    + 'Notice the three parts of that. '
+    + 'There is a name for the rule, which is "area of a rectangle". '
+    + 'There are the two numbers you hand it. '
+    + 'And there is the one number it hands back. '
+    + 'A function in a program is exactly that, written so a machine '
+    + 'can use it, '
+    + 'and the two numbers you hand over are called its parameters.',
 
   method: [
     'State the one job the function does, in a few words.',

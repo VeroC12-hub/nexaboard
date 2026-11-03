@@ -1432,6 +1432,37 @@ teach({
     ],
   },
 
+  why:
+    'A trader from Niger sets up beside your family\u2019s stall. '
+    + 'He speaks Arabic and Hausa and almost no English. '
+    + 'You greet him with as salaamu alaykum, '
+    + 'which you have heard all your life, and he answers. '
+    + 'Then he asks you something. '
+    + 'You catch that it is a question and nothing else. '
+    + 'You cannot tell him your name, '
+    + 'ask his, '
+    + 'or say where you are from. '
+    + 'Two people who can greet each other '
+    + 'and then stand in silence '
+    + 'is exactly the gap this topic closes.',
+
+  notation:
+    'Arabic has sounds English does not, '
+    + 'so books write them with extra marks. '
+    + 'In this lesson a dot under a letter is written out as '
+    + '"d dot" or "s dot", as in min fad dot lika. '
+    + 'That dotted letter is a heavier, deeper version of the plain one, '
+    + 'made further back in the mouth. '
+    + 'The letter ayn, in as salaamu alaykum, '
+    + 'is a sound made in the throat and has no English equal. '
+    + 'Listen for it rather than reading it. '
+    + 'The endings matter more than the marks. '
+    + 'ka at the end means you are speaking to a man '
+    + 'and ki means you are speaking to a woman, '
+    + 'so kayfa haaluka and kayfa haaluki both mean "how are you" '
+    + 'but to different people. '
+    + 'Using the wrong one is the commonest way to lose a mark here.',
+
   idea:
     'The standard greeting is as salaamu alaykum, '
     + 'peace be upon you, '
@@ -1504,7 +1535,7 @@ teach({
     + 'So these should be memorised two by two rather than singly. '
     + 'Third, a point about register '
     + 'that matters in Ghana specifically. '
-    + 'What is taught in school '
+    + 'What the schools teach '
     + 'is Modern Standard Arabic, '
     + 'which is the written language and the language of broadcasting, '
     + 'and it is what the examination uses. '
@@ -1554,10 +1585,21 @@ teach({
     + 'loses marks even when every word is spelled correctly.',
 
   recap:
-    'You can read vowelled Arabic '
-    + 'and build a sentence with no verb. '
-    + 'This gives the exchanges a conversation needs, '
-    + 'and the endings that change with the person addressed.',
+    'Arabic is written from right to left. '
+    + 'The short vowels are not normally written as letters at all. '
+    + 'They are small marks placed above or below a letter, '
+    + 'and a text that shows them is called vowelled. '
+    + 'Beginners\u2019 books and the Qur\u2019an are vowelled; '
+    + 'a newspaper is not. '
+    + 'One more thing is needed before the phrases below make sense. '
+    + 'Arabic can make a complete sentence with no verb in it. '
+    + 'To say "my name is Kofi" you say ismii Kofi, '
+    + 'which is just "my name" then "Kofi", '
+    + 'with no word for "is". '
+    + 'Nothing is missing: that is the normal way to say it. '
+    + 'This lesson gives the exchanges a conversation needs, '
+    + 'and the word endings that change '
+    + 'with who you are speaking to.',
 
   method: [
     'Open with as salaamu alaykum.',
@@ -1677,7 +1719,7 @@ teach({
     + 'already knowing several of its phrases. '
     + 'That is unusual in a foreign language. '
     + 'Use it on purpose. '
-    + 'The phrases you already know '
+    + 'The phrases already in your ear '
     + 'give a sound model of the pronunciation. '
     + 'They carry the ayn, '
     + 'and the emphatic consonants, '

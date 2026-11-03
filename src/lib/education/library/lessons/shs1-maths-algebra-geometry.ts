@@ -57,9 +57,41 @@ teach({
     ],
   },
 
+  why:
+    'A tro-tro mate charges 4 cedis a passenger '
+    + 'and pays 60 cedis for fuel for the day. '
+    + 'With 30 passengers he takes in 120 cedis and clears 60. '
+    + 'With 40 he clears 100. '
+    + 'Writing it out again for every number is slow, '
+    + 'so he wants one line that covers all of them: '
+    + 'take the number of passengers, times 4, minus 60. '
+    + 'Now a harder question. '
+    + 'Suppose the day\u2019s profit works out to $x^2 + 7x + 12$ cedis. '
+    + 'Is there a shorter way to write that? '
+    + 'There is, and it is $(x + 3)(x + 4)$, '
+    + 'but nothing you have so far will find it. '
+    + 'This topic is how such a thing is found.',
+
+  notation:
+    'In $6x^2 + 9x$ each part has a name. '
+    + 'The parts separated by plus and minus signs are the terms, '
+    + 'so there are two terms here. '
+    + 'The number in front of a letter is the coefficient, '
+    + 'so the coefficient of $x^2$ is 6. '
+    + 'The small raised 2 is the power, or index. '
+    + '$x^2$ is said "x squared" and means x times x. '
+    + '$2x$ means 2 times x, '
+    + 'and the times sign is left out on purpose '
+    + 'so that it is never confused with the letter x. '
+    + 'The commonest way to lose a mark '
+    + 'is to read $2x$ as a two digit number '
+    + 'or to treat $x^2$ as $2x$. '
+    + 'They are different: with x as 3, '
+    + '$x^2$ is 9 and $2x$ is 6.',
+
   idea:
     'An algebraic expression is a rule for working out a number '
-    + 'once you know what the letters stand for. '
+    + 'once the letters are known. '
     + 'It has no equals sign, so there is nothing to solve. '
     + 'The terms are the parts added or subtracted, '
     + 'and the factors are the parts multiplied. '
@@ -110,14 +142,24 @@ teach({
     + 'and if they do not, you have not finished.',
 
   recap:
-    'You have collected like terms, '
-    + 'multiplied out a single bracket, '
-    + 'and taken out a common factor. '
-    + 'This adds the two bracket patterns, '
-    + 'and applies all of it to fractions.',
+    'Three ordinary moves are used on every question here, '
+    + 'so each is worth doing once with numbers in front of you. '
+    + 'Collecting like terms means adding the parts that match. '
+    + 'In $5x + 3 + 2x$ the $5x$ and the $2x$ match, '
+    + 'because both are a number of x, '
+    + 'so they add to $7x$ and the whole thing becomes $7x + 3$. '
+    + 'The 3 stays where it is, because it is not a number of x. '
+    + 'Multiplying out a bracket means multiplying everything inside it '
+    + 'by what is outside. '
+    + 'So $4(x + 2)$ becomes $4x + 8$. '
+    + 'Taking out a common factor is that move backwards. '
+    + 'In $6x + 9$ both terms divide by 3, '
+    + 'so it becomes $3(2x + 3)$. '
+    + 'This lesson adds two more bracket patterns to those three moves, '
+    + 'and then applies the lot to fractions.',
 
   method: [
-    'Check there is no equals sign, so you know you are simplifying.',
+    'Check there is no equals sign. Then it is a simplification.',
     'Take out the highest common factor of every term.',
     'Look at what is left: two terms and both squares means difference '
       + 'of two squares.',

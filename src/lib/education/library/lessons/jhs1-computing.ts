@@ -45,6 +45,34 @@ teach({
     ],
   },
 
+  why:
+    'You are typing an assignment on a laptop at home. '
+    + 'The lights go off before you have saved it. '
+    + 'When the power comes back, the work is gone. '
+    + 'Your friend says the computer forgot it. '
+    + 'But the photographs on the same laptop did not go anywhere, '
+    + 'and neither did the programs. '
+    + 'So why was the typing lost and not the photographs, '
+    + 'when all three were on the same machine? '
+    + 'There is a precise answer, '
+    + 'and this topic is where it comes from.',
+
+  notation:
+    'The parts are usually named by their initials. '
+    + 'CPU is said "see pee you" '
+    + 'and stands for central processing unit. '
+    + 'RAM is said as one word, "ram", '
+    + 'and stands for random access memory. '
+    + 'That is the memory that empties when the power goes. '
+    + 'ROM is read only memory, which does not empty. '
+    + 'Sizes are given in bytes: '
+    + 'KB for kilobyte, MB for megabyte, GB for gigabyte, '
+    + 'each about a thousand times the one before. '
+    + 'The commonest way to lose a mark '
+    + 'is to write memory where storage is meant. '
+    + 'In an examination they are two different things, '
+    + 'even though people use both words loosely in ordinary speech.',
+
   idea:
     'A computer system has four parts by job, not by shape. '
     + 'Input takes information in: keyboard, mouse, microphone, camera, '
@@ -80,8 +108,16 @@ teach({
     + 'it was still in memory and had never reached storage.',
 
   recap:
-    'You have used a phone or a computer and know a keyboard from a screen. '
-    + 'This sorts every device by the job it does in the system.',
+    'A keyboard is the board of lettered keys you press to type. '
+    + 'A screen is the flat glass panel that shows you what came out. '
+    + 'Press the letter K on a keyboard and a K appears on the screen. '
+    + 'Those are two different jobs, '
+    + 'and that one example contains the whole idea of this lesson. '
+    + 'The keyboard put something in. '
+    + 'The screen gave something back out. '
+    + 'Nothing in their shape tells you that. '
+    + 'This lesson sorts every part of a computer '
+    + 'by the job it does rather than by what it looks like.',
 
   method: [
     'Name the four jobs: input, processing, storage, output.',
@@ -89,7 +125,7 @@ teach({
     'Into the machine: input. Out to a person: output.',
     'Kept for later: storage. Changed on the way: processing.',
     'Say whether the thing is hardware or software.',
-    'Remember that memory empties without power and storage does not.',
+    'Memory empties without power. Storage does not.',
   ],
 
   figure: {

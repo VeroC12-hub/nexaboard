@@ -59,6 +59,39 @@ teach({
     ],
   },
 
+  why:
+    'You want to tell a French speaker that your brother is studying. '
+    + 'You find the word for to study in a dictionary: étudier. '
+    + 'So you write: mon frère étudier. '
+    + 'That is wrong, and a French speaker hears it '
+    + 'the way you would hear "my brother to study". '
+    + 'The dictionary gave you one form of the word '
+    + 'and the sentence needs a different one. '
+    + 'There are six different forms, '
+    + 'depending on who is doing the studying. '
+    + 'The dictionary will not list them, '
+    + 'and there are thousands of verbs. '
+    + 'So how do you get the right form '
+    + 'of a verb you have only just looked up? '
+    + 'That is what this topic answers.',
+
+  notation:
+    'The form a dictionary lists is called the infinitive. '
+    + 'Parler is an infinitive and means "to speak". '
+    + 'Take the last two letters off and what is left is the stem: '
+    + 'parl. '
+    + 'What is added back on is the ending. '
+    + 'So je parle is the stem parl plus the ending e. '
+    + 'Verbs are set out in a block of six lines, '
+    + 'always in the same order: '
+    + 'je, tu, il, nous, vous, ils. '
+    + 'Learn that order, '
+    + 'because a table of endings is printed in it '
+    + 'and nothing labels the lines. '
+    + 'The commonest way to lose a mark '
+    + 'is to write the infinitive where a changed form is needed, '
+    + 'which is writing je parler instead of je parle.',
+
   idea:
     'A French verb is listed in the dictionary as an infinitive, '
     + 'and regular infinitives end in er, ir or re. '
@@ -82,7 +115,7 @@ teach({
     + 'nous allons, vous allez, ils vont. '
     + 'Faire: je fais, tu fais, il fait, '
     + 'nous faisons, vous faites, ils font. '
-    + 'Tu is used for one person you know well '
+    + 'Tu is used for one person you are close to '
     + 'and vous for more than one person, '
     + 'or for one person addressed politely. '
     + 'The French present covers both English presents, '
@@ -143,10 +176,20 @@ teach({
     + 'has written a wrong word, not a nearly right one.',
 
   recap:
-    'You have met the present tense of a few French verbs '
-    + 'and the pronouns je, tu, il and so on. '
-    + 'This gives the three regular patterns as a procedure, '
-    + 'and the four irregular verbs you cannot do without.',
+    'A verb is the word that says what is being done. '
+    + 'In French its form changes with who is doing it. '
+    + 'The words for who are the subject pronouns: '
+    + 'je for I, tu for you, il for he, elle for she, '
+    + 'nous for we, vous for you when it is more than one, '
+    + 'and ils and elles for they. '
+    + 'Take the verb parler, to speak. '
+    + 'For I it is je parle. '
+    + 'For we it is nous parlons. '
+    + 'The front of the word stayed the same and the end changed. '
+    + 'That front part is called the stem, and the end is the ending. '
+    + 'The present tense is the one used for what is happening now. '
+    + 'This lesson turns those changing endings into a procedure '
+    + 'and gives the four verbs that refuse to follow it.',
 
   method: [
     'Read the last two letters of the infinitive.',
@@ -675,6 +718,35 @@ teach({
     ],
   },
 
+  why:
+    'You are asked to write four lines in French '
+    + 'about the house you live in. '
+    + 'You want to say the house is big and white. '
+    + 'You look the words up and write '
+    + 'le maison est grand et blanc. '
+    + 'Every word is a genuine French word, correctly spelt. '
+    + 'The marker still takes three marks off that one sentence. '
+    + 'The right version is la maison est grande et blanche. '
+    + 'One wrong decision about maison '
+    + 'made the next three words wrong as well, '
+    + 'and nothing in the dictionary entry warned you. '
+    + 'This topic is how that decision is made and then kept.',
+
+  notation:
+    'A French dictionary marks a noun n.m. or n.f. '
+    + 'n.m. means nom masculin, a masculine noun. '
+    + 'n.f. means nom féminin, a feminine one. '
+    + 'Do not store that letter. '
+    + 'Store the article instead, so what you learn is la table. '
+    + 'Two written marks matter here. '
+    + 'The apostrophe in l\u2019école stands for a dropped vowel, '
+    + 'and it hides the gender, '
+    + 'so école has to be learned as feminine some other way. '
+    + 'The accents are part of the spelling and not decoration. '
+    + 'The commonest way to lose a mark '
+    + 'is to add the feminine e and the plural s in the wrong order. '
+    + 'The e comes first and the s second: grande, then grandes.',
+
   idea:
     'Every French noun has a gender. '
     + 'Le livre is masculine; la table is feminine. '
@@ -780,15 +852,24 @@ teach({
     + 'because agreement is a pattern and not a meaning.',
 
   recap:
-    'You know that French nouns have gender '
-    + 'and that adjectives change for it. '
-    + 'This makes agreement systematic, '
-    + 'and shows how one choice about the noun '
-    + 'controls several words.',
+    'In French every noun belongs to one of two classes, '
+    + 'called masculine and feminine. '
+    + 'The class has nothing to do with the thing being male or female. '
+    + 'There is nothing feminine about a table, '
+    + 'but the word table is in the feminine class. '
+    + 'The class matters because other words must match it. '
+    + 'The word for "the" changes: le livre, but la table. '
+    + 'A describing word changes too: '
+    + 'un grand garçon, but une grande fille. '
+    + 'That matching is called agreement, '
+    + 'and English does not do it at all. '
+    + 'This lesson makes agreement a procedure '
+    + 'and shows how one decision about the noun '
+    + 'settles several other words.',
 
   method: [
     'Identify the noun.',
-    'Settle its gender from the article you learned with it.',
+    'Settle its gender from the article it is stored with.',
     'Settle its number.',
     'Choose the matching article: le, la, les, un, une, des.',
     'For each adjective, add e for feminine and then s for plural.',

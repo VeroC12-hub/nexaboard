@@ -254,6 +254,32 @@ teach({
     ],
   },
 
+  why:
+    'A farmer has a rectangular plot. '
+    + 'He has been told its area in square metres '
+    + 'comes to $x^2 + 7x + 12$, '
+    + 'where x is a length in metres he has not measured. '
+    + 'He wants to fence the plot. '
+    + 'For that he needs the two side lengths, not the area. '
+    + 'The area of a rectangle is one side times the other. '
+    + 'So he needs two expressions that multiply together '
+    + 'to give $x^2 + 7x + 12$. '
+    + 'No amount of adding or subtracting will find them. '
+    + 'Finding them is exactly what factorising does.',
+
+  notation:
+    'An expression like $6x + 9$ is made of terms. '
+    + 'A term is a part that is added or subtracted, '
+    + 'so $6x$ is one term and 9 is another. '
+    + 'In $3(2x + 3)$ the parts are called factors, '
+    + 'because they are multiplied together. '
+    + '3 is one factor and $(2x + 3)$ is the other. '
+    + 'There is no times sign written between them. '
+    + 'A number set against a bracket always means multiply. '
+    + 'The commonest way to lose a mark is to drop the brackets, '
+    + 'because $3 \\times 2x + 3$ '
+    + 'does not mean the same thing as $3(2x + 3)$.',
+
   idea:
     'To factorise is to write an expression as something multiplied, '
     + 'which is the reverse of expanding. '
@@ -276,7 +302,7 @@ teach({
     + 'it. '
     + 'Which means you can always check your own answer by expanding it, '
     + 'and if it does not give back the original, you are wrong, '
-    + 'and you know it before the marker does. '
+    + 'and you find it out before the marker does. '
     + 'There is no other topic in JHS algebra with a check that complete. '
     + 'Taking out the highest common factor matters too. '
     + '6x + 9 could be written 1(6x + 9), which is true and useless. '
@@ -292,9 +318,18 @@ teach({
     + 'and you have (x + y)(a + b).',
 
   recap:
-    'You have just expanded brackets. '
-    + 'This is the same step done backwards, '
-    + 'so everything you learned there is the check for everything here.',
+    'To expand a bracket is to multiply everything inside it '
+    + 'by whatever sits outside it. '
+    + 'Take $3(2x + 3)$. '
+    + 'The 3 outside multiplies the $2x$, which gives $6x$. '
+    + 'That same 3 multiplies the 3, which gives 9. '
+    + 'So $3(2x + 3)$ expands to $6x + 9$. '
+    + 'Nothing is skipped: every term inside gets multiplied. '
+    + 'Factorising is that same step walked backwards. '
+    + 'You are handed $6x + 9$ and asked to produce $3(2x + 3)$. '
+    + 'That gives a free check on every answer here. '
+    + 'Expand what you wrote. '
+    + 'If it does not come back to what you started with, it is wrong.',
 
   method: [
     'Look at the numbers and find their highest common factor.',
@@ -1257,6 +1292,33 @@ teach({
     ],
   },
 
+  why:
+    'A mason is putting up a wall and wants the corner truly square. '
+    + 'He has a tape measure and nothing else. '
+    + 'He measures 3 metres out along one wall and marks it. '
+    + 'He measures 4 metres along the other wall and marks that. '
+    + 'Now he wants the distance straight across, from mark to mark, '
+    + 'that a truly square corner would give. '
+    + 'He cannot just measure it and accept it, '
+    + 'because the corner is the very thing he is checking. '
+    + 'So he needs that third length worked out from the other two. '
+    + 'Adding 3 and 4 will not give it. '
+    + 'Supplying it is what this topic does.',
+
+  notation:
+    'In this topic the sides are given letters. '
+    + 'The two short sides are called a and b. '
+    + 'The long side is called c, '
+    + 'and its proper name is the hypotenuse. '
+    + 'It is the side facing the right angle. '
+    + 'The rule is written $a^2 + b^2 = c^2$ '
+    + 'and said "a squared plus b squared equals c squared". '
+    + 'The letters can change from one question to the next, '
+    + 'but the long side is always the one standing alone. '
+    + 'The commonest way to lose a mark '
+    + 'is to put a short side where c belongs. '
+    + 'Find the right angle first, and c is the side across from it.',
+
   idea:
     'In a right angled triangle, '
     + '$a^2 + b^2 = c^2$, '
@@ -1278,7 +1340,7 @@ teach({
     + 'The hypotenuse is the longest side and it is always opposite the '
     + 'right angle, '
     + 'so it is identified by looking, not by calculating. '
-    + 'Once you know which side is c, '
+    + 'Once c is settled, '
     + 'the decision makes itself. '
     + 'If c is the unknown, the two knowns are smaller, '
     + 'so the answer must be bigger than both, and you add. '
@@ -1298,10 +1360,20 @@ teach({
     + 'it.',
 
   recap:
-    'You know what a right angle is and you can square a number and take a '
-    + 'square root. '
-    + 'This connects the three sides of a right angled triangle, '
-    + 'so two of them give you the third.',
+    'A right angle is a square corner. '
+    + 'The corner of this page is one. '
+    + 'It measures 90 degrees. '
+    + 'In a drawing it is marked with a small square, '
+    + 'not with a curved arc. '
+    + 'To square a number is to multiply it by itself. '
+    + '5 squared is 5 times 5, which is 25, and it is written $5^2$. '
+    + 'A square root undoes that. '
+    + 'The square root of 25 asks which number times itself gives 25. '
+    + 'The answer is 5, and it is written $\\sqrt{25}$. '
+    + 'Those two operations undo each other, '
+    + 'and both are needed on every question here. '
+    + 'This lesson connects the three sides of a right angled triangle, '
+    + 'so that any two of them give you the third.',
 
   method: [
     'Draw the triangle and mark the right angle.',

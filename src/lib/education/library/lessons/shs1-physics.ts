@@ -1330,6 +1330,36 @@ teach({
     ],
   },
 
+  why:
+    'Fill a flask with hot tea at six in the morning and shut it. '
+    + 'Open it at midday and the tea is still hot. '
+    + 'Pour the same tea into a metal cup instead '
+    + 'and it is cold in twenty minutes. '
+    + 'Both containers sit in the same room, at the same air temperature. '
+    + 'So what is the flask doing that the cup is not? '
+    + 'Saying it "keeps the heat in" is not an answer, '
+    + 'because that is only the question restated. '
+    + 'There are three separate ways the heat could leave, '
+    + 'and the flask has to stop all three. '
+    + 'This topic is those three ways.',
+
+  notation:
+    'The conduction rate is written '
+    + '$\\frac{Q}{t} = \\frac{kA\\Delta\\theta}{d}$. '
+    + 'Said out loud: Q over t equals k A delta theta over d. '
+    + 'Q over t is the heat passing per second. '
+    + 'A is the area the heat crosses. '
+    + 'd is the thickness it must cross. '
+    + 'The symbol $\\Delta$ is the Greek letter delta '
+    + 'and it always means "the change in", '
+    + 'so $\\Delta\\theta$ is the temperature difference '
+    + 'between the two faces, not a temperature. '
+    + 'k is the thermal conductivity, '
+    + 'a number belonging to the material itself. '
+    + 'The commonest way to lose a mark is to put a temperature in '
+    + 'where $\\Delta\\theta$ belongs. '
+    + 'It is always the difference between two of them.',
+
   idea:
     'Heat flows from a hotter place to a cooler one by three mechanisms. '
     + 'In conduction, a particle that gains energy vibrates more '
@@ -1444,11 +1474,21 @@ teach({
     + 'and every school can do them.',
 
   recap:
-    'You know that a metal spoon in hot soup becomes hot '
-    + 'and that warm air rises. '
-    + 'This names the three mechanisms, '
-    + 'says what moves in each, '
-    + 'and makes the conduction rate a calculation.',
+    'Everything is made of particles that are always moving. '
+    + 'Temperature is a measure of how fast they move. '
+    + 'In a hot thing they move faster than in a cold one. '
+    + 'Two plain observations follow from that, '
+    + 'and both are used throughout this lesson. '
+    + 'Put a metal spoon in hot soup '
+    + 'and in half a minute the handle is too hot to hold, '
+    + 'though the handle was never in the soup. '
+    + 'Something travelled up the metal. '
+    + 'Second, hold your hand above a coal pot and it is hot, '
+    + 'while beside it at the same distance it is not. '
+    + 'The hot air went upwards. '
+    + 'This lesson names the three ways heat travels, '
+    + 'says what actually moves in each, '
+    + 'and turns the first of them into a calculation.',
 
   method: [
     'Ask what lies between the hot place and the cool place.',
@@ -1460,7 +1500,7 @@ teach({
       + 'and falls with thickness.',
     'For convection, explain by density: warmed fluid is less dense and '
       + 'rises.',
-    'For radiation, remember that a good absorber is a good emitter.',
+    'For radiation, a good absorber is also a good emitter.',
     'For a design, pair each feature with the mode it blocks.',
   ],
 

@@ -752,6 +752,35 @@ teach({
     ],
   },
 
+  why:
+    'You write a note to a Spanish friend: '
+    + 'you want to say "the house is big". '
+    + 'You look up the three words and write '
+    + 'el casa es grando. '
+    + 'Every word is a real Spanish word. '
+    + 'Your friend still laughs, '
+    + 'because two of the three are in the wrong form, '
+    + 'and in a written examination that is two marks gone '
+    + 'from a sentence where you knew the vocabulary. '
+    + 'The correct sentence is la casa es grande. '
+    + 'Nothing in a dictionary tells you why. '
+    + 'This topic is why.',
+
+  notation:
+    'A Spanish dictionary writes a noun with m or f after it. '
+    + 'libro m means libro is masculine. '
+    + 'casa f means casa is feminine. '
+    + 'Learn each noun with its article rather than with that letter, '
+    + 'so what you store is el libro and la casa. '
+    + 'The articles are said "el", "la", "los", "las". '
+    + 'el and la mean "the" for one thing; '
+    + 'los and las mean "the" for more than one. '
+    + 'un and una mean "a". '
+    + 'The accents matter: '
+    + 'nación carries one and is feminine, '
+    + 'and leaving the accent off is the commonest way to lose a mark '
+    + 'on a word you otherwise had right.',
+
   idea:
     'Every Spanish noun is masculine or feminine. '
     + 'The ending is a good guide. '
@@ -872,11 +901,19 @@ teach({
     + 'an agreement error can be heard.',
 
   recap:
-    'You know that French nouns have gender '
-    + 'and that adjectives change to match. '
-    + 'Spanish works the same way '
-    + 'and tells you the gender from the word itself, '
-    + 'which makes it much easier.',
+    'In some languages every noun belongs to one of two classes. '
+    + 'The classes are called masculine and feminine. '
+    + 'This has nothing to do with the thing being male or female. '
+    + 'A table is not female, '
+    + 'but in Spanish the word mesa is in the feminine class. '
+    + 'The class matters because other words have to match it. '
+    + 'The word for "the" changes: el libro, but la mesa. '
+    + 'Words that describe the noun change too: '
+    + 'libro alto, but mesa alta. '
+    + 'That matching is called agreement. '
+    + 'English never does this, which is why it feels strange at first. '
+    + 'The good news in Spanish is that the last letter of the noun '
+    + 'usually tells you which class it is in.',
 
   method: [
     'Read the last letter of the noun.',
@@ -887,8 +924,7 @@ teach({
     'Form the plural with s after a vowel and es after a consonant.',
     'Change a final z to c before es.',
     'Copy the gender and number of the noun onto each adjective.',
-    'Remember that adjectives in e or a consonant do not change for '
-      + 'gender.',
+    'Adjectives ending in e or a consonant do not change for gender.',
     'Place the adjective after the noun unless it is bueno, malo or '
       + 'mucho.',
     'Read the work aloud, since Spanish agreement can be heard.',

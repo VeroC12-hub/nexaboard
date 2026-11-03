@@ -1413,6 +1413,37 @@ teach({
     ],
   },
 
+  why:
+    'A cassava stem is cut and pushed into the ground. '
+    + 'Nothing is added to it. '
+    + 'Six months later there are tubers under it '
+    + 'heavy enough to feed a family, '
+    + 'plus a stem and a head of leaves. '
+    + 'All that mass had to come from somewhere. '
+    + 'The farmer gave it nothing but soil and water, '
+    + 'and water does not turn into cassava. '
+    + 'So where did the food come from? '
+    + 'This topic is the answer, '
+    + 'and the answer is stranger than the soil.',
+
+  notation:
+    'The reaction is written as an equation with an arrow, not an equals '
+    + 'sign. '
+    + 'In words: carbon dioxide plus water, '
+    + 'in the presence of light and chlorophyll, '
+    + 'gives glucose plus oxygen. '
+    + 'In symbols: '
+    + '6CO2 + 6H2O gives C6H12O6 + 6O2. '
+    + 'The arrow means "turns into" and only points one way. '
+    + 'The small numbers after a letter count the atoms, '
+    + 'so H2O is two hydrogens and one oxygen. '
+    + 'The big numbers in front count whole molecules, '
+    + 'so 6H2O is six waters. '
+    + 'Light and chlorophyll are written above the arrow, '
+    + 'because they are needed but are not used up. '
+    + 'The commonest way to lose a mark is to leave the 6s out, '
+    + 'because then the two sides no longer have the same atoms.',
+
   idea:
     'Photosynthesis is how a plant makes its own food. '
     + 'Carbon dioxide and water, '
@@ -1444,7 +1475,7 @@ teach({
     + 'because either difference could have caused the result. '
     + 'That is what a control is for: '
     + 'the plant that has everything, '
-    + 'so you know the result came from what you removed '
+    + 'so the result can only have come from what you removed '
     + 'and not from the way you treated them. '
     + 'A particular trick is worth knowing. '
     + 'To test for carbon dioxide you cannot simply remove air, '
@@ -1459,10 +1490,19 @@ teach({
     + 'because the leaf is its own control.',
 
   recap:
-    'You know plants need sunlight and water, '
-    + 'and that they make their own food. '
-    + 'This gives the equation '
-    + 'and shows how to prove that each requirement is really needed.',
+    'Animals get food by eating. '
+    + 'A plant cannot do that, so it builds its own food inside itself. '
+    + 'Three things go into it from outside. '
+    + 'Water comes up from the soil through the roots. '
+    + 'Carbon dioxide, a gas, comes in from the air. '
+    + 'Light comes from the sun. '
+    + 'Put a potted plant in a dark room for two weeks '
+    + 'and it goes pale and dies, even if you water it, '
+    + 'which shows the light is not optional. '
+    + 'The green colouring in a leaf is a substance called chlorophyll, '
+    + 'and it is what catches the light. '
+    + 'This lesson gives the equation for all of that '
+    + 'and shows how each of those requirements is proved necessary.',
 
   method: [
     'Write the word equation.',
