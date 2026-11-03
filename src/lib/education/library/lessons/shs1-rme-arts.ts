@@ -72,6 +72,35 @@ teach({
     ],
   },
 
+  why:
+    'A mosque, a church and a shrine stand '
+    + 'within five minutes of each other in Tamale, '
+    + 'and the people in them have known each other all their lives. '
+    + 'A visitor asks a student '
+    + 'whether the three of them worship the same God. '
+    + 'He answers that they all believe in God, '
+    + 'which is true and settles nothing, '
+    + 'because he cannot say what each one actually affirms. '
+    + 'Then an examination asks him to compare the three '
+    + 'and he writes three separate lists. '
+    + 'What does each faith affirm about God, '
+    + 'and how do you set three faiths side by side '
+    + 'so that the answer is fair to all three?',
+
+  notation:
+    'Several words in this topic are not English '
+    + 'and are written in ordinary letters as they sound: '
+    + 'tawhid, said "tow-heed", is the oneness of God in Islam, '
+    + 'and Onyame, said "on-ya-may", '
+    + 'is the Akan name for the Supreme Being. '
+    + 'A name of God takes a capital letter and a doctrine does not, '
+    + 'so Allah and Onyame are capitalised and tawhid is not. '
+    + 'Give such a word with its short meaning '
+    + 'the first time you use it, as "tawhid, the oneness of God". '
+    + 'Writing a name of God in small letters, '
+    + 'or giving a term with no meaning beside it, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'An attribute is something a faith affirms about God. '
     + 'Christianity affirms one God, the creator of all that exists. '
@@ -156,11 +185,19 @@ teach({
     + 'uniform system is simply inaccurate.',
 
   recap:
-    'At JHS you listed what each faith says about God '
-    + 'and found that much of it agrees. '
-    + 'This asks the harder question: '
-    + 'what each faith draws from each attribute, '
-    + 'and how to set out a comparison that is fair to all three.',
+    'To say what something is like, '
+    + 'you name its qualities one at a time. '
+    + 'A quality that a faith affirms about God is called an attribute. '
+    + '"God is powerful" names one attribute. '
+    + '"God knows everything" names another. '
+    + 'The names used for God are attributes in themselves, '
+    + 'so calling God "the Merciful" is a claim that God is merciful. '
+    + 'All three faiths in this subject '
+    + 'affirm one God who made everything, '
+    + 'so the comparison is not about whether they agree, '
+    + 'which in large part they do. '
+    + 'It is about what each one draws from each attribute, '
+    + 'and this topic is how to set that out.',
 
   method: [
     'Name the three faiths and the name each uses for God.',
@@ -433,6 +470,35 @@ teach({
     ],
   },
 
+  why:
+    'A student in Sunyani is asked by a cousin at a funeral: '
+    + 'if the world was made in six days, '
+    + 'what about the fossils they showed us in science? '
+    + 'He believes the Genesis account he grew up with '
+    + 'and he passed the science lesson too, '
+    + 'and nobody has ever given him one sentence '
+    + 'that holds the two together. '
+    + 'He says nothing, and the cousin takes the silence for an answer. '
+    + 'Where is each faith’s account of creation actually found, '
+    + 'what does each one claim, '
+    + 'and what can honestly be said '
+    + 'when somebody sets it against science?',
+
+  notation:
+    'A place in the Bible is given as the book, then the chapter, '
+    + 'then the verse, so Genesis 1:1 is said '
+    + '"Genesis chapter one, verse one". '
+    + 'The two dots separate the chapter from the verse, '
+    + 'and a dash gives a run of verses, as in Genesis 1:1-5. '
+    + 'A place in the Quran is given as the surah, which is a chapter, '
+    + 'then the verse, so 2:255 is said '
+    + '"surah two, verse two five five", '
+    + 'and the surah usually carries a name as well, '
+    + 'such as Al-Baqarah. '
+    + 'Citing a chapter with no verse, '
+    + 'or putting the verse before the chapter, '
+    + 'is the commonest way to lose a mark in this subject.',
+
   idea:
     'An account of creation says where the world came from '
     + 'and what the human being is doing in it. '
@@ -518,11 +584,21 @@ teach({
     + 'and that other tellings exist.',
 
   recap:
-    'At JHS you compared the three accounts '
-    + 'and learned the idea of stewardship. '
-    + 'This asks where each account is found, '
-    + 'how each faith argues from it, '
-    + 'and what to say when somebody sets it against science.',
+    'Three faiths are taught side by side in this subject, '
+    + 'and each one has its own account of how the world began. '
+    + 'Christianity has an account in the Bible, '
+    + 'in the book of Genesis. '
+    + 'Islam has one in the Quran, '
+    + 'set out in several places rather than in one chapter. '
+    + 'African Traditional Religion has accounts '
+    + 'that were never written down at all, '
+    + 'but told aloud and passed on, '
+    + 'so they differ from one people to another. '
+    + 'All three say the world was made by God '
+    + 'and did not simply happen, '
+    + 'and all three give the human being a particular job in it. '
+    + 'This topic asks where each account is found, '
+    + 'what each one claims, and how to compare the three fairly.',
 
   method: [
     'Name the faith and where its account is found.',
@@ -825,6 +901,20 @@ teach({
     ],
   },
 
+  why:
+    'A young man in Nsawam finishes school '
+    + 'and is told by one uncle to go and make money, '
+    + 'by his pastor to serve God, '
+    + 'and by his grandmother to marry and have children '
+    + 'so that the name does not die. '
+    + 'All three love him and all three are certain. '
+    + 'He wants to know which of them is right, '
+    + 'and nobody has shown him '
+    + 'that each one is reasoning from a different answer '
+    + 'to the question of what a person is for. '
+    + 'What does each of the three faiths say a person is for, '
+    + 'and what follows from each answer?',
+
   idea:
     'Christianity teaches that a person is made '
     + 'in the image of God, '
@@ -911,10 +1001,19 @@ teach({
     + 'and the good name outlives the person.',
 
   recap:
-    'You have compared what each faith says about God, '
-    + 'and what each draws from the creation accounts. '
-    + 'This asks the question those two were leading to: '
-    + 'given all that, what is a person for.',
+    'What a thing is for follows from what it is. '
+    + 'A cutlass is for cutting because of the way it is made. '
+    + 'The same reasoning is used about people. '
+    + 'Each faith first says what a human being is, '
+    + 'and the purpose follows from that. '
+    + 'Christianity says a person is made in the image of God. '
+    + 'Islam says a person is made khalifah, '
+    + 'a trustee placed on the earth. '
+    + 'Ghanaian traditional thought says a person is a member '
+    + 'of a family, a clan and a line of ancestors, '
+    + 'and is not complete alone. '
+    + 'This topic takes those three claims about what a person is '
+    + 'and draws out what each one says a person is for.',
 
   method: [
     'Name the faith.',
@@ -1655,6 +1754,17 @@ teach({
     ],
   },
 
+  why:
+    'A student paints a good picture '
+    + 'on a sheet of plain exercise paper, in poster colour. '
+    + 'Two months later the paper has buckled into waves, '
+    + 'the colours have sunk in and gone dull, '
+    + 'and a brown stain has come up through the sky. '
+    + 'The painting itself was never the problem. '
+    + 'Something underneath it was, '
+    + 'and nobody had told her there was anything underneath. '
+    + 'What goes under a painting, and what does it have to do?',
+
   idea:
     'A painting has three parts. '
     + 'The support is what it is painted on: '
@@ -1756,11 +1866,19 @@ teach({
     + 'and say which rules belong to oil alone.',
 
   recap:
-    'You have painted with poster colour and watercolour '
-    + 'and know that colours can be mixed. '
-    + 'This asks what goes under the paint, '
-    + 'and in what order the paint goes on, '
-    + 'so that the picture lasts and reads correctly.',
+    'Paint is coloured powder, called pigment, '
+    + 'mixed into something wet that carries it and then sets. '
+    + 'Mix blue and yellow poster colour on a saucer and you get green, '
+    + 'because the two powders now lie side by side '
+    + 'too finely for an eye to separate them. '
+    + 'Add water and the colour goes weaker, '
+    + 'because the same pigment is spread further. '
+    + 'So a paint is two things: '
+    + 'the pigment, which decides the colour, '
+    + 'and the wet carrier, which decides how it behaves '
+    + 'and how it dries. '
+    + 'This topic follows the carrier, '
+    + 'and asks what the paint is sitting on.',
 
   method: [
     'Choose a support and say why: paper, board, plywood or canvas.',
@@ -2037,6 +2155,18 @@ teach({
     ],
   },
 
+  why:
+    'A potter in Vume makes two pots on the same morning '
+    + 'out of the same clay. '
+    + 'She leaves one in the sun to dry quickly '
+    + 'and stands the other in the shade. '
+    + 'The one in the sun cracks right through '
+    + 'before it ever reaches the fire. '
+    + 'Nothing was added to one and not the other, '
+    + 'and nobody dropped it. '
+    + 'What was happening inside the clay of the cracked pot '
+    + 'that was not happening in the other one?',
+
   idea:
     'Clay is a fine earth that becomes plastic with water '
     + 'and hard when fired. '
@@ -2136,10 +2266,17 @@ teach({
     + 'and say plainly that glaze firing needs a kiln.',
 
   recap:
-    'You have modelled with clay and seen pots at the market. '
-    + 'This asks what is happening to the water in the clay '
-    + 'at each stage, '
-    + 'because that is what decides whether the piece survives.',
+    'Clay is a very fine earth. '
+    + 'Dry, it is a stiff powder. '
+    + 'Add water and the tiny flat grains slide over one another, '
+    + 'which is why wet clay can be squeezed into a shape '
+    + 'and will hold it. '
+    + 'Squeeze a handful and you can feel the water in it, '
+    + 'because your hand comes away damp. '
+    + 'Everything in this topic follows that water. '
+    + 'Every stage from a soft lump to a fired pot '
+    + 'is the water leaving, '
+    + 'and a piece survives or cracks according to how it leaves.',
 
   method: [
     'Prepare the clay: soak, pick out stones and roots, and wedge it.',
@@ -2433,6 +2570,18 @@ teach({
     ],
   },
 
+  why:
+    'Two students hand in final pieces of much the same quality. '
+    + 'One also hands in a book of thirty pages: '
+    + 'a market stall drawn from life four times, '
+    + 'six different ideas tried out small, '
+    + 'three colour trials, '
+    + 'and two directions crossed out with a note saying why. '
+    + 'The other hands in four neat drawings of the finished piece. '
+    + 'The second student gets the lower mark '
+    + 'and cannot see why, because the drawings are good. '
+    + 'What is the book being marked for, if not for good drawings?',
+
   idea:
     'A sketchbook is the record of how a piece of work came about. '
     + 'It holds observation drawings, '
@@ -2516,10 +2665,18 @@ teach({
     + 'than one with good paints and no record of thinking.',
 
   recap:
-    'You have kept drawings in a book before. '
-    + 'This asks you to keep something different: '
-    + 'the record of how you decided, '
-    + 'including the ideas you did not use.',
+    'Draw a cooking pot from memory '
+    + 'and you draw the idea of a pot: '
+    + 'round, with two handles level with each other. '
+    + 'Now put the pot on the table in front of you and draw it again. '
+    + 'The handles are not level, the rim is an oval, '
+    + 'and there is a dent down one side. '
+    + 'The second drawing took longer '
+    + 'and told you things you did not know. '
+    + 'Drawing from the thing itself is called observation, '
+    + 'and drawing fast to try out an idea is called a sketch. '
+    + 'This topic is about keeping both of those, in order, '
+    + 'so that the thinking behind a piece of work can be seen.',
 
   method: [
     'Start every project with observation drawings from the real thing.',
@@ -2831,6 +2988,34 @@ teach({
     ],
   },
 
+  why:
+    'A man threw pots for thirty years in a small back room '
+    + 'and swept the floor dry every evening. '
+    + 'He never cut himself and never burned himself. '
+    + 'At fifty five he could not climb a flight of stairs '
+    + 'without stopping to breathe. '
+    + 'The dust he swept up every evening '
+    + 'had been going into his lungs a little at a time, '
+    + 'and not one of those evenings hurt. '
+    + 'Which things in a studio harm a person like that, '
+    + 'slowly and without any warning, '
+    + 'and how does each one get inside?',
+
+  notation:
+    'A hazard pictogram is a diamond with a red border '
+    + 'and a black picture inside it, '
+    + 'and each picture means one thing: '
+    + 'a flame for something that catches fire, '
+    + 'a skull for a poison that acts at once, '
+    + 'and a figure with a damaged chest '
+    + 'for something that harms the lungs or organs over years. '
+    + 'The sheet a supplier has to provide is the safety data sheet, '
+    + 'often said as its letters, "S D S". '
+    + 'The words on a label are fixed and worth reading exactly, '
+    + 'because "harmful" and "toxic" are not the same word. '
+    + 'Treating a jar as safe because nothing is written on it '
+    + 'is the worst mistake of all.',
+
   idea:
     'A studio holds materials that can harm a person '
     + 'in four ways. '
@@ -2944,10 +3129,17 @@ teach({
     + 'the moment nobody is watching.',
 
   recap:
-    'You have been told to wash your hands and not to breathe dust. '
-    + 'This asks which studio materials actually carry a hazard, '
-    + 'how each one gets into a person, '
-    + 'and why the slow harms matter more than the quick ones.',
+    'Nothing in a studio can harm you '
+    + 'until it gets inside you or through your skin. '
+    + 'There are only a few ways in. '
+    + 'You breathe air, so anything hanging in the air '
+    + 'goes down into your lungs. '
+    + 'You eat and drink with your hands, '
+    + 'so anything on your hands goes into your mouth. '
+    + 'Your skin can be cut or burned, which opens it. '
+    + 'Knowing which way in a material uses '
+    + 'is what tells you what to do about it, '
+    + 'because a mask is no use against something you are swallowing.',
 
   method: [
     'Before starting, name the materials you will use.',
@@ -3245,6 +3437,35 @@ teach({
     ],
   },
 
+  why:
+    'A drumming group in Ho is teaching a new piece. '
+    + 'The bell plays one pattern and the master drum plays another, '
+    + 'and the two lock together without anybody counting out loud. '
+    + 'A new member can hear it '
+    + 'and still cannot come in at the right moment. '
+    + 'The leader tells him to listen, '
+    + 'which is true and is not teaching. '
+    + 'If that pattern were written on a sheet of paper, '
+    + 'he could count himself in before he ever heard it. '
+    + 'How is a rhythm written down, '
+    + 'so exactly that somebody who has never heard it can play it?',
+
+  notation:
+    'A time signature is two figures written one above the other '
+    + 'at the start of the music, with no line between them, '
+    + 'and four over four is said "four four". '
+    + 'The top figure says how many beats are in a bar '
+    + 'and the lower figure says what kind of beat. '
+    + 'A bar is the span between two upright lines through the stave, '
+    + 'and those lines are called bar lines. '
+    + 'A note is a round head, filled or hollow, '
+    + 'usually with a tail, '
+    + 'and the head and tail together say how long it lasts. '
+    + 'A dot after the head adds half the note again, '
+    + 'so a dotted crotchet is one and a half beats, '
+    + 'while a dot above or below the head means something else entirely, '
+    + 'which is the commonest way to lose a mark.',
+
   idea:
     'A beat, or pulse, is a regular tap. '
     + 'Metre is the grouping of beats into bars, '
@@ -3340,9 +3561,16 @@ teach({
     + 'has the thing a drum would have taught.',
 
   recap:
-    'You have clapped in time and marched in step, '
-    + 'and you know the sound of a bell holding a dance together. '
-    + 'This gives the counting a notation, '
+    'Tap your foot steadily, the way you would walking. '
+    + 'Each tap is a beat, and the beats come evenly spaced. '
+    + 'Now say "one, two, three, four" over the taps, '
+    + 'one word to a tap, and start again at one. '
+    + 'You have put the beats into groups of four, '
+    + 'and that grouping is what makes a rhythm feel like something '
+    + 'rather than a line of taps. '
+    + 'Clap on the one of each group '
+    + 'and the grouping becomes audible to somebody else. '
+    + 'This topic gives those counts a way of being written down, '
     + 'and a method for two patterns running at once.',
 
   method: [
@@ -3634,6 +3862,30 @@ teach({
     ],
   },
 
+  why:
+    'A choirmaster in Cape Coast has a new anthem '
+    + 'on one sheet of paper. '
+    + 'He has never heard it. '
+    + 'Nobody in the room has ever heard it. '
+    + 'He hands out the parts '
+    + 'and the choir sings it correctly the first time through. '
+    + 'Nothing on that paper is a recording, '
+    + 'and the sound came out of it anyway. '
+    + 'How can how high a note is be written on paper, '
+    + 'exactly enough for a stranger to produce it?',
+
+  notation:
+    'The five lines are called the stave. '
+    + 'A note sits either on a line or in the space between two lines, '
+    + 'and that is how one step of pitch is shown. '
+    + 'A note higher on the page is higher in sound. '
+    + 'The curly sign at the start of the stave is a clef, '
+    + 'and it fixes which line stands for which letter, '
+    + 'so without it a note head means nothing at all. '
+    + 'A sharp, the sign like a hash, is said "sharp", '
+    + 'and it is written before the note it changes, never after, '
+    + 'which is the commonest way to lose a mark.',
+
   idea:
     'A stave is five lines with four spaces between them. '
     + 'A clef at the start says which pitches the lines stand for. '
@@ -3736,11 +3988,15 @@ teach({
     + 'which is the ear and not the paper.',
 
   recap:
-    'You have clapped and counted rhythm, '
-    + 'which is music in time. '
-    + 'This adds the other dimension, '
-    + 'which is how high or low a note is, '
-    + 'and how that is written down.',
+    'Sing one note, then sing a higher one. '
+    + 'That difference, how high or how low a sound is, is called pitch. '
+    + 'It has nothing to do with loudness. '
+    + 'A high note can be quiet and a low note can be loud. '
+    + 'Press two keys at opposite ends of a keyboard '
+    + 'and you hear the two extremes of pitch. '
+    + 'A rhythm says when a note happens. '
+    + 'Pitch says which note it is, '
+    + 'and this topic is how pitch is written down.',
 
   method: [
     'Draw the stave and the clef.',
@@ -4046,6 +4302,18 @@ teach({
     ],
   },
 
+  why:
+    'At a funeral in Kpando the drums start '
+    + 'and everybody in the yard knows how to move to them. '
+    + 'A teacher then asks the same class '
+    + 'to make up a new dance of their own, two minutes long, '
+    + 'for the school festival, and the room goes quiet. '
+    + 'They can all dance, and not one of them can build a dance. '
+    + 'Ask why one part of a dance feels heavy and another feels light, '
+    + 'and the answer is that it just does. '
+    + 'What is there in a movement that can actually be changed, '
+    + 'so that a dance can be built on purpose instead of waited for?',
+
   idea:
     'Dance is organised movement, '
     + 'and it is described by four elements. '
@@ -4146,11 +4414,18 @@ teach({
     + 'you will be able to teach the sequence back to a group next week.',
 
   recap:
-    'You have danced at a funeral, a festival or a church, '
-    + 'and you know that some dances are slow and heavy '
-    + 'and others quick and light. '
-    + 'This gives you four dials to name that difference with, '
-    + 'and to compose with on purpose.',
+    'Watch two people dancing to the same drum. '
+    + 'One keeps her feet low, her steps small and her pace slow. '
+    + 'The other jumps high, travels right across the floor, '
+    + 'and lands hard. '
+    + 'The drum is the same for both, '
+    + 'so the difference is in the movement itself. '
+    + 'Clap once softly and once hard, '
+    + 'and you have changed one thing, the force, '
+    + 'while leaving everything else alone. '
+    + 'That is what this topic does to a dance: '
+    + 'it separates the movement into the few things '
+    + 'that can each be changed on their own.',
 
   method: [
     'Choose a short movement, and repeat it to learn it.',
@@ -4459,6 +4734,34 @@ teach({
     ],
   },
 
+  why:
+    'Two pairs of students perform the same quarrel '
+    + 'from the same script on the same afternoon. '
+    + 'The first pair say every word correctly '
+    + 'and the audience watches the clock. '
+    + 'The second pair say the same words '
+    + 'and the room goes quiet. '
+    + 'Both pairs knew the lines, '
+    + 'so the words were not the difference. '
+    + 'The second pair had decided what each person in the quarrel '
+    + 'was trying to get, and spent the scene trying to get it. '
+    + 'What can be decided before the night, '
+    + 'so that a performance is built rather than hoped for?',
+
+  notation:
+    'In a script the character’s name is set at the left, '
+    + 'then a colon, then the words that person says. '
+    + 'Anything in brackets or in sloping letters is a stage direction, '
+    + 'and it is never said out loud. '
+    + 'An actor marks a working script in pencil: '
+    + 'an upright stroke where a pause goes, '
+    + 'a line under a word to be stressed, '
+    + 'and the objective written in the margin as something to do, '
+    + 'as in "to warn him". '
+    + 'Writing a feeling in that margin instead of an action '
+    + 'is the commonest mistake, '
+    + 'because a feeling cannot be played and an action can.',
+
   idea:
     'Characterisation is the work of becoming somebody else '
     + 'in a convincing way. '
@@ -4560,10 +4863,19 @@ teach({
     + 'instead of hoping for one.',
 
   recap:
-    'You have told a story and taken a part in a play at school. '
-    + 'This asks what a character is actually doing, moment by moment, '
-    + 'so that the performance can be built '
-    + 'rather than left to the night.',
+    'A play is a story told by people saying words '
+    + 'in front of an audience. '
+    + 'The written words are the script, '
+    + 'and each person in the story is a character. '
+    + 'Saying a character’s lines correctly is the first thing, '
+    + 'and it is not yet acting. '
+    + 'Say "I am fine" as somebody who is fine. '
+    + 'Then say those same three words '
+    + 'as somebody hiding very bad news. '
+    + 'The words have not changed at all, '
+    + 'and everything a watcher takes from them has. '
+    + 'This topic is what you decide '
+    + 'in order to make that second version happen on purpose.',
 
   method: [
     'Read the whole play, then the scene.',
