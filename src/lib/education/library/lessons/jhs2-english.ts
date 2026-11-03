@@ -43,6 +43,16 @@ teach({
     ],
   },
 
+  why:
+    'The motion in class is that mobile phones should be '
+    + 'allowed in school. '
+    + 'You stand up, say they are useful for learning, and sit '
+    + 'down pleased with yourself. '
+    + 'The other side stands up and says that in a school in Tema '
+    + 'they were tried and the exam results fell. '
+    + 'Nobody has contradicted your point, and yet the room has '
+    + 'moved, so what did their speech have that yours did not?',
+
   idea:
     'A motion is the statement being debated, '
     + 'and one side proposes it while the other opposes. '
@@ -80,9 +90,18 @@ teach({
     + 'claims without one.',
 
   recap:
-    'You can give a prepared talk in standard English. '
-    + 'A debate adds an opponent, '
-    + 'so now you need evidence for your points and answers to theirs.',
+    'A prepared talk is one you have thought out and ordered '
+    + 'before you stand up, said in standard English rather than '
+    + 'everyday speech. '
+    + 'You pick your points, put them in order, and know roughly '
+    + 'how long each will take. '
+    + 'Nobody interrupts, so what you planned is what the room '
+    + 'hears. '
+    + 'A debate is that same talk with somebody on the other '
+    + 'side, answering back and heard just as clearly as you are. '
+    + 'So two things become necessary that a talk never needed: '
+    + 'evidence for what you claim, and answers to what they '
+    + 'claim.',
 
   method: [
     'Read the motion and decide exactly what it claims.',
@@ -323,6 +342,17 @@ teach({
     ],
   },
 
+  why:
+    'A nurse at the clinic tells your mother the dose: one '
+    + 'tablet twice a day for five days, and stop if the rash '
+    + 'comes back. '
+    + 'She says it once, nothing is written down, and the queue '
+    + 'is already moving. '
+    + 'Get any one of those four things wrong and the medicine '
+    + 'fails or does harm. '
+    + 'How do you hold on to spoken detail that will not be '
+    + 'repeated?',
+
   idea:
     'A listening test plays something once, or sometimes twice, '
     + 'and asks questions on it. '
@@ -358,11 +388,16 @@ teach({
     + 'which is what the mark is for.',
 
   recap:
-    'You answer comprehension questions on a passage you can read as often '
-    + 'as you like. '
-    + 'This is the same skill with one difference, '
-    + 'and the difference changes the method completely: '
-    + 'you only hear it once.',
+    'A comprehension passage sits in front of you on paper. '
+    + 'You read a question, go back to the passage, find the line '
+    + 'that answers it, and read that line twice if you want to. '
+    + 'The passage waits for you, and going slowly costs you '
+    + 'nothing. '
+    + 'A listening test asks the same kinds of question about the '
+    + 'same kind of material, with one change: it is spoken, and '
+    + 'it goes past once. '
+    + 'That single change is what makes the method completely '
+    + 'different, and the method is what this lesson is about.',
 
   method: [
     'Read every question before the recording starts.',
@@ -592,6 +627,14 @@ teach({
     ],
   },
 
+  why:
+    'A health officer has three pages on how cholera spreads '
+    + 'and five minutes on the radio. '
+    + 'Everything on those pages matters to somebody. '
+    + 'Read the first five minutes of it and the town never hears '
+    + 'about the water. '
+    + 'So what stays in, what goes, and on what grounds?',
+
   idea:
     'A summary gives the points of a passage in fewer words. '
     + 'You keep each separate point once, and you drop the support '
@@ -628,9 +671,18 @@ teach({
     + 'so the points you put at the end are thrown away.',
 
   recap:
-    'You can find the main idea of a paragraph. '
-    + 'A summary does that for a whole passage '
-    + 'and then writes the results as prose inside a word count.',
+    'A paragraph is a group of sentences about one point, and '
+    + 'the main idea is that point. '
+    + 'If a paragraph says cocoa farming is hard work and then '
+    + 'describes the clearing, the spraying and the carrying, the '
+    + 'main idea is the hard work and the three jobs are there to '
+    + 'support it. '
+    + 'Finding it means asking what the other sentences are there '
+    + 'for. '
+    + 'A whole passage has several paragraphs, and so several '
+    + 'main ideas. '
+    + 'This lesson collects them and writes them out as prose, '
+    + 'inside a fixed number of words.',
 
   method: [
     'Read the passage once for the whole sense.',
@@ -1124,6 +1176,16 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher asks what kind of person the main character '
+    + 'is, and you say he is wicked. '
+    + 'She asks how you know and you say it was obvious from the '
+    + 'book. '
+    + 'She marks the answer wrong, even though she agrees with '
+    + 'you that he is wicked. '
+    + 'Why is being right about a story not the same thing as '
+    + 'answering the question?',
+
   idea:
     'Prose and drama are read for four things: '
     + 'plot, character, setting and theme. '
@@ -1158,15 +1220,25 @@ teach({
     + 'cannot have a secret kept for long, '
     + 'so the setting is driving the plot. '
     + 'That is the kind of observation a question about setting wants. '
-    + 'And in drama, remember what has been taken away. '
+    + 'And in drama, notice what has been taken away. '
     + 'There is no narrator to tell you what anybody is thinking, '
     + 'so a dramatist has to make characters reveal themselves in speech, '
     + 'which is why plays are full of arguments and confessions.',
 
   recap:
-    'You have read stories and answered questions on them. '
-    + 'This names the four elements examiners ask about '
-    + 'and insists on evidence for every claim.',
+    'A story has people in it, a place where it happens, things '
+    + 'that happen in order, and something it leaves you thinking '
+    + 'about. '
+    + 'Take a story in which a boy steals to pay his school fees '
+    + 'and is caught. '
+    + 'The boy is a person in it, the town is the place, the '
+    + 'stealing and the catching are what happens, and what it '
+    + 'leaves you with is something about poverty and honesty. '
+    + 'Answering a question on a story means pointing at the part '
+    + 'of it your answer came from. '
+    + 'Examiners ask about those four things by name, so this '
+    + 'lesson gives each its name, and insists on evidence from '
+    + 'the text for every claim.',
 
   method: [
     'Read the whole work before writing about any part of it.',
@@ -1388,6 +1460,28 @@ teach({
     ],
   },
 
+  why:
+    'The road to your school floods every rainy season and the '
+    + 'children wade through it. '
+    + 'Your father says write to the District Chief Executive. '
+    + 'The letter will be opened by a clerk, filed, and perhaps '
+    + 'put in front of a busy man who has never met you. '
+    + 'What makes a letter like that get read and acted on, '
+    + 'rather than left at the bottom of a pile?',
+
+  notation:
+    'The address block at the top right is called the heading, '
+    + 'the address of the person you are writing to is the inside '
+    + 'address, the Dear line is the salutation, and the ending '
+    + 'above your name is the closing. '
+    + 'The salutation always ends with a comma, and the closing '
+    + 'takes a capital on the first word only, so it is Yours '
+    + 'faithfully and never Yours Faithfully. '
+    + 'The subject line, written under the salutation, is the one '
+    + 'part a formal letter has that an informal one does not. '
+    + 'Pairing Dear Sir with Yours sincerely is the commonest way '
+    + 'to lose a mark, because the two have to match.',
+
   idea:
     'A formal letter is written to somebody in an official position, '
     + 'and its layout carries marks of its own. '
@@ -1422,10 +1516,16 @@ teach({
     + 'has got it as wrong as the other way round.',
 
   recap:
-    'You have written letters in primary school. '
-    + 'This fixes the layout exactly, '
-    + 'and separates the two kinds, '
-    + 'because what is right in one is wrong in the other.',
+    'A letter has parts that always appear in the same places: '
+    + 'your address, the date, a greeting at the start, the body, '
+    + 'then an ending with your name. '
+    + 'The greeting is the Dear line, and the ending is the '
+    + 'sign-off written above the signature. '
+    + 'Those two are a matched pair, so Dear Sir goes with Yours '
+    + 'faithfully and Dear Mr Mensah goes with Yours sincerely. '
+    + 'This lesson fixes the layout exactly and separates the two '
+    + 'kinds of letter, formal and informal, because what is '
+    + 'correct in one of them is wrong in the other.',
 
   method: [
     'Write your address at the top right, then the date beneath it.',
@@ -1635,6 +1735,15 @@ teach({
     ],
   },
 
+  why:
+    'You write ten sentences about your journey to school, and '
+    + 'every one of them is short and plain. '
+    + 'The teacher writes correct but monotonous at the bottom. '
+    + 'Nothing in it is actually wrong, so there is nothing to go '
+    + 'back and fix. '
+    + 'What is she asking for, and how do you turn ten correct '
+    + 'sentences into writing somebody wants to read?',
+
   idea:
     'A phrase and a clause are told apart by one thing. '
     + 'A clause has a verb of its own, and a phrase does not. '
@@ -1669,10 +1778,18 @@ teach({
     + 'That is why subordination is the more useful of the two.',
 
   recap:
-    'You can identify a subject and a verb in a sentence. '
-    + 'This builds on that: '
-    + 'a group with both is a clause, '
-    + 'and how clauses are joined decides the type of sentence.',
+    'In a sentence, the subject is who or what it is about, and '
+    + 'the verb is what they do. '
+    + 'In "The farmer cleared the land", the subject is the '
+    + 'farmer and the verb is cleared. '
+    + 'A group of words with both a subject and a verb inside it '
+    + 'is called a clause, so that whole sentence is one clause. '
+    + 'Some clauses make sense standing alone and some do not: '
+    + '"when the rain stopped" has a subject and a verb, and '
+    + 'still leaves you waiting. '
+    + 'This lesson is about how clauses are joined, because the '
+    + 'joining is what decides which kind of sentence you have '
+    + 'written.',
 
   method: [
     'Find the verb. If there is none, it is a phrase.',
@@ -1893,6 +2010,25 @@ teach({
     ],
   },
 
+  why:
+    'A newspaper writes that the money was stolen from the '
+    + 'account. '
+    + 'The sentence is complete and correct, and nobody reading '
+    + 'it can tell who stole it. '
+    + 'Written the other way round, it would have to name '
+    + 'somebody. '
+    + 'So that choice is doing real work, and what is the work?',
+
+  notation:
+    'A verb in the passive is built from a form of the word be '
+    + 'plus the past participle, so broke becomes was broken. '
+    + 'The past participle is the form used after have, as in '
+    + 'have broken, and it is not the same as the simple past. '
+    + 'The person who did the action, if named at all, comes '
+    + 'after the word by, and that part is called the agent. '
+    + 'Using the simple past in place of the participle, as in '
+    + 'was broke, is the commonest way to lose a mark.',
+
   idea:
     'In the active voice the subject does the action: '
     + 'the boy broke the window. '
@@ -1928,9 +2064,18 @@ teach({
     + 'or because somebody would rather not say.',
 
   recap:
-    'You know what a subject, a verb and an object are. '
-    + 'This swaps the subject and the object around '
-    + 'and changes the verb to match.',
+    'A sentence usually has three parts worth naming. '
+    + 'In "The boy broke the window", the boy is the subject, '
+    + 'which is who the sentence is about; broke is the verb, '
+    + 'which is the action; and the window is the object, the '
+    + 'thing the action was done to. '
+    + 'In English the normal order is subject, then verb, then '
+    + 'object. '
+    + 'You find them by asking who did it, what they did, and to '
+    + 'what. '
+    + 'This lesson takes a sentence like that and turns it round, '
+    + 'so the thing it was done to becomes what the sentence is '
+    + 'about, and the verb changes to match.',
 
   method: [
     'Identify the subject, the verb and the object.',
@@ -2136,6 +2281,15 @@ teach({
     ],
   },
 
+  why:
+    'You write "The box of oranges were heavy" and it comes '
+    + 'back marked wrong. '
+    + 'You read it again and it still sounds right, because the '
+    + 'oranges are plural and they were heavy. '
+    + 'The examiner says the sentence is about the box. '
+    + 'So which word in a long subject is the verb actually '
+    + 'matching?',
+
   idea:
     'Concord means the subject and the verb agree in number. '
     + 'The boy runs. The boys run. '
@@ -2171,9 +2325,15 @@ teach({
     + 'and neither the pupils nor the teacher was ready are both correct.',
 
   recap:
-    'You already say "he goes" and "they go" without thinking. '
-    + 'This topic is the cases where the subject is hard to find, '
-    + 'or where a word that looks plural is not.',
+    'A verb changes its form according to its subject. '
+    + 'For one: he goes, she runs, the boy eats. '
+    + 'For more than one: they go, they run, the boys eat. '
+    + 'Most speakers make that change without ever thinking about '
+    + 'it, and the rule behind it is that a verb must match its '
+    + 'subject in number. '
+    + 'The trouble starts when the subject is hard to find, or '
+    + 'when a word that looks plural turns out not to be, and '
+    + 'this lesson is about those cases only.',
 
   method: [
     'Find the verb.',
