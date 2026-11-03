@@ -35,6 +35,28 @@ teach({
     ],
   },
 
+  why:
+    'The stadium at Kumasi is full for a match. '
+    + 'One man says there are 40,000 people inside. '
+    + 'Another says 4,000. '
+    + 'One of those is the whole stadium '
+    + 'and the other is one corner of it. '
+    + 'On the page the two numbers look almost the same. '
+    + 'Read it wrong and you have the wrong crowd. '
+    + 'How do you read a long number '
+    + 'so that you say the right one?',
+
+  notation:
+    'A long number is written with a comma every three digits, '
+    + 'counted from the right, '
+    + 'so four thousand two hundred and seventy one is 4,271. '
+    + 'The comma does not change the number. '
+    + 'It only makes the groups easy to see. '
+    + 'Say the number in those groups: '
+    + '"four thousand, two hundred and seventy one". '
+    + 'A comma in the wrong place '
+    + 'makes you say a number ten times too big.',
+
   idea:
     'Numbers do not stop at 999. Ten hundreds make one thousand. '
     + 'So 4,271 is four thousands, two hundreds, seven tens and one one. '
@@ -51,8 +73,15 @@ teach({
     + 'Once you see the groups, a long number reads as two short ones.',
 
   recap:
-    'You can read a three digit number and say what each digit is worth. '
-    + 'This is that, with more places on the left.',
+    'Take the number 342. '
+    + 'The 2 sits on the right, in the ones place, '
+    + 'so it stands for 2. '
+    + 'The 4 sits in the tens place, so it stands for 40. '
+    + 'The 3 sits in the hundreds place, so it stands for 300. '
+    + 'Add 300 and 40 and 2 and you are back at 342. '
+    + 'So where a digit sits is what says what it is worth. '
+    + 'This lesson adds more places '
+    + 'to the left of those three.',
 
   method: [
     'Group the digits in threes, counting from the right.',
@@ -217,6 +246,30 @@ teach({
     ],
   },
 
+  why:
+    'Ama had 14 oranges. '
+    + 'She sold some. '
+    + 'Now she has 9. '
+    + 'A boy says the answer is 23, '
+    + 'because there were two numbers so he added them. '
+    + 'His adding is correct. '
+    + '14 plus 9 really is 23. '
+    + 'But Ama cannot have more oranges after selling some. '
+    + 'The sum was right and the answer is wrong. '
+    + 'How do you tell, from a story, which sum to do?',
+
+  notation:
+    'A story can be written as a number sentence '
+    + 'before you work it out, like 14 - 9 = ? '
+    + 'The minus sign means take away. '
+    + 'The plus sign means add. '
+    + 'The equals sign means "the same as", '
+    + 'so what is on one side of it '
+    + 'must be worth the same as what is on the other. '
+    + 'Write the number sentence down first, then do it. '
+    + 'Using the equals sign to mean "and then" '
+    + 'is the commonest mistake.',
+
   idea:
     'A word problem is a story with a sum hidden inside it. '
     + 'Your job is to find the sum. '
@@ -234,8 +287,17 @@ teach({
     + 'That question works on a problem you have never seen before.',
 
   recap:
-    'You can add and take away with carrying and borrowing. '
-    + 'This is about knowing which one the story is asking for.',
+    'Adding puts two amounts together to make a bigger one. '
+    + '27 plus 15 is 42. '
+    + '7 and 5 make 12, so you write the 2 '
+    + 'and carry the 1 into the tens. '
+    + 'Taking away finds how much is left. '
+    + '42 take away 15 is 27. '
+    + 'You cannot take 5 from 2, '
+    + 'so you borrow a ten and take 5 from 12. '
+    + 'Those two sums are what this lesson uses. '
+    + 'The lesson is about deciding '
+    + 'which of them a story is asking for.',
 
   method: [
     'Read the whole problem twice. Do not start working yet.',
@@ -846,6 +908,30 @@ teach({
     ],
   },
 
+  why:
+    'Kofi cuts a cake into 2 pieces and takes 1. '
+    + 'Ama cuts the same size cake into 4 pieces and takes 2. '
+    + 'Kofi says he has more, because his piece is bigger. '
+    + 'Ama says she has more, because she has two pieces '
+    + 'and he has one. '
+    + 'Put the two helpings side by side '
+    + 'and they are exactly the same amount of cake. '
+    + 'So who is right, '
+    + 'and how can you tell without cutting a cake every time?',
+
+  notation:
+    'A fraction is written with two numbers, '
+    + 'one above the other, and a line between them. '
+    + 'The line is said "out of", or "over". '
+    + 'So 3 over 4 is said "three quarters", '
+    + 'or "three out of four". '
+    + 'The bottom number has a name, the denominator, '
+    + 'and the top one is the numerator. '
+    + 'The line is not a minus sign. '
+    + 'Writing the top number at the bottom '
+    + 'turns three quarters into four thirds, '
+    + 'which is more than a whole one.',
+
   idea:
     'Two fractions can look completely different and be the same '
     + 'amount of cake. '
@@ -862,9 +948,16 @@ teach({
     + 'you would be changing the pieces without changing how many you have.',
 
   recap:
-    'You know the bottom number counts the parts in the whole '
-    + 'and the top counts how many you have. '
-    + 'Both of those matter here.',
+    'A fraction is written with one number above another. '
+    + 'Cut an orange into 4 equal parts and take 3 of them. '
+    + 'The bottom number, 4, '
+    + 'counts how many equal parts the whole orange was cut into. '
+    + 'The top number, 3, '
+    + 'counts how many of those parts you have. '
+    + 'So you have three quarters, written 3 over 4. '
+    + 'Both numbers matter in this lesson, '
+    + 'because changing the bottom number '
+    + 'changes the size of each piece.',
 
   method: [
     'To find an equal fraction, pick a number.',
@@ -1051,9 +1144,33 @@ teach({
     ],
   },
 
+  why:
+    'A man selling charcoal writes his prices on a board. '
+    + '1 bag is 8 cedis. '
+    + '2 bags are 16 cedis. '
+    + '3 bags are 24 cedis. '
+    + 'A woman wants 9 bags, and the board stops at 5. '
+    + 'She could add 8 again and again, nine times over, '
+    + 'and she would get there in the end. '
+    + 'What is the one thing about that list '
+    + 'that lets you jump straight to 9 bags '
+    + 'without writing out the ones in between?',
+
+  notation:
+    'Each number in a list like this is called a term. '
+    + 'They are counted from the left, '
+    + 'so in 5, 8, 11 the first term is 5 '
+    + 'and the third term is 11. '
+    + 'The step from one term to the next '
+    + 'is written with a plus or a minus sign, '
+    + 'so "+3" means every term is 3 more than the one before. '
+    + 'Counting the first term as number nought '
+    + 'instead of number one is the commonest mistake, '
+    + 'and it puts every answer one step out.',
+
   idea:
     'A sequence follows a rule. '
-    + 'Once you know the rule you can find a term far along '
+    + 'Once the rule is found you can give a term far along '
     + 'without writing out all the ones in between.',
 
   mechanism:
@@ -1065,8 +1182,17 @@ teach({
     + 'One of the two usually falls out.',
 
   recap:
-    'You can carry on a pattern by comparing neighbours. '
-    + 'This is that, plus saying the rule well enough to skip ahead.',
+    'Look at the list 5, 8, 11, 14. '
+    + 'Compare each number with the one before it. '
+    + '8 is 3 more than 5. '
+    + '11 is 3 more than 8. '
+    + '14 is 3 more than 11. '
+    + 'The step is 3 every time, '
+    + 'so the next number is 14 and 3, which is 17. '
+    + 'That is how you carry a pattern on. '
+    + 'This lesson is about saying the step well enough '
+    + 'that you can jump a long way ahead '
+    + 'instead of one step at a time.',
 
   method: [
     'Write the sequence with gaps between the terms.',
@@ -1260,6 +1386,29 @@ teach({
     ],
   },
 
+  why:
+    'You go to the shop with 20 cedis. '
+    + 'You buy bread for 8 cedis 50 pesewas '
+    + 'and milk for 6 cedis 70 pesewas. '
+    + 'The shopkeeper hands you back some coins '
+    + 'and you are not sure it is right. '
+    + 'Looking at the coins will not tell you. '
+    + 'How do you work out, before he hands anything over, '
+    + 'exactly what your change should be?',
+
+  notation:
+    'Money is written with the cedis, then a point, '
+    + 'then the pesewas, '
+    + 'so eight cedis fifty pesewas is written 8.50 '
+    + 'and said "eight cedis fifty". '
+    + 'There are always two figures after the point, '
+    + 'because 100 pesewas make one cedi, '
+    + 'so fifty pesewas is .50 and five pesewas is .05. '
+    + 'The cedi sign goes in front of the figure. '
+    + 'Writing 8.5 for eight cedis fifty '
+    + 'is read by some people as eight cedis five pesewas, '
+    + 'so always write both figures after the point.',
+
   idea:
     'Money works like any other number, with one extra rule: '
     + '100 pesewas make one cedi. '
@@ -1277,8 +1426,17 @@ teach({
     + 'to the note.',
 
   recap:
-    'You can add and subtract with carrying and borrowing. '
-    + 'Money is those sums with units attached.',
+    'Adding puts amounts together. '
+    + '27 plus 15 is 42. '
+    + '7 and 5 make 12, so write the 2 '
+    + 'and carry the 1 into the tens column. '
+    + 'Taking away finds what is left. '
+    + '42 take away 15 is 27. '
+    + '5 will not come out of 2, '
+    + 'so borrow a ten and take 5 from 12. '
+    + 'Money is those same two sums with one thing added: '
+    + 'the numbers have units on them, cedis and pesewas, '
+    + 'and the units have to be lined up before you start.',
 
   method: [
     'Write the prices with the cedis lined up under the cedis.',
@@ -1438,6 +1596,30 @@ teach({
     ],
   },
 
+  why:
+    'Your class of 30 is asked which fruit they like best. '
+    + '12 say mango, 9 say banana, 6 say orange, 3 say pawpaw. '
+    + 'You read those four numbers out to the class '
+    + 'and nobody can remember them a minute later. '
+    + 'The teacher wants everybody to see straight away '
+    + 'that mango won by a long way. '
+    + 'Four numbers read out cannot show that. '
+    + 'How do you draw the answers '
+    + 'so that the biggest one is obvious?',
+
+  notation:
+    'A bar chart has two edges with writing on them, '
+    + 'and those are called axes. '
+    + 'The names go along the bottom '
+    + 'and the numbers go up the side. '
+    + 'The numbers must go up in equal steps, '
+    + 'like 0, 2, 4, 6, and that is called the scale. '
+    + 'A pictograph needs a line saying '
+    + 'what one picture stands for, '
+    + 'and that line is called the key. '
+    + 'A chart with no scale and no key cannot be read at all, '
+    + 'and leaving it off is the commonest mistake.',
+
   idea:
     'A bar chart shows numbers as bars so you can compare them by looking. '
     + 'A pictograph does the same with small pictures, '
@@ -1453,8 +1635,17 @@ teach({
     + 'can make a small difference look enormous.',
 
   recap:
-    'You can collect answers in a tally and write the totals in a table. '
-    + 'A chart is the next step, and the table is what it is drawn from.',
+    'When you ask a question and count the answers, '
+    + 'make a mark for each answer as you hear it. '
+    + 'Four upright marks, then the fifth laid across them, '
+    + 'so that you can count them in fives. '
+    + 'That is called a tally. '
+    + 'When you have finished, '
+    + 'count each set of marks and write the totals in a table, '
+    + 'the name on one side and the number on the other: '
+    + 'mango 12, banana 9, orange 6, pawpaw 3. '
+    + 'This lesson draws a picture from that table, '
+    + 'so the table has to be right first.',
 
   method: [
     'Start from your table of numbers.',

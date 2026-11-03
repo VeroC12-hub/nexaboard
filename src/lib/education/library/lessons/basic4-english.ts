@@ -28,6 +28,19 @@ teach({
     ],
   },
 
+  why:
+    'A teacher reads a story about a boy '
+    + 'who misses the tro-tro, runs, falls, gets up, '
+    + 'and reaches school just as the bell stops. '
+    + 'She asks the class what the story was about. '
+    + 'One boy says "he fell down". '
+    + 'That did happen, and the story was not about that. '
+    + 'Another says "the bell". Also in the story. '
+    + 'Nobody can find the sentence that says what it is about, '
+    + 'because there is no such sentence. '
+    + 'So how do you say what a passage is about '
+    + 'when the passage never says it?',
+
   idea:
     'The main idea is what a passage is mostly about. '
     + 'It is not the first sentence, and it is not the most exciting event. '
@@ -45,9 +58,16 @@ teach({
     + 'keeping the market clean.',
 
   recap:
-    'You can find an answer in a passage and point at the line. '
-    + 'This is harder, because the main idea is often not written in any '
-    + 'single line.',
+    'When a question asks something a passage says straight out, '
+    + 'you can go and put your finger on it. '
+    + '"Kofi has three goats." '
+    + 'Ask how many goats Kofi has '
+    + 'and the answer is in that line, in those words. '
+    + 'That is the easiest kind of question '
+    + 'and it is worth getting fast at. '
+    + 'This lesson is harder, '
+    + 'because the main idea is usually not written in any one line, '
+    + 'so there is nothing to point at.',
 
   method: [
     'Read the whole passage, start to finish.',
@@ -239,6 +259,32 @@ teach({
     ],
   },
 
+  why:
+    'A boy writes half a page about his village. '
+    + 'It is all one block of writing. '
+    + 'Everything he says is true '
+    + 'and the handwriting is good. '
+    + 'His teacher reads it twice '
+    + 'and still cannot say where he stopped talking about the market '
+    + 'and started talking about the school. '
+    + 'The words were right and the reader got lost anyway. '
+    + 'What is it that tells a reader '
+    + 'when one idea has ended and the next has begun?',
+
+  notation:
+    'A new paragraph is shown on the page in one of two ways. '
+    + 'Either the first line is pushed in from the edge, '
+    + 'which is called indenting, '
+    + 'or a blank line is left above it. '
+    + 'Pick one of the two '
+    + 'and use it all the way through a piece of writing. '
+    + 'The mark itself carries the meaning, '
+    + 'so a reader who sees it knows a new idea has started '
+    + 'before reading a single word. '
+    + 'Starting every sentence on a new line, '
+    + 'so that nothing at all is marked, '
+    + 'is the commonest mistake.',
+
   idea:
     'A paragraph is a group of sentences about one idea. '
     + 'The first sentence usually says what the idea is, '
@@ -251,14 +297,22 @@ teach({
     + 'A reader uses the blank line at the start of a paragraph '
     + 'to know a new thought has begun. '
     + 'Break that and they have to work out where your thinking turned, '
-    + 'which is work you should have done for them. '
+    + 'which is work the writer was meant to do for them. '
     + 'It helps you too: if you cannot say your paragraph’s idea in one '
     + 'sentence, it has more than one idea in it and should be split.',
 
   recap:
-    'You can write a sentence that starts with a capital and ends with a '
-    + 'full stop. '
-    + 'A paragraph is several of those, all pulling the same way.',
+    'A sentence is a group of words that says one whole thing. '
+    + 'It begins with a capital letter '
+    + 'and it ends with a full stop. '
+    + '"The goat ate my book." '
+    + 'That is a sentence. '
+    + 'It starts with a capital T, it ends with a stop, '
+    + 'and you can tell what happened. '
+    + '"The goat ate" leaves you waiting, '
+    + 'so it is not finished. '
+    + 'A paragraph is several of those whole sentences, '
+    + 'all pulling the same way.',
 
   method: [
     'Decide the one idea this paragraph is about.',
@@ -433,6 +487,31 @@ teach({
     ],
   },
 
+  why:
+    'You want to tell your aunt what happened at school. '
+    + 'You say "I go to the head teacher office". '
+    + 'She asks whether you are going now '
+    + 'or whether you went already, '
+    + 'and you have to stop and explain. '
+    + 'The words were nearly right, '
+    + 'and the one thing she needed was missing. '
+    + 'One word in that sentence '
+    + 'is supposed to say when it happened. '
+    + 'Which word is it, and how does it change?',
+
+  notation:
+    'The past is usually shown '
+    + 'by adding the letters -ed to the end of the verb, '
+    + 'so walk becomes walked. '
+    + 'The future is shown by putting the word will in front, '
+    + 'so walk becomes will walk. '
+    + 'Letters added to the end are called an ending, '
+    + 'and words put in front are called helping words. '
+    + 'Some verbs take no -ed at all: '
+    + 'go becomes went and eat becomes ate, '
+    + 'and those have to be learned one at a time. '
+    + 'Writing goed instead of went is the commonest mistake.',
+
   idea:
     'The verb tells you when. '
     + 'I walk to school. That is now, the present. '
@@ -450,8 +529,17 @@ teach({
     + 'and you will learn them by ear before you learn them by rule.',
 
   recap:
-    'You can find the verb in a sentence. '
-    + 'It is the doing word, and it is the word that changes here.',
+    'In every sentence there is a word '
+    + 'that says what is being done. '
+    + '"The dog barks." '
+    + 'The doing word is barks. '
+    + '"Ama ate the rice." '
+    + 'The doing word is ate. '
+    + 'That word is called the verb, '
+    + 'and you find it by asking '
+    + 'what is happening in the sentence. '
+    + 'The verb is the word this lesson changes, '
+    + 'so finding it comes first.',
 
   method: [
     'Find the verb.',
@@ -621,6 +709,32 @@ teach({
     ],
   },
 
+  why:
+    'Write this down with no marks in it: '
+    + 'let us eat grandma. '
+    + 'Now write it this way: '
+    + 'let us eat, Grandma. '
+    + 'The first one invites the class '
+    + 'to eat their grandmother. '
+    + 'The second one calls her to the table. '
+    + 'The words are the same words in the same order, '
+    + 'and one small mark changed who was being eaten. '
+    + 'What are those marks, '
+    + 'and what does each one tell a reader to do?',
+
+  notation:
+    'Each mark has a name, '
+    + 'and the names are worth saying out loud. '
+    + 'A full stop is the dot at the end. '
+    + 'A comma is the small tail that sits on the line. '
+    + 'A question mark is the hook with a dot under it. '
+    + 'An exclamation mark is the upright line '
+    + 'with a dot under it. '
+    + 'Speaking marks are the two little pairs '
+    + 'that go round the exact words somebody said. '
+    + 'A comma sits on the line and a full stop has no tail, '
+    + 'and mixing those two up is the commonest mistake.',
+
   idea:
     'Punctuation marks are instructions for the reader. '
     + 'Each one tells them something different '
@@ -637,8 +751,15 @@ teach({
     + 'they are part of the words, not a tidy up afterwards.',
 
   recap:
-    'You can write a sentence with a capital and a full stop. '
-    + 'This adds the marks that go inside a sentence.',
+    'A sentence starts with a capital letter '
+    + 'and ends with a full stop. '
+    + '"My father drives a taxi." '
+    + 'The capital M shows a reader where the sentence begins. '
+    + 'The stop shows where it ends, '
+    + 'so the reader knows when to take a breath '
+    + 'and start again. '
+    + 'Those two marks go on the outside of a sentence. '
+    + 'This lesson is about the marks that go inside one.',
 
   method: [
     'Capital letter at the start of every sentence.',
@@ -815,6 +936,31 @@ teach({
     ],
   },
 
+  why:
+    'Everybody can say the word night. '
+    + 'Sound it out, write what you hear, '
+    + 'and you get nite. '
+    + 'Every letter you wrote '
+    + 'makes the sound you heard, '
+    + 'and the word is still wrong. '
+    + 'Now look at light, right, fight and might. '
+    + 'All of them do the same odd thing in the same place. '
+    + 'So the spelling is not random after all. '
+    + 'What is the pattern, '
+    + 'and how many words does one pattern get you?',
+
+  notation:
+    'A spelling pattern is written with a small dash in front, '
+    + 'so the ending of night, light and right '
+    + 'is written -ight. '
+    + 'The dash means "something comes before this". '
+    + 'A pattern at the start of a word '
+    + 'has the dash after it instead, '
+    + 'so un- means something follows. '
+    + 'A pattern is said letter by letter, not as a word, '
+    + 'so -tion is said "t i o n", '
+    + 'even though it sounds like "shun".',
+
   idea:
     'English spelling looks random and mostly is not. '
     + 'Words that sound alike are often spelled alike. '
@@ -831,10 +977,18 @@ teach({
     + 'themselves.',
 
   recap:
-    'You can sound out a word and you know that one letter can make more '
-    + 'than one sound. '
-    + 'Patterns are how you handle the cases where sounding out is not '
-    + 'enough.',
+    'Sounding out a word means '
+    + 'saying its letters slowly '
+    + 'and writing down what you hear. '
+    + 'C-a-t makes cat, and that works. '
+    + 'But a letter does not always make the same sound. '
+    + 'The c in cat and the c in city '
+    + 'are one letter saying two different things. '
+    + 'The a in hat is not the a in hate. '
+    + 'So sounding out gets you a long way '
+    + 'and not all the way. '
+    + 'This lesson is about the words '
+    + 'where it stops working.',
 
   method: [
     'Say the word slowly and break it into parts.',
