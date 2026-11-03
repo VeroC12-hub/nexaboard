@@ -836,6 +836,29 @@ teach({
     ],
   },
 
+  why:
+    'A passage in your examination says: '
+    + '"The harmattan had its hand on the town." '
+    + 'The question asks what effect that has. '
+    + 'You can see at once that the harmattan has no hand. '
+    + 'So you write that it means the town was very dry. '
+    + 'That is true, and it scores almost nothing. '
+    + 'The marks are for saying what those words do '
+    + 'that "the town was very dry" cannot do. '
+    + 'You have no method for that yet. '
+    + 'This topic is that method.',
+
+  notation:
+    'The words you are discussing go inside inverted commas, '
+    + 'like this: "a hunted animal". '
+    + 'Inverted commas are the pair of raised marks '
+    + 'that show the words are copied from the passage and not your own. '
+    + 'Copy them letter for letter. '
+    + 'The names of the figures take a small letter: '
+    + 'simile, metaphor, personification, irony. '
+    + 'The commonest way to lose a mark is to quote the whole sentence '
+    + 'instead of the few words the figure actually sits in.',
+
   idea:
     'A figure of speech says a thing in a way the plain words would not. '
     + 'The figures in the syllabus are few and each has its own job, '
@@ -869,10 +892,17 @@ teach({
     + 'alone.',
 
   recap:
-    'You have met similes and proverbs before '
-    + 'and you know a sentence can mean more than it says. '
-    + 'This names the devices '
-    + 'and asks you to explain what each one achieves.',
+    'A comparison puts two things side by side and says they are alike. '
+    + '"The boy runs fast" is not a comparison. '
+    + '"The boy runs like a deer" is one. '
+    + 'It brings in a deer to tell you how fast. '
+    + 'A sentence can also mean something its words do not say. '
+    + 'A man is handed a heavy load and says, "Nice work." '
+    + 'The words are praise and he means the opposite, '
+    + 'and everybody standing there hears it. '
+    + 'Both of those are ordinary speech, and everybody already uses them. '
+    + 'This lesson gives them names '
+    + 'and asks you to say what each one achieves.',
 
   method: [
     'Read the sentence and ask whether anything is being compared.',

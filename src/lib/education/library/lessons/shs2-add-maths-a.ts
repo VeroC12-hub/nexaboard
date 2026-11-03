@@ -1699,6 +1699,37 @@ teach({
     ],
   },
 
+  why:
+    'A ladder leans against a wall at an angle of 65 degrees. '
+    + 'You want the height it reaches, '
+    + 'and sine of 65 gives it straight away. '
+    + 'Now a different question. '
+    + 'Somebody writes down an expression: '
+    + 'sine squared of 65, added to cosine squared of 65. '
+    + 'Work it out on a calculator and the answer is exactly 1. '
+    + 'Try 20 degrees and it is 1 again. '
+    + 'Try 71.4 degrees and it is still 1. '
+    + 'Why is it always 1, for every angle you try? '
+    + 'You cannot answer that by testing more angles, '
+    + 'because there are infinitely many. '
+    + 'This topic is how such a statement is shown '
+    + 'to be true for all of them at once.',
+
+  notation:
+    'Sine squared A is written $\\sin^2 A$ and said "sine squared A". '
+    + 'It means the sine of A, then that answer squared. '
+    + 'It does NOT mean the sine of A squared. '
+    + 'Those are different numbers, '
+    + 'and $\\sin^2 A$ is only a shorter way of writing $(\\sin A)^2$. '
+    + 'The three less familiar names are reciprocals: '
+    + 'secant A is 1 over cosine A, '
+    + 'cosecant A is 1 over sine A, '
+    + 'and cotangent A is 1 over tangent A. '
+    + 'They are written sec A, cosec A and cot A. '
+    + 'Note which goes with which, '
+    + 'because secant pairing with cosine rather than with sine '
+    + 'is the commonest way to lose a mark here.',
+
   idea:
     'An identity is true for every value of the angle, '
     + 'unlike an equation, which is true for particular values. '
@@ -1800,11 +1831,26 @@ teach({
     + 'as though they were the proof.',
 
   recap:
-    'You have used sine, cosine and tangent in right angled triangles, '
-    + 'and you know Pythagoras. '
-    + 'This gives the relations between those three functions '
-    + 'that hold for every angle, '
-    + 'and the rules for proving one from another.',
+    'Take a right angled triangle and pick one of the two sharp angles. '
+    + 'Call it A. '
+    + 'The longest side, the one opposite the right angle, '
+    + 'is the hypotenuse. '
+    + 'The side facing A is the opposite. '
+    + 'The third side is the adjacent. '
+    + 'Sine of A is the opposite divided by the hypotenuse. '
+    + 'Cosine of A is the adjacent divided by the hypotenuse. '
+    + 'Tangent of A is the opposite divided by the adjacent. '
+    + 'In a triangle with sides 3, 4 and 5, '
+    + 'and A facing the side of length 3, '
+    + 'sine A is 3 over 5, cosine A is 4 over 5, '
+    + 'and tangent A is 3 over 4. '
+    + 'Pythagoras is the other fact needed here. '
+    + 'It says the two shorter sides, each squared and added, '
+    + 'equal the hypotenuse squared. '
+    + 'In that same triangle, 9 plus 16 is 25. '
+    + 'This lesson is the relations between those three ratios '
+    + 'that hold for every angle, not just for one triangle, '
+    + 'and the rules for proving one of them from another.',
 
   method: [
     'Read which side is the more complicated, and start there.',

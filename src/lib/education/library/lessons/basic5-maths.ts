@@ -434,6 +434,27 @@ teach({
     ],
   },
 
+  why:
+    'Your mother gives you 12 oranges to share. '
+    + 'Everybody must get the same number, with none left over. '
+    + 'How many people can you share them with? '
+    + 'Try 5 people: each one gets 2 and 2 oranges are left in your hand. '
+    + 'Try 4 people: each one gets 3 and none are left. '
+    + 'So 4 works and 5 does not. '
+    + 'Which other numbers work, and how do you find every one of them '
+    + 'without guessing? '
+    + 'That is the question this topic answers.',
+
+  notation:
+    'HCF is short for highest common factor. '
+    + 'Say it "aitch see eff", or say the three words in full. '
+    + 'Factor means a number that divides in exactly. '
+    + 'Common means it sits in both lists. '
+    + 'Highest means the biggest one of those. '
+    + 'The commonest way to lose a mark is to give a shared factor '
+    + 'that is not the biggest shared one. '
+    + 'For 12 and 18 both share 3, but 6 is shared too, so 6 is the HCF.',
+
   idea:
     'A factor of a number divides into it with nothing left over. '
     + 'A multiple is what you get when you multiply the number by '
@@ -451,8 +472,15 @@ teach({
     + 'which guessing never does.',
 
   recap:
-    'You know your tables, and you know division. '
-    + 'A factor is a division that comes out exactly.',
+    'Multiplying is adding the same number again and again. '
+    + '3 times 4 means 3 added four times, which is 12. '
+    + 'Dividing undoes that. '
+    + '12 divided by 3 asks how many 3s fit inside 12. '
+    + 'The answer is 4, and nothing is left over. '
+    + 'Some divisions do not fit exactly. '
+    + '12 divided by 5 gives 2, and 2 is left over. '
+    + 'That leftover is called the remainder. '
+    + 'This topic is about the divisions that leave no remainder at all.',
 
   method: [
     'To find factors, start at 1 and test each number in turn.',
@@ -838,6 +866,29 @@ teach({
     ],
   },
 
+  why:
+    'A cup of rice at the market costs 2 cedis 50 pesewas. '
+    + 'You buy four cups. '
+    + 'The trader asks you for 10 cedis. '
+    + 'Is she right? '
+    + 'Four lots of 2 cedis is 8 cedis. '
+    + 'Four lots of 50 pesewas is 200 pesewas. '
+    + 'Now you are stuck. '
+    + 'You cannot add 8 cedis to 200 pesewas the way they are written. '
+    + 'You need one number that holds the whole cedis '
+    + 'and the part of a cedi at the same time. '
+    + 'That is the job a decimal does.',
+
+  notation:
+    'The number 3.45 is said "three point four five". '
+    + 'Say each digit after the point on its own. '
+    + 'Never say "three point forty five". '
+    + 'The dot is called the decimal point. '
+    + 'What sits on its left is the whole number. '
+    + 'What sits on its right is the part of one. '
+    + 'The commonest way to lose a mark is to drop the nought in front. '
+    + 'Write 0.5, not .5.',
+
   idea:
     'A decimal shows parts of a whole using the same place system as '
     + 'ordinary numbers. '
@@ -856,9 +907,18 @@ teach({
     + 'and the number of digits afterwards is irrelevant.',
 
   recap:
-    'You know that each place in a number has a value, '
-    + 'and you know that a half can be written as one over two. '
-    + 'Decimals join those two ideas.',
+    'Every digit in a number has a value that comes from where it sits. '
+    + 'Take 346. '
+    + 'The 6 sits in the ones place, so it means 6. '
+    + 'The 4 sits in the tens place, so it means 40. '
+    + 'The 3 sits in the hundreds place, so it means 300. '
+    + 'Each place to the left is worth ten times the place before it. '
+    + 'A fraction is a different way of saying a part of something. '
+    + 'One half means one of two equal pieces. '
+    + 'It is written 1 over 2. '
+    + 'A decimal joins those two ideas. '
+    + 'It carries the places on past the ones, going right, '
+    + 'and those new places hold pieces of one.',
 
   method: [
     'Read the whole part, then say "point", then each digit separately.',

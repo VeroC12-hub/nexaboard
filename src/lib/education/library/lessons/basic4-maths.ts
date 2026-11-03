@@ -400,6 +400,28 @@ teach({
     ],
   },
 
+  why:
+    'Your school is buying exercise books. '
+    + 'One book costs 6 cedis. '
+    + 'There are 34 children in your class and each one needs a book. '
+    + 'How much money must the class bring? '
+    + 'You cannot count that out on your fingers. '
+    + 'And 34 times 6 is not in any table. '
+    + 'Nobody learns the six times table as far as thirty four. '
+    + 'So you need a way to do a multiplication '
+    + 'that nobody has taught you by heart.',
+
+  notation:
+    'The sum is written 34 x 6. '
+    + 'It is said "thirty four times six", '
+    + 'or "thirty four multiplied by six". '
+    + 'The x sign means multiply. '
+    + 'Set out in columns, the 34 goes on top and the 6 goes underneath. '
+    + 'The 6 must sit under the 4 and not under the 3, '
+    + 'because ones go under ones. '
+    + 'The commonest way to lose a mark is to line the columns up wrongly, '
+    + 'so a ten gets multiplied as though it were a one.',
+
   idea:
     'You cannot know 34 times 6 by heart, and you do not have to. '
     + 'Break 34 into 30 and 4. '
@@ -416,9 +438,16 @@ teach({
     + 'more tightly, which is why the carried digits land where they do.',
 
   recap:
-    'You know your tables to 10, '
-    + 'and you know that 30 is three tens. '
-    + 'Both are needed here.',
+    'Multiplying is adding the same number over and over. '
+    + '4 times 3 means 4 added three times, which is 12. '
+    + 'The small multiplications up to ten times ten are called tables. '
+    + '6 times 7 is 42. '
+    + '8 times 9 is 72. '
+    + 'Those are the ones to have ready. '
+    + 'The second thing needed here is what a written number means. '
+    + 'In 34 the 3 does not stand for three. '
+    + 'It sits in the tens place, so it stands for three tens, which is 30. '
+    + 'So 34 is 30 and 4 put together.',
 
   method: [
     'Split the big number by its places. 247 becomes 200, 40 and 7.',

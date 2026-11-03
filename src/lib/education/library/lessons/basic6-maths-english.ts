@@ -1586,6 +1586,18 @@ teach({
     ],
   },
 
+  why:
+    'A friend has to find your house for the first time. '
+    + 'You write to him: it is a nice house near the junction. '
+    + 'He walks past it twice and then phones you. '
+    + 'The same week your small brother asks how to boil rice. '
+    + 'You write: just cook it until it is soft. '
+    + 'He burns it. '
+    + 'Both pieces of writing failed. '
+    + 'But they failed for two different reasons, '
+    + 'and right now you cannot say what either reason was. '
+    + 'Being able to say it is what this topic gives you.',
+
   idea:
     'Describing and explaining are different jobs. '
     + 'A description lets the reader picture something. '
@@ -1602,13 +1614,20 @@ teach({
     + 'so nothing may be left out. '
     + 'Which is why the person who wrote it is the worst person to test '
     + 'it: '
-    + 'you know the task, so you fill the gap without noticing it is '
-    + 'there.',
+    + 'the task is already in your head, '
+    + 'so you fill the gap without noticing it is there.',
 
   recap:
-    'You can describe an object so somebody could pick it out, '
-    + 'and you can write instructions in the right order. '
-    + 'This is about knowing which one a task needs.',
+    'A description is writing that puts a thing in front of the reader. '
+    + 'Here is one: a blue door with a brass handle, '
+    + 'and one panel split near the bottom. '
+    + 'Somebody who has never seen that door could now pick it out '
+    + 'from ten others. '
+    + 'Instructions are a different kind of writing. '
+    + 'They are the steps of a job, set down in the order you do them. '
+    + 'Here are some: wash the maize, grind it, then add water. '
+    + 'Nobody pictures anything from that, but anybody can follow it. '
+    + 'This lesson is about telling which of the two a task is asking for.',
 
   method: [
     'Decide which job you are doing before you write.',
@@ -1643,7 +1662,8 @@ teach({
       level: 6,
       ask: 'Your explanation works for you but confuses everybody else. Why?',
       steps: [
-        'You know the task, so you fill in gaps without noticing.',
+        'The task is already in your head, so you fill in gaps '
+          + 'without noticing.',
         'Your reader cannot.',
       ],
       answer: 'You assumed something. '

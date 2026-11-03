@@ -1621,6 +1621,20 @@ teach({
     ],
   },
 
+  why:
+    'Two brothers are quarrelling over a plot of land at a family meeting. '
+    + 'The elder listens, then says one sentence: '
+    + 'the rain does not fall on one roof alone. '
+    + 'The quarrel stops. '
+    + 'Nobody has produced a document or a new fact. '
+    + 'How did one short sentence do that, '
+    + 'when an hour of arguing could not? '
+    + 'And a harder one. '
+    + 'An examination asks you to explain that proverb. '
+    + 'You can say what the words mean, '
+    + 'but you cannot yet say what it did in that room, '
+    + 'and that second part is where most of the marks are.',
+
   idea:
     'A proverb is a short fixed saying carrying a general truth. '
     + 'An idiom is an expression whose meaning is not the sum of its words. '
@@ -1658,9 +1672,17 @@ teach({
     + 'That is honest translation, and it earns more than a literal one.',
 
   recap:
-    'You have used proverbs in formal speech, '
-    + 'and you know they carry weight because they are old. '
-    + 'This is about explaining them, and using them in the right place.',
+    'A proverb is a short saying whose words never change. '
+    + 'Here is one: the rain does not fall on one roof alone. '
+    + 'Nobody says it to tell you about rain. '
+    + 'It is said to a man who thinks his trouble is his alone, '
+    + 'and it means that other people are carrying the same thing. '
+    + 'Notice two things about it. '
+    + 'The words are fixed, so you may not improve them. '
+    + 'And they carry weight because older people have used them '
+    + 'in the same way for a long time. '
+    + 'This lesson is about explaining a proverb '
+    + 'and about using one in the right place.',
 
   method: [
     'Say the proverb in the language, with its rhythm.',

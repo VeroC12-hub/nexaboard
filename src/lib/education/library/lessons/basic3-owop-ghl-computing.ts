@@ -218,6 +218,18 @@ teach({
     ],
   },
 
+  why:
+    'Your mother sends you to buy pepper. '
+    + 'The trader is an old woman from your area. '
+    + 'She greets you in your language and you greet her back. '
+    + 'Then she says something more. '
+    + 'You answer, "I am fine." '
+    + 'Now nobody says anything at all. '
+    + 'She looks at you and you look at the ground. '
+    + 'Why did the talk stop? '
+    + 'Every word you used was correct. '
+    + 'So something else went wrong, and this lesson is what it was.',
+
   idea:
     'A conversation is not one line. It goes back and forth. '
     + 'You greet. They reply. You ask. They answer. Then they ask you. '
@@ -230,8 +242,16 @@ teach({
     + 'It is handing the turn back.',
 
   recap:
-    'You know how to greet, and you know the greeting changes '
-    + 'with the time of day and with who you are greeting. '
+    'A greeting is what you say when you first meet somebody. '
+    + 'The words change with the time of day. '
+    + 'In the morning you use the morning greeting. '
+    + 'In the evening you use the evening one. '
+    + 'The words also change with who is in front of you. '
+    + 'A friend your own age gets one greeting. '
+    + 'An elder gets a more respectful one. '
+    + 'So the morning greeting for a friend '
+    + 'and the morning greeting for an elder '
+    + 'are not the same words in your language. '
     + 'A conversation begins where that greeting ends.',
 
   method: [

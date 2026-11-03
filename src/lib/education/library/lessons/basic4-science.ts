@@ -1655,6 +1655,18 @@ teach({
     ],
   },
 
+  why:
+    'Look at the gutter in front of your house after a heavy rain. '
+    + 'If there are water sachets and plastic bags packed in it, '
+    + 'the water stops and spreads across the road. '
+    + 'A week later there are mosquitoes. '
+    + 'Somebody put that rubbish there to get rid of it. '
+    + 'So here is the question. '
+    + 'Where is rubbish supposed to go? '
+    + 'Not into the gutter, and not onto a fire, '
+    + 'but you have not been told what the right answer is instead. '
+    + 'That is what this topic is for.',
+
   idea:
     'Some waste rots away and some does not, '
     + 'and that one question decides what should be done with it. '
@@ -1673,9 +1685,17 @@ teach({
     + 'It has only moved to where it does more damage.',
 
   recap:
-    'You know that mosquitoes breed in standing water, '
-    + 'and you know germs travel. '
-    + 'Both of those come back in this topic.',
+    'A mosquito lays its eggs in water that is not moving. '
+    + 'A puddle left after rain is enough. '
+    + 'An old tin holding rain water is enough. '
+    + 'The eggs hatch there, and the mosquitoes that fly out '
+    + 'are the ones that give people malaria. '
+    + 'Germs are living things too small for your eye to see. '
+    + 'They make people ill, and they travel. '
+    + 'They travel on hands, on flies, and in dirty water. '
+    + 'Both of those facts come back in this topic, '
+    + 'because waste left in the wrong place makes water stand '
+    + 'and gives germs somewhere to live.',
 
   method: [
     'Sort the waste as you make it, not later.',

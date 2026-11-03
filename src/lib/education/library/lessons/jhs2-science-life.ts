@@ -313,6 +313,19 @@ teach({
     ],
   },
 
+  why:
+    'A girl of thirteen finds she is bleeding, '
+    + 'and nobody has told her this was coming. '
+    + 'She thinks she is injured or ill. '
+    + 'She stays away from school for three days. '
+    + 'Next month it happens again, '
+    + 'and she still cannot say whether it is normal, '
+    + 'how long it should last, '
+    + 'or why it happens at all. '
+    + 'Guessing is not good enough here, '
+    + 'and there is a plain biological answer. '
+    + 'This topic is that answer.',
+
   idea:
     'The male system makes sperm and delivers it. '
     + 'The female system holds the eggs and releases one about every 28 '
@@ -357,9 +370,19 @@ teach({
     + 'especially in the first years after puberty.',
 
   recap:
-    'You know that living things reproduce '
-    + 'and you have met the changes of puberty in personal health lessons. '
-    + 'This gives the organs, their jobs, and the order of the cycle.',
+    'Reproduction is how living things make new living things '
+    + 'of their own kind. '
+    + 'A maize plant makes seeds, and each seed can grow into maize. '
+    + 'A hen lays an egg, and a chick comes out of it. '
+    + 'In animals this takes two cells, one from a male and one from a '
+    + 'female, and the two join to start the new individual. '
+    + 'Puberty is the stretch of years, '
+    + 'roughly from ten to sixteen, '
+    + 'when a child\u2019s body changes into a body that can do this. '
+    + 'The changes are driven by chemical messengers called hormones, '
+    + 'which are made inside the body and carried in the blood. '
+    + 'This lesson gives the organs, what each one does, '
+    + 'and the order the monthly cycle runs in.',
 
   method: [
     'Name the male organs and what each does.',
