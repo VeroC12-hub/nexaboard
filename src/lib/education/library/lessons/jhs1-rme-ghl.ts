@@ -58,17 +58,11 @@ teach({
     + 'about by itself. '
     + 'It was made, by God, on purpose, '
     + 'and human beings are placed in it as caretakers rather than owners. '
-    + 'The accounts differ. '
-    + 'Christianity reads the book of Genesis, '
-    + 'where God creates over six days and rests on the seventh, '
-    + 'and makes human beings in his own image. '
-    + 'Islam teaches that God, Allah, created the heavens and the earth in '
-    + 'six periods by his command, '
-    + 'and appointed the human being as his trustee on earth. '
-    + 'African Traditional Religion teaches a Supreme Being, '
-    + 'called Onyame, Mawu, Nyonmo and other names in different languages, '
-    + 'who created all that exists and set it in order, '
-    + 'with lesser spirits and the ancestors having their place under him.',
+    + 'That much the three share, '
+    + 'and it is the part a comparison question is usually after. '
+    + 'What differs is the telling: '
+    + 'the name used for God, the shape the account takes, '
+    + 'and the duty each one draws out of it.',
 
   mechanism:
     'The useful question is not which account came first or which is right. '
@@ -83,14 +77,6 @@ teach({
     + 'and not merely a poor decision. '
     + 'All three say this, in their own words, and that agreement is a '
     + 'finding worth stating. '
-    + 'Where they differ is in the telling. '
-    + 'Genesis is ordered as days and ends in rest. '
-    + 'The Qur’an stresses that creation came by command: '
-    + 'God says be, and it is. '
-    + 'The traditional accounts often explain how things came to be as they '
-    + 'now are, '
-    + 'including why the Supreme Being is approached through lesser spirits '
-    + 'and the ancestors. '
     + 'So when a question asks you to compare, '
     + 'give the agreement, then the accounts, then the duty, '
     + 'and do not use the comparison to rank them.',
@@ -175,6 +161,46 @@ teach({
     + 'and placed in a created order with duties to the living and the '
     + 'dead.',
 
+  tables: [
+    {
+      caption: 'How the three faiths taught in Ghana tell the creation of '
+        + 'the world',
+      columns: [
+        'Faith',
+        'Name used for God',
+        'How the account runs',
+        'Duty it draws',
+      ],
+      rows: [
+        [
+          'Christianity',
+          'God',
+          'Genesis: creation over six days, rest on the seventh, '
+            + 'and the human being made in God’s own image',
+          'Care for the earth, as one made in the image of the one who '
+            + 'made it',
+        ],
+        [
+          'Islam',
+          'Allah',
+          'Creation of the heavens and the earth in six periods by God’s '
+            + 'command: he says be, and it is',
+          'Act as God’s trustee on earth',
+        ],
+        [
+          'African Traditional Religion',
+          'Onyame, Mawu, Nyonmo, and other names in other languages',
+          'A Supreme Being created all that exists and set it in order, '
+            + 'with lesser spirits and the ancestors under him',
+          'Keep the order that was set, towards the living and the dead',
+        ],
+      ],
+      note: 'The first three columns differ in every row. '
+        + 'The last one does not, and that is the whole result of the '
+        + 'comparison.',
+    },
+  ],
+
   questions: [
     {
       id: 'cre-1',
@@ -243,24 +269,14 @@ teach({
   },
 
   idea:
-    'Worship is how people turn towards God. '
-    + 'Each faith has its own forms. '
-    + 'Christians gather as a congregation, usually on Sunday. '
-    + 'They pray, read and preach scripture, sing, and give an offering. '
-    + 'They also have sacraments, such as baptism and holy communion. '
-    + 'Islamic worship rests on the five daily prayers. '
-    + 'Each is at a set time, facing Makkah, after washing. '
-    + 'On Friday Muslims pray together at the mosque. '
-    + 'They also fast in Ramadan, give to the poor, '
-    + 'and make the pilgrimage. '
-    + 'In African Traditional Religion people pray to the Supreme Being. '
-    + 'Libation is poured with words. '
-    + 'Offerings and sacrifices are made. '
-    + 'There is drumming and dancing. '
-    + 'Festivals come at fixed times of the year. '
-    + 'A priest or an elder of the family often leads. '
-    + 'All three ask the worshipper to come sincerely and clean. '
-    + 'And all three teach that worship is judged by how the worshipper '
+    'Worship is how people turn towards God, '
+    + 'and each faith taught in Ghana has its own forms for it: '
+    + 'when it happens, where, what is done, and who leads. '
+    + 'Those are what you learn, '
+    + 'and you learn each as its own followers state it. '
+    + 'What does not differ is what is asked of the worshipper. '
+    + 'All three ask the person to come sincerely and clean, '
+    + 'and all three teach that worship is judged by how the worshipper '
     + 'then lives.',
 
   mechanism:
@@ -270,15 +286,12 @@ teach({
     + 'another pours a drink on the ground. '
     + 'Listed like that, the three look unrelated. '
     + 'Look instead at what each form is doing, and the pattern appears. '
-    + 'Each has a preparation, '
-    + 'something that marks the worshipper as ready: '
-    + 'the washing before salat, '
-    + 'confession or quiet before a service, '
-    + 'the state required of the one who pours libation. '
-    + 'Each has an address to God in words. '
-    + 'Each has a giving: the offering, the zakat, the sacrifice. '
-    + 'Each has a gathering at a set time, '
-    + 'which is what makes it a community and not a private habit. '
+    + 'There are four jobs, and all three faiths do all four: '
+    + 'a preparation that marks the worshipper as ready, '
+    + 'an address to God in words, '
+    + 'a giving, '
+    + 'and a gathering at a set time, '
+    + 'which is what makes worship a community and not a private habit. '
     + 'And all three insist on the same final test, in their own words: '
     + 'that worship which leaves the worshipper unchanged is not accepted. '
     + 'The prophets said it, the Qur’an says it, '
@@ -367,6 +380,78 @@ teach({
     + 'These are worth comparing the same way, '
     + 'by asking what the rite does rather than what it uses.',
 
+  tables: [
+    {
+      caption: 'What is done in each form of worship, and who leads it',
+      columns: ['Faith', 'When and where', 'What is done', 'Who leads'],
+      rows: [
+        [
+          'Christianity',
+          'As a congregation in church, usually on Sunday',
+          'Prayer, scripture read and preached, singing, an offering, '
+            + 'and sacraments such as baptism and holy communion',
+          'A pastor, priest or minister',
+        ],
+        [
+          'Islam',
+          'Five set times each day, facing Makkah, '
+            + 'and together at the mosque on Friday',
+          'Salat after washing, with fasting in Ramadan, '
+            + 'giving to the poor, and the pilgrimage',
+          'An imam, for the congregation',
+        ],
+        [
+          'African Traditional Religion',
+          'At a shrine or in the home, '
+            + 'and at festivals fixed in the year',
+          'Prayer to the Supreme Being, libation poured with words, '
+            + 'offerings and sacrifices, drumming and dancing',
+          'A priest, or an elder of the family',
+        ],
+      ],
+      note: 'Every entry is put as that faith’s own followers put it. '
+        + 'Nothing here ranks one form above another.',
+    },
+    {
+      caption: 'The four jobs a form of worship does, '
+        + 'and how each faith does them',
+      columns: [
+        'The job the form does',
+        'Christianity',
+        'Islam',
+        'African Traditional Religion',
+      ],
+      rows: [
+        [
+          'Preparation, marking the worshipper ready',
+          'Prayer or confession before the service',
+          'The ablution, washing before prayer',
+          'The purity required of the one who pours libation',
+        ],
+        [
+          'An address to God in words',
+          'Prayer, and scripture read aloud',
+          'The words of salat, facing Makkah',
+          'Prayer, and the words spoken over the libation',
+        ],
+        [
+          'A giving',
+          'The offering',
+          'Zakat, given to the poor',
+          'An offering or a sacrifice',
+        ],
+        [
+          'A gathering at a set time',
+          'Sunday worship',
+          'Friday prayer at the mosque',
+          'The festivals of the year',
+        ],
+      ],
+      note: 'Read this one along a row, not down a column. '
+        + 'What is used differs. The job being done does not.',
+    },
+  ],
+
   questions: [
     {
       id: 'wor-1',
@@ -439,8 +524,8 @@ teach({
     + 'You speak. '
     + 'You thank them for listening, and you sit. '
     + 'Respect is shown in the grammar: '
-    + 'most Ghanaian languages use a plural pronoun for one senior person, '
-    + 'as Akan uses mo and Ewe uses mi for one elder. '
+    + 'most Ghanaian languages use a plural pronoun for one senior '
+    + 'person. '
     + 'It is shown in the words chosen, '
     + 'in proverbs, which carry weight precisely because they are old, '
     + 'and in the voice, which is kept level. '
@@ -562,6 +647,75 @@ teach({
     + 'it passes through the linguist. '
     + 'Learn who speaks for whom in your own area before you attend.',
 
+  figure: {
+    alt: 'Six numbered boxes in a column, giving the order of a formal '
+      + 'address: greet the gathering, name those present with the most '
+      + 'senior first, say why you are standing, speak with a level voice, '
+      + 'thank them for listening, and sit down. An arrow down the side '
+      + 'shows that the order is fixed, and a bracket marks the first '
+      + 'three boxes as the opening, where the right to speak is claimed.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the order of a formal address</text>'
+      + '<line x1="100" y1="48" x2="100" y2="348"/>'
+      + '<path d="M 92 346 L 100 364 L 108 346 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="86" y="192" font-size="15" text-anchor="end" fill="currentColor" stroke="none">in this</text>'
+      + '<text x="86" y="210" font-size="15" text-anchor="end" fill="currentColor" stroke="none">order</text>'
+      + '<circle cx="124" cy="65" r="13"/>'
+      + '<text x="124" y="71" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<rect x="145" y="44" width="330" height="42" rx="6"/>'
+      + '<text x="157" y="71" font-size="16" fill="currentColor" stroke="none">greet the gathering</text>'
+      + '<circle cx="124" cy="121" r="13"/>'
+      + '<text x="124" y="127" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<rect x="145" y="100" width="330" height="42" rx="6"/>'
+      + '<text x="157" y="127" font-size="16" fill="currentColor" stroke="none">name those present, most senior first</text>'
+      + '<circle cx="124" cy="177" r="13"/>'
+      + '<text x="124" y="183" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">3</text>'
+      + '<rect x="145" y="156" width="330" height="42" rx="6"/>'
+      + '<text x="157" y="183" font-size="16" fill="currentColor" stroke="none">say why you are standing</text>'
+      + '<circle cx="124" cy="233" r="13"/>'
+      + '<text x="124" y="239" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<rect x="145" y="212" width="330" height="42" rx="6"/>'
+      + '<text x="157" y="239" font-size="16" fill="currentColor" stroke="none">speak, voice level, words few</text>'
+      + '<circle cx="124" cy="289" r="13"/>'
+      + '<text x="124" y="295" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">5</text>'
+      + '<rect x="145" y="268" width="330" height="42" rx="6"/>'
+      + '<text x="157" y="295" font-size="16" fill="currentColor" stroke="none">thank them for listening</text>'
+      + '<circle cx="124" cy="345" r="13"/>'
+      + '<text x="124" y="351" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">6</text>'
+      + '<rect x="145" y="324" width="330" height="42" rx="6"/>'
+      + '<text x="157" y="351" font-size="16" fill="currentColor" stroke="none">sit down</text>'
+      + '<path d="M 492 44 H 504 V 198 H 492" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="512" y="106" font-size="15" fill="#0f8a4d" stroke="none">the opening, where</text>'
+      + '<text x="512" y="124" font-size="15" fill="#0f8a4d" stroke="none">the right to speak</text>'
+      + '<text x="512" y="142" font-size="15" fill="#0f8a4d" stroke="none">is claimed</text>'
+      + '<text x="320" y="390" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a fault here outweighs correct content later on</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The form of address that marks respect to one elder, '
+        + 'in four Ghanaian languages',
+      columns: [
+        'Language',
+        'To one person of your own age',
+        'To one elder',
+        'To more than one person',
+      ],
+      rows: [
+        ['Akan', 'wo', 'mo', 'mo'],
+        ['Ewe', 'wò', 'mi', 'mi'],
+        ['Ga', 'bo', 'nyɛ', 'nyɛ'],
+        ['Dagbani', 'a', 'ya', 'ya'],
+      ],
+      note: 'The last two columns are the same in every row, '
+        + 'and that is the point: the plural form is used for one elder '
+        + 'because the elder stands for more than themselves. '
+        + 'Ask your teacher for the forms of your own language if it is '
+        + 'not here, and for the tone marks it writes.',
+    },
+  ],
+
   questions: [
     {
       id: 'fgh-1',
@@ -633,11 +787,10 @@ teach({
     + 'Read the whole passage once first, '
     + 'then read the questions, '
     + 'then read again looking for each answer. '
-    + 'Some answers are in the passage and you can point at them. '
-    + 'Others must be worked out from what the passage says. '
     + 'Answer in complete sentences, in the language, in your own words. '
-    + 'Where the passage uses a proverb or an idiom, '
-    + 'give its meaning rather than repeating it.',
+    + 'The questions are not all of one kind, '
+    + 'and what counts as an answer depends on which kind you are '
+    + 'looking at.',
 
   mechanism:
     'The thing that costs marks here is not vocabulary. '
@@ -745,6 +898,88 @@ teach({
     + 'and rewrite them in your own, '
     + 'which cannot be done at all while you are translating in your head.',
 
+  figure: {
+    alt: 'Two routes from a comprehension passage to a written answer. '
+      + 'The upper route, drawn in green, goes straight from the passage '
+      + 'to reading for the meaning in the language, and then to the '
+      + 'answer in that language. The lower route, drawn in red, turns the '
+      + 'passage into English, works the answer out in English, and turns '
+      + 'that answer back again, so two translations happen and the answer '
+      + 'comes out in a shape the language does not use.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">two routes from the passage to the answer</text>'
+      + '<rect x="14" y="150" width="120" height="74" rx="6"/>'
+      + '<text x="74" y="178" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">the passage,</text>'
+      + '<text x="74" y="196" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">in your</text>'
+      + '<text x="74" y="214" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">language</text>'
+      + '<path d="M 136 168 L 182 116" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 170 112 L 188 110 L 180 126 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="192" y="84" width="186" height="56" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="285" y="108" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">read for the meaning</text>'
+      + '<text x="285" y="128" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">in the language</text>'
+      + '<line x1="378" y1="112" x2="412" y2="112" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 410 104 L 426 112 L 410 120 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="428" y="84" width="196" height="56" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="526" y="108" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the answer, in</text>'
+      + '<text x="526" y="128" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">the same language</text>'
+      + '<text x="405" y="62" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">one step, and nothing is lost</text>'
+      + '<path d="M 136 206 L 170 250" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 158 248 L 176 256 L 162 266 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="178" y="248" width="128" height="56" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="242" y="272" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">turn it into</text>'
+      + '<text x="242" y="292" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">English</text>'
+      + '<line x1="306" y1="276" x2="330" y2="276" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 328 268 L 344 276 L 328 284 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="346" y="248" width="142" height="56" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="417" y="272" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">work the answer</text>'
+      + '<text x="417" y="292" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">out in English</text>'
+      + '<line x1="488" y1="276" x2="508" y2="276" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 506 268 L 522 276 L 506 284 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="524" y="248" width="102" height="56" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="575" y="272" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">turn it</text>'
+      + '<text x="575" y="292" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">back again</text>'
+      + '<text x="400" y="334" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">two translations, and each one loses something</text>'
+      + '<text x="400" y="358" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">so the answer comes out in a shape nobody says</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four kinds of comprehension question, '
+        + 'and where the answer to each one comes from',
+      columns: [
+        'Kind of question',
+        'Where the answer comes from',
+        'What to write',
+      ],
+      rows: [
+        [
+          'A fact asked for directly',
+          'A line of the passage you can point at',
+          'The fact, in a full sentence of your own words',
+        ],
+        [
+          'Something the passage does not say outright',
+          'Worked out from what the passage does say',
+          'The conclusion, with the part of the passage it rests on',
+        ],
+        [
+          'The meaning of a proverb or an idiom',
+          'What you know of the language',
+          'The meaning in plain words, tied back to the passage',
+        ],
+        [
+          'The meaning of one unfamiliar word',
+          'The sentence around it',
+          'A word or phrase that would fit in its place',
+        ],
+      ],
+      note: 'All four are answered in the language of the passage, '
+        + 'with every tone mark and special letter written. '
+        + 'None of the four is answered by copying a whole line.',
+    },
+  ],
+
   questions: [
     {
       id: 'cgh-1',
@@ -811,28 +1046,22 @@ teach({
   },
 
   idea:
-    'Three things decide whether a sentence in your language is correct. '
-    + 'First, tense and aspect. '
-    + 'Most Ghanaian languages mark them on the verb with a prefix, '
-    + 'a particle or a change of tone, '
-    + 'rather than by changing the verb itself as English does with go and '
-    + 'went. '
-    + 'Second, tone. '
-    + 'Pitch can distinguish two words that are otherwise spelt the same, '
-    + 'so where your language writes tone marks they belong in every word '
-    + 'that needs one. '
-    + 'Third, order. '
-    + 'The usual order is subject, then verb, then object, '
-    + 'and the words that modify a noun sit where that language puts them, '
-    + 'which is often after the noun rather than before it as in English.',
+    'Three things decide whether a sentence in your language is correct: '
+    + 'what carries the tense, '
+    + 'whether the tone marks are written, '
+    + 'and where each word sits. '
+    + 'They do not all work the way they work in English, '
+    + 'which is why a learner who writes by translating loses marks '
+    + 'even when every word used is a real word of the language. '
+    + 'Check the three, in that order, on your own sentence, '
+    + 'before you hand it in.',
 
   mechanism:
     'The single most useful thing to understand is that your language does '
     + 'not do tense the way English does, '
     + 'and that learners lose marks by assuming it must. '
-    + 'In English the verb itself changes: go, going, went, gone. '
-    + 'In most Ghanaian languages the verb stays and something is added, '
-    + 'or the tone shifts. '
+    + 'In most Ghanaian languages the verb stays where it is '
+    + 'and something is added, or the tone shifts. '
     + 'So the question to ask of a sentence is not what shape the verb has '
     + 'taken, '
     + 'but what is sitting beside it. '
@@ -931,6 +1160,89 @@ teach({
     + 'where English would need a preposition or a whole clause. '
     + 'It is one of the places the language is simply not translatable word '
     + 'for word.',
+
+  figure: {
+    alt: 'Two rows of boxes, each row making one sentence. The upper row, '
+      + 'for English, reads subject, verb, object, with a note that '
+      + 'English changes the verb itself, so go becomes went. The lower '
+      + 'row, for most Ghanaian languages, reads subject, then a tense '
+      + 'mark drawn in green, then verb, then object, with a note that the '
+      + 'mark is a prefix, a particle or a tone, and that the verb beside '
+      + 'it does not change.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the tense is not in the same place</text>'
+      + '<text x="20" y="58" font-size="17" fill="currentColor" stroke="none">English</text>'
+      + '<rect x="20" y="68" width="130" height="52" rx="6"/>'
+      + '<text x="85" y="100" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">subject</text>'
+      + '<rect x="158" y="68" width="160" height="52" rx="6"/>'
+      + '<text x="238" y="100" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">verb</text>'
+      + '<rect x="326" y="68" width="130" height="52" rx="6"/>'
+      + '<text x="391" y="100" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">object</text>'
+      + '<line x1="238" y1="120" x2="238" y2="140"/>'
+      + '<path d="M 230 138 L 238 152 L 246 138 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="238" y="172" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">this word itself changes: go becomes went</text>'
+      + '<text x="20" y="212" font-size="17" fill="currentColor" stroke="none">most Ghanaian languages</text>'
+      + '<rect x="20" y="222" width="120" height="52" rx="6"/>'
+      + '<text x="80" y="254" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">subject</text>'
+      + '<rect x="148" y="222" width="130" height="52" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="213" y="254" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">tense mark</text>'
+      + '<rect x="286" y="222" width="120" height="52" rx="6"/>'
+      + '<text x="346" y="254" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">verb</text>'
+      + '<rect x="414" y="222" width="120" height="52" rx="6"/>'
+      + '<text x="474" y="254" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">object</text>'
+      + '<line x1="213" y1="274" x2="213" y2="294" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 205 292 L 213 306 L 221 292 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="213" y="326" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">a prefix, a particle or a tone</text>'
+      + '<text x="213" y="346" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">and the verb beside it does not change</text>'
+      + '<text x="320" y="388" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so do not look for a changed verb, look beside it</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three things that decide whether a sentence is '
+        + 'correct, and how each one differs from English',
+      columns: [
+        'What to check',
+        'How English does it',
+        'How most Ghanaian languages do it',
+        'What a mistake costs',
+      ],
+      rows: [
+        [
+          'Tense and aspect',
+          'The verb itself changes: go, going, went, gone',
+          'The verb stays, and a prefix, a particle or a change of tone '
+            + 'carries the time',
+          'You look for a changed verb, find none, and lose the tense',
+        ],
+        [
+          'Tone',
+          'Pitch never decides which word it is',
+          'Pitch can separate two words spelt with the same letters, '
+            + 'so the marks are part of the spelling',
+          'A missing mark writes a different word, '
+            + 'and is marked as a spelling error',
+        ],
+        [
+          'Order of subject, verb and object',
+          'Subject, verb, object',
+          'Subject, verb, object, the same',
+          'Little: this is the one place the two agree',
+        ],
+        [
+          'Where a word that describes a noun sits',
+          'Before the noun: a red cloth',
+          'After the noun, in most of these languages',
+          'A phrase no speaker would say, such as the describing word '
+            + 'put in front',
+        ],
+      ],
+      note: 'Read each row across before you write. '
+        + 'Three of the four differ from English, '
+        + 'and those three are where the marks are lost.',
+    },
+  ],
 
   questions: [
     {
