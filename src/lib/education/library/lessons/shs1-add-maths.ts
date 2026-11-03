@@ -66,6 +66,34 @@ teach({
     ],
   },
 
+  why:
+    'A water tank is to be built as a box. '
+    + 'The base is 2 metres longer than it is wide, '
+    + 'and the height is 1 metre less than the width. '
+    + 'It has to hold 24 cubic metres. '
+    + 'Call the width x. '
+    + 'The volume is x, times x plus 2, times x minus 1, '
+    + 'which multiplies out to x cubed plus x squared minus 2x. '
+    + 'So the width is the number that makes that equal 24. '
+    + 'Hunting for two numbers that multiply and add, '
+    + 'which is how a quadratic is cracked, will not touch a cubic. '
+    + 'How do you find a number that satisfies a cubic, '
+    + 'without trying every number there is?',
+
+  notation:
+    'f of x is written f(x) and said "f of x", '
+    + 'and f of 2 means the number you get '
+    + 'by putting 2 wherever x appears. '
+    + 'The degree is the highest power present, '
+    + 'so x cubed minus 1 has degree 3 and is called a cubic. '
+    + 'In a long division the answer written on top is the quotient '
+    + 'and what is left at the bottom is the remainder, '
+    + 'laid out exactly as a long division of whole numbers is. '
+    + 'A value that makes f of x come out zero '
+    + 'is called a root, or a zero. '
+    + 'Reading f(x) as f times x and cancelling the f '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A polynomial in x is a sum of terms, each a number times a whole '
     + 'number power of x. '
@@ -135,10 +163,18 @@ teach({
     + 'and a bare yes scores nothing.',
 
   recap:
-    'You have factorised quadratics by finding two numbers '
-    + 'that multiply and add to the right values. '
-    + 'This gives a method that works for a cubic too, '
-    + 'where guessing a pair no longer helps.',
+    'Factorising means writing an expression '
+    + 'as things multiplied together. '
+    + 'Take x squared plus 5x plus 6. '
+    + 'Look for two numbers that multiply to 6 and add to 5. '
+    + 'They are 2 and 3, '
+    + 'so the expression is x plus 2, times x plus 3. '
+    + 'Check by multiplying out: '
+    + 'x squared plus 3x plus 2x plus 6, '
+    + 'which is x squared plus 5x plus 6 again. '
+    + 'That hunt for a pair is the whole of factorising a quadratic, '
+    + 'and this topic exists because there is no pair to hunt for '
+    + 'once the highest power is 3.',
 
   method: [
     'Write the polynomial in descending powers, with zeros for any missing '
@@ -340,6 +376,33 @@ teach({
     ],
   },
 
+  why:
+    'A mason is laying a square floor that must cover 18 square metres. '
+    + 'One side of it is the square root of 18 metres. '
+    + 'His calculator gives 4.2426406, '
+    + 'and it goes on without ever settling, '
+    + 'so he cannot mark a line at it. '
+    + 'The only exact root in his table is the square root of 2. '
+    + 'Can the square root of 18 be written exactly, '
+    + 'using the square root of 2, and what rule decides when that works? '
+    + 'The same lesson answers the other thing he cannot do: '
+    + 'his sand pile doubles with every tipper load, '
+    + 'and he wants the number of loads that takes him past 50 cubic metres, '
+    + 'which is a number sitting up in an exponent '
+    + 'where multiplying cannot reach it.',
+
+  notation:
+    'The square root sign is a tick with a bar running over the number, '
+    + 'and the square root of 18 is said "root eighteen". '
+    + 'A small figure tucked into the tick asks for another root, '
+    + 'so the one with a 3 in it is said "cube root". '
+    + 'A logarithm is written log, then the base small and low, '
+    + 'then the number, so log base 3 of 81 is said just that way. '
+    + 'When no base is written, as in log 40, the base is ten, '
+    + 'because that is the one everybody agreed to leave out. '
+    + 'Dropping the base when it is not ten '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'The laws of indices are three. '
     + 'a to the m times a to the n equals a to the m plus n. '
@@ -425,9 +488,17 @@ teach({
     + 'Those phrases are the marks.',
 
   recap:
-    'You know index notation and how to square and take square roots. '
-    + 'This adds the laws in full, '
-    + 'and the logarithm, which is the index made into the unknown.',
+    'An index is the small raised number that says '
+    + 'how many times a number is multiplied by itself. '
+    + 'In 2 to the power 3 the index is 3, '
+    + 'and it means 2 times 2 times 2, which is 8. '
+    + 'The 2 is called the base. '
+    + 'A square root goes the other way: '
+    + 'the square root of 9 is 3, because 3 times 3 is 9. '
+    + 'Some roots come out exactly, like the square root of 9, '
+    + 'and some never do, like the square root of 2. '
+    + 'This topic takes both of those, gives the index laws in full, '
+    + 'and then asks for the index itself, which is what a logarithm is.',
 
   method: [
     'For an index equation, write both sides as powers of one base.',
@@ -629,6 +700,31 @@ teach({
     ],
   },
 
+  why:
+    'A chairman tells a meeting: '
+    + 'if the rains come early, the cocoa price will fall. '
+    + 'The rains do not come early. '
+    + 'A member stands up and says, so the price will not fall. '
+    + 'Half the room agrees with him and half does not, '
+    + 'and they argue for twenty minutes without settling it. '
+    + 'Nothing in ordinary speech can settle it, '
+    + 'because the word "if" is being used loosely by both sides. '
+    + 'This topic fixes exactly what "if" means, '
+    + 'so an argument like that can be tested instead of shouted about.',
+
+  notation:
+    'Statements are given letters, usually p and q. '
+    + 'Not p is written with a small curl in front of the p, '
+    + 'and said "not p". '
+    + 'p and q is written with a symbol like a letter v turned upside down '
+    + 'between them, and said "p and q". '
+    + 'p or q uses the v the right way up, and is said "p or q". '
+    + 'If p then q is written with an arrow from p to q, '
+    + 'and said "p implies q". '
+    + 'The arrow points the way the reasoning is allowed to run, '
+    + 'and turning it round makes a different statement, '
+    + 'which is the commonest way to lose a mark.',
+
   idea:
     'A statement, or proposition, is a sentence that is either true or '
     + 'false, '
@@ -705,9 +801,16 @@ teach({
     + 'That sentence is the mark the table was built to earn.',
 
   recap:
-    'You have used words like and, or and if in ordinary speech. '
-    + 'This fixes exactly what each one means, '
-    + 'so that an argument can be tested rather than argued over.',
+    'Some sentences can be called true or false. '
+    + '"Accra is in Ghana" is true. '
+    + '"Accra is in Nigeria" is false. '
+    + 'Other sentences can be neither. '
+    + '"Close the door" is an order and "What is the time?" is a question, '
+    + 'and neither of those is true or false. '
+    + 'A sentence that has to be one or the other, '
+    + 'true or false and never both, is called a statement. '
+    + 'Everything in this topic is built by joining statements '
+    + 'with the words not, and, or, and if.',
 
   method: [
     'Name each simple statement with a letter.',
@@ -922,6 +1025,31 @@ teach({
     ],
   },
 
+  why:
+    'A shop in Tema charges for photocopies like this: '
+    + '1 cedi to start, then 20 pesewas a page. '
+    + 'For 10 pages that is 1 plus 2, which is 3 cedis. '
+    + 'For 50 pages it is 1 plus 10, which is 11 cedis. '
+    + 'A customer comes in with 9 cedis exactly '
+    + 'and asks how many pages that buys her. '
+    + 'The rule was built to go from pages to cedis, '
+    + 'and she is asking it to run backwards. '
+    + 'Can every rule be run backwards, '
+    + 'and what would tell you when one cannot?',
+
+  notation:
+    'f of x is written f(x) and said "f of x". '
+    + 'It does not mean f multiplied by x, '
+    + 'so the f can never be cancelled. '
+    + 'The arrow form, x maps to 2x plus 1, says the same thing, '
+    + 'and is read "x maps to two x plus one". '
+    + 'In fg of x the letter nearest the x is used first, '
+    + 'so g runs before f. '
+    + 'The inverse is written f with a raised minus one, '
+    + 'and said "f inverse". '
+    + 'It does not mean one over f, '
+    + 'and reading it that way is the commonest way to lose a mark.',
+
   idea:
     'A mapping takes each member of one set, the domain, '
     + 'to a member of another set, the co-domain. '
@@ -993,10 +1121,17 @@ teach({
     + 'if f inverse of f of 5 comes back as 5, the inverse is right.',
 
   recap:
-    'You have substituted a value into a formula and got an answer. '
-    + 'This names what that machine is, '
-    + 'asks which inputs are allowed, '
-    + 'and asks whether the machine can be run backwards.',
+    'A formula is a rule for turning one number into another. '
+    + 'Take the rule "multiply by 2, then add 1", '
+    + 'which is written f of x equals 2x plus 1. '
+    + 'Put in 3 and you get 2 times 3 plus 1, which is 7. '
+    + 'Put in 5 and you get 11. '
+    + 'The number going in is the input '
+    + 'and the number coming out is the output, '
+    + 'and the same input always gives the same output. '
+    + 'This topic gives that machine its proper names, '
+    + 'asks which inputs are allowed into it, '
+    + 'and asks whether it can be run backwards.',
 
   method: [
     'Identify the domain and check each input has exactly one output.',
@@ -1200,6 +1335,32 @@ teach({
     ],
   },
 
+  why:
+    'A surveyor pegs two corners of a plot at Oyarifa. '
+    + 'On his plan the first peg is at the point 2, 3 '
+    + 'and the second at 10, 9, in metres from a fixed corner. '
+    + 'He needs the exact distance between the two pegs, '
+    + 'and the exact slope of the boundary, '
+    + 'to write on a document that will be registered. '
+    + 'He could draw them on graph paper and measure with a ruler, '
+    + 'and be out by half a metre, '
+    + 'which is enough to put a wall in the wrong place. '
+    + 'How do you get the exact distance and the exact slope '
+    + 'from those four numbers alone, with no drawing at all?',
+
+  notation:
+    'A point is written as two numbers in brackets with a comma between, '
+    + 'as (2, 3), and said "the point two, three". '
+    + 'The across number always comes first. '
+    + 'A small figure sitting low beside a letter only labels '
+    + 'which point it belongs to, '
+    + 'so x1 is said "x one" and means the x of the first point, '
+    + 'not x times 1. '
+    + 'The letter m is the usual letter for a gradient, '
+    + 'and c for where the line crosses the y axis. '
+    + 'Writing the up number first, or reading x1 as a multiplication, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'The gradient of the line through the points x1, y1 and x2, y2 '
     + 'is y2 minus y1 over x2 minus x1. '
@@ -1285,9 +1446,19 @@ teach({
     + 'scores none of the three.',
 
   recap:
-    'You have plotted straight line graphs and found gradients from them. '
-    + 'This does the same work by algebra instead of by drawing, '
-    + 'which is what makes an exact angle or distance possible.',
+    'A point on a grid is fixed by two numbers, '
+    + 'written in brackets, the across one first and the up one second, '
+    + 'so the point 3, 2 is three to the right and two up. '
+    + 'Two points joined make a line, '
+    + 'and how steeply that line climbs is called its gradient. '
+    + 'Read a gradient off a drawing by counting. '
+    + 'Go from one point to the other, '
+    + 'count the squares up, count the squares across, '
+    + 'and divide the up by the across. '
+    + 'From the point 1, 2 to the point 4, 8 is 6 up and 3 across, '
+    + 'so the gradient is 6 over 3, which is 2. '
+    + 'This topic does that same work with the numbers only, '
+    + 'which is what makes an exact answer possible.',
 
   method: [
     'Write down the coordinates or the equation you are given.',
@@ -1491,6 +1662,32 @@ teach({
     ],
   },
 
+  why:
+    'A carpenter in Takoradi is cutting a fan shaped window '
+    + 'out of a sheet of plywood. '
+    + 'The radius is 60 centimetres and the opening is 50 degrees. '
+    + 'He wants the length of the curved edge, '
+    + 'so that he knows how much beading to buy. '
+    + 'The way he was taught it is 50 over 360, '
+    + 'times 2, times pi, times 60. '
+    + 'That works, and it is four steps of fiddling with 360. '
+    + 'There is a way of measuring an angle '
+    + 'that makes the curved edge simply the radius times the angle, '
+    + 'with no 360 in it anywhere. '
+    + 'This topic is that way of measuring, and why anybody bothers.',
+
+  notation:
+    'An angle in degrees carries a small raised circle, as in 30 degrees. '
+    + 'An angle in radians carries nothing at all, '
+    + 'so a bare pi over 6 means pi over 6 radians, '
+    + 'and that silence is the whole convention. '
+    + 'The Greek letter theta, an o with a line through it, '
+    + 'is the usual letter for an angle, and is said "theta". '
+    + 'The formula arc equals r theta is only true '
+    + 'when theta is in radians, '
+    + 'so leaving an angle in degrees inside it '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'An angle can be measured in degrees or in radians. '
     + 'One radian is the angle at the centre of a circle '
@@ -1566,10 +1763,18 @@ teach({
     + 'error.',
 
   recap:
-    'You have found arc lengths and sector areas '
-    + 'as fractions of a circle, using degrees. '
-    + 'This gives a different unit for the angle, '
-    + 'chosen so that those two formulas become products.',
+    'A full turn round a circle is 360 degrees, '
+    + 'and the whole way round the edge is the circumference, '
+    + 'which is 2 times pi times the radius. '
+    + 'A sector is a slice of the circle, '
+    + 'like a slice cut from a round loaf. '
+    + 'Its curved edge is the same fraction of the circumference '
+    + 'as its angle is of 360 degrees. '
+    + 'So a 90 degree slice of a circle of radius 10 '
+    + 'has a curved edge of 90 over 360, which is a quarter, '
+    + 'times 2 times pi times 10, giving about 15.7. '
+    + 'This topic changes the unit the angle is measured in, '
+    + 'chosen so that the dividing by 360 disappears.',
 
   method: [
     'Read the angle and note its unit.',
@@ -1771,6 +1976,32 @@ teach({
     ],
   },
 
+  why:
+    'Five traders at Makola count a day’s takings: '
+    + '80 cedis, 90, 100, 110, '
+    + 'and one who had a wholesale order, 2000. '
+    + 'A bank officer asks what a trader there takes in a day. '
+    + 'Add the five and divide by five and the answer is 476 cedis, '
+    + 'which not one of the five took. '
+    + 'Say 100, and four of the five are described well '
+    + 'and the fifth not at all. '
+    + 'Both numbers are correct arithmetic, '
+    + 'and they tell a different story about the same market. '
+    + 'Which one should the officer be given, and what settles that?',
+
+  notation:
+    'The adding-up sign is a large Greek letter S, '
+    + 'written like a pointed capital E and said "sigma". '
+    + 'It means "add up all of these", '
+    + 'so sigma f x means: multiply each midpoint x by its frequency f, '
+    + 'then add all those products together. '
+    + 'The mean of a set is written as x with a bar over it, '
+    + 'and said "x bar". '
+    + 'In sigma f x squared the squaring is done to each x '
+    + 'before any adding, '
+    + 'and squaring the finished total instead '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A measure of location is a single value standing for a whole set. '
     + 'The mean is the total divided by how many there are. '
@@ -1855,10 +2086,19 @@ teach({
     + 'even when both numbers are right.',
 
   recap:
-    'You have found the mean, median and mode of a short list, '
-    + 'and the range. '
-    + 'This handles data already sorted into classes, '
-    + 'and adds a measure of spread that uses every value.',
+    'Take the list 4, 6, 6, 8, 11. '
+    + 'The mean is the total divided by how many there are: '
+    + '35 divided by 5, which is 7. '
+    + 'The median is the middle one when they are put in order, '
+    + 'which is 6. '
+    + 'The mode is the one appearing most often, which is 6 as well. '
+    + 'The range is the largest take away the smallest: '
+    + '11 take away 4, which is 7. '
+    + 'Those four are what this topic stands on. '
+    + 'It goes on to handle data already sorted into classes, '
+    + 'where the single values can no longer be seen, '
+    + 'and adds a measure of spread that uses every value '
+    + 'instead of only two.',
 
   method: [
     'Draw a table with columns for class, midpoint x, frequency f, '

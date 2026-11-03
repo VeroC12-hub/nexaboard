@@ -877,7 +877,7 @@ teach({
     + '1.2, '
     + 'because you keep the whole, which is 1, and add 0.2 of it. '
     + 'A decrease of 20 per cent means multiplying by 0.8. '
-    + 'And if you know the amount after a change, '
+    + 'And when the amount after a change is given, '
     + 'you find the original by dividing by that same multiplier.',
 
   mechanism:
@@ -1353,6 +1353,28 @@ teach({
     ],
   },
 
+  why:
+    'A chair maker in Suame starts the week with 7 chairs finished. '
+    + 'He finishes 4 more every day. '
+    + 'By Monday evening he has 11, by Tuesday 15, by Wednesday 19. '
+    + 'A shop asks him for 87 chairs '
+    + 'and wants to know which day they will be ready. '
+    + 'Writing out the days one by one would get him there in the end. '
+    + 'This topic gives him the one line that answers it straight away.',
+
+  notation:
+    'Each number in a sequence is called a term. '
+    + 'The terms are counted from the first one, '
+    + 'so in 5, 8, 11 the first term is 5 and the third term is 11. '
+    + 'The position of a term is written n, '
+    + 'so the nth term means the term in position n. '
+    + 'A formula like 3n + 2 is said "three n plus two", '
+    + 'and 3n means 3 times n with the multiplication sign left out. '
+    + 'To use it, put the position where the n is: '
+    + 'the fourth term is 3 times 4, plus 2, which is 14. '
+    + 'Doing the adding before the multiplying '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A sequence is a list of numbers made by a rule. '
     + 'The nth term is a formula that gives any term you ask for, '
@@ -1386,10 +1408,17 @@ teach({
     + 'or ask whether each term is multiplied rather than added to.',
 
   recap:
-    'You can continue a pattern by spotting what is added each time. '
-    + 'This turns that into a formula, '
-    + 'so you can give the hundredth term without writing the first '
-    + 'ninety nine.',
+    'Look at the list 5, 8, 11, 14. '
+    + 'Each number is 3 more than the one before it. '
+    + 'Subtract any two numbers that sit next to each other '
+    + 'and you get 3 every time: 8 take away 5 is 3, '
+    + 'and 11 take away 8 is 3. '
+    + 'That fixed step is called the common difference, '
+    + 'and with it you can keep the list going: '
+    + 'the next number is 14 plus 3, which is 17. '
+    + 'This topic turns that step into a formula, '
+    + 'so the hundredth number can be given '
+    + 'without writing the ninety nine before it.',
 
   method: [
     'Write the sequence with space underneath.',
@@ -1894,7 +1923,7 @@ teach({
     + 'The adding was right and the dividing was right, '
     + 'and the number is still a lie about the shop. '
     + 'Which number would have told the truth, '
-    + 'and how would you know to pick that one?',
+    + 'and what would tell you to pick that one?',
 
   notation:
     'The mean has a symbol: a letter with a short bar over it, '
