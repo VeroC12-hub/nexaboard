@@ -1449,21 +1449,16 @@ teach({
   },
 
   idea:
-    'A reflection needs a mirror line, '
-    + 'and every point moves to the same distance on the other side of it, '
-    + 'along a perpendicular. '
-    + 'A rotation needs a centre, an angle, and a direction, '
-    + 'clockwise or anticlockwise. '
-    + 'A translation needs a vector: '
-    + 'so many units across and so many up. '
-    + 'An enlargement needs a centre and a scale factor, '
-    + 'and every distance from the centre is multiplied by that factor. '
-    + 'Reflection, rotation and translation leave lengths and angles '
-    + 'unchanged, '
+    'Four transformations are set, '
+    + 'and each needs a particular piece of information '
+    + 'before it can be carried out at all: '
+    + 'a line, or a centre with an angle and a direction, '
+    + 'or a vector, or a centre with a scale factor. '
+    + 'Three of the four leave every length and every angle as it was, '
     + 'so the image is congruent to the object. '
-    + 'An enlargement changes lengths '
-    + 'and leaves angles unchanged, '
-    + 'so the image is similar to the object.',
+    + 'The fourth, enlargement, changes the lengths '
+    + 'and leaves the angles alone, '
+    + 'so its image is similar rather than congruent.',
 
   mechanism:
     'The mistake that costs marks is working on the whole shape at once, '
@@ -1476,22 +1471,11 @@ teach({
     + 'misplaced. '
     + 'The second useful idea is to know what each transformation '
     + 'preserves, '
-    + 'because it gives you a free check. '
-    + 'After a reflection, rotation or translation, '
-    + 'every side of your image must be the same length as the original. '
-    + 'If one is not, a vertex is wrong, and you have found it without the '
-    + 'answer. '
-    + 'After an enlargement, every length must be the factor times the '
-    + 'original, '
-    + 'and every angle unchanged, '
-    + 'which is also how you can tell an enlargement from a mistake. '
-    + 'Two particular cases are worth knowing. '
-    + 'A point on the mirror line does not move at all, '
-    + 'which is why a reflection of a shape touching the line '
-    + 'shares those points with its image. '
-    + 'And a scale factor between 0 and 1 makes the shape smaller, '
-    + 'which is still called an enlargement, '
-    + 'because the word describes the operation and not the outcome.',
+    + 'because it gives you a free check on your own work. '
+    + 'If a length comes out wrong under a transformation that should not '
+    + 'change lengths, '
+    + 'a vertex is misplaced, '
+    + 'and you have found it without being told the answer.',
 
   recap:
     'You can plot points in four quadrants. '
@@ -1515,23 +1499,23 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Reflect the point (3, 2) in the y axis.',
+      ask: 'Reflect the point $(3, 2)$ in the y axis.',
       steps: [
-        'The y axis is the line x = 0.',
+        'The y axis is the line $x = 0$.',
         'The distance across is 3, so the image is 3 on the other side.',
         'The height does not change.',
       ],
-      answer: '(-3, 2).',
+      answer: '$(-3, 2)$.',
     },
     {
       level: 4,
       ask: 'A triangle is enlarged by scale factor 3 from the origin. '
-        + 'Where does the vertex (2, 1) go?',
+        + 'Where does the vertex $(2, 1)$ go?',
       steps: [
         'Every distance from the centre is multiplied by 3.',
         'The centre is the origin, so multiply both coordinates.',
       ],
-      answer: '(6, 3).',
+      answer: '$(6, 3)$.',
     },
     {
       level: 5,
@@ -1570,6 +1554,120 @@ teach({
       mistake: 'Measuring an enlargement from the wrong point.',
       why: 'Distances are measured from the centre of enlargement, '
         + 'not from the origin unless that is the centre.',
+    },
+  ],
+
+  figure: {
+    alt: 'Four small panels, one for each transformation, each showing a '
+      + 'triangle and its image in green. Reflection: the image stands at '
+      + 'the same distance on the other side of a dashed mirror line, the '
+      + 'same size. Rotation: the image is turned a quarter turn '
+      + 'anticlockwise about a marked centre, with an arc showing the '
+      + 'turn. Translation: the image is slid across and up, with a '
+      + 'dashed arrow for the vector. Enlargement: the image is twice the '
+      + 'size, with dashed rays from a marked centre through each pair of '
+      + 'matching vertices. In the first three the image is the same size '
+      + 'as the object. Only the enlargement changes size.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">four rules, and what each one needs</text>'
+      + '<rect x="8" y="46" width="306" height="182" rx="6" stroke-width="1"/>'
+      + '<text x="160" y="68" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">reflection</text>'
+      + '<line x1="160" y1="80" x2="160" y2="196" stroke-dasharray="8 5"/>'
+      + '<path d="M 76 192 L 126 192 L 76 128 Z"/>'
+      + '<path d="M 244 192 L 194 192 L 244 128 Z" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="160" y="216" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">needs a mirror line</text>'
+      + '<rect x="326" y="46" width="306" height="182" rx="6" stroke-width="1"/>'
+      + '<text x="480" y="68" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">rotation</text>'
+      + '<circle cx="480" cy="192" r="5" fill="currentColor" stroke="none"/>'
+      + '<path d="M 490 192 L 550 192 L 550 146 Z"/>'
+      + '<path d="M 480 182 L 480 122 L 434 122 Z" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 520 192 A 40 40 0 0 0 480 152" stroke-dasharray="6 4"/>'
+      + '<path d="M 472 156 L 479 142 L 487 154 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="528" y="166" font-size="12" fill="currentColor" stroke="none">a quarter turn</text>'
+      + '<text x="480" y="216" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">needs a centre, an angle and a direction</text>'
+      + '<rect x="8" y="236" width="306" height="160" rx="6" stroke-width="1"/>'
+      + '<text x="160" y="254" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">translation</text>'
+      + '<path d="M 50 368 L 100 368 L 50 318 Z"/>'
+      + '<path d="M 180 328 L 230 328 L 180 278 Z" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<line x1="70" y1="342" x2="186" y2="306" stroke-dasharray="7 5"/>'
+      + '<path d="M 188 314 L 196 302 L 182 300 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="160" y="390" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">needs a vector: across and up</text>'
+      + '<rect x="326" y="236" width="306" height="160" rx="6" stroke-width="1"/>'
+      + '<text x="480" y="254" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">enlargement</text>'
+      + '<circle cx="355" cy="362" r="5" fill="currentColor" stroke="none"/>'
+      + '<line x1="355" y1="362" x2="435" y2="322" stroke-width="1" stroke-dasharray="6 4"/>'
+      + '<line x1="355" y1="362" x2="495" y2="322" stroke-width="1" stroke-dasharray="6 4"/>'
+      + '<line x1="355" y1="362" x2="435" y2="262" stroke-width="1" stroke-dasharray="6 4"/>'
+      + '<path d="M 395 342 L 425 342 L 395 312 Z"/>'
+      + '<path d="M 435 322 L 495 322 L 435 262 Z" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="512" y="296" font-size="12" fill="currentColor" stroke="none">factor 2</text>'
+      + '<text x="480" y="390" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">needs a centre and a scale factor</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each transformation needs, '
+        + 'what it does to a point, and what it leaves unchanged',
+      columns: [
+        'Transformation',
+        'What it needs before you can start',
+        'What it does to a point',
+        'What it leaves unchanged',
+      ],
+      rows: [
+        [
+          'Reflection',
+          'A mirror line',
+          'Moves it to the same distance on the other side of the line, '
+            + 'along a perpendicular',
+          'Lengths and angles, so the image is congruent',
+        ],
+        [
+          'Rotation',
+          'A centre, an angle, and a direction',
+          'Turns it about the centre through that angle',
+          'Lengths and angles, so the image is congruent',
+        ],
+        [
+          'Translation',
+          'A vector: so many units across and so many up',
+          'Slides it by that vector',
+          'Lengths and angles, so the image is congruent',
+        ],
+        [
+          'Enlargement',
+          'A centre and a scale factor',
+          'Multiplies its distance from the centre by the factor',
+          'Angles only, so the image is similar but not congruent',
+        ],
+      ],
+      note: 'Work one vertex at a time, '
+        + 'because every rule in the third column is a rule about a '
+        + 'POINT. Transform each corner, then join the images in the same '
+        + 'order, and the shape takes care of itself.',
+    },
+    {
+      caption: 'Two things that look like mistakes and are not',
+      columns: ['What you see', 'What is actually happening'],
+      rows: [
+        [
+          'A point of the object has not moved at all after a reflection',
+          'It was sitting on the mirror line. Points on the line stay '
+            + 'where they are, which is why a shape touching the line '
+            + 'shares those points with its image',
+        ],
+        [
+          'A scale factor between 0 and 1 has made the shape smaller, '
+            + 'and it is still called an enlargement',
+          'The word names the operation, which is multiplying every '
+            + 'distance from a centre by a factor. It does not describe '
+            + 'the outcome',
+        ],
+      ],
+      note: 'When a question asks you to describe a transformation, '
+        + 'give everything the second column of the first table asks for. '
+        + 'A rotation without its direction is not a full description.',
     },
   ],
 
@@ -1641,25 +1739,21 @@ teach({
 
   idea:
     'A bearing gives a direction as an angle from north, '
-    + 'measured clockwise, '
-    + 'and written with three figures: '
-    + 'due east is 090, due south is 180, due west is 270. '
+    + 'measured clockwise, and written with three figures. '
+    + 'Due east is 090, due south is 180, due west is 270. '
+    + 'Which point you measure at decides the answer. '
     + 'The bearing of B from A is measured at A, '
-    + 'from a north line drawn at A. '
-    + 'The bearing of A from B is the back bearing, '
-    + 'which is 180 degrees more, '
-    + 'or 180 less if adding would exceed 360. '
+    + 'from a north line drawn at A, '
+    + 'and the bearing of A from B, the back bearing, '
+    + 'is measured at B instead. '
     + 'A journey problem is solved by drawing the legs to scale '
-    + 'with a north line at each turning point.',
+    + 'with a north line at every turning point.',
 
   mechanism:
     'Bearings are not difficult and are lost on carelessness, '
     + 'because three conventions have to hold at once '
     + 'and dropping any one of them gives a wrong answer that looks '
-    + 'reasonable. '
-    + 'From north, not from the nearest axis. '
-    + 'Clockwise, not whichever way is shorter. '
-    + 'Three figures, so a leading zero where needed. '
+    + 'perfectly reasonable. '
     + 'So the habit to build is mechanical: '
     + 'before measuring anything, draw the north line at the point you are '
     + 'measuring FROM. '
@@ -1714,7 +1808,7 @@ teach({
         + 'What is the bearing of A from B?',
       steps: [
         'The back bearing is 180 more.',
-        '70 + 180 = 250.',
+        '$70 + 180 = 250$.',
       ],
       answer: '250.',
     },
@@ -1751,6 +1845,111 @@ teach({
       mistake: 'Adding 180 when the result passes 360.',
       why: 'Subtract instead. '
         + 'A bearing is never more than 360.',
+    },
+  ],
+
+  figure: {
+    alt: 'Two points, A low on the left and B up to the right. A north '
+      + 'line is drawn upward at each of them, and the two north lines '
+      + 'are parallel. The line from A to B crosses both. At A an arc from '
+      + 'the north line clockwise to the line AB is marked 070, the '
+      + 'bearing of B from A. At B a much larger arc from its own north '
+      + 'line clockwise round to the direction back towards A is marked '
+      + '250, the bearing of A from B. A note says the north lines are '
+      + 'parallel and the line between the points crosses both, which is '
+      + 'where the 180 comes from.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">where the 180 in a back bearing comes from</text>'
+      + '<line x1="160" y1="300" x2="160" y2="104"/>'
+      + '<path d="M 152 106 L 160 90 L 168 106 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="160" y="80" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">N</text>'
+      + '<line x1="386" y1="218" x2="386" y2="86"/>'
+      + '<path d="M 378 88 L 386 72 L 394 88 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="386" y="62" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">N</text>'
+      + '<line x1="160" y1="300" x2="386" y2="218"/>'
+      + '<circle cx="160" cy="300" r="5" fill="currentColor" stroke="none"/>'
+      + '<text x="146" y="314" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">A</text>'
+      + '<circle cx="386" cy="218" r="5" fill="currentColor" stroke="none"/>'
+      + '<text x="398" y="230" font-size="17" fill="currentColor" stroke="none">B</text>'
+      + '<path d="M 160 250 A 50 50 0 0 1 207 283" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="196" y="256" font-size="15" fill="#0f8a4d" stroke="none">070</text>'
+      + '<path d="M 386 172 A 46 46 0 1 1 343 234" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="408" y="268" font-size="15" fill="#0f8a4d" stroke="none">250</text>'
+      + '<text x="452" y="120" font-size="15" fill="currentColor" stroke="none">the two north lines</text>'
+      + '<text x="452" y="140" font-size="15" fill="currentColor" stroke="none">are parallel, and the</text>'
+      + '<text x="452" y="160" font-size="15" fill="currentColor" stroke="none">line AB crosses both,</text>'
+      + '<text x="452" y="186" font-size="15" fill="#0f8a4d" stroke="none">so the two bearings</text>'
+      + '<text x="452" y="206" font-size="15" fill="#0f8a4d" stroke="none">differ by 180</text>'
+      + '<text x="320" y="352" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the bearing of B from A is 070, and it is measured at A</text>'
+      + '<text x="320" y="378" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the bearing of A from B is 250, and it is measured at B</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three conventions a bearing keeps, '
+        + 'and what breaks if you drop one',
+      columns: [
+        'The convention',
+        'What it means',
+        'What happens if you drop it',
+      ],
+      rows: [
+        [
+          'Measured from north',
+          'From the north line every time, never from the nearest axis',
+          'An answer that looks reasonable and is wrong by up to 90 '
+            + 'degrees',
+        ],
+        [
+          'Measured clockwise',
+          'Clockwise from north, never whichever way round is shorter',
+          'A bearing that should be 300 comes out as 060',
+        ],
+        [
+          'Written with three figures',
+          'A leading zero where one is needed: 045, never 45',
+          'Marks lost on the page, and over a radio forty five can be '
+            + 'heard as four, or as five',
+        ],
+      ],
+      note: 'Before measuring anything, draw the north line at the point '
+        + 'you are measuring FROM. Half the errors in this topic are '
+        + 'measuring from the wrong end of the journey, and a north line '
+        + 'at the right point makes that impossible.',
+    },
+    {
+      caption: 'Finding a back bearing, with the two cases it falls into',
+      columns: [
+        'The bearing you are given',
+        'Which case it is',
+        'The back bearing',
+      ],
+      rows: [
+        [
+          '090',
+          'Adding 180 stays under 360, so add',
+          '270',
+        ],
+        [
+          '070',
+          'Adding 180 stays under 360, so add',
+          '250',
+        ],
+        [
+          '240',
+          'Adding 180 would pass 360, so subtract instead',
+          '060',
+        ],
+        [
+          '315',
+          'Adding 180 would pass 360, so subtract instead',
+          '135',
+        ],
+      ],
+      note: 'This is one rule and not two. A bearing lies between 000 and '
+        + '360, so you add or subtract whichever keeps it there, '
+        + 'and the answer is written with three figures as well.',
     },
   ],
 
@@ -1815,18 +2014,16 @@ teach({
   },
 
   idea:
-    'A prism has the same cross section all along its length. '
-    + 'Its volume is the area of that cross section times the length. '
-    + 'So a cuboid is length times width times height, '
-    + 'a triangular prism is half base times height, times length, '
-    + 'and a cylinder is pi r squared times h. '
-    + 'Surface area is the sum of the areas of all the faces. '
-    + 'A cuboid has six. '
-    + 'A closed cylinder has two circles and one curved surface, '
-    + 'and the curved surface unrolls into a rectangle '
-    + 'of height h and width equal to the circumference, '
-    + 'so its area is 2 pi r h. '
-    + 'Volume is in cubic units and surface area in square units.',
+    'A prism has the same cross section all along its length, '
+    + 'and its volume is the area of that cross section times the length. '
+    + 'That one sentence covers every prism you will meet, '
+    + 'so there is nothing here to memorise. '
+    + 'Surface area is different: it is the total of all the faces, '
+    + 'there is no single formula for it, '
+    + 'and the work is listing every face before adding anything. '
+    + 'Volume is given in cubic units and surface area in square units, '
+    + 'and an answer with the wrong unit is marked wrong '
+    + 'even when the number is right.',
 
   mechanism:
     'One idea covers every prism, '
@@ -1842,10 +2039,8 @@ teach({
     + 'Surface area needs a different habit, '
     + 'because there is no single formula and the marks are lost by '
     + 'forgetting a face. '
-    + 'So list them. '
-    + 'For a cuboid, three pairs. '
-    + 'For a cylinder, two circles and a curved surface, '
-    + 'unless the question says open, when there is one circle or none. '
+    + 'So list them before you add anything, '
+    + 'and read the question for the word open. '
     + 'The curved surface is the part learners cannot picture, '
     + 'and there is a way to see it: '
     + 'take the label off a tin and flatten it. '
@@ -1853,13 +2048,11 @@ teach({
     + 'Its height is the height of the tin, '
     + 'and its width was wrapped once round the tin, so it is the '
     + 'circumference. '
-    + 'Hence 2 pi r times h, '
+    + 'Hence $2\\pi r h$, '
     + 'which you can rebuild from a tin label rather than remember. '
-    + 'Finally the units. '
+    + 'Finally the units, which follow from the multiplying. '
     + 'Volume multiplies three lengths, so it is cubic. '
-    + 'Area multiplies two, so it is square. '
-    + 'An answer with the wrong unit is marked wrong '
-    + 'even when the number is right.',
+    + 'Area multiplies two, so it is square.',
 
   recap:
     'You can find the area of a rectangle, a triangle and a circle. '
@@ -1882,7 +2075,7 @@ teach({
       level: 3,
       ask: 'Find the volume of a cuboid 5 cm by 3 cm by 4 cm.',
       steps: [
-        'Cross section 5 by 3 is 15 square cm.',
+        'Cross section $5 \\times 3 = 15$ square cm.',
         'Multiply by the height 4.',
       ],
       answer: '60 cubic cm.',
@@ -1892,24 +2085,25 @@ teach({
       ask: 'Find the volume of a cylinder of radius 7 cm and height 10 cm, '
         + 'using 22 over 7.',
       steps: [
-        'Cross section is pi r squared: 22 over 7, times 49, is 154.',
+        'Cross section is $\\pi r^2$: '
+          + '$\\frac{22}{7} \\times 49 = 154$.',
         'Multiply by the height.',
       ],
       answer: '1540 cubic cm.',
     },
     {
       level: 5,
-      ask: 'Why is the curved surface area of a cylinder 2 pi r h?',
+      ask: 'Why is the curved surface area of a cylinder $2\\pi r h$?',
       steps: [
         'Unroll the curved surface and it is a rectangle.',
         'Its height is the height of the cylinder.',
         'Its width went once round the cylinder, so it is the '
           + 'circumference.',
-        'Circumference is 2 pi r.',
+        'Circumference is $2\\pi r$.',
       ],
       answer: 'Because it unrolls into a rectangle '
-        + 'of height h and width equal to the circumference, 2 pi r, '
-        + 'so the area is 2 pi r h.',
+        + 'of height $h$ and width equal to the circumference, $2\\pi r$, '
+        + 'so the area is $2\\pi r h$.',
     },
   ],
 
@@ -1932,6 +2126,115 @@ teach({
       mistake: 'Using the diameter as the radius in pi r squared.',
       why: 'Halve it first. '
         + 'Writing both down before starting prevents this.',
+    },
+  ],
+
+  figure: {
+    alt: 'A cylinder on the left, with its height marked h and the radius '
+      + 'of its top marked r. A green arrow labelled unroll it leads to a '
+      + 'rectangle on the right. The rectangle is as tall as the cylinder, '
+      + 'so its height is also h, and its width is the circumference of '
+      + 'the cylinder, two pi r, because it went once round. Its area is '
+      + 'therefore two pi r times h.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the curved surface unrolls into a rectangle</text>'
+      + '<ellipse cx="140" cy="92" rx="56" ry="18"/>'
+      + '<line x1="84" y1="92" x2="84" y2="248"/>'
+      + '<line x1="196" y1="92" x2="196" y2="248"/>'
+      + '<path d="M 84 248 A 56 18 0 0 0 196 248"/>'
+      + '<path d="M 84 248 A 56 18 0 0 1 196 248" stroke-dasharray="6 5"/>'
+      + '<line x1="140" y1="92" x2="196" y2="92" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="166" y="84" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">r</text>'
+      + '<line x1="216" y1="92" x2="216" y2="248"/>'
+      + '<line x1="210" y1="92" x2="222" y2="92"/>'
+      + '<line x1="210" y1="248" x2="222" y2="248"/>'
+      + '<text x="230" y="176" font-size="16" fill="currentColor" stroke="none">h</text>'
+      + '<line x1="252" y1="170" x2="294" y2="170" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<path d="M 292 160 L 312 170 L 292 180 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="282" y="150" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">unroll it</text>'
+      + '<line x1="330" y1="74" x2="600" y2="74"/>'
+      + '<line x1="330" y1="68" x2="330" y2="80"/>'
+      + '<line x1="600" y1="68" x2="600" y2="80"/>'
+      + '<text x="465" y="58" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">the circumference: 2 pi r</text>'
+      + '<rect x="330" y="92" width="270" height="156" rx="4" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<line x1="618" y1="92" x2="618" y2="248"/>'
+      + '<line x1="612" y1="92" x2="624" y2="92"/>'
+      + '<line x1="612" y1="248" x2="624" y2="248"/>'
+      + '<text x="610" y="176" font-size="16" text-anchor="end" fill="currentColor" stroke="none">h</text>'
+      + '<text x="465" y="176" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">area = 2 pi r times h</text>'
+      + '<text x="320" y="300" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the volume is one idea: cross section times length</text>'
+      + '<text x="320" y="330" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">a cuboid is a rectangle repeated, a cylinder is a circle repeated</text>'
+      + '<text x="320" y="364" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">volume in cubic units, surface area in square units</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'One idea for every prism: the cross section, times the '
+        + 'length',
+      columns: [
+        'Solid',
+        'The cross section that repeats',
+        'The area of that cross section',
+        'So the volume is',
+      ],
+      rows: [
+        [
+          'Cuboid',
+          'A rectangle',
+          'Length times width',
+          'Length times width times height',
+        ],
+        [
+          'Triangular prism',
+          'A triangle',
+          'Half the base times the perpendicular height',
+          'That area, times the length of the prism',
+        ],
+        [
+          'Cylinder',
+          'A circle',
+          'Pi times the radius squared',
+          'Pi times the radius squared, times the height',
+        ],
+      ],
+      note: 'These read as three formulas and they are one. '
+        + 'A prism is a cross section laid down once for every unit of '
+        + 'length, so the volume is that area times the length.',
+    },
+    {
+      caption: 'The faces to list for a surface area, '
+        + 'and what each one comes to',
+      columns: ['Solid', 'The faces it has', 'What they come to'],
+      rows: [
+        [
+          'Cuboid',
+          'Six, in three matching pairs',
+          'Length times width, length times height, and width times '
+            + 'height, each one counted twice',
+        ],
+        [
+          'Closed cylinder',
+          'Two circles and one curved surface',
+          'Pi times the radius squared, twice, '
+            + 'plus the circumference times the height',
+        ],
+        [
+          'Cylinder open at one end, such as a tin with no lid',
+          'One circle and one curved surface',
+          'Pi times the radius squared, once, '
+            + 'plus the circumference times the height',
+        ],
+        [
+          'Pipe, open at both ends',
+          'The curved surface, and nothing else',
+          'The circumference times the height',
+        ],
+      ],
+      note: 'There is no single formula in this table, '
+        + 'and the marks are lost by forgetting a face. '
+        + 'Read the question for the word open, '
+        + 'and write the list out before you add anything.',
     },
   ],
 
@@ -2005,12 +2308,12 @@ teach({
     + 'with every length reduced or increased in the same ratio. '
     + 'A scale of 1 to 100 means one unit on the drawing '
     + 'stands for one hundred of the same units in reality. '
-    + 'To draw, divide each real length by the scale factor. '
-    + 'To read, measure the drawing and multiply by the scale factor. '
-    + 'Angles are unchanged by a scale drawing. '
-    + 'A map scale such as 1 to 50 000 works the same way, '
-    + 'so one centimetre on the map is 50 000 centimetres, '
-    + 'which is 500 metres, or half a kilometre.',
+    + 'The work has two halves and they go in opposite directions: '
+    + 'to draw, you divide by the scale factor, '
+    + 'and to read an answer off the drawing, you multiply. '
+    + 'A map scale such as 1 to 50 000 works in exactly the same way, '
+    + 'and converting the answer to a sensible unit afterwards '
+    + 'is a separate job from the scale.',
 
   mechanism:
     'The scale itself is simple and the units are where marks go. '
@@ -2117,6 +2420,112 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'A small map with two towns P and Q marked on it, four '
+      + 'centimetres apart, at a scale of one to fifty thousand. Below '
+      + 'the map the conversion runs as a chain of boxes joined by '
+      + 'arrows: four centimetres on the map, times fifty thousand, gives '
+      + 'two hundred thousand centimetres; divided by a hundred, two '
+      + 'thousand metres; divided by a thousand, two kilometres.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the units are where the marks go</text>'
+      + '<rect x="40" y="50" width="250" height="140" rx="4"/>'
+      + '<circle cx="80" cy="160" r="6" fill="currentColor" stroke="none"/>'
+      + '<text x="68" y="174" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">P</text>'
+      + '<circle cx="250" cy="100" r="6" fill="currentColor" stroke="none"/>'
+      + '<text x="262" y="96" font-size="15" fill="currentColor" stroke="none">Q</text>'
+      + '<line x1="80" y1="160" x2="250" y2="100" stroke-dasharray="7 5"/>'
+      + '<text x="165" y="210" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">4 cm on the map</text>'
+      + '<text x="165" y="232" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">scale 1 to 50 000</text>'
+      + '<text x="147" y="258" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">times</text>'
+      + '<text x="147" y="274" font-size="12" text-anchor="middle" fill="#0f8a4d" stroke="none">50 000</text>'
+      + '<text x="323" y="258" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">divide</text>'
+      + '<text x="323" y="274" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">by 100</text>'
+      + '<text x="473" y="258" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">divide</text>'
+      + '<text x="473" y="274" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">by 1000</text>'
+      + '<rect x="14" y="286" width="110" height="60" rx="5"/>'
+      + '<text x="69" y="312" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">4 cm</text>'
+      + '<text x="69" y="332" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">on the map</text>'
+      + '<line x1="126" y1="316" x2="156" y2="316" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 154 309 L 168 316 L 154 323 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="170" y="286" width="130" height="60" rx="5"/>'
+      + '<text x="235" y="322" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">200 000 cm</text>'
+      + '<line x1="302" y1="316" x2="332" y2="316"/>'
+      + '<path d="M 330 309 L 344 316 L 330 323 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="346" y="286" width="104" height="60" rx="5"/>'
+      + '<text x="398" y="322" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">2000 m</text>'
+      + '<line x1="452" y1="316" x2="482" y2="316"/>'
+      + '<path d="M 480 309 L 494 316 L 480 323 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="496" y="286" width="100" height="60" rx="5" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="546" y="322" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">2 km</text>'
+      + '<text x="320" y="382" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">write the unit on every line, and convert as its own visible step</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Going from the drawing to reality and back again',
+      columns: ['What you have', 'What you do with it', 'What you get'],
+      rows: [
+        [
+          'A real length, and you want to draw it',
+          'Divide by the scale factor',
+          'The length to draw, in whatever unit you measured the real one '
+            + 'in',
+        ],
+        [
+          'A length measured off the drawing',
+          'Multiply by the scale factor',
+          'The real length, in the same unit you measured with',
+        ],
+        [
+          'A real length in centimetres, and you want metres',
+          'Divide by 100',
+          'Metres',
+        ],
+        [
+          'A real length in metres, and you want kilometres',
+          'Divide by 1000',
+          'Kilometres',
+        ],
+      ],
+      note: 'The first two rows are the scale. '
+        + 'The last two are ordinary conversion and have nothing to do '
+        + 'with the scale, which is exactly why they belong on separate '
+        + 'lines of the working.',
+    },
+    {
+      caption: 'What a scale drawing keeps, what it changes, '
+        + 'and what it costs',
+      columns: ['What about the drawing', 'What the scale does to it'],
+      rows: [
+        [
+          'Every length',
+          'Divided by the scale factor, and every one of them by the same '
+            + 'amount',
+        ],
+        [
+          'Every angle',
+          'Nothing. A scale drawing has the same angles as the real thing',
+        ],
+        [
+          'The units of the scale itself',
+          'There are none. A scale is a pure ratio, so 1 to 50 000 holds '
+            + 'in whatever unit you choose to measure in',
+        ],
+        [
+          'The accuracy of your answer',
+          'Limited by the drawing. So use a sharp pencil, the largest '
+            + 'scale that fits the paper, and a sensible number of figures '
+            + 'in the answer',
+        ],
+      ],
+      note: 'A scale drawing lets you measure an answer instead of '
+        + 'calculating one, which is why it solves journey and surveying '
+        + 'problems that would otherwise need trigonometry.',
+    },
+  ],
+
   extension:
     'Scale is how a bearings journey is solved without trigonometry: '
     + 'draw each leg to scale at its correct bearing, '
@@ -2185,13 +2594,15 @@ teach({
     'The probability of an event is '
     + 'the number of outcomes that give it, '
     + 'divided by the total number of equally likely outcomes. '
-    + 'So the probability of a 3 on a fair die is one sixth. '
+    + 'So the probability of a 3 on a fair die is $\\frac{1}{6}$. '
     + 'A probability of 0 means impossible and 1 means certain, '
-    + 'and all probabilities lie between. '
-    + 'The probabilities of all possible outcomes add to 1, '
-    + 'so the chance of an event NOT happening is 1 minus its probability. '
-    + 'Two events are independent when one does not affect the other, '
-    + 'and then the probability of both is the product of the two.',
+    + 'and every probability lies between the two. '
+    + 'Everything else in the topic follows from that one definition, '
+    + 'including what to do about an event NOT happening '
+    + 'and about two events both happening. '
+    + 'The word to watch for is equally. '
+    + 'The definition says nothing at all '
+    + 'about outcomes that are not equally likely.',
 
   mechanism:
     'Two things in this topic are worth more than the arithmetic. '
@@ -2206,11 +2617,10 @@ teach({
     + 'Check the equal likelihood before you count anything. '
     + 'The second is why independent probabilities multiply, '
     + 'which is easier to see than to accept. '
-    + 'Toss a coin twice. '
-    + 'There are four equally likely results: '
-    + 'head head, head tail, tail head, tail tail. '
-    + 'Only one of those is two heads, so the probability is one quarter, '
-    + 'and one quarter is one half times one half. '
+    + 'Toss a coin twice and write out every result: '
+    + 'there are four, all equally likely, and only one of them is two '
+    + 'heads, so the probability is $\\frac{1}{4}$, '
+    + 'which is also $\\frac{1}{2} \\times \\frac{1}{2}$. '
     + 'The multiplication is not a rule imposed on the problem. '
     + 'It is what counting the combinations gives, '
     + 'because each outcome of the first event '
@@ -2246,17 +2656,17 @@ teach({
         'Total outcomes: 8 beads.',
         'Favourable: 3 red.',
       ],
-      answer: 'Three eighths.',
+      answer: '$\\frac{3}{8}$.',
     },
     {
       level: 4,
       ask: 'A fair die is rolled. '
         + 'What is the probability of NOT getting a 6?',
       steps: [
-        'The probability of a 6 is one sixth.',
-        'Subtract from 1.',
+        'The probability of a 6 is $\\frac{1}{6}$.',
+        'Subtract it from 1.',
       ],
-      answer: 'Five sixths.',
+      answer: '$\\frac{5}{6}$.',
     },
     {
       level: 5,
@@ -2265,10 +2675,11 @@ teach({
       steps: [
         'The four equally likely results are HH, HT, TH, TT.',
         'Only HH gives two heads.',
-        'So the probability is one quarter.',
-        'And one half times one half is also one quarter.',
+        'So the probability is $\\frac{1}{4}$.',
+        'And $\\frac{1}{2} \\times \\frac{1}{2}$ is also '
+          + '$\\frac{1}{4}$.',
       ],
-      answer: 'One quarter. '
+      answer: '$\\frac{1}{4}$. '
         + 'Multiplying works because each outcome of the first toss '
         + 'pairs with each outcome of the second, '
         + 'giving four equally likely results.',
@@ -2294,6 +2705,118 @@ teach({
       mistake: 'Forgetting that a drawn bead may not be replaced.',
       why: 'Without replacement the second draw has one fewer bead, '
         + 'so the events are not independent.',
+    },
+  ],
+
+  figure: {
+    alt: 'A two by two grid of the results of tossing a coin twice. The '
+      + 'rows are the first toss, head or tail, and the columns are the '
+      + 'second toss, head or tail. The four cells read HH, HT, TH and '
+      + 'TT, and the HH cell is outlined in green. A note says four '
+      + 'results, all equally likely, one of them HH, so the chance is a '
+      + 'quarter, which is also a half times a half.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">why two independent probabilities multiply</text>'
+      + '<text x="310" y="62" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">second toss</text>'
+      + '<text x="255" y="92" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">H</text>'
+      + '<text x="365" y="92" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">T</text>'
+      + '<text x="150" y="182" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">first</text>'
+      + '<text x="150" y="200" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">toss</text>'
+      + '<text x="186" y="152" font-size="18" text-anchor="end" fill="currentColor" stroke="none">H</text>'
+      + '<text x="186" y="232" font-size="18" text-anchor="end" fill="currentColor" stroke="none">T</text>'
+      + '<rect x="200" y="100" width="110" height="80" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="255" y="148" font-size="20" text-anchor="middle" fill="#0f8a4d" stroke="none">HH</text>'
+      + '<rect x="310" y="100" width="110" height="80"/>'
+      + '<text x="365" y="148" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">HT</text>'
+      + '<rect x="200" y="180" width="110" height="80"/>'
+      + '<text x="255" y="228" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">TH</text>'
+      + '<rect x="310" y="180" width="110" height="80"/>'
+      + '<text x="365" y="228" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">TT</text>'
+      + '<text x="450" y="122" font-size="15" fill="currentColor" stroke="none">four results, all</text>'
+      + '<text x="450" y="142" font-size="15" fill="currentColor" stroke="none">equally likely</text>'
+      + '<text x="450" y="176" font-size="15" fill="#0f8a4d" stroke="none">one of them is HH,</text>'
+      + '<text x="450" y="196" font-size="15" fill="#0f8a4d" stroke="none">so the chance is</text>'
+      + '<text x="450" y="216" font-size="15" fill="#0f8a4d" stroke="none">one quarter</text>'
+      + '<text x="450" y="250" font-size="15" fill="#0f8a4d" stroke="none">and one half times</text>'
+      + '<text x="450" y="270" font-size="15" fill="#0f8a4d" stroke="none">one half is a quarter</text>'
+      + '<text x="320" y="320" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the multiplying is not a rule imposed on the problem,</text>'
+      + '<text x="320" y="344" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">it is what counting the combinations gives</text>'
+      + '<text x="320" y="380" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">asking for two things is asking for more, so it must be less likely</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The four things a question can ask for, '
+        + 'and the check on each answer',
+      columns: [
+        'What you are finding',
+        'How to work it out',
+        'The check on your answer',
+      ],
+      rows: [
+        [
+          'The probability of one event',
+          'The outcomes that give it, divided by the total number of '
+            + 'equally likely outcomes',
+          'It lies between 0 and 1',
+        ],
+        [
+          'The probability that it does NOT happen',
+          'One, less the probability that it does',
+          'The two of them add to exactly 1',
+        ],
+        [
+          'The probability of both of two independent events',
+          'Multiply the two probabilities together',
+          'It is smaller than either of the two parts on its own',
+        ],
+        [
+          'Whether two events are independent at all',
+          'Ask whether the first one changes the chances of the second',
+          'If it does, they are not independent, and multiplying is '
+            + 'simply wrong',
+        ],
+      ],
+      note: 'Every row rests on the outcomes being equally likely. '
+        + 'Check that before you count anything.',
+    },
+    {
+      caption: 'Where outcomes can be taken as equally likely, '
+        + 'and where they cannot',
+      columns: ['The situation', 'Equally likely?', 'Why'],
+      rows: [
+        [
+          'A fair die',
+          'Yes',
+          'Six faces, and no reason for any one of them to come up more '
+            + 'often than another',
+        ],
+        [
+          'A fair coin',
+          'Yes',
+          'Two sides, and the same for each of them',
+        ],
+        [
+          'A well shuffled pack of cards',
+          'Yes',
+          'Shuffling is the thing that makes every position equally '
+            + 'likely',
+        ],
+        [
+          'A bag of counted beads, drawn without looking',
+          'Yes',
+          'Every bead has the same chance of being the one that comes out',
+        ],
+        [
+          'Whether it rains tomorrow',
+          'No',
+          'There are two possibilities, but rain and no rain are nothing '
+            + 'like equally likely',
+        ],
+      ],
+      note: 'The last row is the commonest wrong answer in the topic. '
+        + 'Two possibilities does not make the chance one over two.',
     },
   ],
 
