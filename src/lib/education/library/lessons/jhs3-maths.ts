@@ -47,18 +47,17 @@ teach({
   },
 
   idea:
-    'Profit is selling price minus cost price, '
-    + 'and the percentage profit is that profit over the COST price, '
-    + 'times a hundred. '
-    + 'A loss is worked the same way on the cost price. '
-    + 'Discount is a reduction from the marked price, '
-    + 'and the percentage discount is of the marked price. '
-    + 'Commission is a percentage of the value sold. '
-    + 'Simple interest is the principal times the rate times the time, '
-    + 'divided by a hundred. '
-    + 'Hire purchase means paying a deposit and then instalments, '
-    + 'and the hire purchase price is the deposit plus all the instalments. '
-    + 'It is always more than the cash price.',
+    'Five calculations are set in this topic, '
+    + 'and four of them are a percentage of something. '
+    + 'The whole difficulty is which something. '
+    + 'Profit and loss are measured against the cost price, '
+    + 'discount against the marked price, '
+    + 'commission against the value sold, '
+    + 'and simple interest against the principal. '
+    + 'The fifth, the hire purchase price, '
+    + 'is not a percentage of anything: '
+    + 'it is the deposit plus every instalment, added up, '
+    + 'and it always comes to more than the cash price.',
 
   mechanism:
     'Every error in this topic is the same error: '
@@ -113,7 +112,7 @@ teach({
       steps: [
         'Profit is 20.',
         'The base is the cost price, 80.',
-        '20 over 80 is 0.25.',
+        '$20 \\div 80 = 0.25$.',
       ],
       answer: '25 per cent.',
     },
@@ -123,7 +122,7 @@ teach({
         + 'years.',
       steps: [
         'Interest is principal times rate times time over 100.',
-        '500 x 6 x 3 = 9000.',
+        '$500 \\times 6 \\times 3 = 9000$.',
         'Divide by 100.',
       ],
       answer: '90 cedis.',
@@ -136,7 +135,7 @@ teach({
         + 'How much more does the credit cost?',
       steps: [
         '12 payments of 90 is 1080.',
-        'Add the deposit: 1080 + 300 = 1380.',
+        'Add the deposit: $1080 + 300 = 1380$.',
         'Compare with 1200.',
       ],
       answer: '180 cedis more. '
@@ -163,6 +162,82 @@ teach({
     {
       mistake: 'Leaving the currency off an answer.',
       why: 'Money answers are marked with their unit.',
+    },
+  ],
+
+  figure: {
+    alt: 'Two bars. The upper bar is the cost price of 80 cedis. The lower '
+      + 'bar is the selling price of 100 cedis, drawn as the same 80 with '
+      + 'a further 20 on the end marked in green as the profit. An arrow '
+      + 'from that profit to a green box reads 20 out of 80 is 25 per '
+      + 'cent, and a second arrow to a red box reads 20 out of 100 is 20 '
+      + 'per cent, which is wrong.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the profit is a percentage of which bar?</text>'
+      + '<text x="112" y="110" font-size="15" text-anchor="end" fill="currentColor" stroke="none">cost price</text>'
+      + '<rect x="120" y="82" width="240" height="46"/>'
+      + '<text x="240" y="112" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">80 cedis</text>'
+      + '<text x="112" y="190" font-size="15" text-anchor="end" fill="currentColor" stroke="none">selling price</text>'
+      + '<rect x="120" y="162" width="240" height="46"/>'
+      + '<text x="240" y="192" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">80 cedis</text>'
+      + '<rect x="360" y="162" width="60" height="46" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="430" y="186" font-size="15" fill="#0f8a4d" stroke="none">20 cedis</text>'
+      + '<text x="430" y="204" font-size="15" fill="#0f8a4d" stroke="none">of profit</text>'
+      + '<line x1="380" y1="210" x2="262" y2="248" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 256 250 L 268 238 L 272 252 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="24" y="254" width="230" height="70" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="139" y="282" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">20 out of 80</text>'
+      + '<text x="139" y="306" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">is 25 per cent</text>'
+      + '<line x1="400" y1="210" x2="480" y2="248" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 486 250 L 472 252 L 478 238 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="386" y="254" width="230" height="70" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="501" y="282" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">20 out of 100</text>'
+      + '<text x="501" y="306" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">is 20 per cent: wrong</text>'
+      + '<text x="320" y="366" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">profit is a return on what you put in,</text>'
+      + '<text x="320" y="388" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">so the base is what you put in</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each calculation, the amount the percentage is taken of, '
+        + 'and how to work it out',
+      columns: [
+        'What you are finding',
+        'The amount the percentage is of',
+        'How to work it out',
+      ],
+      rows: [
+        [
+          'Percentage profit or loss',
+          'The cost price, because that is what you put in',
+          'The difference between the two prices, divided by the cost '
+            + 'price, times a hundred',
+        ],
+        [
+          'Discount',
+          'The marked price, because that is what is being reduced',
+          'That percentage of the marked price, then taken off it',
+        ],
+        [
+          'Commission',
+          'The value sold',
+          'That percentage of the value sold',
+        ],
+        [
+          'Simple interest',
+          'The principal',
+          'Principal times rate times time, divided by a hundred',
+        ],
+        [
+          'Hire purchase price',
+          'Nothing. It is a total, not a percentage',
+          'The deposit plus every instalment, added up',
+        ],
+      ],
+      note: 'Write the middle column down as the first line of your '
+        + 'working. The hire purchase price always comes to more than the '
+        + 'cash price, and the difference is what the credit cost.',
     },
   ],
 
@@ -232,17 +307,13 @@ teach({
   idea:
     'A pair of simultaneous equations is two equations '
     + 'that are both true for the same pair of values. '
-    + 'By elimination: '
-    + 'multiply one or both equations so that one letter has the same '
-    + 'coefficient, '
-    + 'then add or subtract to remove it, '
-    + 'solve for the remaining letter, '
-    + 'and substitute back. '
-    + 'By substitution: '
-    + 'rearrange one equation to get one letter alone, '
-    + 'put that expression into the other equation, '
-    + 'and solve. '
-    + 'The answer is a pair, and it must satisfy both equations.',
+    + 'Two methods are set, elimination and substitution, '
+    + 'and either will work on any pair. '
+    + 'Both do the same job, '
+    + 'which is to get rid of one of the two letters '
+    + 'so that what is left is an ordinary equation in one unknown. '
+    + 'The answer is a pair, and it has to satisfy both equations, '
+    + 'so it is checked in both.',
 
   mechanism:
     'The reason there is exactly one answer, '
@@ -258,15 +329,10 @@ teach({
     + 'or they are the same line, in which case there are infinitely many. '
     + 'So the algebra is finding a crossing point, '
     + 'and you can always check it by drawing. '
-    + 'Elimination works because adding equal things to equal things keeps '
-    + 'them equal: '
-    + 'you are building a third true statement with one letter gone. '
-    + 'Substitution works because if x equals something, '
-    + 'you may write that something anywhere x appears. '
-    + 'Neither is a trick, and neither is better in general. '
-    + 'Elimination is quicker when a coefficient is already matched or '
-    + 'easy to match. '
-    + 'Substitution is quicker when one letter already stands alone. '
+    + 'Neither method is a trick, '
+    + 'and neither is better than the other in general: '
+    + 'each one is just a legitimate way of building a third true '
+    + 'statement that has one letter fewer in it. '
     + 'And checking in both equations is not optional: '
     + 'an answer satisfying only one of them is a sign of exactly the '
     + 'arithmetic slip these questions produce.',
@@ -291,26 +357,26 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Solve x + y = 10 and x - y = 2.',
+      ask: 'Solve $x + y = 10$ and $x - y = 2$.',
       steps: [
         'Add the two equations: the y terms cancel.',
-        '2x = 12, so x = 6.',
-        'Substitute: 6 + y = 10.',
+        '$2x = 12$, so $x = 6$.',
+        'Substitute: $6 + y = 10$.',
       ],
-      answer: 'x = 6, y = 4. '
-        + 'Check both: 6 + 4 = 10 and 6 - 4 = 2.',
+      answer: '$x = 6$ and $y = 4$. '
+        + 'Check both: $6 + 4 = 10$ and $6 - 4 = 2$.',
     },
     {
       level: 4,
-      ask: 'Solve 2x + 3y = 16 and x - y = 3.',
+      ask: 'Solve $2x + 3y = 16$ and $x - y = 3$.',
       steps: [
-        'The second gives x = y + 3.',
-        'Substitute: 2(y + 3) + 3y = 16.',
-        '2y + 6 + 3y = 16, so 5y = 10, y = 2.',
-        'Then x = 5.',
+        'The second gives $x = y + 3$.',
+        'Substitute: $2(y + 3) + 3y = 16$.',
+        '$2y + 6 + 3y = 16$, so $5y = 10$ and $y = 2$.',
+        'Then $x = 5$.',
       ],
-      answer: 'x = 5, y = 2. '
-        + 'Check: 10 + 6 = 16 and 5 - 2 = 3.',
+      answer: '$x = 5$ and $y = 2$. '
+        + 'Check: $10 + 6 = 16$ and $5 - 2 = 3$.',
     },
     {
       level: 5,
@@ -347,6 +413,120 @@ teach({
     {
       mistake: 'Giving only one value as the answer.',
       why: 'The solution is a pair. Both letters are wanted.',
+    },
+  ],
+
+  figure: {
+    alt: 'A grid with x and y axes. Two straight lines are drawn on it. '
+      + 'One runs down to the right and is labelled x plus y equals 10. '
+      + 'The other runs up to the right and is labelled x minus y equals '
+      + '2. They cross once, at the point 6 comma 4, which is marked with '
+      + 'a green dot. A note says that this crossing point is the '
+      + 'solution, and that parallel lines would never cross while '
+      + 'identical lines would cross everywhere.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the solution is where the two lines cross</text>'
+      + '<line x1="124" y1="66" x2="124" y2="338" stroke-width="1"/>'
+      + '<line x1="168" y1="66" x2="168" y2="338" stroke-width="1"/>'
+      + '<line x1="212" y1="66" x2="212" y2="338" stroke-width="1"/>'
+      + '<line x1="256" y1="66" x2="256" y2="338" stroke-width="1"/>'
+      + '<line x1="300" y1="66" x2="300" y2="338" stroke-width="1"/>'
+      + '<line x1="344" y1="66" x2="344" y2="338" stroke-width="1"/>'
+      + '<line x1="80" y1="286" x2="356" y2="286" stroke-width="1"/>'
+      + '<line x1="80" y1="242" x2="356" y2="242" stroke-width="1"/>'
+      + '<line x1="80" y1="198" x2="356" y2="198" stroke-width="1"/>'
+      + '<line x1="80" y1="154" x2="356" y2="154" stroke-width="1"/>'
+      + '<line x1="80" y1="110" x2="356" y2="110" stroke-width="1"/>'
+      + '<line x1="80" y1="66" x2="356" y2="66" stroke-width="1"/>'
+      + '<line x1="72" y1="330" x2="362" y2="330"/>'
+      + '<path d="M 360 322 L 376 330 L 360 338 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="382" y="336" font-size="15" fill="currentColor" stroke="none">x</text>'
+      + '<line x1="80" y1="338" x2="80" y2="58"/>'
+      + '<path d="M 72 60 L 80 44 L 88 60 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="80" y="36" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">y</text>'
+      + '<text x="124" y="350" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="212" y="350" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">6</text>'
+      + '<text x="300" y="350" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">10</text>'
+      + '<text x="72" y="291" font-size="13" text-anchor="end" fill="currentColor" stroke="none">2</text>'
+      + '<text x="72" y="203" font-size="13" text-anchor="end" fill="currentColor" stroke="none">6</text>'
+      + '<text x="72" y="115" font-size="13" text-anchor="end" fill="currentColor" stroke="none">10</text>'
+      + '<line x1="80" y1="110" x2="300" y2="330"/>'
+      + '<text x="86" y="100" font-size="15" fill="currentColor" stroke="none">x + y = 10</text>'
+      + '<line x1="124" y1="330" x2="344" y2="110"/>'
+      + '<text x="350" y="106" font-size="15" fill="currentColor" stroke="none">x - y = 2</text>'
+      + '<circle cx="212" cy="242" r="7" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="224" y="234" font-size="15" fill="#0f8a4d" stroke="none">(6, 4)</text>'
+      + '<text x="408" y="150" font-size="16" fill="#0f8a4d" stroke="none">they cross once,</text>'
+      + '<text x="408" y="172" font-size="16" fill="#0f8a4d" stroke="none">and that one point</text>'
+      + '<text x="408" y="194" font-size="16" fill="#0f8a4d" stroke="none">is the answer:</text>'
+      + '<text x="408" y="216" font-size="16" fill="#0f8a4d" stroke="none">x = 6 and y = 4</text>'
+      + '<text x="408" y="252" font-size="14" fill="currentColor" stroke="none">parallel lines never</text>'
+      + '<text x="408" y="270" font-size="14" fill="currentColor" stroke="none">cross, so no solution</text>'
+      + '<text x="408" y="294" font-size="14" fill="currentColor" stroke="none">identical lines cross</text>'
+      + '<text x="408" y="312" font-size="14" fill="currentColor" stroke="none">everywhere, so endless</text>'
+      + '<text x="320" y="386" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the algebra finds this point without drawing it</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The two methods, when to choose each, and why each is '
+        + 'allowed',
+      columns: [
+        'Method',
+        'What you do',
+        'Choose it when',
+        'Why it is allowed',
+      ],
+      rows: [
+        [
+          'Elimination',
+          'Multiply one or both equations so that one letter has the same '
+            + 'coefficient, then add or subtract to remove it',
+          'A coefficient is already matched, or is easy to match',
+          'Adding equal things to equal things keeps them equal, so what '
+            + 'you build is a third true statement with one letter gone',
+        ],
+        [
+          'Substitution',
+          'Rearrange one equation to get a letter alone, then put that '
+            + 'expression in place of the letter in the other',
+          'One letter already stands alone, or nearly does',
+          'If a letter equals something, that something may be written '
+            + 'anywhere the letter appears',
+        ],
+      ],
+      note: 'In elimination, add when the matched terms have opposite '
+        + 'signs and subtract when their signs are the same.',
+    },
+    {
+      caption: 'What the two lines can do, '
+        + 'and how many solutions each case means',
+      columns: [
+        'What the lines do',
+        'How many solutions',
+        'What you see in the algebra',
+      ],
+      rows: [
+        [
+          'They cross once',
+          'Exactly one pair',
+          'One letter goes, and the other comes out with a single value',
+        ],
+        [
+          'They are parallel',
+          'None at all',
+          'Both letters vanish and what is left is false, such as 0 = 5',
+        ],
+        [
+          'They are the same line',
+          'Endlessly many',
+          'Both letters vanish and what is left is true, such as 0 = 0',
+        ],
+      ],
+      note: 'The first row is the usual case. '
+        + 'The other two are worth recognising, '
+        + 'so that both letters vanishing does not look like a mistake.',
     },
   ],
 
@@ -421,22 +601,23 @@ teach({
   idea:
     'An inequality says one side is less than, '
     + 'or greater than, or not more than, the other. '
-    + 'You may add or subtract anything from both sides. '
-    + 'You may multiply or divide both sides by a POSITIVE number. '
+    + 'You solve it the way you solve an equation. '
+    + 'Do the same thing to both sides. '
+    + 'There is one exception. '
     + 'If you multiply or divide by a NEGATIVE number, '
-    + 'the inequality sign reverses. '
-    + 'On a number line, '
-    + 'use an open circle for < and >, '
-    + 'a filled circle for the ones that include the value, '
-    + 'and an arrow in the direction of the solution.',
+    + 'the sign turns round. '
+    + 'The answer is a range, not a single value. '
+    + 'It is drawn on a number line, '
+    + 'with a circle at the end value '
+    + 'and an arrow pointing the way the solution goes.',
 
   mechanism:
     'The sign reversing looks like a rule to memorise '
     + 'and is something you can see on the number line in one move. '
-    + 'Start with something true: 2 is less than 5. '
-    + 'Multiply both sides by negative 1. '
-    + 'You now have negative 2 and negative 5, '
-    + 'and negative 2 is GREATER than negative 5, '
+    + 'Start with something true: $2 < 5$. '
+    + 'Multiply both sides by $-1$. '
+    + 'You now have $-2$ and $-5$, '
+    + 'and $-2$ is GREATER than $-5$, '
     + 'because it is nearer zero. '
     + 'So the order of the two numbers has swapped, '
     + 'which is exactly what multiplying by a negative does: '
@@ -448,8 +629,8 @@ teach({
     + 'If you can picture the flip you will never lose the mark. '
     + 'There is also a way to avoid the case entirely: '
     + 'move the unknown to whichever side keeps its coefficient positive. '
-    + 'Instead of solving negative 2x greater than 6, '
-    + 'add 2x to both sides and work with 0 greater than 6 plus 2x, '
+    + 'Instead of solving $-2x > 6$, '
+    + 'add $2x$ to both sides and work with $0 > 6 + 2x$, '
     + 'which needs no flip at all. '
     + 'And whatever method you use, '
     + 'test one number from your answer in the original inequality, '
@@ -475,31 +656,31 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Solve 3x + 2 < 14.',
+      ask: 'Solve $3x + 2 < 14$.',
       steps: [
-        'Subtract 2: 3x < 12.',
+        'Subtract 2: $3x < 12$.',
         'Divide by 3, which is positive, so no flip.',
       ],
-      answer: 'x < 4.',
+      answer: '$x < 4$.',
     },
     {
       level: 4,
-      ask: 'Solve -2x > 6.',
+      ask: 'Solve $-2x > 6$.',
       steps: [
         'Divide both sides by negative 2.',
         'Dividing by a negative reverses the sign.',
       ],
-      answer: 'x < -3. '
-        + 'Test x = -4: -2 times -4 is 8, which is greater than 6.',
+      answer: '$x < -3$. '
+        + 'Test $x = -4$: $-2 \\times -4 = 8$, which is greater than 6.',
     },
     {
       level: 5,
       ask: 'Why does multiplying an inequality by a negative number '
         + 'reverse it?',
       steps: [
-        'Take 2 < 5, which is true.',
-        'Multiply by negative 1: negative 2 and negative 5.',
-        'Negative 2 is greater than negative 5.',
+        'Take $2 < 5$, which is true.',
+        'Multiply by $-1$: you now have $-2$ and $-5$.',
+        'And $-2 > -5$.',
         'So the order has swapped.',
       ],
       answer: 'Because multiplying by a negative flips the number line end '
@@ -531,10 +712,126 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'Two number lines. On the upper one, 2 and 5 are marked, with 2 '
+      + 'to the left of 5, under the words 2 is less than 5. Two arrows '
+      + 'cross as they lead down to the lower line, where negative 5 and '
+      + 'negative 2 are marked, with negative 5 now on the left and '
+      + 'negative 2 on the right. The caption under it reads that '
+      + 'negative 2 is greater than negative 5, so the sign turned round.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">multiplying by a negative flips the line</text>'
+      + '<text x="320" y="56" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">2 is less than 5, which is true</text>'
+      + '<line x1="50" y1="96" x2="590" y2="96"/>'
+      + '<line x1="70" y1="90" x2="70" y2="102" stroke-width="1"/>'
+      + '<line x1="220" y1="90" x2="220" y2="102" stroke-width="1"/>'
+      + '<line x1="320" y1="88" x2="320" y2="104"/>'
+      + '<line x1="420" y1="90" x2="420" y2="102" stroke-width="1"/>'
+      + '<line x1="570" y1="90" x2="570" y2="102" stroke-width="1"/>'
+      + '<text x="320" y="82" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<circle cx="420" cy="96" r="6" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="420" y="80" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">2</text>'
+      + '<circle cx="570" cy="96" r="6" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="570" y="80" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">5</text>'
+      + '<line x1="418" y1="106" x2="228" y2="172"/>'
+      + '<path d="M 222 174 L 234 162 L 239 176 Z" fill="currentColor" stroke="none"/>'
+      + '<line x1="568" y1="106" x2="78" y2="172"/>'
+      + '<path d="M 72 174 L 84 162 L 89 176 Z" fill="currentColor" stroke="none"/>'
+      + '<line x1="50" y1="186" x2="590" y2="186"/>'
+      + '<line x1="70" y1="180" x2="70" y2="192" stroke-width="1"/>'
+      + '<line x1="220" y1="180" x2="220" y2="192" stroke-width="1"/>'
+      + '<line x1="320" y1="178" x2="320" y2="194"/>'
+      + '<line x1="420" y1="180" x2="420" y2="192" stroke-width="1"/>'
+      + '<line x1="570" y1="180" x2="570" y2="192" stroke-width="1"/>'
+      + '<text x="320" y="210" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">0</text>'
+      + '<circle cx="70" cy="186" r="6" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="70" y="212" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">-5</text>'
+      + '<circle cx="220" cy="186" r="6" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="220" y="212" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">-2</text>'
+      + '<text x="320" y="244" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">and now -2 is greater than -5</text>'
+      + '<text x="320" y="286" font-size="16" text-anchor="middle" fill="#c8433a" stroke="none">adding or subtracting only slides the line, so no flip</text>'
+      + '<text x="320" y="316" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">and you can dodge the case: keep the coefficient positive</text>'
+      + '<circle cx="176" cy="362" r="7"/>'
+      + '<text x="192" y="368" font-size="14" fill="currentColor" stroke="none">open: not included</text>'
+      + '<circle cx="396" cy="362" r="7" fill="currentColor" stroke="none"/>'
+      + '<text x="412" y="368" font-size="14" fill="currentColor" stroke="none">filled: included</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What you may do to an inequality, '
+        + 'and what each thing does to the sign',
+      columns: ['What you do to both sides', 'What the sign does', 'Why'],
+      rows: [
+        [
+          'Add or subtract any number',
+          'Nothing. It stays as it was',
+          'Adding slides the whole number line along without turning it '
+            + 'round',
+        ],
+        [
+          'Multiply or divide by a positive number',
+          'Nothing. It stays as it was',
+          'The line is stretched or squeezed, but left stays left and '
+            + 'right stays right',
+        ],
+        [
+          'Multiply or divide by a negative number',
+          'It reverses',
+          'The line is flipped end for end, '
+            + 'so whatever was the smaller is now the larger',
+        ],
+      ],
+      note: 'Only the last row changes anything, '
+        + 'and forgetting it is the commonest error in the topic. '
+        + 'Test one number from your answer in the original inequality '
+        + 'and a missed flip shows up at once.',
+    },
+    {
+      caption: 'How to draw each kind of inequality on a number line',
+      columns: [
+        'The inequality',
+        'Said in words',
+        'The circle at the end value',
+        'The arrow',
+      ],
+      rows: [
+        [
+          'x < 4',
+          'x is less than 4',
+          'Open, because 4 itself is not included',
+          'To the left, away from 4',
+        ],
+        [
+          'x > 4',
+          'x is greater than 4',
+          'Open, because 4 itself is not included',
+          'To the right',
+        ],
+        [
+          'x is not more than 4',
+          'x is less than 4, or equal to it',
+          'Filled, because 4 is included',
+          'To the left',
+        ],
+        [
+          'x is not less than 4',
+          'x is greater than 4, or equal to it',
+          'Filled, because 4 is included',
+          'To the right',
+        ],
+      ],
+      note: 'There is always an arrow, '
+        + 'because an inequality is satisfied by a range '
+        + 'and never by one value.',
+    },
+  ],
+
   extension:
     'Two inequalities can be combined. '
     + 'Take 2 less than x, and x not more than 5. '
-    + 'That is written 2 < x ≤ 5. '
+    + 'That is written $2 < x \\le 5$. '
     + 'It is drawn as a segment with one open end and one filled end.',
 
   questions: [
@@ -593,31 +890,32 @@ teach({
   },
 
   idea:
-    'A formula such as A = l times w has A as its subject. '
-    + 'Changing the subject to l means rearranging it to l = A over w. '
-    + 'The rules are the same as for an equation: '
+    'A formula such as $A = lw$ has $A$ as its subject, '
+    + 'because $A$ is the letter standing alone. '
+    + 'Changing the subject to $l$ means rearranging it to '
+    + '$l = \\frac{A}{w}$. '
+    + 'The rules are the rules of an equation: '
     + 'whatever you do to one side you do to the other. '
-    + 'Addition is undone by subtraction, '
-    + 'multiplication by division, '
-    + 'a square by a square root, '
-    + 'and a square root by squaring. '
-    + 'When the letter you want appears in more than one term, '
-    + 'collect those terms and factorise.',
+    + 'Each operation has one that undoes it, '
+    + 'and the work is undoing them in the right order. '
+    + 'The one case that needs more than that '
+    + 'is a letter appearing in more than one term, '
+    + 'which has to be collected and factorised first.',
 
   mechanism:
     'Learners who find this hard are usually treating it as a new topic, '
     + 'and it is solving an equation with letters in place of numbers. '
     + 'Compare them. '
-    + 'To solve 3x + 2 = 14 you subtract 2, then divide by 3. '
-    + 'To make x the subject of y = 3x + 2 you subtract 2, then divide by '
-    + '3. '
+    + 'To solve $3x + 2 = 14$ you subtract 2, then divide by 3. '
+    + 'To make $x$ the subject of $y = 3x + 2$ '
+    + 'you subtract 2, then divide by 3. '
     + 'The steps are identical, '
     + 'and only the thing on the other side looks unfamiliar. '
     + 'So the method is the one you already have: '
     + 'find what is being done to the letter you want, in order, '
     + 'then undo those things in the reverse order. '
     + 'Last done, first undone. '
-    + 'In y = 3x + 2, x is multiplied by 3 and then 2 is added, '
+    + 'In $y = 3x + 2$, $x$ is multiplied by 3 and then 2 is added, '
     + 'so you take the 2 away first and divide last. '
     + 'Doing it the other way round is the commonest error '
     + 'and it is the same error as in arithmetic. '
@@ -651,33 +949,33 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Make l the subject of A = l times w.',
+      ask: 'Make $l$ the subject of $A = lw$.',
       steps: [
-        'l is multiplied by w.',
-        'Undo by dividing both sides by w.',
+        '$l$ is multiplied by $w$.',
+        'Undo it by dividing both sides by $w$.',
       ],
-      answer: 'l = A over w.',
+      answer: '$l = \\frac{A}{w}$.',
     },
     {
       level: 4,
-      ask: 'Make x the subject of y = 3x + 2.',
+      ask: 'Make $x$ the subject of $y = 3x + 2$.',
       steps: [
-        'x is multiplied by 3, then 2 is added.',
-        'Undo the addition first: y - 2 = 3x.',
+        '$x$ is multiplied by 3, then 2 is added.',
+        'Undo the addition first: $y - 2 = 3x$.',
         'Then undo the multiplication.',
       ],
-      answer: 'x = (y - 2) over 3.',
+      answer: '$x = \\frac{y - 2}{3}$.',
     },
     {
       level: 5,
-      ask: 'Make x the subject of ax = bx + c.',
+      ask: 'Make $x$ the subject of $ax = bx + c$.',
       steps: [
-        'x appears on both sides, so undoing cannot isolate it.',
-        'Collect: ax - bx = c.',
-        'Factorise: x(a - b) = c.',
-        'Divide by the bracket.',
+        '$x$ appears on both sides, so undoing cannot isolate it.',
+        'Collect: $ax - bx = c$.',
+        'Factorise: $x(a - b) = c$.',
+        'Divide both sides by the bracket.',
       ],
-      answer: 'x = c over (a - b).',
+      answer: '$x = \\frac{c}{a - b}$.',
     },
   ],
 
@@ -702,6 +1000,94 @@ teach({
         + 'without saying so.',
       why: 'A square root has two values. '
         + 'In a physical formula say which one you are keeping and why.',
+    },
+  ],
+
+  figure: {
+    alt: 'Two rows. The upper row runs left to right and shows what is '
+      + 'done to x: x, then a box reading times 3, then a box reading add '
+      + '2, arriving at y. The lower row runs right to left in green and '
+      + 'undoes them in the opposite order: from y, a box reading take 2 '
+      + 'away, then a box reading divide by 3, arriving back at x. To the '
+      + 'right, four lines show the separate case of a letter appearing '
+      + 'twice, collected and factorised.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">last done, first undone</text>'
+      + '<text x="230" y="60" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">what is done to x, in order</text>'
+      + '<text x="52" y="106" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">x</text>'
+      + '<line x1="66" y1="100" x2="92" y2="100"/>'
+      + '<path d="M 90 92 L 106 100 L 90 108 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="110" y="76" width="100" height="48" rx="5"/>'
+      + '<text x="160" y="106" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">times 3</text>'
+      + '<line x1="210" y1="100" x2="236" y2="100"/>'
+      + '<path d="M 234 92 L 250 100 L 234 108 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="254" y="76" width="100" height="48" rx="5"/>'
+      + '<text x="304" y="106" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">add 2</text>'
+      + '<line x1="354" y1="100" x2="380" y2="100"/>'
+      + '<path d="M 378 92 L 394 100 L 378 108 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="408" y="106" font-size="18" text-anchor="middle" fill="currentColor" stroke="none">y</text>'
+      + '<text x="408" y="216" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">y</text>'
+      + '<line x1="394" y1="210" x2="368" y2="210" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 370 202 L 354 210 L 370 218 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="250" y="186" width="100" height="48" rx="5" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="300" y="210" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">take the 2</text>'
+      + '<text x="300" y="228" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">away</text>'
+      + '<line x1="250" y1="210" x2="224" y2="210" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 226 202 L 210 210 L 226 218 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="106" y="186" width="100" height="48" rx="5" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="156" y="210" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">divide</text>'
+      + '<text x="156" y="228" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">by 3</text>'
+      + '<line x1="106" y1="210" x2="80" y2="210" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 82 202 L 66 210 L 82 218 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="52" y="216" font-size="18" text-anchor="middle" fill="#0f8a4d" stroke="none">x</text>'
+      + '<text x="230" y="266" font-size="15" text-anchor="middle" fill="#0f8a4d" stroke="none">and undone in the reverse order</text>'
+      + '<text x="444" y="130" font-size="14" fill="currentColor" stroke="none">if the letter appears</text>'
+      + '<text x="444" y="148" font-size="14" fill="currentColor" stroke="none">twice, no undoing will</text>'
+      + '<text x="444" y="166" font-size="14" fill="currentColor" stroke="none">isolate it. collect and</text>'
+      + '<text x="444" y="184" font-size="14" fill="currentColor" stroke="none">factorise first:</text>'
+      + '<text x="444" y="212" font-size="15" fill="#0f8a4d" stroke="none">ax = bx + c</text>'
+      + '<text x="444" y="234" font-size="15" fill="#0f8a4d" stroke="none">ax - bx = c</text>'
+      + '<text x="444" y="256" font-size="15" fill="#0f8a4d" stroke="none">x(a - b) = c</text>'
+      + '<text x="444" y="278" font-size="15" fill="#0f8a4d" stroke="none">x = c over (a - b)</text>'
+      + '<text x="320" y="332" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the same steps as solving an equation,</text>'
+      + '<text x="320" y="356" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">with letters in the answer instead of a number</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each operation, and the one that undoes it',
+      columns: ['What is being done to the letter', 'What undoes it'],
+      rows: [
+        [
+          'Something is added to it',
+          'Subtract that something, from both sides',
+        ],
+        [
+          'Something is subtracted from it',
+          'Add that something, to both sides',
+        ],
+        [
+          'It is multiplied',
+          'Divide both sides, and divide the whole of each side',
+        ],
+        [
+          'It is divided',
+          'Multiply both sides',
+        ],
+        [
+          'It is squared',
+          'Take the square root of both sides, '
+            + 'and say which of the two roots you are keeping',
+        ],
+        [
+          'Its square root is taken',
+          'Square both sides',
+        ],
+      ],
+      note: 'List what is being done, in order, then work down this table '
+        + 'backwards through your list. Last done, first undone. '
+        + 'The one case it does not cover is a letter appearing twice.',
     },
   ],
 
@@ -773,16 +1159,13 @@ teach({
   },
 
   idea:
-    'A relation like y = 2x + 1 gives a y for every x, '
+    'A relation like $y = 2x + 1$ gives a $y$ for every $x$, '
     + 'and plotting those pairs gives a straight line. '
-    + 'In y = mx + c, '
-    + 'm is the gradient and c is the y intercept. '
-    + 'The gradient is how much y rises for each unit x moves right, '
-    + 'calculated as the change in y over the change in x. '
-    + 'A positive gradient rises to the right, '
-    + 'a negative one falls, '
-    + 'and a gradient of zero is a horizontal line. '
-    + 'The y intercept is the value of y when x is zero.',
+    + 'Every such line can be written as $y = mx + c$, '
+    + 'where $m$ is the gradient and $c$ is the $y$ intercept. '
+    + 'Those two numbers are the whole of the line: '
+    + 'given them you can draw it, '
+    + 'and given the line you can read them back off it.',
 
   mechanism:
     'The gradient is the only idea here, and it repays understanding '
@@ -803,7 +1186,7 @@ teach({
     + 'because with two you cannot tell that one of them is wrong, '
     + 'and with three a mistake shows up as a point off the line. '
     + 'The intercept is simpler but worth saying. '
-    + 'c is the value of y when x is zero, '
+    + '$c$ is the value of $y$ when $x$ is zero, '
     + 'so in a real situation it is the starting amount: '
     + 'the fixed charge before any units are used, '
     + 'the distance already travelled when timing began.',
@@ -828,18 +1211,19 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'What is the gradient and intercept of y = 3x - 4?',
+      ask: 'What is the gradient and intercept of $y = 3x - 4$?',
       steps: [
-        'Compare with y = mx + c.',
+        'Compare it with $y = mx + c$.',
       ],
       answer: 'Gradient 3, y intercept negative 4.',
     },
     {
       level: 4,
-      ask: 'A line passes through (1, 3) and (4, 12). Find its gradient.',
+      ask: 'A line passes through $(1, 3)$ and $(4, 12)$. '
+        + 'Find its gradient.',
       steps: [
-        'Change in y: 12 - 3 = 9.',
-        'Change in x: 4 - 1 = 3.',
+        'Change in $y$: $12 - 3 = 9$.',
+        'Change in $x$: $4 - 1 = 3$.',
         'Divide.',
       ],
       answer: '3.',
@@ -878,6 +1262,120 @@ teach({
       mistake: 'An uneven scale on an axis.',
       why: 'Every point is then misplaced, '
         + 'and nothing in your working will show it.',
+    },
+  ],
+
+  figure: {
+    alt: 'A grid with x and y axes, carrying the straight line y equals 2x '
+      + 'plus 1. A green dot at the point 0 comma 1 marks the y '
+      + 'intercept. A green dashed right angled triangle on the line runs '
+      + '2 units across and 4 units up, labelled run 2 and rise 4, and a '
+      + 'note says the gradient is 4 over 2, which is 2. A further note '
+      + 'warns that a small triangle magnifies your reading error.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="24" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">the gradient and the intercept, read off the line</text>'
+      + '<line x1="86" y1="46" x2="86" y2="364" stroke-width="1"/>'
+      + '<line x1="214" y1="46" x2="214" y2="364" stroke-width="1"/>'
+      + '<line x1="278" y1="46" x2="278" y2="364" stroke-width="1"/>'
+      + '<line x1="342" y1="46" x2="342" y2="364" stroke-width="1"/>'
+      + '<line x1="78" y1="350" x2="374" y2="350" stroke-width="1"/>'
+      + '<line x1="78" y1="222" x2="374" y2="222" stroke-width="1"/>'
+      + '<line x1="78" y1="158" x2="374" y2="158" stroke-width="1"/>'
+      + '<line x1="78" y1="94" x2="374" y2="94" stroke-width="1"/>'
+      + '<line x1="70" y1="286" x2="380" y2="286"/>'
+      + '<path d="M 378 278 L 394 286 L 378 294 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="400" y="292" font-size="15" fill="currentColor" stroke="none">x</text>'
+      + '<line x1="150" y1="370" x2="150" y2="48"/>'
+      + '<path d="M 142 50 L 150 34 L 158 50 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="150" y="26" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">y</text>'
+      + '<text x="86" y="304" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">-2</text>'
+      + '<text x="214" y="304" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="278" y="304" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">4</text>'
+      + '<text x="342" y="304" font-size="13" text-anchor="middle" fill="currentColor" stroke="none">6</text>'
+      + '<text x="142" y="227" font-size="13" text-anchor="end" fill="currentColor" stroke="none">2</text>'
+      + '<text x="142" y="163" font-size="13" text-anchor="end" fill="currentColor" stroke="none">4</text>'
+      + '<text x="142" y="99" font-size="13" text-anchor="end" fill="currentColor" stroke="none">6</text>'
+      + '<text x="142" y="355" font-size="13" text-anchor="end" fill="currentColor" stroke="none">-2</text>'
+      + '<line x1="102" y1="350" x2="246" y2="62"/>'
+      + '<circle cx="150" cy="254" r="7" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="162" y="268" font-size="15" fill="#0f8a4d" stroke="none">(0, 1)</text>'
+      + '<line x1="182" y1="190" x2="246" y2="190" stroke="#0f8a4d" stroke-width="3" stroke-dasharray="7 5"/>'
+      + '<line x1="246" y1="190" x2="246" y2="62" stroke="#0f8a4d" stroke-width="3" stroke-dasharray="7 5"/>'
+      + '<text x="214" y="208" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">run 2</text>'
+      + '<text x="254" y="128" font-size="14" fill="#0f8a4d" stroke="none">rise 4</text>'
+      + '<text x="412" y="92" font-size="17" fill="currentColor" stroke="none">y = 2x + 1</text>'
+      + '<text x="412" y="130" font-size="15" fill="#0f8a4d" stroke="none">the 2 is the gradient:</text>'
+      + '<text x="412" y="150" font-size="15" fill="#0f8a4d" stroke="none">4 up for 2 across</text>'
+      + '<text x="412" y="182" font-size="15" fill="#0f8a4d" stroke="none">the 1 is the intercept:</text>'
+      + '<text x="412" y="202" font-size="15" fill="#0f8a4d" stroke="none">y when x is zero</text>'
+      + '<text x="412" y="242" font-size="14" fill="currentColor" stroke="none">choose two points far</text>'
+      + '<text x="412" y="260" font-size="14" fill="currentColor" stroke="none">apart, on crossings:</text>'
+      + '<text x="412" y="278" font-size="14" fill="currentColor" stroke="none">a small triangle</text>'
+      + '<text x="412" y="296" font-size="14" fill="currentColor" stroke="none">magnifies your error</text>'
+      + '<text x="320" y="388" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">plot three points, not two: with two you cannot tell one is wrong</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Reading the gradient and the intercept, '
+        + 'off the rule and off the graph',
+      columns: ['What you want', 'From the rule', 'From the graph'],
+      rows: [
+        [
+          'The gradient, m',
+          'The number multiplying x',
+          'Pick two points far apart on grid crossings: '
+            + 'the change in y divided by the change in x',
+        ],
+        [
+          'The y intercept, c',
+          'The number standing on its own',
+          'The value of y where the line crosses the y axis',
+        ],
+        [
+          'The y for a given x',
+          'Put that x in and work the rule out',
+          'Go up from that x to the line, then across to the y axis',
+        ],
+        [
+          'The x for a given y',
+          'Put that y in and solve for x',
+          'Go across from that y to the line, then down to the x axis',
+        ],
+      ],
+      note: 'A positive gradient rises to the right, a negative one '
+        + 'falls, and a gradient of zero is a horizontal line.',
+    },
+    {
+      caption: 'Gradient is one calculation under several names',
+      columns: [
+        'What the graph plots',
+        'The change in the upward quantity divided by the change in the '
+          + 'sideways one is then called',
+        'What it tells you',
+      ],
+      rows: [
+        [
+          'y against x',
+          'The gradient',
+          'How much y rises for each unit x moves right',
+        ],
+        [
+          'Distance against time',
+          'The speed',
+          'How far the thing travels in each unit of time',
+        ],
+        [
+          'Cost against units used',
+          'The rate per unit',
+          'What one more unit adds to the bill',
+        ],
+      ],
+      note: 'The intercept has the same double life. '
+        + 'On a cost graph it is the fixed charge before any units are '
+        + 'used; on a distance graph it is the distance already travelled '
+        + 'when the timing began.',
     },
   ],
 
