@@ -1373,18 +1373,13 @@ teach({
   idea:
     'An appellation is a praise name or string of praise names, '
     + 'used for a chief, an ancestor, a family or a person. '
-    + 'It is built from images: '
-    + 'an animal for strength or cunning, '
-    + 'a great tree for endurance, '
-    + 'a river for depth, '
-    + 'a weapon for readiness, '
-    + 'and the names of ancestors for descent. '
+    + 'It is built out of images, '
+    + 'and every image in it is making a claim about the one named. '
     + 'It is recited at durbars, festivals and formal gatherings, '
     + 'often by a linguist or a drummer, '
     + 'and the talking drums can sound it without words. '
     + 'A dirge is a funeral song, '
-    + 'and its images do the reverse work: '
-    + 'the tree has fallen, the river has dried, the house is empty. '
+    + 'and it uses the same images to say the opposite. '
     + 'Both are oral poetry: '
     + 'learned by ear, performed, '
     + 'and varying slightly with the reciter and the occasion.',
@@ -1398,13 +1393,9 @@ teach({
     + 'and that removing him would move the soil. '
     + 'So the way to answer a question about an appellation '
     + 'is to take each image and name the claim inside it. '
-    + 'An animal image claims a quality that animal is known for. '
-    + 'An ancestor’s name claims the right to the position by descent. '
-    + 'A weapon claims readiness, and sometimes a warning. '
-    + 'Explain the image and you have explained the poem. '
+    + 'Explain the images and you have explained the poem. '
     + 'A dirge works by the same method with the images reversed, '
     + 'and that is why they are worth teaching together. '
-    + 'In praise the tree stands; in mourning the tree has fallen. '
     + 'The same image system is being used to say the opposite thing, '
     + 'which tells you the images are a shared language '
     + 'rather than one poet’s invention. '
@@ -1490,6 +1481,54 @@ teach({
       mistake: 'Reciting it without its rhythm.',
       why: 'The rhythm is part of the poem, '
         + 'and the drums can sound it without any words at all.',
+    },
+  ],
+
+  tables: [
+    {
+      caption: 'The images an appellation is built from, '
+        + 'the claim in each one, and what a dirge does with it',
+      columns: [
+        'Image',
+        'The claim it makes in praise',
+        'What a dirge does with the same image',
+      ],
+      rows: [
+        [
+          'A great tree',
+          'Endurance, and roots that hold the land together',
+          'The tree has fallen',
+        ],
+        [
+          'A river',
+          'Depth, and water that does not run out',
+          'The river has dried',
+        ],
+        [
+          'The house',
+          'A household standing, with people in it',
+          'The house is empty',
+        ],
+        [
+          'An animal',
+          'The quality that animal is known for, '
+            + 'such as strength or cunning',
+          'The animal is not heard any more',
+        ],
+        [
+          'A weapon',
+          'Readiness, and sometimes a warning',
+          'The weapon has been set down',
+        ],
+        [
+          'The name of an ancestor',
+          'The right to the position, held by descent',
+          'The name is called and nobody answers',
+        ],
+      ],
+      note: 'The last column shows the method and not a fixed text. '
+        + 'A dirge turns round whatever image praise used, '
+        + 'and a reciter chooses the images for the occasion.',
     },
   ],
 
@@ -1583,15 +1622,11 @@ teach({
     + 'It is a move in an argument, '
     + 'and that is why the occasion is part of its meaning. '
     + 'When an elder answers a young man’s complaint with a proverb, '
-    + 'the proverb does three things at once. '
-    + 'It states a general rule, '
-    + 'it places the young man’s case under that rule, '
-    + 'and it borrows the authority of everybody who ever said it before. '
-    + 'The last part is why a proverb settles things that an argument '
-    + 'would not: '
-    + 'disagreeing with it means disagreeing with the ancestors, '
-    + 'not with the speaker. '
-    + 'This is why an answer that gives only the meaning is incomplete. '
+    + 'the proverb does three things at once, '
+    + 'and the third of them is why a proverb settles arguments that '
+    + 'reasoning would not. '
+    + 'This is also why an answer that gives only the meaning is '
+    + 'incomplete. '
     + '"Haste is bad" is not an explanation of a proverb about haste. '
     + 'You have to say when it would be used, '
     + 'because the same proverb used in the wrong place '
@@ -1682,6 +1717,69 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'Three numbered boxes in a column giving the parts of a full '
+      + 'explanation of a proverb: the literal picture, which is what the '
+      + 'words show; the general meaning, which is the rule it states; '
+      + 'and the occasion, which is when you would say it. Beside the '
+      + 'middle box a red box shows an answer that gives only the middle '
+      + 'part, such as saying that haste is bad, and notes that this is '
+      + 'not an explanation.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="19" text-anchor="middle" fill="currentColor" stroke="none">a full explanation of a proverb has three parts</text>'
+      + '<rect x="20" y="58" width="320" height="66" rx="6"/>'
+      + '<circle cx="46" cy="91" r="13"/>'
+      + '<text x="46" y="97" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">1</text>'
+      + '<text x="72" y="86" font-size="16" fill="currentColor" stroke="none">the literal picture</text>'
+      + '<text x="72" y="108" font-size="14" fill="currentColor" stroke="none">what the words show</text>'
+      + '<rect x="20" y="136" width="320" height="66" rx="6"/>'
+      + '<circle cx="46" cy="169" r="13"/>'
+      + '<text x="46" y="175" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">2</text>'
+      + '<text x="72" y="164" font-size="16" fill="currentColor" stroke="none">the general meaning</text>'
+      + '<text x="72" y="186" font-size="14" fill="currentColor" stroke="none">the rule it states</text>'
+      + '<rect x="20" y="214" width="320" height="66" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<circle cx="46" cy="247" r="13" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="46" y="253" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">3</text>'
+      + '<text x="72" y="242" font-size="16" fill="#0f8a4d" stroke="none">the occasion</text>'
+      + '<text x="72" y="264" font-size="14" fill="#0f8a4d" stroke="none">when you would say it</text>'
+      + '<line x1="340" y1="169" x2="352" y2="169" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 350 161 L 366 169 L 350 177 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="368" y="136" width="250" height="98" rx="6" stroke="#c8433a" stroke-width="3" stroke-dasharray="7 5"/>'
+      + '<text x="493" y="166" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">only the middle box,</text>'
+      + '<text x="493" y="190" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">so: haste is bad.</text>'
+      + '<text x="493" y="216" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">that is not an explanation</text>'
+      + '<text x="320" y="330" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">all three parts, or the explanation is not finished,</text>'
+      + '<text x="320" y="358" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">and the third is the one learners leave out</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three things a proverb does at once '
+        + 'when an elder uses one',
+      columns: ['What it does', 'Why that matters'],
+      rows: [
+        [
+          'States a general rule',
+          'The rule is not the speaker’s own opinion, '
+            + 'so it cannot be argued with as one',
+        ],
+        [
+          'Places the case in front of you under that rule',
+          'The particular quarrel is settled by something already agreed',
+        ],
+        [
+          'Borrows the authority of everybody who said it before',
+          'Disagreeing means disagreeing with the ancestors, '
+            + 'and not with the speaker',
+        ],
+      ],
+      note: 'This is why the occasion is part of the meaning. '
+        + 'The same proverb in the wrong place is not a wise saying but a '
+        + 'mistake, and in some gatherings an insult.',
+    },
+  ],
+
   extension:
     'Some proverbs contradict each other, '
     + 'and that is not a flaw in the tradition. '
@@ -1755,17 +1853,16 @@ teach({
 
   idea:
     'A folktale is a story passed on by telling. '
-    + 'It opens and closes with a set formula, '
-    + 'often has a song the audience joins, '
-    + 'uses repetition in threes, '
-    + 'and gives animals speech and human character. '
-    + 'The trickster figure, such as Ananse the spider, '
-    + 'wins by cleverness and is sometimes punished for it. '
-    + 'The lesson comes out of what happens to the characters. '
-    + 'A riddle is a question with a hidden answer, '
-    + 'asked to sharpen thinking and to pass time. '
-    + 'Songs within a tale mark the turning points '
-    + 'and keep the audience part of the performance.',
+    + 'It teaches through what happens to its characters, '
+    + 'and not through a sentence at the end. '
+    + 'The devices of the telling are not ornament. '
+    + 'The formulas, the repetition, the song, the talking animals '
+    + 'and the trickster each do a job. '
+    + 'Each one solves a problem that comes up '
+    + 'when a story is told aloud with no book. '
+    + 'A riddle is a different thing. '
+    + 'It is a question with a hidden answer, '
+    + 'asked to sharpen thinking and to pass time.',
 
   mechanism:
     'The reason a folktale teaches better than a rule '
@@ -1781,20 +1878,16 @@ teach({
     + 'and what happened to him. '
     + 'A lesson that does not come from that link has been imported from '
     + 'outside the story. '
-    + 'The devices are not ornament either; '
-    + 'each one solves a problem of telling a story aloud with no book. '
-    + 'Repetition in threes gives the listener a pattern '
-    + 'and gives the teller time to think. '
-    + 'The song lets the audience join, '
-    + 'which keeps children awake and makes them part of the performance. '
-    + 'Animals as characters let a tale criticise human behaviour safely, '
-    + 'because nobody present need be insulted by what the tortoise did. '
-    + 'And the opening and closing formulas mark off the world of the '
-    + 'story, '
+    + 'The devices are not ornament either. '
+    + 'Each one solves a problem that only arises '
+    + 'when a story is told aloud with no book, '
+    + 'and the one worth understanding first is the pair of formulas. '
+    + 'They mark off the world of the story, '
     + 'so that nothing said inside it is taken as a statement about real '
     + 'people, '
     + 'which is what makes the criticism sayable at all. '
-    + 'Seen that way, the devices are a technology for oral teaching.',
+    + 'Seen that way, the devices are a technology for oral teaching '
+    + 'rather than a style of telling.',
 
   recap:
     'You have heard folktales told at home '
@@ -1869,6 +1962,80 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'Two boxes side by side. The left one reads what the character '
+      + 'did, with Ananse scheming for everything under it. The right one '
+      + 'reads what happened to him, with him losing it all for exactly '
+      + 'that reason. A thick green arrow joins them, labelled as the link '
+      + 'the lesson lives in. Below, a red dashed box reading greed brings '
+      + 'trouble, stated as a rule, has a crossed out arrow pointing up at '
+      + 'the link, to show that a rule brought in from outside the story '
+      + 'is not the tale’s lesson.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">where the lesson of a tale is</text>'
+      + '<rect x="24" y="92" width="216" height="84" rx="6"/>'
+      + '<text x="132" y="120" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">what the character did</text>'
+      + '<text x="132" y="142" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">Ananse schemes for</text>'
+      + '<text x="132" y="162" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">everything he wants</text>'
+      + '<line x1="240" y1="134" x2="378" y2="134" stroke="#0f8a4d" stroke-width="5"/>'
+      + '<path d="M 376 124 L 396 134 L 376 144 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="318" y="78" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">the lesson is in this link</text>'
+      + '<rect x="400" y="92" width="216" height="84" rx="6"/>'
+      + '<text x="508" y="120" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">what happened to him</text>'
+      + '<text x="508" y="142" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">he loses it all, for</text>'
+      + '<text x="508" y="162" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">exactly the same reason</text>'
+      + '<rect x="192" y="262" width="256" height="72" rx="6" stroke="#c8433a" stroke-width="3" stroke-dasharray="7 5"/>'
+      + '<text x="320" y="292" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">greed brings trouble,</text>'
+      + '<text x="320" y="314" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">stated as a rule</text>'
+      + '<line x1="320" y1="258" x2="320" y2="206" stroke="#c8433a" stroke-width="3" stroke-dasharray="6 5"/>'
+      + '<path d="M 312 208 L 320 192 L 328 208 Z" fill="#c8433a" stroke="none"/>'
+      + '<line x1="306" y1="218" x2="334" y2="246" stroke="#c8433a" stroke-width="3"/>'
+      + '<line x1="334" y1="218" x2="306" y2="246" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="320" y="368" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">a rule from outside the story is not the tale’s lesson</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'Each device of a folktale, '
+        + 'and the problem of telling aloud that it solves',
+      columns: ['Device', 'What it is', 'The problem it solves'],
+      rows: [
+        [
+          'A set opening and closing formula',
+          'Fixed words that begin and end every telling',
+          'Marks off the world of the story, so nothing said inside it is '
+            + 'taken as a statement about real people',
+        ],
+        [
+          'Repetition in threes',
+          'The same action or phrase coming round three times',
+          'Gives the listener a pattern, '
+            + 'and gives the teller time to think',
+        ],
+        [
+          'A song the audience joins',
+          'A sung part at the turning points of the tale',
+          'Keeps children awake, and makes them part of the performance',
+        ],
+        [
+          'Animals with speech and human character',
+          'A spider or a tortoise behaving as a person would',
+          'Lets the tale criticise human behaviour '
+            + 'without insulting anybody listening',
+        ],
+        [
+          'The trickster, such as Ananse the spider',
+          'A clever character who wins, and is then punished for it',
+          'Admires the cleverness and refuses to let it go unpaid for',
+        ],
+      ],
+      note: 'The third column is the one worth learning. '
+        + 'A device named without the problem it solves is a list, '
+        + 'and a list earns little.',
+    },
+  ],
+
   extension:
     'The trickster appears in many traditions, '
     + 'and in each one he both wins and is punished. '
@@ -1938,19 +2105,13 @@ teach({
   },
 
   idea:
-    'A narrative composition tells a story: '
-    + 'a plan, paragraphs, and an ending that says what changed. '
-    + 'A letter has the layout of a letter in your language, '
-    + 'with the greeting and closing that language uses, '
-    + 'and the level of respect the reader is owed. '
-    + 'An argumentative composition states a position, '
-    + 'gives reasons with examples, '
-    + 'answers the main objection, '
-    + 'and closes by restating the position. '
-    + 'In all three, '
-    + 'the tense is kept consistent, '
-    + 'the sentence order is the language’s own, '
-    + 'and all tone marks and special letters are written.',
+    'Three forms are set: a narrative, a letter, and an argument. '
+    + 'Read the question first and decide which one it is asking for, '
+    + 'because each has parts it must have and is marked for having them. '
+    + 'Everything else is the same in all three. '
+    + 'The tense is kept consistent, '
+    + 'the sentence order is the language’s own and not English order, '
+    + 'and every tone mark and special letter is written.',
 
   mechanism:
     'The fault that costs most marks in composition '
@@ -2065,6 +2226,68 @@ teach({
     {
       mistake: 'Forcing in a proverb that does not fit.',
       why: 'A misused proverb loses more than a missing one.',
+    },
+  ],
+
+  figure: {
+    alt: 'Five boxes stacked in a column giving the shape of an '
+      + 'argumentative composition: your position in one sentence, a '
+      + 'reason with an example, another reason with an example, the main '
+      + 'objection answered, and the position stated again. A green '
+      + 'bracket beside the two reason boxes says that a proverb at the '
+      + 'end of one of them does the work of three sentences, and that it '
+      + 'is only available to somebody who planned in the language.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the shape of an argument</text>'
+      + '<rect x="20" y="48" width="320" height="50" rx="6"/>'
+      + '<text x="34" y="79" font-size="16" fill="currentColor" stroke="none">your position, in one sentence</text>'
+      + '<rect x="20" y="108" width="320" height="50" rx="6"/>'
+      + '<text x="34" y="139" font-size="16" fill="currentColor" stroke="none">a reason, with an example</text>'
+      + '<rect x="20" y="168" width="320" height="50" rx="6"/>'
+      + '<text x="34" y="199" font-size="16" fill="currentColor" stroke="none">another reason, with an example</text>'
+      + '<rect x="20" y="228" width="320" height="50" rx="6"/>'
+      + '<text x="34" y="259" font-size="16" fill="currentColor" stroke="none">the main objection, answered</text>'
+      + '<rect x="20" y="288" width="320" height="50" rx="6"/>'
+      + '<text x="34" y="319" font-size="16" fill="currentColor" stroke="none">the position again</text>'
+      + '<path d="M 354 108 H 366 V 218 H 354" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="378" y="128" font-size="15" fill="#0f8a4d" stroke="none">a proverb at the end of</text>'
+      + '<text x="378" y="148" font-size="15" fill="#0f8a4d" stroke="none">one of these does the</text>'
+      + '<text x="378" y="168" font-size="15" fill="#0f8a4d" stroke="none">work of three sentences</text>'
+      + '<text x="378" y="196" font-size="14" fill="#0f8a4d" stroke="none">and it only comes to you</text>'
+      + '<text x="378" y="214" font-size="14" fill="#0f8a4d" stroke="none">if you planned in the language</text>'
+      + '<text x="320" y="378" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">plan the five boxes in your language, not in English</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The three forms of composition, '
+        + 'and the parts each one is marked for having',
+      columns: ['Form', 'What it is for', 'The parts it must have'],
+      rows: [
+        [
+          'Narrative',
+          'Telling what happened',
+          'A plan, paragraphs, one tense throughout, '
+            + 'and an ending that says what changed',
+        ],
+        [
+          'Letter',
+          'Addressing one reader',
+          'The layout, greeting and closing your language uses, '
+            + 'at the level of respect that reader is owed',
+        ],
+        [
+          'Argument',
+          'Persuading somebody of a position',
+          'The position, reasons with examples, '
+            + 'an answer to the main objection, '
+            + 'and the position stated again at the close',
+        ],
+      ],
+      note: 'A piece missing a part of its own form loses marks '
+        + 'however well it is written, '
+        + 'so decide the form before you plan.',
     },
   ],
 
