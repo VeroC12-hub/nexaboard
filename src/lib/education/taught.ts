@@ -289,19 +289,35 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     : null
   if (t.mechanism && !mechanism && !gist) why.push('the reasoning is left out because you are strong here and prefer to be doing')
 
-  /* ── Why the gist keeps this and used to not ────────────────────────────
+  /* ── Why everybody gets the groundwork now ──────────────────────────────
      BRIEF dropped the recap along with everything else, and that was the
      wrong cut. The learner who asks for the gist and is shaky is not asking
      to be told less about the thing they are missing: they are asking for a
      short page, and the one part a short page cannot do without is the thing
-     this topic stands on. Dropping it also made every BRIEF learner's lesson
-     the same page, which `personalisation-check.mts` measured at 100%
-     identical for two learners as different as somebody catching up and
-     somebody sitting an exam. */
-  const recap: Piece | null = t.recap && (catchingUp || shaky)
+     this topic stands on.
+
+     The bigger wrong cut was the gate itself. The recap was shown only to a
+     learner who had ticked "catching up" or "shaky", so a learner who stated
+     no preference, which is most of them, was handed a lesson that opens
+     straight into the new idea. In this library that means a lesson on
+     logarithms whose first sentence is "a logarithm is an index", to a
+     reader who has not been told what an index is, what a logarithm is, or
+     that the two have anything to do with each other. Written out, 535 of
+     601 lessons store the sentence that would have told them, and the
+     assembler was throwing it away for everybody who had not confessed to
+     being behind.
+
+     Nobody has to say they are struggling to be told what a word means.
+     Stating that you are strong means you want less hand-holding in the
+     reasoning, which `wantsMechanism` already handles; it does not mean you
+     want the vocabulary withheld. So the groundwork is now part of every
+     lesson that has it, and the sentence explaining why only appears for
+     the learners who asked to start further back than usual. */
+  const recap: Piece | null = t.recap
     ? { kind: 'recap', heading: 'First, the thing it stands on', text: t.recap }
     : null
-  if (recap) why.push(catchingUp ? 'it starts further back because you are closing gaps' : 'it starts further back because you said you are shaky here')
+  if (recap && catchingUp) why.push('it starts further back because you are closing gaps')
+  else if (recap && shaky) why.push('it starts further back because you said you are shaky here')
 
   const method: Piece = {
     kind: 'method',
@@ -385,21 +401,60 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
    * The heading comes from the caption, because a column of sections all
    * headed "Table" tells a reader nothing about which one to look at.
    */
-  const tables: Piece[] = (gist ? (t.tables ?? []).slice(0, 1) : t.tables ?? [])
+  const tablePieces: Piece[] = (gist ? (t.tables ?? []).slice(0, 1) : t.tables ?? [])
     .map(table => ({ kind: 'table' as const, heading: table.caption, table }))
 
-  /* One question inside the lesson, for somebody who learns by doing. The rest
-     of the questions belong to practice, not here. */
+  /* The first table carries the break in the reasoning and the rest follow
+     the method, rather than all of them arriving in one stack. A lesson with
+     three tables used to put three in a row, which is as much of a wall as
+     three paragraphs and harder to read. */
+  const tableFirst: Piece[] = tablePieces.slice(0, 1)
+  const tableRest: Piece[] = tablePieces.slice(1)
+
+  /* One question inside the lesson. The rest belong to practice, not here.
+
+     ── Why this is no longer only for somebody who asked to be doing ───────
+     It was gated on `diet === 'PRACTISE'`, and measured across the library
+     that meant 0 of 601 lessons showed a question to a learner who had
+     stated no preference, which is most of them. The reasoning was that a
+     reader wants to read; the effect was that the one moment in a lesson
+     where the page stops talking and asks something was switched off for
+     almost everybody. One question in the middle of a lesson is not practice,
+     it is the thing that tells a reader whether the last three paragraphs
+     landed, and nobody has to answer it to carry on.
+
+     It stays out of the gist, where the whole request is for less. */
   const first = (t.questions ?? [])
     .slice()
     .sort((a, b) => Math.abs(a.level - wantLevel) - Math.abs(b.level - wantLevel))[0]
-  const question: Piece | null = doing && first
-    ? { kind: 'question', heading: 'Try this one', question: first }
+  const question: Piece | null = first && !gist
+    ? { kind: 'question', heading: doing ? 'Try this one' : 'Before you read on', question: first }
     : null
 
   /* ── the order ──────────────────────────────────────────────────────────
      This is the whole of `approach`, and it is the clearest case for storing
-     parts: the same six pieces, arranged three ways. */
+     parts: the same pieces, arranged three ways.
+
+     ── Why the picture moved ──────────────────────────────────────────────
+     It used to sit after the traps, near the end, for every learner who had
+     not said they prefer watching. Measured over the library that put the
+     picture in the last third of the page in 472 of 472 lessons that have
+     one: every single time. A diagram at the bottom of a page of prose is a
+     diagram most readers never reach, and it is the one block that can show
+     in a second what a paragraph spends two hundred words on.
+
+     It now comes directly after the idea, before the reasoning. The idea
+     says what the thing is, the picture shows it, and only then does the
+     page explain why it works. For a learner who takes things in better
+     shown than told it still leads the whole lesson.
+
+     ── Why anything moved at all ──────────────────────────────────────────
+     Measured with `scripts/lesson-shape.mts`: a learner who has stated no
+     preference read on average 356 words, and in 105 lessons more than 700
+     words, of unbroken paragraphs before meeting anything that was not a
+     paragraph. The pieces to break that up were already written and stored
+     in every one of those lessons. They were simply all queued behind the
+     prose. Nothing here changes what a lesson says. */
   let pieces: Piece[]
 
   if (p.approach === 'TRY_FIRST' && (question || worked)) {
@@ -408,21 +463,21 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     why.push('it opens with something to try, because you learn from the mistake')
     pieces = [
       question ?? worked!,
-      recap, idea, mechanism, ...tables, method,
+      recap, idea, figure, mechanism, ...tableFirst, method,
       question ? worked : null,
-      ...workedMore,
-      traps, figure, extension,
+      ...workedMore, ...tableRest,
+      traps, extension,
     ].filter(Boolean) as Piece[]
   } else if (p.approach === 'SHOW_FIRST') {
     why.push('it shows you one done first')
     pieces = [
       recap,
       shows ? figure : null,
-      worked, idea, mechanism, ...tables, method,
-      ...workedMore,
-      traps,
+      worked, idea,
       shows ? null : figure,
-      question, extension,
+      mechanism, ...tableFirst, method,
+      ...workedMore, ...tableRest,
+      question, traps, extension,
     ].filter(Boolean) as Piece[]
   } else {
     /* IDEA_FIRST, and the default. The idea in full before anything is
@@ -430,15 +485,16 @@ export function assemble(t: Taught, p: LearnerProfile): Assembled {
     pieces = [
       recap,
       shows ? figure : null,
-      idea, mechanism, ...tables, method, worked,
-      ...workedMore,
-      traps,
+      idea,
       shows ? null : figure,
-      question, extension,
+      mechanism, ...tableFirst, method, worked,
+      ...workedMore, ...tableRest,
+      question, traps, extension,
     ].filter(Boolean) as Piece[]
   }
 
   if (shows && figure) why.push('the picture leads, because you take things in better shown than told')
+  else if (figure) why.push('the picture comes early, so you can see the thing before reading why it works')
 
   return {
     pieces,
