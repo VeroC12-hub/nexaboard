@@ -2123,6 +2123,34 @@ teach({
     ],
   },
 
+  why:
+    'Stand on bare rock at the top of a hill in the Kwahu range. '
+    + 'Nothing grows on it. '
+    + 'Walk down to the foot of the same hill '
+    + 'and there is soil deep enough for cocoa. '
+    + 'It is the same rock underneath in both places. '
+    + 'So the soil at the bottom was once rock like the rock at the top. '
+    + 'Something turned one into the other. '
+    + 'What did, and how long did it take? '
+    + 'A farmer who knows the answer '
+    + 'knows why topsoil lost to one season of erosion '
+    + 'does not come back in his lifetime. '
+    + 'This topic is that answer.',
+
+  notation:
+    'A vertical cut down through a soil is called a profile. '
+    + 'The layers in it are called horizons, '
+    + 'and each has a letter, read from the top down. '
+    + 'O is the litter of leaves on the surface. '
+    + 'A is the dark topsoil. '
+    + 'B is the subsoil. '
+    + 'C is broken up parent rock. '
+    + 'R is solid rock. '
+    + 'Say them as "the A horizon", not "layer A". '
+    + 'The commonest way to lose a mark '
+    + 'is to give the horizons in the wrong direction. '
+    + 'They are always listed from the surface downwards.',
+
   idea:
     'Soil is weathered rock mixed with organic matter, '
     + 'water, air and living things. '
@@ -2161,7 +2189,7 @@ teach({
     + 'to be deposited in the B horizon. '
     + 'That is why a B horizon is usually heavier, '
     + 'stickier and redder or more yellow than the A above it. '
-    + 'Once you know that, the profile tells you things '
+    + 'Once that is settled, the profile tells you things '
     + 'nobody wrote on it. '
     + 'A thin A horizon over a dense clay B '
     + 'means water will sit on that clay after heavy rain, '
@@ -2207,9 +2235,19 @@ teach({
     + 'and say where a soil test would add what the eye cannot see.',
 
   recap:
-    'You have met soil as the thing crops grow in, '
-    + 'and sand, clay and loam as its types. '
-    + 'This asks where it came from, '
+    'Soil is the loose material a crop puts its roots into. '
+    + 'Take a handful and it is not one substance. '
+    + 'There are gritty bits, fine powdery bits, '
+    + 'dark crumbly matter from dead leaves, water, '
+    + 'and air in the spaces between. '
+    + 'Soils are named by which of the gritty or fine parts dominates. '
+    + 'Sandy soil is mostly coarse grains, '
+    + 'so water drains straight through it. '
+    + 'Clay soil is mostly very fine particles, '
+    + 'so it holds water and goes sticky. '
+    + 'Loam is a mixture of both with dark matter in it, '
+    + 'and it is the best for most crops. '
+    + 'This lesson asks where any of it came from in the first place, '
     + 'and why a soil is not the same all the way down.',
 
   method: [
@@ -2505,6 +2543,32 @@ teach({
     ],
   },
 
+  why:
+    'A farmer in the Afram Plains walks into his maize at six weeks. '
+    + 'The oldest leaves at the bottom have gone pale yellow. '
+    + 'The young leaves at the top are still green. '
+    + 'In the next field the pattern is reversed. '
+    + 'He has one bag of fertiliser and cannot buy a second. '
+    + 'Which field should get it, and will that bag even help? '
+    + 'Buying a bag and spreading it to see what happens '
+    + 'costs him a season and the money. '
+    + 'The plant has already told him which element is short. '
+    + 'This topic is how to read what it said.',
+
+  notation:
+    'A fertiliser bag carries three numbers, like 15-15-15. '
+    + 'They are read in a fixed order: '
+    + 'nitrogen first, then phosphorus, then potassium. '
+    + 'Each is a percentage by weight, '
+    + 'so 15-15-15 is 15 per cent of each '
+    + 'and the rest of the bag is filler. '
+    + 'The three are often called by their chemical symbols, '
+    + 'N, P and K, and the bag may be called NPK. '
+    + 'The commonest way to lose a mark '
+    + 'is to read the three numbers in the wrong order, '
+    + 'because 23-10-5 and 5-10-23 are different fertilisers '
+    + 'for different problems.',
+
   idea:
     'A plant takes carbon, hydrogen and oxygen '
     + 'from the air and from water. '
@@ -2587,9 +2651,19 @@ teach({
     + 'and in a field it is worth a season.',
 
   recap:
-    'You know that crops grow better when manure or fertiliser is added. '
-    + 'This says which element does which job, '
-    + 'and how to read from the plant itself which one is missing.',
+    'A plant needs more than water and light. '
+    + 'It needs chemical elements, '
+    + 'and it takes most of them out of the soil through its roots. '
+    + 'A soil cropped year after year runs short of them. '
+    + 'That is why a maize field that gave a good harvest '
+    + 'gives a poorer one the next year on the same land. '
+    + 'Manure and fertiliser put those elements back. '
+    + 'Manure is rotted animal dung or plant matter. '
+    + 'Fertiliser is the elements supplied as a manufactured powder. '
+    + 'Both work for the same reason, '
+    + 'and a field given either does visibly better. '
+    + 'This lesson says which element does which job in the plant, '
+    + 'and how to read off the plant itself which one is short.',
 
   method: [
     'Walk the field and see whether the symptom affects a patch or one plant.',
@@ -2619,7 +2693,7 @@ teach({
       level: 4,
       ask: 'The lower leaves of a maize plant are yellowing from the tip '
         + 'back along the midrib, while the top is still green. '
-        + 'Name the nutrient and explain how you know.',
+        + 'Name the nutrient and give the reasoning.',
       steps: [
         'The symptom is on the old leaves, so the nutrient is mobile.',
         'The whole lower leaf is yellowing, not just between the veins.',

@@ -48,6 +48,35 @@ teach({
     ],
   },
 
+  why:
+    'You buy a memory card marked 32GB. '
+    + 'You want to fill it with photographs. '
+    + 'The phone says each photograph is 4MB. '
+    + 'So how many will fit? '
+    + 'You cannot answer that, '
+    + 'because nothing tells you how an MB compares to a GB. '
+    + 'They are two different units and the packet explains neither. '
+    + 'Then a two hour film turns out to be 1.5GB, '
+    + 'which is more than three hundred photographs. '
+    + 'Why should a film be so much larger? '
+    + 'This topic answers both questions.',
+
+  notation:
+    'A small b means a bit. '
+    + 'A capital B means a byte, which is eight bits. '
+    + 'So 8b and 1B are the same amount of data, '
+    + 'and that one letter is the whole difference. '
+    + 'The units above the byte carry a prefix: '
+    + 'KB is kilobyte, MB is megabyte, '
+    + 'GB is gigabyte and TB is terabyte. '
+    + 'They are said "kay bee", "em bee", "gee bee" and "tee bee". '
+    + 'Each is about a thousand times the one below it. '
+    + 'The commonest way to lose a mark '
+    + 'is to mix the small b with the capital B. '
+    + 'An internet speed is given in bits per second '
+    + 'and a file size is given in bytes, '
+    + 'so the same figure means two things eight times apart.',
+
   idea:
     'A bit is a single 0 or 1, '
     + 'and it is the smallest piece of data a computer holds. '
@@ -72,8 +101,8 @@ teach({
     + 'That is six million bytes, or about six megabytes, '
     + 'before any compression. '
     + 'So the photograph is three thousand pages of text, '
-    + 'and nothing about that is surprising once you know what is being '
-    + 'stored. '
+    + 'and nothing about that is surprising '
+    + 'once the contents are counted up. '
     + 'Video follows at once: it is many such pictures every second, '
     + 'which is why an hour of it reaches gigabytes. '
     + 'This is worth knowing for a practical reason. '
@@ -84,9 +113,18 @@ teach({
     + 'guessing.',
 
   recap:
-    'You know base two from mathematics, '
-    + 'and that a computer stores everything as 0s and 1s. '
-    + 'This gives the units those 0s and 1s are counted in.',
+    'A computer has no way of writing the digits 2 to 9. '
+    + 'Inside it every switch is either off or on, '
+    + 'and nothing in between. '
+    + 'Off is written 0 and on is written 1. '
+    + 'So every number, letter, picture and song in a computer '
+    + 'is held as a row of 0s and 1s and nothing else. '
+    + 'Counting with only two digits is called base two, or binary. '
+    + 'In base two you count 0, 1, then 10, then 11, then 100, '
+    + 'and that 100 stands for four, not for a hundred. '
+    + 'The letter A is stored as 01000001. '
+    + 'This lesson is about the units '
+    + 'those rows of 0s and 1s are counted in.',
 
   method: [
     'Start from bytes. One character is one byte.',

@@ -381,6 +381,38 @@ teach({
     ],
   },
 
+  why:
+    'A root sits in soil water. '
+    + 'The soil water is weak, '
+    + 'and the plant has already pulled in so much potassium '
+    + 'that inside the root cell there is far more of it '
+    + 'than outside. '
+    + 'And yet the root keeps taking in more potassium. '
+    + 'That is uphill. '
+    + 'Nothing spreads of its own accord '
+    + 'from where it is scarce to where it is already crowded, '
+    + 'any more than water runs uphill. '
+    + 'So something must be paying for it. '
+    + 'What, and how? '
+    + 'That question is the whole of this topic.',
+
+  notation:
+    'A concentration gradient is the difference in crowding '
+    + 'between two places. '
+    + 'Down the gradient means from crowded to spread out, '
+    + 'and against the gradient means the other way. '
+    + 'Water potential is written with the Greek letter psi, '
+    + 'as $\\Psi$, and said "sigh" or "psi". '
+    + 'Pure water has a water potential of zero, '
+    + 'and every solution has a negative one, '
+    + 'so the more concentrated a solution is, '
+    + 'the more negative its water potential. '
+    + 'Water always moves from the higher value to the lower one. '
+    + 'The commonest way to lose a mark '
+    + 'is to call a more negative value higher. '
+    + 'Minus 20 is lower than minus 5, '
+    + 'so water moves from minus 5 towards minus 20.',
+
   idea:
     'Particles in a liquid or a gas move about at random. '
     + 'Diffusion is the net movement that results '
@@ -428,7 +460,7 @@ teach({
     + 'and the phrase from high water potential to low water potential '
     + 'becomes a statement rather than a formula. '
     + 'Now the distinction that carries the marks. '
-    + 'How do you know a process is active transport and not diffusion? '
+    + 'How is active transport told apart from diffusion? '
     + 'Two tests, and a question will give you one of them. '
     + 'First, direction: if the substance moves from low concentration '
     + 'to high, no passive process can do it. '
@@ -478,10 +510,22 @@ teach({
     + 'and whether energy was required.',
 
   recap:
-    'You know that a smell spreads through a room '
-    + 'and that a wilted plant recovers when watered. '
-    + 'This names the processes behind both, '
-    + 'and separates the two that are free from the one that costs energy.',
+    'Two everyday things happen for the reasons this lesson is about, '
+    + 'so it is worth setting both down plainly first. '
+    + 'Fry fish at one end of a house '
+    + 'and in a few minutes it can be smelt at the other end. '
+    + 'Nobody carried the smell. '
+    + 'The particles carrying it simply spread out '
+    + 'from where there were many of them to where there were few. '
+    + 'Second, a plant left unwatered goes limp, '
+    + 'and within an hour of watering it stands up again. '
+    + 'Water went into the cells and stiffened them. '
+    + 'A concentration is how crowded the particles are '
+    + 'in a given amount of liquid or gas. '
+    + 'Crowded is concentrated and spread out is dilute. '
+    + 'This lesson names the processes behind those two observations, '
+    + 'and separates the ones that are free '
+    + 'from the one that costs the cell energy.',
 
   method: [
     'Identify what is moving.',

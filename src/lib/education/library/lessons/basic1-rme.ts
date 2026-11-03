@@ -937,6 +937,17 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'You are playing football and you break a window. '
+    + 'Nobody saw you. '
+    + 'Your mother asks who did it. '
+    + 'If you say nothing, nothing happens to you today. '
+    + 'If you say it was you, you will be in trouble today. '
+    + 'So saying nothing looks like the better choice. '
+    + 'Is it? '
+    + 'That is a real question and it has a real answer, '
+    + 'and the answer is not just that lying is bad.',
+
   idea:
     'Being honest means two things. '
     + 'You say what is true. And you give back what is not yours. '
@@ -955,9 +966,16 @@ teach({
     + 'you.',
 
   recap:
-    'You told the truth once and nobody believed you. '
-    + 'Remember how that felt. '
-    + 'That feeling is what lying costs. And it lasts a long time.',
+    'When somebody tells you something, you either believe them or you do not. '
+    + 'That is called trust. '
+    + 'Think of a boy in your class who said he had a bicycle at home. '
+    + 'There was no bicycle. '
+    + 'Now he says he has a new ball. '
+    + 'Nobody goes to look. '
+    + 'They do not believe him, even if this time it is true. '
+    + 'That is what a lie does. '
+    + 'It takes away the trust, '
+    + 'and the trust does not come straight back.',
 
   method: [
     'Say what actually happened, even the part that makes you look bad.',
@@ -1001,7 +1019,8 @@ teach({
   traps: [
     {
       mistake: 'Thinking it is not a lie if nobody finds out.',
-      why: 'You know. And the next lie is easier, which is how it grows.',
+      why: 'You carry it yourself. '
+        + 'And the next lie is easier, which is how it grows.',
     },
     {
       mistake: 'Keeping something found because nobody claimed it yet.',

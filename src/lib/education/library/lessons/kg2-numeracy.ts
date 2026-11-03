@@ -1011,12 +1011,21 @@ teach({
     ],
   },
 
+  why:
+    'Here is a line of beads on a string. '
+    + 'Red, blue, red, blue, red. '
+    + 'Now cover the end of the string with your hand. '
+    + 'There is one more bead under your hand. '
+    + 'Nobody has told you what colour it is. '
+    + 'Can you say it anyway, before you look? '
+    + 'You can, and that is what this lesson is about.',
+
   idea:
     'Look. Red, blue, red, blue. '
     + 'Say it with me. '
     + 'What comes next? '
     + 'Red. '
-    + 'How did you know? '
+    + 'How did you work that out? '
     + 'Because it keeps repeating. '
     + 'Red and blue, red and blue. '
     + 'Now make a pattern of your own. '
@@ -1067,7 +1076,7 @@ teach({
     },
     {
       level: 3,
-      ask: 'How do you know what comes next?',
+      ask: 'How do you work out what comes next?',
       steps: [
         'Find the repeating part.',
       ],

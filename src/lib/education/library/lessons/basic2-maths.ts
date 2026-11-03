@@ -223,6 +223,28 @@ teach({
     ],
   },
 
+  why:
+    'Your mother sends you to count the eggs. '
+    + 'They are in six trays and every tray has ten eggs. '
+    + 'You start counting them one at a time. '
+    + 'One, two, three, and somebody calls you, '
+    + 'and now you have to start again. '
+    + 'There must be a faster way than touching every egg. '
+    + 'There is, and it only works because every tray holds the same number. '
+    + 'This lesson is that faster way.',
+
+  notation:
+    'Four groups of three is written 4 x 3. '
+    + 'It is said "four times three". '
+    + 'The x sign means "groups of". '
+    + 'The answer, twelve, is written after an equals sign: 4 x 3 = 12. '
+    + 'Do not read the x as the letter x. '
+    + 'In a sum it always means times. '
+    + 'The commonest mistake is to write 4 x 3 '
+    + 'when there are three bowls with four in each, '
+    + 'which is 3 x 4. '
+    + 'The number of groups comes first.',
+
   idea:
     'When every group has the same number in it, you do not have to count them '
     + 'all one by one. Four bowls with three mangoes in each is four groups of '
@@ -277,8 +299,8 @@ teach({
       ask: 'You have 12 bottle tops and want to share them into groups of 3. '
         + 'How many groups?',
       steps: [
-        'This time you know the group size and are looking for the number of '
-          + 'groups.',
+        'This time the group size is given and the number of groups '
+          + 'is what is wanted.',
         'Count in threes until you reach twelve: three, six, nine, twelve.',
         'You said four numbers, so there are four groups.',
       ],
@@ -307,7 +329,7 @@ teach({
   extension:
     '4 groups of 3 gives the same answer as 3 groups of 4. '
     + 'So every fact you learn gives you a second one free. '
-    + 'Know four threes and you already know three fours. '
+    + 'Know four threes and three fours comes to you free. '
     + 'That is half the work gone.',
 
   figure: {

@@ -28,6 +28,31 @@ teach({
     ],
   },
 
+  why:
+    'You are sent to buy six things at the market. '
+    + 'They cost 23, 48, 19, 31, 52 and 27 cedis. '
+    + 'Your mother wants to know, before you leave, '
+    + 'roughly how much money to give you. '
+    + 'Adding all six exactly in your head is too hard. '
+    + 'Standing there with a pen and paper is too slow. '
+    + 'But you do not actually need the exact total. '
+    + 'You need a number close enough to be safe. '
+    + 'How do you get one, '
+    + 'and how do you know it is close enough? '
+    + 'That is what this topic is for.',
+
+  notation:
+    'A rounded answer is said "to the nearest" something. '
+    + '390 is 387 to the nearest ten. '
+    + '400 is 387 to the nearest hundred. '
+    + 'Always say which place you rounded to. '
+    + '390 and 400 are both right for the same number, '
+    + 'because they answer two different questions. '
+    + 'The sign for "about" is a wavy equals sign. '
+    + 'The commonest way to lose a mark '
+    + 'is to join the two numbers with an ordinary equals sign, '
+    + 'because 387 does not equal 390.',
+
   idea:
     'Rounding swaps a number for a simpler one close to it. '
     + '387 to the nearest ten is 390. To the nearest hundred it is 400. '
@@ -44,8 +69,16 @@ teach({
     + 'Rounding money you owe somebody is not.',
 
   recap:
-    'You know what each place in a number is worth. '
-    + 'Rounding is choosing which place to keep honest and which to let go.',
+    'Each digit in a number is worth something different, '
+    + 'and what it is worth depends on where it sits. '
+    + 'Take 387. '
+    + 'The 7 is in the ones place and is worth 7. '
+    + 'The 8 is in the tens place and is worth 80. '
+    + 'The 3 is in the hundreds place and is worth 300. '
+    + 'Add those up and you get 387 back. '
+    + 'Each place to the left is worth ten times the one before it. '
+    + 'Rounding is deciding which of those places to keep exact '
+    + 'and which ones to let go.',
 
   method: [
     'Decide which place you are rounding to.',
@@ -75,7 +108,7 @@ teach({
         'The digit to its right is 4, which is less than 5.',
         'So leave the 2 alone.',
       ],
-      answer: '2,000. The 451 does not matter once you know the 4.',
+      answer: '2,000. The 451 does not matter once the 4 has been read.',
     },
     {
       level: 5,

@@ -411,7 +411,7 @@ teach({
     + 'Here is one, two sentences long. '
     + '"Kofi has a brown dog called Bono. It sleeps under the table." '
     + 'Reading it means saying each word in order '
-    + 'until you know what it told you. '
+    + 'until you can say what it told you. '
     + 'Up to now you read a passage to find out what it says. '
     + 'Today you read it to find one thing inside it.',
 
@@ -448,8 +448,8 @@ teach({
     },
     {
       level: 3,
-      ask: 'A question asks what Ama ate. Rice is her favourite and you '
-        + 'remember that. '
+      ask: 'A question asks what Ama ate. Rice is her favourite, '
+        + 'and that fact is already in your head. '
         + 'The passage does not say what she ate. What do you write?',
       steps: [
         'Rice is her favourite. But that is in your head.',

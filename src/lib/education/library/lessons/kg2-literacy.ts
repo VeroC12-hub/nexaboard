@@ -49,8 +49,17 @@ teach({
     ],
   },
 
+  why:
+    'I have just read you a story. '
+    + 'Your friend was outside and did not hear it. '
+    + 'She comes in and asks what the story was about. '
+    + 'I am not going to read it again. '
+    + 'So she can only hear it from you. '
+    + 'Can you tell it to her, all of it, in the right order? '
+    + 'That is what we are going to practise.',
+
   idea:
-    'You know this story. '
+    'I have just read you this story. '
     + 'Now you tell it to me. '
     + 'How did it begin? '
     + 'Who was in it? '
@@ -78,7 +87,7 @@ teach({
     + 'get into a child’s own speech.',
 
   method: [
-    'Choose a story you know well.',
+    'Choose a story you have heard many times.',
     'Say how it began.',
     'Say who was in it.',
     'Say what happened in the middle.',
@@ -675,6 +684,17 @@ teach({
     ],
   },
 
+  why:
+    'Your name is written on your exercise book. '
+    + 'You did not write it. '
+    + 'Somebody else did. '
+    + 'Look at the letters. '
+    + 'How do the marks on that cover turn into your name '
+    + 'when somebody looks at them? '
+    + 'Today you are going to do that yourself, '
+    + 'with a short word, '
+    + 'and then you will be reading.',
+
   idea:
     'Here is a word. '
     + 'Put your finger on the first letter. '
@@ -735,13 +755,13 @@ teach({
         'Try saying them faster.',
       ],
       answer: 'Say the sounds closer together, '
-        + 'until they make a word you know.',
+        + 'until they make a word you can hear.',
     },
     {
       level: 3,
       ask: 'What is reading a word made of?',
       steps: [
-        'Three things you already learned.',
+        'Three things, and you have done all three before.',
       ],
       answer: 'A sound for each letter, '
         + 'going left to right, '

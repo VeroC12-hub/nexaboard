@@ -1323,6 +1323,18 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Your class is doing a play for the whole school. '
+    + 'You have four words to say. '
+    + 'You say them, and the children at the back do not laugh. '
+    + 'They did not hear you. '
+    + 'You were not being quiet on purpose. '
+    + 'You said the words correctly. '
+    + 'So what did the children at the front get '
+    + 'that the children at the back did not? '
+    + 'Nobody has told you yet, '
+    + 'and this lesson is what they would say.',
+
   idea:
     'In a play you become somebody else for a little while. You say their '
     + 'words, you stand the way they would stand, and you do it loudly enough '
