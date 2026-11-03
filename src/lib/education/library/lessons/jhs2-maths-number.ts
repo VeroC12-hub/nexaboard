@@ -45,6 +45,27 @@ teach({
     ],
   },
 
+  why:
+    'Kofi hears a piece of news and tells 2 friends. '
+    + 'Each of those 2 tells 2 more, so 4 people hear it next. '
+    + 'Each of those 4 tells 2 more, so 8 hear it. '
+    + 'Writing out 2 times 2 times 2 is easy enough for three rounds. '
+    + 'Now answer this: how many people have heard it after twenty rounds, '
+    + 'and how do you write that down '
+    + 'without filling a whole page with twos? '
+    + 'There is a short way of writing a long multiplication, '
+    + 'and this topic is the rules for working with it.',
+
+  notation:
+    'In 2 to the power 5, the 2 sits on the line '
+    + 'and the 5 sits raised up beside it. '
+    + 'It is said "two to the power five", or "two to the fifth". '
+    + 'The 2 is called the base and the 5 is called the index. '
+    + 'The index is also called the power, or the exponent. '
+    + 'The raised position carries the whole meaning, '
+    + 'so writing the 5 flat beside the 2 gives twenty five, '
+    + 'which is the commonest way to lose a mark.',
+
   idea:
     'In 2 to the power 5, the 2 is the base and the 5 is the index. '
     + 'It means 2 multiplied by itself 5 times. '
@@ -77,10 +98,14 @@ teach({
     + 'Both are forced.',
 
   recap:
-    'You know that 3 squared means 3 times 3, '
-    + 'and you can work out squares and cubes. '
-    + 'This gives the rules for combining them, '
-    + 'and extends them to 0 and to negative indices.',
+    'Multiplying a number by itself has a short name. '
+    + '3 times 3 is called 3 squared, and it comes to 9. '
+    + '3 times 3 times 3 is called 3 cubed, and it comes to 27. '
+    + 'The small raised number counts how many threes are being multiplied, '
+    + 'and that small raised number is called the index. '
+    + 'The number being multiplied, the 3 here, is called the base. '
+    + 'This topic takes that small raised number '
+    + 'and gives the rules for working with it.',
 
   method: [
     'Write the base and the index separately in your head.',
@@ -279,6 +304,27 @@ teach({
     ],
   },
 
+  why:
+    'The road from Accra to Kumasi is about 250 000 metres long. '
+    + 'One sheet of exercise book paper is about 0.0001 metres thick. '
+    + 'How many sheets, piled flat on each other, '
+    + 'would stand as tall as that road is long? '
+    + 'The dividing is easy. '
+    + 'Writing those two numbers side by side without losing a zero is not, '
+    + 'and one zero out of place makes the answer ten times wrong. '
+    + 'This topic is a way of writing any number '
+    + 'so that the zeros count themselves.',
+
+  notation:
+    'A number in standard form is written as a front part, '
+    + 'then a multiplication sign, then 10 with a small raised number. '
+    + 'So 4.3 times 10 to the power 3 '
+    + 'is said "four point three times ten to the power three". '
+    + 'The raised number is the index, or the power. '
+    + 'The front part has to be 1 or more and less than 10. '
+    + 'So 43 times 10 to the power 2 is the right size but the wrong form, '
+    + 'and that is the commonest way to lose a mark.',
+
   idea:
     'A number is in standard form when it is written as a number between '
     + '1 and 10, multiplied by a power of ten. '
@@ -313,9 +359,14 @@ teach({
     + 'so comparing two numbers becomes comparing two small whole numbers.',
 
   recap:
-    'You can multiply and divide by 10, 100 and 1000, '
-    + 'and you know this moves the decimal point. '
-    + 'Standard form is that movement written down as a power.',
+    'Multiplying by 10 makes a number ten times bigger, '
+    + 'and the digits slide one place to the left of the point. '
+    + 'So 4.3 times 10 is 43, and 4.3 times 100 is 430. '
+    + 'Dividing does the reverse, so 4.3 divided by 10 is 0.43. '
+    + 'Powers of ten have a short way of being written. '
+    + '10 times 10 times 10 is 1000, and that is written 10 to the power 3, '
+    + 'where the 3 counts how many tens are multiplied. '
+    + 'Standard form is that sliding of the point, written down as a power.',
 
   method: [
     'Place the decimal point just after the first non zero digit.',
@@ -795,6 +846,29 @@ teach({
     ],
   },
 
+  why:
+    'A bag of rice in Makola cost 180 cedis in January. '
+    + 'In June the same bag costs 225 cedis. '
+    + 'Everybody can see the price has gone up. '
+    + 'But by how much has it gone up, '
+    + 'as a figure you could set beside the rise in the price of oil? '
+    + 'The difference is 45 cedis, and that does not answer it, '
+    + 'because 45 cedis on a bag of rice '
+    + 'and 45 cedis on a motorbike are not the same rise at all. '
+    + 'You need a way of measuring a change against the thing that changed, '
+    + 'and that is what this topic gives you.',
+
+  notation:
+    'The sign % is said "per cent", and it means "out of a hundred", '
+    + 'so 20% is said "twenty per cent". '
+    + 'The amount a percentage is taken of has a name worth using: '
+    + 'it is the original. '
+    + 'A percentage on its own says nothing until you name its original, '
+    + 'so "a rise of 20%" must always be a rise of 20% of something. '
+    + 'In a calculation, 20% is the number 0.2, not the number 20, '
+    + 'and multiplying by 20 instead of 0.2 '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A percentage change compares the change to what you started with. '
     + 'The change divided by the original, multiplied by 100, '
@@ -829,9 +903,14 @@ teach({
     + 'and later takes 20 per cent off is not back where it started.',
 
   recap:
-    'You can find a percentage of an amount. '
-    + 'This asks the reverse questions: '
-    + 'what percentage is this change, '
+    'Per cent means "out of a hundred". '
+    + 'So 20 per cent is 20 out of every 100. '
+    + 'That is the fraction 20 over 100, which is the decimal 0.2. '
+    + 'To find 20 per cent of 150 cedis, multiply 150 by 0.2, '
+    + 'which gives 30 cedis. '
+    + 'That one skill, a percentage of an amount, is what this stands on. '
+    + 'This topic turns it round and asks the two harder questions: '
+    + 'what percentage is a change, '
     + 'and what was the amount before the change happened?',
 
   method: [
@@ -1021,6 +1100,30 @@ teach({
     ],
   },
 
+  why:
+    'Two sisters sell oranges together in Kaneshie market. '
+    + 'Ama put in 300 cedis of her own money and Akos put in 200. '
+    + 'At the end of the week they have 750 cedis to share. '
+    + 'Split it down the middle and each gets 375, '
+    + 'and Ama is right to say that is not fair, because she put in more. '
+    + 'Give each one back exactly what she put in '
+    + 'and 250 cedis are left sitting on the table. '
+    + 'How do you divide the 750 '
+    + 'so that it is shared in the same proportions as the money put in?',
+
+  notation:
+    'A ratio is written with two dots between the parts, as 3 : 2, '
+    + 'and it is said "three to two". '
+    + 'The two dots are called a colon. '
+    + 'The order follows the order of the names, '
+    + 'so "share between Ama and Akos in the ratio 3 : 2" '
+    + 'gives Ama the 3 parts. '
+    + 'The parts add up to the whole, '
+    + 'so 3 : 2 means three fifths and two fifths. '
+    + 'A rate is written with the word "per", or with a stroke as 12 cedis/kg, '
+    + 'and "per" always means "for each one of". '
+    + 'Swapping the order of a ratio is the commonest way to lose a mark.',
+
   idea:
     'A ratio compares amounts of the same kind: 3 to 2. '
     + 'To share 200 in the ratio 3 to 2, '
@@ -1056,9 +1159,17 @@ teach({
     + 'So 3 workers must take 8, because 3 times 8 is also 24.',
 
   recap:
-    'You have shared amounts in a ratio in primary school. '
-    + 'This adds rates, and the difference between two quantities growing '
-    + 'together and one growing while the other falls.',
+    'A ratio says how two amounts compare, '
+    + 'without saying how big either one is. '
+    + 'If a group has 2 boys for every 3 girls, '
+    + 'the ratio of boys to girls is 2 to 3. '
+    + 'That same ratio fits a group of 4 boys and 6 girls, '
+    + 'and a group of 20 boys and 30 girls, '
+    + 'because each one still has 2 boys for every 3 girls. '
+    + 'The order matters: 2 to 3 of boys to girls '
+    + 'does not say the same thing as 3 to 2. '
+    + 'This topic takes that comparison and uses it to share out real amounts, '
+    + 'and to handle rates.',
 
   method: [
     'For a share: add the parts to get the number of shares.',
@@ -1487,6 +1598,27 @@ teach({
     ],
   },
 
+  why:
+    'A JHS form of 40 pupils is asked how they get to school. '
+    + '18 walk, 12 come by tro-tro, 6 by taxi and 4 by bicycle. '
+    + 'Those four numbers are correct, '
+    + 'and a parent reading them out takes almost nothing in. '
+    + 'The head teacher wants to see in one glance '
+    + 'that nearly half the form walks. '
+    + 'A list of numbers cannot show that, '
+    + 'and this topic is how you turn the list into a picture that can.',
+
+  notation:
+    'An angle is written with a small raised circle after the figure, '
+    + 'as in 162 degrees. '
+    + 'A full circle is 360 degrees, '
+    + 'so the sector angles of a pie chart must add up to 360. '
+    + 'The note that says what one symbol stands for is called the key, '
+    + 'and the one that says what one square of the grid is worth '
+    + 'is called the scale. '
+    + 'A chart with neither cannot be read at all, '
+    + 'and leaving it off is the commonest way to lose a mark.',
+
   idea:
     'A bar chart has bars of equal width whose heights show the amounts, '
     + 'and it is used to compare separate categories. '
@@ -1527,9 +1659,16 @@ teach({
     + 'first thing you do with somebody else’s chart.',
 
   recap:
-    'You have drawn and read bar charts and pictograms before. '
-    + 'This adds the pie chart, with the arithmetic for its angles, '
-    + 'and the question of which chart suits which data.',
+    'A bar chart turns each amount into the height of a bar. '
+    + 'If 18 pupils walk, the bar for walking is drawn 18 units tall, '
+    + 'and the taller bar is always the bigger amount. '
+    + 'A pictogram does the same with a repeated picture instead of a bar. '
+    + 'A note at the side says what one picture is worth, '
+    + 'so if one bus stands for 4 pupils, three buses stand for 12. '
+    + 'Both need a title and labels, '
+    + 'or a reader cannot tell what is being counted. '
+    + 'This topic keeps those two and adds the pie chart, '
+    + 'which shows the shares of one whole.',
 
   method: [
     'Ask whether the data forms a meaningful whole.',
@@ -1745,6 +1884,29 @@ teach({
     ],
   },
 
+  why:
+    'Nine people work in a small shop in Tamale. '
+    + 'Eight of them are paid 600 cedis a month. '
+    + 'The owner pays himself 6000. '
+    + 'Add the nine wages and divide by nine, '
+    + 'and the answer is 1200 cedis a month. '
+    + 'Not one person in that shop earns 1200. '
+    + 'The adding was right and the dividing was right, '
+    + 'and the number is still a lie about the shop. '
+    + 'Which number would have told the truth, '
+    + 'and how would you know to pick that one?',
+
+  notation:
+    'The mean has a symbol: a letter with a short bar over it, '
+    + 'written as x with a bar on top and said "x bar". '
+    + 'The word "average" on its own is not precise, '
+    + 'because all three of these are averages, '
+    + 'so a question that says "average" and nothing more means the mean. '
+    + 'The range is one number, the largest take away the smallest, '
+    + 'so the range of 4, 6, 10 is 6, not "4 to 10". '
+    + 'Giving the range as two numbers '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'An average is one number standing for a whole list, and there are '
     + 'three of them, each found differently and each fair in a '
@@ -1777,10 +1939,15 @@ teach({
     + 'Use the mode when the data is categories rather than numbers.',
 
   recap:
-    'You have found the mean of a small list before. '
-    + 'This adds two other averages, '
-    + 'and asks which of the three tells the truth about a particular set '
-    + 'of data.',
+    'The mean is the one most people call the average. '
+    + 'Add all the numbers in the list, '
+    + 'then divide by how many numbers there are. '
+    + 'Take the list 4, 6, 8, 10. '
+    + 'They add up to 28, and there are 4 of them, '
+    + 'so the mean is 28 divided by 4, which is 7. '
+    + 'That single number stands for the whole list. '
+    + 'This topic keeps the mean, '
+    + 'and adds two more averages for the lists where the mean misleads.',
 
   method: [
     'Count how many values there are.',

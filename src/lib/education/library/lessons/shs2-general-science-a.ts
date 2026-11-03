@@ -95,6 +95,22 @@ teach({
     + 's for solid, l for liquid, g for gas, '
     + 'and aq for dissolved in water.',
 
+  notation:
+    'An equation is read from left to right, '
+    + 'and the arrow in the middle is said "gives". '
+    + 'It is not an equals sign. '
+    + 'It shows which way the change runs. '
+    + 'A big number in front multiplies the whole formula, '
+    + 'so 2 H2O is said "two H two O" '
+    + 'and means two whole units of water, '
+    + 'while the small 2 inside H2O is a subscript '
+    + 'and is part of what water is. '
+    + 'The letters in brackets are said out loud too: '
+    + 's for solid, l for liquid, g for gas, '
+    + 'aq for dissolved in water. '
+    + 'Leaving those brackets off is '
+    + 'the commonest way to lose a mark here.',
+
   mechanism:
     'There is one rule that decides everything in balancing, '
     + 'and it is the rule learners break first. '
@@ -141,9 +157,17 @@ teach({
     + 'The second thing to understand is why classification is asked for, '
     + 'because learners treat it as labelling and it is not. '
     + 'The class predicts the products. '
-    + 'If you know a reaction is a displacement, '
-    + 'and you know the reactivity series, '
-    + 'you can say in advance '
+    + 'There is a list that makes this work, '
+    + 'and it is called the reactivity series. '
+    + 'It puts the metals in order of how readily they react, '
+    + 'starting with potassium, sodium, calcium and magnesium, '
+    + 'then aluminium, zinc, iron, lead and hydrogen, '
+    + 'and ending with copper, silver and gold. '
+    + 'A metal higher in the list '
+    + 'pushes a lower one out of its compound, '
+    + 'and a lower one cannot push out a higher one. '
+    + 'So once a reaction has been named as a displacement, '
+    + 'that list says in advance '
     + 'whether anything will happen at all: '
     + 'zinc put into copper sulphate solution '
     + 'displaces the copper, '

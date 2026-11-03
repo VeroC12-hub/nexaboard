@@ -402,7 +402,7 @@ teach({
   mechanism:
     'Significant figures are not a tidiness rule, they are a claim, '
     + 'and that is why they are marked. '
-    + 'Writing 6.72 says you know the area to the nearest hundredth. '
+    + 'Writing 6.72 claims the area to the nearest hundredth. '
     + 'Here is where it goes wrong. '
     + 'A block measures 3.2 cm by 2.1 cm with a metre rule. '
     + 'The calculator gives 6.72 cm squared. '
@@ -433,7 +433,7 @@ teach({
     + 'I measured the diameter is not. '
     + 'If the school has no vernier caliper, '
     + 'the examinable part is still learnable: '
-    + 'you must know that it reads to 0.01 cm, '
+    + 'the fact to carry is that it reads to 0.01 cm, '
     + 'that a micrometer screw gauge reads to 0.001 cm, '
     + 'and that a metre rule reads to 0.1 cm, '
     + 'and you must be able to say which suits a wire, a coin or a desk. '

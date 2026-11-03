@@ -883,6 +883,20 @@ teach({
     + 'cos A is zero and the cosine rule becomes Pythagoras, '
     + 'and sin C is 1 and the area becomes one half base times height.',
 
+  notation:
+    'A capital letter stands for an angle. '
+    + 'The small letter of the same name stands for the side facing it, '
+    + 'so side a faces angle A. '
+    + 'sin A is said "sine A" and cos A is said "cos A". '
+    + 'Neither one is a number multiplied by A, '
+    + 'so neither can be split up or cancelled. '
+    + 'An angle carries a small raised circle after the figure, '
+    + 'as in 70 degrees. '
+    + 'sin to the power minus one, said "inverse sine", '
+    + 'means the angle whose sine that is. '
+    + 'It does not mean one over the sine, '
+    + 'and reading it that way is the commonest way to lose a mark.',
+
   mechanism:
     'The whole of this topic is one decision, '
     + 'and it is made by counting what the question gave you. '
@@ -905,7 +919,7 @@ teach({
     + 'included angle '
     + 'is worth seeing: the sine rule relates a side to the angle '
     + 'opposite it, '
-    + 'and in that pattern you know no side with its own opposite angle, '
+    + 'and in that pattern no side comes with its own opposite angle, '
     + 'so the sine rule has no pair to start from. '
     + 'The cosine rule is the one that uses an angle '
     + 'together with the two sides beside it. '
@@ -1090,8 +1104,8 @@ teach({
   ],
 
   extension:
-    'Both rules can be derived from what you already know, '
-    + 'and seeing that makes them easier to trust. '
+    'Both rules can be derived in a few lines, '
+    + 'and seeing that done makes them easier to trust. '
     + 'Drop a perpendicular from one vertex to the opposite side. '
     + 'Its length can be written two ways, '
     + 'as b sin C and as c sin B, '

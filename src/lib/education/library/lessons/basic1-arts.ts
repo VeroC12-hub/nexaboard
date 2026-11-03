@@ -1347,13 +1347,31 @@ teach({
     + 'happen, however well you did it.',
 
   recap:
-    'You already answer in full sentences and speak up so people can hear. A '
-    + 'play asks for both, with more of each.',
+    'Speaking loudly is not the same as shouting. '
+    + 'Shouting pushes the sound out of your throat, and it hurts. '
+    + 'Speaking loudly takes a big breath first. '
+    + 'Then the words ride out on the air. '
+    + 'Take a breath now and say your own name to the far wall, '
+    + 'and that is the voice a play needs. '
+    + 'A play needs turns as well. '
+    + 'One person speaks, then the next, '
+    + 'and nobody speaks on top of anybody.',
+
+  notation:
+    'A play is written down, and that writing is called a script. '
+    + 'On each line the name comes first, then two dots, '
+    + 'then the words that person says, like this: '
+    + 'AMA: I am going to the farm. '
+    + 'The two dots are called a colon, '
+    + 'and they mean the words after them are said out loud. '
+    + 'Words inside round brackets are not said out loud. '
+    + 'They tell you what to do, like (she stands up). '
+    + 'Saying the bracket words out loud is the mistake most children make.',
 
   method: [
     'Learn what your character wants. That is what you are playing.',
-    'Learn your words, and the word that comes just before yours, so you know '
-      + 'when to speak.',
+    'Learn your words, and the word that comes just before yours, so you can '
+      + 'tell when to speak.',
     'Face the audience, even when you talk to somebody on stage.',
     'Speak to the person furthest away.',
     'Stay in your part while others are speaking. You are still being watched.',
@@ -1362,7 +1380,7 @@ teach({
   worked: [
     {
       level: 1,
-      ask: 'How do you know when it is your turn to speak?',
+      ask: 'How can you tell when it is your turn to speak?',
       steps: [
         'Learn the words that come just before yours.',
         'When you hear them, that is your signal.',

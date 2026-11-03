@@ -2533,7 +2533,7 @@ teach({
     + 'An air traffic controller needs the mental arithmetic '
     + 'of speeds, distances and times '
     + 'held in the head while talking. '
-    + 'So a learner in SHS 1 who means to go into aviation '
+    + 'So a learner in the first year of SHS who means to go into aviation '
     + 'should be told plainly: '
     + 'keep Core Mathematics and Physics strong, '
     + 'and keep English strong too, '
@@ -2647,7 +2647,7 @@ teach({
     },
     {
       level: 6,
-      ask: 'A learner in SHS 1 wants a career in aviation '
+      ask: 'A first year SHS learner wants a career in aviation '
         + 'but the family cannot afford pilot training. '
         + 'Advise them honestly.',
       steps: [

@@ -298,7 +298,7 @@ teach({
     'Write it in a table, one row per day.',
     'At the end of the week, look for a pattern.',
     'Remember a week shows weather, not climate.',
-    'Compare your week with the same week last year if you can.',
+    'Compare your week with the same week a year ago if you can.',
   ],
 
   worked: [
@@ -346,7 +346,7 @@ teach({
     },
     {
       mistake: 'Trusting memory instead of records.',
-      why: 'Nobody remembers last year’s weather accurately. '
+      why: 'Nobody remembers the weather of a year ago accurately. '
         + 'Written records are the whole point.',
     },
   ],
