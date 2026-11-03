@@ -63,6 +63,18 @@ teach({
     ],
   },
 
+  why:
+    'A farmer says his maize does better on the eastern half of his '
+    + 'field. '
+    + 'He wants to know whether it is the new fertiliser he spread '
+    + 'there. '
+    + 'That eastern half also catches the morning sun first, lies '
+    + 'slightly lower so it holds more water, and was planted two '
+    + 'days earlier. '
+    + 'He has one field and one season. '
+    + 'How does he find out whether the fertiliser did anything, when '
+    + 'four things differ between the two halves at once?',
+
   idea:
     'A scientific investigation is a comparison. '
     + 'You change one thing, you measure another, '
@@ -116,9 +128,17 @@ teach({
     + 'because you have no idea what it would have been without.',
 
   recap:
-    'You have done experiments where the teacher said what to change and '
-    + 'what to measure. '
-    + 'This asks you to decide that yourself, and to defend the choice.',
+    'In a school experiment the teacher usually sets it up. '
+    + 'She says to put one seedling in a dark cupboard and one on the '
+    + 'windowsill, water both the same, and measure the height of '
+    + 'each after a week. '
+    + 'The thing being changed there is the light, the thing being '
+    + 'measured is the height, and the water is held the same on '
+    + 'purpose. '
+    + 'Somebody made all three of those decisions before the lesson '
+    + 'began. '
+    + 'This lesson asks you to make them yourself, and to defend the '
+    + 'choice.',
 
   method: [
     'State the question as a prediction with a direction.',
@@ -328,6 +348,37 @@ teach({
     ],
   },
 
+  why:
+    'A student measures the side of a square tile with a metre rule '
+    + 'marked in millimetres and gets 25.'
+    + '0 cm. '
+    + 'He squares it on a calculator and writes the area as 625.'
+    + '0000 square centimetres. '
+    + 'His multiplication is perfect. '
+    + 'The last four of those figures are invented, because his rule '
+    + 'could not tell 25.'
+    + '0 from 25.'
+    + '05, and the real area is somewhere between about 624 and 627. '
+    + 'How many figures is he entitled to write, and what decides '
+    + 'that number?',
+
+  notation:
+    'A quantity is written as a number, a space, then the unit, as '
+    + 'in 25.'
+    + '0 cm, and the unit is never made plural: 25 kgs is wrong. '
+    + 'A prefix goes in front of the unit with no space and no full '
+    + 'stop: km, cm, mm, and µm for micro. '
+    + 'An uncertainty follows the value after a plus-or-minus sign, '
+    + 'as 25.'
+    + '0 ± 0.'
+    + '05 cm, said “twenty-five point naught, plus or minus naught '
+    + 'point naught five centimetres”. '
+    + 'Trailing zeros count as significant figures, so 25.'
+    + '0 cm claims more precision than 25 cm and the two are not the '
+    + 'same answer. '
+    + 'Writing a bare number with no unit at all is the commonest way '
+    + 'to lose a mark.',
+
   idea:
     'A physical quantity has a number and a unit, '
     + 'and a number written without its unit is not an answer. '
@@ -389,10 +440,17 @@ teach({
     + 'The real instrument is needed only to practise the reading itself.',
 
   recap:
-    'You have measured length, mass and time and written the unit each '
-    + 'time. '
-    + 'This adds two things: which unit is the SI one, '
-    + 'and how many figures the measurement actually earns.',
+    'Measuring a length means laying a rule against a thing, '
+    + 'reading a number off it, and writing the unit beside it: 25 '
+    + 'cm, not 25. '
+    + 'Mass is measured on a balance, in grams or kilograms. '
+    + 'Time is measured with a stopwatch, in seconds. '
+    + 'In every case the number on its own says nothing. '
+    + '25 could be centimetres, grams or seconds, and those three '
+    + 'cannot be compared. '
+    + 'This lesson adds two things: which of several possible units '
+    + 'is the SI one, and how many figures a measurement actually '
+    + 'earns.',
 
   method: [
     'Decide what quantity is wanted and in which unit.',
@@ -590,6 +648,33 @@ teach({
     ],
   },
 
+  why:
+    'Sodium is a metal soft enough to cut with a knife, and it '
+    + 'catches fire if it touches water. '
+    + 'Chlorine is a green gas that has been used as a weapon because '
+    + 'it kills the people who breathe it. '
+    + 'Put the two together and the result is the salt on every table '
+    + 'in Ghana, which everybody eats every day. '
+    + 'Nothing was added and nothing was taken away. '
+    + 'How do two dangerous things make one harmless thing, and why '
+    + 'do they combine one to one rather than in some other '
+    + 'proportion?',
+
+  notation:
+    'An atom is written with two numbers beside its symbol, the '
+    + 'mass number above and the atomic number below, so sodium '
+    + 'carries 23 above and 11 below the Na, and it is said “sodium '
+    + 'twenty-three”. '
+    + 'The atomic number is the protons. '
+    + 'The mass number is the protons plus the neutrons, so the '
+    + 'neutrons are the difference: 23 less 11 is 12. '
+    + 'An ion carries its charge as a raised sign after the symbol, '
+    + 'so sodium that has lost one electron is written Na with a '
+    + 'raised plus. '
+    + 'Putting the mass number below and the atomic number above, or '
+    + 'leaving the charge off an ion, is the commonest way to lose a '
+    + 'mark.',
+
   idea:
     'An atom has a small dense nucleus holding protons and neutrons, '
     + 'with electrons moving around it in shells. '
@@ -657,10 +742,19 @@ teach({
     + 'and it is the sentence most learners leave out.',
 
   recap:
-    'You have met the atom as the smallest particle of an element, '
-    + 'and elements joining to make compounds. '
-    + 'This says what is inside the atom, '
-    + 'and why particular elements join in particular numbers.',
+    'An element is a substance made of one kind of atom only, like '
+    + 'the iron in a nail or the oxygen in air. '
+    + 'An atom is the smallest piece of an element that is still that '
+    + 'element: break it further and it is no longer iron. '
+    + 'Elements join to make compounds, and a compound has properties '
+    + 'of its own. '
+    + 'Sodium is a soft metal that burns in water, chlorine is a '
+    + 'poisonous green gas, and sodium chloride is table salt. '
+    + 'They also join in fixed numbers, one sodium to one chlorine '
+    + 'but two hydrogens to one oxygen, and nobody chose those '
+    + 'numbers. '
+    + 'This lesson says what is inside an atom, and why particular '
+    + 'elements join in particular numbers.',
 
   method: [
     'Write the symbol with its mass number on top and atomic number below.',
@@ -858,6 +952,32 @@ teach({
     ],
   },
 
+  why:
+    'Sodium, potassium and lithium are three different metals, '
+    + 'mined in different places and sold at different prices. '
+    + 'All three are soft, all three burn in water, and all three '
+    + 'make a white salt with chlorine. '
+    + 'Fluorine and chlorine are both choking gases that attack '
+    + 'metals. '
+    + 'Nothing about where these elements come from accounts for '
+    + 'their behaving in families. '
+    + 'What do two elements have in common when they behave alike, '
+    + 'and could you predict a fourth member of a family without ever '
+    + 'having seen it?',
+
+  notation:
+    'An electron arrangement is written as the number in each '
+    + 'shell, separated by commas, from the innermost outwards, so '
+    + 'sodium is 2,8,1 and it is said “two, eight, one”. '
+    + 'For a main-group element the group number is the last number '
+    + 'in that list, so 2,8,1 is group 1. '
+    + 'The period number is how many numbers there are, so three '
+    + 'shells means period 3. '
+    + 'Group 0 is the exception: a full outer shell of eight is group '
+    + '0, not group 8. '
+    + 'Counting the shells to get the group, or the outer electrons '
+    + 'to get the period, is the commonest way to lose a mark.',
+
   idea:
     'The periodic table lists the elements in order of atomic number. '
     + 'A vertical column is a group and a horizontal row is a period. '
@@ -921,10 +1041,16 @@ teach({
     + 'and the arrangement has to be worked out.',
 
   recap:
-    'You need the electron arrangement, '
-    + 'filling the shells 2, then 8, then 8. '
-    + 'The group and period are read straight off that arrangement, '
-    + 'so if you can write it you can place the element.',
+    'Electrons sit in shells around the nucleus, and the shells '
+    + 'fill in order from the inside out. '
+    + 'The first shell takes two electrons, the second takes eight, '
+    + 'and the third takes eight. '
+    + 'So sodium, which has 11 electrons, is 2 then 8 then 1. '
+    + 'Chlorine, which has 17, is 2 then 8 then 7. '
+    + 'Writing that arrangement is only a matter of counting the '
+    + 'electrons out into the shells in that order. '
+    + 'The group and the period are read straight off it, so anybody '
+    + 'who can write the arrangement can place the element.',
 
   method: [
     'Write the electron arrangement from the atomic number.',
@@ -1123,6 +1249,16 @@ teach({
     ],
   },
 
+  why:
+    'A cut on your arm closes over in a week and the skin is whole '
+    + 'again. '
+    + 'No skin was brought from anywhere and you did not eat any. '
+    + 'A child grows from the length of a forearm to the height of a '
+    + 'man, and every bit of that is new. '
+    + 'Somewhere, something is making more of itself. '
+    + 'What is doing the making, and why does the same body do '
+    + 'something quite different when it makes a child?',
+
   idea:
     'The cell is the smallest unit that can carry out all the processes of '
     + 'life. '
@@ -1191,10 +1327,17 @@ teach({
     + 'convention.',
 
   recap:
-    'You have met the cell as the building block of living things, '
-    + 'with a few named parts. '
-    + 'This adds what each part does, '
-    + 'and the two different ways a cell can divide.',
+    'Every living thing is built out of cells. '
+    + 'A cell is small enough that a full stop on this page would '
+    + 'cover several of them, and one human body holds many millions '
+    + 'of millions. '
+    + 'Tear the thinnest skin off an onion ring, hold it up to the '
+    + 'light, and the lines crossing it are the walls between cells. '
+    + 'A few of the parts have names: the membrane round the outside, '
+    + 'the cytoplasm filling it, and the nucleus sitting in that '
+    + 'cytoplasm. '
+    + 'This lesson adds what each of those parts actually does, and '
+    + 'the two different ways a cell can divide.',
 
   method: [
     'For a structure question, name the part and then say its job, '
@@ -1385,6 +1528,31 @@ teach({
     ],
   },
 
+  why:
+    'A farmer in the Volta region finds an insect eating his cowpea '
+    + 'and takes it to the agricultural officer. '
+    + 'The officer needs to tell a scientist in Nigeria exactly which '
+    + 'insect it is, because the spray that works depends on it. '
+    + 'The farmer calls it by its Ewe name, which the scientist has '
+    + 'never heard. '
+    + 'Several insects look much alike and one of them is harmless. '
+    + 'How do two people who share no language name one animal so '
+    + 'that both are certain they mean the same one?',
+
+  notation:
+    'A species is named in two words, as in Homo sapiens for a '
+    + 'human being or Theobroma cacao for cocoa, and it is said the '
+    + 'way it is written. '
+    + 'The first word is the genus and it always takes a capital '
+    + 'letter. '
+    + 'The second is the species and never does. '
+    + 'The whole name is printed in italics, or underlined when '
+    + 'written by hand, and after the first mention the genus may be '
+    + 'shortened to its initial, as in H. '
+    + 'sapiens. '
+    + 'Writing both words with capitals, or neither of them in '
+    + 'italics, is the commonest way to lose a mark.',
+
   idea:
     'Classification sorts living things into groups by the features they '
     + 'share. '
@@ -1451,10 +1619,16 @@ teach({
     + 'One mark for the features, one for the conclusion.',
 
   recap:
-    'You have sorted animals into groups such as mammals and birds, '
-    + 'and you know plants make their own food. '
-    + 'This gives the full order of the groups, '
-    + 'the naming rules, and a key to work with.',
+    'Animals can be sorted into groups by the features they share. '
+    + 'Mammals have hair and feed their young on milk, so a goat, a '
+    + 'bat and a whale are all mammals. '
+    + 'Birds have feathers and lay eggs. '
+    + 'Fish live in water and breathe through gills. '
+    + 'Plants stand apart from all of those, because a plant makes '
+    + 'its own food out of sunlight, air and water, while every '
+    + 'animal has to eat something that is food already. '
+    + 'This lesson gives the full order of the groups, the rules for '
+    + 'naming a species, and a key to work with.',
 
   method: [
     'Does the cell have a nucleus? No means Monera.',
@@ -1644,6 +1818,16 @@ teach({
     ],
   },
 
+  why:
+    'You eat a ball of kenkey and feel full, and four hours later '
+    + 'you can run on the strength of it. '
+    + 'The kenkey was a solid lump and your blood is a liquid. '
+    + 'Nothing the size of that lump could cross into your blood at '
+    + 'any point. '
+    + 'Yet something out of it is now in your muscles. '
+    + 'What cut it small enough to cross, and why does it take four '
+    + 'hours and not four seconds?',
+
   idea:
     'Food supplies seven things. '
     + 'Carbohydrate gives energy. '
@@ -1733,9 +1917,18 @@ teach({
     + 'Those colour changes are what the paper asks for.',
 
   recap:
-    'You know the food groups and that food is broken down inside you. '
-    + 'This names the enzyme at each stage, '
-    + 'the conditions it needs, and what it produces.',
+    'Food is sorted into groups by the job it does. '
+    + 'Carbohydrates such as rice, yam and bread give energy. '
+    + 'Proteins such as beans, fish and eggs build and repair the '
+    + 'body. '
+    + 'Fats give energy and keep heat in, and vitamins and minerals '
+    + 'are needed in small amounts to keep the whole thing working. '
+    + 'Food is also broken down inside the body. '
+    + 'A lump of kenkey that goes in whole cannot pass through the '
+    + 'wall of the gut, so it has to be cut up, first by the teeth '
+    + 'and then chemically. '
+    + 'This lesson names the substance doing that chemical cutting at '
+    + 'each stage, the conditions it needs, and what it produces.',
 
   method: [
     'Name the part of the gut the question is about.',
@@ -1934,6 +2127,32 @@ teach({
     ],
   },
 
+  why:
+    'A mahogany tree weighs several tonnes. '
+    + 'It grew on one spot, and the soil around it is not several '
+    + 'tonnes lower than it was. '
+    + 'Nobody carried anything to it and it ate nothing. '
+    + 'Weigh everything that goes into a potted plant for a year and '
+    + 'it is water and a very little mineral. '
+    + 'Yet the plant is heavier at the end by more than the water it '
+    + 'is holding. '
+    + 'Where did the substance of the tree come from?',
+
+  notation:
+    'The equation is written in words as carbon dioxide plus water, '
+    + 'in the presence of light and chlorophyll, gives glucose plus '
+    + 'oxygen. '
+    + 'In symbols it is six CO2 plus six H2O gives one C6H12O6 plus '
+    + 'six O2, said “six C O two plus six H two O gives glucose plus '
+    + 'six O two”. '
+    + 'The small numbers sit low and count atoms, and the large '
+    + 'numbers in front count whole molecules, so 6H2O is six waters '
+    + 'and not one substance with a 6 in it. '
+    + 'Light and chlorophyll go above or below the arrow, because '
+    + 'they are conditions and are not used up. '
+    + 'Writing the small numbers full size, or putting chlorophyll in '
+    + 'as a reactant, is the commonest way to lose a mark.',
+
   idea:
     'Photosynthesis is how a green plant makes its own food. '
     + 'Carbon dioxide from the air and water from the soil '
@@ -2012,9 +2231,16 @@ teach({
     + 'and saying so is the sentence the examiner is looking for.',
 
   recap:
-    'You know that plants make their own food and that leaves are green. '
-    + 'This gives the equation, the structures involved, '
-    + 'and the experiments that show each requirement is needed.',
+    'A plant makes its own food instead of eating. '
+    + 'No animal can do that, which is why every animal must eat a '
+    + 'plant, or eat something that ate one. '
+    + 'Leaves are green because they hold a green substance, and a '
+    + 'plant kept in the dark for a week goes pale and weakens. '
+    + 'So the green and the light are both doing something, and the '
+    + 'food is being made in the leaf. '
+    + 'This lesson gives the equation for it, the structures that '
+    + 'carry it out, and the experiments that show each requirement '
+    + 'is really needed.',
 
   method: [
     'Write the word equation, with light and chlorophyll over the arrow.',
@@ -2227,6 +2453,31 @@ teach({
     ],
   },
 
+  why:
+    'A driver on the Accra to Kumasi road sees a goat step out 30 '
+    + 'metres ahead. '
+    + 'He is doing 90 kilometres an hour and he brakes hard. '
+    + 'Whether he stops in time depends on how fast his speed falls, '
+    + 'not on how fast he was going. '
+    + 'He would like to settle, before he ever gets there, what speed '
+    + 'he could be doing and still stop inside 30 metres. '
+    + 'Distance divided by time cannot answer it, because his speed '
+    + 'is not staying the same. '
+    + 'What does he need instead?',
+
+  notation:
+    'Five letters are used, and they always stand for the same five '
+    + 'things: u for the starting velocity, v for the final velocity, '
+    + 'a for the acceleration, t for the time, and s for the '
+    + 'distance. '
+    + 'Speed and velocity are in metres per second, written m/s. '
+    + 'Acceleration is in metres per second squared, written m/s², '
+    + 'and the squared applies to the second, not to the metre. '
+    + 'Velocity has a direction in it, so minus 5 m/s is not the same '
+    + 'answer as 5 m/s. '
+    + 'Putting kilometres an hour into an equation that wants metres '
+    + 'per second is the commonest way to lose a mark.',
+
   idea:
     'Distance is how far something has travelled '
     + 'and displacement is how far it is from where it started, '
@@ -2311,10 +2562,18 @@ teach({
     + 'and a table of readings printed in a question does the same job.',
 
   recap:
-    'You have calculated speed as distance over time '
-    + 'and read a distance time graph. '
-    + 'This adds direction, acceleration, '
-    + 'and three equations that let you find any missing quantity.',
+    'Speed is distance divided by time. '
+    + 'A tro-tro that covers 90 kilometres in 2 hours has a speed of '
+    + '45 kilometres an hour, which is 12.'
+    + '5 metres every second. '
+    + 'A distance-time graph puts time along the bottom and distance '
+    + 'up the side. '
+    + 'The steeper the line, the faster the thing is going, because '
+    + 'the same amount of time covers more distance. '
+    + 'A flat line means it has stopped. '
+    + 'This lesson adds direction, adds what happens when the speed '
+    + 'itself is changing, and gives three equations that find any '
+    + 'missing quantity.',
 
   method: [
     'Choose a positive direction and state it.',
@@ -2559,6 +2818,32 @@ teach({
     ],
   },
 
+  why:
+    'A canoe on the Volta carries four people and sits low in the '
+    + 'water. '
+    + 'A fifth climbs in and the water comes within a hand’s width of '
+    + 'the edge. '
+    + 'A sixth climbs in and it goes under. '
+    + 'Each person weighs about the same and the canoe never changed '
+    + 'shape. '
+    + 'Up to five it floated, and at six it did not. '
+    + 'What is the condition that was met five times and failed the '
+    + 'sixth, and how would a boat builder settle it before building '
+    + 'anything?',
+
+  notation:
+    'Pressure is written $P = F/A$, said “pressure equals force '
+    + 'over area”, and its unit is the pascal, written Pa, which is '
+    + 'one newton per square metre. '
+    + 'Pressure in a liquid at a depth h is written ρgh, said “rho g '
+    + 'h”, where ρ is the Greek letter rho, standing for density in '
+    + 'kilograms per cubic metre, g is about 10 newtons per kilogram, '
+    + 'and h is the depth in metres. '
+    + 'Pressure and force are different quantities and do not share a '
+    + 'unit. '
+    + 'Giving an answer in newtons where the question asked for a '
+    + 'pressure is the commonest way to lose a mark.',
+
   idea:
     'Pressure is the force acting at right angles to a surface, '
     + 'divided by the area of that surface. '
@@ -2637,11 +2922,19 @@ teach({
     + 'displaced, is a mark.',
 
   recap:
-    'You know that a force can be spread over an area, '
-    + 'and that some things float. '
-    + 'This gives the formula for pressure, '
-    + 'the way it grows with depth, '
-    + 'and the exact condition for floating.',
+    'A force is a push or a pull, measured in newtons. '
+    + 'The same force feels quite different depending on how much '
+    + 'surface it acts on. '
+    + 'Press the point of a drawing pin into your palm with 10 '
+    + 'newtons and it goes in. '
+    + 'Press the flat head in with the same 10 newtons and nothing '
+    + 'happens. '
+    + 'Things also float or sink, and it is not simply a matter of '
+    + 'weight, because a steel nail sinks and a steel ship of '
+    + 'thousands of tonnes does not. '
+    + 'This lesson gives the formula behind the drawing pin, the way '
+    + 'pressure grows with depth, and the exact condition for '
+    + 'floating.',
 
   method: [
     'Decide whether the pressure is from a solid on a surface or from a '
@@ -2847,6 +3140,32 @@ teach({
     ],
   },
 
+  why:
+    'Two farmers near Ejura buy the same bag of fertiliser and '
+    + 'spread the same amount on the same acreage. '
+    + 'One gets a markedly better crop and the other sees almost no '
+    + 'change at all. '
+    + 'The second farmer’s soil is heavy clay that stands in a pond '
+    + 'after rain. '
+    + 'The first is a crumbly loam. '
+    + 'Same bag, same amount, same rain. '
+    + 'One soil used it and the other did not. '
+    + 'What about the two soils decided that, and how could the '
+    + 'second farmer have found out before spending the money?',
+
+  notation:
+    'Soil acidity is written as a pH number and said “p H”, with a '
+    + 'small p and a capital H, and it carries no unit. '
+    + 'The scale runs from 0 to 14: below 7 is acid, 7 is neutral, '
+    + 'above 7 is alkaline, and most crops do best between pH 6 and '
+    + '7. '
+    + 'A fertiliser bag carries three numbers, as in 15-15-15, said '
+    + '“fifteen fifteen fifteen”, which are the percentages of '
+    + 'nitrogen, phosphorus and potassium, always in that order, N '
+    + 'then P then K. '
+    + 'Reading those three in the wrong order, or writing a unit on a '
+    + 'pH, is the commonest way to lose a mark.',
+
   idea:
     'Soil is the thin surface layer in which crops grow. '
     + 'It is made of mineral particles from weathered rock, '
@@ -2938,11 +3257,19 @@ teach({
     + 'That test is worth marks and costs nothing.',
 
   recap:
-    'You know that plants need soil, water and light, '
-    + 'and that manure helps. '
-    + 'This says what soil is made of, '
-    + 'why texture changes how it behaves, '
-    + 'and what a bag of fertiliser actually supplies.',
+    'A plant needs three things from outside itself. '
+    + 'Light, which it takes in through its leaves. '
+    + 'Water, which it draws up through its roots. '
+    + 'And the ground, which holds that water and holds the plant '
+    + 'upright. '
+    + 'Manure helps, as any farmer will say: dig animal dung or '
+    + 'rotted plant matter into a plot and the next crop is better, '
+    + 'though nobody watered it any more than before. '
+    + 'So the ground is supplying something besides water, and manure '
+    + 'adds more of it. '
+    + 'This lesson says what soil is actually made of, why its '
+    + 'texture changes how it behaves, and what a bag of fertiliser '
+    + 'actually supplies.',
 
   method: [
     'Describe the soil by texture, using the wet feel test.',
