@@ -38,6 +38,25 @@ teach({
     ],
   },
 
+  why:
+    'Ghana has about 34,000,000 people, and the sun is '
+    + '150,000,000 kilometres away. '
+    + '000007 metres wide. '
+    + 'Writing out all those noughts is slow, and one dropped '
+    + 'nought changes the whole answer. '
+    + 'How do you write a number that big, or that small, so that '
+    + 'it is short and still exact?',
+
+  notation:
+    '4 times $10^7$, and it is said aloud as three point four '
+    + 'times ten to the power seven. '
+    + 'The first part must be at least 1 and less than 10, and it '
+    + 'is called the mantissa. '
+    + 'The raised 7 is the power, or index, and it says how many '
+    + 'places the decimal point moves. '
+    + 'Writing 34 times $10^6$ instead is the commonest way to '
+    + 'lose a mark, because 34 is not less than 10.',
+
   idea:
     'Place value does not stop at thousands. '
     + 'Each place is worth ten times the one to its right, for ever. '
@@ -57,9 +76,14 @@ teach({
     + 'The power is simply a record of how many times you did that.',
 
   recap:
-    'You can read a number into the thousands and say what each digit is '
-    + 'worth. '
-    + 'This continues the same pattern and gives it a shorthand.',
+    'Place value means the position of a digit decides what it '
+    + 'is worth. '
+    + 'In 4,382 the 3 is not worth 3. '
+    + 'It sits in the hundreds place, so it is worth 300. '
+    + 'Each place to the left is worth ten times the place on its '
+    + 'right: ones, tens, hundreds, thousands. '
+    + 'This lesson carries that same pattern much further, and '
+    + 'gives a short way of writing the numbers it reaches.',
 
   method: [
     'To read a large number, group the digits in threes from the right.',
@@ -227,6 +251,26 @@ teach({
     ],
   },
 
+  why:
+    'You have 20 cedis on your mobile money and you send 50 '
+    + 'cedis to a friend. '
+    + 'The balance that shows is not 30, and it is not nothing '
+    + 'either. '
+    + 'It shows minus 30, which means you owe 30 cedis. '
+    + 'What kind of number is that, and how do you add and '
+    + 'subtract with it?',
+
+  notation:
+    'A negative number is written with a minus sign in front, '
+    + 'so minus three is written $-3$ and said aloud as negative '
+    + 'three. '
+    + 'The same sign is also used for subtracting, which is why '
+    + 'two of them can end up side by side. '
+    + 'When that happens the second one goes in brackets, as in '
+    + '$5 - (-3)$, said five subtract negative three. '
+    + 'Writing that without the brackets is the commonest way to '
+    + 'lose a mark.',
+
   idea:
     'Integers are the whole numbers together with their negatives. '
     + 'They measure things that can go below nothing: '
@@ -245,9 +289,16 @@ teach({
     + 'and two turns put you facing the way you started.',
 
   recap:
-    'You can add and subtract on a number line. '
-    + 'Everything here is movement on that line, '
-    + 'with left for negative and right for positive.',
+    'A number line is a straight line with the numbers marked '
+    + 'along it in order. '
+    + 'On it, adding means moving to the right and subtracting '
+    + 'means moving to the left. '
+    + 'Start at 5, subtract 3, and you move three steps left to '
+    + '2. '
+    + 'If you keep moving left past 0 you do not stop, and the '
+    + 'numbers on that side are written with a minus sign in '
+    + 'front. '
+    + 'Those numbers are what this lesson is about.',
 
   method: [
     'Adding a positive moves right. Adding a negative moves left.',
@@ -445,6 +496,25 @@ teach({
     ],
   },
 
+  why:
+    '82 metres and wants the floor area. '
+    + '6934 square metres. '
+    + '0034 of a square metre. '
+    + 'Keeping four decimal places here is not more correct, only '
+    + 'longer, so how many digits should the answer actually '
+    + 'keep?',
+
+  notation:
+    'f. '
+    + 'is said aloud as three significant figures. '
+    + 'p. '
+    + 'in the same way. '
+    + '00456 has three significant figures but five decimal '
+    + 'places. '
+    + 'Rounding to the wrong one of the two is the commonest way '
+    + 'to lose a mark, so read which one the question asked for '
+    + 'before you round anything.',
+
   idea:
     'Significant figures count the digits that carry information, '
     + 'starting from the first non-zero one. '
@@ -465,9 +535,16 @@ teach({
     + 'which are large and silent.',
 
   recap:
-    'You can round to the nearest ten, hundred or thousand. '
-    + 'Significant figures round by how many digits you keep '
-    + 'rather than by which place you stop at.',
+    'Rounding means swapping a number for a nearby one that is '
+    + 'easier to use. '
+    + 'To round 384 to the nearest ten, look at the digit after '
+    + 'the tens place. '
+    + 'It is 4, which is less than 5, so the tens digit stays and '
+    + '384 becomes 380. '
+    + 'Had that digit been 5 or more, the tens digit would go up '
+    + 'by one, so 386 becomes 390. '
+    + 'This lesson rounds a different way: not by which place you '
+    + 'stop at, but by how many digits you keep.',
 
   method: [
     'Find the first non-zero digit. That is the first significant figure.',
@@ -853,6 +930,26 @@ teach({
     ],
   },
 
+  why:
+    'A tro-tro mate charges 2 cedis to board and 1 cedi more '
+    + 'for every stop you pass. '
+    + 'As a rule, the fare is 2 plus 1 times the number of stops. '
+    + 'Now one passenger going seven stops asks what to pay, and '
+    + 'another going three stops asks as well. '
+    + 'How do you get a number out of a rule written in letters, '
+    + 'without doing the whole thing again from the start each '
+    + 'time?',
+
+  notation:
+    'A number written next to a letter means multiply, so 2a '
+    + 'means 2 times a. '
+    + 'Two letters written together mean the same thing, so ab '
+    + 'means a times b. '
+    + 'A raised number applies only to the letter it sits on, so '
+    + '$3a^2$ means 3 times a times a, and not 3a times 3a. '
+    + 'Doubling instead of squaring is the commonest way to lose '
+    + 'a mark: when a is 5, $a^2$ is 25 and not 10.',
+
   idea:
     'Substitution means replacing each letter with its value '
     + 'and then working the expression out. '
@@ -868,9 +965,15 @@ teach({
     + 'A bracket makes both of them impossible to write.',
 
   recap:
-    'You can use a letter to stand for a number, '
-    + 'and you know the order of operations. '
-    + 'Substitution is both at once.',
+    'A letter can stand in for a number. '
+    + 'If a bag of rice costs c cedis, then two bags cost 2c, '
+    + 'whatever c turns out to be. '
+    + 'There is also a fixed order for working any calculation '
+    + 'out: brackets first, then powers, then multiply and '
+    + 'divide, then add and subtract. '
+    + 'So 2 plus 3 times 4 is 14 and not 20, because the '
+    + 'multiplying is done before the adding. '
+    + 'This lesson uses both of those ideas at once.',
 
   method: [
     'Copy the expression, putting a bracket where each letter was.',
@@ -1040,6 +1143,26 @@ teach({
     ],
   },
 
+  why:
+    'A mason is pricing a job. '
+    + 'He needs 3 bags of cement, 2 trips of sand, 5 more bags of '
+    + 'cement and 1 more trip of sand. '
+    + 'He will tell you 8 bags and 3 trips, but he will never say '
+    + '11 of anything. '
+    + 'Why can the bags be added to the bags, and the trips to '
+    + 'the trips, but never a bag to a trip?',
+
+  notation:
+    'Terms that can be put together are called like terms, and '
+    + 'they carry the same letter raised to the same power. '
+    + 'The number in front of a term is called its coefficient, '
+    + 'so in 7x the coefficient is 7. '
+    + 'A letter standing alone has a coefficient of 1, so x means '
+    + '1x. '
+    + 'Treating $x$ and $x^2$ as like terms is the commonest way '
+    + 'to lose a mark: the power is different, so $3x + 2x^2$ '
+    + 'cannot be shortened at all.',
+
   idea:
     'Simplifying means collecting terms that are alike, '
     + 'which means terms carrying the same letter raised to the same '
@@ -1058,8 +1181,15 @@ teach({
     + 'and the letter with its power is what tells you.',
 
   recap:
-    'You can use letters for numbers and substitute values into them. '
-    + 'This is about tidying an expression before you substitute anything.',
+    'In algebra a letter stands for a number, and a number in '
+    + 'front of a letter means multiply. '
+    + 'So 3x means three lots of x, and if x is 4 then 3x is 12. '
+    + 'A piece like 3x, with its own sign and its own letter, is '
+    + 'called a term. '
+    + 'An expression is simply terms added together or '
+    + 'subtracted. '
+    + 'This lesson tidies an expression by gathering the terms '
+    + 'that match.',
 
   method: [
     'Look at each term: its number, its letter, and its power.',
@@ -1215,6 +1345,25 @@ teach({
     ],
   },
 
+  why:
+    'A trader has 84 oranges and 126 limes. '
+    + 'She wants to make gift bundles that are all exactly alike, '
+    + 'with no fruit left over, and she wants them as large as '
+    + 'possible. '
+    + 'Listing every factor of 126 by hand would fill a page. '
+    + 'How do you find the right bundle size without writing all '
+    + 'those factors out?',
+
+  notation:
+    'The highest common factor is written HCF and the lowest '
+    + 'common multiple LCM, and each is said as its letters. '
+    + 'A number broken into primes is written with powers, so 12 '
+    + 'breaks down as $2^2$ times 3, said two squared times '
+    + 'three. '
+    + 'Swapping the two is the commonest way to lose a mark, so '
+    + 'check this: the HCF of two numbers is never bigger than '
+    + 'either of them, and the LCM is never smaller than either.',
+
   idea:
     'Every whole number breaks into primes in exactly one way. '
     + '12 is 2 times 2 times 3. 18 is 2 times 3 times 3. '
@@ -1233,9 +1382,17 @@ teach({
     + 'you are reading two answers off one breakdown.',
 
   recap:
-    'You can list the factors of a number and find the highest common factor '
-    + 'of two small ones. '
-    + 'This is the method that keeps working when the numbers get large.',
+    'A factor of a number is a whole number that divides into '
+    + 'it and leaves nothing over. '
+    + 'The factors of 12 are 1, 2, 3, 4, 6 and 12, because each '
+    + 'of those divides 12 exactly. '
+    + 'A prime number has only two factors, itself and 1, so 2, '
+    + '3, 5, 7 and 11 are prime and 12 is not. '
+    + 'The highest common factor of two numbers is the biggest '
+    + 'number that is a factor of both, and for 12 and 18 it is '
+    + '6. '
+    + 'This lesson finds that same thing by a method that still '
+    + 'works when the numbers are far too big to list.',
 
   method: [
     'Divide each number by the smallest prime that goes into it.',
@@ -1409,6 +1566,23 @@ teach({
     ],
   },
 
+  why:
+    'A seamstress is paid 15 cedis for every dress she sews and '
+    + 'nothing else. '
+    + 'At the end of the week she has 195 cedis. '
+    + 'Nobody counted the dresses. '
+    + 'How many did she sew, and how do you reach that number '
+    + 'without guessing one and trying it?',
+
+  notation:
+    'An equals sign says the two sides are the same amount. '
+    + 'It is not an instruction to work something out. '
+    + 'The letter standing for the unknown amount is usually x, '
+    + 'and $3x + 5 = 20$ is said three x plus five equals twenty. '
+    + 'Writing a chain such as 20 subtract 5 equals 15 equals 5 '
+    + 'is the commonest way to lose a mark, because it says 15 '
+    + 'and 5 are the same number.',
+
   idea:
     'An equation is a claim that two amounts are the same. '
     + 'Solving it means finding the value of the unknown that makes the claim '
@@ -1429,9 +1603,17 @@ teach({
     + 'and the answer is right whatever the working looked like.',
 
   recap:
-    'You can find a missing number by undoing, '
-    + 'and you can substitute a value into an expression. '
-    + 'Solving is the first, and checking is the second.',
+    'Finding a missing number means undoing what was done to '
+    + 'it. '
+    + 'If a number plus 7 is 12, then the number is 12 take away '
+    + '7, which is 5. '
+    + 'Undoing works because adding and subtracting are '
+    + 'opposites, and so are multiplying and dividing. '
+    + 'Putting a value back in to test it is called substituting: '
+    + 'put 5 where the number was and 5 plus 7 is 12, which shows '
+    + 'it is right. '
+    + 'This lesson does both, and the undoing is the solving '
+    + 'while the putting back is the checking.',
 
   method: [
     'Look at what has been done to the unknown.',
@@ -1602,6 +1784,28 @@ teach({
     ],
   },
 
+  why:
+    'A carpenter is fitting a roof. '
+    + 'Two of the angles where the timbers meet can be measured '
+    + 'with his bevel, but the third is tight against the wall '
+    + 'where no tool will fit. '
+    + 'The timber has to be cut before it goes up, so measuring '
+    + 'it afterwards is no use to him. '
+    + 'How do you find an angle you cannot reach?',
+
+  notation:
+    'An angle is named by three letters, as in angle ABC, and '
+    + 'the middle letter is always the corner where the turn '
+    + 'happens. '
+    + 'So angle ABC and angle CBA are the same angle, but angle '
+    + 'BAC is a different one. '
+    + 'The small raised circle is the degree sign, so 90° is said '
+    + 'ninety degrees. '
+    + 'Arrowheads drawn on two lines mean those lines are '
+    + 'parallel, and missing those arrows is the commonest way to '
+    + 'lose a mark, because the parallel-line facts are what the '
+    + 'question was built on.',
+
   idea:
     'A few angle facts solve most problems at this level. '
     + 'Each one is tied to something you can look for in the diagram: '
@@ -1621,9 +1825,17 @@ teach({
     + 'Only the arrows on the diagram say that.',
 
   recap:
-    'You can recognise right, acute and obtuse angles '
-    + 'and measure one with a protractor. '
-    + 'These facts let you work angles out without measuring.',
+    'An angle is the amount of turn between two lines that '
+    + 'meet. '
+    + 'It is measured in degrees, and a quarter turn is 90 '
+    + 'degrees. '
+    + 'An angle of exactly 90 degrees is called a right angle, '
+    + 'and the corner of this page is one. '
+    + 'An angle smaller than that is called acute, and one '
+    + 'between 90 and 180 degrees is called obtuse. '
+    + 'Those names and that measure are all this lesson needs, '
+    + 'and from here the angles are worked out rather than '
+    + 'measured.',
 
   method: [
     'Mark what you know on the diagram.',
@@ -1794,6 +2006,28 @@ teach({
     ],
   },
 
+  why:
+    'A tiler is laying tiles that have six sides each, and he '
+    + 'wants them to meet flat with no gaps. '
+    + 'To know whether they will, he needs the angle at each '
+    + 'corner of a tile. '
+    + 'There is no protractor in his bag and the tiles are '
+    + 'already cut. '
+    + 'How do you work out the corner angle of a six-sided shape '
+    + 'from the number of sides alone?',
+
+  notation:
+    'A triangle is named by its corners, so triangle ABC has '
+    + 'corners A, B and C. '
+    + 'Short dashes drawn across two sides mean those sides are '
+    + 'the same length, and matching arcs at two corners mean '
+    + 'those angles are equal. '
+    + 'The angle rule for a shape with n sides is read as n minus '
+    + '2, all times 180, where n is the number of sides. '
+    + 'Forgetting to subtract the 2 is the commonest way to lose '
+    + 'a mark, so test it on a triangle, where n is 3 and the '
+    + 'answer has to come out as 180.',
+
   idea:
     'The angles inside a triangle always add to 180 degrees. '
     + 'For a polygon with n sides they add to $(n - 2) \\times 180$. '
@@ -1811,8 +2045,14 @@ teach({
     + 'seconds, which is better than remembering it.',
 
   recap:
-    'You know the angle facts for straight lines and parallel lines, '
-    + 'and you can name shapes by their sides.',
+    'Angles on a straight line add up to 180 degrees. '
+    + 'So if one angle on a line is 60°, the angle beside it must '
+    + 'be 120°, because the two together have to make 180°. '
+    + 'A shape with straight sides is named by how many sides it '
+    + 'has: three sides is a triangle, four is a quadrilateral, '
+    + 'five is a pentagon. '
+    + 'This lesson puts those two facts together and finds the '
+    + 'angles inside any such shape.',
 
   method: [
     'For a triangle, the three angles add to 180.',
@@ -2234,6 +2474,26 @@ teach({
     ],
   },
 
+  why:
+    'Your class wants the school to change the time of break. '
+    + 'Forty-two learners have forty-two opinions, and shouting '
+    + 'them across the room settles nothing. '
+    + 'The headmistress will look at something written down and '
+    + 'at nothing else. '
+    + 'What do you ask, and how do you turn forty-two answers '
+    + 'into one page she can read?',
+
+  notation:
+    'The number of times an answer comes up is called its '
+    + 'frequency, and in a table that column is often headed f. '
+    + 'The frequencies are added to give a total, and that total '
+    + 'must equal the number of people you asked. '
+    + 'A tally of five is drawn as four strokes with the fifth '
+    + 'laid across them. '
+    + 'Leaving the frequency column with no total is the '
+    + 'commonest way to lose a mark, because the total is what '
+    + 'shows that nobody was missed.',
+
   idea:
     'Data collection starts with a question, not with a form. '
     + 'Once you know what you are asking, you collect answers, '
@@ -2253,8 +2513,16 @@ teach({
     + 'that was wrong to begin with.',
 
   recap:
-    'You can collect answers with a tally and record them in a table. '
-    + 'This adds the thinking that should come before the tally.',
+    'A tally is a way of counting as you go. '
+    + 'Each answer you hear gets one stroke, and the fifth stroke '
+    + 'is drawn across the other four, so a group of five can be '
+    + 'seen at a glance. '
+    + 'Count the strokes at the end and you have the total for '
+    + 'that answer. '
+    + 'A table listing each possible answer beside its total is '
+    + 'called a frequency table. '
+    + 'This lesson adds the part that has to come before any of '
+    + 'that: deciding what you are actually asking.',
 
   method: [
     'Write down the question you want answered.',
