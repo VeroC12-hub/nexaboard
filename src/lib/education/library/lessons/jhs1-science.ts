@@ -37,6 +37,16 @@ teach({
     ],
   },
 
+  why:
+    'Cut an onion across and you see rings. '
+    + 'Tear the thinnest skin you can off one ring, hold it up to the '
+    + 'light and look closely. '
+    + 'There are lines crossing each other, like a mat. '
+    + 'Nobody drew those lines. '
+    + 'The onion is built out of something small, repeated over and '
+    + 'over. '
+    + 'What is it, and is a goat built out of the same thing?',
+
   idea:
     'Every living thing is made of cells, '
     + 'and the cell of a plant and the cell of an animal are mostly the '
@@ -55,9 +65,14 @@ teach({
     + 'Ask what a plant cannot do and the differences come out in order.',
 
   recap:
-    'You know the parts of a plant and what each does for it. '
-    + 'This is the same question one level smaller: '
-    + 'what the parts inside a single cell do.',
+    'A plant has parts, and each part has a job. '
+    + 'The roots hold the plant down and draw up water. '
+    + 'The stem holds the plant up and carries that water to the top. '
+    + 'The leaf makes the plant’s food out of sunlight, air and '
+    + 'water. '
+    + 'The flower makes seeds, so that there will be another plant. '
+    + 'This lesson asks the same question one level smaller: inside a '
+    + 'single cell, what does each part do?',
 
   method: [
     'Name the three parts both kinds have: membrane, cytoplasm, nucleus.',
@@ -232,6 +247,27 @@ teach({
     ],
   },
 
+  why:
+    'A whale lives in the sea all its life, has no legs, and swims. '
+    + 'A tilapia lives in water, has no legs, and swims. '
+    + 'By everything you can see from the outside, they belong '
+    + 'together. '
+    + 'But the whale comes up for air, and feeds its young on milk, '
+    + 'and the tilapia does neither. '
+    + 'So which group does the whale really belong in, and what makes '
+    + 'one answer better than the other?',
+
+  notation:
+    'Every living thing has a two-word scientific name, like Homo '
+    + 'sapiens for a human being or Zea mays for maize. '
+    + 'It is said the way it is written, “Homo sapiens”. '
+    + 'The first word is the genus and the second word is the '
+    + 'species. '
+    + 'The genus always starts with a capital letter and the species '
+    + 'never does, and the whole name is printed in italics or '
+    + 'underlined by hand. '
+    + 'Writing it “homo Sapiens” is the commonest way to lose a mark.',
+
   idea:
     'Living things are placed in kingdoms: plants, animals, fungi and '
     + 'others. '
@@ -252,10 +288,15 @@ teach({
     + 'not because they share a recent ancestor.',
 
   recap:
-    'You can group animals by how they move, what they eat, or where they '
-    + 'live, '
-    + 'and you know the group depends on the question. '
-    + 'This explains which question scientists chose, and why.',
+    'Animals can be put into groups in more than one way. '
+    + 'Group them by how they move and the bat goes with the bird. '
+    + 'Group them by what they eat and the bat goes with the lizard. '
+    + 'Group them by where they sleep and the bat goes with the rat '
+    + 'in the roof. '
+    + 'Every one of those groupings is correct, and each one answers '
+    + 'a different question. '
+    + 'This lesson is about which question scientists chose, and why '
+    + 'that one choice gives a single grouping instead of three.',
 
   method: [
     'Look at the body: covering, bones, how it reproduces.',
@@ -426,6 +467,17 @@ teach({
     ],
   },
 
+  why:
+    'Put your thumb over the hole of a bicycle pump and push the '
+    + 'handle in. '
+    + 'It moves some way before it stops, and it pushes back against '
+    + 'your hand. '
+    + 'Now fill the same pump with water, cover the hole, and push. '
+    + 'The handle will not move at all. '
+    + 'Both are shut inside the same tube and neither can get out. '
+    + 'Why does a gas let you squeeze it into a smaller space when a '
+    + 'liquid refuses?',
+
   idea:
     'Everything is made of particles far too small to see. '
     + 'What a solid, a liquid and a gas are is nothing more than how '
@@ -445,9 +497,16 @@ teach({
     + 'Every one of those is the same answer.',
 
   recap:
-    'You can sort things into solid, liquid and gas by what happens to their '
-    + 'shape. '
-    + 'This explains why they behave that way.',
+    'Things can be sorted into solid, liquid and gas by what '
+    + 'happens to their shape. '
+    + 'A stone is a solid: put it in any container and it keeps its '
+    + 'own shape. '
+    + 'Water is a liquid: it takes the shape of whatever it is poured '
+    + 'into, while the amount of it stays the same. '
+    + 'Air is a gas: it spreads out until it fills the whole '
+    + 'container, however big that container is. '
+    + 'That sorting is the starting point, and this lesson explains '
+    + 'why the three behave that way.',
 
   method: [
     'Say how the particles are arranged.',
@@ -668,11 +727,22 @@ teach({
     ],
   },
 
+  why:
+    'Hang washing out at seven on a bright, breezy morning and it '
+    + 'is dry by eleven. '
+    + 'Hang the same washing out on a cool, still, cloudy day and it '
+    + 'is damp at four in the afternoon. '
+    + 'The same amount of water has to leave the same cloth either '
+    + 'way. '
+    + 'Nobody touched it in between. '
+    + 'Why will the sun and the wind take that water when the cool '
+    + 'day will not, and what is it that actually leaves the cloth?',
+
   idea:
-    'You already know the stages: evaporation, condensation, precipitation, '
-    + 'collection. '
-    + 'At JHS the question is what the particles are doing at each one, '
-    + 'and the answer is always about energy.',
+    'The water cycle has four stages: evaporation, condensation, '
+    + 'precipitation and collection. '
+    + 'At JHS the question is what the particles are doing at each '
+    + 'one, and the answer is always about energy.',
 
   mechanism:
     'Evaporation does not need boiling, and that confuses people. '
@@ -687,9 +757,17 @@ teach({
     + 'That is exactly why sweating cools you.',
 
   recap:
-    'You know the four stages of the water cycle, '
-    + 'and you know that particles move more when heated. '
-    + 'This joins the two.',
+    'The water cycle has four stages. '
+    + 'Evaporation is water leaving a surface as a gas, which is what '
+    + 'empties a bowl left out in the sun. '
+    + 'Condensation is that gas turning back into liquid on something '
+    + 'cooler, which is the water that beads on a cold bottle. '
+    + 'Precipitation is that water falling again as rain. '
+    + 'Collection is wherever it gathers: a river, a lake, the sea, '
+    + 'or soaking down into the ground. '
+    + 'Heat also makes particles move faster, so the particles in a '
+    + 'hot thing are moving more than those in a cold one. '
+    + 'This lesson joins the stages to the particles.',
 
   method: [
     'Evaporation: the fastest surface particles escape as gas.',
@@ -893,6 +971,16 @@ teach({
     ],
   },
 
+  why:
+    'A family in Kasoa sleeps under treated nets every single night '
+    + 'and still gets malaria twice in one year. '
+    + 'Their neighbour has no net at all and does not get it. '
+    + 'The nets are good nets and they are used properly. '
+    + 'Behind the house with the nets there is an old tyre and a '
+    + 'bucket that always hold water. '
+    + 'Why did the nets fail, and what was the neighbour doing right '
+    + 'without knowing it?',
+
   idea:
     'A vector is an animal that carries disease between people. '
     + 'The mosquito carries malaria. '
@@ -910,9 +998,15 @@ teach({
     + 'You are breaking the cycle where it is pinned down.',
 
   recap:
-    'You know the four stages of a mosquito '
-    + 'and that emptying standing water reduces them. '
-    + 'This explains why that works better than chasing adults.',
+    'A mosquito passes through four stages in its life. '
+    + 'The egg is laid on standing water. '
+    + 'The larva hatches out and lives in that water, wriggling just '
+    + 'under the surface. '
+    + 'The pupa is the still stage, and it is in the water too. '
+    + 'Only the adult flies, and only the adult bites. '
+    + 'So three of the four stages cannot leave the water, which is '
+    + 'why pouring the water away works better than chasing the '
+    + 'adults.',
 
   method: [
     'Name the four stages in order.',
@@ -1093,6 +1187,17 @@ teach({
     ],
   },
 
+  why:
+    'Hold one arm straight out and put your other hand on top of '
+    + 'it, above the bone. '
+    + 'Now bend your elbow. '
+    + 'Something under your hand went hard and short, and the arm '
+    + 'came up with it. '
+    + 'The bone itself did not change. '
+    + 'A bone cannot shorten and a bone cannot pull. '
+    + 'So what pulled it, and why can that thing bend your arm but '
+    + 'not straighten it again?',
+
   idea:
     'The skeleton does three jobs at once, and the third of them is the '
     + 'one that is easy to miss: it gives muscles something to pull '
@@ -1110,9 +1215,14 @@ teach({
     + 'and if you can only find one you have not looked at the other side.',
 
   recap:
-    'You know the body has parts that each do a job. '
-    + 'This is how two of those systems work together, '
-    + 'because neither does anything useful alone.',
+    'The body is built out of systems, and each system has one job '
+    + 'to do. '
+    + 'The digestive system breaks food down. '
+    + 'The breathing system takes air in. '
+    + 'The blood system carries both of those round the body. '
+    + 'Bones and muscles are two more systems, and this lesson is '
+    + 'about how those two work together, because neither of them '
+    + 'does anything useful on its own.',
 
   method: [
     'Name the bones meeting at the joint.',
@@ -1293,6 +1403,28 @@ teach({
     ],
   },
 
+  why:
+    'A lagoon near Keta used to hold plenty of tilapia, and the '
+    + 'fishermen also saw crabs, herons and kingfishers there. '
+    + 'One season a factory upstream killed off the small shrimps in '
+    + 'it. '
+    + 'Nobody touched the tilapia, the crabs or the birds. '
+    + 'Within two years the catch had collapsed and the herons had '
+    + 'gone. '
+    + 'Why does killing one small animal that nobody fishes for empty '
+    + 'a whole lagoon?',
+
+  notation:
+    'A food chain is written with arrows: grass → grasshopper → '
+    + 'lizard → hawk. '
+    + 'Each arrow is said “is eaten by”, so that line is read “grass '
+    + 'is eaten by the grasshopper”. '
+    + 'The arrow points from the one that is eaten to the one that '
+    + 'eats, because it follows the energy. '
+    + 'In a web the same animal can have several arrows going in and '
+    + 'several coming out. '
+    + 'Turning one arrow round is the commonest way to lose a mark.',
+
   idea:
     'A food chain shows one path of energy. '
     + 'A food web joins many chains together, '
@@ -1313,8 +1445,13 @@ teach({
     + 'direction.',
 
   recap:
-    'You can build a food chain and point the arrows the right way, '
-    + 'from the food towards the eater, following the energy.',
+    'A food chain is a line showing what eats what, with arrows in '
+    + 'between: grass, then grasshopper, then lizard, then hawk. '
+    + 'Each arrow points from the food towards the eater, because the '
+    + 'arrow follows the energy as it is handed on. '
+    + 'So grass to grasshopper means the grasshopper eats the grass. '
+    + 'A chain like that shows one path and nothing else. '
+    + 'This lesson joins many of those paths together.',
 
   method: [
     'List the organisms and what each eats.',
@@ -1502,6 +1639,28 @@ teach({
     ],
   },
 
+  why:
+    'A tro-tro pulls away from the station and you are pressed back '
+    + 'into the seat. '
+    + 'Out on the motorway it reaches full speed, and now you feel '
+    + 'nothing at all, though it is moving faster than it was before. '
+    + 'Then the driver brakes and you are thrown forward. '
+    + 'You are pushed about when the speed changes and left alone '
+    + 'when it does not. '
+    + 'Why does going fast feel like nothing, while changing speed '
+    + 'does not?',
+
+  notation:
+    'A force is measured in newtons, written N, so a 20 newton pull '
+    + 'is written 20 N, with a space and a capital N. '
+    + 'In a diagram a force is drawn as an arrow starting on the '
+    + 'object it acts on. '
+    + 'The way the arrow points is the direction of the force, and a '
+    + 'longer arrow means a bigger force. '
+    + 'Drawing the arrow pointing into the object instead of out of '
+    + 'it, or leaving the N off the number, is the commonest way to '
+    + 'lose a mark.',
+
   idea:
     'A force is a push or a pull, measured in newtons. '
     + 'Some forces need the two things to be touching and some act across a gap. '
@@ -1521,9 +1680,16 @@ teach({
     + 'to keep moving, only to overcome what is resisting it.',
 
   recap:
-    'You know a push can start, stop or turn something, '
-    + 'and that friction resists movement. '
-    + 'This names the forces and adds the idea of balance.',
+    'A push or a pull can start something moving, stop it, or turn '
+    + 'it. '
+    + 'Push a ball standing still and it moves off. '
+    + 'Put your foot in its way and it stops. '
+    + 'Friction is the force that works against movement wherever two '
+    + 'surfaces rub on each other. '
+    + 'A ball rolled across sand stops far sooner than the same ball '
+    + 'rolled across concrete, and the sand is the reason. '
+    + 'This lesson names the forces properly and adds a new idea: '
+    + 'what happens when two of them balance.',
 
   method: [
     'Name every force acting on the object.',
@@ -1710,6 +1876,29 @@ teach({
     ],
   },
 
+  why:
+    'A dry cell costs two cedis and runs a torch for a few nights. '
+    + 'Weigh the cell before and weigh it after and it weighs the '
+    + 'same. '
+    + 'Nothing went into it and nothing came out of it, and yet it '
+    + 'will not light the bulb any more. '
+    + 'The light it gave out is gone as well, and it did not pile up '
+    + 'anywhere. '
+    + 'So where did that energy come from, and where has it gone?',
+
+  notation:
+    'Energy is measured in joules, written J, so five hundred '
+    + 'joules is written 500 J. '
+    + 'One joule is small: lifting a one kilogram bag of sugar one '
+    + 'metre takes about 10 J. '
+    + 'A thousand joules is a kilojoule, written kJ, which is the '
+    + 'unit on the side of a food packet. '
+    + 'An energy change is written as arrows between the forms, as in '
+    + 'chemical → electrical → light, said “chemical to electrical to '
+    + 'light”. '
+    + 'Leaving the unit off, or writing a small j for joules instead '
+    + 'of a capital J, is the commonest way to lose a mark.',
+
   idea:
     'Energy comes in forms: chemical, electrical, light, sound, heat, '
     + 'and the energy of movement and of position. '
@@ -1729,9 +1918,14 @@ teach({
     + 'and that is why no device is ever fully efficient.',
 
   recap:
-    'You know that energy comes from the sun, water, wind and fuel, '
-    + 'and which sources are renewable. '
-    + 'This is about what happens to energy once it is in a device.',
+    'Energy reaches us from a few sources: the sun, moving water, '
+    + 'moving wind, and fuels such as charcoal, petrol and gas. '
+    + 'A source is renewable if using it does not use it up, so the '
+    + 'sun, the wind and running water are renewable. '
+    + 'Charcoal and petrol are not, because once they are burnt they '
+    + 'are gone. '
+    + 'This lesson is about something else: what happens to energy '
+    + 'after it is already inside a device.',
 
   method: [
     'Name the form of energy supplied.',
@@ -1913,6 +2107,15 @@ teach({
     ],
   },
 
+  why:
+    'A child in a village eats every day and is never hungry. '
+    + 'Her belly is even swollen, so she looks well fed. '
+    + 'But her hair is thin and reddish, her legs are puffy, and she '
+    + 'is tired all the time. '
+    + 'She eats cassava, and almost nothing else. '
+    + 'She is getting plenty of food, and she is ill from food. '
+    + 'How can somebody be full and starving at the same time?',
+
   idea:
     'There are six classes of food, and each one does a job the others '
     + 'cannot do for it. '
@@ -1931,9 +2134,15 @@ teach({
     + 'quantity fills the stomach and only the right mix does the jobs.',
 
   recap:
-    'You know food does three things: energy, building and protecting. '
-    + 'This divides those into six classes and names what each shortage '
-    + 'does.',
+    'Food does three things in the body. '
+    + 'It gives energy, and rice, yam and bread are mainly for that. '
+    + 'It builds the body, and that is the work of beans, fish and '
+    + 'eggs. '
+    + 'It guards the body against illness, which is what oranges and '
+    + 'green leaves are for. '
+    + 'Those three jobs are the starting point. '
+    + 'This lesson divides them into six named classes and says what '
+    + 'a shortage of each one actually does to a person.',
 
   method: [
     'Name the class.',
@@ -2124,6 +2333,16 @@ teach({
     ],
   },
 
+  why:
+    'After one heavy rain, a farmer’s field is a pond and the water '
+    + 'is still sitting there two days later. '
+    + 'The field next to it is dry on top within the hour, and by the '
+    + 'third day the crops in it are wilting. '
+    + 'Both fields got exactly the same rain. '
+    + 'One kept far too much water and one kept far too little. '
+    + 'What is different about the two soils, and which of them would '
+    + 'you rather plant maize in?',
+
   idea:
     'Soil is made of weathered rock, decayed material called humus, '
     + 'water and air. '
@@ -2143,8 +2362,16 @@ teach({
     + 'You need to remember the particle size and work the rest out.',
 
   recap:
-    'You can test a soil by wetting and squeezing it, '
-    + 'and you know a field grows poorer if nothing is put back.',
+    'Soils can be told apart by wetting a handful and squeezing it. '
+    + 'Sandy soil falls apart as soon as you open your hand. '
+    + 'Clay soil holds the shape of your fist and feels smooth and '
+    + 'sticky. '
+    + 'Loam holds together but crumbles when you poke it. '
+    + 'A field also grows poorer if crops are taken off it year after '
+    + 'year with nothing put back, because every harvest carries '
+    + 'substances away with it. '
+    + 'This lesson says what soil is actually made of, and why those '
+    + 'three behave so differently.',
 
   method: [
     'Wet a handful and squeeze it.',
