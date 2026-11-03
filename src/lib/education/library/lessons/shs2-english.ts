@@ -58,6 +58,19 @@ teach({
     ],
   },
 
+  why:
+    'A passage of 600 words describes seven problems a town has '
+    + 'with its water. '
+    + 'The question asks for four of them, in your own words, in '
+    + 'continuous prose. '
+    + 'A candidate who understood every line of it writes a page and '
+    + 'a half, repeating the writer’s phrases, mentioning all seven, '
+    + 'and adding the history of the town. '
+    + 'He understood the passage completely and he scores two marks '
+    + 'out of ten. '
+    + 'What was he being paid for, and what did he get paid nothing '
+    + 'for?',
+
   idea:
     'A summary question gives a passage '
     + 'and asks for a particular set of points from it, '
@@ -147,12 +160,17 @@ teach({
     + 'not to improve on it.',
 
   recap:
-    'You have found the main idea of a paragraph '
-    + 'and answered comprehension questions in your own words. '
-    + 'This is narrower and stricter: '
-    + 'a stated number of points, '
-    + 'on one stated question, '
-    + 'and nothing else at all.',
+    'The main idea of a paragraph is the one thing it is about. '
+    + 'Every other sentence in that paragraph either supports it or '
+    + 'illustrates it. '
+    + 'In a paragraph about why a river is polluted, the main idea is '
+    + 'the pollution, and the sentences naming the factory and the '
+    + 'washing are the support. '
+    + 'Answering in your own words means giving the same content in '
+    + 'different phrasing, so “the river is dirty because waste runs '
+    + 'into it” for “effluent is discharged into the watercourse”. '
+    + 'This lesson is narrower and stricter: a stated number of '
+    + 'points, on one stated question, and nothing else at all.',
 
   method: [
     'Read the question first and underline exactly what it asks for.',
@@ -441,6 +459,19 @@ teach({
     ],
   },
 
+  why:
+    'Two reports describe the same new road. '
+    + 'One calls it “a long-awaited link” that “finally” reaches the '
+    + 'district. '
+    + 'The other calls it “a strip of tarmac” that “has at last been '
+    + 'laid”. '
+    + 'The facts in both are the same: the same road, the same '
+    + 'length, the same date. '
+    + 'One reads as good news and the other reads as a complaint. '
+    + 'Neither one says what its writer thinks. '
+    + 'How do you prove, out of the words on the page, what each '
+    + 'writer feels?',
+
   idea:
     'Tone is the writer’s attitude to the subject '
     + 'or to the reader, '
@@ -533,11 +564,17 @@ teach({
     + 'loses the mark even when the adjective is a good one.',
 
   recap:
-    'You have met figures of speech '
-    + 'and found the writer’s purpose in a comprehension passage. '
-    + 'This asks something finer: '
-    + 'not what the writer says, but how the writer feels about it, '
-    + 'and which words give it away.',
+    'A figure of speech is a phrase that does not mean what its '
+    + 'words say. '
+    + 'A simile compares with like or as: she ran like a deer. '
+    + 'A metaphor states the comparison outright: the man is a lion. '
+    + 'Personification gives a thing the behaviour of a person: the '
+    + 'wind complained all night. '
+    + 'The writer’s purpose is what the passage is for, whether to '
+    + 'inform, to persuade, to warn or to entertain. '
+    + 'This lesson asks something finer than purpose: not what the '
+    + 'writer says, but how the writer feels about it, and which '
+    + 'words give that away.',
 
   method: [
     'Read the passage once for sense.',
@@ -817,6 +854,20 @@ teach({
     ],
   },
 
+  why:
+    'A student writes in a report: “When the nurse arrived, the '
+    + 'child died.'
+    + '” The teacher marks it wrong. '
+    + 'What she meant is that the child was already dead when the '
+    + 'nurse got there. '
+    + 'Every word she used is correct English and the tense is a past '
+    + 'tense. '
+    + 'What she wrote says the nurse came first. '
+    + 'Two events, one order in her head and the opposite order on '
+    + 'the page. '
+    + 'What form would have fixed it, and why can one simple past not '
+    + 'carry two different times?',
+
   idea:
     'Tense places an action in time. '
     + 'There are three: past, present and future. '
@@ -918,12 +969,18 @@ teach({
     + 'and nobody is served by not being told.',
 
   recap:
-    'You have used the past, present and future tenses, '
-    + 'and you have met the passive form. '
-    + 'This sorts them into a grid, '
-    + 'adds the perfect forms that place one past event before another, '
-    + 'and asks when the passive is the right choice '
-    + 'rather than a fault.',
+    'A tense puts an action in time. '
+    + 'I write is present, I wrote is past, and I will write is '
+    + 'future. '
+    + 'The passive form turns a sentence round so that the thing '
+    + 'acted on comes first, so “the chief opened the market” becomes '
+    + '“the market was opened by the chief”. '
+    + 'It is built from a part of the verb to be plus the past '
+    + 'participle, and the doer can be dropped altogether, leaving '
+    + '“the market was opened”. '
+    + 'This lesson sorts those forms into a grid, adds the perfect '
+    + 'forms that place one past event before another, and asks when '
+    + 'the passive is the right choice rather than a fault.',
 
   method: [
     'Decide the tense of the whole piece before writing.',
@@ -1246,6 +1303,17 @@ teach({
     ],
   },
 
+  why:
+    'A student writes one sentence of forty words about a flood, '
+    + 'and every word in it is spelled correctly. '
+    + 'The teacher marks a single error and writes “run-on” beside '
+    + 'it. '
+    + 'The student cannot see the error, because he can read the '
+    + 'sentence aloud and it makes sense to him. '
+    + 'He cannot tell where one part of it ends and the next begins. '
+    + 'How do you cut a long sentence into its parts, when nothing on '
+    + 'the page shows where the joins are?',
+
   idea:
     'A finite verb is one that has a tense '
     + 'and agrees with a subject: '
@@ -1341,10 +1409,16 @@ teach({
     + 'than the grammar question is worth in the objective paper.',
 
   recap:
-    'You have met the subject and the verb of a sentence, '
-    + 'and the difference between a complete sentence and a fragment. '
-    + 'This divides a long sentence into its parts '
-    + 'and asks what job each part is doing.',
+    'The subject of a sentence is who or what it is about. '
+    + 'The verb is what the subject does or is. '
+    + 'In “the market woman sold her yams”, the subject is the market '
+    + 'woman and the verb is sold. '
+    + 'A complete sentence has both and makes sense on its own. '
+    + 'A fragment is missing one of them, or leans on a sentence that '
+    + 'is not there: “because the rain was late” is a fragment, '
+    + 'because it leaves the reader waiting. '
+    + 'This lesson divides a long sentence into its parts and asks '
+    + 'what job each part is doing.',
 
   method: [
     'Read the whole sentence.',
@@ -1642,6 +1716,17 @@ teach({
     ],
   },
 
+  why:
+    'A candidate writes: “The committee made a photograph of the '
+    + 'site and took a decision to postpone the work off.'
+    + '” Every word there is an English word and the grammar is '
+    + 'sound. '
+    + 'A Ghanaian reader understands exactly what is meant. '
+    + 'A marker takes marks off three times in that one sentence. '
+    + 'Nothing in it is wrong logically. '
+    + 'So what rule is being broken, and where would you go to look '
+    + 'it up?',
+
   idea:
     'An idiom is an expression '
     + 'whose meaning cannot be worked out from its words. '
@@ -1747,10 +1832,17 @@ teach({
     + 'and both are good English in their own place.',
 
   recap:
-    'You have met proverbs and figures of speech, '
-    + 'and you know that a proverb means more than its words. '
-    + 'This extends that to the ordinary expressions of English, '
-    + 'and to the pairs of words the language habitually joins.',
+    'A proverb is a short fixed saying that carries a lesson. '
+    + '“The crab does not give birth to a bird” is not about crabs, '
+    + 'and nobody using it thinks it is. '
+    + 'It says that a child takes after the parent. '
+    + 'So the meaning of a saying and the meaning of its words are '
+    + 'two separate things. '
+    + 'A figure of speech works the same way, as when “the man is a '
+    + 'lion” says that he is brave and not that he has fur. '
+    + 'This lesson extends that to the ordinary expressions of '
+    + 'English, and to the pairs of words the language habitually '
+    + 'joins.',
 
   method: [
     'Learn each idiom as a single item, with its exact wording.',
@@ -2089,6 +2181,18 @@ teach({
     ],
   },
 
+  why:
+    'Two students write against school fees. '
+    + 'The first writes four paragraphs saying fees are unfair, a '
+    + 'burden, wrong, and hard on parents. '
+    + 'The second writes three, and in each one names a figure, a '
+    + 'report or a case, then answers what somebody defending fees '
+    + 'would say. '
+    + 'The first believes it more strongly than the second. '
+    + 'The second scores far higher. '
+    + 'What is in the second essay that the first has four copies of '
+    + 'one thing instead of?',
+
   idea:
     'An argumentative essay defends a position. '
     + 'The position is stated at the start '
@@ -2203,11 +2307,16 @@ teach({
     + 'loses them all before the argument is even considered.',
 
   recap:
-    'You have written a composition with a plan, '
-    + 'an introduction, paragraphs and a conclusion. '
-    + 'This adds the two things an argument needs: '
-    + 'evidence under each point, '
-    + 'and an answer to the other side.',
+    'A composition is built from a plan written before any of the '
+    + 'writing. '
+    + 'The plan is a list of the points, in the order they will come. '
+    + 'The introduction says what the composition is about. '
+    + 'Each paragraph then takes one point off the list, and the '
+    + 'conclusion closes without adding anything new. '
+    + 'That shape holds for any composition at all. '
+    + 'This lesson adds the two things an argument needs on top of '
+    + 'it: evidence underneath each point, and an answer to the other '
+    + 'side.',
 
   method: [
     'Read the question and decide which side you will take.',
@@ -2528,6 +2637,17 @@ teach({
     ],
   },
 
+  why:
+    'A nurse has to write half a page telling market traders how '
+    + 'cholera spreads and how to keep clear of it. '
+    + 'She knows the disease completely. '
+    + 'What she writes mentions faecal-oral transmission, rehydration '
+    + 'and the incubation period. '
+    + 'Every sentence of it is true. '
+    + 'Not one trader changes anything she does. '
+    + 'The writing was accurate and it failed. '
+    + 'What was that half page for, and who was it for?',
+
   idea:
     'Expository writing sets out information '
     + 'so that a reader understands something. '
@@ -2631,10 +2751,16 @@ teach({
     + 'usually means a plan without a single subject.',
 
   recap:
-    'You have written letters and narrative compositions, '
-    + 'and you have read instructions and followed them. '
-    + 'This asks for writing whose only job is to be understood, '
-    + 'by a reader whom the question names.',
+    'A letter is written to one named reader, and its form shows '
+    + 'who that reader is: an address, a greeting and a closing that '
+    + 'all change with the person. '
+    + 'A narrative composition tells what happened, in the order it '
+    + 'happened, to somebody. '
+    + 'Instructions are a third thing: their job is to be carried '
+    + 'out, which is why a recipe comes in numbered steps and a '
+    + 'manual says what to do before it says why. '
+    + 'This lesson asks for writing whose only job is to be '
+    + 'understood, by a reader the question names for you.',
 
   method: [
     'Write the named readership at the top of your plan.',
@@ -2973,6 +3099,30 @@ teach({
     ],
   },
 
+  why:
+    'A student answers in class and says “I want to REcord the '
+    + 'answer”. '
+    + 'The teacher hears him ask for a REcord, a thing, when he meant '
+    + 'to record it, an action. '
+    + 'Every letter of that word is the one he wanted and he '
+    + 'mispronounced no single sound. '
+    + 'One beat landed in the wrong place and the word changed its '
+    + 'job. '
+    + 'How does one spelling become two different words, and how do '
+    + 'you tell which beat to hit?',
+
+  notation:
+    'A stressed syllable is written in capital letters in this '
+    + 'lesson, so teacher is written TEAcher and examination is '
+    + 'examiNAtion, and it is said with that beat louder and on a '
+    + 'higher note. '
+    + 'A dictionary shows the same thing differently, with a small '
+    + 'raised mark before the stressed syllable. '
+    + 'The capitals are a teaching device and not spelling: TEAcher '
+    + 'is never written that way in an essay. '
+    + 'Marking the stress on the wrong syllable, or marking two '
+    + 'syllables in one word, is the commonest way to lose a mark.',
+
   idea:
     'A syllable is one beat of a word. '
     + 'The word teacher has two, '
@@ -3084,11 +3234,17 @@ teach({
     + 'which is exactly the right habit.',
 
   recap:
-    'You have met syllables and vowel sounds, '
-    + 'and you have noticed that English words are not said flatly. '
-    + 'This asks which syllable carries the force, '
-    + 'and shows that moving it can change a word’s class '
-    + 'or a sentence’s meaning.',
+    'A syllable is one beat in a word. '
+    + 'Clap once for each beat: teacher gives two claps, market gives '
+    + 'two, and examination gives five. '
+    + 'Each syllable is built round a vowel sound, which is a sound '
+    + 'you can hold on: the a in cat, the ee in see, the o in go. '
+    + 'English words are also not said flatly. '
+    + 'One beat in a long word comes out louder and higher than the '
+    + 'rest. '
+    + 'This lesson asks which beat carries that force, and shows that '
+    + 'moving it can change a word’s class or a whole sentence’s '
+    + 'meaning.',
 
   method: [
     'Count the syllables of the word.',
@@ -3365,6 +3521,31 @@ teach({
     ],
   },
 
+  why:
+    'Two candidates answer the same question on a novel: whether '
+    + 'the main character is to blame for what happens. '
+    + 'The first writes a page on what the character is like, '
+    + 'confidently and correctly. '
+    + 'The second writes less, and quotes four short phrases from the '
+    + 'book, one in each paragraph. '
+    + 'Both have read the novel properly. '
+    + 'The second scores nearly twice as much. '
+    + 'What is the second one doing that the first is not?',
+
+  notation:
+    'A quotation is the author’s exact words inside quotation '
+    + 'marks, as in “he had nothing left to sell”. '
+    + 'Exact means exact: change one word and it is no longer a '
+    + 'quotation. '
+    + 'Where part of a sentence is left out, three dots mark the gap, '
+    + 'so “he had nothing ... '
+    + 'to sell”. '
+    + 'A quotation runs inside your own sentence and takes a comma or '
+    + 'a colon before it, never a full stop. '
+    + 'Writing the author’s words with no quotation marks is the '
+    + 'commonest way to lose a mark, because it then reads as your '
+    + 'own writing and proves nothing.',
+
   idea:
     'A set text is a novel, play or collection '
     + 'that the syllabus names for study. '
@@ -3464,10 +3645,18 @@ teach({
     + 'where it would be enough for a point about a character.',
 
   recap:
-    'You have read stories and answered questions on them, '
-    + 'and in literature you have met plot, character and theme. '
-    + 'This asks for an essay that argues one case about the text '
-    + 'and proves it with the author’s own words.',
+    'The plot of a story is what happens in it, in the order it '
+    + 'happens. '
+    + 'Character is what a person in the story is like, and it is '
+    + 'shown rather than stated: a man who gives away his last cedi '
+    + 'is generous, and the story never uses the word. '
+    + 'Setting is the place and the time, and it does real work, '
+    + 'because the same events in a village and in Accra are not the '
+    + 'same story. '
+    + 'Theme is what the whole work is about beneath its events, such '
+    + 'as duty, or the cost of ambition. '
+    + 'This lesson asks for an essay that argues one case about a '
+    + 'text and proves it with the author’s own words.',
 
   method: [
     'Read the question twice and underline its key words and names.',
