@@ -130,12 +130,31 @@ teach({
     + 'Both are caught by the same habit: '
     + 'write a, b and c down with their signs before you touch the formula.',
 
+  why:
+    'A farmer has 40 metres of fencing '
+    + 'and wants to pen off a rectangle against a wall, '
+    + 'so the fence has to cover only three sides. '
+    + 'He wants the pen to hold exactly 200 square metres. '
+    + 'How long should each side be? '
+    + 'Try numbers and you will get close but keep missing. '
+    + 'The answer needs an equation where the unknown is multiplied '
+    + 'by itself, and that kind of equation has its own method '
+    + 'and usually two answers.',
+
   recap:
-    'You have solved linear equations, '
-    + 'where there is one unknown and one answer, '
-    + 'and you have expanded two brackets. '
-    + 'This goes the other way, from the expanded form back to brackets, '
-    + 'and it has two answers instead of one.',
+    'An equation is two things said to be equal, '
+    + 'with a letter standing for the number you do not know yet. '
+    + 'In 2x plus 3 equals 11, take 3 off both sides to get 2x equals 8, '
+    + 'then halve both sides to get x equals 4. '
+    + 'Whatever you do to one side you do to the other. '
+    + 'That kind has one answer. '
+    + 'You also need to multiply out brackets. '
+    + 'x plus 2, times x plus 3, '
+    + 'means every term in the first bracket times every term '
+    + 'in the second, '
+    + 'which gives x squared plus 3x plus 2x plus 6, '
+    + 'or x squared plus 5x plus 6. '
+    + 'This topic runs that backwards.',
 
   method: [
     'Rearrange until one side is zero.',
@@ -487,13 +506,29 @@ teach({
     + 'that are still inside the region, '
     + 'and say that you have done so.',
 
+  why:
+    'A tro-tro can carry at most 18 passengers '
+    + 'and the driver needs at least 90 cedis from the trip to break even. '
+    + 'Adults pay 6 cedis and students pay 4. '
+    + 'There is no single answer to how many of each he should take. '
+    + 'There is a whole range of answers that work, '
+    + 'and some that do not. '
+    + 'Finding the range rather than the number is this topic.',
+
   recap:
-    'You have solved linear equations '
-    + 'and drawn straight line graphs. '
-    + 'This asks what happens when the equals sign becomes '
-    + 'less than or greater than, '
-    + 'so that the answer is a range rather than a value, '
-    + 'and in two unknowns a region rather than a point.',
+    'An equation says two things are equal, '
+    + 'and solving 2x plus 3 equals 11 gives the one value x equals 4. '
+    + 'An inequality says one thing is bigger or smaller than another. '
+    + 'The sign is read from the wide end: '
+    + 'x is greater than 4 points its wide end at x, '
+    + 'so x is the bigger side. '
+    + 'The answer is not one number. '
+    + 'x greater than 4 means 5 works, 4.1 works, 100 works, '
+    + 'and 4 itself does not. '
+    + 'You also need a straight line graph. '
+    + 'y equals 2x plus 1 is a line, '
+    + 'and you draw it by working out y for two or three values of x '
+    + 'and joining the points with a ruler.',
 
   method: [
     'Write each condition of the problem as an inequality.',
@@ -866,11 +901,30 @@ teach({
     + 'Being able to say that is a good test of whether a learner '
     + 'understands the topic or has learned its formulas.',
 
+  why:
+    'Four masons build a wall in 6 days. '
+    + 'The contractor now wants the same wall in 3 days, '
+    + 'so he asks how many masons to send. '
+    + 'Doubling the days would mean halving the men, '
+    + 'so halving the days means doubling them: 8 masons. '
+    + 'Notice what happened. '
+    + 'One number went up and the other went down, '
+    + 'and they did it in step. '
+    + 'Some quantities move together and some move opposite, '
+    + 'and this topic is the rule for both.',
+
   recap:
-    'You have met ratio and the unitary method, '
-    + 'where you find the cost of one thing and then multiply. '
-    + 'This gives that a general form, '
-    + 'and adds the cases where one quantity grows as the other shrinks.',
+    'If 3 exercise books cost 12 cedis, one book costs 4 cedis, '
+    + 'so 7 books cost 28 cedis. '
+    + 'Find the value of one, then multiply. '
+    + 'That works because the cost and the number of books '
+    + 'go up together, and in step: '
+    + 'twice as many books costs twice as much. '
+    + 'A ratio is the same idea written as a comparison. '
+    + 'Saying the cost and the number are in the ratio 4 to 1 '
+    + 'says every book adds 4 cedis. '
+    + 'Hold on to the phrase in step. '
+    + 'It is the thing this topic is really about.',
 
   method: [
     'Read which quantities vary, and in which way.',
@@ -1227,11 +1281,28 @@ teach({
     + 'That one line protects you '
     + 'and it is often part of the mark scheme.',
 
+  why:
+    'A woman saves 50 cedis in January '
+    + 'and 20 cedis more each month than the month before: '
+    + '50, 70, 90, 110 and on. '
+    + 'How much has she saved by December? '
+    + 'You could write out all twelve months and add them, '
+    + 'and for twelve months that is fair enough. '
+    + 'For five years it is sixty numbers '
+    + 'and you will make a mistake somewhere. '
+    + 'This topic finds both the month you want '
+    + 'and the running total, without writing the list.',
+
   recap:
-    'You have continued number patterns '
-    + 'and found a rule for the nth term of a simple one. '
-    + 'This gives two important families of pattern their own formulas, '
-    + 'and adds the harder question of what the terms come to when added.',
+    'A sequence is a list of numbers in order, following a rule. '
+    + 'In 3, 7, 11, 15 the rule is add 4 each time. '
+    + 'Each number in the list is called a term. '
+    + 'The first term is 3 and the fourth term is 15. '
+    + 'The nth term means a formula that gives any term you ask for '
+    + 'without counting up to it. '
+    + 'For this list the nth term is 4n minus 1: '
+    + 'put n equal to 4 and you get 16 minus 1, which is 15, '
+    + 'and that is the fourth term as it should be.',
 
   method: [
     'Write out the first few terms.',
@@ -1591,12 +1662,29 @@ teach({
     + 'and its column does the same. '
     + 'Inverses: the identity appears somewhere in every row.',
 
+  why:
+    'Put on your socks, then your shoes. '
+    + 'Now try it the other way round. '
+    + 'The order changed the result, '
+    + 'and for some things it does not: '
+    + 'buying rice then beans leaves you with the same shopping either way. '
+    + 'An examiner can invent a brand new operation '
+    + 'you have never seen, give you its rule, '
+    + 'and ask whether order matters for it. '
+    + 'This topic is how you answer that '
+    + 'about a rule nobody has taught you.',
+
   recap:
-    'You have used addition, subtraction, multiplication and division '
-    + 'and noticed that some of them can be done in either order '
-    + 'and some cannot. '
-    + 'This gives those observations names, '
-    + 'and asks you to test a rule you have never seen before.',
+    'An operation is something you do to two numbers to get a third. '
+    + 'Add, subtract, multiply and divide are the four you know. '
+    + 'Order matters for some and not for others. '
+    + '3 plus 5 and 5 plus 3 both give 8, so order does not matter there. '
+    + '7 minus 2 gives 5 but 2 minus 7 gives minus 5, so there it does. '
+    + 'Brackets matter too. '
+    + '12 divided by 6, then divided by 2, gives 1. '
+    + '12 divided by the answer to 6 divided by 2 gives 4. '
+    + 'Same numbers, same operation, different grouping, '
+    + 'different answer.',
 
   method: [
     'Write down the set and the rule of the operation.',
@@ -2007,12 +2095,26 @@ teach({
     + 'and claiming more accuracy than the drawing can give '
     + 'is itself an error.',
 
+  why:
+    'A stone is thrown up from the ground. '
+    + 'It rises, slows, stops for an instant, and falls back. '
+    + 'Its height is not going up by the same amount every second, '
+    + 'so no straight line can describe it. '
+    + 'When does it land, and how high did it get? '
+    + 'Both answers can be read straight off a curve, '
+    + 'and drawing that curve is this topic.',
+
   recap:
-    'You have plotted points from coordinates '
-    + 'and drawn straight line graphs from a table of values. '
-    + 'This adds the curve of a quadratic, '
-    + 'and the idea that a drawn graph is a tool '
-    + 'for solving equations you have not yet met.',
+    'A pair of coordinates gives a point on a grid. '
+    + 'In 3, 2 the first number is how far across '
+    + 'and the second is how far up, '
+    + 'so you go 3 along and 2 up, in that order. '
+    + 'To draw a graph of a rule, '
+    + 'make a table: choose some values of x, '
+    + 'work out y for each, plot the pairs, and join them. '
+    + 'For y equals 2x plus 1, '
+    + 'x equal to 0 gives y equal to 1, and x equal to 3 gives y equal 7. '
+    + 'Plot 0, 1 and 3, 7 and the points lie on a straight line.',
 
   method: [
     'Read the function, the range of x, and the scale given.',
@@ -2398,12 +2500,30 @@ teach({
     + 'The naming of the rule is a mark, '
     + 'exactly as quoting a theorem is in circle geometry.',
 
+  why:
+    'Two survey pegs are driven into a plot of land. '
+    + 'From the corner of the plot, '
+    + 'one is 3 metres east and 4 metres north, '
+    + 'the other is 9 metres east and 12 metres north. '
+    + 'How far apart are the pegs, '
+    + 'and where is the midpoint between them for the third peg? '
+    + 'Nobody wants to walk it out with a tape, '
+    + 'and on a drawing you cannot measure accurately enough. '
+    + 'This topic gets both answers from the numbers alone.',
+
   recap:
-    'You have plotted points, '
-    + 'used Pythagoras on a right angled triangle, '
-    + 'and drawn graphs of y equals m x plus c. '
-    + 'This brings those together, '
-    + 'and lets you work with a line without drawing it at all.',
+    'A point on a grid is given by two numbers, '
+    + 'how far across and how far up, written in that order. '
+    + 'Pythagoras is the fact that in a triangle with a right angle, '
+    + 'the longest side squared equals the sum of the squares '
+    + 'of the other two. '
+    + 'With sides 3 and 4, the longest side is 5, '
+    + 'because 9 plus 16 is 25 and 5 times 5 is 25. '
+    + 'And y equals mx plus c is a straight line, '
+    + 'where m says how steep it is '
+    + 'and c says where it crosses the upright axis. '
+    + 'In y equals 2x plus 1 the line climbs 2 for every 1 across, '
+    + 'and crosses at 1.',
 
   method: [
     'Write the points as (x1, y1) and (x2, y2).',

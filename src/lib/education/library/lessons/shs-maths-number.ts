@@ -86,11 +86,28 @@ teach({
     + 'must come to the universal set. '
     + 'If they do not, something is in two places.',
 
+  why:
+    'A class of 40 pupils. '
+    + '25 of them play football. '
+    + '18 of them sing in the choir. '
+    + '7 of them do both. '
+    + 'How many pupils do neither? '
+    + 'You cannot just add 25 and 18, '
+    + 'because the 7 who do both would be counted twice. '
+    + 'Counting groups that overlap needs a method of its own, '
+    + 'and that method is this topic.',
+
   recap:
-    'You have sorted objects into groups and said why they belong '
-    + 'together. '
-    + 'This gives that notation, '
-    + 'and asks you to count the members of combinations of groups.',
+    'A set is a collection of things with a clear rule '
+    + 'for what belongs in it. '
+    + 'The pupils in your class are a set. '
+    + 'The even numbers below 10 are a set, '
+    + 'and that set is 2, 4, 6 and 8. '
+    + 'Each thing in a set is called a member. '
+    + 'Two facts matter from the start. '
+    + 'Order does not count, so 2, 4 is the same set as 4, 2. '
+    + 'And a thing is either a member or it is not. '
+    + 'There is no half member.',
 
   method: [
     'Define the universal set in words.',
@@ -280,11 +297,26 @@ teach({
     + 'and a question asking you to classify it '
     + 'wants all of those, not the smallest one.',
 
+  why:
+    'Take a square tile one metre along each side '
+    + 'and measure across it from corner to corner. '
+    + 'The answer starts 1.414 and the digits keep going, '
+    + 'with no pattern and no end. '
+    + 'No fraction gives it exactly either. '
+    + 'So some numbers are not fractions at all, '
+    + 'and a tape measure can never show them exactly. '
+    + 'Telling those two kinds of number apart is this topic.',
+
   recap:
-    'You have worked with whole numbers, negatives, fractions and '
-    + 'decimals. '
-    + 'This names the families they belong to '
-    + 'and gives the test for the one new distinction.',
+    'The counting numbers are 1, 2, 3 and onwards. '
+    + 'Add zero and the negatives '
+    + 'and you have the integers, which run on both sides of zero. '
+    + 'A fraction is one integer written over another, such as 3 over 4. '
+    + 'A decimal is another way of writing the same thing, '
+    + 'so 0.75 and 3 over 4 are one number in two coats. '
+    + 'Some decimals stop, like 0.75. '
+    + 'Some repeat for ever, like 0.333 and on, which is 1 over 3. '
+    + 'Both of those are still fractions.',
 
   method: [
     'Ask whether the number can be written as one integer over another.',
@@ -472,11 +504,28 @@ teach({
     + 'and examinations ask for the rationalised form, '
     + 'so it is marked.',
 
+  why:
+    'A carpenter braces a square frame one metre on each side '
+    + 'by cutting one piece across it corner to corner. '
+    + 'The exact length is the square root of 2 metres. '
+    + 'Cut to 1.41 metres the brace is 4 millimetres short, '
+    + 'and on a roof of many frames those shortfalls add up '
+    + 'until the last one will not fit. '
+    + 'So there is a reason to keep a root as a root while you work, '
+    + 'and to turn it into a decimal only at the very end.',
+
   recap:
-    'You know the laws of indices and the difference of two squares. '
-    + 'Surds use both: '
-    + 'a root is a power of one half, '
-    + 'and rationalising is the difference of two squares put to work.',
+    'A square root asks: what number times itself gives this one? '
+    + 'The square root of 9 is 3, because 3 times 3 is 9. '
+    + 'A few come out exactly, '
+    + 'and 4, 9, 16, 25 and 36 are the ones worth knowing by heart. '
+    + 'Most do not. '
+    + 'The square root of 2 is 1.414 and on for ever. '
+    + 'A root left in exact form, rather than rounded, is called a surd. '
+    + 'One more fact gets used later: '
+    + 'a minus b, times a plus b, gives a squared minus b squared. '
+    + 'Check it with 7 and 3: '
+    + '4 times 10 is 40, and 49 minus 9 is also 40.',
 
   method: [
     'Look for the largest perfect square factor.',
@@ -656,10 +705,29 @@ teach({
     + 'and you discard any root that is not a sensible base: '
     + 'a base must be a positive integer greater than every digit used.',
 
+  why:
+    'A phone has no way to write a 7. '
+    + 'Inside it there are only switches, '
+    + 'and a switch is either off or on, '
+    + 'which gives it two symbols instead of ten. '
+    + 'Every number it holds has to be written with those two. '
+    + 'Writing numbers with a different count of symbols is this topic, '
+    + 'and it is the reason a computer can work at all.',
+
   recap:
-    'You converted between base ten and base two at JHS. '
-    + 'This generalises to any base '
-    + 'and adds arithmetic done inside a base.',
+    'In the number 245, each digit is worth something different '
+    + 'depending on the column it sits in. '
+    + 'The 5 is five ones. '
+    + 'The 4 is four tens. '
+    + 'The 2 is two hundreds. '
+    + 'The columns run 1, 10, 100, 1000, '
+    + 'each one ten times the column before it, '
+    + 'which is why it is called base ten. '
+    + 'Nothing says the columns must go up in tens. '
+    + 'In base two they go up in twos: 1, 2, 4, 8, 16. '
+    + 'The only digits allowed in base two are 0 and 1, '
+    + 'because once you reach 2 the column is full '
+    + 'and you move to the next one.',
 
   method: [
     'Write the column values of the base above the digits.',
@@ -843,10 +911,29 @@ teach({
     + 'Halved means inverse, so the product is constant, '
     + 'and that gives you a free check on the answer.',
 
+  why:
+    'A trader puts the price of a bag of rice up by 20 percent '
+    + 'for the festive season, '
+    + 'then takes it down by 20 percent when the season ends. '
+    + 'Is the price back where it started? '
+    + 'Most people say yes. '
+    + 'It is not, and the difference is real money '
+    + 'that somebody keeps at the end of it. '
+    + 'Percentage changes do not cancel each other, '
+    + 'and understanding why is worth more '
+    + 'than any formula in this topic.',
+
   recap:
-    'You have shared in ratios and worked percentage changes at JHS. '
-    + 'This adds the multiplier method, '
-    + 'reversing a change, and compound interest.',
+    'Per cent means per hundred. '
+    + 'So 20 percent means 20 out of every 100, '
+    + 'which is 20 over 100, which is 0.2. '
+    + 'To find 20 percent of 50 cedis, multiply 50 by 0.2, '
+    + 'and the answer is 10 cedis. '
+    + 'A ratio compares two amounts. '
+    + 'Sharing 60 cedis in the ratio 2 to 1 '
+    + 'means cutting it into 3 equal shares of 20 cedis each, '
+    + 'then giving 2 shares to the first person and 1 to the second, '
+    + 'which is 40 cedis and 20 cedis.',
 
   method: [
     'For a share, add the parts and find the value of one share.',
@@ -1310,11 +1397,26 @@ teach({
     + 'and check your answer is between 0 and n minus 1 '
     + 'before writing it down.',
 
+  why:
+    'Today is Tuesday. '
+    + 'What day will it be in 100 days? '
+    + 'Counting 100 days on your fingers takes a long time '
+    + 'and you will lose your place somewhere in the middle. '
+    + 'The week repeats every 7 days, '
+    + 'so the only thing that matters is what is left over '
+    + 'after taking away whole weeks. '
+    + 'Working with that leftover is the whole of this topic, '
+    + 'and it is how clocks, calendars and shift rotas are worked out.',
+
   recap:
-    'You can divide with a remainder, '
-    + 'and you know the days of the week repeat every seven days. '
-    + 'This is arithmetic that keeps only the remainder, '
-    + 'which is exactly what a repeating cycle needs.',
+    'Dividing does not always come out exactly. '
+    + 'Share 17 oranges between 5 people '
+    + 'and each gets 3, with 2 oranges left over. '
+    + 'The 3 is called the quotient and the 2 is called the remainder. '
+    + 'Written out: 17 is 5 times 3, plus 2. '
+    + 'The remainder is always smaller than the number you divided by, '
+    + 'because if it were not, '
+    + 'you could still give everybody one more.',
 
   method: [
     'Identify the modulus: for a cycle, its length.',

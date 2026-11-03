@@ -141,12 +141,30 @@ teach({
     + 'from one end of it to the other '
     + 'and seeing that both angles open onto it.',
 
+  why:
+    'A mason is laying a circular platform '
+    + 'and needs a true right angle at a point on its edge, '
+    + 'with no set square big enough to reach. '
+    + 'There is a way to get one with nothing but a string. '
+    + 'Mark the two ends of a line straight through the centre, '
+    + 'join both to any point on the edge, '
+    + 'and the angle at that point is exactly 90 degrees, every time. '
+    + 'A circle forces angles to certain sizes whether you like it or not, '
+    + 'and this topic is the list of what it forces.',
+
   recap:
-    'You know that angles in a triangle add to 180 degrees, '
-    + 'that the base angles of an isosceles triangle are equal, '
-    + 'and that angles on a straight line add to 180. '
-    + 'This adds the facts that hold when the points lie on a circle, '
-    + 'and asks you to name the one you used.',
+    'Three angle facts get used on every question here, '
+    + 'so they are worth having in front of you. '
+    + 'The three angles inside any triangle add up to 180 degrees, '
+    + 'so if two of them are 50 and 60, the third is 70. '
+    + 'Angles sitting side by side on a straight line also add to 180, '
+    + 'so next to an angle of 110 there is one of 70. '
+    + 'And a triangle with two sides the same length '
+    + 'has two angles the same, the two at the bottom of those equal sides. '
+    + 'That triangle is called isosceles. '
+    + 'Watch for it here, '
+    + 'because any two radii of a circle are equal by definition, '
+    + 'so they make one every time they meet.',
 
   method: [
     'Redraw the diagram if it is crowded, keeping only what you need.',
@@ -520,12 +538,28 @@ teach({
     + 'which takes ten seconds and catches the commonest error, '
     + 'which is shading the wrong side of a bisector.',
 
+  why:
+    'A village wants a borehole that is the same distance '
+    + 'from two schools, and no more than 500 metres from the clinic. '
+    + 'There is no single spot that is the answer. '
+    + 'There is a line of spots equally far from the two schools, '
+    + 'and a circle of spots within reach of the clinic, '
+    + 'and the answer is the piece of that line inside that circle. '
+    + 'Drawing the set of all points that fit a condition, '
+    + 'accurately and with a reason, is this topic.',
+
   recap:
-    'You have used a ruler, a pair of compasses and a protractor, '
-    + 'and drawn circles and triangles. '
-    + 'This asks you to work without the protractor, '
-    + 'and introduces the idea of describing every point '
-    + 'that satisfies a condition.',
+    'A pair of compasses holds a fixed distance '
+    + 'and draws every point at that distance from where the point sits. '
+    + 'That is all a circle is: '
+    + 'every point the same distance from the centre. '
+    + 'The distance from the point to the pencil is called the radius. '
+    + 'Two things to know before starting. '
+    + 'An arc is part of a circle, drawn by swinging the compasses '
+    + 'without going all the way round. '
+    + 'And where two arcs cross, that crossing point is at a known '
+    + 'distance from both centres at once, '
+    + 'which is how every construction in this topic works.',
 
   method: [
     'Draw the given points and lines accurately, in pencil.',
@@ -917,12 +951,29 @@ teach({
     + 'and if the angle given is not between them, '
     + 'find a different pair or find the angle you need first.',
 
+  why:
+    'A surveyor stands at one corner of a three cornered plot. '
+    + 'He can measure two of the sides, 40 metres and 55 metres, '
+    + 'and the angle between them, 70 degrees. '
+    + 'He wants the third side without walking across the middle, '
+    + 'which is flooded. '
+    + 'The plot has no right angle anywhere in it, '
+    + 'so nothing he learned for right angled triangles will help. '
+    + 'Most real triangles have no right angle, '
+    + 'and this topic is what you use on them.',
+
   recap:
-    'You have used Pythagoras and the three trigonometric ratios '
-    + 'in right angled triangles. '
-    + 'This handles triangles with no right angle at all, '
-    + 'which is most of the triangles in a real survey or a bearing '
-    + 'problem.',
+    'In a triangle with a right angle in it, '
+    + 'the three sides have names taken from one of the other angles. '
+    + 'The longest side, opposite the right angle, is the hypotenuse. '
+    + 'The side across from the angle you are looking at is the opposite. '
+    + 'The one beside it is the adjacent. '
+    + 'Three ratios connect them to that angle. '
+    + 'Sine is opposite over hypotenuse. '
+    + 'Cosine is adjacent over hypotenuse. '
+    + 'Tangent is opposite over adjacent. '
+    + 'Every one of those three needs a right angle to be true, '
+    + 'which is the whole reason this topic exists.',
 
   method: [
     'Sketch the triangle and label the angles A, B, C and the sides a, b, c.',
@@ -1302,11 +1353,29 @@ teach({
     + 'and it catches nearly every bearing conversion error '
     + 'before it reaches the arithmetic.',
 
+  why:
+    'Tell a boat captain to sail north east and he can be out by miles, '
+    + 'because north east covers a wide wedge of the sea. '
+    + 'Tell him 047 degrees and there is only one direction he can take. '
+    + 'Ships, aircraft and survey teams all need a direction '
+    + 'with no argument in it, '
+    + 'and this topic is how a direction is made exact.',
+
   recap:
-    'You have used a compass direction such as north east, '
-    + 'and you have worked with angles between parallel lines. '
-    + 'This replaces the compass points with three figure bearings, '
-    + 'and uses the parallel north lines to get inside the triangle.',
+    'An angle is measured in degrees, '
+    + 'and a full turn all the way round is 360 of them. '
+    + 'A quarter turn is 90 degrees and a half turn is 180. '
+    + 'North, east, south and west are each a quarter turn apart, '
+    + 'so going clockwise from north: '
+    + 'east is 90, south is 180, west is 270. '
+    + 'One more fact gets used in nearly every question here. '
+    + 'North lines drawn at two different places point the same way, '
+    + 'so they never meet, and lines that never meet are parallel. '
+    + 'When one straight line crosses two parallel lines, '
+    + 'the two angles on opposite sides of it, inside the pair, '
+    + 'are equal. '
+    + 'That is what lets you carry an angle from one north line '
+    + 'to the next.',
 
   method: [
     'Draw a rough diagram, large, with the points in roughly the right '
@@ -1688,12 +1757,30 @@ teach({
     + 'not twice. '
     + 'Saying that explicitly in the working is worth a mark.',
 
+  why:
+    'A roofer is covering a round grain store with a conical cap '
+    + 'and needs to know how much sheeting to buy. '
+    + 'Buy by the area of the ground it covers and he will be short, '
+    + 'because the sloping surface is bigger than the circle beneath it. '
+    + 'A water tank is the same question the other way round: '
+    + 'how much will it hold. '
+    + 'Getting surface and capacity right for curved and pointed shapes '
+    + 'is this topic, and it is money either way.',
+
   recap:
-    'You have found the area of a circle and a triangle, '
-    + 'and the volume of a cuboid and a cylinder. '
-    + 'This adds the cone, the pyramid and the sphere, '
-    + 'and asks you to read carefully which height '
-    + 'and which surfaces the question means.',
+    'Area is how much flat surface something covers, '
+    + 'measured in squares. '
+    + 'A rectangle 5 by 3 covers 15 squares, so its area is 15. '
+    + 'A triangle is half of the rectangle around it, '
+    + 'so its area is half the base times the height. '
+    + 'A circle area is pi times the radius squared, '
+    + 'where the radius is the distance from the centre to the edge '
+    + 'and pi is about 3.14. '
+    + 'Volume is how much space something fills, measured in cubes. '
+    + 'A box 5 by 3 by 2 holds 30 cubes. '
+    + 'For any shape with the same cross section all the way up, '
+    + 'such as a box or a cylinder, '
+    + 'the volume is the area of that cross section times the height.',
 
   method: [
     'Name the solid, and sketch it.',
@@ -2094,11 +2181,28 @@ teach({
     + 'with and without it, '
     + 'and say what you did.',
 
+  why:
+    'Two classes both average 50 in a test. '
+    + 'In the first, every pupil scored between 48 and 52. '
+    + 'In the second, half scored 20 and half scored 80. '
+    + 'The average says those classes are the same. '
+    + 'Any teacher can see they are nothing like each other, '
+    + 'and need completely different help. '
+    + 'An average alone hides that, '
+    + 'and this topic is how the difference is measured.',
+
   recap:
-    'You have found the mean, the median and the mode, '
-    + 'and drawn bar charts from a frequency table. '
-    + 'This asks the question an average cannot answer: '
-    + 'how close together the values actually are.',
+    'An average is one number standing for a whole set of numbers, '
+    + 'and there are three of them. '
+    + 'The mean is the total divided by how many there are: '
+    + 'for 4, 6 and 8, the total is 18 and the mean is 6. '
+    + 'The median is the middle one once they are put in order, '
+    + 'which for 4, 6, 8 is 6 as well. '
+    + 'With an even count there are two in the middle, '
+    + 'so take the mean of those two. '
+    + 'The mode is the one that appears most often. '
+    + 'A frequency table is just a list of values '
+    + 'with a count of how many times each one came up.',
 
   method: [
     'Order the values if quartiles or the range are wanted.',
@@ -2505,12 +2609,28 @@ teach({
     + 'Rounding early turns an exact answer into an approximate one '
     + 'and the error grows along each path.',
 
+  why:
+    'A bag holds 3 red beads and 2 white. '
+    + 'You take one out without looking, keep it, and take another. '
+    + 'What is the chance both are red? '
+    + 'The catch is that the first bead changes the second draw: '
+    + 'take a red one out and only 2 reds are left out of 4. '
+    + 'Most mistakes in this topic are made right there, '
+    + 'and so are most of the marks.',
+
   recap:
-    'You have found simple probabilities from a die or a bag of counters, '
-    + 'and you have used the set formula '
-    + 'that subtracts the overlap when two groups are combined. '
-    + 'This adds several stages at once, '
-    + 'and the difference it makes when something is not put back.',
+    'Probability is a measure of how likely something is, '
+    + 'written as a fraction between 0 and 1. '
+    + '0 means it cannot happen and 1 means it is certain. '
+    + 'When every outcome is equally likely, '
+    + 'the probability is the number of outcomes you want '
+    + 'over the number of outcomes there are. '
+    + 'A fair die has six faces, so the chance of rolling a 4 is 1 over 6. '
+    + 'Two of the faces hold an even number above 3, namely 4 and 6, '
+    + 'so the chance of that is 2 over 6, or 1 over 3. '
+    + 'And whatever the chance of a thing happening, '
+    + 'the chance of it not happening is 1 take away that, '
+    + 'because something has to happen.',
 
   method: [
     'Count the total number of equally likely outcomes.',
