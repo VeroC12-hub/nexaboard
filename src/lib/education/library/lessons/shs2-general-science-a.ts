@@ -171,12 +171,31 @@ teach({
     + 'because an equation that looks balanced '
     + 'and is not will cost every mark that follows from it.',
 
+  why:
+    'A blacksmith weighs a bar of iron, leaves it out in the rain '
+    + 'for a month, and weighs the rust. '
+    + 'The rust is heavier than the iron was. '
+    + 'Nothing was added that anybody can see, '
+    + 'so where did the extra weight come from? '
+    + 'Nothing is ever really lost or gained in a chemical change, '
+    + 'and tracking exactly what went where is this topic.',
+
   recap:
-    'You know that a chemical change makes a new substance '
-    + 'and cannot easily be reversed, '
-    + 'and you have written word equations. '
-    + 'This replaces the words with formulas '
-    + 'and insists that the atoms be accounted for.',
+    'Matter is made of atoms, which are too small to see. '
+    + 'An atom of one kind of substance is an element, '
+    + 'and each element has a short letter code: '
+    + 'O for oxygen, H for hydrogen, Fe for iron. '
+    + 'When atoms join they make a compound, '
+    + 'written by putting the codes together with small numbers '
+    + 'for how many of each. '
+    + 'Water is two hydrogen atoms joined to one oxygen atom, '
+    + 'written H2O with the 2 small and low. '
+    + 'A chemical change is when atoms let go of each other '
+    + 'and join up differently, making a new substance. '
+    + 'Burning paper is one. '
+    + 'The atoms themselves are not destroyed. '
+    + 'They are only rearranged, and that single fact '
+    + 'is what this whole topic rests on.',
 
   method: [
     'Identify the reactants and the products.',
@@ -576,12 +595,29 @@ teach({
     + 'What it cannot give is an accurate concentration, '
     + 'and the lesson says so rather than pretending.',
 
+  why:
+    'A farmer in the Volta Region keeps getting poor maize '
+    + 'from good seed and enough rain. '
+    + 'The extension officer tests the soil and tells him to spread lime. '
+    + 'The next season the maize is fine. '
+    + 'Nothing was fed to the plants. '
+    + 'Something in the soil was cancelled out, '
+    + 'and knowing what it was, and how much lime cancels it, '
+    + 'is this topic.',
+
   recap:
-    'You know that lime juice is sour and soap is slippery, '
-    + 'and you have used litmus paper. '
-    + 'This puts a number on how acidic something is, '
-    + 'explains what the number means, '
-    + 'and shows how an acid is cancelled.',
+    'Taste a lime and it is sour. '
+    + 'Rub soap between your fingers and it is slippery. '
+    + 'Sour and slippery are the two ends of one scale. '
+    + 'The sour things are called acids: lime juice, vinegar, '
+    + 'and the juice in your own stomach. '
+    + 'The slippery ones are called bases: soap, wood ash, '
+    + 'and the lime a farmer spreads. '
+    + 'Litmus paper tells them apart. '
+    + 'It turns red in an acid and blue in a base. '
+    + 'Never taste or touch a laboratory one to find out which it is. '
+    + 'Strong ones of either kind will burn skin, '
+    + 'and the paper exists so that nobody has to.',
 
   method: [
     'Identify the acid and what it is reacting with.',
@@ -1018,12 +1054,29 @@ teach({
     + 'and it is what an examination question about household water '
     + 'is looking for.',
 
+  why:
+    'In one house a small piece of soap raises a thick lather at once. '
+    + 'In another, the same soap gives a grey scum '
+    + 'and you use half the bar to wash one shirt. '
+    + 'Same soap, same hands, different water. '
+    + 'Something is dissolved in the second one '
+    + 'that you cannot see, taste or filter out with a cloth, '
+    + 'and this topic is what it is and what to do about it.',
+
   recap:
-    'You know that air is a mixture of gases '
-    + 'and that water can be boiled to make it safe. '
-    + 'This gives the proportions, '
-    + 'explains why some water will not lather, '
-    + 'and sets out how a town treats its supply.',
+    'Air is not one thing. '
+    + 'It is a mixture of gases, '
+    + 'mostly nitrogen and oxygen, with a little of several others. '
+    + 'Only the oxygen is used in breathing and in burning. '
+    + 'Water is also rarely just water. '
+    + 'Rain falls almost pure, '
+    + 'but as it runs over ground and through rock '
+    + 'it dissolves some of what it touches, '
+    + 'and carries that along without changing colour. '
+    + 'Boiling kills the living things in water. '
+    + 'It does not take out what is dissolved in it. '
+    + 'Those are two different problems with two different answers, '
+    + 'and most of this topic is keeping them apart.',
 
   method: [
     'For air, give the figures: about 78 per cent nitrogen, 21 oxygen.',
@@ -1484,13 +1537,30 @@ teach({
     + 'fixation, nitrification, denitrification, '
     + 'evaporation, transpiration, condensation, precipitation.',
 
+  why:
+    'A farmer clears the same plot every year and burns the stalks. '
+    + 'For three seasons the yield is good. '
+    + 'By the sixth it is poor, on the same land, with the same rain. '
+    + 'Nothing was taken away except the harvest, '
+    + 'and the harvest was the point. '
+    + 'Something that was going round in a circle '
+    + 'has had a piece of the circle removed, '
+    + 'and this topic is which piece and how to put it back.',
+
   recap:
-    'You have met photosynthesis and respiration '
-    + 'as opposite processes, '
-    + 'and you know that rain comes from evaporated water. '
-    + 'This joins them into closed cycles, '
-    + 'and asks what happens when one arrow is made larger '
-    + 'than the others.',
+    'A green plant makes its own food. '
+    + 'It takes in carbon dioxide from the air and water from the soil, '
+    + 'and using the energy of sunlight it builds sugar, '
+    + 'letting out oxygen as it does so. '
+    + 'That is photosynthesis. '
+    + 'Every living thing, plants included, then breaks sugar back down '
+    + 'to release the energy stored in it, '
+    + 'taking in oxygen and giving out carbon dioxide. '
+    + 'That is respiration. '
+    + 'Read those two again and notice '
+    + 'that each one undoes the other exactly. '
+    + 'What one puts out, the other takes in. '
+    + 'That is what makes a cycle rather than a one way journey.',
 
   method: [
     'Draw a box for each store: the air, the living, the soil, the water.',
@@ -1913,13 +1983,30 @@ teach({
     + 'and a learner who says that '
     + 'has joined the two halves of the topic.',
 
+  why:
+    'A farmer plants cassava from cuttings of one good plant, '
+    + 'and every plant in the field is identical to it. '
+    + 'A disease arrives that this plant has no defence against. '
+    + 'He does not lose part of the field. '
+    + 'He loses all of it, '
+    + 'because there was only ever one plant there, copied. '
+    + 'Why seed is slower but safer, '
+    + 'and when each way is worth it, is this topic.',
+
   recap:
-    'You know that plants grow from seeds '
-    + 'and that cassava is planted from cuttings, '
-    + 'and you have met the parts of a flower. '
-    + 'This asks what the difference between those two ways of planting '
-    + 'actually is, '
-    + 'and what each one costs.',
+    'There are two ways a new plant or animal can come about. '
+    + 'In the first, two parents each give half, '
+    + 'and the young one is a mix of both and identical to neither. '
+    + 'A seed is made this way: '
+    + 'pollen from one flower reaches the egg in another. '
+    + 'In the second, one parent makes a copy of itself '
+    + 'with no second parent involved. '
+    + 'A cassava cutting is this, and so is a yam from a yam. '
+    + 'A flower is the plant organ for the first way. '
+    + 'The stamen makes the pollen. '
+    + 'The carpel holds the egg and receives pollen at its tip. '
+    + 'The petals are there to bring in the insect or bird '
+    + 'that carries pollen from one to the other.',
 
   method: [
     'Count the parents involved.',
@@ -2328,13 +2415,30 @@ teach({
     + 'are useful: alcohol in pito and in palm wine, '
     + 'and carbon dioxide to raise bread.',
 
+  why:
+    'Run hard for two minutes and your legs begin to burn, '
+    + 'then ache the next day. '
+    + 'Walk the same distance and nothing hurts at all. '
+    + 'Same muscles, same person, same food inside you. '
+    + 'The difference is whether oxygen reached the muscle '
+    + 'fast enough to keep up. '
+    + 'What carries it, how fast, and what the body does '
+    + 'when it cannot keep up, is this topic.',
+
   recap:
-    'You have met the heart as a pump and the lungs as the place '
-    + 'where air is taken in, '
-    + 'and you know that respiration releases energy from food. '
-    + 'This asks why the heart is double, '
-    + 'why a lung looks as it does, '
-    + 'and what happens when the oxygen runs out.',
+    'Every cell in the body burns food to release energy, '
+    + 'and to do it the cell needs oxygen. '
+    + 'That is respiration, and it happens in the cell itself, '
+    + 'not in the lungs. '
+    + 'So oxygen has to get from the air to every cell, '
+    + 'and the waste carbon dioxide has to come back. '
+    + 'The lungs are where air meets blood. '
+    + 'The heart is a muscular bag that squeezes, '
+    + 'pushing blood out along tubes and round the body. '
+    + 'Blood is the carrier, the vessels are the roads, '
+    + 'and the heart is the pump that keeps it moving. '
+    + 'Hold on to the fact that respiration happens in the cell, '
+    + 'because everything in this topic exists to serve it.',
 
   method: [
     'For a circulation question, start in a named chamber and go round.',
@@ -2759,10 +2863,27 @@ teach({
     + 'That is the answer to why the energy pyramid is preferred, '
     + 'and it is a question the paper sets directly.',
 
+  why:
+    'One hectare of grass feeds a good number of cattle. '
+    + 'The same hectare of grass, fed to cattle, '
+    + 'and those cattle fed to lions, '
+    + 'would support one or two lions at most. '
+    + 'And nowhere on earth is there a chain of ten animals '
+    + 'each eating the one below. '
+    + 'Something runs out as you go up, '
+    + 'and this topic is what it is and how fast it goes.',
+
   recap:
-    'You have drawn food chains and met producers and consumers. '
-    + 'This asks what happens to the energy at each step, '
-    + 'and why that answer limits how long a chain can be.',
+    'A green plant makes its own food from sunlight, '
+    + 'so it is called a producer. '
+    + 'Anything that cannot make its own food has to eat, '
+    + 'so it is called a consumer. '
+    + 'A food chain writes down who eats whom, with arrows: '
+    + 'grass, then grasshopper, then lizard, then hawk. '
+    + 'The arrow is worth a second look. '
+    + 'It points from the eaten to the eater, '
+    + 'because it is showing which way the food, '
+    + 'and so the energy in it, is travelling.',
 
   method: [
     'List the organisms of the place.',
@@ -3176,12 +3297,29 @@ teach({
     + 'when the old drug stopped working: '
     + 'the parasites that survived it had bred.',
 
+  why:
+    'A patient is given a course of antibiotics for seven days. '
+    + 'He feels well after three and stops taking them. '
+    + 'Two weeks later the illness returns, '
+    + 'and this time the same drug does not touch it. '
+    + 'He did not catch something new. '
+    + 'He changed what was already in him, '
+    + 'and understanding how is the most useful thing '
+    + 'in this topic.',
+
   recap:
-    'You know that germs cause disease '
-    + 'and that immunisation protects a child. '
-    + 'This asks how each disease actually travels, '
-    + 'what a vaccine leaves behind, '
-    + 'and why a drug that worked can stop working.',
+    'Some diseases are caused by living things small enough '
+    + 'to get inside the body, and these are called pathogens. '
+    + 'Bacteria are one kind and viruses are another, '
+    + 'and the difference matters because antibiotics kill bacteria '
+    + 'and do nothing at all to a virus. '
+    + 'The body fights them with its immune system, '
+    + 'which learns the shape of an attacker '
+    + 'and remembers it afterwards. '
+    + 'That memory is why you rarely get the same measles twice. '
+    + 'A vaccine uses it on purpose: '
+    + 'it shows the body a harmless version of the attacker '
+    + 'so that the memory is made before the real one arrives.',
 
   method: [
     'Name the pathogen and which of the four groups it belongs to.',

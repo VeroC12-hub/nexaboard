@@ -158,11 +158,30 @@ teach({
     + 'and a learner who calculates first '
     + 'almost always does.',
 
+  why:
+    'Push a loaded truck on level ground and it is very hard to start, '
+    + 'but once it is rolling a child can keep it going. '
+    + 'Everybody has felt that and almost everybody draws '
+    + 'the wrong lesson from it, '
+    + 'which is that moving things need a push to stay moving. '
+    + 'They do not. '
+    + 'Getting this one thing right explains seat belts, '
+    + 'why a tro-tro skids, and most of physics after it.',
+
   recap:
-    'You have met speed, acceleration and the forces of friction '
-    + 'and weight. '
-    + 'This asks the harder question of what a force actually does, '
-    + 'and the answer is not what experience suggests.',
+    'Speed is how far something goes in a given time. '
+    + 'A car covering 60 kilometres in one hour has a speed '
+    + 'of 60 kilometres per hour. '
+    + 'Acceleration is different. '
+    + 'It is how fast the speed itself is changing. '
+    + 'A car going from stopped to 20 metres per second in 10 seconds '
+    + 'gains 2 metres per second every second, '
+    + 'so its acceleration is 2 metres per second per second. '
+    + 'Slowing down is acceleration too, with a minus in front. '
+    + 'A force is a push or a pull. '
+    + 'Weight is one: the pull of the earth on a mass. '
+    + 'Friction is another: the rub between two surfaces, '
+    + 'always acting against the direction of sliding.',
 
   method: [
     'Draw the body on its own, detached from what touches it.',
@@ -571,11 +590,30 @@ teach({
     + 'because what matters is how fast it can lift the water, '
     + 'not how much it could lift given for ever.',
 
+  why:
+    'Hold a full bucket of water at arm length '
+    + 'and stand still for five minutes. '
+    + 'You will be shaking and exhausted. '
+    + 'In physics you have done no work at all, '
+    + 'not a single joule of it. '
+    + 'Carry the same bucket up a flight of stairs '
+    + 'and you have done a measurable amount. '
+    + 'The everyday meaning of work and the physics meaning '
+    + 'are not the same thing, and the difference loses marks '
+    + 'in every examination.',
+
   recap:
-    'You have met forces and the forms of energy, '
-    + 'and you know that energy is needed to lift a load. '
-    + 'This puts numbers on it, '
-    + 'and asks exactly when a force counts as doing work.',
+    'A force is a push or a pull, measured in newtons. '
+    + 'The weight of a one kilogram bag of sugar '
+    + 'is about 10 newtons, which is the earth pulling on it. '
+    + 'Energy is what a thing must have to make something happen, '
+    + 'and it is measured in joules. '
+    + 'It comes in forms that change into one another. '
+    + 'A stone held up has energy because of its position. '
+    + 'Let it go and that becomes energy of movement. '
+    + 'Energy is never made from nothing and never destroyed, '
+    + 'only passed on or changed into another form. '
+    + 'That rule is the one to hold on to here.',
 
   method: [
     'Identify the force and ask whether its point of application moved.',
@@ -1003,12 +1041,28 @@ teach({
     + 'and that is worth saying, '
     + 'because it is not true of most of the syllabus.',
 
+  why:
+    'One man rolls a drum of fuel up a plank into a lorry '
+    + 'that four men could barely lift. '
+    + 'The plank did not make the drum lighter. '
+    + 'Nothing about the drum changed. '
+    + 'So what exactly did the plank give him, '
+    + 'and what did it take in return? '
+    + 'Every machine makes that same bargain, '
+    + 'and this topic is the terms of it.',
+
   recap:
-    'You have used a lever, a pulley and a ramp, '
-    + 'and you know that work is force times distance. '
-    + 'This asks exactly what a machine gives you, '
-    + 'what it charges for it, '
-    + 'and why the accounts never quite balance.',
+    'A lever is a bar that turns about a fixed point, '
+    + 'like a crowbar or a pair of scissors. '
+    + 'A pulley is a wheel with a rope over it. '
+    + 'A ramp is a slope used instead of a lift. '
+    + 'All three let a small push move a big load. '
+    + 'Work, in physics, is force multiplied by the distance '
+    + 'moved along the direction of the force. '
+    + 'Push with 50 newtons through 4 metres and you do 200 joules. '
+    + 'Keep both of those in mind at once. '
+    + 'A machine changes the force and the distance, '
+    + 'but the work is what it cannot cheat.',
 
   method: [
     'Draw the machine and label the load and the effort.',
@@ -1422,12 +1476,27 @@ teach({
     + 'Explaining a flask is therefore the standard question, '
     + 'and all three transfers have to be named.',
 
+  why:
+    'A cup of tea and a bucket of water are both at 60 degrees. '
+    + 'The thermometer says they are the same. '
+    + 'Spill the cup on your arm and it hurts. '
+    + 'Fall into the bucket and you are in hospital. '
+    + 'Same temperature, nothing like the same amount of heat. '
+    + 'Temperature and heat are two different things, '
+    + 'and running them together is the commonest error in this topic.',
+
   recap:
-    'You know that heat flows from hot to cold '
-    + 'and that a thermometer measures temperature. '
-    + 'This separates the two ideas, '
-    + 'puts a figure on how much energy a substance stores, '
-    + 'and explains why water behaves as it does.',
+    'Everything is made of tiny particles that are always moving. '
+    + 'In a hot thing they move faster; in a cold thing, slower. '
+    + 'Temperature is a measure of how fast they are moving on average, '
+    + 'and a thermometer reads it in degrees Celsius. '
+    + 'Water freezes at 0 and boils at 100. '
+    + 'Heat is energy moving from a hotter thing to a colder one, '
+    + 'and it is measured in joules, not degrees. '
+    + 'Heat always travels hot to cold and never the other way '
+    + 'on its own. '
+    + 'A fridge does it the other way only by using electricity '
+    + 'to force it.',
 
   method: [
     'Decide which question is being asked: how hot, or how much energy.',
@@ -1859,12 +1928,29 @@ teach({
     + 'about three seconds for each kilometre, '
     + 'lets you work out how far away the storm is.',
 
+  why:
+    'Stand a stick in a bucket of water and look from the side. '
+    + 'It appears bent at the surface, '
+    + 'and a fish seen in a river is never quite where it looks. '
+    + 'A fisherman who aims a spear at where he sees the fish '
+    + 'will miss, every time, and the good ones know to aim below it. '
+    + 'The stick is straight and the water is still. '
+    + 'What bends is the light, and this topic is why.',
+
   recap:
-    'You have seen waves on water, '
-    + 'heard echoes, '
-    + 'and watched a stick appear to bend where it enters water. '
-    + 'This gives those an equation, '
-    + 'and explains the bending by what happens to the speed.',
+    'Drop a stone in still water and rings spread outwards. '
+    + 'The water itself does not travel to the edge: '
+    + 'a leaf floating there bobs up and down and stays put. '
+    + 'What travels is the disturbance, and that is what a wave is. '
+    + 'Three measurements describe one. '
+    + 'The wavelength is the distance from one crest to the next. '
+    + 'The frequency is how many crests pass a point each second, '
+    + 'counted in hertz. '
+    + 'The speed is how fast a crest moves along. '
+    + 'Sound is a wave, which is why it echoes '
+    + 'when it bounces off a wall and comes back. '
+    + 'Light is a wave as well, '
+    + 'and it is the one this topic mostly follows.',
 
   method: [
     'For a calculation, write v equals f times the wavelength.',
