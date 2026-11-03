@@ -44,6 +44,28 @@ teach({
     ],
   },
 
+  why:
+    'Sodium is a soft metal that catches fire when it is '
+    + 'dropped in water. '
+    + 'Potassium does the same thing, only more violently, and '
+    + 'lithium does it too. '
+    + 'Three different elements, dug out of different places, '
+    + 'behave almost identically, and nobody arranged for that. '
+    + 'Why should separate elements share a behaviour so exactly?',
+
+  notation:
+    'An element is written as a symbol of one or two letters, '
+    + 'such as Na for sodium and O for oxygen. '
+    + 'The first letter is always a capital and the second is '
+    + 'always small, so Na is sodium while NA is nothing at all. '
+    + 'In a compound the symbols are written together with small '
+    + 'low numbers, so water is H2O, said aitch two oh, and the 2 '
+    + 'counts the hydrogen atoms. '
+    + 'The number of protons in an atom is called its atomic '
+    + 'number. '
+    + 'Getting the capitals wrong is the commonest way to lose a '
+    + 'mark here.',
+
   idea:
     'An atom has a central nucleus with electrons moving round it in '
     + 'shells, and three kinds of particle between them. '
@@ -77,10 +99,18 @@ teach({
     + 'which is what a good table does.',
 
   recap:
-    'You know that elements cannot be broken into anything simpler, '
-    + 'and that compounds are elements joined. '
-    + 'This looks inside the atom '
-    + 'and explains why the elements fall into families.',
+    'Everything around you is built from a small number of '
+    + 'basic substances. '
+    + 'An element is a substance that cannot be broken down into '
+    + 'anything simpler, and iron, oxygen, carbon and gold are '
+    + 'elements. '
+    + 'A compound is two or more elements joined, so water is '
+    + 'hydrogen joined to oxygen and common salt is sodium joined '
+    + 'to chlorine. '
+    + 'There are only about ninety elements on earth, and yet '
+    + 'they make millions of compounds. '
+    + 'This lesson looks inside a single atom, which is where the '
+    + 'reason for the pattern among the elements turns out to be.',
 
   method: [
     'State the atomic number: the number of protons.',
@@ -552,6 +582,25 @@ teach({
     ],
   },
 
+  why:
+    'A tro-tro leaves Accra at six in the morning and reaches '
+    + 'Kumasi, 250 kilometres away, at half past ten. '
+    + 'Another leaves at the same time, stops twice on the road, '
+    + 'and arrives at noon. '
+    + 'Both drivers will tell you they drove fast. '
+    + 'How do you compare the two journeys with one number each, '
+    + 'so that fast stops being a matter of opinion?',
+
+  notation:
+    'Speed is written as distance divided by time, and its unit '
+    + 'is written m/s, said metres per second. '
+    + 'The slash is read as per, and per means for every, so 20 '
+    + 'm/s is twenty metres for every second. '
+    + 'The unit must match the measurements you actually used, so '
+    + 'kilometres and hours give km/h and not m/s. '
+    + 'Mixing the units, such as dividing kilometres by seconds, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Speed is how far something travels in a given time: '
     + 'distance divided by time. '
@@ -590,9 +639,18 @@ teach({
     + 'equal.',
 
   recap:
-    'You can divide and you can read a graph with two axes. '
-    + 'This connects them: '
-    + 'the slope of a distance time graph is the speed.',
+    'Dividing tells you how much there is for each one. '
+    + 'Share 60 mangoes among 12 people and each gets 5, because '
+    + '60 divided by 12 is 5. '
+    + 'A graph with two axes has one measurement along the bottom '
+    + 'and another up the side, and each point marks one pair of '
+    + 'values. '
+    + 'Put time along the bottom and distance up the side, and a '
+    + 'point then says how far something had gone by a certain '
+    + 'moment. '
+    + 'This lesson joins the two, because dividing the distance '
+    + 'by the time turns out to be the same thing as the '
+    + 'steepness of that line.',
 
   method: [
     'Write down distance, time and speed with their units.',
@@ -778,6 +836,24 @@ teach({
     ],
   },
 
+  why:
+    'A log of odum weighs far more than a nail, and yet the log '
+    + 'floats while the nail sinks. '
+    + 'Being heavy is clearly not what decides it. '
+    + 'A small stone sinks and a whole wooden canoe does not. '
+    + 'So what is it about a thing that settles whether water '
+    + 'holds it up?',
+
+  notation:
+    'Density is written as mass divided by volume, and its unit '
+    + 'is written g/cm3, said grams per cubic centimetre. '
+    + '7 grams in every cubic centimetre. '
+    + 'All parts of the unit must match the measurements used, so '
+    + 'kilograms and cubic metres give kg/m3 instead. '
+    + 'Giving a density with no unit at all is the commonest way '
+    + 'to lose a mark, because the bare number does not say which '
+    + 'scale it is on.',
+
   idea:
     'Density is mass divided by volume, '
     + 'measured in grams per cubic centimetre or kilograms per cubic metre. '
@@ -814,10 +890,17 @@ teach({
     + 'so the water it pushes out of the way has exactly its volume.',
 
   recap:
-    'You can find the volume of a box and you know mass is measured in '
-    + 'grams. '
-    + 'This divides one by the other, '
-    + 'and that single number decides whether a thing floats.',
+    'Mass is how much matter a thing contains, and a balance '
+    + 'measures it in grams or kilograms. '
+    + 'Volume is how much space the same thing takes up, measured '
+    + 'in cubic centimetres. '
+    + 'The volume of a box is length times width times height, so '
+    + 'a box 4 cm by 3 cm by 2 cm has a volume of 24 cubic '
+    + 'centimetres. '
+    + 'Those are two separate measurements of one object, and '
+    + 'neither of them tells you the other. '
+    + 'This lesson divides one by the other, and the single '
+    + 'number that comes out decides whether the thing floats.',
 
   method: [
     'Measure the mass on a balance.',
@@ -1014,6 +1097,27 @@ teach({
     ],
   },
 
+  why:
+    'A cooking pot on a coal pot gets hot at the bottom first. '
+    + 'The water inside gets hot all through, even the part '
+    + 'nowhere near the coals. '
+    + 'Stand a metre away from the coal pot and you feel the heat '
+    + 'on your face, with nothing at all touching you. '
+    + 'Three different things are happening there, so is heat '
+    + 'moving in three different ways?',
+
+  notation:
+    'Temperature is measured in degrees Celsius, written °C and '
+    + 'said degrees Celsius. '
+    + 'Heat and temperature are not the same thing and the words '
+    + 'cannot be swapped: temperature says how hot something is, '
+    + 'while heat is the energy that moves. '
+    + 'The three routes have names, conduction, convection and '
+    + 'radiation, and each name says something about how it '
+    + 'works. '
+    + 'Writing heat where the question asked for temperature is '
+    + 'the commonest way to lose a mark.',
+
   idea:
     'Heat always moves from hotter to colder, and it does it in three '
     + 'ways that differ in one thing only: whether the matter itself '
@@ -1048,9 +1152,16 @@ teach({
     + 'you put the source where the current it makes will circulate.',
 
   recap:
-    'You know heat moves from hot things to cold things. '
-    + 'This names the three ways it travels '
-    + 'and explains each from what the particles are doing.',
+    'Heat is energy moving because one thing is hotter than '
+    + 'another. '
+    + 'Put a cold spoon in hot tea and the spoon gets warm while '
+    + 'the tea cools a little. '
+    + 'The heat went from the hotter thing to the colder one, and '
+    + 'it never goes the other way by itself. '
+    + 'Once both have reached the same temperature the movement '
+    + 'stops. '
+    + 'This lesson names the three routes heat takes, and '
+    + 'explains each one by what the particles are doing.',
 
   method: [
     'State which object is hotter.',
@@ -1283,6 +1394,28 @@ teach({
     ],
   },
 
+  why:
+    'Put a straight stick into a bucket of water and it looks '
+    + 'bent at the surface, though your hand tells you it is not. '
+    + 'A coin at the bottom looks nearer the top than it really '
+    + 'is. '
+    + 'A fisherman spearing a fish has to aim at a spot where the '
+    + 'fish is not, or he misses. '
+    + 'What is happening to the light between the fish and his '
+    + 'eye?',
+
+  notation:
+    'The line drawn at right angles to a surface, at the point '
+    + 'where the light strikes it, is called the normal. '
+    + 'Every angle in this topic is measured from the normal and '
+    + 'never from the surface itself. '
+    + 'The angle between the arriving ray and the normal is the '
+    + 'angle of incidence, written i, and the angle between the '
+    + 'leaving ray and the normal is the angle of reflection, '
+    + 'written r, so the rule is written i equals r. '
+    + 'Measuring from the surface instead of from the normal is '
+    + 'the commonest way to lose a mark.',
+
   idea:
     'Light travels in straight lines, which is why shadows have edges. '
     + 'When it hits a mirror it reflects, '
@@ -1333,10 +1466,17 @@ teach({
     + 'advance.',
 
   recap:
-    'You know light travels in straight lines '
-    + 'and that a mirror reflects it. '
-    + 'This gives the law exactly, '
-    + 'and adds what happens when light enters water or glass.',
+    'Light travels in straight lines. '
+    + 'Hold a torch behind a book at night and the shadow on the '
+    + 'wall has a sharp edge, because the light that was blocked '
+    + 'could not bend round the book to fill it in. '
+    + 'A mirror sends light back instead of letting it through, '
+    + 'which is why you see yourself in it rather than through '
+    + 'it. '
+    + 'Those two facts are the whole starting point. '
+    + 'This lesson states the rule for the bouncing exactly, and '
+    + 'adds what happens when light goes into water or glass '
+    + 'instead.',
 
   method: [
     'Draw the surface and the ray arriving.',
@@ -1560,6 +1700,28 @@ teach({
     ],
   },
 
+  why:
+    'A drum and a whistle take about the same effort, but one '
+    + 'gives a deep sound and the other a piercing one. '
+    + 'Hit the drum harder and it gets louder without getting any '
+    + 'higher. '
+    + 'Blow the whistle softly and it stays just as high while '
+    + 'getting quieter. '
+    + 'Loudness and pitch can each be changed on their own, so '
+    + 'what is different about the shaking in each case?',
+
+  notation:
+    'The number of complete shakes in one second is called the '
+    + 'frequency, measured in hertz, written Hz. '
+    + 'Frequency decides pitch, so a bigger number of hertz means '
+    + 'a higher note. '
+    + 'The size of each shake is called the amplitude, and '
+    + 'amplitude decides loudness, which has its own unit, the '
+    + 'decibel, written dB. '
+    + 'Swapping frequency and amplitude is the commonest way to '
+    + 'lose a mark, so hold on to this: frequency is how often, '
+    + 'amplitude is how big.',
+
   idea:
     'Sound is produced by something vibrating, '
     + 'and it travels by pushing the particles of the material around it, '
@@ -1600,10 +1762,16 @@ teach({
     + 'and slow when they must travel before they meet, as in a gas.',
 
   recap:
-    'You know sound is made by vibrations and that it can be loud or soft, '
-    + 'high or low. '
-    + 'This connects each of those to a measurable property of the '
-    + 'vibration.',
+    'Sound is made by something shaking back and forth quickly. '
+    + 'Pluck a guitar string and you can see it blur as it '
+    + 'shakes, and that shaking is what you hear. '
+    + 'Stop the string with your finger and the sound stops at '
+    + 'once. '
+    + 'A sound can be loud or soft, and it can also be high or '
+    + 'low, and those are two separate things: a whistle is high '
+    + 'and quiet while a drum is low and loud. '
+    + 'This lesson ties each of those to something about the '
+    + 'shaking that can actually be measured.',
 
   method: [
     'Identify what is vibrating.',

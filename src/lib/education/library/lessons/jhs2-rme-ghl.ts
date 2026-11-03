@@ -51,6 +51,15 @@ teach({
     ],
   },
 
+  why:
+    'The Densu supplies water to part of Accra. '
+    + 'Along its banks people wash, dump refuse and dig sand, and '
+    + 'each one of them, taken alone, is doing almost no harm. '
+    + 'Nobody owns the river, so nobody is answerable when it '
+    + 'runs brown. '
+    + 'If a thing belongs to no one in particular, who is '
+    + 'supposed to look after it?',
+
   idea:
     'A steward is somebody left in charge of what belongs to another, '
     + 'and who must answer for it. '
@@ -90,9 +99,19 @@ teach({
     + 'which is more than most laws manage.',
 
   recap:
-    'You compared what the three faiths teach about creation, '
-    + 'and found that all of them make people caretakers. '
-    + 'This takes that duty and applies it.',
+    'A steward is somebody left in charge of what belongs to '
+    + 'another, and who must answer for how it was kept. '
+    + 'Leave your uncle in charge of your shop for a month and he '
+    + 'is a steward of it: he may use it, but he has to hand it '
+    + 'back and account for what he did. '
+    + 'All three major faiths in Ghana put the human being in '
+    + 'that position towards the earth. '
+    + 'Christianity and Islam both have God making the human '
+    + 'being a keeper of creation, and Akan traditional teaching '
+    + 'holds the land to belong to the ancestors and the unborn '
+    + 'as much as to the living. '
+    + 'So in each of them the earth is something a person answers '
+    + 'for, and this lesson is about what follows from that.',
 
   method: [
     'State the teaching and name the faith it comes from.',
@@ -310,6 +329,15 @@ teach({
     ],
   },
 
+  why:
+    'A Christian in Kumasi calls God Onyame. '
+    + 'A Muslim two streets away calls God Allah. '
+    + 'An elder pouring libation calls on Onyankopɔn, and all '
+    + 'three are certain they are addressing the one who made the '
+    + 'world. '
+    + 'Are they speaking about the same God, and how would '
+    + 'anybody settle that?',
+
   idea:
     'All three faiths taught in Ghana affirm one supreme God, '
     + 'the creator of everything that exists, '
@@ -346,9 +374,17 @@ teach({
     + 'It is a claim, and each claim does work in the faith that holds it.',
 
   recap:
-    'You compared the three creation accounts '
-    + 'and the forms of worship in each faith. '
-    + 'This compares what each one says about God.',
+    'An attribute is something true of a thing by its nature '
+    + 'rather than by accident. '
+    + 'Call a knife sharp and you have named an attribute, '
+    + 'because sharpness is what a knife is for; say it is on the '
+    + 'table and you have not. '
+    + 'When people speak about God they make statements of the '
+    + 'first kind: that God made everything, knows everything and '
+    + 'can do anything. '
+    + 'Statements like those are called the attributes of God. '
+    + 'This lesson sets side by side what each of the three major '
+    + 'faiths in Ghana says about them.',
 
   method: [
     'Name the faith and the name it uses for God.',
@@ -544,6 +580,16 @@ teach({
     ],
   },
 
+  why:
+    'A girl in a Krobo town turns sixteen and her family holds '
+    + 'dipo for her. '
+    + 'It costs money, it takes days, and nothing about her body '
+    + 'changes on the day. '
+    + 'The same week a boy in Accra turns sixteen and nothing at '
+    + 'all is held. '
+    + 'Both are adults in the eyes of the law now, so what is the '
+    + 'ceremony actually doing?',
+
   idea:
     'A rite of passage marks a person moving from one stage of life to '
     + 'another, and it does the marking in public. '
@@ -583,10 +629,18 @@ teach({
     + 'is worth making rather than just noting.',
 
   recap:
-    'You know what culture is '
-    + 'and that it is passed on by the family and the community. '
-    + 'Rites of passage are the moments where that passing on is done '
-    + 'publicly.',
+    'Culture is the whole way of life a group of people share. '
+    + 'It is the language they speak, the food they cook, how '
+    + 'they greet, what they wear to a funeral and what they hold '
+    + 'to be right. '
+    + 'Nobody is born with any of it. '
+    + 'A child picks it up by being in the family and the '
+    + 'community, watching what is done and being corrected when '
+    + 'it is done wrong. '
+    + 'So culture is handed on person to person, year after year, '
+    + 'and most of that handing on happens quietly. '
+    + 'This lesson is about the moments when it is done openly, '
+    + 'in front of everybody.',
 
   method: [
     'Name the rite and the stage it marks.',
@@ -1387,6 +1441,16 @@ teach({
     ],
   },
 
+  why:
+    'The Asantehene is announced at a durbar, and the linguist '
+    + 'does not give his name and title. '
+    + 'He calls out instead that this is the one whose coming '
+    + 'makes the ground tremble, and the crowd answers. '
+    + 'Everybody standing there already knows exactly who the man '
+    + 'is. '
+    + 'So what is the linguist adding by calling him something '
+    + 'that is not his name?',
+
   idea:
     'An appellation is a praise name or string of praise names, '
     + 'used for a chief, an ancestor, a family or a person. '
@@ -1425,9 +1489,18 @@ teach({
     + 'differently and both be right.',
 
   recap:
-    'You can address a gathering formally '
-    + 'and you know that proverbs carry weight because they are old. '
-    + 'An appellation is that principle condensed into names and images.',
+    'Addressing a gathering formally means using set words in a '
+    + 'set order, not everyday speech. '
+    + 'You greet the chief first, then the elders, then the '
+    + 'gathering, and only after that say why you stood up. '
+    + 'A proverb carries weight in such a setting for a '
+    + 'particular reason: it is old, so you did not invent it to '
+    + 'win this argument, and the people hearing it already agree '
+    + 'with it. '
+    + 'Both of those work by reaching for words that are not your '
+    + 'own. '
+    + 'An appellation is that same principle packed into a name, '
+    + 'and this lesson is about how one is built.',
 
   method: [
     'Learn it by ear, with its rhythm, not from the page alone.',
@@ -2143,6 +2216,31 @@ teach({
     ],
   },
 
+  why:
+    'You can tell a story out loud in your own language for ten '
+    + 'minutes and hold a room. '
+    + 'Asked to write that same story down for marks, you find '
+    + 'yourself thinking it in English first and then turning it '
+    + 'over. '
+    + 'What comes out is stiff, and some of it is not how anybody '
+    + 'actually speaks. '
+    + 'Why is writing the language harder than speaking it, and '
+    + 'what has to be learned on its own?',
+
+  notation:
+    'Ghanaian languages are written with the ordinary letters '
+    + 'plus a few more, and the two commonest are ɛ and ɔ. '
+    + 'The letter ɛ is called open e and sounds like the e in '
+    + 'bed, while ɔ is called open o and sounds like the o in '
+    + 'hot. '
+    + 'They are separate letters of the alphabet and not '
+    + 'decorations, and a tone mark written above a vowel does '
+    + 'similar work, telling apart two words that are otherwise '
+    + 'spelt the same. '
+    + 'Writing plain e and o where ɛ and ɔ belong is the '
+    + 'commonest way to lose a mark, because it can turn one word '
+    + 'into another one.',
+
   idea:
     'Three forms are set: a narrative, a letter, and an argument. '
     + 'Read the question first and decide which one it is asking for, '
@@ -2184,10 +2282,16 @@ teach({
     + 'and so are sentences that have come out in an English shape.',
 
   recap:
-    'You can plan an essay, write paragraphs, '
-    + 'and keep a tense consistent, from your English lessons. '
-    + 'This does the same work in your own language, '
-    + 'which has its own order, its own letters and its own resources.',
+    'An essay is planned before it is written. '
+    + 'You decide the points, put them in order, then write one '
+    + 'paragraph for each, with a paragraph holding one point. '
+    + 'Keeping a tense consistent means a story begun in the past '
+    + 'stays in the past all the way down, so you never slip from '
+    + 'he went into he goes. '
+    + 'Those habits hold in any language at all. '
+    + 'This lesson does the same work in your own language, which '
+    + 'has its own word order, its own letters and resources that '
+    + 'English does not have.',
 
   method: [
     'Read the question and decide which of the three forms it asks for.',
