@@ -205,18 +205,43 @@
    is comfortable and the material is denser. */
 .sch-read {
   min-height: 100dvh;
-  background: var(--nx-paper);
-  padding: 24px 16px 56px;
+  background: #fff;
+  padding: 0;
 }
 
+/* The lesson sheet: the whole window.
+
+   It was a 760px card floating on cream, which on a laptop is a narrow slip
+   with most of the screen left over. Asked for full width, so there is no
+   card and no cap: the lesson is the page, white to all four edges, with
+   padding alone holding the text off them.
+
+   This is a deliberate trade and worth recording. A line of prose running
+   the full width of a 1440px window is about 190 characters, roughly twice
+   the measure that reads comfortably, and the eye loses its place on the
+   return sweep. The things that soften it are all in use below: the text is
+   justified so both edges are straight, `hyphens: auto` so justification
+   breaks words instead of opening rivers of white between them, and the
+   line-height stays on the 28px measure so the lines stay distinct from
+   each other. If the full width is ever reconsidered, the one line to
+   change is `max-width` here.
+
+   Not ruled, and deliberately. The outline is cream paper with lines on it
+   and every block of it was put on the 28px measure so the writing sits on
+   the lines. A lesson carries headings, worked examples, figures and
+   tables whose heights are set by what is inside them: measured on the
+   rendered page, its blocks land 6, 9, 11 and 20 pixels into the measure
+   rather than on it. Ruling it would reproduce exactly the fault just taken
+   off the outline, a sheet printed out of register. */
 .sch-read-in {
+  --pitch: 28px;
   width: 100%;
-  max-width: 760px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   background: #fff;
-  border: 1px solid var(--nx-line);
-  border-radius: 16px;
-  padding: 30px 32px 36px;
+  border: 0;
+  border-radius: 0;
+  padding: 28px clamp(20px, 3.5vw, 56px) 56px;
   box-sizing: border-box;
 }
 
@@ -237,16 +262,61 @@
      text shouting at the same volume as its own headings. */
   font-weight: 400;
   font-size: 17px;
-  line-height: 1.78;
-  max-width: 66ch;
+  /* Was 1.78, which is 30.26px and lands nowhere. 28px is the measure the
+     rest of the product is set on. */
+  line-height: var(--pitch, 28px);
+  /* No cap: the lesson fills the window, as asked. */
+  max-width: none;
+  /* Justified, with hyphenation doing the work that a short measure would
+     otherwise do. Without `hyphens: auto` a justified line this long has to
+     stretch its word spaces to reach the right edge, and the gaps line up
+     down the paragraph as white rivers. With it, long words break and the
+     spacing stays even. `text-wrap: pretty` keeps a single word off the
+     last line of a paragraph. */
+  text-align: justify;
+  hyphens: auto;
+  text-wrap: pretty;
   color: var(--nx-ink);
 }
 
-.sch-read .nx-display { letter-spacing: -0.02em; color: var(--nx-ink); }
-.sch-read .nx-lede { color: var(--nx-ink-2); }
+/* Full width means all of it, not only the prose.
 
+   The blocks inside a lesson carry their own measures: a worked example and
+   a table wrapper stop at 62ch, the method and traps lists at 62ch, the
+   lede at 54ch, the fine print at 68ch. Those caps are right on a sheet and
+   wrong on a window: with the prose running edge to edge and a table
+   stopping at 626px, the page looked like it had been assembled from two
+   different layouts, the writing full width and everything else huddled
+   against the left with half the screen empty beside it. They are lifted
+   here only, so the teen and kid lessons keep the measures they were
+   designed with.
+
+   A `.nx-table` is already `width: 100%`, so taking the cap off its wrapper
+   is all a table needs to fill the page. */
+.sch-read .nx-worked,
+.sch-read .nx-table-wrap,
+.sch-read .nx-piece-lines,
+.sch-read .nx-lede,
+.sch-read .nx-fineprint { max-width: none; }
+
+.sch-read .nx-display { letter-spacing: -0.02em; color: var(--nx-ink); }
+/* The title is the serif and the sentence under it was the sans, which is
+   two voices in the first four lines of the page. */
+.sch-read .nx-lede {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-weight: 400;
+  line-height: var(--pitch, 28px);
+  color: var(--nx-ink-2);
+}
+
+/* Small caps in the page's serif, the same change made to the labels on the
+   outline and for the same reason: this line is the first thing under the
+   title and in monospace it read like a file path. */
 .sch-read .nx-mark {
-  font-size: 11.5px;
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-variant-caps: all-small-caps;
+  font-size: 14px;
+  line-height: var(--pitch, 28px);
   /* No longer uppercase. This class mostly carries a topic title straight
      from the syllabus, and "LETTERS STANDING FOR NUMBERS" is both harder to
      read and a worse sentence than the one that was written. Small, soft and
@@ -691,13 +761,21 @@
 /* Air between paragraphs.
 
    A lesson is read, not skimmed, and the gap between paragraphs is what
-   tells a reader that one thought has finished. 18px under a 30px line was
-   not enough to register as a break at all. */
-.sch-read .nx-lesson-p,
-.sch-read .nx-ai-p { margin-bottom: 26px; }
+   tells a reader that one thought has finished.
 
-.sch-read .nx-lesson-p:last-child,
-.sch-read .nx-ai-p:last-child { margin-bottom: 0; }
+   There was none, on any lesson in the product. The 26px was real and so
+   was the rule under it taking the gap off the last paragraph, but a
+   paragraph of a lesson is rendered one to a `.nx-block`, one block to a
+   `.nx-row`, so every paragraph is the last child of its wrapper and the
+   exemption fired on all of them. Measured on a rendered lesson, the gap
+   between consecutive paragraphs was 0px. A whole lesson ran as one slab
+   with the sentences merely stopping and starting again, which is the
+   thing a reader notices and calls a wall of text.
+
+   The gap goes on the rows, which is where it survives the wrapping: one
+   measure between one block of a lesson and the next, and nothing added
+   after the last one because there is no row after it to carry it. */
+.sch-read .nx-row + .nx-row { margin-top: var(--pitch, 28px); }
 
 /* ── working, one line at a time ───────────────────────────────────────────
 
@@ -1066,17 +1144,21 @@
    Horizontally scrollable rather than wrapped, so on a phone it stays one
    line and does not become a block of its own above the lesson. */
 
+/* What is in this lesson.
+
+   It was one nowrap row in a hidden scroller, so a lesson whose last section
+   is called "Each index law, and the logarithm law that is the same law" met
+   the edge of the sheet and was cut off mid-word, with no scrollbar to say
+   it could be dragged. A contents list that hides half its contents is worse
+   than none. It wraps now: every section is visible, and the row is as tall
+   as it needs to be. */
 .nx-contents {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  margin: 0 0 26px;
-  padding-bottom: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+  margin: 0 0 28px;
+  padding-bottom: 0;
 }
-
-.nx-contents::-webkit-scrollbar { display: none; }
 
 .nx-contents-item {
   flex: 0 0 auto;
@@ -1090,7 +1172,7 @@
   background: #fff;
   border: 1px solid var(--nx-line);
   border-radius: 999px;
-  white-space: nowrap;
+  max-width: 100%;
 }
 
 .nx-contents-item:hover { color: var(--nx-ink); border-color: var(--nx-ink-2); }
