@@ -4,6 +4,20 @@ A working brief for anybody, person or agent, picking up the backfill. It is
 self contained: a session starts from the repository alone with no memory of
 the last one.
 
+## Where this stands
+
+The three stages in scope below are finished. `creche`, `primary` and `jhs`
+each report zero lessons that are paragraphs and nothing else. Run the
+coverage script before assuming otherwise, because a stage can regress when
+new lessons land:
+
+    npx tsx scripts/coverage/visual-coverage.mts
+
+What is left in that report is `shs`, and the boundary below still holds: it
+belongs to the other routine, not to this one. If that report shows a figure
+or a table missing anywhere in creche, primary or jhs, it is a new lesson
+written since, and it is in scope.
+
 ## The problem this fixes
 
 When this was written, 462 of 508 finished lessons were paragraphs and
