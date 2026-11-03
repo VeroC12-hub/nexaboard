@@ -66,6 +66,26 @@ teach({
     ],
   },
 
+  why:
+    'A program takes a learner score out of 100 and prints the '
+    + 'grade. '
+    + 'Somebody types 7O, with the letter O in place of the zero. '
+    + 'The program adds it to the class total and prints a total '
+    + 'of nothing at all, with no error anywhere on the screen. '
+    + 'Why would a computer accept 7O as a score and then fail '
+    + 'quietly on it?',
+
+  notation:
+    'A variable is given a value with an equals sign, written '
+    + 'count = 5 and said count gets 5, or count is assigned 5. '
+    + 'That equals sign is not the one from mathematics: it does '
+    + 'not claim the two sides are equal, it puts the right side '
+    + 'into the left. '
+    + 'So count = count + 1 is a sensible line, and it means take '
+    + 'what count holds, add one, and put it back. '
+    + 'Reading that line as a claim that a number equals itself '
+    + 'plus one is the commonest way to lose a mark.',
+
   idea:
     'A variable is a named place in memory that holds one value at a time. '
     + 'Writing count takes the value 5 puts 5 into count '
@@ -119,10 +139,17 @@ teach({
     + 'has thrown marks away even when the number is right.',
 
   recap:
-    'You have used letters to stand for numbers in algebra, '
-    + 'where a letter keeps one value throughout. '
-    + 'A program variable is the same name '
-    + 'except that its value may be replaced as the program runs.',
+    'A name can stand for a value. '
+    + 'In algebra you write x equals 5, and from then on x means '
+    + '5 everywhere in that problem and does not change while you '
+    + 'work. '
+    + 'A program does something similar, with one important '
+    + 'difference: the value behind the name can be replaced '
+    + 'while the program is running. '
+    + 'Write count equals 5 and then count equals 6, and the 5 is '
+    + 'simply gone. '
+    + 'This lesson is about those names, what kinds of value each '
+    + 'is allowed to hold, and why the kind matters.',
 
   method: [
     'List every variable the problem needs, with its type.',
@@ -367,6 +394,28 @@ teach({
     ],
   },
 
+  why:
+    'A teacher has to find the average score for a class of 60. '
+    + 'She could write out the adding of 60 numbers one line at a '
+    + 'time, and next year, for 61 learners, write the whole '
+    + 'thing again. '
+    + 'The adding step is identical every time and only the '
+    + 'number changes. '
+    + 'How do you tell a machine to do one step many times '
+    + 'without writing it out many times?',
+
+  notation:
+    'A condition is written inside IF, as in IF age < 12 THEN, '
+    + 'said if age is less than twelve then. '
+    + 'The block that runs is indented underneath the IF, and '
+    + 'that indentation is what shows where the block ends, so it '
+    + 'is not decoration. '
+    + 'A loop with a known count is written FOR i = 1 TO 10, said '
+    + 'for i from one to ten, and i is called the loop counter. '
+    + 'Leaving out ELSE where a second case exists is the '
+    + 'commonest way to lose a mark, because then that case '
+    + 'silently does nothing at all.',
+
   idea:
     'A program is built from three structures and nothing else. '
     + 'Sequence means the statements run in the order written. '
@@ -422,10 +471,17 @@ teach({
     + 'and a correct table with one arithmetic slip earns most of the marks.',
 
   recap:
-    'You have followed written instructions in order, '
-    + 'and made choices from a rule, such as a bus fare that depends on age. '
-    + 'This gives those two habits a notation, and adds doing a thing again '
-    + 'until a condition is met.',
+    'Instructions followed in the order they are written get a '
+    + 'job done: wash the rice, add water, put it on the fire, '
+    + 'wait twenty minutes. '
+    + 'A rule that chooses between actions is just as familiar. '
+    + 'A tro-tro fare of 2 cedis for an adult and 1 cedi for a '
+    + 'child under twelve is a rule of that kind, because you '
+    + 'look at the age and then charge one amount or the other. '
+    + 'This lesson gives both of those habits a way of being '
+    + 'written down. '
+    + 'Then it adds a third thing, which is doing something over '
+    + 'and over until some condition is met.',
 
   method: [
     'Read the problem and decide which structure it needs.',
@@ -1029,6 +1085,27 @@ teach({
     ],
   },
 
+  why:
+    'A computer has no ink in it and no voice. '
+    + 'Every part of it is a switch that is either on or off, '
+    + 'with no third position anywhere. '
+    + 'Yet it holds your name, your photograph and a figure such '
+    + 'as 2,450. '
+    + 'How do you write down any number at all when the only two '
+    + 'things you can write are on and off?',
+
+  notation:
+    'The base is written as a small number after the value, so '
+    + '1011 in base two is said one zero one one base two, and '
+    + 'never one thousand and eleven. '
+    + 'One binary digit is called a bit, and eight of them '
+    + 'together are called a byte. '
+    + 'Hexadecimal needs sixteen digits, so after 9 it uses the '
+    + 'letters A to F, where A is 10 and F is 15. '
+    + 'Reading a binary or hex number aloud as an ordinary number '
+    + 'is the commonest way to lose a mark, so say the digits and '
+    + 'then say the base.',
+
   idea:
     'A base says how many digits there are and what the columns are worth. '
     + 'Denary, base ten, has columns 1, 10, 100, 1000. '
@@ -1093,10 +1170,17 @@ teach({
     + 'even when the arithmetic goes wrong.',
 
   recap:
-    'You have used place value in base ten since primary school: '
-    + 'the 3 in 300 is worth a hundred times the 3 in 3. '
-    + 'Binary and hexadecimal are the same idea with the columns '
-    + 'growing by 2 and by 16 instead of by 10.',
+    'Place value means a digit is worth more or less depending '
+    + 'on which column it sits in. '
+    + 'In 300 the 3 sits in the hundreds column, so it is worth '
+    + '300, while the 3 in 3 is worth only 3. '
+    + 'The columns going leftwards are 1, 10, 100, 1000, and each '
+    + 'is ten times the one on its right, which is why the system '
+    + 'is called base ten. '
+    + 'Nothing makes ten special except that people have ten '
+    + 'fingers. '
+    + 'This lesson uses that very same idea, with columns that '
+    + 'grow by 2 and by 16 instead of by 10.',
 
   method: [
     'To go from denary to binary, divide by 2 and keep the remainder.',
@@ -1356,6 +1440,28 @@ teach({
     ],
   },
 
+  why:
+    'A corn mill in a market grinds whatever is poured into it '
+    + 'and stops only when somebody switches it off. '
+    + 'If the hopper runs empty it goes on turning anyway. '
+    + 'Now think of a machine that has to carry a load across a '
+    + 'yard where people keep walking through. '
+    + 'It would have to notice them first, so what must that '
+    + 'machine have that the mill does not?',
+
+  notation:
+    'The cycle a robot runs is written as sense, decide, act, '
+    + 'and the three words are always given in that order, '
+    + 'because each one feeds the next. '
+    + 'In a block diagram the sensor is drawn on the left, the '
+    + 'controller in the middle and the actuator on the right, '
+    + 'with arrows showing which way the signal travels. '
+    + 'Those arrows carry meaning: a diagram with an arrow the '
+    + 'wrong way round describes a machine that cannot work. '
+    + 'Leaving the arrowheads off is the commonest way to lose a '
+    + 'mark, because then nothing in the diagram shows what feeds '
+    + 'what.',
+
   idea:
     'A robot is a machine that senses its surroundings, '
     + 'decides what to do from what it sensed, '
@@ -1416,11 +1522,17 @@ teach({
     + 'while a teleoperated one is driven by a person.',
 
   recap:
-    'You have met machines that do the same thing every time, '
-    + 'such as a corn mill, '
-    + 'and devices that react, such as a security light '
-    + 'that comes on when somebody walks past. '
-    + 'This gives that difference its name and its diagram.',
+    'Some machines do the same thing every time they are '
+    + 'switched on. '
+    + 'A corn mill grinds whatever is poured in, at the same '
+    + 'speed, whether the hopper is full or nearly empty, and it '
+    + 'never checks. '
+    + 'Other devices react to what is around them. '
+    + 'A security light that comes on when somebody walks past '
+    + 'has measured something first and then acted on what it '
+    + 'measured. '
+    + 'That difference is what this lesson is about, and it is '
+    + 'the difference between a machine and a robot.',
 
   method: [
     'Name what the device senses, and with what sensor.',
@@ -1983,6 +2095,31 @@ teach({
     ],
   },
 
+  why:
+    'A robot arm has to lift a sachet of water off a belt and '
+    + 'drop it in a box. '
+    + 'Give the motor current for one second and it turns a '
+    + 'certain amount; give it the same current with a heavier '
+    + 'load and it turns less. '
+    + 'The arm has to arrive in the same place every time or it '
+    + 'crushes the sachet. '
+    + 'So how do you tell a motor not simply to spin, but to turn '
+    + 'exactly ninety degrees and stop there?',
+
+  notation:
+    'A motor is rated in volts, written V, and the current it '
+    + 'draws is in amps, written A. '
+    + 'Its speed is given in revolutions per minute, written rpm '
+    + 'and said r p m. '
+    + 'How far a shaft has turned is given in degrees, so a servo '
+    + 'told to go to 90° stops with its arm a quarter turn round, '
+    + 'and that is the difference between the two devices: a '
+    + 'servo is given a position, while a plain motor is only '
+    + 'given power. '
+    + 'Giving a servo a speed instead of a position is the '
+    + 'commonest way to lose a mark, because a servo does not '
+    + 'take one.',
+
   idea:
     'An actuator is a device that turns an electrical signal '
     + 'into movement or some other physical change. '
@@ -2054,10 +2191,17 @@ teach({
     + 'A specification missing the current is not a specification.',
 
   recap:
-    'You have seen a motor turn a fan and a grinder, '
-    + 'and watched a tailor’s treadle turn a wheel. '
-    + 'This asks a narrower question: '
-    + 'not whether it turns, but whether anything knows how far it turned.',
+    'A motor turns electrical power into movement. '
+    + 'Current flows into it and the shaft spins, and that is '
+    + 'what drives a fan or a grinder. '
+    + 'The treadle of a sewing machine does the same job from a '
+    + 'foot instead of from current, because pushing it turns the '
+    + 'wheel. '
+    + 'In every one of those, something turns and that is the end '
+    + 'of it, since nothing anywhere is keeping count of how far '
+    + 'it went. '
+    + 'This lesson asks the narrower question: not whether it '
+    + 'turns, but whether anything knows how far it turned.',
 
   method: [
     'Write down the movement needed: how far, how fast, how much force.',

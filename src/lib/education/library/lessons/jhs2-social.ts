@@ -44,6 +44,15 @@ teach({
     ],
   },
 
+  why:
+    'Galamsey in the Western Region pays a young man about 100 '
+    + 'cedis a day, which is far more than farming pays him. '
+    + 'The same work turns the Ankobra brown and shuts the water '
+    + 'treatment plant downstream. '
+    + 'Everybody in the town knows both of those facts at the '
+    + 'same time. '
+    + 'So why does it carry on, and what would actually stop it?',
+
   idea:
     'Environmental degradation means the land, water or air is being '
     + 'damaged faster than it can recover. '
@@ -88,10 +97,19 @@ teach({
     + 'and the next generation, who were not consulted.',
 
   recap:
-    'You have learned that trees hold the soil '
-    + 'and that rubbish in gutters causes flooding. '
-    + 'This asks the harder question: '
-    + 'why does it keep happening when everybody knows?',
+    'Tree roots hold soil in place. '
+    + 'Clear the trees off a slope and the first heavy rain '
+    + 'carries the topsoil down into the river, which is why a '
+    + 'cleared hillside turns bare and gullied within a few '
+    + 'seasons. '
+    + 'Rubbish thrown into a gutter does similar damage by '
+    + 'another route: it blocks the gutter, so water that should '
+    + 'run away stands in the road and floods the houses beside '
+    + 'it. '
+    + 'In both cases the place is being damaged faster than it '
+    + 'can repair itself. '
+    + 'This lesson asks the harder question: why it keeps '
+    + 'happening when nobody is in any doubt about the cause.',
 
   method: [
     'Name the problem and the places it affects.',
@@ -330,6 +348,16 @@ teach({
     ],
   },
 
+  why:
+    'In 2012 an election was decided by a few hundred thousand '
+    + 'votes, and the losing side went to court. '
+    + 'The judges heard the case for months and then said the '
+    + 'winner had won. '
+    + 'The man who lost was not jailed, and the man who won did '
+    + 'not arrest him. '
+    + 'Nothing physically forced either of them to behave that '
+    + 'way, so what turned a possible fight into a settled rule?',
+
   idea:
     'Ghana’s constitution of 1992 is the supreme law, '
     + 'and any law or act that conflicts with it is void. '
@@ -364,9 +392,17 @@ teach({
     + 'is what makes it a check rather than a statement of intent.',
 
   recap:
-    'You know Ghana has a President, a Parliament and courts. '
-    + 'This says what each one is for '
-    + 'and why the country does not put all three jobs in one place.',
+    'Three different bodies each do part of the governing of '
+    + 'Ghana. '
+    + 'Parliament is a house of elected members in Accra, and its '
+    + 'work is making laws. '
+    + 'The President, with the ministers, runs the country day to '
+    + 'day and carries those laws out. '
+    + 'The courts are judges who decide what a law means and '
+    + 'whether somebody has broken it. '
+    + 'This lesson says what each of the three is for, and why '
+    + 'the country deliberately keeps the three jobs in three '
+    + 'separate pairs of hands.',
 
   method: [
     'State that the constitution is the supreme law.',
@@ -890,6 +926,15 @@ teach({
     ],
   },
 
+  why:
+    'A woman bakes bread at Madina and sells it. '
+    + 'The flour cost her money, the girl who kneads is paid a '
+    + 'wage, and the oven was rented from somebody. '
+    + 'After every one of those is paid there is money left over, '
+    + 'and it is hers to keep. '
+    + 'Nobody paid her a wage at all, so what is that last amount '
+    + 'for?',
+
   idea:
     'Production is making goods or providing services to satisfy wants. '
     + 'It needs four factors, and each of them earns its own reward. '
@@ -925,9 +970,17 @@ teach({
     + 'the fourth factor stops being vague.',
 
   recap:
-    'You know that making something needs materials, work and tools. '
-    + 'This names the four factors properly '
-    + 'and gives the reward each one earns.',
+    'Making anything takes three different kinds of input. '
+    + 'To bake bread you need materials, which are the flour, the '
+    + 'sugar and the water. '
+    + 'You need work, which is somebody kneading and watching the '
+    + 'oven. '
+    + 'And you need tools, which are the oven, the pans and the '
+    + 'room they stand in. '
+    + 'Take away any one of the three and no bread comes out. '
+    + 'This lesson names those inputs with the words an examiner '
+    + 'uses, adds a fourth that is easy to miss, and gives the '
+    + 'reward each one earns.',
 
   method: [
     'State what is being produced.',
@@ -1147,6 +1200,15 @@ teach({
     ],
   },
 
+  why:
+    'You keep 200 cedis in a box under your bed for a year, and '
+    + 'at the end of the year you still have 200 cedis. '
+    + 'Your uncle puts his 200 in a bank for the same year and '
+    + 'takes out 215. '
+    + 'The bank did not print the extra 15, and nobody made them '
+    + 'a gift of it. '
+    + 'So where did those 15 cedis come from?',
+
   idea:
     'Money is anything generally accepted in exchange for goods and '
     + 'services. '
@@ -1190,8 +1252,16 @@ teach({
     + 'because the small amount is available and the large one never is.',
 
   recap:
-    'You have used money and perhaps kept some in a box at home. '
-    + 'This explains what a bank does with it, '
+    'Money is anything people will generally accept in exchange '
+    + 'for goods. '
+    + 'A cedi note is only paper, and it works because the trader '
+    + 'is confident the next person will take it from her too. '
+    + 'Before notes, goods were exchanged directly: a farmer with '
+    + 'yams had to find a man with a goat who wanted yams, and if '
+    + 'he did not want them there was no trade. '
+    + 'Keeping cash in a box at home keeps it safe and does '
+    + 'nothing else with it. '
+    + 'This lesson is about what a bank does with money instead, '
     + 'and where interest comes from.',
 
   method: [
@@ -1397,6 +1467,15 @@ teach({
     ],
   },
 
+  why:
+    'A boy of fourteen who was easy to live with last year now '
+    + 'answers his mother sharply and shuts his door. '
+    + 'He cannot say why, and neither can she. '
+    + 'He has not decided to be difficult and nothing bad has '
+    + 'happened to him. '
+    + 'So what has changed, and is there anything to be done '
+    + 'about it?',
+
   idea:
     'Adolescence is the stage between childhood and adulthood. '
     + 'The body changes first, driven by hormones, '
@@ -1449,9 +1528,18 @@ teach({
     + 'That is not timidity. It is how anybody keeps a decision they meant.',
 
   recap:
-    'You have learned the physical changes of puberty in science. '
-    + 'This adds the emotional and social changes, '
-    + 'and looks at the decisions that come with them.',
+    'Between about ten and nineteen the body changes a great '
+    + 'deal. '
+    + 'Hormones are chemical messengers made inside the body, and '
+    + 'at this stage they are released in much larger amounts. '
+    + 'They make a boy grow taller quickly and his voice deepen, '
+    + 'and they bring a girl her first period and change the '
+    + 'shape of her body. '
+    + 'The changes do not arrive at the same age in everybody, '
+    + 'and being early or late is normal. '
+    + 'This lesson takes those bodily changes as the starting '
+    + 'point, then adds the changes in feeling and in how a '
+    + 'person stands with other people.',
 
   method: [
     'Separate the three kinds of change: physical, emotional, social.',
