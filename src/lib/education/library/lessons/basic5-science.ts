@@ -33,6 +33,16 @@ teach({
     ],
   },
 
+  why:
+    'Your mother sends you to pick the stones out of a bowl of '
+    + 'rice. '
+    + 'You can see every stone, so your fingers can do the job. '
+    + 'Then she tips a cup of salt into the pot of water by mistake. '
+    + 'The salt is gone. '
+    + 'The water still looks like water. '
+    + 'How do you get that salt back out, when there is nothing left '
+    + 'to see and nothing left to hold?',
+
   idea:
     'A mixture is two or more substances together, '
     + 'each still being itself. '
@@ -46,9 +56,13 @@ teach({
     + 'and the method follows from the answer.',
 
   recap:
-    'You know solids, liquids and gases, '
-    + 'and that heat moves things between those states. '
-    + 'Both are used here.',
+    'Everything around you is a solid, a liquid or a gas. '
+    + 'A stone is a solid, so it keeps its own shape. '
+    + 'Water is a liquid, so it takes the shape of the cup it is in. '
+    + 'Air is a gas, so it spreads out and fills the whole room. '
+    + 'Heat can move a thing from one of these to the next: ice is a '
+    + 'solid, and heat turns it into water, which is a liquid. '
+    + 'This lesson uses those three states, and it uses heat.',
 
   method: [
     'Look at the mixture and name the parts.',
@@ -230,6 +244,27 @@ teach({
     ],
   },
 
+  why:
+    'A farmer near Techiman wants to plant his maize. '
+    + 'If he plants and no rain comes for three weeks, the young '
+    + 'plants die. '
+    + 'Today the sky is clear and the sun is hot. '
+    + 'Is this the start of the dry season, or is it one dry day '
+    + 'inside the rainy season? '
+    + 'Looking up at today’s sky cannot tell him which.',
+
+  notation:
+    'Temperature is written 28 °C and said “twenty-eight degrees '
+    + 'Celsius”. '
+    + 'The small circle is the degree sign, and the C stands for '
+    + 'Celsius. '
+    + 'Rain is written in millimetres, so 12 mm is said “twelve '
+    + 'millimetres”, and it means rain that would stand 12 '
+    + 'millimetres deep in a tin. '
+    + 'Write the unit every time. '
+    + 'A bare 28 does not say whether you mean the heat or the rain, '
+    + 'and that is the commonest way to lose a mark here.',
+
   idea:
     'Weather is what the sky is doing today: hot, raining, windy. '
     + 'Climate is what it usually does in a place, '
@@ -248,9 +283,14 @@ teach({
     + 'One day is a fact. Thirty years of days is a climate.',
 
   recap:
-    'You know that Ghana’s south is wetter than its north, '
-    + 'and that this changes what grows. '
-    + 'That difference is a difference of climate, not of weather.',
+    'Rain does not fall the same way everywhere in Ghana. '
+    + 'Kumasi, in the south, gets rain in most months of the year. '
+    + 'Bolgatanga, in the north, gets almost none from November to '
+    + 'March. '
+    + 'That is why cocoa grows in the south and millet grows in the '
+    + 'north. '
+    + 'A difference that holds for many years like this is a '
+    + 'difference of climate, not a difference of weather.',
 
   method: [
     'Choose a time of day and keep to it.',
@@ -409,6 +449,15 @@ teach({
     ],
   },
 
+  why:
+    'You eat a ball of kenkey at six in the morning and you feel '
+    + 'full. '
+    + 'By ten o’clock you are hungry again, and you have had the '
+    + 'strength to walk to school and play. '
+    + 'The kenkey has gone somewhere. '
+    + 'Something out of it is now in your arms and your legs. '
+    + 'How did a lump of kenkey get inside a muscle?',
+
   idea:
     'Food goes in at the mouth and travels a long tube through the body. '
     + 'Mouth, then gullet, then stomach, then small intestine, '
@@ -429,13 +478,19 @@ teach({
     + 'you are doing the first stage for your stomach.',
 
   recap:
-    'You know that food does three jobs: energy, building and protecting. '
-    + 'This is how the body gets at those.',
+    'Food does three jobs in the body. '
+    + 'Some food gives energy, like rice, yam and bread. '
+    + 'Some food builds the body, like beans, fish and eggs. '
+    + 'Some food guards the body against illness, like oranges and '
+    + 'green leaves. '
+    + 'None of those three jobs can start while the food is still a '
+    + 'lump sitting in the bowl. '
+    + 'This lesson is how the body gets at them.',
 
   method: [
     'Follow the food in order, from the mouth to the end of the tube.',
     'At each part, say what happens to the food there.',
-    'Remember that almost all the absorbing is in the small intestine.',
+    'Almost all the absorbing is in the small intestine.',
     'Whatever cannot be broken down leaves the body as waste.',
   ],
 
@@ -602,6 +657,16 @@ teach({
     ],
   },
 
+  why:
+    'Hold your breath and count slowly. '
+    + 'Most people reach about forty and have to let go. '
+    + 'You can go a whole day with no food, and a long hot morning '
+    + 'with no water. '
+    + 'You cannot go one minute with no air. '
+    + 'So something in air is needed every minute of your life. '
+    + 'What is it, and what is the body doing with it that cannot '
+    + 'wait?',
+
   idea:
     'Air enters through the nose, travels down the windpipe '
     + 'and fills the lungs. '
@@ -621,8 +686,14 @@ teach({
     + 'the nose warms the air and traps dust before it reaches the lungs.',
 
   recap:
-    'You know that digestion takes goodness from food through a thin wall. '
-    + 'The lungs do the same job with air.',
+    'The small intestine is a long tube inside the body. '
+    + 'Its wall is very thin, and there is blood on the other side of '
+    + 'it. '
+    + 'The goodness in food passes through that thin wall into the '
+    + 'blood, and the blood carries it everywhere. '
+    + 'A thin wall with blood behind it is how the body takes '
+    + 'anything in at all. '
+    + 'The lungs do the same thing, but with air instead of food.',
 
   method: [
     'Breathe in through the nose: the air is warmed and filtered.',
@@ -792,6 +863,26 @@ teach({
     ],
   },
 
+  why:
+    'A farmer at Ejura sprays his maize to kill the grasshoppers '
+    + 'eating it. '
+    + 'The spray works and the grasshoppers die. '
+    + 'A month later the lizards and hawks that used to sit on his '
+    + 'fence are gone as well, and rats have got into his store. '
+    + 'He killed one insect and lost three other animals. '
+    + 'Why did taking out the grasshopper change animals he never '
+    + 'touched?',
+
+  notation:
+    'A food chain is written with arrows: grass → grasshopper → '
+    + 'lizard → hawk. '
+    + 'Each arrow is said “is eaten by”, so that line is read “grass '
+    + 'is eaten by the grasshopper, which is eaten by the lizard, '
+    + 'which is eaten by the hawk”. '
+    + 'The arrow points the way the food goes, from the one that is '
+    + 'eaten to the one that eats it. '
+    + 'Turning the arrows round is the commonest way to lose a mark.',
+
   idea:
     'A food chain shows what eats what. '
     + 'Grass, then grasshopper, then lizard, then hawk. '
@@ -811,9 +902,14 @@ teach({
     + 'they are never confusing again.',
 
   recap:
-    'You know that leaves make the plant’s food using light. '
-    + 'That is where every food chain starts, '
-    + 'which is why the sun is at the back of all of this.',
+    'A green leaf makes the plant’s own food. '
+    + 'It uses light from the sun, water from the roots, and a gas it '
+    + 'takes from the air. '
+    + 'No animal can do this. '
+    + 'A goat cannot stand in the sun and make food, so it has to eat '
+    + 'a plant that did. '
+    + 'That is why every food chain starts with a plant, and why the '
+    + 'sun stands behind the whole of it.',
 
   method: [
     'Find a plant to start with.',
@@ -989,6 +1085,15 @@ teach({
     ],
   },
 
+  why:
+    'At seven in the morning your shadow on the school compound is '
+    + 'longer than you are tall. '
+    + 'By noon it is a short dark patch under your feet. '
+    + 'By four o’clock it is long again, and it falls on the other '
+    + 'side. '
+    + 'Nobody moved the sun, and you did not change height. '
+    + 'So why did your own shadow change length and swap sides?',
+
   idea:
     'Light travels in straight lines. '
     + 'When something solid gets in the way, '
@@ -1008,8 +1113,14 @@ teach({
     + 'once you believe the straight lines.',
 
   recap:
-    'You know that the Earth turns and that the sun stays put. '
-    + 'That is why a shadow outdoors moves and changes length through the day.',
+    'The sun does not travel across the sky. '
+    + 'The Earth turns, once every day, and we turn round with it. '
+    + 'In the morning we face the sun from one side, at noon from '
+    + 'underneath, and in the evening from the other side. '
+    + 'So the sun seems to rise, cross over and set, while what is '
+    + 'really moving is us. '
+    + 'That turning is why a shadow outdoors moves and changes its '
+    + 'length all day.',
 
   method: [
     'Set up a light, an object and a wall in a line.',
@@ -1185,6 +1296,15 @@ teach({
     ],
   },
 
+  why:
+    'You are stirring hot soup on a coal pot with a metal spoon. '
+    + 'You stand the spoon in the pot and go to fetch salt. '
+    + 'When you come back and take hold of the spoon, it burns your '
+    + 'hand. '
+    + 'The fire never touched the handle. '
+    + 'The handle was never down in the soup. '
+    + 'So how did the heat get all the way up there?',
+
   idea:
     'Heat moves from the hotter thing to the cooler one, always. '
     + 'Put a metal spoon in hot soup and the handle warms. '
@@ -1202,14 +1322,18 @@ teach({
     + 'It is how quickly heat is leaving you.',
 
   recap:
-    'You know that heat changes ice to water and water to steam. '
-    + 'This is about how heat gets from one place to another.',
+    'Heat is what makes a thing hot. '
+    + 'Put heat into ice and it turns into water. '
+    + 'Put more heat into that water and it turns into steam. '
+    + 'So heat going into a thing changes the thing. '
+    + 'This lesson asks a different question: how does the heat get '
+    + 'from one place to another in the first place?',
 
   method: [
     'Decide which thing is hotter.',
     'Heat will move from it to the cooler thing.',
     'To move heat quickly use a conductor. To stop it use an insulator.',
-    'Remember that still air is a good insulator, '
+    'Still air is a good insulator, '
       + 'which is why loose cloth keeps you warm.',
   ],
 
@@ -1375,6 +1499,15 @@ teach({
     ],
   },
 
+  why:
+    'Two children in one house fall sick in the same week. '
+    + 'One has malaria and one has cholera. '
+    + 'Their mother boils every drop of drinking water from then on. '
+    + 'The cholera does not come back. '
+    + 'The malaria comes back anyway. '
+    + 'She did one careful thing and it saved one child only. '
+    + 'Why did the same care stop one disease and not the other?',
+
   idea:
     'Malaria is spread by the bite of an infected mosquito. '
     + 'Cholera is spread by drinking water or eating food '
@@ -1395,9 +1528,15 @@ teach({
     + 'Find the route and you find every point where it can be broken.',
 
   recap:
-    'You know that germs travel from a surface to the hand to the mouth, '
-    + 'and that mosquitoes breed in standing water. '
-    + 'Both of those are routes, and this lesson is about routes.',
+    'A germ is a living thing far too small to see. '
+    + 'Touch a dirty table, then put your fingers in your mouth, and '
+    + 'the germs from that table are now inside you. '
+    + 'Table, then hand, then mouth: that path is called a route. '
+    + 'A mosquito has a route of its own. '
+    + 'It lays eggs in standing water, the young grow in that water, '
+    + 'and the grown mosquito flies out and bites. '
+    + 'Every disease travels along a route like these, and routes are '
+    + 'what this lesson is about.',
 
   method: [
     'Name the disease.',
@@ -1592,6 +1731,15 @@ teach({
     ],
   },
 
+  why:
+    'You fetch water from the stream and it comes up brown. '
+    + 'You pour it through a clean cloth and now it looks as clear as '
+    + 'sachet water. '
+    + 'Your small brother wants to drink it. '
+    + 'It looks exactly as clean as the water you buy. '
+    + 'How can you tell whether clear water is safe to drink, when '
+    + 'the thing that makes people ill cannot be seen at all?',
+
   idea:
     'Water becomes unsafe when waste, animals or run off get into it. '
     + 'The danger is germs, and germs cannot be seen. '
@@ -1609,9 +1757,15 @@ teach({
     + 'strain so the water is clear, then boil so it is safe.',
 
   recap:
-    'You know that filtering separates a solid from a liquid, '
-    + 'and you know how cholera travels. '
-    + 'This lesson sits exactly where those two meet.',
+    'Filtering means pouring a mixture through cloth or paper. '
+    + 'The liquid runs through and the solid pieces stay behind, so '
+    + 'the sand is caught and the water comes out clear. '
+    + 'Cholera travels a different way. '
+    + 'Human waste gets into water, a person drinks that water, and '
+    + 'the germs go into them. '
+    + 'Filtering catches the sand. '
+    + 'It does not catch the cholera germ, and the gap between those '
+    + 'two is what this lesson is about.',
 
   method: [
     'Let the water settle, or strain it through clean cloth.',
@@ -1804,6 +1958,16 @@ teach({
     ],
   },
 
+  why:
+    'Two farmers in one village plant tomatoes on the same day, on '
+    + 'plots side by side. '
+    + 'After the rains, one plot gives basket after basket. '
+    + 'The other gives thin yellow plants and almost no fruit. '
+    + 'Same seed, same seller, same rain, same sun. '
+    + 'The only thing that differs is the ground they stand in. '
+    + 'What is different about that ground, and how would you find '
+    + 'out before you plant?',
+
   idea:
     'Soil is more than dirt. '
     + 'It holds water, it holds air, and it holds the substances a plant '
@@ -1825,9 +1989,15 @@ teach({
     + 'extras.',
 
   recap:
-    'You know that roots drink and hold the plant down, '
-    + 'and that plants make their food in the leaves using light. '
-    + 'What they draw from soil is water and the substances in it.',
+    'A plant has roots down under the ground. '
+    + 'The roots do two jobs. '
+    + 'They hold the plant so the wind cannot push it over, and they '
+    + 'drink water. '
+    + 'The leaves do a different job: they make the plant’s food, '
+    + 'using light from the sun. '
+    + 'So a plant gets its food from above and its water from below. '
+    + 'What the roots pull out of soil is water, and the substances '
+    + 'dissolved in that water.',
 
   method: [
     'Take a handful of soil and wet it slightly.',
