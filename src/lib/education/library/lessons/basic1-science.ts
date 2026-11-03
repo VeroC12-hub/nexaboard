@@ -32,6 +32,13 @@ teach({
     ],
   },
 
+  why:
+    'A toy car moves when you push it. '
+    + 'A mango tree never moves at all. '
+    + 'One of the two is alive. '
+    + 'It is not the one that moves. '
+    + 'How can that be?',
+
   idea:
     'Some things are alive and some are not. A goat is alive. A stone is not. '
     + 'A mango tree is alive, and so is the mango on it. To know which, you do '
@@ -51,10 +58,13 @@ teach({
     + 'Nothing does one without the others.',
 
   recap:
-    'You know lots of animals and plants already. '
-    + 'Name three animals near your house. '
-    + 'Now name three plants. '
-    + 'Keep them in your head.',
+    'A goat is a thing. A stone is a thing. A mango tree is a thing. '
+    + 'Some things in the world feed and grow. '
+    + 'A goat eats grass and gets bigger. '
+    + 'A mango tree takes in water and gets taller. '
+    + 'Other things do neither. '
+    + 'A stone stays the same stone for years. '
+    + 'Today you learn how to tell those two apart.',
 
   method: [
     'Ask: does it grow bigger by itself?',
@@ -214,6 +224,13 @@ teach({
     ],
   },
 
+  why:
+    'Your friend ate with the same hands you did, '
+    + 'from the same bowl. '
+    + 'Two days later he is ill and you are not. '
+    + 'Nothing on his hands looked dirty. '
+    + 'What was on them?',
+
   idea:
     'Germs are too small to see. They sit on your hands after you touch '
     + 'things, and they go into you when your hand touches your food or your '
@@ -234,10 +251,13 @@ teach({
     + 'And the germs go with it.',
 
   recap:
-    'You cannot see germs. '
-    + 'Hands can look clean and still carry them. '
-    + 'So the rule is not about how dirty they look. '
-    + 'It is about when you wash.',
+    'Soap is not the same as water. '
+    + 'Water alone just slides over your skin. '
+    + 'Soap holds on to the oil on your skin and lifts it off. '
+    + 'Whatever was stuck in that oil comes away too. '
+    + 'So washing with soap takes off more than rinsing does. '
+    + 'Your hands can look clean '
+    + 'and still carry things you cannot see.',
 
   method: [
     'Wet your hands.',

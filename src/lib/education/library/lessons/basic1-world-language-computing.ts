@@ -379,6 +379,14 @@ teach({
     ],
   },
 
+  why:
+    'A computer is on the table in front of you. '
+    + 'Your teacher says, use the mouse. '
+    + 'You do not know which thing on the table is the mouse. '
+    + 'You can see a screen, a box, a flat thing with keys, '
+    + 'and a small thing with a wire. '
+    + 'How do you work out which is which?',
+
   idea:
     'A computer is made of parts, and each part has one job. The monitor is '
     + 'the screen that shows you things. The keyboard is for typing. The mouse '
@@ -395,10 +403,14 @@ teach({
     + 'A printer shows. A microphone puts in.',
 
   recap:
-    'You have seen a screen before. '
-    + 'On a phone. On a television. '
-    + 'A computer screen does the same job. '
-    + 'It shows you what the machine is doing.',
+    'A machine is a thing people build to do a job. '
+    + 'A grinding mill grinds corn. '
+    + 'A sewing machine sews. '
+    + 'A computer is a machine too, '
+    + 'but it does not do just one job. '
+    + 'It can write, count, draw and play music. '
+    + 'A machine like that is built from several parts. '
+    + 'Each part does its own piece of the work.',
 
   method: [
     'Ask what the part does.',

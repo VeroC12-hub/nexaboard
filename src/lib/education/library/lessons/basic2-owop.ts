@@ -238,6 +238,15 @@ teach({
     ],
   },
 
+  why:
+    'A stranger gets off a trotro in your town '
+    + 'and asks for the clinic. '
+    + 'You know the way perfectly well. '
+    + 'But you cannot say it, '
+    + 'because you do not know which turns to name. '
+    + 'You could walk him there in five minutes. '
+    + 'How do you tell him instead of showing him?',
+
   idea:
     'Your community is the place you live. '
     + 'It is the people in it too. '
@@ -257,8 +266,13 @@ teach({
     + 'It throws away everything else.',
 
   recap:
-    'You know your own house and the way to school. Those are the first two '
-    + 'things on your map, and everything else can be placed from them.',
+    'A place can be drawn on paper. '
+    + 'Stand up high and look down on a compound '
+    + 'and the rooms become squares. '
+    + 'The path becomes a line. '
+    + 'That is how a map shows a place: from above, looking down. '
+    + 'Your house and the road to school can be drawn the same way, '
+    + 'and everything else can be put in from them.',
 
   method: [
     'Start with your own house. Put it on the paper first.',

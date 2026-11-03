@@ -1130,6 +1130,24 @@ teach({
     ],
   },
 
+  why:
+    'Your mother sends you to buy a piece of cloth 2 metres long. '
+    + 'The trader measures in centimetres '
+    + 'and says the piece is 180. '
+    + 'You cannot tell whether that is more or less '
+    + 'than what she asked for. '
+    + 'Both numbers measure the same kind of thing. '
+    + 'How do you compare 2 of one with 180 of the other?',
+
+  notation:
+    'A metre is written m. '
+    + 'A centimetre is written cm. '
+    + 'A kilogram is written kg. '
+    + 'These short forms take no full stop after them. '
+    + 'Leave a space between the number and the letters, so 5 cm. '
+    + 'The commonest mistake is leaving the unit off, '
+    + 'because 5 on its own does not say 5 of what.',
+
   idea:
     'Length is how long a thing is. '
     + 'We measure it in metres and centimetres. '
@@ -1150,9 +1168,15 @@ teach({
     + 'Not for the thing you measured.',
 
   recap:
-    'You know numbers to 1000 and what each place is worth. '
-    + 'Changing units is just times or divide by 100 or 1000. '
-    + 'The digits slide along the places.',
+    'Numbers run up to 1000, '
+    + 'and the place of a digit says what it is worth. '
+    + 'In 342 the 3 is in the hundreds place, so it is worth 300. '
+    + 'The 4 is in the tens place, so it is worth 40. '
+    + 'The 2 is in the ones place, so it is worth 2. '
+    + 'Each place to the left is ten times the one on its right. '
+    + 'Changing units uses that fact: '
+    + 'you times or divide by 100 or 1000, '
+    + 'and the digits slide along the places.',
 
   method: [
     'Decide what you are measuring: how long, how heavy, or how much it holds.',

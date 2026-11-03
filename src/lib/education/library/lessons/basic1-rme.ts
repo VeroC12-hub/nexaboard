@@ -733,6 +733,13 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Your friend says a man called Jesus started her church. '
+    + 'You ask who started the religion your grandfather follows. '
+    + 'Nobody can give you a name. '
+    + 'It has still been here longer than the church. '
+    + 'How can a religion have no one who started it?',
+
   idea:
     'Christians follow the teaching of Jesus Christ. '
     + 'Muslims follow the teaching brought by the Prophet Muhammad, '
@@ -751,8 +758,16 @@ teach({
     + 'The teaching is stored in them.',
 
   recap:
-    'You know that each faith keeps its account of creation differently, some '
-    + 'in a book and some by telling. The same difference shows up again here.',
+    'Christians, Muslims and people who follow the old Ghanaian religion '
+    + 'all teach how to live. '
+    + 'Christians read theirs in the Bible. '
+    + 'Muslims read theirs in the Quran. '
+    + 'The old religion has no book. '
+    + 'Its teaching is held by the elders. '
+    + 'They pass it on by mouth. '
+    + 'So one faith keeps its teaching on paper. '
+    + 'Another keeps it in people. '
+    + 'That difference comes up again here.',
 
   method: [
     'Name the faith.',
@@ -1264,6 +1279,14 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Two boys are given the same farm job on Saturday morning. '
+    + 'One finishes it and goes to play. '
+    + 'The other starts, stops, starts again, '
+    + 'and is still there at dark. '
+    + 'They had the same work and the same hands. '
+    + 'Why did one finish and one not?',
+
   idea:
     'Work is how things get made. It is how people are fed. '
     + 'All three faiths here speak well of honest work. '
@@ -1282,8 +1305,14 @@ teach({
     + 'That habit is the real skill. More than any one task.',
 
   recap:
-    'You have finished something hard before. '
-    + 'You felt different after. That is what this is about.',
+    'Work means doing something that takes effort. '
+    + 'Sweeping the compound is work. '
+    + 'Fetching water is work. '
+    + 'Farming is work. '
+    + 'Your schoolwork is work too. '
+    + 'Nobody is born able to do it well. '
+    + 'You get better by doing it. '
+    + 'This lesson is about why all three faiths speak well of it.',
 
   method: [
     'Start the task rather than thinking about it.',
@@ -1434,6 +1463,13 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Your brother breaks your pen on purpose. '
+    + 'You break his ruler to make it even. '
+    + 'Now he is looking for something of yours to break. '
+    + 'The pen is still broken and nothing is better. '
+    + 'How does a thing like this ever stop?',
+
   idea:
     'People who live together will quarrel. That is normal. '
     + 'The real question is what happens next. '
@@ -1451,8 +1487,13 @@ teach({
     + 'That is why it takes strength, not weakness.',
 
   recap:
-    'You can speak with respect even when you do not agree. '
-    + 'Settling a quarrel needs exactly that. From both sides.',
+    'A quarrel is when two people fall out and both are angry. '
+    + 'It happens between friends. '
+    + 'It happens in families. '
+    + 'It happens between neighbours. '
+    + 'Nobody feels well while it lasts. '
+    + 'Something has to end it, or it goes on. '
+    + 'This lesson is about one thing that can end it.',
 
   method: [
     'Cool down before you speak. Nothing is settled while you are shouting.',

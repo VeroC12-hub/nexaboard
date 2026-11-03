@@ -401,6 +401,14 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'At a funeral everybody is in cloth. '
+    + 'One woman wears cloth with black shapes stamped on it. '
+    + 'The man beside her wears cloth '
+    + 'where the pattern is in the weave. '
+    + 'The two were not made the same way. '
+    + 'How was each one made?',
+
   idea:
     'Ghana has crafts that have been made here for a very long time. Kente, '
     + 'adinkra cloth and pottery are three of them, and each one is made in '
@@ -414,8 +422,16 @@ teach({
     + 'why the patterns were kept and passed on rather than changed freely.',
 
   recap:
-    'You have seen cloth with patterns at home and at funerals and festivals. '
-    + 'Think of one you have seen and what people wore it for.',
+    'Cloth is made from thread. '
+    + 'Thread can be woven. '
+    + 'That means passing one thread over and under others '
+    + 'until a sheet is made. '
+    + 'Cloth can also be printed. '
+    + 'That means pressing a pattern on top of it after it is woven. '
+    + 'Pottery is different. '
+    + 'It is clay shaped by hand, then put in heat until it is hard. '
+    + 'Those three ways of making a thing '
+    + 'are what this lesson is about.',
 
   method: [
     'Look at the piece and ask how it was made: woven, printed or shaped?',
@@ -1126,6 +1142,13 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Somebody hits a drum and you hear it. '
+    + 'Somebody shakes an axatse and you hear something else. '
+    + 'Nobody touched your ears. '
+    + 'The sound still got to them. '
+    + 'What came across the room?',
+
   idea:
     'Instruments make sound in different ways. A drum is hit, and its skin '
     + 'shakes. A shaker like the axatse has seeds inside that knock against '
@@ -1140,8 +1163,13 @@ teach({
     + 'the same is true of a tighter string.',
 
   recap:
-    'You know that a beat is a steady pulse. Most of these instruments are '
-    + 'played to a beat, so keeping one is part of playing any of them.',
+    'A beat is a steady pulse, like the tick of a clock. '
+    + 'Tap your foot at the same speed over and over. '
+    + 'That is a beat. '
+    + 'Clap along with your foot '
+    + 'and you are playing to the beat. '
+    + 'Most of these instruments are played to a beat. '
+    + 'So keeping one is part of playing any of them.',
 
   method: [
     'Ask how the sound is made: hit, shaken, blown or plucked.',
