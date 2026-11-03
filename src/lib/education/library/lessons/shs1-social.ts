@@ -67,6 +67,33 @@ teach({
     ],
   },
 
+  why:
+    'Two farmers, one at Axim and one at Bawku, '
+    + 'plant maize on the same day in April. '
+    + 'The one at Axim harvests, replants in September, '
+    + 'and harvests again. '
+    + 'The one at Bawku gets one harvest a year, '
+    + 'and spends December to February watching a dry dusty wind '
+    + 'strip the topsoil off his field. '
+    + 'Neither man is the better farmer. '
+    + 'Something about the land and the sky above it decided that, '
+    + 'and it can be set down in figures. '
+    + 'What are those figures, '
+    + 'and how do they decide how people live in each part of Ghana?',
+
+  notation:
+    'A height is written in metres above sea level, '
+    + 'so 885 m means 885 metres higher than the sea, '
+    + 'not a hill 885 metres tall. '
+    + 'Rainfall is written in millimetres a year, '
+    + 'so 2000 mm is the depth the year’s rain would stand '
+    + 'if none of it ran off or dried up. '
+    + 'A place is given as latitude first, then longitude, '
+    + 'so Accra is about 5 degrees north, 0 degrees west. '
+    + 'Giving a rainfall figure with no period attached, '
+    + 'so that nobody can tell a year from a month, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Ghana is a low lying country. '
     + 'About half of it is under 150 m above sea level, '
@@ -159,10 +186,20 @@ teach({
     + 'from one who knows the shape of the argument only.',
 
   recap:
-    'You know the regions of Ghana and that the north is drier than the '
-    + 'south. '
-    + 'This gives the figures behind that, '
-    + 'and asks you to explain how people live from the land they have.',
+    'Ghana is a block of land on the coast of West Africa, '
+    + 'with the sea along the whole of its southern edge '
+    + 'and dry country away to the north. '
+    + 'It is about 670 kilometres '
+    + 'from the coast at Takoradi to the border at Paga. '
+    + 'Rain comes off the sea, '
+    + 'so it falls most heavily near the coast in the south west '
+    + 'and less and less as you go inland and north. '
+    + 'That is why the south west is thick forest '
+    + 'and the far north is open grass with scattered trees, '
+    + 'which anybody who has travelled that road has seen. '
+    + 'This topic puts the figures behind that change, '
+    + 'and asks how people live from the land '
+    + 'each part of the country gives them.',
 
   method: [
     'State the relief with heights and named features.',
@@ -399,6 +436,34 @@ teach({
     ],
   },
 
+  why:
+    'The Birim at Kyebi ran clear enough to drink from '
+    + 'twenty years ago. '
+    + 'It now runs the colour of milky tea, '
+    + 'and the people living beside it buy sachet water. '
+    + 'Everybody in the district knows who is digging in the river, '
+    + 'and everybody knows it is against the law. '
+    + 'The Environmental Protection Agency exists, '
+    + 'the law exists, and the river is still brown. '
+    + 'Naming the problem is the easy part. '
+    + 'Why has the thing meant to stop it not stopped it, '
+    + 'and what would?',
+
+  notation:
+    'Several bodies in this topic are given as their initials, '
+    + 'and an answer should give the full name once '
+    + 'before using them: '
+    + 'the Environmental Protection Agency, written EPA, '
+    + 'and the Minerals Commission. '
+    + 'The word galamsey is Ghanaian English '
+    + 'for small scale mining done without a licence, '
+    + 'and it is written as one word with no capital letter. '
+    + 'An area is written in hectares or square kilometres, '
+    + 'written ha and km2, '
+    + 'and one square kilometre is 100 hectares. '
+    + 'Using a body’s initials without ever giving its name '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'An environmental problem is damage to the natural world '
     + 'that makes it less useful to people and to other living things. '
@@ -500,9 +565,20 @@ teach({
     + 'about any country, and it is marked as though it were.',
 
   recap:
-    'You know that cutting trees and dumping rubbish cause harm. '
-    + 'This organises that into causes, effects and management, '
-    + 'and asks you to say why the management has not fully worked.',
+    'People take things out of the land around them '
+    + 'and put things back into it. '
+    + 'A farmer takes a crop out and burns the stalks back in. '
+    + 'A town takes water out of a river '
+    + 'and puts its waste back into the same river. '
+    + 'While what is taken is small '
+    + 'compared with what the land holds, '
+    + 'the land replaces it and nothing shows. '
+    + 'When what is taken is large, '
+    + 'or what is put back is poisonous, '
+    + 'the land cannot replace it and the damage stays. '
+    + 'Everything in this topic is an example of that second case, '
+    + 'sorted into what causes it, what it does, '
+    + 'and what is being done about it.',
 
   method: [
     'Read the question and count its parts.',
@@ -1141,6 +1217,33 @@ teach({
     ],
   },
 
+  why:
+    'A tonne of cocoa beans leaves Tema '
+    + 'and sells for a price set at an exchange in London. '
+    + 'The same beans come back into Ghana as chocolate bars '
+    + 'in a supermarket in Osu, '
+    + 'at many times the price for each kilogram. '
+    + 'Ghana grew the beans, '
+    + 'and almost all the money made after they left '
+    + 'was made somewhere else. '
+    + 'The farmer did nothing wrong and the price is not a trick. '
+    + 'Where exactly is the value added, '
+    + 'and what would Ghana have to do to keep more of it?',
+
+  notation:
+    'A quantity of a traded good is given in tonnes, written t, '
+    + 'and one tonne is 1000 kilograms. '
+    + 'A money figure has to carry its currency and its period, '
+    + 'so "4 billion dollars in 2023" is an answer '
+    + 'and "4 billion" is not. '
+    + 'The three sectors are named primary, secondary and tertiary, '
+    + 'and the order carries the meaning: '
+    + 'primary takes a resource out, secondary works on it, '
+    + 'tertiary serves people. '
+    + 'Writing a figure with no currency, '
+    + 'or naming a sector by number instead of by name, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A resource is anything in the environment '
     + 'that people can use to satisfy a want. '
@@ -1238,10 +1341,19 @@ teach({
     + 'from an answer about developing countries in general.',
 
   recap:
-    'You know Ghana produces gold and cocoa and sells them abroad. '
-    + 'This asks what form they are sold in, '
-    + 'who sets the price, '
-    + 'and what the country could do differently.',
+    'Anything in the world around people '
+    + 'that can be used to meet a want is a resource. '
+    + 'Gold in the ground at Obuasi is a resource. '
+    + 'So is the forest that cocoa grows under, '
+    + 'and so are the people themselves, with the skills they have. '
+    + 'A resource is worth little until something is done with it. '
+    + 'Cocoa beans in a sack are worth one price, '
+    + 'and the same beans turned into chocolate '
+    + 'are worth several times that. '
+    + 'Ghana sends most of what it digs up and grows '
+    + 'out of the country with very little done to it. '
+    + 'This topic asks what form each resource leaves in, '
+    + 'who sets its price, and what could be done differently.',
 
   method: [
     'Name the resource and classify it.',
@@ -1480,6 +1592,18 @@ teach({
     ],
   },
 
+  why:
+    'A boy born in Kumasi to Asante parents '
+    + 'is taken to Tokyo at six months old and raised there. '
+    + 'At eighteen he speaks Japanese, bows when he greets, '
+    + 'eats with chopsticks, and has never heard of adinkra. '
+    + 'Nothing in his body changed. '
+    + 'He looks exactly like his cousins in Kumasi. '
+    + 'So whatever made his cousins Asante and him Japanese '
+    + 'was not carried inside him at birth. '
+    + 'Where does it come from instead, '
+    + 'who passes it on, and what changes it?',
+
   idea:
     'Culture is the entire way of life of a people: '
     + 'their beliefs, values, language, customs, laws and arts, '
@@ -1589,10 +1713,20 @@ teach({
     + 'Saying people are conservative is not.',
 
   recap:
-    'You know that different peoples have different customs '
-    + 'and that children learn from their families. '
-    + 'This names the two parts of culture, '
-    + 'the agents that transmit it, '
+    'Travel from Ho to Wa and the greeting changes, '
+    + 'the staple food changes, the cloth changes, '
+    + 'and the language changes, '
+    + 'although the country is the same country. '
+    + 'None of those differences is in anybody’s body. '
+    + 'A baby is born able to learn any language at all '
+    + 'and ends up speaking the one spoken around it. '
+    + 'A child learns to greet an elder '
+    + 'the way the people around that child greet elders, '
+    + 'by watching and by being corrected. '
+    + 'So the whole of what makes a people a people '
+    + 'has to be passed from person to person, '
+    + 'and this topic names the parts of it, '
+    + 'the people who pass it on, '
     + 'and the forces that change it.',
 
   method: [
@@ -1825,6 +1959,20 @@ teach({
     ],
   },
 
+  why:
+    'A girl in form two is asked by four friends '
+    + 'to come to a party where there will be drink. '
+    + 'She does not want to go. '
+    + '"I will think about it" gets her asked again the next day, '
+    + 'and the day after. '
+    + 'On the fourth day she goes, '
+    + 'because saying no four times to four friends '
+    + 'is harder than going once. '
+    + 'She knew the right answer the whole time '
+    + 'and still ended up at the party. '
+    + 'What did she need and not have, '
+    + 'if it was not knowing the answer?',
+
   idea:
     'Adolescence is the change from child to adult. '
     + 'It begins with puberty. '
@@ -1933,9 +2081,21 @@ teach({
     + 'and the response with its reason and its named source of help.',
 
   recap:
-    'You have been taught about puberty and about saying no. '
-    + 'This asks you to analyse a particular pressure '
-    + 'and to argue a response that would stand up to being questioned.',
+    'Somewhere between about ten and sixteen, '
+    + 'the body begins changing itself '
+    + 'from a child’s into an adult’s. '
+    + 'Chemical messengers called hormones are released, '
+    + 'and they set off growth in height, '
+    + 'the development of the reproductive system, '
+    + 'and the changes in voice, hair and shape. '
+    + 'That whole change is called puberty, '
+    + 'and adolescence begins with it. '
+    + 'It is not only the body. '
+    + 'Feelings get stronger and less predictable at the same time, '
+    + 'and the opinion of friends starts to weigh more '
+    + 'than the opinion of family. '
+    + 'This topic starts from there '
+    + 'and asks what to do about the pressures that come with it.',
 
   method: [
     'Name the pressure specifically, including who applies it.',

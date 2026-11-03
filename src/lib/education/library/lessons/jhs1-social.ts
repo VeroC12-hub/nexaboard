@@ -42,6 +42,33 @@ teach({
     ],
   },
 
+  why:
+    'A lorry driver says Bolgatanga is a long way north of Accra. '
+    + 'A fisherman says Axim is far to the west. '
+    + 'Both are right, and neither is any use '
+    + 'to somebody drawing a map. '
+    + '"North of Accra" means something '
+    + 'only to a person who knows where Accra is. '
+    + 'A ship coming from Brazil has to be given a position '
+    + 'that works for a captain who has never heard of Accra. '
+    + 'How do you say where a place is, '
+    + 'in a way that means the same thing to everybody in the world?',
+
+  notation:
+    'A position is given as two figures. '
+    + 'Latitude comes first. '
+    + 'It says how far north or south of the equator a place is, '
+    + 'so 5 degrees north means five degrees up from the equator. '
+    + 'Longitude comes second. '
+    + 'It says how far east or west of the line through Greenwich, '
+    + 'which is 0 degrees. '
+    + 'Each figure carries a small raised circle for degrees '
+    + 'and a letter for the direction, '
+    + 'as in 5 degrees north, 0 degrees west. '
+    + 'Putting longitude first, or leaving off the letter '
+    + 'so nobody can tell north from south, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Ghana sits in West Africa, on the coast of the Gulf of Guinea. '
     + 'Côte d’Ivoire is to the west, Burkina Faso to the north, '
@@ -67,9 +94,18 @@ teach({
     + 'and the climate is the reason the farming lesson works.',
 
   recap:
-    'You have named Ghana’s regions and its neighbours before. '
-    + 'What is added here is position by latitude and longitude, '
-    + 'and relief, which means the shape and height of the land.',
+    'Ghana is a country on the west coast of Africa. '
+    + 'The sea lies along the whole of its southern edge, '
+    + 'which is why Tema and Takoradi are ports. '
+    + 'Three countries touch it on land: '
+    + 'Côte d’Ivoire on the west, Burkina Faso on the north, '
+    + 'and Togo on the east. '
+    + 'Inside the country there are 16 regions, '
+    + 'and the biggest river is the Volta, '
+    + 'held back at Akosombo to make Lake Volta. '
+    + 'This topic adds two things to that: '
+    + 'a way of giving a position in figures, '
+    + 'and the shape and height of the land, which is called relief.',
 
   method: [
     'Give the position by neighbours: west, north, east and south.',
@@ -269,6 +305,32 @@ teach({
     ],
   },
 
+  why:
+    'A farmer in Wa plants once a year. '
+    + 'A farmer in Enchi plants twice. '
+    + 'They grow the same crop and neither of them chose this. '
+    + 'Ask either man why '
+    + 'and he will say that is how the rain comes here. '
+    + 'But the rain is not made in Wa or in Enchi. '
+    + 'One thing moving across the whole of West Africa '
+    + 'gives one of them two rainy seasons and the other one. '
+    + 'What is moving, '
+    + 'and why does it reach one place twice and the other once?',
+
+  notation:
+    'Rainfall is measured in millimetres, written mm. '
+    + 'It is the depth the rain would stand '
+    + 'if none of it ran away or dried up, '
+    + 'so 150 mm is said "a hundred and fifty millimetres". '
+    + 'Temperature is written 28 degrees C '
+    + 'and said "twenty-eight degrees Celsius". '
+    + 'A climate graph shows both at once: '
+    + 'bars for the rainfall, read against the left hand scale, '
+    + 'and a line for the temperature, '
+    + 'read against the right hand one. '
+    + 'Reading the rainfall bars against the temperature scale '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Ghana has two seasons, wet and dry, because a belt of rain moves '
     + 'north and south across West Africa during the year. '
@@ -305,9 +367,19 @@ teach({
     + 'which is why irrigation and dams matter more there.',
 
   recap:
-    'You know Ghana has a wet season and a dry season, '
-    + 'and that cocoa grows in the south. '
-    + 'This explains the cause of both, which is one moving belt of rain.',
+    'In Ghana the year is not split into hot and cold. '
+    + 'It is split by rain. '
+    + 'For some months rain comes almost every day '
+    + 'and the ground stays wet, '
+    + 'and that stretch is called the rainy season. '
+    + 'For other months almost no rain falls, '
+    + 'the grass goes brown and the dust rises, '
+    + 'and that is the dry season. '
+    + 'A farmer plants when the rains begin, '
+    + 'because a seed needs water to start. '
+    + 'This topic explains what makes the rain come and go, '
+    + 'and why the pattern in the north '
+    + 'is not the pattern in the south.',
 
   method: [
     'Say where the rain belt is at that time of year.',
@@ -516,6 +588,31 @@ teach({
     ],
   },
 
+  why:
+    'A cocoa farmer near Suhum sells his beans '
+    + 'for a price fixed for the whole country. '
+    + 'A bar of chocolate in a shop in Accra '
+    + 'costs more for each kilogram than he was paid '
+    + 'for the beans inside it, '
+    + 'and that bar was made in Europe out of Ghanaian beans. '
+    + 'The farmer did the growing, the drying and the carrying. '
+    + 'Somebody else did the last step and kept most of the money. '
+    + 'Which step is the one where the money is made, '
+    + 'and what is stopping Ghana from doing it?',
+
+  notation:
+    'A weight of a traded good is given in tonnes, written t, '
+    + 'and one tonne is 1000 kilograms. '
+    + 'A money figure means nothing without its currency and its year, '
+    + 'so "2 billion dollars in 2023" is an answer '
+    + 'and "2 billion" is not. '
+    + 'Raw means a resource sold as it came out of the ground '
+    + 'or off the tree, '
+    + 'and processed means work has been done on it, '
+    + 'and those two words are the whole of this topic. '
+    + 'Giving a figure without saying cedis or dollars '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A resource is anything from the land, the water or the people that '
     + 'can be used to meet a need. '
@@ -549,9 +646,19 @@ teach({
     + 'One is income. The other is an economy.',
 
   recap:
-    'You have named Ghana’s resources and where they are found. '
-    + 'This asks the harder question: how much of their value does Ghana '
-    + 'actually keep?',
+    'A resource is anything a country can use to meet a need. '
+    + 'Some come out of the ground, '
+    + 'like gold at Obuasi and oil from the sea off Takoradi. '
+    + 'Some grow, like cocoa in the forest '
+    + 'and the fish in Lake Volta. '
+    + 'The people themselves are a resource too, '
+    + 'because nothing is dug up or grown '
+    + 'without somebody to do it. '
+    + 'A resource on its own is worth little: '
+    + 'gold in rock is worth nothing '
+    + 'until it is dug, washed and melted. '
+    + 'This topic asks how much of that work Ghana does '
+    + 'on its own resources before they leave.',
 
   method: [
     'Name the resource.',
@@ -779,6 +886,32 @@ teach({
     ],
   },
 
+  why:
+    'A man in Takoradi dies suddenly, '
+    + 'leaving a wife, two children, '
+    + 'and a brother in Tarkwa. '
+    + 'His wife expects the house to pass to her children. '
+    + 'His mother’s family expects it to pass to his sister’s son. '
+    + 'Both sides are following what they were taught is right, '
+    + 'and both are certain. '
+    + 'Nobody is being wicked. '
+    + 'Two different ways of counting who belongs to a family '
+    + 'have met in one house. '
+    + 'What are those two ways, '
+    + 'and what does each one say about who inherits?',
+
+  notation:
+    'A family is drawn as a family tree, '
+    + 'and the drawing has rules. '
+    + 'A man is a square and a woman is a circle. '
+    + 'A marriage is a short line joining the two of them. '
+    + 'Children hang on a line dropped below that join, '
+    + 'with the oldest on the left. '
+    + 'The person the tree is drawn about is marked with an arrow. '
+    + 'Drawing a child on the same level as its parents, '
+    + 'or joining two brothers with a marriage line, '
+    + 'is the commonest mistake.',
+
   idea:
     'A nuclear family is a father, a mother and their children. '
     + 'An extended family is that household together with grandparents, '
@@ -808,9 +941,22 @@ teach({
     + 'and no longer decide inheritance by themselves.',
 
   recap:
-    'You know what a family is and who is in yours. '
-    + 'What is added here is the difference between the nuclear and the '
-    + 'extended family, and the two systems of descent.',
+    'A family is a group of people tied together by birth, '
+    + 'by marriage, or by being taken in. '
+    + 'The smallest one is a man, a woman '
+    + 'and their children living together, '
+    + 'and that is what most people picture '
+    + 'when the word is used. '
+    + 'But a Ghanaian asked to name his family '
+    + 'will usually name far more people than that: '
+    + 'his father’s brothers, his mother’s sisters, his cousins, '
+    + 'his grandparents, people in another town '
+    + 'he sees once a year. '
+    + 'Those people count as family '
+    + 'and are called on in trouble. '
+    + 'This topic names those two different sizes of family, '
+    + 'and sets out the two ways Ghanaians count '
+    + 'which family a child belongs to.',
 
   method: [
     'State who is in a nuclear family.',
@@ -1035,6 +1181,21 @@ teach({
     ],
   },
 
+  why:
+    'A child of five in Ho already knows '
+    + 'to take a gift with the right hand, '
+    + 'to answer an elder with both feet still, '
+    + 'and which day the drums are not beaten. '
+    + 'Nobody sat that child down '
+    + 'and taught any of it as a lesson. '
+    + 'Another child of five in another country '
+    + 'does none of those things, '
+    + 'and would not know she had done anything wrong. '
+    + 'Neither child chose, '
+    + 'and neither was taught on purpose. '
+    + 'How does all of that get into a child, '
+    + 'and who put it there?',
+
   idea:
     'Culture is the way of life of a people. '
     + 'It has a material side, which you can touch: '
@@ -1064,8 +1225,18 @@ teach({
     + 'little different.',
 
   recap:
-    'You have learned about festivals, food and dress in your area. '
-    + 'This gathers all of that under one word, culture, '
+    'Go to a funeral in Kumasi and the cloth is red and black. '
+    + 'Go to one among the Ga in Accra '
+    + 'and the custom is not the same. '
+    + 'The food changes from fufu to banku to tuo zaafi '
+    + 'as you travel, '
+    + 'and the greeting changes with it. '
+    + 'None of those differences is an accident, '
+    + 'and none of them is in anybody’s body. '
+    + 'Each one is something a group of people does, '
+    + 'has done for a long time, '
+    + 'and passes on to its children. '
+    + 'This topic gathers all of it under one word, culture, '
     + 'and asks how it reaches each new child.',
 
   method: [
