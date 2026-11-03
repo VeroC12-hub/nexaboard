@@ -1146,6 +1146,79 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'A small flow chart for an idiom. At the top, a box reading an '
+      + 'idiom in the passage leads down to a question: is there an idiom '
+      + 'in the other language that means the same? Two arrows lead to two '
+      + 'green boxes. Yes: use it, because an idiom is best matched by an '
+      + 'idiom. No: state the meaning in plain words. A line in red at the '
+      + 'bottom warns against going word for word and against inventing an '
+      + 'idiom that does not exist.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">what to do with an idiom</text>'
+      + '<rect x="200" y="48" width="240" height="50" rx="6"/>'
+      + '<text x="320" y="79" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">an idiom in the passage</text>'
+      + '<line x1="320" y1="98" x2="320" y2="112"/>'
+      + '<path d="M 312 110 L 320 124 L 328 110 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="130" y="126" width="380" height="66" rx="6"/>'
+      + '<text x="320" y="154" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">is there an idiom in the other</text>'
+      + '<text x="320" y="176" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">language that means the same?</text>'
+      + '<path d="M 230 192 L 150 232" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 144 226 L 138 242 L 154 242 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<path d="M 410 192 L 490 232" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 486 242 L 502 242 L 496 226 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<rect x="20" y="246" width="250" height="86" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="145" y="272" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">yes: use it</text>'
+      + '<text x="145" y="296" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">an idiom is best</text>'
+      + '<text x="145" y="316" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">matched by an idiom</text>'
+      + '<rect x="370" y="246" width="250" height="86" rx="6" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="495" y="272" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">no: give the meaning</text>'
+      + '<text x="495" y="296" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">in plain words, and say</text>'
+      + '<text x="495" y="316" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">what the image was</text>'
+      + '<text x="320" y="372" font-size="17" text-anchor="middle" fill="#c8433a" stroke="none">never word for word, and never invent one that does not exist</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What a translation changes, and what it keeps',
+      columns: [
+        'Part of the passage',
+        'What a translation does with it',
+      ],
+      rows: [
+        [
+          'Word order',
+          'Changed, to the natural order of the language you are '
+            + 'translating into',
+        ],
+        [
+          'Idiom and proverb',
+          'Replaced by one in the other language that means the same; '
+            + 'where none exists, the meaning stated plainly',
+        ],
+        [
+          'Names of people and places',
+          'Kept unchanged',
+        ],
+        [
+          'Register, whether formal or casual',
+          'Kept: a speech stays a speech and a story stays a story',
+        ],
+        [
+          'Tone marks and special letters',
+          'Written in full, when translating into a Ghanaian language',
+        ],
+        [
+          'The meaning',
+          'Kept exactly, with nothing added and nothing lost',
+        ],
+      ],
+      note: 'Only one row keeps the words themselves, '
+        + 'and it is the row about names.',
+    },
+  ],
+
   extension:
     'Interpreting is translation done aloud and at once, '
     + 'and it is harder for one reason: '
@@ -1227,19 +1300,10 @@ teach({
     + 'that a person’s faith and community set. '
     + 'In all three traditions taught in Ghana that means two things: '
     + 'abstaining before marriage, and faithfulness within it. '
-    + 'Christianity teaches that the body is to be honoured, '
-    + 'and that sexual union belongs in marriage. '
-    + 'Islam commands modesty. '
-    + 'It forbids zina, which is sexual relations outside marriage. '
-    + 'African Traditional Religion ties sexual conduct to the family '
-    + 'line, '
-    + 'and to obligations between families. '
-    + 'Puberty rites instruct young people in what is expected. '
-    + 'The teachings guard against real consequences. '
-    + 'Pregnancy before a person can support a child. '
-    + 'Infection passed on by sex, including HIV. '
-    + 'Schooling cut short. '
-    + 'And children born without the support of two families.',
+    + 'Each tradition gives its own reasons for that, '
+    + 'in its own words, '
+    + 'and each is guarding against consequences '
+    + 'that are concrete rather than abstract.',
 
   mechanism:
     'The honest way to teach this is to give the teaching '
@@ -1252,15 +1316,10 @@ teach({
     + 'each tradition treats it as belonging inside a permanent commitment '
     + 'because it can produce a person who will need one. '
     + 'The practical reasons point the same way '
-    + 'and can be stated without appealing to any faith. '
-    + 'A pregnancy at fifteen commonly ends schooling, '
-    + 'and the end of schooling decides work and income for decades. '
-    + 'It falls hardest on the girl, whatever anybody says about fairness, '
-    + 'and it creates a child whose first years are decided '
-    + 'by two people who were not ready. '
-    + 'An infection may be carried for years without symptoms, '
-    + 'and some cannot be cured. '
-    + 'None of that is a threat; it is arithmetic. '
+    + 'and can be stated without appealing to any faith at all. '
+    + 'They are not threats; they are arithmetic. '
+    + 'And the arithmetic falls hardest on the girl, '
+    + 'whatever anybody says about fairness. '
     + 'There is one more thing worth saying plainly, '
     + 'because the lesson is useless without it. '
     + 'A decision of this kind is not made at the moment it appears to be '
@@ -1348,6 +1407,91 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'A line running left to right for time. Early on it, a green '
+      + 'marker reads you decide here, in advance, quietly, with nobody '
+      + 'asking. Much later a second marker reads the moment it looks like '
+      + 'it is being decided, with a note that by then there is no time to '
+      + 'decide. A red arrow leads down from that second marker to a box '
+      + 'reading or the circumstances decide for you.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">when the decision is actually made</text>'
+      + '<line x1="30" y1="160" x2="602" y2="160"/>'
+      + '<path d="M 600 152 L 616 160 L 600 168 Z" fill="currentColor" stroke="none"/>'
+      + '<text x="616" y="190" font-size="14" text-anchor="end" fill="currentColor" stroke="none">time</text>'
+      + '<circle cx="140" cy="160" r="11" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="140" y="112" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">you decide here,</text>'
+      + '<text x="140" y="132" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">in advance</text>'
+      + '<text x="140" y="198" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">quietly, with</text>'
+      + '<text x="140" y="216" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">nobody asking</text>'
+      + '<circle cx="430" cy="160" r="11"/>'
+      + '<text x="430" y="112" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the moment it looks</text>'
+      + '<text x="430" y="132" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">like it is being decided</text>'
+      + '<line x1="430" y1="172" x2="430" y2="240" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 422 238 L 430 254 L 438 238 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="286" y="258" width="288" height="66" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="430" y="286" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">or the circumstances</text>'
+      + '<text x="430" y="308" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">decide for you</text>'
+      + '<text x="320" y="372" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">decide first, then stay out of the places where the choice is taken</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each tradition teaches about sexual conduct, '
+        + 'and where it teaches it',
+      columns: ['Tradition', 'What it teaches', 'Its own term or practice'],
+      rows: [
+        [
+          'Christianity',
+          'The body is to be honoured, '
+            + 'and sexual union belongs in marriage',
+          'Taught as honouring the body',
+        ],
+        [
+          'Islam',
+          'Modesty is commanded, '
+            + 'and zina, sexual relations outside marriage, is forbidden',
+          'Zina, and the command to modesty',
+        ],
+        [
+          'African Traditional Religion',
+          'Sexual conduct is tied to the family line '
+            + 'and to obligations between families',
+          'Puberty rites, where the young are instructed in what is '
+            + 'expected',
+        ],
+      ],
+      note: 'All three arrive at the same two requirements. '
+        + 'The differences are in the reasons given, '
+        + 'and a question asking you to compare wants the reasons.',
+    },
+    {
+      caption: 'What the teachings are guarding against, '
+        + 'and what each one leads to',
+      columns: ['The consequence', 'What follows from it'],
+      rows: [
+        [
+          'A pregnancy before anybody can support a child',
+          'Schooling commonly ends, and the end of schooling decides '
+            + 'work and income for decades',
+        ],
+        [
+          'A child born without the support of two families',
+          'The child’s first years are decided by two people who were '
+            + 'not ready',
+        ],
+        [
+          'An infection passed on by sex, including HIV',
+          'It may be carried for years with no symptoms, '
+            + 'and some of them cannot be cured',
+        ],
+      ],
+      note: 'Abstinence is the one course with no failure rate. '
+        + 'That is a fact about it, not a teaching about it.',
+    },
+  ],
+
   extension:
     'Each faith also teaches about marriage itself. '
     + 'The teachings on chastity belong to that teaching. '
@@ -1411,23 +1555,13 @@ teach({
   },
 
   idea:
-    'Christianity teaches that work is honourable, '
-    + 'and that a worker deserves his wages. '
-    + 'Stealing and bearing false witness are forbidden. '
-    + 'Islam honours lawful earning. '
-    + 'It commands that weights and measures be just. '
-    + 'And it forbids bribery, cheating and taking what is not yours. '
-    + 'African Traditional Religion treats dishonesty '
-    + 'as an offence against the community and the ancestors. '
-    + 'A person answers to the whole family for their conduct. '
-    + 'Corruption is using a public position for private gain. '
-    + 'It includes bribery and embezzlement. '
-    + 'It includes giving contracts to oneself or to friends. '
-    + 'And it includes charging for what should be free. '
-    + 'Its costs are large. '
-    + 'Services are not delivered. '
-    + 'Work is priced far above its value. '
-    + 'And people lose confidence in every institution.',
+    'All three faiths taught in Ghana honour honest work '
+    + 'and condemn taking what is not earned, '
+    + 'each in its own words. '
+    + 'Corruption is using a public position for private gain, '
+    + 'and it takes several forms. '
+    + 'Its costs are large, '
+    + 'and the largest of them is not the money that was taken.',
 
   mechanism:
     'Corruption is usually condemned as greed, '
@@ -1450,14 +1584,9 @@ teach({
     + 'The practical cost is worth tracing in an answer, '
     + 'because the examination asks what it costs the country. '
     + 'It is not only the money taken. '
-    + 'It is the clinic that was never staffed, '
-    + 'the teacher whose posting depended on a payment they could not '
-    + 'make, '
-    + 'the honest contractor who stopped bidding '
-    + 'because the result was decided before the tender, '
-    + 'and the citizen who no longer believes any institution will do its '
-    + 'job. '
-    + 'That last one is the most expensive, '
+    + 'Every form of it has somebody who pays and never knows it. '
+    + 'And the citizen who no longer believes '
+    + 'any institution will do its job is the most expensive of all, '
     + 'because once people expect corruption they plan around it, '
     + 'and then honest behaviour starts to look foolish. '
     + 'Which is the reason the teaching aims at the individual: '
@@ -1540,6 +1669,102 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'Money for two roads splits into two outcomes. One road is built '
+      + 'at twice the price, and a red box beside it shows that the '
+      + 'difference is taken. The second road, drawn as a red dashed box, '
+      + 'is simply not there, and beside it a red box names who pays: a '
+      + 'village with no road, who never learn they were robbed.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">theft that nobody sees happen</text>'
+      + '<rect x="14" y="150" width="140" height="74" rx="6"/>'
+      + '<text x="84" y="182" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">money for</text>'
+      + '<text x="84" y="204" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">two roads</text>'
+      + '<path d="M 154 172 L 192 112"/>'
+      + '<path d="M 186 106 L 200 100 L 196 116 Z" fill="currentColor" stroke="none"/>'
+      + '<rect x="200" y="66" width="230" height="74" rx="6"/>'
+      + '<text x="315" y="98" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">one road, built at</text>'
+      + '<text x="315" y="120" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">twice the price</text>'
+      + '<line x1="430" y1="103" x2="444" y2="103" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 442 95 L 458 103 L 442 111 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="460" y="66" width="170" height="74" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="545" y="98" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the difference</text>'
+      + '<text x="545" y="120" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">is taken</text>'
+      + '<path d="M 154 202 L 190 254" stroke="#c8433a"/>'
+      + '<path d="M 182 252 L 198 262 L 184 268 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="200" y="234" width="230" height="74" rx="6" stroke="#c8433a" stroke-width="3" stroke-dasharray="7 5"/>'
+      + '<text x="315" y="266" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">the second road,</text>'
+      + '<text x="315" y="288" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">simply not there</text>'
+      + '<line x1="430" y1="271" x2="444" y2="271" stroke="#c8433a" stroke-width="3"/>'
+      + '<path d="M 442 263 L 458 271 L 442 279 Z" fill="#c8433a" stroke="none"/>'
+      + '<rect x="460" y="234" width="170" height="74" rx="6" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="545" y="258" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">a village with</text>'
+      + '<text x="545" y="276" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">no road, who</text>'
+      + '<text x="545" y="294" font-size="14" text-anchor="middle" fill="#c8433a" stroke="none">never learn</text>'
+      + '<text x="320" y="360" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">nobody is visibly robbed, and that is what makes it durable</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What each faith teaches about work and about dishonesty',
+      columns: ['Faith', 'On work', 'On dishonesty'],
+      rows: [
+        [
+          'Christianity',
+          'Work is honourable, and a worker deserves his wages',
+          'Stealing and bearing false witness are forbidden',
+        ],
+        [
+          'Islam',
+          'Lawful earning is honoured, '
+            + 'and weights and measures must be just',
+          'Bribery, cheating and taking what is not yours are forbidden',
+        ],
+        [
+          'African Traditional Religion',
+          'A person works as a member of a family '
+            + 'and answers to the whole of it for their conduct',
+          'Dishonesty is an offence against the community '
+            + 'and the ancestors',
+        ],
+      ],
+      note: 'Three different sets of words for one position: '
+        + 'what is earned is yours, and what is not earned is not.',
+    },
+    {
+      caption: 'The forms corruption takes, and who pays for each',
+      columns: ['Form', 'What it is', 'Who pays'],
+      rows: [
+        [
+          'Bribery',
+          'Paying, or being paid, for what should be decided on merit',
+          'Everybody who met the requirement and still lost',
+        ],
+        [
+          'Embezzlement',
+          'Taking money that was allocated to a public purpose',
+          'The village with no road, who never learn they were robbed',
+        ],
+        [
+          'Nepotism',
+          'Giving contracts or postings to oneself or to friends',
+          'The honest contractor who stopped bidding, '
+            + 'and the teacher who could not pay',
+        ],
+        [
+          'Charging for what should be free',
+          'Taking a fee for a service the taxes already paid for',
+          'The person who went without it because they could not pay '
+            + 'twice',
+        ],
+      ],
+      note: 'The third column is where the marks are. '
+        + 'An answer that names the forms and not the people who pay '
+        + 'has given half of it.',
+    },
+  ],
+
   extension:
     'Ghana has institutions meant to check this: '
     + 'the Auditor General, '
@@ -1619,17 +1844,12 @@ teach({
     'Tolerance means respecting the right of others '
     + 'to hold and practise a different faith, '
     + 'while you keep your own. '
-    + 'Christianity teaches love of neighbour, '
-    + 'including those outside the community. '
-    + 'It also teaches that judgement belongs to God. '
-    + 'Islam teaches that there is no compulsion in religion. '
-    + 'It teaches that People of the Book are to be treated justly. '
-    + 'African Traditional Religion has long lived beside other faiths. '
-    + 'Its practice is tied to community duties '
-    + 'that cross religious lines. '
-    + 'In Ghana, people of different faiths share families and schools, '
-    + 'markets and funerals. '
-    + 'The practical duties are these. '
+    + 'It is not agreeing that all faiths are the same. '
+    + 'Each tradition taught in Ghana has its own reason for it, '
+    + 'drawn from inside its own teaching. '
+    + 'In Ghana people of different faiths share families and schools, '
+    + 'markets and funerals, '
+    + 'so the duties are practical ones. '
     + 'Attend the ceremonies of others. '
     + 'Do not insult what they hold sacred. '
     + 'Do not use a position to press a faith on anybody. '
@@ -1638,27 +1858,13 @@ teach({
   mechanism:
     'There are two bad arguments for tolerance '
     + 'and it is worth putting them aside before giving a good one. '
-    + 'The first says all religions are really the same, '
-    + 'which is false and insulting to everybody, '
-    + 'because they make different claims and their followers know it. '
-    + 'The second says nobody can know what is true, '
-    + 'which asks a believer to stop believing '
-    + 'as the price of being decent, '
-    + 'so it persuades nobody who is religious. '
+    + 'Both of them ask a believer to give something up, '
+    + 'which is exactly why neither persuades anybody religious. '
     + 'Tolerance does not need either. '
     + 'It only needs this: '
     + 'that you may believe somebody is wrong '
     + 'and still owe them good treatment. '
     + 'And every tradition has its own route to that, from inside. '
-    + 'For a Christian, love of neighbour is not conditional on the '
-    + 'neighbour agreeing, '
-    + 'and judgement is explicitly God’s rather than yours. '
-    + 'For a Muslim, the Qur’an states that there is no compulsion in '
-    + 'religion, '
-    + 'which settles the matter without appeal to anything outside it. '
-    + 'For a traditional believer, '
-    + 'the obligations of family and town '
-    + 'are owed to people whose religion was never the basis of them. '
     + 'This is why the lesson asks you to argue from inside your own '
     + 'tradition. '
     + 'An argument from outside religion '
@@ -1751,6 +1957,66 @@ teach({
     },
   ],
 
+  tables: [
+    {
+      caption: 'Two bad arguments for tolerance, and the one that works',
+      columns: ['The argument', 'What it asks you to accept', 'How it ends'],
+      rows: [
+        [
+          'All religions are really the same',
+          'That the differences between them do not matter',
+          'It fails. They make different claims and their followers know '
+            + 'it, so it is false and it insults everybody',
+        ],
+        [
+          'Nobody can know what is true',
+          'That no belief should be held with confidence',
+          'It fails. It asks a believer to stop believing as the price of '
+            + 'being decent, so it persuades nobody religious',
+        ],
+        [
+          'You may believe somebody is wrong '
+            + 'and still owe them good treatment',
+          'That good treatment and agreement are separate things',
+          'It holds. It asks nothing of anybody’s beliefs, '
+            + 'and every tradition reaches it from inside',
+        ],
+      ],
+      note: 'Only the third can be accepted without giving anything up, '
+        + 'which is why it is the only one worth making.',
+    },
+    {
+      caption: 'Each faith’s own route to tolerance, '
+        + 'argued from inside its own teaching',
+      columns: ['Faith', 'The teaching it argues from', 'What that settles'],
+      rows: [
+        [
+          'Christianity',
+          'Love of neighbour, including those outside the community, '
+            + 'and judgement belongs to God',
+          'Good treatment is not conditional on the neighbour agreeing, '
+            + 'and the judging was never yours to do',
+        ],
+        [
+          'Islam',
+          'There is no compulsion in religion, '
+            + 'and People of the Book are to be treated justly',
+          'The matter is settled without appeal to anything outside the '
+            + 'faith itself',
+        ],
+        [
+          'African Traditional Religion',
+          'The obligations of family and town, '
+            + 'which cross religious lines',
+          'Those duties were never owed on the basis of religion, '
+            + 'so religion cannot cancel them',
+        ],
+      ],
+      note: 'Every route here begins from something the believer already '
+        + 'holds, which is what makes it an argument and not an appeal.',
+    },
+  ],
+
   extension:
     'Ghana’s record of religious coexistence is unusual. '
     + 'It is also not automatic. '
@@ -1826,21 +2092,14 @@ teach({
   },
 
   idea:
-    'In a shop: '
-    + 'Je voudrais ... s’il vous plaît, meaning I would like. '
-    + 'C’est combien? for how much is it. '
-    + 'C’est trop cher for that is too expensive. '
-    + 'Je prends celui-ci for I will take this one. '
-    + 'For directions: '
-    + 'Où est la gare, s’il vous plaît? '
-    + 'Answers include tout droit for straight on, '
-    + 'à gauche for left, à droite for right, '
-    + 'and près de or loin de for near and far. '
-    + 'In a restaurant: '
-    + 'Je prends le riz, '
-    + 'and l’addition, s’il vous plaît, for the bill. '
-    + 'Everywhere: bonjour on arriving, '
-    + 'merci, and au revoir on leaving.',
+    'Three situations come up, in the examination and in life: '
+    + 'a shop, asking the way, and a restaurant. '
+    + 'Each has a small set of fixed phrases, '
+    + 'and they are learned whole '
+    + 'rather than built out of grammar you have not covered yet. '
+    + 'Two rules hold across all three. '
+    + 'Use vous with anybody serving you, '
+    + 'and attach s’il vous plaît to whatever you ask for.',
 
   mechanism:
     'Everyday French is learned as whole phrases rather than as grammar, '
@@ -1865,11 +2124,9 @@ teach({
     + 'which is harder than speaking in this topic. '
     + 'You can prepare your own sentence '
     + 'and you cannot prepare the answer. '
-    + 'For directions the useful preparation '
-    + 'is to know the three or four words that carry the answer: '
-    + 'gauche, droite, tout droit, and a number. '
-    + 'If you catch one of those you have the direction, '
-    + 'and the rest of the sentence does not matter. '
+    + 'So the preparation that works is not more phrases but fewer: '
+    + 'learn the handful of words that any answer has to contain, '
+    + 'and let the rest of the sentence go past you. '
     + 'Listening for the one word that carries the answer '
     + 'is how anybody manages in a language they are still learning.',
 
@@ -1941,6 +2198,93 @@ teach({
       mistake: 'Trying to understand every word of the reply.',
       why: 'Listen for the one word that carries the answer: '
         + 'gauche, droite, tout droit, or a number.',
+    },
+  ],
+
+  figure: {
+    alt: 'A simple street map. A dot low on a vertical street is marked '
+      + 'vous êtes ici, you are here. A green arrow runs straight up that '
+      + 'street labelled tout droit. Where it meets a crossing street, one '
+      + 'green arrow runs left labelled à gauche and another runs right '
+      + 'labelled à droite, ending at a box marked la gare, the station.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the words that answer où est la gare?</text>'
+      + '<line x1="200" y1="370" x2="200" y2="170" stroke-width="3"/>'
+      + '<line x1="60" y1="170" x2="600" y2="170" stroke-width="3"/>'
+      + '<circle cx="200" cy="344" r="8" fill="currentColor" stroke="none"/>'
+      + '<text x="216" y="350" font-size="15" fill="currentColor" stroke="none">vous êtes ici</text>'
+      + '<line x1="186" y1="330" x2="186" y2="202" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<path d="M 178 204 L 186 188 L 194 204 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="176" y="268" font-size="16" text-anchor="end" fill="#0f8a4d" stroke="none">tout droit</text>'
+      + '<line x1="186" y1="156" x2="96" y2="156" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<path d="M 98 148 L 82 156 L 98 164 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="138" y="140" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">à gauche</text>'
+      + '<line x1="214" y1="156" x2="424" y2="156" stroke="#0f8a4d" stroke-width="4"/>'
+      + '<path d="M 422 148 L 438 156 L 422 164 Z" fill="#0f8a4d" stroke="none"/>'
+      + '<text x="320" y="140" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">à droite</text>'
+      + '<rect x="452" y="128" width="120" height="56" rx="6"/>'
+      + '<text x="512" y="162" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">la gare</text>'
+      + '<text x="512" y="206" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">the station</text>'
+      + '<text x="320" y="392" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">catch one of the three green words and you have the way</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'What to say in a shop and in a restaurant',
+      columns: ['What you say', 'What it means', 'Where'],
+      rows: [
+        [
+          'Je voudrais ... s’il vous plaît',
+          'I would like ..., please',
+          'A shop, for whatever you want',
+        ],
+        [
+          'C’est combien?',
+          'How much is it?',
+          'A shop or a market',
+        ],
+        [
+          'C’est trop cher',
+          'That is too expensive',
+          'A market, where the price can still move',
+        ],
+        [
+          'Je prends celui-ci',
+          'I will take this one',
+          'A shop, once you have chosen',
+        ],
+        [
+          'Je prends le riz',
+          'I will take the rice',
+          'A restaurant, to order',
+        ],
+        [
+          'L’addition, s’il vous plaît',
+          'The bill, please',
+          'A restaurant, to pay',
+        ],
+      ],
+      note: 'Bonjour, with monsieur or madame, belongs at the start of '
+        + 'every one of these, and merci, au revoir at the end. '
+        + 'So does vous: never tu to somebody serving you.',
+    },
+    {
+      caption: 'Asking the way, and the words the answer will be carried '
+        + 'in',
+      columns: ['The French', 'What it means'],
+      rows: [
+        ['Où est la gare, s’il vous plaît?', 'Where is the station, please?'],
+        ['tout droit', 'Straight on'],
+        ['à gauche', 'On the left'],
+        ['à droite', 'On the right'],
+        ['près de', 'Near to'],
+        ['loin de', 'Far from'],
+      ],
+      note: 'A number usually comes with one of these: '
+        + 'deux cents mètres, or la deuxième rue. '
+        + 'Catch the direction word and the number '
+        + 'and you have the whole answer.',
     },
   ],
 
@@ -2016,18 +2360,16 @@ teach({
     + 'and it is built from two words: '
     + 'the present tense of avoir or être, '
     + 'followed by the past participle. '
-    + 'For -er verbs the participle ends in é: '
-    + 'parler gives parlé, so j’ai parlé. '
+    + 'For -er verbs the participle ends in é, '
+    + 'so parler gives parlé. '
     + 'Most verbs take avoir. '
     + 'A small group of verbs of movement and change of state take être: '
     + 'aller, venir, arriver, partir, entrer, sortir, '
     + 'monter, descendre, rester, tomber, naître, mourir, devenir. '
-    + 'With être, the participle agrees with the subject: '
-    + 'je suis allé for a boy, je suis allée for a girl, '
-    + 'nous sommes allés for a group. '
+    + 'With être the participle also agrees with the subject, '
+    + 'the way an adjective would. '
     + 'The near future is simpler: '
-    + 'aller in the present plus the infinitive. '
-    + 'Je vais partir means I am going to leave.',
+    + 'aller in the present plus the infinitive.',
 
   mechanism:
     'The thing to understand first '
@@ -2133,6 +2475,85 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'Two rows, each showing a tense built out of two boxes joined by '
+      + 'a plus sign. The first row, the passé composé, is avoir or être '
+      + 'in the present, labelled as saying who and when, plus the past '
+      + 'participle such as parlé or allé, labelled as saying what '
+      + 'happened. The second row, the near future, is aller in the '
+      + 'present plus the infinitive such as partir or manger. A note says '
+      + 'the conjugation is all in the first box, and that the first box '
+      + 'is one you already know.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="26" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">both tenses are two words, not one</text>'
+      + '<text x="20" y="62" font-size="17" fill="currentColor" stroke="none">the passé composé</text>'
+      + '<rect x="20" y="72" width="250" height="66" rx="6"/>'
+      + '<text x="145" y="100" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">avoir or être,</text>'
+      + '<text x="145" y="122" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">in the present</text>'
+      + '<text x="290" y="114" font-size="26" text-anchor="middle" fill="currentColor" stroke="none">+</text>'
+      + '<rect x="310" y="72" width="250" height="66" rx="6"/>'
+      + '<text x="435" y="100" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the past participle</text>'
+      + '<text x="435" y="122" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">parlé, allé</text>'
+      + '<text x="145" y="160" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">says who, and when</text>'
+      + '<text x="435" y="160" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">says what happened</text>'
+      + '<text x="20" y="222" font-size="17" fill="currentColor" stroke="none">the near future</text>'
+      + '<rect x="20" y="232" width="250" height="66" rx="6"/>'
+      + '<text x="145" y="260" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">aller,</text>'
+      + '<text x="145" y="282" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">in the present</text>'
+      + '<text x="290" y="274" font-size="26" text-anchor="middle" fill="currentColor" stroke="none">+</text>'
+      + '<rect x="310" y="232" width="250" height="66" rx="6"/>'
+      + '<text x="435" y="260" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the infinitive</text>'
+      + '<text x="435" y="282" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">partir, manger</text>'
+      + '<path d="M 20 312 V 324 H 270 V 312" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="320" y="352" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">the conjugating is all in the left box,</text>'
+      + '<text x="320" y="376" font-size="17" text-anchor="middle" fill="#0f8a4d" stroke="none">and the left box is one you already know</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The two tenses, each built out of two words',
+      columns: ['Tense', 'First word', 'Second word', 'Example'],
+      rows: [
+        [
+          'Passé composé, with avoir',
+          'avoir in the present',
+          'The past participle, which does not change',
+          'j’ai parlé, I spoke',
+        ],
+        [
+          'Passé composé, with être',
+          'être in the present',
+          'The past participle, agreeing with the subject',
+          'je suis allé, I went',
+        ],
+        [
+          'Near future',
+          'aller in the present',
+          'The infinitive, straight from the dictionary',
+          'je vais partir, I am going to leave',
+        ],
+      ],
+      note: 'Only the first word is conjugated. '
+        + 'In the être row the second word still changes, '
+        + 'but for gender and number, the way an adjective does, '
+        + 'and never for person.',
+    },
+    {
+      caption: 'How the participle agrees with the subject after être',
+      columns: ['Who the subject is', 'The participle', 'The whole thing'],
+      rows: [
+        ['A boy, or a man', 'allé', 'je suis allé'],
+        ['A girl, or a woman', 'allée', 'je suis allée'],
+        ['A group, with at least one male', 'allés', 'nous sommes allés'],
+        ['A group of girls or women only', 'allées', 'nous sommes allées'],
+      ],
+      note: 'The être verbs describe a change in the subject, '
+        + 'so the participle behaves like an adjective describing them, '
+        + 'and adds e or s exactly as an adjective would.',
+    },
+  ],
+
   extension:
     'The imperfect tense describes what used to happen or was happening, '
     + 'as against the passé composé, which reports what happened once. '
@@ -2202,20 +2623,15 @@ teach({
   },
 
   idea:
-    'A French letter begins with the town and the date. '
-    + 'Then comes the greeting. '
-    + 'To a friend it is Cher Kofi, or Chère Ama. '
-    + 'In a formal letter it is Monsieur or Madame. '
-    + 'Then the paragraphs. '
-    + 'Then the closing. '
-    + 'To a friend, Amitiés or À bientôt. '
-    + 'A formal letter takes a formal phrase. '
-    + 'A short composition needs a plan. '
-    + 'Each paragraph holds one idea. '
-    + 'And the tense is kept the same throughout. '
-    + 'The marks go to correct agreement, correct verb forms, '
+    'Two forms are set: a letter and a short composition. '
+    + 'A French letter has a layout that is fixed, '
+    + 'and a greeting and a closing that change with who will read it. '
+    + 'A composition needs a plan, one idea in each paragraph, '
+    + 'and one tense kept from start to finish. '
+    + 'In both, the marks go to accuracy: '
+    + 'correct agreement, correct verb forms, '
     + 'accents written in full, '
-    + 'and words used accurately.',
+    + 'and words used in the sense they actually have.',
 
   mechanism:
     'The temptation in a French composition '
@@ -2236,17 +2652,11 @@ teach({
     + 'are, '
     + 'and it works best as three separate passes '
     + 'rather than one general reading. '
-    + 'First pass: every verb. '
-    + 'Find each one and check it against its subject. '
-    + 'Second pass: every adjective. '
-    + 'Find each one, find its noun, check the gender and number. '
-    + 'Third pass: every accent. '
-    + 'Accents are part of the spelling, '
-    + 'and a missing one is a spelling error '
-    + 'even where the word is still readable. '
-    + 'Three focused passes find far more than one careful read, '
-    + 'because each time you are looking for one kind of thing '
-    + 'instead of everything at once.',
+    + 'Accents belong in the last of the three, '
+    + 'and one thing about them is worth saying plainly: '
+    + 'an accent is part of the spelling, '
+    + 'so a missing one is a spelling error '
+    + 'even where the word is still readable.',
 
   recap:
     'You can conjugate verbs in three tenses, '
@@ -2324,6 +2734,84 @@ teach({
     {
       mistake: 'Checking everything in one reading.',
       why: 'Three focused passes find far more.',
+    },
+  ],
+
+  figure: {
+    alt: 'The layout of a French letter, drawn as a page. The town and the '
+      + 'date sit at the top right. Below them on the left is the '
+      + 'greeting, Cher Kofi. Below that are ruled lines standing for two '
+      + 'paragraphs. Below those, on the left, is the closing, Amitiés, '
+      + 'and under it a name. Green labels down the right hand side name '
+      + 'each part.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="2">'
+      + '<text x="320" y="28" font-size="20" text-anchor="middle" fill="currentColor" stroke="none">the layout of a French letter</text>'
+      + '<rect x="110" y="44" width="380" height="300" rx="4"/>'
+      + '<text x="470" y="82" font-size="15" text-anchor="end" fill="currentColor" stroke="none">Accra, le 3 novembre</text>'
+      + '<text x="128" y="130" font-size="16" fill="currentColor" stroke="none">Cher Kofi,</text>'
+      + '<line x1="128" y1="162" x2="450" y2="162" stroke-width="1"/>'
+      + '<line x1="128" y1="180" x2="450" y2="180" stroke-width="1"/>'
+      + '<line x1="128" y1="198" x2="380" y2="198" stroke-width="1"/>'
+      + '<line x1="128" y1="228" x2="450" y2="228" stroke-width="1"/>'
+      + '<line x1="128" y1="246" x2="412" y2="246" stroke-width="1"/>'
+      + '<text x="128" y="292" font-size="16" fill="currentColor" stroke="none">Amitiés,</text>'
+      + '<text x="128" y="322" font-size="16" fill="currentColor" stroke="none">Ama</text>'
+      + '<text x="500" y="76" font-size="13" fill="#0f8a4d" stroke="none">the town</text>'
+      + '<text x="500" y="92" font-size="13" fill="#0f8a4d" stroke="none">and the date</text>'
+      + '<text x="500" y="134" font-size="13" fill="#0f8a4d" stroke="none">the greeting</text>'
+      + '<text x="500" y="186" font-size="13" fill="#0f8a4d" stroke="none">one idea per</text>'
+      + '<text x="500" y="202" font-size="13" fill="#0f8a4d" stroke="none">paragraph</text>'
+      + '<text x="500" y="296" font-size="13" fill="#0f8a4d" stroke="none">the closing</text>'
+      + '<text x="320" y="382" font-size="17" text-anchor="middle" fill="currentColor" stroke="none">the layout is marked, so settle it before you write a word</text>'
+      + '</svg>',
+  },
+  tables: [
+    {
+      caption: 'The greeting and the closing of a French letter, '
+        + 'by who will read it',
+      columns: ['Who you are writing to', 'Greeting', 'Closing'],
+      rows: [
+        ['A male friend', 'Cher Kofi,', 'Amitiés, or À bientôt'],
+        ['A female friend', 'Chère Ama,', 'Amitiés, or À bientôt'],
+        [
+          'A man you do not know',
+          'Monsieur,',
+          'A formal phrase, such as Cordialement',
+        ],
+        [
+          'A woman you do not know',
+          'Madame,',
+          'A formal phrase, such as Cordialement',
+        ],
+      ],
+      note: 'Cher is the masculine form and Chère the feminine, '
+        + 'and the difference is marked. '
+        + 'The town and the date go above the greeting in every case.',
+    },
+    {
+      caption: 'The three checks at the end, one pass each',
+      columns: ['Pass', 'What you look for', 'What you check it against'],
+      rows: [
+        [
+          'First',
+          'Every verb',
+          'Its subject: does the ending match the person?',
+        ],
+        [
+          'Second',
+          'Every adjective',
+          'Its noun: the gender and the number',
+        ],
+        [
+          'Third',
+          'Every accent',
+          'The spelling of the word, which the accent is part of',
+        ],
+      ],
+      note: 'Three focused passes find far more than one careful reading, '
+        + 'because each time you are looking for one kind of thing '
+        + 'instead of everything at once.',
     },
   ],
 
