@@ -63,6 +63,35 @@ teach({
     ],
   },
 
+  why:
+    'A student copies a line of Arabic off the board, '
+    + 'letter by letter, exactly as it looks. '
+    + 'His teacher reads it back and it is a different word. '
+    + 'He had written each letter '
+    + 'in the shape it takes when it stands alone, '
+    + 'and inside a word they join '
+    + 'and most of them change shape. '
+    + 'He copied carefully, '
+    + 'and the care went on the wrong thing. '
+    + 'What are the rules by which these letters change, '
+    + 'and why can one word look like three separate pieces?',
+
+  notation:
+    'Each letter has a name, '
+    + 'and the name is said as it is spelled here, '
+    + 'so baa is said "baa" and qaaf is said "qaaf". '
+    + 'Most letters have four written forms, '
+    + 'called isolated, initial, medial and final, '
+    + 'according to where in the word they fall, '
+    + 'and all four are the same letter. '
+    + 'Several letters share one basic shape, called a skeleton, '
+    + 'and are told apart by dots alone: '
+    + 'one dot below is baa, two above is taa, three above is thaa. '
+    + 'A dot in the wrong place or the wrong number '
+    + 'is not a slip of the pen. '
+    + 'It is a different letter, '
+    + 'and that is the commonest way to lose a mark.',
+
   idea:
     'The Arabic alphabet has twenty eight letters '
     + 'and is written from right to left. '
@@ -172,11 +201,21 @@ teach({
     + 'and every school has them.',
 
   recap:
-    'You can read and write the Latin alphabet, '
-    + 'left to right, with capital and small letters. '
-    + 'Arabic runs the other way, '
-    + 'joins its letters, '
-    + 'and distinguishes many of them by dots alone.',
+    'The alphabet this page is printed in '
+    + 'runs from left to right. '
+    + 'Its letters stand apart from each other, '
+    + 'each one keeping the same shape '
+    + 'wherever it falls in a word, '
+    + 'and it has two sizes, a capital and a small one. '
+    + 'Look at the word "cat": '
+    + 'three separate letters, left to right, '
+    + 'each the shape it would be standing alone. '
+    + 'Arabic does none of those three things. '
+    + 'It runs from right to left, '
+    + 'its letters join inside a word and change shape as they join, '
+    + 'and it has no capitals at all. '
+    + 'That is what has to be clear '
+    + 'before a single Arabic word can be read.',
 
   method: [
     'Set the page and write from right to left.',
@@ -394,6 +433,36 @@ teach({
     ],
   },
 
+  why:
+    'A student reads the word kataba off a fully marked page '
+    + 'without any trouble. '
+    + 'The same word appears in a newspaper '
+    + 'and the small marks are not there. '
+    + 'All he can see is three consonants, k, t and b. '
+    + 'Those three could be kataba, which means he wrote, '
+    + 'or kaataba, which means he corresponded, '
+    + 'or kutiba, which means it was written. '
+    + 'Nothing on the page says which. '
+    + 'How does a reader of Arabic decide, '
+    + 'and what are the marks the newspaper left out?',
+
+  notation:
+    'The short vowel marks are called harakaat, '
+    + 'said "ha-ra-KAAT", '
+    + 'and they sit above or below the consonant, '
+    + 'never beside it. '
+    + 'Fathah is a small stroke above and gives the sound a. '
+    + 'Kasrah is a small stroke below and gives i. '
+    + 'Dammah is a small loop above and gives u. '
+    + 'A small circle above, called sukuun, '
+    + 'means the letter carries no vowel at all, '
+    + 'and a mark called shaddah means the consonant is doubled. '
+    + 'A fathah and a kasrah are the same stroke '
+    + 'in two different places, '
+    + 'so a mark on the wrong side of the letter '
+    + 'changes the word, and that is the commonest way '
+    + 'to lose a mark.',
+
   idea:
     'Arabic writing represents consonants with letters '
     + 'and short vowels with small marks, '
@@ -504,12 +573,19 @@ teach({
     + 'earns most of the marks available.',
 
   recap:
-    'You can read the Arabic letters '
-    + 'and know they are consonants. '
-    + 'This adds the vowels: '
-    + 'three short ones written as marks, '
-    + 'three long ones written as letters, '
-    + 'and the habit of supplying what is left out.',
+    'Say the English word "bat" slowly. '
+    + 'The b and the t are made by closing part of the mouth, '
+    + 'and those are consonants. '
+    + 'The a in the middle is made with the mouth open '
+    + 'and the air flowing, and that is a vowel. '
+    + 'In the Arabic alphabet '
+    + 'every one of the twenty eight letters is a consonant. '
+    + 'So the letters of a word give you its frame, '
+    + 'k t b, and nothing in between them. '
+    + 'This lesson adds the vowels: '
+    + 'three short ones written as small marks, '
+    + 'three long ones written as full letters, '
+    + 'and the habit of supplying the marks that are left out.',
 
   method: [
     'Read the consonant skeleton of the word.',
@@ -731,6 +807,37 @@ teach({
     ],
   },
 
+  why:
+    'A learner in Tamale says the word qalb, meaning heart, '
+    + 'using an ordinary English k. '
+    + 'The man he is speaking to hears kalb, '
+    + 'which means dog. '
+    + 'He has said one thing '
+    + 'and been understood to say another, '
+    + 'and both of them are embarrassed. '
+    + 'Arabic has several sounds '
+    + 'that English, Twi and Dagbani do not have, '
+    + 'and every one of them separates two real words. '
+    + 'What are those sounds, '
+    + 'and what is the nearest thing to each '
+    + 'in a language spoken around you?',
+
+  notation:
+    'These sounds are written here in Latin letters, '
+    + 'and the writing follows rules worth knowing. '
+    + 'A doubled vowel means a long one, '
+    + 'so aa lasts about twice as long as a. '
+    + 'The word "dot" in a name, as in s dot aad, '
+    + 'stands for a dot written under the letter in Arabic, '
+    + 'and it marks an emphatic sound, '
+    + 'made with the tongue flatter. '
+    + 'Two different letters can both be written h, '
+    + 'so haa and haa light are not the same sound '
+    + 'and the name has to be given in full. '
+    + 'Treating an emphatic letter as its plain partner '
+    + 'is the commonest way to lose a mark, '
+    + 'because the two words are genuinely different.',
+
   idea:
     'Arabic has consonants that English does not. '
     + 'They fall into three groups. '
@@ -851,16 +958,27 @@ teach({
     + 'which is a glottal stop.',
 
   recap:
-    'You can produce the sounds of English '
-    + 'and of your own Ghanaian language. '
-    + 'Arabic needs several that neither has, '
-    + 'and this lesson pairs each with its nearest familiar sound.',
+    'A speech sound is made by letting air out of the lungs '
+    + 'and getting in its way somewhere. '
+    + 'Say "k" and the back of your tongue '
+    + 'touches the roof of your mouth. '
+    + 'Say "t" and the tip touches just behind your teeth. '
+    + 'Say "h" and nothing touches at all: '
+    + 'the air simply rushes. '
+    + 'So every consonant has a place in the mouth '
+    + 'and a way of being made, '
+    + 'and you can feel both '
+    + 'with your own hand on your throat. '
+    + 'Arabic uses several places '
+    + 'that English and the Ghanaian languages do not use, '
+    + 'and this lesson pairs each one '
+    + 'with the nearest sound you do already make.',
 
   method: [
     'Take the difficult sound together with its plain partner.',
     'Say the two one after the other, aloud.',
     'Notice where in the mouth or throat each is made.',
-    'Use a word you already know that contains the sound.',
+    'Use a word from a language you speak that contains the sound.',
     'For an emphatic, flatten and lower the tongue.',
     'For qaaf, make the closure further back than for kaaf.',
     'Practise in whole words, not single letters.',
@@ -1087,6 +1205,34 @@ teach({
     ],
   },
 
+  why:
+    'A student wants to say "the house is big" in Arabic. '
+    + 'He finds al baytu for the house '
+    + 'and kabiirun for big, '
+    + 'and then he goes looking for the word that means "is", '
+    + 'because the English sentence has one. '
+    + 'There is no such word to find, and he is stuck. '
+    + 'The sentence he wants exists and is two words long. '
+    + 'How can a complete sentence have no verb in it, '
+    + 'and what makes those two words a statement '
+    + 'instead of a list?',
+
+  notation:
+    'The ending on a noun is part of the grammar, '
+    + 'and it is written as a vowel mark, not as a letter. '
+    + 'A subject takes the ending u, '
+    + 'written as a small loop above the last letter, '
+    + 'so bayt becomes baytu. '
+    + 'An indefinite word takes un, which is two of those loops, '
+    + 'as in kabiirun. '
+    + 'The two parts of the sentence have names: '
+    + 'the subject is the mubtada, '
+    + 'and the thing said about it is the khabar. '
+    + 'Putting al on the khabar '
+    + 'turns the whole sentence into a phrase '
+    + 'meaning "the big house", '
+    + 'which is the commonest way to lose a mark.',
+
   idea:
     'Arabic has two kinds of sentence. '
     + 'A verbal sentence begins with a verb. '
@@ -1213,10 +1359,20 @@ teach({
     + 'rather than a grammar one.',
 
   recap:
-    'You can read vowelled Arabic '
-    + 'and know that nouns take the article al. '
-    + 'This builds a complete sentence '
-    + 'out of two nouns and no verb.',
+    'Arabic marks its short vowels '
+    + 'with small strokes above and below the letters, '
+    + 'and a page with all of them written '
+    + 'is called fully vowelled. '
+    + 'Al baytu, written with those marks, '
+    + 'is read "al BAY-tu" and means "the house". '
+    + 'The al at the front is the definite article, '
+    + 'and it does the work the English word "the" does: '
+    + 'baytun is a house, and al baytu is the house. '
+    + 'A word carrying al is called definite, '
+    + 'and a word without it is indefinite. '
+    + 'This lesson builds a complete sentence '
+    + 'out of one definite word and one indefinite one, '
+    + 'and no verb at all.',
 
   method: [
     'Decide what the sentence is about: that is the subject.',
@@ -1826,7 +1982,7 @@ teach({
 
   why:
     'In a house in Nima a grandfather keeps a few old sheets of paper '
-    + 'covered in Arabic writing. '
+    + 'written all over in Arabic. '
     + 'They are letters, and they are older than his own grandfather. '
     + 'Nobody in the house can read them. '
     + 'Now answer this: how did a language from Arabia come to be the '

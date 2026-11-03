@@ -63,6 +63,19 @@ teach({
     ],
   },
 
+  why:
+    'Two students hand in posters for the same school event. '
+    + 'Everybody in the class agrees the first one is better '
+    + 'and nobody can say why. '
+    + 'Asked for a reason, they say it looks nicer. '
+    + 'The teacher points at it and says '
+    + 'the lettering is the one dark thing on a pale ground, '
+    + 'so the eye lands there first, '
+    + 'and every other part is smaller and quieter. '
+    + 'That is a reason somebody could act on. '
+    + 'What words let you say what is in a picture, '
+    + 'and how its parts have been arranged?',
+
   idea:
     'The elements of design are the components '
     + 'from which a work is built. '
@@ -184,9 +197,18 @@ teach({
     + 'or is a cloth somebody is wearing.',
 
   recap:
-    'You can look at a picture and say whether you like it. '
-    + 'This gives the vocabulary to say what is in it '
-    + 'and how the parts have been arranged.',
+    'Look at any picture and something happens. '
+    + 'You like it, or you do not, '
+    + 'or your eye goes to one part of it first. '
+    + 'That reaction is real, and it is not a description. '
+    + '"I like it" tells the person who made it '
+    + 'nothing they can change. '
+    + '"The red patch in the corner pulls my eye away from the face" '
+    + 'tells them exactly what to change. '
+    + 'The difference between those two sentences '
+    + 'is a set of words for the parts of a picture '
+    + 'and for the way those parts are arranged, '
+    + 'and that set of words is this topic.',
 
   method: [
     'List the elements: line, shape, form, space, texture, colour, '
@@ -424,6 +446,35 @@ teach({
     ],
   },
 
+  why:
+    'Ask ten students to draw the cooking pot '
+    + 'standing on the table. '
+    + 'Nine of them draw the rim as a flat line '
+    + 'and the two handles level with each other. '
+    + 'Look at the actual pot from where they are sitting '
+    + 'and the rim is an oval, '
+    + 'and one handle is lower than the other. '
+    + 'They were not careless. '
+    + 'They drew what a pot is '
+    + 'instead of what that pot looks like from that chair. '
+    + 'How do you stop your own knowledge '
+    + 'from overriding your eyes?',
+
+  notation:
+    'A light line used only to position something '
+    + 'is a construction line, '
+    + 'and it is left in a working drawing rather than rubbed out. '
+    + 'A measurement in a drawing is given in units, '
+    + 'where one chosen length in the subject is the unit, '
+    + 'so "two units high" means twice that chosen length '
+    + 'and never two centimetres. '
+    + 'A contour line follows an edge, '
+    + 'and it is not the same as an outline, '
+    + 'because a contour can run across the middle of a form. '
+    + 'Giving a proportion in centimetres off the paper, '
+    + 'instead of in units of the subject, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Drawing from observation means recording '
     + 'what is actually in front of you. '
@@ -554,8 +605,18 @@ teach({
     + 'Materials: a pencil, paper and an eraser, and nothing else.',
 
   recap:
-    'You can draw a thing you have in mind. '
-    + 'This draws a thing in front of you, '
+    'Draw a pot with your eyes shut '
+    + 'and something recognisable comes out: '
+    + 'a round body, a rim, two handles. '
+    + 'That drawing came out of your head, '
+    + 'where you keep a sign for a pot, '
+    + 'and it is useful for a quick note. '
+    + 'Now look at a real pot and draw it. '
+    + 'The rim is not a line, it is an oval, '
+    + 'and the oval is flatter or rounder '
+    + 'depending on how high your eye is above it. '
+    + 'Nothing in your head told you that. '
+    + 'This topic draws the thing in front of you, '
     + 'by measuring it instead of recognising it.',
 
   method: [
@@ -664,7 +725,7 @@ teach({
 
   traps: [
     {
-      mistake: 'Drawing what you know instead of what you see.',
+      mistake: 'Drawing what you expect instead of what you see.',
       why: 'A cup opening seen from above the rim is an ellipse. '
         + 'Put a measurement between the looking and the drawing.',
     },
@@ -797,6 +858,37 @@ teach({
     ],
   },
 
+  why:
+    'A student draws a mango in outline. '
+    + 'The outline is exactly the right shape '
+    + 'and anybody can see it is a mango. '
+    + 'It is also flat, like a shape cut out of paper, '
+    + 'and it sits on the page rather than in the room. '
+    + 'Another student draws the same mango, '
+    + 'with the same outline, '
+    + 'puts a pale patch near the top left '
+    + 'and darkens one side, '
+    + 'and the mango is suddenly round enough to pick up. '
+    + 'The second drawing has no more lines than the first. '
+    + 'What was added, and where exactly does it go?',
+
+  notation:
+    'A tonal scale is a strip divided into boxes, '
+    + 'running from the white of the paper '
+    + 'to the darkest the pencil will go, '
+    + 'and it is drawn first '
+    + 'so that every tone in the drawing '
+    + 'can be matched against it. '
+    + 'Pencil grades are written as a figure and a letter: '
+    + 'H is hard and makes a pale line, '
+    + 'B is soft and makes a dark one, '
+    + 'so 4B is darker than 2B and 2H is paler than H. '
+    + 'Hatching is parallel lines, cross hatching crosses them, '
+    + 'and stippling is dots. '
+    + 'Calling the darkest part of an object its cast shadow '
+    + 'is the commonest way to lose a mark, '
+    + 'because the cast shadow is on the surface underneath.',
+
   idea:
     'Tone, also called value, is the lightness or darkness of an area. '
     + 'It is what makes a drawing on flat paper '
@@ -927,8 +1019,17 @@ teach({
     + 'and one object with one light on it.',
 
   recap:
-    'You can draw the outline of an object correctly. '
-    + 'This makes that outline read as solid, '
+    'An outline is the line round the edge of a thing. '
+    + 'Put a mango on the table, '
+    + 'trace round where it stops and the background starts, '
+    + 'and you have its outline. '
+    + 'Get that shape right and anybody will name the fruit. '
+    + 'But run your finger over the drawing '
+    + 'and the paper is flat, '
+    + 'and run it over the mango and the mango is not. '
+    + 'An outline says where a thing ends. '
+    + 'It says nothing about a surface turning away from you. '
+    + 'This topic makes an outline read as solid, '
     + 'by putting light and dark in the right places.',
 
   method: [
@@ -1174,6 +1275,34 @@ teach({
     ],
   },
 
+  why:
+    'A signwriter is painting a board for a shop. '
+    + 'He wants the lettering to jump off the background '
+    + 'so that a driver reads it at speed. '
+    + 'He paints red letters on an orange board '
+    + 'and from the road it is a blur. '
+    + 'He paints the same red letters on a green board '
+    + 'and they can be read from fifty metres. '
+    + 'He did not change the red at all. '
+    + 'What is it about one pair of colours and not the other, '
+    + 'and what would tell you which pair to pick '
+    + 'before buying the paint?',
+
+  notation:
+    'The three things about a colour have names '
+    + 'that cannot be swapped for one another. '
+    + 'Hue is which colour it is, '
+    + 'and it is the name you would say: red, blue green. '
+    + 'Value is how light or dark it is, '
+    + 'and a hue made lighter with white is called a tint '
+    + 'while one made darker with black is a shade. '
+    + 'Intensity is how bright or dull it is. '
+    + 'Positions on the wheel are given as opposite or adjacent, '
+    + 'and opposite has a precise meaning, '
+    + 'so red and green are complementary and red and orange are not. '
+    + 'Saying "a darker red" when you mean a duller one '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'The colour wheel arranges hues in a circle. '
     + 'In pigment the primary colours are red, yellow and blue, '
@@ -1307,11 +1436,17 @@ teach({
     + 'and the effect in terms of value and intensity.',
 
   recap:
-    'You know the primary colours and can mix green from blue and '
-    + 'yellow. '
-    + 'This makes the mixing deliberate, '
-    + 'and gives the three things about a colour '
-    + 'that can be changed separately.',
+    'Take red, yellow and blue poster paint. '
+    + 'Nothing you can mix will make any of those three, '
+    + 'which is why they are called the primary colours. '
+    + 'Mix two of them and you get a new colour: '
+    + 'blue and yellow give green, red and yellow give orange, '
+    + 'red and blue give violet. '
+    + 'Add white to any colour and it goes paler. '
+    + 'Add black and it goes darker. '
+    + 'So a colour can be changed in more than one way, '
+    + 'and this topic separates those ways '
+    + 'and makes the mixing deliberate instead of hopeful.',
 
   method: [
     'Identify the hue you want on the wheel.',
@@ -1769,7 +1904,7 @@ teach({
         'The mould is broken to release the piece.',
       ],
       answer: 'A model is made in wax, '
-        + 'then covered in clay to form a mould, '
+        + 'then packed round with clay to form a mould, '
         + 'leaving channels. '
         + 'The mould is heated so the wax melts and runs out, '
         + 'leaving a cavity in the exact shape of the model. '
