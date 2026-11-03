@@ -28,6 +28,16 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher says that on Friday you will stand in front '
+    + 'of the class for two minutes and talk about keeping the '
+    + 'school clean. '
+    + 'You already know what you think about it. '
+    + 'But two minutes is a long time when you are standing up, '
+    + 'and the first thing that happens is that your mind goes '
+    + 'blank. '
+    + 'What do you say first, and how do you know when to stop?',
+
   idea:
     'A talk is not a paper read aloud. '
     + 'It has three parts: tell them what you are going to say, '
@@ -45,8 +55,15 @@ teach({
     + 'speech.',
 
   recap:
-    'You can speak in full sentences and read aloud at a steady pace. '
-    + 'A talk is those two with your own words and no page to hide behind.',
+    'A sentence is a full thought with somebody in it and '
+    + 'something happening. '
+    + '"The rain stopped" is a sentence, and "stopped" on its own '
+    + 'is not. '
+    + 'Reading aloud at a steady pace means not rushing and not '
+    + 'crawling, with a small stop at every full stop. '
+    + 'A talk uses both of those. '
+    + 'The difference is that the words are your own and there is '
+    + 'no page in front of you to hide behind.',
 
   method: [
     'Choose your topic and write down three points.',
@@ -202,6 +219,14 @@ teach({
     ],
   },
 
+  why:
+    'A story says a boy stood at the gate, looked at the dog, '
+    + 'then walked the long way round the house. '
+    + 'It never says he was afraid. '
+    + 'Your teacher asks how the boy felt, and she will not '
+    + 'accept I just know. '
+    + 'How do you prove a feeling the writer never named?',
+
   idea:
     'Writers often show rather than tell. '
     + 'A passage may never say a boy was frightened, '
@@ -221,8 +246,14 @@ teach({
     + 'is a complete answer. Writing "he was frightened" is half of one.',
 
   recap:
-    'You can find an answer stated in a passage and point at the line. '
-    + 'This is the same discipline for an answer that is not stated.',
+    'Some answers are written in a passage in plain words. '
+    + 'If the passage says "Kofi was late because the lorry broke '
+    + 'down", and the question asks why Kofi was late, you can '
+    + 'put your finger on the very line that says it. '
+    + 'That is the rule for every answer: show the words it came '
+    + 'from. '
+    + 'This lesson keeps that same rule for answers the passage '
+    + 'never writes down.',
 
   method: [
     'Read the passage.',
@@ -489,7 +520,8 @@ teach({
   extension:
     'This is how almost all your vocabulary was learned, '
     + 'long before anybody gave you a dictionary. '
-    + 'You met words repeatedly in context until the meaning settled. '
+    + 'A child meets a word again and again in different sentences, '
+    + 'until its meaning settles. '
     + 'Reading widely works for exactly this reason.',
 
   figure: {
@@ -604,6 +636,15 @@ teach({
     ],
   },
 
+  why:
+    'Something happened at a funeral in your home town and you '
+    + 'have told your friends about it four times. '
+    + 'Now your teacher asks you to write it down. '
+    + 'On paper the whole thing comes out in three lines and '
+    + 'sounds like nothing. '
+    + 'The event has not changed, so what was your telling of it '
+    + 'doing that the three lines are not?',
+
   idea:
     'A story has three parts: a beginning, a middle and an ending. '
     + 'The middle is where something goes wrong, '
@@ -621,9 +662,15 @@ teach({
     + 'and found it was not what they expected.',
 
   recap:
-    'You can write a paragraph on one idea, '
-    + 'and you can use the past tense consistently. '
-    + 'A story is several paragraphs, usually in the past.',
+    'A paragraph is a group of sentences about one idea. '
+    + 'Write four sentences about your journey to school, then '
+    + 'start a new paragraph when you move on to the classroom. '
+    + 'The past tense is for things already finished: walked, not '
+    + 'walk, and said, not say. '
+    + 'Keeping it the same all the way through stops you slipping '
+    + 'from walked into walks halfway down the page. '
+    + 'A story is several such paragraphs, nearly always in the '
+    + 'past.',
 
   method: [
     'Decide who the story is about and what they want.',
@@ -804,6 +851,25 @@ teach({
     ],
   },
 
+  why:
+    'Your cousin in Takoradi has not seen you for a year and '
+    + 'there is no phone in the house. '
+    + 'You write to her and the letter goes in the post. '
+    + 'It will be read without you there to explain anything, by '
+    + 'somebody who cannot see when you wrote it or where you '
+    + 'are. '
+    + 'So what has to be on that paper besides your news?',
+
+  notation:
+    'The part at the top right, with your address and the date, '
+    + 'is called the heading. '
+    + 'The line that begins Dear Ama is called the greeting, and '
+    + 'it always ends with a comma. '
+    + 'The part carrying your news is called the body, and the '
+    + 'ending, such as Your loving cousin, is called the closing. '
+    + 'Leaving the comma off the greeting is the commonest way to '
+    + 'lose a mark.',
+
   idea:
     'An informal letter is one to somebody you know. '
     + 'It has a set layout: your address at the top right, '
@@ -822,9 +888,16 @@ teach({
     + 'because they are wondering.',
 
   recap:
-    'You can write paragraphs on one idea each, '
-    + 'and you can punctuate properly. '
-    + 'A letter is that, inside a layout.',
+    'A paragraph holds one idea, and you start a new one when '
+    + 'the idea changes. '
+    + 'Punctuation marks are the signs that tell a reader where '
+    + 'to stop. '
+    + 'A full stop ends a sentence, a comma makes a short pause, '
+    + 'and a question mark closes a question. '
+    + '" needs both the comma and the question mark. '
+    + 'A letter is paragraphs and punctuation like that, set '
+    + 'inside a fixed layout, and the layout is what this lesson '
+    + 'adds.',
 
   method: [
     'Write your address at the top right.',
@@ -996,6 +1069,16 @@ teach({
     ],
   },
 
+  why:
+    'You write "My brothers goes to school in Tamale" and the '
+    + 'teacher crosses it out. '
+    + 'You write "My brother go to school in Tamale" and she '
+    + 'crosses that out too. '
+    + 'Both sentences say exactly what you meant, and in Twi '
+    + 'nothing like this happens. '
+    + 'So which word has to change when you speak about one '
+    + 'brother instead of two?',
+
   idea:
     'The verb changes to match its subject. '
     + 'Whether the subject is one thing or more than one '
@@ -1013,9 +1096,15 @@ teach({
     + '"The box is heavy" settles it instantly.',
 
   recap:
-    'You can find the subject and the verb in a sentence, '
-    + 'and you know singular from plural. '
-    + 'This is those two working together.',
+    'In a sentence, the subject is who or what the sentence is '
+    + 'about, and the verb is what they do. '
+    + 'In "The girl sweeps the floor", the subject is the girl '
+    + 'and the verb is sweeps. '
+    + 'Singular means one and plural means more than one, so one '
+    + 'girl is singular and two girls is plural. '
+    + 'In "The girls sweep the floor" the subject is plural, and '
+    + 'the verb is not sweeps any more. '
+    + 'This lesson is about why the verb had to change.',
 
   method: [
     'Find the verb.',
@@ -1193,6 +1282,16 @@ teach({
     ],
   },
 
+  why:
+    'You tell your friend you saw a dog, and he asks which dog. '
+    + 'You say the big black one by the gate, and now he can '
+    + 'picture it. '
+    + 'You tell him you ran home and he asks how, and you say '
+    + 'quickly, because it had started raining. '
+    + 'Your first sentences were true but told him almost '
+    + 'nothing, so which words in the second ones were doing the '
+    + 'real work?',
+
   idea:
     'An adjective describes a noun: the red bag, a heavy box. '
     + 'An adverb describes a verb: she ran quickly, he spoke softly. '
@@ -1207,8 +1306,15 @@ teach({
     + 'It is whether a better noun or verb would make it unnecessary.',
 
   recap:
-    'You can find nouns and verbs in a sentence. '
-    + 'Adjectives attach to the first and adverbs to the second.',
+    'A noun is a word for a person, a place or a thing: Ama, '
+    + 'Kumasi, bag. '
+    + 'A verb is a word for what somebody does: run, speak, '
+    + 'carry. '
+    + 'So in "Ama carried the bag", Ama and bag are nouns and '
+    + 'carried is the verb. '
+    + 'This lesson is about two kinds of word that fasten onto '
+    + 'those: one that fastens onto a noun and one that fastens '
+    + 'onto a verb.',
 
   method: [
     'Find the noun. A word describing it is an adjective.',
@@ -1370,6 +1476,14 @@ teach({
     ],
   },
 
+  why:
+    'You have just finished a book you liked and your friend is '
+    + 'deciding whether to read it. '
+    + 'Tell her the whole story and she has no reason to read it '
+    + 'at all. '
+    + 'Say only that it was nice and she has learned nothing. '
+    + 'What do you tell her, so that she can decide for herself?',
+
   idea:
     'Talking about a book has three parts: '
     + 'what it was about, what you thought of it, '
@@ -1388,9 +1502,15 @@ teach({
     + 'Saying why is what lets them judge for themselves.',
 
   recap:
-    'You can find the main idea of a passage, '
-    + 'and you can give a short talk. '
-    + 'This is both, about something you chose to read.',
+    'The main idea of a passage is what the whole thing is '
+    + 'mostly about, not one detail out of it. '
+    + 'If a passage describes a market, the noise, the traders '
+    + 'and the goods, the main idea is the market and not the '
+    + 'noise. '
+    + 'A short talk has three parts: say what you are going to '
+    + 'say, say it, then say what you said. '
+    + 'This lesson uses both of those, about a book you chose '
+    + 'yourself.',
 
   method: [
     'Name the book and the writer.',
