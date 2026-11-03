@@ -698,10 +698,15 @@ export default function Learn({
             wordmark and the page is even on both sides. */}
         <main className="nx-sheet is-plain">
           <div className="nx-body">
-            <h1 className="nx-display" style={{ fontSize: 'clamp(30px,5vw,44px)', margin: '0 0 10px' }}>
+            {/* Two rules tall and spaced by one, so the title block measures
+                a whole number of lines on the sheet behind it. */}
+            <h1
+              className="nx-display"
+              style={{ fontSize: 'clamp(30px,5vw,44px)', lineHeight: '56px', margin: '0 0 14px' }}
+            >
               {syllabus.subject}
             </h1>
-            <p className="nx-lede" style={{ margin: '0 0 6px' }}>
+            <p className="nx-lede" style={{ lineHeight: '28px', margin: 0 }}>
               {shown.length} {shown.length === 1 ? 'topic' : 'topics'}
               {wholeSubject
                 ? ' across the whole subject.'
@@ -785,7 +790,7 @@ export default function Learn({
                   <p className="nx-strand-purpose">{strand.purpose}</p>
                   {rows.map(({ ss, topics }) => (
                     <div key={ss.id} style={{ marginBottom: 18 }}>
-                      <p className="nx-mark" style={{ margin: '0 0 8px' }}>{ss.name}</p>
+                      <p className="nx-sub-name" style={{ margin: 0 }}>{ss.name}</p>
                       <ul className="nx-topics">
                         {topics.map(t => (
                           <TopicRow key={t.id} topic={t} done={worked.has(t.id)}

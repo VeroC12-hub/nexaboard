@@ -853,9 +853,12 @@
    the strand above it is a quiet label rather than a title competing with
    the rows for the first tap. */
 
-.nx-strand { margin-bottom: 30px; }
+/* Spacing on the sheet's own measure: 28px, or 14, or 42. Nothing between
+   the blocks of this page is a number that does not divide into the rules
+   behind them. */
+.nx-strand { margin-bottom: var(--pitch, 28px); }
 
-.nx-strand + .nx-strand { margin-top: 34px; }
+.nx-strand + .nx-strand { margin-top: 42px; }
 
 /* The strand name, which is the main topic and for a while was the smallest
    text on the page: see the comment where it is rendered. It is now the
@@ -864,33 +867,49 @@
    underneath because a row is a white card with an arrow, and this is set on
    the page itself with its purpose line between the two. */
 .nx-strand-name {
-  margin: 0 0 6px;
+  margin: 0;
   font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
   font-size: clamp(22px, 3.4vw, 27px);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: var(--pitch, 28px);
   letter-spacing: -0.01em;
   text-transform: none;
   color: var(--nx-ink);
 }
 
 .nx-strand-purpose {
-  margin: 0 0 20px;
+  /* A whole pitch, not half of one: at 14px the sub strand under it landed
+     between the rules instead of on them. */
+  margin: 0 0 28px;
   font-size: 15.5px;
-  line-height: 1.55;
+  line-height: var(--pitch, 28px);
   color: var(--nx-ink-2);
 }
 
-.nx-topics { margin: 0 0 20px; padding: 0; list-style: none; }
+/* The sub strand, which was the last monospace label left in the body. Same
+   change as the record at the top of the page and for the same reason: a
+   column of lowercase monospace down the middle of a reading list is what
+   made it look machine-made. */
+.nx-sub-name {
+  font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.06em;
+  line-height: var(--pitch, 28px);
+  color: var(--ink-faint, #8a94a6);
+}
 
-.nx-topic + .nx-topic { margin-top: 10px; }
+.nx-topics { margin: 0 0 14px; padding: 0; list-style: none; }
+
+.nx-topic + .nx-topic { margin-top: 14px; }
 
 .nx-topic-btn {
   display: flex;
   align-items: center;
   gap: 14px;
   width: 100%;
-  padding: 16px 16px 16px 18px;
+  padding: 13px 16px 13px 18px;
   text-align: left;
   background: #fff;
   border: 1px solid var(--nx-line);
@@ -922,16 +941,16 @@
   font-family: Fraunces, 'Iowan Old Style', Georgia, ui-serif, serif;
   font-weight: 600;
   font-size: 17.5px;
-  line-height: 1.35;
+  line-height: var(--pitch, 28px);
   color: var(--nx-ink);
 }
 
 .nx-topic-outcome {
   display: block;
-  margin-top: 4px;
+  margin-top: 0;
   font-family: Inter, system-ui, sans-serif;
   font-size: 14.5px;
-  line-height: 1.5;
+  line-height: var(--pitch, 28px);
   color: var(--nx-ink-2);
 }
 
@@ -947,8 +966,10 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  margin: 26px 0 20px;
-  padding-bottom: 12px;
+  margin: 28px 0 14px;
+  /* 13 plus the hairline below it, so the strand heading under this bar comes
+     out on a rule and not a pixel above one. */
+  padding-bottom: 13px;
   border-bottom: 1px solid var(--nx-line);
 }
 
