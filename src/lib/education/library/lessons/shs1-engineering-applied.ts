@@ -67,6 +67,31 @@ teach({
     ],
   },
 
+  why:
+    'A mason props a 4 metre plank out from a window ledge to carry '
+    + 'a load of blocks. '
+    + 'He stands a drum of water on the inside end to hold it down. '
+    + 'With the drum 1 metre in and the blocks 2 metres out, it '
+    + 'holds. '
+    + 'He slides the blocks half a metre further out and the whole '
+    + 'thing tips, although nothing got heavier. '
+    + 'How far out can the blocks go before it goes over, and what '
+    + 'decides that number?',
+
+  notation:
+    'A force is written in newtons, so 250 N is said “two hundred '
+    + 'and fifty newtons”. '
+    + 'A moment is a force times a distance, so its unit is the '
+    + 'newton metre, written N m with a space and said “newton '
+    + 'metre”. '
+    + 'N m is not the same thing as N/m, which is a force per metre. '
+    + 'The two parts of an angled force are written F cos A and F sin '
+    + 'A, said “F cos A” and “F sine A”, where A is the angle to the '
+    + 'horizontal. '
+    + 'Cos goes with the part along the direction the angle is '
+    + 'measured from, and swapping sin and cos is the commonest way '
+    + 'to lose a mark.',
+
   idea:
     'A force is a push or a pull. '
     + 'It has size, measured in newtons, and a direction. '
@@ -139,11 +164,16 @@ teach({
     + 'which the question mentioned in one quiet phrase.',
 
   recap:
-    'You have balanced a see saw, '
-    + 'and found that a heavy person near the middle '
-    + 'can balance a light person far out. '
-    + 'This puts numbers on that, '
-    + 'and adds forces that pull at an angle.',
+    'A see saw balances when the turning effect on each side is '
+    + 'equal. '
+    + 'Sit a 60 kilogram man 1 metre from the pivot and a 30 kilogram '
+    + 'boy 2 metres out on the other side, and the plank sits level. '
+    + 'The heavy one near the middle balances the light one far out, '
+    + 'because what counts is the weight multiplied by the distance '
+    + 'from the pivot. '
+    + '60 times 1 is 60, and 30 times 2 is 60, so the two agree. '
+    + 'This lesson puts proper units on that product and adds forces '
+    + 'that pull at an angle instead of straight down.',
 
   method: [
     'Draw the body on its own, away from its supports.',
@@ -413,11 +443,42 @@ teach({
     ],
   },
 
+  why:
+    'A workshop in Tema is sent a drawing of a bracket and makes '
+    + 'two hundred of them. '
+    + 'Every bracket matches the drawing. '
+    + 'None of them fits the machine. '
+    + 'The hole was drawn at 20 millimetres, and the shaft it has to '
+    + 'take is 20 millimetres as well, so every hole is either '
+    + 'exactly tight or slightly small. '
+    + 'The drawing was correct and the parts are scrap. '
+    + 'What was left off that drawing, and what should the hole have '
+    + 'said instead?',
+
+  notation:
+    'A dimension is written as a plain number above the dimension '
+    + 'line, in millimetres, with the unit stated once on the drawing '
+    + 'rather than beside each figure. '
+    + 'A tolerance is written either as 20 ± 0.'
+    + '05, said “twenty plus or minus naught point naught five”, or '
+    + 'as two limits, an upper and a lower, printed one above the '
+    + 'other. '
+    + 'A fit is written with the hole first and the shaft second, as '
+    + 'in H7/g6, said “H seven g six”, where the capital letter is '
+    + 'always the hole. '
+    + 'Each feature carries its dimension once and once only. '
+    + 'Dimensioning one feature twice, so that the two disagree, is '
+    + 'the commonest way to lose a mark.',
+
   idea:
     'An engineering drawing tells somebody else how to make the part. '
-    + 'Projection is covered in Design and Communication Technology, '
-    + 'and a learner taking both should read the two lessons together. '
-    + 'This one is about the two things projection does not give: '
+    + 'Projection is the arrangement of the separate views on the sheet: '
+    + 'the front elevation looking straight at the front, '
+    + 'the end elevation from the side, '
+    + 'and the plan from above, '
+    + 'lined up so a feature can be followed from one into the next. '
+    + 'That arrangement gives the shape. '
+    + 'This lesson is about the two things it does not give: '
     + 'dimensioning and tolerance. '
     + 'A dimension is placed on a thin extension line and dimension line, '
     + 'with an arrowhead at each end '
@@ -491,11 +552,18 @@ teach({
     + 'that half a millimetre by hand is good work.',
 
   recap:
-    'You have read a plan and used a scale rule, '
-    + 'and you have measured a length with a rule. '
-    + 'This asks what has to be written on a drawing '
-    + 'so that somebody else can make the thing without asking you, '
-    + 'and how exact that somebody has to be.',
+    'A plan is a drawing of an object as seen from directly above. '
+    + 'Reading one means taking the shape off the paper and picturing '
+    + 'the real thing. '
+    + 'A scale rule is a rule whose markings are already reduced, so '
+    + 'on a 1 to 50 scale a mark reading 2 metres is 40 millimetres '
+    + 'of actual paper. '
+    + 'Measuring with an ordinary rule means laying the zero on one '
+    + 'end and reading the figure at the other, to the nearest half '
+    + 'millimetre. '
+    + 'This lesson asks what else has to be written on a drawing so '
+    + 'that somebody else can make the thing without asking you, and '
+    + 'how exact that somebody has to be.',
 
   method: [
     'Decide what the part must do; that sets which sizes matter.',
@@ -772,6 +840,36 @@ teach({
     ],
   },
 
+  why:
+    'A fitter is told to turn a shaft to 24.'
+    + '00 millimetres so that it runs in a bearing. '
+    + 'He measures it with a steel rule, reads 24 millimetres, and '
+    + 'the shaft will not go in. '
+    + 'He measures the same shaft with a micrometer and reads 24.'
+    + '08. '
+    + 'Nothing changed between the two measurements. '
+    + 'One instrument said it was right and the other said it was '
+    + 'wrong. '
+    + 'Which reading does he act on, and how would he find out if the '
+    + 'micrometer were lying as well?',
+
+  notation:
+    'A measurement with its uncertainty is written 24.'
+    + '36 ± 0.'
+    + '01 mm, said “twenty-four point three six, plus or minus naught '
+    + 'point naught one millimetres”. '
+    + 'The first figure is the reading and the second is the '
+    + 'uncertainty, which is how far out the true size may be. '
+    + 'The decimal places have to match the instrument. '
+    + 'A steel rule can give 24.'
+    + '5 mm and must never be written 24.'
+    + '50 mm, because that claims a fineness it does not have. '
+    + 'A vernier reading is the main scale figure plus the vernier '
+    + 'division that lines up, times the value of one vernier '
+    + 'division. '
+    + 'Writing more decimal places than the instrument can resolve is '
+    + 'the commonest way to lose a mark.',
+
   idea:
     'Metrology is the business of measuring, '
     + 'and of knowing how far to trust what you read. '
@@ -859,10 +957,19 @@ teach({
     + 'and a school with none should say so rather than pretend.',
 
   recap:
-    'You have measured with a rule and read a scale. '
-    + 'This adds instruments that read far finer than a rule, '
-    + 'and asks the harder question: '
-    + 'how much of what you just read is real.',
+    'Measuring with a steel rule means laying the zero end against '
+    + 'one edge and reading off the other. '
+    + 'The smallest marks on it are half millimetres, so 24.'
+    + '5 millimetres is as fine as it goes, and anything past that is '
+    + 'a guess. '
+    + 'Reading a scale means deciding which mark the edge falls on, '
+    + 'and when it falls between two marks you take the nearer. '
+    + 'So every rule measurement already carries an error of about a '
+    + 'quarter of a millimetre, whether or not anybody writes it '
+    + 'down. '
+    + 'This lesson adds instruments that read far finer than that, '
+    + 'and asks the harder question: how much of what you just read '
+    + 'is real.',
 
   method: [
     'Wipe the measuring faces and the part clean.',
@@ -1143,6 +1250,18 @@ teach({
     ],
   },
 
+  why:
+    'A foundry in Tema casts a cooking pot. '
+    + 'The mould is made exactly the size the drawing asks for, the '
+    + 'metal is poured, and the sand is broken away. '
+    + 'The pot that comes out is slightly smaller than the drawing '
+    + 'everywhere, by about one part in a hundred, and there is a '
+    + 'hollow dip in the thickest part of the base. '
+    + 'Nobody made a mistake measuring. '
+    + 'Why did a mould of the right size give a part of the wrong '
+    + 'size, and where did the metal that should have filled the base '
+    + 'go?',
+
   idea:
     'Casting makes a part by pouring a liquid into a shaped space '
     + 'and letting it harden. '
@@ -1237,11 +1356,17 @@ teach({
     + 'rather than improvise one.',
 
   recap:
-    'You have seen a blacksmith beat metal to shape '
-    + 'and watched water freeze in a mould as ice. '
-    + 'Casting is the second of those used on purpose, '
-    + 'and this lesson asks what goes wrong as the liquid sets '
-    + 'and how the mould is designed to allow for it.',
+    'There are two ways of giving metal a shape. '
+    + 'One is to beat it while it is still solid, which is what a '
+    + 'blacksmith does: the metal is heated until it is soft, then '
+    + 'hammered, and it keeps the new shape. '
+    + 'The other is to melt it, pour it into a space of the right '
+    + 'shape, and let it harden there. '
+    + 'Water does the second of those when it freezes in a tray and '
+    + 'comes out as a block the shape of the tray. '
+    + 'Casting is that second way, used on purpose. '
+    + 'This lesson asks what goes wrong as the liquid sets, and how '
+    + 'the mould is designed to allow for it.',
 
   method: [
     'Name the part, its material, and how many are wanted.',
@@ -1517,6 +1642,30 @@ teach({
     ],
   },
 
+  why:
+    'A pilot flying Accra to Tamale holds a steady 400 kilometres '
+    + 'an hour at a steady height. '
+    + 'Nothing about the aircraft is changing. '
+    + 'The engines are running hard the whole way and burning fuel '
+    + 'the whole way. '
+    + 'A crate sitting on a floor is not changing either, and it '
+    + 'needs no engine at all. '
+    + 'Both are unchanging, and one of them needs power while the '
+    + 'other does not. '
+    + 'Why does holding steady cost the aircraft anything?',
+
+  notation:
+    'The four forces are written with capital letters: L for lift, '
+    + 'W for weight, T for thrust and D for drag, each one in '
+    + 'newtons. '
+    + 'Steady level flight is written as two statements, L = W and T '
+    + '= D, said “lift equals weight” and “thrust equals drag”. '
+    + 'Lift acts at right angles to the airflow and not to the '
+    + 'ground, so in a banked turn L = W stops being true even though '
+    + 'the aircraft is steady. '
+    + 'Writing L = W for an aircraft in a turn is the commonest way '
+    + 'to lose a mark.',
+
   idea:
     'An aircraft in flight has four forces on it. '
     + 'Lift is produced by air flowing over the wings '
@@ -1605,11 +1754,20 @@ teach({
     + 'Saying that is worth more than listing the four forces again.',
 
   recap:
-    'You have met balanced and unbalanced forces, '
-    + 'and Newton’s laws of motion. '
-    + 'This applies them to one object, '
-    + 'and shows that an aircraft holding a steady climb '
-    + 'is in balance just as much as one sitting on the ground.',
+    'Forces on an object are balanced when they add to zero, and '
+    + 'unbalanced when they do not. '
+    + 'Push a crate with 100 newtons while friction pushes back with '
+    + '100 newtons, and it does not change speed. '
+    + 'Push with 150 against the same 100 and it speeds up. '
+    + 'Newton’s first law says that an object with balanced forces '
+    + 'keeps the speed and direction it already has, and standing '
+    + 'still counts as that. '
+    + 'His second law says unbalanced forces change it. '
+    + 'His third says every push comes with an equal push the other '
+    + 'way. '
+    + 'This lesson applies all three to one object, and shows that an '
+    + 'aircraft holding a steady climb is in balance just as much as '
+    + 'one sitting on the ground.',
 
   method: [
     'Draw the aircraft and the direction of flight.',
@@ -1884,6 +2042,30 @@ teach({
     ],
   },
 
+  why:
+    'A pilot coming in to land is a little high, so she raises the '
+    + 'nose to slow down. '
+    + 'The aircraft slows, and she raises the nose a little more. '
+    + 'At some point it stops flying, drops, and will not answer the '
+    + 'controls, though the engine is running normally and nothing '
+    + 'broke. '
+    + 'She did the same thing twice and the second time it stopped '
+    + 'working. '
+    + 'What changed between the two, and what is the number she '
+    + 'needed in front of her?',
+
+  notation:
+    'The angle of attack is written with the Greek letter alpha, α, '
+    + 'and said “alpha”, or “angle of attack”, in degrees. '
+    + 'It is the angle between the chord line and the oncoming air, '
+    + 'not the angle between the aircraft and the ground. '
+    + 'The chord line is the straight line from the leading edge to '
+    + 'the trailing edge. '
+    + 'Lift is usually drawn against α on a graph, and the peak of '
+    + 'that curve is the stall. '
+    + 'Measuring α from the ground instead of from the airflow is the '
+    + 'commonest way to lose a mark.',
+
   idea:
     'An aerofoil is the cross section of a wing. '
     + 'The leading edge meets the air, '
@@ -1984,10 +2166,18 @@ teach({
     + 'is all paper work.',
 
   recap:
-    'You know that a wing holds an aircraft up, '
-    + 'and you have felt your hand pushed up '
-    + 'when you tilt it out of a moving car. '
-    + 'This gives that tilt a name and a limit.',
+    'A wing is what holds an aircraft up. '
+    + 'Put a flat hand out of the window of a moving car, palm down '
+    + 'and level, and it is pushed backwards but hardly upwards at '
+    + 'all. '
+    + 'Tilt the front edge of that hand up a little and it is pushed '
+    + 'firmly upwards as well. '
+    + 'Tilt it steeply and the upward push goes away again, and the '
+    + 'hand is simply dragged back. '
+    + 'So the tilt is what makes the lift, and there is a limit to '
+    + 'how far it can be taken. '
+    + 'This lesson gives that tilt a name, explains where the push '
+    + 'comes from, and finds the limit.',
 
   method: [
     'Draw the aerofoil section, with the leading and trailing edges marked.',
@@ -2262,6 +2452,29 @@ teach({
     ],
   },
 
+  why:
+    'A young man in Ho finishes SHS and wants to work in aviation. '
+    + 'He takes that to mean being a pilot, which needs eyesight, '
+    + 'money and years of training he does not have. '
+    + 'Fifteen other people were paid that same morning for getting '
+    + 'one aircraft from Accra to Tamale, and not one of them flew '
+    + 'it. '
+    + 'He wants a job in aviation and he can name only one. '
+    + 'What are the others, who licenses each, and which of them '
+    + 'could he start on from Ho?',
+
+  notation:
+    'Every airport carries two codes. '
+    + 'The three letter IATA code is the one on a ticket and on a bag '
+    + 'tag, so Accra is ACC and Kumasi is KMS, said as the separate '
+    + 'letters, “A C C”. '
+    + 'The four letter ICAO code is the one pilots and controllers '
+    + 'use, and in Ghana it starts with DG, so Kotoka is DGAA. '
+    + 'A flight number is the airline’s two letter code followed by a '
+    + 'figure, as in AW 123. '
+    + 'Using an IATA code where a flight plan wants the ICAO one is '
+    + 'the commonest way to lose a mark.',
+
   idea:
     'Aviation in Ghana is built in layers. '
     + 'The Ghana Civil Aviation Authority is the regulator. '
@@ -2366,10 +2579,19 @@ teach({
     + 'is doing what the question asks.',
 
   recap:
-    'You have seen an aircraft overhead '
-    + 'and perhaps been through Kotoka. '
-    + 'This asks who is responsible for each part of what you saw, '
-    + 'and what it takes to be one of those people.',
+    'An aircraft passing overhead is the visible end of a long '
+    + 'chain. '
+    + 'Somebody licensed it to fly, and licensed the person flying '
+    + 'it. '
+    + 'Somebody owns the strip of tarmac it took off from and keeps '
+    + 'it swept and lit. '
+    + 'Somebody told the pilot which way to turn and at what height. '
+    + 'Somebody else told her what the weather would be at the other '
+    + 'end. '
+    + 'Kotoka International Airport in Accra is where most of that '
+    + 'happens in Ghana. '
+    + 'This lesson asks who is responsible for each part of it, and '
+    + 'what it takes to be one of those people.',
 
   method: [
     'Name the layer: regulator, airport operator, airline, or service company.',
@@ -2661,6 +2883,18 @@ teach({
     ],
   },
 
+  why:
+    'A carpenter in Takoradi makes two window frames to the same '
+    + 'drawing, one in odum and one in a cheaper wood the timber yard '
+    + 'recommended. '
+    + 'Both look identical going in. '
+    + 'After two rainy seasons one is sound, and the other has '
+    + 'swollen, dropped at a corner, and has insect holes in it. '
+    + 'Same drawing, same joints, same workmanship. '
+    + 'What is the difference between those two woods, and what word '
+    + 'would he have had to put on the drawing to stop it happening '
+    + 'again?',
+
   idea:
     'Materials are chosen by their properties. '
     + 'Strength is the load a material carries before it fails. '
@@ -2754,10 +2988,17 @@ teach({
     + 'which costs nothing and teaches a great deal.',
 
   recap:
-    'You have handled wood, metal and plastic, '
-    + 'and you know a cutlass is harder than a stick. '
-    + 'This asks why each material is used where it is, '
-    + 'in words a drawing can be specified in.',
+    'Pick up a stick and a cutlass and the difference is plain in '
+    + 'the hand. '
+    + 'The stick can be snapped across a knee and the cutlass cannot. '
+    + 'Scratch the stick with the cutlass and it marks; try it the '
+    + 'other way round and nothing happens. '
+    + 'Hit a dry stick hard and it breaks in one go, while the '
+    + 'cutlass bends or chips instead. '
+    + 'All of that is obvious, and none of it can be written on a '
+    + 'drawing. '
+    + 'This lesson gives each of those differences its proper name, '
+    + 'in words a material can actually be specified in.',
 
   method: [
     'Write down what the part must do and where it will live.',
@@ -3032,6 +3273,32 @@ teach({
     ],
   },
 
+  why:
+    'A student is marking a strip of steel for six holes 20 '
+    + 'millimetres apart. '
+    + 'He measures 20 from the end for the first, then 20 from the '
+    + 'first for the second, and so on down the strip. '
+    + 'Each measurement looks right as he makes it. '
+    + 'When the strip is drilled, the first three holes line up with '
+    + 'the part and the last three do not. '
+    + 'He was careful every single time. '
+    + 'Where did the error come from, if no one measurement was '
+    + 'wrong?',
+
+  notation:
+    'The waste side of a line is the side that will be cut away, '
+    + 'and it is shown by light shading or a row of short strokes '
+    + 'along that side. '
+    + 'The convention matters because a saw cut has width: cut down '
+    + 'the middle of the line and the part comes out half a blade too '
+    + 'small. '
+    + 'A datum is marked once and labelled, and every other dimension '
+    + 'is written from it. '
+    + 'A centre punch dot goes at the crossing of two lines before '
+    + 'any drilling. '
+    + 'Cutting on the keeping side of the line, or not shading the '
+    + 'waste side at all, is the commonest way to lose a mark.',
+
   idea:
     'Marking out is setting out the lines a part will be made to. '
     + 'A datum face is the one flat surface everything is measured from, '
@@ -3117,9 +3384,17 @@ teach({
     + 'and the lesson sticks for good.',
 
   recap:
-    'You have measured with a rule and drawn a straight line. '
-    + 'This asks something harder: '
-    + 'where to measure from, so that the tenth line '
+    'Measuring with a rule means laying the zero against one end '
+    + 'and reading the figure at the other. '
+    + 'Drawing a straight line means laying a straightedge down and '
+    + 'running a pencil or a scriber along it. '
+    + 'Both are easy once. '
+    + 'The trouble starts when a job wants ten lines. '
+    + 'If each line is measured from the one before it, every small '
+    + 'error is carried into the next and added on. '
+    + 'Step off ten 20 millimetre spaces one from another, each half '
+    + 'a millimetre out, and the tenth line is 5 millimetres wrong. '
+    + 'This lesson asks where to measure from, so that the tenth line '
     + 'is as accurate as the first.',
 
   method: [
@@ -3424,6 +3699,18 @@ teach({
     ],
   },
 
+  why:
+    'A student needs to cut a 10 millimetre steel rod. '
+    + 'He picks up a tenon saw, because it is on the bench and it '
+    + 'cuts wood well. '
+    + 'Five minutes later the rod is barely scratched and four teeth '
+    + 'are gone off the saw. '
+    + 'He tries a wood chisel on the same rod and the edge of the '
+    + 'chisel folds over. '
+    + 'Both tools were sharp and both were used properly. '
+    + 'Why did two good tools fail on one job, and what is it about a '
+    + 'hacksaw that does not?',
+
   idea:
     'A hand tool is designed for one job. '
     + 'A tenon saw cuts across the grain in wood '
@@ -3514,9 +3801,18 @@ teach({
     + 'rather than claim the skill was taught.',
 
   recap:
-    'You have used a cutlass, a hammer and a saw at home. '
-    + 'This asks why each tool is shaped as it is, '
-    + 'and turns the warnings you were given into reasons.',
+    'A cutlass, a hammer and a saw are each built for one kind of '
+    + 'work. '
+    + 'The cutlass has a long thin blade with its weight out near the '
+    + 'end, so one swing carries through grass and stems. '
+    + 'The hammer has its weight in a solid head on a springy handle, '
+    + 'so the blow lands in one place. '
+    + 'The saw has a thin blade with teeth bent alternately left and '
+    + 'right, so the slot it cuts is wider than the blade and the '
+    + 'blade cannot jam in it. '
+    + 'In every case the shape follows the job. '
+    + 'This lesson asks that question of every tool on the bench, and '
+    + 'turns the warnings you were given into reasons.',
 
   method: [
     'Name the job, and choose the tool made for it.',
