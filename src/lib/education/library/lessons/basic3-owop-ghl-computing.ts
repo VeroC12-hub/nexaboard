@@ -453,6 +453,34 @@ teach({
     ],
   },
 
+  why:
+    'A pupil writes a sentence in her own language. '
+    + 'She needs a sound from the middle of a word, '
+    + 'and English has no letter for it. '
+    + 'So she writes an e instead. '
+    + 'Now the word on her page is a different word. '
+    + 'Her teacher reads it out and the class laughs. '
+    + 'The sound was right in her mouth '
+    + 'and wrong on her paper. '
+    + 'So which letters does her language have '
+    + 'that English does not?',
+
+  notation:
+    'Your language uses the English letters '
+    + 'and a few more besides. '
+    + 'The open e looks like the number 3 '
+    + 'written backwards. '
+    + 'The open o looks like a letter c '
+    + 'turned the other way round. '
+    + 'In Ewe there is also a d with a curl on it '
+    + 'and an f with a bar through it. '
+    + 'Each of those stands for one sound, '
+    + 'and no English letter makes that sound. '
+    + 'Writing an ordinary e '
+    + 'where the open e belongs '
+    + 'is the commonest mistake, '
+    + 'because it makes a different word.',
+
   idea:
     'You can already read the letters of your language. '
     + 'Now you write them. '
@@ -471,8 +499,18 @@ teach({
     + 'Your hand will try to help, and it will be wrong.',
 
   recap:
-    'You know the letters your language has that English does not. '
-    + 'Writing them is the same job as reading them, the other way round.',
+    'Reading and writing are the same job '
+    + 'going in two directions. '
+    + 'When you read, '
+    + 'you see a letter and your mouth makes the sound. '
+    + 'When you write, '
+    + 'you hear a sound and your hand makes the letter. '
+    + 'See the open e and you say its sound. '
+    + 'Hear that sound and you have to write the open e. '
+    + 'This lesson is the second direction, '
+    + 'which is the harder one, '
+    + 'because nothing on the page '
+    + 'is there to remind you.',
 
   method: [
     'Say the sentence out loud first.',
@@ -673,6 +711,19 @@ teach({
     ],
   },
 
+  why:
+    'A class is given a list and told to sort it: '
+    + 'keyboard, screen, mouse, '
+    + 'speaker, printer, microphone. '
+    + 'One pupil sorts them by size. '
+    + 'One sorts them by colour. '
+    + 'One puts the microphone and the speaker together, '
+    + 'because the two of them look alike. '
+    + 'All three sortings are neat '
+    + 'and none of them is any use. '
+    + 'So what is the one question '
+    + 'that sorts these properly?',
+
   idea:
     'Some parts of a computer put things in. Those are input. '
     + 'A keyboard, a mouse, a microphone. '
@@ -690,9 +741,16 @@ teach({
     + 'The direction decides, not the shape.',
 
   recap:
-    'You can name the parts of a computer: the keyboard, the mouse, '
-    + 'the monitor and the system unit. '
-    + 'Now you sort them by what they do.',
+    'A computer is a box with things plugged into it. '
+    + 'The board of letter keys you press is the keyboard. '
+    + 'The small thing you slide with your hand '
+    + 'is the mouse. '
+    + 'The flat glass panel you look at '
+    + 'is the monitor, or the screen. '
+    + 'The box itself is the system unit. '
+    + 'Those are the names of the parts. '
+    + 'This lesson sorts those same parts '
+    + 'by what each one does.',
 
   method: [
     'Point at the device.',
@@ -858,6 +916,35 @@ teach({
     ],
   },
 
+  why:
+    'A pupil types with one finger. '
+    + 'He looks for each letter, '
+    + 'presses it, '
+    + 'then looks for the next one. '
+    + 'One sentence takes him four minutes. '
+    + 'His eyes are on the keyboard the whole time, '
+    + 'so he never sees the mistakes '
+    + 'going onto the screen. '
+    + 'Another pupil types the same sentence '
+    + 'in twenty seconds, watching the screen. '
+    + 'What is she doing with her hands '
+    + 'that he is not?',
+
+  notation:
+    'The keys sit in rows. '
+    + 'The middle row is called the home row. '
+    + 'Your fingers rest there '
+    + 'and come back to it after every key. '
+    + 'The long key along the bottom is the space bar, '
+    + 'and it makes the gap between words. '
+    + 'The key marked Shift is held down '
+    + 'to make a capital letter. '
+    + 'You hold it; you do not press it and let go. '
+    + 'Hunting for each key with one finger '
+    + 'is the commonest mistake, '
+    + 'because it keeps your eyes off the screen, '
+    + 'which is where your mistakes are.',
+
   idea:
     'Typing well means using both hands and the right fingers. '
     + 'Each hand has its own half of the keyboard. '
@@ -872,8 +959,17 @@ teach({
     + 'The point is not speed. It is that you can see what you are writing.',
 
   recap:
-    'You know the keyboard is an input device. '
-    + 'This is about using it properly.',
+    'A keyboard is how your words '
+    + 'get into the machine. '
+    + 'Press the key marked K '
+    + 'and a K appears on the screen. '
+    + 'Press it again and there are two. '
+    + 'Nothing comes out of the machine on its own. '
+    + 'It puts out what you put in. '
+    + 'So the keyboard is the way in, '
+    + 'and every letter on that screen went through it. '
+    + 'This lesson is about using it '
+    + 'so that the way in is fast and correct.',
 
   method: [
     'Sit up straight with both feet on the floor.',

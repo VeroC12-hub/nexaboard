@@ -218,6 +218,31 @@ teach({
     ],
   },
 
+  why:
+    'A boy reads aloud in class. '
+    + 'He says each word on its own: '
+    + '"The. Dog. Ran. Away." '
+    + 'Every word is correct. '
+    + 'Nobody listening can tell what the sentence said. '
+    + 'Then the teacher reads the same line '
+    + 'and everybody understands it. '
+    + 'She did not read better words. '
+    + 'So what did she do that he did not?',
+
+  notation:
+    'The marks on the page tell you where to stop. '
+    + 'A full stop is a dot. '
+    + 'It means the sentence has ended, so stop. '
+    + 'A comma is a little hook. '
+    + 'It means a short rest, then carry on. '
+    + 'A question mark means the sentence is asking, '
+    + 'so let your voice go up at the end. '
+    + 'Stopping in the middle of a sentence '
+    + 'where there is no mark '
+    + 'is the commonest mistake, '
+    + 'because the words on each side of it '
+    + 'belong together.',
+
   idea:
     'Reading aloud well is not reading fast. '
     + 'It is reading so that somebody listening understands you. '
@@ -231,8 +256,16 @@ teach({
     + 'That is what the marks are for.',
 
   recap:
-    'You can blend sounds into words. '
-    + 'Now you join words into a line that sounds like talking.',
+    'A word is made of sounds pushed together. '
+    + 'Take the word cat. '
+    + 'Say c, then a, then t, slowly, one at a time. '
+    + 'Now say them faster, with no gaps, '
+    + 'and you have said cat. '
+    + 'Putting sounds together like that is blending. '
+    + 'A sentence works the same way, one step up. '
+    + 'The words get pushed together into a line '
+    + 'that sounds like talking. '
+    + 'This lesson is that step.',
 
   method: [
     'Read the sentence in your head first.',
@@ -760,6 +793,22 @@ teach({
     ],
   },
 
+  why:
+    'A girl takes a big book off the shelf '
+    + 'because she likes the picture on the front. '
+    + 'She opens it, '
+    + 'and on the first page '
+    + 'there are nine words she cannot read. '
+    + 'She stops at every one of them. '
+    + 'By the bottom of the page '
+    + 'she has forgotten the top of it. '
+    + 'She puts the book down '
+    + 'and says she does not like reading. '
+    + 'Nothing was wrong with the book '
+    + 'and nothing was wrong with the girl. '
+    + 'So how do you tell, before you start, '
+    + 'whether a book is the right one for you?',
+
   idea:
     'A good book for you is one you can mostly read on your own. '
     + 'Not one that is too easy. Not one that stops you on every line. '
@@ -775,8 +824,18 @@ teach({
     + 'which is the only thing that makes you better at it.',
 
   recap:
-    'You can sound out a word you do not know. '
-    + 'This is about how many of those a page should have.',
+    'When you meet a word you do not know, '
+    + 'you sound it out. '
+    + 'Take the word stand. '
+    + 'Say s, t, a, n, d, '
+    + 'then push them together '
+    + 'and the word comes out. '
+    + 'That works, and it takes time. '
+    + 'One hard word on a page costs you a few seconds. '
+    + 'Nine hard words on a page costs you the page, '
+    + 'because by the end of it '
+    + 'you have forgotten the beginning. '
+    + 'This lesson is about how many is too many.',
 
   method: [
     'Open the book at any full page.',

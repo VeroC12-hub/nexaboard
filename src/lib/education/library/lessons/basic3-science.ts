@@ -31,6 +31,17 @@ teach({
     ],
   },
 
+  why:
+    'A farmer has a problem. '
+    + 'Something is eating his tomato leaves at night. '
+    + 'He wants to know what to do about it. '
+    + 'A goat eats leaves. '
+    + 'A caterpillar eats leaves too. '
+    + 'You keep a goat out with a fence. '
+    + 'A fence will not stop a caterpillar. '
+    + 'So how do you put animals into groups '
+    + 'that actually help you?',
+
   idea:
     'There are too many animals to learn one at a time. '
     + 'So we put them into groups. '
@@ -48,9 +59,15 @@ teach({
     + 'So before you group anything, say what you are grouping by.',
 
   recap:
-    'You can already tell a living thing from a non living one. '
-    + 'All of these are living. '
-    + 'Now you are sorting them into smaller sets.',
+    'A living thing grows, feeds, and has young. '
+    + 'A dog does all three. '
+    + 'So does a mango tree. '
+    + 'A stone does none of them. '
+    + 'A stone never gets bigger '
+    + 'and it never has baby stones. '
+    + 'So a dog is living and a stone is not. '
+    + 'Every animal in this lesson is a living thing. '
+    + 'Now we put the living ones into smaller groups.',
 
   method: [
     'Decide your question first. How it moves? What it eats? Where it lives?',
@@ -215,6 +232,16 @@ teach({
     ],
   },
 
+  why:
+    'A cooking pot is made of metal. '
+    + 'Nobody makes a cooking pot out of paper. '
+    + 'Put a paper pot on a fire and it burns up. '
+    + 'A water bucket is made of plastic. '
+    + 'Nobody makes a bucket out of cloth, '
+    + 'because the water runs straight out. '
+    + 'So who decides what a thing is made of, '
+    + 'and how do they decide it?',
+
   idea:
     'Things are made of materials. '
     + 'Each material behaves in its own way, '
@@ -230,8 +257,15 @@ teach({
     + 'Nobody chose at random.',
 
   recap:
-    'You can name things around you. '
-    + 'Now you look at what each one is made of, and ask why.',
+    'Everything around you is made of something. '
+    + 'Pick up a spoon. It is made of metal. '
+    + 'Pick up your exercise book. It is made of paper. '
+    + 'Pick up a bucket. It is made of plastic. '
+    + 'The spoon, the book and the bucket are the things. '
+    + 'Metal, paper and plastic '
+    + 'are the materials they are made from. '
+    + 'This lesson asks why each thing '
+    + 'got the material it did.',
 
   method: [
     'Name the object.',
@@ -424,6 +458,15 @@ teach({
     ],
   },
 
+  why:
+    'Stand outside in the morning. '
+    + 'The sun is low, over in the east. '
+    + 'Look again at noon and it is high up. '
+    + 'Look in the evening and it is low, over in the west. '
+    + 'It looks as if the sun walked across the sky. '
+    + 'It did not move at all. '
+    + 'So what moved?',
+
   idea:
     'The sun does not move across the sky. The Earth turns. '
     + 'Your side of the Earth turns towards the sun, and that is day. '
@@ -440,8 +483,17 @@ teach({
     + 'What you see and what is happening are not the same.',
 
   recap:
-    'You know the sun comes up in the morning and goes down in the evening. '
-    + 'This lesson explains what is really happening while that looks true.',
+    'The sun is a very long way away '
+    + 'and it does not move. '
+    + 'It is the Earth that moves. '
+    + 'Hold a ball and turn it slowly round. '
+    + 'A spot on the ball faces you, '
+    + 'then goes round the back, '
+    + 'then comes back to face you again. '
+    + 'The ball turned. '
+    + 'You stayed still. '
+    + 'The Earth does that once every day, '
+    + 'and that one fact is the whole of this lesson.',
 
   method: [
     'Hold a ball. That is the Earth.',
