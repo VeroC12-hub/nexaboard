@@ -63,7 +63,7 @@ teach({
   idea:
     'A steward is somebody left in charge of what belongs to another, '
     + 'and who must answer for it. '
-    + 'All three faiths taught in Ghana make the human being a steward of '
+    + 'All three of the faiths studied in Ghana make the human being a steward of '
     + 'the earth, each in its own words, '
     + 'and each therefore gives a duty to care for it. '
     + 'The important part is what follows from that. '
@@ -339,7 +339,7 @@ teach({
     + 'anybody settle that?',
 
   idea:
-    'All three faiths taught in Ghana affirm one supreme God, '
+    'All three of the faiths studied in Ghana affirm one supreme God, '
     + 'the creator of everything that exists, '
     + 'more powerful and more knowing than any creature, '
     + 'merciful, and the final judge. '
@@ -589,6 +589,19 @@ teach({
     + 'all is held. '
     + 'Both are adults in the eyes of the law now, so what is the '
     + 'ceremony actually doing?',
+
+  notation:
+    'The rites have names and a question will use them. '
+    + 'An outdooring, or naming ceremony, '
+    + 'marks a baby being brought out and given a name. '
+    + 'A puberty rite marks a child becoming an adult. '
+    + 'A funeral rite marks a death. '
+    + 'The word for what a person is treated as afterwards '
+    + 'is their status, '
+    + 'so a rite changes a status and not a body. '
+    + 'Describing the objects used and stopping there '
+    + 'is the commonest way to lose a mark, '
+    + 'because the question asks what the rite announces.',
 
   idea:
     'A rite of passage marks a person moving from one stage of life to '
@@ -878,6 +891,34 @@ teach({
     ],
   },
 
+  why:
+    'Two pupils answer a question '
+    + 'about the founder of a religion. '
+    + 'The first gives the year he was born, '
+    + 'the year he died, and the town he came from. '
+    + 'The second gives one thing he taught, '
+    + 'and then names something '
+    + 'believers in Ghana still do every year because of it. '
+    + 'The second answer scores higher, '
+    + 'on a question that asked about a life. '
+    + 'Dates are facts about a man who is dead. '
+    + 'So what is the question looking for '
+    + 'that a date cannot give it?',
+
+  notation:
+    'Names and titles are used in a set way here, '
+    + 'and a question expects it. '
+    + 'In Islam he is called the Prophet Muhammad, '
+    + 'and many Muslims add "peace be upon him" after the name. '
+    + 'In Christianity, Christ is a title and not a surname. '
+    + 'It means the anointed one, '
+    + 'so Jesus Christ is a name and a title together. '
+    + 'African Traditional Religion is written out in full '
+    + 'the first time, and shortened to ATR after that. '
+    + 'Giving African Traditional Religion a founder '
+    + 'is the commonest way to lose a mark, '
+    + 'because no one person started it.',
+
   idea:
     'A religious leader is answered as a life, and in order: '
     + 'where they came from, how the mission began, what they taught, '
@@ -916,9 +957,19 @@ teach({
     + 'rather than memorised a biography.',
 
   recap:
-    'You have compared what the three faiths teach about creation, '
-    + 'worship and God. '
-    + 'This looks at the people the teachings came through.',
+    'A teaching and a teacher are two different things. '
+    + 'A teaching is what is held to be true: '
+    + 'that there is one God, that the poor must be fed. '
+    + 'A teacher is the person it came through, '
+    + 'who lived in a place, at a time, '
+    + 'and was argued with while he lived. '
+    + 'Christianity came through Jesus, '
+    + 'Islam through Muhammad, '
+    + 'and African Traditional Religion '
+    + 'came through no single person at all, '
+    + 'which is itself worth knowing. '
+    + 'This lesson is about the people, '
+    + 'and about what their lives left behind them.',
 
   method: [
     'Name the leader and the faith.',
@@ -1203,7 +1254,7 @@ teach({
     + 'is usually the wrong one.',
 
   recap:
-    'Every faith taught in Ghana sets out rules for how to treat people. '
+    'Every faith studied in Ghana sets out rules for how to treat people. '
     + 'Christianity says do to others what you would want done to you. '
     + 'Islam makes honesty in trade and care for the poor into duties. '
     + 'Traditional Akan teaching holds that a person is a person through '
@@ -1450,6 +1501,23 @@ teach({
     + 'is. '
     + 'So what is the linguist adding by calling him something '
     + 'that is not his name?',
+
+  notation:
+    'Three kinds of saying come up here '
+    + 'and they are not the same. '
+    + 'An appellation is a praise name, '
+    + 'said to somebody who is present. '
+    + 'A dirge is sung at a funeral, '
+    + 'about somebody who is not. '
+    + 'A libation is a prayer said while a drink is poured. '
+    + 'Inside an appellation, '
+    + 'each separate picture is called an image, '
+    + 'and what the image says about the person is its claim. '
+    + 'Write the line first, '
+    + 'then what it pictures, '
+    + 'then what it claims. '
+    + 'Giving the picture and stopping there '
+    + 'is the commonest way to lose a mark.',
 
   idea:
     'An appellation is a praise name or string of praise names, '
@@ -1708,6 +1776,23 @@ teach({
     + 'but you cannot yet say what it did in that room, '
     + 'and that second part is where most of the marks are.',
 
+  notation:
+    'One proverb gets asked about in three ways, '
+    + 'and the words for them are worth having. '
+    + 'The literal meaning is the picture: '
+    + 'an actual rain, an actual roof. '
+    + 'The figurative meaning is the general truth '
+    + 'the picture stands for. '
+    + 'The occasion is the moment '
+    + 'at which you would say it. '
+    + 'A proverb has a fixed form, '
+    + 'which means its words do not change, '
+    + 'so quote it exactly and do not tidy it up. '
+    + 'Changing the words of a proverb '
+    + 'is the commonest way to lose a mark, '
+    + 'because the fixed form is what makes it a proverb '
+    + 'rather than an opinion.',
+
   idea:
     'A proverb is a short fixed saying carrying a general truth. '
     + 'An idiom is an expression whose meaning is not the sum of its words. '
@@ -1963,6 +2048,36 @@ teach({
     ],
   },
 
+  why:
+    'A grandmother tells a tale in which Ananse tricks everybody, '
+    + 'wins the food, eats all of it, '
+    + 'and ends the night stuck up on the roof '
+    + 'with nobody willing to help him down. '
+    + 'She never says "so do not be greedy". '
+    + 'The children do not need telling, '
+    + 'because they saw what happened to him. '
+    + 'A pupil writing about that tale '
+    + 'puts "the lesson is that greed is bad" at the end '
+    + 'and loses marks for it. '
+    + 'So where in a folktale does the lesson actually sit?',
+
+  notation:
+    'The kinds of oral literature have names, '
+    + 'and a question asks for one of them by name. '
+    + 'A folktale is a story told aloud '
+    + 'and passed on by telling. '
+    + 'A riddle is a question with a hidden answer, '
+    + 'asked to be guessed. '
+    + 'A dirge is sung at a funeral. '
+    + 'The set words a teller uses to begin and end a tale '
+    + 'are the opening and closing formulas. '
+    + 'When the teller sings a line '
+    + 'and the listeners sing one back, '
+    + 'that is call and response. '
+    + 'Naming a device without saying '
+    + 'what it does for the telling '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A folktale is a story passed on by telling. '
     + 'It teaches through what happens to its characters, '
@@ -2002,10 +2117,20 @@ teach({
     + 'rather than a style of telling.',
 
   recap:
-    'You have heard folktales told at home '
-    + 'and can say what happens in one. '
-    + 'This asks what the tale is doing, '
-    + 'and what each part of the telling is for.',
+    'A story told aloud and a story in a book '
+    + 'are not the same thing. '
+    + 'A book waits for you, '
+    + 'and you can turn back a page. '
+    + 'A teller gets one go. '
+    + 'Nobody can turn back, '
+    + 'and the listeners are in the room, '
+    + 'awake or losing interest. '
+    + 'So a teller repeats a line so that nobody is lost, '
+    + 'puts in a song so that everybody joins, '
+    + 'and uses animals everybody already knows '
+    + 'so that nothing needs describing. '
+    + 'None of that is decoration, '
+    + 'and this lesson is what each part of the telling is for.',
 
   method: [
     'Give the opening formula as it is said in your language.',

@@ -327,6 +327,33 @@ teach({
     ],
   },
 
+  why:
+    'A JHS class is selling 40 exercise books to raise money. '
+    + 'They do the figures in an exercise book. '
+    + '40 books at 5 cedis each is 200 cedis. '
+    + 'The paper cost 60 cedis. '
+    + 'So the profit is 140 cedis. '
+    + 'Then they sell two more books '
+    + 'and change the 40 to 42. '
+    + 'Now the 200 is wrong, and the 140 is wrong too, '
+    + 'and both have to be worked out again by hand. '
+    + 'Is there a way to write a sum once '
+    + 'so that it corrects itself when a figure changes?',
+
+  notation:
+    'Each box in the grid is a cell. '
+    + 'A cell is named by its column letter '
+    + 'and then its row number, so a box is called B3. '
+    + 'The letter always comes first. '
+    + 'A formula has to start with an equals sign. '
+    + 'Without it the computer treats what you typed as plain words. '
+    + 'So you type equals B3 times 5. '
+    + 'A range is two cell names with a colon between them, '
+    + 'so B2 colon B9 means every cell from B2 down to B9. '
+    + 'Forgetting the equals sign is the commonest mistake, '
+    + 'and you see it at once: '
+    + 'your sum sits in the cell as words instead of an answer.',
+
   idea:
     'A spreadsheet is a grid. '
     + 'Columns have letters, rows have numbers, '
@@ -364,10 +391,17 @@ teach({
     + 'without rewriting the formula.',
 
   recap:
-    'You can add a column of figures on paper '
-    + 'and you have met the mean in mathematics. '
-    + 'A spreadsheet does both, '
-    + 'and keeps them correct when the figures change.',
+    'Adding up a column and finding a mean are two jobs. '
+    + 'Adding up puts the figures together: '
+    + '5 and 8 and 2 make 15. '
+    + 'A mean is the number each one would be '
+    + 'if they were all the same. '
+    + 'You find it by adding them '
+    + 'and then sharing the total out, '
+    + 'so 15 shared between 3 figures is 5. '
+    + 'Both of those are easy to do once. '
+    + 'They are slow when the figures keep changing, '
+    + 'and that is the problem this lesson solves.',
 
   method: [
     'Put headings in the first row.',
@@ -577,6 +611,31 @@ teach({
     ],
   },
 
+  why:
+    'A pupil has to tell the class about the Volta dam. '
+    + 'She writes everything she knows onto six slides, '
+    + 'in small type. '
+    + 'On the day she stands at the side and reads them out. '
+    + 'Everybody in the room has finished reading slide one '
+    + 'before she reaches the bottom of it. '
+    + 'They stop listening to her, '
+    + 'because she is saying what they can already see. '
+    + 'So what should have been on the screen instead?',
+
+  notation:
+    'The screen shows slides, '
+    + 'and the whole set of them is one presentation. '
+    + 'A slide is counted and not named, so you say slide 3. '
+    + 'The size of the letters is the font size, '
+    + 'measured in points, '
+    + 'and 24 points is about the smallest a class can read. '
+    + 'Notes you keep for yourself and do not show '
+    + 'are speaker notes. '
+    + 'Writing whole sentences on a slide '
+    + 'is the commonest mistake, '
+    + 'because a sentence on a screen gets read, '
+    + 'and anything read is not heard.',
+
   idea:
     'A presentation is a set of slides shown while somebody talks. '
     + 'Each slide may hold a heading, a few words, '
@@ -616,8 +675,15 @@ teach({
     + 'which forces the discipline the presentation needs.',
 
   recap:
-    'You can give a prepared talk from short notes. '
-    + 'This adds a screen behind you, '
+    'A talk and a piece of writing do different work. '
+    + 'Writing has to carry everything by itself, '
+    + 'because nobody is there to be asked. '
+    + 'A talk has you standing in front of people, '
+    + 'so you carry it, '
+    + 'and the paper in your hand only reminds you. '
+    + 'That is why notes for a talk are short: '
+    + 'four words can hold a whole minute of speech. '
+    + 'This lesson puts a screen behind you as well, '
     + 'and the whole skill is deciding what belongs on it.',
 
   method: [
@@ -1127,6 +1193,36 @@ teach({
     ],
   },
 
+  why:
+    'A message arrives on a phone. '
+    + 'It says the mobile money account '
+    + 'will be closed today, '
+    + 'and it gives a number to call at once. '
+    + 'The person calls it. '
+    + 'A polite voice asks for the code '
+    + 'that has just come by text, '
+    + 'to confirm who they are. '
+    + 'They read it out, '
+    + 'and the money is gone inside a minute. '
+    + 'Nothing was broken into '
+    + 'and no password was guessed. '
+    + 'So what was the trick, '
+    + 'and where was the one moment it could have been stopped?',
+
+  notation:
+    'A message pretending to come from somebody you trust '
+    + 'is called phishing, said "fishing". '
+    + 'The number texted to you when you log in '
+    + 'is a one time code, or an OTP. '
+    + 'One time means it works once and is then dead. '
+    + 'It is still a key, '
+    + 'and handing one over is handing over your password. '
+    + 'Nobody who works for a bank or a network '
+    + 'will ever ask you for it. '
+    + 'Calling the number given in the message '
+    + 'is the commonest mistake, '
+    + 'because that number belongs to whoever sent it.',
+
   idea:
     'Phishing is a message that pretends to be somebody you trust. '
     + 'It may seem to come from a bank, a network, a school or a friend. '
@@ -1178,9 +1274,17 @@ teach({
     + 'because the message is exactly what you are trying to verify.',
 
   recap:
-    'You know not to enter a password on a page reached from a link. '
-    + 'This explains what all these attacks have in common, '
-    + 'so you can recognise one you have never seen before.',
+    'A password is a secret that proves you are you. '
+    + 'A lock on a door works the same way. '
+    + 'Whoever holds the key gets in, '
+    + 'and the lock cannot tell whether they stole it. '
+    + 'So anybody holding your password is you, '
+    + 'as far as the computer can tell. '
+    + 'That is why no bank and no network ever asks for it. '
+    + 'They do not need it, '
+    + 'because they can see your account from their own side. '
+    + 'This lesson shows what every trick for getting it '
+    + 'has in common.',
 
   method: [
     'Read the message and ask whether it is pushing you to hurry.',
@@ -1404,6 +1508,31 @@ teach({
     ],
   },
 
+  why:
+    'Tell a friend to cook some rice and they cook rice. '
+    + 'Tell a machine the same thing and nothing happens. '
+    + 'A machine has no judgement at all. '
+    + 'It cannot guess how much water to use, '
+    + 'and it cannot decide that the rice is done. '
+    + 'Every one of those decisions '
+    + 'has to be written down for it beforehand. '
+    + 'So how do you write instructions '
+    + 'for something that understands nothing?',
+
+  notation:
+    'Each shape in a flowchart means one kind of step, '
+    + 'and the shape is part of the answer. '
+    + 'An oval is where it starts and where it stops. '
+    + 'A rectangle is a step that does something. '
+    + 'A parallelogram, the leaning rectangle, '
+    + 'is where something goes in or comes out. '
+    + 'A diamond is a question, '
+    + 'and exactly two arrows leave a diamond, '
+    + 'one marked Yes and one marked No. '
+    + 'Leaving a diamond’s arrows unlabelled '
+    + 'is the commonest mistake, '
+    + 'because then nobody can tell which way to go.',
+
   idea:
     'An algorithm is a list of steps that solves a problem, '
     + 'where every step is clear, '
@@ -1444,9 +1573,18 @@ teach({
     + 'and you have found it before anybody ran it.',
 
   recap:
-    'You can follow a recipe or a set of directions. '
-    + 'This writes such instructions so exactly '
-    + 'that something with no judgement at all could follow them.',
+    'A recipe is a set of instructions in order. '
+    + 'Boil the water. '
+    + 'Put the rice in. '
+    + 'Wait twenty minutes. '
+    + 'Take it off the fire. '
+    + 'Four steps, and anybody doing them in that order '
+    + 'ends up with rice. '
+    + 'Do them in another order and you get something else. '
+    + 'So instructions have two parts: '
+    + 'the steps, and the order they go in. '
+    + 'This lesson writes both so exactly '
+    + 'that a thing with no judgement could follow them.',
 
   method: [
     'State the problem in one sentence.',
