@@ -72,6 +72,23 @@ teach({
     + 'What is the real price of that hospital, and how would you '
     + 'put a number on it?',
 
+  notation:
+    'Opportunity cost is the next best thing '
+    + 'you did not choose, '
+    + 'and it is not a sum of money. '
+    + 'Say it as a thing: '
+    + 'the opportunity cost of the hospital is the road. '
+    + 'Not "the opportunity cost is 100 million cedis", '
+    + 'because the cedis were spent either way. '
+    + 'Scarcity means wants are unlimited '
+    + 'while resources are limited, '
+    + 'and it is a permanent condition, '
+    + 'not a shortage that somebody could fix. '
+    + 'A want is something you would like '
+    + 'and a need is something you cannot do without. '
+    + 'Giving a money figure as an opportunity cost '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Human wants are unlimited. '
     + 'The resources for meeting them are limited. '
@@ -159,7 +176,8 @@ teach({
     + 'and the consequence of losing it is the second mark.',
 
   recap:
-    'You have 20 cedis and the whole day in front of you. '
+    'There are 20 cedis in your pocket '
+    + 'and the whole day in front of you. '
     + 'A plate of waakye is 15, the tro-tro home is 5, and '
     + 'airtime is 10. '
     + 'Any two of those together come to more than 20, so you '

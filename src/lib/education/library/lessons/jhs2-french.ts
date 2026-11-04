@@ -44,6 +44,38 @@ teach({
     ],
   },
 
+  why:
+    'A pupil wants to say two things about his sister '
+    + 'in French. '
+    + 'The first is that she is tall. '
+    + 'The second is that she has a bicycle. '
+    + 'In English both sentences are about her, '
+    + 'and both feel the same to say. '
+    + 'In French one of them takes être '
+    + 'and the other takes avoir, '
+    + 'and those are two different verbs. '
+    + 'Pick the wrong one '
+    + 'and the sentence says something '
+    + 'no French speaker would say. '
+    + 'So what question tells you '
+    + 'which of the two a sentence wants?',
+
+  notation:
+    'Être means to be and avoir means to have, '
+    + 'and both are irregular, '
+    + 'so their forms are learned whole. '
+    + 'Être goes je suis, tu es, il est, '
+    + 'nous sommes, vous êtes, ils sont. '
+    + 'Avoir goes j’ai, tu as, il a, '
+    + 'nous avons, vous avez, ils ont. '
+    + 'Il y a means there is or there are, '
+    + 'and it is three words working as one. '
+    + 'A possessive changes with the thing owned '
+    + 'and not with the owner: '
+    + 'mon frère, ma soeur, mes frères. '
+    + 'Using mon with a feminine noun '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Almost all description in French runs through two verbs, '
     + 'être for what somebody is and avoir for what they have, '
@@ -78,9 +110,23 @@ teach({
     + 'because in English my never changes at all.',
 
   recap:
-    'You can greet, introduce yourself and give your age, '
-    + 'and you know that French nouns have gender. '
-    + 'This uses both to describe your family, your school and your town.',
+    'Every French noun belongs to one of two classes, '
+    + 'called masculine and feminine. '
+    + 'This has nothing to do '
+    + 'with the thing being male or female. '
+    + 'There is nothing feminine about a table, '
+    + 'and yet the word table '
+    + 'is in the feminine class. '
+    + 'The class matters '
+    + 'because the other words in the sentence '
+    + 'have to match it. '
+    + 'The word for "a" changes: '
+    + 'un frère, but une soeur. '
+    + 'A describing word changes too: '
+    + 'il est grand, but elle est grande. '
+    + 'Every sentence in this lesson '
+    + 'has to get that agreement right, '
+    + 'so it is worth having in hand first.',
 
   method: [
     'Decide whether the sentence is about being or having.',
@@ -567,6 +613,38 @@ teach({
     ],
   },
 
+  why:
+    'A pupil is given a short French text '
+    + 'and five questions on it. '
+    + 'He does not know four of the words '
+    + 'in the first sentence, '
+    + 'so he stops there '
+    + 'and looks them up one at a time. '
+    + 'By the time he has the fourth one '
+    + 'the lesson is nearly over, '
+    + 'and he has not read the rest of the text '
+    + 'or looked at a single question. '
+    + 'Three of the five questions '
+    + 'were about the last two lines. '
+    + 'So what should he have done '
+    + 'with the words he did not know?',
+
+  notation:
+    'A French question tells you how to answer it. '
+    + 'Qui asks who. '
+    + 'Que asks what. '
+    + 'Où asks where. '
+    + 'Quand asks when. '
+    + 'Pourquoi asks why, '
+    + 'and an answer to pourquoi '
+    + 'needs parce que inside it. '
+    + 'Combien asks how many. '
+    + 'Answer in French, in a full sentence, '
+    + 'built out of the words of the question itself. '
+    + 'Answering a French question in English '
+    + 'is the commonest way to lose a mark, '
+    + 'even where the content of the answer is right.',
+
   idea:
     'A reading passage in French is answered in French. '
     + 'Read the whole text once without stopping at words you do not '
@@ -612,10 +690,21 @@ teach({
     + 'sentence.',
 
   recap:
-    'You answer comprehension questions in English and in your own '
-    + 'language, '
-    + 'and you know to look for the answer in the text. '
-    + 'This does the same in French, '
+    'Reading a text for answers '
+    + 'is not the same as reading every word of it. '
+    + 'Take an English sentence '
+    + 'with one word blanked out: '
+    + '"the farmer put the maize '
+    + 'into a large blank and carried it home". '
+    + 'You do not have the missing word, '
+    + 'and you can still say '
+    + 'what the sentence means. '
+    + 'A sack, a basket, a bag: '
+    + 'for most questions you could be asked, '
+    + 'it does not matter which. '
+    + 'So an unknown word '
+    + 'does not stop a reader who keeps going, '
+    + 'and this lesson does that in French, '
     + 'with the answers written in French too.',
 
   method: [

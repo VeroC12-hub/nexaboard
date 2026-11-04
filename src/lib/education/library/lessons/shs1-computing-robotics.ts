@@ -485,7 +485,8 @@ teach({
 
   method: [
     'Read the problem and decide which structure it needs.',
-    'Use FOR when you know how many times, and WHILE when you do not.',
+    'Use FOR when the number of times is known, '
+      + 'and WHILE when it is not.',
     'Use REPEAT UNTIL when the body must run at least once.',
     'Write the condition in full, with its comparison sign.',
     'Draw a trace table: one column per variable, one for the condition, one for output.',
@@ -1782,6 +1783,35 @@ teach({
     ],
   },
 
+  why:
+    'A robot is built to stop before it hits a wall. '
+    + 'It carries an ultrasonic sensor on the front. '
+    + 'In a classroom it stops 10 cm short of the wall '
+    + 'every single time. '
+    + 'Taken outside, it drives straight into a hedge. '
+    + 'The sensor is not broken '
+    + 'and the program was not changed. '
+    + 'A hedge is a wall as far as a robot is concerned, '
+    + 'and this one was not detected at all. '
+    + 'So what does an ultrasonic sensor actually measure, '
+    + 'and why would a hedge be invisible to it?',
+
+  notation:
+    'A sensor gives out a signal, not a measurement. '
+    + 'An analogue signal is a voltage '
+    + 'that can take any value in a range. '
+    + 'A digital signal is only high or low, '
+    + 'written 1 or 0. '
+    + 'An analogue reading is turned into a number '
+    + 'by the board, '
+    + 'and that number often runs from 0 to 1023, '
+    + 'which is what ten bits can hold. '
+    + 'Working out which number '
+    + 'stands for which real value is calibration. '
+    + 'Writing that a sensor measures distance, '
+    + 'when what it measures is the time for an echo, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A sensor is a device that turns a physical quantity '
     + 'into an electrical signal a controller can read. '
@@ -1838,10 +1868,24 @@ teach({
     + 'and the fourth is the one most learners leave out.',
 
   recap:
-    'You have measured length with a rule and temperature with a '
-    + 'thermometer, reading a scale with your eyes. '
-    + 'A sensor does the same measuring '
-    + 'but hands the reading to a circuit instead of to a person.',
+    'Measuring has two separate halves to it, '
+    + 'and a person does both at once without noticing. '
+    + 'Put a rule against a desk, '
+    + 'and the edge of the desk '
+    + 'lines up with the 60 cm mark. '
+    + 'That is the first half: '
+    + 'something physical has become '
+    + 'a position on a scale. '
+    + 'Then your eye reads the mark '
+    + 'and your brain says 60 cm. '
+    + 'That is the second half. '
+    + 'A sensor does the first half '
+    + 'and hands the result to a circuit, '
+    + 'which has no eye and no brain, '
+    + 'so the second half '
+    + 'has to be written down for it. '
+    + 'This lesson is both halves, '
+    + 'and the trouble is nearly always in the second.',
 
   method: [
     'Write down the quantity you need to know.',
@@ -2464,6 +2508,40 @@ teach({
     ],
   },
 
+  why:
+    'A line following robot is given one instruction: '
+    + 'if you can see the line, go forward. '
+    + 'It works until the line turns a sharp corner. '
+    + 'There the robot loses the line, '
+    + 'so it does not go forward, '
+    + 'and it does nothing at all. '
+    + 'It sits with its motors off '
+    + 'for as long as you leave it there. '
+    + 'Nothing in the instruction was wrong, '
+    + 'and nothing in it covered that case. '
+    + 'So how do you write a rule '
+    + 'so that every situation it can meet '
+    + 'has an answer inside it?',
+
+  notation:
+    'Each shape in a flowchart carries one meaning, '
+    + 'and the shape is part of the answer. '
+    + 'An oval is a start or a stop. '
+    + 'A rectangle is a process: '
+    + 'something gets done. '
+    + 'A parallelogram, the leaning rectangle, '
+    + 'is an input or an output. '
+    + 'A diamond is a decision, '
+    + 'and exactly two arrows leave it, '
+    + 'labelled Yes and No. '
+    + 'A path that comes back round to itself is a loop, '
+    + 'and a loop needs a condition '
+    + 'that will one day be false, '
+    + 'or it never ends. '
+    + 'A diamond with one exit, '
+    + 'or a path that reaches no stop, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'An algorithm is a finite list of unambiguous steps '
     + 'that finishes. '
@@ -2527,11 +2605,22 @@ teach({
     + 'and the table is what is marked.',
 
   recap:
-    'You have written a set of instructions for somebody else to follow, '
-    + 'such as how to get from the school to the market. '
-    + 'This adds two things: '
-    + 'the instructions are for a machine, which cannot guess, '
-    + 'and some of them are decisions taken from a measurement.',
+    'Instructions for a person '
+    + 'and instructions for a machine '
+    + 'are not the same thing. '
+    + 'Tell somebody "go to the market, '
+    + 'and if it is closed, come back". '
+    + 'They will manage, '
+    + 'and they will also handle the case '
+    + 'you never mentioned, '
+    + 'such as the market being half open. '
+    + 'A machine will not. '
+    + 'Give it a rule with a gap in it '
+    + 'and it sits in the gap doing nothing, '
+    + 'which is exactly what it was told. '
+    + 'So every case has to be covered beforehand, '
+    + 'and this lesson is how to draw a rule '
+    + 'and then check that it is.',
 
   method: [
     'List every sensor reading the robot can take.',

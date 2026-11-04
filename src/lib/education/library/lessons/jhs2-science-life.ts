@@ -2126,6 +2126,38 @@ teach({
     ],
   },
 
+  why:
+    'Two farmers plant maize on the same day '
+    + 'on neighbouring plots. '
+    + 'One sows in rows, a hand span apart, '
+    + 'and weeds at three weeks. '
+    + 'The other scatters his seed by hand '
+    + 'and weeds when the weeds are knee high. '
+    + 'Both get the same rain and the same sun. '
+    + 'The first gets twice the harvest. '
+    + 'Nothing was put on the first plot '
+    + 'that was not put on the second. '
+    + 'So what were those two decisions actually doing?',
+
+  notation:
+    'The jobs of growing a crop are called operations, '
+    + 'and a question asks for them in order. '
+    + 'Land preparation comes first, '
+    + 'then sowing, then weeding, '
+    + 'then harvesting, then storage. '
+    + 'Spacing is the distance '
+    + 'between one plant and the next. '
+    + 'Yield is how much comes off a piece of land, '
+    + 'and it is given per area, '
+    + 'such as per hectare. '
+    + 'A pest eats the crop '
+    + 'and a disease makes it sick, '
+    + 'and the two words are not interchangeable. '
+    + 'Giving the operations out of order '
+    + 'is the commonest way to lose a mark, '
+    + 'because each one is only possible '
+    + 'after the one before it.',
+
   idea:
     'Crop production runs in a fixed order, from choosing the site to '
     + 'storing what you harvested, and keeping animals has the same '
@@ -2162,9 +2194,23 @@ teach({
     + 'they are how you notice a problem in week one instead of week four.',
 
   recap:
-    'You have grown a plant in a school garden '
-    + 'and know that crops need water and weeding. '
-    + 'This puts the operations in order and gives the reason for each.',
+    'A plant needs four things '
+    + 'and it cannot go and look for any of them. '
+    + 'It needs water, light, air, '
+    + 'and food from the soil. '
+    + 'All four have to arrive '
+    + 'where the plant is standing, '
+    + 'or they do not arrive at all. '
+    + 'Now put two maize plants '
+    + 'right next to each other. '
+    + 'They are reaching into the same soil '
+    + 'for the same food, '
+    + 'and standing in each other’s light. '
+    + 'Both of them grow smaller '
+    + 'than one plant on its own would have. '
+    + 'Every job in this lesson, '
+    + 'from spacing to weeding, '
+    + 'is about that one competition.',
 
   method: [
     'For a crop, list the operations in order from site to storage.',

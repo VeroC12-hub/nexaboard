@@ -1133,6 +1133,41 @@ teach({
     ],
   },
 
+  why:
+    'A student in a hospital laboratory '
+    + 'is given two blood samples to spin. '
+    + 'One is from a patient being tested for hepatitis. '
+    + 'One is from a routine check on a nurse. '
+    + 'The two look identical: '
+    + 'the same tube, the same red, the same label. '
+    + 'He wears gloves for the first '
+    + 'and handles the second with bare hands, '
+    + 'to save time. '
+    + 'The nurse’s sample is the infectious one, '
+    + 'and nobody knows that yet. '
+    + 'So how should he have decided '
+    + 'which of the two to be careful with?',
+
+  notation:
+    'The rule that every specimen is handled '
+    + 'as though it were infectious '
+    + 'is called standard precautions. '
+    + 'Standard means it does not change '
+    + 'from one specimen to the next. '
+    + 'A sharp is anything that can pierce skin: '
+    + 'a needle, a blade, a broken slide. '
+    + 'Sharps go into a sharps box, '
+    + 'which is rigid and is never opened again. '
+    + 'Recapping a needle '
+    + 'means putting its cover back on, '
+    + 'and it is the act '
+    + 'behind most needle injuries. '
+    + 'Writing "wear gloves '
+    + 'when the sample is infectious" '
+    + 'is the commonest way to lose a mark, '
+    + 'because the whole point '
+    + 'is that you cannot tell which one is.',
+
   idea:
     'A specimen is a sample taken from a patient '
     + 'for testing: blood, urine, stool, sputum or a swab. '
@@ -1212,11 +1247,22 @@ teach({
     + 'and the lesson is better for saying so.',
 
   recap:
-    'You have been told to wash your hands before eating '
-    + 'and not to drink from a stream. '
-    + 'This takes the same idea into a laboratory, '
-    + 'where the dose is concentrated '
-    + 'and where you handle other people’s infections on purpose.',
+    'An infection passes on '
+    + 'when something you cannot see '
+    + 'gets from one place into a body. '
+    + 'Handle raw meat, '
+    + 'then eat with the same hand, '
+    + 'and what was on the meat is now in you. '
+    + 'Wash the hand in between and it is not. '
+    + 'Nothing about that '
+    + 'depends on knowing which meat was dirty. '
+    + 'The washing works '
+    + 'whether there was anything on it or not, '
+    + 'which is exactly why it is done every time. '
+    + 'This lesson takes that one idea '
+    + 'into a laboratory, '
+    + 'where the amounts are concentrated '
+    + 'and the samples are infections on purpose.',
 
   method: [
     'Before touching anything, name what could get into you and how.',
@@ -1507,6 +1553,38 @@ teach({
     ],
   },
 
+  why:
+    'Hold your arm straight down, '
+    + 'then bend your elbow. '
+    + 'The muscle on the front of your upper arm '
+    + 'goes hard and short. '
+    + 'Now straighten the arm again. '
+    + 'That same muscle goes soft, '
+    + 'and a different one at the back goes hard. '
+    + 'The front muscle did not push the arm back down. '
+    + 'A muscle cannot push at all. '
+    + 'So how does an arm that was pulled one way '
+    + 'ever get pulled back?',
+
+  notation:
+    'Movements have proper names '
+    + 'and a question will ask for them. '
+    + 'Flexion is bending a joint, '
+    + 'so bending the elbow is flexion. '
+    + 'Extension is straightening it. '
+    + 'Abduction is moving a limb '
+    + 'away from the middle of the body, '
+    + 'and adduction is bringing it back, '
+    + 'which you can hold on to '
+    + 'as adding it to the body. '
+    + 'Rotation is turning a limb '
+    + 'about its own length. '
+    + 'A pair of muscles working against each other '
+    + 'is an antagonistic pair. '
+    + 'Writing that a muscle pushes a bone back '
+    + 'is the commonest way to lose a mark, '
+    + 'because a muscle only ever pulls.',
+
   idea:
     'The skeleton has about 206 bones in an adult. '
     + 'It gives the body shape, '
@@ -1591,9 +1669,23 @@ teach({
     + 'and that forcing it is how a footballer tears a ligament.',
 
   recap:
-    'You have named the main bones and felt your elbow bend. '
-    + 'This adds the proper words for each movement, '
-    + 'and the reason muscles come in pairs.',
+    'A bone is a stiff rod '
+    + 'and it cannot move itself. '
+    + 'Feel the long bone in your upper arm '
+    + 'and the two in your forearm. '
+    + 'They meet at your elbow, '
+    + 'and the place where two bones meet '
+    + 'is called a joint. '
+    + 'The bones themselves do not bend. '
+    + 'The joint lets them turn against each other. '
+    + 'Something has to do the turning, '
+    + 'and that something is muscle, '
+    + 'the soft mass you can feel go hard '
+    + 'when you bend the arm. '
+    + 'So bones, joints and muscles '
+    + 'are three separate things '
+    + 'with three separate jobs, '
+    + 'and this lesson is what each one contributes.',
 
   method: [
     'Name the joint where the movement happens.',
