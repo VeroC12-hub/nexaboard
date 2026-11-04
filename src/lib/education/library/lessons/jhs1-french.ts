@@ -46,6 +46,40 @@ teach({
     ],
   },
 
+  why:
+    'Aflao is the last town in Ghana on the eastern road. '
+    + 'The town on the other side of the border is Lomé, in Togo. '
+    + 'In Lomé the market women, the taxi drivers and the teachers '
+    + 'all work in French. '
+    + 'You cross over to buy cloth. '
+    + 'The woman at the stall says something to you and waits. '
+    + 'You want to greet her back and give her your name. '
+    + 'Now the part English never prepares you for. '
+    + 'French has two different words for you. '
+    + 'One is for a friend and one is for a stranger. '
+    + 'Pick the wrong one and you have been rude to her. '
+    + 'English has only one word for you, '
+    + 'so nothing you already say can tell you which to choose. '
+    + 'This lesson gives you the lines for that first minute, '
+    + 'and the rule for choosing.',
+
+  notation:
+    'Bonjour is said "bon-ZHOOR". '
+    + 'The zh is the sound of the s in the middle of "measure". '
+    + 'Je m’appelle is said "zhuh ma-PELL". '
+    + 'The mark between the m and the a is an apostrophe. '
+    + 'It is not decoration. '
+    + 'It shows that a letter has been dropped so two words can join: '
+    + 'me plus appelle becomes m’appelle. '
+    + 'Enchanté has a small stroke over the last e. '
+    + 'The stroke is called an accent, and this one is the accent aigu, '
+    + 'said "ak-son ay-GOO". '
+    + 'An accent in French is part of the spelling. '
+    + 'So a missing accent is a spelling mistake, not untidy writing. '
+    + 'A girl writes Enchantée, with a second e on the end. '
+    + 'The dropped accent and the missing second e '
+    + 'are the two commonest ways to lose a mark here.',
+
   idea:
     'The first lesson is a small set of fixed lines, '
     + 'and one choice that runs underneath all of them. '
@@ -75,10 +109,19 @@ teach({
     + 'Using tu to a stranger is.',
 
   recap:
-    'You greet people in English and in your own language, '
-    + 'and in your own language the words already change for an elder. '
-    + 'French does the same thing with tu and vous, '
-    + 'so the idea is familiar even though the words are new.',
+    'A greeting is a fixed set of words. '
+    + 'You do not build it fresh each time. '
+    + 'You learn it whole and say it back. '
+    + 'Good morning in English is one of these. '
+    + 'Twi has the same thing: Maakye in the morning, '
+    + 'Maaha in the afternoon. '
+    + 'Many Ghanaian languages then change the words for an elder. '
+    + 'Twi asks a child wo ho te sɛn. '
+    + 'It asks an elder mo ho te sɛn, '
+    + 'which is the plural form, used out of respect. '
+    + 'French is built the same way. '
+    + 'It has a small set of fixed greetings. '
+    + 'And it changes a word depending on who is standing in front of you.',
 
   method: [
     'Decide tu or vous before speaking: '
@@ -293,6 +336,39 @@ teach({
       'Before a vowel, le and la both become l’.',
     ],
   },
+
+  why:
+    'You want to write one sentence in French: the table is big. '
+    + 'You look up table in a French dictionary. '
+    + 'It gives you table. '
+    + 'You look up big. '
+    + 'It gives you grand. '
+    + 'So you write Le table est grand. '
+    + 'Two of those four words are wrong. '
+    + 'A French speaker writes La table est grande. '
+    + 'The le became la, and the grand grew an e on the end. '
+    + 'Nothing about a table is female. '
+    + 'Nothing in the English sentence asked you to change a thing. '
+    + 'Something hidden inside the French word table decided it. '
+    + 'The dictionary did tell you, in two letters you did not read. '
+    + 'This lesson is what those two letters are, '
+    + 'and how to stop them costing you a mark in every sentence.',
+
+  notation:
+    'A French dictionary prints n.m. or n.f. beside every noun. '
+    + 'n.m. is short for nom masculin, a masculine noun. '
+    + 'n.f. is short for nom féminin, a feminine noun. '
+    + 'That is where the gender is kept, which is why it looks hidden. '
+    + 'Le is said "luh", la is said "lah", and les is said "lay". '
+    + 'The s on les is silent, so you never hear a plural, you read it. '
+    + 'Un is said "uh" through the nose, and une is said "oon". '
+    + 'When the noun starts with a vowel, '
+    + 'both le and la are written l’ with an apostrophe. '
+    + 'So it is l’école, never la école. '
+    + 'The apostrophe stands for the letter that was dropped. '
+    + 'Writing la école is one common way to lose a mark. '
+    + 'Writing a noun in your vocabulary list with no article in front '
+    + 'of it is the other, because then the gender is simply gone.',
 
   idea:
     'Every noun in French belongs to one of two classes, '
@@ -553,6 +629,42 @@ teach({
     ],
   },
 
+  why:
+    'A friend in Lomé sends you one line: Je parle twi. '
+    + 'You find parler in the dictionary. '
+    + 'It means to speak, so the line says I speak Twi. '
+    + 'Now write back and tell her two things. '
+    + 'We speak Twi. They speak Twi. '
+    + 'In English the word never moves: speak, speak, speak. '
+    + 'In French it does. '
+    + 'We speak is nous parlons. '
+    + 'They speak is ils parlent. '
+    + 'The dictionary gave you neither. '
+    + 'It gave you one word, parler, '
+    + 'and that word is not any of the six forms you actually need. '
+    + 'So this is the question the lesson answers. '
+    + 'Given the one word a dictionary prints, '
+    + 'how do you make the six a real sentence needs?',
+
+  notation:
+    'The form a dictionary prints is called the infinitive. '
+    + 'It is said "in-FIN-i-tiv". '
+    + 'Parler, finir and vendre are all infinitives. '
+    + 'Take the last two letters off and what is left is called the stem. '
+    + 'The stem of parler is parl. '
+    + 'The letters you then add are called the ending. '
+    + 'Doing the whole job is called conjugating, '
+    + 'said "KON-juh-gay-ting". '
+    + 'Three of the six endings are silent. '
+    + 'Je parle, tu parles and ils parlent are all said the same way, '
+    + '"parl". '
+    + 'Only two endings are heard. '
+    + 'Nous parlons is "par-LON" and vous parlez is "par-LAY". '
+    + 'Silent does not mean optional. '
+    + 'The letters are still written, '
+    + 'and dropping a silent ending is the commonest way '
+    + 'to lose a mark in this topic.',
+
   idea:
     'A French verb in the dictionary ends in -er, -ir or -re, '
     + 'and that form is called the infinitive: parler, finir, vendre. '
@@ -808,6 +920,38 @@ teach({
     ],
   },
 
+  why:
+    'You are at a stall in Lomé and you ask the price of a bag of rice. '
+    + 'The woman answers: quatre-vingt-quinze. '
+    + 'You have your word list, so you can take it apart. '
+    + 'Quatre is four. '
+    + 'Vingt is twenty. '
+    + 'Quinze is fifteen. '
+    + 'Four, twenty, fifteen. '
+    + 'None of those is a price, '
+    + 'and all three of them cannot be the price at once. '
+    + 'The price is 95. '
+    + 'Not one of the three words says ninety and not one says five. '
+    + 'You cannot pay an amount you cannot hear. '
+    + 'You cannot catch a bus at a time you cannot hear either. '
+    + 'This lesson is how French builds its numbers, '
+    + 'so that quatre-vingt-quinze reaches you as one number '
+    + 'instead of three.',
+
+  notation:
+    'The hyphen between the parts of a number is part of the spelling. '
+    + 'Forty three is written quarante-trois, not quarante trois. '
+    + 'Quatre-vingts keeps an s when it stands alone for 80. '
+    + 'It loses that s as soon as another number follows: quatre-vingt-un. '
+    + 'The time is said Il est trois heures, "eel ay trwa ZUR". '
+    + 'Il est means it is. '
+    + 'Heures means hours, and it is never left out. '
+    + 'English can drop o’clock and still be understood. '
+    + 'French cannot drop heures. '
+    + 'A date puts le in front: le douze mai, said "luh dooz may". '
+    + 'The two commonest ways to lose a mark here '
+    + 'are the missing hyphen and the missing heures.',
+
   idea:
     'The numbers up to sixteen each have their own word, '
     + 'and after that French builds them. '
@@ -840,10 +984,18 @@ teach({
     + 'which is why you cannot drop it as English drops o’clock.',
 
   recap:
-    'You count and tell the time in English and in your own language. '
-    + 'The French numbers are new words for the same amounts, '
-    + 'and only the stretch from seventy to ninety nine is built '
-    + 'differently.',
+    'Counting is naming amounts in a fixed order. '
+    + 'In English the first twelve names are each their own word: '
+    + 'one, two, three, on to twelve. '
+    + 'After twelve, English stops inventing words and starts building. '
+    + 'Thirteen is three and ten. '
+    + 'Twenty-four is two tens and four. '
+    + 'Telling the time is built as well. '
+    + 'Three o’clock is the number three with a fixed word after it. '
+    + 'French does both of these. '
+    + 'It has its own words for the small numbers. '
+    + 'It builds the big ones out of smaller ones. '
+    + 'And its time carries a fixed word of its own.',
 
   method: [
     'Learn one to twenty as whole words.',

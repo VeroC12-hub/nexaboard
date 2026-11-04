@@ -215,6 +215,18 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Walk beside the Odaw river in Accra. '
+    + 'In some places you cannot see the water for the rubbish on it. '
+    + 'Nobody set out to kill that river. '
+    + 'Each person only dropped one bag. '
+    + 'One bag is nothing at all. '
+    + 'So who killed it? '
+    + 'And if no single person did anything big, was anything even wrong? '
+    + 'That question is not really about rubbish. '
+    + 'It is about right and wrong, '
+    + 'and it is the question all three faiths answer here.',
+
   idea:
     'All three faiths here teach the same thing. '
     + 'The world is not ours to spoil. '
@@ -398,6 +410,21 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'It is Friday at noon in Nima. '
+    + 'Men close their shops and walk to the mosque. '
+    + 'On Sunday morning in the same town you hear singing from a church. '
+    + 'At a family house, an elder pours a little drink on the ground '
+    + 'and speaks to those who died long ago. '
+    + 'Three different days. '
+    + 'Three different places. '
+    + 'Three different things being done. '
+    + 'Now the hard question. '
+    + 'Are those three people doing the same thing, or three different '
+    + 'things? '
+    + 'Watching them will not tell you, because none of it looks alike. '
+    + 'This lesson is how you tell.',
+
   idea:
     'Worship is how people show honour to God. '
     + 'Christians meet in a church, mostly on Sunday. '
@@ -419,9 +446,14 @@ teach({
     + 'That is why every faith has both.',
 
   recap:
-    'You greet a friend one way. You greet an elder another way. '
-    + 'Worship is a way of showing honour too. '
-    + 'It has its own words. It has its own manners.',
+    'To show honour means to treat someone as important. '
+    + 'There are set ways of doing it, and a greeting is one. '
+    + 'To a teacher you say "Good morning", and you stand up to say it. '
+    + 'To a friend you say "hello" and you stay where you are. '
+    + 'Two people, two ways. '
+    + 'The words and the manners together are what show the honour. '
+    + 'Worship is a set way of showing honour to God. '
+    + 'It has its own words and its own manners, just as a greeting does.',
 
   method: [
     'Say which faith you are describing.',

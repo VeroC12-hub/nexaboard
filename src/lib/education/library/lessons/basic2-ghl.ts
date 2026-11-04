@@ -35,6 +35,36 @@ teach({
     ],
   },
 
+  why:
+    'Your teacher writes a word on the board. '
+    + 'It is a word you have never seen before. '
+    + 'She does not say it for you. '
+    + 'She asks you to read it out. '
+    + 'Can you? '
+    + 'In English that is hard. '
+    + 'Look at cat and cake. '
+    + 'The a looks the same in both and it does not sound the same. '
+    + 'So an English reader has to guess. '
+    + 'In your own language you never have to guess. '
+    + 'One letter says one sound, every time. '
+    + 'This lesson gives you the letters, '
+    + 'so you can read a new word the first time you meet it.',
+
+  notation:
+    'ɛ is a letter. '
+    + 'We call it "eh". '
+    + 'It says the sound in the middle of bed. '
+    + 'ɔ is a letter too. '
+    + 'We call it "aw". '
+    + 'It says the sound in the middle of pot. '
+    + 'These two have their own places in the alphabet. '
+    + 'They are not an e and an o with a mark put on top. '
+    + 'Some letters work in pairs and say one sound together. '
+    + 'In Akan, ky is one sound, and so are gy and hy. '
+    + 'When you write ɛ, draw the whole letter. '
+    + 'An e in its place makes a different word. '
+    + 'That is the easiest mark in the world to lose.',
+
   idea:
     'Your language uses the same letters as English. '
     + 'And it uses a few more. '

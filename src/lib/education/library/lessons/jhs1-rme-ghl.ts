@@ -553,6 +553,38 @@ teach({
     ],
   },
 
+  why:
+    'An uncle has died and the family is gathering to plan the funeral. '
+    + 'You are seventeen. '
+    + 'The oldest people in the room are the chief’s elders. '
+    + 'The family has picked you to stand up and tell the gathering '
+    + 'how much money has been collected so far. '
+    + 'You know the amount. '
+    + 'You know every word you need in your own language. '
+    + 'Then you stand, and you do not know what to say first. '
+    + 'Who do you name? '
+    + 'What do you call them? '
+    + 'Say the amount straight out and you have insulted every elder there, '
+    + 'even though not one word was untrue. '
+    + 'Nobody will tell you that you did it, '
+    + 'and nobody will tell you how it should have gone. '
+    + 'This lesson is that order, written down.',
+
+  notation:
+    'A senior person is addressed by a title and not by a bare name. '
+    + 'In Akan the title for a chief or an elder is Nana. '
+    + 'In Ga it is Nii for a man and Naa for a woman. '
+    + 'In Ewe it is Togbe. '
+    + 'The title comes first, then the name: Nana Kwaku, Nii Teiko. '
+    + 'The person who speaks on a chief’s behalf has a name too. '
+    + 'In Akan he is the ɔkyeame, said "aw-CHA-may", '
+    + 'and in English he is called the linguist. '
+    + 'Most Ghanaian languages also use the word for more than one person '
+    + 'when addressing one senior person. '
+    + 'In Twi that word is mo, where a child is told wo. '
+    + 'Using wo to an elder is the commonest mistake, '
+    + 'and it is heard by everybody in the room at once.',
+
   idea:
     'Speaking to a gathering in a Ghanaian language follows a form. '
     + 'You greet first. '
@@ -596,9 +628,19 @@ teach({
     + 'which is the strongest claim a young person can make in that room.',
 
   recap:
-    'At home the words of a greeting change for an elder. '
-    + 'This gathers those habits into the full form '
-    + 'for standing and speaking before a gathering.',
+    'Ghanaian languages change their words to suit who is being spoken to. '
+    + 'The clearest case is the word for you. '
+    + 'Twi says wo to one child. '
+    + 'It says mo to one elder. '
+    + 'And mo is also the word for more than one person. '
+    + 'So an elder is addressed as though they were many people, '
+    + 'and that is what respect looks like inside the grammar. '
+    + 'A gathering has an order too. '
+    + 'The chief or the eldest comes first, then the other elders, '
+    + 'then everybody else, down to the youngest. '
+    + 'That order decides who is greeted first. '
+    + 'A formal address is built out of those two facts: '
+    + 'the plural for respect, and the order of seniority.',
 
   method: [
     'Ask beforehand who will be present and in what order of seniority.',
@@ -819,6 +861,39 @@ teach({
     ],
   },
 
+  why:
+    'The exam paper puts a passage in front of you in your own language. '
+    + 'Under it is a question, in the same language: '
+    + 'what did the farmer do when the rain stopped? '
+    + 'You read the passage and you understand every line of it. '
+    + 'You know what the farmer did. '
+    + 'You write it down. '
+    + 'You get two marks out of five. '
+    + 'Nothing you wrote was untrue. '
+    + 'So where did the other three marks go? '
+    + 'They went on things the question never said out loud. '
+    + 'Which language you answered in. '
+    + 'Whether the words were your own or copied off the page. '
+    + 'Whether you wrote the special letters and the marks over them. '
+    + 'This lesson is those three things.',
+
+  notation:
+    'Ghanaian languages are written with letters English does not have. '
+    + 'Twi and Ewe both use ɛ, said like the e in bed, '
+    + 'and ɔ, said like the o in pot. '
+    + 'Ewe also uses ƒ, ɖ and ŋ. '
+    + 'Each one is a letter in its own right. '
+    + 'ɛ is not an e with something added to it, '
+    + 'and it has its own place in the alphabet. '
+    + 'Some of these languages also write a small stroke above a vowel '
+    + 'to show the pitch of the voice. '
+    + 'That stroke is called a tone mark. '
+    + 'It is not decoration either. '
+    + 'It separates two words that are spelled with the same letters. '
+    + 'Leaving out ɛ, ɔ or a tone mark is a spelling mistake, '
+    + 'and it is the commonest way to lose a mark in an answer '
+    + 'that was otherwise right.',
+
   idea:
     'A comprehension passage in your language is answered in that '
     + 'language. '
@@ -852,10 +927,18 @@ teach({
     + 'Writing the marks is part of answering, not neatness.',
 
   recap:
-    'You answer comprehension questions in English already. '
-    + 'The method is the same. '
-    + 'What changes is that the reading and the answering both stay in your '
-    + 'language.',
+    'A comprehension is a passage to read, '
+    + 'with questions underneath about what the passage said. '
+    + 'Every answer is already in the passage. '
+    + 'Nothing is asked that the passage has not told you, '
+    + 'so you are not being tested on what you knew before you started. '
+    + 'Take the question: what did the farmer plant? '
+    + 'If line three of the passage says he planted maize, '
+    + 'then maize is the answer. '
+    + 'It came off line three, not off your own farm. '
+    + 'That is what comprehension is, in any language at all. '
+    + 'What this lesson adds is what changes '
+    + 'when the passage and the answers are both in your own language.',
 
   method: [
     'Read the whole passage once without stopping.',
@@ -1083,6 +1166,38 @@ teach({
     ],
   },
 
+  why:
+    'You are writing a letter in your language '
+    + 'to your grandmother in the village. '
+    + 'You want to tell her one thing: I will come at Christmas. '
+    + 'In English the word will does the whole job. '
+    + 'It is what tells her the coming has not happened yet. '
+    + 'So you look for the word for will in your own language. '
+    + 'There is no such word to find. '
+    + 'Then how does the sentence tell her you have not come yet? '
+    + 'Something else in it is carrying the time. '
+    + 'Until you know what that something is, '
+    + 'you cannot write the sentence and be sure it says next month '
+    + 'rather than last month. '
+    + 'That is the difference between a mark and no mark, '
+    + 'and this lesson is where that something sits.',
+
+  notation:
+    'A piece stuck on the front of a verb is called a prefix. '
+    + 'A small separate word that stands beside the verb is called '
+    + 'a particle. '
+    + 'The difference is written down as a space. '
+    + 'A prefix joins the verb with no space, a particle keeps its own. '
+    + 'The small stroke written above a vowel '
+    + 'to show the pitch of the voice is called a tone mark. '
+    + 'These languages also use letters English has not got: '
+    + 'ɛ, said like the e in bed, and ɔ, said like the o in pot. '
+    + 'Ewe adds ƒ, ɖ and ŋ. '
+    + 'Each is a full letter, not a decorated e or o. '
+    + 'So there are three ways to lose a mark here, and all three are small: '
+    + 'the right word with the wrong space, a missing tone mark, '
+    + 'and a special letter written as its plain English neighbour.',
+
   idea:
     'Three things decide whether a sentence in your language is correct: '
     + 'what carries the tense, '
@@ -1117,9 +1232,19 @@ teach({
     + 'and that is visible to a marker in the first line.',
 
   recap:
-    'You speak the language and know when a sentence sounds wrong. '
-    + 'This names the three things that make it wrong, '
-    + 'so you can correct your own writing instead of guessing.',
+    'A verb is the word in a sentence that says what happens: '
+    + 'go, eat, buy. '
+    + 'Every sentence with a verb in it also says when, '
+    + 'and that part is called the tense. '
+    + 'English marks the tense by changing the verb itself. '
+    + 'Go becomes went for the past. '
+    + 'Buy becomes bought. '
+    + 'Sometimes English adds a separate word instead, '
+    + 'as in will go for the future. '
+    + 'So English has two ways of saying when, '
+    + 'and the one it reaches for first changes the verb. '
+    + 'Ghanaian languages lean almost entirely on the other way. '
+    + 'That is where this lesson starts.',
 
   method: [
     'Find the verb in the sentence.',

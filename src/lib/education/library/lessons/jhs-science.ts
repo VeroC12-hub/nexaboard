@@ -20,6 +20,40 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Sachet water is sold on every street. '
+    + 'Hold a sachet up to the light and it looks like nothing at all. '
+    + 'Just clear. '
+    + 'Now put a cup of sea water from Labadi beside it. '
+    + 'That is clear too. '
+    + 'Both are clear, both are wet, '
+    + 'and you cannot see one single difference between them. '
+    + 'Leave the sea water on a window sill in the sun for two days. '
+    + 'The water goes and a ring of salt is left in the bottom. '
+    + 'Do the same with the sachet water and nothing is left behind. '
+    + 'Same look, two different things. '
+    + 'So what was actually different about them, '
+    + 'and how could you have known before you left them in the sun? '
+    + 'Looking will not tell you. '
+    + 'This lesson is how you tell.',
+
+  notation:
+    'Each element is written as a short code called its symbol. '
+    + 'A symbol is one capital letter, '
+    + 'or a capital letter followed by a small one. '
+    + 'O is oxygen. Fe is iron. Na is sodium. '
+    + 'The second letter is always small. '
+    + 'FE and NA are both wrong. '
+    + 'Put symbols together and you have written a formula. '
+    + 'Water is the formula $H_2O$, said "aitch two oh". '
+    + 'The small 2 sitting low is called a subscript. '
+    + 'It counts the atoms of the symbol in front of it. '
+    + 'So $H_2O$ is two atoms of hydrogen joined to one atom of oxygen. '
+    + 'Where no number is written, the count is one. '
+    + 'Two marks are lost here over and over: '
+    + 'a subscript written at full height, '
+    + 'and the second letter of a symbol written as a capital.',
+
   idea:
     'Everything around you is built from about a hundred basic substances. '
     + 'We call them elements. '

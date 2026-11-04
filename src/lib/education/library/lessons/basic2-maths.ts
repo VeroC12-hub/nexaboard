@@ -38,6 +38,32 @@ teach({
     ],
   },
 
+  why:
+    'Your mother sends you out to buy eggs. '
+    + 'She tells you the price is twenty four pesewas. '
+    + 'The woman at the stall writes 42 on a scrap of paper. '
+    + 'You look at the two numbers. '
+    + 'Twenty four is 24. '
+    + 'The paper says 42. '
+    + 'Both of them are made from a 2 and a 4. '
+    + 'Are they the same amount or not? '
+    + 'If they are not, which one is bigger, and by how much? '
+    + 'The digits cannot tell you, because the digits are the same two. '
+    + 'This lesson is how you tell.',
+
+  notation:
+    'A digit is one of the ten number signs: '
+    + '0, 1, 2, 3, 4, 5, 6, 7, 8 and 9. '
+    + '42 is written with two digits. '
+    + 'The spot a digit sits in is called its place. '
+    + 'The place on the right is the ones place. '
+    + 'The place beside it, on the left, is the tens place. '
+    + 'So a digit has a place, and the place is part of what it means. '
+    + '42 is said "forty two". '
+    + 'It is not said "four two". '
+    + 'Saying "four two" is the commonest mistake, '
+    + 'because it hides the tens.',
+
   idea:
     'Every two digit number is made of tens and ones. 42 is four tens and two '
     + 'ones. The digit on the left counts the tens. The digit on the right '
