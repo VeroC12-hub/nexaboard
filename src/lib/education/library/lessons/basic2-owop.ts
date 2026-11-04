@@ -38,6 +38,16 @@ teach({
     ],
   },
 
+  why:
+    'It is Monday morning. '
+    + 'The person who always fetches the water is sick in bed. '
+    + 'Nobody fetched any last night. '
+    + 'So there is no water to bath with and none to cook with. '
+    + 'One job was not done. '
+    + 'Now three people are late for school. '
+    + 'Why did one small job stop the whole house? '
+    + 'This lesson is the answer.',
+
   idea:
     'A home runs on jobs, and the jobs get shared out. '
     + 'Homes are not all made of the same people. '
@@ -53,8 +63,15 @@ teach({
     + 'The jobs hold each other up.',
 
   recap:
-    'You live with people who look after each other. '
-    + 'That is your home. You are one of them.',
+    'A home is a group of people who live together '
+    + 'and look after each other. '
+    + 'It may be a mother, a father and their children. '
+    + 'It may be a grandmother and her grandchildren. '
+    + 'It may be an aunt, an uncle and cousins in one house. '
+    + 'All of those are homes. '
+    + 'What makes it a home is the looking after. '
+    + 'It is not who is in it. '
+    + 'And you are one of the people in yours.',
 
   method: [
     'Name the people in your household.',

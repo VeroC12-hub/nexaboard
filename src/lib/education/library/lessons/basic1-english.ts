@@ -211,6 +211,30 @@ teach({
     ],
   },
 
+  why:
+    'Your name is written on the front of your book. '
+    + 'It is your name. The teacher told you so. '
+    + 'Now she writes a new word on the board. '
+    + 'This time she does not tell you what it says. '
+    + 'The marks just sit there. '
+    + 'They say nothing to you at all. '
+    + 'How can a mark on a board tell you a word? '
+    + 'This lesson is how.',
+
+  notation:
+    'Every letter has two things: a name and a sound. '
+    + 'The letter m is called "em". '
+    + 'That is its name. '
+    + 'It says mmm. '
+    + 'That is its sound. '
+    + 'The name and the sound are not the same thing. '
+    + 'Every letter also comes in two sizes. '
+    + 'M is the big one and m is the small one. '
+    + 'They are still the same letter. '
+    + 'Saying the name when you should say the sound '
+    + 'is the thing that stops children reading. '
+    + 'Say mmm, not em.',
+
   idea:
     'Letters are marks that stand for sounds. The letter m says mmm, like the '
     + 'start of maame. The letter s says sss, like the start of sika. When you '

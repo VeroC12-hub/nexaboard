@@ -33,6 +33,28 @@ teach({
     ],
   },
 
+  why:
+    'You go to the market with your mother. '
+    + 'There are a lot of people. '
+    + 'You turn round and she is gone. '
+    + 'A kind woman stops and asks you who you are. '
+    + 'You say "Ama". '
+    + 'She asks which Ama. '
+    + 'And you do not know what else to say. '
+    + 'There are four Amas in your class alone. '
+    + 'What else did you need to be able to tell her? '
+    + 'This lesson is what else.',
+
+  notation:
+    'Your name has two parts. '
+    + 'The first part is your first name. '
+    + 'The second part is your family name. '
+    + 'In Ama Mensah, Ama comes first and Mensah comes after. '
+    + 'Both parts start with a big letter, every single time. '
+    + 'Writing ama mensah with small letters is wrong. '
+    + 'When you write your name, write both parts, '
+    + 'with one space between them.',
+
   idea:
     'You have a name, an age, and a place you come from. Those three answer '
     + 'the question "who are you?" for anybody who asks. But you are more than '

@@ -39,6 +39,29 @@ teach({
     ],
   },
 
+  why:
+    'You and your friend are counting mangoes in a basket. '
+    + 'There are a lot of them. '
+    + 'You count: one, two, three, four. '
+    + 'At twenty six you lose your place. '
+    + 'You start again. '
+    + 'At thirty one your friend talks to you and you lose it again. '
+    + 'Counting one at a time keeps breaking. '
+    + 'Is there a way to count a lot of things '
+    + 'and not lose your place? '
+    + 'This lesson is that way.',
+
+  notation:
+    '34 is written with two marks side by side. '
+    + 'Each mark is called a digit. '
+    + '34 is said "thirty four". '
+    + 'It is not said "three four". '
+    + 'The digit on the left counts the bundles of ten. '
+    + 'The digit on the right counts the loose ones. '
+    + 'So the place a digit sits in tells you what it is counting. '
+    + '34 and 43 are made from the same two digits. '
+    + 'They are not the same number.',
+
   idea:
     'Tie ten sticks together. That is one bundle. '
     + 'Count the bundles. Then count the loose sticks. '
@@ -209,6 +232,27 @@ teach({
     ],
   },
 
+  why:
+    'You have 8 bottle tops in your hand. '
+    + 'Your friend gives you 5 more. '
+    + 'How many have you got now? '
+    + 'You could put them all on the ground and count every one. '
+    + 'One, two, three, all the way up. '
+    + 'But you already knew you had 8 before he gave you any. '
+    + 'Counting them all again throws that away. '
+    + 'Is there a faster way? '
+    + 'This lesson is the faster way.',
+
+  notation:
+    'The sign + is called plus. '
+    + '8 + 5 is said "eight plus five". '
+    + 'The sign = is called equals. '
+    + 'It means "is the same as". '
+    + 'So 8 + 5 = 13 is said "eight plus five equals thirteen". '
+    + 'The sign for taking away is a single line, -, called minus. '
+    + 'Keep the two signs apart. '
+    + '8 + 5 is thirteen and 8 - 5 is three.',
+
   idea:
     'Adding is putting things together. Then you count them all. '
     + 'Taking away is moving some away. Then you count what is left. '
@@ -378,6 +422,30 @@ teach({
       'No sides at all means circle.',
     ],
   },
+
+  why:
+    'Your teacher holds up two shapes cut from paper. '
+    + 'One is long and thin. '
+    + 'One is wide and flat. '
+    + 'They look nothing like each other. '
+    + 'Then she says they both have the same name. '
+    + 'How can that be? '
+    + 'Your eyes say they are two different things. '
+    + 'So what is she looking at that you are not? '
+    + 'This lesson is what.',
+
+  notation:
+    'A flat shape is drawn with lines. '
+    + 'Each straight line is called a side. '
+    + 'The place where two sides meet is called a corner. '
+    + 'In a drawing of a square, '
+    + 'a little dash is put on each side '
+    + 'to show that all the sides are the same length. '
+    + 'Triangle is said "TRY-ang-gul". '
+    + 'Cylinder is said "SIL-in-der". '
+    + 'Cuboid is said "KYOO-boyd". '
+    + 'The commonest mistake is to name a shape by looking at it. '
+    + 'Count the sides instead.',
 
   idea:
     'Every shape has a name. Count to find it. '

@@ -451,6 +451,32 @@ teach({
     ],
   },
 
+  why:
+    'You and your sister have one orange between you. '
+    + 'You cut it in two. '
+    + 'One piece is big and one piece is small. '
+    + 'You give her the small one. '
+    + 'She says that is not half. '
+    + 'You say you cut it into two, so each piece is a half. '
+    + 'Who is right? '
+    + 'You both agree it is in two pieces. '
+    + 'So what is she asking for that you did not give her? '
+    + 'This lesson is that word, and what it really asks for.',
+
+  notation:
+    'Half is written as the word half. '
+    + 'You will also see it written as a small 1 above a small 2, '
+    + 'with a line between them. '
+    + 'The 2 underneath says the orange was cut into two. '
+    + 'A quarter is said "KWOR-ter". '
+    + 'It is written as a 1 above a 4, '
+    + 'because the thing was cut into four. '
+    + 'The number underneath is the one doing the work. '
+    + 'Two halves make one whole thing. '
+    + 'Four quarters make one whole thing too. '
+    + 'The commonest mistake is to call any two pieces halves. '
+    + 'Halves have to match.',
+
   idea:
     'Half means split into two parts that are the same. A quarter means split '
     + 'into four parts that are the same. Half of a ten pesewa coin shared '
@@ -615,6 +641,16 @@ teach({
       'Do that change once more.',
     ],
   },
+
+  why:
+    'Your teacher is drawing beads on the board for a necklace. '
+    + 'Red, blue, red, blue, red, blue. '
+    + 'Then she stops and goes to answer the door. '
+    + 'She left the next bead for you to draw. '
+    + 'Which colour do you pick? '
+    + 'Nobody told you the rule. '
+    + 'The rule is hiding in the beads she already drew. '
+    + 'This lesson is how to find it.',
 
   idea:
     'A pattern is something that repeats in the same way each time. Red, blue, '
@@ -781,6 +817,29 @@ teach({
       'Count in fives, then add the leftovers.',
     ],
   },
+
+  why:
+    'Your teacher wants to know which fruit the class likes best. '
+    + 'She asks every child, one at a time. '
+    + 'Mango. Pawpaw. Mango. Orange. Mango. Pawpaw. '
+    + 'There are forty children and she is only on number six. '
+    + 'Now hold all forty answers in your head. '
+    + 'Tell her how many said mango. '
+    + 'You cannot. '
+    + 'Nobody can. '
+    + 'So how do you count a thing while it is still happening? '
+    + 'This lesson is how.',
+
+  notation:
+    'A tally mark is one straight stroke. '
+    + 'One stroke means one answer. '
+    + 'The fifth stroke is not drawn standing up like the others. '
+    + 'It is laid across the four before it, like a gate. '
+    + 'That gate of five is read as five, not as one. '
+    + 'So three gates and two loose strokes reads as seventeen. '
+    + 'The commonest mistake is to draw the fifth stroke standing up. '
+    + 'Then there are no gates, '
+    + 'and the whole row has to be counted one stroke at a time.',
 
   idea:
     'A tally is a mark you make for each answer. '

@@ -47,7 +47,8 @@ teach({
     + '240. 95. 108. '
     + 'She asks you which class gave the most. '
     + 'You can read 95. '
-    + 'That is nine tens and five ones, and you learnt that last year. '
+    + 'That is nine tens and five ones. '
+    + 'Two digits, and each one sits in a place. '
     + 'But 240 has three digits, and you have no name for the first one. '
     + 'Worse: is 95 bigger than 108? '
     + 'There are nine tens in 95 and only nought tens in 108. '
@@ -876,7 +877,7 @@ teach({
     + 'It is said "three quarters", or "three over four". '
     + 'The number under the line is the bottom number. '
     + 'Its proper name is the denominator, '
-    + 'and an easy way to remember that is that the denominator is down. '
+    + 'and an easy way to keep it straight is that the denominator is down. '
     + 'The number above the line is the top number, '
     + 'and its proper name is the numerator. '
     + 'The line between them is not a minus sign. '
@@ -1072,7 +1073,7 @@ teach({
     + 'Someone draws a shape on paper and hands it to you. '
     + 'Find the line it would fold along. '
     + 'You are not allowed to cut the paper or fold it. '
-    + 'And if there is no such line, how would you know for certain? '
+    + 'And if there is no such line at all, how would you be sure? '
     + 'This lesson is the test you use instead of folding.',
 
   notation:

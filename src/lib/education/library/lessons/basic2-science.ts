@@ -33,6 +33,17 @@ teach({
     ],
   },
 
+  why:
+    'A cassava plant stands in the sun. '
+    + 'There has been no rain for a week. '
+    + 'It does not walk down to the river. '
+    + 'It does not go out and look for food. '
+    + 'It just stands there. '
+    + 'And it stays alive. '
+    + 'Tie a goat in that same spot for a week and the goat dies. '
+    + 'So how is the plant eating and drinking without moving at all? '
+    + 'This lesson is how.',
+
   idea:
     'A plant has roots, a stem, leaves, and often flowers and fruit. Each part '
     + 'has a job. The roots hold it down and drink. The stem holds it up and '
@@ -222,6 +233,18 @@ teach({
     ],
   },
 
+  why:
+    'The lights go off at night and the room is black. '
+    + 'You cannot see your own hand in front of your face. '
+    + 'But your little brother walks in, and you can tell he is there. '
+    + 'How? '
+    + 'You did not see him. '
+    + 'And the kenkey is ready before anybody calls you, '
+    + 'and you can tell that too. '
+    + 'You did not see that either. '
+    + 'Something is telling you about things you cannot see. '
+    + 'This lesson is what.',
+
   idea:
     'You find out about the world through five parts of your body. Eyes to '
     + 'see, ears to hear, nose to smell, tongue to taste, skin to feel. Those '
@@ -394,6 +417,18 @@ teach({
       'Ask which job it did: start, stop or turn.',
     ],
   },
+
+  why:
+    'A ball lies still on the ground in the schoolyard. '
+    + 'It lies there all morning and does nothing. '
+    + 'Then you kick it. '
+    + 'It flies across the yard. '
+    + 'It rolls, and it rolls, and then it stops on its own. '
+    + 'Two things happened there that you never think about. '
+    + 'The ball did not start moving until something touched it. '
+    + 'And it did not keep moving either. '
+    + 'What started it, and what stopped it? '
+    + 'This lesson is the one word that answers both.',
 
   idea:
     'A push or a pull is what makes things move, stop or change direction. You '
