@@ -59,6 +59,36 @@ teach({
     ],
   },
 
+  why:
+    'A student writes: Because the rains came late. '
+    + 'It has a subject, it has a verb, '
+    + 'it starts with a capital and ends with a full stop. '
+    + 'A teacher marks it wrong '
+    + 'and writes "not a sentence" beside it. '
+    + 'In the same essay he writes '
+    + '"the rains came late the maize failed", '
+    + 'which holds two whole sentences '
+    + 'and no sign of where the first one stops. '
+    + 'Both faults are about the same thing. '
+    + 'So what makes a run of words a sentence, '
+    + 'when having a verb in it is not enough?',
+
+  notation:
+    'A clause is a group of words '
+    + 'with its own subject and its own verb. '
+    + 'A main clause could be written on its own '
+    + 'as a sentence. '
+    + 'A subordinate clause could not, '
+    + 'and the word that makes it subordinate '
+    + 'is the one at the front of it: '
+    + 'because, although, when, if, that. '
+    + 'A phrase has no verb of its own at all, '
+    + 'so "in the morning" is a phrase and not a clause. '
+    + 'Count clauses by counting verbs that have subjects, '
+    + 'never by counting commas. '
+    + 'Calling a phrase a clause '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A clause is a group of words with its own subject and its own '
     + 'verb. '
@@ -128,11 +158,17 @@ teach({
     + 'not length.',
 
   recap:
-    'You have named the subject and the predicate, '
-    + 'and joined two short sentences with a conjunction. '
-    + 'This gives the four sentence types, '
-    + 'and the two faults they let you repair: '
-    + 'the fragment and the run on.',
+    'Every sentence does two jobs. '
+    + 'One part names who or what the sentence is about, '
+    + 'and that part is the subject. '
+    + 'The other part says what they do or are, '
+    + 'and the heart of it is the verb. '
+    + 'In "the rains came late", '
+    + 'the rains is the subject and came is the verb. '
+    + 'Take the verb away and nothing is being said: '
+    + '"the rains late" is a label, not a statement. '
+    + 'This lesson counts those subject and verb pairs '
+    + 'and names the four shapes they make.',
 
   method: [
     'Read the sentence aloud once.',
@@ -314,6 +350,34 @@ teach({
     ],
   },
 
+  why:
+    'A student writes: The box of mangoes were heavy. '
+    + 'Read it aloud and it sounds right, '
+    + 'because mangoes and were sit next to each other '
+    + 'and both of them are plural. '
+    + 'It is wrong. '
+    + 'One box was heavy, '
+    + 'and one box is a singular thing, '
+    + 'however many mangoes were inside it. '
+    + 'The ear will go on getting this wrong every time, '
+    + 'because the ear listens to the nearest word. '
+    + 'So what do you check instead of listening?',
+
+  notation:
+    'Agreement between a subject and its verb is called concord. '
+    + 'Singular and plural are the two numbers '
+    + 'a subject can have, '
+    + 'and the verb has a form for each: '
+    + 'the box is, the boxes are. '
+    + 'A phrase sitting between them, such as of mangoes, '
+    + 'is called an intervening phrase, '
+    + 'and it never changes the number of the subject. '
+    + 'Cross it out with your pencil '
+    + 'before you choose the verb. '
+    + 'Matching the verb to the last noun before it '
+    + 'is the commonest way to lose a mark, '
+    + 'and it is exactly what the question is testing.',
+
   idea:
     'Concord, or agreement, is the rule that a verb matches its '
     + 'subject in number. '
@@ -385,12 +449,18 @@ teach({
     + 'find the subject, count it, then look at the verb.',
 
   recap:
-    'You have matched singular and plural verbs to simple subjects. '
-    + 'This handles the hard cases: '
-    + 'a phrase in the way, '
-    + 'each and every, '
-    + 'collective nouns, '
-    + 'and either or.',
+    'An English verb changes its form '
+    + 'with the number of its subject. '
+    + 'One boy walks, with an s, '
+    + 'and two boys walk, with none. '
+    + 'The verb to be changes more: '
+    + 'the boy is, the boys are, '
+    + 'and in the past the boy was, the boys were. '
+    + 'So a verb carries a claim about how many, '
+    + 'and a sentence is wrong '
+    + 'when that claim does not match its subject. '
+    + 'This lesson is the hard cases, '
+    + 'where the subject is not the word nearest the verb.',
 
   method: [
     'Find the verb in the clause.',
@@ -567,6 +637,35 @@ teach({
     ],
   },
 
+  why:
+    'An examination paper has a sentence with a gap in it: '
+    + 'the committee reached a blank after three hours. '
+    + 'Beside it, in brackets, is the word decide. '
+    + 'Decide will not go in the gap, '
+    + 'because "reached a decide" is not English. '
+    + 'The gap wants the name of a thing, '
+    + 'and decide is an action. '
+    + 'Nothing about the meaning needs to change. '
+    + 'What changes is the job the word has to do. '
+    + 'So how do you turn a word that does '
+    + 'into a word that names?',
+
+  notation:
+    'A root is the word before anything is added to it. '
+    + 'A prefix goes in front and changes the meaning: '
+    + 'happy becomes unhappy. '
+    + 'A suffix goes on the end '
+    + 'and usually changes the job: '
+    + 'decide becomes decision. '
+    + 'The jobs a word can have are the parts of speech: '
+    + 'a noun names, a verb does, '
+    + 'an adjective describes a noun, '
+    + 'and an adverb describes a verb. '
+    + 'Writing the root unchanged into a gap '
+    + 'that wants a different part of speech '
+    + 'is the commonest way to lose a mark, '
+    + 'because the brackets hand you the root on purpose.',
+
   idea:
     'Most English words are built from a root with pieces added. '
     + 'A prefix goes in front and changes the meaning: '
@@ -637,12 +736,19 @@ teach({
     + 'is a reporting error, not a style choice.',
 
   recap:
-    'You have used prefixes and suffixes to build words, '
-    + 'and matched words to their meanings. '
-    + 'This turns that into a method: '
-    + 'decide the part of speech the sentence needs, '
-    + 'then choose the form, '
-    + 'and choose between near synonyms on strength and company.',
+    'A word can be rebuilt '
+    + 'without changing what it is about. '
+    + 'Start with care. '
+    + 'Add ful and you get careful, which describes a person. '
+    + 'Add less and you get careless, '
+    + 'which describes the opposite person. '
+    + 'Add ly to careful and you get carefully, '
+    + 'which describes how a thing was done. '
+    + 'One root, four words, '
+    + 'every one of them still about care, '
+    + 'and each one fitting a different place in a sentence. '
+    + 'This lesson turns that into a method '
+    + 'for choosing which one a gap wants.',
 
   method: [
     'Read the whole sentence, not the gap alone.',

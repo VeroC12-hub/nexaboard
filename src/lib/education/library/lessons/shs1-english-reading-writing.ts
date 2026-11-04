@@ -58,6 +58,34 @@ teach({
     ],
   },
 
+  why:
+    'A passage says a man walked home in the rain '
+    + 'with no umbrella, '
+    + 'and that his wife met him at the door with a towel. '
+    + 'The question asks how the wife felt about her husband. '
+    + 'The passage never says how she felt. '
+    + 'One student writes "the passage does not say", '
+    + 'which earns nothing. '
+    + 'Another writes "she had been watching for him", '
+    + 'which earns the mark. '
+    + 'Where did the second answer come from, '
+    + 'if the words are not on the page?',
+
+  notation:
+    'The question word tells you what kind of answer is wanted, '
+    + 'and the marks follow it. '
+    + 'State and name ask you to find the thing and set it down. '
+    + 'Explain and why ask for a reason, '
+    + 'and a reason needs the word because inside it. '
+    + '"Give the meaning of, as it is used in the passage" '
+    + 'asks for a word that could replace the original '
+    + 'without changing what the sentence says. '
+    + '"In your own words" means not the passage words, '
+    + 'and it is the instruction most often ignored. '
+    + 'Copying a passage sentence whole '
+    + 'where your own words were asked for '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A comprehension passage is unseen, '
     + 'so every answer has to be built from the text in front of you '
@@ -131,11 +159,17 @@ teach({
     + 'is looking for two things, not for a paragraph.',
 
   recap:
-    'You have found information in a passage '
-    + 'and answered questions on what you read. '
-    + 'This names the three kinds of question, '
-    + 'and adds the habit of giving evidence '
-    + 'and then the reasoning from it.',
+    'A passage can answer a question in two different ways. '
+    + 'Sometimes the answer is sitting there as a sentence. '
+    + 'Read "the lorry left Tamale at six" '
+    + 'and the question "when did the lorry leave" '
+    + 'is already answered. '
+    + 'Sometimes the answer is not there and is still certain. '
+    + 'Read "she locked the door and took the key with her" '
+    + 'and it is plain she was not coming back soon, '
+    + 'although no sentence in the passage says so. '
+    + 'Finding and working out are two different jobs, '
+    + 'and this lesson names them both.',
 
   method: [
     'Read the whole passage once, without stopping.',
@@ -213,7 +247,7 @@ teach({
     {
       mistake: 'Answering from general knowledge.',
       why: 'Only the passage counts. '
-        + 'What you know about lorries is not evidence here.',
+        + 'Your own knowledge of lorries is not evidence here.',
     },
     {
       mistake: 'Giving evidence with no reasoning, or the reverse.',
@@ -319,6 +353,38 @@ teach({
     ],
   },
 
+  why:
+    'A student writes: '
+    + 'I was very afraid. '
+    + 'The night was very frightening. '
+    + 'I was so scared. '
+    + 'Three sentences, and the reader feels nothing at all. '
+    + 'Another writes: '
+    + 'I counted the gaps in the fence twice, '
+    + 'and the second time there were four. '
+    + 'Nobody mentioned fear and the reader has it. '
+    + 'Both students were told to write a frightening story. '
+    + 'What is the second one doing '
+    + 'that the first cannot reach by adding more words like very?',
+
+  notation:
+    'Two instructions in this topic come as set phrases, '
+    + 'and they are worth saying properly. '
+    + 'Show, do not tell, '
+    + 'means give the thing that was seen, heard or done, '
+    + 'and let the reader take the feeling out of it. '
+    + 'Pace is how fast the writing moves '
+    + 'through the story’s own time, '
+    + 'and you control it '
+    + 'by how many words you spend on a minute. '
+    + 'A narrative tells what happened; '
+    + 'a descriptive piece says what something was like, '
+    + 'so a narrative needs a problem and a description does not. '
+    + 'Writing a description where a story was asked for '
+    + 'is the commonest way to lose a mark, '
+    + 'because a piece with no problem in it '
+    + 'cannot have an ending.',
+
   idea:
     'A narrative tells what happened; '
     + 'a description makes a reader see something. '
@@ -391,11 +457,16 @@ teach({
     + 'and the last paragraph shows it.',
 
   recap:
-    'You have written a story with a beginning, a middle and an end, '
-    + 'and described a place using the senses. '
-    + 'This adds control: '
-    + 'showing instead of telling, '
-    + 'and spending words where the story turns.',
+    'A story is not a list of events. '
+    + '"I woke up, I ate, I went to school, I came home" '
+    + 'holds four events and no story. '
+    + 'Put one thing in the way and it becomes a story: '
+    + 'I woke up late, and the only bus had gone. '
+    + 'Now something is wanted, '
+    + 'something is stopping it, '
+    + 'and a reader waits to see which of the two wins. '
+    + 'That is the problem, '
+    + 'and this lesson is about handling it on purpose.',
 
   method: [
     'Read the question and note what kind of story is asked for.',
@@ -582,6 +653,36 @@ teach({
     ],
   },
 
+  why:
+    'A student says "I will tink about it" '
+    + 'and the whole room understands him. '
+    + 'In the examination he is given a list of words '
+    + 'and asked which one has the same vowel sound as bird. '
+    + 'He says the words to himself to decide. '
+    + 'But his own speech makes bed and bad one word, '
+    + 'and bird and bud one word, '
+    + 'so his ear reports a match '
+    + 'where the examiner has two separate sounds. '
+    + 'The ear is the tool for this question, '
+    + 'and here the tool is wrong. '
+    + 'So what do you use instead?',
+
+  notation:
+    'A sounds question is about saying, not about spelling, '
+    + 'and writing keeps the two apart. '
+    + 'A letter is named as a letter: the letter a. '
+    + 'A sound is written between two slashes. '
+    + 'A minimal pair is two words '
+    + 'differing in exactly one sound, '
+    + 'such as ship and sheep, '
+    + 'and a minimal pair is the proof '
+    + 'that English keeps those two sounds separate. '
+    + 'Grouping words by their spelling '
+    + 'where the question asked about sound '
+    + 'is the commonest way to lose a mark, '
+    + 'because put and but are spelt alike '
+    + 'and said differently.',
+
   idea:
     'A vowel sound is made with the air flowing freely; '
     + 'a consonant sound involves some blocking or narrowing. '
@@ -652,11 +753,17 @@ teach({
     + 'and ignore how they are written.',
 
   recap:
-    'You have matched letters to sounds, '
-    + 'and sounded out new words in reading. '
-    + 'This separates the two: '
-    + 'the sound is what the question asks about, '
-    + 'and the spelling is a distraction.',
+    'English spelling and English sound are two systems '
+    + 'laid one on top of the other. '
+    + 'The letters ough are the same four letters '
+    + 'in though, through, cough and rough, '
+    + 'and all four are said differently. '
+    + 'The sound in meat is the same sound '
+    + 'as in meet, feet and receive, '
+    + 'written four different ways. '
+    + 'So the page cannot be trusted in either direction. '
+    + 'This lesson is about the sound alone, '
+    + 'and the spelling is there to mislead you.',
 
   method: [
     'Read the question and find which sound is being asked about.',
@@ -836,6 +943,33 @@ teach({
     ],
   },
 
+  why:
+    'A passage says the harmattan scraped the town dry. '
+    + 'A student writes "the writer uses a metaphor". '
+    + 'That is true, and it earns one mark out of four. '
+    + 'The word scraped does something '
+    + 'that a word like dried would not do: '
+    + 'it puts a blade on the wind '
+    + 'and makes the town a thing being worked on. '
+    + 'Naming the device is the first sentence of an answer. '
+    + 'What are the other three?',
+
+  notation:
+    'An answer about a device has three parts, '
+    + 'and they go in one order. '
+    + 'Quote the words, in quotation marks, '
+    + 'exactly as the passage has them. '
+    + 'Name the device, in the singular: '
+    + 'a metaphor, a simile, one piece of alliteration. '
+    + 'Then say what it does, '
+    + 'which means what a reader sees, hears or feels '
+    + 'because of it. '
+    + 'Alliteration is repeated sounds '
+    + 'at the start of words, not repeated letters, '
+    + 'so a city and a cat do not alliterate. '
+    + 'Naming the device and stopping there '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A literary device is a choice a writer makes '
     + 'about how to say something '
@@ -910,11 +1044,16 @@ teach({
     + 'and the mark is for noticing which.',
 
   recap:
-    'You have named similes, metaphors and personification, '
-    + 'and found them in a poem. '
-    + 'This asks for the effect as well as the name, '
-    + 'and for the link between the choice and the meaning of the '
-    + 'whole piece.',
+    'A device is a choice the writer made, '
+    + 'and a choice could always have gone the other way. '
+    + 'A passage could have said the wind was strong. '
+    + 'It said instead that the wind had fingers. '
+    + 'Both sentences describe the same wind. '
+    + 'The second one puts a hand on the reader '
+    + 'and the first does not. '
+    + 'Naming the device says which choice was made. '
+    + 'The marks are for saying what the choice bought, '
+    + 'and this lesson is that second half.',
 
   method: [
     'Read the passage or poem through for its overall meaning first.',

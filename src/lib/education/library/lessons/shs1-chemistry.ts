@@ -63,6 +63,34 @@ teach({
     ],
   },
 
+  why:
+    'A goldsmith in Accra is handed a chain '
+    + 'and asked whether it is real gold. '
+    + 'He can weigh it and he can look at its colour, '
+    + 'and brass passes both of those tests. '
+    + 'Gold and brass are built from the same three kinds of particle '
+    + 'in different counts. '
+    + 'Nothing you can see with your eyes gives you the counts. '
+    + 'So how did anybody ever work out '
+    + 'what is inside a lump of matter, '
+    + 'when nobody has ever seen inside one?',
+
+  notation:
+    'An atom is written with two numbers against its symbol. '
+    + 'The bottom left number is the atomic number: '
+    + 'how many protons the atom has. '
+    + 'The top left number is the mass number: '
+    + 'protons and neutrons added together. '
+    + 'So carbon with 12 above and 6 below '
+    + 'is said "carbon twelve", '
+    + 'and it holds 6 protons and 6 neutrons. '
+    + 'An electron arrangement is written '
+    + 'as a list of sub-shells with their counts raised: '
+    + '1s two, 2s two, 2p six. '
+    + 'Swapping the two numbers round '
+    + 'is the commonest way to lose a mark, '
+    + 'because the smaller of them is always the atomic number.',
+
   idea:
     'An atom has a nucleus containing protons and neutrons, '
     + 'with electrons occupying shells around it. '
@@ -150,10 +178,20 @@ teach({
     + 'and the marks are for the inferences, which are reasoning.',
 
   recap:
-    'You have met the atom as protons, neutrons and electrons, '
-    + 'with electrons in shells of 2, 8 and 8. '
-    + 'This gives the evidence for that picture '
-    + 'and divides each shell into sub-shells.',
+    'All matter is built of atoms, '
+    + 'and an atom is built of three kinds of particle. '
+    + 'A proton carries one positive charge. '
+    + 'An electron carries one negative charge '
+    + 'and is nearly two thousand times lighter. '
+    + 'A neutron carries no charge at all. '
+    + 'The protons and the neutrons sit together '
+    + 'in a lump at the centre, called the nucleus, '
+    + 'and the electrons are out beyond it. '
+    + 'A carbon atom has 6 protons, 6 neutrons and 6 electrons, '
+    + 'which is why it is neutral: '
+    + 'six positives and six negatives cancel. '
+    + 'This lesson gives the evidence for that picture '
+    + 'and divides the outside into sub-shells.',
 
   method: [
     'Write the atomic number and the mass number.',
@@ -364,6 +402,37 @@ teach({
     ],
   },
 
+  why:
+    'Sodium dropped into water skates about and fizzes. '
+    + 'Potassium, one place below it in the same column, '
+    + 'catches fire on the water. '
+    + 'Caesium, three places further down, '
+    + 'is dangerous to bring near water at all. '
+    + 'Nobody found this out by testing every element. '
+    + 'It was predicted. '
+    + 'A table was arranged in an order, '
+    + 'and the order told chemists what an element would do '
+    + 'before anybody tried it. '
+    + 'What is that order, '
+    + 'and why should a position in it predict anything?',
+
+  notation:
+    'A period is a row across the table '
+    + 'and a group is a column down it. '
+    + 'Periods are numbered 1, 2, 3 and upwards, '
+    + 'and groups are numbered 1 to 8 or 1 to 18, '
+    + 'depending on the table in front of you. '
+    + 'Atomic radius is given in nanometres or picometres. '
+    + 'Ionisation energy is given in kilojoules per mole, '
+    + 'written kJ per mol, '
+    + 'and it is always for a mole of atoms, never for one atom. '
+    + 'Electronegativity carries no unit at all, '
+    + 'because it is a comparison. '
+    + 'Saying a value rises down a group '
+    + 'when it rises across a period '
+    + 'is the commonest way to lose a mark, '
+    + 'so name the direction you are moving in first.',
+
   idea:
     'Periodicity is the pattern that repeats '
     + 'as the elements are taken in order of atomic number. '
@@ -456,10 +525,20 @@ teach({
     + 'and the marks are for explaining it.',
 
   recap:
-    'You can place an element from its electron arrangement '
-    + 'and read its group and period. '
-    + 'This asks what changes as you move along a row or down a column, '
-    + 'and why.',
+    'The periodic table is not a list. '
+    + 'It is an arrangement. '
+    + 'The elements are set out in order '
+    + 'of how many protons each atom holds: '
+    + 'hydrogen 1, helium 2, lithium 3, and so on upwards. '
+    + 'Then the row is broken and a new one started '
+    + 'whenever a new shell of electrons begins. '
+    + 'That one decision does all the work. '
+    + 'Every element in a column ends up '
+    + 'with the same number of electrons in its outer shell, '
+    + 'so sodium and potassium both have one, '
+    + 'and that is why a column behaves as a family. '
+    + 'This lesson asks what changes '
+    + 'as you move along a row or down a column, and why.',
 
   method: [
     'Write down which direction you are moving: across a period or down a '
@@ -676,6 +755,33 @@ teach({
     ],
   },
 
+  why:
+    'Table salt and candle wax are both white solids '
+    + 'you can hold in your hand. '
+    + 'Put salt in water and it vanishes into the water. '
+    + 'Put wax in water and it floats there, unchanged. '
+    + 'Heat salt and it is still solid at 700 degrees. '
+    + 'Heat wax and it melts in a saucepan. '
+    + 'Both are made of atoms, '
+    + 'and the atoms are not very different in size. '
+    + 'So what is different about the way they are held together, '
+    + 'and can you tell which way a substance is held '
+    + 'before you test it?',
+
+  notation:
+    'A bond is drawn as a line between two symbols, '
+    + 'and one line means one shared pair of electrons. '
+    + 'So a single line between two H symbols is one bond, '
+    + 'and a double line between two O symbols is two. '
+    + 'A charge on an ion is written raised after the symbol, '
+    + 'with the number first and the sign second, '
+    + 'so it is Mg two plus and never Mg plus two. '
+    + 'A pair of electrons not used in bonding is a lone pair, '
+    + 'and it is drawn as two dots. '
+    + 'A bond angle is given in degrees. '
+    + 'Putting the sign before the number in a charge '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'An ionic bond forms when a metal transfers electrons to a non-metal. '
     + 'The resulting positive and negative ions attract '
@@ -778,10 +884,22 @@ teach({
     + 'and the name of the shape with its angle.',
 
   recap:
-    'You know that a metal and a non-metal transfer electrons '
-    + 'and that two non-metals share them. '
-    + 'This adds the metallic bond, the shape of a molecule, '
-    + 'and the link from structure to physical properties.',
+    'An atom is at its steadiest '
+    + 'when its outer shell of electrons is full. '
+    + 'Most atoms are not born that way, '
+    + 'so they do something about it, '
+    + 'and there are only two things to do. '
+    + 'One atom can hand an electron over to another. '
+    + 'Sodium has one electron in its outer shell '
+    + 'and chlorine needs one, '
+    + 'so sodium gives it away and both are left full. '
+    + 'Or two atoms can hold a pair of electrons between them, '
+    + 'so the pair counts for both. '
+    + 'Two chlorine atoms each need one, '
+    + 'and sharing a pair fills both. '
+    + 'Handing over and sharing are the two, '
+    + 'and this lesson adds a third case '
+    + 'and the shapes that follow from it.',
 
   method: [
     'Identify the elements as metal or non-metal.',
@@ -1012,6 +1130,35 @@ teach({
     ],
   },
 
+  why:
+    'A fertiliser bag says 50 kg of ammonium sulphate. '
+    + 'A farmer wants to know '
+    + 'how much nitrogen he is actually buying, '
+    + 'because nitrogen is the part the maize uses. '
+    + 'He cannot weigh the nitrogen out, '
+    + 'because it is locked inside the compound. '
+    + 'Reactions happen between numbers of particles, '
+    + 'not between kilogrammes, '
+    + 'and a balance only ever shows a mass. '
+    + 'So how do you get from a mass you can weigh '
+    + 'to a number of particles you cannot count?',
+
+  notation:
+    'A mole is a counted number of particles, '
+    + 'and its unit is written mol. '
+    + 'The number is 6.02 times ten to the power 23, '
+    + 'and it is called the Avogadro constant. '
+    + 'Molar mass is grams per mole, written g per mol. '
+    + 'Say "moles of" and then name the particle, '
+    + 'because a mole of oxygen atoms '
+    + 'and a mole of oxygen molecules '
+    + 'are not the same amount of oxygen. '
+    + 's.t.p. means standard temperature and pressure, '
+    + 'and at s.t.p. one mole of any gas fills 22.4 litres. '
+    + 'Leaving the unit off a molar mass, '
+    + 'or writing mole where mol belongs, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A mole is an amount of substance containing as many particles '
     + 'as there are atoms in 12 g of carbon 12, '
@@ -1099,9 +1246,19 @@ teach({
     + 'them.',
 
   recap:
-    'You know relative atomic masses and can read a chemical formula. '
-    + 'This gives the unit that turns a mass on a balance '
-    + 'into a number of particles.',
+    'Every kind of atom has a mass, '
+    + 'and chemists compare those masses '
+    + 'rather than weighing them. '
+    + 'Carbon is given the value 12 '
+    + 'and everything else is measured against it. '
+    + 'Hydrogen comes out at 1, oxygen at 16, sodium at 23. '
+    + 'Those figures are the relative atomic masses, '
+    + 'and they carry no unit, because they are ratios. '
+    + 'A formula then says how many of each atom there are: '
+    + 'water is H2O, two hydrogens and one oxygen, '
+    + 'so its masses add to 1 plus 1 plus 16, which is 18. '
+    + 'This lesson turns that 18 '
+    + 'into something you can weigh on a balance.',
 
   method: [
     'Write the formula of the substance.',
