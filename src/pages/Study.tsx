@@ -29,8 +29,6 @@ import SyllabusLearn from './Learn'
 import { loadLessons, lessonsReady, onLessonsLoaded } from '../lib/education/library/lessons/load'
 import { readinessOf, subjectById } from '../lib/education/subjects'
 import { subjectOfTopic, syllabusFor } from '../lib/education/syllabus'
-import KidApp from './KidApp'
-import TeenApp from './TeenApp'
 import ScholarApp from './ScholarApp'
 import { learnedBrief } from '../lib/education/adapt'
 
@@ -55,7 +53,7 @@ import {
 } from '../lib/education/mastery'
 import {
   greeting, opensWithTeaching, purposeLine,
-  reliefFor, skinFor, startingLevel,
+  reliefFor, startingLevel,
   type LearnerProfile, type Stage,
 } from '../lib/education/learner'
 import {
@@ -618,13 +616,20 @@ export default function Study() {
 
   if (gate.at === 'subjects' && profile) {
     /**
-     * Each learner meets the interface built for them, not a restyled one.
+     * One home screen, for every learner.
      *
-     * The old chooser was a list of subjects with a note under each and a text
-     * box for telling the tutor how to teach you. A five year old can use none
-     * of that, and a sixth former on a laptop is served a phone column. Every
-     * one of these screens reads the same syllabus, the same attempts and the
-     * same plan; only what a person can actually use differs.
+     * There were three: a picture grid for the small ones, a phone column for
+     * primary and junior high, and the dashboard for senior high. Only the
+     * dashboard answered the question a learner actually arrives with, which
+     * is "where am I": each subject, how far through it, how they are doing on
+     * it, and what to open next. The other two showed tiles and a streak, so a
+     * Basic 4 pupil who wanted to know whether they were behind had nowhere to
+     * look, and the same pupil's parent had nowhere either.
+     *
+     * Being nine is not a reason to be told less about your own progress. The
+     * differences that are real, which are reading age and the size of a
+     * finger, are handled in the type, the spacing and the voice rather than
+     * by taking the screen away.
      */
     const onOpen = (subjectId: string, topicId?: string, mode?: Mode) => {
       const next = { ...profile, subjectId }
@@ -633,60 +638,19 @@ export default function Study() {
       setGate({ at: 'course', topicId, mode })
     }
     const goBack = account && account.kind !== 'learner' ? leaveLearner : undefined
-    const skin = skinFor(profile)
-
-    if (skin === 'kid') {
-      return (
-        <KidApp
-          profile={profile}
-          attempts={attempts}
-          onOpenSubject={onOpen}
-          /* Which screen, and which subject, from the address rather than
-             from state, so that back inside a child's app moves inside the
-             child's app instead of leaving it. */
-          panel={gate.panel ?? 'home'}
-          subjectOpen={gate.subjectId ?? null}
-          onPanel={pan => setGate({ at: 'subjects', panel: pan })}
-          onSubject={id => setGate(
-            id ? { at: 'subjects', subjectId: id } : { at: 'subjects' })}
-          onSignOut={leave}
-          onBack={goBack}
-        />
-      )
-    }
-
-    if (skin === 'teen') {
-      return (
-        <TeenApp
-          profile={profile}
-          attempts={attempts}
-          onOpenSubject={(id, topicId) => onOpen(id, topicId)}
-          onSignOut={leave}
-          onBack={goBack}
-        />
-      )
-    }
-
-    if (skin === 'scholar') {
-      return (
-        <ScholarApp
-          profile={profile}
-          attempts={attempts}
-          onOpenSubject={(id, topicId) => onOpen(id, topicId)}
-          onSignOut={leave}
-          onBack={goBack}
-        />
-      )
-    }
 
     return (
-      <Subjects
+      <ScholarApp
         profile={profile}
         attempts={attempts}
-        onSave={p => { saveLearner(p); setProfile(p) }}
-        onStudy={() => setGate({ at: 'course' })}
+        onOpenSubject={onOpen}
+        /* Which screen, from the address rather than from state, so that
+           back inside the app moves inside the app instead of leaving it.
+           The small learners' shell had this and the dashboard did not. */
+        panel={gate.panel ?? 'home'}
+        onPanel={pan => setGate({ at: 'subjects', panel: pan })}
         onSignOut={leave}
-        onBack={account && account.kind !== 'learner' ? leaveLearner : undefined}
+        onBack={goBack}
       />
     )
   }

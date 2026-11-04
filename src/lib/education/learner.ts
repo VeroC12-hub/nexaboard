@@ -264,21 +264,35 @@ export function newLearnerId(now = new Date()): string {
  * and then an adult lesson has been handed the worst of both.
  */
 /**
- * Which of the four interfaces this learner gets.
+ * Which interface this learner gets.
  *
- * | | Who | Why it differs |
- * |---|---|---|
- * | `kid` | creche, KG, Basic 1 to 2 | Cannot read the navigation. Pictures carry the meaning, tabs at the bottom, everything spoken on request |
- * | `teen` | Basic 3 to JHS 3 | Reads. Words carry the meaning again, and a playroom reads as being for younger children |
- * | `scholar` | SHS, TVET, university | As likely to be at a desk as on a phone, so a dashboard rather than a column |
+ * ── Why there is one, where there were three ────────────────────────────────
  *
- * One function, so the router, the home screen, the lesson and the questions
- * cannot disagree. A learner given the kid home screen and then an adult
- * lesson has been handed the worst of both, which is exactly what happened
- * before this existed.
+ * There used to be a `kid` shell for creche to Basic 2, a `teen` column for
+ * Basic 3 to JHS 3, and a `scholar` dashboard for senior high and above. Three
+ * home screens meant three answers to the same question. Only the dashboard
+ * ever told a learner where they actually stood: what each subject is, how far
+ * through it they are, how they are doing on it, and what to open next. The
+ * other two showed a grid of subject tiles and a daily streak, and a child who
+ * wanted to know whether they were behind had nowhere to look.
+ *
+ * Being nine is not a reason to be told less about your own progress. So every
+ * learner now gets the dashboard, and the differences that are real, which are
+ * reading age and the size of a finger, are handled where they belong: in the
+ * type, the spacing and the voice, not by withholding a screen.
+ *
+ * `skin` is kept as a type because the lesson and the question screens still
+ * use it to decide how much to put on a page at once, which is a genuine
+ * difference between a six year old and a sixth former.
  */
 export type Skin = 'kid' | 'teen' | 'scholar'
 
+/**
+ * How dense a page may be for this learner. No longer which home screen.
+ *
+ * The home screen is the same dashboard for everybody. This still says how
+ * much a lesson may put in front of them at one time.
+ */
 export function skinFor(p: Pick<LearnerProfile, 'stage' | 'level'>): Skin {
   if (isYoung(p)) return 'kid'
   if (p.stage === 'primary' || p.stage === 'jhs') return 'teen'

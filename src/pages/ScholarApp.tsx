@@ -1,5 +1,11 @@
 /**
- * Senior high, TVET and university.
+ * Every learner's home screen, from creche to university.
+ *
+ * It was senior high's alone, and the other stages had a picture grid or a
+ * phone column instead. Those two answered "what subjects are there" and this
+ * one answers "where am I", which is the question a learner actually arrives
+ * with. Being nine is not a reason to be told less about your own progress,
+ * so this is now the one home screen and the others are gone.
  *
  * ── Why this one is a desktop layout ────────────────────────────────────────
  *
@@ -32,6 +38,14 @@ import { standingOf, weekStart } from '../lib/education/rewards'
 import { earningsFor, onPoints } from '../lib/education/points'
 import { localPlan, savedPlan } from '../lib/education/plan'
 import { asksFor } from '../lib/education/ask'
+/* The playroom, the star tin and the grown up's door. These were the small
+   learner's other three tabs, and folding their home screen into this one
+   would have quietly deleted all three, so they are rendered here instead. */
+import { Play, Rewards, GrownUp, type KidSubject } from './KidApp'
+import GrownUpGate from '../components/kid/GrownUpGate'
+import { artFor } from '../components/kid/subjectArt'
+import { palFor } from '../components/kid/cast'
+import type { Panel } from './Study'
 import type { Attempt } from '../lib/education/mastery'
 import type { LearnerProfile } from '../lib/education/learner'
 
@@ -66,16 +80,32 @@ function greetingFor(now = new Date()): string {
 
 export default function ScholarApp({
   profile, attempts, onOpenSubject, onSignOut, onBack,
+  panel = 'home', onPanel,
 }: {
   profile: LearnerProfile
   attempts: Attempt[]
-  onOpenSubject: (subjectId: string, topicId?: string) => void
+  /* Carries the mode. Dropping it here is what turned every game into a
+     lesson once the playroom moved onto this screen. */
+  onOpenSubject: (
+    subjectId: string, topicId?: string, mode?: 'lesson' | 'practice' | 'game',
+  ) => void
   onSignOut: () => void
   onBack?: () => void
+  /**
+   * Which screen, from the address rather than from state.
+   *
+   * The small learners' shell had this and the dashboard did not, which meant
+   * a parent could not send a link to the playroom and the back button left
+   * the app instead of moving inside it. Keeping the address is the reason
+   * these are props and not `useState`.
+   */
+  panel?: Panel
+  onPanel?: (p: Panel) => void
 }) {
   const [where, setWhere] = useState<Where>('dashboard')
   const [open, setOpen] = useState(false)
   const [find, setFind] = useState('')
+  const [askGrownUp, setAskGrownUp] = useState(false)
 
   const worked = useMemo(() => new Set(attempts.map(a => a.objectiveId)), [attempts])
 
@@ -170,6 +200,26 @@ export default function ScholarApp({
     return first[0] ?? null
   }, [papers, worked])
 
+  /**
+   * The same papers, in the shape the playroom and the star tin expect.
+   *
+   * Those two screens were written against the small learner's subject list.
+   * Rebuilding them against `Paper` would be two rewrites to change nothing a
+   * learner sees, so the dashboard hands them what they already read.
+   */
+  const asKid = useMemo<KidSubject[]>(() => papers.map(p => ({
+    id: p.id,
+    name: p.name,
+    art: artFor(p.name),
+    pal: palFor(p.name),
+    topics: p.topics,
+    done: p.done,
+  })), [papers])
+
+  const seen = {
+    profile, attempts, subjects: asKid, worked, standing, onOpen: onOpenSubject,
+  }
+
   const hunting = find.trim().toLowerCase()
   const found = useMemo(() => {
     if (hunting.length < 2) return []
@@ -227,17 +277,48 @@ export default function ScholarApp({
           </button>
         </div>
 
-        {NAV.map(n => (
-          <button
-            key={n.key}
-            className={`sch-nav${where === n.key ? ' is-on' : ''}`}
-            aria-current={where === n.key ? 'page' : undefined}
-            onClick={() => { setWhere(n.key); setOpen(false) }}>
-            <span className="sch-nav-mark" aria-hidden><Icon mark={n.mark} size={17} /></span> {n.name}
-          </button>
-        ))}
+        {NAV.map(n => {
+          const on = panel === 'home' && where === n.key
+          return (
+            <button
+              key={n.key}
+              className={`sch-nav${on ? ' is-on' : ''}`}
+              aria-current={on ? 'page' : undefined}
+              onClick={() => { setWhere(n.key); onPanel?.('home'); setOpen(false) }}>
+              <span className="sch-nav-mark" aria-hidden><Icon mark={n.mark} size={17} /></span> {n.name}
+            </button>
+          )
+        })}
+
+        {/* The playroom and the star tin.
+
+            These were two of the four tabs along the bottom of the small
+            learner's shell. Folding that shell into this one would have
+            deleted both, and a game is not a reward for being under seven: a
+            JHS learner practising bearings against a clock is doing the same
+            thing with the same engine. So they are here, for everyone. */}
+        <button
+          className={`sch-nav${panel === 'play' ? ' is-on' : ''}`}
+          aria-current={panel === 'play' ? 'page' : undefined}
+          onClick={() => { onPanel?.('play'); setOpen(false) }}>
+          <span className="sch-nav-mark" aria-hidden><Icon mark="play" size={17} /></span> Play
+        </button>
+        <button
+          className={`sch-nav${panel === 'rewards' ? ' is-on' : ''}`}
+          aria-current={panel === 'rewards' ? 'page' : undefined}
+          onClick={() => { onPanel?.('rewards'); setOpen(false) }}>
+          <span className="sch-nav-mark" aria-hidden><Icon mark="star" size={17} /></span> Stars
+        </button>
 
         <div className="sch-rail-foot">
+          {/* The grown up's door, in the foot with the other adult controls
+              rather than taking a fifth of a learner's navigation. */}
+          <button
+            className={`sch-nav${panel === 'profile' ? ' is-on' : ''}`}
+            aria-current={panel === 'profile' ? 'page' : undefined}
+            onClick={() => { onPanel?.('profile'); setOpen(false) }}>
+            <span className="sch-nav-mark" aria-hidden><Icon mark="grown" size={17} /></span> For a grown up
+          </button>
           {onBack && (
             <button className="sch-nav" onClick={onBack}>
               <span className="sch-nav-mark" aria-hidden><Icon mark="back" size={17} /></span> Back to everyone
@@ -317,6 +398,18 @@ export default function ScholarApp({
           <div className="sch-panel">
             <p className="sch-none">Nothing matches "{find}" in your subjects.</p>
           </div>
+        ) : panel === 'play' ? (
+          <Play {...seen} />
+        ) : panel === 'rewards' ? (
+          <Rewards {...seen} onBack={() => onPanel?.('home')} />
+        ) : panel === 'profile' ? (
+          <GrownUp
+            profile={profile}
+            pal={palFor(profile.name || profile.id)}
+            because={plan.because}
+            onBack={() => onPanel?.('home')}
+            onSignOut={() => setAskGrownUp(true)}
+            onBackToAll={onBack} />
         ) : where === 'progress' ? (
           <Progress papers={papers} recent={recent} standing={standing} />
         ) : where === 'subjects' ? (
@@ -442,6 +535,16 @@ export default function ScholarApp({
           </div>
         )}
       </main>
+
+      {/* The question itself, over whichever screen asked it. Signing out is
+          the one action on a learner's own device that a child should not be
+          able to take alone. */}
+      {askGrownUp && (
+        <GrownUpGate
+          what="sign out"
+          onPass={() => { setAskGrownUp(false); onSignOut() }}
+          onCancel={() => setAskGrownUp(false)} />
+      )}
     </div>
   )
 }

@@ -55,7 +55,7 @@ const CHIPS: Array<readonly ['all' | 'new' | 'going', string]> = [
 ]
 
 /** One subject, with everything the kid screens need about it. */
-interface KidSubject {
+export interface KidSubject {
   id: string
   name: string
   art: TileArt
@@ -68,13 +68,21 @@ interface KidSubject {
 
 /* ── what every screen is given ───────────────────────────────────────────── */
 
-interface Seen {
+export interface Seen {
   profile: LearnerProfile
   attempts: Attempt[]
   subjects: KidSubject[]
   worked: Set<string>
   standing: Standing
-  onOpen: (subjectId: string, topicId?: string) => void
+  /**
+   * Open a topic, and say what as.
+   *
+   * `mode` is not optional decoration. The playroom used to call this with
+   * two arguments and the third defaulted to `lesson`, so every card on the
+   * "What shall we play?" screen opened a lesson. A child who asked for a
+   * game and was handed reading has been told the screen lies.
+   */
+  onOpen: (subjectId: string, topicId?: string, mode?: 'lesson' | 'practice' | 'game') => void
 }
 
 /* ── home ─────────────────────────────────────────────────────────────────── */
@@ -305,7 +313,7 @@ function SubjectPage({ subject, attempts, worked, onOpen, onBack }: Seen & {
 
 /* ── play ─────────────────────────────────────────────────────────────────── */
 
-function Play({ profile, subjects, onOpen }: Seen) {
+export function Play({ profile, subjects, onOpen }: Seen) {
   /* Only topics a game genuinely fits. A game bolted onto a topic it does not
      suit is a distraction wearing the costume of teaching, and this screen is
      where that would happen at scale. */
@@ -342,7 +350,10 @@ function Play({ profile, subjects, onOpen }: Seen) {
             <button
               key={topic.id}
               className="kid-row"
-              onClick={() => onOpen(subject.id, topic.id)}>
+              /* As a game. Without this third argument the course screen
+                  defaults to the lesson, which is how every card here opened
+                  reading instead of playing. */
+              onClick={() => onOpen(subject.id, topic.id, 'game')}>
               {/* By position, so the row above and below are never the same
                   friend. Hashing the id put two of the same next to each
                   other. */}
@@ -362,7 +373,7 @@ function Play({ profile, subjects, onOpen }: Seen) {
 
 /* ── rewards ──────────────────────────────────────────────────────────────── */
 
-function Rewards({ standing, onBack }: Seen & { onBack: () => void }) {
+export function Rewards({ standing, onBack }: Seen & { onBack: () => void }) {
   /**
    * Anything earned since the last time this screen was open.
    *
@@ -480,7 +491,7 @@ function Rewards({ standing, onBack }: Seen & { onBack: () => void }) {
 
 /* ── the grown up's screen ────────────────────────────────────────────────── */
 
-function GrownUp({ profile, pal, because, onBack, onSignOut, onBackToAll }: {
+export function GrownUp({ profile, pal, because, onBack, onSignOut, onBackToAll }: {
   profile: LearnerProfile
   /** This learner's own companion, so the grown up's page is recognisably
       theirs rather than a settings screen with a stock character on it. */
