@@ -36,6 +36,19 @@ teach({
     ],
   },
 
+  why:
+    'You lose your water bottle at school. '
+    + 'You go to the teacher and tell her your bottle is gone. '
+    + 'She asks you which one it is. '
+    + 'You say: a bottle. '
+    + 'She opens the lost property box. '
+    + 'There are nine bottles inside it. '
+    + 'Every single one of them is a bottle. '
+    + 'So every word you said was true, '
+    + 'and it did not get your bottle back. '
+    + 'What else did you have to say? '
+    + 'This lesson is what else.',
+
   idea:
     'To describe something is to say what it is like. '
     + 'You say enough that somebody else could pick it out. '
@@ -49,8 +62,15 @@ teach({
     + 'Those are the useful words. The rest is filling.',
 
   recap:
-    'You speak in full sentences. '
-    + 'You will need that here, because one word is never a description.',
+    'A full sentence says who or what, '
+    + 'and then says what they do or what they are. '
+    + '"The bag is red" is a full sentence. '
+    + 'It names the bag and then tells you something about it. '
+    + '"Red" on its own is not a sentence. '
+    + 'It never says what is red. '
+    + 'One word can answer a question. '
+    + 'One word cannot describe a thing. '
+    + 'A description is several full sentences, one after the other.',
 
   method: [
     'Say what the thing is first. A bag. A boy. A tree.',
@@ -620,6 +640,33 @@ teach({
     ],
   },
 
+  why:
+    'You write a note to your teacher: I have two foots. '
+    + 'The class laughs. '
+    + 'But look at what you did. '
+    + 'You know you have two of them. '
+    + 'You know the word is foot. '
+    + 'You added an s, '
+    + 'because that is what you do to make two of a thing. '
+    + 'One book, two books. '
+    + 'So why is two foots wrong when two books is right? '
+    + 'The rule worked on one word and broke on the other. '
+    + 'And nothing you can see in either word says which is which. '
+    + 'This lesson is how to tell.',
+
+  notation:
+    'The letters added to a word to make it plural are called the ending. '
+    + 'Book takes the ending -s and becomes books. '
+    + 'Box takes the ending -es and becomes boxes. '
+    + 'An ending is written joined to the word. '
+    + 'No space, and no apostrophe. '
+    + 'Writing book’s for more than one book '
+    + 'is the commonest mistake in this whole topic. '
+    + 'An apostrophe has a different job. '
+    + 'It shows that a thing belongs to somebody. '
+    + 'Two books. The book’s cover. '
+    + 'Same letter s, two different jobs.',
+
   idea:
     'Singular means one. Plural means more than one. '
     + 'One book, two books. '
@@ -637,7 +684,13 @@ teach({
 
   recap:
     'A noun is a naming word. '
-    + 'This is about how a naming word changes when there is more than one.',
+    + 'It names a person, a place or a thing. '
+    + 'Kofi is a noun. '
+    + 'Accra is a noun. '
+    + 'Book, chair and goat are all nouns. '
+    + 'Point at anything in the room and the word for it is a noun. '
+    + 'This lesson is about one thing that happens to a noun: '
+    + 'what it does when there is more than one of it.',
 
   method: [
     'Ask first: is it one, or more than one?',

@@ -41,6 +41,33 @@ teach({
     ],
   },
 
+  why:
+    'Your school is collecting money for a new ball. '
+    + 'The teacher writes each class total on the board as it comes in. '
+    + '240. 95. 108. '
+    + 'She asks you which class gave the most. '
+    + 'You can read 95. '
+    + 'That is nine tens and five ones, and you learnt that last year. '
+    + 'But 240 has three digits, and you have no name for the first one. '
+    + 'Worse: is 95 bigger than 108? '
+    + 'There are nine tens in 95 and only nought tens in 108. '
+    + 'So which one is really bigger, and how could you ever be sure? '
+    + 'This lesson is the third place, '
+    + 'the one you have no name for yet.',
+
+  notation:
+    '342 is read "three hundred and forty two". '
+    + 'It is not read "three four two". '
+    + 'Every digit sits in a place. '
+    + 'Counting from the right, the places are the ones, the tens, '
+    + 'then the hundreds. '
+    + 'So in 342 the 3 is in the hundreds place, '
+    + 'the 4 is in the tens place and the 2 is in the ones place. '
+    + 'Write the digits side by side with no gap and no comma. '
+    + 'The commonest mistake is to leave out a nought. '
+    + 'Three hundred and five is 305, not 35. '
+    + 'The nought is holding the empty tens place open.',
+
   idea:
     'After ninety nine the tens run out, so we start counting hundreds. Ten '
     + 'tens make one hundred. A three digit number has hundreds, tens and ones: '
@@ -222,11 +249,42 @@ teach({
     ],
   },
 
+  why:
+    'You are holding the money for your class party. '
+    + 'One week the class brings 28 cedis. '
+    + 'The next week they bring 17. '
+    + 'How much is there now? '
+    + 'Line the two numbers up and add the ones. '
+    + '8 and 7 is 15. '
+    + 'Now write 15 in the ones column. '
+    + 'You cannot. '
+    + 'A column holds one digit, and 15 is two. '
+    + 'So what happens to it? '
+    + 'You cannot throw it away and you cannot squeeze it in. '
+    + 'This lesson is where it goes.',
+
+  notation:
+    'The numbers are written one under the other. '
+    + 'Ones go under ones and tens go under tens. '
+    + 'A line goes under the bottom number, and the answer goes below it. '
+    + 'The small 1 you write above the next column is called the carry. '
+    + 'Keep it small and keep it above the line, '
+    + 'so you never mistake it for part of the answer. '
+    + '28 + 17 is said "twenty eight plus seventeen". '
+    + 'There are two ways to lose a mark here, and both are the carry. '
+    + 'Forgetting it is there. '
+    + 'Adding it into the wrong column. '
+    + 'Writing it down above its own column is what stops both.',
+
   idea:
-    'When the ones column adds up to ten or more, you cannot write a two digit '
-    + 'answer in one column. So you exchange ten ones for one ten and move it '
-    + 'across to the tens column. That small digit you write above the tens is '
-    + 'the ten you carried.',
+    'Add the ones column and you may get ten or more. '
+    + 'A column has room for one digit only. '
+    + 'Ten will not fit. '
+    + 'So you make a swap. '
+    + 'Ten ones become one ten. '
+    + 'You move that one ten across into the tens column. '
+    + 'The small 1 above the tens is the ten you moved. '
+    + 'That is carrying.',
 
   mechanism:
     'Carrying is not a rule about digits. It is a swap. '
@@ -801,6 +859,32 @@ teach({
     ],
   },
 
+  why:
+    'Four of you are sharing one ball of kenkey. '
+    + 'You cut it into four pieces, all the same size. '
+    + 'Each of you takes one piece. '
+    + 'Now say how much you got, using a number. '
+    + 'It is not one, because you did not get the whole ball. '
+    + 'It is not four, because you got a single piece. '
+    + 'It is not nought either, because you are holding something. '
+    + 'Not one of the counting numbers says it. '
+    + 'There is no number on your fingers for a piece of a thing. '
+    + 'This lesson is the kind of number that says it.',
+
+  notation:
+    'Three quarters is written as a 3 above a 4 with a line between them. '
+    + 'It is said "three quarters", or "three over four". '
+    + 'The number under the line is the bottom number. '
+    + 'Its proper name is the denominator, '
+    + 'and an easy way to remember that is that the denominator is down. '
+    + 'The number above the line is the top number, '
+    + 'and its proper name is the numerator. '
+    + 'The line between them is not a minus sign. '
+    + 'The commonest way to lose a mark '
+    + 'is to write the two numbers the wrong way round. '
+    + 'That turns three quarters into four thirds, '
+    + 'which is more than a whole one.',
+
   idea:
     'A fraction counts parts of a whole. '
     + 'Take three quarters. It is a 3 above a 4. '
@@ -978,6 +1062,30 @@ teach({
     ],
   },
 
+  why:
+    'Fold a sheet of paper in half. '
+    + 'Cut a shape out of the folded edge and open the paper. '
+    + 'The two sides match each other exactly. '
+    + 'Now look at the adinkra stamps printed on a cloth. '
+    + 'Some of them match side to side and some of them do not. '
+    + 'Here is the question. '
+    + 'Someone draws a shape on paper and hands it to you. '
+    + 'Find the line it would fold along. '
+    + 'You are not allowed to cut the paper or fold it. '
+    + 'And if there is no such line, how would you know for certain? '
+    + 'This lesson is the test you use instead of folding.',
+
+  notation:
+    'The fold line is called a line of symmetry. '
+    + 'Symmetry is said "SIM-uh-tree". '
+    + 'In a drawing the line is always drawn dashed, never solid, '
+    + 'because the line is not part of the shape. '
+    + 'A shape can have more than one, '
+    + 'and then we say it has two, or four, lines of symmetry. '
+    + 'A square has four. '
+    + 'The commonest mistake is to draw the line solid, '
+    + 'so that it then looks like a side of the shape itself.',
+
   idea:
     'A shape has a line of symmetry if you can fold it along that line and the '
     + 'two halves land exactly on each other. A square has four such lines. A '
@@ -995,9 +1103,13 @@ teach({
     + 'What you see in the mirror must match the hidden half.',
 
   recap:
-    'You name shapes by counting sides and corners. '
-    + 'This is different. '
-    + 'This is about how a shape is balanced.',
+    'A shape is named by its sides and its corners. '
+    + 'A square has four sides, all the same length, and four corners. '
+    + 'A triangle has three sides and three corners. '
+    + 'So naming a shape is counting. '
+    + 'This lesson asks a different question about those same shapes. '
+    + 'Not how many sides it has, '
+    + 'but whether its two halves match each other.',
 
   method: [
     'Draw or imagine a line across the shape.',
@@ -1351,6 +1463,32 @@ teach({
       'Say the hour, then the minutes.',
     ],
   },
+
+  why:
+    'School closes at half past two. '
+    + 'You look up at the clock on the wall. '
+    + 'The short hand is sitting between the 1 and the 2. '
+    + 'The long hand is pointing at the 8. '
+    + 'One, two and eight. '
+    + 'Three numbers, and not one of them is a time. '
+    + 'Is it nearly closing time or not? '
+    + 'Can you still start another sum, '
+    + 'or should you be packing your bag? '
+    + 'The clock is right there in front of you and it will not tell you. '
+    + 'This lesson is how to make it tell you.',
+
+  notation:
+    'Half past two is also written 2:30. '
+    + 'The two dots in the middle are called a colon. '
+    + 'The number before the colon is the hour. '
+    + 'The number after it is the minutes. '
+    + 'So 2:30 is said "half past two", or "two thirty". '
+    + 'The minutes are always written with two digits. '
+    + 'Five past three is 3:05. '
+    + 'It is never 3:5. '
+    + 'That nought is holding a place open, '
+    + 'the same job it does in 305. '
+    + 'Leaving it out is the commonest way to lose a mark here.',
 
   idea:
     'A clock has two hands doing two different jobs. The short hand points at '

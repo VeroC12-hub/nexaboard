@@ -1154,6 +1154,20 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'A visitor comes to the house while your mother is out. '
+    + 'She is much older than you. '
+    + 'You bring her a chair and a cup of water, '
+    + 'and you stand while she drinks it. '
+    + 'Then she tells you to run out and buy her something. '
+    + 'Your mother told you not to leave the house. '
+    + 'Now what do you do? '
+    + 'Going disobeys your mother. '
+    + 'Saying no to an elder feels wrong in your chest. '
+    + 'Nobody has ever told you what to do '
+    + 'when those two pull against each other. '
+    + 'This lesson is about that.',
+
   idea:
     'Respect means you treat a person as someone who matters. '
     + 'It looks a little different with an elder '
@@ -1169,9 +1183,16 @@ teach({
     + 'That is the only kind worth having.',
 
   recap:
-    'You greet an elder one way. You greet a friend another way. '
-    + 'That is respect already. '
-    + 'You have practised it more than you think.',
+    'There are set ways of treating people. '
+    + 'They are not the same for everybody. '
+    + 'To an elder you say "Good morning" '
+    + 'and you wait to be spoken to. '
+    + 'To a friend your own age you say "hello" '
+    + 'and you start talking at once. '
+    + 'Both of those are polite. '
+    + 'Only the words are different. '
+    + 'One thing sits behind both of them, '
+    + 'and this lesson is the name for that thing.',
 
   method: [
     'Greet first, properly for who they are.',
