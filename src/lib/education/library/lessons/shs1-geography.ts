@@ -60,6 +60,31 @@ teach({
     ],
   },
 
+  why:
+    'In Accra the sun sets at about six in the evening, '
+    + 'and it does that all year round. '
+    + 'A trader on a video call to a cousin in London in December '
+    + 'finds it is already dark there at four in the afternoon. '
+    + 'In June it is still light there at nine at night. '
+    + 'Both places are on the same planet on the same day. '
+    + 'Why does the length of a day stay the same in Accra '
+    + 'and swing by five hours in London?',
+
+  notation:
+    'The tilt of the Earth is written 23.5 degrees, '
+    + 'and the small circle after the number is the degree sign. '
+    + 'A place on the Earth is given as two angles. '
+    + 'Latitude is measured north or south of the equator. '
+    + 'Longitude is measured east or west of Greenwich. '
+    + 'Accra is about 5 degrees 33 minutes north, '
+    + '0 degrees 12 minutes west, '
+    + 'where a minute is one sixtieth of a degree. '
+    + 'Latitude is always given first. '
+    + 'Dropping the N, S, E or W '
+    + 'is the commonest way to lose a mark, '
+    + 'because 5 degrees north and 5 degrees south '
+    + 'are more than a thousand kilometres apart.',
+
   idea:
     'The Earth has three main layers. '
     + 'The crust is the thin outer shell, '
@@ -160,11 +185,17 @@ teach({
     + 'and a bare time scores one of them.',
 
   recap:
-    'You know the Earth spins and goes round the Sun, '
-    + 'and that this gives day, night and the seasons. '
-    + 'This gives the layers inside, '
-    + 'the figures, '
-    + 'and the exact reason the seasons happen.',
+    'The Earth makes two separate movements, '
+    + 'and keeping them apart is the whole of this topic. '
+    + 'It spins on its own axis, '
+    + 'like a ball turning on a stick pushed through it, '
+    + 'once every 24 hours. '
+    + 'That spin is called rotation, '
+    + 'and it carries Accra into the sunlight and out again. '
+    + 'Separately, it travels a full circuit round the Sun, '
+    + 'which takes 365 and a quarter days. '
+    + 'That journey is called revolution. '
+    + 'Rotation takes a day and revolution takes a year.',
 
   method: [
     'Name the three layers with a thickness or material for each.',
@@ -386,6 +417,33 @@ teach({
     ],
   },
 
+  why:
+    'A builder at Nsawam is offered two lorry loads of stone '
+    + 'at the same price. '
+    + 'One is granite, hard, and speckled with crystals '
+    + 'you can pick out with your eye. '
+    + 'The other is a sandstone '
+    + 'that crumbles at the corner when a hammer touches it. '
+    + 'He needs stone for a foundation '
+    + 'that must carry a two storey house for fifty years. '
+    + 'Nothing on the outside of a stone says how strong it is. '
+    + 'So what is it about the way a stone was made '
+    + 'that decides whether it will hold?',
+
+  notation:
+    'Four words in this topic come in pairs '
+    + 'that are easy to swap by mistake. '
+    + 'Igneous, said "ig-nee-us", '
+    + 'comes from the Latin word for fire. '
+    + 'Intrusive means the melt stopped inside the ground, '
+    + 'and extrusive means it came out. '
+    + 'Magma is the melt while it is still underground, '
+    + 'and lava is the same melt once it is out, '
+    + 'so nothing called magma ever runs down a hillside. '
+    + 'Metamorphic, said "met-a-mor-fic", means changed in form. '
+    + 'Writing lava where magma belongs '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A rock is a natural aggregate of minerals, '
     + 'and rocks are classified by their mode of formation. '
@@ -491,10 +549,16 @@ teach({
     + 'In that order the answer cannot be circular.',
 
   recap:
-    'You know that some rocks come from volcanoes '
-    + 'and some are made of layers. '
-    + 'This classifies all rocks by how they formed, '
-    + 'and shows how each kind becomes another.',
+    'Rock is not one material. '
+    + 'Pick up a piece of granite and a piece of shale '
+    + 'and look at the broken faces. '
+    + 'The granite is a mass of separate glittering grains, '
+    + 'each grain a crystal, locked into the ones around it. '
+    + 'The shale comes apart in flat sheets, '
+    + 'like a stack of paper that has been pressed. '
+    + 'Neither of those faces is an accident. '
+    + 'Each one is the mark of how that rock was made, '
+    + 'and this lesson reads the mark backwards to the making.',
 
   method: [
     'Ask how the rock formed.',
@@ -723,6 +787,33 @@ teach({
     ],
   },
 
+  why:
+    'A message says a borehole has broken down '
+    + '"near Fumbisi, by the big tree". '
+    + 'A repair team with a map and a vehicle has to reach it. '
+    + 'There are three big trees in that area '
+    + 'and the message does not say which one. '
+    + 'They drive 40 km and find the wrong tree. '
+    + 'Is there a way of naming a spot on the ground so exactly '
+    + 'that one number sends somebody to it and nowhere else?',
+
+  notation:
+    'The vertical grid lines are eastings '
+    + 'and the horizontal ones are northings. '
+    + 'A reference is read along the bottom of the map first, '
+    + 'then up the side, '
+    + 'which is remembered as "along the corridor, then up the stairs". '
+    + 'A four figure reference such as 3421 '
+    + 'names a whole square, 1 km across. '
+    + 'A six figure reference such as 342217 '
+    + 'names a point inside that square, to the nearest 100 m. '
+    + 'A reference is written as one run of digits, '
+    + 'with no space and no comma. '
+    + 'Giving the northing first '
+    + 'is the commonest way to lose a mark, '
+    + 'because 3421 and 2134 are both real squares, '
+    + 'a long way from each other.',
+
   idea:
     'A topographical map shows the ground to scale, '
     + 'with a grid of numbered lines. '
@@ -830,12 +921,15 @@ teach({
     + 'and the answer with its unit.',
 
   recap:
-    'You have used a map to find a place '
-    + 'and seen a scale bar. '
-    + 'This gives the exact methods: '
-    + 'how to name a point, '
-    + 'measure a distance, '
-    + 'and calculate a slope.',
+    'A map is the ground shrunk by a fixed amount, '
+    + 'and the scale is that amount. '
+    + 'A scale of 1 to 50 000 means that 1 cm on the paper '
+    + 'stands for 50 000 cm on the ground. '
+    + '50 000 cm is 500 m, which is half a kilometre. '
+    + 'So 4 cm measured between two towns on that map '
+    + 'means 2 km of ground. '
+    + 'Every measurement in this lesson is that one step: '
+    + 'measure the paper, then multiply by the scale.',
 
   method: [
     'For a grid reference, read along the bottom first, then up the side.',

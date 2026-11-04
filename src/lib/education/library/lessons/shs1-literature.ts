@@ -64,6 +64,33 @@ teach({
     ],
   },
 
+  why:
+    'A man sits quietly at a funeral. '
+    + 'What matters about him is that inside he feels relief, '
+    + 'not grief. '
+    + 'A novelist writes one sentence: '
+    + 'he was relieved, and ashamed of being relieved. '
+    + 'Now put the same man on a stage. '
+    + 'The audience sees a man sitting quietly at a funeral, '
+    + 'and nobody can see relief. '
+    + 'What does a playwright have to do '
+    + 'that a novelist never has to think about?',
+
+  notation:
+    'The three genres cut their text into different pieces, '
+    + 'and the words for the pieces are not interchangeable. '
+    + 'Prose runs in paragraphs, gathered into chapters. '
+    + 'A play is divided into acts and each act into scenes, '
+    + 'so you write Act 2, Scene 1, '
+    + 'with a capital A and a capital S. '
+    + 'A poem is divided into lines, '
+    + 'and a group of lines is a stanza, '
+    + 'not a paragraph and not a verse. '
+    + 'Calling a stanza a paragraph, or a scene a chapter, '
+    + 'is the commonest way to lose a mark, '
+    + 'because it tells the examiner '
+    + 'you have not noticed which form is in front of you.',
+
   idea:
     'Literature is divided into three genres. '
     + 'Prose is written in ordinary continuous sentences '
@@ -170,10 +197,19 @@ teach({
     + 'then the thing it costs.',
 
   recap:
-    'You have read stories, seen a play '
-    + 'and learned a poem by heart. '
-    + 'This asks what each of those forms is able to do '
-    + 'that the others are not.',
+    'One event can reach you in three different ways. '
+    + 'Read about a quarrel in a book '
+    + 'and it comes in sentences, at your own speed, alone. '
+    + 'Watch the same quarrel on a stage '
+    + 'and it comes in the voices and bodies of the actors, '
+    + 'at their speed, in a room full of other people. '
+    + 'Hear it in a poem '
+    + 'and it comes in a few lines, '
+    + 'with the sound of the words doing part of the work. '
+    + 'Nothing about the quarrel changed. '
+    + 'The way it arrived did, '
+    + 'and this lesson asks what each way can do '
+    + 'that the other two cannot.',
 
   method: [
     'State how the work reaches its audience: read, watched or heard.',
@@ -406,6 +442,37 @@ teach({
     ],
   },
 
+  why:
+    'A poem about the harmattan says the wind has fingers. '
+    + 'Wind has no fingers, so the sentence is not true. '
+    + 'A student writes in the examination: '
+    + '"the poet uses personification". '
+    + 'That earns one mark out of five. '
+    + 'The fingers tell you something a true sentence could not: '
+    + 'that the wind reaches in, '
+    + 'that it touches you, '
+    + 'that it seems to be doing it on purpose. '
+    + 'So how do you get from naming the device '
+    + 'to saying what the device does?',
+
+  notation:
+    'Quote with quotation marks round the exact words, '
+    + 'and put nothing else inside them. '
+    + 'Name the device in the singular: '
+    + 'a simile, a metaphor, one piece of personification. '
+    + 'A simile says one thing is like another '
+    + 'and uses the word like or the word as. '
+    + 'A metaphor says one thing is the other '
+    + 'and uses neither word. '
+    + 'Imagery is the general name '
+    + 'for language that calls on the senses, '
+    + 'so a metaphor can be an image, '
+    + 'but imagery on its own names nothing in particular. '
+    + 'Writing "the poet uses imagery" '
+    + 'is the commonest way to lose a mark, '
+    + 'because every poem does, '
+    + 'and the question is asking which device and to what effect.',
+
   idea:
     'Imagery is language that appeals to the senses. '
     + 'Visual imagery appeals to sight. '
@@ -533,10 +600,17 @@ teach({
     + 'and the quotation must be exact and in quotation marks.',
 
   recap:
-    'You can spot a simile and a metaphor '
-    + 'and say what they compare. '
-    + 'This widens the range of devices, '
-    + 'and asks you to carry the effect through to the theme.',
+    'A figure of speech is a sentence '
+    + 'that is not literally true, used on purpose. '
+    + '"Her voice was like a bell" makes no claim about bells. '
+    + 'It sets two things side by side, '
+    + 'and the word like is what makes it a simile. '
+    + '"Her voice was a bell" drops the like '
+    + 'and says she is one, which makes it a metaphor. '
+    + 'Both of them put a sound in your ear '
+    + 'that a plain description would not. '
+    + 'This lesson adds the rest of the devices, '
+    + 'and asks for the effect as well as the name.',
 
   method: [
     'Quote the words exactly, in quotation marks.',
@@ -782,6 +856,32 @@ teach({
     ],
   },
 
+  why:
+    'Two students write about the same novel. '
+    + 'The first writes that the book is about a boy '
+    + 'who leaves his village, suffers in the city, and comes home. '
+    + 'The second writes that the book argues '
+    + 'that a person who leaves home to become somebody '
+    + 'comes back as nobody. '
+    + 'The second answer scores higher. '
+    + 'The first student cannot see why, '
+    + 'because he has told the examiner everything that happened. '
+    + 'What is the second student doing that the first is not?',
+
+  notation:
+    'The words in this topic have narrow meanings, '
+    + 'and using the loose everyday meaning costs marks. '
+    + 'Story is what happened, in the order it happened. '
+    + 'Plot is the order the writer put it in, '
+    + 'which may not be the same order. '
+    + 'Character is the person; '
+    + 'characterisation is how the writer shows you that person. '
+    + 'A theme is written as a full sentence with a verb, '
+    + 'so poverty is not a theme, '
+    + 'and "poverty makes honest men steal" is one. '
+    + 'Writing a single word as a theme '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Plot is the sequence of events as the writer arranges them, '
     + 'which may not be the order in which they happened. '
@@ -904,9 +1004,14 @@ teach({
     + 'is an assertion the examiner cannot credit.',
 
   recap:
-    'You have described a story and said who the characters were. '
-    + 'This gives the exact words for talking about a text, '
-    + 'and shows what each term is for.',
+    'Retelling a text and discussing it are two different jobs. '
+    + 'Retelling says what happened: '
+    + 'the boy left, the father died, the money ran out. '
+    + 'Discussing says what the text is doing with what happened. '
+    + 'Anybody who has opened the book can do the first, '
+    + 'and the marks sit in the second. '
+    + 'The second needs exact words for the parts of a text, '
+    + 'which is what this lesson hands you.',
 
   method: [
     'For a theme, write a full idea with a verb, '

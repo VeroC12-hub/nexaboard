@@ -63,6 +63,32 @@ teach({
     ],
   },
 
+  why:
+    'A student meets the written Spanish word hola on a page '
+    + 'and has never heard anybody say it. '
+    + 'In English the spelling is a poor guide to the sound: '
+    + 'put and but, through and though, '
+    + 'and the c of city against the c of cat. '
+    + 'So he does not trust the page, '
+    + 'and he says hola with the h sounded. '
+    + 'A Spanish speaker hears a word that is not hola. '
+    + 'Is there a language where the page tells you the sound, '
+    + 'and can you trust it every time?',
+
+  notation:
+    'Spanish puts a mark over a vowel '
+    + 'and it does not do what an English reader expects. '
+    + 'The mark in José slopes up to the right '
+    + 'and is called an accent. '
+    + 'It does not change the vowel sound at all. '
+    + 'It says only that this is the syllable to stress, '
+    + 'so the word is Jo-SE and not JO-se. '
+    + 'The squiggle over the n in ñ is a different mark, '
+    + 'and that one does change the letter: '
+    + 'año is a year and ano is another word altogether. '
+    + 'Leaving the squiggle off ñ '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Spanish spelling is close to regular, '
     + 'so a written word tells you how to say it '
@@ -180,10 +206,17 @@ teach({
     + 'has written the wrong answer.',
 
   recap:
-    'You can read English aloud, '
-    + 'where the same letters have many sounds. '
-    + 'This gives a language where they have one each, '
-    + 'and shows how much that is worth.',
+    'In English one letter does not have one sound. '
+    + 'The letter a says a different thing in cat, car, cake '
+    + 'and about: '
+    + 'four sounds out of one letter. '
+    + 'That is why an English word '
+    + 'has to be half learned by heart before you can say it. '
+    + 'Spanish is not built that way. '
+    + 'Each of its five vowel letters has exactly one sound, '
+    + 'and it keeps that sound in every word it appears in. '
+    + 'So once you have the five, '
+    + 'you can say a Spanish word you have never seen before.',
 
   method: [
     'Say each vowel with its single Spanish sound.',
@@ -1121,6 +1154,34 @@ teach({
     ],
   },
 
+  why:
+    'A Ghanaian trader is in a shop in Madrid '
+    + 'and wants to say "I want three of those". '
+    + 'She has the word for want out of the dictionary, querer, '
+    + 'and the word for three. '
+    + 'She says "yo querer tres". '
+    + 'The shopkeeper works out what she means, '
+    + 'and she sounds like a two year old. '
+    + 'Querer is the dictionary word and nobody is doing it: '
+    + 'it means "to want", not "I want". '
+    + 'So how do you turn the dictionary word '
+    + 'into a sentence with a person in it?',
+
+  notation:
+    'The dictionary form of a verb is the infinitive, '
+    + 'and in Spanish it always ends in ar, er or ir: '
+    + 'hablar, comer, vivir. '
+    + 'In English the infinitive takes two words, "to speak", '
+    + 'so hablar is one word doing the work of two. '
+    + 'Take the last two letters off '
+    + 'and what is left is the stem: habl. '
+    + 'What you put back on is the ending. '
+    + 'Writing the infinitive where a person is wanted, '
+    + 'as in "yo hablar", '
+    + 'is the commonest way to lose a mark, '
+    + 'because the infinitive names the action '
+    + 'and says that nobody is carrying it out.',
+
   idea:
     'A Spanish verb is listed as an infinitive '
     + 'ending in ar, er or ir. '
@@ -1234,16 +1295,23 @@ teach({
     + 'not a near miss.',
 
   recap:
-    'You can read Spanish aloud and know that nouns have gender. '
-    + 'This gives the verb system: '
-    + 'three groups, one procedure, '
-    + 'and a short list of verbs that must be learned whole.',
+    'English changes a verb for the person, but only barely. '
+    + 'It is I speak, you speak, we speak, they speak, '
+    + 'and then he speaks, with an s on the end. '
+    + 'One ending out of five, '
+    + 'so English leans on the word in front '
+    + 'to say who is acting. '
+    + 'Spanish changes the ending every single time: '
+    + 'hablo, hablas, habla, hablamos, hablan. '
+    + 'Five persons, five different endings. '
+    + 'That is why the word for I can be left out. '
+    + 'The ending has already said it.',
 
   method: [
     'Read the last two letters of the infinitive.',
     'Remove them to leave the stem.',
     'Choose the endings for ar, er or ir.',
-    'Remember that er and ir differ only for nosotros and vosotros.',
+    'The er and ir endings differ only for nosotros and vosotros.',
     'Add the ending for the person intended.',
     'Leave out the subject pronoun unless it is needed.',
     'For a stem changer, change the vowel in every form '
@@ -1451,6 +1519,34 @@ teach({
     ],
   },
 
+  why:
+    'A student wants to say two things about his friend Kofi. '
+    + 'The first is that Kofi is a teacher. '
+    + 'The second is that Kofi is at the market. '
+    + 'In English both sentences use the one word is. '
+    + 'In Spanish one of them takes es '
+    + 'and the other takes está, '
+    + 'and picking the wrong one '
+    + 'turns "Kofi is a teacher" into a sentence '
+    + 'no Spanish speaker would say. '
+    + 'English gives no clue which is which. '
+    + 'So what decides it?',
+
+  notation:
+    'Both verbs mean "to be", '
+    + 'and both are irregular, '
+    + 'so their forms are learned whole. '
+    + 'Ser goes soy, eres, es, somos, son. '
+    + 'Estar goes estoy, estás, está, estamos, están. '
+    + 'Four of the estar forms carry a written accent, '
+    + 'and the accent is not decoration. '
+    + 'Está with the accent means "he is", '
+    + 'and esta without it means "this". '
+    + 'Leaving that accent off '
+    + 'is the commonest way to lose a mark, '
+    + 'because it turns the verb of the sentence '
+    + 'into a pointing word.',
+
   idea:
     'English has one verb to be '
     + 'where Spanish has two, and they are not interchangeable. '
@@ -1574,10 +1670,16 @@ teach({
     + 'The category is the mark.',
 
   recap:
-    'You can conjugate ser and estar in the present. '
-    + 'This says which of them to use, '
-    + 'and why the usual permanent and temporary rule '
-    + 'is not reliable.',
+    'Spanish keeps two separate verbs '
+    + 'where English makes do with one. '
+    + 'English uses is for all of it: '
+    + 'the soup is salty, the soup is on the table, '
+    + 'the soup is food. '
+    + 'Spanish will not let you do that. '
+    + 'It has ser, which goes soy, eres, es, somos, son, '
+    + 'and estar, which goes estoy, estás, está, estamos, están. '
+    + 'Both of them come into English as the single word is, '
+    + 'and this lesson is about which one a sentence wants.',
 
   method: [
     'Read the sentence and ask what it is doing.',
@@ -1795,6 +1897,36 @@ teach({
     ],
   },
 
+  why:
+    'A student is told Spanish is worth learning '
+    + 'and pictures Spain: '
+    + 'one country in Europe, far off, '
+    + 'with nothing to do with Accra. '
+    + 'Then a cocoa buyer from Ecuador '
+    + 'walks into a company office in Tema, '
+    + 'and a Ghanaian working for the United Nations '
+    + 'is posted to Bogotá. '
+    + 'There are more Spanish speakers in Mexico alone '
+    + 'than there are in Spain. '
+    + 'So where is this language actually spoken, '
+    + 'and who would a Ghanaian be speaking it with?',
+
+  notation:
+    'The language is called español, '
+    + 'and a person from Spain is español too, '
+    + 'which is why the wider word hispanohablante, '
+    + 'meaning Spanish speaking, exists. '
+    + 'Latin America means the countries of the Americas '
+    + 'whose language came from Latin, '
+    + 'so it takes in Brazil, where Portuguese is spoken. '
+    + 'Hispanic America means the Spanish speaking ones only, '
+    + 'so it leaves Brazil out. '
+    + 'Country names keep their Spanish spelling '
+    + 'in a Spanish answer: '
+    + 'México, Perú and Panamá all carry an accent. '
+    + 'Calling Brazil a Spanish speaking country '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Spanish is official in about twenty countries. '
     + 'In Europe that country is España, with Madrid. '
@@ -1914,11 +2046,18 @@ teach({
     + 'Each specific fact is a mark.',
 
   recap:
-    'You know Spanish is spoken in Spain '
-    + 'and perhaps that it is spoken in South America. '
-    + 'This gives the countries, '
-    + 'corrects the proportions, '
-    + 'and says what a Ghanaian gains from the language.',
+    'A language and the country it is named after '
+    + 'are two different sizes of thing. '
+    + 'English is named after England, '
+    + 'which holds about 56 million people. '
+    + 'English is an official language in Ghana, Nigeria, '
+    + 'India, Kenya and many more, '
+    + 'so far more English speakers live outside England '
+    + 'than inside it. '
+    + 'Spanish has gone the same way. '
+    + 'Spain holds about 48 million people, '
+    + 'and Spanish is official in roughly twenty countries, '
+    + 'most of them on the far side of the Atlantic.',
 
   method: [
     'Name the country with its accents, and its capital.',
