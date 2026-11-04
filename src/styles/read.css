@@ -1216,3 +1216,37 @@
   font-weight: 800;
   line-height: 1;
 }
+
+/* ── the way out, and the voice ───────────────────────────────────────────── */
+
+/* The back link and the speaker on one line, with the speaker pushed to the
+   far edge. A lesson is its own full screen frame rather than a page inside
+   the dashboard shell, so it does not inherit the top bar and has to carry
+   its own copy of the one control a struggling reader needs most. */
+.nx-read-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.nx-speak {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 10px;
+  border: 1px solid var(--nx-line);
+  background: var(--nx-card, #fff);
+  color: inherit;
+  cursor: pointer;
+}
+
+.nx-speak:hover { border-color: var(--nx-ink-2); }
+
+.nx-speak[aria-pressed='true'] {
+  border-color: var(--nx-gold);
+  color: var(--nx-gold);
+}

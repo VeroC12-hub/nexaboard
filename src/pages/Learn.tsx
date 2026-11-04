@@ -82,6 +82,7 @@ import {
   allTopics, foundations, placeOf, topicsFor,
   type Syllabus, type Topic,
 } from '../lib/education/syllabus'
+import ReadAloud from '../components/ReadAloud'
 
 /** Which of the three things this screen is doing. */
 type View =
@@ -1761,9 +1762,18 @@ function Lesson({
         </>
       ) : (
         <>
-          <button className="nx-link" onClick={onBack} style={{ marginBottom: 22 }}>
-            Back to {learner.subjectName}
-          </button>
+          {/* The way out and the voice, on one line.
+
+              The speaker was in the dashboard's top bar, and a lesson is its
+              own full screen frame rather than a page inside that shell, so
+              opening a lesson lost it. The learner who most needs a lesson
+              read aloud is the one already looking at a wall of words. */}
+          <div className="nx-read-top">
+            <button className="nx-link" onClick={onBack}>
+              Back to {learner.subjectName}
+            </button>
+            <ReadAloud className="nx-speak" within=".sch-read-in" />
+          </div>
 
           <p className="nx-mark" style={{ margin: '0 0 10px' }}>
             {place.strand}{place.subStrand ? ` · ${place.subStrand}` : ''} · {topic.year}
