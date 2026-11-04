@@ -346,7 +346,7 @@ teach({
     'If it runs the machine, it is system software.',
     'If it does a job you chose, it is an application.',
     'Name the operating system as the chief system software.',
-    'Remember that applications reach the hardware through it, never '
+    'Applications reach the hardware through it, never '
       + 'directly.',
   ],
 
@@ -544,6 +544,34 @@ teach({
     ],
   },
 
+  why:
+    'A pupil types a project on a school computer '
+    + 'and saves it. '
+    + 'The next week he comes back to finish it '
+    + 'and cannot find it. '
+    + 'He saved it as "untitled 1", '
+    + 'and he saved it wherever the box was already pointing. '
+    + 'The file is still on that machine. '
+    + 'Searching every folder takes the whole lesson, '
+    + 'so he types the project again instead. '
+    + 'Nothing was deleted and nothing broke. '
+    + 'So how should it have been saved?',
+
+  notation:
+    'A file is one piece of work with a name. '
+    + 'A folder is a container for files, '
+    + 'and a folder can hold other folders. '
+    + 'A file name ends with a dot and a few letters, '
+    + 'called the extension, '
+    + 'which says what kind of file it is: '
+    + 'docx for a document, jpg for a picture. '
+    + 'The run of folders you go through to reach a file '
+    + 'is called the path. '
+    + 'Saving without reading the folder box '
+    + 'is the commonest mistake, '
+    + 'because the computer picks a place for you '
+    + 'and it will not be the place you wanted.',
+
   idea:
     'A file is one saved piece of work, with a name and an extension that '
     + 'says what kind it is. '
@@ -577,9 +605,20 @@ teach({
     + 'and nothing you do from the keyboard will bring it back.',
 
   recap:
-    'You have saved and opened work on a computer or a phone. '
-    + 'This explains the tree the work sits in, '
-    + 'so you can put something where you will find it again.',
+    'A computer keeps work '
+    + 'the way a cupboard keeps paper. '
+    + 'One piece of work is a file, '
+    + 'like one sheet of paper. '
+    + 'Files are kept in folders, '
+    + 'like sheets in labelled envelopes. '
+    + 'A folder can sit inside another folder, '
+    + 'which paper does too: '
+    + 'an envelope inside a box inside a cupboard. '
+    + 'Nothing gets lost in a cupboard arranged like that, '
+    + 'and nothing gets lost on a computer either. '
+    + 'This lesson is how the arrangement works, '
+    + 'so that a file can be put '
+    + 'where it will be found again.',
 
   method: [
     'Make a folder for each subject or each project.',
@@ -784,6 +823,36 @@ teach({
     ],
   },
 
+  why:
+    'A pupil hands in an eight page project. '
+    + 'Every heading in it was made bold '
+    + 'and set to size 16 by hand. '
+    + 'The teacher asks for one change: '
+    + 'every heading in dark blue. '
+    + 'There are fourteen headings. '
+    + 'He has to find each one and change it, '
+    + 'and he misses two of them. '
+    + 'Is there a way of making that one change '
+    + 'in one place?',
+
+  notation:
+    'A style is a name you give a paragraph, '
+    + 'such as Heading 1 or Normal. '
+    + 'The look is stored against the name, '
+    + 'so changing the name '
+    + 'changes every paragraph using it. '
+    + 'A header is the strip at the top of every page '
+    + 'and a footer is the strip at the bottom. '
+    + 'Both are typed once for the whole document, '
+    + 'not once per page. '
+    + 'A table is made of rows going across '
+    + 'and columns going down, '
+    + 'and one box in it is a cell. '
+    + 'Making a heading big and bold by hand '
+    + 'instead of giving it a style '
+    + 'is the commonest mistake, '
+    + 'and the cost of it only shows up later.',
+
   idea:
     'A word processor is an application for writing documents. '
     + 'You type, and then you can change what you typed without writing it '
@@ -813,9 +882,20 @@ teach({
     + 'so it repeats and renumbers itself when you add a page.',
 
   recap:
-    'You have typed work on a computer or a phone before. '
-    + 'This adds the parts that make a long document hold together: '
-    + 'styles, tables, headers and footers.',
+    'There are two ways to make a line of text '
+    + 'look like a heading. '
+    + 'One is to select it, press bold, '
+    + 'and set the size to 16. '
+    + 'The other is to tell the program '
+    + 'that the line is a heading, '
+    + 'and let it decide the look. '
+    + 'Both of those put the same thing on the screen. '
+    + 'They are not the same at all, '
+    + 'because the second one has a name attached to it, '
+    + 'and anything with a name '
+    + 'can be changed everywhere at once. '
+    + 'This lesson is what a program can do for you '
+    + 'once things have names.',
 
   method: [
     'Type all the words first. Do not format while writing.',
@@ -1032,6 +1112,33 @@ teach({
     ],
   },
 
+  why:
+    'A pupil in Ho types an address into a phone, '
+    + 'and a page kept in Accra arrives in two seconds. '
+    + 'Nobody in Ho has that page. '
+    + 'The phone had to ask a machine somewhere else for it, '
+    + 'and that machine had to find the phone again '
+    + 'to send it back. '
+    + 'Neither of them knows where the other is standing. '
+    + 'So how does a message reach one particular machine '
+    + 'out of all the machines in the world?',
+
+  notation:
+    'The internet is the network of joined machines. '
+    + 'The web is one of the services running on it, '
+    + 'and the two are not the same thing. '
+    + 'Email is another service, and so is messaging. '
+    + 'A browser is the program '
+    + 'that shows you a web page. '
+    + 'An address beginning www is a URL, '
+    + 'said as the three letters. '
+    + 'Every machine on the network also has a number, '
+    + 'which is its IP address. '
+    + 'Saying the internet where you mean the web '
+    + 'is the commonest mistake, '
+    + 'because the question is usually asking you '
+    + 'to tell the two apart.',
+
   idea:
     'The internet is a network joining computers all over the world. '
     + 'The services that run on it are separate things, '
@@ -1073,9 +1180,19 @@ teach({
     + 'and whether anybody else says the same.',
 
   recap:
-    'You have used a phone to browse or message. '
-    + 'This explains what is actually happening, '
-    + 'and separates the network from the services running on it.',
+    'A phone on its own '
+    + 'can only show you what is already inside it. '
+    + 'Switch the data off, open a web page, '
+    + 'and nothing comes. '
+    + 'The page was never in the phone. '
+    + 'It was on another machine, '
+    + 'and the phone asked for it and was sent it. '
+    + 'For that to happen, '
+    + 'two machines that have never met '
+    + 'have to be joined by something, '
+    + 'and have to have some way of naming each other. '
+    + 'This lesson is what the joining is, '
+    + 'and what runs on top of it.',
 
   method: [
     'For a search, pick the words that would be on the page you want.',

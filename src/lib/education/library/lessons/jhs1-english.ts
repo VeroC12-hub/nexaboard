@@ -39,6 +39,35 @@ teach({
     ],
   },
 
+  why:
+    'A pupil is told to speak for two minutes '
+    + 'on keeping the school clean. '
+    + 'He writes the whole thing out in full '
+    + 'and reads it to the class with his head down. '
+    + 'Halfway through he loses his place, '
+    + 'and he cannot find it again, '
+    + 'because every line on the page '
+    + 'looks like every other line. '
+    + 'He sits down with half of it unsaid. '
+    + 'He knew the subject perfectly well. '
+    + 'So what should have been on the paper in his hand?',
+
+  notation:
+    'A talk and a reading are two different things, '
+    + 'and the words for them matter. '
+    + 'A speech is spoken. '
+    + 'A reading is read out. '
+    + 'What you carry up with you is notes, or cue cards, '
+    + 'and a note is a few words, never a sentence. '
+    + 'Standard English uses the full form of a word, '
+    + 'so it is "do not" rather than "don’t", '
+    + 'and "cannot" rather than "can’t". '
+    + 'Slang is a word used only among friends, '
+    + 'and it has no place in a formal talk. '
+    + 'Reading your sentences out word for word '
+    + 'is the commonest mistake, '
+    + 'because it stops being a talk the moment you do.',
+
   idea:
     'A prepared talk is planned before and spoken on the day. '
     + 'You stand with a card of short notes, not a page of sentences. '
@@ -59,9 +88,19 @@ teach({
     + 'The notes are there to hold the order of your points, nothing more.',
 
   recap:
-    'You have given talks in class before. '
-    + 'This asks for the same thing with two rules added: '
-    + 'plan it first, and use standard English throughout.',
+    'Speaking to one person and speaking to a group '
+    + 'are two different jobs. '
+    + 'Tell a friend about a football match '
+    + 'and you can start anywhere, '
+    + 'because he will ask you questions when he is lost. '
+    + 'Stand in front of thirty people '
+    + 'and nobody interrupts you. '
+    + 'Lose them at the start '
+    + 'and they stay lost to the end. '
+    + 'So the order has to be settled before you stand up, '
+    + 'and not while you are standing there. '
+    + 'This lesson is how to settle it, '
+    + 'and how to say it in English that suits the occasion.',
 
   method: [
     'Decide the one thing you want the people to leave knowing.',
@@ -258,6 +297,35 @@ teach({
     ],
   },
 
+  why:
+    'A passage says a boy came home, '
+    + 'put his bag down without a word, '
+    + 'and went straight to bed. '
+    + 'One question asks what he did with his bag. '
+    + 'The passage says it, '
+    + 'so you point at the line. '
+    + 'Another question asks how he was feeling. '
+    + 'The passage never says how he was feeling. '
+    + 'The answer is still certain, '
+    + 'and it is still in the passage. '
+    + 'How can an answer be in a passage '
+    + 'that does not contain it?',
+
+  notation:
+    'The two kinds of question have names, '
+    + 'and a paper may use them. '
+    + 'A literal question has its answer written in the passage, '
+    + 'so you can put a finger on the line. '
+    + 'An inferential question has an answer '
+    + 'you work out from what is written. '
+    + 'Infer means to work out from evidence, '
+    + 'and what you work out is an inference. '
+    + 'An inference is not a guess, '
+    + 'because a guess has no words standing behind it. '
+    + 'Answering an inferential question '
+    + 'without pointing at the words that led you there '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Some questions are answered by the passage itself. '
     + 'You find the line and put it in your own words. '
@@ -284,9 +352,17 @@ teach({
     + 'It shows you, and showing is stronger than telling.',
 
   recap:
-    'You already answer questions on a passage. '
-    + 'This sorts those questions into two kinds, '
-    + 'because each kind wants a different sort of answer.',
+    'A passage holds more than it says. '
+    + 'Read this: '
+    + 'she picked up her umbrella before opening the door. '
+    + 'The words tell you she picked up an umbrella. '
+    + 'They do not say it was raining, '
+    + 'and they do not say she expected rain. '
+    + 'Yet nobody reading it pictures a clear sky. '
+    + 'So some things in a passage are written '
+    + 'and some are carried, '
+    + 'and this lesson sorts the questions '
+    + 'by which of the two they are asking for.',
 
   method: [
     'Read the question before reading the passage again.',
@@ -502,6 +578,32 @@ teach({
     ],
   },
 
+  why:
+    'A passage says a trader had a hard head. '
+    + 'A pupil writes that the trader’s skull was solid, '
+    + 'which is what the words say. '
+    + 'He loses the mark. '
+    + 'Another passage says a stone is hard, '
+    + 'and there the answer really is about being solid. '
+    + 'One word, two answers, '
+    + 'and a dictionary that gives both and more besides. '
+    + 'So who decides which meaning is the right one here?',
+
+  notation:
+    'A word with more than one meaning '
+    + 'has them listed separately in a dictionary, '
+    + 'numbered 1, 2, 3. '
+    + 'The meaning a word carries in one particular place '
+    + 'is its meaning in context, '
+    + 'and context means the words standing around it. '
+    + 'A question will say "as it is used in the passage", '
+    + 'and those six words are the whole instruction. '
+    + 'Test an answer by putting it in place of the original '
+    + 'and reading the sentence again. '
+    + 'Giving the usual meaning of a word '
+    + 'where the question asked for its meaning in the passage '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Words change meaning with their company. '
     + '"The crowd was thick" does not mean the crowd was stupid. '
@@ -527,10 +629,17 @@ teach({
     + 'The marker is checking whether your word could replace the original.',
 
   recap:
-    'You have used a dictionary and found that a word has several meanings '
-    + 'listed. '
-    + 'This explains how to choose between them: the passage chooses, '
-    + 'not you.',
+    'One word can mean several different things. '
+    + 'Take the word run. '
+    + '"He can run fast" is about moving your legs. '
+    + '"She runs a shop" is about being in charge of it. '
+    + '"The tap runs" is about water coming out. '
+    + 'Nothing about the word itself changed '
+    + 'in those three sentences. '
+    + 'What changed was the words around it, '
+    + 'and those are what fixed the meaning each time. '
+    + 'This lesson is how to let the sentence '
+    + 'do the choosing for you.',
 
   method: [
     'Find the word in the passage and read the whole sentence.',
@@ -705,6 +814,35 @@ teach({
     ],
   },
 
+  why:
+    'A pupil has forty minutes '
+    + 'to write about a day he will never forget. '
+    + 'He starts writing at once, with no plan. '
+    + 'He spends two pages on waking up and getting dressed, '
+    + 'reaches the actual event with four minutes left, '
+    + 'and finishes with '
+    + '"and that is my day I will never forget". '
+    + 'Everything in it is true '
+    + 'and his English is correct throughout. '
+    + 'It still scores badly. '
+    + 'What did the five minutes he did not spend planning '
+    + 'actually cost him?',
+
+  notation:
+    'A paragraph is a block of sentences about one idea, '
+    + 'and it starts on a new line. '
+    + 'One idea per paragraph is the rule, '
+    + 'and it is how a marker sees that you had a plan. '
+    + 'A narrative essay tells what happened, '
+    + 'so it needs a problem and an ending. '
+    + 'A descriptive essay says what something was like, '
+    + 'so it needs detail rather than events. '
+    + 'A plan is four or five short notes, not sentences. '
+    + 'Writing one long block with no paragraph breaks '
+    + 'is the commonest way to lose a mark, '
+    + 'because it looks the same '
+    + 'whether there is an order inside it or not.',
+
   idea:
     'A narrative essay tells a story: something happened, and then '
     + 'something changed. '
@@ -732,9 +870,19 @@ teach({
     + 'so you do not need words like "furthermore" at all.',
 
   recap:
-    'You have written stories and descriptions in primary school. '
-    + 'What is added here is the plan, the paragraph, and an ending that '
-    + 'means something.',
+    'A story and a description do two different jobs. '
+    + 'A story moves: '
+    + 'the boy went out, the rain came, he got lost. '
+    + 'Something has changed '
+    + 'between the beginning and the end. '
+    + 'A description stands still: '
+    + 'the market was loud, the fish smelled of salt, '
+    + 'flies sat on everything. '
+    + 'Nothing changed, and that is correct, '
+    + 'because a description is not meant to move. '
+    + 'A question asks for one or the other, '
+    + 'and this lesson adds the plan and the paragraph '
+    + 'that hold either of them together.',
 
   method: [
     'Read the question twice and underline what it asks for.',
@@ -950,6 +1098,33 @@ teach({
     ],
   },
 
+  why:
+    'Take the word water. '
+    + 'In "the water is cold", water is a thing. '
+    + 'In "water the garden", water is something you do. '
+    + 'It is the same five letters both times. '
+    + 'A pupil who learned that water is a noun '
+    + 'will get the second one wrong. '
+    + 'So what actually decides '
+    + 'which kind of word a word is?',
+
+  notation:
+    'There are eight kinds of word '
+    + 'and each kind has a name. '
+    + 'A noun names. '
+    + 'A pronoun stands in for a noun. '
+    + 'A verb does. '
+    + 'An adjective describes a noun. '
+    + 'An adverb describes a verb. '
+    + 'A preposition says where or when, '
+    + 'as in on, under, before. '
+    + 'A conjunction joins, as in and, but, because. '
+    + 'An interjection is a cry on its own, as in oh, ah. '
+    + 'Naming a word without saying which word it works with '
+    + 'is the commonest way to lose a mark, '
+    + 'because an adjective has to be describing something, '
+    + 'and an adverb has to be describing something else.',
+
   idea:
     'Words are sorted by the job they do in a sentence, and there are '
     + 'eight of those jobs. '
@@ -976,8 +1151,18 @@ teach({
     + 'decided.',
 
   recap:
-    'You know nouns, verbs and adjectives from primary school. '
-    + 'This adds the other five and one rule that covers all eight: '
+    'Words are sorted by the job they do in a sentence. '
+    + 'In "the small boy ran quickly" '
+    + 'there are four jobs being done. '
+    + 'Boy names a thing, so it is a noun. '
+    + 'Ran says what he did, so it is a verb. '
+    + 'Small tells you which boy, '
+    + 'so it describes the noun. '
+    + 'Quickly tells you how he ran, '
+    + 'so it describes the verb. '
+    + 'Those four jobs have names, '
+    + 'and this lesson gives all eight of them, '
+    + 'with one rule that covers the lot: '
     + 'the job decides, not the word.',
 
   method: [
@@ -1191,6 +1376,36 @@ teach({
     ],
   },
 
+  why:
+    'A pupil writes a story that begins '
+    + '"I walked to the farm", '
+    + 'and three lines later says '
+    + '"then I see my uncle under the tree". '
+    + 'Each sentence is correct English on its own. '
+    + 'Together they are wrong, '
+    + 'because the story started yesterday '
+    + 'and the second sentence has moved to now. '
+    + 'A reader feels the jolt '
+    + 'without being able to name it. '
+    + 'So what is it that has to stay the same '
+    + 'all the way down a piece of writing?',
+
+  notation:
+    'Tense says when, '
+    + 'and there are three: past, present and future. '
+    + 'Inside one time there is more than one form, '
+    + 'and the word for that difference is aspect. '
+    + '"I ate" is a finished action. '
+    + '"I have eaten" is finished and still matters now. '
+    + '"I was eating" was going on '
+    + 'when something else happened. '
+    + 'A form made of two words, such as have eaten, '
+    + 'has a helper in front of it, called an auxiliary. '
+    + 'Slipping from one tense to another '
+    + 'inside one piece of writing '
+    + 'is the commonest way to lose a mark, '
+    + 'and it is what a marker checks first.',
+
   idea:
     'Tense tells the reader when something happened. '
     + 'Aspect tells the reader how it sat in time: stated plainly, '
@@ -1219,9 +1434,21 @@ teach({
     + '"Yesterday" closes the event off, and the perfect keeps it open.',
 
   recap:
-    'You already use past, present and future correctly when speaking. '
-    + 'This names the forms, so you can keep one tense across a whole '
-    + 'piece of writing on purpose.',
+    'A verb changes its shape '
+    + 'to say when something happened. '
+    + '"I walk" is now. '
+    + '"I walked" is finished. '
+    + '"I will walk" has not happened yet. '
+    + 'It is the same walking in all three; '
+    + 'only the time moved. '
+    + 'Most people do this correctly in speech '
+    + 'without ever thinking about it. '
+    + 'Writing is harder, '
+    + 'because a piece of writing is long, '
+    + 'and a slip in the middle of it '
+    + 'is easy to make and easy to see. '
+    + 'This lesson names the forms, '
+    + 'so that a tense can be held on purpose.',
 
   method: [
     'Decide the time of your story: past, present or future.',
@@ -1428,6 +1655,36 @@ teach({
     ],
   },
 
+  why:
+    'Here are two sentences '
+    + 'with the same words in the same order. '
+    + '"Let us eat, Grandma." '
+    + '"Let us eat Grandma." '
+    + 'One is a call to a meal. '
+    + 'The other is a confession. '
+    + 'The only difference between them is one comma. '
+    + 'So punctuation is not decoration, '
+    + 'and it is not about where you breathe. '
+    + 'What are the marks actually doing?',
+
+  notation:
+    'Each mark has a name and a job. '
+    + 'A full stop ends a statement. '
+    + 'A comma separates items in a list, '
+    + 'or marks off an extra part of a sentence. '
+    + 'A colon is two dots above each other, '
+    + 'and it introduces what comes after it. '
+    + 'A semicolon is a dot above a comma, '
+    + 'and it joins two statements '
+    + 'that could each have stood alone. '
+    + 'An apostrophe does two jobs: '
+    + 'it shows ownership, as in the boy’s bag, '
+    + 'and it shows a missing letter, '
+    + 'as in "do not" becoming "don’t". '
+    + 'Putting an apostrophe into a plain plural, '
+    + 'such as mango’s for more than one mango, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Punctuation shows the reader how a sentence is built. '
     + 'Each mark names a different boundary inside it, and the '
@@ -1457,9 +1714,19 @@ teach({
     + 'possessive word, like his.',
 
   recap:
-    'You use full stops, question marks and commas in lists already. '
-    + 'This adds the colon, the semicolon, and the two jobs of the '
-    + 'apostrophe.',
+    'A sentence read aloud has pauses in it, '
+    + 'and a sentence on paper has marks. '
+    + 'The two are not the same thing, '
+    + 'and that is where most mistakes start. '
+    + 'Read "the dog, which was black, barked" aloud '
+    + 'and you pause twice. '
+    + 'But the commas are not there for the pauses. '
+    + 'They are there to show '
+    + 'that "which was black" is an extra part, '
+    + 'and that the sentence still works without it: '
+    + 'the dog barked. '
+    + 'So every mark is doing a job in the sentence, '
+    + 'and this lesson is what each job is.',
 
   method: [
     'End every statement with a full stop.',

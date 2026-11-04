@@ -114,7 +114,7 @@ teach({
         + 'Use notes with keywords only.',
     },
     {
-      mistake: 'Cramming in everything you know.',
+      mistake: 'Cramming every fact you have into the talk.',
       why: 'Three points remembered beats ten points forgotten.',
     },
     {
@@ -302,7 +302,7 @@ teach({
 
   traps: [
     {
-      mistake: 'Inferring from what you know rather than what it says.',
+      mistake: 'Inferring from your own experience rather than the text.',
       why: 'Your own experience is not evidence about this character. '
         + 'Point at the text.',
     },
@@ -871,7 +871,7 @@ teach({
     + 'lose a mark.',
 
   idea:
-    'An informal letter is one to somebody you know. '
+    'An informal letter is one to a friend or a relative. '
     + 'It has a set layout: your address at the top right, '
     + 'the date below it, a greeting on the left, '
     + 'then the body, then a closing and your name.',
