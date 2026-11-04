@@ -1,171 +1,145 @@
 /**
- * The end of year examination, and the class it moves you into.
+ * The end of year examination, subject by subject, and the class it moves you
+ * into.
  *
- * Three states in one component, because they are three moments of one event
- * and splitting them across screens would lose the paper when the answers are
- * submitted: the notice before sitting, the paper itself, and the result.
+ * ── Why it is one paper per subject ─────────────────────────────────────────
  *
- * The paper is deliberately plain. No timer, no progress ring, no encouraging
- * mascot. A learner who is being examined should be able to tell, from the
- * page alone, that this one counts, and every ornament that makes a lesson
- * friendly works against that here.
+ * The first version put four questions from every subject into one paper. That
+ * is not an examination, it is a quiz that decides whether you repeat a year.
+ * A real end of year examination is one paper per subject, twenty objective
+ * questions each, sat over several days, and promotion is decided on the
+ * aggregate. So that is the shape: the learner sits Mathematics when they are
+ * ready for Mathematics, the mark is kept, and the class moves when every
+ * paper is in and the aggregate reaches the pass mark.
+ *
+ * ── Why there is no readiness gate ──────────────────────────────────────────
+ *
+ * There was one: a quarter of the year's topics had to be worked first. It was
+ * meant kindly and it was wrong. A learner who already knows the work, or who
+ * joined late, or who is simply curious what the paper looks like, was told to
+ * go away and study something they may already know. Every class may sit, at
+ * any time, as often as they like.
+ *
+ * The paper itself is deliberately plain. No timer, no progress ring, no
+ * mascot. A learner being examined should be able to tell from the page alone
+ * that this one counts.
  */
 
 import { useMemo, useState } from 'react'
 import {
-  attemptsFrom, eligibility, examFor, markExam, PASS,
-  type Exam, type ExamResult,
+  attemptsFromPaper, clearPapers, markPaper, paperFor, PASS,
+  recordPaper, standingOfExam,
+  type ExamSection, type PaperMark,
 } from '../lib/education/promotion'
+import { optionsOf } from '../lib/education/course'
 import type { Attempt } from '../lib/education/mastery'
 import type { LearnerProfile } from '../lib/education/learner'
 
+const pc = (share: number) => Math.round(share * 100)
+
 export default function MoveUp({
-  profile, attempts, onMoved, onAttempts,
+  profile, onMoved, onAttempts,
 }: {
   profile: LearnerProfile
-  attempts: Attempt[]
-  /** Passed, and these are the stage and year they are now in. */
+  /** Passed the whole examination: this is their new stage and year. */
   onMoved: (stage: LearnerProfile['stage'], level: string) => void
-  /** Every answer, so the plan learns from the paper as it does from practice. */
+  /** Every answer, so the plan learns from a paper as it does from practice. */
   onAttempts: (a: Attempt[]) => void
 }) {
-  const exam = useMemo<Exam>(() => examFor(profile), [profile])
-  const may = useMemo(() => eligibility(profile, attempts), [profile, attempts])
+  /* Bumped after every paper, so the standing is read from storage again
+     rather than from a value captured when the screen first rendered. */
+  const [turn, setTurn] = useState(0)
+  const standing = useMemo(
+    () => standingOfExam(profile),
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    [profile, turn])
 
-  const [sitting, setSitting] = useState(false)
+  const [sitting, setSitting] = useState<ExamSection | null>(null)
   const [given, setGiven] = useState<Map<string, string>>(new Map())
-  const [result, setResult] = useState<ExamResult | null>(null)
+  const [justMarked, setJustMarked] = useState<PaperMark | null>(null)
 
   const answer = (id: string, value: string) =>
     setGiven(prev => new Map(prev).set(id, value))
 
-  const answered = exam.sections
-    .flatMap(s => s.questions)
-    .filter(({ question: q }) => (given.get(q.id) ?? '').trim().length > 0).length
+  const start = (subjectId: string) => {
+    const paper = paperFor(profile, subjectId)
+    if (!paper) return
+    setGiven(new Map())
+    setJustMarked(null)
+    setSitting(paper)
+  }
 
   const submit = () => {
-    const marked = markExam(exam, given)
-    setResult(marked)
-    setSitting(false)
-    onAttempts(attemptsFrom(exam, given))
-    /* The move happens here rather than behind a second button. Passing is the
-       event; making them press "accept" afterwards would invite the reading
-       that it did not count unless they agreed to it. */
-    if (marked.moveTo) onMoved(marked.moveTo.stage, marked.moveTo.level)
+    if (!sitting) return
+    const mark = markPaper(sitting, given)
+    recordPaper(profile.id, profile.level, mark)
+    onAttempts(attemptsFromPaper(sitting, given))
+    setJustMarked(mark)
+    setSitting(null)
+    setTurn(t => t + 1)
   }
 
-  /* ── the result ─────────────────────────────────────────────────────────── */
-
-  if (result) {
-    const pc = Math.round(result.share * 100)
-    return (
-      <div className="sch-panel">
-        <div className="sch-panel-top">
-          <h2>{result.passed ? 'You have moved up' : 'Not this time'}</h2>
-        </div>
-
-        <p className="nx-lede" style={{ marginTop: 0 }}>
-          {result.right} out of {result.total}, which is {pc} per cent.
-          {' '}
-          {result.passed
-            ? result.moveTo
-              ? `You are now in ${result.moveTo.level}${result.moveTo.newStage
-                  ? ', and that is a new stage, so your subjects change today.'
-                  : '.'}`
-              : 'There is nowhere further to move in this app.'
-            : `The pass mark is ${Math.round(PASS * 100)} per cent. `
-              + 'Nothing is lost. Go back to the subjects that went worst, and sit it again when you are ready.'}
-        </p>
-
-        {/* Per subject, because a learner who failed needs to know where, and
-            a learner who passed still has a subject that nearly stopped
-            them. A single percentage tells neither of them anything. */}
-        <div className="sch-marks">
-          {result.bySubject
-            .slice()
-            .sort((a, b) => (a.right / a.total) - (b.right / b.total))
-            .map(s => (
-              <div className="sch-line" key={s.subjectId}>
-                <span className="sch-line-body">
-                  <span className="sch-line-title">{s.subjectName}</span>
-                  <span className="sch-line-sub">
-                    {s.right} of {s.total}
-                  </span>
-                </span>
-                <span
-                  className={`sch-pill${s.right / s.total >= PASS ? ' is-pass' : ' is-fail'}`}>
-                  {Math.round((s.right / s.total) * 100)}%
-                </span>
-              </div>
-            ))}
-        </div>
-
-        <button
-          className="sch-btn is-quiet"
-          style={{ marginTop: 18 }}
-          onClick={() => { setResult(null); setGiven(new Map()) }}>
-          Done
-        </button>
-      </div>
-    )
+  /** Every paper in, and the aggregate reached: move, and start a clean set. */
+  const moveUp = () => {
+    if (!standing.passed || !standing.next) return
+    clearPapers(profile.id, profile.level)
+    onMoved(standing.next.stage, standing.next.level)
   }
 
-  /* ── the paper ──────────────────────────────────────────────────────────── */
+  /* ── sitting one ────────────────────────────────────────────────────────── */
 
   if (sitting) {
+    const answered = sitting.questions
+      .filter(({ question: q }) => (given.get(q.id) ?? '').trim().length > 0).length
+
     return (
       <div className="sch-panel">
         <div className="sch-panel-top">
-          <h2>End of {exam.level}</h2>
-          <span className="sch-line-sub">{answered} of {exam.total} answered</span>
+          <h2>{sitting.subjectName}</h2>
+          <span className="sch-line-sub">
+            {answered} of {sitting.questions.length} answered
+          </span>
         </div>
 
-        {exam.sections.map(s => (
-          <section key={s.subjectId} className="sch-exam-part">
-            <h3 className="sch-exam-subject">{s.subjectName}</h3>
-            {s.questions.map(({ question: q }, i) => (
-              <div className="sch-exam-q" key={q.id}>
-                <p className="sch-exam-ask">
-                  <span className="sch-exam-no">{i + 1}</span> {q.ask}
-                </p>
+        {sitting.questions.map(({ question: q }, i) => (
+          <div className="sch-exam-q" key={q.id}>
+            <p className="sch-exam-ask">
+              <span className="sch-exam-no">{i + 1}</span> {q.ask}
+            </p>
 
-                {q.kind === 'choice' && q.options ? (
-                  <div className="sch-exam-options">
-                    {q.options.map(o => (
-                      <label className="sch-exam-option" key={o}>
-                        <input
-                          type="radio"
-                          name={q.id}
-                          value={o}
-                          checked={given.get(q.id) === o}
-                          onChange={() => answer(q.id, o)} />
-                        <span>{o}</span>
-                      </label>
-                    ))}
-                  </div>
-                ) : (
-                  <input
-                    className="sch-exam-input"
-                    inputMode="text"
-                    aria-label={q.ask}
-                    value={given.get(q.id) ?? ''}
-                    onChange={e => answer(q.id, e.target.value)} />
-                )}
+            {q.kind === 'choice' && q.options ? (
+              <div className="sch-exam-options">
+                {optionsOf(q).map(o => (
+                  <label className="sch-exam-option" key={o}>
+                    <input
+                      type="radio"
+                      name={q.id}
+                      value={o}
+                      checked={given.get(q.id) === o}
+                      onChange={() => answer(q.id, o)} />
+                    <span>{o}</span>
+                  </label>
+                ))}
               </div>
-            ))}
-          </section>
+            ) : (
+              <input
+                className="sch-exam-input"
+                inputMode="text"
+                aria-label={q.ask}
+                value={given.get(q.id) ?? ''}
+                onChange={e => answer(q.id, e.target.value)} />
+            )}
+          </div>
         ))}
 
         <div className="sch-exam-foot">
-          {/* No confirmation step. The warning was given before they started,
-              and asking "are you sure" after every question is answered only
-              teaches people to click through warnings. */}
-          <button className="sch-btn" onClick={submit}>
-            Submit the paper
+          <button className="sch-btn" onClick={submit}>Submit this paper</button>
+          <button className="sch-btn is-quiet" onClick={() => setSitting(null)}>
+            Leave it
           </button>
           <span className="sch-line-sub">
-            {answered < exam.total
-              ? `${exam.total - answered} unanswered will be marked wrong.`
+            {answered < sitting.questions.length
+              ? `${sitting.questions.length - answered} unanswered will be marked wrong.`
               : 'Every question answered.'}
           </span>
         </div>
@@ -173,60 +147,112 @@ export default function MoveUp({
     )
   }
 
-  /* ── before sitting ─────────────────────────────────────────────────────── */
+  /* ── the examination as a whole ─────────────────────────────────────────── */
+
+  const justSat = justMarked
+    && standing.papers.find(p => p.subjectId === justMarked.subjectId)
 
   return (
     <div className="sch-panel">
       <div className="sch-panel-top">
-        <h2>Move up a class</h2>
+        <h2>End of {standing.level}</h2>
+        {standing.sat > 0 && (
+          <span className="sch-line-sub">
+            {standing.sat} of {standing.papers.length} papers sat
+          </span>
+        )}
       </div>
 
-      <p className="nx-lede" style={{ marginTop: 0 }}>
-        {exam.next
-          ? `Sit the end of ${exam.level} examination. Pass it and you move into `
-            + `${exam.next.level}${exam.next.newStage
-              ? ', which is a new stage, so your subjects change.'
-              : '.'}`
-          : `${exam.level} is the last class this app carries.`}
-      </p>
-
-      {/* What it is, and what it is not. A learner who thinks this is BECE
-          will either panic or will later believe they hold a certificate. */}
-      <p className="nx-fineprint">
-        This is Learning-Pal's own check that you are ready for next year's
-        work. It is not BECE or WASSCE, it is not sat with an invigilator, and
-        it awards nothing a school or an employer will recognise. What it
-        changes is what you are taught here.
-      </p>
-
-      {exam.sections.length > 0 && (
-        <div className="sch-marks">
-          {exam.sections.map(s => (
-            <div className="sch-line" key={s.subjectId}>
-              <span className="sch-line-body">
-                <span className="sch-line-title">{s.subjectName}</span>
-                <span className="sch-line-sub">
-                  {s.questions.length} {s.questions.length === 1 ? 'question' : 'questions'}
-                </span>
-              </span>
-            </div>
-          ))}
-        </div>
+      {justSat && justMarked && (
+        <p className="nx-lede" style={{ marginTop: 0 }}>
+          {justSat.subjectName}: {justMarked.right} out of {justMarked.total}.
+          {' '}
+          {standing.complete
+            ? ''
+            : `${standing.papers.length - standing.sat} `
+              + `${standing.papers.length - standing.sat === 1 ? 'paper' : 'papers'} left.`}
+        </p>
       )}
 
-      {may.ready ? (
-        <>
-          <p className="nx-fineprint">
-            {exam.total} questions, {Math.round(PASS * 100)} per cent to pass.
-            No hints, and the tutor will not help while you are sitting it.
-          </p>
-          <button className="sch-btn" onClick={() => setSitting(true)}>
-            Start the examination
-          </button>
-        </>
+      {!standing.next ? (
+        <p className="sch-none">
+          {standing.level} is the last class this app carries, so there is
+          nowhere to move up to.
+        </p>
+      ) : !standing.papers.length ? (
+        <p className="sch-none">There are no questions written for this class yet.</p>
       ) : (
-        <p className="sch-none">{may.why}</p>
+        <>
+          <p className="nx-lede" style={{ marginTop: justSat ? 0 : undefined }}>
+            One paper for each subject, {PER_LENGTH(standing.papers[0].length)} each.
+            Sit them in any order, on any day. When every paper is in and your
+            aggregate is {pc(PASS)} per cent or more, you move into{' '}
+            {standing.next.level}
+            {standing.next.newStage
+              ? ', which is a new stage, so your subjects change.'
+              : '.'}
+          </p>
+
+          {/* What it is, and what it is not. A learner who thinks this is BECE
+              will either panic or will later believe they hold a certificate. */}
+          <p className="nx-fineprint">
+            This is Learning-Pal's own examination. It is not BECE or WASSCE, it
+            is not sat with an invigilator, and it awards nothing a school or an
+            employer will recognise. What it changes is what you are taught here.
+          </p>
+
+          <div className="sch-marks">
+            {standing.papers.map(p => (
+              <div className="sch-line" key={p.subjectId}>
+                <span className="sch-line-body">
+                  <span className="sch-line-title">{p.subjectName}</span>
+                  <span className="sch-line-sub">
+                    {p.mark
+                      ? `${p.mark.right} of ${p.mark.total}`
+                      : `${p.length} questions, not yet sat`}
+                  </span>
+                </span>
+                {p.mark && (
+                  <span
+                    className={`sch-pill${p.mark.right / p.mark.total >= PASS
+                      ? ' is-pass' : ' is-fail'}`}>
+                    {pc(p.mark.right / p.mark.total)}%
+                  </span>
+                )}
+                <button className="sch-btn is-quiet" onClick={() => start(p.subjectId)}>
+                  {p.mark ? 'Sit again' : 'Sit the paper'}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {standing.sat > 0 && (
+            <p className="nx-lede">
+              Aggregate so far: {standing.right} out of {standing.total},
+              which is {pc(standing.share)} per cent.
+            </p>
+          )}
+
+          {standing.complete && (
+            standing.passed ? (
+              <button className="sch-btn" onClick={moveUp}>
+                Move into {standing.next.level}
+              </button>
+            ) : (
+              <p className="sch-none">
+                Every paper is in, and the aggregate is {pc(standing.share)} per
+                cent against a pass mark of {pc(PASS)}. Nothing is lost. Go back
+                to the subjects that went worst and sit those papers again.
+              </p>
+            )
+          )}
+        </>
       )}
     </div>
   )
+}
+
+/** "20 questions", or the honest number where a subject has fewer written. */
+function PER_LENGTH(n: number): string {
+  return `${n} ${n === 1 ? 'question' : 'questions'}`
 }

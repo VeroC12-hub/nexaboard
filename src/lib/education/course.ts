@@ -121,3 +121,58 @@ export function isRight(q: Question, given: string): boolean {
   }
   return false
 }
+
+/**
+ * The options of a choice question, in an order that is not a giveaway.
+ *
+ * ── The fault this fixes ────────────────────────────────────────────────────
+ *
+ * Questions are written with the right answer first, because that is the
+ * natural way to write one: state the answer, then invent the distractors.
+ * Measured across the library, the correct option was first in 1670 of 1810
+ * multiple choice questions, which is 92 per cent. A learner who always chose
+ * the first option scored 92 per cent on every quiz in the app and would have
+ * passed the end of year examination in every subject without reading a single
+ * question. `scripts/coverage/answer-position.mts` is the measurement.
+ *
+ * ── Why it is shuffled here rather than in the content ──────────────────────
+ *
+ * Reordering 1810 questions by hand would fix today and not tomorrow: the next
+ * lesson written would put the answer first again, because that is how people
+ * write questions. Doing it at the point of use makes the content safe to
+ * write the natural way for ever.
+ *
+ * ── Why the order is derived rather than random ─────────────────────────────
+ *
+ * `Math.random` would reshuffle on every React render, so the option under a
+ * learner's finger would move as they reached for it, and an answer chosen by
+ * position would be marked against a different option. The order is derived
+ * from the question id instead: stable across renders, across reloads and
+ * across devices, and different from question to question.
+ */
+export function optionsOf(q: Question): string[] {
+  const options = q.options ?? []
+  if (options.length < 2) return options
+
+  /* A small deterministic hash of the id, so each question gets its own
+     ordering. FNV-1a: four lines, no dependency, and spreads short similar
+     strings like "indices-1" and "indices-2" well. */
+  let hash = 0x811c9dc5
+  for (let i = 0; i < q.id.length; i++) {
+    hash ^= q.id.charCodeAt(i)
+    hash = Math.imul(hash, 0x01000193) >>> 0
+  }
+
+  /* Fisher-Yates, drawing from the hash rather than from Math.random. The
+     hash is advanced each step so the whole order depends on the id, not
+     only the first swap. */
+  const out = [...options]
+  for (let i = out.length - 1; i > 0; i--) {
+    hash = Math.imul(hash ^ (hash >>> 15), 0x2545f491) >>> 0
+    const j = hash % (i + 1)
+    const swap = out[i]
+    out[i] = out[j]
+    out[j] = swap
+  }
+  return out
+}

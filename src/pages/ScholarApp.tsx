@@ -50,7 +50,7 @@ import MoveUp from '../components/MoveUp'
 import type { Attempt } from '../lib/education/mastery'
 import type { LearnerProfile } from '../lib/education/learner'
 
-type Where = 'dashboard' | 'subjects' | 'progress' | 'moveup'
+type Where = 'dashboard' | 'subjects' | 'progress'
 
 /* Drawn marks, not font characters. The rail used ▦ ▤ ◴ ⏻ ↩, which render
    differently on every machine and looked like mojibake on most of them. */
@@ -58,11 +58,6 @@ const NAV: Array<{ key: Where, name: string, mark: Mark }> = [
   { key: 'dashboard', name: 'Dashboard', mark: 'grid' },
   { key: 'subjects', name: 'My subjects', mark: 'list' },
   { key: 'progress', name: 'Progress', mark: 'clock' },
-  /* The way out of this class. It belongs beside Progress rather than buried
-     in the grown up's screen: finishing a year is the learner's own event, and
-     before this existed the only way to be in JHS 2 was to have said so when
-     the profile was made. */
-  { key: 'moveup', name: 'Move up a class', mark: 'star' },
 ]
 
 const DAY_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -441,14 +436,15 @@ export default function ScholarApp({
             onBack={() => onPanel?.('home')}
             onSignOut={() => setAskGrownUp(true)}
             onBackToAll={onBack} />
-        ) : where === 'moveup' ? (
-          <MoveUp
-            profile={profile}
-            attempts={attempts}
-            onMoved={onMoved}
-            onAttempts={onAttempts} />
         ) : where === 'progress' ? (
-          <Progress papers={papers} recent={recent} standing={standing} />
+          <>
+            <Progress papers={papers} recent={recent} standing={standing} />
+            {/* The end of year examination sits under Progress, because
+                finishing a class is the last thing progress means. A rail item
+                of its own put "Move up a class" in front of a learner on their
+                first day, which reads as the app asking them to leave. */}
+            <MoveUp profile={profile} onMoved={onMoved} onAttempts={onAttempts} />
+          </>
         ) : where === 'subjects' ? (
           <div className="sch-panel">
             <div className="sch-panel-top">

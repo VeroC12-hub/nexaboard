@@ -103,13 +103,23 @@ export interface Exam {
 }
 
 /**
- * How many questions each subject contributes.
+ * How long one subject's paper is.
  *
- * Small on purpose. A paper a learner will not finish tells you nothing about
- * what they know, only about their patience, and a nine subject timetable at
- * ten questions each is ninety questions on a phone.
+ * This was four, on the reasoning that a learner will not finish a long one.
+ * That produced something nobody would call an examination: four questions
+ * decided whether you repeated the year.
+ *
+ * A real end of year paper is per subject and sat over several days, so that
+ * is the shape now. Twenty objective questions is the length of a school's own
+ * end of year objective paper, and nine subjects at twenty is a hundred and
+ * eighty questions, which is exactly why they are not sat in one sitting.
+ * Each subject is its own paper, sat when the learner chooses, and the marks
+ * are kept until the whole set is done.
+ *
+ * Where a subject has fewer than twenty written questions the paper is as long
+ * as the subject allows, rather than padded with repeats.
  */
-const PER_SUBJECT = 4
+export const PER_SUBJECT = 20
 
 /** The pass mark, as a fraction. Half, which is the usual school rule here. */
 export const PASS = 0.5
@@ -117,11 +127,11 @@ export const PASS = 0.5
 /**
  * Spread questions across a subject's topics rather than taking the first few.
  *
- * Four questions from one topic tests one topic. Four questions from four
- * topics tests the year, which is what this paper is for. Walking the topics
- * in order and taking one from each until the quota is full does that without
- * randomness, so the same learner sitting twice meets the same paper and
- * cannot shop for an easy one by resitting.
+ * Twenty questions from one topic tests one topic. Twenty taken a round at a
+ * time from every topic of the year tests the year, which is what this paper
+ * is for. Walking the topics in order rather than shuffling means the same
+ * learner sitting twice meets the same paper and cannot shop for an easier one
+ * by resitting.
  */
 function spread(topics: Topic[], want: number): ExamQuestion[] {
   const pools = topics
@@ -188,6 +198,52 @@ export function examFor(profile: LearnerProfile): Exam {
   }
 }
 
+/**
+ * One subject's paper, which is what a learner actually sits.
+ *
+ * `examFor` builds the whole examination and is still what the standing is
+ * measured against. This is the paper in front of them on the day.
+ */
+export function paperFor(profile: LearnerProfile, subjectId: string): ExamSection | null {
+  const subject = yearTopics(profile).find(s => s.id === subjectId)
+  if (!subject) return null
+  const questions = spread(subject.topics, PER_SUBJECT)
+  if (!questions.length) return null
+  return { subjectId: subject.id, subjectName: subject.name, questions }
+}
+
+/** Mark one subject's paper. */
+export function markPaper(
+  paper: ExamSection, given: Map<string, string>, at = new Date().toISOString(),
+): PaperMark {
+  return {
+    subjectId: paper.subjectId,
+    right: paper.questions.filter(
+      ({ question: q }) => isRight(q, given.get(q.id) ?? '')).length,
+    total: paper.questions.length,
+    at,
+  }
+}
+
+/** The answers on one paper, as attempts against their topics. */
+export function attemptsFromPaper(
+  paper: ExamSection, given: Map<string, string>, at = new Date().toISOString(),
+): Attempt[] {
+  const out: Attempt[] = []
+  for (const { topicId, question: q } of paper.questions) {
+    const answer = given.get(q.id)
+    if (answer === undefined) continue
+    out.push({
+      objectiveId: topicId,
+      isCorrect: isRight(q, answer),
+      /* Nothing is hinted in an examination. That is what makes it one. */
+      hintUsed: false,
+      at,
+    })
+  }
+  return out
+}
+
 /* ── marking ──────────────────────────────────────────────────────────────── */
 
 export interface SubjectMark {
@@ -251,52 +307,128 @@ export function attemptsFrom(
   return out
 }
 
-/* ── being allowed to sit it ──────────────────────────────────────────────── */
+/* ── one subject's paper at a time ────────────────────────────────────────── */
 
-/** Whether a learner may sit, and the sentence to show them when they may not. */
-export interface Eligibility {
-  ready: boolean
-  why: string
+/**
+ * The marks already in the bag, kept per learner and per class.
+ *
+ * Kept on the device rather than in memory because an end of year examination
+ * is not sat in one sitting. A learner who sat Mathematics on Monday and
+ * closes the app has not withdrawn from the examination, and losing their
+ * Mathematics mark because the tab was closed would be the worst possible
+ * answer to having done the work.
+ *
+ * Keyed by class as well as learner, so moving up starts a clean set and a
+ * learner who repeats a year is not credited with last year's papers.
+ */
+export interface PaperMark {
+  subjectId: string
+  right: number
+  total: number
+  /** ISO, so a result can say when it was sat. */
+  at: string
+}
+
+const BAG = 'lp.promotion.'
+
+const bagKey = (learnerId: string, level: string) =>
+  BAG + learnerId + '.' + level.replace(/\s+/g, '-').toLowerCase()
+
+/** Papers already sat for this class. Empty on any failure to read. */
+export function papersSat(learnerId: string, level: string): PaperMark[] {
+  try {
+    const raw = localStorage.getItem(bagKey(learnerId, level))
+    if (!raw) return []
+    const got: unknown = JSON.parse(raw)
+    return Array.isArray(got) ? got as PaperMark[] : []
+  } catch {
+    /* Private browsing, blocked storage, or something else wrote here. An
+       empty bag means "sit them again", which is recoverable. Throwing here
+       would take the whole screen down. */
+    return []
+  }
+}
+
+/** Record one subject's paper, replacing any earlier sitting of it. */
+export function recordPaper(
+  learnerId: string, level: string, mark: PaperMark,
+): PaperMark[] {
+  const kept = papersSat(learnerId, level).filter(m => m.subjectId !== mark.subjectId)
+  const next = [...kept, mark]
+  try {
+    localStorage.setItem(bagKey(learnerId, level), JSON.stringify(next))
+  } catch { /* Nothing can be done about it here, and the mark is still shown. */ }
+  return next
+}
+
+/** Clear the bag, which is what moving up or deliberately starting again does. */
+export function clearPapers(learnerId: string, level: string): void {
+  try { localStorage.removeItem(bagKey(learnerId, level)) } catch { /* as above */ }
+}
+
+/* ── where the learner stands ─────────────────────────────────────────────── */
+
+export interface PaperStanding {
+  subjectId: string
+  subjectName: string
+  /** How long this subject's paper is. */
+  length: number
+  mark: PaperMark | null
+}
+
+export interface Standing {
+  level: string
+  next: NextClass | null
+  papers: PaperStanding[]
+  sat: number
+  /** Marks over questions, across the papers actually sat. */
+  right: number
+  total: number
+  share: number
+  /** Every paper sat, and the aggregate at or above the pass mark. */
+  complete: boolean
+  passed: boolean
 }
 
 /**
- * How much of the year must be touched before sitting.
+ * The whole examination, as it stands.
  *
- * Not a hurdle for its own sake. A learner who has opened nothing will fail,
- * and failing on their first day teaches them that the app thinks they are
- * behind. A quarter of their own year's topics is enough to mean they have
- * actually been studying here, and low enough that somebody who arrived
- * already knowing the work is not held back for a term.
+ * Aggregate rather than every subject separately, which is how a Ghanaian
+ * school decides promotion: a learner who is strong in seven subjects and weak
+ * in two moves up, and one who is weak in seven does not. Requiring a pass in
+ * every single subject would hold back most of a real class.
  */
-const TOUCHED = 0.25
+export function standingOfExam(profile: LearnerProfile): Standing {
+  const marks = new Map(
+    papersSat(profile.id, profile.level).map(m => [m.subjectId, m]))
 
-export function eligibility(profile: LearnerProfile, attempts: Attempt[]): Eligibility {
-  const exam = examFor(profile)
-
-  if (!exam.next) {
-    return {
-      ready: false,
-      why: `${profile.level} is the last class this app carries, `
-        + 'so there is nowhere to move up to.',
-    }
+  const papers: PaperStanding[] = []
+  for (const s of yearTopics(profile)) {
+    const length = spread(s.topics, PER_SUBJECT).length
+    if (!length) continue
+    papers.push({
+      subjectId: s.id,
+      subjectName: s.name,
+      length,
+      mark: marks.get(s.id) ?? null,
+    })
   }
-  if (!exam.sections.length) {
-    return { ready: false, why: 'There are no questions written for this class yet.' }
-  }
 
-  const topics = yearTopics(profile).flatMap(s => s.topics.map(t => t.id))
-  const worked = new Set(attempts.map(a => a.objectiveId))
-  const done = topics.filter(t => worked.has(t)).length
-  const need = Math.ceil(topics.length * TOUCHED)
+  const sat = papers.filter(p => p.mark).length
+  const right = papers.reduce((n, p) => n + (p.mark?.right ?? 0), 0)
+  const total = papers.reduce((n, p) => n + (p.mark?.total ?? 0), 0)
+  const share = total ? right / total : 0
+  const complete = papers.length > 0 && sat === papers.length
 
-  if (done < need) {
-    const left = need - done
-    return {
-      ready: false,
-      why: `Work through ${left} more ${left === 1 ? 'topic' : 'topics'} of `
-        + `${profile.level} first. The examination covers the whole year, and `
-        + 'sitting it before you have studied only tells you what you already knew.',
-    }
+  return {
+    level: profile.level,
+    next: nextClassOf(profile.stage, profile.level),
+    papers,
+    sat,
+    right,
+    total,
+    share,
+    complete,
+    passed: complete && share >= PASS,
   }
-  return { ready: true, why: '' }
 }

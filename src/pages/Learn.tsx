@@ -73,7 +73,7 @@ import {
 } from '../lib/education/ai'
 import { styleFor } from '../lib/education/storyboard'
 import { adaptationFor, observed, paceFrom, signalsFrom } from '../lib/education/adapt'
-import { isRight, type Question } from '../lib/education/course'
+import { isRight, optionsOf, type Question } from '../lib/education/course'
 import type { Attempt } from '../lib/education/mastery'
 import {
   skinFor, type LearnerProfile, type Skin, type Stage,
@@ -2002,7 +2002,7 @@ function Lesson({
                           have and invites picking the first. */}
                       {piece.question.options && (
                         <ul className="nx-choices">
-                          {piece.question.options.map(o => <li key={o}>{o}</li>)}
+                          {optionsOf(piece.question).map(o => <li key={o}>{o}</li>)}
                         </ul>
                       )}
                       <p className="nx-fineprint">
@@ -2639,7 +2639,7 @@ function Practice({
 
         {q.kind === 'choice' && q.options ? (
           <div>
-            {q.options.map(opt => {
+            {optionsOf(q).map(opt => {
               const picked = given === opt
               const cls = verdict === null
                 ? picked ? ' is-picked' : ''
@@ -2727,7 +2727,7 @@ function Practice({
 
         {q.kind === 'choice' && q.options ? (
           <div style={{ display: 'grid', gap: 8, maxWidth: 560 }}>
-            {q.options.map(opt => {
+            {optionsOf(q).map(opt => {
               const picked = given === opt
               const cls = verdict === null
                 ? picked ? ' is-picked' : ''

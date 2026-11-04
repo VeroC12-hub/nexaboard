@@ -10,7 +10,8 @@
  */
 
 import {
-  attemptsFrom, eligibility, examFor, markExam, nextClassOf,
+  attemptsFrom, attemptsFromPaper, examFor, markExam, markPaper,
+  nextClassOf, paperFor, PASS, PER_SUBJECT,
 } from '../../src/lib/education/promotion'
 import { STAGE_YEARS, type LearnerProfile, type Stage } from '../../src/lib/education/learner'
 import type { Attempt } from '../../src/lib/education/mastery'
@@ -101,18 +102,41 @@ ok('and are filed against topics, not questions',
   attemptsFrom(exam, every).every(a => !all.some(q => q.id === a.objectiveId)))
 ok('an unanswered question is not an attempt', attemptsFrom(exam, new Map()).length === 0)
 
-/* ── the gate ───────────────────────────────────────────────────────────── */
+/* ── one subject's paper ────────────────────────────────────────────────── */
 
 console.log()
-console.log('Sitting it:')
-ok('a learner who has done nothing may not sit', !eligibility(p, []).ready)
+console.log('Papers, on JHS 2:')
+const maths = paperFor(p, 'maths')
+ok('Mathematics has a paper', maths !== null)
+if (maths) {
+  ok(`it is ${PER_SUBJECT} questions`, maths.questions.length === PER_SUBJECT,
+    maths.questions.length)
+  const spreadOver = new Set(maths.questions.map(q => q.topicId)).size
+  ok('spread over several topics', spreadOver > 1, `${spreadOver} topics`)
+  ok('the same paper twice', 
+    paperFor(p, 'maths')!.questions.map(q => q.question.id).join()
+      === maths.questions.map(q => q.question.id).join())
 
-/* Every question answered counts as having worked that topic, which is the
-   same set the dashboard counts. */
-const worked: Attempt[] = attemptsFrom(exam, every)
-console.log('   after the whole year:', eligibility(p, worked).ready ? 'may sit' : eligibility(p, worked).why)
+  const right = new Map(maths.questions.map(q => [q.question.id, q.question.answer]))
+  const mark = markPaper(maths, right)
+  ok('full marks on a paper', mark.right === mark.total, `${mark.right}/${mark.total}`)
+  ok('an empty paper scores nothing', markPaper(maths, new Map()).right === 0)
+  ok('a paper files attempts against topics',
+    attemptsFromPaper(maths, right).every(
+      a => maths.questions.some(q => q.topicId === a.objectiveId)))
+}
+ok('a subject not on the timetable has no paper', paperFor(p, 'no-such-subject') === null)
 
-ok('SHS 3 may never sit', !eligibility(learner('shs', 'SHS 3'), worked).ready)
+console.log()
+console.log('Every class can sit one:')
+for (const [stage, level] of [
+  ['creche', 'KG 1'], ['primary', 'Basic 4'], ['jhs', 'JHS 1'],
+  ['jhs', 'JHS 3'], ['shs', 'SHS 2'],
+] as Array<[Stage, string]>) {
+  const e = examFor(learner(stage, level))
+  ok(`${level} has papers`, e.sections.length > 0,
+    `${e.sections.length} subjects, ${e.total} questions`)
+}
 
 console.log()
 console.log(bad === 0 ? 'ALL CHECKS PASSED' : `${bad} CHECK(S) FAILED`)
