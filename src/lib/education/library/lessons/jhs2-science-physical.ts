@@ -323,6 +323,21 @@ teach({
     ],
   },
 
+  why:
+    'A borehole in a village pumps up water with sand in it. '
+    + 'The sand is easy. '
+    + 'Tie a cloth over the bucket, pour the water through, '
+    + 'and the sand stays on the cloth. '
+    + 'Now take the same bucket and the same cloth to the coast, '
+    + 'where the only water near the house is sea water. '
+    + 'Pour it through. '
+    + 'Every grain of the salt goes straight through with the water. '
+    + 'The cloth did nothing at all. '
+    + 'So why did the cloth stop the sand and not the salt? '
+    + 'And if a cloth will not take the salt out, what will? '
+    + 'This lesson is the one question you ask '
+    + 'to pick the right method every time.',
+
   idea:
     'There are seven methods in this topic and only one idea behind '
     + 'them: each one exploits a single difference between the parts of '

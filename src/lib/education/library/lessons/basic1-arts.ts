@@ -611,6 +611,20 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'You have a pile of palm leaf strips. '
+    + 'One strip on its own is no use to anybody. '
+    + 'Bend it and it bends. '
+    + 'Pull it and it tears. '
+    + 'You could not carry one mango in it. '
+    + 'But a basket woven out of those same strips '
+    + 'will carry cassava to market on somebody’s head. '
+    + 'Nothing was added to make it. '
+    + 'No glue, no nail, no thread. '
+    + 'Same strips, and now they hold. '
+    + 'So where did the strength come from? '
+    + 'This lesson is where.',
+
   idea:
     'Weaving is making one thing out of many strips by passing them over and '
     + 'under each other. Modelling is making a shape out of clay with your '

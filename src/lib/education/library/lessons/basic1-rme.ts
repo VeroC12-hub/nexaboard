@@ -595,6 +595,19 @@ teach({
   source: 'WRITTEN',
   approved: true,
 
+  why:
+    'Once a year Ada fills up with people who came home '
+    + 'for Asafotufiam. '
+    + 'Cape Coast does the same for Fetu Afahye. '
+    + 'At Christmas, and at Eid, whole towns change for a day. '
+    + 'Here is the question. '
+    + 'Nobody posted letters to remind all those people. '
+    + 'Nobody sat the children down and taught them the date. '
+    + 'So how does a whole town remember the same thing, '
+    + 'on the same day, year after year, '
+    + 'with nobody telling anybody? '
+    + 'This lesson is how.',
+
   idea:
     'A festival is a special day. It comes once every year. '
     + 'It helps people remember something big. '
@@ -610,9 +623,15 @@ teach({
     + 'They are what makes the day stick in your head.',
 
   recap:
-    'Your family comes together on special days. '
-    + 'A festival is the same thing. But it is a whole town. '
-    + 'And it is the same day every year.',
+    'Some days are not like other days. '
+    + 'A family keeps a few of them. '
+    + 'When a baby is named, '
+    + 'the family comes together in one house. '
+    + 'There is food, and people wear their good cloth. '
+    + 'Same house, same people, and still not an ordinary day. '
+    + 'A festival is that, made bigger. '
+    + 'It is a whole town instead of one family. '
+    + 'And it comes back on the same day every year.',
 
   method: [
     'Name the festival and whose it is.',

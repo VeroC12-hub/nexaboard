@@ -48,6 +48,17 @@ teach({
     ],
   },
 
+  why:
+    'Here is a bag of groundnuts. '
+    + 'Count them with me. '
+    + 'One, two, three, four, five, '
+    + 'six, seven, eight, nine, ten. '
+    + 'There are still more in the bag. '
+    + 'What comes after ten? '
+    + 'If the counting stops at ten, '
+    + 'the rest of the groundnuts cannot be counted at all. '
+    + 'Today we learn the words that come after ten.',
+
   idea:
     'Count with me. One to ten. '
     + 'Now we keep going. '
@@ -207,6 +218,16 @@ teach({
     ],
   },
 
+  why:
+    'Your mother asks how many oranges are in the bowl. '
+    + 'You count them. '
+    + 'One. Two. Three. Four. '
+    + 'She asks you again. How many? '
+    + 'Do you count them all over again? '
+    + 'You said the answer out loud already '
+    + 'and you did not notice you had said it. '
+    + 'Today we find out which number was the answer.',
+
   idea:
     'Count these stones with me. '
     + 'One. Two. Three. Four. Five. '
@@ -353,6 +374,17 @@ teach({
       'Then count to check.',
     ],
   },
+
+  why:
+    'I hold up my hand fast and take it away again. '
+    + 'How many fingers were up? '
+    + 'Two. '
+    + 'You did not count them. '
+    + 'There was no time to count. '
+    + 'And you were right anyway. '
+    + 'How did that happen with no counting? '
+    + 'Today we practise it, '
+    + 'because it makes everything with numbers faster.',
 
   idea:
     'Look at my fingers. '
@@ -506,6 +538,18 @@ teach({
       'Whatever is left over tells you which has more.',
     ],
   },
+
+  why:
+    'There are five children in the room and there are some chairs. '
+    + 'Is there a chair for every child? '
+    + 'Looking will not tell you. '
+    + 'The chairs are spread out across the room '
+    + 'and the children are standing in a bunch. '
+    + 'You could count both. '
+    + 'But counting to five twice is hard, '
+    + 'and losing your place in the middle is easy. '
+    + 'There is a way to find out with no counting at all. '
+    + 'Today we do it.',
 
   idea:
     'Here are some cups. Here are some stones. '
@@ -663,6 +707,16 @@ teach({
       'Push them together and count them all.',
     ],
   },
+
+  why:
+    'You have three mangoes. '
+    + 'Your friend gives you two more. '
+    + 'How many mangoes are there now? '
+    + 'Three. And two. '
+    + 'Two numbers, and the answer is a third number. '
+    + 'Nobody has said that third number yet. '
+    + 'It is not three and it is not two. '
+    + 'Today we find out how to get it.',
 
   idea:
     'Here are three stones. '
@@ -823,6 +877,18 @@ teach({
     ],
   },
 
+  why:
+    'I empty a basket of things onto the mat. '
+    + 'Bottle tops. Stones. Leaves. A spoon. A ball. '
+    + 'Put the ones that go together in a group. '
+    + 'Which ones go together? '
+    + 'The round ones? '
+    + 'The small ones? '
+    + 'The green ones? '
+    + 'All three of those answers are right. '
+    + 'And all three make different groups. '
+    + 'Today we find out why.',
+
   idea:
     'Here are many things. '
     + 'Put all the round ones here. '
@@ -976,6 +1042,15 @@ teach({
     ],
   },
 
+  why:
+    'Two children stand up and we ask which one is taller. '
+    + 'One of them is standing on a step. '
+    + 'The other is standing on the ground. '
+    + 'The one on the step looks taller. '
+    + 'Is she really taller? '
+    + 'Or is it only the step? '
+    + 'Today we learn the way to tell for certain.',
+
   idea:
     'Here are two sticks. '
     + 'Put them side by side. '
@@ -1124,6 +1199,16 @@ teach({
       'Put them in that order.',
     ],
   },
+
+  why:
+    'Your mother says you are going to the market tomorrow. '
+    + 'Not now. Tomorrow. '
+    + 'So when is tomorrow? '
+    + 'Is it after you eat? '
+    + 'Is it after you sleep? '
+    + 'How many sleeps? '
+    + 'Today we put the parts of a day in order, '
+    + 'so that tomorrow stops being a mystery.',
 
   idea:
     'In the morning the sun comes up. '
@@ -1290,6 +1375,25 @@ teach({
       'Find the card with that mark.',
     ],
   },
+
+  why:
+    'There is a 4 painted on the door of a room. '
+    + 'It is one mark. '
+    + 'It is not a picture of anything. '
+    + 'And it is not four of anything either. '
+    + 'It is one single mark. '
+    + 'So how can one mark mean four? '
+    + 'Today we find out.',
+
+  notation:
+    'A mark that stands for an amount is called a numeral. '
+    + 'The numeral 4 is said "four". '
+    + 'It is one mark, and it stands for four things. '
+    + 'Hold the card the right way up. '
+    + 'Turn a 6 upside down and it becomes a 9. '
+    + 'Six things and nine things are not the same amount. '
+    + 'So which way up a numeral sits '
+    + 'is part of what the numeral says.',
 
   idea:
     'Look at this card. '
