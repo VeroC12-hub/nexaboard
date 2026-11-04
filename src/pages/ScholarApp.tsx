@@ -220,6 +220,15 @@ export default function ScholarApp({
     profile, attempts, subjects: asKid, worked, standing, onOpen: onOpenSubject,
   }
 
+  /**
+   * Whether this learner gets the playroom and the star tin.
+   *
+   * Creche, kindergarten and primary. Above that they are hidden, because a
+   * playroom reads as being for younger children. See the rail below for what
+   * that costs.
+   */
+  const playroom = profile.stage === 'creche' || profile.stage === 'primary'
+
   const hunting = find.trim().toLowerCase()
   const found = useMemo(() => {
     if (hunting.length < 2) return []
@@ -290,25 +299,37 @@ export default function ScholarApp({
           )
         })}
 
-        {/* The playroom and the star tin.
+        {/* The playroom and the star tin, to the end of primary only.
 
-            These were two of the four tabs along the bottom of the small
-            learner's shell. Folding that shell into this one would have
-            deleted both, and a game is not a reward for being under seven: a
-            JHS learner practising bearings against a clock is doing the same
-            thing with the same engine. So they are here, for everyone. */}
-        <button
-          className={`sch-nav${panel === 'play' ? ' is-on' : ''}`}
-          aria-current={panel === 'play' ? 'page' : undefined}
-          onClick={() => { onPanel?.('play'); setOpen(false) }}>
-          <span className="sch-nav-mark" aria-hidden><Icon mark="play" size={17} /></span> Play
-        </button>
-        <button
-          className={`sch-nav${panel === 'rewards' ? ' is-on' : ''}`}
-          aria-current={panel === 'rewards' ? 'page' : undefined}
-          onClick={() => { onPanel?.('rewards'); setOpen(false) }}>
-          <span className="sch-nav-mark" aria-hidden><Icon mark="star" size={17} /></span> Stars
-        </button>
+            These were two of the four tabs on the small learner's shell, and
+            folding that shell into this one would have deleted both. They are
+            kept where they were rather than given to everybody: a playroom and
+            a tin of stars read as being for younger children, and a fifteen
+            year old meeting them beside their own syllabus reads the whole
+            product that way.
+
+            The cost of the line is real and is written down here so that it is
+            a decision rather than an oversight. The game engine is keyed by
+            stage and topic and already holds games for junior high: seven of
+            them for JHS 2 alone, including Number sequences, Light and Sound.
+            Above primary nothing reaches them. If that is ever reconsidered,
+            this is the one condition to change. */}
+        {playroom && (
+          <>
+            <button
+              className={`sch-nav${panel === 'play' ? ' is-on' : ''}`}
+              aria-current={panel === 'play' ? 'page' : undefined}
+              onClick={() => { onPanel?.('play'); setOpen(false) }}>
+              <span className="sch-nav-mark" aria-hidden><Icon mark="play" size={17} /></span> Play
+            </button>
+            <button
+              className={`sch-nav${panel === 'rewards' ? ' is-on' : ''}`}
+              aria-current={panel === 'rewards' ? 'page' : undefined}
+              onClick={() => { onPanel?.('rewards'); setOpen(false) }}>
+              <span className="sch-nav-mark" aria-hidden><Icon mark="star" size={17} /></span> Stars
+            </button>
+          </>
+        )}
 
         <div className="sch-rail-foot">
           {/* The grown up's door, in the foot with the other adult controls
@@ -398,9 +419,9 @@ export default function ScholarApp({
           <div className="sch-panel">
             <p className="sch-none">Nothing matches "{find}" in your subjects.</p>
           </div>
-        ) : panel === 'play' ? (
+        ) : panel === 'play' && playroom ? (
           <Play {...seen} />
-        ) : panel === 'rewards' ? (
+        ) : panel === 'rewards' && playroom ? (
           <Rewards {...seen} onBack={() => onPanel?.('home')} />
         ) : panel === 'profile' ? (
           <GrownUp
