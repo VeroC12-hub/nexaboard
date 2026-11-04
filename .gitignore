@@ -50,3 +50,6 @@ public/narration/
 # can be rebuilt.
 public/ananse/video/*.mp4
 tutor-usage.jsonl
+
+# Claude Code scratch worktrees
+.claude/
