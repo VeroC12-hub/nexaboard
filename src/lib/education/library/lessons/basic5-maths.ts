@@ -38,7 +38,7 @@ teach({
     + 'But you do not actually need the exact total. '
     + 'You need a number close enough to be safe. '
     + 'How do you get one, '
-    + 'and how do you know it is close enough? '
+    + 'and how can you be sure it is close enough? '
     + 'That is what this topic is for.',
 
   notation:
@@ -245,6 +245,26 @@ teach({
     ],
   },
 
+  why:
+    'Twenty six children are going to a durbar. '
+    + 'One taxi takes four children. '
+    + 'Four taxis take sixteen. '
+    + 'Six taxis take twenty four. '
+    + 'Two children are still standing there. '
+    + 'Do you book six taxis or seven? '
+    + 'The sum gives six either way. '
+    + 'The two children do not go away. '
+    + 'So how do you decide?',
+
+  notation:
+    '26 divided by 4 is said "twenty six divided by four". '
+    + 'What is left over is called the remainder. '
+    + 'You write it as 6 remainder 2. '
+    + 'Short, that is 6 r 2. '
+    + 'The commonest mistake is to write 6.2 instead. '
+    + '6 remainder 2 means six whole ones and two left over. '
+    + '6.2 means six and a bit, and the bit is not 2.',
+
   idea:
     'Not every division comes out evenly. '
     + '26 divided by 4 is 6, with 2 left over. '
@@ -260,9 +280,14 @@ teach({
     + 'The arithmetic is the easy half.',
 
   recap:
-    'You can divide by sharing and by grouping, '
-    + 'and you have already seen a leftover. '
-    + 'This is about what to do with it.',
+    'Dividing is sharing out, or making groups. '
+    + 'Share 12 mangoes between 3 children and each gets 4. '
+    + 'Or ask how many bags of 3 you can fill from 12. '
+    + 'That is 4 bags. '
+    + 'Both of those are 12 divided by 3. '
+    + 'Both come out exactly, with nothing left on the table. '
+    + 'This lesson is what to do '
+    + 'when something is left on the table.',
 
   method: [
     'Divide as far as the numbers allow.',
@@ -702,6 +727,30 @@ teach({
     ],
   },
 
+  why:
+    'You have half a loaf of bread. '
+    + 'Your sister gives you a quarter of hers. '
+    + 'How much bread do you have now? '
+    + 'The two pieces are not the same size. '
+    + 'One is a half and one is a quarter. '
+    + 'You cannot say one and one makes two, '
+    + 'because they are not the same thing. '
+    + 'So how much bread is it?',
+
+  notation:
+    'A fraction has a top number and a bottom number. '
+    + 'The bottom says how many pieces the whole was cut into. '
+    + 'The top says how many of those pieces you have. '
+    + 'So three quarters has a 3 on top and a 4 below. '
+    + 'The top number is called the numerator. '
+    + 'The bottom one is called the denominator. '
+    + 'Say it out loud as "three quarters". '
+    + 'The commonest mistake is to add the bottoms '
+    + 'as well as the tops. '
+    + 'The bottom says how big each piece is, '
+    + 'and the pieces do not change size '
+    + 'when you put some of them together.',
+
   idea:
     'Two quarters and one quarter make three quarters. '
     + 'You add the tops and leave the bottom alone. '
@@ -720,9 +769,18 @@ teach({
     + 'that size. Only how many you have changed.',
 
   recap:
-    'You can find equivalent fractions by multiplying top and bottom by the '
-    + 'same number. '
-    + 'That is the tool this topic needs.',
+    'Two fractions can look different '
+    + 'and be the same amount. '
+    + 'Cut a loaf in half and take one piece. '
+    + 'That is one half. '
+    + 'Now cut both halves again, so there are four pieces. '
+    + 'Your piece is now two of them. '
+    + 'That is two quarters. '
+    + 'You did not eat anything and you did not gain anything. '
+    + 'One half and two quarters are the same bread. '
+    + 'You get from one to the other '
+    + 'by doubling the top and the bottom together. '
+    + 'That is the tool this lesson needs.',
 
   method: [
     'Look at the two bottom numbers.',
@@ -1338,6 +1396,28 @@ teach({
     ],
   },
 
+  why:
+    'A door is standing a little bit open. '
+    + 'Push it some more and it opens wider. '
+    + 'Push it right back until it touches the wall. '
+    + 'Each time it is the same door. '
+    + 'Nothing got longer and nothing got shorter. '
+    + 'But something changed. '
+    + 'What changed, and how would you say how much?',
+
+  notation:
+    'An angle is written with a small circle after the number. '
+    + 'The small circle means degrees. '
+    + 'So 90 with a small circle is said "ninety degrees". '
+    + 'A right angle is marked on a drawing '
+    + 'with a tiny square in the corner. '
+    + 'Any other angle is marked with a curve '
+    + 'between the two lines. '
+    + 'The point where the two lines meet is the vertex. '
+    + 'The commonest mistake is to leave the small circle off. '
+    + '90 on its own is just ninety. '
+    + '90 degrees is a square corner.',
+
   idea:
     'An angle measures how much something has turned. '
     + 'You name one by comparing its opening with a square corner, '
@@ -1353,8 +1433,17 @@ teach({
     + 'Look at the opening at the point, not at the gap at the far end.',
 
   recap:
-    'You can name shapes by their sides and corners. '
-    + 'An angle is what is happening at a corner, measured.',
+    'Look at the corner of this page. '
+    + 'Two edges meet there, '
+    + 'and between them there is an opening. '
+    + 'A square has four corners '
+    + 'and all four openings are the same. '
+    + 'Now think of the corner at the top of a roof. '
+    + 'Two edges meet there too, '
+    + 'but the opening is much thinner. '
+    + 'So a corner is not only a place. '
+    + 'It has an amount of opening in it, '
+    + 'and that amount is what this lesson measures.',
 
   method: [
     'Find the point where the two lines meet.',

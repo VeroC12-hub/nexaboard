@@ -324,6 +324,33 @@ teach({
     ],
   },
 
+  why:
+    'A trader buys exercise books and pens. '
+    + 'Six books and four pens cost 32 cedis. '
+    + 'Three books and eight pens cost 34 cedis. '
+    + 'She wants the price of one book. '
+    + 'An equation with one unknown can be unpicked '
+    + 'by taking the same thing off both sides. '
+    + 'Each of these has two unknowns in it, '
+    + 'so there is nothing to take off. '
+    + 'Can two equations be worth more together '
+    + 'than either one is on its own?',
+
+  notation:
+    'Two equations that must both be true at once '
+    + 'are a pair of simultaneous equations, '
+    + 'and they are written one under the other. '
+    + 'Simultaneous means at the same time, '
+    + 'and that is the whole of the meaning: '
+    + 'the answer has to satisfy both of them, '
+    + 'not just one. '
+    + 'The answer is written as a pair, '
+    + '$x = 2$ and $y = 5$, '
+    + 'or as a point $(2, 5)$ when the work is on a graph. '
+    + 'Giving one value and stopping '
+    + 'is the commonest way to lose a mark, '
+    + 'because a pair of equations has a pair for its answer.',
+
   idea:
     'An equation says two expressions are equal, '
     + 'and solving it means finding every value of the letter '
@@ -370,10 +397,16 @@ teach({
     + 'is x plus 2 equals 8, not x plus 1 equals 8.',
 
   recap:
-    'You have solved an equation with one unknown '
-    + 'and plotted a straight line from a table of values. '
-    + 'This puts the two together: '
-    + 'two unknowns, solved by algebra and checked on a graph.',
+    'An equation is a statement that two things are equal. '
+    + 'In $3x + 2 = 14$ '
+    + 'the $x$ stands for a number nobody has told you yet. '
+    + 'You find it by doing the same thing to both sides, '
+    + 'so that the balance holds. '
+    + 'Take 2 off both sides and you have $3x = 12$. '
+    + 'Divide both sides by 3 and you have $x = 4$. '
+    + 'Check it: 3 times 4 plus 2 is 14, so it is right. '
+    + 'This lesson does that same work '
+    + 'when there are two unknowns instead of one.',
 
   method: [
     'Multiply through by the common denominator to clear fractions.',
@@ -559,6 +592,32 @@ teach({
     ],
   },
 
+  why:
+    'A mobile money transfer costs 1 cedi, '
+    + 'plus 1 percent of whatever you send. '
+    + 'Send 100 and the charge is 2 cedis. '
+    + 'Send 500 and it is 6 cedis. '
+    + 'Send 2000 and it is 21. '
+    + 'Nobody wants to work that out afresh every time, '
+    + 'and no table can hold every possible amount. '
+    + 'Is there a way to write the rule itself down once, '
+    + 'so that any amount goes in '
+    + 'and the charge comes out?',
+
+  notation:
+    'A rule with an input and an output is written $f(x)$, '
+    + 'and it is said "f of x". '
+    + 'The $f$ is the name of the rule '
+    + 'and the $x$ is what you put in. '
+    + 'So $f(x) = 2x + 1$ is a rule, '
+    + 'and $f(3)$ means put 3 in, which gives 7. '
+    + 'The brackets do not mean multiply. '
+    + '$f(3)$ is not $f$ times 3. '
+    + 'The inputs the rule will accept are its domain, '
+    + 'and the outputs it hands back are its range. '
+    + 'Reading $f(x)$ as a multiplication '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A relation is any rule pairing members of one set with another. '
     + 'A function is a relation with one extra condition: '
@@ -608,11 +667,19 @@ teach({
     + 'Two inputs reaching the same output is perfectly allowed.',
 
   recap:
-    'You have used a number machine, '
-    + 'put values into a formula, '
-    + 'and read values off a graph. '
-    + 'This gives that the notation f(x), '
-    + 'and asks which inputs the machine accepts.',
+    'A rule can take a number in '
+    + 'and give a different number back. '
+    + 'Take the rule "double it and add one". '
+    + 'Put 3 in and 7 comes out. '
+    + 'Put 5 in and 11 comes out. '
+    + 'Put 0 in and 1 comes out. '
+    + 'The rule never changes. '
+    + 'Only the number going in changes. '
+    + 'Every pair can be written down, '
+    + 'so 3 goes with 7 and 5 goes with 11, '
+    + 'and plotted as points those pairs fall on a straight line. '
+    + 'This lesson gives that rule a name '
+    + 'and a way of writing it.',
 
   method: [
     'Write down the rule and what the letter stands for.',
@@ -772,6 +839,37 @@ teach({
     ],
   },
 
+  why:
+    'A carpenter is fitting a window '
+    + 'into a wall that is not square. '
+    + 'He can only reach one of the four corners '
+    + 'with his set square. '
+    + 'He measures that one and it is 72 degrees. '
+    + 'The frame he is cutting '
+    + 'has to fit the other three exactly, '
+    + 'and he cannot get a tool to any of them. '
+    + 'Given one angle in a figure, '
+    + 'how many of the others can be worked out, '
+    + 'and what gives you the right to say so?',
+
+  notation:
+    'An angle is named by three letters, '
+    + 'with the corner letter in the middle, '
+    + 'so angle $ABC$ is the angle at $B$, '
+    + 'and it is said "angle A B C". '
+    + 'Parallel lines are marked '
+    + 'with matching arrowheads on each line. '
+    + 'Equal angles carry the same number of small arcs. '
+    + 'Equal sides carry the same number of small dashes. '
+    + 'Every step in an answer carries a reason, '
+    + 'written in brackets after it, '
+    + 'such as "angles on a straight line" '
+    + 'or "alternate angles". '
+    + 'Giving the number without the reason '
+    + 'is the commonest way to lose a mark, '
+    + 'because the reason is a separate mark '
+    + 'from the arithmetic.',
+
   idea:
     'Angles on a straight line add to 180 degrees. '
     + 'Angles at a point add to 360 degrees. '
@@ -822,11 +920,19 @@ teach({
     + 'and three more chances to slip.',
 
   recap:
-    'You have measured angles, used angles on a line and at a point, '
-    + 'and found the angle sum of a triangle. '
-    + 'This adds the parallel line facts '
-    + 'and the polygon sums, '
-    + 'and asks you to write the reason for every step.',
+    'Three facts about angles '
+    + 'are used on nearly every question here. '
+    + 'Angles sitting side by side on a straight line '
+    + 'add to 180 degrees, '
+    + 'so if one of them is 130 the other is 50. '
+    + 'Angles round a single point add to 360 degrees, '
+    + 'so angles of 90, 120 and 150 '
+    + 'fill the turn exactly. '
+    + 'The three angles inside any triangle '
+    + 'add to 180 degrees, '
+    + 'so with 50 and 60 given, the third is 70. '
+    + 'This lesson adds the facts about parallel lines, '
+    + 'and asks for a reason at every step.',
 
   method: [
     'Copy the diagram and mark on every angle you are given.',
@@ -993,6 +1099,35 @@ teach({
     ],
   },
 
+  why:
+    'Two roofing sheets have been cut as triangles. '
+    + 'One is already up on the roof '
+    + 'and cannot be brought down. '
+    + 'The other is on the ground. '
+    + 'A carpenter reaches up '
+    + 'and measures two sides of the one above, '
+    + 'and the angle between them: '
+    + '2 m, 3 m, and 40 degrees. '
+    + 'The one on the ground has the same three. '
+    + 'He has not measured the third side of either. '
+    + 'Can he already be certain they are identical?',
+
+  notation:
+    'Two triangles that are exactly the same are congruent, '
+    + 'said "con-grew-ent". '
+    + 'Two that are the same shape at a different size '
+    + 'are similar. '
+    + 'The two words are not interchangeable, '
+    + 'and congruent is the stronger claim. '
+    + 'The congruence rules are written as initials: '
+    + 'SSS for three sides, '
+    + 'SAS for two sides and the angle between them, '
+    + 'ASA for two angles and a side, '
+    + 'and RHS for a right angle, the hypotenuse and a side. '
+    + 'In SAS the A has to be the angle between the two sides, '
+    + 'and using an angle from somewhere else '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Two triangles are congruent when one could be placed exactly on the '
     + 'other. '
@@ -1047,12 +1182,20 @@ teach({
     + 'which is why RHS exists as a case of its own.',
 
   recap:
-    'You have found angles in a triangle, '
-    + 'used Pythagoras, '
-    + 'and enlarged a shape by a scale factor. '
-    + 'This asks you to prove two triangles are the same, '
-    + 'or the same shape, '
-    + 'and to say which rule you used.',
+    'Two shapes can be equal in two different ways. '
+    + 'Cut two triangles from card '
+    + 'with sides of 3 cm, 4 cm and 5 cm. '
+    + 'Lay one on the other '
+    + 'and they cover each other exactly, '
+    + 'even if you have to turn one over to do it. '
+    + 'They are the same size and the same shape. '
+    + 'Now cut a third with sides 6 cm, 8 cm and 10 cm. '
+    + 'It will not cover the first, '
+    + 'but its corners are the same corners, '
+    + 'and it is the same shape at twice the size. '
+    + 'Those two kinds of sameness '
+    + 'have separate names and separate tests, '
+    + 'and this lesson is both of them.',
 
   method: [
     'Draw both triangles separately, the same way round.',

@@ -51,6 +51,31 @@ teach({
     ],
   },
 
+  why:
+    'A tailor at Ho is cutting a cone shaped hat out of cloth. '
+    + 'Flattened out, the piece he needs '
+    + 'is a slice of a circle. '
+    + 'He has to know how much cloth that slice will take '
+    + 'before he cuts into a metre costing 40 cedis. '
+    + 'It is not a rectangle '
+    + 'and it is not a whole circle either. '
+    + 'Can you find the area of a part of a shape '
+    + 'when the formula you have is for the whole of it?',
+
+  notation:
+    'A perimeter is a length, so its unit is cm or m. '
+    + 'An area is a surface, '
+    + 'so its unit is cm squared or m squared, '
+    + 'and the small 2 is part of the answer. '
+    + 'A slice cut out of a circle from the centre '
+    + 'is called a sector, '
+    + 'and the curved edge of it is an arc. '
+    + 'The angle at the centre is given in degrees. '
+    + 'Pi is said "pie" and is about 3.14, or 22 over 7. '
+    + 'Leaving the squared off an area '
+    + 'is the commonest way to lose a mark, '
+    + 'because the unit carries a mark of its own.',
+
   idea:
     'The perimeter of a figure is the total distance round its edge. '
     + 'The area is the amount of surface inside it. '
@@ -110,10 +135,20 @@ teach({
     + 'the area of a washer is the big circle minus the small one.',
 
   recap:
-    'You have found the area of rectangles, triangles and circles, '
-    + 'and the perimeter of straight sided shapes. '
-    + 'This adds the sector, '
-    + 'and asks you to break an unfamiliar figure into familiar pieces.',
+    'Perimeter and area answer two different questions '
+    + 'about one shape. '
+    + 'Take a rectangle 6 m by 4 m. '
+    + 'The perimeter is the distance round the edge: '
+    + '6 and 4 and 6 and 4, which is 20 m. '
+    + 'That is what a fence round it would cost. '
+    + 'The area is the surface inside it: '
+    + '6 times 4, which is 24 square metres. '
+    + 'That is what tiling it would cost. '
+    + 'A triangle takes half the base times the height, '
+    + 'and a circle takes pi times the radius squared. '
+    + 'This lesson adds a part of a circle, '
+    + 'and asks you to cut an odd figure '
+    + 'into pieces you already have formulas for.',
 
   method: [
     'Sketch the figure, however rough.',
@@ -208,7 +243,7 @@ teach({
   ],
 
   extension:
-    'In SHS 2 the same fraction argument gives the surface area '
+    'The same fraction argument next gives the surface area '
     + 'and volume of a cone and a sphere, '
     + 'and the sector becomes the net of the cone: '
     + 'the arc of the sector is the circumference of the cone base, '
@@ -289,6 +324,33 @@ teach({
     ],
   },
 
+  why:
+    'A health worker has the ages of 200 patients, '
+    + 'written one to a line. '
+    + 'She has to tell a meeting whether the clinic '
+    + 'is mostly serving children or mostly serving old people. '
+    + 'Reading 200 numbers aloud tells nobody anything. '
+    + 'The list on the page is no better, '
+    + 'because an eye cannot see a shape in 200 figures. '
+    + 'How do you turn two hundred separate numbers '
+    + 'into one picture a room full of people '
+    + 'can read in a second?',
+
+  notation:
+    'Numbers put into bands are grouped data, '
+    + 'and each band is a class. '
+    + 'A class is written as its two ends, '
+    + 'so 10 to 19 is one class and 20 to 29 is the next. '
+    + 'The distance between the ends is the class width, '
+    + 'and the middle of the class is its midpoint. '
+    + 'A histogram has its bars touching, '
+    + 'because the classes run on from one another '
+    + 'with no gap between them. '
+    + 'A bar chart has gaps, '
+    + 'because its categories are separate things. '
+    + 'Drawing a histogram with gaps between the bars '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Raw data is a list of values. '
     + 'A frequency table counts how many fall in each group, or class. '
@@ -348,11 +410,20 @@ teach({
     + 'and that is why it is marked wrong.',
 
   recap:
-    'You have made a tally chart, '
-    + 'drawn a bar chart, '
-    + 'and read values off a graph. '
-    + 'This groups data into classes, '
-    + 'and adds the two graphs that grouped data needs.',
+    'Counting how often each value appears '
+    + 'turns a list into a table. '
+    + 'Take the marks 4, 7, 4, 5, 7, 4. '
+    + 'Go through the list once, '
+    + 'putting a stroke beside each value as you meet it. '
+    + 'That gives 4 appearing three times, '
+    + '5 appearing once, and 7 appearing twice. '
+    + 'The strokes are a tally, '
+    + 'the counts are the frequencies, '
+    + 'and the finished thing is a frequency table. '
+    + 'Drawn as bars of height 3, 1 and 2, '
+    + 'the same information becomes a picture. '
+    + 'This lesson does it when the values '
+    + 'are too spread out to list one by one.',
 
   method: [
     'Decide on classes of equal width covering the whole range.',
@@ -541,6 +612,35 @@ teach({
     ],
   },
 
+  why:
+    'Nine people work in a small workshop. '
+    + 'Eight of them earn 600 cedis a month '
+    + 'and the owner earns 6000. '
+    + 'Add it all up and share it out '
+    + 'and the answer is 1200 cedis each. '
+    + 'Not one person in that workshop earns 1200. '
+    + 'Eight of them earn half of it. '
+    + 'The arithmetic is right '
+    + 'and the answer is misleading. '
+    + 'So which single number should have been given instead, '
+    + 'and how would you decide which one to choose?',
+
+  notation:
+    'Three averages have three names '
+    + 'and they are not interchangeable. '
+    + 'The mean is the total shared out. '
+    + 'The median is the middle one, once they are in order. '
+    + 'The mode is the one appearing most often. '
+    + 'In a frequency table '
+    + 'f stands for the frequency and x for the value, '
+    + 'so the sum of f times x is the total of all the values, '
+    + 'and the sum of f is how many values there are. '
+    + 'Say "the mean of" and then name what it is the mean of. '
+    + 'Writing average where a question asks for the median '
+    + 'is the commonest way to lose a mark, '
+    + 'because average on its own does not say '
+    + 'which of the three you used.',
+
   idea:
     'An average is one number standing for a whole set. '
     + 'The mean is the sum of the values divided by how many there are. '
@@ -603,11 +703,20 @@ teach({
     + 'it is just the middle of a list.',
 
   recap:
-    'You have found the mean, median and mode of a short list, '
-    + 'and read a frequency table. '
-    + 'This applies all three to grouped data, '
-    + 'where the exact values are gone, '
-    + 'and asks which average is the fair one to quote.',
+    'An average is one number '
+    + 'put in the place of a whole set. '
+    + 'Take five marks: 4, 8, 6, 8, 4. '
+    + 'Add them to get 30, '
+    + 'and share that between the five, which gives 6. '
+    + 'That 6 is the mean. '
+    + 'Put them in order, 4, 4, 6, 8, 8, '
+    + 'and the middle one is 6. '
+    + 'That is the median. '
+    + 'Two of the values appear twice each, 4 and 8, '
+    + 'so this set has two modes. '
+    + 'This lesson does all three '
+    + 'when the values have been put into bands '
+    + 'and the exact figures are gone.',
 
   method: [
     'Lay the table out in columns: class, f, midpoint x, then fx.',
