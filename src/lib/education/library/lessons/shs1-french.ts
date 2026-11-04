@@ -397,6 +397,34 @@ teach({
     ],
   },
 
+  why:
+    'A student writes about yesterday in French: '
+    + 'it was raining, so I stayed at home. '
+    + 'Both halves are in the past '
+    + 'and both happened on the same day, '
+    + 'so he puts both into the same past tense. '
+    + 'A French reader finds one half of it wrong. '
+    + 'The rain and the staying are not the same kind of past. '
+    + 'One was going on and the other happened once and finished. '
+    + 'English never makes you choose, and French does. '
+    + 'So what is the question you ask in order to choose?',
+
+  notation:
+    'The passé composé is two words and not one: '
+    + 'a present tense helper plus the past participle, '
+    + 'as in j’ai mangé, "I have eaten". '
+    + 'The helper is called the auxiliary, '
+    + 'and it is avoir for most verbs and être for some. '
+    + 'The past participle of an er verb ends in é with an accent, '
+    + 'and that accent is the whole difference '
+    + 'between mangé, eaten, and manger, to eat. '
+    + 'The imperfect is one word, '
+    + 'with the endings ais, ais, ait, ions, iez, aient. '
+    + 'Writing manger where mangé belongs '
+    + 'is the commonest way to lose a mark, '
+    + 'because the two sound almost alike '
+    + 'and mean different things.',
+
   idea:
     'French has two main past tenses for ordinary narrative. '
     + 'The passé composé reports an action as completed. '
@@ -498,9 +526,17 @@ teach({
     + 'Naming the reason earns a mark separate from the form.',
 
   recap:
-    'You can use the present tense of regular and irregular verbs. '
-    + 'This adds two past tenses, '
-    + 'and the question you ask to choose between them.',
+    'A tense is the shape of a verb '
+    + 'that places the action in time. '
+    + 'In French je mange means I eat, '
+    + 'and it puts the eating now. '
+    + 'To talk about yesterday '
+    + 'the verb itself has to change shape, '
+    + 'not merely gain the word yesterday. '
+    + 'French has two different shapes for the past, '
+    + 'and it will not let you use one where the other belongs. '
+    + 'This lesson is the question you ask '
+    + 'to tell which one a sentence wants.',
 
   method: [
     'Read the sentence and ask whether it reports or describes.',
@@ -1083,6 +1119,32 @@ teach({
     ],
   },
 
+  why:
+    'A student wants to say "I do not know" in French. '
+    + 'He has je sais for I know, '
+    + 'and he looks up not, which gives pas. '
+    + 'So he writes je pas sais, then je sais pas, '
+    + 'and a teacher marks neither of them right. '
+    + 'In English not is one word and it goes in one place. '
+    + 'In French the not comes in two pieces '
+    + 'and the verb sits between them. '
+    + 'Where exactly do the two pieces go, '
+    + 'and what happens when the verb is two words long?',
+
+  notation:
+    'A French negative is a sandwich: '
+    + 'ne, then the verb, then the second word. '
+    + 'Je ne sais pas is word for word "I not know not", '
+    + 'and both halves are required. '
+    + 'Before a vowel sound ne loses its e '
+    + 'and takes an apostrophe, giving je n’ai pas. '
+    + 'The second word is the one carrying the meaning: '
+    + 'pas for not, jamais for never, rien for nothing, '
+    + 'personne for nobody, plus for no longer. '
+    + 'In speech the ne is often dropped. '
+    + 'In writing it never is, '
+    + 'and leaving it out is the commonest way to lose a mark.',
+
   idea:
     'A French negative has two parts around the verb. '
     + 'Je ne parle pas. '
@@ -1188,10 +1250,17 @@ teach({
     + 'is an incomplete negative.',
 
   recap:
-    'You can say je ne sais pas '
-    + 'and ask a simple question. '
-    + 'This makes the pattern general, '
-    + 'and gives the three ways a question can be formed.',
+    'A sentence can be turned round in two ways '
+    + 'without changing who it is about. '
+    + 'Take "he is at home". '
+    + 'Deny it and you get "he is not at home", '
+    + 'which is a negative. '
+    + 'Ask it and you get "is he at home?", '
+    + 'which is a question. '
+    + 'English makes the negative with one word, not, '
+    + 'and makes the question by swapping two words round. '
+    + 'French does both of those differently, '
+    + 'and this lesson is how.',
 
   method: [
     'Find the conjugated verb.',
@@ -1408,6 +1477,34 @@ teach({
     ],
   },
 
+  why:
+    'A student reads a French notice on a shop door: '
+    + 'le magasin est actuellement fermé. '
+    + 'Magasin looks like magazine '
+    + 'and actuellement looks like actually. '
+    + 'So he reads it as something about a magazine '
+    + 'being actually closed, '
+    + 'which is almost but not quite nonsense. '
+    + 'It says the shop is currently closed. '
+    + 'Two of the three words he thought he recognised '
+    + 'were lying to him. '
+    + 'How do you read a French word you have never met '
+    + 'without being fooled by the English word it resembles?',
+
+  notation:
+    'The French name for this trap is faux ami, '
+    + 'said "fo-zami", which means false friend. '
+    + 'A word that looks like its English relative '
+    + 'and does mean the same thing '
+    + 'is a cognate, said "cog-nate". '
+    + 'So most French and English look alikes are cognates, '
+    + 'and only a few are faux amis. '
+    + 'The two words are not interchangeable. '
+    + 'Calling every look alike a false friend '
+    + 'is the commonest way to lose a mark, '
+    + 'because the question is usually asking you '
+    + 'to tell the two apart.',
+
   idea:
     'Many French and English words look alike. '
     + 'English borrowed heavily from French, '
@@ -1523,11 +1620,19 @@ teach({
     + 'recovers more marks than any other single habit.',
 
   recap:
-    'You have met French words that look like English ones '
-    + 'and used them. '
-    + 'This says when that works, '
-    + 'which words betray you, '
-    + 'and how to work out a word you have never seen.',
+    'English and French share thousands of words, '
+    + 'and there is a reason for it. '
+    + 'Both of them took words from Latin, '
+    + 'and English took a great many from French directly, '
+    + 'after 1066. '
+    + 'So table is table, nation is nation, '
+    + 'and important is important. '
+    + 'That makes French easier to read '
+    + 'than a language sharing nothing with English. '
+    + 'It also sets a trap, '
+    + 'because a few of the shared words drifted apart in meaning, '
+    + 'and this lesson is how to tell the safe ones '
+    + 'from the dangerous ones.',
 
   method: [
     'Read the whole sentence first.',
@@ -1747,6 +1852,37 @@ teach({
     ],
   },
 
+  why:
+    'A trader at Aflao crosses into Lomé every week '
+    + 'to buy cloth. '
+    + 'The border is twenty minutes from her house. '
+    + 'On the other side of it '
+    + 'every price, every receipt '
+    + 'and every argument about change happens in French, '
+    + 'so she takes a boy along to translate. '
+    + 'She pays him, '
+    + 'and she never knows whether the price he passes back '
+    + 'is the real one. '
+    + 'Ghana has three land borders '
+    + 'and all three are with French speaking countries. '
+    + 'Which countries are they, '
+    + 'and why is French the language there at all?',
+
+  notation:
+    'A country name in French takes an article, '
+    + 'and the article decides the word for "in". '
+    + 'Le Togo and le Burkina Faso are masculine, '
+    + 'so it is au Togo and au Burkina Faso. '
+    + 'La Côte d’Ivoire is feminine, '
+    + 'so it is en Côte d’Ivoire. '
+    + 'Francophone means French speaking, '
+    + 'and it describes a country or a person, not a language. '
+    + 'Official and spoken are two different claims: '
+    + 'French is the official language of Côte d’Ivoire, '
+    + 'and most people there speak something else at home. '
+    + 'Saying that a Togolese person speaks French first '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'French is an official language in about half the countries '
     + 'of West Africa, '
@@ -1851,10 +1987,18 @@ teach({
     + 'and that is the point of learning it.',
 
   recap:
-    'You know Ghana has neighbours where French is spoken. '
-    + 'This names them with their capitals, '
-    + 'explains why French is official there, '
-    + 'and says what follows for Ghana.',
+    'An official language is the one a state uses '
+    + 'for its own business: '
+    + 'its laws, its courts, its schools and its forms. '
+    + 'It is not the same thing '
+    + 'as the language people grow up speaking. '
+    + 'Ghana’s official language is English, '
+    + 'and almost nobody in Ghana learns English first at home. '
+    + 'The same split runs through the countries around Ghana, '
+    + 'and in all three of them '
+    + 'the official language chosen was French. '
+    + 'This lesson is which countries those are, '
+    + 'and how that came about.',
 
   method: [
     'Name the country in French, with its article.',

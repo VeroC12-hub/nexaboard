@@ -64,6 +64,34 @@ teach({
     ],
   },
 
+  why:
+    'Three Twi words are all written papa. '
+    + 'One means good, one means a fan, '
+    + 'and one means father. '
+    + 'Said aloud by somebody raised with the language '
+    + 'they are never once confused. '
+    + 'Said aloud by a learner reading them off a page '
+    + 'they are the same word three times. '
+    + 'Nothing in the spelling separates them. '
+    + 'So what carries the difference, '
+    + 'and how would you write that difference down?',
+
+  notation:
+    'Tone is marked with a small stroke over the vowel. '
+    + 'A stroke rising to the right marks a high tone. '
+    + 'A stroke falling to the right marks a low tone. '
+    + 'A vowel left unmarked is read as mid, '
+    + 'or as holding the tone of the syllable before it. '
+    + 'The extra vowel letters have descriptions you can use: '
+    + 'the open e looks like a backwards 3, '
+    + 'and the open o looks like a c turned round. '
+    + 'A nasal vowel is shown by an n written after it, '
+    + 'or in some spellings by a hook underneath. '
+    + 'Leaving the tone marks off a pair of words '
+    + 'you were asked to tell apart '
+    + 'is the commonest way to lose a mark, '
+    + 'because the marks are the answer.',
+
   idea:
     'The sound system of a language is its phonology. '
     + 'The Ghanaian languages have vowel systems '
@@ -175,10 +203,18 @@ teach({
     + 'and the work is describing it accurately.',
 
   recap:
-    'You speak the language and can hear when a word is said wrongly. '
-    + 'This asks you to describe why: '
-    + 'which sounds the language has, '
-    + 'and how pitch changes a word.',
+    'Speaking a language and describing it are two skills, '
+    + 'and this lesson wants the second one. '
+    + 'Say the English words pin and bin '
+    + 'and feel what your lips do. '
+    + 'They do the same thing in both words. '
+    + 'The only difference is whether your voice is switched on, '
+    + 'which you can feel with a hand on your throat. '
+    + 'An English speaker does that every day '
+    + 'and has never once had to say so. '
+    + 'This lesson asks for the saying so: '
+    + 'which sounds your language has, '
+    + 'and what each of them does.',
 
   method: [
     'List the vowels of your language, with the special letters.',
@@ -424,6 +460,33 @@ teach({
     ],
   },
 
+  why:
+    'In Twi a child is abofra and children are mmofra. '
+    + 'The two words do not simply differ by an s on the end. '
+    + 'The front of the word changed. '
+    + 'A speaker produces the right one every time '
+    + 'without stopping to think. '
+    + 'Now a question asks which part of the word '
+    + 'carries the plural, and what the rest of it is. '
+    + 'Can you cut a word of your own language into pieces '
+    + 'and say what each piece is doing?',
+
+  notation:
+    'The parts of a word have names, '
+    + 'and a question will use them. '
+    + 'The root is the piece that carries the meaning. '
+    + 'An affix is anything added to the root. '
+    + 'A prefix goes in front of the root '
+    + 'and a suffix goes after it. '
+    + 'When a word is cut up on paper '
+    + 'the pieces are separated by hyphens, '
+    + 'so the prefix, the root and the suffix '
+    + 'stand as three pieces in order. '
+    + 'Calling a prefix a suffix, '
+    + 'or marking the root as an affix, '
+    + 'is the commonest way to lose a mark, '
+    + 'because which piece is which is the whole answer.',
+
   idea:
     'Morphology is the study of how words are built. '
     + 'A root is the part that carries the core meaning. '
@@ -537,10 +600,17 @@ teach({
     + 'answers a vocabulary question, not a morphology one.',
 
   recap:
-    'You use the words of your language correctly '
-    + 'without dividing them. '
-    + 'This asks you to cut a word into its parts '
-    + 'and say what each part contributes.',
+    'A word can have smaller pieces inside it, '
+    + 'and each piece can carry its own meaning. '
+    + 'Take the English word unhappiness. '
+    + 'Happy is the piece that carries the meaning. '
+    + 'Un in front of it reverses that meaning. '
+    + 'Ness on the end turns the whole thing '
+    + 'into the name of a state. '
+    + 'Three pieces in one word, '
+    + 'each doing a separate job. '
+    + 'This lesson does that same cutting '
+    + 'on the words of a Ghanaian language.',
 
   method: [
     'Collect two or three related words that share a meaning.',
@@ -1169,6 +1239,34 @@ teach({
     ],
   },
 
+  why:
+    'At a funeral in Kumasi a young man wants to say '
+    + 'something wise, '
+    + 'and quotes a proverb he knows is right, word for word. '
+    + 'The elders go quiet in a way that is not approval. '
+    + 'The proverb was about a man '
+    + 'who wastes what his father left him, '
+    + 'and the dead man had left his family nothing. '
+    + 'Every word of it was correct '
+    + 'and saying it was wrong. '
+    + 'So what does a proverb carry '
+    + 'besides its words and its meaning?',
+
+  notation:
+    'Three different things get asked about one proverb, '
+    + 'and the question names which of them it wants. '
+    + 'The literal meaning is the picture the words paint: '
+    + 'an actual bird, an actual river. '
+    + 'The figurative meaning is the general truth '
+    + 'that the picture stands for. '
+    + 'The occasion is the kind of moment '
+    + 'at which it may properly be said. '
+    + 'Quote the proverb in the language first, exactly, '
+    + 'and translate it after. '
+    + 'Giving the general truth '
+    + 'where the literal picture was asked for '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A proverb is a short traditional saying '
     + 'that carries a general truth '
@@ -1288,10 +1386,18 @@ teach({
     + 'and how it fits the case being discussed.',
 
   recap:
-    'You have heard proverbs used and know some by heart. '
-    + 'This asks you to take one apart: '
-    + 'what it pictures, what it claims, '
-    + 'and when it may properly be said.',
+    'A proverb says one thing and means another. '
+    + 'Take the English '
+    + '"do not count your chickens before they hatch". '
+    + 'The words are about eggs and a farmyard. '
+    + 'Nobody who says it is talking about poultry. '
+    + 'It means do not depend on something '
+    + 'that has not happened yet, '
+    + 'and it is said to a person '
+    + 'already spending money he has not been paid. '
+    + 'So a proverb has a picture, a meaning, '
+    + 'and a moment at which it fits. '
+    + 'This lesson takes those three apart.',
 
   method: [
     'Quote the proverb exactly as the language has it.',
@@ -1536,6 +1642,33 @@ teach({
     ],
   },
 
+  why:
+    'At a durbar a chief is greeted, '
+    + 'and the greeting is not his name. '
+    + 'The speaker calls him a leopard, '
+    + 'then a river that does not dry, '
+    + 'then one whose father was called the same. '
+    + 'A visitor hears poetry and a compliment. '
+    + 'Everybody from the town hears three exact claims '
+    + 'about who this man is and what he is owed. '
+    + 'What is each of those images actually saying, '
+    + 'and who decided that it could be said of him?',
+
+  notation:
+    'An appellation is a praise name, '
+    + 'or a string of praise names, '
+    + 'and it is neither the person’s name nor a title. '
+    + 'Each image inside it is taken one at a time. '
+    + 'The word for what an image does is a claim: '
+    + 'it asserts something about the person addressed. '
+    + 'When you write one out, '
+    + 'give the line in the language first, '
+    + 'then the translation, '
+    + 'then the claim the line carries. '
+    + 'Translating the image and stopping there '
+    + 'is the commonest way to lose a mark, '
+    + 'because a translation is not yet a claim.',
+
   idea:
     'An appellation is a praise name, '
     + 'or a string of them, '
@@ -1659,10 +1792,18 @@ teach({
     + 'not the question asked.',
 
   recap:
-    'You have heard a chief addressed at a durbar '
-    + 'and know that praise names are used. '
-    + 'This asks what each praise name actually asserts, '
-    + 'and why the assertion is made in public.',
+    'Some names are given and some are earned. '
+    + 'A person’s name is given at birth '
+    + 'and says nothing about the person. '
+    + 'A praise name is a different thing. '
+    + 'It is a short description, and it makes a claim. '
+    + 'Call a man a leopard '
+    + 'and you have said he is dangerous to cross, '
+    + 'and that he comes from a line of the same. '
+    + 'Anybody listening can agree or disagree with that, '
+    + 'which is something a birth name can never be. '
+    + 'This lesson takes praise names apart '
+    + 'into the claims inside them.',
 
   method: [
     'Name who or what the appellation addresses.',

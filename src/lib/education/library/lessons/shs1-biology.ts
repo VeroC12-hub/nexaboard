@@ -66,6 +66,33 @@ teach({
     ],
   },
 
+  why:
+    'A drop of blood on a slide looks like one red liquid '
+    + 'with no parts to it. '
+    + 'Put it under a school microscope '
+    + 'and it breaks into separate round objects, '
+    + 'thousands of them, '
+    + 'each one about eight thousandths of a millimetre across. '
+    + 'Every one of those is alive on its own. '
+    + 'So what is inside one of them that keeps it alive, '
+    + 'and why does a leaf cell hold things '
+    + 'that a blood cell does not?',
+
+  notation:
+    'Cell parts are measured in micrometres. '
+    + 'A micrometre is one thousandth of a millimetre, '
+    + 'and it is written with the Greek letter mu, '
+    + 'which is a u with a tail, followed by m. '
+    + 'Magnification is written with a times sign in front, '
+    + 'as in times 400, '
+    + 'and it is the image size divided by the real size. '
+    + 'Both sizes go into the same unit before you divide, '
+    + 'so a 20 mm drawing of a cell 50 micrometres wide '
+    + 'is 20 000 divided by 50, which is times 400. '
+    + 'Dividing a measurement in millimetres '
+    + 'by one in micrometres '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A cell is the smallest unit that carries out all the processes of '
     + 'life. '
@@ -168,10 +195,17 @@ teach({
     + 'all of which can be done from a printed photograph with a scale bar.',
 
   recap:
-    'You know the cell and a few of its parts. '
-    + 'This asks what each part is shaped like and why that shape suits its '
-    + 'job, '
-    + 'and sets the bacterial cell against the other two.',
+    'Every living thing is built of cells. '
+    + 'A cell is a small bag of watery jelly, '
+    + 'held in by a thin skin called the membrane. '
+    + 'Inside it sit a number of separate working parts, '
+    + 'and each part has one job. '
+    + 'Those parts are called organelles, '
+    + 'which means little organs. '
+    + 'Peel the skin off an onion, '
+    + 'hold it flat under a microscope, '
+    + 'and you see a wall of small boxes, each box one cell. '
+    + 'This lesson takes one box and names what is inside it.',
 
   method: [
     'Name the organelle.',
@@ -768,6 +802,30 @@ teach({
     ],
   },
 
+  why:
+    'A nurse at a clinic in Bolgatanga sees a child '
+    + 'who is thin, with a swollen belly and pale hair. '
+    + 'The mother says the child eats every day, '
+    + 'and she is telling the truth: '
+    + 'the child eats kenkey, and plenty of it. '
+    + 'So the child is fed and is still starving of something. '
+    + 'Food is not one substance. '
+    + 'How do you find out what is actually in a food, '
+    + 'with nothing but a few bottles of liquid and a flame?',
+
+  notation:
+    'A food test is named by its reagent, not by its colour. '
+    + 'Iodine solution is the reagent and blue black is the result. '
+    + 'Benedict solution is the reagent '
+    + 'and brick red is the result, after heating. '
+    + 'Biuret solution, said "by-you-ret", gives purple with protein. '
+    + 'Write every result as a change: '
+    + 'brown to blue black, blue to brick red. '
+    + 'Naming only the end colour '
+    + 'is the commonest way to lose a mark, '
+    + 'because the mark is for the change, '
+    + 'and one colour on its own does not show that a change happened.',
+
   idea:
     'Carbohydrates are made of sugar units. '
     + 'A single unit such as glucose is a monosaccharide, '
@@ -870,10 +928,17 @@ teach({
     + 'with a statement that the shape of the active site has changed.',
 
   recap:
-    'You know the food groups and that digestion needs enzymes. '
-    + 'This says what each food group is built from, '
-    + 'how to test for it, '
-    + 'and why an enzyme stops working when it is heated.',
+    'Food is a mixture of a few kinds of substance, '
+    + 'not one substance. '
+    + 'Three kinds do most of the work. '
+    + 'Carbohydrates are the starches and the sugars, '
+    + 'so kenkey, rice and yam are mostly carbohydrate. '
+    + 'Proteins are in fish, beans, eggs and groundnut. '
+    + 'Fats and oils are in palm oil, shea butter '
+    + 'and the fat on meat. '
+    + 'A plate of plain banku carries plenty of the first '
+    + 'and almost none of the second, '
+    + 'and detecting that difference is what this lesson is for.',
 
   method: [
     'For a food test, name the reagent, '
@@ -1089,6 +1154,32 @@ teach({
     ],
   },
 
+  why:
+    'A farmer at Techiman brings a caterpillar '
+    + 'that is stripping his cassava leaves '
+    + 'to an agricultural officer, and asks what will kill it. '
+    + 'The officer has a book with 400 pests in it '
+    + 'and no name for this one. '
+    + 'He cannot look it up, '
+    + 'because looking a thing up needs its name, '
+    + 'and the name is exactly what he is missing. '
+    + 'Is there a way of working from a creature in your hand '
+    + 'to its name, without knowing the name first?',
+
+  notation:
+    'A species is named with two words, '
+    + 'and how they are written is part of the answer. '
+    + 'The first word is the genus and takes a capital letter. '
+    + 'The second word is the species and never takes one. '
+    + 'Both are printed in italics, '
+    + 'or underlined when you are writing by hand: '
+    + 'Homo sapiens, Theobroma cacao. '
+    + 'Once the genus has been written out in full '
+    + 'it can be shortened to its letter, as in T. cacao. '
+    + 'Capitalising the second word, '
+    + 'or leaving the pair neither italic nor underlined, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Classification sorts living things into groups '
     + 'by the features they share. '
@@ -1179,10 +1270,18 @@ teach({
     + 'teaches the topic better than any diagram.',
 
   recap:
-    'You can sort animals into familiar groups '
-    + 'and you know what a species is. '
-    + 'This adds the full hierarchy, the phyla below the animal kingdom, '
-    + 'and the discipline of working a key and recording the route.',
+    'Sorting means putting things into groups '
+    + 'by a feature they share. '
+    + 'Put a cow, a goat, a fowl and a tilapia on a table '
+    + 'and sort them. '
+    + 'Choose the feature "has feathers" '
+    + 'and the fowl goes on its own. '
+    + 'Choose "lives in water" '
+    + 'and the tilapia goes on its own instead. '
+    + 'The groups changed because the feature changed, '
+    + 'so a sorting is only as good as the feature chosen for it. '
+    + 'Biology chooses features that show how closely things are related, '
+    + 'and this lesson is about those.',
 
   method: [
     'Examine the specimen and list its visible features.',
