@@ -592,3 +592,92 @@
   border-color: var(--accent, #c8891f);
   color: var(--accent, #c8891f);
 }
+
+/* ── the end of year examination ──────────────────────────────────────────── */
+
+/* Plain on purpose. A learner being examined should be able to tell from the
+   page alone that this one counts, and every ornament that makes a lesson
+   friendly works against that here: no mascot, no progress ring, no colour
+   until the paper has been marked. */
+
+.sch-exam-part { margin-top: 26px; }
+.sch-exam-part:first-of-type { margin-top: 12px; }
+
+.sch-exam-subject {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sch-exam-q { margin-bottom: 20px; }
+
+.sch-exam-ask {
+  margin: 0 0 10px;
+  line-height: 1.55;
+}
+
+/* The number in the margin rather than inline, so the question text of every
+   item starts on the same vertical line and the paper scans as a list. */
+.sch-exam-no {
+  display: inline-block;
+  min-width: 26px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+.sch-exam-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 26px;
+}
+
+.sch-exam-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* 44px, because the same paper is sat on a phone. */
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.sch-exam-input {
+  margin-left: 26px;
+  width: min(100%, 320px);
+  min-height: 44px;
+  padding: 0 12px;
+  font: inherit;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: inherit;
+}
+
+.sch-exam-foot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+/* ── the marks ────────────────────────────────────────────────────────────── */
+
+.sch-marks { margin-top: 14px; }
+
+.sch-pill {
+  flex: none;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--line);
+}
+
+.sch-pill.is-pass { color: var(--right); border-color: var(--right); }
+.sch-pill.is-fail { color: var(--wrong); border-color: var(--wrong); }

@@ -580,6 +580,16 @@ export default function Study() {
            The small learners' shell had this and the dashboard did not. */
         panel={gate.panel ?? 'home'}
         onPanel={pan => setGate({ at: 'subjects', panel: pan })}
+        /* Passing the end of year examination is the one thing in the app
+           that changes a learner's year. It is saved the moment it happens,
+           because a promotion that is lost on refresh is worse than one that
+           was never offered. */
+        onMoved={(movedStage, level) => {
+          const moved = { ...profile, stage: movedStage, level }
+          saveLearner(moved)
+          setProfile(moved)
+        }}
+        onAttempts={more => setAttempts(prev => [...prev, ...more])}
         onSignOut={leave}
         onBack={goBack}
       />

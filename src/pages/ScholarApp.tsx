@@ -46,10 +46,11 @@ import GrownUpGate from '../components/kid/GrownUpGate'
 import { artFor } from '../components/kid/subjectArt'
 import { palFor } from '../components/kid/cast'
 import type { Panel } from './Study'
+import MoveUp from '../components/MoveUp'
 import type { Attempt } from '../lib/education/mastery'
 import type { LearnerProfile } from '../lib/education/learner'
 
-type Where = 'dashboard' | 'subjects' | 'progress'
+type Where = 'dashboard' | 'subjects' | 'progress' | 'moveup'
 
 /* Drawn marks, not font characters. The rail used ▦ ▤ ◴ ⏻ ↩, which render
    differently on every machine and looked like mojibake on most of them. */
@@ -57,6 +58,11 @@ const NAV: Array<{ key: Where, name: string, mark: Mark }> = [
   { key: 'dashboard', name: 'Dashboard', mark: 'grid' },
   { key: 'subjects', name: 'My subjects', mark: 'list' },
   { key: 'progress', name: 'Progress', mark: 'clock' },
+  /* The way out of this class. It belongs beside Progress rather than buried
+     in the grown up's screen: finishing a year is the learner's own event, and
+     before this existed the only way to be in JHS 2 was to have said so when
+     the profile was made. */
+  { key: 'moveup', name: 'Move up a class', mark: 'star' },
 ]
 
 const DAY_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -80,7 +86,7 @@ function greetingFor(now = new Date()): string {
 
 export default function ScholarApp({
   profile, attempts, onOpenSubject, onSignOut, onBack,
-  panel = 'home', onPanel,
+  panel = 'home', onPanel, onMoved, onAttempts,
 }: {
   profile: LearnerProfile
   attempts: Attempt[]
@@ -101,6 +107,10 @@ export default function ScholarApp({
    */
   panel?: Panel
   onPanel?: (p: Panel) => void
+  /** Passed the end of year examination: this is their new stage and year. */
+  onMoved: (stage: LearnerProfile['stage'], level: string) => void
+  /** Answers from the examination, recorded like any other practice. */
+  onAttempts: (a: Attempt[]) => void
 }) {
   const [where, setWhere] = useState<Where>('dashboard')
   const [open, setOpen] = useState(false)
@@ -431,6 +441,12 @@ export default function ScholarApp({
             onBack={() => onPanel?.('home')}
             onSignOut={() => setAskGrownUp(true)}
             onBackToAll={onBack} />
+        ) : where === 'moveup' ? (
+          <MoveUp
+            profile={profile}
+            attempts={attempts}
+            onMoved={onMoved}
+            onAttempts={onAttempts} />
         ) : where === 'progress' ? (
           <Progress papers={papers} recent={recent} standing={standing} />
         ) : where === 'subjects' ? (
