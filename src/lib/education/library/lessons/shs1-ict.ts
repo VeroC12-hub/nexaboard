@@ -65,6 +65,32 @@ teach({
     ],
   },
 
+  why:
+    'Two laptops sit on the same shelf in a shop at Circle, '
+    + 'both 2800 cedis. '
+    + 'One is marked 4 GB RAM and a 500 GB hard disk. '
+    + 'The other is marked 8 GB RAM and a 128 GB solid state drive. '
+    + 'The second one holds less than a quarter of what the first holds. '
+    + 'The shopkeeper says it is the better machine anyway. '
+    + 'Is he right, and which of those four numbers '
+    + 'decides how fast the thing feels when you use it?',
+
+  notation:
+    'The parts go by their initials, '
+    + 'and a question may use either form. '
+    + 'CPU is the central processing unit, '
+    + 'said letter by letter, "see pee you". '
+    + 'ALU is the arithmetic and logic unit. '
+    + 'RAM is random access memory, '
+    + 'and ROM is read only memory. '
+    + 'Memory size is written in bytes: '
+    + 'MB is a megabyte and GB is a gigabyte, with a capital B. '
+    + 'A small b means a bit, which is eight times smaller, '
+    + 'so 8 Gb and 8 GB are not the same amount. '
+    + 'Giving only the initials '
+    + 'where the question asks you to name the component '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A computer has a processor, memory, buses, '
     + 'and input and output devices. '
@@ -182,10 +208,17 @@ teach({
     + 'and arrows are marked.',
 
   recap:
-    'You know a computer has a processor, memory and a hard disk. '
-    + 'This says what each one does, '
-    + 'why there are several kinds of memory, '
-    + 'and how a program is actually carried out.',
+    'A computer is a box of a few separate parts, '
+    + 'and each part has one job. '
+    + 'Open a desktop case and you can point at them. '
+    + 'The small square chip under a fan is the processor, '
+    + 'which does the work. '
+    + 'The thin sticks standing in slots beside it are the memory, '
+    + 'which holds whatever is being worked on now. '
+    + 'The sealed metal box lower down is the hard disk, '
+    + 'which keeps your files when the power is off. '
+    + 'This lesson says what each one does, '
+    + 'and why one of them on its own is not enough.',
 
   method: [
     'Name the component and give its function.',
@@ -421,6 +454,31 @@ teach({
     ],
   },
 
+  why:
+    'A phone says a photograph is 2.4 MB '
+    + 'and that 60 MB of space is left. '
+    + 'You take 30 more photographs and the phone says it is full. '
+    + '30 times 2.4 is 72, so that part is clear enough. '
+    + 'Now the harder part. '
+    + 'The photograph is a picture of your sister, not a number, '
+    + 'and the phone holds nothing but switches that are on or off. '
+    + 'How does a face become a run of ons and offs, '
+    + 'and how does it come back out as her face?',
+
+  notation:
+    'A number carries its base as a small digit written low beside it, '
+    + 'so one zero one one in base two '
+    + 'is written 1011 with a small 2 after it. '
+    + 'Say it digit by digit: "one zero one one, base two". '
+    + 'Never say "one thousand and eleven", '
+    + 'which is reading it as base ten. '
+    + 'In hexadecimal the digits run 0 to 9 and then A to F, '
+    + 'so A stands for ten and F for fifteen. '
+    + 'Leaving the base off an answer '
+    + 'is the commonest way to lose a mark, '
+    + 'because 10 means ten in denary, '
+    + 'two in binary and sixteen in hexadecimal.',
+
   idea:
     'A computer circuit has two reliable states, '
     + 'current flowing or not, '
@@ -537,10 +595,16 @@ teach({
     + 'A bare answer earns one mark where three were available.',
 
   recap:
-    'You know numbers in base ten '
-    + 'and that computers work in ones and zeros. '
-    + 'This gives the conversions in both directions, '
-    + 'and shows how letters, pictures and sound become numbers.',
+    'Base ten works by place value. '
+    + 'In 352 the 3 is not three; it is three hundreds. '
+    + 'That is because each place to the left '
+    + 'is worth ten times the place to its right: '
+    + 'one, ten, hundred. '
+    + 'So 352 means 300 plus 50 plus 2. '
+    + 'Nothing in that idea needs the number ten. '
+    + 'Double at each step instead of multiplying by ten, '
+    + 'and the places become 1, 2, 4, 8, 16, '
+    + 'which is base two, and that is this whole lesson.',
 
   method: [
     'Write the place values above the binary digits.',
@@ -756,6 +820,30 @@ teach({
     ],
   },
 
+  why:
+    'A laptop in a school office will not print. '
+    + 'The teacher is told three different things: '
+    + 'reinstall Word, install the printer driver, '
+    + 'or reinstall Windows. '
+    + 'All three are software, '
+    + 'all three cost an afternoon, '
+    + 'and only one of them has anything to do with printing. '
+    + 'Which one, and how would you tell, without guessing?',
+
+  notation:
+    'OS is the operating system, said "oh ess". '
+    + 'GUI is the graphical user interface, said "goo-ee". '
+    + 'A program that lets the machine talk to one piece of hardware '
+    + 'is a driver. '
+    + 'Two pairs of words need care. '
+    + 'Free software means free to change, '
+    + 'and freeware means free of charge, '
+    + 'and they are not the same thing. '
+    + 'Software is the instructions and hardware is the parts, '
+    + 'so calling a printer software, '
+    + 'or calling an operating system hardware, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Software is the set of instructions that tells hardware what to do. '
     + 'It divides into system software and application software. '
@@ -880,10 +968,18 @@ teach({
     + 'Three things in every answer.',
 
   recap:
-    'You have used a computer and opened programs on it. '
-    + 'This divides software into what runs the machine '
-    + 'and what does your work, '
-    + 'and says what the operating system is doing underneath.',
+    'A computer has two halves, '
+    + 'and you can tell them apart by asking which one you could drop. '
+    + 'The screen, the keyboard and the chips inside are hardware: '
+    + 'things. '
+    + 'Word, the browser and the game are software: '
+    + 'instructions. '
+    + 'Switch a machine on '
+    + 'and something is already running before you touch anything, '
+    + 'because it puts the desktop on the screen and waits there. '
+    + 'That something is software too, '
+    + 'and it is working for the machine rather than for you. '
+    + 'This lesson is about the difference between those two jobs.',
 
   method: [
     'Decide whether the program serves the machine or the user.',
@@ -1133,6 +1229,34 @@ teach({
     ],
   },
 
+  why:
+    'A student finishes a 30 page project '
+    + 'the night before it is due. '
+    + 'Every heading in it was made big and bold by hand. '
+    + 'The contents page was typed by hand, '
+    + 'with the page numbers read off the screen. '
+    + 'Then she adds one missing paragraph on page 4. '
+    + 'Every page number after it is now wrong, '
+    + 'and there are 26 of them to find and retype. '
+    + 'Is there a way of writing it '
+    + 'so that adding that paragraph costs nothing?',
+
+  notation:
+    'Two words in this topic do not mean what they look like. '
+    + 'A style is not a look. '
+    + 'It is a name you attach to a paragraph, '
+    + 'such as Heading 1 or Normal, '
+    + 'and the look is stored against the name, '
+    + 'so changing the name changes every paragraph wearing it. '
+    + 'A field is a box the program fills in for you, '
+    + 'rather than text you typed, '
+    + 'and a page number and a table of contents are both fields. '
+    + 'A merge field is shown in angle brackets, as in Name. '
+    + 'Typing a name where a merge field belongs '
+    + 'is the commonest way to lose a mark, '
+    + 'because it looks right on the screen '
+    + 'and comes out the same on all 200 letters.',
+
   idea:
     'A word processor can do far more than type and print. '
     + 'A style is a named collection of formatting, '
@@ -1247,10 +1371,17 @@ teach({
     + 'is not shut out of the written paper.',
 
   recap:
-    'You can type, save and print a document, '
-    + 'and make text bold or larger. '
-    + 'This replaces hand formatting with named styles, '
-    + 'which is what lets the program do the repetitive work.',
+    'Formatting by hand means selecting text '
+    + 'and changing how it looks. '
+    + 'Select a heading, press bold, and set the size to 16, '
+    + 'and that one heading is now big and bold. '
+    + 'Do the same to the next heading '
+    + 'and you have done the same work twice. '
+    + 'With 30 headings you do it 30 times, '
+    + 'and if you later want 14 instead of 16 '
+    + 'you do it 30 times again. '
+    + 'This lesson replaces that hand work '
+    + 'with one name applied once.',
 
   method: [
     'Mark each heading with a heading style instead of formatting it by '

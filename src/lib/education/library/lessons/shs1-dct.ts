@@ -61,6 +61,33 @@ teach({
     ],
   },
 
+  why:
+    'A carpenter in Kumasi is handed a sketch of a stool. '
+    + 'In the middle of the seat is a circle. '
+    + 'He has to decide what that circle is: '
+    + 'a hole bored right through, '
+    + 'a shallow dip for a cup, '
+    + 'or a ring painted on. '
+    + 'All three look the same on the paper. '
+    + 'He guesses, bores it through, and the wood is wasted. '
+    + 'So how do you draw a thing '
+    + 'so that a person you will never speak to '
+    + 'makes the right one?',
+
+  notation:
+    'The lines have names, and you say them out loud. '
+    + 'A line of long dash, short dash, long dash is a chain line. '
+    + 'On a size, the line with an arrowhead at each end '
+    + 'is the dimension line. '
+    + 'The two short lines that run out from the article to meet it '
+    + 'are the projection lines. '
+    + 'The number itself is the figure. '
+    + 'Sizes are in millimetres, and the title block says so once, '
+    + 'so the figure is written 40 and not 40 mm. '
+    + 'Putting the unit on every figure, '
+    + 'or writing one size twice on two views, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A technical drawing uses a standard set of line types, '
     + 'and each one has a meaning. '
@@ -185,9 +212,15 @@ teach({
     + 'and that is the whole list.',
 
   recap:
-    'You can draw a shape and label it. '
-    + 'This gives the code a technical drawing uses, '
-    + 'so that somebody else can read it exactly.',
+    'A drawing turns the edges of a thing into lines on paper. '
+    + 'Draw a matchbox from the front: '
+    + 'four lines, and each one is a real edge of the box. '
+    + 'Write 40 beside the bottom line '
+    + 'and you have said that edge is 40 mm long. '
+    + 'So a line stands for an edge, '
+    + 'and a number beside it states a size. '
+    + 'This lesson is the code that says '
+    + 'which kind of line to use for which kind of edge.',
 
   method: [
     'Plan the layout and draw the border before anything else.',
@@ -415,6 +448,33 @@ teach({
     ],
   },
 
+  why:
+    'A welder in Tamale is making a metal gate. '
+    + 'The post is 1830 mm tall '
+    + 'and the middle hinge must sit exactly halfway up. '
+    + 'He measures 915 mm with a tape that has a bent end, '
+    + 'and the hinge goes on 4 mm high. '
+    + 'On the second post he measures again '
+    + 'and is 3 mm low the other way. '
+    + 'The gate hangs crooked. '
+    + 'Can you find the exact middle of a line, '
+    + 'and an exact 60 degrees, '
+    + 'without measuring either of them?',
+
+  notation:
+    'Points are named with capital letters, '
+    + 'so a line from A to B is said "the line A B". '
+    + 'The corner of an angle is the vertex, '
+    + 'and the two lines running out of it are the arms. '
+    + 'An angle is written with the vertex letter in the middle, '
+    + 'so angle A B C is the angle at B, '
+    + 'and it is said "angle A B C". '
+    + 'A curve struck with compasses is an arc, not a circle, '
+    + 'because only part of the way round is drawn. '
+    + 'Rubbing out the construction arcs '
+    + 'is the commonest way to lose a mark: '
+    + 'they are the proof of the method, and they are marked.',
+
   idea:
     'A geometric construction produces a figure exactly, '
     + 'using compasses and a straight edge, '
@@ -542,10 +602,15 @@ teach({
     + 'so the finished outline stands out from the working.',
 
   recap:
-    'You can draw a circle with compasses '
-    + 'and measure an angle with a protractor. '
-    + 'This builds figures exactly, '
-    + 'using arcs instead of measurement.',
+    'A pair of compasses holds one fixed distance. '
+    + 'Open them to 50 mm, '
+    + 'stand the point on a spot on the paper, '
+    + 'and swing the pencil round. '
+    + 'Every point on the curve you have drawn is 50 mm from that spot, '
+    + 'and no other point on the paper is. '
+    + 'That curve is called an arc. '
+    + 'So an arc marks a distance without a ruler, '
+    + 'and every construction in this lesson is built from arcs.',
 
   method: [
     'Identify the points you need to find.',
@@ -789,6 +854,31 @@ teach({
     ],
   },
 
+  why:
+    'A workshop in Takoradi is sent a photograph of a steel bracket '
+    + 'and told to make twenty of them. '
+    + 'The photograph shows the bracket standing at an angle. '
+    + 'The near edge measures 30 mm on the print, '
+    + 'and the far edge, which is the same edge of the same bracket, '
+    + 'measures 22 mm. '
+    + 'Neither number is the real size. '
+    + 'A picture of a thing cannot be measured. '
+    + 'So how do you draw a solid object on flat paper '
+    + 'in a way that lets somebody take true sizes off it?',
+
+  notation:
+    'The three views have names you use out loud. '
+    + 'The view from the front is the front elevation, '
+    + 'and it is written FE. '
+    + 'The view from above is the plan. '
+    + 'The view from the side is the end elevation, written EE. '
+    + 'Which system a drawing uses '
+    + 'is shown by a small symbol in the title block, '
+    + 'a cone drawn in two views. '
+    + 'Leaving that symbol out is the commonest way to lose a mark, '
+    + 'because the same three views '
+    + 'then describe two different objects.',
+
   idea:
     'Orthographic projection represents a solid object '
     + 'by separate flat views, '
@@ -946,10 +1036,17 @@ teach({
   },
 
   recap:
-    'You can draw a shape as it looks. '
-    + 'This draws it as it measures, '
-    + 'in separate square on views '
-    + 'from which every length can be read.',
+    'Hold a matchbox at arm length '
+    + 'and turn it until one face is straight in front of your eye. '
+    + 'The top and the sides have gone, '
+    + 'and you are looking at one flat rectangle. '
+    + 'That rectangle is the true shape of that face: '
+    + 'a 40 mm edge looks 40 mm wide. '
+    + 'Turn the box even slightly '
+    + 'and the same edge starts to look shorter than it is. '
+    + 'Looking square on is the one position '
+    + 'where a length on paper can be trusted, '
+    + 'and this whole lesson is built on it.',
 
   method: [
     'Choose as the front view the one with most detail '
@@ -1188,6 +1285,32 @@ teach({
     ],
   },
 
+  why:
+    'A seamstress at Makola asks a carpenter '
+    + 'for a cutting table with a shelf under it. '
+    + 'He shows her three flat views, '
+    + 'each one a plain rectangle with some dashed lines in it. '
+    + 'She studies them '
+    + 'and cannot tell what the table will look like '
+    + 'standing in her shop. '
+    + 'She will not pay for a thing she cannot picture. '
+    + 'So how do you draw the whole object in one view, '
+    + 'so that it looks like the object itself?',
+
+  notation:
+    'Isometric means "of equal measure": '
+    + 'iso for equal, and metron for measure. '
+    + 'The three lines a pictorial drawing is built on '
+    + 'are called the axes, said "ax-eez". '
+    + 'The two base axes run at 30 degrees to the horizontal, '
+    + 'and the third stays vertical. '
+    + 'A circle drawn on a sloping isometric face '
+    + 'comes out as an ellipse, said "ee-lips". '
+    + 'A pictorial drawing carries no sizes. '
+    + 'Writing a size on a receding edge '
+    + 'is the commonest way to lose a mark, '
+    + 'because a receding edge is not a true length.',
+
   idea:
     'A pictorial drawing shows three faces in one view. '
     + 'So it looks like the object '
@@ -1347,9 +1470,16 @@ teach({
   },
 
   recap:
-    'You can draw separate measurable views of an object. '
-    + 'This draws it in one view that looks like the object, '
-    + 'and explains what that costs.',
+    'A 30 by 60 set square has one corner of 30 degrees, '
+    + 'one of 60, and one square corner of 90. '
+    + 'Lay its longest edge along a ruler, '
+    + 'and a line drawn up the short edge '
+    + 'rises at 30 degrees to that ruler. '
+    + 'You never measure that angle '
+    + 'and you cannot get it wrong, because the plastic holds it. '
+    + 'Every isometric drawing here is drawn on lines at that angle. '
+    + 'So the instrument gives you the angles '
+    + 'and you give the lengths.',
 
   method: [
     'Decide whether isometric or oblique suits the object.',
@@ -1581,6 +1711,35 @@ teach({
     ],
   },
 
+  why:
+    'A school in Ho needs somewhere to keep 40 pupils drinking cups. '
+    + 'The woodwork teacher says "build a cupboard", '
+    + 'and a pupil builds a good cupboard: '
+    + '900 mm tall, with a door, for 300 cedis. '
+    + 'It is stood in the corridor, '
+    + 'where it blocks the doorway and has to be moved out, '
+    + 'and the cups go back on the window sill. '
+    + 'Nothing was built badly. '
+    + 'The wrong thing was built. '
+    + 'So how do you write down what is needed, '
+    + 'before anybody decides what to make?',
+
+  notation:
+    'Three words in this topic are worth saying out loud '
+    + 'before a question puts them in front of you. '
+    + 'A brief states the problem. '
+    + 'A specification, said "spess-if-ic-ay-shun", '
+    + 'is the list of things the finished article must do, '
+    + 'and every item on it has to be testable. '
+    + 'Ergonomics, said "er-go-nom-ics", '
+    + 'is fitting an article to the person who uses it. '
+    + 'Anthropometric data, said "an-thro-po-met-ric", '
+    + 'is the body measurements that fitting needs: '
+    + 'a seat height, a reach, a grip width. '
+    + 'A specification point that cannot be tested, '
+    + 'such as "it must look nice", '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'The design process begins with a situation '
     + 'in which something is needed. '
@@ -1716,10 +1875,15 @@ teach({
     + 'and a specification in which every point can be checked.',
 
   recap:
-    'You have made things and solved practical problems. '
-    + 'This gives the order the work is done in, '
-    + 'starting with a statement of the problem '
-    + 'that leaves the solution open.',
+    'A problem and a solution are two different sentences. '
+    + '"The cups have nowhere to go" is a problem. '
+    + '"Build a cupboard" is a solution. '
+    + 'Say the solution first '
+    + 'and the cupboard becomes the only idea anybody has, '
+    + 'even where a rack on the wall '
+    + 'would have been better and cheaper. '
+    + 'Stating the problem on its own '
+    + 'is what keeps the better idea possible.',
 
   method: [
     'Describe the situation and identify the user.',
