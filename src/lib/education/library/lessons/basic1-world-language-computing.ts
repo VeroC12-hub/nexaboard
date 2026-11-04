@@ -104,7 +104,7 @@ teach({
     {
       mistake: 'Not knowing the name of your own town or area.',
       why: 'It is the thing a stranger would need most if you were lost. Learn '
-        + 'it the way you learned your name.',
+        + 'it as surely as your own name.',
     },
     {
       mistake: 'Thinking you must be the best at something for it to count.',

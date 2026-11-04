@@ -3756,7 +3756,7 @@ teach({
         + 'what the work says about poverty.',
     },
     {
-      mistake: 'Writing everything you know about the text.',
+      mistake: 'Writing down everything you can remember about the text.',
       why: 'Answer the question asked. '
         + 'If it names two characters, discuss both; '
         + 'if it says the first half, stay there.',

@@ -587,7 +587,7 @@ teach({
       steps: [
         'They say a lot in very few words.',
         'They carry the thinking of people who came before.',
-        'Using one well shows you know the language deeply.',
+        'Using one well shows a deep hold on the language.',
       ],
       answer: 'Because they compress a lot of meaning, '
         + 'and using one properly shows real command of the language.',
@@ -1282,7 +1282,7 @@ teach({
     },
     {
       mistake: 'Copying without noting where it came from.',
-      why: 'Then you cannot answer "how do you know", '
+      why: 'Then you cannot answer "where did this come from", '
         + 'and you cannot check it later.',
     },
   ],

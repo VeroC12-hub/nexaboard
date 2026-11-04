@@ -1589,7 +1589,7 @@ teach({
     },
     {
       level: 6,
-      ask: 'How do you know if something can be cut?',
+      ask: 'How can you tell if something can be cut?',
       steps: [
         'Take it out.',
         'Ask whether the meaning changed.',

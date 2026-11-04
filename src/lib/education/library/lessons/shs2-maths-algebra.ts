@@ -1676,7 +1676,7 @@ teach({
 
   recap:
     'An operation is something you do to two numbers to get a third. '
-    + 'Add, subtract, multiply and divide are the four you know. '
+    + 'Add, subtract, multiply and divide are the four everybody meets first. '
     + 'Order matters for some and not for others. '
     + '3 plus 5 and 5 plus 3 both give 8, so order does not matter there. '
     + '7 minus 2 gives 5 but 2 minus 7 gives minus 5, so there it does. '

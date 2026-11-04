@@ -51,7 +51,7 @@ teach({
     + 'and one choice that runs underneath all of them. '
     + 'French has two words where English has only you, '
     + 'so before you greet anybody you have already decided '
-    + 'how well you know them. '
+    + 'how close you are to them. '
     + 'Several of the lines also change ending for a boy and for a girl.',
 
   mechanism:

@@ -776,7 +776,7 @@ teach({
     + 'Two jobs. That is why you need both.',
 
   recap:
-    'Counting in fives: five, ten, fifteen, twenty. If you know that, you can '
+    'Counting in fives: five, ten, fifteen, twenty. With that, you can '
     + 'read any tally without counting a single stroke on its own.',
 
   method: [

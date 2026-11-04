@@ -265,8 +265,8 @@ teach({
         + 'A history textbook published in 1960 '
         + 'is a secondary source for the events it describes, '
         + 'since it was written long after them from other sources. '
-        + 'It is a primary source for what Ghanaian schools were taught '
-        + 'in 1960, '
+        + 'It is a primary source for what Ghanaian schools '
+        + 'were putting on the syllabus in 1960, '
         + 'and for the assumptions of the historians of that generation, '
         + 'because for those questions it comes from the period itself. '
         + 'Nothing about the book changed, only the question.',
@@ -368,11 +368,11 @@ teach({
       ask: 'A 1960 textbook about 1874 is a primary source for:',
       kind: 'choice',
       options: [
-        'what was taught in 1960',
+        'what was on the syllabus in 1960',
         'the events of 1874',
         'nothing at all',
       ],
-      answer: 'what was taught in 1960',
+      answer: 'what was on the syllabus in 1960',
       teach: 'The classification relates a source to a question. '
         + 'Change the question and it can change.',
       level: 5,

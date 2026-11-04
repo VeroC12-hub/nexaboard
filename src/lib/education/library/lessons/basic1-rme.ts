@@ -235,7 +235,7 @@ teach({
 
   recap:
     'Borrow a thing and you give it back as you found it. '
-    + 'You already know that rule. '
+    + 'That is the rule for a borrowed bicycle. '
     + 'This is the same rule, about something much bigger.',
 
   method: [
@@ -1171,7 +1171,7 @@ teach({
     },
     {
       level: 3,
-      ask: 'An older child tells you to do something you know is wrong. Is '
+      ask: 'An older child tells you to do something that is wrong. Is '
         + 'obeying respect?',
       steps: [
         'Respect is for the person, not for every instruction they give.',

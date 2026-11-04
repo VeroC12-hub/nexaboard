@@ -516,7 +516,7 @@ teach({
     + 'the locus is a circle of radius 3 centimetres with centre at P. '
     + 'And give the drawing. '
     + 'Words alone do not show you can draw it; '
-    + 'a drawing alone does not show you know what it is. '
+    + 'a drawing alone does not show that you understood it. '
     + 'Most mark schemes award both separately. '
     + 'Then there are combined loci, '
     + 'which is where the interesting questions live. '

@@ -434,7 +434,7 @@ teach({
     {
       mistake: 'Counting the whole group again.',
       why: 'One more is just the next number. '
-        + 'You already know it.',
+        + 'It is already in your head.',
     },
     {
       mistake: 'Mixing up more and less.',
@@ -735,7 +735,7 @@ teach({
     },
     {
       level: 3,
-      ask: 'How do you know whether to join or take away?',
+      ask: 'How can you tell whether to join or take away?',
       steps: [
         'Listen to what happened in the story.',
       ],
@@ -867,7 +867,8 @@ teach({
     + 'Going round one at a time cannot go wrong. '
     + 'Then check at the end by counting both piles, '
     + 'or better, by matching them one to one, '
-    + 'which the child learned last year. '
+    + 'which means putting one from each pile side by side '
+    + 'until a pile runs out. '
     + 'When the sharing does not come out even, '
     + 'say so plainly: '
     + 'there is one left over and it cannot be shared. '

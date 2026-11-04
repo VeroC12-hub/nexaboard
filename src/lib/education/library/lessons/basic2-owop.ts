@@ -241,7 +241,7 @@ teach({
   why:
     'A stranger gets off a trotro in your town '
     + 'and asks for the clinic. '
-    + 'You know the way perfectly well. '
+    + 'You could find the clinic with your eyes shut. '
     + 'But you cannot say it, '
     + 'because you do not know which turns to name. '
     + 'You could walk him there in five minutes. '

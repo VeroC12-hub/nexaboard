@@ -271,7 +271,7 @@ teach({
   traps: [
     {
       mistake: 'Counting the whole row again when asked how many.',
-      why: 'You already know. '
+      why: 'There is no need. '
         + 'The last number you said is the answer.',
     },
     {
@@ -522,7 +522,7 @@ teach({
     'For the adult. '
     + 'Matching one to one answers "which has more" '
     + 'without any counting at all, '
-    + 'and that is why it is taught before counting is secure. '
+    + 'and that is why it comes before counting is secure. '
     + 'It also protects the child from the trap in the next lesson: '
     + 'a long spread out row LOOKS like more. '
     + 'Matching ignores how things look '

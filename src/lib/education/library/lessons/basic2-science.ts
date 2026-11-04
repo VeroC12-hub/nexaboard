@@ -225,7 +225,7 @@ teach({
   idea:
     'You find out about the world through five parts of your body. Eyes to '
     + 'see, ears to hear, nose to smell, tongue to taste, skin to feel. Those '
-    + 'are the sense organs, and everything you know about what is around you '
+    + 'are the sense organs, and everything in your head about what is around you '
     + 'came in through one of them.',
 
   mechanism:

@@ -419,7 +419,7 @@ teach({
         'Knowing what to listen for means you catch it.',
       ],
       answer: 'Because you only hear it once, '
-        + 'so you must know in advance what to listen for.',
+        + 'so you have to decide in advance what to listen for.',
     },
     {
       level: 4,
@@ -1568,7 +1568,7 @@ teach({
       steps: [
         'Dear Sir means the person is unknown to you.',
         'You are writing to the office, so you are faithful to it.',
-        'Dear Mr Mensah means you know who they are.',
+        'Dear Mr Mensah names the person, so the reader is not a stranger.',
         'Sincerity is something between people.',
       ],
       answer: 'Faithfully goes with an unknown reader, '

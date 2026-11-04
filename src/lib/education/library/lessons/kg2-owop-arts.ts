@@ -289,7 +289,7 @@ teach({
     },
     {
       mistake: 'Going with somebody because they were kind.',
-      why: 'Being kind does not mean you know them. '
+      why: 'Being kind does not make somebody safe to go with. '
         + 'Do not go.',
     },
     {
@@ -622,7 +622,7 @@ teach({
     },
     {
       level: 2,
-      ask: 'Is a stone alive? How do you know?',
+      ask: 'Is a stone alive? How can you tell?',
       steps: [
         'Ask what it needs.',
       ],

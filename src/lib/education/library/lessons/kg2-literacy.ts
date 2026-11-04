@@ -612,7 +612,7 @@ teach({
   ],
 
   extension:
-    'Now you know a few letters. '
+    'Now you have a few letters. '
     + 'Put them together. '
     + 'm, a, t. '
     + 'You just read a word.',
@@ -925,7 +925,7 @@ teach({
       steps: [
         'It joins writing to reading.',
       ],
-      answer: 'So the name is sounds you know, '
+      answer: 'So the name is sounds you can say, '
         + 'not a shape you copied.',
     },
   ],

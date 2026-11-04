@@ -1955,7 +1955,7 @@ teach({
   method: [
     'For a calculation, write v equals f times the wavelength.',
     'Keep metres and hertz, and convert before substituting.',
-    'Remember that frequency does not change between materials; the speed and wavelength do.',
+    'Frequency does not change between materials; the speed and wavelength do.',
     'For reflection, draw the normal and measure both angles from it.',
     'For refraction, decide first whether the wave speeds up or slows down.',
     'Slower means bending towards the normal; faster means away from it.',

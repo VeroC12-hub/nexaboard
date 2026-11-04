@@ -2578,7 +2578,7 @@ teach({
   method: [
     'Choose a positive direction and state it.',
     'Convert every quantity to SI units.',
-    'Write the five letters u, v, a, t, s and fill in what you know.',
+    'Write the five letters u, v, a, t, s and fill in the ones the question gives.',
     'Mark the quantity asked for.',
     'Identify the quantity you neither have nor want.',
     'Choose the equation that leaves that one out.',

@@ -1363,7 +1363,7 @@ teach({
     + 'is pointing at them, and this is where nearly all the confusion comes '
     + 'from. For the short hand, the 3 means three o clock. For the long hand, '
     + 'the 3 means fifteen minutes, because there are five minutes between each '
-    + 'pair of numbers. One face, two scales. Once you know that, you count the '
+    + 'pair of numbers. One face, two scales. Once that is clear, you count the '
     + 'long hand in fives and the clock stops being a puzzle.',
 
   recap:

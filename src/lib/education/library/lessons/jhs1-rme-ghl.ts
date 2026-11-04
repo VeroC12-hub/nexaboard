@@ -596,7 +596,7 @@ teach({
     + 'which is the strongest claim a young person can make in that room.',
 
   recap:
-    'You greet elders at home and you know the words change for them. '
+    'At home the words of a greeting change for an elder. '
     + 'This gathers those habits into the full form '
     + 'for standing and speaking before a gathering.',
 
@@ -874,7 +874,7 @@ teach({
       level: 3,
       ask: 'What do you do before looking at the questions?',
       steps: [
-        'The questions make sense only once you know the passage.',
+        'The questions make sense only once the passage has been read.',
       ],
       answer: 'Read the whole passage once through.',
     },

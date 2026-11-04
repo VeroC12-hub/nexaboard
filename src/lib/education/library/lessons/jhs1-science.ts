@@ -485,7 +485,7 @@ teach({
 
   mechanism:
     'This one idea replaces a list of facts with an explanation, '
-    + 'and it is the most useful thing in JHS 1 science. '
+    + 'and it is the most useful idea in this year of science. '
     + 'Why does a solid keep its shape? The particles cannot move past each '
     + 'other. '
     + 'Why does a liquid take the shape of its container? They can slide. '

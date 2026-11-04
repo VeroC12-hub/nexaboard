@@ -1594,7 +1594,7 @@ teach({
     'To find a human interruption, ask which arrow has grown or shrunk.',
     'Name the store that therefore grows, and say what follows from that.',
     'For nitrogen, name the bacteria at each step.',
-    'For water, remember that the total does not change; only the rates do.',
+    'For water, the total does not change; only the rates do.',
   ],
 
   worked: [

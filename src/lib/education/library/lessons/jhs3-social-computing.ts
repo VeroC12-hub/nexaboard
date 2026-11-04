@@ -1681,7 +1681,7 @@ teach({
     'Give the remedy: position, light, and breaks.',
     'For an ethical question, ask whose work it is.',
     'Ask whether the use is being claimed as your own.',
-    'Name the source where you have used one.',
+    'Name the source wherever one was used.',
     'For a privacy question, ask whether the person agreed.',
     'Check anything before passing it on.',
   ],

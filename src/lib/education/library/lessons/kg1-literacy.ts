@@ -683,7 +683,7 @@ teach({
   extension:
     'Now I clap and you guess the word. '
     + 'Three claps, and it is a town. '
-    + 'Now clap the longest name you know.',
+    + 'Now clap the longest name you can think of.',
 
   figure: {
     alt: 'The name Kumasi written in three parts, Ku, ma and si, with a '
@@ -1000,7 +1000,7 @@ teach({
     },
     {
       level: 3,
-      ask: 'Must you know the letter’s name to find it?',
+      ask: 'Do you need the letter’s name to find it?',
       steps: [
         'You are matching the shape.',
       ],

@@ -214,7 +214,7 @@ teach({
   idea:
     'Letters are marks that stand for sounds. The letter m says mmm, like the '
     + 'start of maame. The letter s says sss, like the start of sika. When you '
-    + 'know the sound a letter makes, you can start to read words you have '
+    + 'have the sound a letter makes, you can start to read words you have '
     + 'never seen.',
 
   mechanism:
