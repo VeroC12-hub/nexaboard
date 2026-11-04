@@ -46,6 +46,37 @@ teach({
     ],
   },
 
+  why:
+    'Two pupils are told to draw a rectangle '
+    + '80 mm by 50 mm, with square corners. '
+    + 'The first draws it freehand '
+    + 'against the edge of an exercise book. '
+    + 'His corner comes out at about 85 degrees '
+    + 'and his two long sides measure 80 and 83. '
+    + 'The second uses a tee square and a set square. '
+    + 'Her corner is 90 degrees '
+    + 'and both long sides are 80. '
+    + 'Neither of them is the better artist. '
+    + 'So what is the instrument doing '
+    + 'that a steady hand cannot?',
+
+  notation:
+    'The instruments have names a question will use. '
+    + 'A tee square is shaped like the letter T, '
+    + 'and its head slides along the edge of the board. '
+    + 'A set square is a flat plastic triangle, '
+    + 'and there are two of them: '
+    + 'a 45 and a 30 by 60. '
+    + 'A pencil grade is a letter and a number, '
+    + 'so 2H is hard and HB is softer. '
+    + 'Thick lines come from a soft pencil '
+    + 'and thin lines from a hard one, '
+    + 'never from pressing harder. '
+    + 'Drawing every line at the same thickness '
+    + 'is the commonest mistake, '
+    + 'because then a reader cannot tell an outline '
+    + 'from a construction line.',
+
   idea:
     'Technical drawing is done with instruments because a drawing is a '
     + 'measurement, not a picture. '
@@ -78,9 +109,19 @@ teach({
     + 'and it lies about what it is.',
 
   recap:
-    'You have drawn shapes with a ruler and measured angles before. '
-    + 'This replaces free drawing with instruments, '
-    + 'and gives each kind of line a meaning the reader can rely on.',
+    'A drawing can be a picture, '
+    + 'or it can be an instruction. '
+    + 'Draw a bowl to hang on your wall '
+    + 'and only you have to like it. '
+    + 'Draw a bowl so that a potter you will never meet '
+    + 'can make exactly that bowl, '
+    + 'and it has to carry sizes, '
+    + 'and every line in it has to mean one thing '
+    + 'and not another. '
+    + 'That second kind is technical drawing, '
+    + 'and it is what this subject is. '
+    + 'This lesson is the instruments it needs, '
+    + 'and what each line is allowed to mean.',
 
   method: [
     'Tape the paper square on the board.',
@@ -342,6 +383,33 @@ teach({
     ],
   },
 
+  why:
+    'A pupil needs to cut 30 mm off a wooden strip. '
+    + 'He has no vice, '
+    + 'so he holds the strip in his left hand '
+    + 'and saws with his right. '
+    + 'The saw jumps out of the cut on the second stroke. '
+    + 'It lands on his left thumb. '
+    + 'He was not being careless '
+    + 'and he was not rushing. '
+    + 'The way he held it is what made the jump possible. '
+    + 'So what setup would not have let the saw reach him?',
+
+  notation:
+    'A vice is the clamp on the bench '
+    + 'that holds work still. '
+    + 'The part of a tool you hold is the handle, '
+    + 'and the part that cuts is the blade, or the edge. '
+    + 'The waste is the part of the material '
+    + 'you are going to throw away. '
+    + 'You always cut on the waste side of your line, '
+    + 'so that the piece you are keeping stays full size. '
+    + 'Holding work in your hand instead of a vice '
+    + 'is the commonest mistake, '
+    + 'because a tool in one hand '
+    + 'against work in the other '
+    + 'has nowhere safe to slip to.',
+
   idea:
     'Workshop tools are sorted by the job they do: '
     + 'marking, cutting, smoothing, holding and driving. '
@@ -371,9 +439,21 @@ teach({
     + 'and a split handle lets go while the blade is moving.',
 
   recap:
-    'You have used scissors, a knife and a ruler at home. '
-    + 'The workshop uses the same idea with tools that cut harder material, '
-    + 'so the holding and the direction of cut now matter.',
+    'A cutting tool only cuts '
+    + 'when it is held against something that will not move. '
+    + 'Try cutting a sheet of paper '
+    + 'while holding it up in the air. '
+    + 'It folds away from the blade '
+    + 'and tears instead of cutting. '
+    + 'Lay the same sheet flat on a table, '
+    + 'hold it down, '
+    + 'and the blade goes through it cleanly. '
+    + 'Nothing about the blade changed. '
+    + 'What changed is that the work '
+    + 'could no longer move away. '
+    + 'This lesson is that same idea '
+    + 'with tools that cut harder material, '
+    + 'where a slip costs more.',
 
   method: [
     'Say what the job is: measure, mark, cut, hold, smooth or drive.',
@@ -593,6 +673,35 @@ teach({
     ],
   },
 
+  why:
+    'A mother has 20 cedis to feed four people. '
+    + 'She buys a big bowl of gari and some sugar, '
+    + 'and everybody goes to bed full. '
+    + 'She does that every day for a month, '
+    + 'and the youngest child starts falling ill often. '
+    + 'Nobody in the house went hungry. '
+    + 'Being full and being fed '
+    + 'are not the same thing. '
+    + 'So how do you plan a meal that does both, '
+    + 'on money that does not stretch?',
+
+  notation:
+    'Food is sorted into groups '
+    + 'by what the body uses it for. '
+    + 'Carbohydrates give energy: '
+    + 'gari, rice, yam, kenkey. '
+    + 'Proteins build the body: '
+    + 'fish, beans, eggs, groundnut. '
+    + 'Vitamins and minerals come '
+    + 'from vegetables and fruit, '
+    + 'and they keep the body working. '
+    + 'A balanced meal has something from each group, '
+    + 'in one meal, on one plate. '
+    + 'Leaving a group out to save money '
+    + 'is the commonest mistake, '
+    + 'because the cheapest food in a group still counts '
+    + 'and an empty group counts for nothing.',
+
   idea:
     'A balanced meal takes one food from each of four groups, '
     + 'and each group is there for a different reason. '
@@ -628,10 +737,20 @@ teach({
     + 'which is exactly why the order you work in matters.',
 
   recap:
-    'You learned the food groups and why each one is needed in primary '
-    + 'school. '
-    + 'This asks you to plan a real meal from them, '
-    + 'to a price, and to cook it safely.',
+    'Different foods do different jobs in the body, '
+    + 'and a body needs all the jobs done. '
+    + 'Gari and rice give you the energy '
+    + 'to walk and to work. '
+    + 'Fish, beans and eggs build you: '
+    + 'muscle, blood, the mending of a cut. '
+    + 'Vegetables and fruit keep the whole thing running, '
+    + 'and without them a person falls ill easily. '
+    + 'A plate of gari on its own '
+    + 'gives you one of those three. '
+    + 'You can eat it until you are full '
+    + 'and still be missing the other two. '
+    + 'This lesson plans a real meal '
+    + 'with all three on it, to a price.',
 
   method: [
     'Write the four groups down the side of a page.',
@@ -853,6 +972,36 @@ teach({
     ],
   },
 
+  why:
+    'A seam on a uniform is sewn with a running stitch: '
+    + 'in, out, in, out. '
+    + 'It holds for a week. '
+    + 'Then the thread breaks at one point, '
+    + 'the stitching pulls loose along its whole length, '
+    + 'and the seam opens from the hem to the armpit. '
+    + 'A seam sewn with backstitch, '
+    + 'broken in the same one place, '
+    + 'loses one stitch. '
+    + 'Same cloth, same thread, same needle. '
+    + 'So what is different about the way '
+    + 'the thread goes in?',
+
+  notation:
+    'A stitch is one pass of the needle, '
+    + 'and a run of them along a join is a seam. '
+    + 'Tacking is temporary: '
+    + 'big loose stitches '
+    + 'that hold the cloth while you sew the real seam, '
+    + 'and they are pulled out afterwards. '
+    + 'Running stitch goes forward every time. '
+    + 'Backstitch goes forward, '
+    + 'then back over the last one, '
+    + 'which is what makes it strong. '
+    + 'Hemming and slip stitch finish an edge '
+    + 'so that it does not fray. '
+    + 'Calling tacking a seam is the commonest mistake, '
+    + 'because tacking is meant to come out again.',
+
   idea:
     'Stitches do three different jobs. '
     + 'A temporary stitch holds cloth in place while you work. '
@@ -889,9 +1038,20 @@ teach({
     + 'Two minutes of tacking is cheaper than unpicking a seam.',
 
   recap:
-    'You have threaded a needle and sewn a button before. '
-    + 'This names the stitches, says which is strong and why, '
-    + 'and adds the finishing that stops a seam from fraying apart.',
+    'Sewing holds two pieces of cloth together '
+    + 'with a thread that passes through both of them. '
+    + 'Push a needle down through both pieces '
+    + 'and up again, '
+    + 'and you have made one stitch. '
+    + 'Do that in a line '
+    + 'and the two pieces are joined along the line. '
+    + 'One thread is holding all of it, '
+    + 'which is the useful part '
+    + 'and also the dangerous part. '
+    + 'If that thread breaks in the wrong way, '
+    + 'the whole line can come undone. '
+    + 'This lesson names the stitches, '
+    + 'says which one survives a break, and says why.',
 
   method: [
     'Measure and mark, then cut with the grain of the cloth.',

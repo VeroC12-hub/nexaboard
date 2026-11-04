@@ -1316,7 +1316,7 @@ teach({
     + 'There is also a second use for records that traders discover late. '
     + 'Six months of them is evidence. '
     + 'They are what lets you ask a bank or a credit union for a loan, '
-    + 'because they show somebody else what you already know, '
+    + 'because they show somebody else what the trader can see, '
     + 'and a trader with no records has no way of proving a good business '
     + 'is good.',
 
@@ -1889,7 +1889,8 @@ teach({
   idea:
     'Chastity means keeping sexual conduct within the limits '
     + 'that a person’s faith and community set. '
-    + 'In all three traditions taught in Ghana that means two things: '
+    + 'In all three of the traditions studied in Ghana '
+    + 'that means two things: '
     + 'abstaining before marriage, and faithfulness within it. '
     + 'Each tradition gives its own reasons for that, '
     + 'in its own words, '
@@ -2165,7 +2166,7 @@ teach({
     + 'What was taken, and from whom?',
 
   idea:
-    'All three faiths taught in Ghana honour honest work '
+    'All three of the faiths studied in Ghana honour honest work '
     + 'and condemn taking what is not earned, '
     + 'each in its own words. '
     + 'Corruption is using a public position for private gain, '
@@ -2477,7 +2478,7 @@ teach({
     + 'to hold and practise a different faith, '
     + 'while you keep your own. '
     + 'It is not agreeing that all faiths are the same. '
-    + 'Each tradition taught in Ghana has its own reason for it, '
+    + 'Each tradition studied in Ghana has its own reason for it, '
     + 'drawn from inside its own teaching. '
     + 'In Ghana people of different faiths share families and schools, '
     + 'markets and funerals, '

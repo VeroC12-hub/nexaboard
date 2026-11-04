@@ -342,6 +342,40 @@ teach({
     ],
   },
 
+  why:
+    'A pupil is making a stool '
+    + 'and needs a leg 400 mm long. '
+    + 'He measures, marks with a pencil, '
+    + 'and saws down the middle of the pencil line. '
+    + 'The leg comes out at 398 mm, '
+    + 'because the pencil line was 2 mm wide '
+    + 'and the saw took half of it. '
+    + 'He cuts the other three the same way '
+    + 'and gets 397, 399 and 398. '
+    + 'The stool rocks. '
+    + 'Nothing can be put back '
+    + 'on a leg that was cut short. '
+    + 'So how do you get four pieces the same, '
+    + 'when every cut takes something away?',
+
+  notation:
+    'Marking out means putting the lines on the material '
+    + 'before anything is cut. '
+    + 'A scriber is a steel point that scratches a line, '
+    + 'and a marking knife cuts one. '
+    + 'Both give a thinner line than a pencil does. '
+    + 'The waste is the side of the line '
+    + 'you are throwing away, '
+    + 'and that is the side you cut on. '
+    + 'A tolerance is how far out a piece may be '
+    + 'and still do its job, '
+    + 'written as plus or minus a number, '
+    + 'such as plus or minus 1 mm. '
+    + 'Cutting down the middle of your own line '
+    + 'is the commonest mistake, '
+    + 'because it makes every piece short '
+    + 'by half the width of the line.',
+
   idea:
     'Marking out comes first: '
     + 'choose a face and an edge as your reference, '
@@ -385,10 +419,17 @@ teach({
     + 'Knowing which is which is most of the skill.',
 
   recap:
-    'You can name the tools and use them safely. '
-    + 'This is about accuracy: '
-    + 'getting a piece to the size you intended '
-    + 'and to a joint that fits.',
+    'Material cannot be put back once it is cut. '
+    + 'Cut a 500 mm board down to 400 '
+    + 'and you have a 400 mm board, and that is final. '
+    + 'Cut it to 380 by mistake '
+    + 'and there is nothing to do '
+    + 'but start again with a new board. '
+    + 'So a cut is a decision '
+    + 'that cannot be taken back, '
+    + 'and everything in this lesson follows from that. '
+    + 'Measuring twice costs ten seconds. '
+    + 'Getting it wrong costs the whole piece.',
 
   method: [
     'Choose and mark a face side and a face edge.',
@@ -662,6 +703,38 @@ teach({
     ],
   },
 
+  why:
+    'A fisherman at Elmina lands more fish '
+    + 'than the market will buy that day. '
+    + 'By the next morning the rest of it smells '
+    + 'and nobody will touch it. '
+    + 'He has no refrigerator '
+    + 'and no electricity at the beach. '
+    + 'His grandmother smoked fish over a fire '
+    + 'and it kept for weeks. '
+    + 'Nothing was added to it except smoke. '
+    + 'So what is actually happening '
+    + 'to fish that is going bad, '
+    + 'and what does the smoke take away from it?',
+
+  notation:
+    'The living things that spoil food '
+    + 'are micro-organisms: '
+    + 'bacteria, moulds and yeasts. '
+    + 'Micro means too small to see, '
+    + 'so a micro-organism '
+    + 'is a living thing you cannot see. '
+    + 'An enzyme is not alive at all. '
+    + 'It is a substance in the food itself '
+    + 'that goes on changing it. '
+    + 'Preserving means stopping both of those, '
+    + 'and food that has gone bad is spoiled. '
+    + 'Saying that food goes bad on its own '
+    + 'is the commonest mistake, '
+    + 'because something is always doing it, '
+    + 'and every method works '
+    + 'by stopping that something.',
+
   idea:
     'Food spoils because bacteria, yeasts and moulds grow on it, '
     + 'and because the food’s own enzymes keep working. '
@@ -700,9 +773,20 @@ teach({
     + 'so thawed food must be treated as fresh and not refrozen.',
 
   recap:
-    'You know food goes bad and that a refrigerator slows it. '
-    + 'This explains why each traditional method works, '
-    + 'in terms of what it takes away from the organisms.',
+    'Food does not go bad by itself. '
+    + 'Something is eating it, '
+    + 'and that something is too small to see. '
+    + 'Leave a plate of rice out overnight '
+    + 'and by morning it smells, '
+    + 'because living things landed on it '
+    + 'and have been feeding and multiplying all night. '
+    + 'Put the same rice in a refrigerator '
+    + 'and in the morning it is fine. '
+    + 'Nothing was added and nothing was taken out. '
+    + 'It was only made too cold '
+    + 'for those living things to work in, '
+    + 'and this lesson is every other way '
+    + 'of doing the same job.',
 
   method: [
     'Name the method.',
@@ -939,6 +1023,36 @@ teach({
     ],
   },
 
+  why:
+    'A woollen cardigan costing 60 cedis '
+    + 'is washed with the uniforms, '
+    + 'in hot water, and scrubbed. '
+    + 'It comes out of the bucket '
+    + 'able to fit a small child. '
+    + 'A synthetic blouse is ironed '
+    + 'on the setting that works for cotton. '
+    + 'It comes out with a hole '
+    + 'the shape of the iron. '
+    + 'Both garments were clean '
+    + 'and both are now ruined. '
+    + 'So what is it about one cloth '
+    + 'that lets it survive what destroys another?',
+
+  notation:
+    'The material a cloth is made from is its fibre. '
+    + 'Cotton comes from a plant, '
+    + 'wool comes from a sheep, '
+    + 'and a synthetic is made in a factory. '
+    + 'The label sewn inside a garment '
+    + 'gives its fibre and how to wash it, '
+    + 'and that label is the instruction. '
+    + 'Shrinking is a garment getting smaller. '
+    + 'Felting is wool matting into a solid lump. '
+    + 'Washing every garment the same way '
+    + 'is the commonest mistake, '
+    + 'because hot water is right for one fibre '
+    + 'and ruin for another.',
+
   idea:
     'Clothes last longer when they are treated according to their fibre, '
     + 'because the fibres are different materials '
@@ -977,9 +1091,20 @@ teach({
     + 'It is about which changes can be undone and which cannot.',
 
   recap:
-    'You can sew a seam and finish an edge. '
-    + 'This is about keeping a garment serviceable: '
-    + 'washing it according to its fibre and mending it in time.',
+    'Cloth is not one material, '
+    + 'and the difference is in the thread it is made of. '
+    + 'Rub a cotton shirt between your fingers: '
+    + 'it feels dry and it takes a crease. '
+    + 'Rub a woollen sweater: '
+    + 'it feels springy and comes back to its shape. '
+    + 'Rub a synthetic blouse: '
+    + 'it feels slippery and cool. '
+    + 'Those three threads came from a plant, '
+    + 'from an animal, and from a factory. '
+    + 'A thing made in a factory will melt '
+    + 'and a thing grown on a sheep will not. '
+    + 'This lesson is what each of them '
+    + 'will and will not survive.',
 
   method: [
     'Read the label, or identify the fibre by feel and by burn test '
@@ -1201,6 +1326,38 @@ teach({
     ],
   },
 
+  why:
+    'Three people on the same street at Madina '
+    + 'open three provision shops. '
+    + 'All three sell the same tins of milk, '
+    + 'sachets of water and tins of tomatoes. '
+    + 'Two of them close inside a year. '
+    + 'Three streets away, '
+    + 'nobody can get a phone screen repaired '
+    + 'without a trip into town, '
+    + 'and people there complain about it every week. '
+    + 'A shop was the idea each of the three had. '
+    + 'Not one of them asked the question '
+    + 'that the phone screens are the answer to. '
+    + 'What is that question?',
+
+  notation:
+    'A need is something people want '
+    + 'and cannot easily get. '
+    + 'A business idea is a need '
+    + 'plus a way of meeting it, '
+    + 'and not a kind of shop. '
+    + 'Demand means people will actually pay, '
+    + 'which is different from people saying '
+    + 'it is a good idea. '
+    + 'Your customers are the particular people '
+    + 'who would pay, '
+    + 'and you have to be able to name them. '
+    + 'Naming a kind of business instead of a need '
+    + 'is the commonest mistake, '
+    + 'because "I will open a shop" says nothing '
+    + 'about whether anybody is short of one.',
+
   idea:
     'An opportunity is a need somebody will pay to have met. '
     + 'You find one by observing: '
@@ -1247,10 +1404,20 @@ teach({
     + 'and knowing which you have is the point of the lesson.',
 
   recap:
-    'You know what the factors of production are '
-    + 'and that an entrepreneur carries the risk. '
-    + 'This is the step before any of that: '
-    + 'finding something worth producing.',
+    'A business sells something '
+    + 'to somebody who wants it. '
+    + 'Both halves of that have to be true at once. '
+    + 'A woman who fries the best kelewele in the district '
+    + 'and sets up where nobody walks past '
+    + 'sells nothing. '
+    + 'A man who sets up where everybody walks past '
+    + 'and sells something nobody wants '
+    + 'also sells nothing. '
+    + 'So before anything is bought, built or borrowed, '
+    + 'there is one question to settle: '
+    + 'what are people here short of? '
+    + 'This lesson is how to find that out '
+    + 'instead of guessing.',
 
   method: [
     'Walk your community and write down what people find difficult.',
