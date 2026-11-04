@@ -149,43 +149,29 @@ function accuracyOn(attempts: Attempt[], topicId: string): number | null {
 }
 
 /**
- * The page, in whichever interface this learner uses.
+ * The page.
  *
- * The lesson and the questions are shared between the two interfaces on
- * purpose: the logic that streams a lesson, orders it by the plan, asks for
- * pictures and marks answers is the same whoever is reading it, and forking it
- * would leave two of everything with one of them quietly rotting.
+ * One frame now, for every learner. There were three, matching the three home
+ * screens, and the home screens have since become one. Leaving three reading
+ * frames behind would have meant a Basic 4 pupil opening a lesson from the
+ * same dashboard as a sixth former and being handed a 620px column with the
+ * other two thirds of the window empty, which is exactly what happened.
  *
- * So only the frame changes here, and `kid-pages.css` restyles what is inside
- * it. A learner given the kid home screen and then an adult lesson has been
- * handed the worst of both.
+ * The content was always shared: the logic that streams a lesson, orders it by
+ * the plan, asks for pictures and marks answers is the same whoever is reading
+ * it. Only the frame differed, and the frame was the part that was wrong.
+ *
+ * `skin` still decides how dense the page is, in `kid-pages.css` and in the
+ * reading styles, which is a real difference between a six year old and a
+ * candidate. It no longer decides how wide the window may be used.
  */
 function Page({ skin, kind, children }: {
   skin: Skin
   kind: 'lesson' | 'quiz'
   children: React.ReactNode
 }) {
-  if (skin === 'kid') {
-    return (
-      <div className="kid">
-        <div className={kind === 'lesson' ? 'kid-lesson' : 'kid-quiz'}>{children}</div>
-      </div>
-    )
-  }
-
-  if (skin === 'teen') {
-    return (
-      <div className="teen">
-        <div className="teen-read">{children}</div>
-      </div>
-    )
-  }
-
-  /* The reading column on the dashboard's own grey, in a white sheet, so
-     moving from the dashboard into a lesson does not look like leaving the
-     product. */
   return (
-    <div className="sch-read">
+    <div className={`sch-read is-${skin}${kind === 'quiz' ? ' is-quiz' : ''}`}>
       <div className="sch-read-in">{children}</div>
     </div>
   )
