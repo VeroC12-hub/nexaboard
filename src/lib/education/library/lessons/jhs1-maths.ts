@@ -528,7 +528,7 @@ teach({
     + 'Round everything to one significant figure, do the easy sum in your '
     + 'head, and you have a rough target. '
     + 'If 387 times 21 should be about 400 times 20, which is 8,000, '
-    + 'then an answer of 812 or 81,270 is wrong and you know it in two '
+    + 'then an answer of 812 or 81,270 is wrong, and you can see it in two '
     + 'seconds without checking a single step. '
     + 'This catches the mistakes that matter most: '
     + 'misplaced decimal points and dropped digits, '
@@ -1838,7 +1838,7 @@ teach({
     + 'measured.',
 
   method: [
-    'Mark what you know on the diagram.',
+    'Mark every fact the question gives you on the diagram.',
     'Look for a straight line: those angles add to 180.',
     'Look for a point: those add to 360.',
     'Look for arrows marking parallel lines.',
@@ -1972,7 +1972,7 @@ teach({
     },
     {
       id: 'ang-3',
-      ask: 'How do you know two lines in a diagram are parallel?',
+      ask: 'How can you tell that two lines in a diagram are parallel?',
       kind: 'choice',
       options: [
         'Arrows mark them',
@@ -2496,7 +2496,7 @@ teach({
 
   idea:
     'Data collection starts with a question, not with a form. '
-    + 'Once you know what you are asking, you collect answers, '
+    + 'Once the question itself is settled, you collect answers, '
     + 'then organise them into a frequency table: '
     + 'each possible value, and how many times it occurred.',
 

@@ -755,6 +755,35 @@ teach({
     ],
   },
 
+  why:
+    'A steel nail dropped into water sinks at once. '
+    + 'A ship built of the same steel, '
+    + 'weighing eight thousand tonnes, floats. '
+    + 'Nobody changed the steel. '
+    + 'A tank on a tower feeds a village, '
+    + 'and the tap at the bottom of the hill '
+    + 'runs harder than the tap near the top, '
+    + 'out of the same tank. '
+    + 'So what decides how hard a liquid pushes, '
+    + 'and how can one metal both sink and float?',
+
+  notation:
+    'Pressure is measured in pascals, written Pa, '
+    + 'and one pascal is one newton per square metre. '
+    + 'The symbol $\\rho$ is the Greek letter rho, said "roe", '
+    + 'and it stands for density, '
+    + 'in kilograms per cubic metre. '
+    + 'Do not read it as a p. '
+    + 'In $P = \\rho g h$ '
+    + 'the $h$ is the depth below the surface, '
+    + 'measured straight down, '
+    + 'and not the length of a slanting pipe '
+    + 'or the width of the tank. '
+    + 'Upthrust is a force, so it is in newtons. '
+    + 'Using the height of the whole tank '
+    + 'where the depth of one point was wanted '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Pressure is force per unit area, '
     + '$$P = \\frac{F}{A},$$ '
@@ -878,10 +907,19 @@ teach({
     + 'balance and a beaker of water, which most schools have.',
 
   recap:
-    'You know that a drawing pin goes into wood more easily than a nail '
-    + 'head, and that water comes out of a tap at the bottom of a tank '
-    + 'with more force. '
-    + 'This puts numbers on both, and explains why a ship of steel floats.',
+    'One push can do two very different things, '
+    + 'depending on how much area it is spread over. '
+    + 'Press the flat head of a nail into a plank '
+    + 'with your thumb and nothing happens. '
+    + 'Turn it round, press the point in with the same thumb, '
+    + 'and it goes into the wood. '
+    + 'The push from your thumb did not change. '
+    + 'The area it was spread over '
+    + 'went from a few square millimetres to almost none. '
+    + 'Force divided by area is what did the work, '
+    + 'and that is called pressure. '
+    + 'This lesson puts numbers on it inside a liquid, '
+    + 'and then explains the ship.',
 
   method: [
     'Write down the area in square metres and the force in newtons.',
@@ -1065,6 +1103,35 @@ teach({
     ],
   },
 
+  why:
+    'A mechanic hangs 2 kg on a spring balance '
+    + 'and the pointer drops 4 cm. '
+    + 'He hangs 4 kg and it drops 8 cm. '
+    + 'He hangs 6 kg and it drops 12 cm, '
+    + 'so he trusts the pattern. '
+    + 'Then he hangs 40 kg to weigh a sack of maize. '
+    + 'The pointer drops 60 cm instead of 80, '
+    + 'and when the sack comes off '
+    + 'the pointer does not go back to where it started. '
+    + 'The balance now reads every load wrong. '
+    + 'Where exactly did the pattern stop holding, and why?',
+
+  notation:
+    'In $F = ke$ the $e$ is the extension: '
+    + 'how much longer the spring got, '
+    + 'not how long it now is. '
+    + 'A spring of 20 cm stretched to 26 cm '
+    + 'has an extension of 6 cm, not 26. '
+    + 'The $k$ is the spring constant, '
+    + 'in newtons per metre, '
+    + 'and it belongs to that one spring. '
+    + 'A load has to become a force before you use it, '
+    + 'so 2 kg goes in as about 20 N and not as 2. '
+    + 'The point past which a spring will not come back '
+    + 'is the elastic limit. '
+    + 'Putting the final length in for $e$ '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Hooke’s law says this. '
     + 'The extension of a spring is in direct proportion to the force '
@@ -1199,9 +1266,19 @@ teach({
     + 'the school, that is the demonstration worth doing.',
 
   recap:
-    'You have stretched a rubber band and felt it pull harder the further '
-    + 'it goes, and seen that pulled too far it does not return. '
-    + 'This puts a formula on the first part and a name on the second.',
+    'Pull a rubber band and two things happen together. '
+    + 'It gets longer, '
+    + 'and it pulls back harder the further you take it. '
+    + 'Let go while it is only a little stretched '
+    + 'and it snaps back to exactly the length it was. '
+    + 'Pull it much further, let go, '
+    + 'and it hangs there longer than it started, '
+    + 'slack and useless. '
+    + 'So there are two regions and not one: '
+    + 'one where the stretch undoes itself '
+    + 'and one where it does not. '
+    + 'This lesson puts a formula on the first '
+    + 'and a name on the boundary between them.',
 
   method: [
     'Find the extension by subtracting the original length from the new one.',
@@ -1396,6 +1473,36 @@ teach({
     ],
   },
 
+  why:
+    'Put a pot of water on a coal pot '
+    + 'and watch the thermometer. '
+    + 'It climbs steadily: '
+    + '30, then 50, then 80, then 99. '
+    + 'Then the water boils, '
+    + 'and the thermometer stops at 100 and stays there. '
+    + 'The fire is burning at the same rate as before '
+    + 'and the thermometer will not move. '
+    + 'Heat is going in and the temperature is not going up. '
+    + 'So where is that heat going, '
+    + 'and how much of it does boiling the pot dry take?',
+
+  notation:
+    'Heat is energy, so it is measured in joules, written J. '
+    + 'The symbol $\\Delta$ is the Greek letter delta, '
+    + 'and it means "the change in". '
+    + 'So $\\Delta\\theta$ is a change in temperature, '
+    + 'and $\\theta$ is the Greek letter theta. '
+    + 'Because it is a change, '
+    + 'a rise from 20 to 70 gives $\\Delta\\theta = 50$, '
+    + 'and a change of 50 degrees Celsius '
+    + 'is the same as a change of 50 kelvin. '
+    + 'Specific heat capacity, $c$, '
+    + 'is in joules per kilogram per kelvin. '
+    + 'Latent heat, $l$, is in joules per kilogram, '
+    + 'with no temperature in it at all, '
+    + 'and putting a temperature into $Q = ml$ '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'To change the temperature of a mass $m$ by $\\Delta\\theta$ takes '
     + 'heat '
@@ -1534,10 +1641,21 @@ teach({
     + 'the whole idea in one observation.',
 
   recap:
-    'You know that heating a pot of water raises its temperature, and that '
-    + 'water boiling away stays at the same temperature however high the '
-    + 'flame. '
-    + 'This explains the second fact and puts numbers on both.',
+    'Temperature and heat are two different things, '
+    + 'and this topic needs them kept apart. '
+    + 'Heat is energy moving '
+    + 'from a hotter thing to a cooler one. '
+    + 'Temperature is how hot a thing is, '
+    + 'which is what a thermometer reads. '
+    + 'A cup of water at 100 degrees '
+    + 'and a bath of water at 100 degrees '
+    + 'are at the same temperature, '
+    + 'and the bath holds far more heat, '
+    + 'because there is far more water in it to hold it. '
+    + 'So heat depends on how much there is '
+    + 'and temperature does not. '
+    + 'This lesson is about heat that goes in '
+    + 'without the temperature going up.',
 
   method: [
     'Sketch temperature against heat supplied for the whole process.',
@@ -1722,6 +1840,36 @@ teach({
     ],
   },
 
+  why:
+    'A lorry driver checks his tyres cold '
+    + 'in the morning at Tamale '
+    + 'and sets them correctly. '
+    + 'He drives all day '
+    + 'and checks them again in the afternoon, hot. '
+    + 'They read higher now, and nobody added any air. '
+    + 'So he lets some out '
+    + 'to bring them back to the morning reading. '
+    + 'By the next morning they are flat enough to be unsafe. '
+    + 'The amount of air in the tyre never changed. '
+    + 'What changed, '
+    + 'and can it be predicted with a number '
+    + 'instead of guessed at?',
+
+  notation:
+    '$P$ is pressure, $V$ is volume and $T$ is temperature, '
+    + 'and the three are always written in that order. '
+    + 'Temperature in a gas law is in kelvin, written K, '
+    + 'with no degree sign: '
+    + 'it is 300 K and never 300 degrees K. '
+    + 'You get kelvin by adding 273 to the Celsius reading, '
+    + 'so 27 degrees Celsius is 300 K. '
+    + 'Add 273 to a temperature, '
+    + 'never to a change in temperature. '
+    + 'Leaving a temperature in Celsius inside a gas law '
+    + 'is the commonest way to lose a mark, '
+    + 'and it is worse than it looks, '
+    + 'because a Celsius zero makes the whole thing zero.',
+
   idea:
     'For a fixed mass of gas, '
     + '$$\\frac{P_1V_1}{T_1} = \\frac{P_2V_2}{T_2},$$ '
@@ -1868,9 +2016,19 @@ teach({
     + 'observation mark alone.',
 
   recap:
-    'You know that a bicycle pump gets hot and hard to push as the air '
-    + 'inside is squeezed, and that a football left in the sun goes tight. '
-    + 'This gives both of those an equation and a reason in molecules.',
+    'A gas has three things about it that can change, '
+    + 'and they will not change independently. '
+    + 'Take a bicycle pump and block the hole with your thumb. '
+    + 'Push the handle in '
+    + 'and the air inside takes up less room, '
+    + 'which is its volume going down. '
+    + 'Push harder and you feel it shove back, '
+    + 'which is its pressure going up. '
+    + 'Hold it squeezed and the barrel goes warm, '
+    + 'which is its temperature going up. '
+    + 'Not one of the three can be moved '
+    + 'without the other two answering. '
+    + 'This lesson is the exact relation between them.',
 
   method: [
     'Write down $P$, $V$ and $T$ for both states, with units.',

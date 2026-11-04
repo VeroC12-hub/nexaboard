@@ -49,6 +49,38 @@ teach({
     ],
   },
 
+  why:
+    'A farmer is offered a loan of 1000 cedis on two terms. '
+    + 'The first adds 100 cedis to what he owes every month. '
+    + 'The second adds 8 percent of what he owes every month. '
+    + 'After three months '
+    + 'the first owes 1300 and the second owes 1260, '
+    + 'so the second looks like the better deal. '
+    + 'After two years '
+    + 'the first owes 3400 and the second owes over 6000. '
+    + 'Both of them are one rule repeated. '
+    + 'How do you reach the fiftieth step of such a rule '
+    + 'without working through the first forty nine?',
+
+  notation:
+    'A sequence is the list '
+    + 'and a series is the list added up, '
+    + 'and the two words are not interchangeable. '
+    + '$a$ is the first term. '
+    + '$d$ is the common difference, '
+    + 'which is what gets added each time '
+    + 'in an arithmetic progression. '
+    + '$r$ is the common ratio, '
+    + 'which is what you multiply by each time '
+    + 'in a geometric progression. '
+    + '$n$ is how many terms there are, '
+    + 'and $T_n$ is the nth term, said "T sub n". '
+    + '$S_n$ is the sum of the first $n$ terms. '
+    + 'Using $d$ where a sequence multiplies, '
+    + 'or $r$ where it adds, '
+    + 'is the commonest way to lose a mark, '
+    + 'which is why the type is tested first.',
+
   idea:
     'A sequence is a list of numbers in order. '
     + 'A series is what you get when you add them. '
@@ -191,10 +223,19 @@ teach({
     + 'else.',
 
   recap:
-    'You have found the rule of a number pattern and continued it. '
-    + 'This gives that work its two names and its formulae, '
-    + 'so you can reach the fiftieth term without writing the first forty '
-    + 'nine.',
+    'A pattern of numbers is a rule applied again and again. '
+    + 'Take 3, 7, 11, 15. '
+    + 'Each one is the one before it plus 4, '
+    + 'so the next is 19. '
+    + 'Now take 3, 6, 12, 24. '
+    + 'Each one is the one before it times 2, '
+    + 'so the next is 48. '
+    + 'Two patterns, '
+    + 'and the only difference between them '
+    + 'is whether the step adds or multiplies. '
+    + 'This lesson gives both of them a name and a formula, '
+    + 'so the fiftieth term can be reached '
+    + 'without the first forty nine.',
 
   method: [
     'Subtract neighbouring terms. Is the difference constant?',
@@ -379,6 +420,37 @@ teach({
     ],
   },
 
+  why:
+    'A rule gives a charge as $\\frac{x^2 - 4}{x - 2}$ cedis. '
+    + 'Put in 3 and it gives 5. '
+    + 'Put in 2.1 and it gives 4.1. '
+    + 'Put in 2.01 and it gives 4.01. '
+    + 'The answers are walking towards 4. '
+    + 'Now put in 2 exactly. '
+    + 'The bottom comes out zero, '
+    + 'so there is no answer at all. '
+    + 'The rule is undefined at the one point '
+    + 'everything was heading for. '
+    + 'Can you say where a thing is going '
+    + 'when it never arrives there?',
+
+  notation:
+    'A limit is written with the word lim '
+    + 'and the approach underneath it, '
+    + 'and it is said '
+    + '"the limit as x tends to two". '
+    + 'The arrow means tends to, '
+    + 'which means gets closer and closer to, '
+    + 'and not equals. '
+    + '$\\frac{0}{0}$ is not a number and it is not zero. '
+    + 'It is called an indeterminate form, '
+    + 'and all it says is that more work is needed. '
+    + 'The $\\infty$ sign is said "infinity", '
+    + 'and it is not a number either, '
+    + 'so it cannot be substituted in. '
+    + 'Writing $\\frac{0}{0} = 0$ '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'The limit of $f(x)$ as $x$ approaches $a$ is the value that $f(x)$ '
     + 'gets close to as $x$ gets close to $a$, written '
@@ -487,10 +559,19 @@ teach({
     + 'the end.',
 
   recap:
-    'You can substitute a value into a function and read a graph. '
-    + 'This asks a smaller and stranger question: '
-    + 'where is the function going as you close in on a point, '
-    + 'whether or not it ever arrives.',
+    'Substituting means putting a number '
+    + 'where the letter is, and working it out. '
+    + 'Take $f(x) = x^2 + 1$. '
+    + 'Put 3 in for $x$ and you get 9 plus 1, '
+    + 'which is 10. '
+    + 'That works whenever the arithmetic is possible. '
+    + 'It stops working '
+    + 'when the bottom of a fraction comes out zero, '
+    + 'because nothing can be divided by zero. '
+    + 'This lesson asks a smaller and stranger question: '
+    + 'where is the function heading '
+    + 'as you close in on a point, '
+    + 'whether or not it ever gets there.',
 
   method: [
     'Substitute the value into the expression.',
@@ -667,6 +748,39 @@ teach({
     ],
   },
 
+  why:
+    'A water tank is filling. '
+    + 'After 1 minute it holds 3 litres, '
+    + 'after 2 minutes 12 litres, '
+    + 'after 3 minutes 27 litres. '
+    + 'The amount is not rising '
+    + 'by a fixed quantity each minute, '
+    + 'so there is no one rate for the whole fill. '
+    + 'Somebody asks how fast it is filling '
+    + 'at exactly the two minute mark. '
+    + 'Not over the second minute '
+    + 'and not over the third: at that instant. '
+    + 'How do you find a rate at a single moment, '
+    + 'when measuring a rate needs two moments?',
+
+  notation:
+    'The derivative of $y$ with respect to $x$ '
+    + 'is written $\\frac{dy}{dx}$, '
+    + 'and it is said "d y by d x". '
+    + 'It is one symbol and not a fraction '
+    + 'of $d$ times $y$ over $d$ times $x$, '
+    + 'so the $d$s cannot be cancelled. '
+    + 'The same thing can be written $f’(x)$, '
+    + 'said "f prime of x". '
+    + 'The mark is a prime, '
+    + 'not an apostrophe and not a 1. '
+    + 'In the product rule '
+    + '$u$ and $v$ are the two parts being multiplied, '
+    + 'and you write both of them '
+    + 'and both their derivatives down before starting. '
+    + 'Cancelling the $d$s in $\\frac{dy}{dx}$ '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'The derivative $\\frac{dy}{dx}$ is the gradient of the curve at a '
     + 'point, and also the rate at which $y$ changes as $x$ changes. '
@@ -778,9 +892,19 @@ teach({
     + 'shortest correct route, and fewer lines means fewer places to slip.',
 
   recap:
-    'You have found the gradient of a straight line as rise over step. '
-    + 'A curve has a different gradient at every point, '
-    + 'and the derivative is the formula that gives it.',
+    'The gradient of a straight line says how steep it is. '
+    + 'You find it by taking two points on the line '
+    + 'and dividing the rise by the step across. '
+    + 'A line from the point $(1, 2)$ to the point $(4, 11)$ '
+    + 'rises 9 and steps 3, '
+    + 'so its gradient is 9 over 3, which is 3. '
+    + 'That one number describes the whole line, '
+    + 'because a straight line '
+    + 'has the same steepness everywhere along it. '
+    + 'A curve does not. '
+    + 'Its steepness changes from point to point, '
+    + 'and this lesson is the formula '
+    + 'that gives it at any one of them.',
 
   method: [
     'Simplify the expression first if it will divide out.',
@@ -950,6 +1074,38 @@ teach({
     ],
   },
 
+  why:
+    'A canoe is paddled straight across the Volta '
+    + 'at 3 km per hour. '
+    + 'The river itself is moving downstream '
+    + 'at 4 km per hour. '
+    + 'The paddler points at the far bank the whole way. '
+    + 'He does not land opposite where he started, '
+    + 'and he does not travel at 3 or at 4. '
+    + 'Adding 3 and 4 gives 7, which is wrong, '
+    + 'and nothing in ordinary arithmetic '
+    + 'gives the right answer either. '
+    + 'So how do you add two amounts '
+    + 'that are pointing in different directions?',
+
+  notation:
+    'A vector is written in bold, '
+    + 'or with an arrow over it, '
+    + 'or underlined when you write by hand. '
+    + 'That marking is not decoration. '
+    + 'It says the thing has a direction, '
+    + 'and a plain letter does not. '
+    + 'Component form uses $\\mathbf{i}$ and $\\mathbf{j}$, '
+    + 'so 3 across and 4 up '
+    + 'is written $3\\mathbf{i} + 4\\mathbf{j}$. '
+    + 'The magnitude of $\\mathbf{a}$ is written $|\\mathbf{a}|$, '
+    + 'with upright bars, and it is a plain number. '
+    + 'The scalar product takes a raised dot, '
+    + '$\\mathbf{a}\\cdot\\mathbf{b}$, '
+    + 'and it gives a number and not a vector. '
+    + 'Giving a vector where the magnitude was asked for '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A vector has both magnitude and direction; a scalar has magnitude '
     + 'only. '
@@ -1064,9 +1220,19 @@ teach({
     + 'say that $\\cos 90^\\circ = 0$ is the reason.',
 
   recap:
-    'You have used Pythagoras and bearings. '
-    + 'A vector holds a distance and a direction in one object, '
-    + 'so those two tools become arithmetic you can do on paper.',
+    'Some quantities need a direction and some do not. '
+    + 'A mass of 5 kg is 5 kg whichever way you turn it. '
+    + 'A walk of 5 km is not: '
+    + '5 km north leaves you somewhere entirely different '
+    + 'from 5 km east. '
+    + 'A quantity with size only is called a scalar. '
+    + 'One with size and direction is a vector. '
+    + 'Two vectors can be the same size '
+    + 'and still be different, '
+    + 'because they point different ways, '
+    + 'and that one fact is why '
+    + 'they cannot be added like ordinary numbers. '
+    + 'This lesson is the arithmetic that handles them.',
 
   method: [
     'Write every vector in component form.',
