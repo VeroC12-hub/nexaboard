@@ -61,6 +61,34 @@ teach({
     ],
   },
 
+  why:
+    'Two farmers at Ejura buy neighbouring plots on the same day. '
+    + 'The rains come. '
+    + 'One field drains in a morning. '
+    + 'The other holds puddles for three days '
+    + 'and the maize in it yellows. '
+    + 'The seed came out of the same bag '
+    + 'and both men weeded the same week. '
+    + 'The difference was in the ground '
+    + 'before either of them bought it. '
+    + 'How do you find out what kind of ground you have, '
+    + 'and which of its faults you can do something about?',
+
+  notation:
+    'Particle sizes are given in millimetres, written mm, '
+    + 'and the figures are small: '
+    + 'sand runs from 0.05 to 2 mm and clay is below 0.002 mm, '
+    + 'so the decimal places carry the whole meaning. '
+    + 'Soil acidity is given as pH, said as the two letters, "P H", '
+    + 'on a scale from about 0 to 14, '
+    + 'where 7 is neutral, below 7 is acid and above 7 is alkaline. '
+    + 'The scale is not an ordinary one. '
+    + 'Each step of 1 is a tenfold change, '
+    + 'so pH 5 is ten times as acid as pH 6. '
+    + 'Writing pH with a capital P and a small h, '
+    + 'or treating a drop of one pH unit as a small change, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Soil is made of mineral particles, organic matter, '
     + 'water, air and living organisms. '
@@ -201,9 +229,19 @@ teach({
     + 'and the crop that behaviour suits.',
 
   recap:
-    'You know that some soils are sandy and some are heavy, '
-    + 'and that manure helps. '
-    + 'This identifies a soil by a test you can do with water, '
+    'Pick up a handful of soil from a riverbank '
+    + 'and a handful from a cocoa farm, '
+    + 'and rub each between your fingers. '
+    + 'One feels gritty, like fine sugar, '
+    + 'and falls apart as soon as you open your hand. '
+    + 'The other feels smooth and sticky '
+    + 'and holds the shape of your fist. '
+    + 'Both of those are soil. '
+    + 'Dig a little rotted manure into either one '
+    + 'and it goes darker, holds more water and crumbles better. '
+    + 'So a soil has properties you can feel, '
+    + 'and some of them change with what you put in. '
+    + 'This topic sorts a soil by a test you can do with water, '
     + 'and separates what can be changed from what cannot.',
 
   method: [
@@ -441,6 +479,37 @@ teach({
     ],
   },
 
+  why:
+    'A maize field at Techiman is well weeded, '
+    + 'well spaced, and it has had rain. '
+    + 'The oldest leaves at the bottom of each plant '
+    + 'have gone pale yellow, '
+    + 'while the young leaves at the top are still green. '
+    + 'In the next field it is the young top leaves '
+    + 'that are pale. '
+    + 'Both farmers say the soil is tired '
+    + 'and both buy the same bag of fertiliser. '
+    + 'One of them has wasted his money. '
+    + 'The plant was telling each man something different. '
+    + 'What is it saying, '
+    + 'and why does it matter which leaves went yellow?',
+
+  notation:
+    'A fertiliser bag carries three figures, as in NPK 15-15-15, '
+    + 'and they are percentages by weight, in one fixed order: '
+    + 'nitrogen, then phosphorus, then potassium. '
+    + 'The letters are the chemical symbols of those elements '
+    + 'and each takes a capital, '
+    + 'so N is nitrogen and K is potassium, '
+    + 'K coming from kalium rather than from any English word. '
+    + 'A rate of application is given in kilograms per hectare, '
+    + 'written kg/ha, '
+    + 'so 250 kg/ha is that weight spread over one hectare '
+    + 'and not over one field. '
+    + 'Reading the three figures in any other order, '
+    + 'or giving a rate with no area attached, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Soil fertility is the capacity of a soil '
     + 'to supply the nutrients a crop needs, '
@@ -585,9 +654,17 @@ teach({
     + 'and the check on pH and drainage before treating it.',
 
   recap:
-    'You know that plants need nutrients '
-    + 'and that NPK supplies three of them. '
-    + 'This reads a shortage from the plant itself, '
+    'A plant builds itself out of elements it takes in. '
+    + 'Carbon, hydrogen and oxygen come from the air '
+    + 'and from water, free of charge. '
+    + 'Everything else has to come out of the soil '
+    + 'through the roots, and those are called nutrients. '
+    + 'Three of them are needed in the largest amounts: '
+    + 'nitrogen, phosphorus and potassium. '
+    + 'A bag of fertiliser marked NPK 15-15-15 carries those three, '
+    + 'fifteen parts in a hundred of each, '
+    + 'which is why the three letters are on the bag. '
+    + 'This topic reads a shortage off the plant itself, '
     + 'and asks why the plant is not getting the nutrient.',
 
   method: [
@@ -828,6 +905,39 @@ teach({
     ],
   },
 
+  why:
+    'Two farmers plant maize on the same acre '
+    + 'in the same week. '
+    + 'One clears, ploughs, harrows and ridges, '
+    + 'then plants two seeds a hole '
+    + 'at 80 centimetres by 40. '
+    + 'The other slashes the weeds, '
+    + 'makes holes with a cutlass '
+    + 'wherever the ground looks soft, '
+    + 'and drops in three or four seeds. '
+    + 'At harvest the first field gives nearly twice as much. '
+    + 'Both used the same seed and the same rain. '
+    + 'Which of those steps did the work, '
+    + 'and what was each one for?',
+
+  notation:
+    'A spacing is written as two distances '
+    + 'with the word "by" between them, as 80 cm by 40 cm. '
+    + 'The first figure is the distance between rows '
+    + 'and the second is the distance between plants in a row. '
+    + 'The two are not interchangeable: '
+    + '80 by 40 and 40 by 80 put the same number of plants '
+    + 'on the land in two different arrangements. '
+    + 'Plant population is given as plants per hectare, '
+    + 'and a hectare is 10,000 square metres, '
+    + 'so a spacing in centimetres has to be turned into metres '
+    + 'before any dividing. '
+    + 'Sowing depth is given as a multiple of the seed, '
+    + 'so two to three times the seed diameter '
+    + 'is a different instruction for maize and for groundnut. '
+    + 'Giving a population with no area attached '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Land preparation is the sequence of operations '
     + 'that puts a field in a state to receive seed. '
@@ -967,9 +1077,23 @@ teach({
     + 'and for every spacing a figure and the reason for it.',
 
   recap:
-    'You know that land is cleared and ploughed before planting. '
-    + 'This gives the operations in order with the reason for each, '
-    + 'and the spacings that decide how many plants a hectare carries.',
+    'Land left alone grows into bush, '
+    + 'and a seed dropped into bush is shaded out '
+    + 'and strangled by roots already in the ground. '
+    + 'So the bush is cut down and taken off, '
+    + 'and that is clearing. '
+    + 'Then the soil is broken up and turned over, '
+    + 'with a hoe, a bullock plough or a tractor. '
+    + 'That loosens it so a root can push down through it, '
+    + 'buries the weeds, and lets water and air in, '
+    + 'and that is ploughing. '
+    + 'Press your thumb into untouched ground '
+    + 'and then into ploughed ground, '
+    + 'and the difference is in your hand. '
+    + 'This topic gives all the operations in order '
+    + 'with the reason for each, '
+    + 'and the spacings that decide '
+    + 'how many plants a hectare carries.',
 
   method: [
     'Clear the vegetation and decide between burning and mulching.',
@@ -1213,6 +1337,36 @@ teach({
     ],
   },
 
+  why:
+    'A young man near Kintampo is given 2000 cedis '
+    + 'to start keeping animals. '
+    + 'He buys one good Friesian heifer, '
+    + 'because he has been told a Friesian gives the most milk. '
+    + 'Within a year she has lost weight, given little milk, '
+    + 'and been treated twice for disease. '
+    + 'His neighbour, who bought fifteen local fowls, '
+    + 'has been selling eggs every week since the third month. '
+    + 'The Friesian really does give the most milk, '
+    + 'somewhere else. '
+    + 'What should decide which animal and which breed '
+    + 'a particular person in a particular place keeps?',
+
+  notation:
+    'A breed name is a proper name and takes a capital letter, '
+    + 'so a Friesian and a Sanga are breeds, '
+    + 'while cattle and poultry are not. '
+    + 'The words for an animal change with its sex and its age '
+    + 'and they cannot be swapped in an answer: '
+    + 'a heifer is a young female that has not calved, '
+    + 'a cow has calved, '
+    + 'and a bull is the uncastrated male. '
+    + 'How much feed an animal turns into a kilogram of meat '
+    + 'is written as the feed conversion ratio, '
+    + 'and a lower figure is the better one, '
+    + 'which is the opposite of how most figures read. '
+    + 'Writing "cow" for cattle in general '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Livestock are kept for identifiable products and services. '
     + 'Cattle provide beef, milk, hides, manure '
@@ -1345,8 +1499,19 @@ teach({
     + 'and what the choice gives up.',
 
   recap:
-    'You know that farmers keep cattle, goats and chickens. '
-    + 'This asks which animal for which purpose, '
+    'An animal kept on a farm '
+    + 'is kept because it gives something back. '
+    + 'A hen gives eggs, and then meat. '
+    + 'A goat gives meat and a skin, '
+    + 'and drops manure that goes on the field. '
+    + 'A cow gives beef, milk, a hide, manure, '
+    + 'and in the north the pull for a plough or a cart. '
+    + 'None of those animals is free. '
+    + 'Each one eats, needs water, '
+    + 'needs somewhere to sleep, and gets sick. '
+    + 'So keeping livestock is a trade: '
+    + 'what the animal gives against what it costs. '
+    + 'This topic asks which animal for which purpose, '
     + 'and which breed for the place it will be kept.',
 
   method: [

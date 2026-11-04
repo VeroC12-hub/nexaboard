@@ -70,6 +70,36 @@ teach({
     ],
   },
 
+  why:
+    'A student rearranges an equation from memory '
+    + 'and writes that speed equals distance times time. '
+    + 'He puts in 100 metres and 20 seconds, '
+    + 'gets 2000, '
+    + 'and writes that down as the speed of a sprinter. '
+    + 'Nothing in the arithmetic is wrong. '
+    + '2000 metre seconds is not a speed at all, '
+    + 'and a glance at the units would have caught it '
+    + 'before a single number was substituted. '
+    + 'Is there a check you can run on an equation '
+    + 'before trusting it, '
+    + 'and a way of saying how much of an answer is real?',
+
+  notation:
+    'A dimension is written as a capital letter '
+    + 'inside square brackets: '
+    + 'L for length, M for mass and T for time. '
+    + 'Speed is then L over T, '
+    + 'written as L T to the power minus one, '
+    + 'and that minus one means "divided by", '
+    + 'not "negative time". '
+    + 'Force, built from all three, '
+    + 'is M L T to the power minus two. '
+    + 'The square brackets are said "the dimensions of", '
+    + 'so the brackets round v are said "the dimensions of v". '
+    + 'Writing metres where L is wanted, '
+    + 'which is a unit where a dimension was asked for, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'A physical quantity is measured as a number times a unit. '
     + 'A scalar has size only, such as mass, time or energy. '
@@ -163,8 +193,19 @@ teach({
     + 'and a printed set of readings lets every calculation be practised.',
 
   recap:
-    'You have measured with a rule and written the unit each time. '
-    + 'This adds two tools: '
+    'Measuring a length means laying a rule against the thing, '
+    + 'reading the mark it reaches, '
+    + 'and writing the unit beside the figure. '
+    + 'The tile is 25 cm, not 25. '
+    + 'Leave the unit off and the figure says nothing, '
+    + 'because 25 could be centimetres, grams or seconds, '
+    + 'and those three cannot be compared with each other. '
+    + 'Look at the rule itself '
+    + 'and the smallest marks are 1 millimetre apart, '
+    + 'so a reading that falls between two marks '
+    + 'has to be judged, '
+    + 'and the judging is where the uncertainty comes from. '
+    + 'This topic adds two tools to that: '
     + 'dimensions, which test whether an equation can be right, '
     + 'and error, which says how much of an answer is real.',
 
@@ -380,6 +421,40 @@ teach({
     ],
   },
 
+  why:
+    'A driver on the Accra road is doing 25 metres a second '
+    + 'when he sees a goat, and brakes hard, '
+    + 'stopping in 4 seconds. '
+    + 'The police want to know how far he travelled '
+    + 'while he was braking, '
+    + 'because the goat was 40 metres away. '
+    + 'Multiply 25 by 4 and you get 100 metres, '
+    + 'which would have killed the goat twice over. '
+    + 'He was not doing 25 all the way. '
+    + 'He was slowing the whole time. '
+    + 'So the distance is no longer speed times time. '
+    + 'What is it instead, '
+    + 'and why did the old formula stop working?',
+
+  notation:
+    'The five letters of the equations of motion '
+    + 'each stand for one fixed thing '
+    + 'and cannot be swapped: '
+    + 'u is the velocity at the start, '
+    + 'v the velocity at the end, '
+    + 'a the acceleration, t the time '
+    + 'and s the displacement. '
+    + 's is displacement and not speed, '
+    + 'which catches many learners, '
+    + 'and the letter for speed here is v. '
+    + 'Acceleration is in metres per second squared, '
+    + 'said "metres per second per second". '
+    + 'A minus sign on a or on v is a direction, not a size, '
+    + 'so an acceleration of minus 5 '
+    + 'is as big as one of plus 5, '
+    + 'and reading the minus as meaning small '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Kinematics describes how a body moves, '
     + 'without asking what makes it move. '
@@ -470,15 +545,26 @@ teach({
     + 'and seeing that a constant increase means constant acceleration.',
 
   recap:
-    'You have found speed as distance over time '
-    + 'and read a distance time graph. '
-    + 'This adds direction, sign, '
-    + 'and the use of the gradient and the area as exact operations.',
+    'Speed is how far something goes in a given time, '
+    + 'found by dividing the distance by the time. '
+    + 'A car covering 120 kilometres in 2 hours '
+    + 'has a speed of 60 kilometres an hour. '
+    + 'Draw that on a graph '
+    + 'with time along the bottom and distance up the side, '
+    + 'and the line climbs steadily. '
+    + 'The steeper the line, the faster the motion, '
+    + 'and a flat line means standing still. '
+    + 'This topic adds three things to that. '
+    + 'Direction, so that going back counts as negative. '
+    + 'The exact use of the steepness of a line, '
+    + 'which is called its gradient. '
+    + 'And the area underneath a line, '
+    + 'which turns out to mean something too.',
 
   method: [
     'State the positive direction.',
     'Convert everything to SI units.',
-    'List u, v, a, t, s with what you know.',
+    'List u, v, a, t, s, and fill in the ones the question gives.',
     'Identify the quantity neither given nor asked for.',
     'Use the equation that omits it.',
     'Write the equation, the substitution and the answer on separate lines.',
@@ -695,6 +781,38 @@ teach({
     ],
   },
 
+  why:
+    'A loaded tipper truck and an empty one '
+    + 'stand still on level ground at Tema. '
+    + 'Push each with the same shoulder '
+    + 'for the same three seconds. '
+    + 'The empty one rolls '
+    + 'and the loaded one barely shifts. '
+    + 'Everybody can see that '
+    + 'and nobody can put a number on it. '
+    + 'Then two of them collide at a junction, '
+    + 'and the wreck slides off in one particular direction '
+    + 'at one particular speed, '
+    + 'which was settled before they ever touched. '
+    + 'What quantity settles that, '
+    + 'and how do you calculate with it?',
+
+  notation:
+    'Force is measured in newtons, written N with a capital, '
+    + 'because it is named after a person, '
+    + 'while the unit spelled out in words '
+    + 'takes a small n: 5 N is said "five newtons". '
+    + 'Momentum has no single name for its unit, '
+    + 'so it is written out as kilogram metres per second, '
+    + 'kg m/s. '
+    + 'A vector carries a direction, '
+    + 'and in a straight line the sign carries it, '
+    + 'so a momentum of minus 20 kg m/s '
+    + 'is 20 going the other way. '
+    + 'Giving a force or a momentum with no direction '
+    + 'in a collision question '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Newton gave three laws of motion. '
     + 'The first says a body at rest stays at rest, '
@@ -791,10 +909,22 @@ teach({
     + 'That is the structure the marking scheme follows.',
 
   recap:
-    'You know that a push can start something moving '
-    + 'and that heavier things are harder to start. '
-    + 'This makes both exact, '
-    + 'and adds a quantity that is conserved through a collision.',
+    'Put your hand on a wheelbarrow standing still, and push. '
+    + 'It starts to move, '
+    + 'so a push can change a thing '
+    + 'from standing still to moving, '
+    + 'and that push is called a force. '
+    + 'Now load the barrow with sand '
+    + 'and push exactly as hard. '
+    + 'It starts more slowly. '
+    + 'The same force gave a smaller change in motion, '
+    + 'because there was more stuff to move, '
+    + 'and the amount of stuff is the mass. '
+    + 'So two things matter: '
+    + 'how hard you push, and how much there is to push. '
+    + 'This topic makes both of those exact, '
+    + 'and adds a quantity that stays the same '
+    + 'right through a collision.',
 
   method: [
     'Draw the body alone and mark every force acting on it.',
@@ -1014,6 +1144,35 @@ teach({
     ],
   },
 
+  why:
+    'A cup of boiling water and a bath of warm water '
+    + 'stand side by side. '
+    + 'A thermometer reads 100 in the cup and 40 in the bath, '
+    + 'so the cup is the hotter of the two. '
+    + 'Now empty the cup into the bath. '
+    + 'The bath barely changes temperature at all. '
+    + 'The hotter thing turned out to have less of something '
+    + 'than the cooler thing had. '
+    + 'What are the two different things being measured here, '
+    + 'and where did the numbers on the thermometer '
+    + 'come from in the first place?',
+
+  notation:
+    'A Celsius temperature is written '
+    + 'with a small raised circle and a capital C, as 28 degrees C, '
+    + 'and said "twenty-eight degrees Celsius". '
+    + 'A kelvin temperature is written with a capital K '
+    + 'and no degree sign at all, as 301 K, '
+    + 'and is said "three hundred and one kelvin", '
+    + 'never "degrees kelvin". '
+    + 'The degree is the same size on both scales, '
+    + 'so a change of 1 degree Celsius is a change of 1 K, '
+    + 'and only the starting point differs, '
+    + 'K being the Celsius figure plus 273. '
+    + 'Adding 273 to a temperature change, '
+    + 'instead of to a temperature, '
+    + 'is the commonest way to lose a mark.',
+
   idea:
     'Temperature is a measure of how hot or cold a body is, '
     + 'and it decides the direction in which heat will flow: '
@@ -1116,8 +1275,19 @@ teach({
     + 'in a funnel of melting ice, which is worth doing if it can be done.',
 
   recap:
-    'You have used a thermometer and read degrees Celsius off it. '
-    + 'This asks where those degrees came from, '
+    'A thermometer is a thin glass tube '
+    + 'with a liquid in a bulb at the bottom. '
+    + 'Put the bulb in something hot '
+    + 'and the liquid expands and climbs the tube. '
+    + 'Put it in something cold '
+    + 'and the liquid shrinks back down. '
+    + 'The marks on the side '
+    + 'turn the height of that liquid into a number, '
+    + 'given in degrees Celsius. '
+    + 'So a thermometer does not sense heat directly. '
+    + 'It measures something else that changes with temperature, '
+    + 'and reports that instead. '
+    + 'This topic asks where those marks came from, '
     + 'and separates temperature from heat.',
 
   method: [
