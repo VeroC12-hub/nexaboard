@@ -24,6 +24,7 @@
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import '../styles/scholar.css'
 import { Icon, type Mark } from '../components/kid/art'
+import ReadAloud from '../components/ReadAloud'
 import { subjectsForLearner } from '../lib/education/subjects'
 import { asksProgramme, programmeById, timetableFor } from '../lib/education/programmes'
 import { allTopics, syllabusFor, topicsFor, type Topic } from '../lib/education/syllabus'
@@ -273,6 +274,12 @@ export default function ScholarApp({
             placeholder="Search your topics"
             aria-label="Search your topics"
             onChange={e => setFind(e.target.value)} />
+
+          {/* Read this page. The child's shell has had one of these since it
+              was written and nothing else did, which assumed that only a small
+              learner ever needs to be read to. A candidate with poor sight, or
+              reading in a second language, needs it at least as much. */}
+          <ReadAloud className="sch-speak" within=".sch-main" />
 
           <div className="sch-who">
             <span className="sch-who-ring" aria-hidden>{initials}</span>

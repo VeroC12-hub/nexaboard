@@ -564,3 +564,31 @@
 }
 
 .sch-band:first-child { margin-top: 0; }
+
+/* ── read this page ───────────────────────────────────────────────────────── */
+
+/* The speaker in the top bar. Sized and bordered as the burger is, because
+   they are both controls about the reader rather than about the subject, and
+   a reader who finds one should recognise the other.
+
+   `is-on` is the pressed state, which matters more here than on most toggles:
+   the only other way to tell whether the page is being read is to listen. */
+.sch-speak {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: inherit;
+  cursor: pointer;
+}
+
+.sch-speak:hover { background: var(--wash, var(--card)); }
+
+.sch-speak[aria-pressed='true'] {
+  border-color: var(--accent, #c8891f);
+  color: var(--accent, #c8891f);
+}

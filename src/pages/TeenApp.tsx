@@ -35,6 +35,7 @@ import { localPlan, savedPlan } from '../lib/education/plan'
 import { asksFor } from '../lib/education/ask'
 import type { Attempt } from '../lib/education/mastery'
 import type { LearnerProfile } from '../lib/education/learner'
+import ReadAloud from '../components/ReadAloud'
 
 const DAY_LETTERS = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -121,6 +122,13 @@ export default function TeenApp({
           <span className="teen-count is-days" title="Days learned this week">
             <Icon mark="flame" size={18} /> {standing.daysLearned}
           </span>
+          {/* Read this page, in the bar with the other controls that belong
+              to the reader rather than to the subject. Primary and JHS had no
+              voice at all, which left a Basic 3 pupil who cannot yet read a
+              paragraph with nothing, while the Basic 1 shell beside them had
+              a speaker. */}
+          <ReadAloud className="teen-menu" within=".teen-page" />
+
           <button className="teen-menu" aria-label="Menu" onClick={() => setMenu(true)}>
             <Icon mark="menu" size={22} />
           </button>
