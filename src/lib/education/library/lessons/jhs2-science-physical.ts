@@ -656,7 +656,7 @@ teach({
   recap:
     'Dividing tells you how much there is for each one. '
     + 'Share 60 mangoes among 12 people and each gets 5, because '
-    + '60 divided by 12 is 5. '
+    + '$60 \\div 12 = 5$. '
     + 'A graph with two axes has one measurement along the bottom '
     + 'and another up the side, and each point marks one pair of '
     + 'values. '
@@ -684,7 +684,7 @@ teach({
       ask: 'A car travels 150 km in 3 hours. What is its speed?',
       steps: [
         'Speed is distance over time.',
-        '150 divided by 3.',
+        '$150 \\div 3$.',
       ],
       answer: '50 km per hour.',
     },
@@ -861,10 +861,11 @@ teach({
 
   notation:
     'Density is written as mass divided by volume, and its unit '
-    + 'is written g/cm3, said grams per cubic centimetre. '
+    + 'is written $\\text{g/cm}^3$, said grams per cubic centimetre. '
+    + 'So a density of $7 \\text{ g/cm}^3$ means '
     + '7 grams in every cubic centimetre. '
     + 'All parts of the unit must match the measurements used, so '
-    + 'kilograms and cubic metres give kg/m3 instead. '
+    + 'kilograms and cubic metres give $\\text{kg/m}^3$ instead. '
     + 'Giving a density with no unit at all is the commonest way '
     + 'to lose a mark, because the bare number does not say which '
     + 'scale it is on.',
@@ -934,7 +935,7 @@ teach({
         + 'Find its density.',
       steps: [
         'Density is mass over volume.',
-        '60 divided by 20.',
+        '$60 \\div 20$.',
       ],
       answer: '3 g per cubic cm.',
     },
@@ -944,7 +945,7 @@ teach({
         + '75 cubic cm. Find its density, and say whether it floats.',
       steps: [
         'The displaced water is 25 cubic cm, so that is its volume.',
-        '75 divided by 25 is 3.',
+        '$75 \\div 25 = 3$.',
         'Water is about 1.',
       ],
       answer: '3 g per cubic cm, so it sinks.',
@@ -1122,8 +1123,8 @@ teach({
     + 'moving in three different ways?',
 
   notation:
-    'Temperature is measured in degrees Celsius, written °C and '
-    + 'said degrees Celsius. '
+    'Temperature is measured in degrees Celsius, written $^\\circ\\text{C}$ '
+    + 'and said degrees Celsius. '
     + 'Heat and temperature are not the same thing and the words '
     + 'cannot be swapped: temperature says how hot something is, '
     + 'while heat is the energy that moves. '
@@ -1425,9 +1426,9 @@ teach({
     + 'Every angle in this topic is measured from the normal and '
     + 'never from the surface itself. '
     + 'The angle between the arriving ray and the normal is the '
-    + 'angle of incidence, written i, and the angle between the '
+    + 'angle of incidence, written $i$, and the angle between the '
     + 'leaving ray and the normal is the angle of reflection, '
-    + 'written r, so the rule is written i equals r. '
+    + 'written $r$, so the rule is written $i = r$. '
     + 'Measuring from the surface instead of from the normal is '
     + 'the commonest way to lose a mark.',
 
@@ -1508,12 +1509,12 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'A ray strikes a mirror at 30 degrees to the normal. '
+      ask: 'A ray strikes a mirror at $30^\\circ$ to the normal. '
         + 'At what angle does it reflect?',
       steps: [
         'The angle of reflection equals the angle of incidence.',
       ],
-      answer: '30 degrees from the normal, on the other side.',
+      answer: '$30^\\circ$ from the normal, on the other side.',
     },
     {
       level: 4,
