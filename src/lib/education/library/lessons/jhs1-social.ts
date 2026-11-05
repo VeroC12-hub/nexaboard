@@ -58,13 +58,13 @@ teach({
     'A position is given as two figures. '
     + 'Latitude comes first. '
     + 'It says how far north or south of the equator a place is, '
-    + 'so 5 degrees north means five degrees up from the equator. '
+    + 'so $5^\\circ$ N means five degrees up from the equator. '
     + 'Longitude comes second. '
     + 'It says how far east or west of the line through Greenwich, '
-    + 'which is 0 degrees. '
+    + 'which is $0^\\circ$. '
     + 'Each figure carries a small raised circle for degrees '
     + 'and a letter for the direction, '
-    + 'as in 5 degrees north, 0 degrees west. '
+    + 'as in $5^\\circ$ N, $0^\\circ$ W. '
     + 'Putting longitude first, or leaving off the letter '
     + 'so nobody can tell north from south, '
     + 'is the commonest way to lose a mark.',
@@ -73,16 +73,16 @@ teach({
     'Ghana sits in West Africa, on the coast of the Gulf of Guinea. '
     + 'Côte d’Ivoire is to the west, Burkina Faso to the north, '
     + 'Togo to the east, and the sea to the south. '
-    + 'On the globe it lies between about 4 degrees and 11 degrees north, '
+    + 'On the globe it lies between about $4^\\circ$ N and $11^\\circ$ N, '
     + 'so it is wholly north of the equator and wholly in the tropics. '
-    + 'The Greenwich meridian, which is 0 degrees longitude, '
+    + 'The Greenwich meridian, which is $0^\\circ$ longitude, '
     + 'passes through the country near Tema. '
     + 'The country has 16 regions, '
     + 'and its largest river is the Volta.',
 
   mechanism:
     'The two facts people treat as trivia are the two that explain the most. '
-    + 'First, Ghana lies between 4 and 11 degrees north. '
+    + 'First, Ghana lies between $4^\\circ$ N and $11^\\circ$ N. '
     + 'That is why it has no winter and no summer. '
     + 'The sun is high all year, so temperature hardly changes, '
     + 'and the year is divided by rain instead of by heat. '
@@ -132,7 +132,7 @@ teach({
       level: 4,
       ask: 'Why does Ghana have no winter?',
       steps: [
-        'Ghana lies between 4 and 11 degrees north.',
+        'Ghana lies between $4^\\circ$ N and $11^\\circ$ N.',
         'That is inside the tropics, close to the equator.',
         'The sun stays high all year there.',
       ],
@@ -322,7 +322,7 @@ teach({
     + 'It is the depth the rain would stand '
     + 'if none of it ran away or dried up, '
     + 'so 150 mm is said "a hundred and fifty millimetres". '
-    + 'Temperature is written 28 degrees C '
+    + 'Temperature is written $28^\\circ\\text{C}$ '
     + 'and said "twenty-eight degrees Celsius". '
     + 'A climate graph shows both at once: '
     + 'bars for the rainfall, read against the left hand scale, '
