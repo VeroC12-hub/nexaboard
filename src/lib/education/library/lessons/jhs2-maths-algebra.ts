@@ -1103,8 +1103,8 @@ teach({
       + 'edge only, and no protractor. '
       + 'An arc marks every point at one distance from a centre, '
       + 'and that is the only fact you need. '
-      + '60 degrees comes from an equilateral triangle, '
-      + 'and 90 and 30 come from bisecting.',
+      + '$60^\\circ$ comes from an equilateral triangle, '
+      + 'and $90^\\circ$ and $30^\\circ$ come from bisecting.',
     method: [
       'Keep the compasses at one radius until the step is finished.',
       'Leave all your arcs on the page. They are the evidence.',
@@ -1114,7 +1114,7 @@ teach({
 
   why:
     'A mason has to set out the corner of a building '
-    + 'at exactly 90 degrees. '
+    + 'at exactly $90^\\circ$. '
     + 'He has a long tape, a string and a nail, '
     + 'and no protractor anywhere near big enough for a wall. '
     + 'He could measure the angle '
@@ -1135,7 +1135,7 @@ teach({
     + 'A line marked with two small strokes '
     + 'is the same length as another line '
     + 'marked with two small strokes, '
-    + 'and a small square at a corner means exactly 90 degrees. '
+    + 'and a small square at a corner means exactly $90^\\circ$. '
     + 'Rubbing the arcs out is the commonest way to lose a mark, '
     + 'because nothing is then left to show '
     + 'the drawing was constructed and not measured.',
@@ -1152,18 +1152,18 @@ teach({
     'Everything in this topic comes from one property of the compasses: '
     + 'an arc is the set of all points at one fixed distance from its '
     + 'centre. '
-    + 'That is why the equilateral triangle gives you 60 degrees for free. '
-    + 'Draw an arc of radius r from the vertex. '
+    + 'That is why the equilateral triangle gives you $60^\\circ$ for free. '
+    + 'Draw an arc of radius $r$ from the vertex. '
     + 'Then from the point where it crosses the line, draw another arc of '
-    + 'radius r. '
-    + 'Where they meet is r from both points, '
+    + 'radius $r$. '
+    + 'Where they meet is $r$ from both points, '
     + 'so the three points form a triangle with three equal sides, '
     + 'and a triangle with three equal sides has three equal angles. '
-    + 'Three equal angles adding to 180 means each is exactly 60. '
+    + 'Three equal angles adding to $180^\\circ$ means each is exactly $60^\\circ$. '
     + 'Nothing was measured, so nothing can be out by a degree. '
     + 'That is the whole reason construction exists as a topic: '
-    + 'a measured 60 is approximately 60, '
-    + 'and a constructed 60 is 60. '
+    + 'a measured $60^\\circ$ is approximately $60^\\circ$, '
+    + 'and a constructed $60^\\circ$ is $60^\\circ$. '
     + 'Bisection works by the same property. '
     + 'The crossing points of two equal arcs are the same distance from '
     + 'both ends, '
@@ -1177,8 +1177,8 @@ teach({
 
   recap:
     'A protractor is a half circle of plastic '
-    + 'marked from 0 to 180 degrees. '
-    + 'To draw an angle of 60 degrees, draw a line, '
+    + 'marked from $0^\\circ$ to $180^\\circ$. '
+    + 'To draw an angle of $60^\\circ$, draw a line, '
     + 'put the centre hole of the protractor on one end of it, '
     + 'line the zero up along the line, '
     + 'find 60 on the scale, make a mark, and join it. '
@@ -1217,26 +1217,26 @@ teach({
     },
     {
       level: 4,
-      ask: 'Construct 30 degrees. What is the order of steps?',
+      ask: 'Construct $30^\\circ$. What is the order of steps?',
       steps: [
-        'There is no direct construction for 30.',
-        'But 60 is direct, from the equilateral triangle.',
-        'Half of 60 is 30, and bisecting is a construction.',
+        'There is no direct construction for $30^\\circ$.',
+        'But $60^\\circ$ is direct, from the equilateral triangle.',
+        'Half of $60^\\circ$ is $30^\\circ$, and bisecting is a construction.',
       ],
-      answer: 'Construct 60 degrees, then bisect it.',
+      answer: 'Construct $60^\\circ$, then bisect it.',
     },
     {
       level: 5,
-      ask: 'Why is a constructed 60 degree angle exact, '
+      ask: 'Why is a constructed $60^\\circ$ angle exact, '
         + 'when a measured one is not?',
       steps: [
-        'The construction makes three points all r apart.',
+        'The construction makes three points all $r$ apart.',
         'That is a triangle with three equal sides.',
         'Equal sides force equal angles.',
-        'Three equal angles in a triangle must each be 60.',
+        'Three equal angles in a triangle must each be $60^\\circ$.',
       ],
       answer: 'Because the construction builds an equilateral triangle, '
-        + 'whose angles must be 60 by reasoning. '
+        + 'whose angles must be $60^\\circ$ by reasoning. '
         + 'Nothing was measured, so nothing can be slightly off.',
     },
   ],
@@ -1266,8 +1266,8 @@ teach({
 
   extension:
     'Those four constructions build everything else. '
-    + 'A 45 degree angle is a bisected 90. '
-    + 'A 15 degree angle is a bisected 30. '
+    + 'A $45^\\circ$ angle is a bisected $90^\\circ$. '
+    + 'A $15^\\circ$ angle is a bisected $30^\\circ$. '
     + 'Constructing a triangle from three given sides uses arcs alone, '
     + 'and it is why three sides fix a triangle completely.',
 
@@ -1417,8 +1417,8 @@ teach({
 
   notation:
     'In this topic the sides are given letters. '
-    + 'The two short sides are called a and b. '
-    + 'The long side is called c, '
+    + 'The two short sides are called $a$ and $b$. '
+    + 'The long side is called $c$, '
     + 'and its proper name is the hypotenuse. '
     + 'It is the side facing the right angle. '
     + 'The rule is written $a^2 + b^2 = c^2$ '
@@ -1426,13 +1426,13 @@ teach({
     + 'The letters can change from one question to the next, '
     + 'but the long side is always the one standing alone. '
     + 'The commonest way to lose a mark '
-    + 'is to put a short side where c belongs. '
-    + 'Find the right angle first, and c is the side across from it.',
+    + 'is to put a short side where $c$ belongs. '
+    + 'Find the right angle first, and $c$ is the side across from it.',
 
   idea:
     'In a right angled triangle, '
     + '$a^2 + b^2 = c^2$, '
-    + 'where c is the hypotenuse, the side opposite the right angle. '
+    + 'where $c$ is the hypotenuse, the side opposite the right angle. '
     + 'To find the hypotenuse, square the two shorter sides, add them, '
     + 'and take the square root. '
     + 'To find a shorter side, square the hypotenuse, '
@@ -1450,11 +1450,11 @@ teach({
     + 'The hypotenuse is the longest side and it is always opposite the '
     + 'right angle, '
     + 'so it is identified by looking, not by calculating. '
-    + 'Once c is settled, '
+    + 'Once $c$ is settled, '
     + 'the decision makes itself. '
-    + 'If c is the unknown, the two knowns are smaller, '
+    + 'If $c$ is the unknown, the two knowns are smaller, '
     + 'so the answer must be bigger than both, and you add. '
-    + 'If c is known, the unknown is smaller than c, '
+    + 'If $c$ is known, the unknown is smaller than $c$, '
     + 'so the answer must be smaller, and you subtract. '
     + 'That gives you a check on every answer before you trust it: '
     + 'a hypotenuse that came out shorter than one of the other sides is '
@@ -1472,11 +1472,11 @@ teach({
   recap:
     'A right angle is a square corner. '
     + 'The corner of this page is one. '
-    + 'It measures 90 degrees. '
+    + 'It measures $90^\\circ$. '
     + 'In a drawing it is marked with a small square, '
     + 'not with a curved arc. '
     + 'To square a number is to multiply it by itself. '
-    + '5 squared is 5 times 5, which is 25, and it is written $5^2$. '
+    + '$5^2$ is $5 \\times 5$, which is 25. '
     + 'A square root undoes that. '
     + 'The square root of 25 asks which number times itself gives 25. '
     + 'The answer is 5, and it is written $\\sqrt{25}$. '
@@ -1502,9 +1502,9 @@ teach({
       level: 3,
       ask: 'The two shorter sides are 6 cm and 8 cm. Find the hypotenuse.',
       steps: [
-        'c is unknown, so add the squares.',
-        '36 + 64 = 100.',
-        'Square root of 100.',
+        '$c$ is unknown, so add the squares.',
+        '$36 + 64 = 100$.',
+        '$\\sqrt{100}$.',
       ],
       answer: '10 cm.',
     },
@@ -1513,9 +1513,9 @@ teach({
       ask: 'The hypotenuse is 13 cm and one side is 5 cm. '
         + 'Find the other side.',
       steps: [
-        'c is known, so subtract.',
-        '169 - 25 = 144.',
-        'Square root of 144.',
+        '$c$ is known, so subtract.',
+        '$169 - 25 = 144$.',
+        '$\\sqrt{144}$.',
       ],
       answer: '12 cm. '
         + 'It is shorter than 13, as it must be.',
@@ -1527,8 +1527,8 @@ teach({
       steps: [
         'The wall and ground make the right angle.',
         'The ladder is opposite it, so the ladder is the hypotenuse.',
-        '25 - 1.96 = 23.04.',
-        'Square root of 23.04.',
+        '$25 - 1.96 = 23.04$.',
+        '$\\sqrt{23.04}$.',
       ],
       answer: 'About 4.8 m.',
     },
@@ -1662,8 +1662,8 @@ teach({
     idea:
       'The radius reaches from centre to edge, '
       + 'the diameter crosses through the centre and is twice the radius. '
-      + 'Circumference is pi times the diameter. '
-      + 'Area is pi times the radius squared. '
+      + 'Circumference is $\\pi$ times the diameter. '
+      + 'Area is $\\pi$ times the radius squared. '
       + 'Circumference uses the diameter; area uses the radius.',
     method: [
       'Write down whether you were given the radius or the diameter.',
@@ -1709,7 +1709,7 @@ teach({
     + 'the diameter, '
     + 'and the reason it happens is that the two formulas use different '
     + 'ones. '
-    + 'Circumference is pi d, and area is pi r squared. '
+    + 'Circumference is $\\pi d$, and area is $\\pi r^2$. '
     + 'So the first thing to write on your page is which one you were '
     + 'given, '
     + 'and the second is the other one, worked out. '
@@ -1719,12 +1719,12 @@ teach({
     + 'Measure the distance round any circular thing and divide it by the '
     + 'distance across. '
     + 'A tin, a bucket, a bottle top: the answer is always about 3.14. '
-    + 'That constant ratio is pi, '
+    + 'That constant ratio is $\\pi$, '
     + 'and the formula $C = \\pi d$ is nothing more than that measurement '
     + 'rearranged. '
     + 'It is a fact about every circle, not a rule somebody invented. '
     + 'The area formula explains the units too. '
-    + 'Area has r squared in it, so a length is multiplied by a length, '
+    + 'Area has $r^2$ in it, so a length is multiplied by a length, '
     + 'and the answer is in square units. '
     + 'This is also why doubling the radius does not double the area: '
     + 'it quadruples it, '
@@ -1743,7 +1743,7 @@ teach({
     + 'and can each be measured one at a time. '
     + 'A circle has no straight sides at all, '
     + 'so neither method will even start, '
-    + 'and that is why it needs a number of its own, called pi.',
+    + 'and that is why it needs a number of its own, called $\\pi$.',
 
   method: [
     'Write down what you were given: radius or diameter.',
@@ -1761,10 +1761,10 @@ teach({
     {
       level: 3,
       ask: 'A circle has radius 7 cm. Find its circumference, '
-        + 'using 22 over 7.',
+        + 'using $\\frac{22}{7}$.',
       steps: [
         'The diameter is 14 cm.',
-        'C = pi d = 22 over 7, times 14.',
+        '$C = \\pi d = \\frac{22}{7} \\times 14$.',
       ],
       answer: '44 cm.',
     },
@@ -1772,20 +1772,20 @@ teach({
       level: 4,
       ask: 'A circle has diameter 10 cm. Find its area, using 3.14.',
       steps: [
-        'Area needs the radius, so halve the diameter: r = 5.',
-        'r squared is 25.',
-        '3.14 x 25.',
+        'Area needs the radius, so halve the diameter: $r = 5$.',
+        '$r^2 = 25$.',
+        '$3.14 \\times 25$.',
       ],
-      answer: '78.5 cm squared.',
+      answer: '$78.5 \\text{ cm}^2$.',
     },
     {
       level: 5,
       ask: 'One circle has twice the radius of another. '
         + 'How many times the area does it have?',
       steps: [
-        'Area is pi r squared.',
-        'Replace r with 2r: pi times (2r) squared.',
-        '(2r) squared is 4r squared.',
+        'Area is $\\pi r^2$.',
+        'Replace $r$ with $2r$: $\\pi (2r)^2$.',
+        '$(2r)^2 = 4r^2$.',
       ],
       answer: 'Four times. '
         + 'The radius appears twice in the formula, '
@@ -1818,8 +1818,8 @@ teach({
 
   extension:
     'A sector is a fraction of the circle, '
-    + 'and the fraction is its angle over 360. '
-    + 'So a 90 degree sector has a quarter of the area '
+    + 'and the fraction is its angle over $360^\\circ$. '
+    + 'So a $90^\\circ$ sector has a quarter of the area '
     + 'and its arc is a quarter of the circumference.',
 
   figure: {
@@ -1936,9 +1936,9 @@ teach({
 
   brief: {
     idea:
-      'A point is written (x, y): across first, then up. '
+      'A point is written $(x, y)$: across first, then up. '
       + 'The axes divide the plane into four quadrants, '
-      + 'and the signs of x and y say which one a point is in. '
+      + 'and the signs of $x$ and $y$ say which one a point is in. '
       + 'The distance between two points comes from Pythagoras.',
     method: [
       'Always read across before up.',
@@ -1973,21 +1973,21 @@ teach({
     + 'is the commonest way to lose a mark.',
 
   idea:
-    'The horizontal axis is the x axis and the vertical is the y axis, '
-    + 'crossing at the origin, (0, 0). '
-    + 'A point is written (x, y), with the across value first. '
+    'The horizontal axis is the $x$ axis and the vertical is the $y$ axis, '
+    + 'crossing at the origin, $(0, 0)$. '
+    + 'A point is written $(x, y)$, with the across value first. '
     + 'The plane is cut into four quadrants, and which one a point lands '
     + 'in is decided entirely by the signs of its two numbers. '
     + 'The distance between two points is found by taking the difference '
-    + 'in x and the difference in y '
+    + 'in $x$ and the difference in $y$ '
     + 'and using Pythagoras on them.',
 
   mechanism:
     'Two things in this topic are worth more than the plotting itself. '
-    + 'The first is that the order in (x, y) is not a convention to be '
+    + 'The first is that the order in $(x, y)$ is not a convention to be '
     + 'tolerated, '
     + 'it is the whole point of the notation. '
-    + '(2, 5) and (5, 2) are different places. '
+    + '$(2, 5)$ and $(5, 2)$ are different places. '
     + 'Across then up, every time, without deciding afresh. '
     + 'The second is where the distance formula comes from, '
     + 'because learners memorise it and forget it, '
@@ -1997,10 +1997,10 @@ teach({
     + 'other. '
     + 'You have made a right angled triangle, '
     + 'and your line is its hypotenuse. '
-    + 'The horizontal side is how far apart the x values are, '
-    + 'and the vertical side is how far apart the y values are. '
-    + 'So the distance is the square root of (difference in x) squared '
-    + 'plus (difference in y) squared, '
+    + 'The horizontal side is how far apart the $x$ values are, '
+    + 'and the vertical side is how far apart the $y$ values are. '
+    + 'So the distance is the square root of (difference in $x$) squared '
+    + 'plus (difference in $y$) squared, '
     + 'which is Pythagoras and nothing else. '
     + 'You can rebuild it on the page in ten seconds whenever you need it. '
     + 'The order of subtraction does not matter, '
@@ -2036,34 +2036,34 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Which quadrant holds the point (-3, 4)?',
+      ask: 'Which quadrant holds the point $(-3, 4)$?',
       steps: [
-        'x is negative, so it is to the left.',
-        'y is positive, so it is above.',
+        '$x$ is negative, so it is to the left.',
+        '$y$ is positive, so it is above.',
       ],
       answer: 'The second quadrant, top left.',
     },
     {
       level: 4,
-      ask: 'Find the distance between (1, 2) and (4, 6).',
+      ask: 'Find the distance between $(1, 2)$ and $(4, 6)$.',
       steps: [
-        'Difference in x: 4 - 1 = 3.',
-        'Difference in y: 6 - 2 = 4.',
-        'Pythagoras: 9 + 16 = 25.',
-        'Square root of 25.',
+        'Difference in $x$: $4 - 1 = 3$.',
+        'Difference in $y$: $6 - 2 = 4$.',
+        'Pythagoras: $9 + 16 = 25$.',
+        '$\\sqrt{25}$.',
       ],
       answer: '5 units.',
     },
     {
       level: 5,
-      ask: 'Find the distance between (-2, 1) and (3, -4).',
+      ask: 'Find the distance between $(-2, 1)$ and $(3, -4)$.',
       steps: [
-        'Difference in x: 3 - (-2) = 5.',
-        'Difference in y: -4 - 1 = -5.',
-        'Squaring removes the sign: 25 + 25 = 50.',
-        'Square root of 50.',
+        'Difference in $x$: $3 - (-2) = 5$.',
+        'Difference in $y$: $-4 - 1 = -5$.',
+        'Squaring removes the sign: $25 + 25 = 50$.',
+        '$\\sqrt{50}$.',
       ],
-      answer: 'The square root of 50, which is about 7.1 units.',
+      answer: '$\\sqrt{50}$, which is about 7.1 units.',
     },
   ],
 
@@ -2092,8 +2092,8 @@ teach({
 
   extension:
     'The midpoint of two points is easy to find. '
-    + 'Average the two x values. '
-    + 'Then average the two y values. '
+    + 'Average the two $x$ values. '
+    + 'Then average the two $y$ values. '
     + 'That works because the middle is halfway in each direction on its '
     + 'own.',
 
