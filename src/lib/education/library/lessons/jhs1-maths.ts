@@ -1365,7 +1365,7 @@ teach({
     'The highest common factor is written HCF and the lowest '
     + 'common multiple LCM, and each is said as its letters. '
     + 'A number broken into primes is written with powers, so 12 '
-    + 'breaks down as $2^2$ times 3, said two squared times '
+    + 'breaks down as $2^2 \\times 3$, said two squared times '
     + 'three. '
     + 'Swapping the two is the commonest way to lose a mark, so '
     + 'check this: the HCF of two numbers is never bigger than '
@@ -1373,7 +1373,7 @@ teach({
 
   idea:
     'Every whole number breaks into primes in exactly one way. '
-    + '12 is 2 times 2 times 3. 18 is 2 times 3 times 3. '
+    + '$12 = 2 \\times 2 \\times 3$ and $18 = 2 \\times 3 \\times 3$. '
     + 'From those two breakdowns you can read off both the highest common '
     + 'factor and the lowest common multiple.',
 
@@ -1415,8 +1415,8 @@ teach({
       level: 4,
       ask: 'Find the HCF of 12 and 18.',
       steps: [
-        '12 is 2 times 2 times 3.',
-        '18 is 2 times 3 times 3.',
+        '$12 = 2 \\times 2 \\times 3$.',
+        '$18 = 2 \\times 3 \\times 3$.',
         'Shared: one 2 and one 3.',
       ],
       answer: '6.',
@@ -1428,7 +1428,7 @@ teach({
         'Primes appearing: 2 and 3.',
         'Highest power of 2 is two of them, from the 12.',
         'Highest power of 3 is two of them, from the 18.',
-        '2 times 2 times 3 times 3.',
+        '$2 \\times 2 \\times 3 \\times 3$.',
       ],
       answer: '36.',
     },
@@ -1586,7 +1586,7 @@ teach({
     + 'It is not an instruction to work something out. '
     + 'The letter standing for the unknown amount is usually x, '
     + 'and $3x + 5 = 20$ is said three x plus five equals twenty. '
-    + 'Writing a chain such as 20 subtract 5 equals 15 equals 5 '
+    + 'Writing a chain such as $20 - 5 = 15 = 5$ '
     + 'is the commonest way to lose a mark, because it says 15 '
     + 'and 5 are the same number.',
 
@@ -1612,12 +1612,12 @@ teach({
   recap:
     'Finding a missing number means undoing what was done to '
     + 'it. '
-    + 'If a number plus 7 is 12, then the number is 12 take away '
-    + '7, which is 5. '
+    + 'If a number plus 7 is 12, then the number is $12 - 7$, '
+    + 'which is 5. '
     + 'Undoing works because adding and subtracting are '
     + 'opposites, and so are multiplying and dividing. '
     + 'Putting a value back in to test it is called substituting: '
-    + 'put 5 where the number was and 5 plus 7 is 12, which shows '
+    + 'put 5 where the number was and $5 + 7 = 12$, which shows '
     + 'it is right. '
     + 'This lesson does both, and the undoing is the solving '
     + 'while the putting back is the checking.',
@@ -1639,17 +1639,17 @@ teach({
         'The 5 was added last, so take 5 from both sides: $2x = 12$.',
         'Divide both sides by 2.',
       ],
-      answer: '$x = 6$. Check: 2 times 6 plus 5 is 17.',
+      answer: '$x = 6$. Check: $2 \\times 6 + 5 = 17$.',
     },
     {
       level: 4,
       ask: 'Solve $5x - 3 = 2x + 9$.',
       steps: [
-        'Take 2x from both sides: $3x - 3 = 9$.',
+        'Take $2x$ from both sides: $3x - 3 = 9$.',
         'Add 3 to both sides: $3x = 12$.',
         'Divide both sides by 3.',
       ],
-      answer: '$x = 4$. Check: 20 minus 3 is 17, and 8 plus 9 is 17.',
+      answer: '$x = 4$. Check: $20 - 3 = 17$, and $8 + 9 = 17$.',
     },
     {
       level: 5,
@@ -1781,9 +1781,9 @@ teach({
 
   brief: {
     idea:
-      'Angles on a straight line add to 180, at a point to 360. '
+      'Angles on a straight line add to $180^\\circ$, at a point to $360^\\circ$. '
       + 'With parallel lines, alternate angles are equal '
-      + 'and co-interior angles add to 180.',
+      + 'and co-interior angles add to $180^\\circ$.',
     method: [
       'Name the fact you are using every time.',
       'Look for a straight line, a point, or a pair of parallel lines.',
@@ -1806,7 +1806,7 @@ teach({
     + 'happens. '
     + 'So angle ABC and angle CBA are the same angle, but angle '
     + 'BAC is a different one. '
-    + 'The small raised circle is the degree sign, so 90° is said '
+    + 'The small raised circle is the degree sign, so $90^\\circ$ is said '
     + 'ninety degrees. '
     + 'Arrowheads drawn on two lines mean those lines are '
     + 'parallel, and missing those arrows is the commonest way to '
@@ -1834,12 +1834,11 @@ teach({
   recap:
     'An angle is the amount of turn between two lines that '
     + 'meet. '
-    + 'It is measured in degrees, and a quarter turn is 90 '
-    + 'degrees. '
-    + 'An angle of exactly 90 degrees is called a right angle, '
+    + 'It is measured in degrees, and a quarter turn is $90^\\circ$. '
+    + 'An angle of exactly $90^\\circ$ is called a right angle, '
     + 'and the corner of this page is one. '
     + 'An angle smaller than that is called acute, and one '
-    + 'between 90 and 180 degrees is called obtuse. '
+    + 'between $90^\\circ$ and $180^\\circ$ is called obtuse. '
     + 'Those names and that measure are all this lesson needs, '
     + 'and from here the angles are worked out rather than '
     + 'measured.',
@@ -1857,22 +1856,22 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Two angles sit on a straight line. One is 125 degrees. '
+      ask: 'Two angles sit on a straight line. One is $125^\\circ$. '
         + 'What is the other?',
       steps: [
-        'Angles on a straight line add to 180.',
-        '180 minus 125.',
+        'Angles on a straight line add to $180^\\circ$.',
+        '$180^\\circ - 125^\\circ$.',
       ],
-      answer: '55 degrees, because angles on a straight line add to 180.',
+      answer: '$55^\\circ$, because angles on a straight line add to $180^\\circ$.',
     },
     {
       level: 4,
-      ask: 'A line crosses two parallel lines. One alternate angle is 70 '
-        + 'degrees. What is the other?',
+      ask: 'A line crosses two parallel lines. One alternate angle is '
+        + '$70^\\circ$. What is the other?',
       steps: [
         'Alternate angles between parallel lines are equal.',
       ],
-      answer: '70 degrees, because alternate angles are equal.',
+      answer: '$70^\\circ$, because alternate angles are equal.',
     },
     {
       level: 5,
@@ -1906,8 +1905,8 @@ teach({
   ],
 
   extension:
-    'That angles on a straight line add to 180 and the angles of a triangle '
-    + 'also add to 180 is not a coincidence. '
+    'That angles on a straight line add to $180^\\circ$ and the angles of a '
+    + 'triangle also add to $180^\\circ$ is not a coincidence. '
     + 'Draw a line through one vertex parallel to the opposite side '
     + 'and the three angles of the triangle land on that straight line.',
 
@@ -2003,9 +2002,9 @@ teach({
 
   brief: {
     idea:
-      'The angles of a triangle add to 180. '
-      + 'A polygon of n sides splits into n minus 2 triangles, '
-      + 'so its angles add to (n minus 2) times 180.',
+      'The angles of a triangle add to $180^\\circ$. '
+      + 'A polygon of $n$ sides splits into $n - 2$ triangles, '
+      + 'so its angles add to $(n - 2) \\times 180^\\circ$.',
     method: [
       'Triangle: the three angles add to 180.',
       'Polygon: count the sides, subtract 2, multiply by 180.',
@@ -2029,15 +2028,15 @@ teach({
     + 'Short dashes drawn across two sides mean those sides are '
     + 'the same length, and matching arcs at two corners mean '
     + 'those angles are equal. '
-    + 'The angle rule for a shape with n sides is read as n minus '
-    + '2, all times 180, where n is the number of sides. '
+    + 'The angle rule for a shape with $n$ sides is read as '
+    + '$n - 2$, all times 180, where $n$ is the number of sides. '
     + 'Forgetting to subtract the 2 is the commonest way to lose '
-    + 'a mark, so test it on a triangle, where n is 3 and the '
-    + 'answer has to come out as 180.',
+    + 'a mark, so test it on a triangle, where $n = 3$ and the '
+    + 'answer has to come out as $180^\\circ$.',
 
   idea:
-    'The angles inside a triangle always add to 180 degrees. '
-    + 'For a polygon with n sides they add to $(n - 2) \\times 180$. '
+    'The angles inside a triangle always add to $180^\\circ$. '
+    + 'For a polygon with $n$ sides they add to $(n - 2) \\times 180^\\circ$. '
     + 'A triangle also carries two names, one taken from its sides and '
     + 'one from its angles.',
 
@@ -2046,15 +2045,15 @@ teach({
     + 'Take any polygon, pick one corner, and draw lines from it to every '
     + 'other corner. '
     + 'You always get two fewer triangles than the shape has sides. '
-    + 'Each triangle contributes 180 degrees, so the total is '
-    + '$(n - 2) \\times 180$. '
+    + 'Each triangle contributes $180^\\circ$, so the total is '
+    + '$(n - 2) \\times 180^\\circ$. '
     + 'If you forget the formula you can rebuild it on the page in ten '
     + 'seconds, which is better than remembering it.',
 
   recap:
-    'Angles on a straight line add up to 180 degrees. '
-    + 'So if one angle on a line is 60°, the angle beside it must '
-    + 'be 120°, because the two together have to make 180°. '
+    'Angles on a straight line add up to $180^\\circ$. '
+    + 'So if one angle on a line is $60^\\circ$, the angle beside it must '
+    + 'be $120^\\circ$, because the two together have to make $180^\\circ$. '
     + 'A shape with straight sides is named by how many sides it '
     + 'has: three sides is a triangle, four is a quadrilateral, '
     + 'five is a pentagon. '
@@ -2073,33 +2072,34 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'A triangle has angles of 65 and 70 degrees. What is the third?',
+      ask: 'A triangle has angles of $65^\\circ$ and $70^\\circ$. '
+        + 'What is the third?',
       steps: [
-        'They add to 180.',
-        '65 plus 70 is 135.',
-        '180 minus 135.',
+        'They add to $180^\\circ$.',
+        '$65^\\circ + 70^\\circ = 135^\\circ$.',
+        '$180^\\circ - 135^\\circ$.',
       ],
-      answer: '45 degrees.',
+      answer: '$45^\\circ$.',
     },
     {
       level: 4,
       ask: 'What do the angles of a pentagon add to?',
       steps: [
         'A pentagon has 5 sides.',
-        '5 minus 2 is 3 triangles.',
-        '3 times 180.',
+        '$5 - 2 = 3$ triangles.',
+        '$3 \\times 180^\\circ$.',
       ],
-      answer: '540 degrees.',
+      answer: '$540^\\circ$.',
     },
     {
       level: 5,
       ask: 'What is each angle of a regular hexagon?',
       steps: [
-        '6 sides, so 4 triangles, so 720 degrees in total.',
+        '6 sides, so 4 triangles, so $720^\\circ$ in total.',
         'Regular means all angles equal.',
-        '720 divided by 6.',
+        '$720^\\circ \\div 6$.',
       ],
-      answer: '120 degrees.',
+      answer: '$120^\\circ$.',
     },
   ],
 
@@ -2122,7 +2122,7 @@ teach({
   ],
 
   extension:
-    'The exterior angles of any polygon always add to 360, '
+    'The exterior angles of any polygon always add to $360^\\circ$, '
     + 'no matter how many sides it has. '
     + 'Walk right round the outside of the shape and you have turned through '
     + 'one full circle, which is why.',
@@ -2263,12 +2263,12 @@ teach({
 
   notation:
     'An area is written with a small 2 after the unit. '
-    + 'So 15 cm with a small 2 is said "fifteen square centimetres". '
+    + 'So $15 \\text{ cm}^2$ is said "fifteen square centimetres". '
     + 'The small 2 is not a power to work out. '
     + 'It is there to say the unit is a square. '
-    + 'A perimeter uses the plain unit, so 16 cm, said "sixteen '
+    + 'A perimeter uses the plain unit, so $16 \\text{ cm}$, said "sixteen '
     + 'centimetres". '
-    + 'In a formula, base times height is written bh. '
+    + 'In a formula, base times height is written $bh$. '
     + 'The letters sit side by side and the times sign is left out. '
     + 'The commonest way to lose a mark is to give an area in cm '
     + 'with no small 2.',
@@ -2324,19 +2324,19 @@ teach({
         + 'What is its area?',
       steps: [
         'Half of 10 is 5.',
-        '5 times 6.',
+        '$5 \\times 6$.',
       ],
-      answer: '30 square centimetres.',
+      answer: '$30 \\text{ cm}^2$.',
     },
     {
       level: 4,
       ask: 'A trapezium has parallel sides 8 cm and 12 cm, height 5 cm.',
       steps: [
-        'Add the parallel sides: 8 plus 12 is 20.',
+        'Add the parallel sides: $8 + 12 = 20$.',
         'Half of that is 10.',
-        '10 times 5.',
+        '$10 \\times 5$.',
       ],
-      answer: '50 square centimetres.',
+      answer: '$50 \\text{ cm}^2$.',
     },
     {
       level: 5,
@@ -2492,7 +2492,7 @@ teach({
 
   notation:
     'The number of times an answer comes up is called its '
-    + 'frequency, and in a table that column is often headed f. '
+    + 'frequency, and in a table that column is often headed $f$. '
     + 'The frequencies are added to give a total, and that total '
     + 'must equal the number of people you asked. '
     + 'A tally of five is drawn as four strokes with the fifth '
