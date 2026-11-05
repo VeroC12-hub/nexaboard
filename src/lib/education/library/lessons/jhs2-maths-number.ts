@@ -49,7 +49,7 @@ teach({
     'Kofi hears a piece of news and tells 2 friends. '
     + 'Each of those 2 tells 2 more, so 4 people hear it next. '
     + 'Each of those 4 tells 2 more, so 8 hear it. '
-    + 'Writing out 2 times 2 times 2 is easy enough for three rounds. '
+    + 'Writing out $2 \\times 2 \\times 2$ is easy enough for three rounds. '
     + 'Now answer this: how many people have heard it after twenty rounds, '
     + 'and how do you write that down '
     + 'without filling a whole page with twos? '
@@ -57,7 +57,7 @@ teach({
     + 'and this topic is the rules for working with it.',
 
   notation:
-    'In 2 to the power 5, the 2 sits on the line '
+    'In $2^5$, the 2 sits on the line '
     + 'and the 5 sits raised up beside it. '
     + 'It is said "two to the power five", or "two to the fifth". '
     + 'The 2 is called the base and the 5 is called the index. '
@@ -67,7 +67,7 @@ teach({
     + 'which is the commonest way to lose a mark.',
 
   idea:
-    'In 2 to the power 5, the 2 is the base and the 5 is the index. '
+    'In $2^5$, the 2 is the base and the 5 is the index. '
     + 'It means 2 multiplied by itself 5 times. '
     + 'There are five laws, and not one of them has to be memorised: '
     + 'each appears by itself as soon as you write the powers out in '
@@ -77,30 +77,30 @@ teach({
     'There is nothing to memorise here, '
     + 'and the learners who memorise are the ones who get it wrong. '
     + 'Write the powers out and every law appears by itself. '
-    + '2 cubed times 2 to the fourth is (2x2x2) times (2x2x2x2). '
+    + '$2^3 \\times 2^4$ is $(2 \\times 2 \\times 2) \\times (2 \\times 2 \\times 2 \\times 2)$. '
     + 'Count the twos: there are seven. '
     + 'So you added the indices, and you did not have to be told to. '
     + 'Division is the same picture with cancelling. '
-    + '2 to the fifth over 2 squared is (2x2x2x2x2) over (2x2), '
+    + '$\\frac{2^5}{2^2}$ is $\\frac{2 \\times 2 \\times 2 \\times 2 \\times 2}{2 \\times 2}$, '
     + 'two cancel from each, and three are left. '
     + 'The two that confuse people are the ones you cannot write out, '
     + 'and both follow from division. '
-    + 'Take 2 cubed over 2 cubed. '
-    + 'That is 8 over 8, which is 1. '
-    + 'But by the subtraction rule it is 2 to the power 0. '
-    + 'So 2 to the power 0 has to be 1, '
+    + 'Take $\\frac{2^3}{2^3}$. '
+    + 'That is $\\frac{8}{8}$, which is 1. '
+    + 'But by the subtraction rule it is $2^0$. '
+    + 'So $2^0$ has to be 1, '
     + 'or arithmetic would contradict itself. '
-    + 'Now take 2 squared over 2 to the fifth. '
-    + 'Cancelling leaves 1 over 2 cubed. '
-    + 'By the rule it is 2 to the power negative 3. '
+    + 'Now take $\\frac{2^2}{2^5}$. '
+    + 'Cancelling leaves $\\frac{1}{2^3}$. '
+    + 'By the rule it is $2^{-3}$. '
     + 'So a negative index must mean one over the positive one. '
     + 'Neither is a convention somebody chose. '
     + 'Both are forced.',
 
   recap:
     'Multiplying a number by itself has a short name. '
-    + '3 times 3 is called 3 squared, and it comes to 9. '
-    + '3 times 3 times 3 is called 3 cubed, and it comes to 27. '
+    + '$3 \\times 3$ is called $3^2$, and it comes to 9. '
+    + '$3 \\times 3 \\times 3$ is called $3^3$, and it comes to 27. '
     + 'The small raised number counts how many threes are being multiplied, '
     + 'and that small raised number is called the index. '
     + 'The number being multiplied, the 3 here, is called the base. '
@@ -121,32 +121,32 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Simplify 3 to the power 4 times 3 squared.',
+      ask: 'Simplify $3^4 \\times 3^2$.',
       steps: [
         'Same base, and it is a multiplication.',
-        'So add the indices: 4 + 2 = 6.',
+        'So add the indices: $4 + 2 = 6$.',
       ],
-      answer: '3 to the power 6, which is 729.',
+      answer: '$3^6$, which is 729.',
     },
     {
       level: 4,
-      ask: 'Simplify 5 to the power 7 divided by 5 to the power 7.',
+      ask: 'Simplify $5^7 \\div 5^7$.',
       steps: [
-        'Division, so subtract: 7 - 7 = 0.',
-        'So the answer is 5 to the power 0.',
+        'Division, so subtract: $7 - 7 = 0$.',
+        'So the answer is $5^0$.',
         'But anything divided by itself is 1.',
       ],
       answer: '1. This is why any number to the power 0 is 1.',
     },
     {
       level: 5,
-      ask: 'Evaluate 2 to the power negative 4.',
+      ask: 'Evaluate $2^{-4}$.',
       steps: [
         'A negative index means the reciprocal.',
-        'Make the index positive: 2 to the power 4 is 16.',
+        'Make the index positive: $2^4$ is 16.',
         'Put it under 1.',
       ],
-      answer: 'One sixteenth.',
+      answer: '$\\frac{1}{16}$.',
     },
   ],
 
@@ -175,7 +175,7 @@ teach({
 
   extension:
     'A fractional index is a root. '
-    + '9 to the power one half is 3, '
+    + '$9^{\\frac{1}{2}}$ is 3, '
     + 'because the half index, used twice, must give 9 by the power of a '
     + 'power rule. '
     + 'The same reasoning that forced the 0 and negative cases forces this '
@@ -294,8 +294,8 @@ teach({
     idea:
       'Standard form writes a number as a digit between 1 and 10, '
       + 'times a power of ten. '
-      + '4300 is 4.3 times 10 to the power 3. '
-      + '0.0043 is 4.3 times 10 to the power negative 3. '
+      + '4300 is $4.3 \\times 10^3$. '
+      + '0.0043 is $4.3 \\times 10^{-3}$. '
       + 'The power counts how far the point moved.',
     method: [
       'Put the decimal point after the first non zero digit.',
@@ -318,18 +318,18 @@ teach({
   notation:
     'A number in standard form is written as a front part, '
     + 'then a multiplication sign, then 10 with a small raised number. '
-    + 'So 4.3 times 10 to the power 3 '
+    + 'So $4.3 \\times 10^3$ '
     + 'is said "four point three times ten to the power three". '
     + 'The raised number is the index, or the power. '
     + 'The front part has to be 1 or more and less than 10. '
-    + 'So 43 times 10 to the power 2 is the right size but the wrong form, '
+    + 'So $43 \\times 10^2$ is the right size but the wrong form, '
     + 'and that is the commonest way to lose a mark.',
 
   idea:
     'A number is in standard form when it is written as a number between '
     + '1 and 10, multiplied by a power of ten. '
-    + 'So 4300 becomes 4.3 times 10 to the power 3, '
-    + 'and 0.0043 becomes 4.3 times 10 to the power negative 3. '
+    + 'So 4300 becomes $4.3 \\times 10^3$, '
+    + 'and 0.0043 becomes $4.3 \\times 10^{-3}$. '
     + 'Multiplying and dividing two of them is two separate jobs done '
     + 'at once: one on the front parts, and one on the powers.',
 
@@ -361,10 +361,10 @@ teach({
   recap:
     'Multiplying by 10 makes a number ten times bigger, '
     + 'and the digits slide one place to the left of the point. '
-    + 'So 4.3 times 10 is 43, and 4.3 times 100 is 430. '
-    + 'Dividing does the reverse, so 4.3 divided by 10 is 0.43. '
+    + 'So $4.3 \\times 10 = 43$, and $4.3 \\times 100 = 430$. '
+    + 'Dividing does the reverse, so $4.3 \\div 10 = 0.43$. '
     + 'Powers of ten have a short way of being written. '
-    + '10 times 10 times 10 is 1000, and that is written 10 to the power 3, '
+    + '$10 \\times 10 \\times 10 = 1000$, and that is written $10^3$, '
     + 'where the 3 counts how many tens are multiplied. '
     + 'Standard form is that sliding of the point, written down as a power.',
 
@@ -389,7 +389,7 @@ teach({
         'Count the places moved: 5.2 to 52000 is four places.',
         'The number is big, so the power is positive.',
       ],
-      answer: '5.2 times 10 to the power 4.',
+      answer: '$5.2 \\times 10^4$.',
     },
     {
       level: 4,
@@ -399,19 +399,19 @@ teach({
         'The point moved right four places.',
         'The number is less than 1, so the power is negative.',
       ],
-      answer: '6.7 times 10 to the power negative 4.',
+      answer: '$6.7 \\times 10^{-4}$.',
     },
     {
       level: 5,
-      ask: 'Work out (4 times 10 to the 5) times (6 times 10 to the 3), '
+      ask: 'Work out $(4 \\times 10^5) \\times (6 \\times 10^3)$, '
         + 'in standard form.',
       steps: [
-        'Multiply the fronts: 4 x 6 = 24.',
-        'Add the powers: 5 + 3 = 8.',
-        'So 24 times 10 to the 8, but 24 is not between 1 and 10.',
+        'Multiply the fronts: $4 \\times 6 = 24$.',
+        'Add the powers: $5 + 3 = 8$.',
+        'So $24 \\times 10^8$, but 24 is not between 1 and 10.',
         'Move the point: 2.4, and add 1 to the power.',
       ],
-      answer: '2.4 times 10 to the power 9.',
+      answer: '$2.4 \\times 10^9$.',
     },
   ],
 
@@ -441,7 +441,7 @@ teach({
 
   extension:
     'Scientists use standard form to compare orders of magnitude. '
-    + 'If one quantity is 10 to the 6 and another is 10 to the 9, '
+    + 'If one quantity is $10^6$ and another is $10^9$, '
     + 'the second is a thousand times the first, '
     + 'which you read off the powers without doing any arithmetic.',
 
@@ -593,7 +593,7 @@ teach({
 
   notation:
     'The base is written as a small number after the digits, sitting low. '
-    + 'So 1011 in base two is written 1011 with a small 2 at the end. '
+    + 'So 1011 in base two is written $1011_2$. '
     + 'It is said "one, zero, one, one, base two", one digit at a time. '
     + 'It is never said "one thousand and eleven", '
     + 'because base two has no thousands column. '
@@ -609,7 +609,7 @@ teach({
     + 'To change from base ten, divide by the base again and again, '
     + 'and read the remainders from the bottom up. '
     + 'Adding in base two is ordinary adding, '
-    + 'except that 1 plus 1 is 10, which means carry one.',
+    + 'except that $1 + 1 = 10$, which means carry one.',
 
   mechanism:
     'The reason base ten feels natural and base two feels strange '
@@ -656,11 +656,11 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Convert 1011 in base two to base ten.',
+      ask: 'Convert $1011_2$ to base ten.',
       steps: [
         'Columns from the right: 1, 2, 4, 8.',
         'Digits: 1, 0, 1, 1 reading from the left.',
-        '8 + 0 + 2 + 1.',
+        '$8 + 0 + 2 + 1$.',
       ],
       answer: '11.',
     },
@@ -668,27 +668,27 @@ teach({
       level: 4,
       ask: 'Convert 25 in base ten to base two.',
       steps: [
-        '25 divided by 2 is 12 remainder 1.',
-        '12 divided by 2 is 6 remainder 0.',
-        '6 divided by 2 is 3 remainder 0.',
-        '3 divided by 2 is 1 remainder 1.',
-        '1 divided by 2 is 0 remainder 1.',
+        '$25 \\div 2 = 12$ remainder 1.',
+        '$12 \\div 2 = 6$ remainder 0.',
+        '$6 \\div 2 = 3$ remainder 0.',
+        '$3 \\div 2 = 1$ remainder 1.',
+        '$1 \\div 2 = 0$ remainder 1.',
         'Read the remainders upwards.',
       ],
-      answer: '11001.',
+      answer: '$11001_2$.',
     },
     {
       level: 5,
-      ask: 'Add 1101 and 1011 in base two.',
+      ask: 'Add $1101_2$ and $1011_2$.',
       steps: [
-        'Right column: 1 + 1 = 0 carry 1.',
-        'Next: 0 + 1 + carry 1 = 0 carry 1.',
-        'Next: 1 + 0 + carry 1 = 0 carry 1.',
-        'Next: 1 + 1 + carry 1 = 1 carry 1.',
+        'Right column: $1 + 1 = 0$ carry 1.',
+        'Next: $0 + 1$, plus the carried 1, gives 0 carry 1.',
+        'Next: $1 + 0$, plus the carried 1, gives 0 carry 1.',
+        'Next: $1 + 1$, plus the carried 1, gives 1 carry 1.',
         'Write the final carry.',
       ],
-      answer: '11000. '
-        + 'Check in base ten: 13 + 11 = 24, and 11000 is 16 + 8 = 24.',
+      answer: '$11000_2$. '
+        + 'Check in base ten: $13 + 11 = 24$, and $11000_2$ is $16 + 8 = 24$.',
     },
   ],
 
@@ -898,14 +898,14 @@ teach({
     + 'The second percentage was taken of a different number from the '
     + 'first. '
     + 'This is why you must divide by the multiplier instead: '
-    + '110 divided by 1.1 is exactly 100. '
+    + '$110 \\div 1.1$ is exactly 100. '
     + 'And it is why a shop that raises a price by 20 per cent '
     + 'and later takes 20 per cent off is not back where it started.',
 
   recap:
     'Per cent means "out of a hundred". '
     + 'So 20 per cent is 20 out of every 100. '
-    + 'That is the fraction 20 over 100, which is the decimal 0.2. '
+    + 'That is the fraction $\\frac{20}{100}$, which is the decimal 0.2. '
     + 'To find 20 per cent of 150 cedis, multiply 150 by 0.2, '
     + 'which gives 30 cedis. '
     + 'That one skill, a percentage of an amount, is what this stands on. '
@@ -931,7 +931,7 @@ teach({
       steps: [
         'The change is 10.',
         'The original is 40.',
-        '10 divided by 40 is 0.25.',
+        '$10 \\div 40 = 0.25$.',
       ],
       answer: '25 per cent.',
     },
@@ -942,7 +942,7 @@ teach({
       steps: [
         '15 per cent as a decimal is 0.15.',
         'Keep the whole and add it: multiply by 1.15.',
-        '80 x 1.15.',
+        '$80 \\times 1.15$.',
       ],
       answer: '92 cedis.',
     },
@@ -953,10 +953,10 @@ teach({
       steps: [
         'A 25 per cent decrease means multiplying by 0.75.',
         'So 90 is 0.75 of the original.',
-        'Divide to undo: 90 divided by 0.75.',
+        'Divide to undo: $90 \\div 0.75$.',
       ],
       answer: '120 cedis. '
-        + 'Check: 25 per cent of 120 is 30, and 120 - 30 = 90.',
+        + 'Check: 25 per cent of 120 is 30, and $120 - 30 = 90$.',
     },
   ],
 
@@ -1112,14 +1112,14 @@ teach({
     + 'so that it is shared in the same proportions as the money put in?',
 
   notation:
-    'A ratio is written with two dots between the parts, as 3 : 2, '
+    'A ratio is written with two dots between the parts, as $3 : 2$, '
     + 'and it is said "three to two". '
     + 'The two dots are called a colon. '
     + 'The order follows the order of the names, '
-    + 'so "share between Ama and Akos in the ratio 3 : 2" '
+    + 'so "share between Ama and Akos in the ratio $3 : 2$" '
     + 'gives Ama the 3 parts. '
     + 'The parts add up to the whole, '
-    + 'so 3 : 2 means three fifths and two fifths. '
+    + 'so $3 : 2$ means three fifths and two fifths. '
     + 'A rate is written with the word "per", or with a stroke as 12 cedis/kg, '
     + 'and "per" always means "for each one of". '
     + 'Swapping the order of a ratio is the commonest way to lose a mark.',
@@ -1156,7 +1156,7 @@ teach({
     + 'and inverse keeps the product fixed, '
     + 'which means you can verify your own answer. '
     + 'If 4 workers take 6 days, the product is 24. '
-    + 'So 3 workers must take 8, because 3 times 8 is also 24.',
+    + 'So 3 workers must take 8, because $3 \\times 8$ is also 24.',
 
   recap:
     'A ratio says how two amounts compare, '
@@ -1186,8 +1186,8 @@ teach({
       level: 3,
       ask: 'Share 350 cedis between two people in the ratio 4 to 3.',
       steps: [
-        '4 + 3 = 7 shares.',
-        '350 divided by 7 = 50 for one share.',
+        '$4 + 3 = 7$ shares.',
+        '$350 \\div 7 = 50$ for one share.',
         '4 shares is 200 and 3 shares is 150.',
       ],
       answer: '200 cedis and 150 cedis.',
@@ -1197,8 +1197,8 @@ teach({
       ask: 'If 5 kilos of rice cost 60 cedis, what do 8 kilos cost?',
       steps: [
         'More rice costs more, so this is direct.',
-        'One kilo costs 60 divided by 5, which is 12.',
-        '8 kilos is 8 times 12.',
+        'One kilo costs $60 \\div 5$, which is 12.',
+        '8 kilos is $8 \\times 12$.',
       ],
       answer: '96 cedis.',
     },
@@ -1208,8 +1208,8 @@ teach({
         + 'How long would 4 workers take, at the same rate?',
       steps: [
         'Fewer workers means more days, so this is inverse.',
-        'For inverse, the product stays the same: 6 x 10 = 60.',
-        'So 4 x days = 60.',
+        'For inverse, the product stays the same: $6 \\times 10 = 60$.',
+        'So $4 \\times \\text{days} = 60$.',
       ],
       answer: '15 days.',
     },
@@ -1345,7 +1345,7 @@ teach({
       'Find the difference between terms. '
       + 'If it is constant, the sequence is linear '
       + 'and the nth term is that difference times n, plus a fixed number. '
-      + 'Work the fixed number out by testing n equals 1.',
+      + 'Work the fixed number out by testing $n = 1$.',
     method: [
       'Write the differences underneath.',
       'A constant difference d gives dn plus something.',
@@ -1366,12 +1366,12 @@ teach({
     'Each number in a sequence is called a term. '
     + 'The terms are counted from the first one, '
     + 'so in 5, 8, 11 the first term is 5 and the third term is 11. '
-    + 'The position of a term is written n, '
-    + 'so the nth term means the term in position n. '
-    + 'A formula like 3n + 2 is said "three n plus two", '
-    + 'and 3n means 3 times n with the multiplication sign left out. '
-    + 'To use it, put the position where the n is: '
-    + 'the fourth term is 3 times 4, plus 2, which is 14. '
+    + 'The position of a term is written $n$, '
+    + 'so the nth term means the term in position $n$. '
+    + 'A formula like $3n + 2$ is said "three n plus two", '
+    + 'and $3n$ means 3 times $n$ with the multiplication sign left out. '
+    + 'To use it, put the position where the $n$ is: '
+    + 'the fourth term is $3 \\times 4 + 2$, which is 14. '
     + 'Doing the adding before the multiplying '
     + 'is the commonest way to lose a mark.',
 
@@ -1384,26 +1384,26 @@ teach({
     + 'and the nth term is that common difference times n, '
     + 'plus a fixed number that shifts the whole sequence. '
     + 'So 5, 8, 11, 14 has a difference of 3, '
-    + 'making the nth term 3n plus 2.',
+    + 'making the nth term $3n + 2$.',
 
   mechanism:
     'Most learners find the nth term by guessing and checking, '
     + 'and there is a method that never fails, '
     + 'so it is worth seeing why it works. '
-    + 'The sequence 3, 6, 9, 12 is just 3n. '
+    + 'The sequence 3, 6, 9, 12 is just $3n$. '
     + 'Term one is 3, term two is 6, and so on. '
     + 'Now look at 5, 8, 11, 14. '
     + 'The differences are also 3, so this sequence climbs at exactly the '
     + 'same rate, '
-    + 'which means it has to be 3n with something added to every term. '
-    + 'Compare them: 3n gives 3, 6, 9, 12, and ours gives 5, 8, 11, 14. '
+    + 'which means it has to be $3n$ with something added to every term. '
+    + 'Compare them: $3n$ gives 3, 6, 9, 12, and ours gives 5, 8, 11, 14. '
     + 'Every term is 2 more. '
-    + 'So the nth term is 3n + 2, '
+    + 'So the nth term is $3n + 2$, '
     + 'and that is not a guess, it is a comparison. '
-    + 'Shorter still: put n equal to 1 in dn and see how far off you are. '
+    + 'Shorter still: put $n = 1$ in $dn$ and see how far off you are. '
     + 'This also tells you when the method does not apply. '
     + 'If the differences are not constant, '
-    + 'the sequence is not linear and dn + c cannot describe it. '
+    + 'the sequence is not linear and $dn + c$ cannot describe it. '
     + 'Then look at the differences of the differences, '
     + 'or ask whether each term is multiplied rather than added to.',
 
@@ -1411,11 +1411,11 @@ teach({
     'Look at the list 5, 8, 11, 14. '
     + 'Each number is 3 more than the one before it. '
     + 'Subtract any two numbers that sit next to each other '
-    + 'and you get 3 every time: 8 take away 5 is 3, '
-    + 'and 11 take away 8 is 3. '
+    + 'and you get 3 every time: $8 - 5 = 3$, '
+    + 'and $11 - 8 = 3$. '
     + 'That fixed step is called the common difference, '
     + 'and with it you can keep the list going: '
-    + 'the next number is 14 plus 3, which is 17. '
+    + 'the next number is $14 + 3$, which is 17. '
     + 'This topic turns that step into a formula, '
     + 'so the hundredth number can be given '
     + 'without writing the ninety nine before it.',
@@ -1445,23 +1445,23 @@ teach({
       level: 4,
       ask: 'Find the nth term of 4, 7, 10, 13.',
       steps: [
-        'The common difference is 3, so start with 3n.',
-        'When n is 1, 3n gives 3, but the term is 4.',
+        'The common difference is 3, so start with $3n$.',
+        'When $n = 1$, $3n$ gives 3, but the term is 4.',
         'So add 1.',
       ],
-      answer: '3n + 1. '
-        + 'Check n = 4: 12 + 1 = 13.',
+      answer: '$3n + 1$. '
+        + 'Check $n = 4$: $12 + 1 = 13$.',
     },
     {
       level: 5,
       ask: 'Find the 50th term of 100, 96, 92, 88.',
       steps: [
-        'The difference is negative 4, so start with -4n.',
-        'When n is 1, -4n gives -4, but the term is 100.',
-        'So add 104: the nth term is 104 - 4n.',
-        'Put n = 50: 104 - 200.',
+        'The difference is negative 4, so start with $-4n$.',
+        'When $n = 1$, $-4n$ gives $-4$, but the term is 100.',
+        'So add 104: the nth term is $104 - 4n$.',
+        'Put $n = 50$: $104 - 200$.',
       ],
-      answer: 'Negative 96.',
+      answer: '$-96$.',
     },
   ],
 
@@ -1492,7 +1492,7 @@ teach({
   extension:
     'When the differences are not constant but the differences OF the '
     + 'differences are, '
-    + 'the sequence is quadratic and its nth term contains n squared. '
+    + 'the sequence is quadratic and its nth term contains $n^2$. '
     + '1, 4, 9, 16 is the clearest case.',
 
   figure: {
@@ -1617,8 +1617,8 @@ teach({
       'A bar chart compares amounts. '
       + 'A pie chart shows parts of one whole. '
       + 'A pictogram uses a symbol with a stated value. '
-      + 'For a pie chart, each category’s angle is its share of 360 '
-      + 'degrees.',
+      + 'For a pie chart, each category’s angle is its share of '
+      + '$360^\\circ$.',
     method: [
       'Choose the chart from the question: comparing, or showing shares.',
       'Label both axes and give the chart a title.',
@@ -1639,8 +1639,8 @@ teach({
 
   notation:
     'An angle is written with a small raised circle after the figure, '
-    + 'as in 162 degrees. '
-    + 'A full circle is 360 degrees, '
+    + 'as in $162^\\circ$. '
+    + 'A full circle is $360^\\circ$, '
     + 'so the sector angles of a pie chart must add up to 360. '
     + 'The note that says what one symbol stands for is called the key, '
     + 'and the one that says what one square of the grid is worth '
@@ -1654,7 +1654,7 @@ teach({
     + 'A pie chart is a circle divided into sectors, '
     + 'and it shows how one whole is split up. '
     + 'Each sector angle is the category divided by the total, '
-    + 'multiplied by 360 degrees. '
+    + 'multiplied by $360^\\circ$. '
     + 'A pictogram uses a repeated symbol, '
     + 'with a key saying what one symbol stands for. '
     + 'Every chart needs a title, labels, and a stated scale or key, '
@@ -1728,9 +1728,9 @@ teach({
         + 'What angle does football get in a pie chart?',
       steps: [
         '10 out of 40 is one quarter.',
-        'One quarter of 360.',
+        'One quarter of $360^\\circ$.',
       ],
-      answer: '90 degrees.',
+      answer: '$90^\\circ$.',
     },
     {
       level: 5,
@@ -1927,7 +1927,7 @@ teach({
 
   notation:
     'The mean has a symbol: a letter with a short bar over it, '
-    + 'written as x with a bar on top and said "x bar". '
+    + 'written as $\\bar{x}$ and said "x bar". '
     + 'The word "average" on its own is not precise, '
     + 'because all three of these are averages, '
     + 'so a question that says "average" and nothing more means the mean. '
@@ -1973,7 +1973,7 @@ teach({
     + 'then divide by how many numbers there are. '
     + 'Take the list 4, 6, 8, 10. '
     + 'They add up to 28, and there are 4 of them, '
-    + 'so the mean is 28 divided by 4, which is 7. '
+    + 'so the mean is $28 \\div 4$, which is 7. '
     + 'That single number stands for the whole list. '
     + 'This topic keeps the mean, '
     + 'and adds two more averages for the lists where the mean misleads.',
@@ -1994,7 +1994,7 @@ teach({
       level: 3,
       ask: 'Find the mean of 4, 7, 9, 10, 10.',
       steps: [
-        'Add them: 4 + 7 + 9 + 10 + 10 = 40.',
+        'Add them: $4 + 7 + 9 + 10 + 10 = 40$.',
         'There are 5 values.',
       ],
       answer: '8.',
@@ -2014,7 +2014,7 @@ teach({
       ask: 'Five people earn 400, 420, 430, 450 and 5000 cedis. '
         + 'Which average describes the group fairly, and why?',
       steps: [
-        'The mean is 6700 divided by 5, which is 1340.',
+        'The mean is $6700 \\div 5$, which is 1340.',
         'Nobody earns near 1340 except the one person far above it.',
         'The median is the third value in order, 430.',
         'Four of the five earn close to 430.',
