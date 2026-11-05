@@ -1642,6 +1642,39 @@ teach({
     },
   ],
 
+  figure: {
+    alt: 'Three steps, one under the other. The first is the line, "he '
+      + 'whose roots hold the hill". The second is what it pictures, a '
+      + 'great tree rooted deep. The third is what it claims, that the '
+      + 'stool holds the land together. A note beside the second step '
+      + 'says that most answers stop there, which is where the mark '
+      + 'goes.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">three steps, and the mark is in the third</text>'
+      + '<path d="M 170 56 H 520 V 106 H 170 Z"/>'
+      + '<text x="40" y="87" font-size="15" text-anchor="start" fill="currentColor" stroke="none">the line</text>'
+      + '<text x="185" y="87" font-size="15" text-anchor="start" fill="currentColor" stroke="none">he whose roots hold the hill</text>'
+      + '<line x1="345" y1="106" x2="345" y2="136"/>'
+      + '<line x1="345" y1="136" x2="339.8" y2="127.4"/>'
+      + '<line x1="345" y1="136" x2="350.2" y2="127.4"/>'
+      + '<path d="M 170 136 H 520 V 186 H 170 Z"/>'
+      + '<text x="40" y="167" font-size="15" text-anchor="start" fill="currentColor" stroke="none">what it pictures</text>'
+      + '<text x="185" y="167" font-size="15" text-anchor="start" fill="currentColor" stroke="none">a great tree, rooted deep</text>'
+      + '<text x="530" y="156" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">most answers</text>'
+      + '<text x="530" y="176" font-size="13" text-anchor="start" fill="#c8433a" stroke="none">stop here</text>'
+      + '<line x1="345" y1="186" x2="345" y2="228" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<line x1="345" y1="228" x2="339.8" y2="219.4" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<line x1="345" y1="228" x2="350.2" y2="219.4" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<path d="M 170 228 H 520 V 278 H 170 Z" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="40" y="259" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">what it claims</text>'
+      + '<text x="185" y="259" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">the stool holds the land together</text>'
+      + '<text x="320" y="318" font-size="16" text-anchor="middle" fill="#0f8a4d" stroke="none">explain the images and you have explained the poem</text>'
+      + '<text x="320" y="350" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">a dirge reverses the same image: the tree has fallen</text>'
+      + '<text x="320" y="382" font-size="14" text-anchor="middle" fill="currentColor" stroke="none">so the images are a shared language, not the invention of one poet</text>'
+      + '</svg>',
+  },
+
   tables: [
     {
       caption: 'The images an appellation is built from, '

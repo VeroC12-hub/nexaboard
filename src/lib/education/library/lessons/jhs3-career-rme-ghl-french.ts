@@ -985,13 +985,11 @@ teach({
     + 'thirty bags?',
 
   notation:
-    'Money is written GH₵ 40 and said “forty cedis”, or as plain '
-    + '40.'
-    + '00 when the currency is named at the top of the column. '
+    'Money is written GH₵ 40 and said “forty cedis”, '
+    + 'or as plain 40.00 when the currency is named at the top of the '
+    + 'column. '
     + 'A price is written to two decimal places, so forty cedis fifty '
-    + 'pesewas is 40.'
-    + '50 and never 40.'
-    + '5. '
+    + 'pesewas is 40.50 and never 40.5. '
     + 'A profit as a percentage is written like 25 percent, and you '
     + 'must say what it is 25 percent of, because a mark-up on the '
     + 'cost and a margin on the selling price are two different '
@@ -1082,7 +1080,7 @@ teach({
         + 'and the overhead share is 10. '
         + 'You want 20 per cent profit. Find the price.',
       steps: [
-        'Total cost: 40 + 45 + 10 = 95.',
+        'Total cost: $40 + 45 + 10 = 95$.',
         '20 per cent of 95 is 19.',
         'Add it.',
       ],
@@ -1128,6 +1126,39 @@ teach({
         + 'Check what similar articles fetch.',
     },
   ],
+
+  figure: {
+    alt: 'The cost of one stool drawn as a stack. The bottom block is '
+      + 'materials at 40 cedis, the block above it is labour at 45, and '
+      + 'the thin one on top is the share of overheads at 10, making a '
+      + 'total cost of 95 cedis, which is the floor under the price. '
+      + 'Above that sits the intended profit of 19, giving a selling '
+      + 'price of 114. A line across the top marks what stools like it '
+      + 'actually fetch, 130, which is the ceiling. A short line part way '
+      + 'up the stack marks the 40 she had been counting on its own.',
+    svg: '<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" '
+      + 'fill="none" stroke="currentColor" stroke-width="3">'
+      + '<text x="320" y="30" font-size="21" text-anchor="middle" fill="currentColor" stroke="none">only one of the three lines is the timber</text>'
+      + '<line x1="50" y1="70" x2="590" y2="70"/>'
+      + '<text x="590" y="60" font-size="14" text-anchor="end" fill="currentColor" stroke="none">what stools like it fetch: 130, the ceiling</text>'
+      + '<path d="M 60 140 H 200 V 330 H 60 Z"/>'
+      + '<line x1="60" y1="250" x2="200" y2="250"/>'
+      + '<line x1="60" y1="160" x2="200" y2="160"/>'
+      + '<path d="M 60 102 H 200 V 140 H 60 Z" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="130" y="297" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">materials 40</text>'
+      + '<text x="130" y="212" font-size="15" text-anchor="middle" fill="currentColor" stroke="none">labour 45</text>'
+      + '<text x="130" y="155" font-size="12" text-anchor="middle" fill="currentColor" stroke="none">overheads 10</text>'
+      + '<text x="130" y="127" font-size="14" text-anchor="middle" fill="#0f8a4d" stroke="none">profit 19</text>'
+      + '<line x1="200" y1="250" x2="290" y2="250" stroke="#c8433a" stroke-width="3"/>'
+      + '<text x="298" y="245" font-size="14" text-anchor="start" fill="#c8433a" stroke="none">she counted 40 and stopped</text>'
+      + '<line x1="200" y1="140" x2="350" y2="140" stroke="#0f8a4d" stroke-width="3"/>'
+      + '<text x="358" y="135" font-size="15" text-anchor="start" fill="#0f8a4d" stroke="none">total cost 95: the floor</text>'
+      + '<line x1="200" y1="102" x2="430" y2="102"/>'
+      + '<text x="438" y="97" font-size="15" text-anchor="start" fill="currentColor" stroke="none">selling price 114</text>'
+      + '<text x="320" y="362" font-size="16" text-anchor="middle" fill="currentColor" stroke="none">the price has to clear the floor and stay under the ceiling</text>'
+      + '<text x="320" y="388" font-size="15" text-anchor="middle" fill="#c8433a" stroke="none">count the materials only and every sale loses money</text>'
+      + '</svg>',
+  },
 
   tables: [
     {
