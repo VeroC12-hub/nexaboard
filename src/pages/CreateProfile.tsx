@@ -35,9 +35,11 @@ import {
 } from '../lib/education/programmes'
 import { extrasFor, subjectById } from '../lib/education/subjects'
 import {
-  createAccount, emailProblem, handleTaken, passwordProblem, SignUpError,
+  createAccount, emailProblem, handleTaken, passwordProblem, readContact,
+  SignUpError,
   type AccountKind, type Created,
 } from '../lib/education/accounts'
+import PasswordField from '../components/PasswordField'
 
 const STAGE_LABEL: Record<Stage, string> = {
   creche: 'Creche & KG', primary: 'Primary', jhs: 'JHS',
@@ -118,6 +120,20 @@ export default function CreateProfile({
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  /**
+   * Where a reset code can reach them, if they ever forget the password.
+   *
+   * A phone number or an email, and one number may be given for several
+   * children: three siblings on their mother's phone is the normal case here,
+   * so this is deliberately not checked for uniqueness. Each child still signs
+   * in with their own name and their own password.
+   *
+   * Optional. A family with neither can still make an account; they are told
+   * plainly what that costs them, which is that a forgotten password cannot
+   * be recovered.
+   */
+  const [contact, setContact] = useState('')
   /**
    * Who says this account may exist.
    *
@@ -208,9 +224,13 @@ export default function CreateProfile({
       const created = isLearner
         ? await createAccount({
             kind: 'learner', name: name.trim(), password,
+            recovery: readContact(contact) ?? undefined,
             learner: { ...p, name: name.trim() },
           })
-        : await createAccount({ kind, name: name.trim(), email: email.trim(), password })
+        : await createAccount({
+            kind, name: name.trim(), email: email.trim(), password,
+            recovery: readContact(contact) ?? undefined,
+          })
       onCreated(created)
     } catch (err) {
       /* Say what actually went wrong.
@@ -309,9 +329,28 @@ export default function CreateProfile({
                   worse than no hint at all. */}
               {!onlyLearner && (
                 <Field label="Password" hint="eight characters or more, with letters">
-                  <input className="ne-in" type="password" value={password}
+                  <PasswordField
+                    value={password}
+                    autoComplete="new-password"
                     placeholder="Choose a password"
-                    onChange={e => setPassword(e.target.value)} />
+                    onChange={setPassword} />
+                </Field>
+              )}
+
+              {/* The way back in.
+
+                  Without it a forgotten password is the end of the account:
+                  a learner signs in with a name, and the address behind that
+                  name is synthetic, so there has never been anywhere to send
+                  a code. One number may be given for several children. */}
+              {!onlyLearner && (
+                <Field
+                  label="Phone or email"
+                  hint="optional, for if you forget your password">
+                  <input className="ne-in" value={contact}
+                    inputMode="tel"
+                    placeholder="024 000 0000"
+                    onChange={e => setContact(e.target.value)} />
                 </Field>
               )}
             </div>

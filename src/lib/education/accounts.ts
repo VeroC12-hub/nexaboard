@@ -266,9 +266,28 @@ export function handleTaken(handle: string): boolean {
 
 /* ── creating an account ──────────────────────────────────────────────────── */
 
+/**
+ * Where a reset code can reach this account.
+ *
+ * A phone number or an email, whichever the family has. Shared across
+ * siblings on purpose: one mother's number carries three children, each with
+ * their own name and their own password, and a code is sent for one named
+ * account at a time.
+ *
+ * Optional, because an account made before this existed has none and must
+ * keep working. Such an account simply cannot be reset, and the screen says
+ * so rather than pretending a code went out.
+ */
+export interface Recovery {
+  contact: string
+  channel: 'sms' | 'email'
+}
+
 export type SignUp =
-  | { kind: 'learner'; name: string; password: string; learner: LearnerProfile }
-  | { kind: 'parent' | 'school'; name: string; email: string; password: string }
+  | { kind: 'learner'; name: string; password: string; learner: LearnerProfile
+      recovery?: Recovery }
+  | { kind: 'parent' | 'school'; name: string; email: string; password: string
+      recovery?: Recovery }
 
 export interface Created { account: Account; session: Session }
 
@@ -417,6 +436,10 @@ export async function createAccount(input: SignUp): Promise<Created> {
     name: account.name,
     handle: account.handle,
     email: account.email ?? null,
+    /* Both or neither: the table's own check constraint says so, because a
+       channel with no contact sends a code nowhere. */
+    recovery_contact: input.recovery?.contact ?? null,
+    recovery_channel: input.recovery?.channel ?? null,
     classes: account.classes ?? [],
     teachers: account.teachers ?? [],
   })
@@ -1105,4 +1128,146 @@ export function emailProblem(email: string): string | null {
     return 'That domain cannot be used.'
   }
   return null
+}
+
+/**
+ * Read a typed phone number or email into something a code can be sent to.
+ *
+ * ── Why the phone is forced to E.164 ────────────────────────────────────────
+ *
+ * The same Ghanaian number is written 024 000 0000, 0240000000, +233240000000
+ * and 233 24 000 0000 by four different people, and one family will manage
+ * three of those across three children. Stored as typed, the reset lookup
+ * would be a guess about spacing and leading zeros. Stored as +233240000000
+ * it is an equality test, and it is also the only form an SMS provider will
+ * accept.
+ *
+ * A leading 0 is the national trunk prefix and is dropped when the country
+ * code goes on: 0240000000 is +233240000000, not +2330240000000, which is the
+ * mistake that would silently send every code into the void.
+ *
+ * Ghana is assumed when no country code is given, because that is who this is
+ * for. A number typed with + keeps whatever country it names.
+ */
+export function readContact(typed: string): Recovery | null {
+  const raw = typed.trim()
+  if (!raw) return null
+
+  if (raw.includes('@')) {
+    const email = normaliseEmail(raw)
+    /* Something before the @ and a dot after it. Not a full validation, which
+       cannot be done without sending to it, but it catches the typo. */
+    return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)
+      ? { contact: email, channel: 'email' }
+      : null
+  }
+
+  const digits = raw.replace(/[^\d+]/g, '')
+  if (/^\+/.test(digits)) {
+    return digits.length >= 8 ? { contact: digits, channel: 'sms' } : null
+  }
+  const national = digits.replace(/^0+/, '')
+  /* Nine digits after the trunk zero is a Ghanaian mobile. Shorter is a
+     mistyped number, and sending to it would waste a message and leave
+     somebody waiting. */
+  if (national.length < 9) return null
+  return { contact: `+233${national}`, channel: 'sms' }
+}
+
+/* ── forgetting a password ────────────────────────────────────────────────── */
+
+/**
+ * Getting back in, by a code sent to the family's phone or email.
+ *
+ * ── Why the browser does almost nothing here ────────────────────────────────
+ *
+ * Everything that matters happens in `api/reset.js`, because the contact must
+ * be looked up from the name and the browser must never hold it. A client that
+ * could fetch "the phone number registered to the name Ama Mensah" would be a
+ * directory of children's family phone numbers with a public API. What comes
+ * back is a mask, which the owner recognises and nobody else can dial.
+ *
+ * ── Three children, one phone ───────────────────────────────────────────────
+ *
+ * The contact is shared on purpose: one mother's number across three children,
+ * each with their own name and password. So the reset is keyed on the name.
+ * You say which child you are, and the code goes to that child's registered
+ * contact. The phone proves the family, the name says which account.
+ */
+
+/** How a code was sent, and enough of the contact to recognise it. */
+export interface CodeSent {
+  ok: true
+  /** Null when nothing was actually sent. See the note in `askForCode`. */
+  channel: 'sms' | 'email' | null
+  hint: string | null
+}
+
+export type CodeResult = CodeSent | { ok: false, why: string }
+
+const resetUrl = '/api/reset'
+
+async function post(body: unknown): Promise<{ status: number, json: Record<string, unknown> }> {
+  const res = await fetch(resetUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  const json = await res.json().catch(() => ({}))
+  return { status: res.status, json: json as Record<string, unknown> }
+}
+
+/**
+ * Ask for a code.
+ *
+ * A name that does not exist, and a real account with no contact on it, both
+ * answer `{ channel: null, hint: null }`: the server will not say which names
+ * exist, and this does not either. The screen turns that into the one honest
+ * sentence it can say, which is that a code is on its way if the name is
+ * registered and has a contact.
+ */
+export async function askForCode(name: string): Promise<CodeResult> {
+  if (!name.trim()) return { ok: false, why: 'Type the name you sign in with.' }
+  try {
+    const { status, json } = await post({ name })
+    if (status === 200) {
+      return {
+        ok: true,
+        channel: (json.channel as 'sms' | 'email' | null) ?? null,
+        hint: (json.hint as string | null) ?? null,
+      }
+    }
+    return {
+      ok: false,
+      why: typeof json.error === 'string'
+        ? json.error
+        : 'A code could not be sent just now.',
+    }
+  } catch {
+    return {
+      ok: false,
+      why: 'No connection. A code has to come from the server, so this one '
+        + 'needs the internet.',
+    }
+  }
+}
+
+/** Spend the code and set a new password. */
+export async function useCode(
+  name: string, code: string, password: string,
+): Promise<{ ok: boolean, why?: string }> {
+  if (password.length < 8) return { ok: false, why: 'Eight characters or more.' }
+  if (!code.trim()) return { ok: false, why: 'Type the code that was sent to you.' }
+  try {
+    const { status, json } = await post({ name, code: code.trim(), password })
+    if (status === 200) return { ok: true }
+    return {
+      ok: false,
+      why: typeof json.error === 'string'
+        ? json.error
+        : 'That could not be saved just now.',
+    }
+  } catch {
+    return { ok: false, why: 'No connection. Setting a password needs the internet.' }
+  }
 }

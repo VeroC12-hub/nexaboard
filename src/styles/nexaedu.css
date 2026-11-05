@@ -1356,3 +1356,50 @@
   background: var(--nx-green-soft, #eaf5ee);
   font-weight: 600;
 }
+
+/* ── a password box with an eye ───────────────────────────────────────────── */
+
+/* The input and its toggle share one box. The eye sits inside the field on
+   the right rather than beside it, because a control outside the border reads
+   as a separate thing to be pressed rather than as part of the box. */
+.pw {
+  position: relative;
+  display: block;
+}
+
+/* Room for the eye, so a long password does not run underneath it. */
+.pw-in {
+  width: 100%;
+  padding-right: 46px;
+  box-sizing: border-box;
+}
+
+.pw-eye {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  /* 36px, not an icon-sized hit area. This is pressed by children and by
+     adults with a cracked screen, often one handed on a bus. */
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ne-ink-soft, #46536b);
+  cursor: pointer;
+}
+
+.pw-eye:hover { color: var(--ne-ink, #14243a); }
+
+/* Shown is a state worth seeing at a glance: the whole point of the control
+   is that your password is currently readable by anyone beside you. */
+.pw-eye[aria-pressed='true'] { color: var(--ne-ink, #14243a); }
+
+.pw-eye:focus-visible {
+  outline: 2px solid var(--ne-ink, #14243a);
+  outline-offset: 1px;
+}
