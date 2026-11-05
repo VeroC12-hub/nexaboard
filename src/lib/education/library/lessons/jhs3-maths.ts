@@ -55,13 +55,13 @@ teach({
     + 'which of the two is really cheaper, and by how much?',
 
   notation:
-    'Percent is written with the % sign, so 15% is said fifteen '
+    'Percent is written with the % sign, so $15\\%$ is said fifteen '
     + 'percent and means fifteen out of every hundred. '
     + 'Cost price, selling price and marked price are shortened '
     + 'to CP, SP and MP, each said as its letters. '
     + 'In simple interest the amount saved or borrowed is the '
-    + 'principal, written P, the percentage a year is the rate, '
-    + 'R, and the time in years is T. '
+    + 'principal, written $P$, the percentage a year is the rate, '
+    + '$R$, and the time in years is $T$. '
     + 'Taking the percentage of the wrong amount is the commonest '
     + 'way to lose a mark, so write down what the percentage is '
     + 'of before touching the calculator.',
@@ -108,8 +108,8 @@ teach({
   recap:
     'A percentage is a number out of a hundred, so 15 percent '
     + 'means 15 out of every 100. '
-    + 'To find 15 percent of 400 cedis, divide 400 by 100 to get '
-    + '4, then multiply by 15 to get 60 cedis. '
+    + 'To find 15 percent of 400 cedis, $400 \\div 100 = 4$, '
+    + 'then multiply by 15 to get 60 cedis. '
     + 'A percentage change is always measured against the amount '
     + 'you started from: a price going from 400 to 460 has risen '
     + 'by 60, and 60 out of 400 is 15 percent. '
@@ -147,7 +147,7 @@ teach({
       ask: 'Find the simple interest on 500 cedis at 6 per cent for 3 '
         + 'years.',
       steps: [
-        'Interest is principal times rate times time over 100.',
+        'Interest is $\\frac{P \\times R \\times T}{100}$.',
         '$500 \\times 6 \\times 3 = 9000$.',
         'Divide by 100.',
       ],
@@ -160,7 +160,7 @@ teach({
         + '90. '
         + 'How much more does the credit cost?',
       steps: [
-        '12 payments of 90 is 1080.',
+        '$12 \\times 90 = 1080$.',
         'Add the deposit: $1080 + 300 = 1380$.',
         'Compare with 1200.',
       ],
@@ -342,8 +342,8 @@ teach({
     + 'called simultaneous equations. '
     + 'They are written one under the other and labelled (1) and '
     + '(2), so that the working can refer to them. '
-    + 'The answer is a pair of values, written as x equals 2, y '
-    + 'equals 3, and it has to fit both equations and not just '
+    + 'The answer is a pair of values, written as $x = 2$, '
+    + '$y = 3$, and it has to fit both equations and not just '
     + 'one. '
     + 'Checking the pair in only one of the two equations is the '
     + 'commonest way to lose a mark.',
@@ -384,13 +384,13 @@ teach({
   recap:
     'An equation with one unknown has one answer, and you reach '
     + 'it by undoing. '
-    + 'Take 3x plus 5 equals 20: subtract 5 from both sides to '
-    + 'get 3x equals 15, then divide both sides by 3 to get x '
-    + 'equals 5. '
+    + 'Take $3x + 5 = 20$: subtract 5 from both sides to '
+    + 'get $3x = 15$, then divide both sides by 3 to get '
+    + '$x = 5$. '
     + 'That worked because there was only one letter to find. '
-    + 'With two letters it does not: x plus y equals 10 has no '
-    + 'single answer, because x could be 4 and y 6, or x could be '
-    + '7 and y 3. '
+    + 'With two letters it does not: $x + y = 10$ has no '
+    + 'single answer, because $x$ could be 4 and $y$ 6, '
+    + 'or $x$ could be 7 and $y$ 3. '
     + 'This lesson is about what a second equation adds, and all '
     + 'the work goes into getting back down to one unknown.',
 
@@ -410,7 +410,7 @@ teach({
       level: 3,
       ask: 'Solve $x + y = 10$ and $x - y = 2$.',
       steps: [
-        'Add the two equations: the y terms cancel.',
+        'Add the two equations: the $y$ terms cancel.',
         '$2x = 12$, so $x = 6$.',
         'Substitute: $6 + y = 10$.',
       ],
@@ -708,9 +708,9 @@ teach({
   recap:
     'An equation is solved by doing the same thing to both '
     + 'sides. '
-    + 'Take 2x plus 3 equals 11: subtract 3 from both sides to '
-    + 'get 2x equals 8, then divide both sides by 2 to get x '
-    + 'equals 4. '
+    + 'Take $2x + 3 = 11$: subtract 3 from both sides to '
+    + 'get $2x = 8$, then divide both sides by 2 to get '
+    + '$x = 4$. '
     + 'Doing the same thing to both sides keeps them equal, and '
     + 'that is why the method is allowed at all. '
     + 'This lesson solves statements that say less than or '
@@ -742,7 +742,7 @@ teach({
       level: 4,
       ask: 'Solve $-2x > 6$.',
       steps: [
-        'Divide both sides by negative 2.',
+        'Divide both sides by $-2$.',
         'Dividing by a negative reverses the sign.',
       ],
       answer: '$x < -3$. '
@@ -966,7 +966,8 @@ teach({
 
   why:
     'The area of a rectangle is its length times its width. '
-    + '8 metres. '
+    + 'A carpenter wants a tabletop of exactly 2 square metres, '
+    + 'and the only board he has is 0.8 metres wide. '
     + 'The formula he knows gives the area once he has the '
     + 'length, but here he has the area and wants the length. '
     + 'How do you turn a formula round so that it gives you the '
@@ -977,8 +978,7 @@ teach({
     + 'called the subject, and rearranging the formula so a '
     + 'different letter stands alone is called changing the '
     + 'subject. '
-    + 'A question asks it as make l the subject of A equals l '
-    + 'times w. '
+    + 'A question asks it as make $l$ the subject of $A = lw$. '
     + 'A letter appearing in two different terms has to be '
     + 'collected into one term before it can be freed. '
     + 'Stopping while the wanted letter is still on both sides is '
@@ -1028,13 +1028,12 @@ teach({
   recap:
     'A formula is a rule written with letters, and the letter '
     + 'standing alone on one side is called the subject. '
-    + 'In the area rule A equals l times w, the subject is A, so '
+    + 'In the area rule $A = lw$ the subject is $A$, so '
     + 'the formula is ready to hand you an area. '
     + 'An equation is rearranged by undoing: whatever was done to '
     + 'a letter gets undone on both sides. '
     + 'Taking out a common factor is the other tool needed here, '
-    + 'so 2x plus 2y can be written as 2 times the bracket x plus '
-    + 'y. '
+    + 'so $2x + 2y$ can be written as $2(x + y)$. '
     + 'This lesson uses both, and the one new thing is that the '
     + 'answer has letters in it instead of a number.',
 
@@ -1274,12 +1273,12 @@ teach({
   notation:
     'A straight line is written $y = mx + c$, said y equals em '
     + 'x plus see. '
-    + 'The m is called the gradient and it says how steep the '
+    + 'The $m$ is called the gradient and it says how steep the '
     + 'line is, which is how far up it goes for one step across. '
-    + 'The c is called the y intercept, and it is the value of y '
-    + 'where the line crosses the upright axis. '
-    + 'Reading m and c off the wrong way round is the commonest '
-    + 'way to lose a mark, so hold on to this: c is the number '
+    + 'The $c$ is called the $y$ intercept, and it is the value '
+    + 'of $y$ where the line crosses the upright axis. '
+    + 'Reading $m$ and $c$ off the wrong way round is the commonest '
+    + 'way to lose a mark, so hold on to this: $c$ is the number '
     + 'sitting on its own.',
 
   idea:
@@ -1294,7 +1293,7 @@ teach({
   mechanism:
     'The gradient is the only idea here, and it repays understanding '
     + 'because it is the same idea as speed from the JHS 2 motion lesson. '
-    + 'Gradient is change in y divided by change in x, '
+    + 'Gradient is change in $y$ divided by change in $x$, '
     + 'and speed is change in distance divided by change in time. '
     + 'They are the same calculation on different axes, '
     + 'which is why a distance time graph has speed as its slope. '
@@ -1319,12 +1318,12 @@ teach({
     'A point on a graph is fixed by two numbers, written as a '
     + 'pair inside brackets. '
     + 'The first says how far across and the second how far up, '
-    + 'so the point (3, 2) sits three to the right and two up '
+    + 'so the point $(3, 2)$ sits three to the right and two up '
     + 'from where the axes cross. '
     + 'On the other side of that crossing the numbers are '
-    + 'negative, so (-3, -2) is three to the left and two down. '
-    + 'A rule such as y equals 2x plus 1 hands you a y for every '
-    + 'x you pick: put x as 3 and y comes out as 7. '
+    + 'negative, so $(-3, -2)$ is three to the left and two down. '
+    + 'A rule such as $y = 2x + 1$ hands you a $y$ for every '
+    + '$x$ you pick: put $x = 3$ and $y$ comes out as 7. '
     + 'This lesson plots the pairs a rule like that produces, and '
     + 'then reads the rule back off the picture.',
 
@@ -1346,7 +1345,7 @@ teach({
       steps: [
         'Compare it with $y = mx + c$.',
       ],
-      answer: 'Gradient 3, y intercept negative 4.',
+      answer: 'Gradient 3, $y$ intercept $-4$.',
     },
     {
       level: 4,
@@ -1593,9 +1592,9 @@ teach({
 
   notation:
     'The shape you start with is called the object, '
-    + 'and its corners are labelled A, B and C. '
+    + 'and its corners are labelled $A$, $B$ and $C$. '
     + 'The result is called the image, '
-    + 'and its corners are labelled A prime, B prime and C prime, '
+    + 'and its corners are labelled $A^{\\prime}$, $B^{\\prime}$ and $C^{\\prime}$, '
     + 'written with a small mark after each letter. '
     + 'A translation vector is written as two numbers stacked in '
     + 'brackets, the top one across and the bottom one up. '
@@ -1637,12 +1636,12 @@ teach({
 
   recap:
     'A grid has two number lines crossing at zero. '
-    + 'The flat one is the x axis and the upright one is the y axis. '
+    + 'The flat one is the $x$ axis and the upright one is the $y$ axis. '
     + 'A point is given as two numbers in brackets. '
-    + 'So (3, 2) means go 3 along and 2 up. '
+    + 'So $(3, 2)$ means go 3 along and 2 up. '
     + 'Numbers can be negative too, '
     + 'which means go left or go down, '
-    + 'so (-3, -2) is 3 to the left and 2 down. '
+    + 'so $(-3, -2)$ is 3 to the left and 2 down. '
     + 'The two axes cut the grid into four parts called quadrants. '
     + 'A point can sit in any of them. '
     + 'This lesson moves such points by four rules, '
@@ -1966,7 +1965,7 @@ teach({
     'An angle is measured in degrees. '
     + 'You read one off a protractor by lining its base up with '
     + 'one arm and seeing where the other arm cuts the scale. '
-    + 'A full turn is 360 degrees. '
+    + 'A full turn is $360^\\circ$. '
     + 'North, east, south and west are the four main compass '
     + 'directions, and turning clockwise from north you pass east '
     + 'at a quarter turn, south at a half turn and west at three '
@@ -2197,7 +2196,7 @@ teach({
       'The volume of any prism is the area of its cross section '
       + 'times its length. '
       + 'A cylinder is a prism with a circular cross section, '
-      + 'so its volume is pi r squared times h. '
+      + 'so its volume is $\\pi r^2 h$. '
       + 'Surface area is the total of all the faces, '
       + 'and for a cylinder the curved part unrolls into a rectangle.',
     method: [
@@ -2208,7 +2207,8 @@ teach({
   },
 
   why:
-    '5 metres tall, and the label says 1,000 litres. '
+    'A polytank stands on a platform behind a house. '
+    + 'It is 1.5 metres tall, and the label says 1,000 litres. '
     + 'The family wants to know how many days that water lasts. '
     + 'The painter wants to know how much paint covers the '
     + 'outside. '
@@ -2220,10 +2220,10 @@ teach({
     'A solid with the same cross section all along its length '
     + 'is called a prism, and the flat shape at its end is the '
     + 'cross section. '
-    + 'Volume is measured in cubic units, written as cm with a '
-    + 'small raised 3 and said centimetres cubed. '
-    + 'Surface area is measured in square units, written as cm '
-    + 'with a small raised 2 and said centimetres squared. '
+    + 'Volume is measured in cubic units, written $\\text{cm}^3$ and '
+    + 'said centimetres cubed. '
+    + 'Surface area is measured in square units, written $\\text{cm}^2$ '
+    + 'and said centimetres squared. '
     + 'Those units are how a marker sees at a glance which of the '
     + 'two you found, so giving a volume in square centimetres is '
     + 'the commonest way to lose a mark even when the number is '
@@ -2272,13 +2272,12 @@ teach({
 
   recap:
     'The area of a rectangle is its length times its width, so '
-    + 'a rectangle 5 cm by 3 cm covers 15 square centimetres. '
+    + 'a rectangle 5 cm by 3 cm covers $15 \\text{ cm}^2$. '
     + 'The area of a triangle is half its base times its height, '
-    + 'so a base of 6 cm and a height of 4 cm gives 12 square '
-    + 'centimetres. '
-    + 'The area of a circle is pi times the radius times the '
-    + 'radius, so a radius of 7 cm gives about 154 square '
-    + 'centimetres. '
+    + 'so a base of 6 cm and a height of 4 cm gives '
+    + '$12 \\text{ cm}^2$. '
+    + 'The area of a circle is $\\pi r^2$, '
+    + 'so a radius of 7 cm gives about $154 \\text{ cm}^2$. '
     + 'Each of those is a flat shape with two measurements. '
     + 'This lesson takes a flat shape and carries it along a '
     + 'length to make a solid.',
@@ -2299,21 +2298,21 @@ teach({
       level: 3,
       ask: 'Find the volume of a cuboid 5 cm by 3 cm by 4 cm.',
       steps: [
-        'Cross section $5 \\times 3 = 15$ square cm.',
+        'Cross section $5 \\times 3 = 15 \\text{ cm}^2$.',
         'Multiply by the height 4.',
       ],
-      answer: '60 cubic cm.',
+      answer: '$60 \\text{ cm}^3$.',
     },
     {
       level: 4,
       ask: 'Find the volume of a cylinder of radius 7 cm and height 10 cm, '
-        + 'using 22 over 7.',
+        + 'using $\\frac{22}{7}$.',
       steps: [
         'Cross section is $\\pi r^2$: '
           + '$\\frac{22}{7} \\times 49 = 154$.',
         'Multiply by the height.',
       ],
-      answer: '1540 cubic cm.',
+      answer: '$1540 \\text{ cm}^3$.',
     },
     {
       level: 5,
@@ -2538,12 +2537,12 @@ teach({
     + 'single wall coming out wrong?',
 
   notation:
-    'A scale is written as a ratio with no units, such as 1 to '
-    + '100, which is also written 1:100 and said one to one '
+    'A scale is written as a ratio with no units, such as '
+    + '$1 : 100$, said one to one '
     + 'hundred. '
     + 'It means one unit measured on the drawing stands for a '
     + 'hundred of the same units in real life. '
-    + 'A map scale such as 1:50 000 works the same way, so 1 cm '
+    + 'A map scale such as $1 : 50\\,000$ works the same way, so 1 cm '
     + 'on the map is 50 000 cm, which is 500 m. '
     + 'Leaving the units off a real-life answer is the commonest '
     + 'way to lose a mark, because the scale itself carries none '
@@ -2591,7 +2590,7 @@ teach({
 
   recap:
     'A ratio compares two amounts of the same kind. '
-    + 'Mix cement and sand in the ratio 1 to 3 and every headpan '
+    + 'Mix cement and sand in the ratio $1 : 3$ and every headpan '
     + 'of cement takes three headpans of sand, so 2 headpans of '
     + 'cement take 6 of sand. '
     + 'The ratio stays the same however much you mix. '
@@ -2627,7 +2626,7 @@ teach({
       ask: 'On a map of scale 1 to 50 000, two towns are 4 cm apart. '
         + 'How far apart are they really?',
       steps: [
-        '4 x 50 000 = 200 000 cm.',
+        '$4 \\times 50\\,000 = 200\\,000$ cm.',
         '200 000 cm is 2000 m.',
         '2000 m is 2 km.',
       ],
@@ -2851,14 +2850,14 @@ teach({
     + 'down?',
 
   notation:
-    'The probability of an event A is written P(A) and said the '
-    + 'probability of A. '
+    'The probability of an event $A$ is written $P(A)$ and said the '
+    + 'probability of $A$. '
     + 'It is always a number from 0 to 1, where 0 means it cannot '
     + 'happen and 1 means it is certain, and it may be written as '
     + 'a fraction, a decimal or a percentage. '
-    + 'The event not happening is written P(not A), and it is 1 '
-    + 'take away P(A). '
-    + 'Giving a probability bigger than 1, such as 6 over 4, is '
+    + 'The event not happening is written $P(\\text{not } A)$, '
+    + 'and it is $1 - P(A)$. '
+    + 'Giving a probability bigger than 1, such as $\\frac{6}{4}$, is '
     + 'the commonest way to lose a mark, because it means the top '
     + 'and bottom have been swapped.',
 
@@ -2882,7 +2881,7 @@ teach({
     + 'likely, '
     + 'and learners apply it where they are not. '
     + 'Asking for the probability that it rains tomorrow '
-    + 'is not one over two just because there are two possibilities, '
+    + 'is not $\\frac{1}{2}$ just because there are two possibilities, '
     + 'because rain and no rain are not equally likely. '
     + 'The formula is for a fair die, a fair coin, '
     + 'a well shuffled pack, a bag of counted beads. '
@@ -2905,10 +2904,9 @@ teach({
   recap:
     'A fraction is one number written over another, and it '
     + 'means that many of a number of equal parts. '
-    + 'So 1 over 6 means one part out of six equal parts. '
+    + 'So $\\frac{1}{6}$ means one part out of six equal parts. '
     + 'Two fractions are multiplied by multiplying the tops and '
-    + 'multiplying the bottoms, so 1 over 2 times 1 over 3 is 1 '
-    + 'over 6. '
+    + 'multiplying the bottoms, so $\\frac{1}{2} \\times \\frac{1}{3} = \\frac{1}{6}$. '
     + 'Some things are more likely than others: rain in Kumasi in '
     + 'June is more likely than rain in January. '
     + 'This lesson puts a number on how likely something is, and '
