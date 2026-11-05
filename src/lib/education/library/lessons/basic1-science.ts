@@ -184,6 +184,93 @@ teach({
       level: 1,
     },
     {
+      id: 'lnl-4',
+      ask: 'Is a goat living or non-living?',
+      kind: 'choice',
+      options: ['Non-living', 'Living'],
+      answer: 'Living',
+      teach: 'A goat eats grass, grows bigger and has young ones. It passes '
+        + 'all three tests.',
+      level: 1,
+    },
+    {
+      id: 'lnl-5',
+      ask: 'Which of these is non-living?',
+      kind: 'choice',
+      options: ['A hen', 'A stone', 'A seed', 'A mango tree'],
+      answer: 'A stone',
+      teach: 'A stone does not grow, feed or make young ones. A seed looks '
+        + 'still, but it grows into a plant when it gets water.',
+      level: 1,
+    },
+    {
+      id: 'lnl-6',
+      ask: 'A mango tree does not move. Is it living?',
+      kind: 'choice',
+      options: [
+        'No, it cannot move',
+        'Yes, it grows, drinks and makes seeds',
+        'No, it is made of wood',
+      ],
+      answer: 'Yes, it grows, drinks and makes seeds',
+      teach: 'Moving is not the test. Ask the three questions. The tree '
+        + 'grows, drinks water and makes seeds.',
+      level: 2,
+    },
+    {
+      id: 'lnl-7',
+      ask: 'Which question helps you test if a thing is living?',
+      kind: 'choice',
+      options: [
+        'Does it move?',
+        'Is it big?',
+        'Does it grow by itself?',
+        'Is it a nice colour?',
+      ],
+      answer: 'Does it grow by itself?',
+      teach: 'Moving, size and colour do not tell you. Growing by itself is '
+        + 'one of the three tests, with feeding and making young ones.',
+      level: 2,
+    },
+    {
+      id: 'lnl-8',
+      ask: 'A goat is lying still. It is asleep. Is it living?',
+      kind: 'choice',
+      options: ['Living', 'Non-living'],
+      answer: 'Living',
+      teach: 'Being still does not make a thing non-living. A sleeping goat '
+        + 'still eats, grows and has young ones.',
+      level: 2,
+    },
+    {
+      id: 'lnl-9',
+      ask: 'A ball rolls down a hill. Is it living?',
+      kind: 'choice',
+      options: [
+        'Yes, it moves fast',
+        'No, it does not grow or feed',
+        'Yes, it is round',
+      ],
+      answer: 'No, it does not grow or feed',
+      teach: 'The ball moves, but moving is not the test. It does not grow, '
+        + 'feed or make young balls.',
+      level: 3,
+    },
+    {
+      id: 'lnl-10',
+      ask: 'Kofi has a seed in his hand. It is not growing now. Is it living?',
+      kind: 'choice',
+      options: [
+        'Non-living, it is not growing',
+        'Living, it is resting',
+        'Non-living, it is too small',
+      ],
+      answer: 'Living, it is resting',
+      teach: 'Put the seed in soil and give it water. It grows into a plant. '
+        + 'It is only waiting, not dead.',
+      level: 3,
+    },
+    {
       id: 'lnl-2',
       ask: 'A car moves. Does that make it living?',
       kind: 'choice',
@@ -400,6 +487,93 @@ teach({
         + 'around the thumbs are the places soap does not reach unless you '
         + 'aim for them.',
       level: 2,
+    },
+    {
+      id: 'hyg-4',
+      ask: 'Can hands that look clean still have germs on them?',
+      kind: 'choice',
+      options: ['No, clean is clean', 'Yes, germs are too small to see'],
+      answer: 'Yes, germs are too small to see',
+      teach: 'You cannot see germs. So do not wash only when hands look '
+        + 'dirty. Wash at the right times.',
+      level: 1,
+    },
+    {
+      id: 'hyg-5',
+      ask: 'When else must you wash your hands?',
+      kind: 'choice',
+      options: [
+        'After using the toilet',
+        'After a drink of water',
+        'Before you sleep only',
+      ],
+      answer: 'After using the toilet',
+      teach: 'Germs come from the toilet. Wash after the toilet and before '
+        + 'eating.',
+      level: 1,
+    },
+    {
+      id: 'hyg-6',
+      ask: 'A germ is on a door. Ama touches the door. Where is the germ now?',
+      kind: 'choice',
+      options: ['In her mouth', 'On her hand', 'Gone away'],
+      answer: 'On her hand',
+      teach: 'Follow the path one step at a time. Thing, then hand, then '
+        + 'food, then mouth. After touching, it is on her hand.',
+      level: 2,
+    },
+    {
+      id: 'hyg-7',
+      ask: 'What comes first when you wash your hands?',
+      kind: 'choice',
+      options: ['Dry them', 'Rinse them', 'Wet them', 'Rub the soap'],
+      answer: 'Wet them',
+      teach: 'Wet first. Then rub soap all over. Then rinse. Then dry.',
+      level: 2,
+    },
+    {
+      id: 'hyg-8',
+      ask: 'Why sing a short song while you rub the soap?',
+      kind: 'choice',
+      options: [
+        'To scare the germs',
+        'So you rub for long enough',
+        'To make the water warm',
+      ],
+      answer: 'So you rub for long enough',
+      teach: 'A quick rub misses germs. The song keeps you rubbing long '
+        + 'enough to lift them off.',
+      level: 2,
+    },
+    {
+      id: 'hyg-9',
+      ask: 'Yaw washes his hands. Then he dries them on his dirty shirt. '
+        + 'Are his hands clean?',
+      kind: 'choice',
+      options: [
+        'Yes, he used soap',
+        'No, the shirt puts germs back',
+        'Yes, the shirt is dry',
+      ],
+      answer: 'No, the shirt puts germs back',
+      teach: 'The dirty shirt has germs on it. Drying on it puts them back. '
+        + 'Dry on something clean, or in the air.',
+      level: 3,
+    },
+    {
+      id: 'hyg-10',
+      ask: 'You wash your hands before eating. Which step of the germ path '
+        + 'do you break?',
+      kind: 'choice',
+      options: [
+        'From thing to hand',
+        'From hand to food',
+        'From mouth to tummy',
+      ],
+      answer: 'From hand to food',
+      teach: 'The germs were already on your hand. Washing takes them off '
+        + 'before they get onto your food.',
+      level: 3,
     },
   ],
 })

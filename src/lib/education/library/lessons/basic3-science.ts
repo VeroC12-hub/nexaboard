@@ -47,7 +47,8 @@ teach({
     + 'So we put them into groups. '
     + 'You can group them by how they move. '
     + 'Or by what they eat. '
-    + 'Or by where they live.',
+    + 'Or by where they live. '
+    + 'A fish lives in water. A goat lives on land.',
 
   mechanism:
     'Here is the part people miss. '
@@ -209,6 +210,88 @@ teach({
       teach: 'Ask about moving in water and it is a swimmer. '
         + 'Ask about moving in air and it is a flier. '
         + 'The duck has not changed.',
+      level: 3,
+    },
+    {
+      id: 'ag-4',
+      ask: 'You group animals by how they move. Which group does a bird go in?',
+      kind: 'choice',
+      options: ['Walkers', 'Swimmers', 'Fliers'],
+      answer: 'Fliers',
+      teach: 'The question is how it moves. A bird flies, so it goes with the '
+        + 'fliers.',
+      level: 1,
+    },
+    {
+      id: 'ag-5',
+      ask: 'You group animals by what they eat. A goat eats plants. Which group '
+        + 'does it go in?',
+      kind: 'choice',
+      options: ['Plant eaters', 'Meat eaters', 'Eats both'],
+      answer: 'Plant eaters',
+      teach: 'Now the question is food, not moving. A goat eats only plants, '
+        + 'so it goes with the plant eaters.',
+      level: 1,
+    },
+    {
+      id: 'ag-6',
+      ask: 'You group by what they eat. Where does a lion go?',
+      kind: 'choice',
+      options: ['Plant eaters', 'Meat eaters', 'Walkers'],
+      answer: 'Meat eaters',
+      teach: 'A lion eats meat. Walkers is a group for how it moves, which is '
+        + 'a different question.',
+      level: 2,
+    },
+    {
+      id: 'ag-7',
+      ask: 'A fowl eats seeds and it also eats small animals. Grouping by what '
+        + 'they eat, where does it go?',
+      kind: 'choice',
+      options: ['Plant eaters', 'Meat eaters', 'Eats both'],
+      answer: 'Eats both',
+      teach: 'Seeds come from plants. Small animals are meat. The fowl eats '
+        + 'both, so it goes in the group that eats both.',
+      level: 2,
+    },
+    {
+      id: 'ag-8',
+      ask: 'You group animals by where they live. Where does a goat go?',
+      kind: 'choice',
+      options: ['In water', 'On land', 'With the fliers'],
+      answer: 'On land',
+      teach: 'The question is where it lives. A goat lives on land and a fish '
+        + 'lives in water. Fliers answers a different question.',
+      level: 2,
+    },
+    {
+      id: 'ag-9',
+      ask: 'Yaw sorts animals into big and small. He says a goat is big. '
+        + 'What is the problem?',
+      kind: 'choice',
+      options: [
+        'Big and small depend on what you compare with',
+        'A goat is always small',
+        'There is no problem',
+      ],
+      answer: 'Big and small depend on what you compare with',
+      teach: 'A goat is big beside a rat and small beside a cow. So size is '
+        + 'not a fixed group. Moving, eating and home are clearer questions.',
+      level: 3,
+    },
+    {
+      id: 'ag-10',
+      ask: 'Ama puts a goat with the walkers. Kofi puts it with the plant '
+        + 'eaters. Who is right?',
+      kind: 'choice',
+      options: [
+        'Only Ama',
+        'Only Kofi',
+        'Both, because they asked different questions',
+      ],
+      answer: 'Both, because they asked different questions',
+      teach: 'Ama grouped by how it moves. Kofi grouped by what it eats. The '
+        + 'goat is the same. The question changed, so the group changed.',
       level: 3,
     },
   ],
@@ -437,6 +520,97 @@ teach({
         + 'So they get different materials.',
       level: 3,
     },
+    {
+      id: 'mat-4',
+      ask: 'What material is a spoon made of?',
+      kind: 'choice',
+      options: ['Metal', 'Paper', 'Cloth'],
+      answer: 'Metal',
+      teach: 'The spoon is the thing. Metal is what it is made from. Paper is '
+        + 'the material of a book.',
+      level: 1,
+    },
+    {
+      id: 'mat-5',
+      ask: 'Which of these is a material, not an object?',
+      kind: 'choice',
+      options: ['Window', 'Bottle', 'Glass'],
+      answer: 'Glass',
+      teach: 'A window and a bottle are things. Glass is what they are made '
+        + 'of. Name the stuff, not the thing.',
+      level: 1,
+    },
+    {
+      id: 'mat-6',
+      ask: 'Why is a window made of glass?',
+      kind: 'choice',
+      options: [
+        'It lets light through and keeps the rain out',
+        'It carries heat well',
+        'It bends easily',
+      ],
+      answer: 'It lets light through and keeps the rain out',
+      teach: 'Ask what job a window does. You must see out and stay dry. Glass '
+        + 'does both. Glass does not bend, and carrying heat is a job for metal.',
+      level: 2,
+    },
+    {
+      id: 'mat-7',
+      ask: 'Why are clothes made of cloth?',
+      kind: 'choice',
+      options: [
+        'Cloth stays whole in a fire',
+        'Cloth bends and lets air through',
+        'Cloth lets light through',
+      ],
+      answer: 'Cloth bends and lets air through',
+      teach: 'Clothes must move with your body and let your skin breathe. '
+        + 'Cloth bends and lets air through, so it fits the job.',
+      level: 2,
+    },
+    {
+      id: 'mat-8',
+      ask: 'A window made of wood. What would go wrong?',
+      kind: 'choice',
+      options: [
+        'The rain would get in',
+        'It would melt in the sun',
+        'You could not see out',
+      ],
+      answer: 'You could not see out',
+      teach: 'Wood keeps the rain off, but no light comes through it. A window '
+        + 'must do both jobs. Only glass does both.',
+      level: 2,
+    },
+    {
+      id: 'mat-9',
+      ask: 'Why is a bucket made of plastic and not cloth?',
+      kind: 'choice',
+      options: [
+        'Plastic keeps water in and holds its shape',
+        'Plastic carries heat',
+        'Cloth is too heavy',
+      ],
+      answer: 'Plastic keeps water in and holds its shape',
+      teach: 'A bucket must hold water. Cloth cannot hold a shape on its own. '
+        + 'Plastic keeps water from getting through and stays the right shape.',
+      level: 3,
+    },
+    {
+      id: 'mat-10',
+      ask: 'Kofi says metal is the best material for everything. Why is he '
+        + 'wrong?',
+      kind: 'choice',
+      options: [
+        'Metal is never useful',
+        'Each material fits some jobs and not others',
+        'Metal is always too heavy',
+      ],
+      answer: 'Each material fits some jobs and not others',
+      teach: 'Metal is right for a pot, because it carries heat. It is wrong for '
+        + 'a window, because light cannot get through. Pick the material for the job.',
+      level: 3,
+    },
   ],
 })
 
@@ -628,6 +802,87 @@ teach({
       answer: 'Because you are turning with the Earth',
       teach: 'You cannot feel the Earth turning, so the sun seems to slide. '
         + 'It is like trees rushing past a bus window.',
+      level: 3,
+    },
+    {
+      id: 'dn-4',
+      ask: 'Your side of the Earth is facing the sun. Is it day or night for you?',
+      kind: 'choice',
+      options: ['Night', 'Day', 'It depends on the moon'],
+      answer: 'Day',
+      teach: 'When your side faces the sun, the light reaches you. That is day. '
+        + 'When your side turns away, it is night.',
+      level: 1,
+    },
+    {
+      id: 'dn-5',
+      ask: 'One full turn of the Earth gives you what?',
+      kind: 'choice',
+      options: ['A year', 'One hour', 'A day and a night'],
+      answer: 'A day and a night',
+      teach: 'As the Earth turns once, your side faces the sun and then faces '
+        + 'away. So one turn gives one day and one night.',
+      level: 1,
+    },
+    {
+      id: 'dn-6',
+      ask: 'You use a ball and a torch to show day and night. What does the '
+        + 'torch stand for?',
+      kind: 'choice',
+      options: ['The sun', 'The Earth', 'You'],
+      answer: 'The sun',
+      teach: 'The ball is the Earth and a spot on it is you. The torch gives '
+        + 'the light, so it is the sun.',
+      level: 2,
+    },
+    {
+      id: 'dn-7',
+      ask: 'In the ball and torch model, what do you move?',
+      kind: 'choice',
+      options: [
+        'Move the torch round the ball',
+        'Turn the ball and keep the torch still',
+        'Move both',
+      ],
+      answer: 'Turn the ball and keep the torch still',
+      teach: 'The sun does not move across the sky. The Earth turns. So you '
+        + 'turn the ball and leave the torch where it is.',
+      level: 2,
+    },
+    {
+      id: 'dn-8',
+      ask: 'You sit on a tro-tro and the trees seem to rush past. What is '
+        + 'really moving?',
+      kind: 'choice',
+      options: ['The trees', 'The tro-tro you are on', 'Nothing'],
+      answer: 'The tro-tro you are on',
+      teach: 'The trees stay still. You are moving, so they look like they '
+        + 'move. The sun is the same: you turn with the Earth, so it looks like it moves.',
+      level: 2,
+    },
+    {
+      id: 'dn-9',
+      ask: 'If the Earth stopped turning, what would happen?',
+      kind: 'choice',
+      options: [
+        'Day and night would go on as before',
+        'One half would have day for ever, the other half night',
+        'It would be night everywhere',
+      ],
+      answer: 'One half would have day for ever, the other half night',
+      teach: 'Day and night come from the turning. With no turn, the side '
+        + 'facing the sun stays in light and the far side stays dark.',
+      level: 3,
+    },
+    {
+      id: 'dn-10',
+      ask: 'One turn of the Earth gives a day. What does one trip of the Earth '
+        + 'round the sun give?',
+      kind: 'choice',
+      options: ['A day', 'A night', 'A year'],
+      answer: 'A year',
+      teach: 'These are two different movements. The turn gives a day and a '
+        + 'night. The long trip round the sun gives a year.',
       level: 3,
     },
   ],

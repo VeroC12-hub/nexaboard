@@ -224,6 +224,97 @@ teach({
         + 'How strong it is matters far more than which group it is in.',
       level: 6,
     },
+    {
+      id: 'ab-4',
+      ask: 'Soap is:',
+      kind: 'choice',
+      options: ['Acidic', 'Neutral', 'Basic'],
+      answer: 'Basic',
+      teach: 'Soap feels slippery, and slippery things like soap and '
+        + 'wood ash water are basic. Sour things like lime juice are '
+        + 'the acidic ones.',
+      level: 2,
+    },
+    {
+      id: 'ab-5',
+      ask: 'Pure water is:',
+      kind: 'choice',
+      options: ['Neutral', 'Acidic', 'Basic'],
+      answer: 'Neutral',
+      teach: 'Neutral means neither acidic nor basic. Pure water is the '
+        + 'usual example of a neutral liquid.',
+      level: 2,
+    },
+    {
+      id: 'ab-6',
+      ask: 'What is an indicator?',
+      kind: 'choice',
+      options: [
+        'A liquid that always tastes sour',
+        'A substance that changes colour depending on what it is put in',
+        'A clean cup for testing',
+      ],
+      answer: 'A substance that changes colour depending on what it is put in',
+      teach: 'You cannot tell an acid from a base by looking. An '
+        + 'indicator shows you by turning a different colour, so you '
+        + 'never need to taste.',
+      level: 3,
+    },
+    {
+      id: 'ab-7',
+      ask: 'Vinegar is:',
+      kind: 'choice',
+      options: ['Basic', 'Acidic', 'Neutral'],
+      answer: 'Acidic',
+      teach: 'Vinegar is sour, like lime juice and soured milk, so it '
+        + 'sits with the acids. Baking soda and soap are the bases.',
+      level: 3,
+    },
+    {
+      id: 'ab-8',
+      ask: 'What can you use at home to make an indicator?',
+      kind: 'choice',
+      options: [
+        'Salt stirred into water',
+        'Cooking oil',
+        'Water from boiled red cabbage',
+      ],
+      answer: 'Water from boiled red cabbage',
+      teach: 'Boil chopped red cabbage and keep the coloured liquid. It '
+        + 'changes colour in acids and bases. Salt water and oil do '
+        + 'not.',
+      level: 3,
+    },
+    {
+      id: 'ab-9',
+      ask: 'Why should you test a known acid and a known base beside '
+        + 'the liquid you are asking about?',
+      kind: 'choice',
+      options: [
+        'Your own indicator colours depend on what you made it from',
+        'To use up the indicator',
+        'Acids only work next to bases',
+      ],
+      answer: 'Your own indicator colours depend on what you made it from',
+      teach: 'A cabbage indicator and litmus paper give different '
+        + 'colours. Testing a known acid and base shows you what each '
+        + 'colour means this time.',
+      level: 4,
+    },
+    {
+      id: 'ab-10',
+      ask: 'Why must you test in a clean container?',
+      kind: 'choice',
+      options: [
+        'A dirty one makes the colour brighter',
+        'What was in it before will change your result',
+        'It does not matter at all',
+      ],
+      answer: 'What was in it before will change your result',
+      teach: 'A little lime juice left in the cup will make soap water '
+        + 'look less basic. Then you trust a reading that is wrong.',
+      level: 4,
+    },
   ],
 })
 
@@ -432,6 +523,97 @@ teach({
       answer: 'The arm is longer',
       teach: 'And your end then travels further, which is the trade.',
       level: 6,
+    },
+    {
+      id: 'sm6-4',
+      ask: 'What does a simple machine do?',
+      kind: 'choice',
+      options: [
+        'Makes a load weigh less',
+        'Makes a job easier',
+        'Does the work for you',
+      ],
+      answer: 'Makes a job easier',
+      teach: 'The load weighs the same and the work is the same. The '
+        + 'machine lets you use a smaller force over a longer '
+        + 'distance, so the job is easier.',
+      level: 2,
+    },
+    {
+      id: 'sm6-5',
+      ask: 'A mason rolls a drum up a plank onto a pickup. Which '
+        + 'simple machine is the plank?',
+      kind: 'choice',
+      options: ['A pulley', 'A lever', 'A ramp'],
+      answer: 'A ramp',
+      teach: 'A plank laid from the ground up to a higher place is a '
+        + 'ramp. It lets you raise a load without lifting it straight '
+        + 'up.',
+      level: 2,
+    },
+    {
+      id: 'sm6-6',
+      ask: 'Which of these is a simple machine?',
+      kind: 'choice',
+      options: ['A lever', 'A bucket of water', 'A stone'],
+      answer: 'A lever',
+      teach: 'A lever, a ramp and a pulley are simple machines. A bucket '
+        + 'or a stone does not trade force for distance.',
+      level: 2,
+    },
+    {
+      id: 'sm6-7',
+      ask: 'What does a pulley let you do?',
+      kind: 'choice',
+      options: [
+        'Make the load lighter',
+        'Pull down instead of lifting up',
+        'Lift without any rope',
+      ],
+      answer: 'Pull down instead of lifting up',
+      teach: 'Pulling down on a rope is easier than lifting. You still '
+        + 'pay with more rope pulled for less force.',
+      level: 3,
+    },
+    {
+      id: 'sm6-8',
+      ask: 'A machine makes the force you need smaller. What gets '
+        + 'bigger?',
+      kind: 'choice',
+      options: [
+        'The distance you move',
+        'The weight of the load',
+        'Nothing gets bigger',
+      ],
+      answer: 'The distance you move',
+      teach: 'Every simple machine trades. If the force gets smaller, '
+        + 'the distance gets bigger. Nothing comes free.',
+      level: 4,
+    },
+    {
+      id: 'sm6-9',
+      ask: 'You use a long pole as a lever. Compared with the load, '
+        + 'your end of the pole:',
+      kind: 'choice',
+      options: ['Travels less far', 'Stays still', 'Travels further'],
+      answer: 'Travels further',
+      teach: 'A longer lever needs less push, and the price is that your '
+        + 'end moves a longer way than the load does.',
+      level: 4,
+    },
+    {
+      id: 'sm6-10',
+      ask: 'A ramp has a rough surface. What does that do?',
+      kind: 'choice',
+      options: [
+        'Friction costs you some of what the ramp saved',
+        'It makes the ramp work better',
+        'It changes nothing',
+      ],
+      answer: 'Friction costs you some of what the ramp saved',
+      teach: 'Friction is a drag that works against movement. On a rough '
+        + 'ramp you push against the weight and against the drag.',
+      level: 4,
     },
   ],
 })
@@ -651,6 +833,101 @@ teach({
       teach: 'Otherwise you fix it and never learn what was wrong.',
       level: 6,
     },
+    {
+      id: 'el-4',
+      ask: 'What do you need to light a bulb?',
+      kind: 'choice',
+      options: [
+        'A bulb and a switch only',
+        'A cell, wires and a bulb in a loop',
+        'A cell and a bulb with no wires',
+      ],
+      answer: 'A cell, wires and a bulb in a loop',
+      teach: 'Electricity must leave the cell, pass through the bulb and '
+        + 'come back. The wires make that path, and the loop must be '
+        + 'complete.',
+      level: 2,
+    },
+    {
+      id: 'el-5',
+      ask: 'Which of these lets electricity pass through it?',
+      kind: 'choice',
+      options: ['A wooden spoon', 'A rubber band', 'A metal spoon'],
+      answer: 'A metal spoon',
+      teach: 'Electricity passes through metal, so metal is a conductor. '
+        + 'Wood, rubber and plastic are insulators.',
+      level: 2,
+    },
+    {
+      id: 'el-6',
+      ask: 'Why does a wire have plastic around the metal?',
+      kind: 'choice',
+      options: [
+        'Plastic is an insulator, so the electricity stays in the metal',
+        'Plastic carries electricity better than metal',
+        'Only to make it colourful',
+      ],
+      answer: 'Plastic is an insulator, so the electricity stays in the metal',
+      teach: 'The metal inside is the conductor that carries '
+        + 'electricity. The plastic outside will not let it through, '
+        + 'which keeps it in.',
+      level: 3,
+    },
+    {
+      id: 'el-7',
+      ask: 'What does a switch do in a circuit?',
+      kind: 'choice',
+      options: [
+        'Makes the cell stronger',
+        'Makes a break you can open and close',
+        'Stores electricity for later',
+      ],
+      answer: 'Makes a break you can open and close',
+      teach: 'Open the switch and the loop has a gap, so nothing flows. '
+        + 'Close it and the loop is complete again.',
+      level: 3,
+    },
+    {
+      id: 'el-8',
+      ask: 'In a circuit diagram, what is a circle with a cross in it?',
+      kind: 'choice',
+      options: ['A cell', 'A switch', 'A bulb'],
+      answer: 'A bulb',
+      teach: 'A cell is a long thin line beside a short fat one. A '
+        + 'switch is a line lifted off a dot. The circle with a cross '
+        + 'is the bulb.',
+      level: 3,
+    },
+    {
+      id: 'el-9',
+      ask: 'The bulb does not light. What should you check first?',
+      kind: 'choice',
+      options: [
+        'That each connection is tight',
+        'Swap the bulb and cell together',
+        'Buy a new torch',
+      ],
+      answer: 'That each connection is tight',
+      teach: 'Trace the loop and check the connections first. Then try a '
+        + 'new bulb, then a new cell, changing one thing at a time.',
+      level: 3,
+    },
+    {
+      id: 'el-10',
+      ask: 'A torch flashes once when shaken, then goes dark. What is '
+        + 'most likely wrong?',
+      kind: 'choice',
+      options: [
+        'The bulb is too bright',
+        'A connection is loose',
+        'The cell has too much electricity',
+      ],
+      answer: 'A connection is loose',
+      teach: 'Shaking made two parts touch for a moment, so the loop was '
+        + 'complete for a flash. Then the gap came back. Tighten the '
+        + 'connection.',
+      level: 4,
+    },
   ],
 })
 
@@ -838,6 +1115,94 @@ teach({
       teach: 'Sound needs a material to pass through. '
         + 'A vacuum is silent.',
       level: 6,
+    },
+    {
+      id: 'sn-4',
+      ask: 'Touch your throat while you speak. What do you feel?',
+      kind: 'choice',
+      options: ['Heat', 'Vibration', 'Nothing at all'],
+      answer: 'Vibration',
+      teach: 'Your voice comes from parts in your throat vibrating. '
+        + 'Every sound starts with something shaking like this.',
+      level: 2,
+    },
+    {
+      id: 'sn-5',
+      ask: 'You hold a ringing bell tightly in your hand. What '
+        + 'happens?',
+      kind: 'choice',
+      options: ['The sound stops', 'It gets louder', 'It gets higher'],
+      answer: 'The sound stops',
+      teach: 'Holding the bell stops it vibrating. Stop the vibration '
+        + 'and the sound stops at once.',
+      level: 2,
+    },
+    {
+      id: 'sn-6',
+      ask: 'How do you make a string give a higher note?',
+      kind: 'choice',
+      options: ['Loosen it', 'Make it longer', 'Tighten it'],
+      answer: 'Tighten it',
+      teach: 'A tight string vibrates faster, and faster means higher. '
+        + 'Loose and long both make it slower, so the note goes '
+        + 'lower.',
+      level: 3,
+    },
+    {
+      id: 'sn-7',
+      ask: 'Which drum gives the lower note?',
+      kind: 'choice',
+      options: ['The small drum', 'The large drum', 'They give the same note'],
+      answer: 'The large drum',
+      teach: 'A large drum vibrates more slowly than a small one. Slower '
+        + 'vibration gives a lower note.',
+      level: 3,
+    },
+    {
+      id: 'sn-8',
+      ask: 'What can sound travel through?',
+      kind: 'choice',
+      options: [
+        'Air, water and wood',
+        'Only air',
+        'Empty space with nothing in it',
+      ],
+      answer: 'Air, water and wood',
+      teach: 'Sound needs a material to pass through. Air, water and '
+        + 'wood all carry it. Empty space has nothing to carry it, so '
+        + 'it is silent.',
+      level: 3,
+    },
+    {
+      id: 'sn-9',
+      ask: 'How loud a sound is depends on:',
+      kind: 'choice',
+      options: [
+        'How fast the vibration is',
+        'How big the vibration is',
+        'How long the string is',
+      ],
+      answer: 'How big the vibration is',
+      teach: 'Loud and high are different. Loud is how big the vibration '
+        + 'is. High is how fast it is. A big drum can be loud and low '
+        + 'at once.',
+      level: 4,
+    },
+    {
+      id: 'sn-10',
+      ask: 'A teacher claps at the front of the field. At the back you '
+        + 'see the hands meet before you hear the clap. Why?',
+      kind: 'choice',
+      options: [
+        'The clap is too quiet',
+        'The light reaches you before the sound does',
+        'Your eyes are closer than your ears',
+      ],
+      answer: 'The light reaches you before the sound does',
+      teach: 'Light and sound are different things. Light gets to you '
+        + 'first, and the sound arrives a moment later through the '
+        + 'air.',
+      level: 4,
     },
   ],
 })
@@ -1055,6 +1420,108 @@ teach({
       teach: 'Knowing the limit of what you should handle is part of first '
         + 'aid, not a failure of it.',
       level: 6,
+    },
+    {
+      id: 'fa-4',
+      ask: 'Before you help somebody who is hurt, what do you check?',
+      kind: 'choice',
+      options: [
+        'That it is safe for you',
+        'Where the plasters are',
+        'What time it is',
+      ],
+      answer: 'That it is safe for you',
+      teach: 'If you get hurt too, there are now two people needing '
+        + 'help. Check it is safe for you first.',
+      level: 2,
+    },
+    {
+      id: 'fa-5',
+      ask: 'Somebody has a small cut that is bleeding. What do you do '
+        + 'first?',
+      kind: 'choice',
+      options: [
+        'Put toothpaste on it',
+        'Press on it with a clean cloth',
+        'Leave it open to the air',
+      ],
+      answer: 'Press on it with a clean cloth',
+      teach: 'Pressing with a clean cloth stops the bleeding. Only then '
+        + 'wash the cut with clean water and cover it.',
+      level: 2,
+    },
+    {
+      id: 'fa-6',
+      ask: 'Why should you wash your own hands before treating a cut?',
+      kind: 'choice',
+      options: [
+        'Germs on your hands can get into the cut',
+        'To cool the cut down',
+        'Soap stops bleeding',
+      ],
+      answer: 'Germs on your hands can get into the cut',
+      teach: 'A cut is an opening in the skin, and skin normally keeps '
+        + 'germs out. Washing lifts the germs off your hands first.',
+      level: 3,
+    },
+    {
+      id: 'fa-7',
+      ask: 'The cut has stopped bleeding. What next?',
+      kind: 'choice',
+      options: [
+        'Rub ash into it',
+        'Do nothing else',
+        'Wash it with clean water and cover it',
+      ],
+      answer: 'Wash it with clean water and cover it',
+      teach: 'Washing takes dirt out of the cut, and a cover keeps new '
+        + 'germs out while it heals.',
+      level: 3,
+    },
+    {
+      id: 'fa-8',
+      ask: 'Is fetching an adult a failure of first aid?',
+      kind: 'choice',
+      options: [
+        'Yes, you should manage alone',
+        'No, knowing the limit is part of it',
+        'Only if you are scared',
+      ],
+      answer: 'No, knowing the limit is part of it',
+      teach: 'For anything more than small, fetching an adult at once is '
+        + 'the right first aid. Delay is the real danger.',
+      level: 3,
+    },
+    {
+      id: 'fa-9',
+      ask: 'Your brother burned his arm. After two minutes under the '
+        + 'tap he says it feels better. What do you do?',
+      kind: 'choice',
+      options: [
+        'Keep it under cool water for the full twenty minutes',
+        'Stop, because it has stopped hurting',
+        'Put ice on it instead',
+      ],
+      answer: 'Keep it under cool water for the full twenty minutes',
+      teach: 'The pain eases long before the heat is gone. The damage '
+        + 'goes on under the skin, so keep cooling for twenty '
+        + 'minutes.',
+      level: 4,
+    },
+    {
+      id: 'fa-10',
+      ask: 'Which of these needs an adult fetched at once?',
+      kind: 'choice',
+      options: [
+        'A small scratch on a finger',
+        'A burn on the face',
+        'A small cut that has stopped bleeding',
+      ],
+      answer: 'A burn on the face',
+      teach: 'Deep, large, on the face, or still bleeding means fetch an '
+        + 'adult now. Small cuts and scratches you can clean and '
+        + 'cover.',
+      level: 4,
     },
   ],
 })
@@ -1278,6 +1745,107 @@ teach({
       answer: 'Only the strongest actually get them',
       teach: 'Then most people hold the right in name and not in fact.',
       level: 6,
+    },
+    {
+      id: 'ci-4',
+      ask: 'You have a right to be heard. What duty goes with it?',
+      kind: 'choice',
+      options: [
+        'To speak the loudest',
+        'To listen and wait your turn',
+        'To always speak first',
+      ],
+      answer: 'To listen and wait your turn',
+      teach: 'Everybody holds the right to be heard. All of you can only '
+        + 'be heard if people take turns and listen.',
+      level: 2,
+    },
+    {
+      id: 'ci-5',
+      ask: 'You have a right to be safe. What duty goes with it?',
+      kind: 'choice',
+      options: [
+        'Not to make anybody else unsafe',
+        'To stay at home',
+        'To tell others to keep away',
+      ],
+      answer: 'Not to make anybody else unsafe',
+      teach: 'Everybody has the right to be safe at the same time. That '
+        + 'only works if nobody puts anybody else in danger.',
+      level: 2,
+    },
+    {
+      id: 'ci-6',
+      ask: 'Who holds a right?',
+      kind: 'choice',
+      options: [
+        'Only adults',
+        'Only the strongest',
+        'Everybody at the same time',
+      ],
+      answer: 'Everybody at the same time',
+      teach: 'A right belongs to everybody at once. That is exactly why '
+        + 'each right has a duty beside it.',
+      level: 3,
+    },
+    {
+      id: 'ci-7',
+      ask: 'You have a right to be treated equally. What duty goes '
+        + 'with it?',
+      kind: 'choice',
+      options: [
+        'To be treated better than others',
+        'To treat the others equally',
+        'To ignore people you do not know',
+      ],
+      answer: 'To treat the others equally',
+      teach: 'The duty is the same right seen from the other side. If '
+        + 'you want equal treatment, you must give it too.',
+      level: 3,
+    },
+    {
+      id: 'ci-8',
+      ask: 'Is being a good citizen only about voting?',
+      kind: 'choice',
+      options: [
+        'Yes, only voting counts',
+        'No, most of it is daily, like queueing and taking turns',
+        'No, it is only about paying money',
+      ],
+      answer: 'No, most of it is daily, like queueing and taking turns',
+      teach: 'Citizenship is mostly everyday things: queueing, taking '
+        + 'turns and not spoiling what everybody uses.',
+      level: 3,
+    },
+    {
+      id: 'ci-9',
+      ask: 'Three boys keep the class football for the whole break. No '
+        + 'rule was broken. What went wrong?',
+      kind: 'choice',
+      options: [
+        'They used the right to play so that others could not have it',
+        'Nothing went wrong',
+        'The others should have taken it by force',
+      ],
+      answer: 'They used the right to play so that others could not have it',
+      teach: 'All forty learners have the right to play. It can only be '
+        + 'real for everybody if the ball is shared, and that is the '
+        + 'duty.',
+      level: 4,
+    },
+    {
+      id: 'ci-10',
+      ask: 'How can you work out the duty that sits beside a right?',
+      kind: 'choice',
+      options: [
+        'Wait for an adult to tell you',
+        'Ask what it would take for everybody to have the right at once',
+        'Look for a rule that stops you',
+      ],
+      answer: 'Ask what it would take for everybody to have the right at once',
+      teach: 'You do not need to be told. Whatever it takes for '
+        + 'everybody to hold the right at once is the duty.',
+      level: 4,
     },
   ],
 })
@@ -1506,6 +2074,114 @@ teach({
       teach: 'If they tell you back what the original said, it worked.',
       level: 6,
     },
+    {
+      id: 'tr-4',
+      ask: 'What is the first step when translating a sentence?',
+      kind: 'choice',
+      options: [
+        'Translate the first word',
+        'Read the whole sentence',
+        'Write as you read',
+      ],
+      answer: 'Read the whole sentence',
+      teach: 'Translating as you read makes you choose a shape before '
+        + 'you can see where the sentence is going. Read it all, then '
+        + 'work out what it means.',
+      level: 2,
+    },
+    {
+      id: 'tr-5',
+      ask: 'A Twi message turned word by word into English gives: Me I '
+        + 'say that thing it finish. What went wrong?',
+      kind: 'choice',
+      options: [
+        'One word was spelled wrongly',
+        'Each word was turned on its own, so the meaning was lost',
+        'The message was too short',
+      ],
+      answer: 'Each word was turned on its own, so the meaning was lost',
+      teach: 'Every word was right and the sentence was wrong. Languages '
+        + 'do not line up word by word, so carry the meaning across '
+        + 'instead.',
+      level: 3,
+    },
+    {
+      id: 'tr-6',
+      ask: 'An idiom is translated word for word. What usually '
+        + 'happens?',
+      kind: 'choice',
+      options: [
+        'It means nothing, or the wrong thing',
+        'It becomes a perfect translation',
+        'It gets shorter and clearer',
+      ],
+      answer: 'It means nothing, or the wrong thing',
+      teach: 'An idiom does not mean what its words say. Find what it '
+        + 'means first, then say that in the other language.',
+      level: 3,
+    },
+    {
+      id: 'tr-7',
+      ask: 'You have written your translation. What should you ask as '
+        + 'you read it back?',
+      kind: 'choice',
+      options: [
+        'Does it have the same number of words?',
+        'Are the words in the same order as the original?',
+        'Does it sound like something a person would say?',
+      ],
+      answer: 'Does it sound like something a person would say?',
+      teach: 'Keeping the same words or order often makes it sound '
+        + 'wrong. A good translation sounds natural in the new '
+        + 'language.',
+      level: 3,
+    },
+    {
+      id: 'tr-8',
+      ask: 'The Akan proverb Obi nkyerɛ abɔfra Nyame means:',
+      kind: 'choice',
+      options: [
+        'Somebody not-show child God',
+        'A child comes to know some things without anybody teaching them',
+        'Children should not talk about God',
+      ],
+      answer: 'A child comes to know some things without anybody teaching them',
+      teach: 'Somebody not-show child God is the word for word version, '
+        + 'and it is not English. The meaning is what crosses into '
+        + 'the other language.',
+      level: 4,
+    },
+    {
+      id: 'tr-9',
+      ask: 'One language uses a single word where English needs five. '
+        + 'What should a good translation do?',
+      kind: 'choice',
+      options: [
+        'Use the number of words the meaning needs',
+        'Always keep the same number of words',
+        'Leave that word out',
+      ],
+      answer: 'Use the number of words the meaning needs',
+      teach: 'Languages differ in how many words they need for an idea. '
+        + 'Carry the meaning, and let the word count change.',
+      level: 4,
+    },
+    {
+      id: 'tr-10',
+      ask: 'A joke is built on the sounds of Twi words and cannot be '
+        + 'translated. What does a good translator do?',
+      kind: 'choice',
+      options: [
+        'Pretend nothing was lost',
+        'Refuse to translate the passage',
+        'Choose what to lose and say so',
+      ],
+      answer: 'Choose what to lose and say so',
+      teach: 'Some things truly do not cross between languages. '
+        + 'Pretending nothing was lost is worse than saying honestly '
+        + 'what was.',
+      level: 5,
+    },
   ],
 })
 
@@ -1714,6 +2390,100 @@ teach({
         + 'in whatever order they happened to end up in.',
       level: 6,
     },
+    {
+      id: 'pr-4',
+      ask: 'How many ideas should one slide have?',
+      kind: 'choice',
+      options: ['As many as fit', 'One', 'Five'],
+      answer: 'One',
+      teach: 'One idea per slide lets the class glance, understand the '
+        + 'heading and look back at you.',
+      level: 2,
+    },
+    {
+      id: 'pr-5',
+      ask: 'While you present, where should you look?',
+      kind: 'choice',
+      options: ['At the screen', 'At the floor', 'At the class'],
+      answer: 'At the class',
+      teach: 'Facing the screen sends your voice to the wall. Glance at '
+        + 'the slide if you need to, then turn back to the class.',
+      level: 2,
+    },
+    {
+      id: 'pr-6',
+      ask: 'When should you add a picture to a slide?',
+      kind: 'choice',
+      options: [
+        'On every slide',
+        'When it shows something words cannot',
+        'Never',
+      ],
+      answer: 'When it shows something words cannot',
+      teach: 'A picture should do a job. Add one when it shows what '
+        + 'words cannot, not just to fill space.',
+      level: 3,
+    },
+    {
+      id: 'pr-7',
+      ask: 'Which slide about the Volta Lake is best?',
+      kind: 'choice',
+      options: [
+        'A heading and three short words',
+        'Four full sentences',
+        'Every fact about the lake, in small letters',
+      ],
+      answer: 'A heading and three short words',
+      teach: 'People read faster than you speak. A full slide makes them '
+        + 'read and stop listening. A few words let them glance and '
+        + 'come back to you.',
+      level: 3,
+    },
+    {
+      id: 'pr-8',
+      ask: 'What should you do before the day of the talk?',
+      kind: 'choice',
+      options: [
+        'Practise out loud with the slides',
+        'Only read the slides in your head',
+        'Add more words to every slide',
+      ],
+      answer: 'Practise out loud with the slides',
+      teach: 'Practising out loud shows you where you stumble and how '
+        + 'long it takes, while there is still time to fix it.',
+      level: 3,
+    },
+    {
+      id: 'pr-9',
+      ask: 'A pupil puts everything she knows on four slides and reads '
+        + 'them out. Nobody remembers anything. Why did it fail?',
+      kind: 'choice',
+      options: [
+        'She used too few slides',
+        'The class read the slides and stopped listening to her',
+        'She looked at the class too much',
+      ],
+      answer: 'The class read the slides and stopped listening to her',
+      teach: 'Full slides are read faster than they are spoken, so the '
+        + 'class finishes and waits. Few words keep them listening to '
+        + 'you.',
+      level: 4,
+    },
+    {
+      id: 'pr-10',
+      ask: 'The projector stops working just before your talk. If you '
+        + 'planned the talk first, what can you do?',
+      kind: 'choice',
+      options: [
+        'Give the talk anyway',
+        'Cancel the talk',
+        'Wait until the projector is fixed',
+      ],
+      answer: 'Give the talk anyway',
+      teach: 'If the talk was planned first, the slides were only '
+        + 'helping. You still have everything you meant to say.',
+      level: 4,
+    },
   ],
 })
 
@@ -1757,6 +2527,9 @@ teach({
     + 'and works nothing out at all. '
     + 'A run of cells is written with two dots between the ends, '
     + 'so B3:B10 means every cell from B3 down to B10. '
+    + 'To add up a run of cells, type =SUM( then the run, then a '
+    + 'closing bracket, so =SUM(B3:B10) totals every cell from B3 to '
+    + 'B10. '
     + 'Typing the row number before the column letter, as 3B, '
     + 'is the commonest mistake.',
 
@@ -1945,6 +2718,90 @@ teach({
       teach: 'A range that misses the last row is the commonest spreadsheet '
         + 'error, and it gives a believable answer.',
       level: 6,
+    },
+    {
+      id: 'sp-4',
+      ask: 'In a spreadsheet, how are the columns named?',
+      kind: 'choice',
+      options: ['With numbers', 'With letters', 'With colours'],
+      answer: 'With letters',
+      teach: 'Columns have letters and rows have numbers. So a cell name '
+        + 'is a column letter, then a row number, like B3.',
+      level: 2,
+    },
+    {
+      id: 'sp-5',
+      ask: 'What must a formula start with?',
+      kind: 'choice',
+      options: ['A letter', 'A full stop', 'An equals sign'],
+      answer: 'An equals sign',
+      teach: 'Without the equals sign at the front, the computer treats '
+        + 'what you typed as plain words and works nothing out.',
+      level: 2,
+    },
+    {
+      id: 'sp-6',
+      ask: 'What does B3:B10 mean?',
+      kind: 'choice',
+      options: [
+        'Every cell from B3 down to B10',
+        'Only cells B3 and B10',
+        'B3 divided by B10',
+      ],
+      answer: 'Every cell from B3 down to B10',
+      teach: 'Two dots between two cell names mean the whole run of '
+        + 'cells from one to the other, not just the two ends.',
+      level: 3,
+    },
+    {
+      id: 'sp-7',
+      ask: 'Cells B2 to B5 hold the weights 30, 32, 34 and 36. What '
+        + 'does =SUM(B2:B5) show?',
+      kind: 'numeric',
+      answer: '132',
+      accept: ['132 kg', 'one hundred and thirty two'],
+      teach: '=SUM(B2:B5) adds every cell from B2 to B5. 30 and 32 is '
+        + '62, and 34 and 36 is 70. 62 and 70 is 132.',
+      level: 3,
+    },
+    {
+      id: 'sp-8',
+      ask: 'The weights are in B2, B3, B4 and B5. Which formula totals '
+        + 'all of them?',
+      kind: 'choice',
+      options: ['=SUM(B2:B4)', 'SUM B2 B5', '=SUM(B2:B5)'],
+      answer: '=SUM(B2:B5)',
+      teach: '=SUM(B2:B4) misses the last row and gives a believable '
+        + 'wrong total. SUM B2 B5 has no equals sign, so nothing is '
+        + 'worked out.',
+      level: 4,
+    },
+    {
+      id: 'sp-9',
+      ask: 'Akosua types SUM(B2:B5) with no equals sign. What happens?',
+      kind: 'choice',
+      options: [
+        'It adds the column as normal',
+        'It shows as plain words',
+        'It deletes column B',
+      ],
+      answer: 'It shows as plain words',
+      teach: 'A formula must start with an equals sign. Without it, the '
+        + 'computer shows what you typed and works nothing out.',
+      level: 4,
+    },
+    {
+      id: 'sp-10',
+      ask: 'B2 to B5 hold 30, 32, 34 and 36, and B6 holds =SUM(B2:B5). '
+        + 'A pupil is weighed again and B3 is changed from 32 to 35. '
+        + 'What does B6 show now?',
+      kind: 'numeric',
+      answer: '135',
+      accept: ['135 kg', 'one hundred and thirty five'],
+      teach: 'The formula adds again by itself. The old total was 132, '
+        + 'and B3 went up by 3, so 135. A total typed by hand would '
+        + 'still say 132.',
+      level: 5,
     },
   ],
 })

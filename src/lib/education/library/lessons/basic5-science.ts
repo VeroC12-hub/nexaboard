@@ -222,6 +222,100 @@ teach({
         + 'Find the difference and the method follows.',
       level: 5,
     },
+    {
+      id: 'mx-4',
+      ask: 'How would you separate stones from rice?',
+      kind: 'choice',
+      options: ['Filter it through paper', 'Pick them out by hand', 'Boil it'],
+      answer: 'Pick them out by hand',
+      teach: 'The stones are big enough to see and hold, '
+        + 'so the difference in size lets your fingers do the job. '
+        + 'Filtering is for a solid sitting in a liquid.',
+      level: 1,
+    },
+    {
+      id: 'mx-5',
+      ask: 'How would you take iron filings out of sand?',
+      kind: 'choice',
+      options: ['Boil it', 'Add water', 'Use a magnet'],
+      answer: 'Use a magnet',
+      teach: 'Iron is pulled by a magnet and sand is not. '
+        + 'That difference is the one to use.',
+      level: 1,
+    },
+    {
+      id: 'mx-6',
+      ask: 'Why does a sieve separate a mixture?',
+      kind: 'choice',
+      options: [
+        'Big pieces stay on the mesh and small ones fall through',
+        'The sieve melts the small pieces',
+        'The sieve pulls on iron',
+      ],
+      answer: 'Big pieces stay on the mesh and small ones fall through',
+      teach: 'Sieving uses a difference in size. '
+        + 'The holes are big enough for the small pieces '
+        + 'and too small for the big ones.',
+      level: 2,
+    },
+    {
+      id: 'mx-7',
+      ask: 'Why does filtering separate sand from water?',
+      kind: 'choice',
+      options: [
+        'The sand dissolves into the paper',
+        'Paper lets the water through and holds the sand back',
+        'The water turns to steam in the paper',
+      ],
+      answer: 'Paper lets the water through and holds the sand back',
+      teach: 'Sand does not dissolve, so it stays as solid bits in the water. '
+        + 'The paper catches those bits and lets the liquid pass.',
+      level: 2,
+    },
+    {
+      id: 'mx-8',
+      ask: 'Rice and stones are mixed in a bowl. What are they now?',
+      kind: 'choice',
+      options: [
+        'A new substance',
+        'Still rice and still stones',
+        'Only rice, because the stones are hidden',
+      ],
+      answer: 'Still rice and still stones',
+      teach: 'In a mixture each part keeps being itself. '
+        + 'Nothing has changed, which is why you can separate them again.',
+      level: 2,
+    },
+    {
+      id: 'mx-9',
+      ask: 'Salt has dissolved in a pot of water. How do you get the salt back?',
+      kind: 'choice',
+      options: [
+        'Let the water evaporate, and the salt stays behind',
+        'Pour it through a filter',
+        'Pick the salt out with your fingers',
+      ],
+      answer: 'Let the water evaporate, and the salt stays behind',
+      teach: 'Filtering fails because dissolved salt goes through the paper. '
+        + 'Use a different difference: water evaporates and salt does not.',
+      level: 3,
+    },
+    {
+      id: 'mx-10',
+      ask: 'Kofi filters muddy water through cloth until it looks clear. '
+        + 'Is it safe to drink now?',
+      kind: 'choice',
+      options: [
+        'Yes, it looks clear',
+        'Yes, if he filters it twice',
+        'No, germs pass through, so it must still be boiled',
+      ],
+      answer: 'No, germs pass through, so it must still be boiled',
+      teach: 'Filtering takes out what you can see. '
+        + 'Germs are far too small for the holes in cloth, '
+        + 'so filtered water still has to be boiled.',
+      level: 3,
+    },
   ],
 })
 
@@ -426,6 +520,97 @@ teach({
       teach: 'One year is one point. '
         + 'A climate is what the average does over decades.',
       level: 5,
+    },
+    {
+      id: 'wcl-4',
+      ask: 'What is climate?',
+      kind: 'choice',
+      options: [
+        'What the weather is doing today',
+        'What the weather usually does in a place over many years',
+        'The weather forecast for tomorrow',
+      ],
+      answer: 'What the weather usually does in a place over many years',
+      teach: 'Today’s sky is weather. '
+        + 'Climate is the pattern you find in many years of weather records.',
+      level: 1,
+    },
+    {
+      id: 'wcl-5',
+      ask: 'Which of these belongs in a daily weather record?',
+      kind: 'choice',
+      options: [
+        'What you ate for breakfast',
+        'The names of the trees nearby',
+        'Temperature, rain, wind and cloud',
+      ],
+      answer: 'Temperature, rain, wind and cloud',
+      teach: 'A weather record notes what the sky and air are doing: '
+        + 'how hot, whether it rained, the wind and the cloud.',
+      level: 1,
+    },
+    {
+      id: 'wcl-6',
+      ask: 'A reading says 28 °C. What does it measure?',
+      kind: 'choice',
+      options: ['How much rain fell', 'How hot it is', 'How fast the wind blows'],
+      answer: 'How hot it is',
+      teach: '°C means degrees Celsius, the unit for temperature. '
+        + 'Rain is measured in millimetres instead.',
+      level: 2,
+    },
+    {
+      id: 'wcl-7',
+      ask: 'What unit is rain measured in?',
+      kind: 'choice',
+      options: ['Degrees Celsius', 'Kilograms', 'Millimetres'],
+      answer: 'Millimetres',
+      teach: '12 mm of rain means rain that would stand 12 millimetres deep '
+        + 'in a tin. Always write the unit, '
+        + 'or a bare number could mean heat or rain.',
+      level: 2,
+    },
+    {
+      id: 'wcl-8',
+      ask: 'Abena records rain for three days: Monday 12 mm, Tuesday 0 mm, '
+        + 'Wednesday 5 mm. Which day was wettest?',
+      kind: 'choice',
+      options: ['Tuesday', 'Wednesday', 'Monday'],
+      answer: 'Monday',
+      teach: 'More millimetres means deeper rain in the tin. '
+        + '12 mm is more than 5 mm, and 0 mm means no rain at all.',
+      level: 2,
+    },
+    {
+      id: 'wcl-9',
+      ask: 'Cocoa grows in the south of Ghana and millet in the north. '
+        + 'What explains this?',
+      kind: 'choice',
+      options: [
+        'A difference in climate',
+        'One rainy day in Kumasi',
+        'Last week’s weather',
+      ],
+      answer: 'A difference in climate',
+      teach: 'The south gets rain in most months, year after year. '
+        + 'The north is dry from November to March. '
+        + 'A difference that holds for many years is climate.',
+      level: 2,
+    },
+    {
+      id: 'wcl-10',
+      ask: 'Ama keeps a weather record for one week and no rain falls. '
+        + 'She says her town has a dry climate. Is she right?',
+      kind: 'choice',
+      options: [
+        'Yes, a week is enough',
+        'No, one week shows weather, not climate',
+        'Yes, if she recorded at the same time each day',
+      ],
+      answer: 'No, one week shows weather, not climate',
+      teach: 'A dry week in a wet place is still just weather. '
+        + 'Climate can only be seen in records kept across many years.',
+      level: 3,
     },
   ],
 })
@@ -635,6 +820,105 @@ teach({
         + 'The name describes its width.',
       level: 5,
     },
+    {
+      id: 'dg-4',
+      ask: 'In what order does food travel through the body?',
+      kind: 'choice',
+      options: [
+        'Mouth, stomach, gullet, large intestine, small intestine',
+        'Mouth, gullet, stomach, small intestine, large intestine',
+        'Mouth, gullet, large intestine, stomach, small intestine',
+      ],
+      answer: 'Mouth, gullet, stomach, small intestine, large intestine',
+      teach: 'The gullet comes before the stomach because it carries food down '
+        + 'to it. The small intestine comes before the large one.',
+      level: 1,
+    },
+    {
+      id: 'dg-5',
+      ask: 'Which part carries food from the mouth down to the stomach?',
+      kind: 'choice',
+      options: ['The windpipe', 'The large intestine', 'The gullet'],
+      answer: 'The gullet',
+      teach: 'The gullet is the food tube. '
+        + 'The windpipe carries air to the lungs, a different tube.',
+      level: 1,
+    },
+    {
+      id: 'dg-6',
+      ask: 'What happens to food in the mouth?',
+      kind: 'choice',
+      options: [
+        'Teeth break it up and spit begins to soften it',
+        'The goodness goes into the blood',
+        'Water is taken back out of it',
+      ],
+      answer: 'Teeth break it up and spit begins to soften it',
+      teach: 'The mouth does the first breaking down. '
+        + 'Taking goodness into the blood happens later, '
+        + 'in the small intestine.',
+      level: 2,
+    },
+    {
+      id: 'dg-7',
+      ask: 'What does the stomach do to food?',
+      kind: 'choice',
+      options: [
+        'Takes back water from what is left',
+        'Churns it and adds juices',
+        'Carries it down from the mouth',
+      ],
+      answer: 'Churns it and adds juices',
+      teach: 'The stomach churns food and adds juices that break it down. '
+        + 'Taking back water is the job of the large intestine.',
+      level: 2,
+    },
+    {
+      id: 'dg-8',
+      ask: 'What does the large intestine do?',
+      kind: 'choice',
+      options: [
+        'Takes back water from what is left',
+        'Chews the food',
+        'Takes most of the goodness into the blood',
+      ],
+      answer: 'Takes back water from what is left',
+      teach: 'Most of the goodness has already been taken in by the small '
+        + 'intestine. The large intestine takes back water from what remains.',
+      level: 2,
+    },
+    {
+      id: 'dg-9',
+      ask: 'What happens to the parts of food that cannot be broken down?',
+      kind: 'choice',
+      options: [
+        'They stay in the stomach for ever',
+        'They go into the blood',
+        'They keep going and leave the body as waste',
+      ],
+      answer: 'They keep going and leave the body as waste',
+      teach: 'Only very small pieces can cross into the blood. '
+        + 'Whatever cannot be broken down moves on and leaves as waste.',
+      level: 2,
+    },
+    {
+      id: 'dg-10',
+      ask: 'How does the goodness from a ball of kenkey reach the muscles '
+        + 'in your legs?',
+      kind: 'choice',
+      options: [
+        'The stomach pushes it down into the legs',
+        'It crosses the small intestine wall into the blood, '
+          + 'and the blood carries it',
+        'It travels down the gullet into the legs',
+      ],
+      answer: 'It crosses the small intestine wall into the blood, '
+        + 'and the blood carries it',
+      teach: 'The food is broken into tiny pieces. '
+        + 'They pass through the wall of the small intestine into the blood, '
+        + 'and the blood takes them all round the body.',
+      level: 3,
+    },
   ],
 })
 
@@ -839,6 +1123,96 @@ teach({
       teach: 'Oxygen comes in and carbon dioxide goes out, '
         + 'in the same place at the same time.',
       level: 5,
+    },
+    {
+      id: 'br-4',
+      ask: 'Which way does air travel when you breathe in?',
+      kind: 'choice',
+      options: [
+        'Lungs, windpipe, nose',
+        'Nose, windpipe, lungs',
+        'Mouth, gullet, stomach',
+      ],
+      answer: 'Nose, windpipe, lungs',
+      teach: 'Air comes in at the nose, goes down the windpipe and fills the '
+        + 'lungs. Mouth, gullet and stomach is the road food takes.',
+      level: 1,
+    },
+    {
+      id: 'br-5',
+      ask: 'Which waste gas do you breathe out?',
+      kind: 'choice',
+      options: ['Oxygen', 'Nitrogen', 'Carbon dioxide'],
+      answer: 'Carbon dioxide',
+      teach: 'The body takes oxygen in and puts carbon dioxide back into the '
+        + 'lungs, to be breathed out.',
+      level: 1,
+    },
+    {
+      id: 'br-6',
+      ask: 'Where does the windpipe lead?',
+      kind: 'choice',
+      options: ['To the stomach', 'To the lungs', 'To the small intestine'],
+      answer: 'To the lungs',
+      teach: 'Food and air take different tubes. '
+        + 'The windpipe goes to the lungs; the gullet goes to the stomach.',
+      level: 2,
+    },
+    {
+      id: 'br-7',
+      ask: 'Where do oxygen and carbon dioxide swap places?',
+      kind: 'choice',
+      options: [
+        'Across the thin walls inside the lungs',
+        'In the nose',
+        'In the stomach',
+      ],
+      answer: 'Across the thin walls inside the lungs',
+      teach: 'Inside the lungs, oxygen crosses into the blood '
+        + 'and carbon dioxide crosses out, in the same place at the same time.',
+      level: 2,
+    },
+    {
+      id: 'br-8',
+      ask: 'Most of the air you breathe in is nitrogen. What happens to it?',
+      kind: 'choice',
+      options: [
+        'It goes into the blood',
+        'It turns into oxygen',
+        'It goes straight back out',
+      ],
+      answer: 'It goes straight back out',
+      teach: 'The lungs do not take in all of the air. '
+        + 'Only the oxygen is taken; the nitrogen is breathed out again.',
+      level: 3,
+    },
+    {
+      id: 'br-9',
+      ask: 'How are the lungs like the small intestine?',
+      kind: 'choice',
+      options: [
+        'Both take things in through a thin wall with blood behind it',
+        'Both break food down',
+        'Both are part of the food tube',
+      ],
+      answer: 'Both take things in through a thin wall with blood behind it',
+      teach: 'The small intestine takes in food this way, '
+        + 'and the lungs take in oxygen the same way.',
+      level: 3,
+    },
+    {
+      id: 'br-10',
+      ask: 'Why does smoking make it harder to climb stairs?',
+      kind: 'choice',
+      options: [
+        'It makes the legs heavier',
+        'It damages the surfaces in the lungs, so less oxygen gets in',
+        'It fills the stomach with smoke',
+      ],
+      answer: 'It damages the surfaces in the lungs, so less oxygen gets in',
+      teach: 'Smoke harms the tiny surfaces where the exchange happens. '
+        + 'Less surface means less oxygen for the same effort.',
+      level: 3,
     },
   ],
 })
@@ -1063,6 +1437,94 @@ teach({
         + 'The animals above lose food and the plant below loses a grazer.',
       level: 5,
     },
+    {
+      id: 'fc-4',
+      ask: 'In a food chain, how is the arrow → read?',
+      kind: 'choice',
+      options: ['"eats"', '"is eaten by"', '"is bigger than"'],
+      answer: '"is eaten by"',
+      teach: 'Grass → grasshopper is read "grass is eaten by the '
+        + 'grasshopper". Reading it as "eats" turns the chain backwards.',
+      level: 1,
+    },
+    {
+      id: 'fc-5',
+      ask: 'In grass → grasshopper → lizard → hawk, what eats the lizard?',
+      kind: 'choice',
+      options: ['The grasshopper', 'The hawk', 'The grass'],
+      answer: 'The hawk',
+      teach: 'Follow the arrow out of the lizard: it points to the hawk. '
+        + 'The lizard is eaten by the hawk.',
+      level: 1,
+    },
+    {
+      id: 'fc-6',
+      ask: 'Which food chain is written correctly?',
+      kind: 'choice',
+      options: [
+        'Hawk → lizard → grasshopper → grass',
+        'Grass → grasshopper → lizard → hawk',
+        'Lizard → grass → hawk → grasshopper',
+      ],
+      answer: 'Grass → grasshopper → lizard → hawk',
+      teach: 'Start with the plant and point each arrow from the food to the '
+        + 'eater. The hawk-first chain has every arrow turned round.',
+      level: 2,
+    },
+    {
+      id: 'fc-7',
+      ask: 'Why does almost every food chain begin with a plant?',
+      kind: 'choice',
+      options: [
+        'Plants are the smallest living things',
+        'Plants are always green',
+        'Plants make their own food, and animals cannot',
+      ],
+      answer: 'Plants make their own food, and animals cannot',
+      teach: 'A green leaf makes food from sunlight, water and a gas from the '
+        + 'air. An animal has to eat a plant, or eat something that did.',
+      level: 2,
+    },
+    {
+      id: 'fc-8',
+      ask: 'What does the arrow in a food chain really show?',
+      kind: 'choice',
+      options: [
+        'Which animal is bigger',
+        'Which way the animal runs',
+        'Which way the energy goes',
+      ],
+      answer: 'Which way the energy goes',
+      teach: 'Energy moves out of the food and into the eater, '
+        + 'so the arrow points from the food to the eater.',
+      level: 2,
+    },
+    {
+      id: 'fc-9',
+      ask: 'Where does the energy in a food chain first come from?',
+      kind: 'choice',
+      options: ['The hawk', 'The sun', 'The soil'],
+      answer: 'The sun',
+      teach: 'The plant uses light from the sun to make its food. '
+        + 'So the sun stands behind the whole chain.',
+      level: 3,
+    },
+    {
+      id: 'fc-10',
+      ask: 'A farmer kills all the grasshoppers on his farm. '
+        + 'Later the lizards and hawks are gone too. Why?',
+      kind: 'choice',
+      options: [
+        'The lizards lost their food, and then the hawks lost the lizards',
+        'The hawks ate all the grass',
+        'The lizards and hawks were afraid of the farmer',
+      ],
+      answer: 'The lizards lost their food, and then the hawks lost the lizards',
+      teach: 'Removing one link affects the whole chain. '
+        + 'With no grasshoppers, lizards go hungry, '
+        + 'and with fewer lizards, hawks go hungry too.',
+      level: 3,
+    },
   ],
 })
 
@@ -1274,6 +1736,100 @@ teach({
         + 'At midday the light comes down steeply.',
       level: 5,
     },
+    {
+      id: 'ls-4',
+      ask: 'How does light travel?',
+      kind: 'choice',
+      options: ['In curves round corners', 'In straight lines', 'In circles'],
+      answer: 'In straight lines',
+      teach: 'Light goes straight and cannot bend round an object. '
+        + 'That is why there is a dark patch behind it.',
+      level: 1,
+    },
+    {
+      id: 'ls-5',
+      ask: 'What shape is the shadow of an object?',
+      kind: 'choice',
+      options: [
+        'Always a circle',
+        'The shape of the light',
+        'The outline of the object',
+      ],
+      answer: 'The outline of the object',
+      teach: 'The blocked rays form the same outline as the object, '
+        + 'so the shadow has its shape.',
+      level: 1,
+    },
+    {
+      id: 'ls-6',
+      ask: 'Moving a torch further away from an object makes the shadow:',
+      kind: 'choice',
+      options: ['Bigger', 'Smaller', 'Disappear'],
+      answer: 'Smaller',
+      teach: 'Further away, the rays arrive more nearly side by side, '
+        + 'so the shadow shrinks towards the object’s real size.',
+      level: 2,
+    },
+    {
+      id: 'ls-7',
+      ask: 'What is your shadow like at noon?',
+      kind: 'choice',
+      options: [
+        'Longer than you are tall',
+        'Short, because the sun is high',
+        'Long, because the sun is low',
+      ],
+      answer: 'Short, because the sun is high',
+      teach: 'At noon the light comes down steeply, '
+        + 'so the shadow is a short patch under your feet. '
+        + 'Long shadows come in the morning and evening, when the sun is low.',
+      level: 2,
+    },
+    {
+      id: 'ls-8',
+      ask: 'Why does the sun seem to move across the sky each day?',
+      kind: 'choice',
+      options: [
+        'The Earth turns, and we turn with it',
+        'The sun travels round the Earth',
+        'The wind pushes the sun',
+      ],
+      answer: 'The Earth turns, and we turn with it',
+      teach: 'The sun does not travel across the sky. '
+        + 'The Earth turns once a day, which makes the sun seem to rise and set.',
+      level: 2,
+    },
+    {
+      id: 'ls-9',
+      ask: 'A torch shines on a cup from the left. '
+        + 'You move the torch further to the left side. '
+        + 'Which way does the shadow move?',
+      kind: 'choice',
+      options: ['To the left', 'It does not move', 'To the right'],
+      answer: 'To the right',
+      teach: 'Light goes straight, so the shadow always falls on the side away '
+        + 'from the light. Move the light one way and the shadow moves '
+        + 'the other way.',
+      level: 3,
+    },
+    {
+      id: 'ls-10',
+      ask: 'What is the difference between a shadow and a reflection?',
+      kind: 'choice',
+      options: [
+        'A shadow is light that never arrived; a reflection is light '
+          + 'bouncing back',
+        'They are the same thing',
+        'A shadow is light bouncing back; a reflection is light that never '
+          + 'arrived',
+      ],
+      answer: 'A shadow is light that never arrived; a reflection is light '
+        + 'bouncing back',
+      teach: 'A mirror sends light back to you. '
+        + 'A shadow is the place the light could not reach '
+        + 'because something blocked it.',
+      level: 3,
+    },
   ],
 })
 
@@ -1476,6 +2032,94 @@ teach({
       teach: 'Your hand feels the rate heat leaves it, not the temperature. '
         + 'A thermometer would show both the same.',
       level: 5,
+    },
+    {
+      id: 'ht-4',
+      ask: 'Which of these is a good conductor of heat?',
+      kind: 'choice',
+      options: ['Wood', 'Metal', 'Plastic'],
+      answer: 'Metal',
+      teach: 'Metal carries heat very well, so it is a conductor. '
+        + 'Wood and plastic carry it poorly.',
+      level: 1,
+    },
+    {
+      id: 'ht-5',
+      ask: 'What is a material that holds heat back called?',
+      kind: 'choice',
+      options: ['A conductor', 'A thermometer', 'An insulator'],
+      answer: 'An insulator',
+      teach: 'A conductor carries heat well. '
+        + 'An insulator holds it back, like wood, plastic or still air.',
+      level: 1,
+    },
+    {
+      id: 'ht-6',
+      ask: 'Why are cooking pots made of metal?',
+      kind: 'choice',
+      options: [
+        'Metal carries heat from the fire into the food',
+        'Metal keeps the food cool',
+        'Metal holds heat back',
+      ],
+      answer: 'Metal carries heat from the fire into the food',
+      teach: 'The pot has to conduct heat into the food, '
+        + 'so it is made of a good conductor.',
+      level: 2,
+    },
+    {
+      id: 'ht-7',
+      ask: 'Why are pot handles often made of wood or plastic?',
+      kind: 'choice',
+      options: [
+        'They carry heat quickly to your hand',
+        'They are insulators, so the handle stays cool enough to hold',
+        'They make the pot heat faster',
+      ],
+      answer: 'They are insulators, so the handle stays cool enough to hold',
+      teach: 'The pot must conduct and the handle must not. '
+        + 'Wood and plastic carry heat poorly, so your hand is safe.',
+      level: 2,
+    },
+    {
+      id: 'ht-8',
+      ask: 'A metal bench feels colder than a wooden one. '
+        + 'How can you find out which is really colder?',
+      kind: 'choice',
+      options: ['Touch both again', 'Look at them', 'Use a thermometer'],
+      answer: 'Use a thermometer',
+      teach: 'Your hand feels how fast heat leaves it, not the temperature. '
+        + 'A thermometer measures the temperature itself.',
+      level: 2,
+    },
+    {
+      id: 'ht-9',
+      ask: 'You hold a piece of ice in your hand. Which way does heat move?',
+      kind: 'choice',
+      options: [
+        'From your hand into the ice',
+        'From the ice into your hand',
+        'Cold moves from the ice into your hand',
+      ],
+      answer: 'From your hand into the ice',
+      teach: 'Heat always moves from hotter to cooler. Your hand is warmer, '
+        + 'so heat leaves it, and that is why your hand feels cold. '
+        + 'Cold does not move.',
+      level: 3,
+    },
+    {
+      id: 'ht-10',
+      ask: 'Why does a blanket keep you warm on a harmattan night?',
+      kind: 'choice',
+      options: [
+        'It makes heat of its own',
+        'It holds still air, which slows heat leaving your body',
+        'It pushes the cold away',
+      ],
+      answer: 'It holds still air, which slows heat leaving your body',
+      teach: 'Still air is a poor conductor, so it is a good insulator. '
+        + 'The blanket traps it and slows the heat leaving you.',
+      level: 3,
     },
   ],
 })
@@ -1709,6 +2353,100 @@ teach({
         + 'can. That works even for a disease nobody has met yet.',
       level: 5,
     },
+    {
+      id: 'dis-4',
+      ask: 'What is a germ?',
+      kind: 'choice',
+      options: [
+        'A kind of insect',
+        'A dirty spot you can see',
+        'A living thing far too small to see',
+      ],
+      answer: 'A living thing far too small to see',
+      teach: 'Germs are alive and far too small to see. '
+        + 'That is why something can look clean and still carry them.',
+      level: 1,
+    },
+    {
+      id: 'dis-5',
+      ask: 'Which of these helps to stop cholera?',
+      kind: 'choice',
+      options: [
+        'Sleeping under a net',
+        'Washing hands with soap before eating',
+        'Wearing a hat',
+      ],
+      answer: 'Washing hands with soap before eating',
+      teach: 'Cholera travels from waste to the mouth. '
+        + 'Clean hands break that route. A net cuts the malaria route instead.',
+      level: 1,
+    },
+    {
+      id: 'dis-6',
+      ask: 'Where do mosquitoes lay their eggs?',
+      kind: 'choice',
+      options: ['In dry sand', 'In standing water', 'In cooked food'],
+      answer: 'In standing water',
+      teach: 'The young grow in standing water and fly out as grown mosquitoes. '
+        + 'Emptying old tins and pots of water stops them being born.',
+      level: 1,
+    },
+    {
+      id: 'dis-7',
+      ask: 'Why does sleeping under a treated net protect against malaria?',
+      kind: 'choice',
+      options: [
+        'The mosquitoes that carry malaria mostly bite at night',
+        'The net keeps cholera germs out',
+        'The net keeps the room cool',
+      ],
+      answer: 'The mosquitoes that carry malaria mostly bite at night',
+      teach: 'The net covers the hours when most of the biting happens, '
+        + 'so it cuts the malaria route at the bite.',
+      level: 2,
+    },
+    {
+      id: 'dis-8',
+      ask: 'Yaw empties old tyres and tins that hold rainwater. '
+        + 'Which disease does this help prevent?',
+      kind: 'choice',
+      options: ['Cholera', 'Neither', 'Malaria'],
+      answer: 'Malaria',
+      teach: 'Standing water is where mosquitoes breed. '
+        + 'No water, no young mosquitoes, so fewer malaria bites.',
+      level: 2,
+    },
+    {
+      id: 'dis-9',
+      ask: 'A mother boils all the drinking water. Cholera stops, '
+        + 'but malaria comes back. Why?',
+      kind: 'choice',
+      options: [
+        'Malaria travels by mosquito bite, not by drinking water',
+        'She did not boil the water long enough',
+        'Boiling makes malaria stronger',
+      ],
+      answer: 'Malaria travels by mosquito bite, not by drinking water',
+      teach: 'Each disease has its own route. '
+        + 'Boiling cuts the cholera route. '
+        + 'Malaria needs a net or no standing water.',
+      level: 3,
+    },
+    {
+      id: 'dis-10',
+      ask: 'Why is it safer to break the cholera route in more than one place?',
+      kind: 'choice',
+      options: [
+        'Breaking one place never works',
+        'If one habit slips, another still stops the disease',
+        'It is not safer',
+      ],
+      answer: 'If one habit slips, another still stops the disease',
+      teach: 'Any one break stops that journey. '
+        + 'But people forget, so safe toilets, safe water and clean hands '
+        + 'together are much safer than one habit alone.',
+      level: 3,
+    },
   ],
 })
 
@@ -1935,6 +2673,87 @@ teach({
       teach: 'Treating the water is only half the job. '
         + 'Storing and serving it cleanly is the other half.',
       level: 5,
+    },
+    {
+      id: 'ws-4',
+      ask: 'How does water get dirty?',
+      kind: 'choice',
+      options: [
+        'Waste, animals and run off get into it',
+        'It is stored in a covered container',
+        'The sun shines on it',
+      ],
+      answer: 'Waste, animals and run off get into it',
+      teach: 'Water becomes unsafe when waste, animals or run off reach it. '
+        + 'Covering stored water helps keep it safe.',
+      level: 1,
+    },
+    {
+      id: 'ws-5',
+      ask: 'How should you store water after boiling it?',
+      kind: 'choice',
+      options: [
+        'In an open bucket',
+        'In a covered container',
+        'In a used cup left outside',
+      ],
+      answer: 'In a covered container',
+      teach: 'An open bucket lets dust and insects back in. '
+        + 'Keep it covered and pour it out cleanly.',
+      level: 1,
+    },
+    {
+      id: 'ws-6',
+      ask: 'Why can germs pass through a cloth filter?',
+      kind: 'choice',
+      options: [
+        'Cloth feeds the germs',
+        'Germs can jump over the cloth',
+        'Germs are far smaller than the holes in the cloth',
+      ],
+      answer: 'Germs are far smaller than the holes in the cloth',
+      teach: 'Cloth catches mud and grit. '
+        + 'Germs are so small they slip straight through the gaps.',
+      level: 2,
+    },
+    {
+      id: 'ws-7',
+      ask: 'Water from the stream is brown. What is the right order to make '
+        + 'it safe?',
+      kind: 'choice',
+      options: [
+        'Strain it only',
+        'Boil it only, and drink it brown',
+        'Strain it until clear, then boil it',
+      ],
+      answer: 'Strain it until clear, then boil it',
+      teach: 'The two steps are not choices; you want both. '
+        + 'Straining makes it clear. Boiling makes it safe.',
+      level: 2,
+    },
+    {
+      id: 'ws-8',
+      ask: 'For how long should water be kept at a rolling boil?',
+      kind: 'choice',
+      options: ['About one second', 'About a minute', 'About a week'],
+      answer: 'About a minute',
+      teach: 'Bring it to a rolling boil, with big bubbles, '
+        + 'and keep it there for about a minute to kill the germs.',
+      level: 2,
+    },
+    {
+      id: 'ws-9',
+      ask: 'Besides boiling, which is a way to make water safe to drink?',
+      kind: 'choice',
+      options: [
+        'Pour it through cloth twice',
+        'Use a water treatment product as its instructions say',
+        'Leave it in an open bucket overnight',
+      ],
+      answer: 'Use a water treatment product as its instructions say',
+      teach: 'Straining twice still lets germs through. '
+        + 'Boiling or a water treatment product kills them.',
+      level: 3,
     },
   ],
 })
@@ -2166,6 +2985,97 @@ teach({
       teach: 'Every harvest removes substances. '
         + 'Compost, manure or a rest restores them.',
       level: 5,
+    },
+    {
+      id: 'sf-4',
+      ask: 'You squeeze a wet handful of soil and it stays in a sticky lump. '
+        + 'What kind of soil is it?',
+      kind: 'choice',
+      options: ['Sandy', 'Loam', 'Clay'],
+      answer: 'Clay',
+      teach: 'Sandy soil falls apart at once. Loam holds loosely and crumbles. '
+        + 'A sticky lump is clay.',
+      level: 1,
+    },
+    {
+      id: 'sf-5',
+      ask: 'A wet handful holds together loosely and then crumbles. '
+        + 'What kind of soil is it?',
+      kind: 'choice',
+      options: ['Loam', 'Clay', 'Sandy'],
+      answer: 'Loam',
+      teach: 'Loam is a mix of sand and clay, '
+        + 'so it holds together a little and still breaks into crumbs.',
+      level: 1,
+    },
+    {
+      id: 'sf-6',
+      ask: 'What do a plant’s roots take from the soil?',
+      kind: 'choice',
+      options: [
+        'Water, and the substances dissolved in it',
+        'Ready made food',
+        'Sunlight',
+      ],
+      answer: 'Water, and the substances dissolved in it',
+      teach: 'The leaves make the plant’s food using sunlight. '
+        + 'The roots take water, with substances dissolved in it, '
+        + 'from the soil.',
+      level: 2,
+    },
+    {
+      id: 'sf-7',
+      ask: 'Where does a plant make its food?',
+      kind: 'choice',
+      options: ['In the soil', 'In the leaves, using sunlight', 'In the roots'],
+      answer: 'In the leaves, using sunlight',
+      teach: 'A plant gets its food from above and its water from below. '
+        + 'The soil does not hand it food ready made.',
+      level: 2,
+    },
+    {
+      id: 'sf-8',
+      ask: 'How can a farmer put goodness back into the soil after harvest?',
+      kind: 'choice',
+      options: [
+        'Add compost or manure',
+        'Water it more every day',
+        'Plant the same crop faster',
+      ],
+      answer: 'Add compost or manure',
+      teach: 'Each crop takes substances out of the soil. '
+        + 'Compost, manure or resting the field puts them back.',
+      level: 2,
+    },
+    {
+      id: 'sf-9',
+      ask: 'Why does clay soil waterlog?',
+      kind: 'choice',
+      options: [
+        'It has large grains with big gaps',
+        'It holds the water and squeezes out the air',
+        'It has too much air',
+      ],
+      answer: 'It holds the water and squeezes out the air',
+      teach: 'Big gaps belong to sandy soil, which drains fast. '
+        + 'Clay holds water so tightly that there is little room for air.',
+      level: 3,
+    },
+    {
+      id: 'sf-10',
+      ask: 'Abena waters her tomatoes in clay soil many times a day, '
+        + 'and they start to die. Why?',
+      kind: 'choice',
+      options: [
+        'Too much water makes them grow too fast',
+        'Clay soil holds no water',
+        'The soil is waterlogged, so the roots get no air',
+      ],
+      answer: 'The soil is waterlogged, so the roots get no air',
+      teach: 'More water is not always better. '
+        + 'Roots need air as well as water, '
+        + 'and soggy clay squeezes the air out.',
+      level: 3,
     },
   ],
 })

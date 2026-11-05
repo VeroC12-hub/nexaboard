@@ -251,6 +251,84 @@ teach({
         + 'The heap pours, but no single grain changes shape.',
       level: 4,
     },
+    {
+      id: 'som-4',
+      ask: 'Which of these is a gas?',
+      kind: 'choice',
+      options: ['Kerosene in a bottle', 'The air inside a balloon', 'A stone'],
+      answer: 'The air inside a balloon',
+      teach: 'A gas spreads out to fill whatever it is in, so the air fills '
+        + 'the whole balloon. '
+        + 'Kerosene is a liquid and a stone is a solid.',
+      level: 1,
+    },
+    {
+      id: 'som-5',
+      ask: 'Kofi moves a stone from a bowl into a box. '
+        + 'What happens to its shape?',
+      kind: 'choice',
+      options: [
+        'It takes the shape of the box',
+        'It keeps its own shape',
+        'It spreads out to fill the box',
+      ],
+      answer: 'It keeps its own shape',
+      teach: 'A stone is a solid. '
+        + 'Its tiny parts are locked in place, so its shape does not change '
+        + 'when the container changes.',
+      level: 1,
+    },
+    {
+      id: 'som-6',
+      ask: 'What makes ice turn into water?',
+      kind: 'choice',
+      options: ['Cold', 'Shaking it', 'Heat'],
+      answer: 'Heat',
+      teach: 'Heat loosens the hold between the tiny parts, so they can '
+        + 'slide. '
+        + 'Taking heat away does the opposite and makes ice.',
+      level: 2,
+    },
+    {
+      id: 'som-7',
+      ask: 'In which state are the tiny parts far apart and moving fast?',
+      kind: 'choice',
+      options: ['Solid', 'Gas', 'Liquid'],
+      answer: 'Gas',
+      teach: 'In a solid they are locked in place. '
+        + 'In a liquid they touch and slide. '
+        + 'Only in a gas are they far apart and moving fast.',
+      level: 2,
+    },
+    {
+      id: 'som-8',
+      ask: 'When ice melts into water, what changes?',
+      kind: 'choice',
+      options: [
+        'What substance it is',
+        'How tightly its tiny parts are held',
+        'It turns into air',
+      ],
+      answer: 'How tightly its tiny parts are held',
+      teach: 'It is still the same water. '
+        + 'Only the hold between the parts gets looser, so it can flow.',
+      level: 3,
+    },
+    {
+      id: 'som-9',
+      ask: 'A pot of water boils dry. Where did the water go?',
+      kind: 'choice',
+      options: [
+        'Into the air as a gas',
+        'It was destroyed',
+        'Into the metal of the pot',
+      ],
+      answer: 'Into the air as a gas',
+      teach: 'It looks as if the water vanished. '
+        + 'Heat made the parts move fast enough to escape, and they spread '
+        + 'into the air as water vapour.',
+      level: 3,
+    },
   ],
 })
 
@@ -437,6 +515,83 @@ teach({
       answer: 'No, they are tiny liquid drops',
       teach: 'Vapour cannot be seen. '
         + 'You can see a cloud, so it must already have turned back to liquid.',
+      level: 4,
+    },
+    {
+      id: 'wc-4',
+      ask: 'What is the step called when water rises from the sea as vapour?',
+      kind: 'choice',
+      options: ['Condensation', 'Evaporation', 'Precipitation'],
+      answer: 'Evaporation',
+      teach: 'Evaporation is water going up as a gas. '
+        + 'Condensation is the gas turning back into drops. '
+        + 'Precipitation is rain falling.',
+      level: 2,
+    },
+    {
+      id: 'wc-5',
+      ask: 'What is rain falling from the clouds called?',
+      kind: 'choice',
+      options: ['Evaporation', 'Condensation', 'Precipitation'],
+      answer: 'Precipitation',
+      teach: 'The drops in a cloud grow heavy and fall. '
+        + 'That falling step is precipitation.',
+      level: 2,
+    },
+    {
+      id: 'wc-6',
+      ask: 'A puddle disappears on a sunny afternoon. Where did the water go?',
+      kind: 'choice',
+      options: [
+        'It turned into nothing',
+        'Into the air as vapour',
+        'Up into the sun',
+      ],
+      answer: 'Into the air as vapour',
+      teach: 'The water did not turn into nothing. '
+        + 'The sun heated it and it rose into the air as vapour.',
+      level: 2,
+    },
+    {
+      id: 'wc-7',
+      ask: 'Why does water vapour turn back into drops high up in the sky?',
+      kind: 'choice',
+      options: [
+        'Because the sun is closer',
+        'Because the wind squeezes it',
+        'Because it is cold up high',
+      ],
+      answer: 'Because it is cold up high',
+      teach: 'Heat makes water rise as a gas. '
+        + 'Cold turns that gas back into tiny drops, and up high it is cold.',
+      level: 3,
+    },
+    {
+      id: 'wc-8',
+      ask: 'Which order is right, starting at the sea?',
+      kind: 'choice',
+      options: [
+        'Sea, clouds, vapour, river, rain',
+        'Sea, vapour, clouds, rain, river',
+        'Rain, vapour, sea, clouds, river',
+      ],
+      answer: 'Sea, vapour, clouds, rain, river',
+      teach: 'Water must rise as vapour before it can make clouds, and it '
+        + 'must fall as rain before rivers can carry it back.',
+      level: 3,
+    },
+    {
+      id: 'wc-9',
+      ask: 'Is the rain that falls in Tamale today new water?',
+      kind: 'choice',
+      options: [
+        'Yes, the clouds make new water',
+        'No, it is the same water going round again',
+        'Yes, the sun makes new water',
+      ],
+      answer: 'No, it is the same water going round again',
+      teach: 'No water leaves the Earth, and clouds do not make new water. '
+        + 'The same water rises, falls and runs back, over and over.',
       level: 4,
     },
   ],
@@ -651,6 +806,81 @@ teach({
       teach: 'The same creature, rebuilt during the pupa stage. '
         + 'Like you and your baby photograph.',
       level: 3,
+    },
+    {
+      id: 'lc-4',
+      ask: 'What is the first stage of a bean plant?',
+      kind: 'choice',
+      options: ['Flower', 'Sprout', 'Seed'],
+      answer: 'Seed',
+      teach: 'A bean plant starts as a seed. '
+        + 'Then it sprouts, grows, and flowers to make new seeds.',
+      level: 1,
+    },
+    {
+      id: 'lc-5',
+      ask: 'What comes after the caterpillar in a butterfly life cycle?',
+      kind: 'choice',
+      options: ['Egg', 'Pupa', 'Adult'],
+      answer: 'Pupa',
+      teach: 'Egg, caterpillar, pupa, adult. '
+        + 'The pupa looks still, but the whole body is being rebuilt inside '
+        + 'it.',
+      level: 2,
+    },
+    {
+      id: 'lc-6',
+      ask: 'Which is the right order for a bean plant?',
+      kind: 'choice',
+      options: [
+        'Sprout, seed, flowers, growing plant',
+        'Seed, sprout, growing plant, flowers then new seeds',
+        'Flowers, seed, growing plant, sprout',
+      ],
+      answer: 'Seed, sprout, growing plant, flowers then new seeds',
+      teach: 'Start at the beginning, the seed, and name each stage in turn. '
+        + 'The flowers make new seeds, so the ring starts again.',
+      level: 2,
+    },
+    {
+      id: 'lc-7',
+      ask: 'A mosquito has four stages. How many of them happen in water?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three'],
+      teach: 'Egg, larva and pupa are all in water. '
+        + 'Only the adult flies. '
+        + 'So three of the four need water.',
+      level: 2,
+    },
+    {
+      id: 'lc-8',
+      ask: 'How does an adult butterfly start the cycle again?',
+      kind: 'choice',
+      options: [
+        'It turns back into a caterpillar',
+        'It becomes a pupa again',
+        'It lays eggs',
+      ],
+      answer: 'It lays eggs',
+      teach: 'The last stage makes a new beginning. '
+        + 'The adult lays eggs, and each egg starts the ring again. '
+        + 'It never turns back into a caterpillar.',
+      level: 3,
+    },
+    {
+      id: 'lc-9',
+      ask: 'Why do a caterpillar and a butterfly not fight over food?',
+      kind: 'choice',
+      options: [
+        'They eat the same food at different times',
+        'The caterpillar eats leaves and the butterfly drinks nectar',
+        'The butterfly does not eat at all',
+      ],
+      answer: 'The caterpillar eats leaves and the butterfly drinks nectar',
+      teach: 'The young and the adult look different and eat different food. '
+        + 'So they can share a place without competing.',
+      level: 4,
     },
   ],
 })
@@ -873,6 +1103,83 @@ teach({
       teach: 'Lose it too early and the adult tooth can come through crooked.',
       level: 4,
     },
+    {
+      id: 'th-4',
+      ask: 'Which teeth tear food?',
+      kind: 'choice',
+      options: ['Incisors', 'Canines', 'Molars'],
+      answer: 'Canines',
+      teach: 'Canines are the pointed ones. '
+        + 'The word comes from dog, and a dog tears with its long pointed '
+        + 'teeth. '
+        + 'Incisors cut and molars grind.',
+      level: 1,
+    },
+    {
+      id: 'th-5',
+      ask: 'Ama bites into a mango with her flat front teeth. '
+        + 'What are they called?',
+      kind: 'choice',
+      options: ['Molars', 'Canines', 'Incisors'],
+      answer: 'Incisors',
+      teach: 'Biting is cutting, and the flat thin teeth at the front cut. '
+        + 'Those are the incisors.',
+      level: 2,
+    },
+    {
+      id: 'th-6',
+      ask: 'Where do the germs on your teeth get their food?',
+      kind: 'choice',
+      options: [
+        'From sugar left on the teeth',
+        'From the toothpaste',
+        'From clean water',
+      ],
+      answer: 'From sugar left on the teeth',
+      teach: 'Germs eat the sugar you leave behind. '
+        + 'What they make from it is acid, and the acid harms the tooth.',
+      level: 2,
+    },
+    {
+      id: 'th-7',
+      ask: 'How long should you brush your teeth?',
+      kind: 'choice',
+      options: ['About ten seconds', 'About two minutes', 'About half an hour'],
+      answer: 'About two minutes',
+      teach: 'Ten seconds cannot reach every surface. '
+        + 'Brush outside, inside and the chewing tops for about two minutes.',
+      level: 2,
+    },
+    {
+      id: 'th-8',
+      ask: 'Why does brushing at night matter most?',
+      kind: 'choice',
+      options: [
+        'Teeth are softer at night',
+        'Germs sleep in the day',
+        'You make less spit while you sleep',
+      ],
+      answer: 'You make less spit while you sleep',
+      teach: 'Spit washes acid away in the day. '
+        + 'At night there is much less spit, so food left on the teeth does '
+        + 'more harm.',
+      level: 3,
+    },
+    {
+      id: 'th-9',
+      ask: 'Kofi and Ama each eat four sweets. '
+        + 'Kofi eats all four at once. '
+        + 'Ama eats one every hour. '
+        + 'Whose teeth are at greater risk?',
+      kind: 'choice',
+      options: ['Kofi’s', 'Ama’s', 'Both the same'],
+      answer: 'Ama’s',
+      teach: 'They ate the same amount, but Ama fed the germs four separate '
+        + 'times. '
+        + 'Every time there is sugar, there is an acid attack. '
+        + 'How often matters more than how much.',
+      level: 4,
+    },
   ],
 })
 
@@ -1077,6 +1384,99 @@ teach({
       teach: 'Oil keeps the surfaces from rubbing directly, '
         + 'so there is less wear and less wasted heat.',
       level: 4,
+    },
+    {
+      id: 'fp-4',
+      ask: 'Rub your hands together fast. What do you feel?',
+      kind: 'choice',
+      options: ['They get cold', 'They get wet', 'They get warm'],
+      answer: 'They get warm',
+      teach: 'That rubbing is friction, and friction turns movement into '
+        + 'heat.',
+      level: 1,
+    },
+    {
+      id: 'fp-5',
+      ask: 'Which way does friction push on a moving ball?',
+      kind: 'choice',
+      options: [
+        'The same way it is moving',
+        'Against the way it is moving',
+        'Straight up',
+      ],
+      answer: 'Against the way it is moving',
+      teach: 'Friction always pushes against the movement. '
+        + 'That is why a rolling ball slows down and stops.',
+      level: 2,
+    },
+    {
+      id: 'fp-6',
+      ask: 'Kwame kicks a ball the same way on smooth cement and on sand. '
+        + 'Where does it roll further?',
+      kind: 'choice',
+      options: ['On the sand', 'On the smooth cement', 'The same on both'],
+      answer: 'On the smooth cement',
+      teach: 'Sand is rough, so it gives more friction and stops the ball '
+        + 'sooner. '
+        + 'Smooth cement gives less friction.',
+      level: 2,
+    },
+    {
+      id: 'fp-7',
+      ask: 'In which of these does friction help?',
+      kind: 'choice',
+      options: [
+        'Machine parts wearing out',
+        'Shoes gripping the ground',
+        'Effort wasted as heat',
+      ],
+      answer: 'Shoes gripping the ground',
+      teach: 'Friction stops your shoes slipping. '
+        + 'Wearing out machine parts and wasting effort as heat are times it '
+        + 'gets in the way.',
+      level: 2,
+    },
+    {
+      id: 'fp-8',
+      ask: 'Does a smooth tile floor have any friction?',
+      kind: 'choice',
+      options: [
+        'No, smooth means none',
+        'Yes, but less than a rough floor',
+        'Yes, more than sand',
+      ],
+      answer: 'Yes, but less than a rough floor',
+      teach: 'Smooth means less friction, not none. '
+        + 'Even tiles push back a little, which is why a ball on them still '
+        + 'stops in the end.',
+      level: 3,
+    },
+    {
+      id: 'fp-9',
+      ask: 'A bicycle chain is stiff and squeaks. '
+        + 'What would lower the friction?',
+      kind: 'choice',
+      options: [
+        'Rubbing sand on it',
+        'Pressing harder on it',
+        'Putting oil on it',
+      ],
+      answer: 'Putting oil on it',
+      teach: 'Oil puts a slippery layer between the parts. '
+        + 'Sand would make it rougher, and pressing harder gives more '
+        + 'friction.',
+      level: 3,
+    },
+    {
+      id: 'fp-10',
+      ask: 'Akosua keeps slipping on a wet floor. '
+        + 'What kind of shoe soles would help?',
+      kind: 'choice',
+      options: ['Smoother soles', 'Rougher soles', 'Oiled soles'],
+      answer: 'Rougher soles',
+      teach: 'Here friction helps, so she wants more of it. '
+        + 'Rougher surfaces give more friction and more grip.',
+      level: 3,
     },
   ],
 })
@@ -1286,6 +1686,91 @@ teach({
       answer: 'Matching poles',
       teach: 'Matching poles push, opposite poles pull. '
         + 'Turn one round and it will pull instead.',
+      level: 4,
+    },
+    {
+      id: 'mg-4',
+      ask: 'What are the two ends of a magnet called?',
+      kind: 'choice',
+      options: ['Poles', 'Corners', 'Sides'],
+      answer: 'Poles',
+      teach: 'Every magnet has two ends called poles. '
+        + 'They behave in opposite ways towards another magnet.',
+      level: 1,
+    },
+    {
+      id: 'mg-5',
+      ask: 'Which will a magnet pull?',
+      kind: 'choice',
+      options: ['A copper wire', 'A wooden pencil', 'A steel pin'],
+      answer: 'A steel pin',
+      teach: 'A magnet pulls iron and steel. '
+        + 'Copper is a metal too, but it is not iron, so the magnet ignores '
+        + 'it.',
+      level: 1,
+    },
+    {
+      id: 'mg-6',
+      ask: 'The N end of one magnet faces the S end of another. What happens?',
+      kind: 'choice',
+      options: ['They push apart', 'They pull together', 'Nothing happens'],
+      answer: 'They pull together',
+      teach: 'N and S are opposite poles, and opposite poles pull together.',
+      level: 2,
+    },
+    {
+      id: 'mg-7',
+      ask: 'The N end of one magnet faces the N end of another. What happens?',
+      kind: 'choice',
+      options: ['They pull together', 'They stick', 'They push apart'],
+      answer: 'They push apart',
+      teach: 'N and N are matching poles, and matching poles push apart. '
+        + 'Turn one magnet round to make them pull.',
+      level: 2,
+    },
+    {
+      id: 'mg-8',
+      ask: 'Must a magnet touch another magnet to push it?',
+      kind: 'choice',
+      options: [
+        'Yes, always',
+        'No, it works across a gap',
+        'Only when they are wet',
+      ],
+      answer: 'No, it works across a gap',
+      teach: 'Bring two magnets together slowly and you feel the push before '
+        + 'they meet. '
+        + 'The force works across a gap.',
+      level: 3,
+    },
+    {
+      id: 'mg-9',
+      ask: 'An empty milk tin sticks to a magnet but a one-cedi coin does '
+        + 'not. '
+        + 'Both are shiny metal. '
+        + 'What does this show?',
+      kind: 'choice',
+      options: [
+        'The coin is too heavy',
+        'A magnet pulls iron and steel, not all metals',
+        'The tin is a magnet too',
+      ],
+      answer: 'A magnet pulls iron and steel, not all metals',
+      teach: 'Being metal is not the test. '
+        + 'The tin has steel in it and the coin is made of a different metal.',
+      level: 3,
+    },
+    {
+      id: 'mg-10',
+      ask: 'Abena tests an iron nail, an aluminium can, a glass marble and a '
+        + 'steel spoon. '
+        + 'How many will the magnet pull?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two'],
+      teach: 'Go through them one at a time and ask: iron or steel? '
+        + 'The nail and the spoon are. '
+        + 'Aluminium and glass are not.',
       level: 4,
     },
   ],
@@ -1516,6 +2001,102 @@ teach({
         + 'being one.',
       level: 4,
     },
+    {
+      id: 'se-4',
+      ask: 'Is wind renewable?',
+      kind: 'choice',
+      options: [
+        'No, it runs out',
+        'Yes, it keeps blowing',
+        'Only in the harmattan',
+      ],
+      answer: 'Yes, it keeps blowing',
+      teach: 'Ask whether there will be as much tomorrow without anybody '
+        + 'doing anything. '
+        + 'The wind will blow again, so it is renewable.',
+      level: 1,
+    },
+    {
+      id: 'se-5',
+      ask: 'Which of these is not renewable?',
+      kind: 'choice',
+      options: ['Sunlight', 'Wind', 'Gas for cooking'],
+      answer: 'Gas for cooking',
+      teach: 'Gas, like oil, took millions of years to form and runs down as '
+        + 'we use it. '
+        + 'Sunlight and wind come back on their own.',
+      level: 2,
+    },
+    {
+      id: 'se-6',
+      ask: 'What is the test for whether a source is renewable?',
+      kind: 'choice',
+      options: [
+        'Is it cheap?',
+        'Will there be as much of it tomorrow, without anybody doing anything?',
+        'Can you see it?',
+      ],
+      answer: 'Will there be as much of it tomorrow, without anybody doing anything?',
+      teach: 'Cost and how it looks do not decide it. '
+        + 'Renewable means it comes back on its own.',
+      level: 2,
+    },
+    {
+      id: 'se-7',
+      ask: 'How does the Akosombo dam make electricity?',
+      kind: 'choice',
+      options: [
+        'It burns charcoal',
+        'Water from the river turns big machines',
+        'It collects sunlight',
+      ],
+      answer: 'Water from the river turns big machines',
+      teach: 'A wall holds back the Volta and the moving water turns big '
+        + 'machines. '
+        + 'The river keeps flowing, so this is renewable.',
+      level: 2,
+    },
+    {
+      id: 'se-8',
+      ask: 'Why is oil not renewable?',
+      kind: 'choice',
+      options: [
+        'It is too dirty',
+        'It took millions of years to form, and we use it much faster',
+        'It is found under the ground',
+      ],
+      answer: 'It took millions of years to form, and we use it much faster',
+      teach: 'Oil does not come back in a day or a year. '
+        + 'We burn it far faster than it forms, so it runs down.',
+      level: 3,
+    },
+    {
+      id: 'se-9',
+      ask: 'What does renewable mean?',
+      kind: 'choice',
+      options: ['It is free', 'It never wears out', 'It comes back on its own'],
+      answer: 'It comes back on its own',
+      teach: 'Renewable does not mean free or everlasting. '
+        + 'A dam still costs money and a solar panel still wears out. '
+        + 'It means the source comes back.',
+      level: 3,
+    },
+    {
+      id: 'se-10',
+      ask: 'People in Fuseini’s town cut trees for charcoal much faster than '
+        + 'new trees grow. '
+        + 'What happens?',
+      kind: 'choice',
+      options: [
+        'The trees grow faster',
+        'The charcoal stops being renewable',
+        'Nothing changes',
+      ],
+      answer: 'The charcoal stops being renewable',
+      teach: 'Trees grow back only if they are replanted and given years. '
+        + 'Cut faster than they grow and a renewable source stops being one.',
+      level: 4,
+    },
   ],
 })
 
@@ -1722,6 +2303,93 @@ teach({
       teach: 'Full comes from the amount, fed comes from the mix. '
         + 'A lot of one group leaves two jobs undone.',
       level: 4,
+    },
+    {
+      id: 'fn-4',
+      ask: 'Which job do beans do for the body?',
+      kind: 'choice',
+      options: [
+        'They give energy only',
+        'They build the body',
+        'They protect it',
+      ],
+      answer: 'They build the body',
+      teach: 'Beans, fish, eggs, meat and groundnuts are building foods. '
+        + 'Rice and yam give energy. '
+        + 'Fruit and vegetables protect.',
+      level: 1,
+    },
+    {
+      id: 'fn-5',
+      ask: 'What do fruit and vegetables do for the body?',
+      kind: 'choice',
+      options: [
+        'They give most of the energy',
+        'They protect it',
+        'They build muscles only',
+      ],
+      answer: 'They protect it',
+      teach: 'Fruit and vegetables are the protecting group. '
+        + 'They are not the main energy or building foods.',
+      level: 2,
+    },
+    {
+      id: 'fn-6',
+      ask: 'Besides food, what does the body need for everything it does?',
+      kind: 'choice',
+      options: ['Sweets', 'Water', 'More rice'],
+      answer: 'Water',
+      teach: 'Every process in the body uses water. '
+        + 'It is part of eating well, not separate from it.',
+      level: 2,
+    },
+    {
+      id: 'fn-7',
+      ask: 'Which meal is balanced?',
+      kind: 'choice',
+      options: [
+        'Banku with kenkey',
+        'Plain rice with yam',
+        'Banku with fish and kontomire',
+      ],
+      answer: 'Banku with fish and kontomire',
+      teach: 'Banku gives energy, fish builds and kontomire, a green leaf, '
+        + 'protects. '
+        + 'The other meals are all energy food.',
+      level: 2,
+    },
+    {
+      id: 'fn-8',
+      ask: 'Yaw has rice and fish for lunch. Which job is missing?',
+      kind: 'choice',
+      options: ['Energy', 'Building', 'Protecting'],
+      answer: 'Protecting',
+      teach: 'Rice gives energy and fish builds. '
+        + 'Nothing on the plate is a fruit or vegetable, so the protecting '
+        + 'job is not done.',
+      level: 3,
+    },
+    {
+      id: 'fn-9',
+      ask: 'Ama has yam and an orange. What would make her meal balanced?',
+      kind: 'choice',
+      options: ['Add more yam', 'Add eggs or beans', 'Add rice'],
+      answer: 'Add eggs or beans',
+      teach: 'Yam gives energy and the orange protects. '
+        + 'The building job is missing, and eggs or beans do that job. '
+        + 'More yam only adds energy.',
+      level: 3,
+    },
+    {
+      id: 'fn-10',
+      ask: 'Which of these builds the body and often costs less than meat?',
+      kind: 'choice',
+      options: ['Plantain', 'Oil', 'Groundnuts'],
+      answer: 'Groundnuts',
+      teach: 'Many think only meat builds. '
+        + 'Groundnuts and beans do the same job for much less money. '
+        + 'Plantain and oil give energy.',
+      level: 3,
     },
   ],
 })
@@ -1950,6 +2618,104 @@ teach({
       answer: 'The smoke carries substances that harm the lungs',
       teach: 'Burning does not remove it. '
         + 'It turns a pile you can see into smoke that people nearby breathe.',
+      level: 4,
+    },
+    {
+      id: 'wa-4',
+      ask: 'Does a plastic bottle rot away?',
+      kind: 'choice',
+      options: ['Yes', 'No'],
+      answer: 'No',
+      teach: 'Plastic does not break down. '
+        + 'That is why it must be kept for collection or reuse.',
+      level: 1,
+    },
+    {
+      id: 'wa-5',
+      ask: 'What should be done with peelings and leaves?',
+      kind: 'choice',
+      options: [
+        'Put them in the gutter',
+        'Put them on a compost heap',
+        'Burn them with plastic',
+      ],
+      answer: 'Put them on a compost heap',
+      teach: 'They rot, so they can go back into the soil as compost. '
+        + 'They must never go in the gutter.',
+      level: 2,
+    },
+    {
+      id: 'wa-6',
+      ask: 'What should be done with an empty plastic bottle?',
+      kind: 'choice',
+      options: [
+        'Burn it',
+        'Throw it in the gutter',
+        'Keep it for collection or reuse',
+      ],
+      answer: 'Keep it for collection or reuse',
+      teach: 'It does not rot. '
+        + 'Burning makes harmful smoke and the gutter makes floods, so keep '
+        + 'it for collection or reuse.',
+      level: 2,
+    },
+    {
+      id: 'wa-7',
+      ask: 'When is the best time to sort waste?',
+      kind: 'choice',
+      options: [
+        'Once it is all mixed together',
+        'As you make it',
+        'Only once a month',
+      ],
+      answer: 'As you make it',
+      teach: 'Mixed waste is hard to separate, and wet food spoils paper and '
+        + 'card. '
+        + 'Sort each piece as you throw it away.',
+      level: 3,
+    },
+    {
+      id: 'wa-8',
+      ask: 'A gutter full of sachets leads to more mosquitoes. Why?',
+      kind: 'choice',
+      options: [
+        'Mosquitoes eat plastic',
+        'Standing water is where mosquitoes lay eggs',
+        'Sachets turn into mosquitoes',
+      ],
+      answer: 'Standing water is where mosquitoes lay eggs',
+      teach: 'The blocked gutter holds water that does not move. '
+        + 'Mosquitoes lay their eggs in still water.',
+      level: 3,
+    },
+    {
+      id: 'wa-9',
+      ask: 'What should you do with an old battery?',
+      kind: 'choice',
+      options: [
+        'Put it on the compost heap',
+        'Burn it',
+        'Ask an adult, because it needs special handling',
+      ],
+      answer: 'Ask an adult, because it needs special handling',
+      teach: 'A battery does not rot, and it needs special handling. '
+        + 'It must not be composted or burned.',
+      level: 3,
+    },
+    {
+      id: 'wa-10',
+      ask: 'Adwoa’s neighbour burns a pile of plastic and the pile is gone. '
+        + 'What really happened?',
+      kind: 'choice',
+      options: [
+        'It disappeared completely',
+        'It turned into soil',
+        'It became smoke that people nearby breathe',
+      ],
+      answer: 'It became smoke that people nearby breathe',
+      teach: 'Burning does not make waste disappear. '
+        + 'It moves into the air as smoke, and that smoke harms the lungs of '
+        + 'whoever is near.',
       level: 4,
     },
   ],

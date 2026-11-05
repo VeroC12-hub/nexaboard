@@ -212,6 +212,89 @@ teach({
         + 'the plant lives on its store until that runs low.',
       level: 3,
     },
+    {
+      id: 'pp-4',
+      ask: 'Which part holds the plant up?',
+      kind: 'choice',
+      options: ['The roots', 'The stem', 'The flower'],
+      answer: 'The stem',
+      teach: 'The roots hold the plant down in the soil. The long part that '
+        + 'holds everything up is the stem.',
+      level: 1,
+    },
+    {
+      id: 'pp-5',
+      ask: 'What does the stem carry up the plant?',
+      kind: 'choice',
+      options: ['Light', 'Seeds', 'Water'],
+      answer: 'Water',
+      teach: 'The roots drink the water. The stem carries it up to the rest of '
+        + 'the plant, like a pipe.',
+      level: 2,
+    },
+    {
+      id: 'pp-6',
+      ask: 'Which part of the plant makes the seed?',
+      kind: 'choice',
+      options: ['The flower', 'The leaves', 'The roots'],
+      answer: 'The flower',
+      teach: 'The leaves make food and the roots drink. The flower is where '
+        + 'the seed is made.',
+      level: 2,
+    },
+    {
+      id: 'pp-7',
+      ask: 'What job does the fruit do for the plant?',
+      kind: 'choice',
+      options: [
+        'It drinks water',
+        'It carries the seed away',
+        'It holds the plant down',
+      ],
+      answer: 'It carries the seed away',
+      teach: 'A plant cannot walk. So the fruit carries its seed to a new place, '
+        + 'where a new plant can grow.',
+      level: 2,
+    },
+    {
+      id: 'pp-8',
+      ask: 'Ama says a flower is only there to look pretty. Is she right?',
+      kind: 'choice',
+      options: [
+        'Yes, it has no job',
+        'No, it makes the seed',
+        'No, it makes the food',
+      ],
+      answer: 'No, it makes the seed',
+      teach: 'Every part solves a problem for the plant. The flower makes the '
+        + 'seed. The food is made in the leaves.',
+      level: 2,
+    },
+    {
+      id: 'pp-9',
+      ask: 'Kofi pulls a plant out of the ground. He waters it, but it still '
+        + 'dies. Why?',
+      kind: 'choice',
+      options: [
+        'It got too much water',
+        'It had no flower',
+        'Its roots were torn, so it cannot drink',
+      ],
+      answer: 'Its roots were torn, so it cannot drink',
+      teach: 'The roots do the drinking. Pulling the plant out tears them. '
+        + 'Water outside the plant is then no use to it.',
+      level: 3,
+    },
+    {
+      id: 'pp-10',
+      ask: 'Yaw says the roots make the food for a plant. Which part really does?',
+      kind: 'choice',
+      options: ['The leaves', 'The roots', 'The stem'],
+      answer: 'The leaves',
+      teach: 'Roots are under the ground, in the dark. Food is made where the '
+        + 'light falls, in the leaves. The roots drink and hold on.',
+      level: 3,
+    },
   ],
 })
 
@@ -395,6 +478,89 @@ teach({
       answer: 'Smell does part of the work of tasting',
       teach: 'The tongue is fine. Much of what we call taste comes through the '
         + 'nose, so blocking it removes part of the picture.',
+      level: 3,
+    },
+    {
+      id: 'so-4',
+      ask: 'Which organ do you smell with?',
+      kind: 'choice',
+      options: ['The nose', 'The tongue', 'The eyes'],
+      answer: 'The nose',
+      teach: 'The nose catches smell. The tongue tastes and the eyes see. Each '
+        + 'organ catches one kind of thing.',
+      level: 1,
+    },
+    {
+      id: 'so-5',
+      ask: 'Which organ tells you a stone is rough?',
+      kind: 'choice',
+      options: ['The ears', 'The skin', 'The nose'],
+      answer: 'The skin',
+      teach: 'Rough and smooth are felt. Hot and cold are felt too. Feeling is '
+        + 'the job of the skin.',
+      level: 1,
+    },
+    {
+      id: 'so-6',
+      ask: 'Which is the sense organ for taste?',
+      kind: 'choice',
+      options: ['The mouth', 'The teeth', 'The tongue'],
+      answer: 'The tongue',
+      teach: 'The mouth is the room the tongue sits in. The tongue is the '
+        + 'organ that tastes.',
+      level: 2,
+    },
+    {
+      id: 'so-7',
+      ask: 'How should you look after your ears?',
+      kind: 'choice',
+      options: [
+        'Clean inside them with a stick',
+        'Put nothing inside them',
+        'Shout into them',
+      ],
+      answer: 'Put nothing inside them',
+      teach: 'The thin part inside the ear tears easily and does not heal back '
+        + 'the same. Clean only the outside, with a cloth.',
+      level: 2,
+    },
+    {
+      id: 'so-8',
+      ask: 'How can you look after your eyes?',
+      kind: 'choice',
+      options: ['Read in the dark', 'Read in good light', 'Rub them hard'],
+      answer: 'Read in good light',
+      teach: 'The eye catches light. Give it good light to read by, so it does '
+        + 'not have to strain.',
+      level: 2,
+    },
+    {
+      id: 'so-9',
+      ask: 'Your light soup has just come off the fire. How do you protect '
+        + 'your tongue?',
+      kind: 'choice',
+      options: [
+        'Let the hot food cool first',
+        'Eat it fast',
+        'Hold your nose',
+      ],
+      answer: 'Let the hot food cool first',
+      teach: 'Very hot food can burn the tongue. Let it cool a little. Holding '
+        + 'your nose does nothing to protect the tongue.',
+      level: 2,
+    },
+    {
+      id: 'so-10',
+      ask: 'Why must you protect your sense organs?',
+      kind: 'choice',
+      options: [
+        'They grow back quickly',
+        'Only the eyes matter',
+        'They do not grow back',
+      ],
+      answer: 'They do not grow back',
+      teach: 'A cut on a finger heals, but a damaged eye or ear may not. You '
+        + 'have only one set of each, so look after all five.',
       level: 3,
     },
   ],
@@ -581,6 +747,90 @@ teach({
       teach: 'Nothing moving stops by itself. The rubbing between ball and '
         + 'floor pushes against the way it is going, which is why it rolls '
         + 'much further on something smooth.',
+      level: 3,
+    },
+    {
+      id: 'pf-4',
+      ask: 'You push a door. Which way does it move?',
+      kind: 'choice',
+      options: ['Towards you', 'Away from you', 'It does not move'],
+      answer: 'Away from you',
+      teach: 'A push sends a thing away from you. A pull brings it towards you.',
+      level: 1,
+    },
+    {
+      id: 'pf-5',
+      ask: 'A ball is still. Kofi kicks it and it rolls. What job did his '
+        + 'push do?',
+      kind: 'choice',
+      options: ['Stopped it', 'Started it', 'Changed its direction'],
+      answer: 'Started it',
+      teach: 'The ball was not moving before the kick. Now it is. So the push '
+        + 'started it moving.',
+      level: 1,
+    },
+    {
+      id: 'pf-6',
+      ask: 'You close a drawer. Is that a push or a pull?',
+      kind: 'choice',
+      options: ['A pull', 'A push', 'Neither'],
+      answer: 'A push',
+      teach: 'Look at the direction, not the drawer. Closing sends it away from '
+        + 'you, so it is a push. Opening it is a pull.',
+      level: 2,
+    },
+    {
+      id: 'pf-7',
+      ask: 'A ball comes at Ama from the left. She heads it to the right. '
+        + 'What did her push do?',
+      kind: 'choice',
+      options: ['Started it', 'Stopped it', 'Changed its direction'],
+      answer: 'Changed its direction',
+      teach: 'The ball was already moving and it never stopped. It turned. So '
+        + 'the push changed its direction.',
+      level: 2,
+    },
+    {
+      id: 'pf-8',
+      ask: 'Can a still ball start rolling all by itself?',
+      kind: 'choice',
+      options: [
+        'Yes, if it is round',
+        'No, something must push or pull it',
+        'Yes, if you wait long enough',
+      ],
+      answer: 'No, something must push or pull it',
+      teach: 'Nothing starts moving by itself. Find what touched it just before '
+        + 'it moved. That was the push or pull.',
+      level: 2,
+    },
+    {
+      id: 'pf-9',
+      ask: 'Yaw pushes a toy car gently. Then he pushes it harder. What changes?',
+      kind: 'choice',
+      options: [
+        'Nothing changes',
+        'The car stops',
+        'The car moves faster and further',
+      ],
+      answer: 'The car moves faster and further',
+      teach: 'A bigger push does more. Try it and watch. The harder push sends '
+        + 'the car faster and further.',
+      level: 3,
+    },
+    {
+      id: 'pf-10',
+      ask: 'A goalkeeper catches a ball. A child kicks a ball. What is the same '
+        + 'about them?',
+      kind: 'choice',
+      options: [
+        'Both are pushes, doing different jobs',
+        'Both start the ball moving',
+        'Nothing is the same',
+      ],
+      answer: 'Both are pushes, doing different jobs',
+      teach: 'The kick starts the ball. The catch stops it. Both are pushes. '
+        + 'Only the job is different.',
       level: 3,
     },
   ],
