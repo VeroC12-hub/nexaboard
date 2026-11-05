@@ -30,17 +30,98 @@
   height: 58px;
   display: grid;
   place-items: center;
-  font-size: 28px;
-  font-weight: 700;
   border: 0;
   border-radius: 50%;
   background: var(--hp-ink);
   color: #fff;
   box-shadow: 0 6px 20px rgba(14, 21, 36, 0.3);
   cursor: pointer;
-  transition: transform 120ms;
+  transition: transform 160ms, box-shadow 160ms;
+}
+
+.hp-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(14, 21, 36, 0.36);
 }
 .hp-button:active { transform: scale(0.94); }
+
+/* A ring that leaves, every so often.
+
+   Drawn on the button rather than as another element, so there is nothing
+   extra in the DOM and nothing that can be clicked by mistake. It fires once
+   every nine seconds: often enough that a learner who has not noticed the
+   button will, rarely enough that it is not a flashing light in the corner of
+   a page somebody is trying to read. */
+.hp-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--lp-blue, #2f88be);
+  opacity: 0;
+  animation: hp-ping 9s cubic-bezier(0.2, 0.8, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes hp-ping {
+  0%        { transform: scale(1);    opacity: 0.55; }
+  12%, 100% { transform: scale(1.75); opacity: 0; }
+}
+
+/* ── the mark ─────────────────────────────────────────────────────────────── */
+
+/* The book breathes. Six seconds for one rise and fall, which is about the
+   rate of a resting breath and is slow enough to read as alive rather than
+   as something demanding to be pressed. */
+.pal-mark {
+  display: block;
+  animation: pal-breathe 6s ease-in-out infinite;
+}
+
+@keyframes pal-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+/* A page turns. The right page swings on the spine, which is at x=24 in the
+   24 by 48 viewBox, so the origin is the middle of the drawing. `scaleX` from
+   1 to -1 is the whole flip; the leaf behind is what you see at the halfway
+   point, which is why it is there.
+
+   Nine seconds, in step with the ring, so the button has one rhythm rather
+   than two things happening at unrelated times. */
+.pal-right {
+  transform-origin: 24px 24px;
+  animation: pal-turn 9s ease-in-out infinite;
+}
+
+@keyframes pal-turn {
+  0%, 62%   { transform: scaleX(1); }
+  74%       { transform: scaleX(0.06); }
+  86%, 100% { transform: scaleX(1); }
+}
+
+/* The writing appears a word at a time, then goes with the page. Four short
+   strokes, staggered, which is the product's whole idea in two seconds. */
+.pal-word {
+  opacity: 0;
+  animation: pal-write 9s ease-in-out infinite;
+}
+.pal-word-1 { animation-delay: 0.0s; }
+.pal-word-2 { animation-delay: 0.5s; }
+.pal-word-3 { animation-delay: 1.0s; }
+.pal-word-4 { animation-delay: 1.5s; }
+
+@keyframes pal-write {
+  0%        { opacity: 0; }
+  14%, 58%  { opacity: 1; }
+  66%, 100% { opacity: 0; }
+}
+
+/* Hovering turns the page now rather than waiting for the cycle, so the
+   control answers the pointer instead of carrying on to its own clock. */
+.hp-button:hover .pal-right { animation-duration: 1.6s; }
+.hp-button:hover .pal-word  { animation-duration: 1.6s; }
 
 @media (min-width: 761px) {
   .hp-button { bottom: max(22px, env(safe-area-inset-bottom)); }
@@ -196,4 +277,13 @@
 @media (prefers-reduced-motion: reduce) {
   .hp-button { transition: none; }
   .hp-button:active { transform: none; }
+  .hp-button:hover { transform: none; }
+
+  /* A static book. Every page present, the writing visible, nothing moving.
+     Not "a bit less animation": none, because that is what was asked for. */
+  .hp-button::after { animation: none; opacity: 0; }
+  .pal-mark,
+  .pal-right,
+  .pal-word { animation: none; }
+  .pal-word { opacity: 1; }
 }

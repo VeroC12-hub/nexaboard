@@ -36,6 +36,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { askHelper, TutorOff, type Said, type TutorStage } from '../lib/education/ai'
 import { useHelperContext } from '../lib/education/helper-context'
+import PalMark from './PalMark'
 import { canSpeak, say, stop as stopSpeaking } from '../lib/education/speak'
 import '../styles/helper.css'
 
@@ -214,10 +215,13 @@ export default function Helper() {
     return (
       <button
         className="hp-button"
-        aria-label="Ask for help"
-        title="Ask for help"
+        /* Not "Ask for help". A question mark on a disc is the universal
+           sign for "help with this website", which is the wrong promise:
+           this is the one control on the screen that can teach you. */
+        aria-label="Ask your tutor"
+        title="Ask your tutor"
         onClick={() => setOpen(true)}>
-        <span aria-hidden>?</span>
+        <PalMark size={30} />
       </button>
     )
   }
