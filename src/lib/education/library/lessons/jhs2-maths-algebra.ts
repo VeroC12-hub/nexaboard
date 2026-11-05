@@ -89,8 +89,8 @@ teach({
     + 'the page. '
     + 'The rule is that a bracket is a parcel, '
     + 'and whatever is outside applies to everything in the parcel. '
-    + 'So 3(x + 4) is three parcels, each holding an x and a 4, '
-    + 'which is 3x and 12. '
+    + 'So $3(x + 4)$ is three parcels, each holding an $x$ and a 4, '
+    + 'which is $3x$ and 12. '
     + 'Nobody gets that wrong when they see it that way. '
     + 'For two brackets there are two terms in the first parcel '
     + 'and each has to meet both terms in the second, '
@@ -102,9 +102,9 @@ teach({
     + 'The signs cause the rest of the trouble, '
     + 'and there is a habit that removes it: '
     + 'treat the sign as part of the number. '
-    + 'In (x - 3) the second term is negative 3, not 3 with a minus '
+    + 'In $(x - 3)$ the second term is $-3$, not 3 with a minus '
     + 'floating nearby. '
-    + 'Then -2 times negative 3 is positive 6 by the ordinary sign rule, '
+    + 'Then $-2 \\times -3$ is positive 6 by the ordinary sign rule, '
     + 'and you never have to remember a special case about brackets at all.',
 
   recap:
@@ -135,37 +135,37 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Expand 5(2x + 3).',
+      ask: 'Expand $5(2x + 3)$.',
       steps: [
-        '5 times 2x is 10x.',
-        '5 times 3 is 15.',
+        '$5 \\times 2x = 10x$.',
+        '$5 \\times 3 = 15$.',
       ],
-      answer: '10x + 15.',
+      answer: '$10x + 15$.',
     },
     {
       level: 4,
-      ask: 'Expand (x + 3)(x + 4).',
+      ask: 'Expand $(x + 3)(x + 4)$.',
       steps: [
-        'x times x is x squared.',
-        'x times 4 is 4x.',
-        '3 times x is 3x.',
-        '3 times 4 is 12.',
-        'Collect 4x and 3x.',
+        '$x \\times x = x^2$.',
+        '$x \\times 4 = 4x$.',
+        '$3 \\times x = 3x$.',
+        '$3 \\times 4 = 12$.',
+        'Collect $4x$ and $3x$.',
       ],
-      answer: 'x squared + 7x + 12.',
+      answer: '$x^2 + 7x + 12$.',
     },
     {
       level: 5,
-      ask: 'Expand (2x - 3)(x - 5).',
+      ask: 'Expand $(2x - 3)(x - 5)$.',
       steps: [
-        'Terms are 2x, negative 3, x, negative 5.',
-        '2x times x is 2x squared.',
-        '2x times negative 5 is negative 10x.',
-        'Negative 3 times x is negative 3x.',
-        'Negative 3 times negative 5 is positive 15.',
-        'Collect the x terms.',
+        'Terms are $2x$, $-3$, $x$ and $-5$.',
+        '$2x \\times x = 2x^2$.',
+        '$2x \\times -5 = -10x$.',
+        '$-3 \\times x = -3x$.',
+        '$-3 \\times -5 = 15$.',
+        'Collect the $x$ terms.',
       ],
-      answer: '2x squared - 13x + 15.',
+      answer: '$2x^2 - 13x + 15$.',
     },
   ],
 
@@ -193,9 +193,9 @@ teach({
 
   extension:
     'Two patterns are worth recognising on sight. '
-    + '(x + a)(x - a) gives x squared minus a squared, with no middle term. '
-    + 'And (x + a) squared gives x squared + 2ax + a squared, '
-    + 'which is not x squared + a squared, '
+    + '$(x + a)(x - a)$ gives $x^2 - a^2$, with no middle term. '
+    + 'And $(x + a)^2$ gives $x^2 + 2ax + a^2$, '
+    + 'which is not $x^2 + a^2$, '
     + 'as expanding it properly shows.',
 
   figure: {
@@ -294,7 +294,7 @@ teach({
     'A farmer has a rectangular plot. '
     + 'He has been told its area in square metres '
     + 'comes to $x^2 + 7x + 12$, '
-    + 'where x is a length in metres he has not measured. '
+    + 'where $x$ is a length in metres he has not measured. '
     + 'He wants to fence the plot. '
     + 'For that he needs the two side lengths, not the area. '
     + 'The area of a rectangle is one side times the other. '
@@ -320,10 +320,10 @@ teach({
     'To factorise is to write an expression as something multiplied, '
     + 'which is the reverse of expanding. '
     + 'Taking out a common factor: '
-    + '6x + 9 becomes 3(2x + 3), '
+    + '$6x + 9$ becomes $3(2x + 3)$, '
     + 'because 3 divides both terms. '
     + 'The common factor can include letters: '
-    + '4x squared + 6x becomes 2x(2x + 3). '
+    + '$4x^2 + 6x$ becomes $2x(2x + 3)$. '
     + 'Factorising by grouping is used with four terms: '
     + 'take them in pairs, factorise each pair, '
     + 'and if the two brackets that appear are the same, '
@@ -333,25 +333,25 @@ teach({
     'Factorising feels like guessing to learners who have not noticed that '
     + 'it is expanding in reverse, '
     + 'and that single observation turns it into a checkable procedure. '
-    + 'Expanding 3(2x + 3) gives 6x + 9. '
-    + 'So factorising 6x + 9 is asking what you would have expanded to get '
+    + 'Expanding $3(2x + 3)$ gives $6x + 9$. '
+    + 'So factorising $6x + 9$ is asking what you would have expanded to get '
     + 'it. '
     + 'Which means you can always check your own answer by expanding it, '
     + 'and if it does not give back the original, you are wrong, '
     + 'and you find it out before the marker does. '
     + 'There is no other topic in JHS algebra with a check that complete. '
     + 'Taking out the highest common factor matters too. '
-    + '6x + 9 could be written 1(6x + 9), which is true and useless. '
+    + '$6x + 9$ could be written $1(6x + 9)$, which is true and useless. '
     + 'Taking out 3 is what the question wants, '
     + 'and you find it by looking for what every term shares, '
     + 'number and letter separately. '
     + 'Grouping looks like a different method and is the same one twice. '
-    + 'In ax + ay + bx + by, '
-    + 'the first pair shares a and the second shares b, '
-    + 'giving a(x + y) + b(x + y). '
-    + 'Now look at what those two terms share: the bracket (x + y) itself. '
+    + 'In $ax + ay + bx + by$, '
+    + 'the first pair shares $a$ and the second shares $b$, '
+    + 'giving $a(x + y) + b(x + y)$. '
+    + 'Now look at what those two terms share: the bracket $(x + y)$ itself. '
     + 'Take it out, exactly as you took out a number, '
-    + 'and you have (x + y)(a + b).',
+    + 'and you have $(x + y)(a + b)$.',
 
   recap:
     'To expand a bracket is to multiply everything inside it '
@@ -382,37 +382,37 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Factorise 8x + 12.',
+      ask: 'Factorise $8x + 12$.',
       steps: [
         'The highest common factor of 8 and 12 is 4.',
-        '8x divided by 4 is 2x. 12 divided by 4 is 3.',
-        'Check: 4(2x + 3) expands to 8x + 12.',
+        '$8x \\div 4 = 2x$ and $12 \\div 4 = 3$.',
+        'Check: $4(2x + 3)$ expands to $8x + 12$.',
       ],
-      answer: '4(2x + 3).',
+      answer: '$4(2x + 3)$.',
     },
     {
       level: 4,
-      ask: 'Factorise 10x squared - 15x.',
+      ask: 'Factorise $10x^2 - 15x$.',
       steps: [
         'Numbers: 5 divides both.',
-        'Letters: x appears in both, to the power 1 at least.',
-        'So take out 5x.',
-        '10x squared over 5x is 2x. Negative 15x over 5x is negative 3.',
+        'Letters: $x$ appears in both, to the power 1 at least.',
+        'So take out $5x$.',
+        '$10x^2 \\div 5x = 2x$ and $-15x \\div 5x = -3$.',
       ],
-      answer: '5x(2x - 3). '
-        + 'Expanding gives 10x squared - 15x.',
+      answer: '$5x(2x - 3)$. '
+        + 'Expanding gives $10x^2 - 15x$.',
     },
     {
       level: 5,
-      ask: 'Factorise ax + ay + bx + by by grouping.',
+      ask: 'Factorise $ax + ay + bx + by$ by grouping.',
       steps: [
-        'Pair them: (ax + ay) and (bx + by).',
-        'First pair shares a: a(x + y).',
-        'Second pair shares b: b(x + y).',
-        'Both terms now share the bracket (x + y).',
+        'Pair them: $(ax + ay)$ and $(bx + by)$.',
+        'First pair shares $a$: $a(x + y)$.',
+        'Second pair shares $b$: $b(x + y)$.',
+        'Both terms now share the bracket $(x + y)$.',
         'Take it out.',
       ],
-      answer: '(x + y)(a + b).',
+      answer: '$(x + y)(a + b)$.',
     },
   ],
 
@@ -441,7 +441,7 @@ teach({
   ],
 
   extension:
-    'Factorising a quadratic such as x squared + 7x + 12 '
+    'Factorising a quadratic such as $x^2 + 7x + 12$ '
     + 'asks for two numbers that multiply to 12 and add to 7. '
     + 'It is the same reverse reasoning: '
     + 'the two numbers are what you would have had in the two brackets.',
@@ -567,22 +567,22 @@ teach({
     + 'into something you can just solve?',
 
   notation:
-    'The sentence "let x be the number of goats" is called defining the '
+    'The sentence "let $x$ be the number of goats" is called defining the '
     + 'variable, and it is written out in words before any algebra. '
     + 'The letter is called the variable. '
-    + 'x is only the usual choice, so g for goats is just as correct. '
+    + '$x$ is only the usual choice, so $g$ for goats is just as correct. '
     + 'The equals sign says the amount on its left '
     + 'and the amount on its right are the same number. '
     + 'It does not mean "and then I worked out". '
     + 'The commonest way to lose a mark is to leave out the "let" '
     + 'sentence, because then nobody marking the script '
-    + 'knows what your x stands for.',
+    + 'knows what your $x$ stands for.',
 
   idea:
     'A word problem becomes an equation in three steps. '
-    + 'First choose the unknown and state it: let x be the number of goats. '
-    + 'Second, write every other quantity in the problem using x: '
-    + 'if there are five more sheep than goats, the sheep are x + 5. '
+    + 'First choose the unknown and state it: let $x$ be the number of goats. '
+    + 'Second, write every other quantity in the problem using $x$: '
+    + 'if there are five more sheep than goats, the sheep are $x + 5$. '
     + 'Third, find the statement that says two amounts are equal. '
     + 'That is usually a total, '
     + 'and it becomes your equation. '
@@ -592,13 +592,13 @@ teach({
   mechanism:
     'Learners get stuck before the algebra starts, '
     + 'and almost always at the same place: choosing the letter. '
-    + 'The rule that unlocks it is to let x be the quantity the question '
+    + 'The rule that unlocks it is to let $x$ be the quantity the question '
     + 'says least about, '
     + 'because everything else in the problem is then described in '
     + 'relation to it. '
     + 'If there are five more sheep than goats, '
-    + 'choosing goats as x makes the sheep x + 5, which is easy. '
-    + 'Choosing sheep as x makes the goats x - 5, which is also correct '
+    + 'choosing goats as $x$ makes the sheep $x + 5$, which is easy. '
+    + 'Choosing sheep as $x$ makes the goats $x - 5$, which is also correct '
     + 'and feels harder, so more learners slip. '
     + 'The second thing to know is where the equals sign comes from. '
     + 'An equation is a claim that two amounts are the same, '
@@ -608,18 +608,18 @@ teach({
     + 'Once you have found that sentence, '
     + 'the two sides of your equation are already written in the question. '
     + 'And the last step is the one most often dropped. '
-    + 'Solving gives x. '
+    + 'Solving gives $x$. '
     + 'The question may have asked for the number of sheep, '
-    + 'which is x + 5. '
+    + 'which is $x + 5$. '
     + 'Answer what was asked, in the units it was asked in.',
 
   recap:
     'An equation is a statement that two amounts are equal, '
     + 'with a letter standing in for a number nobody has told you yet. '
-    + 'Here is one: 3x + 4 = 19. '
+    + 'Here is one: $3x + 4 = 19$. '
     + 'Solving it means getting the letter alone on one side. '
-    + 'Take 4 off both sides and it becomes 3x = 15. '
-    + 'Divide both sides by 3 and it becomes x = 5. '
+    + 'Take 4 off both sides and it becomes $3x = 15$. '
+    + 'Divide both sides by 3 and it becomes $x = 5$. '
     + 'Both moves work for the same reason: '
     + 'the two sides stay equal as long as you do the same thing to each. '
     + 'This topic is entirely about getting from the words to the '
@@ -643,21 +643,21 @@ teach({
       ask: 'A number multiplied by 4 gives 36. Write and solve the '
         + 'equation.',
       steps: [
-        'Let x be the number.',
-        'Four times it: 4x.',
-        'It gives 36, so 4x = 36.',
+        'Let $x$ be the number.',
+        'Four times it: $4x$.',
+        'It gives 36, so $4x = 36$.',
       ],
-      answer: 'x = 9.',
+      answer: '$x = 9$.',
     },
     {
       level: 4,
       ask: 'There are 5 more girls than boys in a class of 33. '
         + 'How many boys?',
       steps: [
-        'Boys are what we know least about. Let x be the boys.',
-        'Girls are then x + 5.',
-        'The total says they are equal to 33: x + (x + 5) = 33.',
-        '2x + 5 = 33, so 2x = 28.',
+        'Boys are what we know least about. Let $x$ be the boys.',
+        'Girls are then $x + 5$.',
+        'The total says they are equal to 33: $x + (x + 5) = 33$.',
+        '$2x + 5 = 33$, so $2x = 28$.',
       ],
       answer: '14 boys. '
         + 'Check: 14 boys and 19 girls is 33.',
@@ -668,12 +668,12 @@ teach({
         + 'In 10 years he will be twice as old. '
         + 'Find their ages now.',
       steps: [
-        'Let x be the son’s age now, since we know least about it.',
-        'The father is 3x now.',
-        'In 10 years: son is x + 10, father is 3x + 10.',
+        'Let $x$ be the son’s age now, since we know least about it.',
+        'The father is $3x$ now.',
+        'In 10 years: son is $x + 10$, father is $3x + 10$.',
         'The equal statement is: father will be twice the son.',
-        '3x + 10 = 2(x + 10).',
-        '3x + 10 = 2x + 20, so x = 10.',
+        '$3x + 10 = 2(x + 10)$.',
+        '$3x + 10 = 2x + 20$, so $x = 10$.',
       ],
       answer: 'The son is 10 and the father is 30. '
         + 'Check: in 10 years they are 20 and 40.',
@@ -857,7 +857,7 @@ teach({
     + 'The same relation can be written three ways. '
     + 'As a mapping, with arrows from each input to its output. '
     + 'As a table, with inputs in one row and outputs in the next. '
-    + 'As ordered pairs, written input first: (1, 3), (2, 5), (3, 7). '
+    + 'As ordered pairs, written input first: $(1, 3)$, $(2, 5)$, $(3, 7)$. '
     + 'A relation is a function, or a one to one mapping, '
     + 'when each input has exactly one output.',
 
@@ -869,7 +869,7 @@ teach({
     + 'The arrows, the table and the pairs all contain exactly the same '
     + 'information. '
     + 'An arrow from 2 to 5 is the column 2 above 5 '
-    + 'and is the pair (2, 5). '
+    + 'and is the pair $(2, 5)$. '
     + 'Nothing is added or lost between them; only the layout changes. '
     + 'Finding the rule is where care is needed. '
     + 'Learners look at the first pair and guess, and more than one '
@@ -878,7 +878,7 @@ teach({
     + 'and you have to test any candidate on all of them. '
     + 'The order of an ordered pair matters for the same reason '
     + 'that the arrow has a point on one end: '
-    + '(2, 5) says 2 maps to 5, and (5, 2) says something different. '
+    + '$(2, 5)$ says 2 maps to 5, and $(5, 2)$ says something different. '
     + 'And the function test is one question: '
     + 'does any input have two arrows leaving it? '
     + 'If so it is not a function, '
@@ -916,22 +916,22 @@ teach({
       steps: [
         'Input first, output second.',
       ],
-      answer: '(1, 4), (2, 5), (3, 6).',
+      answer: '$(1, 4)$, $(2, 5)$, $(3, 6)$.',
     },
     {
       level: 4,
-      ask: 'Find the rule for (1, 3), (2, 5), (3, 7), (4, 9).',
+      ask: 'Find the rule for $(1, 3)$, $(2, 5)$, $(3, 7)$, $(4, 9)$.',
       steps: [
         'The outputs rise by 2 as the inputs rise by 1.',
-        'So the rule contains 2n.',
-        '2n gives 2, 4, 6, 8, and the outputs are each 1 more.',
-        'Test 2n + 1 on (3, 7): 6 + 1 = 7. Correct.',
+        'So the rule contains $2n$.',
+        '$2n$ gives 2, 4, 6, 8, and the outputs are each 1 more.',
+        'Test $2n + 1$ on $(3, 7)$: $6 + 1 = 7$. Correct.',
       ],
-      answer: 'The rule is 2n + 1.',
+      answer: 'The rule is $2n + 1$.',
     },
     {
       level: 5,
-      ask: 'Is the relation (1, 2), (1, 5), (2, 7) a function? Why?',
+      ask: 'Is the relation $(1, 2)$, $(1, 5)$, $(2, 7)$ a function? Why?',
       steps: [
         'A function gives each input exactly one output.',
         'Look at the input 1.',
@@ -970,7 +970,7 @@ teach({
     'A function with a rule can be drawn as a graph, '
     + 'with the inputs along the horizontal axis and the outputs up the '
     + 'vertical. '
-    + 'A linear rule like 2n + 1 gives a straight line, '
+    + 'A linear rule like $2n + 1$ gives a straight line, '
     + 'and the 2 is its steepness.',
 
   figure: {
