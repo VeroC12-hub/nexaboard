@@ -233,6 +233,102 @@ teach({
         + 'and you only have so much.',
       level: 3,
     },
+    {
+      id: 'sw-4',
+      ask: 'What is a sight word?',
+      kind: 'choice',
+      options: [
+        'A very long word',
+        'A word you read at once, without sounding it out',
+        'A word with a picture next to it',
+      ],
+      answer: 'A word you read at once, without sounding it out',
+      teach: 'Sight words are short and come up in nearly every sentence. Your '
+        + 'eyes land on one and the word is there at once, like your own name.',
+      level: 1,
+    },
+    {
+      id: 'sw-5',
+      ask: 'Which word has letters that do not make their usual sounds?',
+      kind: 'choice',
+      options: ['cat', 'was', 'big'],
+      answer: 'was',
+      teach: 'Cat and big sound out fine. In was, the a and the s both '
+        + 'misbehave. So was must be learned whole.',
+      level: 1,
+    },
+    {
+      id: 'sw-6',
+      ask: 'Kofi sees the word "was". He sees the w and says "went". What '
+        + 'did he do wrong?',
+      kind: 'choice',
+      options: [
+        'He read too slowly',
+        'Nothing, that is right',
+        'He guessed from the first letter',
+      ],
+      answer: 'He guessed from the first letter',
+      teach: 'Many words start with w. The first letter alone cannot tell you '
+        + 'the word. Look at the whole word, then say it.',
+      level: 2,
+    },
+    {
+      id: 'sw-7',
+      ask: 'How can you check that you can read a sight word?',
+      kind: 'choice',
+      options: [
+        'Sound out each letter',
+        'Cover it, say it, then uncover it and check',
+        'Spell it backwards',
+      ],
+      answer: 'Cover it, say it, then uncover it and check',
+      teach: 'Sounding it out is the thing a sight word should not need. Cover '
+        + 'it, say it, then look again to see if you were right.',
+      level: 2,
+    },
+    {
+      id: 'sw-8',
+      ask: 'The word "and" sounds out fine. Why is it still learned on sight?',
+      kind: 'choice',
+      options: [
+        'Because it is a long word',
+        'Because its letters are strange',
+        'Because it comes up so often',
+      ],
+      answer: 'Because it comes up so often',
+      teach: 'And is in nearly every page. Even a right sounding out takes time, '
+        + 'and that time adds up. So it is worth reading at once.',
+      level: 2,
+    },
+    {
+      id: 'sw-9',
+      ask: 'Ama stops to sound out "to" every time she meets it. What does '
+        + 'that tell her?',
+      kind: 'choice',
+      options: [
+        'She is a bad reader',
+        'It is not a sight word for her yet, so she should practise it',
+        'The word is spelled wrong',
+      ],
+      answer: 'It is not a sight word for her yet, so she should practise it',
+      teach: 'Stopping to sound out means the word is not yet read on sight. '
+        + 'That is not a bad reader. Practise it again tomorrow, in a real sentence.',
+      level: 3,
+    },
+    {
+      id: 'sw-10',
+      ask: 'Which is the best way to practise a sight word?',
+      kind: 'choice',
+      options: [
+        'Read it in a real sentence, straight through',
+        'Read it off a list once',
+        'Copy its letters ten times',
+      ],
+      answer: 'Read it in a real sentence, straight through',
+      teach: 'A word learned only on a list can still trip you in a book. Find '
+        + 'it in a real sentence and read the sentence without stopping.',
+      level: 3,
+    },
   ],
 })
 
@@ -412,6 +508,88 @@ teach({
       teach: 'Two whole things are being said, so two sentences: "We went '
         + 'home. We ate rice." Read it out loud and you hear where the first '
         + 'one ends.',
+      level: 3,
+    },
+    {
+      id: 'ws-4',
+      ask: 'What must every sentence start with?',
+      kind: 'choice',
+      options: ['A full stop', 'A capital letter', 'A small letter'],
+      answer: 'A capital letter',
+      teach: 'The capital shows the reader where the sentence begins. The full '
+        + 'stop goes at the other end, to show where it stops.',
+      level: 1,
+    },
+    {
+      id: 'ws-5',
+      ask: 'Which one is the capital form of the letter m?',
+      kind: 'choice',
+      options: ['n', 'm', 'M'],
+      answer: 'M',
+      teach: 'A capital is the big form of the same letter. The small m becomes '
+        + 'the big M. The n is a different letter.',
+      level: 1,
+    },
+    {
+      id: 'ws-6',
+      ask: 'Turn these words into a sentence: plays, Kofi, football.',
+      kind: 'choice',
+      options: ['kofi plays football.', 'Football Kofi plays', 'Kofi plays football.'],
+      answer: 'Kofi plays football.',
+      teach: 'Say who it is about first: Kofi. Then what he does: plays '
+        + 'football. Start with a capital and end with a full stop.',
+      level: 2,
+    },
+    {
+      id: 'ws-7',
+      ask: 'Is "the tall tree" a sentence?',
+      kind: 'choice',
+      options: [
+        'Yes, it has three words',
+        'No, it has no doing part',
+        'Yes, it starts with the',
+      ],
+      answer: 'No, it has no doing part',
+      teach: 'It names a thing but never says what the tree did or is. You are '
+        + 'left waiting. "The tall tree fell." is a sentence.',
+      level: 2,
+    },
+    {
+      id: 'ws-8',
+      ask: 'In "We went to accra.", which word is missing a capital?',
+      kind: 'choice',
+      options: ['went', 'accra', 'to'],
+      answer: 'accra',
+      teach: 'We already starts with a capital. Accra is the name of a place, '
+        + 'and names of places always take a capital: Accra.',
+      level: 2,
+    },
+    {
+      id: 'ws-9',
+      ask: 'Why does a sentence need a full stop?',
+      kind: 'choice',
+      options: [
+        'To make the page look neat',
+        'To show the reader where the sentence ends',
+        'Because the teacher likes it',
+      ],
+      answer: 'To show the reader where the sentence ends',
+      teach: 'Without full stops the words run into the next thought. The '
+        + 'reader never knows where to breathe. The mark is for the reader.',
+      level: 3,
+    },
+    {
+      id: 'ws-10',
+      ask: 'Which one is written correctly?',
+      kind: 'choice',
+      options: [
+        'Ama ate rice. She drank water.',
+        'Ama ate rice she drank water.',
+        'ama ate rice. she drank water.',
+      ],
+      answer: 'Ama ate rice. She drank water.',
+      teach: 'There are two things said here, so there are two sentences. Each '
+        + 'one starts with a capital and ends with a full stop.',
       level: 3,
     },
   ],
@@ -601,6 +779,81 @@ teach({
       teach: 'It is what she does. The same word can be a noun elsewhere, as '
         + 'in "the school play", which is why you check the sentence and not '
         + 'the word.',
+      level: 3,
+    },
+    {
+      id: 'nv-4',
+      ask: 'Which word is the noun? The cat sleeps.',
+      kind: 'choice',
+      options: ['sleeps', 'cat', 'The'],
+      answer: 'cat',
+      teach: 'Ask who or what the sentence is about. It is about the cat. So '
+        + 'cat is the naming word. Sleeps is what it does.',
+      level: 1,
+    },
+    {
+      id: 'nv-5',
+      ask: 'Which one is a doing word?',
+      kind: 'choice',
+      options: ['mango', 'school', 'eats'],
+      answer: 'eats',
+      teach: 'Try "she" in front: she eats works. She mango and she school do '
+        + 'not. Mango and school are naming words.',
+      level: 1,
+    },
+    {
+      id: 'nv-6',
+      ask: 'You want to test if a word is a noun. Which word do you put in '
+        + 'front of it?',
+      kind: 'choice',
+      options: ['she', 'the', 'and'],
+      answer: 'the',
+      teach: 'The goes in front of naming words: the market, the mango. She '
+        + 'is the test for a verb, not a noun.',
+      level: 2,
+    },
+    {
+      id: 'nv-7',
+      ask: 'Find the verb: Yaw carries water.',
+      kind: 'choice',
+      options: ['Yaw', 'carries', 'water'],
+      answer: 'carries',
+      teach: 'Ask what Yaw is doing. He carries. Yaw and water are both '
+        + 'naming words, so they are nouns.',
+      level: 2,
+    },
+    {
+      id: 'nv-8',
+      ask: 'How many nouns are in: The goat eats grass?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two'],
+      teach: 'Do not stop at the first noun. Goat is a thing and grass is a '
+        + 'thing. Eats is the verb. So there are two nouns.',
+      level: 3,
+    },
+    {
+      id: 'nv-9',
+      ask: 'In "I water the plants", what is "water"?',
+      kind: 'choice',
+      options: ['A noun', 'Neither', 'A verb'],
+      answer: 'A verb',
+      teach: 'Here water is what I do to the plants, so it is a verb. In "I '
+        + 'drink water" it is a thing, a noun. Check the sentence, not the word.',
+      level: 3,
+    },
+    {
+      id: 'nv-10',
+      ask: 'In "the big dog", is "big" a noun?',
+      kind: 'choice',
+      options: [
+        'Yes, it is a thing',
+        'No, it describes the dog',
+        'Yes, it is a doing word',
+      ],
+      answer: 'No, it describes the dog',
+      teach: 'Big tells you what the dog is like. It does not name anything. '
+        + 'Dog is the noun. Big is a describing word.',
       level: 3,
     },
   ],

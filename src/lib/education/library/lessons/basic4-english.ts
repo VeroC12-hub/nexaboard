@@ -237,6 +237,108 @@ teach({
         + 'what this one said.',
       level: 4,
     },
+    {
+      id: 'mi-4',
+      ask: 'What is the main idea of a passage?',
+      kind: 'choice',
+      options: [
+        'The first sentence',
+        'What the whole passage is mostly about',
+        'The most exciting event',
+      ],
+      answer: 'What the whole passage is mostly about',
+      teach: 'The first sentence and the exciting event are often only details. '
+        + 'The main idea is the thing that holds the whole passage together.',
+      level: 2,
+    },
+    {
+      id: 'mi-5',
+      ask: 'What is the first step in finding the main idea?',
+      kind: 'choice',
+      options: [
+        'Copy the first sentence',
+        'Read only the title',
+        'Read the whole passage, start to finish',
+      ],
+      answer: 'Read the whole passage, start to finish',
+      teach: 'You cannot test an idea against every paragraph until you have '
+        + 'read every paragraph. Then say what each one is about in a word or two.',
+      level: 2,
+    },
+    {
+      id: 'mi-6',
+      ask: 'A passage has three paragraphs: how cocoa grows, how farmers dry '
+        + 'the beans, and how the beans are sold. What is the main idea?',
+      kind: 'choice',
+      options: [
+        'How cocoa grows',
+        'It is about farming',
+        'How cocoa goes from the farm to being sold',
+        'Farmers dry the beans in the sun',
+      ],
+      answer: 'How cocoa goes from the farm to being sold',
+      teach: 'Test each answer against all three paragraphs. "How cocoa grows" '
+        + 'fits only the first. "It is about farming" fits a hundred passages. '
+        + 'Only one covers all three and says what this passage is about.',
+      level: 3,
+    },
+    {
+      id: 'mi-7',
+      ask: 'Is the title of a passage always its main idea?',
+      kind: 'choice',
+      options: [
+        'Yes, always',
+        'No, a title may be chosen just to catch your attention',
+        'Only if the title is short',
+      ],
+      answer: 'No, a title may be chosen just to catch your attention',
+      teach: 'A title can name one striking part to make you want to read. '
+        + 'The main idea is what the writing actually covers, so test it.',
+      level: 3,
+    },
+    {
+      id: 'mi-8',
+      ask: 'Before you look for the main idea, what should you write down for '
+        + 'each paragraph?',
+      kind: 'choice',
+      options: [
+        'What it is about, in one or two words',
+        'Its longest sentence',
+        'How many sentences it has',
+      ],
+      answer: 'What it is about, in one or two words',
+      teach: 'A short label for each paragraph gives you a list. Then you look '
+        + 'for the one thing every item on the list shares.',
+      level: 3,
+    },
+    {
+      id: 'mi-9',
+      ask: 'A passage is about keeping the market clean. One paragraph tells '
+        + 'of a big flood. What is the main idea?',
+      kind: 'choice',
+      options: ['A flood at the market', 'Keeping the market clean', 'It is about markets'],
+      answer: 'Keeping the market clean',
+      teach: 'The flood sticks in your head, but it is in one paragraph only, '
+        + 'so it is a detail. "It is about markets" is too broad.',
+      level: 4,
+    },
+    {
+      id: 'mi-10',
+      ask: 'A story tells how a boy misses the tro-tro, runs, falls, gets up '
+        + 'and reaches school just as the bell stops. What is it mainly about?',
+      kind: 'choice',
+      options: [
+        'He fell down',
+        'The school bell',
+        'A boy rushing to reach school on time',
+        'It is about a boy',
+      ],
+      answer: 'A boy rushing to reach school on time',
+      teach: 'The fall and the bell each happen once, so they are details. "It '
+        + 'is about a boy" fits any story about a boy. The rush to school runs '
+        + 'through the whole story.',
+      level: 4,
+    },
   ],
 })
 
@@ -466,6 +568,106 @@ teach({
         + 'Put it where it belongs.',
       level: 4,
     },
+    {
+      id: 'pg-4',
+      ask: 'What is a paragraph?',
+      kind: 'choice',
+      options: [
+        'One very long sentence',
+        'A group of sentences about one idea',
+        'A sentence on a new line',
+      ],
+      answer: 'A group of sentences about one idea',
+      teach: 'A paragraph holds several whole sentences, and all of them are '
+        + 'about the same one idea. A new idea starts a new paragraph.',
+      level: 2,
+    },
+    {
+      id: 'pg-5',
+      ask: 'How do you show a new paragraph on the page?',
+      kind: 'choice',
+      options: [
+        'Start every sentence on a new line',
+        'Write the first word in capitals',
+        'Push the first line in, or leave a blank line above it',
+      ],
+      answer: 'Push the first line in, or leave a blank line above it',
+      teach: 'Indenting or a blank line tells the reader a new idea has '
+        + 'started. Starting every sentence on a new line marks nothing.',
+      level: 2,
+    },
+    {
+      id: 'pg-6',
+      ask: 'After the first sentence, what should each sentence in a paragraph '
+        + 'be?',
+      kind: 'choice',
+      options: [
+        'A reason, an example or a detail about the idea',
+        'About a new idea',
+        'A question for the reader',
+      ],
+      answer: 'A reason, an example or a detail about the idea',
+      teach: 'The first sentence states the idea. Every sentence after it '
+        + 'supports that same idea with a reason, an example or a detail.',
+      level: 3,
+    },
+    {
+      id: 'pg-7',
+      ask: 'A paragraph is about the market in Ama’s town. Which sentence does '
+        + 'not belong?',
+      kind: 'choice',
+      options: [
+        'Traders sell tomatoes and pepper there.',
+        'My brother plays football on Saturdays.',
+        'The market is busiest on Saturday mornings.',
+        'Women carry their goods on their heads.',
+      ],
+      answer: 'My brother plays football on Saturdays.',
+      teach: 'Ask of each sentence: is it about the market? Football is a '
+        + 'different idea, even though it also mentions Saturday. It goes in '
+        + 'another paragraph.',
+      level: 3,
+    },
+    {
+      id: 'pg-8',
+      ask: 'What goes wrong if you start a new paragraph at every sentence?',
+      kind: 'choice',
+      options: [
+        'Nothing, it looks neat',
+        'The breaks stop telling the reader anything',
+        'The writing becomes too short',
+      ],
+      answer: 'The breaks stop telling the reader anything',
+      teach: 'A break is meant to show that a new idea began. If every sentence '
+        + 'has one, the reader cannot see where the idea really changes.',
+      level: 3,
+    },
+    {
+      id: 'pg-9',
+      ask: 'In a paragraph about liking school, what job does this sentence '
+        + 'do: "Mr Mensah stayed behind to help me with fractions."?',
+      kind: 'choice',
+      options: ['States the one idea', 'An example', 'Does not belong'],
+      answer: 'An example',
+      teach: 'It belongs to the idea, because it shows one thing that makes '
+        + 'school good. It is one real case, so it is an example.',
+      level: 4,
+    },
+    {
+      id: 'pg-10',
+      ask: 'You try to say what your paragraph is about and need "and" to join '
+        + 'two different things. What does that tell you?',
+      kind: 'choice',
+      options: [
+        'It has two ideas and should be split',
+        'It is a very good paragraph',
+        'It needs a longer first sentence',
+      ],
+      answer: 'It has two ideas and should be split',
+      teach: 'One idea can be said in one sentence. Needing "and" to join two '
+        + 'unlike things means two ideas, so make two paragraphs.',
+      level: 4,
+    },
   ],
 })
 
@@ -604,8 +806,8 @@ teach({
     'There are more tenses than three. '
     + '"I have eaten" and "I was eating" both describe the past '
     + 'in different ways: one finished, one still going on at the time. '
-    + 'English uses those constantly, and you already say them correctly '
-    + 'without being taught.',
+    + 'English uses those constantly, and most speakers say them correctly '
+    + 'long before anyone names them.',
 
   figure: {
     alt: 'A line running left to right with an arrow at the end, '
@@ -650,8 +852,8 @@ teach({
       ['see', 'saw', 'see', 'will see'],
     ],
     note: 'The first two add ed. The last three change shape instead, and '
-      + 'they are among the words you say most often, which is why you '
-      + 'already know them by ear.',
+      + 'they are among the words people say most often, which is why the '
+      + 'ear learns them first.',
   }],
   questions: [
     {
@@ -685,6 +887,79 @@ teach({
       answer: 'Yesterday is past but "go" is present',
       teach: 'The time word and the verb must agree. '
         + 'It should be "went".',
+      level: 4,
+    },
+    {
+      id: 'tn-4',
+      ask: 'What is the future of "walk"?',
+      kind: 'choice',
+      options: ['Walked', 'Will walk', 'Walking'],
+      answer: 'Will walk',
+      teach: 'For the future, put the helping word will in front of the verb. '
+        + 'Walked is the past.',
+      level: 2,
+    },
+    {
+      id: 'tn-5',
+      ask: 'Which word is the verb in "Ama ate the rice"?',
+      kind: 'choice',
+      options: ['Ama', 'rice', 'ate'],
+      answer: 'ate',
+      teach: 'Ask what is happening in the sentence. Eating is happening, so '
+        + 'ate is the verb. Ama is who did it and rice is what was eaten.',
+      level: 2,
+    },
+    {
+      id: 'tn-6',
+      ask: 'What is the past of "play"?',
+      kind: 'choice',
+      options: ['Played', 'Plays', 'Will play'],
+      answer: 'Played',
+      teach: 'Play is regular, so the past just adds ed: played.',
+      level: 2,
+    },
+    {
+      id: 'tn-7',
+      ask: 'What is the past of "eat"?',
+      kind: 'choice',
+      options: ['Eated', 'Will eat', 'Ate'],
+      answer: 'Ate',
+      teach: 'Eat is irregular. Say "eated" aloud and it sounds wrong. The verb '
+        + 'changes shape instead: ate.',
+      level: 3,
+    },
+    {
+      id: 'tn-8',
+      ask: 'Which word in a sentence shows that something will happen later?',
+      kind: 'choice',
+      options: ['will', 'went', 'walked'],
+      answer: 'will',
+      teach: 'Will is a helping word put in front of the verb for the future. '
+        + 'Went and walked are both past.',
+      level: 3,
+    },
+    {
+      id: 'tn-9',
+      ask: 'Put "I see my aunt" into the future.',
+      kind: 'choice',
+      options: ['I saw my aunt.', 'I will see my aunt.', 'I seed my aunt.'],
+      answer: 'I will see my aunt.',
+      teach: 'For the future, keep the verb as it is and put will in front. '
+        + 'I saw my aunt is the past, and seed is not a word for this.',
+      level: 3,
+    },
+    {
+      id: 'tn-10',
+      ask: 'Which sentence is correct?',
+      kind: 'choice',
+      options: [
+        'Tomorrow I went to Kumasi.',
+        'Tomorrow I goed to Kumasi.',
+        'Tomorrow I will go to Kumasi.',
+      ],
+      answer: 'Tomorrow I will go to Kumasi.',
+      teach: 'Tomorrow is the future, so the verb needs will in front. Went is '
+        + 'past, and goed is not a word.',
       level: 4,
     },
   ],
@@ -915,6 +1190,85 @@ teach({
       teach: 'Each is a complete thought, so each needs its own full stop.',
       level: 4,
     },
+    {
+      id: 'pn-4',
+      ask: 'Which sentence is punctuated correctly?',
+      kind: 'choice',
+      options: ['Where is my book.', 'where is my book?', 'Where is my book?'],
+      answer: 'Where is my book?',
+      teach: 'It asks something, so it ends with a question mark, not a full '
+        + 'stop. And every sentence starts with a capital letter.',
+      level: 2,
+    },
+    {
+      id: 'pn-5',
+      ask: 'Which mark goes at the end of a sentence that asks something?',
+      kind: 'choice',
+      options: ['A full stop', 'A comma', 'A question mark'],
+      answer: 'A question mark',
+      teach: 'A sentence that tells ends with a full stop. A sentence that asks '
+        + 'ends with a question mark, the hook with a dot under it.',
+      level: 2,
+    },
+    {
+      id: 'pn-6',
+      ask: 'Which sentence uses commas correctly in a list?',
+      kind: 'choice',
+      options: [
+        'We bought, rice beans and fish.',
+        'We bought rice, beans and fish.',
+        'We bought rice beans, and, fish.',
+      ],
+      answer: 'We bought rice, beans and fish.',
+      teach: 'A comma separates the things in a list. It goes between rice and '
+        + 'beans. Before "and" the word itself does the separating.',
+      level: 3,
+    },
+    {
+      id: 'pn-7',
+      ask: 'How do you write: the bag belonging to Kofi?',
+      kind: 'choice',
+      options: ['Kofis bag', 'Kofi’s bag', 'Kofis’ bag'],
+      answer: 'Kofi’s bag',
+      teach: 'Owning takes an apostrophe and then an s, joined to the owner. '
+        + 'The owner is Kofi, so Kofi’s.',
+      level: 3,
+    },
+    {
+      id: 'pn-8',
+      ask: 'What is the short way to write "do not"?',
+      kind: 'choice',
+      options: ['dont', 'do’nt', 'don’t'],
+      answer: 'don’t',
+      teach: 'The apostrophe goes where the letter was left out. The missing '
+        + 'letter is the o of not, so it sits between n and t.',
+      level: 3,
+    },
+    {
+      id: 'pn-9',
+      ask: 'In "let us eat, Kofi", what does the comma show?',
+      kind: 'choice',
+      options: [
+        'That Kofi is the food',
+        'That you are speaking to Kofi',
+        'That this is a list',
+      ],
+      answer: 'That you are speaking to Kofi',
+      teach: 'With the comma you are calling Kofi to eat. Take it out and Kofi '
+        + 'becomes the meal. One mark changes the meaning.',
+      level: 3,
+    },
+    {
+      id: 'pn-10',
+      ask: 'How many words in "we travelled to tamale in january" need a '
+        + 'capital letter?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three'],
+      teach: 'We starts the sentence. Tamale is a town and January is a month, '
+        + 'and names take capitals. So We, Tamale and January.',
+      level: 4,
+    },
   ],
 })
 
@@ -1134,6 +1488,85 @@ teach({
       answer: 'It spells words you have never written before',
       teach: 'A pattern is a rule you can apply to a new word. '
         + 'A single word only ever spells itself.',
+      level: 4,
+    },
+    {
+      id: 'sp-4',
+      ask: 'Sounding out gives "nite". How is the word really spelled?',
+      kind: 'choice',
+      options: ['nite', 'nyte', 'night'],
+      answer: 'night',
+      teach: 'Every letter in nite makes the right sound, and it is still '
+        + 'wrong. The sound is spelled with the ight pattern, as in light and right.',
+      level: 2,
+    },
+    {
+      id: 'sp-5',
+      ask: 'Which pattern do could, would and should share?',
+      kind: 'choice',
+      options: ['ood', 'ould', 'ud'],
+      answer: 'ould',
+      teach: 'All three end in ould, even though you cannot hear the l. Learn '
+        + 'it once and you spell all three.',
+      level: 3,
+    },
+    {
+      id: 'sp-6',
+      ask: 'Which spelling is correct?',
+      kind: 'choice',
+      options: ['stashun', 'station', 'staytion'],
+      answer: 'station',
+      teach: 'The "shun" sound at the end is spelled tion, as in nation and '
+        + 'action. Writing what you hear gives stashun.',
+      level: 3,
+    },
+    {
+      id: 'sp-7',
+      ask: 'Which word rhymes with catch and uses the same tch pattern?',
+      kind: 'choice',
+      options: ['mach', 'match', 'matsh'],
+      answer: 'match',
+      teach: 'Catch, match, fetch and stitch all use tch for that sound at the '
+        + 'end. One pattern spells the whole family.',
+      level: 3,
+    },
+    {
+      id: 'sp-8',
+      ask: 'A pattern is written -ight. What does the dash in front mean?',
+      kind: 'choice',
+      options: [
+        'Something comes after this',
+        'Take these letters away',
+        'Something comes before this',
+      ],
+      answer: 'Something comes before this',
+      teach: 'A dash in front means letters come before the pattern, as in '
+        + 'n-ight. A dash after, as in un-, means something follows.',
+      level: 3,
+    },
+    {
+      id: 'sp-9',
+      ask: 'A word starts with a hard k sound, but you cannot find it under k '
+        + 'in the dictionary. What should you try next?',
+      kind: 'choice',
+      options: ['Give up and guess', 'Look under c', 'Look under s'],
+      answer: 'Look under c',
+      teach: 'One sound can have several spellings. A c can make the same hard '
+        + 'sound as a k, so try c next.',
+      level: 4,
+    },
+    {
+      id: 'sp-10',
+      ask: 'Why is "it looks right" not enough to be sure of a spelling?',
+      kind: 'choice',
+      options: [
+        'A mistake you have made before looks familiar too',
+        'Words never look right',
+        'Dictionaries are often wrong',
+      ],
+      answer: 'A mistake you have made before looks familiar too',
+      teach: 'Looking right often only means looking familiar. If unsure, '
+        + 'check it in a dictionary once and fix it for good.',
       level: 4,
     },
   ],

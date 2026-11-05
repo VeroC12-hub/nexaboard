@@ -197,6 +197,104 @@ teach({
         + 'Saying so costs nothing.',
       level: 5,
     },
+    {
+      id: 'gt-4',
+      ask: 'What are the three parts of a short talk?',
+      kind: 'choice',
+      options: [
+        'Greet the class, read your paper, sit down',
+        'Say what you will cover, cover it, then say what it came to',
+        'Tell a joke, give ten facts, say thank you',
+      ],
+      answer: 'Say what you will cover, cover it, then say what it came to',
+      teach: 'A talk is not a paper read aloud. '
+        + 'Tell them what is coming, say it, then sum it up so they keep it.',
+      level: 2,
+    },
+    {
+      id: 'gt-5',
+      ask: 'Where should you look while you give your talk?',
+      kind: 'choice',
+      options: ['At your notes', 'At the class', 'At the floor'],
+      answer: 'At the class',
+      teach: 'Looking down at a page means you are reading, not talking. '
+        + 'Look at the class, and glance at your notes only when you need to.',
+      level: 2,
+    },
+    {
+      id: 'gt-6',
+      ask: 'You lose your place in the middle of your talk. '
+        + 'What should you do?',
+      kind: 'choice',
+      options: [
+        'Say "em" until you remember',
+        'Start again from the beginning',
+        'Pause for a moment',
+      ],
+      answer: 'Pause for a moment',
+      teach: 'Filling the gap with "em" sounds like panic. '
+        + 'A short silence sounds like thinking, and it gives you time to '
+        + 'find your place.',
+      level: 2,
+    },
+    {
+      id: 'gt-7',
+      ask: 'What should your notes for a talk have in them?',
+      kind: 'choice',
+      options: [
+        'Every word of the talk',
+        'Keywords, not full sentences',
+        'Nothing at all',
+      ],
+      answer: 'Keywords, not full sentences',
+      teach: 'A full script tempts you to read it out. '
+        + 'Keywords remind you of each point and make you use your own words.',
+      level: 3,
+    },
+    {
+      id: 'gt-8',
+      ask: 'How should you practise a talk?',
+      kind: 'choice',
+      options: [
+        'Silently in your head, once',
+        'Out loud, standing up, at least twice',
+        'Not at all, so it sounds fresh',
+      ],
+      answer: 'Out loud, standing up, at least twice',
+      teach: 'Reading it in your head is not the same as saying it. '
+        + 'Practise the way you will give it: out loud and standing.',
+      level: 3,
+    },
+    {
+      id: 'gt-9',
+      ask: 'Why do you say your main points again at the end of a talk?',
+      kind: 'choice',
+      options: [
+        'To make the talk longer',
+        'Because you forgot you said them',
+        'A listener cannot go back and reread',
+      ],
+      answer: 'A listener cannot go back and reread',
+      teach: 'A reader who misses something can look back up the page. '
+        + 'A listener cannot, so saying it again helps them keep it.',
+      level: 3,
+    },
+    {
+      id: 'gt-10',
+      ask: 'Yaw plans a two minute talk with eight points. '
+        + 'What should he change?',
+      kind: 'choice',
+      options: [
+        'Talk faster to fit them all in',
+        'Keep all eight points',
+        'Cut it to about three points',
+      ],
+      answer: 'Cut it to about three points',
+      teach: 'Talking faster does not help, because listeners still lose '
+        + 'track. '
+        + 'Three points remembered beats eight points forgotten.',
+      level: 3,
+    },
   ],
 })
 
@@ -400,6 +498,94 @@ teach({
       teach: 'Two readers can infer differently. '
         + 'The one who quotes the line is the one who can be shown right.',
       level: 5,
+    },
+    {
+      id: 'if-4',
+      ask: 'Writers often show a feeling instead of naming it. '
+        + 'What is working out that feeling called?',
+      kind: 'choice',
+      options: ['Inference', 'Spelling', 'Punctuation'],
+      answer: 'Inference',
+      teach: 'Working out what the writer did not say, from the words they '
+        + 'did write, is called inference.',
+      level: 2,
+    },
+    {
+      id: 'if-5',
+      ask: '"Abena smiled widely and hugged her new bag." '
+        + 'How does Abena feel?',
+      kind: 'choice',
+      options: ['Angry', 'Afraid', 'Happy'],
+      answer: 'Happy',
+      teach: 'Look at what she does. '
+        + 'People smile widely and hug things when they are pleased.',
+      level: 2,
+    },
+    {
+      id: 'if-6',
+      ask: '"Abena smiled widely and hugged her new bag." '
+        + 'Which words show how she feels?',
+      kind: 'choice',
+      options: ['Abena', 'her new bag', 'smiled widely and hugged her new bag'],
+      answer: 'smiled widely and hugged her new bag',
+      teach: 'Her name and the bag are not clues to a feeling. '
+        + 'The actions, smiling and hugging, are the evidence.',
+      level: 3,
+    },
+    {
+      id: 'if-7',
+      ask: '"Adwoa slammed the door and would not look at her brother." '
+        + 'How does Adwoa feel?',
+      kind: 'choice',
+      options: ['Sleepy', 'Angry', 'Excited'],
+      answer: 'Angry',
+      teach: 'Slamming a door and refusing to look at somebody are things '
+        + 'people do when they are cross. '
+        + 'The words support it.',
+      level: 3,
+    },
+    {
+      id: 'if-8',
+      ask: '"The boy looked at the dog, then walked the long way round the '
+        + 'house." '
+        + 'How does the boy feel about the dog?',
+      kind: 'choice',
+      options: ['Happy to see it', 'Afraid of it', 'Hungry'],
+      answer: 'Afraid of it',
+      teach: 'He keeps away from the dog on purpose. '
+        + 'That points to fear, even though the writer never says "afraid".',
+      level: 3,
+    },
+    {
+      id: 'if-9',
+      ask: 'Which answer is complete?',
+      kind: 'choice',
+      options: [
+        'Kofi was frightened',
+        'Kofi was frightened, because it says his voice shook',
+        'Kofi was frightened, I just know',
+      ],
+      answer: 'Kofi was frightened, because it says his voice shook',
+      teach: 'An answer needs the feeling and the words that show it. '
+        + '"I just know" is not evidence.',
+      level: 3,
+    },
+    {
+      id: 'if-10',
+      ask: 'Fuseini says a character is rich because she lives in Accra. '
+        + 'The story says nothing about money. '
+        + 'Is that an inference?',
+      kind: 'choice',
+      options: [
+        'Yes, because it sounds likely',
+        'No, it is a guess, because no words support it',
+        'Yes, because many people in Accra are rich',
+      ],
+      answer: 'No, it is a guess, because no words support it',
+      teach: 'Ask: can you point at the words? '
+        + 'Living in Accra does not show anything about money. '
+        + 'Fuseini brought that idea from his own head.',
+      level: 4,
     },
   ],
 })
@@ -612,6 +798,99 @@ teach({
       answer: 'Work it out from the sentence and keep reading',
       teach: 'Stopping loses the thread of the passage. '
         + 'Check important words afterwards.',
+      level: 4,
+    },
+    {
+      id: 'vc-4',
+      ask: 'Which words tell you that an example is coming?',
+      kind: 'choice',
+      options: ['unlike', 'such as', 'however'],
+      answer: 'such as',
+      teach: '"Such as" and "for instance" bring an example. '
+        + '"Unlike" and "however" bring a contrast.',
+      level: 2,
+    },
+    {
+      id: 'vc-5',
+      ask: 'After you guess what a word means, how do you check your guess?',
+      kind: 'choice',
+      options: [
+        'Look at how the word is spelled',
+        'Put it in place of the word and see if the sentence makes sense',
+        'Count its letters',
+      ],
+      answer: 'Put it in place of the word and see if the sentence makes sense',
+      teach: 'What a word looks like is not a good clue. '
+        + 'Swap your meaning into the sentence. '
+        + 'If it still makes sense, you are close enough.',
+      level: 2,
+    },
+    {
+      id: 'vc-6',
+      ask: '"Unlike his talkative sister, Kwame was taciturn." '
+        + 'What does taciturn mean?',
+      kind: 'choice',
+      options: ['Very talkative', 'Quiet, saying little', 'Very tall'],
+      answer: 'Quiet, saying little',
+      teach: '"Unlike" signals a contrast. '
+        + 'His sister talks a lot, so Kwame is the opposite.',
+      level: 3,
+    },
+    {
+      id: 'vc-7',
+      ask: '"The market sold tubers such as yam and cocoyam." '
+        + 'What are tubers?',
+      kind: 'choice',
+      options: [
+        'Fruits like mango',
+        'Foods like yam and cocoyam',
+        'Drinks like water',
+      ],
+      answer: 'Foods like yam and cocoyam',
+      teach: '"Such as" gives examples. '
+        + 'Yam and cocoyam are examples of tubers, so tubers are foods of '
+        + 'that kind.',
+      level: 3,
+    },
+    {
+      id: 'vc-8',
+      ask: '"She tethered the goat to the post so it could not wander off." '
+        + 'What does tethered mean?',
+      kind: 'choice',
+      options: ['Fed', 'Painted', 'Tied'],
+      answer: 'Tied',
+      teach: 'There is no clue word here, so use the whole sentence. '
+        + 'Something done to a goat and a post that stops it wandering off '
+        + 'is tying.',
+      level: 3,
+    },
+    {
+      id: 'vc-9',
+      ask: 'Adwoa worked out a new word from the sentence. '
+        + 'She wants to use it in her own story. '
+        + 'What should she do first?',
+      kind: 'choice',
+      options: [
+        'Use it straight away',
+        'Check it in a dictionary',
+        'Never use it',
+      ],
+      answer: 'Check it in a dictionary',
+      teach: 'Context gets you close enough to keep reading. '
+        + 'Using a word yourself needs the exact meaning, so check it.',
+      level: 3,
+    },
+    {
+      id: 'vc-10',
+      ask: '"In the harmattan the well was dry, but in the rainy season it '
+        + 'was brimming." '
+        + 'What does brimming mean?',
+      kind: 'choice',
+      options: ['Empty', 'Full to the top', 'Broken'],
+      answer: 'Full to the top',
+      teach: '"But" signals a contrast. '
+        + 'The well was dry, so in the rainy season it was the opposite: '
+        + 'full.',
       level: 4,
     },
   ],
@@ -829,6 +1108,101 @@ teach({
         + 'It need not be a happy change.',
       level: 5,
     },
+    {
+      id: 'nr-4',
+      ask: 'What are the three parts of a story?',
+      kind: 'choice',
+      options: [
+        'A greeting, a body and a closing',
+        'A title, a picture and a name',
+        'A beginning, a middle and an ending',
+      ],
+      answer: 'A beginning, a middle and an ending',
+      teach: 'A greeting, body and closing belong to a letter. '
+        + 'A story has a beginning, a middle and an ending.',
+      level: 1,
+    },
+    {
+      id: 'nr-5',
+      ask: 'What goes in the beginning of a story?',
+      kind: 'choice',
+      options: [
+        'How the trouble is settled',
+        'Who it is about, and what they want',
+        'The biggest problem',
+      ],
+      answer: 'Who it is about, and what they want',
+      teach: 'The beginning sets the scene. '
+        + 'The trouble comes in the middle and is settled at the end.',
+      level: 2,
+    },
+    {
+      id: 'nr-6',
+      ask: 'Which part should take up most of the story?',
+      kind: 'choice',
+      options: ['The beginning', 'The ending', 'The middle'],
+      answer: 'The middle',
+      teach: 'Readers wait for the trouble. '
+        + 'Keep the beginning short and give most of the space to the middle.',
+      level: 2,
+    },
+    {
+      id: 'nr-7',
+      ask: '"Ama went to the market, bought fish and came home." '
+        + 'What is missing?',
+      kind: 'choice',
+      options: ['A name', 'A problem', 'A place'],
+      answer: 'A problem',
+      teach: 'Ama wanted something and got it. '
+        + 'Nothing went wrong, so there is nothing to tell.',
+      level: 2,
+    },
+    {
+      id: 'nr-8',
+      ask: 'Which middle turns Ama’s trip into a story?',
+      kind: 'choice',
+      options: [
+        'She walks to the market',
+        'She buys fish and goes home',
+        'She loses her money on the way and must find a way to buy the fish',
+      ],
+      answer: 'She loses her money on the way and must find a way to buy the fish',
+      teach: 'A middle needs trouble, and then what she does about it. '
+        + 'The other two have nothing going wrong.',
+      level: 3,
+    },
+    {
+      id: 'nr-9',
+      ask: 'A story says "Kofi walked to school." '
+        + 'Later it says "Kofi runs into the class." '
+        + 'What is wrong?',
+      kind: 'choice',
+      options: [
+        'Kofi is not named',
+        'The tense changes from past to present',
+        'There is no ending',
+      ],
+      answer: 'The tense changes from past to present',
+      teach: 'Walked is past and runs is present. '
+        + 'Pick one tense and keep it, or the reader loses when it is '
+        + 'happening.',
+      level: 3,
+    },
+    {
+      id: 'nr-10',
+      ask: 'Which part of a story should you plan first?',
+      kind: 'choice',
+      options: [
+        'The title',
+        'The last line',
+        'The middle, where something goes wrong',
+      ],
+      answer: 'The middle, where something goes wrong',
+      teach: 'Everything else follows from what goes wrong. '
+        + 'Once the trouble is chosen, the beginning and the ending fall '
+        + 'into place.',
+      level: 3,
+    },
   ],
 })
 
@@ -894,7 +1268,7 @@ teach({
     + 'to stop. '
     + 'A full stop ends a sentence, a comma makes a short pause, '
     + 'and a question mark closes a question. '
-    + '" needs both the comma and the question mark. '
+    + '"Ama, are you coming?" needs both the comma and the question mark. '
     + 'A letter is paragraphs and punctuation like that, set '
     + 'inside a fixed layout, and the layout is what this lesson '
     + 'adds.',
@@ -1046,6 +1420,105 @@ teach({
       teach: 'The date serves the reader, which is what the whole layout '
         + 'is for.',
       level: 5,
+    },
+    {
+      id: 'lw-4',
+      ask: 'Where does the date go on an informal letter?',
+      kind: 'choice',
+      options: [
+        'At the very bottom',
+        'Under your address, at the top right',
+        'On the left, before the greeting',
+      ],
+      answer: 'Under your address, at the top right',
+      teach: 'Your address goes at the top right and the date sits just '
+        + 'under it. '
+        + 'Together they are called the heading.',
+      level: 2,
+    },
+    {
+      id: 'lw-5',
+      ask: 'Which greeting is written correctly?',
+      kind: 'choice',
+      options: ['Dear Auntie Akos', 'dear auntie akos.', 'Dear Auntie Akos,'],
+      answer: 'Dear Auntie Akos,',
+      teach: 'The greeting starts with Dear and the name, and always ends '
+        + 'with a comma. '
+        + 'Leaving off the comma is the commonest lost mark.',
+      level: 2,
+    },
+    {
+      id: 'lw-6',
+      ask: 'What is the part of a letter that carries your news called?',
+      kind: 'choice',
+      options: ['The heading', 'The body', 'The closing'],
+      answer: 'The body',
+      teach: 'The heading has your address and the date. '
+        + 'The closing comes at the end. '
+        + 'The body is where your news goes.',
+      level: 2,
+    },
+    {
+      id: 'lw-7',
+      ask: 'Why must your own address be on the letter?',
+      kind: 'choice',
+      options: [
+        'So they can reply',
+        'So the post office can weigh it',
+        'To fill the space',
+      ],
+      answer: 'So they can reply',
+      teach: 'The layout is there to help the reader. '
+        + 'Your address tells them where to send their answer.',
+      level: 2,
+    },
+    {
+      id: 'lw-8',
+      ask: 'Which of these is a closing for an informal letter?',
+      kind: 'choice',
+      options: [
+        'Dear Ama,',
+        'Your loving cousin',
+        'I trust this missive finds you well',
+      ],
+      answer: 'Your loving cousin',
+      teach: '"Dear Ama," is a greeting, which comes at the start. '
+        + 'A closing such as "Your loving cousin" comes at the end, before '
+        + 'your name.',
+      level: 2,
+    },
+    {
+      id: 'lw-9',
+      ask: 'Akosua has three pieces of news: her exams, a new baby sister '
+        + 'and the rain. '
+        + 'How should she write them?',
+      kind: 'choice',
+      options: [
+        'All in one paragraph',
+        'One paragraph for each piece of news',
+        'All in the greeting',
+      ],
+      answer: 'One paragraph for each piece of news',
+      teach: 'One idea per paragraph. '
+        + 'Writing the letter as one block makes it hard for the reader to '
+        + 'follow.',
+      level: 3,
+    },
+    {
+      id: 'lw-10',
+      ask: 'Kwame is writing to his grandmother. '
+        + 'Which sentence suits his letter?',
+      kind: 'choice',
+      options: [
+        'I trust this missive finds you well.',
+        'I hope you are well, Grandma.',
+        'To whom it may concern.',
+      ],
+      answer: 'I hope you are well, Grandma.',
+      teach: 'An informal letter should sound like you talking to somebody '
+        + 'you know. '
+        + 'Stiff, formal words sound like a stranger.',
+      level: 3,
     },
   ],
 })
@@ -1261,6 +1734,87 @@ teach({
         + 'because the common mistake is exactly what sounds right.',
       level: 5,
     },
+    {
+      id: 'sv-4',
+      ask: 'Which is correct?',
+      kind: 'choice',
+      options: ['The girl sweep the floor', 'The girl sweeps the floor'],
+      answer: 'The girl sweeps the floor',
+      teach: 'One girl is singular, so the verb takes s: sweeps. '
+        + 'Two girls would sweep.',
+      level: 1,
+    },
+    {
+      id: 'sv-5',
+      ask: 'In "The girls sweep the floor", what is the subject?',
+      kind: 'choice',
+      options: ['sweep', 'the floor', 'The girls'],
+      answer: 'The girls',
+      teach: 'The subject is who is doing it. '
+        + 'The girls are doing the sweeping. '
+        + 'Sweep is the verb.',
+      level: 2,
+    },
+    {
+      id: 'sv-6',
+      ask: 'Which is correct?',
+      kind: 'choice',
+      options: [
+        'My brother go to school in Tamale',
+        'My brothers goes to school in Tamale',
+        'My brother goes to school in Tamale',
+      ],
+      answer: 'My brother goes to school in Tamale',
+      teach: 'One brother, so the verb takes s: goes. '
+        + '"My brothers goes" puts the s on both words, which is wrong.',
+      level: 2,
+    },
+    {
+      id: 'sv-7',
+      ask: 'Choose the verb: "The children in the yard ___ football."',
+      kind: 'choice',
+      options: ['plays', 'play'],
+      answer: 'play',
+      teach: 'Cover "in the yard". '
+        + 'The children play. '
+        + 'Children is more than one, so the verb has no s.',
+      level: 3,
+    },
+    {
+      id: 'sv-8',
+      ask: 'Choose the verb: "The basket of oranges ___ on the table."',
+      kind: 'choice',
+      options: ['are', 'is'],
+      answer: 'is',
+      teach: 'Oranges sits next to the verb and pulls you towards "are". '
+        + 'Cover "of oranges": the basket is. '
+        + 'There is one basket.',
+      level: 3,
+    },
+    {
+      id: 'sv-9',
+      ask: 'Which is correct?',
+      kind: 'choice',
+      options: [
+        'The boxes of mangoes is heavy',
+        'The boxes of mangoes are heavy',
+      ],
+      answer: 'The boxes of mangoes are heavy',
+      teach: 'Cover "of mangoes": the boxes are heavy. '
+        + 'Boxes is more than one, so the verb is are.',
+      level: 3,
+    },
+    {
+      id: 'sv-10',
+      ask: 'Choose the verb: "The teacher of the boys ___ kind."',
+      kind: 'choice',
+      options: ['are', 'is'],
+      answer: 'is',
+      teach: 'Boys is the nearest noun, but it is not the subject. '
+        + 'Cover "of the boys": the teacher is kind. '
+        + 'One teacher.',
+      level: 4,
+    },
   ],
 })
 
@@ -1453,6 +2007,79 @@ teach({
       teach: 'A friendly man. It describes the man, so it is an adjective. '
         + 'The ending is not the test.',
       level: 5,
+    },
+    {
+      id: 'aa-4',
+      ask: 'In "the red bag", what kind of word is "red"?',
+      kind: 'choice',
+      options: ['An adverb', 'A verb', 'An adjective'],
+      answer: 'An adjective',
+      teach: 'Red describes the bag, and a bag is a noun. '
+        + 'A word that describes a noun is an adjective.',
+      level: 1,
+    },
+    {
+      id: 'aa-5',
+      ask: 'What does an adverb describe?',
+      kind: 'choice',
+      options: ['A noun', 'A verb', 'A full stop'],
+      answer: 'A verb',
+      teach: 'An adverb tells you how something was done. '
+        + 'An adjective is the one that describes a noun.',
+      level: 2,
+    },
+    {
+      id: 'aa-6',
+      ask: 'In "Kwame spoke softly", which word is the adverb?',
+      kind: 'choice',
+      options: ['Kwame', 'spoke', 'softly'],
+      answer: 'softly',
+      teach: 'The verb is spoke. '
+        + 'Softly tells you how he spoke, so it is the adverb.',
+      level: 2,
+    },
+    {
+      id: 'aa-7',
+      ask: 'Which one word could replace "said loudly"?',
+      kind: 'choice',
+      options: ['whispered', 'shouted', 'walked'],
+      answer: 'shouted',
+      teach: 'A strong verb can do the job of a weak verb plus an adverb. '
+        + 'Shouted means said loudly.',
+      level: 2,
+    },
+    {
+      id: 'aa-8',
+      ask: 'Which is correct?',
+      kind: 'choice',
+      options: ['He ran quick', 'He ran quickly'],
+      answer: 'He ran quickly',
+      teach: 'Ran is a verb, so it needs an adverb to describe it. '
+        + 'Quick is an adjective; quickly is the adverb.',
+      level: 3,
+    },
+    {
+      id: 'aa-9',
+      ask: 'Which one word could replace "looked carefully at"?',
+      kind: 'choice',
+      options: ['glanced', 'ignored', 'studied'],
+      answer: 'studied',
+      teach: 'Glanced means looked quickly, which is the opposite. '
+        + 'Studied means looked carefully at, in one word.',
+      level: 3,
+    },
+    {
+      id: 'aa-10',
+      ask: 'Which sentence is more exact?',
+      kind: 'choice',
+      options: [
+        'Ama was very, very tired after the walk.',
+        'Ama was worn out after the walk.',
+      ],
+      answer: 'Ama was worn out after the walk.',
+      teach: 'Piling up "very" adds length but not meaning. '
+        + 'Choosing a stronger word says it better.',
+      level: 3,
     },
   ],
 })
@@ -1648,6 +2275,104 @@ teach({
       teach: '"Boring" often just means "not for me". '
         + 'Saying who would enjoy it helps somebody with different taste.',
       level: 5,
+    },
+    {
+      id: 'brp-4',
+      ask: 'What three things should you say about a book?',
+      kind: 'choice',
+      options: [
+        'The title, the price and the number of pages',
+        'What it was about, what you thought, and who would like it',
+        'The ending, the cover and the colour',
+      ],
+      answer: 'What it was about, what you thought, and who would like it',
+      teach: 'The price and the number of pages do not help a friend decide. '
+        + 'Say what it was about, your opinion, and who would enjoy it.',
+      level: 2,
+    },
+    {
+      id: 'brp-5',
+      ask: 'What should you name first?',
+      kind: 'choice',
+      options: ['The ending', 'Your favourite page', 'The book and the writer'],
+      answer: 'The book and the writer',
+      teach: 'Start with the book and who wrote it, so the listener can find '
+        + 'it. '
+        + 'Then say who it is mainly about.',
+      level: 2,
+    },
+    {
+      id: 'brp-6',
+      ask: 'Which part do people most want to hear?',
+      kind: 'choice',
+      options: [
+        'How many pages it has',
+        'Whether you would tell a friend to read it',
+        'The ending',
+      ],
+      answer: 'Whether you would tell a friend to read it',
+      teach: 'Your listener is deciding whether to read it. '
+        + 'Your recommendation is what helps them decide.',
+      level: 2,
+    },
+    {
+      id: 'brp-7',
+      ask: 'When you say what happens in the book, where should you stop?',
+      kind: 'choice',
+      options: [
+        'After the ending',
+        'Before the ending',
+        'After the first page',
+      ],
+      answer: 'Before the ending',
+      teach: 'Say what the problem is, then stop. '
+        + 'The ending is the thing your friend would be reading for.',
+      level: 2,
+    },
+    {
+      id: 'brp-8',
+      ask: 'Which opinion is most useful to a friend?',
+      kind: 'choice',
+      options: [
+        'I liked it',
+        'It was nice',
+        'I liked it, because the girl solves the problem by herself',
+      ],
+      answer: 'I liked it, because the girl solves the problem by herself',
+      teach: 'An opinion with a reason lets your friend decide whether they '
+        + 'like what you like. '
+        + '"It was nice" tells them nothing.',
+      level: 3,
+    },
+    {
+      id: 'brp-9',
+      ask: 'Akosua tells the whole story from start to finish. What is wrong?',
+      kind: 'choice',
+      options: [
+        'It is too short',
+        'It leaves her friend no reason to read it',
+        'Nothing, that is a good report',
+      ],
+      answer: 'It leaves her friend no reason to read it',
+      teach: 'A report should say enough to interest the listener and then '
+        + 'stop. '
+        + 'Retelling the whole plot gives away the ending.',
+      level: 3,
+    },
+    {
+      id: 'brp-10',
+      ask: 'Kofi says a book was boring. What might he really mean?',
+      kind: 'choice',
+      options: [
+        'It was not for him',
+        'Nobody would like it',
+        'It was too short',
+      ],
+      answer: 'It was not for him',
+      teach: '"Boring" often means "not for me". '
+        + 'Saying who the book is for helps a friend whose taste is '
+        + 'different.',
+      level: 3,
     },
   ],
 })

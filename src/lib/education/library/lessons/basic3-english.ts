@@ -217,6 +217,99 @@ teach({
         + 'Only the chip tells them apart, so that is the word that works.',
       level: 3,
     },
+    {
+      id: 'desc-4',
+      ask: 'Why does "a nice bag" not help somebody find your bag?',
+      kind: 'choice',
+      options: [
+        'Because nice is too long a word',
+        'Because nice is in your head, not on the bag',
+        'Because it does not say bag',
+      ],
+      answer: 'Because nice is in your head, not on the bag',
+      teach: 'Nice is how you feel about it. A stranger cannot see that. Say '
+        + 'what the bag looks like, such as its colour or a broken strap.',
+      level: 1,
+    },
+    {
+      id: 'desc-5',
+      ask: 'Which word tells somebody how big a thing is?',
+      kind: 'choice',
+      options: ['red', 'small', 'plastic'],
+      answer: 'small',
+      teach: 'Red is a colour. Plastic is what it is made of. Small tells the '
+        + 'size. A good description can use all three.',
+      level: 1,
+    },
+    {
+      id: 'desc-6',
+      ask: 'Five bags are on a table. Only one is red. Which words help '
+        + 'somebody find it?',
+      kind: 'choice',
+      options: ['A bag', 'A nice bag', 'A red bag'],
+      answer: 'A red bag',
+      teach: '"A bag" fits all five. "Nice" is only in your head. Red is true '
+        + 'of yours and not of the others, so red is the useful word.',
+      level: 2,
+    },
+    {
+      id: 'desc-7',
+      ask: 'Every girl in the class wears the same uniform. Which helps '
+        + 'somebody find Abena?',
+      kind: 'choice',
+      options: [
+        'A girl in uniform',
+        'The tall girl with a blue ribbon in her hair',
+        'A kind girl',
+      ],
+      answer: 'The tall girl with a blue ribbon in her hair',
+      teach: 'The uniform is true of every girl, so it picks out nobody. Kind '
+        + 'cannot be seen. Tall and a blue ribbon are the things only Abena has.',
+      level: 2,
+    },
+    {
+      id: 'desc-8',
+      ask: 'What is the test of a good description?',
+      kind: 'choice',
+      options: [
+        'Could a stranger find the thing from your words?',
+        'Is it very long?',
+        'Does it use big words?',
+      ],
+      answer: 'Could a stranger find the thing from your words?',
+      teach: 'A description is for somebody else. Long or fancy words do not '
+        + 'help if they still fit many things. Ask if a stranger could pick it out.',
+      level: 2,
+    },
+    {
+      id: 'desc-9',
+      ask: 'Kofi describes his bag. He talks about the zip, the floor, the '
+        + 'window and the sky. What went wrong?',
+      kind: 'choice',
+      options: [
+        'He listed everything he could see',
+        'He used too few words',
+        'He said what it is first',
+      ],
+      answer: 'He listed everything he could see',
+      teach: 'More words are not better. Pick only the things true of your bag '
+        + 'and not the others. The rest is filling.',
+      level: 3,
+    },
+    {
+      id: 'desc-10',
+      ask: 'What should you say first when you describe a pencil?',
+      kind: 'choice',
+      options: [
+        'That it has a small mark near the end',
+        'That it is a pencil',
+        'That it is yellow',
+      ],
+      answer: 'That it is a pencil',
+      teach: 'Start with what the thing is. Then size, then colour. The small '
+        + 'odd thing comes last. Starting with a tiny mark leaves the listener lost.',
+      level: 3,
+    },
   ],
 })
 
@@ -415,6 +508,97 @@ teach({
       teach: 'It ends in a question mark, and a question lifts the voice. '
         + 'The other two end in full stops.',
       level: 2,
+    },
+    {
+      id: 'ral-4',
+      ask: 'What does a comma tell you to do?',
+      kind: 'choice',
+      options: [
+        'Take a small breath, then carry on',
+        'Stop, because the sentence has ended',
+        'Read faster',
+      ],
+      answer: 'Take a small breath, then carry on',
+      teach: 'A comma is a little hook. It is only a short rest. The full stop '
+        + 'is the mark that ends the sentence.',
+      level: 1,
+    },
+    {
+      id: 'ral-5',
+      ask: 'Is reading aloud well the same as reading fast?',
+      kind: 'choice',
+      options: [
+        'Yes, the fastest reader is best',
+        'No, it is reading so the listener understands you',
+        'Yes, if you say every word',
+      ],
+      answer: 'No, it is reading so the listener understands you',
+      teach: 'Racing makes the words run together. Then the listener loses the '
+        + 'meaning. Read at a steady pace, as fast as you talk.',
+      level: 1,
+    },
+    {
+      id: 'ral-6',
+      ask: 'Where do you pause? "Kofi ran home. He was hungry."',
+      kind: 'choice',
+      options: ['After Kofi', 'After ran', 'After home, and at the end'],
+      answer: 'After home, and at the end',
+      teach: 'Look for the marks. There is a full stop after home and another '
+        + 'at the end. Stop there. Kofi and ran belong together, so do not stop between them.',
+      level: 2,
+    },
+    {
+      id: 'ral-7',
+      ask: 'What should your voice do at an exclamation mark?',
+      kind: 'choice',
+      options: ['Get stronger', 'Go up like a question', 'Stay flat'],
+      answer: 'Get stronger',
+      teach: 'A question mark lifts the voice at the end. An exclamation mark '
+        + 'is different. It makes your voice stronger.',
+      level: 2,
+    },
+    {
+      id: 'ral-8',
+      ask: 'You get stuck on a word as you read aloud. What do you do?',
+      kind: 'choice',
+      options: [
+        'Skip the whole line',
+        'Sound it out, then read the whole line again',
+        'Stop reading',
+      ],
+      answer: 'Sound it out, then read the whole line again',
+      teach: 'Skipping loses part of the meaning. Sound the word out. Then '
+        + 'read the line again so it sounds like talking.',
+      level: 2,
+    },
+    {
+      id: 'ral-9',
+      ask: 'Yaw stops for a long time at every comma. What is wrong?',
+      kind: 'choice',
+      options: [
+        'A comma needs only a small breath',
+        'He should never stop at a comma',
+        'Nothing is wrong',
+      ],
+      answer: 'A comma needs only a small breath',
+      teach: 'A long stop is for a full stop. At a comma you take a small '
+        + 'breath and carry on, so the sentence holds together.',
+      level: 3,
+    },
+    {
+      id: 'ral-10',
+      ask: 'Ama reads "The red bus ... stopped." She stops after bus. There '
+        + 'is no mark there. Why is that a mistake?',
+      kind: 'choice',
+      options: [
+        'She should stop after every word',
+        'The words on each side belong together',
+        'She should have stopped after red',
+      ],
+      answer: 'The words on each side belong together',
+      teach: 'Only the marks tell you to stop. "The red bus stopped" is one '
+        + 'idea. Stopping in the middle breaks it in two.',
+      level: 3,
     },
   ],
 })
@@ -617,6 +801,88 @@ teach({
       answer: 'That the passage does not say',
       teach: 'A guess that happens to be right is still a guess. '
         + 'If you cannot point at the line, you do not have the answer.',
+      level: 3,
+    },
+    {
+      id: 'aft-4',
+      ask: 'The passage says: "Kofi has a brown dog called Bono." What is the '
+        + 'dog called?',
+      kind: 'choice',
+      options: ['Kofi', 'Bono', 'Brown'],
+      answer: 'Bono',
+      teach: 'Kofi is the owner and brown is the colour. The line says the dog '
+        + 'is called Bono. Point at "called Bono".',
+      level: 1,
+    },
+    {
+      id: 'aft-5',
+      ask: 'A question starts with "Who". What do you hunt for in the passage?',
+      kind: 'choice',
+      options: ['A colour word', 'A name', 'A day or a time'],
+      answer: 'A name',
+      teach: 'Who asks about a person, so look for a name, like Kofi or Ama. '
+        + 'A day or a time answers when.',
+      level: 1,
+    },
+    {
+      id: 'aft-6',
+      ask: 'The passage says: "On Saturday, Abena went to the market in '
+        + 'Kumasi." Where did Abena go?',
+      kind: 'choice',
+      options: ['On Saturday', 'To school', 'To the market in Kumasi'],
+      answer: 'To the market in Kumasi',
+      teach: 'Where asks for a place. On Saturday is a day, so it answers when. '
+        + 'School is not in the passage at all.',
+      level: 2,
+    },
+    {
+      id: 'aft-7',
+      ask: 'Same passage: "On Saturday, Abena went to the market in Kumasi." '
+        + 'When did she go?',
+      kind: 'choice',
+      options: ['On Saturday', 'In Kumasi', 'On Monday'],
+      answer: 'On Saturday',
+      teach: 'When asks for a day or a time. Hunt for one in the line. Kumasi '
+        + 'is a place. Monday is not in the passage.',
+      level: 2,
+    },
+    {
+      id: 'aft-8',
+      ask: 'What should you do before you hunt for an answer?',
+      kind: 'choice',
+      options: [
+        'Read the whole passage once',
+        'Guess the answer',
+        'Read only the question',
+      ],
+      answer: 'Read the whole passage once',
+      teach: 'If you read only the question and then hunt, you can miss what '
+        + 'the passage means. Read it all once first, then the question.',
+      level: 2,
+    },
+    {
+      id: 'aft-9',
+      ask: 'The passage says: "The road was wet, so Yaw walked slowly." Why '
+        + 'did Yaw walk slowly?',
+      kind: 'choice',
+      options: ['Yaw', 'Because the road was wet', 'Slowly'],
+      answer: 'Because the road was wet',
+      teach: 'A why question needs a reason, not one word. The word so points '
+        + 'to it. The road was wet, so he walked slowly.',
+      level: 3,
+    },
+    {
+      id: 'aft-10',
+      ask: 'How can you show your answer came from the passage?',
+      kind: 'choice',
+      options: [
+        'Say it louder',
+        'Say what you think instead',
+        'Point at the line it came from',
+      ],
+      answer: 'Point at the line it came from',
+      teach: 'Pointing at the line is the proof. If you cannot point at a line, '
+        + 'you guessed. Go back and look again.',
       level: 3,
     },
   ],
@@ -823,6 +1089,76 @@ teach({
       answer: 'Feet',
       teach: 'Foot is an old everyday word, so it changes shape instead of '
         + 'adding s.',
+      level: 3,
+    },
+    {
+      id: 'plu-4',
+      ask: 'What does plural mean?',
+      kind: 'choice',
+      options: ['Only one', 'More than one', 'A doing word'],
+      answer: 'More than one',
+      teach: 'Singular means one: one book. Plural means more than one: two '
+        + 'books.',
+      level: 1,
+    },
+    {
+      id: 'plu-5',
+      ask: 'What is the plural of goat?',
+      kind: 'choice',
+      options: ['goats', 'goates', 'goat\'s'],
+      answer: 'goats',
+      teach: 'Most words just add s. Goat ends in t, so add s: goats. The '
+        + 'apostrophe is for things that belong, not for more than one.',
+      level: 1,
+    },
+    {
+      id: 'plu-6',
+      ask: 'What is the plural of dish?',
+      kind: 'choice',
+      options: ['dishs', 'dish\'s', 'dishes'],
+      answer: 'dishes',
+      teach: 'Dish ends in sh. Words that end in s, x, ch or sh add es. Try '
+        + 'saying dishs out loud. Nobody can, so it is dishes.',
+      level: 2,
+    },
+    {
+      id: 'plu-7',
+      ask: 'What is the plural of baby?',
+      kind: 'choice',
+      options: ['babies', 'babys', 'babyes'],
+      answer: 'babies',
+      teach: 'Baby ends in a letter and then y. The y becomes ies. So one baby, '
+        + 'two babies.',
+      level: 2,
+    },
+    {
+      id: 'plu-8',
+      ask: 'Which shows more than one book?',
+      kind: 'choice',
+      options: ['book\'s', 'books', 'bookes'],
+      answer: 'books',
+      teach: 'An apostrophe shows a thing belongs to somebody, as in the '
+        + 'book\'s cover. For more than one book, just add s: books.',
+      level: 2,
+    },
+    {
+      id: 'plu-9',
+      ask: 'What is the plural of child?',
+      kind: 'choice',
+      options: ['childs', 'children', 'childes'],
+      answer: 'children',
+      teach: 'Child is an old everyday word. Words like that change shape '
+        + 'instead of adding s. One child, two children.',
+      level: 3,
+    },
+    {
+      id: 'plu-10',
+      ask: 'One sheep. Two ...?',
+      kind: 'choice',
+      options: ['sheeps', 'sheepes', 'sheep'],
+      answer: 'sheep',
+      teach: 'A few animal words do not change at all. One sheep, two sheep. '
+        + 'Adding s is the rule for most words, but not this one.',
       level: 3,
     },
   ],
@@ -1042,6 +1378,94 @@ teach({
       teach: 'The first page is often made easy on purpose. '
         + 'The middle shows you what the book is really like.',
       level: 2,
+    },
+    {
+      id: 'book-4',
+      ask: 'You test a page. What do you hold up for each word you cannot read?',
+      kind: 'choice',
+      options: ['The book', 'One finger', 'Your pencil'],
+      answer: 'One finger',
+      teach: 'One finger for each hard word. At the end of the page you count '
+        + 'your fingers. That number tells you if the book is right.',
+      level: 1,
+    },
+    {
+      id: 'book-5',
+      ask: 'You find 2 hard words on a page. What does that tell you?',
+      kind: 'choice',
+      options: ['The book is too hard', 'The book is too easy', 'The book is about right'],
+      answer: 'The book is about right',
+      teach: 'One to three hard words on a page is about right. You can read '
+        + 'it and still learn. Five or more is too hard for now.',
+      level: 1,
+    },
+    {
+      id: 'book-6',
+      ask: 'You read a page and there were no hard words at all. What does '
+        + 'that tell you?',
+      kind: 'choice',
+      options: ['It is too easy for you', 'It is too hard for you', 'It is about right'],
+      answer: 'It is too easy for you',
+      teach: 'No hard words means the book is too easy. Look for a longer one. '
+        + 'If you love it, reading it is still practice.',
+      level: 2,
+    },
+    {
+      id: 'book-7',
+      ask: 'Kwame picks a book because it is the thickest one. Is that a '
+        + 'good reason?',
+      kind: 'choice',
+      options: [
+        'Yes, thick books are best',
+        'No, thick does not tell you if you can read it',
+        'Yes, it will last longer',
+      ],
+      answer: 'No, thick does not tell you if you can read it',
+      teach: 'A thick book can be easy or hard. Open it at a full page and '
+        + 'count the hard words. That tells you.',
+      level: 2,
+    },
+    {
+      id: 'book-8',
+      ask: 'You count the hard words. What else should you ask yourself?',
+      kind: 'choice',
+      options: [
+        'What colour is the cover?',
+        'How heavy is it?',
+        'Do I want to know what happens?',
+      ],
+      answer: 'Do I want to know what happens?',
+      teach: 'A book at your level is good. A book you want to finish is '
+        + 'better. The cover colour and weight do not tell you either thing.',
+      level: 2,
+    },
+    {
+      id: 'book-9',
+      ask: 'Your teacher asks why you chose your book. Which is a good answer?',
+      kind: 'choice',
+      options: [
+        'It was the thickest book on the shelf',
+        'I could read most of a page, and I want to know what happens',
+        'My friend said it was not babyish',
+      ],
+      answer: 'I could read most of a page, and I want to know what happens',
+      teach: 'A good reason says two things. You can read it, because you '
+        + 'tested a page. And you want the story. Thickness and a friend do not count.',
+      level: 3,
+    },
+    {
+      id: 'book-10',
+      ask: 'Why does a book that is too hard not help you get better at reading?',
+      kind: 'choice',
+      options: [
+        'All your work goes on the words, and none on the story',
+        'Hard books have no pictures',
+        'Hard books are too heavy',
+      ],
+      answer: 'All your work goes on the words, and none on the story',
+      teach: 'When every line stops you, you forget the start of the page. '
+        + 'Then you give up. A book at your level lets you practise reading.',
+      level: 3,
     },
   ],
 })

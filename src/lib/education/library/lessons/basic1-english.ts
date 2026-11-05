@@ -190,6 +190,79 @@ teach({
         + 'helping my mother.',
       level: 3,
     },
+    {
+      id: 'sis-4',
+      ask: 'Somebody asks: What is your name? Which is the best answer?',
+      kind: 'choice',
+      options: ['Ama.', 'My name is Ama.', 'Name Ama.'],
+      answer: 'My name is Ama.',
+      teach: 'One word makes the listener guess. A full sentence starts with '
+        + 'the person: My name is Ama.',
+      level: 1,
+    },
+    {
+      id: 'sis-5',
+      ask: 'Which one is a full sentence?',
+      kind: 'choice',
+      options: ['Market.', 'To the market.', 'I am going to the market.'],
+      answer: 'I am going to the market.',
+      teach: 'It says who is going (I) and what they are doing (going to the '
+        + 'market). The others leave out the person.',
+      level: 1,
+    },
+    {
+      id: 'sis-6',
+      ask: 'What should you do first when somebody asks you a question?',
+      kind: 'choice',
+      options: [
+        'Answer fast before they finish',
+        'Listen to the question to the end',
+        'Say one word',
+      ],
+      answer: 'Listen to the question to the end',
+      teach: 'If you answer before the end, you may answer the wrong thing. '
+        + 'Listen to the end, then say the whole sentence.',
+      level: 2,
+    },
+    {
+      id: 'sis-7',
+      ask: 'Somebody asks: What did you eat? You ate kenkey. What do you say?',
+      kind: 'choice',
+      options: ['Kenkey.', 'Ate kenkey.', 'I ate kenkey.'],
+      answer: 'I ate kenkey.',
+      teach: 'Start with the person: I. Then what you did: ate. Then the '
+        + 'thing: kenkey.',
+      level: 2,
+    },
+    {
+      id: 'sis-8',
+      ask: 'Kofi says his answer very quietly. Nobody hears. What should he do?',
+      kind: 'choice',
+      options: [
+        'Look up and speak out',
+        'Say only one word',
+        'Say nothing',
+      ],
+      answer: 'Look up and speak out',
+      teach: 'A sentence nobody hears has not been said. Look at the person '
+        + 'and speak loud enough to be heard.',
+      level: 2,
+    },
+    {
+      id: 'sis-9',
+      ask: 'Somebody asks: Why are you late? You were helping your mother. '
+        + 'Which is the best answer?',
+      kind: 'choice',
+      options: [
+        'I am late.',
+        'I am late because I was helping my mother.',
+        'Mother.',
+      ],
+      answer: 'I am late because I was helping my mother.',
+      teach: 'A why question wants the reason. "I am late" leaves it out. '
+        + 'Join the reason on with "because".',
+      level: 3,
+    },
   ],
 })
 
@@ -388,6 +461,65 @@ teach({
         + 'with shh.',
       level: 2,
     },
+    {
+      id: 'lsp-4',
+      ask: 'What sound does s make?',
+      kind: 'choice',
+      options: ['sss', 'es', 'suh'],
+      answer: 'sss',
+      teach: '"es" is the letter name. "suh" has an extra sound on the end. '
+        + 'The sound is sss, like the start of sika.',
+      level: 1,
+    },
+    {
+      id: 'lsp-5',
+      ask: 'M and m. Are they the same letter?',
+      kind: 'choice',
+      options: ['Yes, big and small', 'No, two letters'],
+      answer: 'Yes, big and small',
+      teach: 'Every letter comes in a big size and a small size. M and m are '
+        + 'the same letter. Both say mmm.',
+      level: 1,
+    },
+    {
+      id: 'lsp-6',
+      ask: 'Which word starts with the mmm sound?',
+      kind: 'choice',
+      options: ['sika', 'maame', 'chop'],
+      answer: 'maame',
+      teach: 'Say the first sound of each word. maame starts with mmm. sika '
+        + 'starts with sss. chop starts with ch.',
+      level: 2,
+    },
+    {
+      id: 'lsp-7',
+      ask: 'To read a word, do you say the letter name or the letter sound?',
+      kind: 'choice',
+      options: ['The name', 'The sound'],
+      answer: 'The sound',
+      teach: 'Saying "em ay tee" does not make mat. Saying mmm, a, t does. '
+        + 'The sound is what helps you read.',
+      level: 2,
+    },
+    {
+      id: 'lsp-8',
+      ask: 'How many sounds do c and h make together, as in chop?',
+      kind: 'numeric',
+      answer: '1',
+      accept: ['one'],
+      teach: 'c and h together make one sound: ch. Do not split it into two.',
+      level: 2,
+    },
+    {
+      id: 'lsp-9',
+      ask: 'How many sounds are in chop?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three'],
+      teach: 'ch is one sound. Then o, then p. That is three sounds, even '
+        + 'though there are four letters.',
+      level: 3,
+    },
   ],
 })
 
@@ -570,6 +702,74 @@ teach({
       answer: 'Check the sounds again, it is not a word',
       teach: 'If what comes out is not a word you have heard, one sound was '
         + 'wrong. Going back and checking is reading. Guessing is not.',
+      level: 3,
+    },
+    {
+      id: 'b2r-4',
+      ask: 'Blend these sounds: mmm, a, t. What is the word?',
+      kind: 'choice',
+      options: ['mat', 'map', 'tam'],
+      answer: 'mat',
+      teach: 'Say the sounds in order, then faster. mmm-a-t runs into mat. '
+        + 'Keep them in the same order.',
+      level: 1,
+    },
+    {
+      id: 'b2r-5',
+      ask: 'Blend these sounds: sss, a, t. What is the word?',
+      kind: 'choice',
+      options: ['sit', 'sat', 'tas'],
+      answer: 'sat',
+      teach: 'The middle sound is a, so the word is sat. Hold the middle '
+        + 'sound the same when you speed up.',
+      level: 1,
+    },
+    {
+      id: 'b2r-6',
+      ask: 'What do you do after you say each sound?',
+      kind: 'choice',
+      options: [
+        'Say them again, faster',
+        'Stop and wait',
+        'Guess from the first letter',
+      ],
+      answer: 'Say them again, faster',
+      teach: 'The sounds are the word already. Say them faster and your ear '
+        + 'catches the whole word.',
+      level: 2,
+    },
+    {
+      id: 'b2r-7',
+      ask: 'Blend these sounds: shh, o, p. What is the word?',
+      kind: 'choice',
+      options: ['chop', 'shop', 'sop'],
+      answer: 'shop',
+      teach: 'shh is one sound from s and h. shh-o-p, said faster, is shop. '
+        + 'chop starts with ch, not shh.',
+      level: 2,
+    },
+    {
+      id: 'b2r-8',
+      ask: 'Yaw sees a word starting with b. He says "boy" at once. Is that '
+        + 'reading?',
+      kind: 'choice',
+      options: [
+        'Yes, boy starts with b',
+        'No, he guessed from one letter',
+      ],
+      answer: 'No, he guessed from one letter',
+      teach: 'Many words start with b. Say every sound to the end of the '
+        + 'word. Then you are reading, not guessing.',
+      level: 2,
+    },
+    {
+      id: 'b2r-9',
+      ask: 'Abena sounds out b, a, g and says "bug". Which sound changed?',
+      kind: 'choice',
+      options: ['The first sound', 'The middle sound', 'The last sound'],
+      answer: 'The middle sound',
+      teach: 'b and g stayed the same. The a turned into u. Say it slowly, '
+        + 'holding the middle: b, aaa, g. Then speed up.',
       level: 3,
     },
   ],
