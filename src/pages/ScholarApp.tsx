@@ -81,7 +81,7 @@ function greetingFor(now = new Date()): string {
 
 export default function ScholarApp({
   profile, attempts, onOpenSubject, onSignOut, onBack,
-  panel = 'home', onPanel, onMoved, onAttempts,
+  panel = 'home', onPanel, onMoved, onAttempts, onHome,
 }: {
   profile: LearnerProfile
   attempts: Attempt[]
@@ -102,6 +102,8 @@ export default function ScholarApp({
    */
   panel?: Panel
   onPanel?: (p: Panel) => void
+  /** The wordmark. Out of the learner app, to the front page. */
+  onHome?: () => void
   /** Passed the end of year examination: this is their new stage and year. */
   onMoved: (stage: LearnerProfile['stage'], level: string) => void
   /** Answers from the examination, recorded like any other practice. */
@@ -275,7 +277,12 @@ export default function ScholarApp({
           {/* Wrapped. Making the brand row a flex container to place the close
               button turned NEXA, the dot and EDU into three separate flex
               items and spread the wordmark across the whole drawer. */}
-          <span className="sch-brand-name"><span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span></span>
+          {/* The wordmark goes home, as a wordmark does everywhere else on
+              the web. It was a plain span, so the one thing every visitor
+              tries first did nothing at all. */}
+          <button className="sch-brand-name" onClick={onHome} aria-label="Learning-Pal home">
+            <span className="lp-mark"><b>Learning</b><i>-</i><em>Pal</em></span>
+          </button>
           {/* A way out from inside the drawer.
 
               Opened on a phone, the rail covered the burger that opened it and

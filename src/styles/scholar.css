@@ -97,7 +97,19 @@
   letter-spacing: 0.1em;
 }
 
-.sch-brand-name { display: inline-block; }
+/* A button now, so it needs the button reset: a browser's own background,
+   border and font would otherwise draw a grey box round the wordmark. */
+.sch-brand-name {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+.sch-brand-name:hover { opacity: 0.82; }
 .sch-brand-name i { color: var(--accent); font-style: normal; }
 
 /* Only on a phone, where the rail is a drawer. On a laptop the rail is always

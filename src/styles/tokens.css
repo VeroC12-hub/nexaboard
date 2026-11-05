@@ -168,3 +168,95 @@ span.lp-mark em { color: var(--lp-orange); font-style: normal; font-weight: 800;
 .nx-dark span.lp-mark em,
 .ne-dark span.lp-mark i,
 .ne-dark span.lp-mark em { color: #f6a95c; }
+
+/* ===========================================================================
+   Clickable things look clickable.
+
+   ── Why this is here and not in each stylesheet ───────────────────────────
+
+   `cursor: pointer` was written out by hand in about seventy places across
+   nine stylesheets, which means it was also missing in about as many: the
+   wordmark, the subject tiles, several icon buttons, the rail items. On a
+   laptop the pointer is the main signal that something can be pressed, and
+   an element that does not change the cursor reads as decoration.
+
+   This file is imported first, in `main.tsx`, so everything below is a floor
+   rather than a ceiling: any stylesheet that wants a different cursor or a
+   louder hover still wins, because it loads later and these are deliberately
+   kept to the lowest specificity that works.
+
+   ── Why hover is opacity and not colour ───────────────────────────────────
+
+   A default hover has to sit under four tiers with different backgrounds, on
+   dark navy rails and on cream paper. Any colour picked here would be wrong
+   on at least one of them. A small opacity shift reads as a response on every
+   background and never fights the design it is standing in for.
+   =========================================================================== */
+
+button,
+summary,
+label[for],
+select,
+[role='button'],
+[role='tab'],
+[role='option'],
+a[href],
+input[type='checkbox'],
+input[type='radio'],
+input[type='submit'],
+input[type='button'],
+input[type='file'],
+input[type='range'],
+input[type='color'] {
+  cursor: pointer;
+}
+
+/* A pressable thing that cannot be pressed should say so rather than
+   silently doing nothing, which reads as the app having frozen. */
+button:disabled,
+select:disabled,
+input:disabled,
+[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+/* The floor. Hover only where a pointer actually exists: on a phone
+   `:hover` sticks after a tap, so a button stays dimmed until something
+   else is touched, which looks like a stuck control. */
+@media (hover: hover) and (pointer: fine) {
+  button:not(:disabled):hover,
+  summary:hover,
+  [role='button']:not([aria-disabled='true']):hover,
+  a[href]:hover {
+    opacity: 0.86;
+  }
+}
+
+button,
+[role='button'],
+a[href] {
+  /* The transition is on the element rather than inside the hover rule, so
+     coming off the control fades back instead of snapping. */
+  transition: opacity 120ms ease, background-color 120ms ease,
+              border-color 120ms ease, color 120ms ease;
+}
+
+/* Keyboards exist. `:focus-visible` rather than `:focus` so a mouse click
+   does not leave a ring behind on everything it touches. */
+button:focus-visible,
+summary:focus-visible,
+[role='button']:focus-visible,
+a[href]:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--nx-gold, #c8891f);
+  outline-offset: 2px;
+}
+
+/* Nothing here applies to somebody who asked their device for stillness. */
+@media (prefers-reduced-motion: reduce) {
+  button,
+  [role='button'],
+  a[href] { transition: none; }
+}

@@ -11,7 +11,7 @@
  * than the syllabus's: what is going wrong comes before what is next.
  */
 
-import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   forgetHelperContext, setHelperContext,
@@ -225,7 +225,7 @@ export default function Study() {
    * because the URL outranks it: somebody who bookmarked a lesson is asking
    * for that lesson, not for wherever they happened to stop last time.
    */
-  const [landing] = useState<Gate>(() => {
+  const landing = useMemo<Gate>(() => {
     const s = loadSession()
     if (!s) return { at: 'front' }
     const a = accountById(s.accountId)
@@ -239,12 +239,32 @@ export default function Study() {
        makes the second of those impossible to find. */
     if (!l) return { at: 'roll' }
     return { at: 'subjects' }
-    /* A lazy initial state rather than a memo, because it is read exactly
-       once: the session changing is what `enter`, `openLearner` and `leave`
-       navigate for, and re-deciding the landing underneath somebody who is
-       already somewhere would move them. */
-  })
+    /* Recomputed when the session changes, which it did not used to be.
 
+       This was a lazy `useState`, decided once on mount, on the reasoning
+       that re-deciding underneath somebody already somewhere would move
+       them. That reasoning was right about the risk and wrong about the
+       cost, and it produced two bugs that looked unrelated:
+
+         - signing out left `landing` saying "subjects". Pressing back then
+           landed on /study/subjects, which bounces to `landing`, which was
+           still subjects, so a signed out person was shown a signed in page.
+         - the same stale value made a bare /study swap to subjects for ever,
+           so the wordmark could never reach the front page again.
+
+       It is safe to recompute because it is only ever *consulted* for a bare
+       /study and for a path this session cannot honour. Every other path
+       outranks it, so nobody standing somewhere valid is moved. */
+  }, [account, profile])
+
+
+  /**
+   * Whether this is the first look at the address.
+   *
+   * Distinguishes arriving at a page from asking for it, which is the whole
+   * difference between a bookmark and a tap on the wordmark.
+   */
+  const cold = useRef(true)
 
   const nav = useNavigate()
   const { pathname } = useLocation()
@@ -316,17 +336,23 @@ export default function Study() {
     const needsLearner = read.gate.at === 'subjects' || read.gate.at === 'course'
     if (needsLearner && !profile) { swapGate(landing); return }
     if (read.gate.at === 'roll' && !account) { swapGate(landing); return }
-    /* A bare /study is the front page for a visitor and the wrong page for
-       everybody else.
+    /* A bare /study on arrival is the wrong page for somebody already signed
+       in, and the right page for them the moment they ask for it.
 
-       `gateOfPath` maps /study to the front page unconditionally, and the
-       URL outranks the session, so a learner who bookmarked /study, tapped
-       the wordmark, or simply typed the address was shown the sales page
-       for a product they had already signed up to, with their own work one
-       unexplained tap away. The comment in App.tsx says the front page is
-       for a visitor who is not signed in; this is the line that makes that
-       true. */
-    if (read.gate.at === 'front' && landing.at !== 'front') swapGate(landing)
+       Arriving at /study cold, from a bookmark or a typed address, should
+       land a signed in learner on their own work rather than on the sales
+       page for a product they have already bought. That is what this line
+       was for and it stays.
+
+       But it fired on every navigation, so tapping the wordmark from inside
+       the app bounced straight back to subjects and the front page became
+       unreachable to anybody with a session. The two cases are told apart by
+       `cold`: true until this effect has run once, which is exactly the
+       difference between landing on the page and asking for it. */
+    if (cold.current && read.gate.at === 'front' && landing.at !== 'front') {
+      swapGate(landing)
+    }
+    cold.current = false
   }, [read, profile, account, landing, swapGate])
 
 
@@ -580,6 +606,7 @@ export default function Study() {
            The small learners' shell had this and the dashboard did not. */
         panel={gate.panel ?? 'home'}
         onPanel={pan => setGate({ at: 'subjects', panel: pan })}
+        onHome={() => setGate({ at: 'front' })}
         /* Passing the end of year examination is the one thing in the app
            that changes a learner's year. It is saved the moment it happens,
            because a promotion that is lost on refresh is worse than one that
