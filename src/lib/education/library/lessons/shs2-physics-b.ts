@@ -365,13 +365,17 @@ teach({
   ],
 
   extension:
-    'The whole electromagnetic spectrum, from radio waves metres long to '
-    + 'gamma rays smaller than an atom, is one family of transverse waves '
-    + 'travelling at $3 \\times 10^{8}$ m per second in a vacuum. '
-    + 'Because $v$ is the same for all of them, $f$ and $\\lambda$ are '
-    + 'simply two ways of naming the same member, which is why a doctor '
-    + 'speaks of X-ray wavelength and an engineer of transmitter frequency '
-    + 'about waves that differ in nothing but scale.',
+    'Radio waves can be metres long. '
+    + 'Gamma rays are smaller than an atom. '
+    + 'Yet the two are the same kind of wave. '
+    + 'Both are transverse, and both travel at $3 \\times 10^{8}$ m '
+    + 'per second in empty space. '
+    + 'Since the speed is fixed, the frequency and the wavelength say '
+    + 'the same thing twice. '
+    + 'Give one and you have given the other. '
+    + 'That is why a doctor speaks of the wavelength of an X ray, and '
+    + 'a radio engineer of the frequency of a transmitter, about '
+    + 'waves that differ only in scale.',
 
   questions: [
     {
@@ -1588,14 +1592,18 @@ teach({
   ],
 
   extension:
-    'A thundercloud is a capacitor with the ground as the other plate, and '
-    + 'it charges until the field between the two is strong enough to tear '
-    + 'the air into a conductor. '
-    + 'The strike is simply that capacitor discharging. '
-    + 'The field needed is about three million volts per metre, so from a '
-    + 'cloud base a kilometre up the potential difference is of the order '
-    + 'of a thousand million volts, which is why a lightning conductor '
-    + 'works by preventing the build up rather than by surviving it.',
+    'A thundercloud is a capacitor. '
+    + 'The cloud is one plate and the ground is the other, and the '
+    + 'air between them is the insulator. '
+    + 'Charge builds until the field in that gap is strong enough to '
+    + 'tear the air apart and make it conduct. '
+    + 'The strike is just the capacitor discharging. '
+    + 'It takes about three million volts per metre to break air '
+    + 'down. '
+    + 'From a cloud base a kilometre up, that is a potential '
+    + 'difference of around a thousand million volts. '
+    + 'No conductor could survive it, which is why a lightning '
+    + 'conductor works by bleeding the charge away first.',
 
   questions: [
     {
