@@ -234,6 +234,91 @@ teach({
         + 'jobs are shared among them. That is what a family is.',
       level: 2,
     },
+    {
+      id: 'fr-4',
+      ask: 'Who in a home does some of the jobs?',
+      kind: 'choice',
+      options: [
+        'Only the grown ups',
+        'Everyone old enough, children too',
+        'Only the person who earns money',
+      ],
+      answer: 'Everyone old enough, children too',
+      teach: 'The jobs are shared out. A child who sweeps or fetches water is '
+        + 'doing a real job that others depend on.',
+      level: 1,
+    },
+    {
+      id: 'fr-5',
+      ask: 'Why are the jobs in a home shared out?',
+      kind: 'choice',
+      options: [
+        'One person could not do them all in a day',
+        'Because children like jobs',
+        'So the grown ups can rest',
+      ],
+      answer: 'One person could not do them all in a day',
+      teach: 'There are too many jobs for one person. That is the whole reason '
+        + 'they are shared.',
+      level: 1,
+    },
+    {
+      id: 'fr-6',
+      ask: 'Nobody fetches water for a day. Which jobs stop?',
+      kind: 'choice',
+      options: [
+        'Only fetching water',
+        'Cooking, washing and drinking',
+        'Nothing stops',
+      ],
+      answer: 'Cooking, washing and drinking',
+      teach: 'Water is used for cooking, washing and drinking. So one job left '
+        + 'undone stops several others, not just one.',
+      level: 2,
+    },
+    {
+      id: 'fr-7',
+      ask: 'Akosua minds her baby brother. What does that job do for the home?',
+      kind: 'choice',
+      options: [
+        'Nothing, it is just play',
+        'It earns money',
+        'It keeps him safe, so a grown up can do another job',
+      ],
+      answer: 'It keeps him safe, so a grown up can do another job',
+      teach: 'If nobody minds the small ones, a grown up must stop their own '
+        + 'job to do it. So minding a child helps the whole home.',
+      level: 2,
+    },
+    {
+      id: 'fr-8',
+      ask: 'Kwame says earning money is the only job that counts. What is '
+        + 'wrong with that?',
+      kind: 'choice',
+      options: [
+        'Nothing, he is right',
+        'Money is no use if nobody cooks, fetches water or sweeps',
+        'Money is not a job',
+      ],
+      answer: 'Money is no use if nobody cooks, fetches water or sweeps',
+      teach: 'Money buys the food, but somebody must cook it. Somebody must '
+        + 'fetch the water. All the jobs hold each other up.',
+      level: 3,
+    },
+    {
+      id: 'fr-9',
+      ask: 'Nobody sweeps the house for a week. What might happen?',
+      kind: 'choice',
+      options: [
+        'The dirt stays, and people may fall ill',
+        'Nothing at all',
+        'There is no food to cook',
+      ],
+      answer: 'The dirt stays, and people may fall ill',
+      teach: 'Sweeping keeps the place clean. Without it the dirt stays, and '
+        + 'that can make people ill. No food is what happens without money.',
+      level: 3,
+    },
   ],
 })
 
@@ -433,6 +518,84 @@ teach({
       answer: 'As a shape on the ground, seen from above',
       teach: 'A map looks straight down. Drawing the front of the house is a '
         + 'picture, not a map, and it cannot be placed correctly on a road.',
+      level: 3,
+    },
+    {
+      id: 'mc-4',
+      ask: 'What is a map?',
+      kind: 'choice',
+      options: [
+        'A list of place names',
+        'A drawing of a place seen from above',
+        'A photo of a house from the front',
+      ],
+      answer: 'A drawing of a place seen from above',
+      teach: 'A map is drawn as if you look down from high up. Rooms become '
+        + 'squares and paths become lines.',
+      level: 1,
+    },
+    {
+      id: 'mc-5',
+      ask: 'Is a community only its buildings?',
+      kind: 'choice',
+      options: [
+        'Yes, only the buildings',
+        'No, it is the people who use them too',
+        'Yes, only the houses',
+      ],
+      answer: 'No, it is the people who use them too',
+      teach: 'A community is the place and the people in it. The market, the '
+        + 'school and the clinic, and everyone who uses them.',
+      level: 1,
+    },
+    {
+      id: 'mc-6',
+      ask: 'You start to draw a map of your community. What do you put on '
+        + 'the paper first?',
+      kind: 'choice',
+      options: ['The market', 'The clinic', 'Your own house'],
+      answer: 'Your own house',
+      teach: 'Start from the place closest to you, your house. Then draw the '
+        + 'road past it, and put the other places in from there.',
+      level: 2,
+    },
+    {
+      id: 'mc-7',
+      ask: 'On a map, how is a path or road shown?',
+      kind: 'choice',
+      options: ['As a line', 'As a tall shape', 'As a word only'],
+      answer: 'As a line',
+      teach: 'Seen from above, a path is long and thin. So on a map it becomes '
+        + 'a line.',
+      level: 2,
+    },
+    {
+      id: 'mc-8',
+      ask: 'The market is far from your house. The school is near. How should '
+        + 'your map show them?',
+      kind: 'choice',
+      options: [
+        'Both the same distance away, to look tidy',
+        'The market farther from your house than the school',
+        'The school farther away than the market',
+      ],
+      answer: 'The market farther from your house than the school',
+      teach: 'A map keeps how far. Putting everything the same distance apart '
+        + 'looks tidy but tells a lie. Far things go farther away.',
+      level: 3,
+    },
+    {
+      id: 'mc-9',
+      ask: 'How can you test whether your map works?',
+      kind: 'choice',
+      options: [
+        'Colour it in',
+        'Give it to somebody and ask them to find the school',
+        'Add more houses',
+      ],
+      answer: 'Give it to somebody and ask them to find the school',
+      teach: 'A map is for finding the way. If another person can use it to '
+        + 'find a place, the map works.',
       level: 3,
     },
   ],
@@ -669,6 +832,87 @@ teach({
       answer: 'Ask what would go wrong if nobody followed it',
       teach: 'That question finds the problem the rule was answering. You may '
         + 'still find it costs you something, and both can be true.',
+      level: 3,
+    },
+    {
+      id: 'sr-4',
+      ask: 'What is a rule?',
+      kind: 'choice',
+      options: [
+        'Something that says what to do, or what not to do',
+        'A way for adults to be strict',
+        'A game played at break',
+      ],
+      answer: 'Something that says what to do, or what not to do',
+      teach: 'A rule tells people what to do or not do. It is there because '
+        + 'many people share one place.',
+      level: 1,
+    },
+    {
+      id: 'sr-5',
+      ask: 'Why do schools need rules?',
+      kind: 'choice',
+      options: [
+        'Because teachers like orders',
+        'Because many people share the school',
+        'Because rules are fun',
+      ],
+      answer: 'Because many people share the school',
+      teach: 'What one child does touches the others. A rule stops one '
+        + 'person from hurting or holding up the rest.',
+      level: 1,
+    },
+    {
+      id: 'sr-6',
+      ask: 'The rule says line up before you come in. What goes wrong without it?',
+      kind: 'choice',
+      options: [
+        'Nothing goes wrong',
+        'Children talk too much',
+        'The doorway jams and nobody gets in',
+      ],
+      answer: 'The doorway jams and nobody gets in',
+      teach: 'Ask what happens if nobody follows the rule. Everyone pushes to '
+        + 'the door at once, and it jams.',
+      level: 2,
+    },
+    {
+      id: 'sr-7',
+      ask: 'Who does the rule against running in the corridor protect most?',
+      kind: 'choice',
+      options: ['The teachers', 'The smallest children', 'The fastest runners'],
+      answer: 'The smallest children',
+      teach: 'When people knock into each other, the small ones get hurt worst. '
+        + 'A rule often protects whoever has the least say.',
+      level: 2,
+    },
+    {
+      id: 'sr-8',
+      ask: 'One rule says nobody leaves the compound at break. Fuseini says '
+        + 'it is unfair. What does it protect?',
+      kind: 'choice',
+      options: [
+        'It keeps children from the road, and someone knows where they are',
+        'It keeps the teachers happy',
+        'It stops children playing',
+      ],
+      answer: 'It keeps children from the road, and someone knows where they are',
+      teach: 'A rule that costs you something is not always unfair. Ask what '
+        + 'goes wrong without it. A child could reach the road unnoticed.',
+      level: 3,
+    },
+    {
+      id: 'sr-9',
+      ask: 'You cannot find who a rule protects. What should you do?',
+      kind: 'choice',
+      options: [
+        'Ask a teacher what it is for',
+        'Stop following it',
+        'Tell others it is silly',
+      ],
+      answer: 'Ask a teacher what it is for',
+      teach: 'Every rule has a reason, but you may not have been told it yet. '
+        + 'Ask a teacher before you decide.',
       level: 3,
     },
   ],

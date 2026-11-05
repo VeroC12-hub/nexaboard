@@ -197,6 +197,91 @@ teach({
         + 'round.',
       level: 2,
     },
+    {
+      id: 'ns-4',
+      ask: 'Which colour is at the bottom of the flag of Ghana?',
+      kind: 'choice',
+      options: ['Red', 'Gold', 'Green', 'Black'],
+      answer: 'Green',
+      teach: 'From the top the bands are red, gold, then green. Black is the '
+        + 'colour of the star, not a band.',
+      level: 1,
+    },
+    {
+      id: 'ns-5',
+      ask: 'What does the green band stand for?',
+      kind: 'choice',
+      options: [
+        'The wealth under our ground',
+        'Our forests and our farms',
+        'The freedom of African people',
+      ],
+      answer: 'Our forests and our farms',
+      teach: 'Think of what is green in Ghana: forest and farmland. The wealth '
+        + 'under the ground is the gold band.',
+      level: 1,
+    },
+    {
+      id: 'ns-6',
+      ask: 'What does the red band stand for?',
+      kind: 'choice',
+      options: [
+        'Our forests and our farms',
+        'The wealth under our ground',
+        'Those who died for our freedom',
+      ],
+      answer: 'Those who died for our freedom',
+      teach: 'Red is the colour of blood. It stands for the people who died so '
+        + 'that Ghana could be free.',
+      level: 2,
+    },
+    {
+      id: 'ns-7',
+      ask: 'Where does the black star sit on the flag?',
+      kind: 'choice',
+      options: ['In the red band', 'In the middle of the gold band', 'In the top corner'],
+      answer: 'In the middle of the gold band',
+      teach: 'The star sits right in the middle of the flag, on the gold band.',
+      level: 2,
+    },
+    {
+      id: 'ns-8',
+      ask: 'How does the national anthem of Ghana begin?',
+      kind: 'choice',
+      options: [
+        'Ghana is a country in Africa',
+        'God bless our homeland Ghana',
+        'Red, gold and green for ever',
+      ],
+      answer: 'God bless our homeland Ghana',
+      teach: 'The anthem begins "God bless our homeland Ghana". It is one of '
+        + 'the symbols that stand for the whole country, like the flag.',
+      level: 1,
+    },
+    {
+      id: 'ns-9',
+      ask: 'What should you do while the national anthem is sung?',
+      kind: 'choice',
+      options: ['Keep talking softly', 'Sit down and wait', 'Stand still and stay quiet'],
+      answer: 'Stand still and stay quiet',
+      teach: 'How people behave around a symbol is part of what it means. '
+        + 'Standing still and quiet shows respect for the country.',
+      level: 2,
+    },
+    {
+      id: 'ns-10',
+      ask: 'Why is the middle band called gold and not yellow?',
+      kind: 'choice',
+      options: [
+        'Because the cloth is shiny',
+        'Because it stands for the wealth in our ground',
+        'Because yellow is not a real colour',
+      ],
+      answer: 'Because it stands for the wealth in our ground',
+      teach: 'Every part of the flag was chosen to mean something. The band is '
+        + 'gold because it stands for the riches under Ghana, such as gold.',
+      level: 3,
+    },
   ],
 })
 
@@ -432,6 +517,92 @@ teach({
         + 'You will pick the word up by hearing it.',
       level: 2,
     },
+    {
+      id: 'etg-4',
+      ask: 'Your friend asks, "How are you?" Which answer keeps the talk going?',
+      kind: 'choice',
+      options: ['I am fine.', 'Yes.', 'I am fine. And you?'],
+      answer: 'I am fine. And you?',
+      teach: '"I am fine." answers the question but gives your friend nothing '
+        + 'to say back. Adding "And you?" hands the turn back.',
+      level: 1,
+    },
+    {
+      id: 'etg-5',
+      ask: 'You greet somebody. What should you do next?',
+      kind: 'choice',
+      options: ['Ask your question straight away', 'Wait for their reply', 'Walk away'],
+      answer: 'Wait for their reply',
+      teach: 'A conversation goes back and forth. After the greeting it is '
+        + 'their turn, so wait and listen before you go on.',
+      level: 1,
+    },
+    {
+      id: 'etg-6',
+      ask: 'You meet an elder in the morning. Which greeting do you use?',
+      kind: 'choice',
+      options: [
+        'The same morning greeting you use for a friend',
+        'The respectful morning greeting for an elder',
+        'The evening greeting',
+      ],
+      answer: 'The respectful morning greeting for an elder',
+      teach: 'The greeting changes with the time of day and with the person. '
+        + 'It is morning and this is an elder, so use the respectful morning '
+        + 'greeting.',
+      level: 2,
+    },
+    {
+      id: 'etg-7',
+      ask: 'A friend asks, "Where are you going?" Which answer keeps the talk '
+        + 'going?',
+      kind: 'choice',
+      options: ['To the market.', 'To the market. Do you need anything?', 'Nowhere.'],
+      answer: 'To the market. Do you need anything?',
+      teach: 'Both "To the market" answers use the same words. Only one adds a '
+        + 'question, and that question gives your friend something to answer.',
+      level: 2,
+    },
+    {
+      id: 'etg-8',
+      ask: 'You answer a trader with "I am fine" and then nobody speaks. Why '
+        + 'did the talk stop?',
+      kind: 'choice',
+      options: [
+        'You used a wrong word',
+        'You spoke too softly',
+        'You gave her nothing to answer',
+      ],
+      answer: 'You gave her nothing to answer',
+      teach: 'Every word was correct. The talk stopped because the turn was not '
+        + 'handed back. Add a short question of your own.',
+      level: 3,
+    },
+    {
+      id: 'etg-9',
+      ask: 'Which is worse in a conversation: using one English word, or '
+        + 'stopping?',
+      kind: 'choice',
+      options: ['Using one English word', 'Stopping', 'They are just as bad'],
+      answer: 'Stopping',
+      teach: 'Stopping ends the conversation. Borrowing one English word keeps '
+        + 'it alive, and you can pick up the right word later by hearing it.',
+      level: 3,
+    },
+    {
+      id: 'etg-10',
+      ask: 'What makes talk a conversation and not two speeches?',
+      kind: 'choice',
+      options: [
+        'Both people talk for a long time',
+        'They use long words',
+        'The turn keeps changing hands',
+      ],
+      answer: 'The turn keeps changing hands',
+      teach: 'In a conversation each person speaks, then hands the turn back. '
+        + 'Two long speeches have no back and forth.',
+      level: 3,
+    },
   ],
 })
 
@@ -482,8 +653,8 @@ teach({
     + 'because it makes a different word.',
 
   idea:
-    'You can already read the letters of your language. '
-    + 'Now you write them. '
+    'Your language has its own letters, such as the open e and the open o. '
+    + 'Reading them is one skill. Writing them is the next. '
     + 'A sentence starts with a capital letter and ends with a full stop, '
     + 'just as in English. '
     + 'The difference is the letters you have to get right.',
@@ -690,6 +861,90 @@ teach({
         + 'A missing or wrong letter shows up at once.',
       level: 2,
     },
+    {
+      id: 'wsg-4',
+      ask: 'What goes at the start of a sentence?',
+      kind: 'choice',
+      options: ['A full stop', 'A capital letter', 'A comma'],
+      answer: 'A capital letter',
+      teach: 'A sentence starts with a capital letter and ends with a full '
+        + 'stop, in your language just as in English.',
+      level: 1,
+    },
+    {
+      id: 'wsg-5',
+      ask: 'What should you do before you write a sentence?',
+      kind: 'choice',
+      options: ['Write the full stop', 'Say the sentence out loud', 'Count the letters'],
+      answer: 'Say the sentence out loud',
+      teach: 'Say it out loud, then say it again slowly and listen for each '
+        + 'sound. Then write a letter for each sound you hear.',
+      level: 1,
+    },
+    {
+      id: 'wsg-6',
+      ask: 'In the spelling of your language, one letter stands for...',
+      kind: 'choice',
+      options: ['Two sounds', 'One sound', 'Any sound you like'],
+      answer: 'One sound',
+      teach: 'Your language has its own spelling, and in it one letter means '
+        + 'one sound. Do not spell the way an English reader would.',
+      level: 2,
+    },
+    {
+      id: 'wsg-7',
+      ask: 'You write e where the word needs ɛ. What can happen?',
+      kind: 'choice',
+      options: [
+        'Nothing, they are the same letter',
+        'You may write a different word',
+        'The sentence needs a second full stop',
+      ],
+      answer: 'You may write a different word',
+      teach: 'e and ɛ look alike but make different sounds. Swap them and the '
+        + 'word on the page can be another word.',
+      level: 2,
+    },
+    {
+      id: 'wsg-8',
+      ask: 'What does the open o, ɔ, look like?',
+      kind: 'choice',
+      options: [
+        'The number 3 written backwards',
+        'A letter c turned the other way round',
+        'A d with a curl on it',
+      ],
+      answer: 'A letter c turned the other way round',
+      teach: 'The open o looks like a c facing the other way. The backwards 3 '
+        + 'is the open e, ɛ.',
+      level: 2,
+    },
+    {
+      id: 'wsg-9',
+      ask: 'You read your sentence aloud and say a sound that has no letter on '
+        + 'the page. What does that tell you?',
+      kind: 'choice',
+      options: ['The full stop is missing', 'A letter is missing', 'The sentence is fine'],
+      answer: 'A letter is missing',
+      teach: 'Every sound you say should have a letter on the page. A sound '
+        + 'with no letter means you left one out.',
+      level: 3,
+    },
+    {
+      id: 'wsg-10',
+      ask: 'Which check needs another person to help?',
+      kind: 'choice',
+      options: [
+        'A capital at the start',
+        'A full stop at the end',
+        'That it says what you meant',
+      ],
+      answer: 'That it says what you meant',
+      teach: 'You can check capitals, full stops and letters alone, out loud. '
+        + 'To know it says what you meant, read it to somebody at home and see '
+        + 'if they hear what you meant.',
+      level: 3,
+    },
   ],
 })
 
@@ -893,6 +1148,88 @@ teach({
       answer: 'Both',
       teach: 'It shows, which is output, and you tap it, which is input. '
         + 'Some devices do two jobs at once.',
+      level: 3,
+    },
+    {
+      id: 'io-4',
+      ask: 'Is a keyboard input or output?',
+      kind: 'choice',
+      options: ['Input', 'Output'],
+      answer: 'Input',
+      teach: 'You press the keys and the letters go into the machine. From you '
+        + 'into the machine is input.',
+      level: 1,
+    },
+    {
+      id: 'io-5',
+      ask: 'Is a speaker input or output?',
+      kind: 'choice',
+      options: ['Input', 'Output'],
+      answer: 'Output',
+      teach: 'Sound comes out of the machine to you. From the machine out to '
+        + 'you is output.',
+      level: 1,
+    },
+    {
+      id: 'io-6',
+      ask: 'Which of these is an output device?',
+      kind: 'choice',
+      options: ['Mouse', 'Keyboard', 'Microphone', 'Screen'],
+      answer: 'Screen',
+      teach: 'The screen shows you what the machine has made, so it is output. '
+        + 'A mouse, a keyboard and a microphone all send things in.',
+      level: 2,
+    },
+    {
+      id: 'io-7',
+      ask: 'Is a microphone input or output?',
+      kind: 'choice',
+      options: ['Output', 'Input'],
+      answer: 'Input',
+      teach: 'It looks like a speaker, but it takes your voice into the '
+        + 'machine. Direction decides, so it is input.',
+      level: 2,
+    },
+    {
+      id: 'io-8',
+      ask: 'A microphone and a speaker look alike. Why are they in different '
+        + 'groups?',
+      kind: 'choice',
+      options: [
+        'One is bigger than the other',
+        'They send information in opposite directions',
+        'One is newer than the other',
+      ],
+      answer: 'They send information in opposite directions',
+      teach: 'Shape tells you nothing. The microphone sends sound in and the '
+        + 'speaker sends it out, so one is input and one is output.',
+      level: 2,
+    },
+    {
+      id: 'io-9',
+      ask: 'Ama says a printer is input because she gives it something to '
+        + 'print. Why is she wrong?',
+      kind: 'choice',
+      options: [
+        'The paper comes out to her, so it is output',
+        'A printer is both input and output',
+        'A printer is not part of a computer',
+      ],
+      answer: 'The paper comes out to her, so it is output',
+      teach: 'She gives it an instruction, but the result leaves the machine '
+        + 'and comes to her. That direction makes it output.',
+      level: 3,
+    },
+    {
+      id: 'io-10',
+      ask: 'A phone can tell when you turn it sideways. Is that part of the '
+        + 'phone input or output?',
+      kind: 'choice',
+      options: ['Input', 'Output'],
+      answer: 'Input',
+      teach: 'It is a sensor. It takes in how the phone is held, so the '
+        + 'information goes into the machine. That is input, even though you '
+        + 'pressed nothing.',
       level: 3,
     },
   ],
@@ -1151,6 +1488,84 @@ teach({
       answer: 'So your eyes can stay on the screen',
       teach: 'One finger has to hunt, and hunting keeps your eyes down. '
         + 'Then you cannot read what you are writing.',
+      level: 3,
+    },
+    {
+      id: 'typ-4',
+      ask: 'Which key makes the gap between words?',
+      kind: 'choice',
+      options: ['Shift', 'The space bar', 'The f key'],
+      answer: 'The space bar',
+      teach: 'The long key along the bottom is the space bar. It makes the gap '
+        + 'between words. Shift is for capital letters.',
+      level: 1,
+    },
+    {
+      id: 'typ-5',
+      ask: 'What is the middle row of keys, where your fingers rest, called?',
+      kind: 'choice',
+      options: ['The top row', 'The space row', 'The home row'],
+      answer: 'The home row',
+      teach: 'The middle row is the home row. Your fingers rest there and come '
+        + 'back to it after every key.',
+      level: 1,
+    },
+    {
+      id: 'typ-6',
+      ask: 'Which finger presses the space bar?',
+      kind: 'choice',
+      options: ['A little finger', 'A thumb', 'The right pointing finger'],
+      answer: 'A thumb',
+      teach: 'The space bar sits below both hands, and the thumbs are the ones '
+        + 'that reach it. Either thumb will do.',
+      level: 1,
+    },
+    {
+      id: 'typ-7',
+      ask: 'Which keys do your right fingers rest on?',
+      kind: 'choice',
+      options: ['a, s, d, f', 'j, k, l and the next key', 'g and h'],
+      answer: 'j, k, l and the next key',
+      teach: 'Each hand has its own half. The left rests on a, s, d, f and the '
+        + 'right rests on j, k, l and the key beside them.',
+      level: 2,
+    },
+    {
+      id: 'typ-8',
+      ask: 'How do you make a capital letter?',
+      kind: 'choice',
+      options: [
+        'Press Shift, let go, then press the letter',
+        'Press the letter twice',
+        'Hold down Shift while you press the letter',
+      ],
+      answer: 'Hold down Shift while you press the letter',
+      teach: 'Shift only works while it is held. Press it and let go first and '
+        + 'you get a small letter.',
+      level: 2,
+    },
+    {
+      id: 'typ-9',
+      ask: 'You have just pressed a key. What should that finger do next?',
+      kind: 'choice',
+      options: ['Stay where it landed', 'Go back to its resting key', 'Move to the space bar'],
+      answer: 'Go back to its resting key',
+      teach: 'Bringing each finger back to the home row is how your hand knows '
+        + 'where it is without looking.',
+      level: 2,
+    },
+    {
+      id: 'typ-10',
+      ask: 'It is your first day of typing with both hands. What is best?',
+      kind: 'choice',
+      options: [
+        'Go as fast as you can',
+        'Go slowly and correctly',
+        'Use one finger until you are fast',
+      ],
+      answer: 'Go slowly and correctly',
+      teach: 'Fast and wrong teaches your hands the wrong path. Slow and '
+        + 'correct becomes fast by itself.',
       level: 3,
     },
   ],

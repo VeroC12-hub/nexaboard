@@ -205,6 +205,79 @@ teach({
         + 'it correctly for their own faith.',
       level: 3,
     },
+    {
+      id: 'cre-4',
+      ask: 'Which book do Christians read?',
+      kind: 'choice',
+      options: ['The Qur’an', 'The Bible', 'No book'],
+      answer: 'The Bible',
+      teach: 'Christians read the Bible. Its account of creation is at the '
+        + 'beginning. Muslims read the Qur’an.',
+      level: 1,
+    },
+    {
+      id: 'cre-5',
+      ask: 'Christians are taught that God made the world in how many days?',
+      kind: 'numeric',
+      answer: '6',
+      accept: ['six', 'six days', '6 days'],
+      teach: 'Christians are taught that God made the world in six days, and '
+        + 'rested on the seventh. Do not count the day of rest.',
+      level: 1,
+    },
+    {
+      id: 'cre-6',
+      ask: 'In Islam, who is named as the creator?',
+      kind: 'choice',
+      options: ['Onyame', 'Allah', 'The elders'],
+      answer: 'Allah',
+      teach: 'Muslims are taught that Allah made the heavens and the earth. '
+        + 'Onyame is named in Ghanaian traditional religion.',
+      level: 2,
+    },
+    {
+      id: 'cre-7',
+      ask: 'How is the traditional account of creation passed on?',
+      kind: 'choice',
+      options: [
+        'Written in the Bible',
+        'Told by elders to children',
+        'Written in the Qur’an',
+      ],
+      answer: 'Told by elders to children',
+      teach: 'The traditional account is spoken, not written. Elders tell it '
+        + 'to children, who tell it to theirs.',
+      level: 2,
+    },
+    {
+      id: 'cre-8',
+      ask: 'What should you say first when you tell a creation account?',
+      kind: 'choice',
+      options: [
+        'Which one is right',
+        'Whose account it is',
+        'How long it is',
+      ],
+      answer: 'Whose account it is',
+      teach: 'Each account belongs to a faith. Say whose it is first: '
+        + 'Christian, Muslim or traditional. Do not mix them into one.',
+      level: 2,
+    },
+    {
+      id: 'cre-9',
+      ask: 'The three accounts are different. What one question do they all '
+        + 'answer?',
+      kind: 'choice',
+      options: [
+        'How the world began',
+        'How to cook food',
+        'Which town is biggest',
+      ],
+      answer: 'How the world began',
+      teach: 'The stories differ, but each answers the same question: how '
+        + 'did the world begin? That is why we learn them side by side.',
+      level: 3,
+    },
   ],
 })
 
@@ -400,6 +473,92 @@ teach({
         + 'protects the place as well as honouring a belief.',
       level: 3,
     },
+    {
+      id: 'cfc-4',
+      ask: 'Which is one way a child can care for the environment?',
+      kind: 'choice',
+      options: [
+        'Drop rubbish in the gutter',
+        'Put rubbish in a bin',
+        'Burn the grass',
+      ],
+      answer: 'Put rubbish in a bin',
+      teach: 'Start with a small thing you can really do. Rubbish in the bin '
+        + 'does not block a gutter.',
+      level: 1,
+    },
+    {
+      id: 'cfc-5',
+      ask: 'Kwame says, "My one bag of rubbish is too small to matter." Is he '
+        + 'right?',
+      kind: 'choice',
+      options: [
+        'Yes, one bag is nothing',
+        'No, a blocked gutter is made of single pieces',
+      ],
+      answer: 'No, a blocked gutter is made of single pieces',
+      teach: 'Each person drops only one bag. All the bags together kill the '
+        + 'river. His bag is one of them.',
+      level: 2,
+    },
+    {
+      id: 'cfc-6',
+      ask: 'Christians and Muslims teach that the earth was given to us. What '
+        + 'are we to do with it?',
+      kind: 'choice',
+      options: [
+        'Look after it',
+        'Use it up',
+        'Leave it to the chiefs',
+      ],
+      answer: 'Look after it',
+      teach: 'Both faiths teach that the earth is to be looked after, and '
+        + 'that people will answer for how they treated it.',
+      level: 2,
+    },
+    {
+      id: 'cfc-7',
+      ask: 'In Ghanaian traditional religion, what is taught about harming a '
+        + 'sacred river or grove?',
+      kind: 'choice',
+      options: [
+        'It is a serious wrong',
+        'It does not matter',
+        'It is a good thing',
+      ],
+      answer: 'It is a serious wrong',
+      teach: 'Traditional religion teaches that some rivers, groves and days '
+        + 'are sacred. Harming them is a serious wrong.',
+      level: 2,
+    },
+    {
+      id: 'cfc-8',
+      ask: 'Ama borrows a bicycle. How should she give it back?',
+      kind: 'choice',
+      options: [
+        'Broken, it is not hers',
+        'As she found it',
+        'She keeps it',
+      ],
+      answer: 'As she found it',
+      teach: 'A borrowed thing goes back in good shape. The faiths teach the '
+        + 'same about the world: we hold it in trust, we do not own it.',
+      level: 3,
+    },
+    {
+      id: 'cfc-9',
+      ask: 'People wash with soap in a stream. Who is harmed?',
+      kind: 'choice',
+      options: [
+        'Nobody',
+        'Everybody who drinks from it',
+        'Only the person washing',
+      ],
+      answer: 'Everybody who drinks from it',
+      teach: 'Ask who would be harmed if it were spoiled. Often it is '
+        + 'somebody you will never meet. That is what makes it a wrong.',
+      level: 3,
+    },
   ],
 })
 
@@ -583,6 +742,71 @@ teach({
       answer: 'A time and a place',
       teach: 'Not all have a book, and not all need a building, but every one '
         + 'sets a time and a place apart. That is what makes it worship.',
+      level: 3,
+    },
+    {
+      id: 'wor-4',
+      ask: 'Where do Christians mostly meet to worship?',
+      kind: 'choice',
+      options: ['In a church', 'In a mosque', 'At a shrine'],
+      answer: 'In a church',
+      teach: 'Christians meet in a church, mostly on Sunday. Muslims meet at '
+        + 'the mosque. Traditional worship may be at a shrine.',
+      level: 1,
+    },
+    {
+      id: 'wor-5',
+      ask: 'How many times a day do Muslims pray?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five', 'five times', '5 times'],
+      teach: 'Muslims pray at five set times through the day, facing Mecca.',
+      level: 1,
+    },
+    {
+      id: 'wor-6',
+      ask: 'On which day do Muslims gather at the mosque for prayer?',
+      kind: 'choice',
+      options: ['Sunday', 'Friday', 'Saturday'],
+      answer: 'Friday',
+      teach: 'Friday is the day Muslims gather at the mosque. Christians '
+        + 'mostly gather on Sunday.',
+      level: 2,
+    },
+    {
+      id: 'wor-7',
+      ask: 'Which way do Muslims face when they pray?',
+      kind: 'choice',
+      options: ['Towards Mecca', 'Towards the sea', 'Any way'],
+      answer: 'Towards Mecca',
+      teach: 'Muslims pray facing Mecca, wherever they are when the time '
+        + 'comes.',
+      level: 2,
+    },
+    {
+      id: 'wor-8',
+      ask: 'Abena says, "Traditional worship has no prayer." Is she right?',
+      kind: 'choice',
+      options: [
+        'Yes, there is only pouring',
+        'No, libation is a prayer',
+      ],
+      answer: 'No, libation is a prayer',
+      teach: 'An elder speaks a prayer while pouring libation. So traditional '
+        + 'worship does have prayer.',
+      level: 2,
+    },
+    {
+      id: 'wor-9',
+      ask: 'Can worship only happen inside a building?',
+      kind: 'choice',
+      options: [
+        'Yes, always in a building',
+        'No, it can be at home or wherever the time comes',
+      ],
+      answer: 'No, it can be at home or wherever the time comes',
+      teach: 'Muslims pray wherever they are at prayer time. Traditional '
+        + 'worship often happens at home or when the family gathers.',
       level: 3,
     },
   ],
@@ -773,6 +997,83 @@ teach({
       teach: 'Its name means hooting at hunger. It remembers surviving famine '
         + 'and gives thanks for the food that ended it.',
       level: 2,
+    },
+    {
+      id: 'fes-4',
+      ask: 'What does Christmas remember?',
+      kind: 'choice',
+      options: [
+        'The birth of Jesus',
+        'The end of Ramadan',
+        'The harvest',
+      ],
+      answer: 'The birth of Jesus',
+      teach: 'Christmas is a Christian festival. It remembers the birth of '
+        + 'Jesus. Easter remembers his death and rising.',
+      level: 1,
+    },
+    {
+      id: 'fes-5',
+      ask: 'How often does a festival come?',
+      kind: 'choice',
+      options: ['Every day', 'Once every year', 'Only one time ever'],
+      answer: 'Once every year',
+      teach: 'A festival comes back on the same day every year. That is how '
+        + 'people keep remembering it.',
+      level: 1,
+    },
+    {
+      id: 'fes-6',
+      ask: 'Whose festival is Homowo?',
+      kind: 'choice',
+      options: ['The Ga people', 'Christians', 'Muslims'],
+      answer: 'The Ga people',
+      teach: 'Homowo belongs to the Ga people. Name whose festival it is '
+        + 'before you say what it remembers.',
+      level: 2,
+    },
+    {
+      id: 'fes-7',
+      ask: 'What does Eid al-Adha remember?',
+      kind: 'choice',
+      options: [
+        'The end of the fasting month',
+        'How Ibrahim obeyed Allah',
+        'The birth of Jesus',
+      ],
+      answer: 'How Ibrahim obeyed Allah',
+      teach: 'Do not mix up the two Eids. Eid al-Fitr ends the fasting '
+        + 'month. Eid al-Adha remembers Ibrahim’s obedience.',
+      level: 2,
+    },
+    {
+      id: 'fes-8',
+      ask: 'Kofi says a festival is only a day with no school. What is '
+        + 'missing?',
+      kind: 'choice',
+      options: [
+        'What it remembers',
+        'The time it ends',
+        'Nothing is missing',
+      ],
+      answer: 'What it remembers',
+      teach: 'A festival exists to help people remember something big. Say '
+        + 'what it remembers, not only that there is a holiday.',
+      level: 3,
+    },
+    {
+      id: 'fes-9',
+      ask: 'How do children learn a festival without anybody teaching them?',
+      kind: 'choice',
+      options: [
+        'They read about it in a letter',
+        'They see it come back every year',
+        'They never learn it',
+      ],
+      answer: 'They see it come back every year',
+      teach: 'Same day, every year. The food, the clothes and the gathering '
+        + 'make it stick, so children learn it by seeing it.',
+      level: 3,
     },
   ],
 })
@@ -978,6 +1279,68 @@ teach({
         + 'differ in much else.',
       level: 3,
     },
+    {
+      id: 'lead-4',
+      ask: 'Who do Christians follow?',
+      kind: 'choice',
+      options: ['The Prophet Muhammad', 'Jesus Christ', 'The elders'],
+      answer: 'Jesus Christ',
+      teach: 'Christians follow the teaching of Jesus Christ. Muslims follow '
+        + 'the teaching brought by the Prophet Muhammad, peace be upon him.',
+      level: 1,
+    },
+    {
+      id: 'lead-5',
+      ask: 'Give one thing Jesus taught.',
+      kind: 'choice',
+      options: [
+        'Love your neighbour as yourself',
+        'Pray five times a day',
+        'Never share food',
+      ],
+      answer: 'Love your neighbour as yourself',
+      teach: 'Christians are taught that Jesus said to love your neighbour '
+        + 'as you love yourself. Praying five times a day is part of Islam.',
+      level: 2,
+    },
+    {
+      id: 'lead-6',
+      ask: 'Who carries the teaching of Ghanaian traditional religion?',
+      kind: 'choice',
+      options: [
+        'One founder',
+        'Elders, priests and families',
+        'A written book',
+      ],
+      answer: 'Elders, priests and families',
+      teach: 'It has no one founder and no book. Its teaching is passed down '
+        + 'by elders, priests and families.',
+      level: 2,
+    },
+    {
+      id: 'lead-7',
+      ask: 'What do Muslims say after the name of the Prophet Muhammad?',
+      kind: 'choice',
+      options: ['Peace be upon him', 'Good morning', 'Thank you'],
+      answer: 'Peace be upon him',
+      teach: 'Muslims say "peace be upon him" after the Prophet’s name. '
+        + 'Using a faith’s own courtesy is part of describing it honestly.',
+      level: 2,
+    },
+    {
+      id: 'lead-8',
+      ask: 'Why do elders matter so much in Ghanaian traditional religion?',
+      kind: 'choice',
+      options: [
+        'The teaching is kept in them',
+        'They are the tallest',
+        'They wrote the Bible',
+      ],
+      answer: 'The teaching is kept in them',
+      teach: 'With no founder’s words written down, the teaching lives in '
+        + 'people. Elders hold it and pass it on.',
+      level: 3,
+    },
   ],
 })
 
@@ -1161,6 +1524,85 @@ teach({
       answer: 'Yes',
       teach: 'It is meant to make somebody believe something untrue, which is '
         + 'what a lie is, whatever words were used.',
+      level: 3,
+    },
+    {
+      id: 'hon-4',
+      ask: 'Being honest means two things. Which pair is right?',
+      kind: 'choice',
+      options: [
+        'Say what is true, and give back what is not yours',
+        'Be quiet, and keep what you find',
+        'Say what people like to hear, and share',
+      ],
+      answer: 'Say what is true, and give back what is not yours',
+      teach: 'Honesty is telling the truth and giving back what is not yours. '
+        + 'You do both even when nobody would know.',
+      level: 1,
+    },
+    {
+      id: 'hon-5',
+      ask: 'You broke a cup and nobody saw. What should you do?',
+      kind: 'choice',
+      options: [
+        'Hide the pieces',
+        'Say so before you are asked',
+        'Say your sister did it',
+      ],
+      answer: 'Say so before you are asked',
+      teach: 'Hiding it adds a second wrong to the first. Saying so now is '
+        + 'only the broken cup.',
+      level: 1,
+    },
+    {
+      id: 'hon-6',
+      ask: 'A boy lied about having a bicycle. Now he says he has a new ball. '
+        + 'Why does nobody believe him?',
+      kind: 'choice',
+      options: [
+        'The lie took away their trust',
+        'Balls are not real',
+        'He spoke too softly',
+      ],
+      answer: 'The lie took away their trust',
+      teach: 'Once people catch you in a lie, they stop believing you, even '
+        + 'when you tell the truth. Trust does not come straight back.',
+      level: 2,
+    },
+    {
+      id: 'hon-7',
+      ask: 'Is it still a lie if nobody ever finds out?',
+      kind: 'choice',
+      options: ['No, nobody knows', 'Yes, it is still a lie'],
+      answer: 'Yes, it is still a lie',
+      teach: 'Being found out does not make it a lie. You carry it yourself, '
+        + 'and the next lie comes easier.',
+      level: 2,
+    },
+    {
+      id: 'hon-8',
+      ask: 'Adwoa finds a pen. Nobody has asked for it yet. Can she keep it?',
+      kind: 'choice',
+      options: [
+        'Yes, nobody claimed it',
+        'No, she should hand it in',
+      ],
+      answer: 'No, she should hand it in',
+      teach: 'Not claimed is not the same as not owned. Somebody lost it. '
+        + 'Hand it in.',
+      level: 2,
+    },
+    {
+      id: 'hon-9',
+      ask: 'Telling the truth will get Yaw punished. Is it still right?',
+      kind: 'choice',
+      options: [
+        'No, he should hide it',
+        'Yes, the punishment ends but lost trust lasts',
+      ],
+      answer: 'Yes, the punishment ends but lost trust lasts',
+      teach: 'Honesty can cost you today. But the punishment passes. Not '
+        + 'being believed goes on.',
       level: 3,
     },
   ],
@@ -1360,6 +1802,69 @@ teach({
         + 'the wrong thing harms somebody, which respect never asks for.',
       level: 3,
     },
+    {
+      id: 'res-4',
+      ask: 'Respect means you treat a person as someone who what?',
+      kind: 'choice',
+      options: ['Is scary', 'Matters', 'Is rich'],
+      answer: 'Matters',
+      teach: 'Respect is treating a person as someone who matters. It is not '
+        + 'the same as fear.',
+      level: 1,
+    },
+    {
+      id: 'res-5',
+      ask: 'An elder asks you to fetch water while you play. What do you do?',
+      kind: 'choice',
+      options: [
+        'Keep playing',
+        'Stop, answer and go',
+        'Complain loudly',
+      ],
+      answer: 'Stop, answer and go',
+      teach: 'Do what an elder asks without complaining. You may ask why '
+        + 'afterwards if you need to.',
+      level: 1,
+    },
+    {
+      id: 'res-6',
+      ask: 'How do you show respect to a child your own age?',
+      kind: 'choice',
+      options: ['Take turns', 'Mock them', 'Ignore them'],
+      answer: 'Take turns',
+      teach: 'With a friend your own age you take turns and never mock them. '
+        + 'Respect looks a little different with an elder.',
+      level: 2,
+    },
+    {
+      id: 'res-7',
+      ask: 'A new child speaks a different language at home. How do you '
+        + 'treat them?',
+      kind: 'choice',
+      options: [
+        'The same as everybody else',
+        'Laugh at how they speak',
+        'Leave them out',
+      ],
+      answer: 'The same as everybody else',
+      teach: 'Respect does not change because somebody is not like you. '
+        + 'Include them, just as you include everybody.',
+      level: 2,
+    },
+    {
+      id: 'res-8',
+      ask: 'You do not agree with what an elder says. What does respect ask?',
+      kind: 'choice',
+      options: [
+        'Argue back at once',
+        'Listen first, then speak without rudeness',
+        'Walk away',
+      ],
+      answer: 'Listen first, then speak without rudeness',
+      teach: 'Respect does not mean never disagreeing. Listen all the way '
+        + 'through, then say it politely.',
+      level: 3,
+    },
   ],
 })
 
@@ -1543,6 +2048,77 @@ teach({
       teach: 'It comes back. Doing it properly once is less work than doing it '
         + 'badly twice.',
       level: 2,
+    },
+    {
+      id: 'hw-4',
+      ask: 'What is your work right now?',
+      kind: 'choice',
+      options: [
+        'Your schoolwork and jobs at home',
+        'Nothing, you are a child',
+        'Only playing',
+      ],
+      answer: 'Your schoolwork and jobs at home',
+      teach: 'Schoolwork is work. So is sweeping and fetching water. Doing '
+        + 'them properly builds the habit of work.',
+      level: 1,
+    },
+    {
+      id: 'hw-5',
+      ask: 'What do all three faiths here say about honest work?',
+      kind: 'choice',
+      options: [
+        'They speak well of it',
+        'They say it does not matter',
+        'They say only adults should work',
+      ],
+      answer: 'They speak well of it',
+      teach: 'Christianity, Islam and Ghanaian traditional religion all speak '
+        + 'well of honest work. They speak badly of taking what you did not '
+        + 'earn.',
+      level: 1,
+    },
+    {
+      id: 'hw-6',
+      ask: 'A job is very big. What should you do?',
+      kind: 'choice',
+      options: [
+        'Give up',
+        'Break it into parts and do one',
+        'Wait until you feel like it',
+      ],
+      answer: 'Break it into parts and do one',
+      teach: 'A big job gets done one part at a time. Waiting to feel like '
+        + 'it does not help: the feeling usually comes after you start.',
+      level: 2,
+    },
+    {
+      id: 'hw-7',
+      ask: 'A farmer plants maize. Nothing shows for weeks. Why keep weeding?',
+      kind: 'choice',
+      options: [
+        'The weeds help the maize',
+        'The reward comes at harvest',
+        'There is nothing else to do',
+      ],
+      answer: 'The reward comes at harvest',
+      teach: 'Work pays late. Weeds take water and food from the maize. '
+        + 'Stopping now wastes all the work already done.',
+      level: 2,
+    },
+    {
+      id: 'hw-8',
+      ask: 'Why do the faiths speak against taking what you did not earn?',
+      kind: 'choice',
+      options: [
+        'It takes another person’s work',
+        'It is too heavy to carry',
+        'It is only a small thing',
+      ],
+      answer: 'It takes another person’s work',
+      teach: 'Somebody worked for that thing. Taking it takes their work, '
+        + 'not only the object.',
+      level: 3,
     },
   ],
 })
@@ -1743,6 +2319,92 @@ teach({
       answer: 'The "but" cancels the sorry',
       teach: 'Everything before the "but" is undone by what comes after it. '
         + 'Say sorry and stop there.',
+      level: 3,
+    },
+    {
+      id: 'for-4',
+      ask: 'What does forgiving mean?',
+      kind: 'choice',
+      options: [
+        'Letting go of paying them back',
+        'Paying them back twice',
+        'Never speaking to them',
+      ],
+      answer: 'Letting go of paying them back',
+      teach: 'Forgiving means you let go of paying the other person back. '
+        + 'That is what stops the quarrel.',
+      level: 1,
+    },
+    {
+      id: 'for-5',
+      ask: 'You pushed a friend and he fell. What do you say?',
+      kind: 'choice',
+      options: [
+        'Sorry, but you were in my way',
+        'Sorry',
+        'Nothing',
+      ],
+      answer: 'Sorry',
+      teach: 'You were wrong, so say sorry plainly. Adding "but" and an '
+        + 'excuse cancels the sorry.',
+      level: 1,
+    },
+    {
+      id: 'for-6',
+      ask: 'In a quarrel, what do you do while the other person tells their '
+        + 'side?',
+      kind: 'choice',
+      options: [
+        'Listen all the way through',
+        'Shout over them',
+        'Walk away',
+      ],
+      answer: 'Listen all the way through',
+      teach: 'Hear their side to the end. Then say what they did, without '
+        + 'insulting them.',
+      level: 2,
+    },
+    {
+      id: 'for-7',
+      ask: 'Two children cannot settle a quarrel. Who can help, in the '
+        + 'Ghanaian way?',
+      kind: 'choice',
+      options: [
+        'An elder or a teacher',
+        'Their friends who take sides',
+        'Nobody',
+      ],
+      answer: 'An elder or a teacher',
+      teach: 'An elder or teacher sits both down. Each one speaks and is '
+        + 'heard. Then both let it go.',
+      level: 2,
+    },
+    {
+      id: 'for-8',
+      ask: 'Is forgiving a sign of weakness?',
+      kind: 'choice',
+      options: [
+        'Yes, it means you lost',
+        'No, it takes strength to stop the quarrel',
+      ],
+      answer: 'No, it takes strength to stop the quarrel',
+      teach: 'Paying back is easy and keeps it going. Forgiving is the only '
+        + 'move that stops it, so it takes strength.',
+      level: 3,
+    },
+    {
+      id: 'for-9',
+      ask: 'A quarrel is settled. Then Kofi tells everybody about it. What '
+        + 'has he done?',
+      kind: 'choice',
+      options: [
+        'Carried on the quarrel',
+        'Finished it well',
+        'Nothing wrong',
+      ],
+      answer: 'Carried on the quarrel',
+      teach: 'Settled means finished. Carrying it on in talk keeps the '
+        + 'quarrel alive.',
       level: 3,
     },
   ],

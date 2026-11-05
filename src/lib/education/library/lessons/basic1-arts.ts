@@ -217,6 +217,78 @@ teach({
         + 'A heavy line cannot be adjusted.',
       level: 2,
     },
+    {
+      id: 'draw-4',
+      ask: 'Most of drawing is what?',
+      kind: 'choice',
+      options: ['Looking', 'Colouring', 'Rubbing out'],
+      answer: 'Looking',
+      teach: 'Look at the thing, then your paper, then the thing again. The '
+        + 'looking is what makes the drawing right.',
+      level: 1,
+    },
+    {
+      id: 'draw-5',
+      ask: 'How often should you look up at the thing you are drawing?',
+      kind: 'choice',
+      options: [
+        'Once, at the start',
+        'Once for every line you draw',
+        'Only at the end',
+      ],
+      answer: 'Once for every line you draw',
+      teach: 'One look at the start gives you the shape you remember. Look up '
+        + 'again for every line.',
+      level: 1,
+    },
+    {
+      id: 'draw-6',
+      ask: 'A calabash is wider than it is tall. What big shape do you draw '
+        + 'first?',
+      kind: 'choice',
+      options: ['A tall thin shape', 'A wide round shape', 'A small dot'],
+      answer: 'A wide round shape',
+      teach: 'Ask first: taller than wide, or wider than tall? The calabash '
+        + 'is wide, so the big shape is wide.',
+      level: 2,
+    },
+    {
+      id: 'draw-7',
+      ask: 'Kofi draws a cup tall and thin. The real cup is short and wide. '
+        + 'What went wrong?',
+      kind: 'choice',
+      options: [
+        'He drew it from memory',
+        'His pencil was too short',
+        'The cup moved',
+      ],
+      answer: 'He drew it from memory',
+      teach: 'Memory gives the same simple cup every time. Look again and '
+        + 'compare the height with the width.',
+      level: 2,
+    },
+    {
+      id: 'draw-8',
+      ask: 'The cup handle points away from you. You see only a thin sliver. '
+        + 'What do you draw?',
+      kind: 'choice',
+      options: ['A big handle', 'The thin sliver', 'No handle'],
+      answer: 'The thin sliver',
+      teach: 'The handle is big, but you cannot see that from here. Draw what '
+        + 'you can see from where you sit.',
+      level: 3,
+    },
+    {
+      id: 'draw-9',
+      ask: 'A plate is lying flat on the table. You look at it from the side. '
+        + 'What shape do you see?',
+      kind: 'choice',
+      options: ['A round circle', 'A long thin shape', 'A square'],
+      answer: 'A long thin shape',
+      teach: 'A plate is round. But edge on, it looks long and '
+        + 'thin. Draw what you see.',
+      level: 3,
+    },
   ],
 })
 
@@ -390,6 +462,70 @@ teach({
       teach: 'Water makes paint thin and runny but not pale. White is what '
         + 'lightens it.',
       level: 2,
+    },
+    {
+      id: 'col-4',
+      ask: 'Which two colours make orange?',
+      kind: 'choice',
+      options: ['Blue and yellow', 'Red and blue', 'Red and yellow'],
+      answer: 'Red and yellow',
+      teach: 'Red and yellow make orange. Yellow and blue make green. Red and '
+        + 'blue make purple.',
+      level: 1,
+    },
+    {
+      id: 'col-5',
+      ask: 'Which two colours make purple?',
+      kind: 'choice',
+      options: ['Blue and red', 'Yellow and red', 'Yellow and blue'],
+      answer: 'Blue and red',
+      teach: 'Blue and red make purple. Each secondary colour comes from two '
+        + 'primaries.',
+      level: 1,
+    },
+    {
+      id: 'col-6',
+      ask: 'Green is made by mixing. What kind of colour is it?',
+      kind: 'choice',
+      options: ['Primary', 'Secondary'],
+      answer: 'Secondary',
+      teach: 'Primary colours cannot be made by mixing. Colours you mix from '
+        + 'them, like green, are secondary.',
+      level: 2,
+    },
+    {
+      id: 'col-7',
+      ask: 'You mix yellow and blue. It comes out too dark. What went wrong?',
+      kind: 'choice',
+      options: [
+        'Too much blue went in at once',
+        'Too much yellow',
+        'The brush was wet',
+      ],
+      answer: 'Too much blue went in at once',
+      teach: 'Blue is much stronger than yellow. Start with the lighter paint '
+        + 'and add the darker one a little at a time.',
+      level: 2,
+    },
+    {
+      id: 'col-8',
+      ask: 'Akosua mixes red, yellow and blue all together. What does she get?',
+      kind: 'choice',
+      options: ['A bright new colour', 'A dull brown or grey', 'White'],
+      answer: 'A dull brown or grey',
+      teach: 'Mixing takes light away. All three together keep back nearly '
+        + 'all the light, so the colour goes dull.',
+      level: 3,
+    },
+    {
+      id: 'col-9',
+      ask: 'Is a mixed colour lighter or darker than the paints that went in?',
+      kind: 'choice',
+      options: ['Lighter', 'Darker'],
+      answer: 'Darker',
+      teach: 'Two paints keep back more light than one alone. So a mixture is '
+        + 'always darker.',
+      level: 3,
     },
   ],
 })
@@ -601,6 +737,83 @@ teach({
         + 'weaving.',
       level: 1,
     },
+    {
+      id: 'craft-4',
+      ask: 'How does adinkra cloth get its pattern?',
+      kind: 'choice',
+      options: ['It is woven in', 'It is stamped on', 'It is shaped by hand'],
+      answer: 'It is stamped on',
+      teach: 'Adinkra stamps are pressed onto cloth that is already made. '
+        + 'Kente is the one with the pattern woven in.',
+      level: 1,
+    },
+    {
+      id: 'craft-5',
+      ask: 'Kente is woven in narrow strips. What happens to the strips next?',
+      kind: 'choice',
+      options: [
+        'They are sewn edge to edge',
+        'They are stamped',
+        'They are put in the fire',
+      ],
+      answer: 'They are sewn edge to edge',
+      teach: 'The strips are sewn side by side to make a wide cloth. Fire is '
+        + 'for hardening clay pots.',
+      level: 2,
+    },
+    {
+      id: 'craft-6',
+      ask: 'How is a clay pot made hard?',
+      kind: 'choice',
+      options: [
+        'It is put in heat',
+        'It is sewn',
+        'It is left in water',
+      ],
+      answer: 'It is put in heat',
+      teach: 'Clay is shaped by hand while it is soft. Then it is put in heat '
+        + 'until it is hard. That is called firing.',
+      level: 2,
+    },
+    {
+      id: 'craft-7',
+      ask: 'A cloth has black shapes pressed on top of it. Is it kente or '
+        + 'adinkra?',
+      kind: 'choice',
+      options: ['Kente', 'Adinkra'],
+      answer: 'Adinkra',
+      teach: 'Ask where the pattern sits. On top, stamped after the cloth was '
+        + 'made, is adinkra. Made from the threads is kente.',
+      level: 2,
+    },
+    {
+      id: 'craft-8',
+      ask: 'Mensah sees patterned Ghanaian cloth. He says all of it is kente. '
+        + 'Is he right?',
+      kind: 'choice',
+      options: [
+        'Yes, all Ghanaian cloth is kente',
+        'No, some is adinkra, which is printed',
+        'Yes, if it has colours',
+      ],
+      answer: 'No, some is adinkra, which is printed',
+      teach: 'Look at how the pattern got there. Kente is woven. Adinkra is '
+        + 'stamped on.',
+      level: 3,
+    },
+    {
+      id: 'craft-9',
+      ask: 'Are kente and adinkra still made today?',
+      kind: 'choice',
+      options: [
+        'No, only long ago',
+        'Yes, by weavers and printers now',
+      ],
+      answer: 'Yes, by weavers and printers now',
+      teach: 'These crafts are old, but not finished. People still make them '
+        + 'and wear them today.',
+      level: 3,
+    },
   ],
 })
 
@@ -777,6 +990,82 @@ teach({
       teach: 'Trapped air has nowhere to go as the clay dries and shrinks, so '
         + 'the piece cracks there.',
       level: 2,
+    },
+    {
+      id: 'weave-4',
+      ask: 'What do you use to model a pot?',
+      kind: 'choice',
+      options: ['Clay', 'Paper strips', 'Thread'],
+      answer: 'Clay',
+      teach: 'Modelling is shaping clay with your hands. Strips and thread '
+        + 'are for weaving.',
+      level: 1,
+    },
+    {
+      id: 'weave-5',
+      ask: 'A strip goes over one, then what?',
+      kind: 'choice',
+      options: ['Over the next', 'Under the next', 'It stops'],
+      answer: 'Under the next',
+      teach: 'Weaving is over, under, over, under, to the end. Two overs in a '
+        + 'row leave a strip loose.',
+      level: 1,
+    },
+    {
+      id: 'weave-6',
+      ask: 'Your weaving has a loose gap in the middle. Why?',
+      kind: 'choice',
+      options: [
+        'The strips are too long',
+        'The over and under pattern was broken',
+        'The paper is too thick',
+      ],
+      answer: 'The over and under pattern was broken',
+      teach: 'A strip is held only by the ones crossing it. Where the pattern '
+        + 'breaks, nothing holds that strip.',
+      level: 2,
+    },
+    {
+      id: 'weave-7',
+      ask: 'What do you do with each new strip after you weave it in?',
+      kind: 'choice',
+      options: [
+        'Leave a big gap',
+        'Push it up close to the last one',
+        'Cut it in half',
+      ],
+      answer: 'Push it up close to the last one',
+      teach: 'Gaps make the sheet weak and untidy. Push each strip up against '
+        + 'the one before.',
+      level: 2,
+    },
+    {
+      id: 'weave-8',
+      ask: 'Adwoa’s clay pot cracked as it dried. What went wrong?',
+      kind: 'choice',
+      options: [
+        'Air was trapped in the clay',
+        'The pot was too small',
+        'She used too much colour',
+      ],
+      answer: 'Air was trapped in the clay',
+      teach: 'Air has nowhere to go as clay dries and shrinks. Squeeze the '
+        + 'clay well before you shape it.',
+      level: 3,
+    },
+    {
+      id: 'weave-9',
+      ask: 'One palm strip tears easily. Why is a woven basket strong?',
+      kind: 'choice',
+      options: [
+        'Glue holds it',
+        'Each strip is held by the ones crossing it',
+        'The strips are thicker',
+      ],
+      answer: 'Each strip is held by the ones crossing it',
+      teach: 'Nothing is added. The over and under locks every strip in '
+        + 'place, so the whole is stronger than one strip.',
+      level: 3,
     },
   ],
 })
@@ -956,6 +1245,76 @@ teach({
       answer: 'They share the same beat',
       teach: 'Different rhythms over one shared pulse is exactly how Ghanaian '
         + 'drumming is built.',
+      level: 3,
+    },
+    {
+      id: 'rhy-4',
+      ask: 'What do you keep the beat with?',
+      kind: 'choice',
+      options: ['Your feet', 'Your eyes', 'Your nose'],
+      answer: 'Your feet',
+      teach: 'Tap your foot to keep the beat steady. Your hands play the '
+        + 'rhythm on top.',
+      level: 1,
+    },
+    {
+      id: 'rhy-5',
+      ask: 'A count where you stay silent is called what?',
+      kind: 'choice',
+      options: ['A bar', 'A clap', 'A rest'],
+      answer: 'A rest',
+      teach: 'A rest is a count with no clap. Keep counting through it. Four '
+        + 'counts together make a bar.',
+      level: 1,
+    },
+    {
+      id: 'rhy-6',
+      ask: 'How many counts are in one bar here?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four'],
+      teach: 'Count one, two, three, four, then start again at one. One run '
+        + 'of four counts is a bar.',
+      level: 2,
+    },
+    {
+      id: 'rhy-7',
+      ask: 'Count one, two, three, four. Clap on one and three. What do you '
+        + 'do on two and four?',
+      kind: 'choice',
+      options: ['Clap louder', 'Rest, but keep the foot going', 'Stop counting'],
+      answer: 'Rest, but keep the foot going',
+      teach: 'The beat carries on through the rests. Your foot keeps all four '
+        + 'counts. Your hands clap only on one and three.',
+      level: 2,
+    },
+    {
+      id: 'rhy-8',
+      ask: 'The song gets exciting. Kwame claps faster and faster. What goes '
+        + 'wrong?',
+      kind: 'choice',
+      options: [
+        'Nothing, faster is better',
+        'The beat moves, so nobody can play with him',
+        'His hands get tired',
+      ],
+      answer: 'The beat moves, so nobody can play with him',
+      teach: 'The beat must stay steady. The whole group counts the same '
+        + 'pulse, so if it speeds up, they fall apart.',
+      level: 3,
+    },
+    {
+      id: 'rhy-9',
+      ask: 'You hear a clap pattern once. What do you listen for first?',
+      kind: 'choice',
+      options: [
+        'How loud the claps are',
+        'The steady beat underneath',
+        'Who is clapping',
+      ],
+      answer: 'The steady beat underneath',
+      teach: 'Find the beat first. Then count which beats the claps land on. '
+        + 'Copy the places, not the loudness.',
       level: 3,
     },
   ],
@@ -1161,6 +1520,73 @@ teach({
         + 'at a fixed moment so the group knows when to answer.',
       level: 3,
     },
+    {
+      id: 'sing-4',
+      ask: 'What should you listen for before you start to sing?',
+      kind: 'choice',
+      options: ['The starting note', 'The end of the song', 'The clock'],
+      answer: 'The starting note',
+      teach: 'Listen for the starting note, then breathe in with everyone. '
+        + 'Missing the note makes the song sound sour.',
+      level: 1,
+    },
+    {
+      id: 'sing-5',
+      ask: 'When does the group breathe in to start?',
+      kind: 'choice',
+      options: ['All at the same time', 'One by one', 'After the first word'],
+      answer: 'All at the same time',
+      teach: 'Breathe in together. Then you all start on the same word.',
+      level: 1,
+    },
+    {
+      id: 'sing-6',
+      ask: 'Whose voice sounds loudest inside your own head?',
+      kind: 'choice',
+      options: ['The leader', 'Your own', 'The person beside you'],
+      answer: 'Your own',
+      teach: 'You hear your own voice from inside. It drowns out the group. '
+        + 'That is why you sing a little softer.',
+      level: 2,
+    },
+    {
+      id: 'sing-7',
+      ask: 'Fuseini keeps ending up ahead of everybody. What should he change?',
+      kind: 'choice',
+      options: [
+        'Sing louder',
+        'Sing softer and listen to the others',
+        'Stop singing',
+      ],
+      answer: 'Sing softer and listen to the others',
+      teach: 'Being ahead means he cannot hear the group. Softer singing lets '
+        + 'him hear where they are and match them.',
+      level: 2,
+    },
+    {
+      id: 'sing-8',
+      ask: 'Somebody starts singing before the others. What happens?',
+      kind: 'choice',
+      options: [
+        'The group is pulled out of time',
+        'The song sounds better',
+        'Nothing happens',
+      ],
+      answer: 'The group is pulled out of time',
+      teach: 'Wait for the shared breath. Starting early leaves one voice '
+        + 'alone, then the rest.',
+      level: 2,
+    },
+    {
+      id: 'sing-9',
+      ask: 'You lead a verse. Should you change your speed in the next verse?',
+      kind: 'choice',
+      options: ['Yes, go faster', 'No, keep the same speed'],
+      answer: 'No, keep the same speed',
+      teach: 'The leader sets the speed. If the leader changes it, the group '
+        + 'answers late.',
+      level: 3,
+    },
   ],
 })
 
@@ -1326,6 +1752,71 @@ teach({
       teach: 'A tighter skin shakes faster, and faster shaking is a higher '
         + 'note. The same is true of a tighter string.',
       level: 2,
+    },
+    {
+      id: 'inst-4',
+      ask: 'How is a drum played?',
+      kind: 'choice',
+      options: ['It is hit', 'It is blown', 'It is plucked'],
+      answer: 'It is hit',
+      teach: 'You hit the drum skin. The skin shakes, and the air around it '
+        + 'shakes too.',
+      level: 1,
+    },
+    {
+      id: 'inst-5',
+      ask: 'What is inside an axatse that makes the sound?',
+      kind: 'choice',
+      options: ['Water', 'Seeds', 'A string'],
+      answer: 'Seeds',
+      teach: 'The seeds knock against the shell when you shake it. The shell '
+        + 'shakes the air.',
+      level: 1,
+    },
+    {
+      id: 'inst-6',
+      ask: 'Every sound is made by something doing what?',
+      kind: 'choice',
+      options: ['Getting hot', 'Shaking the air', 'Changing colour'],
+      answer: 'Shaking the air',
+      teach: 'A skin, a seed, a column of air or a string shakes. That shakes '
+        + 'the air, and the air brings the sound to your ears.',
+      level: 2,
+    },
+    {
+      id: 'inst-7',
+      ask: 'Drums and flutes can both be made of wood. How should you group '
+        + 'them?',
+      kind: 'choice',
+      options: [
+        'By what they are made of',
+        'By how the sound is made',
+        'By their size',
+      ],
+      answer: 'By how the sound is made',
+      teach: 'Wood tells you nothing here. A drum is hit and a flute is '
+        + 'blown, so they go in different groups.',
+      level: 2,
+    },
+    {
+      id: 'inst-8',
+      ask: 'Yaw hits the drum as hard as he can. What does it sound like?',
+      kind: 'choice',
+      options: ['Flat and dead', 'Sweet and high', 'Like a flute'],
+      answer: 'Flat and dead',
+      teach: 'The skin needs room to shake. Hitting too hard gives a dead '
+        + 'sound and hurts your hands.',
+      level: 3,
+    },
+    {
+      id: 'inst-9',
+      ask: 'A string is pulled tighter. What happens to the note?',
+      kind: 'choice',
+      options: ['It goes lower', 'It goes higher', 'It stops'],
+      answer: 'It goes higher',
+      teach: 'A tighter string shakes faster, like a tighter drum skin. '
+        + 'Faster shaking is a higher note.',
+      level: 3,
     },
   ],
 })
@@ -1552,6 +2043,88 @@ teach({
       answer: 'Stay in character and keep it moving',
       teach: 'The play has not ended. Staying in your part and helping the '
         + 'scene along is what keeps the story going for the audience.',
+      level: 3,
+    },
+    {
+      id: 'dra-4',
+      ask: 'What is a play written down called?',
+      kind: 'choice',
+      options: ['A song', 'A script', 'A letter'],
+      answer: 'A script',
+      teach: 'The writing for a play is a script. Each line starts with the '
+        + 'name of the person who speaks it.',
+      level: 1,
+    },
+    {
+      id: 'dra-5',
+      ask: 'Who should you speak to, so everybody hears?',
+      kind: 'choice',
+      options: [
+        'The person nearest you',
+        'The person furthest away',
+        'Yourself',
+      ],
+      answer: 'The person furthest away',
+      teach: 'Speak to the back of the room. Then everybody in between hears '
+        + 'you too.',
+      level: 1,
+    },
+    {
+      id: 'dra-6',
+      ask: 'The script says: AMA: (she stands up) I am going to the farm. '
+        + 'What does Ama say out loud?',
+      kind: 'choice',
+      options: [
+        'She stands up. I am going to the farm.',
+        'I am going to the farm.',
+        'AMA: I am going to the farm.',
+      ],
+      answer: 'I am going to the farm.',
+      teach: 'Words in round brackets are not said. They tell you what to do. '
+        + 'The name before the colon is not said either.',
+      level: 2,
+    },
+    {
+      id: 'dra-7',
+      ask: 'How is speaking loudly different from shouting?',
+      kind: 'choice',
+      options: [
+        'Loud speaking starts with a big breath',
+        'They are the same',
+        'Shouting is better on stage',
+      ],
+      answer: 'Loud speaking starts with a big breath',
+      teach: 'Shouting pushes from the throat and hurts. Take a big breath '
+        + 'and let the words ride out on the air.',
+      level: 2,
+    },
+    {
+      id: 'dra-8',
+      ask: 'You talk to another actor on stage. Which way do you face?',
+      kind: 'choice',
+      options: [
+        'Straight at them, back to the audience',
+        'Partly to them, partly to the audience',
+        'Away from everybody',
+      ],
+      answer: 'Partly to them, partly to the audience',
+      teach: 'If your back is to the audience, they cannot see or hear you. '
+        + 'Stay partly open to them.',
+      level: 2,
+    },
+    {
+      id: 'dra-9',
+      ask: 'It is not your turn to speak. Kofi starts waving at his mother. '
+        + 'What is wrong?',
+      kind: 'choice',
+      options: [
+        'Nothing, it is not his turn',
+        'He dropped out of his part',
+        'He spoke too softly',
+      ],
+      answer: 'He dropped out of his part',
+      teach: 'The audience watches the whole stage. Stay in your part while '
+        + 'others speak, or they stop believing the story.',
       level: 3,
     },
   ],

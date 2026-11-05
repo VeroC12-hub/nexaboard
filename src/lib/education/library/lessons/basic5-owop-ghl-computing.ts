@@ -244,6 +244,91 @@ teach({
       teach: 'Without it, how far apart things look tells you nothing.',
       level: 5,
     },
+    {
+      id: 'gm-4',
+      ask: 'On most maps, where is north?',
+      kind: 'choice',
+      options: ['Down the page', 'Up the page', 'To the right'],
+      answer: 'Up the page',
+      teach: 'North is almost always up the page. '
+        + 'The north arrow is there to check, '
+        + 'because on a few maps it is not.',
+      level: 1,
+    },
+    {
+      id: 'gm-5',
+      ask: 'What is the box that says what each symbol on a map means?',
+      kind: 'choice',
+      options: ['The scale', 'The north arrow', 'The key'],
+      answer: 'The key',
+      teach: 'The key, also called the legend, lists each symbol and what it '
+        + 'stands for. The scale is about distance, '
+        + 'and the north arrow is about direction.',
+      level: 1,
+    },
+    {
+      id: 'gm-6',
+      ask: 'With north at the top of the map, which way is east?',
+      kind: 'choice',
+      options: ['To the right', 'To the left', 'Down the page'],
+      answer: 'To the right',
+      teach: 'Find north first, then the rest follow. '
+        + 'With north up, south is down, east is to the right '
+        + 'and west is to the left.',
+      level: 1,
+    },
+    {
+      id: 'gm-7',
+      ask: 'Accra is by the sea, south of Kumasi. '
+        + 'Travelling from Kumasi to Accra, which way do you go?',
+      kind: 'choice',
+      options: ['North', 'South', 'West'],
+      answer: 'South',
+      teach: 'The sea runs along the bottom of Ghana, which is the south. '
+        + 'Going from Kumasi towards the sea means going south.',
+      level: 2,
+    },
+    {
+      id: 'gm-8',
+      ask: 'From Kumasi you travel towards Ho and the Togo border. '
+        + 'Which direction is that?',
+      kind: 'choice',
+      options: ['West', 'North', 'East'],
+      answer: 'East',
+      teach: 'Ho and the Togo border lie to the right of Kumasi on a map with '
+        + 'north up, and right is east. '
+        + 'West would take you towards Sunyani instead.',
+      level: 2,
+    },
+    {
+      id: 'gm-9',
+      ask: 'A map has the scale 1 cm to 10 km. '
+        + 'Two towns are 3 cm apart on the map. '
+        + 'How many kilometres apart are they on the ground?',
+      kind: 'numeric',
+      answer: '30',
+      accept: ['30 km', 'thirty', '30 kilometres'],
+      teach: 'Each centimetre on the paper is 10 km on the ground. '
+        + '3 lots of 10 is 30 km. '
+        + 'Leaving the answer as 3 cm is the commonest way to lose the mark.',
+      level: 3,
+    },
+    {
+      id: 'gm-10',
+      ask: 'On one map a thick line is a road. '
+        + 'On a new map, how do you find what a thick line means?',
+      kind: 'choice',
+      options: [
+        'It is a road on every map',
+        'Read the key of the new map',
+        'Guess from how long it is',
+      ],
+      answer: 'Read the key of the new map',
+      teach: 'The same symbol can mean different things on different maps. '
+        + 'A thick line could be a road on one and a border on another, '
+        + 'so read the key each time.',
+      level: 3,
+    },
   ],
 })
 
@@ -492,6 +577,90 @@ teach({
         + 'Comparing them is what history actually is.',
       level: 5,
     },
+    {
+      id: 'in-4',
+      ask: 'On which day and month did Ghana become independent?',
+      kind: 'choice',
+      options: ['1 July', '6 March', '25 December'],
+      answer: '6 March',
+      teach: 'Independence came on 6 March 1957. '
+        + 'That is why schools march and the flag goes up every 6 March.',
+      level: 1,
+    },
+    {
+      id: 'in-5',
+      ask: 'Who led the first government of independent Ghana?',
+      kind: 'choice',
+      options: ['J. B. Danquah', 'Kwame Nkrumah', 'Edward Akufo-Addo'],
+      answer: 'Kwame Nkrumah',
+      teach: 'Kwame Nkrumah led the first government after 1957. '
+        + 'Danquah and Akufo-Addo were also among the Big Six, '
+        + 'but they did not lead that first government.',
+      level: 1,
+    },
+    {
+      id: 'in-6',
+      ask: 'What was the country called before it became Ghana?',
+      kind: 'choice',
+      options: ['The Gold Coast', 'The Black Star', 'Togoland'],
+      answer: 'The Gold Coast',
+      teach: 'On independence the Gold Coast became Ghana. '
+        + 'The black star is on the flag; it was never the country’s name.',
+      level: 1,
+    },
+    {
+      id: 'in-7',
+      ask: 'Which country governed the Gold Coast before independence?',
+      kind: 'choice',
+      options: ['France', 'Portugal', 'Britain'],
+      answer: 'Britain',
+      teach: 'Ghana became independent from British rule. '
+        + 'Before 1957 the men who ran the towns were sent out from London.',
+      level: 2,
+    },
+    {
+      id: 'in-8',
+      ask: 'Which of these did NOT change on independence day?',
+      kind: 'choice',
+      options: [
+        'Who governed the country',
+        'The roads and the schools',
+        'The name of the country',
+      ],
+      answer: 'The roads and the schools',
+      teach: 'Who governed, the name, the flag and the anthem changed that '
+        + 'day. The roads and schools were the same the next morning. '
+        + 'Building more was work still to be done.',
+      level: 2,
+    },
+    {
+      id: 'in-9',
+      ask: 'Kofi says Nkrumah won independence all by himself. '
+        + 'What is wrong with that?',
+      kind: 'choice',
+      options: [
+        'Nothing, he did it alone',
+        'Very many people worked for it over many years',
+        'Only the Queen of England could give it',
+      ],
+      answer: 'Very many people worked for it over many years',
+      teach: 'Nkrumah led at the end, but independence came from years of '
+        + 'newspapers, parties, strikes, elections and talks, '
+        + 'by the Big Six and many people never named.',
+      level: 2,
+    },
+    {
+      id: 'in-10',
+      ask: 'Which member of the Big Six invited Nkrumah back to the '
+        + 'Gold Coast?',
+      kind: 'choice',
+      options: ['William Ofori Atta', 'Emmanuel Obetsebi-Lamptey', 'Ako Adjei'],
+      answer: 'Ako Adjei',
+      teach: 'Ako Adjei invited Nkrumah back. '
+        + 'The Big Six were Nkrumah, Danquah, Ako Adjei, Akufo-Addo, '
+        + 'Obetsebi-Lamptey and Ofori Atta.',
+      level: 3,
+    },
   ],
 })
 
@@ -704,6 +873,108 @@ teach({
       teach: 'The meaning lives in when it is used, '
         + 'and that does not travel with the words.',
       level: 5,
+    },
+    {
+      id: 'pv-4',
+      ask: 'What is a proverb?',
+      kind: 'choice',
+      options: [
+        'A long story told aloud',
+        'A short, well known saying that carries a lesson',
+        'A riddle with one answer',
+      ],
+      answer: 'A short, well known saying that carries a lesson',
+      teach: 'A long story told aloud is a folktale. '
+        + 'A proverb does the same job in one short sentence.',
+      level: 1,
+    },
+    {
+      id: 'pv-5',
+      ask: 'An elder speaks about one broomstick and a bundle of broomsticks '
+        + 'to two brothers quarrelling over land. '
+        + 'What is he really talking about?',
+      kind: 'choice',
+      options: [
+        'How to sweep a compound',
+        'Buying new brooms at the market',
+        'The brothers and their quarrel',
+      ],
+      answer: 'The brothers and their quarrel',
+      teach: 'The brooms are only the picture. '
+        + 'A proverb uses a picture everybody knows '
+        + 'to speak about the real situation, here the quarrel.',
+      level: 2,
+    },
+    {
+      id: 'pv-6',
+      ask: 'Adwoa explains a proverb about a goat by saying '
+        + '"goats eat grass". Which part has she explained?',
+      kind: 'choice',
+      options: ['The situation it is used in', 'Only the picture', 'The lesson'],
+      answer: 'Only the picture',
+      teach: 'Talking about the goat stays on the surface. '
+        + 'She still needs to say when somebody would use it '
+        + 'and what they would mean.',
+      level: 2,
+    },
+    {
+      id: 'pv-7',
+      ask: 'Which of these explains a proverb about a river best?',
+      kind: 'choice',
+      options: [
+        'It mentions a river',
+        'You say it to somebody rushing a job',
+        'Rivers are deep and move fast',
+      ],
+      answer: 'You say it to somebody rushing a job',
+      teach: 'The first and last options only describe the river. '
+        + 'A real explanation names the situation the proverb is used in.',
+      level: 2,
+    },
+    {
+      id: 'pv-8',
+      ask: 'How is a proverb like an Ananse folktale?',
+      kind: 'choice',
+      options: [
+        'Both are always about spiders',
+        'Both must be very long',
+        'Both let the listener work out the lesson',
+      ],
+      answer: 'Both let the listener work out the lesson',
+      teach: 'A folktale never says the lesson outright; it shows it. '
+        + 'A proverb does the same, in one sentence.',
+      level: 2,
+    },
+    {
+      id: 'pv-9',
+      ask: 'You have explained a proverb to a friend. '
+        + 'How can you tell you explained it well?',
+      kind: 'choice',
+      options: [
+        'Your friend can now use it in the right situation',
+        'You used a lot of long words',
+        'Your friend can repeat the words',
+      ],
+      answer: 'Your friend can now use it in the right situation',
+      teach: 'Repeating the words is not the same as understanding them. '
+        + 'The test is whether somebody who never heard it '
+        + 'could now use it correctly.',
+      level: 3,
+    },
+    {
+      id: 'pv-10',
+      ask: 'What happens if you use a proverb in the wrong situation?',
+      kind: 'choice',
+      options: [
+        'Nobody notices',
+        'It sounds wrong to anybody who knows it',
+        'It turns into a new proverb',
+      ],
+      answer: 'It sounds wrong to anybody who knows it',
+      teach: 'A proverb belongs to a situation. '
+        + 'Learn the situation along with the words, '
+        + 'or the proverb will land in the wrong place.',
+      level: 3,
     },
   ],
 })
@@ -941,6 +1212,98 @@ teach({
         + 'while you are busy thinking about content.',
       level: 5,
     },
+    {
+      id: 'cg-4',
+      ask: 'How many ideas should each paragraph hold?',
+      kind: 'choice',
+      options: ['One', 'Two or three', 'All of them'],
+      answer: 'One',
+      teach: 'A paragraph is a group of sentences about one idea. '
+        + 'Two ideas in one paragraph is a sign it should be split.',
+      level: 1,
+    },
+    {
+      id: 'cg-5',
+      ask: 'The letter ɔ is said like:',
+      kind: 'choice',
+      options: ['the e in "bed"', 'the o in "pot"', 'the end of "sing"'],
+      answer: 'the o in "pot"',
+      teach: 'ɔ sounds like the o in "pot". '
+        + 'ɛ is the e in "bed", and ŋ is the sound at the end of "sing".',
+      level: 1,
+    },
+    {
+      id: 'cg-6',
+      ask: 'Are "sɛ" and "se" the same word?',
+      kind: 'choice',
+      options: [
+        'Yes, the mark is only decoration',
+        'No, they are two different words',
+        'Yes, if you say them fast',
+      ],
+      answer: 'No, they are two different words',
+      teach: 'ɛ is a letter in its own right, not an e with a mark. '
+        + 'Change the letter and you change the word.',
+      level: 2,
+    },
+    {
+      id: 'cg-7',
+      ask: 'What is the opening paragraph of a composition for?',
+      kind: 'choice',
+      options: [
+        'Tying all the points together',
+        'Making the third point',
+        'Saying what the piece is about',
+      ],
+      answer: 'Saying what the piece is about',
+      teach: 'The opening tells the reader the topic. '
+        + 'Tying the points together is the job of the closing.',
+      level: 2,
+    },
+    {
+      id: 'cg-8',
+      ask: 'Kwame writes about market day. His closing paragraph brings in '
+        + 'a new point about football. What has gone wrong?',
+      kind: 'choice',
+      options: [
+        'Nothing, a closing should add new points',
+        'The closing should tie the points together, not add new ones',
+        'Football should have been the opening',
+      ],
+      answer: 'The closing should tie the points together, not add new ones',
+      teach: 'Every point belongs in the plan and gets its own middle '
+        + 'paragraph. The closing only ties together what came before.',
+      level: 3,
+    },
+    {
+      id: 'cg-9',
+      ask: 'You are not sure how to spell a word in your language. '
+        + 'What should you do?',
+      kind: 'choice',
+      options: [
+        'Write it the English way',
+        'Leave the word out',
+        'Say it slowly and write one letter for each sound',
+      ],
+      answer: 'Say it slowly and write one letter for each sound',
+      teach: 'Ghanaian languages are spelt by sound, one letter for one sound. '
+        + 'English spelling habits are what cause the mistakes.',
+      level: 3,
+    },
+    {
+      id: 'cg-10',
+      ask: 'Put the steps of writing a composition in order.',
+      kind: 'choice',
+      options: [
+        'Write, then plan, then read aloud',
+        'Plan, then write, then read aloud',
+        'Read aloud, then write, then plan',
+      ],
+      answer: 'Plan, then write, then read aloud',
+      teach: 'Plan your points first, write one paragraph for each, '
+        + 'then read it aloud to catch the letters your hand got wrong.',
+      level: 2,
+    },
   ],
 })
 
@@ -1160,6 +1523,105 @@ teach({
       answer: 'When it shows something the words cannot',
       teach: 'A picture takes space and attention, so it has to earn them.',
       level: 5,
+    },
+    {
+      id: 'fd-4',
+      ask: 'What does a heading tell the reader?',
+      kind: 'choice',
+      options: [
+        'A new part begins here',
+        'These words are wrong',
+        'The document has ended',
+      ],
+      answer: 'A new part begins here',
+      teach: 'A heading marks the start of a part, '
+        + 'so the reader can find their way round the document.',
+      level: 1,
+    },
+    {
+      id: 'fd-5',
+      ask: 'What is bold text for?',
+      kind: 'choice',
+      options: [
+        'Making all the text darker',
+        'Filling up empty space',
+        'Making the few words that matter most stand out',
+      ],
+      answer: 'Making the few words that matter most stand out',
+      teach: 'Bold is a signal. It only works when most of the text is not '
+        + 'bold, so keep it for a few words.',
+      level: 1,
+    },
+    {
+      id: 'fd-6',
+      ask: 'How many fonts should the main text of a letter use?',
+      kind: 'choice',
+      options: [
+        'A new one for each paragraph',
+        'One, the same all the way through',
+        'As many as you like',
+      ],
+      answer: 'One, the same all the way through',
+      teach: 'A second font signals a different kind of text. '
+        + 'Too many and it stops looking like one document.',
+      level: 2,
+    },
+    {
+      id: 'fd-7',
+      ask: 'What does a blank line between paragraphs signal?',
+      kind: 'choice',
+      options: ['One idea has ended', 'Nothing at all', 'The page is full'],
+      answer: 'One idea has ended',
+      teach: 'Spacing is formatting too. A blank line tells the reader one '
+        + 'idea is finished and the next is starting.',
+      level: 2,
+    },
+    {
+      id: 'fd-8',
+      ask: 'Put these in the best order for laying out a letter.',
+      kind: 'choice',
+      options: [
+        'Bold words as you type, then type the rest',
+        'Add pictures first, then type the words',
+        'Type all the words, then add headings, then bold a few words',
+      ],
+      answer: 'Type all the words, then add headings, then bold a few words',
+      teach: 'Formatting as you go breaks your thinking. '
+        + 'Type everything, decide the parts and give them headings, '
+        + 'and only then pick the few words to bold.',
+      level: 2,
+    },
+    {
+      id: 'fd-9',
+      ask: 'Yaw’s report uses six fonts and four colours. '
+        + 'Why is it harder to read?',
+      kind: 'choice',
+      options: [
+        'Too many signals, so none of them stands out',
+        'Colours cannot be printed',
+        'Fonts make the words longer',
+      ],
+      answer: 'Too many signals, so none of them stands out',
+      teach: 'Formatting works by contrast. '
+        + 'Each font and colour says "look here", '
+        + 'and when everything says it, nothing does.',
+      level: 3,
+    },
+    {
+      id: 'fd-10',
+      ask: 'Ama types a letter about keeping the market clean. '
+        + 'Which picture is worth adding?',
+      kind: 'choice',
+      options: [
+        'A cartoon cat to fill the space',
+        'A photo of the rubbish heap at the market',
+        'The first picture she finds',
+      ],
+      answer: 'A photo of the rubbish heap at the market',
+      teach: 'A picture has to show something the words cannot. '
+        + 'The photo of the rubbish shows the problem; '
+        + 'a cartoon cat only takes attention away.',
+      level: 3,
     },
   ],
 })
@@ -1394,6 +1856,98 @@ teach({
       teach: 'Order reflects popularity and how the page was written, '
         + 'not whether it is correct.',
       level: 4,
+    },
+    {
+      id: 'sr-4',
+      ask: 'Which of these is one of the three questions to ask about a page?',
+      kind: 'choice',
+      options: [
+        'How many colours does it use?',
+        'Who wrote it?',
+        'Does it have photographs?',
+      ],
+      answer: 'Who wrote it?',
+      teach: 'The three questions are who wrote it, when it was written, '
+        + 'and whether anybody else says the same. '
+        + 'Colours and photographs prove nothing.',
+      level: 1,
+    },
+    {
+      id: 'sr-5',
+      ask: 'Your search gives far too many results. What should you do?',
+      kind: 'choice',
+      options: ['Remove a word', 'Stop searching', 'Add a word'],
+      answer: 'Add a word',
+      teach: 'Each extra precise word narrows the search. '
+        + 'Too many results: add a word. Too few: remove one.',
+      level: 2,
+    },
+    {
+      id: 'sr-6',
+      ask: 'Your search gives almost no results. What should you do?',
+      kind: 'choice',
+      options: ['Add a word', 'Remove a word', 'Type a whole long question'],
+      answer: 'Remove a word',
+      teach: 'Too few results means the search is too narrow. '
+        + 'Take one word out to widen it.',
+      level: 2,
+    },
+    {
+      id: 'sr-7',
+      ask: 'Which source is most answerable for what it says?',
+      kind: 'choice',
+      options: [
+        'A page with no author',
+        'A message forwarded by a stranger',
+        'A page from a government ministry',
+      ],
+      answer: 'A page from a government ministry',
+      teach: 'A ministry, a university or a newspaper has a name to protect '
+        + 'and can be asked about its claim. '
+        + 'A page with nobody behind it cannot.',
+      level: 2,
+    },
+    {
+      id: 'sr-8',
+      ask: 'Why should you write down where you found a fact?',
+      kind: 'choice',
+      options: [
+        'So you can say where it came from and check it later',
+        'So the page loads faster',
+        'Because long lists look good',
+      ],
+      answer: 'So you can say where it came from and check it later',
+      teach: 'If you do not note the source, '
+        + 'you cannot answer "where did this come from?" '
+        + 'and you cannot go back to check it.',
+      level: 2,
+    },
+    {
+      id: 'sr-9',
+      ask: 'Fuseini finds a page with no author and no date. '
+        + 'What should he do with it?',
+      kind: 'choice',
+      options: [
+        'Copy it straight into his homework',
+        'Treat it as a lead and check the claim elsewhere',
+        'Believe it because it has photographs',
+      ],
+      answer: 'Treat it as a lead and check the claim elsewhere',
+      teach: 'He cannot judge who is answerable or whether it is up to date. '
+        + 'It may still be right, so he checks the claim somewhere he can '
+        + 'judge.',
+      level: 3,
+    },
+    {
+      id: 'sr-10',
+      ask: 'Two pages say the same thing, but both copied it from one '
+        + 'original page. How many sources is that really?',
+      kind: 'choice',
+      options: ['Two', 'One', 'Three'],
+      answer: 'One',
+      teach: 'Agreement only counts when the pages are independent. '
+        + 'Two copies of one page are one source said twice.',
+      level: 3,
     },
   ],
 })
@@ -1639,6 +2193,100 @@ teach({
       teach: 'Copies are where mistakes hide, '
         + 'because you will always miss one when you edit them.',
       level: 5,
+    },
+    {
+      id: 'bp-4',
+      ask: 'In what order does the computer carry out the blocks?',
+      kind: 'choice',
+      options: [
+        'Any order it chooses',
+        'The biggest block first',
+        'The order they sit in',
+      ],
+      answer: 'The order they sit in',
+      teach: 'A computer fills in nothing of its own. '
+        + 'It does exactly what the blocks say, in the order they are placed.',
+      level: 1,
+    },
+    {
+      id: 'bp-5',
+      ask: 'To draw a square, a move block and a turn block go inside a '
+        + 'repeat block. How many times should it repeat?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four', '4 times'],
+      teach: 'One move and one turn make one side and one corner. '
+        + 'A square has four sides, so repeat four times.',
+      level: 1,
+    },
+    {
+      id: 'bp-6',
+      ask: 'Without a repeat block, how many blocks does the square need '
+        + '(one move and one turn for each side)?',
+      kind: 'numeric',
+      answer: '8',
+      accept: ['eight', '8 blocks'],
+      teach: 'Four sides, each with a move block and a turn block: '
+        + '4 times 2 is 8. Giving 4 counts only the move blocks.',
+      level: 2,
+    },
+    {
+      id: 'bp-7',
+      ask: 'Your repeat block draws a square. To draw a pentagon, '
+        + 'what number should the repeat say?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five'],
+      teach: 'A pentagon has five sides, so repeat five times. '
+        + 'With a repeat block you change one number '
+        + 'instead of finding every copied block.',
+      level: 2,
+    },
+    {
+      id: 'bp-8',
+      ask: 'You tell a robot "buy bread" and it stands still. Why?',
+      kind: 'choice',
+      options: [
+        'It is tired',
+        'It only does what the instructions say, and they left things out',
+        'Robots cannot ever move',
+      ],
+      answer: 'It only does what the instructions say, and they left things out',
+      teach: 'A person fills in the missing steps. A computer does not. '
+        + 'It needs every step: which way, how far, what to do next.',
+      level: 2,
+    },
+    {
+      id: 'bp-9',
+      ask: 'Kwame changes three blocks at once and the program now works. '
+        + 'What is the problem with that?',
+      kind: 'choice',
+      options: [
+        'He cannot tell which change fixed it',
+        'There is no problem',
+        'The program will now run more slowly',
+      ],
+      answer: 'He cannot tell which change fixed it',
+      teach: 'Change one block at a time and run it again. '
+        + 'Then it is clear which block was the fault, '
+        + 'and you have not added a new one.',
+      level: 3,
+    },
+    {
+      id: 'bp-10',
+      ask: 'You run a program slowly. The first surprise happens at the '
+        + 'fifth block. Where is the fault most likely to be?',
+      kind: 'choice',
+      options: [
+        'In the very first block',
+        'In the fifth block or the one just before it',
+        'In the last block',
+      ],
+      answer: 'In the fifth block or the one just before it',
+      teach: 'Everything before the first surprise worked as planned. '
+        + 'So look at the block where it went wrong, '
+        + 'and the one just before it.',
+      level: 3,
     },
   ],
 })

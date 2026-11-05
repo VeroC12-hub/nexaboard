@@ -245,5 +245,87 @@ teach({
         + 'said and not only read.',
       level: 3,
     },
+    {
+      id: 'sg-4',
+      ask: 'What sound does the letter ɔ make?',
+      kind: 'choice',
+      options: ['The e in "bed"', 'The o in "pot"', 'The ng in "song"'],
+      answer: 'The o in "pot"',
+      teach: 'ɔ is its own letter, called "aw". It says the sound in the '
+        + 'middle of pot. The sound in bed belongs to ɛ.',
+      level: 1,
+    },
+    {
+      id: 'sg-5',
+      ask: 'Which letter says the sound in the middle of "bed"?',
+      kind: 'choice',
+      options: ['ɔ', 'ŋ', 'ɛ'],
+      answer: 'ɛ',
+      teach: 'ɛ is called "eh" and says the sound in bed. ɔ says the sound in '
+        + 'pot. Learn each letter by its sound.',
+      level: 1,
+    },
+    {
+      id: 'sg-6',
+      ask: 'The letter ŋ is used in Ewe, Ga and Dagbani. What sound does it make?',
+      kind: 'choice',
+      options: ['The ng in "song"', 'The n in "nut"', 'The g in "go"'],
+      answer: 'The ng in "song"',
+      teach: 'ŋ is one letter for one sound, the ng at the end of song. It is '
+        + 'not an n and a g said one after the other.',
+      level: 2,
+    },
+    {
+      id: 'sg-7',
+      ask: 'In Akan, how many sounds does ky make?',
+      kind: 'numeric',
+      answer: '1',
+      accept: ['one'],
+      teach: 'The two letters k and y work as a pair and say one sound '
+        + 'together. Sounding them one at a time makes the word come out wrong.',
+      level: 2,
+    },
+    {
+      id: 'sg-8',
+      ask: 'What is blending?',
+      kind: 'choice',
+      options: [
+        'Saying the name of each letter',
+        'Running the sounds together, without stopping',
+        'Spelling a word backwards',
+      ],
+      answer: 'Running the sounds together, without stopping',
+      teach: 'Say the sound of each letter in turn and do not stop between '
+        + 'them. That turns the sounds into a word.',
+      level: 2,
+    },
+    {
+      id: 'sg-9',
+      ask: 'A word needs ɛ, but Abena writes e instead. What can happen?',
+      kind: 'choice',
+      options: [
+        'Nothing changes',
+        'The word gets longer',
+        'It can become a different word',
+      ],
+      answer: 'It can become a different word',
+      teach: 'ɛ and e are different letters with different sounds. Swap one '
+        + 'for the other and the reader says another word. Draw the whole letter.',
+      level: 3,
+    },
+    {
+      id: 'sg-10',
+      ask: 'Ewe uses the letters ɖ and ƒ. Why does a language add a letter?',
+      kind: 'choice',
+      options: [
+        'Because it has a sound that needs spelling',
+        'To make the words look nice',
+        'Because English has those letters',
+      ],
+      answer: 'Because it has a sound that needs spelling',
+      teach: 'English does not have ɖ or ƒ. A language adds a letter only when '
+        + 'it has a sound to spell, so every sound gets its own letter.',
+      level: 3,
+    },
   ],
 })

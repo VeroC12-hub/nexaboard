@@ -249,6 +249,91 @@ teach({
         + 'You received it and you will receive it again.',
       level: 4,
     },
+    {
+      id: 'gu-4',
+      ask: 'Which is the right order of the stages of life?',
+      kind: 'choice',
+      options: [
+        'Child, baby, adult, young person, elder',
+        'Baby, child, young person, adult, elder',
+        'Baby, young person, child, elder, adult',
+      ],
+      answer: 'Baby, child, young person, adult, elder',
+      teach: 'Everybody passes through the same stages in the same order. '
+        + 'A baby comes first and an elder comes last.',
+      level: 2,
+    },
+    {
+      id: 'gu-5',
+      ask: 'What does a child need most from the people around them?',
+      kind: 'choice',
+      options: [
+        'Feeding, washing and carrying',
+        'Teaching and guidance',
+        'Help with the heavy parts',
+      ],
+      answer: 'Teaching and guidance',
+      teach: 'A child can already eat, wash and walk. '
+        + 'Feeding and carrying are what a baby needs. '
+        + 'A child needs to be taught and guided.',
+      level: 2,
+    },
+    {
+      id: 'gu-6',
+      ask: 'Which stage does most of the earning in a household?',
+      kind: 'choice',
+      options: ['Child', 'Adult', 'Baby'],
+      answer: 'Adult',
+      teach: 'Earning needs skills and strength built over years. '
+        + 'Adults have the most of both, so they earn and care for the '
+        + 'stages on either side.',
+      level: 2,
+    },
+    {
+      id: 'gu-7',
+      ask: 'What does an elder give to others?',
+      kind: 'choice',
+      options: [
+        'Nothing',
+        'Heavy work and errands',
+        'Knowledge, and settling disputes',
+      ],
+      answer: 'Knowledge, and settling disputes',
+      teach: 'Elders do not only receive. '
+        + 'Their work changes rather than stops, and what they give is '
+        + 'harder to see.',
+      level: 3,
+    },
+    {
+      id: 'gu-8',
+      ask: 'Akosua is ten. Which of these jobs fits her stage?',
+      kind: 'choice',
+      options: [
+        'Earning money for the family',
+        'Fetching water and minding a baby',
+        'Settling a land dispute',
+      ],
+      answer: 'Fetching water and minding a baby',
+      teach: 'A child gives real help to the household. '
+        + 'Earning money belongs to adults, and settling disputes is often '
+        + 'done by elders.',
+      level: 3,
+    },
+    {
+      id: 'gu-9',
+      ask: 'Two cousins are both twelve, but one is much taller. '
+        + 'Is something wrong?',
+      kind: 'choice',
+      options: [
+        'Yes, they must be the same size',
+        'Yes, one has skipped a stage',
+        'No, people grow at different rates',
+      ],
+      answer: 'No, people grow at different rates',
+      teach: 'The order of the stages is fixed, but the timing is not. '
+        + 'People change at different ages.',
+      level: 3,
+    },
   ],
 })
 
@@ -479,6 +564,85 @@ teach({
         + 'and the crops follow the rain.',
       level: 4,
     },
+    {
+      id: 'nf-4',
+      ask: 'Which is the largest river in Ghana?',
+      kind: 'choice',
+      options: ['The Pra', 'The Volta', 'The Ankobra'],
+      answer: 'The Volta',
+      teach: 'The Volta runs down the middle and the east, and the Akosombo '
+        + 'dam was built across it.',
+      level: 1,
+    },
+    {
+      id: 'nf-5',
+      ask: 'Which part of Ghana is drier and more open?',
+      kind: 'choice',
+      options: ['The south', 'The coast', 'The north'],
+      answer: 'The north',
+      teach: 'Rain is the big difference. '
+        + 'The south is wet and forested. '
+        + 'The north is drier and more open.',
+      level: 2,
+    },
+    {
+      id: 'nf-6',
+      ask: 'On a map, what does the key show?',
+      kind: 'choice',
+      options: [
+        'Which way is north',
+        'What each sign on the map means',
+        'How far one centimetre stands for',
+      ],
+      answer: 'What each sign on the map means',
+      teach: 'The arrow with N shows north and the scale shows distance. '
+        + 'The key tells you what each sign means, such as a blue line for a '
+        + 'river.',
+      level: 2,
+    },
+    {
+      id: 'nf-7',
+      ask: 'Which crops grow well in the drier north?',
+      kind: 'choice',
+      options: ['Cocoa and timber', 'Shea, millet and sorghum', 'Cocoa only'],
+      answer: 'Shea, millet and sorghum',
+      teach: 'Crops follow the rain. '
+        + 'Cocoa and timber need the wet southern forest. '
+        + 'The drier north grows shea, millet and sorghum.',
+      level: 3,
+    },
+    {
+      id: 'nf-8',
+      ask: 'Which river reaches the sea near Axim?',
+      kind: 'choice',
+      options: ['The Volta', 'The Tano', 'The Ankobra'],
+      answer: 'The Ankobra',
+      teach: 'The Ankobra is in the south west and reaches the sea near '
+        + 'Axim. '
+        + 'The Tano runs along part of the western border.',
+      level: 3,
+    },
+    {
+      id: 'nf-9',
+      ask: 'Where do Ghana’s main rivers end?',
+      kind: 'choice',
+      options: ['In the north', 'In the sea in the south', 'In the desert'],
+      answer: 'In the sea in the south',
+      teach: 'The coast is along the south, and the rivers all run down to '
+        + 'it. '
+        + 'That is the way water runs in Ghana.',
+      level: 3,
+    },
+    {
+      id: 'nf-10',
+      ask: 'Yaw lives near the coast. Which part of Ghana is he in?',
+      kind: 'choice',
+      options: ['The north', 'The south', 'The far north east'],
+      answer: 'The south',
+      teach: 'The sea is along the southern edge of Ghana, so anybody living '
+        + 'by the coast is in the south.',
+      level: 2,
+    },
   ],
 })
 
@@ -699,6 +863,76 @@ teach({
       teach: 'Different leaders answer to different people. '
         + 'One leader holding everything leaves nobody to appeal to.',
       level: 4,
+    },
+    {
+      id: 'cl-4',
+      ask: 'Who leads in matters of custom, land and disputes?',
+      kind: 'choice',
+      options: ['The head teacher', 'The assembly member', 'The chief'],
+      answer: 'The chief',
+      teach: 'The chief leads in custom. '
+        + 'Schools belong to the head teacher, and roads and clinics to the '
+        + 'assembly member.',
+      level: 2,
+    },
+    {
+      id: 'cl-5',
+      ask: 'Who is a religious leader responsible for?',
+      kind: 'choice',
+      options: [
+        'The people of their faith',
+        'The whole school',
+        'The roads in the town',
+      ],
+      answer: 'The people of their faith',
+      teach: 'Each leader has their own area. '
+        + 'A religious leader looks after the people of their own faith.',
+      level: 2,
+    },
+    {
+      id: 'cl-6',
+      ask: 'A tree falls across the road to the farm. Who should you go to?',
+      kind: 'choice',
+      options: ['The head teacher', 'The assembly member', 'The pastor'],
+      answer: 'The assembly member',
+      teach: 'Ask whose area it is. '
+        + 'Roads are the assembly member’s area, not the head teacher’s or '
+        + 'the pastor’s.',
+      level: 3,
+    },
+    {
+      id: 'cl-7',
+      ask: 'Who does an assembly member answer to?',
+      kind: 'choice',
+      options: ['The chief', 'The head teacher', 'The people who elected them'],
+      answer: 'The people who elected them',
+      teach: 'The people choose the assembly member by election, so the '
+        + 'assembly member answers to them.',
+      level: 3,
+    },
+    {
+      id: 'cl-8',
+      ask: 'How is a chief chosen?',
+      kind: 'choice',
+      options: [
+        'By an election',
+        'By custom, through the royal family',
+        'By the education service',
+      ],
+      answer: 'By custom, through the royal family',
+      teach: 'An assembly member is elected, but a chief is not. '
+        + 'A chief is chosen by custom through the royal family.',
+      level: 3,
+    },
+    {
+      id: 'cl-9',
+      ask: 'The clinic in Mensah’s town needs repair. Whose area is that?',
+      kind: 'choice',
+      options: ['The chief’s', 'The head teacher’s', 'The assembly member’s'],
+      answer: 'The assembly member’s',
+      teach: 'Clinics, roads and local money are the assembly member’s area. '
+        + 'Taking it to the wrong leader means nobody can act.',
+      level: 3,
     },
   ],
 })
@@ -937,6 +1171,90 @@ teach({
         + 'Yours is unfamiliar to somebody else too.',
       level: 4,
     },
+    {
+      id: 'oc-4',
+      ask: 'Which people mostly live in the south east of Ghana?',
+      kind: 'choice',
+      options: ['The Ga-Dangme', 'The Ewe', 'The Mole-Dagbani'],
+      answer: 'The Ewe',
+      teach: 'The Ewe mostly live in the south east. '
+        + 'The Ga-Dangme live around Accra and the Mole-Dagbani in the north.',
+      level: 2,
+    },
+    {
+      id: 'oc-5',
+      ask: 'Which festival do the Ewe keep?',
+      kind: 'choice',
+      options: ['Homowo', 'Damba', 'Hogbetsotso'],
+      answer: 'Hogbetsotso',
+      teach: 'Each festival belongs to a people. '
+        + 'Homowo is Ga, Damba is Mole-Dagbani, and Hogbetsotso is Ewe.',
+      level: 2,
+    },
+    {
+      id: 'oc-6',
+      ask: 'Damba is a festival of which people?',
+      kind: 'choice',
+      options: ['The Mole-Dagbani', 'The Akan', 'The Ewe'],
+      answer: 'The Mole-Dagbani',
+      teach: 'Damba belongs to the Mole-Dagbani of the north. '
+        + 'Odwira is an Akan festival and Hogbetsotso is Ewe.',
+      level: 2,
+    },
+    {
+      id: 'oc-7',
+      ask: 'Which language do many Akan people speak?',
+      kind: 'choice',
+      options: ['Ewe', 'Twi', 'Dagbani'],
+      answer: 'Twi',
+      teach: 'Akan languages include Twi and Fante. '
+        + 'Ewe and Dagbani are the languages of other peoples.',
+      level: 2,
+    },
+    {
+      id: 'oc-8',
+      ask: 'What does Homowo remember?',
+      kind: 'choice',
+      options: [
+        'A war that was won',
+        'The first rain of the year',
+        'A time of hunger that was survived',
+      ],
+      answer: 'A time of hunger that was survived',
+      teach: 'Festivals remember where a people came from. '
+        + 'Homowo, kept by the Ga, remembers a hunger they lived through.',
+      level: 3,
+    },
+    {
+      id: 'oc-9',
+      ask: 'Is one people in Ghana the normal one, and the rest different?',
+      kind: 'choice',
+      options: [
+        'Yes, the largest one',
+        'No, each people is simply itself',
+        'Yes, the one in Accra',
+      ],
+      answer: 'No, each people is simply itself',
+      teach: 'No group is the standard. '
+        + 'A custom that is new to you is unfamiliar, not strange, and yours '
+        + 'is new to somebody else.',
+      level: 3,
+    },
+    {
+      id: 'oc-10',
+      ask: 'Why is English the official language of Ghana?',
+      kind: 'choice',
+      options: [
+        'It is the oldest language in Ghana',
+        'It belongs to no group, so no group is favoured',
+        'Most people speak it at home',
+      ],
+      answer: 'It belongs to no group, so no group is favoured',
+      teach: 'Ghana has many peoples and many languages. '
+        + 'Using a language that belongs to none of them keeps official '
+        + 'business fair to all.',
+      level: 4,
+    },
   ],
 })
 
@@ -1162,6 +1480,86 @@ teach({
       answer: 'The order of events and the lesson',
       teach: 'Those two carry the story. The words are the teller’s own.',
       level: 4,
+    },
+    {
+      id: 'ft-4',
+      ask: 'Many Ghanaian folktales are about which character?',
+      kind: 'choice',
+      options: ['Ananse the spider', 'A lion king', 'A talking car'],
+      answer: 'Ananse the spider',
+      teach: 'Ananse the spider is the hero of many Ghanaian folktales. '
+        + 'He is clever and greedy.',
+      level: 1,
+    },
+    {
+      id: 'ft-5',
+      ask: 'What two jobs does a folktale do?',
+      kind: 'choice',
+      options: [
+        'It gives news and sells things',
+        'It entertains and it teaches',
+        'It teaches spelling and counting',
+      ],
+      answer: 'It entertains and it teaches',
+      teach: 'People enjoy hearing it, and it also carries a lesson about '
+        + 'how to live. '
+        + 'It does both at once.',
+      level: 2,
+    },
+    {
+      id: 'ft-6',
+      ask: 'When do you say what the story teaches?',
+      kind: 'choice',
+      options: ['At the very start', 'In the middle, as a line', 'At the end'],
+      answer: 'At the end',
+      teach: 'Let the events show the lesson. '
+        + 'If you say it at all, say it at the end, not at the start or in '
+        + 'the middle.',
+      level: 2,
+    },
+    {
+      id: 'ft-7',
+      ask: 'How can you make the characters sound different when you tell a '
+        + 'story?',
+      kind: 'choice',
+      options: [
+        'Speak faster all the time',
+        'Change your voice for each one',
+        'Read it from a book',
+      ],
+      answer: 'Change your voice for each one',
+      teach: 'A teller does more than say the words. '
+        + 'Changing your voice for each character helps listeners follow who '
+        + 'is speaking.',
+      level: 2,
+    },
+    {
+      id: 'ft-8',
+      ask: 'In many Ananse stories, what happens because of his greed?',
+      kind: 'choice',
+      options: [
+        'It always makes him rich',
+        'Nobody notices it',
+        'It wins him something, then costs him more',
+      ],
+      answer: 'It wins him something, then costs him more',
+      teach: 'The story does not say "do not be greedy". '
+        + 'It lets you watch greed win a little and then fail.',
+      level: 3,
+    },
+    {
+      id: 'ft-9',
+      ask: 'Kwame tells the ending of an Ananse story first. What goes wrong?',
+      kind: 'choice',
+      options: [
+        'Nothing, the order does not matter',
+        'The lesson stops working, because the order carries it',
+        'The story becomes too long',
+      ],
+      answer: 'The lesson stops working, because the order carries it',
+      teach: 'The lesson lands because of the order of events. '
+        + 'Give the ending away and the story stops working.',
+      level: 3,
     },
   ],
 })
@@ -1419,6 +1817,98 @@ teach({
         + 'even if the guess is right.',
       level: 4,
     },
+    {
+      id: 'rp-4',
+      ask: 'How fast should you read a passage aloud?',
+      kind: 'choice',
+      options: [
+        'As fast as you can',
+        'At the speed you would speak',
+        'One word at a time, very slowly',
+      ],
+      answer: 'At the speed you would speak',
+      teach: 'Reading too fast to show you can means the listener cannot '
+        + 'follow. '
+        + 'Read at talking speed.',
+      level: 2,
+    },
+    {
+      id: 'rp-5',
+      ask: 'You reach a word you have never seen. What do you do?',
+      kind: 'choice',
+      options: [
+        'Skip it and go on',
+        'Stop reading',
+        'Sound it out letter by letter, then reread the line',
+      ],
+      answer: 'Sound it out letter by letter, then reread the line',
+      teach: 'In a Ghanaian language one letter means one sound, so you can '
+        + 'sound out a new word. '
+        + 'Then read the line again so it makes sense.',
+      level: 2,
+    },
+    {
+      id: 'rp-6',
+      ask: 'Here is a passage: "Kofi kɔɔ afuom. '
+        + 'Ɔde akutu baa fie." '
+        + 'How many sentences does it have?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two'],
+      teach: 'Count the full stops. '
+        + 'Each one ends a sentence, and there are two.',
+      level: 1,
+    },
+    {
+      id: 'rp-7',
+      ask: 'In "Kofi kɔɔ afuom. Ɔde akutu baa fie." what did Kofi bring home?',
+      kind: 'choice',
+      options: ['Yams', 'Oranges', 'Water'],
+      answer: 'Oranges',
+      teach: 'The first sentence says Kofi went to the farm. '
+        + 'The second says he brought oranges home. '
+        + 'Point at the line the answer sits in.',
+      level: 3,
+    },
+    {
+      id: 'rp-8',
+      ask: 'Why can you read a new word correctly in your own language?',
+      kind: 'choice',
+      options: [
+        'The words are all short',
+        'One letter means one sound',
+        'The pitch is written above it',
+      ],
+      answer: 'One letter means one sound',
+      teach: 'The spelling tells you the sounds, so a new word can still be '
+        + 'read. '
+        + 'What it cannot show you is the pitch.',
+      level: 3,
+    },
+    {
+      id: 'rp-9',
+      ask: 'In Twi, the letter ɔ is said like the o in which word?',
+      kind: 'choice',
+      options: ['go', 'moon', 'hot'],
+      answer: 'hot',
+      teach: 'Twi adds ɛ, said like the e in "bed", and ɔ, said like the o '
+        + 'in "hot".',
+      level: 3,
+    },
+    {
+      id: 'rp-10',
+      ask: 'Where should your answers to questions on a passage come from?',
+      kind: 'choice',
+      options: [
+        'What is already in your head',
+        'The passage',
+        'What your friend thinks',
+      ],
+      answer: 'The passage',
+      teach: 'The question is about this passage. '
+        + 'If you cannot point at the line, your answer is a guess.',
+      level: 2,
+    },
   ],
 })
 
@@ -1657,6 +2147,92 @@ teach({
         + 'and the power can go at any time.',
       level: 3,
     },
+    {
+      id: 'sd-4',
+      ask: 'When you save, where does your work go?',
+      kind: 'choice',
+      options: ['Into the screen', 'Into the keyboard', 'Onto the disk'],
+      answer: 'Onto the disk',
+      teach: 'Saving copies your work from the memory, which forgets, onto '
+        + 'the disk, which remembers.',
+      level: 2,
+    },
+    {
+      id: 'sd-5',
+      ask: 'In the file name report.docx, what are the letters after the dot '
+        + 'called?',
+      kind: 'choice',
+      options: ['The folder', 'The extension', 'The password'],
+      answer: 'The extension',
+      teach: 'The letters after the dot are the extension. '
+        + 'They tell the computer which program opens the file.',
+      level: 2,
+    },
+    {
+      id: 'sd-6',
+      ask: 'Which is the best name for a file?',
+      kind: 'choice',
+      options: ['Document1', 'My work', 'maths homework fractions week 3'],
+      answer: 'maths homework fractions week 3',
+      teach: 'A good name says what is inside. '
+        + 'Document1 and My work tell you nothing in a month.',
+      level: 2,
+    },
+    {
+      id: 'sd-7',
+      ask: 'In Homework/report.docx, which part is the folder?',
+      kind: 'choice',
+      options: ['report', 'Homework', 'docx'],
+      answer: 'Homework',
+      teach: 'The folder comes first, then a stroke, then the file name. '
+        + 'So Homework is the folder and report.docx is the file.',
+      level: 3,
+    },
+    {
+      id: 'sd-8',
+      ask: 'Why does unsaved work vanish when the light goes off?',
+      kind: 'choice',
+      options: [
+        'The screen breaks',
+        'The memory forgets everything when the power stops',
+        'The disk is full',
+      ],
+      answer: 'The memory forgets everything when the power stops',
+      teach: 'Nothing was broken. '
+        + 'Unsaved work was only in the memory, and the memory empties when '
+        + 'the power stops.',
+      level: 3,
+    },
+    {
+      id: 'sd-9',
+      ask: 'Abena saved a file and cannot find it. What should she try first?',
+      kind: 'choice',
+      options: [
+        'Type the work again',
+        'Look in the folder that was showing when she saved',
+        'Turn the computer off',
+      ],
+      answer: 'Look in the folder that was showing when she saved',
+      teach: 'The file has not moved. '
+        + 'She has lost its address. '
+        + 'Check that folder first, then search for the name.',
+      level: 3,
+    },
+    {
+      id: 'sd-10',
+      ask: 'Ama changes the name photo.jpg to photo.docx. What happens?',
+      kind: 'choice',
+      options: [
+        'It becomes a document',
+        'Nothing at all',
+        'The file stops opening properly',
+      ],
+      answer: 'The file stops opening properly',
+      teach: 'Changing the letters after the dot does not change what the '
+        + 'file is. '
+        + 'It only stops the computer opening it with the right program.',
+      level: 4,
+    },
   ],
 })
 
@@ -1865,6 +2441,106 @@ teach({
       answer: 'Keep it and tell a trusted adult',
       teach: 'Do not reply, and do not delete it. '
         + 'An adult may need to see exactly what was said.',
+      level: 3,
+    },
+    {
+      id: 'os-4',
+      ask: 'Which of these is safe to share online?',
+      kind: 'choice',
+      options: ['Your phone number', 'Your favourite colour', 'Your address'],
+      answer: 'Your favourite colour',
+      teach: 'Your favourite colour leads nobody to you. '
+        + 'A phone number or an address lets somebody reach you.',
+      level: 1,
+    },
+    {
+      id: 'os-5',
+      ask: 'Before you share anything online, what should you ask?',
+      kind: 'choice',
+      options: [
+        'Will this get many likes?',
+        'Is it funny?',
+        'Could this help somebody find me?',
+      ],
+      answer: 'Could this help somebody find me?',
+      teach: 'The rule is about the information, not about how many people '
+        + 'will see it. '
+        + 'If it could help somebody find you, do not share it.',
+      level: 2,
+    },
+    {
+      id: 'os-6',
+      ask: 'Somebody you chat with in a game asks which school you go to. '
+        + 'What do you do?',
+      kind: 'choice',
+      options: [
+        'Tell them, if they are friendly',
+        'Do not tell them, and tell an adult',
+        'Tell them only the town',
+      ],
+      answer: 'Do not tell them, and tell an adult',
+      teach: 'Your school would let somebody wait outside it. '
+        + 'Do not say, and tell an adult that you were asked.',
+      level: 2,
+    },
+    {
+      id: 'os-7',
+      ask: 'Your best friend asks for your password. What should you do?',
+      kind: 'choice',
+      options: [
+        'Share it with friends only',
+        'Share it if they share theirs',
+        'Do not share it, even with a friend',
+      ],
+      answer: 'Do not share it, even with a friend',
+      teach: 'Somebody with your password can act as you, and it looks like '
+        + 'you did it. '
+        + 'A shared password is no longer a password.',
+      level: 2,
+    },
+    {
+      id: 'os-8',
+      ask: 'Can a person online prove how old they are?',
+      kind: 'choice',
+      options: [
+        'Yes, by sending a photo',
+        'Yes, if they say so',
+        'No, nothing on a screen can prove it',
+      ],
+      answer: 'No, nothing on a screen can prove it',
+      teach: 'A person can say they are twelve and be forty. '
+        + 'That is why the rule is about information, not about who seems '
+        + 'nice.',
+      level: 3,
+    },
+    {
+      id: 'os-9',
+      ask: 'Somebody friendly online asks to meet you. What do you do?',
+      kind: 'choice',
+      options: [
+        'Meet them in a busy place',
+        'Tell an adult, and do not arrange to meet',
+        'Go if they seem kind',
+      ],
+      answer: 'Tell an adult, and do not arrange to meet',
+      teach: 'You cannot know who they are. '
+        + 'Friendly is easy to pretend, and meeting is the one step that '
+        + 'cannot be undone.',
+      level: 3,
+    },
+    {
+      id: 'os-10',
+      ask: 'Why can a message not be taken back once you send it?',
+      kind: 'choice',
+      options: [
+        'It is too long',
+        'Other people can save it',
+        'The phone forgets it',
+      ],
+      answer: 'Other people can save it',
+      teach: 'Once it leaves your phone it goes to other machines, and '
+        + 'people can save or copy it. '
+        + 'It is out of your hands for good.',
       level: 3,
     },
   ],
@@ -2097,6 +2773,100 @@ teach({
       answer: 'Somebody who does not know the task',
       teach: 'Anybody who knows it will step over your gaps without noticing '
         + 'them.',
+      level: 4,
+    },
+    {
+      id: 'si-4',
+      ask: 'In a list of instructions, what do the numbers tell you?',
+      kind: 'choice',
+      options: [
+        'How hard each step is',
+        'How long each step takes',
+        'The order to do the steps',
+      ],
+      answer: 'The order to do the steps',
+      teach: 'The numbers are not decoration. '
+        + 'They say the order, and a reader does the steps from the top down.',
+      level: 2,
+    },
+    {
+      id: 'si-5',
+      ask: '"Boil the water and pour it" holds two actions. '
+        + 'How many numbered steps should it be?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two'],
+      teach: 'One step holds one action. '
+        + 'Boiling is one action and pouring is another, so it needs two '
+        + 'steps.',
+      level: 2,
+    },
+    {
+      id: 'si-6',
+      ask: 'What should you list before you write the steps?',
+      kind: 'choice',
+      options: [
+        'The ending',
+        'Everything needed before you start',
+        'Your own name',
+      ],
+      answer: 'Everything needed before you start',
+      teach: 'Say what the task is and list what is needed first. '
+        + 'Then the follower does not stop halfway to look for something.',
+      level: 2,
+    },
+    {
+      id: 'si-7',
+      ask: '"1. '
+        + 'Fill the kettle with water. '
+        + '2. '
+        + 'Pour the water onto the tea leaves." '
+        + 'Which step is missing?',
+      kind: 'choice',
+      options: ['Drink the tea', 'Boil the water', 'Close the tap'],
+      answer: 'Boil the water',
+      teach: 'A person might fill in the gap without noticing, but the steps '
+        + 'as written make tea with cold water. '
+        + 'The boiling step was left out because it seemed obvious.',
+      level: 3,
+    },
+    {
+      id: 'si-8',
+      ask: 'A computer reads a step that makes no sense. What does it do?',
+      kind: 'choice',
+      options: [
+        'Asks you what you meant',
+        'Fixes it by itself',
+        'Carries it out anyway',
+      ],
+      answer: 'Carries it out anyway',
+      teach: 'A person would ask what you meant. '
+        + 'A computer does exactly what you wrote, even when it is wrong.',
+      level: 3,
+    },
+    {
+      id: 'si-9',
+      ask: 'What is a list of steps in order called?',
+      kind: 'choice',
+      options: ['A folder', 'An algorithm', 'A password'],
+      answer: 'An algorithm',
+      teach: 'A list of steps in order is an algorithm. '
+        + 'Every computer program is one underneath.',
+      level: 3,
+    },
+    {
+      id: 'si-10',
+      ask: 'Why does a person following your steps hide your mistakes?',
+      kind: 'choice',
+      options: [
+        'They cannot read',
+        'They do the steps faster',
+        'They fill in the gaps without noticing',
+      ],
+      answer: 'They fill in the gaps without noticing',
+      teach: 'A helpful person knows what you meant and quietly does it '
+        + 'right. '
+        + 'So you never see the gap, but a computer would stop at it.',
       level: 4,
     },
   ],

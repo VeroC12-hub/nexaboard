@@ -199,6 +199,79 @@ teach({
         + 'together: your family, your class, your town and your country.',
       level: 2,
     },
+    {
+      id: 'wia-4',
+      ask: 'Ama Mensah. Which part is the family name?',
+      kind: 'choice',
+      options: ['Ama', 'Mensah'],
+      answer: 'Mensah',
+      teach: 'The first name comes first. The family name comes after. So '
+        + 'Ama is the first name and Mensah is the family name.',
+      level: 1,
+    },
+    {
+      id: 'wia-5',
+      ask: 'What three things answer "who are you?"',
+      kind: 'choice',
+      options: [
+        'Name, age and town',
+        'Name, food and colour',
+        'Age, shoes and school bag',
+      ],
+      answer: 'Name, age and town',
+      teach: 'Your full name, your age and where you live. Those three tell '
+        + 'anybody who you are.',
+      level: 1,
+    },
+    {
+      id: 'wia-6',
+      ask: 'Which is the right way to write a name?',
+      kind: 'choice',
+      options: ['ama mensah', 'Ama mensah', 'Ama Mensah'],
+      answer: 'Ama Mensah',
+      teach: 'Both parts of a name start with a big letter, every time. Put '
+        + 'one space between them.',
+      level: 2,
+    },
+    {
+      id: 'wia-7',
+      ask: 'Kofi says, "I am six years old." Which thing has he told you?',
+      kind: 'choice',
+      options: ['His name', 'His age', 'His town'],
+      answer: 'His age',
+      teach: 'Years old tells you age. He still needs to say his full name '
+        + 'and his town.',
+      level: 2,
+    },
+    {
+      id: 'wia-8',
+      ask: 'Why is "Ama" not enough if you are lost?',
+      kind: 'choice',
+      options: [
+        'Many children are called Ama',
+        'Ama is a short name',
+        'Strangers do not like names',
+      ],
+      answer: 'Many children are called Ama',
+      teach: 'A first name does not say which Ama. Your family name and town '
+        + 'narrow it down to you.',
+      level: 2,
+    },
+    {
+      id: 'wia-9',
+      ask: 'Two boys are both called Kofi. One sings well. One runs fast. '
+        + 'What does that show?',
+      kind: 'choice',
+      options: [
+        'They are the same person',
+        'What you are good at is part of who you are',
+        'Only names matter',
+      ],
+      answer: 'What you are good at is part of who you are',
+      teach: 'A name says which person. What each one is good at and loves '
+        + 'doing says who they are.',
+      level: 3,
+    },
   ],
 })
 
@@ -379,6 +452,73 @@ teach({
       teach: 'Elders are greeted first, then the others, and only then do you '
         + 'say why you came.',
       level: 2,
+    },
+    {
+      id: 'ghl-4',
+      ask: 'In Twi, what does maakye mean?',
+      kind: 'choice',
+      options: ['Good night', 'Good morning', 'Thank you'],
+      answer: 'Good morning',
+      teach: 'Maakye is the Twi morning greeting. In Ga it is ojekoo. In Ewe '
+        + 'it is ŋdi.',
+      level: 1,
+    },
+    {
+      id: 'ghl-5',
+      ask: 'What do you do when you greet somebody?',
+      kind: 'choice',
+      options: [
+        'Keep playing and shout',
+        'Stop and look at them',
+        'Look away',
+      ],
+      answer: 'Stop and look at them',
+      teach: 'The words are only half of a greeting. Stopping and looking at '
+        + 'the person is the other half.',
+      level: 1,
+    },
+    {
+      id: 'ghl-6',
+      ask: 'Which two things change the greeting you use?',
+      kind: 'choice',
+      options: [
+        'The weather and your clothes',
+        'The time of day and who the person is',
+        'Your name and your age',
+      ],
+      answer: 'The time of day and who the person is',
+      teach: 'Notice the time: morning, afternoon or evening. Notice the '
+        + 'person: an elder or somebody your own age.',
+      level: 2,
+    },
+    {
+      id: 'ghl-7',
+      ask: 'Abena greets her grandmother the way she greets her friend. Why '
+        + 'is that wrong?',
+      kind: 'choice',
+      options: [
+        'It shows she did not notice who her grandmother is',
+        'Grandmothers do not like greetings',
+        'It is not wrong',
+      ],
+      answer: 'It shows she did not notice who her grandmother is',
+      teach: 'A greeting shows respect. An elder is greeted with more respect '
+        + 'than a friend.',
+      level: 2,
+    },
+    {
+      id: 'ghl-8',
+      ask: 'You greet an elder. What do you do next?',
+      kind: 'choice',
+      options: [
+        'Wait for their reply',
+        'Walk away at once',
+        'Ask for what you want straight away',
+      ],
+      answer: 'Wait for their reply',
+      teach: 'A greeting is a short back and forth. Wait for the reply. Then '
+        + 'say why you came.',
+      level: 3,
     },
   ],
 })
@@ -567,6 +707,58 @@ teach({
       answer: 'It shows information',
       teach: 'It shows, like the monitor, just on paper instead of a screen. '
         + 'That is how you place a part you have never met.',
+      level: 3,
+    },
+    {
+      id: 'ntp-4',
+      ask: 'Which part do you type on?',
+      kind: 'choice',
+      options: ['The mouse', 'The keyboard', 'The monitor'],
+      answer: 'The keyboard',
+      teach: 'Typing puts letters in. The keyboard has all the letters on it. '
+        + 'The mouse points and clicks.',
+      level: 1,
+    },
+    {
+      id: 'ntp-5',
+      ask: 'Which part do you use to point and click?',
+      kind: 'choice',
+      options: ['The mouse', 'The system unit', 'The monitor'],
+      answer: 'The mouse',
+      teach: 'The mouse is the small thing with a wire. You move it to point, '
+        + 'and press it to click.',
+      level: 1,
+    },
+    {
+      id: 'ntp-6',
+      ask: 'The keyboard and the mouse do the same kind of job. What is it?',
+      kind: 'choice',
+      options: ['They show things', 'They put things in', 'They think'],
+      answer: 'They put things in',
+      teach: 'Both let you put something into the computer. The monitor '
+        + 'shows. The system unit does the work.',
+      level: 2,
+    },
+    {
+      id: 'ntp-7',
+      ask: 'The machine is on, but the screen is blank. Which part is '
+        + 'probably the problem?',
+      kind: 'choice',
+      options: ['The keyboard', 'The mouse', 'The monitor'],
+      answer: 'The monitor',
+      teach: 'The monitor is the part that shows. Nothing is showing, so look '
+        + 'at the monitor or its cable first.',
+      level: 2,
+    },
+    {
+      id: 'ntp-8',
+      ask: 'A microphone takes your voice into the computer. Which job is '
+        + 'that?',
+      kind: 'choice',
+      options: ['It shows', 'It puts in', 'It thinks'],
+      answer: 'It puts in',
+      teach: 'Ask what the part does. The microphone takes your voice in, '
+        + 'like the keyboard takes letters in.',
       level: 3,
     },
   ],
