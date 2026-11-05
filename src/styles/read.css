@@ -1250,3 +1250,15 @@
   border-color: var(--nx-gold);
   color: var(--nx-gold);
 }
+
+/* The reason the next topic is not here yet.
+
+   A sentence rather than a disabled button. A greyed-out "Next" invites a
+   learner to press it and tells them nothing when it does not respond, and a
+   button that cannot be used is still a button in the tab order. */
+.nx-next-locked {
+  align-self: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--nx-ink-2);
+}

@@ -83,6 +83,7 @@ import {
   type Syllabus, type Topic,
 } from '../lib/education/syllabus'
 import ReadAloud from '../components/ReadAloud'
+import { PASS, recordTopic, topicPassed } from '../lib/education/topic-test'
 
 /** Which of the three things this screen is doing. */
 type View =
@@ -644,6 +645,14 @@ export default function Learn({
           at: 'lesson', topicId: topic.id, attempt: 0, askedFor: '',
         })}
         onBack={backFromTopic}
+        /* The topic after this one, in this learner's own year. Passing the
+           test is what makes it appear. */
+        next={(() => {
+          const mine = topicsFor(syllabus, profile.level)
+          const at = mine.findIndex(t => t.id === topic.id)
+          return at >= 0 && at + 1 < mine.length ? mine[at + 1] : null
+        })()}
+        onOpenTopic={id => setView({ at: 'lesson', topicId: id, attempt: 0, askedFor: '' })}
       />
     )
   }
@@ -989,6 +998,15 @@ function Lesson({
   }, [syllabus, level, topic.id])
 
   const young = skin === 'kid'
+
+  /**
+   * Whether this topic's test has been passed, which is what opens the next.
+   *
+   * Read on every render rather than held in state: the learner leaves this
+   * screen to sit the test and comes back, and a value captured when the
+   * lesson first mounted would still say "not passed" after they had passed.
+   */
+  const passed = topicPassed(learner.profile.id, topic.id)
 
   /**
    * The same lesson, told again in this learner's own words.
@@ -2276,10 +2294,18 @@ function Lesson({
                   Play a game
                 </button>
               )}
+              {/* The test, and it is the primary action until it is passed.
+
+                  It used to read "Try some questions", which is an offer, and
+                  an offer at the bottom of a lesson is declined. A learner
+                  could cross a whole year's syllabus without answering
+                  anything, which tells neither them nor the tutor what landed. */}
               <button
-                className={young ? 'nx-btn' : 'nx-btn nx-btn-primary'}
+                className={passed ? 'nx-btn' : 'nx-btn nx-btn-primary'}
                 onClick={onPractise}>
-                {young ? 'Answer some questions' : 'Try some questions'}
+                {passed
+                  ? (young ? 'More questions' : 'More questions')
+                  : (young ? 'Answer some questions' : 'Take the test')}
               </button>
               <button className="nx-btn nx-btn-quiet" onClick={() => setAsking(a => !a)}>
                 {young ? 'Teach me another way' : 'Teach it differently'}
@@ -2295,12 +2321,26 @@ function Lesson({
                   practising and being taught it again, both of which keep
                   you where you are. A learner working through a subject had
                   to go back to the list and find their place in it, which is
-                  the one moment they are most likely to stop. */}
-              {!young && next && onOpenTopic && (
-                <button className="nx-btn nx-btn-next"
-                  onClick={() => { award(learner.profile.id, 'lesson', topic.id); onOpenTopic(next.id) }}>
-                  Next: {next.title}
-                </button>
+                  the one moment they are most likely to stop.
+
+                  Two changes. It is no longer `!young`: a Basic 2 pupil
+                  finishing a lesson needs the way on as much as anybody, and
+                  withholding it sent them back to a grid to find their place.
+                  And it appears only once the topic's test is passed, because
+                  moving on is what passing is for. */}
+              {next && onOpenTopic && (
+                passed ? (
+                  <button className="nx-btn nx-btn-next"
+                    onClick={() => { award(learner.profile.id, 'lesson', topic.id); onOpenTopic(next.id) }}>
+                    Next: {next.title}
+                  </button>
+                ) : (
+                  <span className="nx-next-locked">
+                    {young
+                      ? 'Answer the questions to open the next one.'
+                      : `Pass the test to open ${next.title}.`}
+                  </span>
+                )
               )}
               {/* No "show me a picture" button any more. A lesson arrives
                   with its pictures; being asked to request them, and then wait
@@ -2333,6 +2373,10 @@ function Lesson({
 
 function Practice({
   topic, place, learner, profile, skin, onAttempt, onObserved, onMore, onLesson, onBack,
+  /* `nextTopic`, not `next`: this component already has a local `next()`
+     that advances to the following question, and two different meanings of
+     "next" in one function is how a bug gets written. */
+  next: nextTopic, onOpenTopic,
 }: {
   topic: Topic
   place: SyllabusPlace
@@ -2347,6 +2391,9 @@ function Practice({
   onMore: () => void
   onLesson: () => void
   onBack: () => void
+  /** The topic after this one, and the way into it. Null on the last. */
+  next?: Topic | null
+  onOpenTopic?: (id: string) => void
 }) {
   const young = skin === 'kid'
 
@@ -2529,6 +2576,19 @@ function Practice({
 
   const score = marks.filter(Boolean).length
 
+  /**
+   * The round, written down, and whether it opens the next topic.
+   *
+   * Recorded during render rather than in an effect because `recordTopic`
+   * keeps the better of the two sittings, so running it twice with the same
+   * numbers changes nothing. An effect here would be a second source of
+   * truth that fires after the screen has already drawn the wrong answer.
+   */
+  const mark = finished && marks.length > 0
+    ? recordTopic(profile.id, topic.id, score, marks.length)
+    : null
+  const passed = !!mark && mark.right / mark.total >= PASS
+
   if (finished) {
     if (young) {
       return (
@@ -2558,7 +2618,16 @@ function Practice({
           </div>
 
           <div className="kid-actions">
-            <button className="nx-btn nx-btn-primary" onClick={onMore}>More questions</button>
+            {/* The way on, when they have earned it. A small learner needs
+                this more than anybody: sending them back to a grid of tiles
+                to find their place is where they stop. */}
+            {passed && nextTopic && onOpenTopic && (
+              <button className="nx-btn nx-btn-next" onClick={() => onOpenTopic(nextTopic.id)}>
+                Next: {nextTopic.title}
+              </button>
+            )}
+            <button className={passed ? 'nx-btn nx-btn-quiet' : 'nx-btn nx-btn-primary'}
+              onClick={onMore}>More questions</button>
             <button className="nx-btn nx-btn-quiet" onClick={onLesson}>Read it again</button>
             <button className="nx-btn nx-btn-quiet" onClick={onBack}>Back to the topics</button>
           </div>
@@ -2576,15 +2645,32 @@ function Practice({
           <h1 className="nx-display" style={{ fontSize: 'clamp(52px,9vw,86px)', margin: '0 0 14px' }}>
             {score}<span style={{ color: 'var(--ink-faint)' }}>/{marks.length}</span>
           </h1>
-          <p className="nx-lede" style={{ margin: '0 0 28px' }}>
+          <p className="nx-lede" style={{ margin: '0 0 10px' }}>
             {score === marks.length
               ? 'All correct. Your tutor has noted how you worked, and the next lesson will take it into account.'
               : score === 0
                 ? 'None right this time. That usually means the idea has not landed yet, not that you cannot do it.'
                 : 'Some of it went in. Your tutor has noted where it did not.'}
           </p>
+
+          {/* Whether this topic is finished, said plainly and with the number
+              it turns on, so a learner can see how close they were rather
+              than guessing why the next topic has not appeared. */}
+          <p className="nx-fineprint" style={{ margin: '0 0 28px' }}>
+            {passed
+              ? `${topic.title} is passed.`
+              : `${Math.round(PASS * 100)} per cent passes this topic. `
+                + 'Read it again or answer more, and the better score is the one that counts.'}
+          </p>
+
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <button className="nx-btn nx-btn-primary" onClick={onMore}>
+            {passed && nextTopic && onOpenTopic && (
+              <button className="nx-btn nx-btn-next" onClick={() => onOpenTopic(nextTopic.id)}>
+                Next: {nextTopic.title}
+              </button>
+            )}
+            <button className={passed ? 'nx-btn nx-btn-quiet' : 'nx-btn nx-btn-primary'}
+              onClick={onMore}>
               More questions
             </button>
             <button className="nx-btn nx-btn-quiet" onClick={onLesson}>Read it again</button>
