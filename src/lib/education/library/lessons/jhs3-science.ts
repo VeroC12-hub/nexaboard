@@ -62,7 +62,7 @@ teach({
     + 'Below 7 is acid, 7 is neutral, and above 7 is a base. '
     + 'A pH is one number with no unit, so “pH 3 units” is wrong. '
     + 'In a formula the small number sits low and counts atoms, so '
-    + 'H2SO4 is said “H two S O four” and means two hydrogen atoms, '
+    + '$\\text{H}_2\\text{SO}_4$ is said “H two S O four” and means two hydrogen atoms, '
     + 'one sulphur and four oxygen. '
     + 'Write those small numbers full size and you have written '
     + 'something else, which is the commonest way to lose a mark.',
@@ -1235,9 +1235,9 @@ teach({
   notation:
     'The rule is written $P = F/A$ and said “pressure equals force '
     + 'divided by area”. '
-    + 'F is the force in newtons and A is the area in square metres. '
+    + '$F$ is the force in newtons and $A$ is the area in square metres. '
     + 'The unit of pressure is the newton per square metre, written '
-    + 'N/m², and it has its own name, the pascal, written Pa. '
+    + '$\\text{N/m}^2$, and it has its own name, the pascal, written Pa. '
     + 'The area has to be in square metres before you divide. '
     + 'Putting centimetres in and writing pascals out is the '
     + 'commonest way to lose a mark here.',
@@ -1309,7 +1309,7 @@ teach({
       ask: 'A force of 200 N acts on 4 square metres. Find the pressure.',
       steps: [
         'Pressure is force over area.',
-        '200 divided by 4.',
+        '$200 \\div 4$.',
       ],
       answer: '50 pascals.',
     },
@@ -1524,26 +1524,18 @@ teach({
     + 'to give up to get it?',
 
   notation:
-    'Mechanical advantage is written M.'
-    + 'A. '
+    'Mechanical advantage is written M.A. '
     + 'and said “mechanical advantage”. '
     + 'It is the load divided by the effort. '
     + 'Both of those are forces in newtons, so the answer comes out '
     + 'with no unit at all. '
-    + 'Velocity ratio, written V.'
-    + 'R.'
-    + ', is the distance the effort moves divided by the distance the '
+    + 'Velocity ratio, written V.R., is the distance the effort moves '
+    + 'divided by the distance the '
     + 'load moves, and it also has no unit. '
-    + 'Efficiency is M.'
-    + 'A. '
-    + 'divided by V.'
-    + 'R.'
-    + ', times 100, and it is a percentage. '
-    + 'Putting a unit on M.'
-    + 'A. '
-    + 'or V.'
-    + 'R.'
-    + ', or writing an efficiency above 100 percent, is the commonest '
+    + 'Efficiency is M.A. divided by V.R., times 100, '
+    + 'and it is a percentage. '
+    + 'Putting a unit on M.A. or V.R., '
+    + 'or writing an efficiency above 100 percent, is the commonest '
     + 'way to lose a mark.',
 
   idea:
@@ -1568,8 +1560,8 @@ teach({
     + 'and you might pull with only 50 newtons, '
     + 'which feels like a gain of four times, '
     + 'but you will have to pull four metres of rope through your hands. '
-    + '50 times 4 is 200, '
-    + 'which is exactly 200 times 1. '
+    + '$50 \\times 4 = 200$, '
+    + 'which is exactly $200 \\times 1$. '
     + 'The work is the same, '
     + 'and the machine has only changed how it is parcelled out: '
     + 'less force, more distance. '
@@ -1619,7 +1611,7 @@ teach({
         + 'Find the mechanical advantage.',
       steps: [
         'Load over effort.',
-        '300 divided by 100.',
+        '$300 \\div 100$.',
       ],
       answer: '3.',
     },
@@ -1629,7 +1621,7 @@ teach({
         + 'Find the velocity ratio.',
       steps: [
         'Effort distance over load distance.',
-        '5 divided by 1.',
+        '$5 \\div 1$.',
       ],
       answer: '5.',
     },
@@ -1640,8 +1632,8 @@ teach({
       steps: [
         'Work is force times distance.',
         'To raise the load 1 m you must pull about 4 m of rope.',
-        '50 times 4 is 200.',
-        '200 times 1 is also 200.',
+        '$50 \\times 4 = 200$.',
+        '$200 \\times 1$ is also 200.',
       ],
       answer: 'Because you must pull four times as far. '
         + 'The force is divided by four and the distance multiplied by '
@@ -1840,11 +1832,11 @@ teach({
     'Current is measured in amperes, written A and said “amps”. '
     + 'Voltage is measured in volts, written V. '
     + 'Resistance is measured in ohms, written with the Greek letter '
-    + 'omega, which looks like a horseshoe. '
+    + 'omega, $\\Omega$, which looks like a horseshoe. '
     + 'The rule joining the three is $V = IR$, said “V equals I R”, '
-    + 'where V is the voltage, I is the current and R is the '
+    + 'where $V$ is the voltage, $I$ is the current and $R$ is the '
     + 'resistance. '
-    + 'Note that current is written I and not C. '
+    + 'Note that current is written $I$ and not $C$. '
     + 'An ammeter goes in the circuit, in line with the component, '
     + 'and a voltmeter goes across it. '
     + 'Swapping those two round is the commonest way to lose a mark.',
@@ -1877,7 +1869,7 @@ teach({
     + 'while the charge divides between the branches, '
     + 'so the branch currents add to the total. '
     + 'Say those two sentences before any calculation '
-    + 'and the rest is V = IR applied to one component at a time. '
+    + 'and the rest is $V = IR$ applied to one component at a time. '
     + 'This also explains two things learners are asked about. '
     + 'House lights are wired in parallel '
     + 'so that each gets the full mains voltage '
@@ -1924,8 +1916,8 @@ teach({
       ask: 'A 12 V supply drives 3 A through a resistor. '
         + 'Find the resistance.',
       steps: [
-        'V = IR, so R = V over I.',
-        '12 divided by 3.',
+        '$V = IR$, so $R = \\frac{V}{I}$.',
+        '$12 \\div 3$.',
       ],
       answer: '4 ohms.',
     },
@@ -1936,7 +1928,7 @@ teach({
         + 'What is across the second?',
       steps: [
         'In series the voltages add to the supply.',
-        '12 - 4 = 8.',
+        '$12 - 4 = 8$.',
       ],
       answer: '8 volts.',
     },
