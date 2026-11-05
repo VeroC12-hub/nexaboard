@@ -308,6 +308,67 @@ teach({
         + 'one.',
       level: 5,
     },
+    {
+      id: 'acd-4',
+      ask: 'What colour does red litmus turn in a base?',
+      kind: 'choice',
+      options: ['Blue', 'Red, it does not change', 'Green'],
+      answer: 'Blue',
+      teach: 'Red litmus stays red in an acid. A base turns red litmus blue.',
+      level: 1,
+    },
+    {
+      id: 'acd-5',
+      ask: 'What is the pH of pure water?',
+      kind: 'numeric',
+      answer: '7',
+      accept: ['pH 7'],
+      teach: 'Water is neither acid nor base. Seven is the middle of the '
+        + 'scale: below 7 is acidic and above 7 is basic.',
+      level: 1,
+    },
+    {
+      id: 'acd-6',
+      ask: 'Which pH shows the most acidic solution?',
+      kind: 'choice',
+      options: ['pH 1', 'pH 5', 'pH 7'],
+      answer: 'pH 1',
+      teach: 'A bigger number does not mean more acid. The lower the pH '
+        + 'below 7, the more acidic the solution.',
+      level: 2,
+    },
+    {
+      id: 'acd-7',
+      ask: 'An acid reacts with a base. What is formed?',
+      kind: 'choice',
+      options: ['A salt and water', 'Only water', 'Only a gas'],
+      answer: 'A salt and water',
+      teach: 'The two cancel each other out, which is neutralisation. What '
+        + 'is left is a salt and water.',
+      level: 2,
+    },
+    {
+      id: 'acd-8',
+      ask: 'Sulphuric acid reacts with sodium hydroxide. Which salt is '
+        + 'formed?',
+      kind: 'choice',
+      options: ['Sodium sulphate', 'Sodium chloride', 'Sodium nitrate'],
+      answer: 'Sodium sulphate',
+      teach: 'Chloride comes from hydrochloric acid and nitrate from nitric '
+        + 'acid. The first part of the name comes from the base (sodium) '
+        + 'and the second from the acid (sulphuric gives sulphate).',
+      level: 4,
+    },
+    {
+      id: 'acd-9',
+      ask: 'A bee sting is acidic. Which would help to ease it?',
+      kind: 'choice',
+      options: ['Baking soda, a weak base', 'Vinegar, an acid', 'Lemon juice'],
+      answer: 'Baking soda, a weak base',
+      teach: 'Adding more acid makes it worse. A weak base neutralises the '
+        + 'acid, so the sting hurts less.',
+      level: 4,
+    },
   ],
 })
 
@@ -618,6 +679,98 @@ teach({
       teach: 'A cycle is its processes, not its places.',
       level: 5,
     },
+    {
+      id: 'cyc-4',
+      ask: 'Which process takes carbon dioxide out of the air?',
+      kind: 'choice',
+      options: ['Photosynthesis', 'Respiration', 'Burning'],
+      answer: 'Photosynthesis',
+      teach: 'Respiration and burning both put carbon dioxide into the air. '
+        + 'Green plants take it in to make sugar by photosynthesis.',
+      level: 1,
+    },
+    {
+      id: 'cyc-5',
+      ask: 'Burning charcoal in a coal pot returns carbon to the air as:',
+      kind: 'choice',
+      options: ['Carbon dioxide', 'Nitrogen', 'Oxygen'],
+      answer: 'Carbon dioxide',
+      teach: 'Burning uses oxygen; it does not give it out. The carbon in '
+        + 'the charcoal joins with oxygen and leaves as carbon dioxide.',
+      level: 2,
+    },
+    {
+      id: 'cyc-6',
+      ask: 'A fallen leaf rots on the ground. How does its carbon go back '
+        + 'to the air?',
+      kind: 'choice',
+      options: [
+        'Decomposers break it down and respire',
+        'By photosynthesis',
+        'By nitrogen fixing',
+      ],
+      answer: 'Decomposers break it down and respire',
+      teach: 'Photosynthesis takes carbon out of the air. Fungi and bacteria '
+        + 'feed on the dead leaf and their respiration gives out carbon '
+        + 'dioxide.',
+      level: 2,
+    },
+    {
+      id: 'cyc-7',
+      ask: 'How do animals get the nitrogen they need?',
+      kind: 'choice',
+      options: [
+        'By eating plants or animals, as protein',
+        'By breathing it in from the air',
+        'By drinking water',
+      ],
+      answer: 'By eating plants or animals, as protein',
+      teach: 'Air is mostly nitrogen, but no animal can use the gas. The '
+        + 'nitrogen comes in the protein of the food they eat.',
+      level: 3,
+    },
+    {
+      id: 'cyc-8',
+      ask: 'Most of the air is nitrogen, but plants cannot use the gas. '
+        + 'Bacteria that turn it into a form plants can use carry out:',
+      kind: 'choice',
+      options: ['Nitrogen fixing', 'Denitrification', 'Respiration'],
+      answer: 'Nitrogen fixing',
+      teach: 'Denitrification goes the other way, back to the air. Fixing '
+        + 'turns nitrogen gas into compounds that end up as nitrates in '
+        + 'the soil.',
+      level: 3,
+    },
+    {
+      id: 'cyc-9',
+      ask: 'Why do farmers plant beans or groundnuts to improve the soil?',
+      kind: 'choice',
+      options: [
+        'Bacteria in their root nodules fix nitrogen',
+        'They take nitrogen out of the soil',
+        'Their roots are very long',
+      ],
+      answer: 'Bacteria in their root nodules fix nitrogen',
+      teach: 'These plants do not drain nitrogen; they add it. Small '
+        + 'swellings on their roots hold bacteria that fix nitrogen from '
+        + 'the air.',
+      level: 4,
+    },
+    {
+      id: 'cyc-10',
+      ask: 'What do denitrifying bacteria do?',
+      kind: 'choice',
+      options: [
+        'Return nitrogen from the soil to the air',
+        'Fix nitrogen from the air into the soil',
+        'Turn dead matter into ammonia',
+      ],
+      answer: 'Return nitrogen from the soil to the air',
+      teach: 'Fixing brings nitrogen in and decay makes ammonia. '
+        + 'Denitrifying bacteria take nitrates from the soil and release '
+        + 'nitrogen gas, closing the cycle.',
+      level: 4,
+    },
   ],
 })
 
@@ -899,6 +1052,86 @@ teach({
       ],
       answer: 'Whether the waste came from the body’s own reactions',
       teach: 'Undigested food never entered the body, so it is egested.',
+      level: 5,
+    },
+    {
+      id: 'exc-4',
+      ask: 'Which organ excretes carbon dioxide?',
+      kind: 'choice',
+      options: ['The lungs', 'The kidneys', 'The liver'],
+      answer: 'The lungs',
+      teach: 'The kidneys deal with urea, water and salts. Carbon dioxide '
+        + 'from respiration leaves in the air you breathe out.',
+      level: 1,
+    },
+    {
+      id: 'exc-5',
+      ask: 'Besides urea, what else do the kidneys remove from the blood?',
+      kind: 'choice',
+      options: ['Extra water and salts', 'Red blood cells', 'Oxygen'],
+      answer: 'Extra water and salts',
+      teach: 'Blood cells and oxygen are kept, because the body needs them. '
+        + 'The kidneys take out urea together with any water and salt '
+        + 'beyond what the body needs.',
+      level: 2,
+    },
+    {
+      id: 'exc-6',
+      ask: 'What does the skin excrete?',
+      kind: 'choice',
+      options: [
+        'Sweat, carrying water, salts and a little urea',
+        'Urine',
+        'Carbon dioxide only',
+      ],
+      answer: 'Sweat, carrying water, salts and a little urea',
+      teach: 'Urine comes from the kidneys. Sweat glands in the skin give '
+        + 'out water with salts and a little urea in it.',
+      level: 2,
+    },
+    {
+      id: 'exc-7',
+      ask: 'Why must urea be removed from the body?',
+      kind: 'choice',
+      options: [
+        'It is poisonous if it builds up',
+        'It makes the blood heavy',
+        'Another organ needs it',
+      ],
+      answer: 'It is poisonous if it builds up',
+      teach: 'Urea is not useful to any part of the body. Left in the blood '
+        + 'it builds up and harms the cells.',
+      level: 3,
+    },
+    {
+      id: 'exc-8',
+      ask: 'Is passing faeces excretion?',
+      kind: 'choice',
+      options: [
+        'No, most of it is food that was never made by the body',
+        'Yes, because it is waste',
+        'Yes, because it leaves the body every day',
+      ],
+      answer: 'No, most of it is food that was never made by the body',
+      teach: 'Not all waste is excretion. Faeces is mostly undigested food '
+        + 'that only passed through the gut, not something made by the '
+        + 'body’s own reactions.',
+      level: 4,
+    },
+    {
+      id: 'exc-9',
+      ask: 'A man works hard all day in the Tamale heat and sweats a lot. '
+        + 'What happens to his urine?',
+      kind: 'choice',
+      options: [
+        'There is less of it and it is darker',
+        'There is more of it and it is paler',
+        'It does not change',
+      ],
+      answer: 'There is less of it and it is darker',
+      teach: 'He has lost a lot of water as sweat. The kidneys hold back '
+        + 'water to make up for it, so the urine is less and more '
+        + 'concentrated.',
       level: 5,
     },
   ],
@@ -1198,6 +1431,86 @@ teach({
       teach: 'Saving water costs it the raw material for photosynthesis.',
       level: 5,
     },
+    {
+      id: 'trp-4',
+      ask: 'Which tissue carries water up from the roots?',
+      kind: 'choice',
+      options: ['Xylem', 'Phloem', 'Stomata'],
+      answer: 'Xylem',
+      teach: 'Phloem carries food, and stomata are pores, not tubes. Xylem '
+        + 'vessels carry water and minerals up the plant.',
+      level: 1,
+    },
+    {
+      id: 'trp-5',
+      ask: 'Water enters a root mainly through the:',
+      kind: 'choice',
+      options: ['Root hairs', 'Stem', 'Leaves'],
+      answer: 'Root hairs',
+      teach: 'Leaves lose water rather than take it in. Thin root hairs give '
+        + 'the root a large surface touching the soil water.',
+      level: 1,
+    },
+    {
+      id: 'trp-6',
+      ask: 'When is transpiration fastest?',
+      kind: 'choice',
+      options: [
+        'On a hot, dry, windy day',
+        'On a cool, still day',
+        'On a damp, dark night',
+      ],
+      answer: 'On a hot, dry, windy day',
+      teach: 'Damp air and cool air both slow evaporation. Heat, dry air and '
+        + 'wind all speed it up, so the leaves lose water fastest.',
+      level: 2,
+    },
+    {
+      id: 'trp-7',
+      ask: 'The tiny pores on the underside of a leaf, through which water '
+        + 'vapour escapes, are called:',
+      kind: 'choice',
+      options: ['Stomata', 'Root hairs', 'Xylem'],
+      answer: 'Stomata',
+      teach: 'Root hairs are on roots and xylem is the tube inside. Stomata '
+        + 'are the holes in the leaf surface that open and close.',
+      level: 2,
+    },
+    {
+      id: 'trp-8',
+      ask: 'A leafy stem is stood in red-coloured water. Hours later, the '
+        + 'veins of the leaves turn red. What does this show?',
+      kind: 'choice',
+      options: [
+        'Xylem carries water up to the leaves',
+        'Phloem carries food down',
+        'The leaves make red dye',
+      ],
+      answer: 'Xylem carries water up to the leaves',
+      teach: 'The dye is not made by the plant. It was carried up with the '
+        + 'water, so the red lines show where the xylem runs.',
+      level: 3,
+    },
+    {
+      id: 'trp-9',
+      ask: 'Sugar made in a mango leaf reaches the fruit through the:',
+      kind: 'choice',
+      options: ['Phloem', 'Xylem', 'Root hairs'],
+      answer: 'Phloem',
+      teach: 'Xylem only carries water up from the roots. Food made in the '
+        + 'leaf moves through the phloem to where it is needed or stored.',
+      level: 3,
+    },
+    {
+      id: 'trp-10',
+      ask: 'The movement of food through the phloem is called:',
+      kind: 'choice',
+      options: ['Translocation', 'Transpiration', 'Evaporation'],
+      answer: 'Translocation',
+      teach: 'Transpiration is water loss from leaves, which is the xylem’s '
+        + 'story. Moving sugar through the phloem is translocation.',
+      level: 4,
+    },
   ],
 })
 
@@ -1487,6 +1800,85 @@ teach({
       ],
       answer: 'The one with the smaller sole',
       teach: 'Same force on a smaller area means higher pressure.',
+      level: 5,
+    },
+    {
+      id: 'prs-4',
+      ask: 'One pascal is:',
+      kind: 'choice',
+      options: [
+        'One newton per square metre',
+        'One newton per metre',
+        'One kilogram per square metre',
+      ],
+      answer: 'One newton per square metre',
+      teach: 'Pressure is force over area, so the unit is a force unit over '
+        + 'an area unit. Newtons divided by square metres gives the '
+        + 'pascal.',
+      level: 1,
+    },
+    {
+      id: 'prs-5',
+      ask: 'A box weighing 200 N rests on an area of 2 m². What pressure '
+        + 'does it exert, in pascals?',
+      kind: 'numeric',
+      answer: '100',
+      accept: ['100 Pa', '100 pascals', '100 N/m²'],
+      teach: 'Do not multiply force and area. Pressure = force ÷ area = 200 '
+        + '÷ 2 = 100 Pa.',
+      level: 2,
+    },
+    {
+      id: 'prs-6',
+      ask: 'Why does a sharp knife cut tomatoes more easily than a blunt '
+        + 'one?',
+      kind: 'choice',
+      options: [
+        'The same force on a tiny area gives a large pressure',
+        'A sharp knife is heavier',
+        'A sharp blade has more force',
+      ],
+      answer: 'The same force on a tiny area gives a large pressure',
+      teach: 'Your hand pushes with the same force either way. The sharp '
+        + 'edge has a much smaller area, so force ÷ area, the pressure, '
+        + 'is much larger.',
+      level: 3,
+    },
+    {
+      id: 'prs-7',
+      ask: 'Why do tractors on muddy farms have wide tyres?',
+      kind: 'choice',
+      options: [
+        'The weight is spread over a larger area, so the pressure is less',
+        'Wide tyres raise the pressure for grip',
+        'Wide tyres make it faster',
+      ],
+      answer: 'The weight is spread over a larger area, so the pressure is less',
+      teach: 'The tractor weighs the same with any tyres. A bigger area '
+        + 'under the same force means lower pressure, so it does not '
+        + 'sink.',
+      level: 3,
+    },
+    {
+      id: 'prs-8',
+      ask: 'A woman weighing 600 N stands in shoes with a total area of '
+        + '0.03 m². What pressure does she exert, in pascals?',
+      kind: 'numeric',
+      answer: '20000',
+      accept: ['20 000', '20,000', '20000 Pa', '20 000 Pa'],
+      teach: 'Dividing by a small number gives a big answer. 600 ÷ 0.03 = 20 '
+        + '000 Pa.',
+      level: 4,
+    },
+    {
+      id: 'prs-9',
+      ask: 'What force, in newtons, gives a pressure of 5000 Pa on an area '
+        + 'of 0.2 m²?',
+      kind: 'numeric',
+      answer: '1000',
+      accept: ['1000 N', '1 000', '1,000'],
+      teach: 'Turn the formula round: force = pressure × area. 5000 × 0.2 = '
+        + '1000 N.',
       level: 5,
     },
   ],
@@ -1794,6 +2186,80 @@ teach({
       answer: 'Trades a smaller force for a longer distance',
       teach: 'Which is why the effort always moves further than the load.',
       level: 5,
+    },
+    {
+      id: 'mch-4',
+      ask: 'The point a lever turns on is called the:',
+      kind: 'choice',
+      options: ['Fulcrum', 'Load', 'Effort'],
+      answer: 'Fulcrum',
+      teach: 'The load is what is lifted and the effort is the push you '
+        + 'give. The fulcrum is the pivot.',
+      level: 1,
+    },
+    {
+      id: 'mch-5',
+      ask: 'A lever lifts a 600 N load with an effort of 200 N. What is '
+        + 'its mechanical advantage?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['3.0'],
+      teach: 'Mechanical advantage is load ÷ effort, not effort ÷ load. 600 '
+        + '÷ 200 = 3.',
+      level: 2,
+    },
+    {
+      id: 'mch-6',
+      ask: 'In a pulley system the effort moves 4 m while the load rises 1 '
+        + 'm. What is the velocity ratio?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['4.0'],
+      teach: 'Velocity ratio uses distances, not forces. Effort distance ÷ '
+        + 'load distance = 4 ÷ 1 = 4.',
+      level: 3,
+    },
+    {
+      id: 'mch-7',
+      ask: 'A single fixed pulley over a village well mainly:',
+      kind: 'choice',
+      options: [
+        'Changes the direction of the force',
+        'Halves the effort needed',
+        'Doubles the load lifted',
+      ],
+      answer: 'Changes the direction of the force',
+      teach: 'One fixed pulley gives no saving in force. It lets you pull '
+        + 'down on the rope to lift the bucket up, which is easier for '
+        + 'the body.',
+      level: 3,
+    },
+    {
+      id: 'mch-8',
+      ask: 'A machine has a mechanical advantage of 3 and a velocity ratio '
+        + 'of 4. What is its efficiency, as a percentage?',
+      kind: 'numeric',
+      answer: '75',
+      accept: ['75%', '75 %', '75 per cent', '75 percent'],
+      teach: 'Dividing the other way gives over 100 per cent, which is '
+        + 'impossible. Efficiency = M.A. ÷ V.R. × 100 = 3 ÷ 4 × 100 = '
+        + '75%.',
+      level: 4,
+    },
+    {
+      id: 'mch-9',
+      ask: 'Why do you oil the chain and moving parts of a bicycle?',
+      kind: 'choice',
+      options: [
+        'To cut friction, so less work is wasted',
+        'To raise the velocity ratio',
+        'To make the chain heavier',
+      ],
+      answer: 'To cut friction, so less work is wasted',
+      teach: 'The velocity ratio is set by the sizes of the parts, not oil. '
+        + 'Oil cuts friction, so more of the work you put in comes out as '
+        + 'useful work.',
+      level: 4,
     },
   ],
 })
@@ -2117,6 +2583,78 @@ teach({
       teach: 'Which is why it is used in bells, relays and cranes.',
       level: 5,
     },
+    {
+      id: 'ele-4',
+      ask: 'In a parallel circuit, one bulb blows. What happens to the '
+        + 'others?',
+      kind: 'choice',
+      options: ['They stay lit', 'They all go out', 'They go off and on'],
+      answer: 'They stay lit',
+      teach: 'In series there is one path, so a break stops everything. In '
+        + 'parallel each bulb has its own branch, so the others still '
+        + 'have a complete path.',
+      level: 2,
+    },
+    {
+      id: 'ele-5',
+      ask: 'A current of 2 A flows through a 5 ohm resistor. What is the '
+        + 'voltage across it, in volts?',
+      kind: 'numeric',
+      answer: '10',
+      accept: ['10 V', '10V', '10 volts'],
+      teach: 'Use V = IR: multiply, do not divide. 2 × 5 = 10 V.',
+      level: 3,
+    },
+    {
+      id: 'ele-6',
+      ask: 'A 12 V supply is connected across a 4 ohm resistor. What '
+        + 'current flows, in amps?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['3 A', '3A', '3 amps'],
+      teach: 'Rearrange V = IR to I = V ÷ R. 12 ÷ 4 = 3 A.',
+      level: 3,
+    },
+    {
+      id: 'ele-7',
+      ask: 'How can you make an electromagnet stronger?',
+      kind: 'choice',
+      options: [
+        'Wind more turns of wire on the coil',
+        'Use a plastic core',
+        'Use less current',
+      ],
+      answer: 'Wind more turns of wire on the coil',
+      teach: 'Plastic cannot be magnetised and less current weakens it. More '
+        + 'turns, more current or an iron core all make it stronger.',
+      level: 3,
+    },
+    {
+      id: 'ele-8',
+      ask: 'Why are the sockets in a house wired in parallel?',
+      kind: 'choice',
+      options: [
+        'Each gets the full voltage and can be switched on alone',
+        'It uses less wire',
+        'The current is the same everywhere',
+      ],
+      answer: 'Each gets the full voltage and can be switched on alone',
+      teach: 'Equal current everywhere is the series rule. In parallel each '
+        + 'branch gets the full supply voltage, and one switched off does '
+        + 'not stop the others.',
+      level: 4,
+    },
+    {
+      id: 'ele-9',
+      ask: 'Two identical bulbs are in series with a 3 V cell. What is the '
+        + 'voltage across each bulb, in volts?',
+      kind: 'numeric',
+      answer: '1.5',
+      accept: ['1.5 V', '1.5V'],
+      teach: 'In series the voltage is shared, not copied to each. Two equal '
+        + 'bulbs split 3 V equally: 1.5 V each.',
+      level: 4,
+    },
   ],
 })
 
@@ -2436,6 +2974,83 @@ teach({
       teach: 'After the adjustment, the drug is taken to feel normal.',
       level: 5,
     },
+    {
+      id: 'drg-4',
+      ask: 'What does a stimulant do?',
+      kind: 'choice',
+      options: [
+        'Speeds up the nervous system',
+        'Slows down the nervous system',
+        'Kills germs',
+      ],
+      answer: 'Speeds up the nervous system',
+      teach: 'Slowing down is what a depressant does, and killing germs is '
+        + 'an antibiotic’s job. A stimulant makes the brain and body work '
+        + 'faster.',
+      level: 1,
+    },
+    {
+      id: 'drg-5',
+      ask: 'Which organ does smoking damage most directly?',
+      kind: 'choice',
+      options: ['The lungs', 'The kidneys', 'The bones'],
+      answer: 'The lungs',
+      teach: 'The smoke is breathed in. Tar coats the lungs and causes '
+        + 'cough, lung disease and cancer.',
+      level: 1,
+    },
+    {
+      id: 'drg-6',
+      ask: 'Nicotine in cigarettes is a:',
+      kind: 'choice',
+      options: ['Stimulant', 'Depressant', 'Painkiller'],
+      answer: 'Stimulant',
+      teach: 'It can feel calming to a smoker, but that is the relief of the '
+        + 'craving. Nicotine itself speeds up the heart and the nervous '
+        + 'system.',
+      level: 2,
+    },
+    {
+      id: 'drg-7',
+      ask: 'Which organ is most harmed by heavy drinking of alcohol over '
+        + 'many years?',
+      kind: 'choice',
+      options: ['The liver', 'The lungs', 'The ears'],
+      answer: 'The liver',
+      teach: 'The lungs are harmed by smoke, not drink. The liver breaks '
+        + 'alcohol down, and years of heavy drinking scar it.',
+      level: 2,
+    },
+    {
+      id: 'drg-8',
+      ask: 'Why is it dangerous to drive after drinking alcohol?',
+      kind: 'choice',
+      options: [
+        'Alcohol is a depressant and slows reactions',
+        'Alcohol speeds up reactions',
+        'Alcohol does not affect the brain',
+      ],
+      answer: 'Alcohol is a depressant and slows reactions',
+      teach: 'Feeling lively after a drink is not faster reactions. Alcohol '
+        + 'slows the brain, so the driver sees and responds too late.',
+      level: 3,
+    },
+    {
+      id: 'drg-9',
+      ask: 'A dependent user stops taking a drug and feels sick and '
+        + 'restless. Why?',
+      kind: 'choice',
+      options: [
+        'The body adjusted to the drug and is out of balance without it',
+        'The drug was poisonous',
+        'They are only bored',
+      ],
+      answer: 'The body adjusted to the drug and is out of balance without it',
+      teach: 'These are withdrawal symptoms, not boredom. The body changed '
+        + 'itself to work against the drug, and with the drug gone, those '
+        + 'changes are left unbalanced.',
+      level: 4,
+    },
   ],
 })
 
@@ -2744,6 +3359,84 @@ teach({
       ],
       answer: 'It changes what people have reason to do',
       teach: 'A deposit on a bottle needs no inspector at all.',
+      level: 5,
+    },
+    {
+      id: 'pol-4',
+      ask: 'Galamsey pollutes rivers mainly with:',
+      kind: 'choice',
+      options: ['Mercury and silt', 'Salt', 'Plastic bags'],
+      answer: 'Mercury and silt',
+      teach: 'Plastic is a waste problem in towns. Galamsey miners dig loose '
+        + 'soil beside rivers and use mercury, and both wash into the '
+        + 'water.',
+      level: 1,
+    },
+    {
+      id: 'pol-5',
+      ask: 'Burning rubbish and smoke from vehicle exhausts cause:',
+      kind: 'choice',
+      options: ['Air pollution', 'Water pollution', 'Soil erosion'],
+      answer: 'Air pollution',
+      teach: 'The smoke goes into the air we breathe, so this is air '
+        + 'pollution, which harms the lungs.',
+      level: 1,
+    },
+    {
+      id: 'pol-6',
+      ask: 'Cutting trees for charcoal without replanting leads to:',
+      kind: 'choice',
+      options: [
+        'Loss of forest and soil erosion',
+        'More rainfall',
+        'Cleaner rivers',
+      ],
+      answer: 'Loss of forest and soil erosion',
+      teach: 'Removing trees does not help rainfall or rivers. Without roots '
+        + 'to hold it, the soil washes away in heavy rain.',
+      level: 2,
+    },
+    {
+      id: 'pol-7',
+      ask: 'Plastic waste blocking gutters in Accra makes which problem '
+        + 'worse?',
+      kind: 'choice',
+      options: ['Flooding when it rains', 'Drought', 'Earthquakes'],
+      answer: 'Flooding when it rains',
+      teach: 'Plastic does not rot, so it stays in the gutter. Rainwater '
+        + 'cannot drain away and spreads over the streets.',
+      level: 2,
+    },
+    {
+      id: 'pol-8',
+      ask: 'Why is mercury in a river dangerous even in tiny amounts?',
+      kind: 'choice',
+      options: [
+        'It builds up in fish and in the people who eat them',
+        'It makes the water salty',
+        'It quickly evaporates',
+      ],
+      answer: 'It builds up in fish and in the people who eat them',
+      teach: 'A tiny amount in the water is not the end of it. Fish take '
+        + 'mercury in and keep it, and a person eating many fish takes in '
+        + 'far more, harming the brain and nerves.',
+      level: 4,
+    },
+    {
+      id: 'pol-9',
+      ask: 'A town pays a small amount for every bag of plastic bottles '
+        + 'brought back. Why might this work better than a poster saying '
+        + '“Do not litter”?',
+      kind: 'choice',
+      options: [
+        'It gives people a reason to collect the plastic',
+        'Posters cost too much',
+        'Bottles are heavy',
+      ],
+      answer: 'It gives people a reason to collect the plastic',
+      teach: 'A poster only asks; most people carry on as before. Paying for '
+        + 'bottles makes collecting them worth someone’s time, so the '
+        + 'behaviour changes.',
       level: 5,
     },
   ],

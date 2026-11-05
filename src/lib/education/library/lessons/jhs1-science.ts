@@ -225,6 +225,75 @@ teach({
         + 'a plant cannot move.',
       level: 5,
     },
+    {
+      id: 'cel-4',
+      ask: 'Which part of a cell controls what goes in and out?',
+      kind: 'choice',
+      options: ['The cell membrane', 'The cell wall', 'The nucleus'],
+      answer: 'The cell membrane',
+      teach: 'The wall is a stiff outer layer for support and lets most '
+        + 'things through. The thin membrane inside it is what decides '
+        + 'what enters and leaves.',
+      level: 1,
+    },
+    {
+      id: 'cel-5',
+      ask: 'Where in a plant cell is food made?',
+      kind: 'choice',
+      options: ['The chloroplasts', 'The vacuole', 'The nucleus'],
+      answer: 'The chloroplasts',
+      teach: 'Chloroplasts hold the green chlorophyll that traps sunlight. '
+        + 'The plant uses that light to make sugar there.',
+      level: 2,
+    },
+    {
+      id: 'cel-6',
+      ask: 'Where do most of the cell’s chemical reactions happen?',
+      kind: 'choice',
+      options: ['The cytoplasm', 'The cell wall', 'The vacuole'],
+      answer: 'The cytoplasm',
+      teach: 'The wall supports and the vacuole stores. The jelly-like '
+        + 'cytoplasm that fills the cell is where the work is done.',
+      level: 2,
+    },
+    {
+      id: 'cel-7',
+      ask: 'A cell has a wall, chloroplasts and a large vacuole. It is:',
+      kind: 'choice',
+      options: ['A plant cell', 'An animal cell', 'It could be either'],
+      answer: 'A plant cell',
+      teach: 'An animal cell has none of these three parts, so finding even '
+        + 'one of them tells you the cell came from a plant.',
+      level: 3,
+    },
+    {
+      id: 'cel-8',
+      ask: 'Why does a plant cell need a wall when an animal cell does '
+        + 'not?',
+      kind: 'choice',
+      options: [
+        'It keeps the plant firm without a skeleton',
+        'It makes the plant’s food',
+        'It controls the cell',
+      ],
+      answer: 'It keeps the plant firm without a skeleton',
+      teach: 'Making food is the chloroplast’s job and control is the '
+        + 'nucleus’s job. The stiff walls, pressed together, hold a plant '
+        + 'upright the way bones hold up an animal.',
+      level: 4,
+    },
+    {
+      id: 'cel-9',
+      ask: 'A cell from the root of a cassava plant is looked at under a '
+        + 'microscope. Which part would you NOT expect to find?',
+      kind: 'choice',
+      options: ['Chloroplasts', 'A cell wall', 'A nucleus'],
+      answer: 'Chloroplasts',
+      teach: 'It is still a plant cell, so it has a wall. But a root grows '
+        + 'underground where there is no light, so it has no chloroplasts '
+        + 'to make food with.',
+      level: 5,
+    },
   ],
 })
 
@@ -443,6 +512,81 @@ teach({
       teach: 'A bat and a bird both fly without being related, '
         + 'which is exactly why flight is the wrong thing to group on.',
       level: 5,
+    },
+    {
+      id: 'cls-4',
+      ask: 'An animal with a backbone is called:',
+      kind: 'choice',
+      options: ['A vertebrate', 'An invertebrate', 'An insect'],
+      answer: 'A vertebrate',
+      teach: '“Vertebra” is a bone of the backbone. Animals with one are '
+        + 'vertebrates, and those without, like insects and snails, are '
+        + 'invertebrates.',
+      level: 1,
+    },
+    {
+      id: 'cls-5',
+      ask: 'A frog lives in water when young and on land as an adult. It '
+        + 'belongs with the:',
+      kind: 'choice',
+      options: ['Amphibians', 'Reptiles', 'Fish'],
+      answer: 'Amphibians',
+      teach: 'Living in water at first does not make it a fish. Amphibians '
+        + 'have moist skin, lay soft eggs in water and change from '
+        + 'tadpole to land animal.',
+      level: 2,
+    },
+    {
+      id: 'cls-6',
+      ask: 'A lizard has dry, scaly skin and lays eggs with leathery '
+        + 'shells on land. It is a:',
+      kind: 'choice',
+      options: ['Reptile', 'Amphibian', 'Mammal'],
+      answer: 'Reptile',
+      teach: 'Amphibians have moist skin and lay eggs in water. Dry scales '
+        + 'and shelled eggs laid on land are the features of reptiles.',
+      level: 2,
+    },
+    {
+      id: 'cls-7',
+      ask: 'Which feature puts a hen with the birds?',
+      kind: 'choice',
+      options: ['It has feathers', 'It has two legs', 'It lays eggs'],
+      answer: 'It has feathers',
+      teach: 'Lizards and snakes lay eggs too, and people walk on two legs. '
+        + 'Feathers are found on birds and nothing else, so that is the '
+        + 'feature to use.',
+      level: 3,
+    },
+    {
+      id: 'cls-8',
+      ask: 'A spider has eight legs. Is it an insect?',
+      kind: 'choice',
+      options: [
+        'No, insects have six legs',
+        'Yes, it is small and has legs',
+        'Yes, it has no backbone',
+      ],
+      answer: 'No, insects have six legs',
+      teach: 'Being small and having no backbone fits many animals. Count '
+        + 'the legs: insects have six, and spiders, with eight, are a '
+        + 'different group.',
+      level: 3,
+    },
+    {
+      id: 'cls-9',
+      ask: 'A bat flies and has wings. Which feature shows it is a mammal, '
+        + 'not a bird?',
+      kind: 'choice',
+      options: [
+        'It has fur and feeds its young on milk',
+        'It flies at night',
+        'It has wings',
+      ],
+      answer: 'It has fur and feeds its young on milk',
+      teach: 'Wings and flying are about how it moves, not what it is. Fur '
+        + 'and milk for the young are the features every mammal shares.',
+      level: 4,
     },
   ],
 })
@@ -705,6 +849,94 @@ teach({
         + 'It needs no wind, only the particles own movement.',
       level: 5,
     },
+    {
+      id: 'pt-4',
+      ask: 'In a solid, the particles:',
+      kind: 'choice',
+      options: [
+        'Are packed close and vibrate in fixed places',
+        'Slide freely past each other',
+        'Are far apart and move fast',
+      ],
+      answer: 'Are packed close and vibrate in fixed places',
+      teach: 'Sliding past each other describes a liquid and far apart '
+        + 'describes a gas. Solid particles stay in place and only shake, '
+        + 'which is why a solid keeps its shape.',
+      level: 1,
+    },
+    {
+      id: 'pt-5',
+      ask: 'A drop of food colouring in still water slowly spreads through '
+        + 'it without stirring. This is called:',
+      kind: 'choice',
+      options: ['Diffusion', 'Melting', 'Condensation'],
+      answer: 'Diffusion',
+      teach: 'Nothing is melting or turning from gas to liquid. The '
+        + 'particles move about at random, so the colour spreads from '
+        + 'where there is a lot to where there is little.',
+      level: 2,
+    },
+    {
+      id: 'pt-6',
+      ask: 'Why can a liquid be poured but still keep the same volume?',
+      kind: 'choice',
+      options: [
+        'Its particles stay close but can slide past each other',
+        'Its particles are far apart',
+        'Its particles do not move',
+      ],
+      answer: 'Its particles stay close but can slide past each other',
+      teach: 'Far-apart particles would describe a gas, which spreads to '
+        + 'fill any space. Liquid particles stay touching, so the volume '
+        + 'is fixed, but they move past one another, so it flows.',
+      level: 3,
+    },
+    {
+      id: 'pt-7',
+      ask: 'Why can a gas be squashed into a smaller space but a solid '
+        + 'cannot?',
+      kind: 'choice',
+      options: [
+        'There are large gaps between gas particles',
+        'Gas particles are softer',
+        'Gas particles are smaller',
+      ],
+      answer: 'There are large gaps between gas particles',
+      teach: 'The particles themselves do not shrink or soften. Squashing a '
+        + 'gas only pushes its particles into the empty space between '
+        + 'them, and a solid has no such space.',
+      level: 3,
+    },
+    {
+      id: 'pt-8',
+      ask: 'A football pumped in the morning feels harder in the afternoon '
+        + 'sun in Tamale. Why?',
+      kind: 'choice',
+      options: [
+        'The air particles move faster and hit the inside harder',
+        'The air particles get bigger',
+        'More air gets into the ball',
+      ],
+      answer: 'The air particles move faster and hit the inside harder',
+      teach: 'No air is added and particles do not grow. Heat gives the '
+        + 'particles more energy, so they strike the inside of the ball '
+        + 'faster and more often, pushing harder.',
+      level: 4,
+    },
+    {
+      id: 'pt-9',
+      ask: 'Why does colour spread faster in hot water than in cold water?',
+      kind: 'choice',
+      options: [
+        'The particles move faster',
+        'Hot water has more particles',
+        'Hot water is thinner',
+      ],
+      answer: 'The particles move faster',
+      teach: 'Heating does not add particles. It gives them more energy, so '
+        + 'they move and mix faster.',
+      level: 5,
+    },
   ],
 })
 
@@ -961,6 +1193,84 @@ teach({
         + 'which is what condensing means.',
       level: 4,
     },
+    {
+      id: 'wcj-4',
+      ask: 'Water vapour cools high up and forms the tiny droplets of a '
+        + 'cloud. This stage is:',
+      kind: 'choice',
+      options: ['Condensation', 'Evaporation', 'Precipitation'],
+      answer: 'Condensation',
+      teach: 'Evaporation goes the other way, liquid to gas. When vapour '
+        + 'particles cool, they slow down and cling together as liquid '
+        + 'droplets: that is condensation.',
+      level: 1,
+    },
+    {
+      id: 'wcj-5',
+      ask: 'Rain, drizzle and hail falling from clouds are called:',
+      kind: 'choice',
+      options: ['Precipitation', 'Condensation', 'Transpiration'],
+      answer: 'Precipitation',
+      teach: 'Condensation makes the cloud. Precipitation is any water '
+        + 'falling out of it to the ground.',
+      level: 1,
+    },
+    {
+      id: 'wcj-6',
+      ask: 'Water given off as vapour from the leaves of plants is called:',
+      kind: 'choice',
+      options: ['Transpiration', 'Precipitation', 'Condensation'],
+      answer: 'Transpiration',
+      teach: 'Transpiration is evaporation from leaves. Plants pull water up '
+        + 'from the soil and much of it escapes into the air this way.',
+      level: 2,
+    },
+    {
+      id: 'wcj-7',
+      ask: 'Drops form on the outside of a cold bottle of water taken from '
+        + 'a fridge. Where do they come from?',
+      kind: 'choice',
+      options: [
+        'Water vapour in the air condensing on the cold bottle',
+        'Water leaking through the bottle',
+        'The cold making new water',
+      ],
+      answer: 'Water vapour in the air condensing on the cold bottle',
+      teach: 'A sealed bottle does not leak. The air carries invisible '
+        + 'vapour, and when its particles touch the cold surface they '
+        + 'lose energy and turn to liquid.',
+      level: 3,
+    },
+    {
+      id: 'wcj-8',
+      ask: 'Wet clothes dry faster on a windy day in Accra. Why?',
+      kind: 'choice',
+      options: [
+        'The wind carries the vapour away, so more particles can escape',
+        'The wind makes the water colder',
+        'The wind pushes the water out of the cloth',
+      ],
+      answer: 'The wind carries the vapour away, so more particles can escape',
+      teach: 'Wind does not squeeze the cloth and cooling would slow drying. '
+        + 'Moving air sweeps away the vapour just above the cloth, so '
+        + 'escaping particles are not crowded back in.',
+      level: 4,
+    },
+    {
+      id: 'wcj-9',
+      ask: 'Why does rising air form clouds?',
+      kind: 'choice',
+      options: [
+        'It cools as it rises, so vapour slows down and forms droplets',
+        'It heats up and boils',
+        'The sun pulls the water up',
+      ],
+      answer: 'It cools as it rises, so vapour slows down and forms droplets',
+      teach: 'Air gets colder higher up, not hotter. As the vapour particles '
+        + 'cool they lose energy, move slower and stick together as '
+        + 'droplets, which we see as cloud.',
+      level: 5,
+    },
   ],
 })
 
@@ -1175,6 +1485,83 @@ teach({
       teach: 'Carrying is enough to be a vector. '
         + 'That is why covering food matters.',
       level: 5,
+    },
+    {
+      id: 'lcj-4',
+      ask: 'Which disease does the female Anopheles mosquito carry?',
+      kind: 'choice',
+      options: ['Malaria', 'Cholera', 'Typhoid'],
+      answer: 'Malaria',
+      teach: 'Cholera and typhoid spread through dirty water and food, often '
+        + 'carried by houseflies. Malaria passes from person to person '
+        + 'when the mosquito bites.',
+      level: 1,
+    },
+    {
+      id: 'lcj-5',
+      ask: 'Where does a female mosquito lay her eggs?',
+      kind: 'choice',
+      options: ['On still water', 'On dry leaves', 'In rubbish heaps'],
+      answer: 'On still water',
+      teach: 'Rubbish heaps are where houseflies breed. Mosquito eggs, '
+        + 'larvae and pupae all need still water, which is why standing '
+        + 'water is the target.',
+      level: 1,
+    },
+    {
+      id: 'lcj-6',
+      ask: 'Which order shows the mosquito life cycle?',
+      kind: 'choice',
+      options: [
+        'Egg, larva, pupa, adult',
+        'Egg, pupa, larva, adult',
+        'Larva, egg, pupa, adult',
+      ],
+      answer: 'Egg, larva, pupa, adult',
+      teach: 'The larva is the feeding stage and must come before the '
+        + 'resting pupa. The adult then comes out of the pupa.',
+      level: 2,
+    },
+    {
+      id: 'lcj-7',
+      ask: 'Where does a housefly lay its eggs?',
+      kind: 'choice',
+      options: [
+        'On rotting rubbish and dung',
+        'In still water',
+        'On clean leaves',
+      ],
+      answer: 'On rotting rubbish and dung',
+      teach: 'Still water is the mosquito’s place. Fly maggots feed on '
+        + 'rotting matter, so uncovered rubbish and dung are where the '
+        + 'housefly cycle starts.',
+      level: 2,
+    },
+    {
+      id: 'lcj-8',
+      ask: 'The larva of a housefly is called a:',
+      kind: 'choice',
+      options: ['Maggot', 'Wriggler', 'Tadpole'],
+      answer: 'Maggot',
+      teach: 'A wriggler is a mosquito larva and a tadpole is a young frog. '
+        + 'The white, legless housefly larva in rubbish is a maggot.',
+      level: 3,
+    },
+    {
+      id: 'lcj-9',
+      ask: 'Which action in a Kumasi compound breaks the mosquito life '
+        + 'cycle?',
+      kind: 'choice',
+      options: [
+        'Emptying old tyres and pots that hold rainwater',
+        'Sweeping the floor',
+        'Leaving the lights on',
+      ],
+      answer: 'Emptying old tyres and pots that hold rainwater',
+      teach: 'Sweeping does nothing to water where mosquitoes breed. '
+        + 'Removing standing water kills the egg, larva and pupa stages '
+        + 'before any adult appears.',
+      level: 3,
     },
   ],
 })
@@ -1392,6 +1779,76 @@ teach({
       teach: 'Support, protection and movement are the three. '
         + 'The skull protects the brain and the ribs the heart and lungs.',
       level: 3,
+    },
+    {
+      id: 'sk-4',
+      ask: 'Which bone protects the brain?',
+      kind: 'choice',
+      options: ['The skull', 'The ribs', 'The pelvis'],
+      answer: 'The skull',
+      teach: 'The ribs guard the chest and the pelvis supports the hips. The '
+        + 'brain sits inside the hard case of the skull.',
+      level: 1,
+    },
+    {
+      id: 'sk-5',
+      ask: 'What do the ribs protect?',
+      kind: 'choice',
+      options: [
+        'The heart and lungs',
+        'The brain',
+        'The stomach and intestines',
+      ],
+      answer: 'The heart and lungs',
+      teach: 'The ribs form a cage round the chest. The heart and lungs sit '
+        + 'inside that cage.',
+      level: 1,
+    },
+    {
+      id: 'sk-6',
+      ask: 'The knee bends one way only, like a door. What kind of joint '
+        + 'is it?',
+      kind: 'choice',
+      options: ['A hinge joint', 'A ball and socket joint', 'A fixed joint'],
+      answer: 'A hinge joint',
+      teach: 'A ball and socket joint can turn in many directions. A joint '
+        + 'that moves back and forth in one direction, like a door, is a '
+        + 'hinge.',
+      level: 2,
+    },
+    {
+      id: 'sk-7',
+      ask: 'Which joint lets the arm swing round in a full circle at the '
+        + 'shoulder?',
+      kind: 'choice',
+      options: ['A ball and socket joint', 'A hinge joint', 'A fixed joint'],
+      answer: 'A ball and socket joint',
+      teach: 'A hinge only bends one way. At the shoulder a round end of '
+        + 'bone sits in a cup, so it can turn in every direction.',
+      level: 3,
+    },
+    {
+      id: 'sk-8',
+      ask: 'Which muscle contracts to straighten the arm?',
+      kind: 'choice',
+      options: ['The triceps', 'The biceps', 'Both at once'],
+      answer: 'The triceps',
+      teach: 'The biceps bends the arm, and a muscle cannot push. To '
+        + 'straighten it, the biceps relaxes and the triceps at the back '
+        + 'contracts and pulls.',
+      level: 3,
+    },
+    {
+      id: 'sk-9',
+      ask: 'The bones of the skull are joined so they cannot move. This '
+        + 'kind of joint is:',
+      kind: 'choice',
+      options: ['A fixed joint', 'A hinge joint', 'A ball and socket joint'],
+      answer: 'A fixed joint',
+      teach: 'Not every joint is for movement. The skull bones are locked '
+        + 'together in fixed joints so the brain inside is held still and '
+        + 'safe.',
+      level: 4,
     },
   ],
 })
@@ -1627,6 +2084,83 @@ teach({
       answer: 'Most animals have more than one food',
       teach: 'Losing one food shifts the numbers rather than starving '
         + 'everything above it.',
+      level: 5,
+    },
+    {
+      id: 'fw-4',
+      ask: 'Where does the energy in every food chain first come from?',
+      kind: 'choice',
+      options: ['The sun', 'The soil', 'Water'],
+      answer: 'The sun',
+      teach: 'The soil and water give plants materials, not energy. Plants '
+        + 'trap sunlight to make food, and every animal after them lives '
+        + 'on that energy.',
+      level: 1,
+    },
+    {
+      id: 'fw-5',
+      ask: 'Fungi and bacteria that break down dead leaves and animals are '
+        + 'called:',
+      kind: 'choice',
+      options: ['Decomposers', 'Producers', 'Predators'],
+      answer: 'Decomposers',
+      teach: 'They do not make food from sunlight or hunt. They break dead '
+        + 'things down, returning the nutrients to the soil.',
+      level: 1,
+    },
+    {
+      id: 'fw-6',
+      ask: 'In a food chain, which way do the arrows point?',
+      kind: 'choice',
+      options: [
+        'From what is eaten to what eats it',
+        'From what eats to what is eaten',
+        'From the biggest animal to the smallest',
+      ],
+      answer: 'From what is eaten to what eats it',
+      teach: 'The arrow is not “eats”. It shows the energy moving, so it '
+        + 'points from the food to the animal that gets the energy.',
+      level: 2,
+    },
+    {
+      id: 'fw-7',
+      ask: 'In the chain maize → grasscutter → python, which is the '
+        + 'producer?',
+      kind: 'choice',
+      options: ['Maize', 'Grasscutter', 'Python'],
+      answer: 'Maize',
+      teach: 'The grasscutter and python both eat other living things. Only '
+        + 'the maize makes its own food from sunlight.',
+      level: 2,
+    },
+    {
+      id: 'fw-8',
+      ask: 'A hawk eats both lizards and rats. If disease kills all the '
+        + 'lizards, what will most likely happen to the rats?',
+      kind: 'choice',
+      options: [
+        'They decrease, because the hawks eat more rats',
+        'They increase',
+        'There is no change',
+      ],
+      answer: 'They decrease, because the hawks eat more rats',
+      teach: 'The hawks do not simply starve; they switch to the food that '
+        + 'is left. More hawks hunting rats means the rat numbers fall.',
+      level: 4,
+    },
+    {
+      id: 'fw-9',
+      ask: 'In the chain maize → grasscutter → python, farmers kill most '
+        + 'of the pythons. What happens to the maize?',
+      kind: 'choice',
+      options: [
+        'It decreases, because more grasscutters eat it',
+        'It increases',
+        'It does not change',
+      ],
+      answer: 'It decreases, because more grasscutters eat it',
+      teach: 'Follow the chain one link at a time. Fewer pythons means more '
+        + 'grasscutters survive, and more grasscutters eat more maize.',
       level: 5,
     },
   ],
@@ -1865,6 +2399,81 @@ teach({
         + 'Greater would mean speeding up.',
       level: 5,
     },
+    {
+      id: 'fr-4',
+      ask: 'What is the unit of force?',
+      kind: 'choice',
+      options: ['The newton', 'The kilogram', 'The metre'],
+      answer: 'The newton',
+      teach: 'The kilogram measures mass and the metre measures length. '
+        + 'Forces are measured in newtons, written N.',
+      level: 1,
+    },
+    {
+      id: 'fr-5',
+      ask: 'A magnet pulls a nail across a table without touching it. This '
+        + 'is:',
+      kind: 'choice',
+      options: ['A non-contact force', 'A contact force', 'Friction'],
+      answer: 'A non-contact force',
+      teach: 'Friction needs two surfaces touching. Magnetism, like gravity, '
+        + 'acts across a gap, so it is a non-contact force.',
+      level: 1,
+    },
+    {
+      id: 'fr-6',
+      ask: 'Friction acts:',
+      kind: 'choice',
+      options: [
+        'Against the direction of motion',
+        'In the direction of motion',
+        'Only on moving cars',
+      ],
+      answer: 'Against the direction of motion',
+      teach: 'Friction never helps something along its path. Where two '
+        + 'surfaces rub, it pulls back against the way the object is '
+        + 'moving.',
+      level: 2,
+    },
+    {
+      id: 'fr-7',
+      ask: 'A trotro driver presses the brakes. Which force slows the '
+        + 'trotro down?',
+      kind: 'choice',
+      options: ['Friction', 'Gravity', 'Magnetism'],
+      answer: 'Friction',
+      teach: 'Gravity pulls downwards, not backwards. The brake pads rub on '
+        + 'the wheels, and that friction acts against the motion.',
+      level: 2,
+    },
+    {
+      id: 'fr-8',
+      ask: 'A ball kicked along the ground slows down and stops. Why?',
+      kind: 'choice',
+      options: [
+        'Friction from the ground acts against its motion',
+        'The force from the kick runs out',
+        'Gravity pulls it backwards',
+      ],
+      answer: 'Friction from the ground acts against its motion',
+      teach: 'A moving ball does not carry a store of force that gets used '
+        + 'up. Without friction it would keep rolling; the ground and air '
+        + 'push against it until it stops.',
+      level: 4,
+    },
+    {
+      id: 'fr-9',
+      ask: 'One boy pushes a box with 30 N to the right. Another pushes '
+        + 'with 20 N to the left. What is the resultant force, in '
+        + 'newtons?',
+      kind: 'numeric',
+      answer: '10',
+      accept: ['10 N', '10N', '10 newtons', '10 N to the right'],
+      teach: 'Forces in opposite directions do not add up to 50 N. Take the '
+        + 'smaller from the larger: 30 − 20 = 10 N, towards the bigger '
+        + 'push.',
+      level: 4,
+    },
   ],
 })
 
@@ -2099,6 +2708,82 @@ teach({
         + 'That is the difference that matters.',
       level: 5,
     },
+    {
+      id: 'en-4',
+      ask: 'Energy stored in food, fuel and batteries is:',
+      kind: 'choice',
+      options: ['Chemical energy', 'Kinetic energy', 'Sound energy'],
+      answer: 'Chemical energy',
+      teach: 'Kinetic energy belongs to things that are moving. Food, fuel '
+        + 'and cells hold energy in their substances, released by a '
+        + 'chemical change.',
+      level: 1,
+    },
+    {
+      id: 'en-5',
+      ask: 'The energy a moving object has is called:',
+      kind: 'choice',
+      options: ['Kinetic energy', 'Potential energy', 'Chemical energy'],
+      answer: 'Kinetic energy',
+      teach: 'Potential energy is stored because of position. Anything that '
+        + 'is moving, like a running goat or a rolling tyre, has kinetic '
+        + 'energy.',
+      level: 1,
+    },
+    {
+      id: 'en-6',
+      ask: 'A solar panel on a roof in Tamale changes:',
+      kind: 'choice',
+      options: [
+        'Light energy to electrical energy',
+        'Electrical energy to light energy',
+        'Heat energy to chemical energy',
+      ],
+      answer: 'Light energy to electrical energy',
+      teach: 'A bulb goes from electrical to light; a solar panel does the '
+        + 'reverse. Sunlight goes in and electricity comes out.',
+      level: 2,
+    },
+    {
+      id: 'en-7',
+      ask: 'A coconut hangs high on a tree. What energy does it have '
+        + 'because of its height?',
+      kind: 'choice',
+      options: [
+        'Gravitational potential energy',
+        'Kinetic energy',
+        'Sound energy',
+      ],
+      answer: 'Gravitational potential energy',
+      teach: 'It is not moving, so it has no kinetic energy yet. Being high '
+        + 'up, it stores energy that gravity can release if it falls.',
+      level: 2,
+    },
+    {
+      id: 'en-8',
+      ask: 'As the coconut falls, what happens to its energy?',
+      kind: 'choice',
+      options: [
+        'Potential energy changes to kinetic energy',
+        'Kinetic energy changes to potential energy',
+        'The energy is used up',
+      ],
+      answer: 'Potential energy changes to kinetic energy',
+      teach: 'Energy is not used up. As it drops it loses height and gains '
+        + 'speed, so stored energy becomes movement energy.',
+      level: 3,
+    },
+    {
+      id: 'en-9',
+      ask: 'A bulb takes in 100 J of electrical energy and gives out 20 J '
+        + 'as light. How many joules become heat?',
+      kind: 'numeric',
+      answer: '80',
+      accept: ['80 J', '80J', '80 joules'],
+      teach: 'The energy does not vanish. What goes in must all come out '
+        + 'somewhere: 100 − 20 = 80 J leaves as heat.',
+      level: 4,
+    },
   ],
 })
 
@@ -2325,6 +3010,75 @@ teach({
       teach: 'Being full depends on amount, being nourished on the mix. '
         + 'Plenty of one class cannot do another class’s job.',
       level: 5,
+    },
+    {
+      id: 'nut-4',
+      ask: 'Kenkey, yam and rice are rich in which food class?',
+      kind: 'choice',
+      options: ['Carbohydrates', 'Proteins', 'Vitamins'],
+      answer: 'Carbohydrates',
+      teach: 'They fill you up, but they are not mainly for building the '
+        + 'body. Starchy foods like these give energy, which is the job '
+        + 'of carbohydrates.',
+      level: 1,
+    },
+    {
+      id: 'nut-5',
+      ask: 'Beans, fish and eggs are good sources of:',
+      kind: 'choice',
+      options: ['Proteins', 'Carbohydrates', 'Vitamins'],
+      answer: 'Proteins',
+      teach: 'These are the body-building foods. Protein builds and repairs '
+        + 'muscle, skin and other parts.',
+      level: 1,
+    },
+    {
+      id: 'nut-6',
+      ask: 'A shortage of iron in the diet causes:',
+      kind: 'choice',
+      options: ['Anaemia', 'Kwashiorkor', 'Night blindness'],
+      answer: 'Anaemia',
+      teach: 'Kwashiorkor comes from too little protein and night blindness '
+        + 'from too little vitamin A. Iron is needed for blood, so too '
+        + 'little causes anaemia, with tiredness and pale skin.',
+      level: 2,
+    },
+    {
+      id: 'nut-7',
+      ask: 'Night blindness is caused by too little:',
+      kind: 'choice',
+      options: ['Vitamin A', 'Iron', 'Protein'],
+      answer: 'Vitamin A',
+      teach: 'Iron shortage causes anaemia. Vitamin A, found in mango, '
+        + 'pawpaw and kontomire, is needed for seeing in dim light.',
+      level: 2,
+    },
+    {
+      id: 'nut-8',
+      ask: 'Which meal has the best mix of food classes?',
+      kind: 'choice',
+      options: [
+        'Rice, fish stew and kontomire',
+        'Kenkey and pepper only',
+        'Gari and sugar',
+      ],
+      answer: 'Rice, fish stew and kontomire',
+      teach: 'The other two are almost all carbohydrate. Rice gives energy, '
+        + 'fish gives protein, the oil gives fat and kontomire gives '
+        + 'vitamins and minerals.',
+      level: 3,
+    },
+    {
+      id: 'nut-9',
+      ask: 'A child eats only kenkey and pepper for months and develops a '
+        + 'swollen belly and thin arms. Which food class is most missing?',
+      kind: 'choice',
+      options: ['Proteins', 'Carbohydrates', 'Water'],
+      answer: 'Proteins',
+      teach: 'Kenkey is full of carbohydrate, so energy is not the gap. '
+        + 'Swelling with thin limbs is kwashiorkor, the sign of too '
+        + 'little protein.',
+      level: 4,
     },
   ],
 })
@@ -2578,6 +3332,81 @@ teach({
       teach: 'Texture needs organic matter. '
         + 'They are two different problems with two different answers.',
       level: 5,
+    },
+    {
+      id: 'sj-4',
+      ask: 'Which soil is usually best for growing most crops?',
+      kind: 'choice',
+      options: ['Loam', 'Sandy', 'Clay'],
+      answer: 'Loam',
+      teach: 'Sandy soil drains too fast and clay holds too much water. Loam '
+        + 'is a mix of both, so it holds water and air and is rich in '
+        + 'humus.',
+      level: 1,
+    },
+    {
+      id: 'sj-5',
+      ask: 'Which soil holds the most water?',
+      kind: 'choice',
+      options: ['Clay', 'Sandy', 'Loam'],
+      answer: 'Clay',
+      teach: 'Big particles do not mean more water. Clay’s tiny particles '
+        + 'leave tiny gaps that hold water tightly.',
+      level: 2,
+    },
+    {
+      id: 'sj-6',
+      ask: 'Wet soil rubbed between the fingers feels gritty and will not '
+        + 'roll into a ball. It is:',
+      kind: 'choice',
+      options: ['Sandy soil', 'Clay soil', 'Loam'],
+      answer: 'Sandy soil',
+      teach: 'Clay feels smooth and sticky. The gritty feel is the large '
+        + 'sand grains, which do not stick together.',
+      level: 3,
+    },
+    {
+      id: 'sj-7',
+      ask: 'Wet soil rolls into a smooth, sticky thread that bends into a '
+        + 'ring without breaking. It is:',
+      kind: 'choice',
+      options: ['Clay soil', 'Sandy soil', 'Loam'],
+      answer: 'Clay soil',
+      teach: 'Sand falls apart and loam breaks when bent. Only clay’s fine '
+        + 'particles stick so well that the thread bends into a ring.',
+      level: 3,
+    },
+    {
+      id: 'sj-8',
+      ask: 'Why does water drain quickly through sandy soil?',
+      kind: 'choice',
+      options: [
+        'Its large particles leave large gaps',
+        'Sand soaks the water up',
+        'Sand is warm',
+      ],
+      answer: 'Its large particles leave large gaps',
+      teach: 'Sand does not soak water up; it lets it pass. Water runs '
+        + 'straight through the wide spaces between the big grains.',
+      level: 3,
+    },
+    {
+      id: 'sj-9',
+      ask: 'A farmer near Techiman grows maize on the same plot every year '
+        + 'and the harvest keeps falling. What would NPK fertiliser give '
+        + 'back?',
+      kind: 'choice',
+      options: [
+        'Nutrients the crops took out, such as nitrogen',
+        'Air spaces in the soil',
+        'A better soil texture',
+      ],
+      answer: 'Nutrients the crops took out, such as nitrogen',
+      teach: 'Texture and air spaces depend on the particles, which '
+        + 'fertiliser does not change. Each harvest carries nutrients '
+        + 'away, and fertiliser puts nitrogen, phosphorus and potassium '
+        + 'back.',
+      level: 4,
     },
   ],
 })
