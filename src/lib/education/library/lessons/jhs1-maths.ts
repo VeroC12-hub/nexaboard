@@ -41,14 +41,17 @@ teach({
   why:
     'Ghana has about 34,000,000 people, and the sun is '
     + '150,000,000 kilometres away. '
-    + '000007 metres wide. '
+    + 'A red blood cell is about 0.000007 metres wide. '
     + 'Writing out all those noughts is slow, and one dropped '
     + 'nought changes the whole answer. '
     + 'How do you write a number that big, or that small, so that '
     + 'it is short and still exact?',
 
   notation:
-    '4 times $10^7$, and it is said aloud as three point four '
+    'A number in standard form is written as a value, then a '
+    + 'multiplication sign, then 10 with a raised power. '
+    + 'So 34,000,000 is written $3.4 \\times 10^7$, '
+    + 'and it is said aloud as three point four '
     + 'times ten to the power seven. '
     + 'The first part must be at least 1 and less than 10, and it '
     + 'is called the mantissa. '
@@ -256,7 +259,7 @@ teach({
     + 'cedis to a friend. '
     + 'The balance that shows is not 30, and it is not nothing '
     + 'either. '
-    + 'It shows minus 30, which means you owe 30 cedis. '
+    + 'It shows $-30$, which means you owe 30 cedis. '
     + 'What kind of number is that, and how do you add and '
     + 'subtract with it?',
 
@@ -311,29 +314,29 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'What is negative 7 plus 3?',
+      ask: 'What is $-7 + 3$?',
       steps: [
-        'Start at negative 7 on the line.',
+        'Start at $-7$ on the line.',
         'Adding 3 moves three places right.',
       ],
-      answer: 'Negative 4.',
+      answer: '$-4$.',
     },
     {
       level: 4,
-      ask: 'What is 5 minus negative 3?',
+      ask: 'What is $5 - (-3)$?',
       steps: [
         'Subtracting a negative moves right.',
-        'So this is 5 plus 3.',
+        'So this is $5 + 3$.',
       ],
       answer: '8. Taking away a debt of 3 leaves you 3 better off.',
     },
     {
       level: 5,
-      ask: 'What is negative 6 times negative 4, and why is it positive?',
+      ask: 'What is $-6 \\times -4$, and why is it positive?',
       steps: [
-        'Digits first: 6 times 4 is 24.',
+        'Digits first: $6 \\times 4 = 24$.',
         'Signs: both negative, so the answer is positive.',
-        'Negative 6 times 4 would be negative 24. The second minus reverses '
+        '$-6 \\times 4$ would be $-24$. The second minus reverses '
           + 'it.',
       ],
       answer: '24. The second negative reverses the first one.',
@@ -497,19 +500,23 @@ teach({
   },
 
   why:
-    '82 metres and wants the floor area. '
-    + '6934 square metres. '
-    + '0034 of a square metre. '
+    'A carpenter measures a room at 3.47 metres by 2.82 metres '
+    + 'and wants the floor area. '
+    + 'The calculator gives 9.7854 square metres. '
+    + 'That last digit claims to know the area to within '
+    + 'a ten thousandth of a square metre, '
+    + 'from a tape marked in centimetres. '
     + 'Keeping four decimal places here is not more correct, only '
     + 'longer, so how many digits should the answer actually '
     + 'keep?',
 
   notation:
-    'f. '
+    'Significant figures is shortened to s.f., so "3 s.f." '
     + 'is said aloud as three significant figures. '
-    + 'p. '
+    + 'Decimal places is shortened to d.p., and "2 d.p." is read '
     + 'in the same way. '
-    + '00456 has three significant figures but five decimal '
+    + 'The two count different things: 0.00456 has three '
+    + 'significant figures but five decimal '
     + 'places. '
     + 'Rounding to the wrong one of the two is the commonest way '
     + 'to lose a mark, so read which one the question asked for '
@@ -527,7 +534,7 @@ teach({
     + 'so that a mistake announces itself. '
     + 'Round everything to one significant figure, do the easy sum in your '
     + 'head, and you have a rough target. '
-    + 'If 387 times 21 should be about 400 times 20, which is 8,000, '
+    + 'If $387 \\times 21$ should be about $400 \\times 20$, which is 8,000, '
     + 'then an answer of 812 or 81,270 is wrong, and you can see it in two '
     + 'seconds without checking a single step. '
     + 'This catches the mistakes that matter most: '
@@ -577,10 +584,10 @@ teach({
     },
     {
       level: 5,
-      ask: 'Estimate 387 times 21, and say what it catches.',
+      ask: 'Estimate $387 \\times 21$, and say what it catches.',
       steps: [
         'Round each to one significant figure: 400 and 20.',
-        '400 times 20 is 8,000.',
+        '$400 \\times 20$ is 8,000.',
       ],
       answer: 'About 8,000. An answer of 812 or 81,270 is now obviously '
         + 'wrong, and those are the usual slips.',
@@ -710,7 +717,7 @@ teach({
     'You have 3 litres of palm oil and bottles that hold half a litre. '
     + 'You want to know how many bottles you can fill. '
     + 'Dividing usually makes a number smaller, '
-    + 'so 3 divided by a half ought to come out under 3. '
+    + 'so $3 \\div \\frac{1}{2}$ ought to come out under 3. '
     + 'But you can see with your own eyes that 3 litres '
     + 'fills more than 3 half-litre bottles. '
     + 'So why does dividing here make the answer bigger?',
@@ -720,7 +727,7 @@ teach({
     + 'and another below it. '
     + 'The number on top is called the numerator. '
     + 'The one below is the denominator. '
-    + 'So 3 over 4 is said "three quarters", '
+    + 'So $\\frac{3}{4}$ is said "three quarters", '
     + 'or "three over four" while you are working. '
     + 'The commonest way to lose a mark in division '
     + 'is to flip the first fraction instead of the second.',
@@ -736,8 +743,8 @@ teach({
     + 'because memorised without a reason it gets applied to multiplication '
     + 'too. '
     + 'Ask what dividing means: how many of these fit into that. '
-    + '3 divided by a half is asking how many halves fit into 3. '
-    + 'The answer is 6, which is 3 times 2. '
+    + '$3 \\div \\frac{1}{2}$ is asking how many halves fit into 3. '
+    + 'The answer is 6, which is $3 \\times 2$. '
     + 'Dividing by a half doubled the number, '
     + 'because halves are small and many of them fit. '
     + 'So dividing by a fraction less than one makes the answer bigger, '
@@ -771,27 +778,27 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'What is two thirds times three quarters?',
+      ask: 'What is $\\frac{2}{3} \\times \\frac{3}{4}$?',
       steps: [
-        'Tops: 2 times 3 is 6.',
-        'Bottoms: 3 times 4 is 12.',
-        'Six twelfths simplifies.',
+        'Tops: $2 \\times 3 = 6$.',
+        'Bottoms: $3 \\times 4 = 12$.',
+        '$\\frac{6}{12}$ simplifies.',
       ],
-      answer: 'One half.',
+      answer: '$\\frac{1}{2}$.',
     },
     {
       level: 4,
-      ask: 'What is three quarters divided by one half?',
+      ask: 'What is $\\frac{3}{4} \\div \\frac{1}{2}$?',
       steps: [
-        'Flip the second: one half becomes two over one.',
-        'Now multiply: 3 times 2 is 6, and 4 times 1 is 4.',
-        'Six quarters simplifies.',
+        'Flip the second: $\\frac{1}{2}$ becomes $\\frac{2}{1}$.',
+        'Now multiply: $3 \\times 2 = 6$, and $4 \\times 1 = 4$.',
+        '$\\frac{6}{4}$ simplifies.',
       ],
-      answer: 'One and a half.',
+      answer: '$1\\frac{1}{2}$.',
     },
     {
       level: 5,
-      ask: 'Why is 3 divided by a half equal to 6 and not 1.5?',
+      ask: 'Why is $3 \\div \\frac{1}{2}$ equal to 6 and not 1.5?',
       steps: [
         'Dividing asks how many fit in.',
         'How many halves fit into 3?',
@@ -941,10 +948,10 @@ teach({
     + 'time?',
 
   notation:
-    'A number written next to a letter means multiply, so 2a '
-    + 'means 2 times a. '
-    + 'Two letters written together mean the same thing, so ab '
-    + 'means a times b. '
+    'A number written next to a letter means multiply, so $2a$ '
+    + 'means $2 \\times a$. '
+    + 'Two letters written together mean the same thing, so $ab$ '
+    + 'means $a \\times b$. '
     + 'A raised number applies only to the letter it sits on, so '
     + '$3a^2$ means 3 times a times a, and not 3a times 3a. '
     + 'Doubling instead of squaring is the commonest way to lose '
@@ -953,25 +960,25 @@ teach({
   idea:
     'Substitution means replacing each letter with its value '
     + 'and then working the expression out. '
-    + 'If a is 3 and b is 4, then 2a plus b is 2 times 3 plus 4, which is 10.',
+    + 'If $a = 3$ and $b = 4$, then $2a + b$ is $2 \\times 3 + 4$, which is 10.',
 
   mechanism:
     'Two things cause almost every mistake here, and brackets fix both. '
     + 'The first is a negative value, which loses its sign when it is '
     + 'squared without one. '
-    + 'The second is an implied multiplication: 2a means 2 times a, and '
+    + 'The second is an implied multiplication: $2a$ means $2 \\times a$, and '
     + 'running the two digits together looks perfectly plausible on the '
     + 'page. '
     + 'A bracket makes both of them impossible to write.',
 
   recap:
     'A letter can stand in for a number. '
-    + 'If a bag of rice costs c cedis, then two bags cost 2c, '
-    + 'whatever c turns out to be. '
+    + 'If a bag of rice costs $c$ cedis, then two bags cost $2c$, '
+    + 'whatever $c$ turns out to be. '
     + 'There is also a fixed order for working any calculation '
     + 'out: brackets first, then powers, then multiply and '
     + 'divide, then add and subtract. '
-    + 'So 2 plus 3 times 4 is 14 and not 20, because the '
+    + 'So $2 + 3 \\times 4$ is 14 and not 20, because the '
     + 'multiplying is done before the adding. '
     + 'This lesson uses both of those ideas at once.',
 
@@ -987,33 +994,33 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'If a is 3 and b is 4, what is 2a plus b?',
+      ask: 'If $a = 3$ and $b = 4$, what is $2a + b$?',
       steps: [
-        'Write it as 2 times (3) plus (4).',
-        '2 times 3 is 6.',
-        '6 plus 4.',
+        'Write it as $2 \\times (3) + (4)$.',
+        '$2 \\times 3 = 6$.',
+        '$6 + 4$.',
       ],
       answer: '10.',
     },
     {
       level: 4,
-      ask: 'If x is negative 2, what is x squared?',
+      ask: 'If $x = -2$, what is $x^2$?',
       steps: [
-        'Write it as (negative 2) squared.',
-        'Negative 2 times negative 2.',
+        'Write it as $(-2)^2$.',
+        '$-2 \\times -2$.',
         'Same signs give a positive.',
       ],
-      answer: '4. Without the bracket people write negative 4.',
+      answer: '4. Without the bracket people write $-4$.',
     },
     {
       level: 5,
-      ask: 'If p is 2 and q is 5, what is 3p squared plus 2q?',
+      ask: 'If $p = 2$ and $q = 5$, what is $3p^2 + 2q$?',
       steps: [
-        'Write it as 3 times (2) squared plus 2 times (5).',
-        'Powers before multiplying: (2) squared is 4.',
-        '3 times 4 is 12. 2 times 5 is 10.',
+        'Write it as $3 \\times (2)^2 + 2 \\times (5)$.',
+        'Powers before multiplying: $(2)^2 = 4$.',
+        '$3 \\times 4 = 12$. $2 \\times 5 = 10$.',
       ],
-      answer: '22. Only the p is squared, not the 3p.',
+      answer: '22. Only the $p$ is squared, not the $3p$.',
     },
   ],
 
@@ -1156,9 +1163,9 @@ teach({
     'Terms that can be put together are called like terms, and '
     + 'they carry the same letter raised to the same power. '
     + 'The number in front of a term is called its coefficient, '
-    + 'so in 7x the coefficient is 7. '
-    + 'A letter standing alone has a coefficient of 1, so x means '
-    + '1x. '
+    + 'so in $7x$ the coefficient is 7. '
+    + 'A letter standing alone has a coefficient of 1, so $x$ means '
+    + '$1x$. '
     + 'Treating $x$ and $x^2$ as like terms is the commonest way '
     + 'to lose a mark: the power is different, so $3x + 2x^2$ '
     + 'cannot be shortened at all.',
@@ -1172,7 +1179,7 @@ teach({
 
   mechanism:
     'The reason is what the letters stand for. '
-    + 'x is a length and x squared is an area. '
+    + '$x$ is a length and $x^2$ is an area. '
     + 'You cannot add a length to an area any more than you can add '
     + '3 metres to 3 square metres and get 6 of anything. '
     + 'So "like terms" is not a rule about appearance. '
@@ -1183,8 +1190,8 @@ teach({
   recap:
     'In algebra a letter stands for a number, and a number in '
     + 'front of a letter means multiply. '
-    + 'So 3x means three lots of x, and if x is 4 then 3x is 12. '
-    + 'A piece like 3x, with its own sign and its own letter, is '
+    + 'So $3x$ means three lots of $x$, and if $x = 4$ then $3x$ is 12. '
+    + 'A piece like $3x$, with its own sign and its own letter, is '
     + 'called a term. '
     + 'An expression is simply terms added together or '
     + 'subtracted. '
@@ -1203,27 +1210,27 @@ teach({
   worked: [
     {
       level: 3,
-      ask: 'Simplify 3x plus 5x.',
+      ask: 'Simplify $3x + 5x$.',
       steps: [
-        'Both are x to the power one.',
+        'Both are $x$ to the power one.',
         'Add the numbers: 3 and 5.',
       ],
-      answer: '8x.',
+      answer: '$8x$.',
     },
     {
       level: 4,
-      ask: 'Simplify 4a plus 3b minus 2a.',
+      ask: 'Simplify $4a + 3b - 2a$.',
       steps: [
-        'The a terms: 4a minus 2a is 2a.',
-        'The b term has nothing to pair with.',
+        'The $a$ terms: $4a - 2a = 2a$.',
+        'The $b$ term has nothing to pair with.',
       ],
-      answer: '2a plus 3b. It is finished, even though two terms remain.',
+      answer: '$2a + 3b$. It is finished, even though two terms remain.',
     },
     {
       level: 5,
-      ask: 'Why can 3x and 3x squared not be collected?',
+      ask: 'Why can $3x$ and $3x^2$ not be collected?',
       steps: [
-        'x is a length. x squared is an area.',
+        '$x$ is a length. $x^2$ is an area.',
         'They are different kinds of quantity.',
       ],
       answer: 'Because they are not the same kind of thing, '
