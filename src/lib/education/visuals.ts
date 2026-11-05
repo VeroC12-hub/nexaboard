@@ -157,9 +157,19 @@ export function cleanSvg(raw: string): string | null {
   svg = svg.replace(CSS_URLS, 'none')
 
   /* Must scale to the column it sits in rather than to whatever the model
-     happened to type, and must have a viewBox to scale by. */
+     happened to type, and must have a viewBox to scale by.
+
+     Only the opening tag. This used to strip width and height from the whole
+     document, which also took them off every <rect> and <ellipse> inside it,
+     and a rectangle with no width is a rectangle nobody can see. Measured
+     across the library it blanked 908 shapes in 174 figures, so a third of
+     the hand drawn diagrams were reaching learners as labels floating with
+     no boxes round them. The intent was always the root element: that is
+     what has to scale to the column, and a shape's own dimensions are the
+     drawing. */
   if (!/viewBox\s*=/i.test(svg)) return null
-  svg = svg.replace(/\s(width|height)\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+  svg = svg.replace(/<svg[^>]*>/i, tag =>
+    tag.replace(/\s(width|height)\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, ''))
   svg = svg.replace(/<svg/i, '<svg width="100%" height="auto"')
 
   /* A picture too big to have come from a diagram. */
