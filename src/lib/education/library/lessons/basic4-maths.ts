@@ -224,6 +224,89 @@ teach({
       teach: 'It sits in the thousands place, so it counts four thousands.',
       level: 3,
     },
+    {
+      id: 'ln-4',
+      ask: 'How do you read 3,450 out loud?',
+      kind: 'choice',
+      options: [
+        'Three hundred and forty five',
+        'Three thousand, four hundred and fifty',
+        'Thirty four thousand, five hundred',
+        'Three thousand and forty five',
+      ],
+      answer: 'Three thousand, four hundred and fifty',
+      teach: 'Group from the right: 3 and 450. Read the left group and say '
+        + 'thousand, then read 450 as an ordinary number.',
+      level: 2,
+    },
+    {
+      id: 'ln-5',
+      ask: 'Are 3,450 and 3450 the same number?',
+      kind: 'choice',
+      options: [
+        'No, 3,450 is bigger',
+        'No, 3450 is bigger',
+        'Yes, the comma only helps your eye',
+      ],
+      answer: 'Yes, the comma only helps your eye',
+      teach: 'The comma is not part of the number. It only shows where the '
+        + 'thousands group ends, so the digits keep their places either way.',
+      level: 2,
+    },
+    {
+      id: 'ln-6',
+      ask: 'Write four thousand, two hundred and seventy one as a number.',
+      kind: 'numeric',
+      answer: '4271',
+      accept: ['4,271'],
+      teach: 'Four thousands, two hundreds, seven tens and one one. Put a digit '
+        + 'in each place: 4, 2, 7, 1.',
+      level: 2,
+    },
+    {
+      id: 'ln-7',
+      ask: 'Which is bigger, 6,512 or 6,251?',
+      kind: 'choice',
+      options: ['6,251', '6,512', 'They are equal'],
+      answer: '6,512',
+      teach: 'Both have four digits and 6 thousands, so move to the hundreds. '
+        + '5 hundreds beats 2 hundreds, and you can stop there.',
+      level: 3,
+    },
+    {
+      id: 'ln-8',
+      ask: 'What is the 7 worth in 27,318?',
+      kind: 'numeric',
+      answer: '7000',
+      accept: ['7,000', 'seven thousand'],
+      teach: 'Group from the right: 27 and 318. The 7 is the last digit of the '
+        + 'thousands group, so it counts seven thousands. Counting from the '
+        + 'left would give the wrong place.',
+      level: 3,
+    },
+    {
+      id: 'ln-9',
+      ask: 'Write five thousand and six as a number.',
+      kind: 'numeric',
+      answer: '5006',
+      accept: ['5,006'],
+      teach: 'Five thousands, no hundreds, no tens and six ones. Two noughts '
+        + 'hold the empty places open. Write 56 or 506 and the 5 is worth far '
+        + 'less.',
+      level: 4,
+    },
+    {
+      id: 'ln-10',
+      ask: 'One man says 40,000 people are at the stadium. Another says 4,000. '
+        + 'How many times bigger is 40,000 than 4,000?',
+      kind: 'numeric',
+      answer: '10',
+      accept: ['ten', '10 times', 'ten times'],
+      teach: 'In 40,000 the 4 counts ten thousands. In 4,000 it counts '
+        + 'thousands. Each place to the left is worth ten of the one beside '
+        + 'it, so the first is ten times the second.',
+      level: 4,
+    },
   ],
 })
 
@@ -441,6 +524,90 @@ teach({
         + 'Growing or shrinking never does.',
       level: 3,
     },
+    {
+      id: 'wp-4',
+      ask: 'Kwame had 25 marbles. His friend gave him 18 more. How many does '
+        + 'he have now?',
+      kind: 'numeric',
+      answer: '43',
+      accept: ['forty three', 'forty-three', '43 marbles'],
+      teach: 'He was given more, so the amount grew. Growing means add. 25 and '
+        + '18: 5 and 8 is 13, write 3 carry 1. Then 2 and 1 and 1 is 4.',
+      level: 2,
+    },
+    {
+      id: 'wp-5',
+      ask: 'A tro-tro had 18 passengers. At Kaneshie 7 got off. How many are '
+        + 'still on?',
+      kind: 'numeric',
+      answer: '11',
+      accept: ['eleven', '11 passengers'],
+      teach: 'People got off, so the amount shrank. Shrinking means take away: '
+        + '18 take away 7 is 11.',
+      level: 2,
+    },
+    {
+      id: 'wp-6',
+      ask: 'Ama had 14 oranges. She sold some and now has 9. A boy adds 14 and '
+        + '9 and says 23. Why is he wrong?',
+      kind: 'choice',
+      options: [
+        'He added 14 and 9 wrongly',
+        'She sold some, so the amount shrank and he should take away',
+        'He should have multiplied',
+      ],
+      answer: 'She sold some, so the amount shrank and he should take away',
+      teach: 'His adding is correct, but Ama cannot have more after selling. '
+        + 'The amount shrank, so take away: 14 take 9 is 5 oranges sold.',
+      level: 3,
+    },
+    {
+      id: 'wp-7',
+      ask: 'Kofi has 120 cedis. His brother has 45 cedis more than Kofi. How '
+        + 'much does his brother have?',
+      kind: 'numeric',
+      answer: '165',
+      accept: ['165 cedis', 'one hundred and sixty five'],
+      teach: '"More than Kofi" means the brother has Kofi’s amount and 45 on '
+        + 'top. 120 and 45 is 165.',
+      level: 3,
+    },
+    {
+      id: 'wp-8',
+      ask: 'A basket had 120 mangoes. 45 were sold, then 30 more were picked '
+        + 'and put in. How many are in the basket now?',
+      kind: 'numeric',
+      answer: '105',
+      accept: ['105 mangoes', 'one hundred and five'],
+      teach: 'Two things happened, so do them in order. Sold 45, so it shrank: '
+        + '120 take 45 is 75. Then 30 added, so it grew: 75 and 30 is 105. '
+        + 'Stopping at 75 answers the middle step, not the question.',
+      level: 3,
+    },
+    {
+      id: 'wp-9',
+      ask: 'Does the word "altogether" always mean you add?',
+      kind: 'choice',
+      options: [
+        'Yes, always',
+        'No, ask whether the amount grew or shrank',
+        'No, it always means take away',
+      ],
+      answer: 'No, ask whether the amount grew or shrank',
+      teach: 'Key words work most of the time and then catch you out. Whether '
+        + 'the amount ended bigger or smaller never lies.',
+      level: 3,
+    },
+    {
+      id: 'wp-10',
+      ask: 'Ama sold 19 oranges and has 27 left. How many did she start with?',
+      kind: 'numeric',
+      answer: '46',
+      accept: ['forty six', 'forty-six', '46 oranges'],
+      teach: 'Work backwards. She had more at the start than now, so add back '
+        + 'what she sold: 27 and 19 is 46. Check: 46 take 19 is 27.',
+      level: 4,
+    },
   ],
 })
 
@@ -646,6 +813,83 @@ teach({
       accept: ['1,260', 'one thousand two hundred and sixty'],
       teach: 'Do 42 times 3, which is 126, then multiply by 10. '
         + 'Forgetting the ten is the usual slip.',
+      level: 4,
+    },
+    {
+      id: 'lm-4',
+      ask: 'To work out 247 times 3, how do you split 247?',
+      kind: 'choice',
+      options: ['Into 2, 4 and 7', 'Into 24 and 7', 'Into 200, 40 and 7'],
+      answer: 'Into 200, 40 and 7',
+      teach: 'Split by the places. The 2 is in the hundreds, so it stands for '
+        + '200, and the 4 stands for 40. Splitting into 2, 4 and 7 loses what '
+        + 'each digit is worth.',
+      level: 2,
+    },
+    {
+      id: 'lm-5',
+      ask: 'What is 32 times 3?',
+      kind: 'numeric',
+      answer: '96',
+      accept: ['ninety six', 'ninety-six'],
+      teach: 'Split into 30 and 2. 30 times 3 is 90 and 2 times 3 is 6. 90 and '
+        + '6 is 96.',
+      level: 2,
+    },
+    {
+      id: 'lm-6',
+      ask: 'What is 124 times 3?',
+      kind: 'numeric',
+      answer: '372',
+      accept: ['three hundred and seventy two'],
+      teach: 'Split into 100, 20 and 4. 100 times 3 is 300, 20 times 3 is 60, '
+        + '4 times 3 is 12. Then 300 and 60 and 12 is 372.',
+      level: 3,
+    },
+    {
+      id: 'lm-7',
+      ask: 'Kofi works out 34 times 6 by doing 3 times 6 and writing 18. What '
+        + 'did he get wrong?',
+      kind: 'choice',
+      options: [
+        'He forgot to carry',
+        'The 3 is really 30, and he left out the 4',
+        'He should have added',
+      ],
+      answer: 'The 3 is really 30, and he left out the 4',
+      teach: 'Every part has to be multiplied. 30 times 6 is 180 and 4 times 6 '
+        + 'is 24, so 34 times 6 is 204.',
+      level: 3,
+    },
+    {
+      id: 'lm-8',
+      ask: 'One exercise book costs 6 cedis. 28 children each need one. How '
+        + 'much do the books cost?',
+      kind: 'numeric',
+      answer: '168',
+      accept: ['168 cedis', 'one hundred and sixty eight'],
+      teach: '28 times 6. Split into 20 and 8. 20 times 6 is 120 and 8 times 6 '
+        + 'is 48. 120 and 48 is 168.',
+      level: 3,
+    },
+    {
+      id: 'lm-9',
+      ask: 'What is 25 times 20?',
+      kind: 'numeric',
+      answer: '500',
+      accept: ['five hundred'],
+      teach: '20 is 2 tens. Do 25 times 2, which is 50, then multiply by 10 to '
+        + 'put the ten back: 500. Stopping at 50 forgets the ten.',
+      level: 3,
+    },
+    {
+      id: 'lm-10',
+      ask: 'What is 53 times 40?',
+      kind: 'numeric',
+      answer: '2120',
+      accept: ['2,120', 'two thousand one hundred and twenty'],
+      teach: 'Do 53 times 4 first: 50 times 4 is 200 and 3 times 4 is 12, so '
+        + '212. Then multiply by 10 for the ten: 2,120.',
       level: 4,
     },
   ],
@@ -886,6 +1130,80 @@ teach({
         + 'Two are left, and that leftover is the remainder.',
       level: 4,
     },
+    {
+      id: 'ds-4',
+      ask: 'Share 21 mangoes between 3 children. How many does each get?',
+      kind: 'numeric',
+      answer: '7',
+      accept: ['seven', '7 mangoes'],
+      teach: 'This is sharing. Each round of dealing uses 3, and 21 is seven '
+        + 'rounds. Check: 7 times 3 is 21.',
+      level: 2,
+    },
+    {
+      id: 'ds-5',
+      ask: 'You have 30 oranges and bags that hold 5. How many bags do you '
+        + 'fill?',
+      kind: 'numeric',
+      answer: '6',
+      accept: ['six', '6 bags'],
+      teach: 'This is grouping. Count in fives: 5, 10, 15, 20, 25, 30. That is '
+        + 'six counts, so six bags.',
+      level: 2,
+    },
+    {
+      id: 'ds-6',
+      ask: '24 oranges are packed into bags of 6. Is that sharing or grouping?',
+      kind: 'choice',
+      options: ['Sharing', 'Grouping'],
+      answer: 'Grouping',
+      teach: 'The 6 is the size of a bag, not a number of people. Filling bags '
+        + 'of a fixed size is grouping.',
+      level: 3,
+    },
+    {
+      id: 'ds-7',
+      ask: '12 mangoes are shared between 3 children. The answer is 4. What does '
+        + 'the 4 tell you?',
+      kind: 'choice',
+      options: ['How many bags there are', 'How many each child gets', 'How many are left'],
+      answer: 'How many each child gets',
+      teach: 'In sharing, the 3 is the number of children, so the answer is '
+        + 'how many each one gets. In grouping it would be how many bags.',
+      level: 3,
+    },
+    {
+      id: 'ds-8',
+      ask: 'You work out that 35 divided by 5 is 7. Which sum checks it?',
+      kind: 'choice',
+      options: ['7 + 5 = 12', '35 x 5', '7 x 5 = 35'],
+      answer: '7 x 5 = 35',
+      teach: 'Multiplying undoes dividing. Your answer times the number you '
+        + 'divided by should give the total back: 7 times 5 is 35.',
+      level: 3,
+    },
+    {
+      id: 'ds-9',
+      ask: 'Share 17 sweets between 5 children. How many does each child get?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three', '3 each', '3 remainder 2'],
+      teach: 'Each round uses 5. Three rounds use 15, and 2 are left, which '
+        + 'is not enough for another round. So 3 each, remainder 2.',
+      level: 4,
+    },
+    {
+      id: 'ds-10',
+      ask: '26 children are going on a trip, 4 to a car. How many cars are '
+        + 'needed?',
+      kind: 'numeric',
+      answer: '7',
+      accept: ['seven', '7 cars'],
+      teach: '26 divided by 4 is 6 remainder 2. But the last 2 children still '
+        + 'need a ride, so one more car: 7. The story decides what to do with '
+        + 'the remainder.',
+      level: 4,
+    },
   ],
 })
 
@@ -1121,6 +1439,85 @@ teach({
       teach: 'Multiplying both cuts every piece and gives you more of them, '
         + 'so the amount stays. Adding does not work that way.',
       level: 3,
+    },
+    {
+      id: 'eq-4',
+      ask: 'What do you do to simplify a fraction?',
+      kind: 'choice',
+      options: [
+        'Take the same number away from top and bottom',
+        'Divide top and bottom by the same number',
+        'Divide only the bottom',
+      ],
+      answer: 'Divide top and bottom by the same number',
+      teach: 'Find a number that divides into both and divide both by it. '
+        + 'Taking away, or changing only one number, changes the amount.',
+      level: 2,
+    },
+    {
+      id: 'eq-5',
+      ask: 'Kofi cuts a cake into 2 and takes 1 piece. Ama cuts the same size '
+        + 'cake into 4 and takes 2. Who has more cake?',
+      kind: 'choice',
+      options: ['Kofi', 'Ama', 'They have the same amount'],
+      answer: 'They have the same amount',
+      teach: 'One half and two quarters are equal. Ama’s pieces are half the '
+        + 'size, but she has twice as many, so the amount is the same.',
+      level: 3,
+    },
+    {
+      id: 'eq-6',
+      ask: 'Write a fraction equal to one half with 6 on the bottom. What is '
+        + 'the top number?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three', '3/6', 'three sixths'],
+      teach: 'To get from 2 to 6 on the bottom, multiply by 3. Do the same to '
+        + 'the top: 1 times 3 is 3. So three sixths.',
+      level: 3,
+    },
+    {
+      id: 'eq-7',
+      ask: 'Multiply the top and bottom of three quarters by 2. What fraction '
+        + 'do you get?',
+      kind: 'choice',
+      options: ['Three eighths', 'Six eighths', 'Six quarters'],
+      answer: 'Six eighths',
+      teach: '3 times 2 is 6 and 4 times 2 is 8, so six eighths. Changing only '
+        + 'one number gives three eighths or six quarters, which are '
+        + 'different amounts.',
+      level: 3,
+    },
+    {
+      id: 'eq-8',
+      ask: 'Simplify six eighths.',
+      kind: 'choice',
+      options: ['Three eighths', 'Two thirds', 'Three quarters'],
+      answer: 'Three quarters',
+      teach: '2 divides into both 6 and 8. 6 divided by 2 is 3 and 8 divided by '
+        + '2 is 4. Nothing divides into both 3 and 4, so stop: three quarters.',
+      level: 3,
+    },
+    {
+      id: 'eq-9',
+      ask: 'Simplify four eighths as far as it will go.',
+      kind: 'choice',
+      options: ['Two quarters', 'One half', 'Four quarters'],
+      answer: 'One half',
+      teach: 'Dividing by 2 gives two quarters, but 2 divides into both again. '
+        + 'Keep going: one half. Stopping at two quarters is not fully simplified.',
+      level: 4,
+    },
+    {
+      id: 'eq-10',
+      ask: 'Yaw adds 1 to the top and bottom of one half and gets two thirds. '
+        + 'Is two thirds the same amount as one half?',
+      kind: 'choice',
+      options: ['Yes', 'No, adding changes the amount'],
+      answer: 'No, adding changes the amount',
+      teach: 'Only multiplying or dividing both numbers keeps the amount. '
+        + 'Adding the same number to both gives a different fraction.',
+      level: 4,
     },
   ],
 })
@@ -1364,6 +1761,78 @@ teach({
         + 'reach the tenth.',
       level: 4,
     },
+    {
+      id: 'fr-4',
+      ask: 'In the list 5, 8, 11, which number is the third term?',
+      kind: 'numeric',
+      answer: '11',
+      accept: ['eleven'],
+      teach: 'Terms are counted from the left, starting at one. 5 is the first, '
+        + '8 the second and 11 the third.',
+      level: 2,
+    },
+    {
+      id: 'fr-5',
+      ask: 'What is the next term in 5, 8, 11, 14?',
+      kind: 'numeric',
+      answer: '17',
+      accept: ['seventeen'],
+      teach: 'Each gap is 3: 8 take 5 is 3, and 11 take 8 is 3. So the next is '
+        + '14 and 3, which is 17.',
+      level: 2,
+    },
+    {
+      id: 'fr-6',
+      ask: 'What is the rule for 20, 17, 14, 11?',
+      kind: 'choice',
+      options: ['Add 3', 'Take away 4', 'Take away 3'],
+      answer: 'Take away 3',
+      teach: 'The terms get smaller, so the step is a minus. 20 take 17 is 3, '
+        + 'and 17 take 14 is 3. So the rule is take away 3, written -3.',
+      level: 2,
+    },
+    {
+      id: 'fr-7',
+      ask: 'What is the rule for 2, 4, 8, 16?',
+      kind: 'choice',
+      options: ['Add 2', 'Multiply by 2', 'Add 4'],
+      answer: 'Multiply by 2',
+      teach: 'The gaps are 2, 4, 8, which are not the same, so it is not '
+        + 'adding. Divide neighbours: 4 divided by 2 is 2, 8 divided by 4 is '
+        + '2. So multiply by 2.',
+      level: 3,
+    },
+    {
+      id: 'fr-8',
+      ask: 'What is the next term in 1, 3, 9, 27?',
+      kind: 'numeric',
+      answer: '81',
+      accept: ['eighty one', 'eighty-one'],
+      teach: 'Each term is three times the one before: 3 divided by 1 is 3, 9 '
+        + 'divided by 3 is 3. So 27 times 3 is 81.',
+      level: 3,
+    },
+    {
+      id: 'fr-9',
+      ask: 'Charcoal costs 8 cedis for 1 bag, 16 for 2 bags and 24 for 3 bags. '
+        + 'How much do 9 bags cost?',
+      kind: 'numeric',
+      answer: '72',
+      accept: ['72 cedis', 'seventy two', 'seventy-two'],
+      teach: 'Each bag adds 8 cedis, so the price is 8 times the number of '
+        + 'bags. 9 times 8 is 72. No need to write every term.',
+      level: 3,
+    },
+    {
+      id: 'fr-10',
+      ask: 'The first term is 3 and the rule is add 5. What is the 10th term?',
+      kind: 'numeric',
+      answer: '48',
+      accept: ['forty eight', 'forty-eight'],
+      teach: 'Reaching the 10th term takes nine steps, not ten. 9 times 5 is '
+        + '45, and 3 and 45 is 48. Adding ten times gives 53.',
+      level: 4,
+    },
   ],
 })
 
@@ -1574,6 +2043,85 @@ teach({
         + 'so this checks the sum without trusting it.',
       level: 3,
     },
+    {
+      id: 'mn-4',
+      ask: 'How do you write eight cedis fifty pesewas?',
+      kind: 'choice',
+      options: ['8.5', '8.05', '850', '8.50'],
+      answer: '8.50',
+      teach: 'Cedis, then a point, then two figures for the pesewas. 8.05 is '
+        + 'eight cedis five pesewas, and 8.5 can be misread, so write 8.50.',
+      level: 2,
+    },
+    {
+      id: 'mn-5',
+      ask: 'What is 150 pesewas in cedis and pesewas?',
+      kind: 'choice',
+      options: ['15 cedis', '1 cedi 50 pesewas', '1 cedi 5 pesewas'],
+      answer: '1 cedi 50 pesewas',
+      teach: '100 pesewas make one cedi. Take 100 out of 150 for the cedi and '
+        + '50 pesewas are left, the way you carry a ten.',
+      level: 2,
+    },
+    {
+      id: 'mn-6',
+      ask: 'Adwoa buys 2 pens at 3 cedis each and a book for 7 cedis. What is '
+        + 'the total?',
+      kind: 'numeric',
+      answer: '13',
+      accept: ['13 cedis', 'thirteen'],
+      teach: 'Two pens at 3 cedis is 6 cedis. Add the book: 6 and 7 is 13 '
+        + 'cedis.',
+      level: 2,
+    },
+    {
+      id: 'mn-7',
+      ask: 'You spend 23 cedis and pay with a 50 cedi note. What is your '
+        + 'change?',
+      kind: 'numeric',
+      answer: '27',
+      accept: ['27 cedis', 'twenty seven', 'twenty-seven'],
+      teach: 'Change is what you paid take away the total: 50 take 23 is 27. '
+        + 'Check: 27 and 23 is 50.',
+      level: 3,
+    },
+    {
+      id: 'mn-8',
+      ask: 'You spend 36 cedis and pay with 50. The trader gives you 15 cedis. '
+        + 'Is that right?',
+      kind: 'choice',
+      options: [
+        'Yes, it is right',
+        'No, 15 and 36 make 51, so it is 1 cedi too much',
+        'No, it should be 16 cedis',
+      ],
+      answer: 'No, 15 and 36 make 51, so it is 1 cedi too much',
+      teach: 'Add the change back to the total. 15 and 36 is 51, not the 50 you '
+        + 'paid, so the change should be 14.',
+      level: 3,
+    },
+    {
+      id: 'mn-9',
+      ask: 'Bread costs 8.50 and milk costs 6.70. What is the total, in cedis?',
+      kind: 'numeric',
+      answer: '15.20',
+      accept: ['15.2', '15 cedis 20 pesewas', 'GH₵15.20'],
+      teach: 'Pesewas first: 50 and 70 is 120 pesewas, which is 1 cedi 20. '
+        + 'Cedis: 8 and 6 and the carried 1 is 15. So 15.20.',
+      level: 3,
+    },
+    {
+      id: 'mn-10',
+      ask: 'You pay 20 cedis for bread and milk that cost 15.20 in all. What is '
+        + 'your change, in cedis?',
+      kind: 'numeric',
+      answer: '4.80',
+      accept: ['4.8', '4 cedis 80 pesewas', 'GH₵4.80'],
+      teach: '20.00 take away 15.20. The pesewas need a cedi changed into 100 '
+        + 'pesewas: 100 take 20 is 80, then 19 take 15 is 4. Check: 4.80 and '
+        + '15.20 is 20.00.',
+      level: 4,
+    },
   ],
 })
 
@@ -1777,6 +2325,83 @@ teach({
       answer: 'A wider bar looks like more even at the same height',
       teach: 'Only the height should carry the number. '
         + 'Width that varies quietly changes what your eye reads.',
+      level: 4,
+    },
+    {
+      id: 'bc-4',
+      ask: 'What does the tallest bar on a bar chart tell you?',
+      kind: 'choice',
+      options: [
+        'Which was asked about first',
+        'Which choice has the most',
+        'Nothing until you count every bar',
+      ],
+      answer: 'Which choice has the most',
+      teach: 'Each bar is drawn up to its number, so the tallest bar is the '
+        + 'biggest number. Your eye does the comparing.',
+      level: 2,
+    },
+    {
+      id: 'bc-5',
+      ask: 'In a pictograph, what does the key tell you?',
+      kind: 'choice',
+      options: ['What one picture stands for', 'The title of the chart', 'Which row is longest'],
+      answer: 'What one picture stands for',
+      teach: 'One picture often stands for 5 or 10 things. Read the key before '
+        + 'you count, or every answer comes out wrong.',
+      level: 2,
+    },
+    {
+      id: 'bc-6',
+      ask: 'The mango bar reaches 12 and the banana bar reaches 9. How many '
+        + 'more children chose mango?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three', '3 more'],
+      teach: '"How many more" means find the difference: 12 take away 9 is 3.',
+      level: 2,
+    },
+    {
+      id: 'bc-7',
+      ask: 'Which of these is a good scale for the side of a bar chart?',
+      kind: 'choice',
+      options: ['2, 4, 6, 8, 10', '0, 2, 5, 6, 10', '0, 2, 4, 6, 8', '0, 1, 4, 9, 16'],
+      answer: '0, 2, 4, 6, 8',
+      teach: 'A scale must start at nought and go up in equal steps. 2, 4, 6 '
+        + 'misses the nought, and the others have steps of different sizes.',
+      level: 3,
+    },
+    {
+      id: 'bc-8',
+      ask: 'In a pictograph, one picture stands for 10 children. A row has 4 '
+        + 'pictures. How many children is that?',
+      kind: 'numeric',
+      answer: '40',
+      accept: ['forty', '40 children'],
+      teach: 'Read the key first: each picture is 10. Four pictures is four '
+        + 'tens, which is 40, not 4.',
+      level: 3,
+    },
+    {
+      id: 'bc-9',
+      ask: 'A chart has bars for mango 12, banana 9, orange 6 and pawpaw 3. '
+        + 'How many children answered in all?',
+      kind: 'numeric',
+      answer: '30',
+      accept: ['thirty', '30 children'],
+      teach: 'Add the heights of all the bars: 12 and 9 is 21, and 6 is 27, '
+        + 'and 3 is 30.',
+      level: 3,
+    },
+    {
+      id: 'bc-10',
+      ask: 'A chart shows bars of 52 and 56, but its scale starts at 50, so one '
+        + 'bar looks three times the other. What is the real difference?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four'],
+      teach: 'Read the numbers, not the picture. 56 take away 52 is 4, which is '
+        + 'small. Starting the scale at 50 cut most of both bars away.',
       level: 4,
     },
   ],

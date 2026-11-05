@@ -70,7 +70,8 @@ teach({
     + 'Cut an orange into 4 equal parts, take 1, and you have '
     + 'taken one quarter, written 1 over 4. '
     + 'The same amount can be written in more than one way. '
-    + '5, and it is also 50%. '
+    + 'Half can be written as 1 over 2, it can be written as 0.5, '
+    + 'and it is also 50%. '
     + 'All three mean the same share of the same thing, and this '
     + 'lesson is about the third of those ways.',
 
@@ -219,6 +220,82 @@ teach({
       teach: '10% of 1,000 is 100, and 50% of 100 is 50. '
         + 'A percentage means nothing without the amount.',
       level: 6,
+    },
+    {
+      id: 'pc-4',
+      ask: 'What does per cent mean?',
+      kind: 'choice',
+      options: ['Out of ten', 'Out of a hundred', 'Out of a thousand'],
+      answer: 'Out of a hundred',
+      teach: 'Cent is the hundred in per cent. 25% means 25 out of every '
+        + '100, so the bottom number is always 100, never 10.',
+      level: 2,
+    },
+    {
+      id: 'pc-5',
+      ask: 'What is 50% of 36 cedis?',
+      kind: 'numeric',
+      answer: '18',
+      accept: ['eighteen', '18 cedis'],
+      teach: '50% is half, so halve the amount. Half of 36 is 18. '
+        + 'Dividing by 50 is the mistake: 50% means halve, not divide '
+        + 'by 50.',
+      level: 2,
+    },
+    {
+      id: 'pc-6',
+      ask: '25% is the same as which fraction?',
+      kind: 'choice',
+      options: ['One half', 'One tenth', 'One quarter', '25 over 10'],
+      answer: 'One quarter',
+      teach: '25% is 25 out of 100, and four lots of 25 make 100. So 25% '
+        + 'is one part in four, which is a quarter.',
+      level: 3,
+    },
+    {
+      id: 'pc-7',
+      ask: 'What is 20% of 60 cedis?',
+      kind: 'numeric',
+      answer: '12',
+      accept: ['twelve', '12 cedis'],
+      teach: 'Find 10% first by dividing by 10, which gives 6. 20% is '
+        + 'double that, so 12. Do not stop at 6.',
+      level: 3,
+    },
+    {
+      id: 'pc-8',
+      ask: 'What is 5% of 80 cedis?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four', '4 cedis'],
+      teach: 'Find 10% first: 80 divided by 10 is 8. 5% is half of 10%, '
+        + 'so half of 8 is 4.',
+      level: 4,
+    },
+    {
+      id: 'pc-9',
+      ask: 'Ama scores 45 out of 50 in a test. What is that as a '
+        + 'percentage?',
+      kind: 'numeric',
+      answer: '90',
+      accept: ['90%', 'ninety', '90 percent'],
+      teach: 'Make the bottom number 100. 50 times 2 is 100, so do the '
+        + 'same to the top: 45 times 2 is 90. That is 90 out of 100, '
+        + 'or 90%.',
+      level: 4,
+    },
+    {
+      id: 'pc-10',
+      ask: 'A shirt costs 80 cedis. One trader takes 25% off. Another '
+        + 'takes 20 cedis off. Which leaves more money in your '
+        + 'pocket?',
+      kind: 'choice',
+      options: ['25% off', '20 cedis off', 'They save exactly the same'],
+      answer: 'They save exactly the same',
+      teach: '25% sounds bigger than 20, but 25% of 80 is a quarter of '
+        + '80, which is 20 cedis. Work out the percentage in cedis '
+        + 'before you compare.',
+      level: 4,
     },
   ],
 })
@@ -430,6 +507,93 @@ teach({
         + 'because of what each put in.',
       level: 6,
     },
+    {
+      id: 'rt-4',
+      ask: 'Kofi and Ama share sweets in the ratio 2:3. Who gets more?',
+      kind: 'choice',
+      options: ['Kofi', 'Ama', 'They get the same'],
+      answer: 'Ama',
+      teach: 'The order matters. The first name gets the first number, '
+        + 'so Kofi gets 2 parts and Ama gets 3 parts. 3 parts is '
+        + 'more.',
+      level: 2,
+    },
+    {
+      id: 'rt-5',
+      ask: 'Share 20 cedis in the ratio 3:1. What is the larger '
+        + 'amount?',
+      kind: 'numeric',
+      answer: '15',
+      accept: ['fifteen', '15 cedis'],
+      teach: 'Add the parts first: 3 and 1 is 4 shares. 20 divided by 4 '
+        + 'is 5 a share. Three shares is 15. Dividing 20 by 3 is the '
+        + 'mistake.',
+      level: 3,
+    },
+    {
+      id: 'rt-6',
+      ask: 'Share 60 oranges in the ratio 3:2. How many oranges is one '
+        + 'share?',
+      kind: 'numeric',
+      answer: '12',
+      accept: ['twelve', '12 oranges'],
+      teach: '3 and 2 is 5 shares altogether. 60 divided by 5 is 12. One '
+        + 'share is 12, so the two people get 36 and 24.',
+      level: 3,
+    },
+    {
+      id: 'rt-7',
+      ask: 'Share 60 oranges in the ratio 5:1. How many does the '
+        + 'smaller share get?',
+      kind: 'numeric',
+      answer: '10',
+      accept: ['ten', '10 oranges'],
+      teach: '5 and 1 is 6 shares. 60 divided by 6 is 10 a share. The '
+        + 'smaller part is 1 share, so 10 oranges. The other gets 50.',
+      level: 3,
+    },
+    {
+      id: 'rt-8',
+      ask: 'Two boys put in 30 cedis and 20 cedis, so they share 100 '
+        + 'cedis in the ratio 3:2. How much does the boy who put in '
+        + '20 cedis get?',
+      kind: 'numeric',
+      answer: '40',
+      accept: ['forty', '40 cedis'],
+      teach: '3 and 2 is 5 shares. 100 divided by 5 is 20 a share. He '
+        + 'has 2 shares, so 40 cedis. The other boy gets 60, and 60 '
+        + 'and 40 is 100.',
+      level: 4,
+    },
+    {
+      id: 'rt-9',
+      ask: 'Yaw shares 50 cedis in the ratio 3:2 and writes 30 cedis '
+        + 'and 25 cedis. How can he tell straight away that it is '
+        + 'wrong?',
+      kind: 'choice',
+      options: [
+        '30 is too big for a ratio',
+        'The two parts do not add back to 50',
+        'A ratio cannot be used for cedis',
+      ],
+      answer: 'The two parts do not add back to 50',
+      teach: '30 and 25 is 55, not 50. The parts of a share must always '
+        + 'add back to the amount you started with. 50 divided by 5 '
+        + 'is 10, so it is 30 and 20.',
+      level: 4,
+    },
+    {
+      id: 'rt-10',
+      ask: 'Share 36 cedis in the ratio 1:2:3. What is the largest '
+        + 'amount?',
+      kind: 'numeric',
+      answer: '18',
+      accept: ['eighteen', '18 cedis'],
+      teach: 'Add all three parts: 1 and 2 and 3 is 6 shares. 36 divided '
+        + 'by 6 is 6 a share. The largest part is 3 shares, so 18. '
+        + 'Check: 6, 12 and 18 add to 36.',
+      level: 5,
+    },
   ],
 })
 
@@ -640,6 +804,81 @@ teach({
       accept: ['six'],
       teach: 'Undo in reverse: take away the 5 first, then divide by 2.',
       level: 6,
+    },
+    {
+      id: 'lf-4',
+      ask: 'What does 5n mean?',
+      kind: 'choice',
+      options: ['5 plus n', 'n take away 5', '5 times n'],
+      answer: '5 times n',
+      teach: 'A number written next to a letter means multiply. The '
+        + 'times sign is left out, so 5n is 5 lots of n, not 5 and n.',
+      level: 2,
+    },
+    {
+      id: 'lf-5',
+      ask: 'If p plus 7 is 12, what is p?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five', 'p = 5'],
+      teach: '7 was added to p, so undo it by taking 7 away. 12 take '
+        + 'away 7 is 5. Check: 5 and 7 is 12.',
+      level: 2,
+    },
+    {
+      id: 'lf-6',
+      ask: 'A bag of oranges costs b cedis. How do you write the cost '
+        + 'of 6 bags?',
+      kind: 'choice',
+      options: ['6 + b', '6b', 'b take away 6'],
+      answer: '6b',
+      teach: 'Six bags is six lots of b, which is 6 times b. A number '
+        + 'next to a letter means multiply, so it is written 6b.',
+      level: 3,
+    },
+    {
+      id: 'lf-7',
+      ask: 'If p divided by 2 is 8, what is p?',
+      kind: 'numeric',
+      answer: '16',
+      accept: ['sixteen', 'p = 16'],
+      teach: 'p was divided by 2, so undo it by multiplying by 2. 8 '
+        + 'times 2 is 16. Dividing 8 by 2 again would give 4, which '
+        + 'is the wrong way round.',
+      level: 3,
+    },
+    {
+      id: 'lf-8',
+      ask: 'A pen costs p cedis, so 4 pens cost 4p cedis. If p is 3, '
+        + 'how much do 4 pens cost?',
+      kind: 'numeric',
+      answer: '12',
+      accept: ['twelve', '12 cedis'],
+      teach: '4p means 4 times p. Put 3 in place of p: 4 times 3 is 12. '
+        + 'It is not 43 and it is not 4 and 3.',
+      level: 4,
+    },
+    {
+      id: 'lf-9',
+      ask: 'To find n in 2n plus 5 equals 17, what do you do first?',
+      kind: 'choice',
+      options: ['Divide 17 by 2', 'Take away 5', 'Add 5'],
+      answer: 'Take away 5',
+      teach: 'The 5 was added last, so it comes off first. Undo in '
+        + 'reverse order: take away 5 to get 12, then divide by 2 to '
+        + 'get 6.',
+      level: 4,
+    },
+    {
+      id: 'lf-10',
+      ask: 'If 4m plus 3 equals 23, what is m?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five', 'm = 5'],
+      teach: 'Undo in reverse. Take away the 3 first: 23 take away 3 is '
+        + '20. Then undo the times 4: 20 divided by 4 is 5. Check: 4 '
+        + 'times 5 is 20, and 20 and 3 is 23.',
+      level: 5,
     },
   ],
 })
@@ -857,6 +1096,98 @@ teach({
         + 'space. Two measurements against three.',
       level: 6,
     },
+    {
+      id: 'vl-4',
+      ask: 'What is volume?',
+      kind: 'choice',
+      options: [
+        'The distance round a shape',
+        'The amount of space something takes up',
+        'The flat top of a shape',
+      ],
+      answer: 'The amount of space something takes up',
+      teach: 'Distance round a shape is a length, and a flat surface is '
+        + 'an area. Volume is the space a solid fills, so it needs '
+        + 'three measurements.',
+      level: 2,
+    },
+    {
+      id: 'vl-5',
+      ask: 'What is a cubic centimetre?',
+      kind: 'choice',
+      options: [
+        'A square 1 cm on each side',
+        'A line 1 cm long',
+        'A cube 1 cm long, 1 cm wide and 1 cm high',
+      ],
+      answer: 'A cube 1 cm long, 1 cm wide and 1 cm high',
+      teach: 'A square is flat, so it measures area. A cubic centimetre '
+        + 'is a small cube 1 cm each way, and volume counts how many '
+        + 'of them fill a box.',
+      level: 2,
+    },
+    {
+      id: 'vl-6',
+      ask: 'A box is 5 cm long, 2 cm wide and 3 cm high. What is its '
+        + 'volume in cubic centimetres?',
+      kind: 'numeric',
+      answer: '30',
+      accept: ['thirty', '30 cm3', '30 cubic centimetres'],
+      teach: 'Multiply all three: 5 times 2 is 10, and 10 times 3 is 30. '
+        + 'Adding them gives 10, which is not a volume.',
+      level: 3,
+    },
+    {
+      id: 'vl-7',
+      ask: 'The school water tank is 2 m long, 1 m wide and 1 m deep. '
+        + 'What is its volume in cubic metres?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two', '2 m3', '2 cubic metres'],
+      teach: 'Length times width times height: 2 times 1 is 2, and 2 '
+        + 'times 1 is still 2. So the tank holds 2 cubic metres.',
+      level: 3,
+    },
+    {
+      id: 'vl-8',
+      ask: 'For a box 4 cm by 3 cm by 2 cm, Kofi works out 4 times 3 '
+        + 'and writes 12. What has he found?',
+      kind: 'choice',
+      options: [
+        'The volume of the box',
+        'The cubes in the bottom layer only',
+        'The height of the box',
+      ],
+      answer: 'The cubes in the bottom layer only',
+      teach: 'Two measurements give one flat layer of 12 cubes. The box '
+        + 'is 2 layers high, so multiply by 2 as well: 24 cubic '
+        + 'centimetres.',
+      level: 4,
+    },
+    {
+      id: 'vl-9',
+      ask: 'A cube is 3 cm long, 3 cm wide and 3 cm high. What is its '
+        + 'volume in cubic centimetres?',
+      kind: 'numeric',
+      answer: '27',
+      accept: ['twenty seven', 'twenty-seven', '27 cm3'],
+      teach: 'Multiply all three: 3 times 3 is 9, and 9 times 3 is 27. '
+        + 'Stopping at 9 gives only the bottom layer, not the whole '
+        + 'cube.',
+      level: 4,
+    },
+    {
+      id: 'vl-10',
+      ask: 'A box is 10 cm by 10 cm by 20 cm. How many litres does it '
+        + 'hold?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two', '2 litres'],
+      teach: '10 times 10 is 100, and 100 times 20 is 2,000 cubic '
+        + 'centimetres. Every 1,000 cubic centimetres is one litre, '
+        + 'so 2,000 is 2 litres.',
+      level: 5,
+    },
   ],
 })
 
@@ -893,7 +1224,7 @@ teach({
     + 'two words mean the same thing here. '
     + 'It is worked out as the total divided by how many numbers '
     + 'there are. '
-    + '5. '
+    + 'So the mean of 4, 5 and 6 is 15 divided by 3, which is 5. '
     + 'Dividing by the wrong count is the commonest way to lose a '
     + 'mark, so count the numbers again before you divide.',
 
@@ -1064,6 +1395,91 @@ teach({
       teach: 'One extreme value drags the mean away from everybody, '
         + 'so it ends up describing nobody.',
       level: 6,
+    },
+    {
+      id: 'av-4',
+      ask: 'What is the first step in finding the mean?',
+      kind: 'choice',
+      options: [
+        'Pick the middle number',
+        'Divide by the largest number',
+        'Add all the values',
+      ],
+      answer: 'Add all the values',
+      teach: 'The mean is the total shared out equally, so you need the '
+        + 'total first. Then divide it by how many values there are.',
+      level: 2,
+    },
+    {
+      id: 'av-5',
+      ask: 'Abena scores 7, 8 and 9 in three tests. What is her mean '
+        + 'score?',
+      kind: 'numeric',
+      answer: '8',
+      accept: ['eight'],
+      teach: '7 and 8 and 9 is 24. There are three scores, so 24 divided '
+        + 'by 3 is 8.',
+      level: 2,
+    },
+    {
+      id: 'av-6',
+      ask: 'What is the mean of 2, 4, 6 and 8?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five'],
+      teach: 'The total is 20. There are four numbers, so divide by 4, '
+        + 'not by 2 or by 8. 20 divided by 4 is 5.',
+      level: 3,
+    },
+    {
+      id: 'av-7',
+      ask: 'Kwame sells 10, 20, 30 and 40 oranges on four days. What '
+        + 'is the mean number he sells in a day?',
+      kind: 'numeric',
+      answer: '25',
+      accept: ['twenty five', 'twenty-five', '25 oranges'],
+      teach: '10 and 20 and 30 and 40 is 100. There are four days, so '
+        + '100 divided by 4 is 25. The mean does not have to be one '
+        + 'of the numbers.',
+      level: 3,
+    },
+    {
+      id: 'av-8',
+      ask: 'What is the mean of 4 and 7?',
+      kind: 'numeric',
+      answer: '5.5',
+      accept: ['5 1/2', 'five and a half', '5.50'],
+      teach: '4 and 7 is 11, and there are two numbers. 11 divided by 2 '
+        + 'is 5.5. It is neither 4 nor 7, and that is allowed.',
+      level: 4,
+    },
+    {
+      id: 'av-9',
+      ask: 'Two groups both have a mean of 12. Which group does the '
+        + 'mean describe well?',
+      kind: 'choice',
+      options: ['2, 3, 3 and 40', '11, 12, 12 and 13', 'Both of them equally'],
+      answer: '11, 12, 12 and 13',
+      teach: 'Both groups add to 48 over four numbers. In 11, 12, 12 and '
+        + '13 every value is near 12. In 2, 3, 3 and 40 nobody is '
+        + 'near 12.',
+      level: 4,
+    },
+    {
+      id: 'av-10',
+      ask: 'Five children have 1, 1, 2, 2 and 44 cedis. The mean is 10 '
+        + 'cedis. What does that tell you about the group?',
+      kind: 'choice',
+      options: [
+        'Most of them have about 10 cedis',
+        'Very little, because one child has far more than the rest',
+        'Every child has 10 cedis',
+      ],
+      answer: 'Very little, because one child has far more than the rest',
+      teach: 'The 44 drags the mean up. Four of the five children have 2 '
+        + 'cedis or less. Always look at the numbers before trusting '
+        + 'the mean.',
+      level: 5,
     },
   ],
 })
@@ -1287,6 +1703,86 @@ teach({
         + 'Most things we are sure of are merely very likely.',
       level: 6,
     },
+    {
+      id: 'ch-4',
+      ask: 'A goat lays an egg. That is:',
+      kind: 'choice',
+      options: ['Unlikely', 'Impossible', 'Certain'],
+      answer: 'Impossible',
+      teach: 'A goat cannot lay an egg in any way at all. No ways for it '
+        + 'to happen means impossible, not just unlikely.',
+      level: 2,
+    },
+    {
+      id: 'ch-5',
+      ask: 'A bag has 9 red balls and 1 blue. Drawing blue is:',
+      kind: 'choice',
+      options: ['Impossible', 'Likely', 'Unlikely'],
+      answer: 'Unlikely',
+      teach: 'There is one blue ball, so it can happen and is not '
+        + 'impossible. But only 1 of the 10 draws gives blue, so it '
+        + 'is unlikely.',
+      level: 2,
+    },
+    {
+      id: 'ch-6',
+      ask: 'A bag holds only red balls. Drawing a red ball is:',
+      kind: 'choice',
+      options: ['Certain', 'Likely', 'An even chance'],
+      answer: 'Certain',
+      teach: 'Every ball in the bag is red, so there is no other way it '
+        + 'can go. Something that must happen is certain.',
+      level: 3,
+    },
+    {
+      id: 'ch-7',
+      ask: 'A coin landing heads is:',
+      kind: 'choice',
+      options: ['Certain', 'An even chance', 'Unlikely'],
+      answer: 'An even chance',
+      teach: 'A coin has two sides and one of them is heads. That is 1 '
+        + 'way out of 2, which is an even chance.',
+      level: 3,
+    },
+    {
+      id: 'ch-8',
+      ask: 'Yaw says: I really want a blue ball, so blue is likely. '
+        + 'What is wrong with that?',
+      kind: 'choice',
+      options: [
+        'Wanting a result does not change how many ways it can happen',
+        'Nothing, he is right',
+        'Blue balls are always impossible',
+      ],
+      answer: 'Wanting a result does not change how many ways it can happen',
+      teach: 'Chance comes from counting the ways, not from how much you '
+        + 'want something. 1 blue in 10 balls is unlikely whatever '
+        + 'Yaw hopes.',
+      level: 4,
+    },
+    {
+      id: 'ch-9',
+      ask: 'There are 10 sachets of water in a bowl and 3 are warm. '
+        + 'What is the chance of taking a warm one?',
+      kind: 'choice',
+      options: ['7 over 10', '10 over 3', '3 over 10'],
+      answer: '3 over 10',
+      teach: 'The bottom number is everything that could happen: 10 '
+        + 'sachets. The top is the ones you are asking about: 3 warm. '
+        + 'So 3 over 10.',
+      level: 4,
+    },
+    {
+      id: 'ch-10',
+      ask: 'Which of these could never be a chance?',
+      kind: 'choice',
+      options: ['1 over 2', '0', '5 over 4', '1'],
+      answer: '5 over 4',
+      teach: 'Every chance sits between 0, impossible, and 1, certain. 5 '
+        + 'over 4 has a top bigger than the bottom, which would mean '
+        + 'more than certain.',
+      level: 5,
+    },
   ],
 })
 
@@ -1496,6 +1992,105 @@ teach({
       teach: 'Everybody listening already noticed. '
         + 'Admitting it keeps your credit and you can still disagree overall.',
       level: 6,
+    },
+    {
+      id: 'ds-4',
+      ask: 'Which of these is a view with a reason?',
+      kind: 'choice',
+      options: [
+        'School should start later',
+        'I just think school should start later',
+        'School should start later because many learners walk an hour to get there',
+      ],
+      answer: 'School should start later because many learners walk an hour to get there',
+      teach: 'The first two only give a view. The reason is the part '
+        + 'that starts with because, and it is what others can '
+        + 'discuss.',
+      level: 2,
+    },
+    {
+      id: 'ds-5',
+      ask: 'While the other person is speaking, what should you do?',
+      kind: 'choice',
+      options: [
+        'Plan your reply',
+        'Listen all the way to the end',
+        'Speak at the same time',
+      ],
+      answer: 'Listen all the way to the end',
+      teach: 'If you plan your reply while they speak, you answer what '
+        + 'you expected them to say instead of what they said.',
+      level: 2,
+    },
+    {
+      id: 'ds-6',
+      ask: 'A view with no reason behind it is:',
+      kind: 'choice',
+      options: ['Just a preference', 'A strong argument', 'A fact'],
+      answer: 'Just a preference',
+      teach: 'Without a reason nobody can weigh it or answer it. The '
+        + 'reason is the useful part of any view.',
+      level: 3,
+    },
+    {
+      id: 'ds-7',
+      ask: 'Before you reply to somebody, what should you do first?',
+      kind: 'choice',
+      options: [
+        'Tell them they are wrong',
+        'Give three new reasons',
+        'Say their point back in your own words',
+      ],
+      answer: 'Say their point back in your own words',
+      teach: 'Saying their point back and checking it is right shows you '
+        + 'understood. Then you answer what they really said.',
+      level: 3,
+    },
+    {
+      id: 'ds-8',
+      ask: 'Kofi says uniform saves families money. Akosua answers: '
+        + 'you are just lazy. What has gone wrong?',
+      kind: 'choice',
+      options: [
+        'She gave a good reason',
+        'She attacked the person, not the point',
+        'She listened well',
+      ],
+      answer: 'She attacked the person, not the point',
+      teach: 'Kofi gave a reason about money, and Akosua said nothing '
+        + 'about money. Answer the reason. Attacking the person ends '
+        + 'the discussion.',
+      level: 3,
+    },
+    {
+      id: 'ds-9',
+      ask: 'Ama says school should start later so learners are more '
+        + 'awake. Kwame answers: so you want us to do no work at all. '
+        + 'What has Kwame done?',
+      kind: 'choice',
+      options: [
+        'Answered a weaker version of what she said',
+        'Said her point back fairly',
+        'Agreed with her',
+      ],
+      answer: 'Answered a weaker version of what she said',
+      teach: 'Ama never said no work. Kwame beat a view she does not '
+        + 'hold. Ask whether Ama would agree you got her point right.',
+      level: 4,
+    },
+    {
+      id: 'ds-10',
+      ask: 'What is the strongest thing you can do in a discussion?',
+      kind: 'choice',
+      options: [
+        'Speak louder than the others',
+        'Refuse to answer hard points',
+        'State their side well, then explain why you still disagree',
+      ],
+      answer: 'State their side well, then explain why you still disagree',
+      teach: 'Nobody can say you misunderstood, and everybody can see '
+        + 'you thought about it. Loudness wins nothing.',
+      level: 5,
     },
   ],
 })
@@ -1746,6 +2341,108 @@ teach({
         + 'Your view on it is a different piece of writing.',
       level: 6,
     },
+    {
+      id: 'sm-4',
+      ask: 'What is a summary?',
+      kind: 'choice',
+      options: [
+        'A copy of the first few sentences',
+        'The same passage said in far fewer words',
+        'Your opinion of the passage',
+      ],
+      answer: 'The same passage said in far fewer words',
+      teach: 'Copying the first sentences misses most of the passage, '
+        + 'and opinion is a different piece of writing. A summary '
+        + 'keeps the meaning in fewer words.',
+      level: 2,
+    },
+    {
+      id: 'sm-5',
+      ask: 'What should you do first when summarising?',
+      kind: 'choice',
+      options: [
+        'Read the whole passage',
+        'Start writing straight away',
+        'Copy the first four sentences',
+      ],
+      answer: 'Read the whole passage',
+      teach: 'You cannot tell what mattered until you have read all of '
+        + 'it. Then find the main idea of each paragraph.',
+      level: 2,
+    },
+    {
+      id: 'sm-6',
+      ask: 'Where does the main idea of a paragraph usually sit?',
+      kind: 'choice',
+      options: [
+        'In the middle sentence',
+        'In the first or the last sentence',
+        'In the longest word',
+      ],
+      answer: 'In the first or the last sentence',
+      teach: 'Writers usually state the point at the start of a '
+        + 'paragraph or sum it up at the end. The middle is mostly '
+        + 'detail.',
+      level: 3,
+    },
+    {
+      id: 'sm-7',
+      ask: 'A passage has four paragraphs. How many main ideas should '
+        + 'your notes have?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four'],
+      teach: 'Each paragraph has one main idea, so four paragraphs give '
+        + 'four main ideas. Put them together in order and you have '
+        + 'the summary.',
+      level: 3,
+    },
+    {
+      id: 'sm-8',
+      ask: 'How can you tell whether a sentence can be cut?',
+      kind: 'choice',
+      options: [
+        'Cut anything long',
+        'Cut anything difficult',
+        'Take it out and see whether the meaning changed',
+      ],
+      answer: 'Take it out and see whether the meaning changed',
+      teach: 'Long or difficult does not mean unimportant. If the '
+        + 'passage still means the same without it, it was detail.',
+      level: 3,
+    },
+    {
+      id: 'sm-9',
+      ask: 'A paragraph says: Cocoa needs shade to grow well. For '
+        + 'example, farmers plant it under taller trees. What belongs '
+        + 'in the summary?',
+      kind: 'choice',
+      options: [
+        'Cocoa needs shade to grow well',
+        'Farmers plant it under taller trees',
+        'Both sentences, word for word',
+      ],
+      answer: 'Cocoa needs shade to grow well',
+      teach: 'The second sentence is an example of the first. Keep the '
+        + 'point and cut the example, because the point is what the '
+        + 'paragraph was for.',
+      level: 4,
+    },
+    {
+      id: 'sm-10',
+      ask: 'A passage gives a number that its whole point rests on. '
+        + 'What do you do with it?',
+      kind: 'choice',
+      options: [
+        'Keep it, because the point falls apart without it',
+        'Cut it, because numbers are detail',
+        'Cut it, because numbers are hard to read',
+      ],
+      answer: 'Keep it, because the point falls apart without it',
+      teach: 'Use the test: take it out and see if the meaning changed. '
+        + 'Here it does, so the number stays.',
+      level: 4,
+    },
   ],
 })
 
@@ -1981,6 +2678,108 @@ teach({
       teach: 'That is why you test it on somebody who does not know it. '
         + 'They stop exactly at the gap.',
       level: 6,
+    },
+    {
+      id: 'de-4',
+      ask: 'Which of these is a description?',
+      kind: 'choice',
+      options: [
+        'Wash the maize, grind it, then add water',
+        'A blue door with a brass handle',
+        'First switch on the light',
+      ],
+      answer: 'A blue door with a brass handle',
+      teach: 'A description lets the reader picture a thing. Wash, grind '
+        + 'and switch on are steps to do, so those are instructions.',
+      level: 2,
+    },
+    {
+      id: 'de-5',
+      ask: 'Each step in a set of instructions should have:',
+      kind: 'choice',
+      options: [
+        'One action',
+        'As many actions as fit',
+        'A description of the room',
+      ],
+      answer: 'One action',
+      teach: 'Several actions in one step are easy to miss. One action '
+        + 'per step, in order, lets the reader do them one at a time.',
+      level: 2,
+    },
+    {
+      id: 'de-6',
+      ask: 'What must a good description have?',
+      kind: 'choice',
+      options: [
+        'Numbered steps',
+        'An order you keep to, like top to bottom',
+        'A list of things needed',
+      ],
+      answer: 'An order you keep to, like top to bottom',
+      teach: 'Numbered steps and lists of things needed belong to '
+        + 'instructions. A reader cannot build a picture from details '
+        + 'that arrive at random.',
+      level: 3,
+    },
+    {
+      id: 'de-7',
+      ask: 'How do you test a set of instructions?',
+      kind: 'choice',
+      options: [
+        'Read them again yourself',
+        'Ask somebody who does not know the task to follow them',
+        'Make them longer',
+      ],
+      answer: 'Ask somebody who does not know the task to follow them',
+      teach: 'The task is already in your head, so you fill the gaps without '
+        + 'noticing. Somebody new stops exactly where a step is '
+        + 'missing.',
+      level: 3,
+    },
+    {
+      id: 'de-8',
+      ask: 'A question says: explain why it happens. What kind of '
+        + 'writing does it want?',
+      kind: 'choice',
+      options: ['A description', 'A summary', 'An explanation'],
+      answer: 'An explanation',
+      teach: 'Explain asks you to help the reader understand why. '
+        + 'Describe asks what it looks like or what happens. Read the '
+        + 'question word first.',
+      level: 3,
+    },
+    {
+      id: 'de-9',
+      ask: 'You write to a friend: it is a nice house near the '
+        + 'junction. He walks past it twice. What was wrong with the '
+        + 'description?',
+      kind: 'choice',
+      options: [
+        'It named nothing that makes this house different',
+        'It was too long',
+        'It had too many steps',
+      ],
+      answer: 'It named nothing that makes this house different',
+      teach: 'Nice could be any house. Name what is different about this '
+        + 'one, such as a blue door or a mango tree in front.',
+      level: 4,
+    },
+    {
+      id: 'de-10',
+      ask: 'Your brother is told: just cook the rice until it is soft. '
+        + 'He burns it. Why did the instructions fail?',
+      kind: 'choice',
+      options: [
+        'They described the rice too much',
+        'Steps were left out, so he did not know what to do',
+        'They were in a strange order',
+      ],
+      answer: 'Steps were left out, so he did not know what to do',
+      teach: 'The writer knew how much water and how long, and left it '
+        + 'out. In an explanation nothing may be assumed: list what '
+        + 'is needed and every step.',
+      level: 4,
     },
   ],
 })

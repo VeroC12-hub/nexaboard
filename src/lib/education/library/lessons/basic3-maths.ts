@@ -229,6 +229,80 @@ teach({
         + 'The 9 in 309 is only nine ones.',
       level: 2,
     },
+    {
+      id: 'n1000-4',
+      ask: 'What is the 5 worth in 352?',
+      kind: 'choice',
+      options: ['5', '500', '50'],
+      answer: '50',
+      teach: 'The 5 is the middle digit, so it sits in the tens place. Five '
+        + 'tens is 50. Only a digit in the hundreds place is worth hundreds.',
+      level: 1,
+    },
+    {
+      id: 'n1000-5',
+      ask: 'Which is the right way to write three hundred and five?',
+      kind: 'choice',
+      options: ['35', '3005', '305'],
+      answer: '305',
+      teach: 'Fill the places: 3 hundreds, no tens, 5 ones. The nought holds the '
+        + 'tens place open. 3005 writes the words as you hear them, and 35 '
+        + 'drops the nought.',
+      level: 1,
+    },
+    {
+      id: 'n1000-6',
+      ask: 'Write six hundred and twenty as a number.',
+      kind: 'numeric',
+      answer: '620',
+      accept: ['six hundred and twenty'],
+      teach: 'Six hundreds, two tens and no ones. A nought goes in the ones '
+        + 'place to keep the 2 in the tens. Without it you have 62.',
+      level: 2,
+    },
+    {
+      id: 'n1000-7',
+      ask: 'How many tens are in the tens place of 908?',
+      kind: 'numeric',
+      answer: '0',
+      accept: ['nought', 'zero', 'none', 'no tens'],
+      teach: 'Name the places from the right: 8 is the ones, 0 is the tens, 9 is '
+        + 'the hundreds. The nought says there are no tens in that place.',
+      level: 2,
+    },
+    {
+      id: 'n1000-8',
+      ask: 'Which is the smallest: 190, 99 or 109?',
+      kind: 'choice',
+      options: ['190', '109', '99'],
+      answer: '99',
+      teach: '99 has only two digits, so it has no hundreds at all. 190 and 109 '
+        + 'each have one hundred, so 99 is the smallest even though it starts '
+        + 'with a 9.',
+      level: 2,
+    },
+    {
+      id: 'n1000-9',
+      ask: 'Class A gave 240 cedis and Class B gave 204 cedis. Which class gave '
+        + 'more?',
+      kind: 'choice',
+      options: ['Class B', 'Class A', 'They gave the same'],
+      answer: 'Class A',
+      teach: 'Both have 2 hundreds, so look at the tens. 240 has 4 tens and 204 '
+        + 'has none. The 4 in 204 is only four ones.',
+      level: 2,
+    },
+    {
+      id: 'n1000-10',
+      ask: 'Put these in order, smallest first: 251, 512, 215.',
+      kind: 'choice',
+      options: ['251, 215, 512', '215, 251, 512', '512, 251, 215', '215, 512, 251'],
+      answer: '215, 251, 512',
+      teach: 'Start with the hundreds. 512 has 5 hundreds, so it is biggest. 251 '
+        + 'and 215 both have 2 hundreds, so compare the tens: 1 ten is less '
+        + 'than 5 tens. So 215 comes first.',
+      level: 3,
+    },
   ],
 })
 
@@ -432,6 +506,73 @@ teach({
       teach: 'Ones: 8 and 7 is 15, write 5 carry one ten. Tens: 5 and 6 and 1 '
         + 'is 12 tens, write 2 carry one hundred. Hundreds: 1 and 1 is 2.',
       level: 3,
+    },
+    {
+      id: 'carry-4',
+      ask: 'What is 245 + 132?',
+      kind: 'numeric',
+      answer: '377',
+      accept: ['three hundred and seventy seven'],
+      teach: 'Ones: 5 and 2 is 7. Tens: 4 and 3 is 7. Hundreds: 2 and 1 is 3. '
+        + 'No column reached ten, so nothing carries.',
+      level: 1,
+    },
+    {
+      id: 'carry-5',
+      ask: 'In 28 + 15, the ones make 13 and a small 1 is carried. What does '
+        + 'that small 1 stand for?',
+      kind: 'choice',
+      options: ['One one', 'One ten', 'One hundred'],
+      answer: 'One ten',
+      teach: 'Ten of the ones were swapped for one ten, and it moved into the '
+        + 'tens column. So the small 1 is worth ten, not one.',
+      level: 2,
+    },
+    {
+      id: 'carry-6',
+      ask: 'Kwame saves 46 cedis one month and 38 cedis the next. How much has '
+        + 'he saved in all?',
+      kind: 'numeric',
+      answer: '84',
+      accept: ['eighty four', 'eighty-four', '84 cedis'],
+      teach: 'Ones: 6 and 8 is 14, write 4 and carry one ten. Tens: 4 and 3 and '
+        + 'the carried 1 is 8. Forget the carry and you get 74.',
+      level: 2,
+    },
+    {
+      id: 'carry-7',
+      ask: 'Ama works out 36 + 27 and writes 513. What went wrong?',
+      kind: 'choice',
+      options: [
+        'She lined the numbers up on the left',
+        'She wrote the whole 13 in the ones column instead of carrying the ten',
+        'She took away instead of adding',
+      ],
+      answer: 'She wrote the whole 13 in the ones column instead of carrying the ten',
+      teach: '6 and 7 is 13, but a column holds one digit. Write the 3 and carry '
+        + 'the ten. Then 3 and 2 and the carried 1 is 6 tens, so 63.',
+      level: 3,
+    },
+    {
+      id: 'carry-8',
+      ask: 'What is 365 + 48?',
+      kind: 'numeric',
+      answer: '413',
+      accept: ['four hundred and thirteen'],
+      teach: 'Ones: 5 and 8 is 13, write 3 carry one ten. Tens: 6 and 4 and 1 is '
+        + '11 tens, write 1 carry one hundred. Hundreds: 3 and the carried 1 '
+        + 'is 4.',
+      level: 3,
+    },
+    {
+      id: 'carry-9',
+      ask: 'What is 57 + 26?',
+      kind: 'numeric',
+      answer: '83',
+      accept: ['eighty three', 'eighty-three'],
+      teach: 'Ones: 7 and 6 is 13, write 3 and carry the ten. Tens: 5 and 2 and '
+        + 'the carried 1 is 8.',
+      level: 2,
     },
   ],
 })
@@ -643,6 +784,89 @@ teach({
         + 'take 4 is 5, 1 take 1 is 0. Check: 55 and 145 is 200.',
       level: 3,
     },
+    {
+      id: 'borrow-4',
+      ask: 'What is 84 take away 36?',
+      kind: 'numeric',
+      answer: '48',
+      accept: ['forty eight', 'forty-eight'],
+      teach: '4 is smaller than 6, so exchange one ten. The 8 tens drop to 7 and '
+        + 'the 4 becomes 14. Ones: 14 take 6 is 8. Tens: 7 take 3 is 4.',
+      level: 2,
+    },
+    {
+      id: 'borrow-5',
+      ask: 'When you exchange in a take away sum, what is really swapped?',
+      kind: 'choice',
+      options: [
+        'One ten for ten ones',
+        'One one for ten tens',
+        'The top digit and the bottom digit',
+        'Nothing, you just add ten to the answer',
+      ],
+      answer: 'One ten for ten ones',
+      teach: 'One ten is broken into ten ones, like one cedi changed for ten ten '
+        + 'pesewa coins. The amount stays the same, only the pieces get smaller.',
+      level: 2,
+    },
+    {
+      id: 'borrow-6',
+      ask: 'In 74 take away 39, what does the 7 become after you exchange?',
+      kind: 'numeric',
+      answer: '6',
+      accept: ['six'],
+      teach: 'One ten is spent to turn the 4 into 14, so the tens drop by one: '
+        + '7 becomes 6.',
+      level: 2,
+    },
+    {
+      id: 'borrow-7',
+      ask: 'Yaw has 90 cedis and spends 46. How much does he have left?',
+      kind: 'numeric',
+      answer: '44',
+      accept: ['forty four', 'forty-four', '44 cedis'],
+      teach: '0 is smaller than 6, so exchange: 9 tens become 8 and the 0 '
+        + 'becomes 10. Ones: 10 take 6 is 4. Tens: 8 take 4 is 4. Check: 44 '
+        + 'and 46 is 90.',
+      level: 2,
+    },
+    {
+      id: 'borrow-8',
+      ask: 'Abena says 81 take away 45 is 36. To check, add 36 and 45. What do '
+        + 'you get?',
+      kind: 'numeric',
+      answer: '81',
+      accept: ['eighty one', 'eighty-one'],
+      teach: '6 and 5 is 11, write 1 carry one ten. 3 and 4 and 1 is 8. You get '
+        + 'back 81, the number you started with, so her answer is right.',
+      level: 2,
+    },
+    {
+      id: 'borrow-9',
+      ask: 'Kofi works out 65 take away 28 and gets 43. What did he do wrong?',
+      kind: 'choice',
+      options: [
+        'He forgot to carry',
+        'He took 5 from 8 instead of exchanging',
+        'He added instead of taking away',
+      ],
+      answer: 'He took 5 from 8 instead of exchanging',
+      teach: 'The top digit is 5, which is smaller than 8. Turning it round to 8 '
+        + 'take 5 is the mistake. Exchange: 15 take 8 is 7, then 5 take 2 is '
+        + '3. The answer is 37.',
+      level: 3,
+    },
+    {
+      id: 'borrow-10',
+      ask: 'What is 403 take away 157?',
+      kind: 'numeric',
+      answer: '246',
+      accept: ['two hundred and forty six'],
+      teach: 'The tens are a nought, so exchange twice: 4 hundreds become 3, the '
+        + 'tens become 9 and the ones become 13. Then 13 take 7 is 6, 9 take 5 '
+        + 'is 4, 3 take 1 is 2. Check: 246 and 157 is 403.',
+      level: 3,
+    },
   ],
 })
 
@@ -794,7 +1018,7 @@ teach({
       + '</svg>',
   },
   tables: [{
-    caption: 'The nine table, built from the ten table you already know',
+    caption: 'The nine table, built from the ten table',
     columns: ['Nine of it', 'Ten of it', 'Take one away', 'The answer'],
     rows: [
       ['Nine fours', 'Forty', 'Take away four', 'Thirty six'],
@@ -820,7 +1044,7 @@ teach({
     },
     {
       id: 'tt3-2',
-      ask: 'You know 10 times 7 is 70. What is 9 times 7?',
+      ask: '10 times 7 is 70. What is 9 times 7?',
       kind: 'numeric',
       answer: '63',
       accept: ['sixty three', 'sixty-three'],
@@ -837,6 +1061,78 @@ teach({
       teach: 'The same, because turning the rows into columns does not change '
         + 'how many there are. Every fact you learn gives you a second free.',
       level: 2,
+    },
+    {
+      id: 'tt3-4',
+      ask: 'What is 7 times 5?',
+      kind: 'numeric',
+      answer: '35',
+      accept: ['thirty five', 'thirty-five'],
+      teach: 'Seven fives is the same as five sevens. The five table ends in 5 '
+        + 'or 0: five, ten, fifteen, twenty, twenty five, thirty, thirty five.',
+      level: 1,
+    },
+    {
+      id: 'tt3-5',
+      ask: 'Which is the same as 4 x 9?',
+      kind: 'choice',
+      options: ['4 + 9', '9 x 9', '9 x 4', '49'],
+      answer: '9 x 4',
+      teach: 'Turning a times fact round gives the same answer. 4 rows of 9 '
+        + 'turned a quarter turn are 9 rows of 4. Both are 36.',
+      level: 1,
+    },
+    {
+      id: 'tt3-6',
+      ask: 'Kofi says 6 x 4 is 10. What did he do?',
+      kind: 'choice',
+      options: ['He turned it round', 'He added instead of multiplying', 'He counted in fours'],
+      answer: 'He added instead of multiplying',
+      teach: '6 and 4 is 10, but the sign is times, not plus. Six fours means '
+        + 'count four, six times: 24.',
+      level: 2,
+    },
+    {
+      id: 'tt3-7',
+      ask: 'Ten sixes is 60. What is nine sixes?',
+      kind: 'numeric',
+      answer: '54',
+      accept: ['fifty four', 'fifty-four'],
+      teach: 'Nine of something is ten of it, less one of it. 60 take away 6 is '
+        + '54.',
+      level: 2,
+    },
+    {
+      id: 'tt3-8',
+      ask: 'A tin of tomatoes costs 8 cedis. Mensah buys 6 tins. How much does '
+        + 'he pay?',
+      kind: 'numeric',
+      answer: '48',
+      accept: ['forty eight', 'forty-eight', '48 cedis'],
+      teach: 'Six eights. Build from five eights, which is 40, then add one more '
+        + 'eight: 48. Adding 6 and 8 gives 14, which is the wrong sum.',
+      level: 2,
+    },
+    {
+      id: 'tt3-9',
+      ask: '5 times 8 is 40. What is 7 times 8?',
+      kind: 'numeric',
+      answer: '56',
+      accept: ['fifty six', 'fifty-six'],
+      teach: 'Seven eights is two more eights than five eights. 40 and 8 is 48, '
+        + 'and 8 more is 56.',
+      level: 3,
+    },
+    {
+      id: 'tt3-10',
+      ask: 'The chairs in a classroom are in 7 rows of 6. How many chairs are '
+        + 'there?',
+      kind: 'numeric',
+      answer: '42',
+      accept: ['forty two', 'forty-two', '42 chairs'],
+      teach: 'Seven rows of 6 is seven sixes, which is 42. Five sixes is 30, and '
+        + 'two more sixes is 12, so 30 and 12 is 42.',
+      level: 3,
     },
   ],
 })
@@ -1042,6 +1338,87 @@ teach({
         + '1 on top: one sixth.',
       level: 2,
     },
+    {
+      id: 'frac-4',
+      ask: 'In two thirds, what does the top number 2 tell you?',
+      kind: 'choice',
+      options: [
+        'How many parts the whole was cut into',
+        'How many of the parts you have',
+        'How big the whole is',
+      ],
+      answer: 'How many of the parts you have',
+      teach: 'The top number counts the parts you have. The bottom number, 3, '
+        + 'counts the equal parts in the whole.',
+      level: 1,
+    },
+    {
+      id: 'frac-5',
+      ask: 'A loaf of bread is cut into 5 equal pieces. Akosua eats 2 of them. '
+        + 'What fraction did she eat?',
+      kind: 'choice',
+      options: ['Five halves', 'Two thirds', 'Two fifths', 'Three fifths'],
+      answer: 'Two fifths',
+      teach: 'Five equal parts, so 5 goes on the bottom. She ate 2, so 2 goes on '
+        + 'top. Three fifths is the part she did not eat.',
+      level: 2,
+    },
+    {
+      id: 'frac-6',
+      ask: 'Which is bigger, one third or one fifth?',
+      kind: 'choice',
+      options: ['One fifth', 'One third', 'They are equal'],
+      answer: 'One third',
+      teach: '5 is bigger than 3, but that means more pieces, so each piece is '
+        + 'smaller. A whole cut into 3 gives bigger pieces than one cut into 5.',
+      level: 2,
+    },
+    {
+      id: 'frac-7',
+      ask: 'Which is bigger, three eighths or five eighths?',
+      kind: 'choice',
+      options: ['Three eighths', 'They are equal', 'Five eighths'],
+      answer: 'Five eighths',
+      teach: 'The bottom numbers match, so the pieces are the same size. Then '
+        + 'the bigger top number means more pieces, so five eighths wins.',
+      level: 2,
+    },
+    {
+      id: 'frac-8',
+      ask: 'A cake is cut into 4 pieces. One piece is huge and three are small. '
+        + 'Is each piece a quarter?',
+      kind: 'choice',
+      options: [
+        'Yes, because there are 4 pieces',
+        'No, because the pieces are not equal',
+        'Yes, because 4 is the bottom number',
+      ],
+      answer: 'No, because the pieces are not equal',
+      teach: 'A quarter is one of four EQUAL parts. Four pieces of different '
+        + 'sizes are not quarters, however many there are.',
+      level: 2,
+    },
+    {
+      id: 'frac-9',
+      ask: 'An orange has 8 equal segments. Fuseini eats 3. How many eighths are '
+        + 'left?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five', '5/8', 'five eighths'],
+      teach: 'The whole is 8 eighths. Take away the 3 he ate: 8 take 3 is 5. So '
+        + 'five eighths are left.',
+      level: 3,
+    },
+    {
+      id: 'frac-10',
+      ask: 'Six eighths is the same amount as which of these?',
+      kind: 'choice',
+      options: ['Three eighths', 'Six quarters', 'Three quarters'],
+      answer: 'Three quarters',
+      teach: 'Each pair of eighths makes one quarter. Six eighths is three pairs, '
+        + 'so it is three quarters. The pieces were just cut a different way.',
+      level: 3,
+    },
   ],
 })
 
@@ -1246,6 +1623,81 @@ teach({
         + 'middle and it matches too. So two.',
       level: 3,
     },
+    {
+      id: 'sym-4',
+      ask: 'In a drawing, how is a line of symmetry drawn?',
+      kind: 'choice',
+      options: ['Solid and thick', 'Dashed', 'As a curve'],
+      answer: 'Dashed',
+      teach: 'The line is drawn dashed because it is not part of the shape. A '
+        + 'solid line would look like one of the sides.',
+      level: 1,
+    },
+    {
+      id: 'sym-5',
+      ask: 'How many lines of symmetry does a circle have?',
+      kind: 'choice',
+      options: ['One', 'Four', 'None', 'More than you could count'],
+      answer: 'More than you could count',
+      teach: 'Any line through the middle of a circle folds it onto itself, so '
+        + 'there are more lines than you could ever count.',
+      level: 1,
+    },
+    {
+      id: 'sym-6',
+      ask: 'How many lines of symmetry does a rectangle that is not a square '
+        + 'have?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two'],
+      teach: 'Down the middle and across the middle both work. The diagonals do '
+        + 'not, because the long side lands on the short side. So two.',
+      level: 2,
+    },
+    {
+      id: 'sym-7',
+      ask: 'A line cuts a shape into two halves of the same size. When you fold '
+        + 'along it, the corners do not meet. Is it a line of symmetry?',
+      kind: 'choice',
+      options: ['Yes, the halves are the same size', 'No', 'Only if it is dashed'],
+      answer: 'No',
+      teach: 'Equal size is not the test. Every corner must land on a corner '
+        + 'when you fold. If any part sticks out, it is not a line of symmetry.',
+      level: 2,
+    },
+    {
+      id: 'sym-8',
+      ask: 'Which capital letter has a line of symmetry down the middle?',
+      kind: 'choice',
+      options: ['F', 'R', 'A', 'J'],
+      answer: 'A',
+      teach: 'Fold each letter down a line through its middle. Only A has two '
+        + 'sides that land on each other. F, R and J stick out on one side.',
+      level: 2,
+    },
+    {
+      id: 'sym-9',
+      ask: 'Which capital letter matches when folded across the middle, but not '
+        + 'when folded down the middle?',
+      kind: 'choice',
+      options: ['A', 'B', 'T', 'V'],
+      answer: 'B',
+      teach: 'The top and bottom halves of B match, but its left and right do '
+        + 'not. A, T and V are the other way: they fold down the middle.',
+      level: 3,
+    },
+    {
+      id: 'sym-10',
+      ask: 'You are finishing a symmetrical drawing. One corner is 3 squares to '
+        + 'the left of the line. How many squares to the right of the line '
+        + 'does its partner go?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three', '3 squares'],
+      teach: 'A partner point sits the same distance from the line on the other '
+        + 'side, as if seen in a mirror. 3 to the left means 3 to the right.',
+      level: 3,
+    },
   ],
 })
 
@@ -1293,7 +1745,9 @@ teach({
     + 'We measure it in kilograms and grams. '
     + 'Capacity is how much a container holds. '
     + 'We measure it in litres and millilitres. '
-    + 'Each one has a big unit and a small unit.',
+    + 'Each one has a big unit and a small unit. '
+    + 'There are 100 centimetres in a metre, 1000 grams in a kilogram '
+    + 'and 1000 millilitres in a litre.',
 
   mechanism:
     'Picking the unit is the real skill. '
@@ -1442,6 +1896,78 @@ teach({
       accept: ['seven hundred and fifty'],
       teach: 'Match the units first: 1 litre is 1000 ml. Then 1000 take away '
         + '250 is 750.',
+      level: 3,
+    },
+    {
+      id: 'meas-4',
+      ask: 'Which unit would you use for how heavy a bag of rice is?',
+      kind: 'choice',
+      options: ['Litres', 'Kilograms', 'Centimetres'],
+      answer: 'Kilograms',
+      teach: 'How heavy something is, is its mass, and mass is measured in '
+        + 'kilograms and grams. Litres measure how much a container holds.',
+      level: 1,
+    },
+    {
+      id: 'meas-5',
+      ask: 'How much water a bucket holds is called its...',
+      kind: 'choice',
+      options: ['Mass', 'Length', 'Capacity'],
+      answer: 'Capacity',
+      teach: 'Capacity is how much a container holds. Mass is how heavy it is, '
+        + 'and length is how long it is.',
+      level: 1,
+    },
+    {
+      id: 'meas-6',
+      ask: 'Where on the ruler do you line up the end of the object?',
+      kind: 'choice',
+      options: ['The edge of the ruler', 'The zero mark', 'The 1 mark'],
+      answer: 'The zero mark',
+      teach: 'Many rulers have a small space before the zero. Start at the edge '
+        + 'and everything you measure comes out too long.',
+      level: 2,
+    },
+    {
+      id: 'meas-7',
+      ask: 'How many millilitres are in 4 litres?',
+      kind: 'numeric',
+      answer: '4000',
+      accept: ['four thousand', '4000 ml'],
+      teach: 'One litre is 1000 millilitres, so four litres is four lots of '
+        + '1000, which is 4000.',
+      level: 2,
+    },
+    {
+      id: 'meas-8',
+      ask: 'How many centimetres are in 2 metres?',
+      kind: 'numeric',
+      answer: '200',
+      accept: ['two hundred', '200 cm'],
+      teach: 'One metre is 100 centimetres, so two metres is 200. Watch out: a '
+        + 'kilogram and a litre are 1000, but a metre is only 100 centimetres.',
+      level: 2,
+    },
+    {
+      id: 'meas-9',
+      ask: 'You asked for 2 metres of cloth. The trader cuts 180 cm. Is that '
+        + 'more or less than you asked for?',
+      kind: 'choice',
+      options: ['More', 'Less', 'The same'],
+      answer: 'Less',
+      teach: 'Put both in the same unit first. 2 metres is 200 cm, and 180 is '
+        + 'less than 200. 180 looks bigger than 2 only because the units differ.',
+      level: 3,
+    },
+    {
+      id: 'meas-10',
+      ask: 'A tin of milk powder is 2 kg. You use 500 g. How many grams are '
+        + 'left?',
+      kind: 'numeric',
+      answer: '1500',
+      accept: ['1500 g', 'one thousand five hundred', '1 kg 500 g'],
+      teach: 'Match the units first: 2 kg is 2000 g. Then 2000 take away 500 is '
+        + '1500 g, which is 1 kg 500 g.',
       level: 3,
     },
   ],
@@ -1637,6 +2163,80 @@ teach({
       accept: ['twenty five', 'twenty-five'],
       teach: 'Both are in the same hour, so take the minutes: 45 take away 20 '
         + 'is 25.',
+      level: 3,
+    },
+    {
+      id: 'time-4',
+      ask: 'The long hand is on the 3. How many minutes past the hour is it?',
+      kind: 'numeric',
+      answer: '15',
+      accept: ['fifteen', 'quarter past'],
+      teach: 'Each number on the face is five minutes for the long hand. Count '
+        + 'in fives to the 3: five, ten, fifteen. It is not three minutes.',
+      level: 1,
+    },
+    {
+      id: 'time-5',
+      ask: 'How do you write five past three with numbers?',
+      kind: 'choice',
+      options: ['3:5', '5:03', '3:50', '3:05'],
+      answer: '3:05',
+      teach: 'The hour comes before the colon and the minutes after. Minutes '
+        + 'always have two digits, so five minutes is 05. 3:50 would be fifty '
+        + 'minutes past.',
+      level: 2,
+    },
+    {
+      id: 'time-6',
+      ask: 'The short hand is just past the 7 and the long hand is on the 6. '
+        + 'What time is it?',
+      kind: 'choice',
+      options: ['Half past seven', 'Half past eight', 'Six past seven', 'Seven past six'],
+      answer: 'Half past seven',
+      teach: 'Short hand first: it has passed the 7, so the hour is seven. Long '
+        + 'hand on the 6 is thirty minutes, which is half past.',
+      level: 2,
+    },
+    {
+      id: 'time-7',
+      ask: 'Abena starts her homework at 4:10 and finishes at 4:40. How many '
+        + 'minutes did it take?',
+      kind: 'numeric',
+      answer: '30',
+      accept: ['thirty', '30 minutes', 'half an hour'],
+      teach: 'Both times are in the same hour, so take the minutes: 40 take '
+        + 'away 10 is 30.',
+      level: 2,
+    },
+    {
+      id: 'time-8',
+      ask: 'The long hand is on the 11 and the short hand is almost on the 4. '
+        + 'What time is it?',
+      kind: 'choice',
+      options: ['4:55', '3:55', '4:11', '3:11'],
+      answer: '3:55',
+      teach: 'The short hand has not reached the 4, so the hour is still three. '
+        + 'The long hand on 11 is eleven fives, which is 55 minutes.',
+      level: 3,
+    },
+    {
+      id: 'time-9',
+      ask: 'School closes at 2:30. The clock says 2:15. How many minutes until '
+        + 'school closes?',
+      kind: 'numeric',
+      answer: '15',
+      accept: ['fifteen', '15 minutes', 'a quarter of an hour'],
+      teach: 'Same hour, so take the minutes: 30 take away 15 is 15.',
+      level: 3,
+    },
+    {
+      id: 'time-10',
+      ask: '2:50 can also be said another way. Which one?',
+      kind: 'choice',
+      options: ['Ten past two', 'Ten to three', 'Ten to two', 'Fifty past three'],
+      answer: 'Ten to three',
+      teach: 'At 2:50 the long hand is ten minutes short of the 12. So it is ten '
+        + 'minutes before three o clock: ten to three.',
       level: 3,
     },
   ],

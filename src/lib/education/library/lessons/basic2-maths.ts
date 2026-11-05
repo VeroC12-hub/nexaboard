@@ -228,6 +228,66 @@ teach({
         + 'third ten and leaves 5 loose. Three tens and five ones is 35.',
       level: 3,
     },
+    {
+      id: 't1-4',
+      ask: 'How many ones are in 73?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three'],
+      teach: 'The ones are the digit on the right. In 73 that is the 3. The 7 '
+        + 'on the left counts tens, not ones.',
+      level: 1,
+    },
+    {
+      id: 't1-5',
+      ask: 'In 64, what is the 6 worth?',
+      kind: 'choice',
+      options: ['6', '64', '60'],
+      answer: '60',
+      teach: 'The 6 sits in the tens place, on the left. So it means six '
+        + 'bundles of ten. That is sixty, not six.',
+      level: 2,
+    },
+    {
+      id: 't1-6',
+      ask: 'Which is more, 42 or 24?',
+      kind: 'choice',
+      options: ['24', '42', 'They are the same'],
+      answer: '42',
+      teach: 'They use the same digits, but look at the tens. 42 has four tens. '
+        + '24 has only two tens. Four tens is more.',
+      level: 2,
+    },
+    {
+      id: 't1-7',
+      ask: 'How do you say 42 out loud?',
+      kind: 'choice',
+      options: ['Four two', 'Forty two', 'Twenty four'],
+      answer: 'Forty two',
+      teach: 'Saying "four two" hides the tens. Say the tens as a ten word '
+        + 'first. 4 tens is forty. Then the ones. Forty two.',
+      level: 2,
+    },
+    {
+      id: 't1-8',
+      ask: 'Kofi writes forty two. Which one is right?',
+      kind: 'choice',
+      options: ['402', '24', '42'],
+      answer: '42',
+      teach: 'Forty is four tens, so a 4 goes in the tens place. Two is the '
+        + 'ones, so a 2 goes beside it. No 0 is needed in between. That makes 42.',
+      level: 3,
+    },
+    {
+      id: 't1-9',
+      ask: 'Ama has 3 tens and 12 ones. What number does she have?',
+      kind: 'numeric',
+      answer: '42',
+      accept: ['forty two', 'forty-two'],
+      teach: 'Tie ten of the 12 ones into a bundle. Now there are 4 tens and '
+        + '2 ones left. Four tens and two ones is 42, not 312.',
+      level: 3,
+    },
   ],
 })
 
@@ -430,6 +490,67 @@ teach({
         + 'is three counts, so three groups.',
       level: 3,
     },
+    {
+      id: 'go-4',
+      ask: 'Three bags. Two oranges in each bag. How many oranges?',
+      kind: 'numeric',
+      answer: '6',
+      accept: ['six', '6 oranges'],
+      teach: 'Three groups of two. Add the group size again and again: two, '
+        + 'four, six. Counting only the bags gives 3, which is the wrong thing.',
+      level: 1,
+    },
+    {
+      id: 'go-5',
+      ask: 'How do you write four groups of three?',
+      kind: 'choice',
+      options: ['3 x 4', '4 + 3', '4 x 3'],
+      answer: '4 x 3',
+      teach: 'The number of groups comes first. Four groups, so 4 first. Then '
+        + 'x for "groups of". Then 3. A plus sign would add them, not group them.',
+      level: 2,
+    },
+    {
+      id: 'go-6',
+      ask: 'Three bowls. Four mangoes in each bowl. Which sum shows this?',
+      kind: 'choice',
+      options: ['3 x 4', '4 x 3', '3 + 4'],
+      answer: '3 x 4',
+      teach: 'Count the groups first. There are 3 bowls, so 3 comes first. '
+        + 'Each bowl holds 4. So it is 3 x 4.',
+      level: 2,
+    },
+    {
+      id: 'go-7',
+      ask: 'Which adding sum is the same as 3 x 5?',
+      kind: 'choice',
+      options: ['3 + 5', '5 + 5 + 5', '3 + 3 + 3'],
+      answer: '5 + 5 + 5',
+      teach: '3 x 5 means three groups of five. So write the five three '
+        + 'times. 3 + 5 only adds the two numbers once.',
+      level: 2,
+    },
+    {
+      id: 'go-8',
+      ask: 'A drawing shows 2 rows of dots. Each row has 6 dots. Which sum '
+        + 'does it show?',
+      kind: 'choice',
+      options: ['2 + 6', '2 x 6', '6 x 6'],
+      answer: '2 x 6',
+      teach: 'Each row is a group. There are 2 rows, so 2 groups. Each has 6. '
+        + 'That is 2 x 6, which is 12.',
+      level: 3,
+    },
+    {
+      id: 'go-9',
+      ask: 'Is 4 groups of 3 the same amount as 3 groups of 4?',
+      kind: 'choice',
+      options: ['Yes, both are 12', 'No, 4 groups of 3 is more', 'No, 3 groups of 4 is more'],
+      answer: 'Yes, both are 12',
+      teach: 'Count them. Three, six, nine, twelve. Four, eight, twelve. Both '
+        + 'make 12. The groups look different but the total is the same.',
+      level: 3,
+    },
   ],
 })
 
@@ -621,6 +742,68 @@ teach({
         + 'of two pieces, a quarter is one of four, so the half is bigger.',
       level: 2,
     },
+    {
+      id: 'hq-4',
+      ask: 'Ama and Kofi share 10 pesewas equally. How many pesewas each?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five', '5 pesewas'],
+      teach: 'Half means two equal parts. Share one to each, round and round. '
+        + 'Each ends up with 5. Half of 10 is 5.',
+      level: 1,
+    },
+    {
+      id: 'hq-5',
+      ask: 'An orange breaks into a big piece and a small piece. Are they halves?',
+      kind: 'choice',
+      options: ['Yes, there are two pieces', 'No, the pieces are not equal', 'Yes, it is one orange'],
+      answer: 'No, the pieces are not equal',
+      teach: 'Two pieces is not enough. Halves must be the same size. A big '
+        + 'piece and a small piece are not halves.',
+      level: 1,
+    },
+    {
+      id: 'hq-6',
+      ask: 'How many quarters make one whole orange?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four'],
+      teach: 'A quarter is one of four equal parts. Put all four parts back '
+        + 'together and you have the whole thing again.',
+      level: 2,
+    },
+    {
+      id: 'hq-7',
+      ask: 'Four children share 16 bottle tops equally. How many each?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four', '4 bottle tops'],
+      teach: 'Share one to each of the four, round and round, until none are '
+        + 'left. Each child gets 4. A quarter of 16 is 4.',
+      level: 2,
+    },
+    {
+      id: 'hq-8',
+      ask: 'You fold a paper square. The two sides lie exactly on each other. '
+        + 'What have you made?',
+      kind: 'choice',
+      options: ['Two quarters', 'Two halves', 'Four halves'],
+      answer: 'Two halves',
+      teach: 'One fold makes two parts. They lie exactly on each other, so they '
+        + 'are equal. Two equal parts are halves.',
+      level: 2,
+    },
+    {
+      id: 'hq-9',
+      ask: 'What is a quarter of 20?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five'],
+      teach: 'A quarter means share between four. Twenty shared into four '
+        + 'equal parts gives 5 in each. Halving gives 10, which is a half, not a '
+        + 'quarter.',
+      level: 3,
+    },
   ],
 })
 
@@ -795,6 +978,67 @@ teach({
       accept: ['twenty one', 'twenty-one'],
       teach: 'This one goes down. Each gap is three less, so take three from '
         + '24.',
+      level: 3,
+    },
+    {
+      id: 'cp-4',
+      ask: 'What comes next? Red, blue, red, blue, ...',
+      kind: 'choice',
+      options: ['Blue', 'Red', 'Green'],
+      answer: 'Red',
+      teach: 'Each step swaps colour. After blue comes red every time. So red '
+        + 'comes next.',
+      level: 1,
+    },
+    {
+      id: 'cp-5',
+      ask: 'What comes next? 10, 20, 30, 40, ...',
+      kind: 'numeric',
+      answer: '50',
+      accept: ['fifty'],
+      teach: 'Look at the gaps. 10 to 20, 20 to 30. Each gap is add ten. Add '
+        + 'ten to 40 and you get 50.',
+      level: 2,
+    },
+    {
+      id: 'cp-6',
+      ask: 'What is the rule for 20, 18, 16, 14?',
+      kind: 'choice',
+      options: ['Add 2', 'Take away 2', 'Take away 4'],
+      answer: 'Take away 2',
+      teach: 'The numbers get smaller, so it is not adding. 20 to 18 is two '
+        + 'less. 18 to 16 is two less. The rule is take away 2.',
+      level: 2,
+    },
+    {
+      id: 'cp-7',
+      ask: 'Which number is missing? 7, 9, __, 13',
+      kind: 'numeric',
+      answer: '11',
+      accept: ['eleven'],
+      teach: 'Compare neighbours you can see. 7 to 9 is add two. So add two to '
+        + '9 to fill the gap. That is 11, and 11 add two is 13, so it checks.',
+      level: 2,
+    },
+    {
+      id: 'cp-8',
+      ask: 'Yaw says the rule for 3, 6, 9 is "it goes up". What is missing '
+        + 'from his rule?',
+      kind: 'choice',
+      options: ['The first number', 'How much it goes up by', 'Nothing is missing'],
+      answer: 'How much it goes up by',
+      teach: '"It goes up" fits many patterns. A rule must say by how much. '
+        + 'Here each gap is three, so the rule is add 3.',
+      level: 3,
+    },
+    {
+      id: 'cp-9',
+      ask: 'What comes next? Triangle, circle, circle, triangle, circle, circle, ...',
+      kind: 'choice',
+      options: ['Circle', 'Square', 'Triangle'],
+      answer: 'Triangle',
+      teach: 'Find the part that repeats: triangle, circle, circle. It has just '
+        + 'ended, so it starts again with a triangle.',
       level: 3,
     },
   ],
@@ -1006,6 +1250,77 @@ teach({
       accept: ['one'],
       teach: 'Add the table: 9 and 5 is 14. You asked 15, so one answer was '
         + 'never marked. Adding the table up is how you catch this.',
+      level: 3,
+    },
+    {
+      id: 'tt-4',
+      ask: 'One gate of tally marks has four strokes and one across them. '
+        + 'How many does it show?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five'],
+      teach: 'The stroke across is the fifth one. So the whole gate is read as '
+        + 'five, not as one.',
+      level: 1,
+    },
+    {
+      id: 'tt-5',
+      ask: 'A tally row has two gates of five and one single stroke. What '
+        + 'number is that?',
+      kind: 'numeric',
+      answer: '11',
+      accept: ['eleven'],
+      teach: 'Count the gates in fives: five, ten. Then add the single stroke. '
+        + 'Ten and one is 11.',
+      level: 2,
+    },
+    {
+      id: 'tt-6',
+      ask: 'You hear the fifth answer for mango. How do you draw that stroke?',
+      kind: 'choice',
+      options: ['Standing up like the others', 'Across the four before it', 'Under the row'],
+      answer: 'Across the four before it',
+      teach: 'If the fifth stroke stands up, there are no gates. Then you must '
+        + 'count every stroke one by one. Lay it across the four to make a gate.',
+      level: 2,
+    },
+    {
+      id: 'tt-7',
+      ask: 'Why do you write a table after you make the tally?',
+      kind: 'choice',
+      options: [
+        'So the numbers are easy to read',
+        'So the tally gets longer',
+        'So you can ask the same child again',
+      ],
+      answer: 'So the numbers are easy to read',
+      teach: 'The tally is for collecting answers as you hear them. The table '
+        + 'is for reading. Two jobs, so you need both.',
+      level: 2,
+    },
+    {
+      id: 'tt-8',
+      ask: 'A tally row has three gates of five and two loose strokes. What '
+        + 'number goes in the table?',
+      kind: 'numeric',
+      answer: '17',
+      accept: ['seventeen'],
+      teach: 'Count the gates in fives: five, ten, fifteen. Then add the two '
+        + 'loose strokes. Fifteen and two is 17.',
+      level: 3,
+    },
+    {
+      id: 'tt-9',
+      ask: 'Abena asked Kwame twice and made two strokes for him. What goes wrong?',
+      kind: 'choice',
+      options: [
+        'Nothing goes wrong',
+        'The tally loses a stroke',
+        'One child is counted twice',
+      ],
+      answer: 'One child is counted twice',
+      teach: 'Each person should give one stroke. Asking twice adds an extra '
+        + 'answer. Then the total is more than the number of children asked.',
       level: 3,
     },
   ],

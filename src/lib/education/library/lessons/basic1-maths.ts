@@ -211,6 +211,76 @@ teach({
         + 'stay at six until you pass sixty nine, then the next one makes seven.',
       level: 2,
     },
+    {
+      id: 'n100-4',
+      ask: 'How many is 2 bundles of ten and 5 loose ones?',
+      kind: 'numeric',
+      answer: '25',
+      accept: ['twenty five', 'twenty-five'],
+      teach: 'Two bundles is twenty. Then the five loose ones. Twenty, then '
+        + 'five, is twenty five.',
+      level: 1,
+    },
+    {
+      id: 'n100-5',
+      ask: 'How do you say 34?',
+      kind: 'choice',
+      options: ['Three four', 'Forty three', 'Thirty four'],
+      answer: 'Thirty four',
+      teach: 'The 3 sits in the bundle place, so it means thirty. Say the '
+        + 'bundles first, then the four loose ones.',
+      level: 1,
+    },
+    {
+      id: 'n100-6',
+      ask: 'Which is bigger, 47 or 74?',
+      kind: 'choice',
+      options: ['47', '74'],
+      answer: '74',
+      teach: 'Look at the bundles first. 74 has 7 bundles. 47 has only 4. '
+        + 'More bundles wins.',
+      level: 2,
+    },
+    {
+      id: 'n100-7',
+      ask: 'How do you write sixty one?',
+      kind: 'choice',
+      options: ['601', '61', '16'],
+      answer: '61',
+      teach: 'Sixty is 6 bundles, so 6 goes in the bundle place. Then 1 loose '
+        + 'one. Do not add a nought: write 61.',
+      level: 2,
+    },
+    {
+      id: 'n100-8',
+      ask: 'Which is bigger, 56 or 53?',
+      kind: 'choice',
+      options: ['53', '56'],
+      answer: '56',
+      teach: 'Both have 5 bundles. When the bundles are the same, look at '
+        + 'the loose ones. 6 is more than 3.',
+      level: 2,
+    },
+    {
+      id: 'n100-9',
+      ask: 'Is 19 bigger than 20?',
+      kind: 'choice',
+      options: ['Yes, 9 is bigger than 0', 'No, 20 has more bundles'],
+      answer: 'No, 20 has more bundles',
+      teach: 'The 9 is only nine loose sticks. 20 has two whole bundles. '
+        + '19 has just one. Count bundles first.',
+      level: 3,
+    },
+    {
+      id: 'n100-10',
+      ask: 'Put in order, smallest first: 38, 83, 30.',
+      kind: 'choice',
+      options: ['38, 30, 83', '30, 38, 83', '83, 38, 30', '30, 83, 38'],
+      answer: '30, 38, 83',
+      teach: 'Sort by bundles first. 30 and 38 have 3 bundles, so they come '
+        + 'before 83. Then 30 has no loose ones, so it comes before 38.',
+      level: 3,
+    },
   ],
 })
 
@@ -400,6 +470,76 @@ teach({
       accept: ['eight'],
       teach: 'Go down to ten first: 12 take away 2 is 10. You have taken 2 of '
         + 'the 4, so take 2 more. 10 take away 2 is 8.',
+      level: 3,
+    },
+    {
+      id: 'a20-4',
+      ask: 'You have 6 bottle tops. You get 3 more. How many now?',
+      kind: 'numeric',
+      answer: '9',
+      accept: ['nine'],
+      teach: 'Start at 6. Count on three: seven, eight, nine. Do not say six '
+        + 'as one of the steps.',
+      level: 1,
+    },
+    {
+      id: 'a20-5',
+      ask: 'To add 3 and 9, which number do you start from?',
+      kind: 'choice',
+      options: ['Start at 3', 'Start at 9', 'Start at 1'],
+      answer: 'Start at 9',
+      teach: 'Put the big number first. 9 and 3 is the same as 3 and 9. '
+        + 'Counting on three from 9 is faster than nine from 3.',
+      level: 1,
+    },
+    {
+      id: 'a20-6',
+      ask: 'What is 8 and 5?',
+      kind: 'numeric',
+      answer: '13',
+      accept: ['thirteen'],
+      teach: '8 needs 2 more to make ten. Take 2 from the 5. That leaves 3. '
+        + 'Ten and 3 is thirteen.',
+      level: 2,
+    },
+    {
+      id: 'a20-7',
+      ask: 'What is 9 take away 4?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five'],
+      teach: 'Count back four from 9: eight, seven, six, five. Do not count '
+        + 'the 9 itself.',
+      level: 2,
+    },
+    {
+      id: 'a20-8',
+      ask: '8 and 5 is 13. So what is 13 take away 5?',
+      kind: 'numeric',
+      answer: '8',
+      accept: ['eight'],
+      teach: 'Taking away undoes adding. 8 and 5 made 13. Take the 5 away '
+        + 'again and 8 is left.',
+      level: 2,
+    },
+    {
+      id: 'a20-9',
+      ask: 'Ama has 15 pesewas. She spends 7 pesewas. How much is left?',
+      kind: 'numeric',
+      answer: '8',
+      accept: ['eight', '8 pesewas'],
+      teach: 'Go down to ten first. 15 take away 5 is 10. You still have 2 '
+        + 'more to take. 10 take away 2 is 8.',
+      level: 3,
+    },
+    {
+      id: 'a20-10',
+      ask: 'What is 7 and 6?',
+      kind: 'numeric',
+      answer: '13',
+      accept: ['thirteen'],
+      teach: '7 needs 3 more to make ten. Take 3 from the 6. That leaves 3. '
+        + 'Ten and 3 is thirteen.',
       level: 3,
     },
   ],
@@ -602,6 +742,77 @@ teach({
       teach: 'A ball is a sphere and is curved everywhere, so it rolls in any '
         + 'direction. A tin has two flat ends and a box has six flat faces.',
       level: 2,
+    },
+    {
+      id: 'shape-4',
+      ask: 'Which shape has no sides and no corners?',
+      kind: 'choice',
+      options: ['A square', 'A triangle', 'A circle'],
+      answer: 'A circle',
+      teach: 'A circle is one curved line. There is no straight side, so '
+        + 'there is no corner where sides meet.',
+      level: 1,
+    },
+    {
+      id: 'shape-5',
+      ask: 'How many corners does a triangle have?',
+      kind: 'numeric',
+      answer: '3',
+      accept: ['three'],
+      teach: 'Run your finger round. You turn once at the end of each side. '
+        + 'Three sides, so three corners.',
+      level: 1,
+    },
+    {
+      id: 'shape-6',
+      ask: 'Your exercise book has four sides. Two are long and two are '
+        + 'short. What shape is it?',
+      kind: 'choice',
+      options: ['A square', 'A rectangle', 'A triangle'],
+      answer: 'A rectangle',
+      teach: 'A square needs all four sides the same. Two long and two short '
+        + 'makes a rectangle.',
+      level: 2,
+    },
+    {
+      id: 'shape-7',
+      ask: 'A triangle is turned upside down. What is it now?',
+      kind: 'choice',
+      options: ['Still a triangle', 'A square', 'Not a shape'],
+      answer: 'Still a triangle',
+      teach: 'Turning a shape does not change it. Count the sides. It still '
+        + 'has three, so it is still a triangle.',
+      level: 2,
+    },
+    {
+      id: 'shape-8',
+      ask: 'What is a tin of milk?',
+      kind: 'choice',
+      options: ['A sphere', 'A cuboid', 'A cylinder', 'A circle'],
+      answer: 'A cylinder',
+      teach: 'A tin has two flat circle ends and a curved part round the '
+        + 'middle. That is a cylinder. A circle is flat and drawn on paper.',
+      level: 2,
+    },
+    {
+      id: 'shape-9',
+      ask: 'How many flat faces does a box have?',
+      kind: 'numeric',
+      answer: '6',
+      accept: ['six'],
+      teach: 'A box is a cuboid. Count the faces: top, bottom, front, back '
+        + 'and two ends. That is six.',
+      level: 3,
+    },
+    {
+      id: 'shape-10',
+      ask: 'Kofi draws a round shape on paper. Is it a circle or a sphere?',
+      kind: 'choice',
+      options: ['A sphere', 'A circle'],
+      answer: 'A circle',
+      teach: 'A circle is flat. You draw it on paper. A sphere is solid, like '
+        + 'a ball you hold in your hand.',
+      level: 3,
     },
   ],
 })

@@ -224,6 +224,76 @@ teach({
         + 'hundreds, exactly as in addition.',
       level: 5,
     },
+    {
+      id: 'rd-4',
+      ask: 'Round 64 to the nearest ten.',
+      kind: 'numeric',
+      answer: '60',
+      accept: ['sixty'],
+      teach: '64 sits between 60 and 70. '
+        + 'The digit after the tens is 4, which is less than 5, '
+        + 'so it rounds down to 60, not up to 70.',
+      level: 1,
+    },
+    {
+      id: 'rd-5',
+      ask: 'Round 750 to the nearest hundred.',
+      kind: 'numeric',
+      answer: '800',
+      accept: ['eight hundred'],
+      teach: 'The digit after the hundreds is 5. '
+        + 'The rule is 5 or more rounds up, so 7 becomes 8. '
+        + 'Rounding down to 700 is the slip to avoid.',
+      level: 2,
+    },
+    {
+      id: 'rd-6',
+      ask: 'Round 1,234 to the nearest hundred.',
+      kind: 'numeric',
+      answer: '1200',
+      accept: ['1,200', 'one thousand two hundred'],
+      teach: 'Underline the hundreds digit, which is 2. '
+        + 'The digit to its right is 3, less than 5, so the 2 stays. '
+        + 'Everything after it becomes noughts: 1,200.',
+      level: 2,
+    },
+    {
+      id: 'rd-7',
+      ask: 'Round 6,782 to the nearest thousand.',
+      kind: 'numeric',
+      answer: '7000',
+      accept: ['7,000', 'seven thousand'],
+      teach: 'The thousands digit is 6. The next digit is 7, which is 5 or '
+        + 'more, so 6 goes up to 7. '
+        + 'Only the 7 after the 6 matters; the 82 does not.',
+      level: 3,
+    },
+    {
+      id: 'rd-8',
+      ask: 'In which of these is rounding NOT sensible?',
+      kind: 'choice',
+      options: [
+        'Saying roughly how many people came to a durbar',
+        'Working out the exact change a trader owes you',
+        'Guessing how much money to take to the market',
+      ],
+      answer: 'Working out the exact change a trader owes you',
+      teach: 'Round when you are estimating. '
+        + 'When money is owed, every pesewa matters, '
+        + 'so the exact number is needed.',
+      level: 2,
+    },
+    {
+      id: 'rd-9',
+      ask: 'Round 2,449 to the nearest hundred.',
+      kind: 'numeric',
+      answer: '2400',
+      accept: ['2,400', 'two thousand four hundred'],
+      teach: 'Rounding twice gives the wrong 2,500: 2,449 becomes 2,450, '
+        + 'then 2,500. Round once, from the start. '
+        + 'The hundreds digit is 4 and the next digit is 4, so it stays 2,400.',
+      level: 4,
+    },
   ],
 })
 
@@ -470,6 +540,81 @@ teach({
         + 'Same arithmetic, different answers.',
       level: 5,
     },
+    {
+      id: 'dr-4',
+      ask: '17 divided by 5 is 3 remainder what?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two', 'r 2', 'remainder 2'],
+      teach: '5 times 3 is 15. '
+        + '17 take away 15 leaves 2. '
+        + 'Check: 15 and 2 is 17.',
+      level: 1,
+    },
+    {
+      id: 'dr-5',
+      ask: 'What is 30 divided by 7?',
+      kind: 'choice',
+      options: ['4.2', '4 remainder 2', '5 remainder 2', '4 remainder 3'],
+      answer: '4 remainder 2',
+      teach: '7 times 4 is 28, and 30 take away 28 is 2. '
+        + 'Writing 4.2 is the common slip: a remainder of 2 is not '
+        + 'the same as point 2.',
+      level: 2,
+    },
+    {
+      id: 'dr-6',
+      ask: 'Akosua packs 22 mangoes into bags of 5. '
+        + 'How many bags can she fill right to the top?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four', '4 bags'],
+      teach: '22 divided by 5 is 4 remainder 2. '
+        + 'The 2 mangoes left cannot fill a bag, '
+        + 'so only 4 bags are full. Here you do not round up.',
+      level: 3,
+    },
+    {
+      id: 'dr-7',
+      ask: '33 children sit on benches. Each bench holds 4. '
+        + 'How many benches are needed so every child can sit?',
+      kind: 'numeric',
+      answer: '9',
+      accept: ['nine', '9 benches'],
+      teach: '33 divided by 4 is 8 remainder 1. '
+        + 'Eight benches hold 32, and the last child still needs a seat, '
+        + 'so the remainder forces a ninth bench.',
+      level: 3,
+    },
+    {
+      id: 'dr-8',
+      ask: '26 cedis are shared equally between 4 children. '
+        + 'How many whole cedis does each child get?',
+      kind: 'numeric',
+      answer: '6',
+      accept: ['six', '6 cedis'],
+      teach: '26 divided by 4 is 6 remainder 2. '
+        + 'Each child gets 6 cedis. '
+        + 'The 2 cedis left are kept or shared further; '
+        + 'they do not give anyone a 7th cedi.',
+      level: 3,
+    },
+    {
+      id: 'dr-9',
+      ask: 'Kofi says 45 divided by 6 is 7 remainder 5. '
+        + 'Use the check to decide if he is right.',
+      kind: 'choice',
+      options: [
+        'He is right',
+        'He is wrong, it is 7 remainder 3',
+        'He is wrong, it is 8 remainder 3',
+      ],
+      answer: 'He is wrong, it is 7 remainder 3',
+      teach: 'Check: 7 times 6 is 42, and 42 and 5 is 47, not 45. '
+        + 'So the remainder is wrong. 45 take away 42 is 3, '
+        + 'so the answer is 7 remainder 3.',
+      level: 4,
+    },
   ],
 })
 
@@ -705,6 +850,71 @@ teach({
       teach: 'Both lists share 1, 2, 3 and 6. The largest shared one is 6.',
       level: 4,
     },
+    {
+      id: 'fm-4',
+      ask: 'Which of these is a factor of 15?',
+      kind: 'choice',
+      options: ['2', '4', '5', '30'],
+      answer: '5',
+      teach: 'A factor divides in exactly. 5 times 3 is 15, so 5 is a factor. '
+        + '30 is a multiple of 15, not a factor: it is bigger, '
+        + 'so it cannot go into 15.',
+      level: 1,
+    },
+    {
+      id: 'fm-5',
+      ask: 'What are the first four multiples of 4?',
+      kind: 'choice',
+      options: ['1, 2, 4, 8', '4, 8, 12, 16', '4, 6, 8, 10'],
+      answer: '4, 8, 12, 16',
+      teach: 'For multiples, count up in fours: 4, 8, 12, 16. '
+        + '1, 2 and 4 are factors of 4, which go into it, '
+        + 'not multiples, which come out of it.',
+      level: 1,
+    },
+    {
+      id: 'fm-6',
+      ask: 'Which of these is a multiple of 7?',
+      kind: 'choice',
+      options: ['17', '27', '35', '47'],
+      answer: '35',
+      teach: 'Count up in sevens: 7, 14, 21, 28, 35. '
+        + '17 and 27 end in 7 but are not in the count. '
+        + 'The last digit does not decide it.',
+      level: 2,
+    },
+    {
+      id: 'fm-7',
+      ask: 'How many factors does 20 have?',
+      kind: 'numeric',
+      answer: '6',
+      accept: ['six'],
+      teach: 'Test in pairs: 1 and 20, 2 and 10, 4 and 5. '
+        + '3 does not go in. After 4 the pairs repeat. '
+        + 'So 1, 2, 4, 5, 10 and 20: six factors.',
+      level: 3,
+    },
+    {
+      id: 'fm-8',
+      ask: 'What is the highest common factor of 8 and 12?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['four'],
+      teach: 'Factors of 8: 1, 2, 4, 8. Factors of 12: 1, 2, 3, 4, 6, 12. '
+        + 'Both share 1, 2 and 4. '
+        + 'Giving 2 is the common slip: it is shared, but 4 is the biggest.',
+      level: 3,
+    },
+    {
+      id: 'fm-9',
+      ask: 'What is the highest common factor of 15 and 25?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['five'],
+      teach: 'Factors of 15: 1, 3, 5, 15. Factors of 25: 1, 5, 25. '
+        + 'The shared ones are 1 and 5, and the largest is 5.',
+      level: 4,
+    },
   ],
 })
 
@@ -935,6 +1145,78 @@ teach({
         + 'means nothing. Match the bottoms first.',
       level: 4,
     },
+    {
+      id: 'af-4',
+      ask: 'What is two sevenths plus three sevenths?',
+      kind: 'choice',
+      options: ['Five fourteenths', 'Five sevenths', 'Six sevenths'],
+      answer: 'Five sevenths',
+      teach: 'The bottoms match, so add the tops: 2 and 3 is 5. '
+        + 'Adding the bottoms too gives fourteenths, which is wrong, '
+        + 'because the pieces stay sevenths.',
+      level: 1,
+    },
+    {
+      id: 'af-5',
+      ask: 'What is five eighths take away two eighths?',
+      kind: 'choice',
+      options: ['Three eighths', 'Three sixteenths', 'Seven eighths'],
+      answer: 'Three eighths',
+      teach: 'Same bottoms, so take away the tops: 5 take away 2 is 3. '
+        + 'The bottom stays 8, because the pieces are still eighths.',
+      level: 2,
+    },
+    {
+      id: 'af-6',
+      ask: 'One half is the same as how many quarters?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['two', '2 quarters', 'two quarters', '2/4'],
+      teach: 'Cut each half in two and you get quarters. '
+        + 'Double the top and the bottom together: '
+        + 'one half becomes two quarters.',
+      level: 2,
+    },
+    {
+      id: 'af-7',
+      ask: 'What is a half plus a half?',
+      kind: 'choice',
+      options: ['Two quarters', 'One whole', 'One quarter'],
+      answer: 'One whole',
+      teach: 'Adding the bottoms gives two quarters, which is only a half, '
+        + 'so it cannot be right. '
+        + 'Keep the bottom: one half and one half is two halves, '
+        + 'which is one whole.',
+      level: 3,
+    },
+    {
+      id: 'af-8',
+      ask: 'What is three quarters take away a half?',
+      kind: 'choice',
+      options: ['One half', 'Two halves', 'One quarter'],
+      answer: 'One quarter',
+      teach: 'Take away tops and bottoms as they stand and you get 2 over 2, '
+        + 'which is wrong. Make the bottoms match first: '
+        + 'a half is two quarters. Three quarters take away two quarters '
+        + 'is one quarter.',
+      level: 3,
+    },
+    {
+      id: 'af-9',
+      ask: 'Ama eats a third of a pie. Kofi eats a sixth of it. '
+        + 'How much of the pie have they eaten?',
+      kind: 'choice',
+      options: [
+        'Two ninths',
+        'Two sixths',
+        'Three sixths, which is one half',
+      ],
+      answer: 'Three sixths, which is one half',
+      teach: 'Make the bottoms match. 6 works for both: '
+        + 'a third is two sixths. Two sixths and one sixth is three sixths. '
+        + 'Three sixths simplifies to one half.',
+      level: 4,
+    },
   ],
 })
 
@@ -1071,10 +1353,10 @@ teach({
   ],
 
   extension:
-    'Money is decimals you already use. '
+    'Money is decimals in everyday use. '
     + '2 cedis 50 pesewas is 2.50, and the two places after the point '
     + 'are there because there are 100 pesewas in a cedi. '
-    + 'Every rule here you have been applying at the market for years.',
+    + 'Every rule here is the same rule a trader uses at the market.',
 
   figure: {
     alt: 'A number line from 0 to 1 marked in tenths. 0.45 is marked in red '
@@ -1160,6 +1442,90 @@ teach({
       accept: ['75%', 'seventy five'],
       teach: '0.75 is 75 hundredths, and per cent means out of a hundred.',
       level: 5,
+    },
+    {
+      id: 'dc-4',
+      ask: 'How do you say 3.45 out loud?',
+      kind: 'choice',
+      options: [
+        'Three point forty five',
+        'Three point four five',
+        'Three hundred and forty five',
+      ],
+      answer: 'Three point four five',
+      teach: 'After the point, say each digit on its own. '
+        + 'Saying "forty five" hides that the 4 is tenths '
+        + 'and the 5 is hundredths.',
+      level: 1,
+    },
+    {
+      id: 'dc-5',
+      ask: 'What fraction is 0.25?',
+      kind: 'choice',
+      options: ['A half', 'A quarter', 'A fifth'],
+      answer: 'A quarter',
+      teach: '0.25 is 25 hundredths, and 25 out of 100 is one quarter. '
+        + 'The 5 at the end does not make it a fifth.',
+      level: 1,
+    },
+    {
+      id: 'dc-6',
+      ask: 'Write 0.1 as a percentage.',
+      kind: 'numeric',
+      answer: '10',
+      accept: ['10%', 'ten', '10 per cent'],
+      teach: '0.1 is one tenth, which is 10 out of 100. '
+        + 'Per cent means out of a hundred, so it is 10%. '
+        + 'Writing 1% forgets that a tenth is ten hundredths.',
+      level: 2,
+    },
+    {
+      id: 'dc-7',
+      ask: 'In 3.45, what is the 4 worth?',
+      kind: 'choice',
+      options: ['Four', 'Four tenths', 'Four hundredths', 'Forty'],
+      answer: 'Four tenths',
+      teach: 'The first place after the point is tenths, '
+        + 'the second is hundredths. '
+        + 'The 4 is first after the point, so it is four tenths.',
+      level: 2,
+    },
+    {
+      id: 'dc-8',
+      ask: 'Which decimal is the same as 50%?',
+      kind: 'choice',
+      options: ['0.05', '5.0', '0.5'],
+      answer: '0.5',
+      teach: '50% is 50 out of 100, which is a half. '
+        + 'A half is five tenths, written 0.5. '
+        + '0.05 is only five hundredths.',
+      level: 2,
+    },
+    {
+      id: 'dc-9',
+      ask: 'Put these in order, smallest first: 0.3, 0.25, 0.7.',
+      kind: 'choice',
+      options: [
+        '0.3, 0.7, 0.25',
+        '0.25, 0.3, 0.7',
+        '0.7, 0.3, 0.25',
+      ],
+      answer: '0.25, 0.3, 0.7',
+      teach: 'Putting 0.25 last because it has more digits is the trap. '
+        + 'Pad them: 0.30, 0.25, 0.70. Compare the tenths: 2, 3, 7. '
+        + 'So 0.25 is smallest.',
+      level: 3,
+    },
+    {
+      id: 'dc-10',
+      ask: 'Write 2 cedis 50 pesewas as a decimal number of cedis.',
+      kind: 'numeric',
+      answer: '2.50',
+      accept: ['2.5', 'GH¢2.50', '2.50 cedis'],
+      teach: 'There are 100 pesewas in a cedi, so 50 pesewas is 50 hundredths '
+        + 'of a cedi. The whole cedis go before the point: 2.50. '
+        + 'Writing 2.050 puts the 5 in the wrong place.',
+      level: 3,
     },
   ],
 })
@@ -1375,6 +1741,85 @@ teach({
         + 'Check: 20 take away 12 is 8.',
       level: 5,
     },
+    {
+      id: 'mn-4',
+      ask: '? plus 6 equals 15. What is the missing number?',
+      kind: 'numeric',
+      answer: '9',
+      accept: ['nine'],
+      teach: 'Giving 21 adds instead of undoing. '
+        + '6 was added to the box, so take 6 away from 15: 9. '
+        + 'Check: 9 and 6 is 15.',
+      level: 1,
+    },
+    {
+      id: 'mn-5',
+      ask: '8 times ? equals 56. What is the missing number?',
+      kind: 'numeric',
+      answer: '7',
+      accept: ['seven'],
+      teach: 'The box was multiplied by 8. Undo it by dividing: '
+        + '56 divided by 8 is 7. Check: 8 times 7 is 56.',
+      level: 2,
+    },
+    {
+      id: 'mn-6',
+      ask: 'To find ? in "? times 6 equals 42", what should you do?',
+      kind: 'choice',
+      options: [
+        'Multiply 42 by 6',
+        'Take 6 away from 42',
+        'Divide 42 by 6',
+      ],
+      answer: 'Divide 42 by 6',
+      teach: 'Ask what was done to the box: it was multiplied by 6. '
+        + 'Dividing undoes multiplying, so divide 42 by 6, which gives 7.',
+      level: 2,
+    },
+    {
+      id: 'mn-7',
+      ask: '? take away 4 equals 10. What is the missing number?',
+      kind: 'numeric',
+      answer: '14',
+      accept: ['fourteen'],
+      teach: 'Giving 6 takes away again. '
+        + '4 was taken from the box, and adding undoes taking away: '
+        + '10 and 4 is 14. Check: 14 take away 4 is 10.',
+      level: 2,
+    },
+    {
+      id: 'mn-8',
+      ask: '? divided by 3 equals 5. What is the missing number?',
+      kind: 'numeric',
+      answer: '15',
+      accept: ['fifteen'],
+      teach: 'The box was divided by 3. Multiplying undoes dividing: '
+        + '5 times 3 is 15. Check: 15 divided by 3 is 5.',
+      level: 3,
+    },
+    {
+      id: 'mn-9',
+      ask: 'Yaw spends 7 cedis and has 18 cedis left. '
+        + 'How many cedis did he start with?',
+      kind: 'numeric',
+      answer: '25',
+      accept: ['twenty five', '25 cedis'],
+      teach: 'The sentence is ? take away 7 equals 18. '
+        + 'Undo the taking away by adding: 18 and 7 is 25. '
+        + 'Giving 11 takes away instead of undoing.',
+      level: 3,
+    },
+    {
+      id: 'mn-10',
+      ask: '30 take away ? equals 12. What is the missing number?',
+      kind: 'numeric',
+      answer: '18',
+      accept: ['eighteen'],
+      teach: 'The box is the part taken away, so it is 30 take away 12, '
+        + 'which is 18. Adding to get 42 is the slip. '
+        + 'Check: 30 take away 18 is 12.',
+      level: 4,
+    },
   ],
 })
 
@@ -1589,6 +2034,89 @@ teach({
       teach: 'An angle measures the turn at the point. '
         + 'Arm length only changes how far apart the ends look.',
       level: 5,
+    },
+    {
+      id: 'an-4',
+      ask: 'An angle of 45 degrees is:',
+      kind: 'choice',
+      options: ['A right angle', 'Obtuse', 'Acute'],
+      answer: 'Acute',
+      teach: '45 is less than 90, so the opening is smaller than a square '
+        + 'corner. Smaller than a square corner is acute.',
+      level: 1,
+    },
+    {
+      id: 'an-5',
+      ask: 'What kind of angle is the corner of a book?',
+      kind: 'choice',
+      options: ['Acute', 'A right angle', 'Obtuse'],
+      answer: 'A right angle',
+      teach: 'The corner of a book is a square corner, '
+        + 'and a square corner is a right angle of 90 degrees.',
+      level: 1,
+    },
+    {
+      id: 'an-6',
+      ask: 'An angle of 175 degrees is:',
+      kind: 'choice',
+      options: ['Obtuse', 'Acute', 'A right angle'],
+      answer: 'Obtuse',
+      teach: '175 is more than 90 and less than 180, so it is obtuse. '
+        + 'It is nearly a straight line, but not quite.',
+      level: 2,
+    },
+    {
+      id: 'an-7',
+      ask: 'What is the point where the two lines of an angle meet called?',
+      kind: 'choice',
+      options: ['The arm', 'The vertex', 'The degree'],
+      answer: 'The vertex',
+      teach: 'The two lines are the arms. '
+        + 'The point where they meet is the vertex, '
+        + 'and the angle is the turn at that point.',
+      level: 2,
+    },
+    {
+      id: 'an-8',
+      ask: 'When you measure an angle, where must the centre of the '
+        + 'protractor go?',
+      kind: 'choice',
+      options: [
+        'At the far end of the longer arm',
+        'Exactly on the point where the two lines meet',
+        'Anywhere along one of the arms',
+      ],
+      answer: 'Exactly on the point where the two lines meet',
+      teach: 'Everything is measured from the point. '
+        + 'A protractor placed a little off gives a wrong reading, '
+        + 'so put the centre right on the point and one arm on the nought line.',
+      level: 2,
+    },
+    {
+      id: 'an-9',
+      ask: 'How many degrees make a straight line?',
+      kind: 'numeric',
+      answer: '180',
+      accept: ['one hundred and eighty', '180 degrees'],
+      teach: 'Two square corners side by side make a straight line. '
+        + '90 and 90 is 180. Obtuse angles sit between 90 and 180.',
+      level: 3,
+    },
+    {
+      id: 'an-10',
+      ask: 'Abena thinks an angle is acute. Her protractor reading says 140 '
+        + 'degrees. What has most likely gone wrong?',
+      kind: 'choice',
+      options: [
+        'The arms are too long',
+        'She read the wrong scale',
+        'Acute angles can be 140 degrees',
+      ],
+      answer: 'She read the wrong scale',
+      teach: 'A protractor has two sets of numbers. '
+        + 'An acute angle is less than 90, so 140 cannot be right. '
+        + 'Check the reading against your estimate every time.',
+      level: 3,
     },
   ],
 })
@@ -1835,6 +2363,85 @@ teach({
       teach: '8 by 2 and 5 by 5 both have a perimeter of 20, '
         + 'and areas of 16 and 25.',
       level: 5,
+    },
+    {
+      id: 'pa-4',
+      ask: 'A farmer wants to put a fence round a field. '
+        + 'Which does he need to know?',
+      kind: 'choice',
+      options: ['The area', 'The perimeter', 'The number of corners'],
+      answer: 'The perimeter',
+      teach: 'A fence goes round the edge, '
+        + 'so it needs the distance round: the perimeter. '
+        + 'Area is for covering the inside, like tiles or seed.',
+      level: 1,
+    },
+    {
+      id: 'pa-5',
+      ask: 'Which unit is used for area?',
+      kind: 'choice',
+      options: ['Metres', 'Degrees', 'Square metres'],
+      answer: 'Square metres',
+      teach: 'Area is a covering, counted in squares, '
+        + 'so it is in square metres. '
+        + 'Metres alone are for lengths, like the perimeter.',
+      level: 1,
+    },
+    {
+      id: 'pa-6',
+      ask: 'A rectangle is 6 m by 4 m. What is its perimeter in metres?',
+      kind: 'numeric',
+      answer: '20',
+      accept: ['twenty', '20 m', '20 metres'],
+      teach: 'Giving 24 multiplies, which is the area. '
+        + 'For perimeter, add length and width: 6 and 4 is 10. '
+        + 'Then double it for the other two sides: 20.',
+      level: 2,
+    },
+    {
+      id: 'pa-7',
+      ask: 'What is the area of a 6 m by 4 m rectangle, in square metres?',
+      kind: 'numeric',
+      answer: '24',
+      accept: ['twenty four', '24 square metres'],
+      teach: 'Area of a rectangle is length times width: 6 times 4 is 24. '
+        + 'Adding the sides gives the perimeter instead.',
+      level: 2,
+    },
+    {
+      id: 'pa-8',
+      ask: 'A square has sides of 5 m. What is its perimeter in metres?',
+      kind: 'numeric',
+      answer: '20',
+      accept: ['twenty', '20 m', '20 metres'],
+      teach: 'A square has four equal sides. '
+        + '5 and 5 is 10, doubled is 20. '
+        + 'Giving 25 is the area, not the distance round.',
+      level: 2,
+    },
+    {
+      id: 'pa-9',
+      ask: 'A plot is 20 m long and 10 m wide. '
+        + 'How many metres of wire go all the way round it?',
+      kind: 'numeric',
+      answer: '60',
+      accept: ['sixty', '60 m', '60 metres'],
+      teach: 'Wire goes round the edge, so find the perimeter. '
+        + '20 and 10 is 30, doubled is 60 metres. '
+        + 'Stopping at 30 counts only two of the four sides.',
+      level: 3,
+    },
+    {
+      id: 'pa-10',
+      ask: 'The same plot is 20 m by 10 m. '
+        + 'How many square metres must be planted with seed?',
+      kind: 'numeric',
+      answer: '200',
+      accept: ['two hundred', '200 square metres'],
+      teach: 'Seed covers the surface, so find the area. '
+        + '20 times 10 is 200 square metres. '
+        + 'The 60 is the fence, a length, not a covering.',
+      level: 3,
     },
   ],
 })
