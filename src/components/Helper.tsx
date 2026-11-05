@@ -213,16 +213,30 @@ export default function Helper() {
 
   if (!open) {
     return (
-      <button
-        className="hp-button"
-        /* Not "Ask for help". A question mark on a disc is the universal
-           sign for "help with this website", which is the wrong promise:
-           this is the one control on the screen that can teach you. */
-        aria-label="Ask your tutor"
-        title="Ask your tutor"
-        onClick={() => setOpen(true)}>
-        <PalMark size={30} />
-      </button>
+      <div className="hp-dock">
+        {/* The words, which are the only thing that truly says what this is.
+
+            A book in a corner is a pretty mark and a mystery. Somebody who
+            has never pressed it has no way to learn that the product's tutor
+            lives behind it, and a tooltip does not exist on a phone. So the
+            button says so itself, out loud, every so often.
+
+            `aria-hidden` because the button beside it already carries the
+            same words as its label, and a screen reader should hear them
+            once rather than twice. */}
+        <span className="hp-say" aria-hidden>Stuck? Ask me</span>
+
+        <button
+          className="hp-button"
+          /* Not "Ask for help". A question mark on a disc is the universal
+             sign for "help with this website", which is the wrong promise:
+             this is the one control on the screen that can teach you. */
+          aria-label="Ask your tutor"
+          title="Ask your tutor"
+          onClick={() => setOpen(true)}>
+          <PalMark size={30} />
+        </button>
+      </div>
     )
   }
 

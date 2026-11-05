@@ -9,6 +9,9 @@
    there and covering the Play tab would trade one complaint for another.
    =========================================================================== */
 
+/* `.hp-dock` is in here too. It was not, and the label inside it fell back to
+   no background with white text, which on cream paper is an invisible pill. */
+.hp-dock,
 .hp-button,
 .hp {
   --hp-ink: #14243a;
@@ -21,11 +24,71 @@
   color: var(--hp-ink);
 }
 
-.hp-button {
+/* The dock: the words and the button, as one thing in the corner.
+
+   The button used to be fixed on its own. It is now laid out beside its own
+   label, right aligned, so the label grows leftwards out of the disc and the
+   disc never moves. */
+.hp-dock {
   position: fixed;
   right: max(16px, env(safe-area-inset-right));
   bottom: calc(env(safe-area-inset-bottom) + 86px);
   z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* The row is only as wide as what is in it, and the gap between the label
+     and the disc must not swallow clicks aimed past them. */
+  pointer-events: none;
+}
+.hp-dock > * { pointer-events: auto; }
+
+/* What it is, in words.
+
+   Rolled out from behind the disc, held long enough to read twice, then
+   rolled back. Fourteen seconds between appearances: often enough that
+   nobody can use the app for a minute without being told what the button
+   is, rare enough not to be a flashing sign next to something they are
+   reading.
+
+   `scaleX` from the right edge rather than a slide, so it reads as coming
+   out of the disc rather than drifting in from off screen. */
+.hp-say {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--hp-ink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(14, 21, 36, 0.26);
+  transform-origin: right center;
+  transform: scaleX(0.2);
+  opacity: 0;
+  animation: hp-say 14s cubic-bezier(0.2, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes hp-say {
+  /* Out at 2s, held to 7s, back by 8s, then nothing until the cycle
+     repeats. The first appearance is two seconds after the screen settles,
+     which is long enough for a learner to have looked at the page first. */
+  0%, 12%   { transform: scaleX(0.2); opacity: 0; }
+  18%, 50%  { transform: scaleX(1);   opacity: 1; }
+  57%, 100% { transform: scaleX(0.2); opacity: 0; }
+}
+
+/* Reaching for the button holds the label open, so somebody who noticed it
+   mid-retreat can still read it. */
+.hp-dock:hover .hp-say,
+.hp-dock:focus-within .hp-say {
+  animation: none;
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.hp-button {
+  position: relative;
   width: 58px;
   height: 58px;
   display: grid;
@@ -67,6 +130,31 @@
   0%        { transform: scale(1);    opacity: 0.55; }
   12%, 100% { transform: scale(1.75); opacity: 0; }
 }
+
+/* A nudge, just before the label speaks.
+
+   Motion at the edge of vision is what makes somebody look; a ring that
+   fades is easy to miss entirely. This is a small tilt rather than a bounce,
+   because a bouncing control in a corner is what advertising does and this
+   has to live on the page all day. It shares the fourteen second cycle with
+   the label, and it happens a beat earlier, so the eye arrives in time to
+   read the words. */
+.hp-button {
+  animation: hp-nudge 14s ease-in-out infinite;
+}
+
+@keyframes hp-nudge {
+  0%, 7%          { transform: rotate(0deg); }
+  9%              { transform: rotate(-9deg); }
+  11%             { transform: rotate(7deg); }
+  13%             { transform: rotate(-4deg); }
+  15%, 100%       { transform: rotate(0deg); }
+}
+
+/* Hover and press still win, because a control must answer the hand before
+   it answers its own clock. */
+.hp-button:hover,
+.hp-button:active { animation: none; }
 
 /* ── the mark ─────────────────────────────────────────────────────────────── */
 
@@ -124,7 +212,13 @@
 .hp-button:hover .pal-word  { animation-duration: 1.6s; }
 
 @media (min-width: 761px) {
-  .hp-button { bottom: max(22px, env(safe-area-inset-bottom)); }
+  .hp-dock { bottom: max(22px, env(safe-area-inset-bottom)); }
+}
+
+/* On a narrow phone the label and the disc together can reach most of the
+   width, so it shortens rather than pushing the disc off screen. */
+@media (max-width: 380px) {
+  .hp-say { font-size: 13px; padding: 8px 11px; }
 }
 
 .hp {
@@ -280,10 +374,17 @@
   .hp-button:hover { transform: none; }
 
   /* A static book. Every page present, the writing visible, nothing moving.
-     Not "a bit less animation": none, because that is what was asked for. */
+     Not "a bit less animation": none, because that is what was asked for.
+
+     The label is the exception: it stays, permanently open. Somebody who
+     cannot have motion still has to be told what the button is, and taking
+     the words away with the animation would leave them the mystery and none
+     of the explanation. */
   .hp-button::after { animation: none; opacity: 0; }
+  .hp-button { animation: none; }
   .pal-mark,
   .pal-right,
   .pal-word { animation: none; }
   .pal-word { opacity: 1; }
+  .hp-say { animation: none; transform: scaleX(1); opacity: 1; }
 }
