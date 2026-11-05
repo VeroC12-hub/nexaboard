@@ -348,6 +348,95 @@ teach({
       teach: 'A label without evidence is a guess.',
       level: 5,
     },
+    {
+      id: 'pur-4',
+      ask: 'A passage gives the opening times, prices and bus routes for '
+        + 'the new Kumasi market, and presses for no conclusion. '
+        + 'What is its purpose?',
+      kind: 'choice',
+      options: ['To persuade', 'To inform', 'To criticise'],
+      answer: 'To inform',
+      teach: 'Ask what the writer wants the reader to do. '
+        + 'Facts given with no conclusion pressed and no objections '
+        + 'answered is informing, not persuading.',
+      level: 2,
+    },
+    {
+      id: 'pur-5',
+      ask: 'What is mood?',
+      kind: 'choice',
+      options: [
+        'What the writer set out to do',
+        'The writer’s attitude to the subject',
+        'What the reader is made to feel',
+      ],
+      answer: 'What the reader is made to feel',
+      teach: 'Purpose is what the writer set out to do and tone is the '
+        + 'writer’s attitude. '
+        + 'Mood belongs to the reader: how the passage leaves them.',
+      level: 2,
+    },
+    {
+      id: 'pur-6',
+      ask: '"The mob gathered outside the office." Which word carries the '
+        + 'writer’s attitude?',
+      kind: 'choice',
+      options: ['gathered', 'mob', 'office', 'outside'],
+      answer: 'mob',
+      teach: 'Look for the word chosen over a plainer one. '
+        + 'The plain word was crowd; mob describes the same people and '
+        + 'makes them sound dangerous.',
+      level: 3,
+    },
+    {
+      id: 'pur-7',
+      ask: 'A piece argues that school fees should be cut. It gives three '
+        + 'reasons and answers the claim that schools need the money. '
+        + 'What is its main purpose?',
+      kind: 'choice',
+      options: ['To entertain', 'To persuade', 'To inform'],
+      answer: 'To persuade',
+      teach: 'Giving reasons and answering an objection are the signs of '
+        + 'persuasion. '
+        + 'An informative piece gives facts but does not press for a '
+        + 'conclusion.',
+      level: 3,
+    },
+    {
+      id: 'pur-8',
+      ask: '"The council has, once again, promised to fix the road." '
+        + 'Which answer about tone would earn the mark?',
+      kind: 'choice',
+      options: [
+        'The tone is critical.',
+        'The tone is critical, shown by "once again", which suggests the '
+          + 'promise has been broken before.',
+        'The tone is sad, because roads are bad.',
+      ],
+      answer: 'The tone is critical, shown by "once again", which suggests '
+        + 'the promise has been broken before.',
+      teach: 'A label alone is a guess. '
+        + 'The mark is for quoting the word that carries the attitude and '
+        + 'saying what it suggests.',
+      level: 4,
+    },
+    {
+      id: 'pur-9',
+      ask: 'A report of a strike describes the closed shops and the '
+        + 'traffic but never says why the workers went on strike. '
+        + 'What does that leaving out show?',
+      kind: 'choice',
+      options: [
+        'Nothing, because only words on the page count as evidence',
+        'The writer has taken a side without stating one',
+        'The writer wanted to entertain',
+      ],
+      answer: 'The writer has taken a side without stating one',
+      teach: 'An omission is a choice, and often the strongest evidence. '
+        + 'Without the cause, readers see only the disruption, so the '
+        + 'gap carries the attitude.',
+      level: 5,
+    },
   ],
 })
 
@@ -664,6 +753,95 @@ teach({
       teach: 'Form and meaning are one answer, not two.',
       level: 5,
     },
+    {
+      id: 'poe-4',
+      ask: 'What is a stanza?',
+      kind: 'choice',
+      options: [
+        'A group of lines in a poem',
+        'A paragraph in a story',
+        'A pair of rhyming words',
+      ],
+      answer: 'A group of lines in a poem',
+      teach: 'A poem is set out in lines, and a group of them, set apart '
+        + 'from the next group, is a stanza. '
+        + 'It is not called a paragraph.',
+      level: 2,
+    },
+    {
+      id: 'poe-5',
+      ask: '"Her voice is like a bell." Which figure of speech is this?',
+      kind: 'choice',
+      options: ['A metaphor', 'Personification', 'A simile'],
+      answer: 'A simile',
+      teach: 'A simile compares using the word like or as. '
+        + '"Her voice is a bell" without like would be a metaphor, which '
+        + 'calls one thing another.',
+      level: 2,
+    },
+    {
+      id: 'poe-6',
+      ask: 'A four line stanza has the rhyme scheme abab. Which lines '
+        + 'rhyme?',
+      kind: 'choice',
+      options: [
+        'Lines 1 and 2, and lines 3 and 4',
+        'Lines 1 and 3, and lines 2 and 4',
+        'Lines 1 and 4 only',
+      ],
+      answer: 'Lines 1 and 3, and lines 2 and 4',
+      teach: 'Each line gets a letter, and the same letter means the same '
+        + 'rhyme. '
+        + 'So the two a lines, first and third, rhyme, and the two b lines, '
+        + 'second and fourth, rhyme.',
+      level: 3,
+    },
+    {
+      id: 'poe-7',
+      ask: '"The buzz of the bees" uses a word that sounds like its '
+        + 'meaning. What is this device called?',
+      kind: 'choice',
+      options: ['Onomatopoeia', 'Alliteration', 'Rhyme'],
+      answer: 'Onomatopoeia',
+      teach: 'Buzz sounds like the noise it names, which is onomatopoeia. '
+        + 'Alliteration is the same first consonant repeated, as in bees '
+        + 'and buzz, but the question asked about the sound word.',
+      level: 3,
+    },
+    {
+      id: 'poe-8',
+      ask: 'Why should a poem be read aloud before you answer on it?',
+      kind: 'choice',
+      options: [
+        'Rhythm, rhyme and repetition exist in sound',
+        'Examiners can hear you reading',
+        'It makes the poem shorter',
+      ],
+      answer: 'Rhythm, rhyme and repetition exist in sound',
+      teach: 'On a silent page the sound patterns are easy to miss. '
+        + 'Read aloud twice, and the poem gives up most of its structure '
+        + 'before any analysis.',
+      level: 4,
+    },
+    {
+      id: 'poe-9',
+      ask: 'A poem about a long, tired walk home uses long vowels and '
+        + 'repeats "step and step and step". Which comment earns the most '
+        + 'credit?',
+      kind: 'choice',
+      options: [
+        'There is repetition in the poem.',
+        'The repetition and long vowels slow the line, so the reader feels '
+          + 'the tiredness of the walk.',
+        'The poet likes walking.',
+      ],
+      answer: 'The repetition and long vowels slow the line, so the reader '
+        + 'feels the tiredness of the walk.',
+      teach: 'Naming the device is true but earns almost nothing. '
+        + 'Say what it does for the meaning, and do not assume the speaker '
+        + 'is the poet.',
+      level: 5,
+    },
   ],
 })
 
@@ -952,6 +1130,85 @@ teach({
       options: ['The strongest', 'The weakest', 'None'],
       answer: 'The strongest',
       teach: 'The reader has already thought of it.',
+      level: 5,
+    },
+    {
+      id: 'arg-4',
+      ask: 'Which title asks for an argumentative essay?',
+      kind: 'choice',
+      options: [
+        'How cocoa is processed',
+        'Phones should be banned in class',
+        'The causes of the harmattan',
+      ],
+      answer: 'Phones should be banned in class',
+      teach: 'An argument takes a side. '
+        + 'The other two ask you to explain how or why, which is '
+        + 'expository and takes no side.',
+      level: 2,
+    },
+    {
+      id: 'arg-5',
+      ask: 'What should the conclusion of an argumentative essay do?',
+      kind: 'choice',
+      options: [
+        'Restate the position and add nothing new',
+        'Give the strongest new reason',
+        'Answer a new objection',
+      ],
+      answer: 'Restate the position and add nothing new',
+      teach: 'A new reason in the conclusion has no paragraph to support '
+        + 'it. '
+        + 'The conclusion gathers up the case already made.',
+      level: 3,
+    },
+    {
+      id: 'arg-6',
+      ask: 'Kwame has three reasons: one strong, one fairly strong and one '
+        + 'weak. In what order should they go?',
+      kind: 'choice',
+      options: [
+        'Strong, fairly strong, weak',
+        'Weak, fairly strong, strong',
+        'Fairly strong, weak, strong',
+      ],
+      answer: 'Fairly strong, weak, strong',
+      teach: 'End strong, because the reader keeps the last thing read. '
+        + 'Put the second strongest first and bury the weak one in the '
+        + 'middle; starting with the best makes the essay decline.',
+      level: 4,
+    },
+    {
+      id: 'arg-7',
+      ask: 'Abena leaves the other side out of her essay so she does not '
+        + 'help her opponent. What is the effect?',
+      kind: 'choice',
+      options: [
+        'Her essay is stronger, because it is one sided',
+        'Her essay reads as if it cannot answer the objection',
+        'It makes no difference to the mark',
+      ],
+      answer: 'Her essay reads as if it cannot answer the objection',
+      teach: 'The examiner already knows the objection. '
+        + 'Stating it and answering it is the strongest thing in the '
+        + 'essay; silence looks like having no answer.',
+      level: 4,
+    },
+    {
+      id: 'arg-8',
+      ask: 'Someone objects that uniforms cost parents money. You reply: '
+        + '"That is true, but one uniform costs less than the many outfits '
+        + 'pupils would buy otherwise." Which kind of answer is this?',
+      kind: 'choice',
+      options: [
+        'The fact is wrong',
+        'The fact is right but outweighed',
+        'Ignoring the objection',
+      ],
+      answer: 'The fact is right but outweighed',
+      teach: 'The reply admits the cost and shows it is outweighed. '
+        + 'Admitting a true fact while showing it is outweighed costs '
+        + 'nothing and gains credit.',
       level: 5,
     },
   ],
@@ -1262,6 +1519,102 @@ teach({
       ],
       answer: 'The reader has to act on facts',
       teach: 'And opinion makes the facts around it less believable.',
+      level: 5,
+    },
+    {
+      id: 'rep-4',
+      ask: 'Which sentence is written correctly for a report?',
+      kind: 'choice',
+      options: [
+        'I called the prefects to the store room.',
+        'The prefects were called to the store room.',
+        'The prefects are called to the store room.',
+      ],
+      answer: 'The prefects were called to the store room.',
+      teach: 'A report uses the third person and the past tense. '
+        + 'The first uses I, and the third is in the present tense.',
+      level: 2,
+    },
+    {
+      id: 'rep-5',
+      ask: 'What does an article have at the top that a report does not?',
+      kind: 'choice',
+      options: [
+        'A headline that makes the reader read on',
+        'The date',
+        'A title saying what it reports',
+      ],
+      answer: 'A headline that makes the reader read on',
+      teach: 'A report has a title saying what it reports, with the '
+        + 'writer’s name and date. '
+        + 'An article has a headline, because nobody has to read it.',
+      level: 3,
+    },
+    {
+      id: 'rep-6',
+      ask: 'Fuseini is writing a report on a fire. He does not know what '
+        + 'time it started. What should he do?',
+      kind: 'choice',
+      options: [
+        'Guess a likely time',
+        'Leave the time out rather than guess',
+        'Write that it was very frightening instead',
+      ],
+      answer: 'Leave the time out rather than guess',
+      teach: 'A gap is honest. '
+        + 'A guess in a report is worse than a gap, because the reader may '
+        + 'act on it, and feelings are not a fact to fill it with.',
+      level: 3,
+    },
+    {
+      id: 'rep-7',
+      ask: 'Which sentence should be cut from a report for the education '
+        + 'office?',
+      kind: 'choice',
+      options: [
+        'The fire started in the store room at 2 p.m.',
+        'It was the most frightening thing I have ever seen.',
+        'Two cartons of exercise books were destroyed.',
+      ],
+      answer: 'It was the most frightening thing I have ever seen.',
+      teach: 'The office must act on facts, and nobody can act on a '
+        + 'feeling. '
+        + 'It is also in the first person, which a report avoids.',
+      level: 4,
+    },
+    {
+      id: 'rep-8',
+      ask: 'Why does the opening of an article matter more than the '
+        + 'opening of a report?',
+      kind: 'choice',
+      options: [
+        'Nobody has to read an article, so the first sentence must earn '
+          + 'the second',
+        'Articles are always shorter',
+        'A report has no opening',
+      ],
+      answer: 'Nobody has to read an article, so the first sentence must '
+        + 'earn the second',
+      teach: 'A report is read by somebody who has to act on it. '
+        + 'An article is read by choice, so a dull opening loses the '
+        + 'reader.',
+      level: 4,
+    },
+    {
+      id: 'rep-9',
+      ask: 'Ama writes an article about a flood for the pupils of her '
+        + 'school, and another for the district assembly. Why are they '
+        + 'different?',
+      kind: 'choice',
+      options: [
+        'One of them must be wrong',
+        'Every choice in an article follows from who is reading it',
+        'Articles for adults must be in the past tense',
+      ],
+      answer: 'Every choice in an article follows from who is reading it',
+      teach: 'The same flood reads one way for pupils and another for '
+        + 'the assembly, and both can be good. '
+        + 'The audience is decided first and everything follows from it.',
       level: 5,
     },
   ],
@@ -1583,6 +1936,94 @@ teach({
       ],
       answer: 'They point at the speaker’s own position, not yours',
       teach: 'You are reporting from a different place and time.',
+      level: 5,
+    },
+    {
+      id: 'spe-4',
+      ask: 'In indirect speech, "here" becomes:',
+      kind: 'choice',
+      options: ['there', 'here', 'this'],
+      answer: 'there',
+      teach: 'Here points at where the speaker stood. '
+        + 'Reported from somewhere else it must point back at that place, '
+        + 'so it becomes there.',
+      level: 2,
+    },
+    {
+      id: 'spe-5',
+      ask: 'Report: Kofi said, "I went to Tamale."',
+      kind: 'choice',
+      options: [
+        'Kofi said that he had gone to Tamale.',
+        'Kofi said that I went to Tamale.',
+        'Kofi said that he goes to Tamale.',
+      ],
+      answer: 'Kofi said that he had gone to Tamale.',
+      teach: 'Went moves one step further back, to had gone, and I becomes '
+        + 'he to match Kofi. '
+        + 'Keeping I would make it sound as if you went.',
+      level: 3,
+    },
+    {
+      id: 'spe-6',
+      ask: 'Report: The teacher said to Yaw, "Close the door."',
+      kind: 'choice',
+      options: [
+        'The teacher said that Yaw close the door.',
+        'The teacher told Yaw to close the door.',
+        'The teacher asked Yaw close the door?',
+      ],
+      answer: 'The teacher told Yaw to close the door.',
+      teach: 'A command is reported with told plus to. '
+        + 'Said does not fit a command, and a command is not a question.',
+      level: 3,
+    },
+    {
+      id: 'spe-7',
+      ask: 'Report: Akosua asked, "Are you ready?" (she was speaking to '
+        + 'Kwame)',
+      kind: 'choice',
+      options: [
+        'Akosua asked whether Kwame was ready.',
+        'Akosua asked was Kwame ready?',
+        'Akosua asked, are you ready.',
+      ],
+      answer: 'Akosua asked whether Kwame was ready.',
+      teach: 'A reported question is not a question any more. '
+        + 'The word order goes back to normal and the question mark goes, '
+        + 'and you becomes the person addressed.',
+      level: 4,
+    },
+    {
+      id: 'spe-8',
+      ask: 'Report: The teacher said, "Water boils at 100 degrees."',
+      kind: 'choice',
+      options: [
+        'The teacher said that water boiled at 100 degrees only then.',
+        'The teacher said that water boils at 100 degrees.',
+        'The teacher said, that water boils at 100 degrees.',
+      ],
+      answer: 'The teacher said that water boils at 100 degrees.',
+      teach: 'The tense may stay when the statement is still true. '
+        + 'Water boils at 100 degrees now as well, so boils can be kept, '
+        + 'and the comma before that is not needed.',
+      level: 4,
+    },
+    {
+      id: 'spe-9',
+      ask: 'On Monday Ama said, "I am leaving today." Report it on '
+        + 'Wednesday.',
+      kind: 'choice',
+      options: [
+        'Ama said that she was leaving that day.',
+        'Ama said that I am leaving today.',
+        'Ama said that she was leaving today.',
+      ],
+      answer: 'Ama said that she was leaving that day.',
+      teach: 'Three things move: am becomes was, I becomes she, and '
+        + 'today becomes that day. '
+        + 'Keeping today on Wednesday would mean Wednesday, which is not '
+        + 'what Ama meant.',
       level: 5,
     },
   ],

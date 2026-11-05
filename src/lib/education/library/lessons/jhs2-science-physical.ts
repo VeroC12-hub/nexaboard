@@ -298,6 +298,81 @@ teach({
         + 'so the column predicts the chemistry.',
       level: 5,
     },
+    {
+      id: 'atm-4',
+      ask: 'Which particle in an atom has no charge?',
+      kind: 'choice',
+      options: ['The proton', 'The electron', 'The neutron'],
+      answer: 'The neutron',
+      teach: 'Protons are positive and electrons are negative. '
+        + 'The neutron sits in the nucleus with the protons and carries '
+        + 'no charge at all.',
+      level: 2,
+    },
+    {
+      id: 'atm-5',
+      ask: 'A neutral atom has 8 protons. How many electrons does it have?',
+      kind: 'numeric',
+      answer: '8',
+      accept: ['eight', '8 electrons'],
+      teach: 'In a neutral atom the electrons equal the protons, so the '
+        + 'positive and negative charges cancel. '
+        + 'Count the protons and you have the electrons.',
+      level: 2,
+    },
+    {
+      id: 'atm-6',
+      ask: 'Which of these is the correct way to write the symbol for '
+        + 'sodium?',
+      kind: 'choice',
+      options: ['NA', 'Na', 'na', 'nA'],
+      answer: 'Na',
+      teach: 'The first letter of a symbol is always a capital and the '
+        + 'second is always small. '
+        + 'NA is not a symbol for anything.',
+      level: 3,
+    },
+    {
+      id: 'atm-7',
+      ask: 'An atom has 11 protons and 12 neutrons. '
+        + 'What is its atomic number?',
+      kind: 'numeric',
+      answer: '11',
+      accept: ['eleven'],
+      teach: 'Adding the neutrons gives 23, which is the mass number. '
+        + 'The atomic number counts the protons only, so it is 11.',
+      level: 3,
+    },
+    {
+      id: 'atm-8',
+      ask: 'Oxygen has 8 electrons, arranged as 2, then 6. '
+        + 'Which group is it in?',
+      kind: 'choice',
+      options: ['Group 8', 'Group 2', 'Group 6'],
+      answer: 'Group 6',
+      teach: 'The group comes from the outer shell only, not from the '
+        + 'total. '
+        + 'The first shell holds 2, so 6 are left in the outer shell, '
+        + 'and that is the group.',
+      level: 4,
+    },
+    {
+      id: 'atm-9',
+      ask: 'An atom has 13 electrons, arranged as 2, then 8, then 3. '
+        + 'Which group and period is it in?',
+      kind: 'choice',
+      options: [
+        'Group 3, period 3',
+        'Group 13, period 3',
+        'Group 3, period 2',
+        'Group 2, period 3',
+      ],
+      answer: 'Group 3, period 3',
+      teach: 'The group is the number in the outer shell, which is 3. '
+        + 'The period is the number of shells in use, and here three '
+        + 'shells are used, so it is period 3 as well.',
+      level: 5,
+    },
   ],
 })
 
@@ -373,8 +448,11 @@ teach({
     + 'which is the difference between a mixture and a compound.',
 
   recap:
-    'You separated mixtures by hand and by sieving in primary school. '
-    + 'This adds the methods for things too small to pick out, '
+    'A mixture is two or more things put together but not joined, '
+    + 'such as sand stirred into water or stones in rice. '
+    + 'Some mixtures can be parted by hand: you pick the stones out of '
+    + 'the rice, or sieve flour so the lumps stay behind. '
+    + 'This lesson adds the methods for things too small to pick out, '
     + 'and asks you to justify the one you chose.',
 
   method: [
@@ -570,6 +648,86 @@ teach({
       ],
       answer: 'Its parts were never chemically joined',
       teach: 'That is the difference between a mixture and a compound.',
+      level: 5,
+    },
+    {
+      id: 'sep-4',
+      ask: 'Which method takes iron filings out of sand?',
+      kind: 'choice',
+      options: ['Filtration', 'A magnet', 'Evaporation'],
+      answer: 'A magnet',
+      teach: 'Ask what is different about the parts. '
+        + 'Neither part dissolves and both are grains, but only the iron '
+        + 'is magnetic, so a magnet uses that one difference.',
+      level: 2,
+    },
+    {
+      id: 'sep-5',
+      ask: 'Sand and water are poured through filter paper. '
+        + 'What is the sand left on the paper called?',
+      kind: 'choice',
+      options: ['The filtrate', 'The distillate', 'The residue'],
+      answer: 'The residue',
+      teach: 'What stays on the paper is the residue. '
+        + 'The liquid that passes through is the filtrate, and distillate '
+        + 'is the liquid collected in distillation.',
+      level: 3,
+    },
+    {
+      id: 'sep-6',
+      ask: 'Which method shows the different dyes in a drop of black ink?',
+      kind: 'choice',
+      options: ['Chromatography', 'Filtration', 'Decanting', 'A magnet'],
+      answer: 'Chromatography',
+      teach: 'The dyes are dissolved, so a filter cannot part them. '
+        + 'They differ in how strongly they cling to paper, so the solvent '
+        + 'carries each one a different distance.',
+      level: 3,
+    },
+    {
+      id: 'sep-7',
+      ask: 'Abena wants drinking water from sea water. Which method should '
+        + 'she use?',
+      kind: 'choice',
+      options: ['Evaporation', 'Simple distillation', 'Filtration'],
+      answer: 'Simple distillation',
+      teach: 'Evaporation keeps the salt and loses the water into the air. '
+        + 'She wants the water, so it must be boiled off, cooled and '
+        + 'collected, which is distillation.',
+      level: 4,
+    },
+    {
+      id: 'sep-8',
+      ask: 'Two liquids mix completely but boil at different '
+        + 'temperatures. Which method parts them?',
+      kind: 'choice',
+      options: [
+        'Fractional distillation',
+        'Filtration',
+        'Evaporation',
+        'Chromatography',
+      ],
+      answer: 'Fractional distillation',
+      teach: 'Liquids that mix do not differ in size, so filtering fails. '
+        + 'They differ only in boiling point, so a column lets the lower '
+        + 'boiling one get away first.',
+      level: 4,
+    },
+    {
+      id: 'sep-9',
+      ask: 'Kofi says he will pour salt water through a cloth to take the '
+        + 'salt out. Why will it not work?',
+      kind: 'choice',
+      options: [
+        'The dissolved salt particles are as small as the water particles',
+        'The cloth holes are too small for the water',
+        'Salt is heavier than water, so it sinks through the cloth',
+      ],
+      answer: 'The dissolved salt particles are as small as the water '
+        + 'particles',
+      teach: 'A filter needs a difference in size. '
+        + 'Once salt dissolves there is no size difference left, so any '
+        + 'hole that lets water through lets salt through too.',
       level: 5,
     },
   ],
@@ -824,6 +982,84 @@ teach({
       ],
       answer: 'Total distance divided by total time',
       teach: 'Averaging the speeds ignores how long each part lasted.',
+      level: 5,
+    },
+    {
+      id: 'mot-4',
+      ask: 'A tro-tro travels 250 km in 5 hours. What is its speed in km '
+        + 'per hour?',
+      kind: 'numeric',
+      answer: '50',
+      accept: ['50 km/h', '50 km per hour', '50km/h'],
+      teach: 'Speed is distance divided by time: 250 divided by 5. '
+        + 'Multiplying the two gives a number with no meaning as a speed.',
+      level: 2,
+    },
+    {
+      id: 'mot-5',
+      ask: 'A car moves at 20 m/s for 30 s. How many metres does it '
+        + 'travel?',
+      kind: 'numeric',
+      answer: '600',
+      accept: ['600 m', '600 metres', '600m'],
+      teach: 'Here the distance is wanted, so rearrange: distance is speed '
+        + 'times time. 20 times 30 is 600 metres.',
+      level: 3,
+    },
+    {
+      id: 'mot-6',
+      ask: 'Yaw cycles 120 km at 60 km/h. How many hours does it take?',
+      kind: 'numeric',
+      answer: '2',
+      accept: ['2 hours', 'two', '2 h', '2.0'],
+      teach: 'Time is distance divided by speed: 120 divided by 60. '
+        + 'Dividing the other way, 60 over 120, gives a half, which is '
+        + 'far too short.',
+      level: 3,
+    },
+    {
+      id: 'mot-7',
+      ask: 'Two lines on a distance time graph start at the same point. '
+        + 'Which one shows the faster object?',
+      kind: 'choice',
+      options: [
+        'The steeper line',
+        'The line that ends higher up the page',
+        'The longer line',
+      ],
+      answer: 'The steeper line',
+      teach: 'Speed is how much the line rises for each step along, which '
+        + 'is its steepness. '
+        + 'Height only says how far from the start the object is.',
+      level: 3,
+    },
+    {
+      id: 'mot-8',
+      ask: 'On a distance time graph a line is high up the page and flat. '
+        + 'What is the object doing?',
+      kind: 'choice',
+      options: [
+        'Moving very fast',
+        'Standing still, far from the start',
+        'Moving slowly towards the start',
+      ],
+      answer: 'Standing still, far from the start',
+      teach: 'Read the slope, not the height. '
+        + 'A flat line means the distance is not changing, so the speed is '
+        + 'zero, and being high only means it is far away.',
+      level: 4,
+    },
+    {
+      id: 'mot-9',
+      ask: 'Akosua walks 6 km in 2 hours, then runs 6 km in 1 hour. '
+        + 'What is her average speed in km per hour?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['4 km/h', '4 km per hour', 'four', '4.0'],
+      teach: 'Her two speeds are 3 and 6, and their average, 4.5, is '
+        + 'wrong because the slow part lasted longer. '
+        + 'Total distance is 12 km and total time is 3 hours, so 12 '
+        + 'divided by 3 is 4.',
       level: 5,
     },
   ],
@@ -1087,6 +1323,90 @@ teach({
       answer: 'Water replaces the air, raising the average density',
       teach: 'The air was what kept the average density below that of '
         + 'water.',
+      level: 5,
+    },
+    {
+      id: 'den-4',
+      ask: 'A block has a mass of 40 g and a volume of 10 cubic cm. '
+        + 'What is its density in g per cubic cm?',
+      kind: 'numeric',
+      answer: '4',
+      accept: ['4 g/cm3', '4 g per cubic cm', 'four', '4.0'],
+      teach: 'Density is mass divided by volume: 40 divided by 10. '
+        + 'Dividing volume by mass gives 0.25, which is the wrong way '
+        + 'round.',
+      level: 2,
+    },
+    {
+      id: 'den-5',
+      ask: 'A stone is lowered into a measuring cylinder and the water '
+        + 'rises from 40 to 55 cubic cm. What is the volume of the stone '
+        + 'in cubic cm?',
+      kind: 'numeric',
+      answer: '15',
+      accept: ['15 cubic cm', '15 cm3', 'fifteen'],
+      teach: 'The final reading, 55, is not the volume of the stone. '
+        + 'The stone pushed aside the difference between the two '
+        + 'readings: 55 take away 40 is 15.',
+      level: 3,
+    },
+    {
+      id: 'den-6',
+      ask: 'Which of these will float in water?',
+      kind: 'choice',
+      options: [
+        'Wood of density 0.6 g per cubic cm',
+        'Glass of density 2.5 g per cubic cm',
+        'Steel of density 8 g per cubic cm',
+        'Rubber of density 1.2 g per cubic cm',
+      ],
+      answer: 'Wood of density 0.6 g per cubic cm',
+      teach: 'Water has a density of about 1 g per cubic cm. '
+        + 'Only something less dense than 1 floats, and 1.2 is just above '
+        + 'it, so the rubber sinks.',
+      level: 3,
+    },
+    {
+      id: 'den-7',
+      ask: 'A box is 5 cm long, 2 cm wide and 2 cm high, and its mass is '
+        + '100 g. What is its density in g per cubic cm?',
+      kind: 'numeric',
+      answer: '5',
+      accept: ['5 g/cm3', '5 g per cubic cm', 'five', '5.0'],
+      teach: 'First find the volume: 5 times 2 times 2 is 20 cubic cm. '
+        + 'Then divide the mass by it: 100 divided by 20 is 5. '
+        + 'Dividing 100 by one side only skips the volume step.',
+      level: 4,
+    },
+    {
+      id: 'den-8',
+      ask: 'A big odum log floats and a small nail sinks. Why?',
+      kind: 'choice',
+      options: [
+        'The log is less dense than water and the nail is more dense',
+        'The nail is heavier than the log',
+        'Wood is always lighter than metal',
+      ],
+      answer: 'The log is less dense than water and the nail is more dense',
+      teach: 'The log weighs far more, so weight cannot be what decides. '
+        + 'What decides is mass for a given amount of space, compared with '
+        + 'the water.',
+      level: 4,
+    },
+    {
+      id: 'den-9',
+      ask: 'A cargo ship is loaded with more and more cocoa until it sinks. '
+        + 'What made it sink?',
+      kind: 'choice',
+      options: [
+        'The steel became denser',
+        'The mass rose until the average density passed that of water',
+        'The air inside became heavier',
+      ],
+      answer: 'The mass rose until the average density passed that of water',
+      teach: 'The steel itself does not change. '
+        + 'The ship floats while its whole mass over its whole volume is '
+        + 'below 1, and each sack adds mass without adding volume.',
       level: 5,
     },
   ],
@@ -1383,6 +1703,91 @@ teach({
       answer: 'It conducts heat away from your hand faster',
       teach: 'You feel the rate at which your hand loses heat, '
         + 'not the temperature of the object.',
+      level: 5,
+    },
+    {
+      id: 'hea-4',
+      ask: 'Which way does heat move by itself?',
+      kind: 'choice',
+      options: [
+        'From the hotter thing to the colder thing',
+        'From the colder thing to the hotter thing',
+        'Always upwards',
+      ],
+      answer: 'From the hotter thing to the colder thing',
+      teach: 'A cold spoon in hot tea warms up while the tea cools. '
+        + 'Heat never flows from cold to hot by itself, and the idea that '
+        + 'heat goes up confuses heat with hot fluid.',
+      level: 2,
+    },
+    {
+      id: 'hea-5',
+      ask: 'The handle of a metal pot on a coal pot gets hot. '
+        + 'Which transfer is this?',
+      kind: 'choice',
+      options: ['Convection', 'Conduction', 'Radiation'],
+      answer: 'Conduction',
+      teach: 'Ask whether the matter moved. '
+        + 'No metal travelled along the handle, so the energy was passed '
+        + 'from particle to particle, which is conduction.',
+      level: 3,
+    },
+    {
+      id: 'hea-6',
+      ask: 'In which can convection NOT happen?',
+      kind: 'choice',
+      options: ['Water', 'Air', 'A solid iron bar'],
+      answer: 'A solid iron bar',
+      teach: 'Convection needs the hot matter itself to move. '
+        + 'The particles of a solid cannot change places, so a solid can '
+        + 'only conduct.',
+      level: 3,
+    },
+    {
+      id: 'hea-7',
+      ask: 'Which surface absorbs the heat of the sun best?',
+      kind: 'choice',
+      options: [
+        'A shiny silver roof',
+        'A dark dull roof',
+        'A white painted roof',
+      ],
+      answer: 'A dark dull roof',
+      teach: 'Dark dull surfaces absorb and give out radiation best. '
+        + 'Shiny and light surfaces reflect it, which is why they stay '
+        + 'cooler.',
+      level: 3,
+    },
+    {
+      id: 'hea-8',
+      ask: 'Why does a thatched roof slow down heat moving through it?',
+      kind: 'choice',
+      options: [
+        'It traps air, and air is a poor conductor',
+        'Grass is a good conductor',
+        'It stops radiation by being shiny',
+      ],
+      answer: 'It traps air, and air is a poor conductor',
+      teach: 'In a gas the particles are far apart and rarely knock each '
+        + 'other, so energy passes slowly. '
+        + 'Blankets and thatch work by holding that air still.',
+      level: 4,
+    },
+    {
+      id: 'hea-9',
+      ask: 'A vacuum flask has an empty space between its two walls. '
+        + 'Which transfers does that empty space stop?',
+      kind: 'choice',
+      options: [
+        'Radiation only',
+        'Conduction and convection',
+        'Conduction, convection and radiation',
+      ],
+      answer: 'Conduction and convection',
+      teach: 'Both conduction and convection need matter, so a vacuum '
+        + 'stops them. '
+        + 'Radiation crosses empty space, which is why the walls are also '
+        + 'silvered to reflect it.',
       level: 5,
     },
   ],
@@ -1693,6 +2098,94 @@ teach({
         + 'which is what near objects need.',
       level: 5,
     },
+    {
+      id: 'lgt-4',
+      ask: 'Why does a shadow have a sharp edge?',
+      kind: 'choice',
+      options: [
+        'Light travels in straight lines',
+        'Light bends round objects',
+        'Shadows are made of dark light',
+      ],
+      answer: 'Light travels in straight lines',
+      teach: 'The blocked light cannot bend round the object to fill the '
+        + 'shadow in. '
+        + 'So the edge marks exactly where straight rays were stopped.',
+      level: 2,
+    },
+    {
+      id: 'lgt-5',
+      ask: 'A ray strikes a mirror at 40 degrees to the normal. '
+        + 'What is the angle of reflection in degrees?',
+      kind: 'numeric',
+      answer: '40',
+      accept: ['40 degrees', '40°', 'forty'],
+      teach: 'The angle of incidence equals the angle of reflection, both '
+        + 'measured from the normal. '
+        + 'So the ray leaves at 40 degrees on the other side.',
+      level: 2,
+    },
+    {
+      id: 'lgt-6',
+      ask: 'Light passes from air into water. Which way does it bend?',
+      kind: 'choice',
+      options: [
+        'Towards the normal',
+        'Away from the normal',
+        'It does not bend',
+      ],
+      answer: 'Towards the normal',
+      teach: 'Light slows down in water, and it bends towards the normal '
+        + 'when it slows. '
+        + 'It bends away from the normal only when it speeds up, coming '
+        + 'out.',
+      level: 3,
+    },
+    {
+      id: 'lgt-7',
+      ask: 'A ray hits a mirror at 30 degrees to the surface. '
+        + 'What is the angle of incidence in degrees?',
+      kind: 'numeric',
+      answer: '60',
+      accept: ['60 degrees', '60°', 'sixty'],
+      teach: 'Giving 30 measures from the surface, the commonest slip. '
+        + 'The normal is at right angles, 90 degrees, to the surface, so '
+        + 'the angle from the normal is 90 take away 30, which is 60.',
+      level: 4,
+    },
+    {
+      id: 'lgt-8',
+      ask: 'A ray enters a glass block straight along the normal. '
+        + 'What happens to its direction?',
+      kind: 'choice',
+      options: [
+        'It bends towards the normal',
+        'It bends away from the normal',
+        'It does not change direction',
+      ],
+      answer: 'It does not change direction',
+      teach: 'The light still slows down, but both edges of the beam '
+        + 'reach the glass at the same moment. '
+        + 'So neither edge slows first and the beam does not swing round.',
+      level: 4,
+    },
+    {
+      id: 'lgt-9',
+      ask: 'Fuseini stops reading a book and looks at a tree far away. '
+        + 'What does the lens of his eye do?',
+      kind: 'choice',
+      options: [
+        'It becomes thinner, so it bends the light less',
+        'It becomes fatter, so it bends the light more',
+        'It moves further back in the eye',
+      ],
+      answer: 'It becomes thinner, so it bends the light less',
+      teach: 'Light from a far object arrives almost parallel and needs '
+        + 'little bending. '
+        + 'The eye changes the shape of its lens, not its position, and '
+        + 'fatter is for near things.',
+      level: 5,
+    },
   ],
 })
 
@@ -1965,6 +2458,88 @@ teach({
       answer: 'There are no particles to carry the vibration',
       teach: 'Sound is a push handed on, so it needs something to hand it '
         + 'to.',
+      level: 5,
+    },
+    {
+      id: 'snd-4',
+      ask: 'What decides how loud a sound is?',
+      kind: 'choice',
+      options: ['Its frequency', 'Its amplitude', 'Its speed'],
+      answer: 'Its amplitude',
+      teach: 'Frequency is how often the shakes come and it decides pitch. '
+        + 'Amplitude is how big each shake is, and that decides loudness.',
+      level: 2,
+    },
+    {
+      id: 'snd-5',
+      ask: 'In what unit is frequency measured?',
+      kind: 'choice',
+      options: ['Decibels', 'Hertz', 'Metres'],
+      answer: 'Hertz',
+      teach: 'Frequency counts the shakes in one second, in hertz, Hz. '
+        + 'Decibels measure loudness, which is a different property.',
+      level: 2,
+    },
+    {
+      id: 'snd-6',
+      ask: 'Kwame hits a drum harder. What changes?',
+      kind: 'choice',
+      options: [
+        'It gets louder and the pitch stays the same',
+        'It gets higher and louder',
+        'It gets higher and the loudness stays the same',
+      ],
+      answer: 'It gets louder and the pitch stays the same',
+      teach: 'Hitting harder makes the skin swing further, a bigger '
+        + 'amplitude. '
+        + 'It still shakes the same number of times a second, so the pitch '
+        + 'does not change.',
+      level: 3,
+    },
+    {
+      id: 'snd-7',
+      ask: 'What is an echo?',
+      kind: 'choice',
+      options: [
+        'Sound reflected from a surface',
+        'Sound that has gained a higher pitch',
+        'Sound passing through a vacuum',
+      ],
+      answer: 'Sound reflected from a surface',
+      teach: 'An echo is the same sound bounced back off a wall or cliff. '
+        + 'It arrives later because it had further to travel.',
+      level: 3,
+    },
+    {
+      id: 'snd-8',
+      ask: 'A guitar string is shortened and plucked just as gently as '
+        + 'before. What do you hear?',
+      kind: 'choice',
+      options: [
+        'A louder note at the same pitch',
+        'A higher note at the same loudness',
+        'A lower note at the same loudness',
+      ],
+      answer: 'A higher note at the same loudness',
+      teach: 'A shorter string vibrates more times a second, so the '
+        + 'frequency and the pitch rise. '
+        + 'The pluck was just as gentle, so the amplitude and loudness are '
+        + 'unchanged.',
+      level: 4,
+    },
+    {
+      id: 'snd-9',
+      ask: 'A machine gives out a sound of 30 000 hertz. Why can people '
+        + 'not hear it?',
+      kind: 'choice',
+      options: [
+        'It is ultrasound, above what human ears can hear',
+        'Its amplitude is too large',
+        'Sound of that frequency cannot travel through air',
+      ],
+      answer: 'It is ultrasound, above what human ears can hear',
+      teach: 'People cannot hear frequencies above about 20 000 hertz. '
+        + 'The problem is how often it shakes, not how big the shakes are.',
       level: 5,
     },
   ],

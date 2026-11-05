@@ -305,6 +305,90 @@ teach({
       teach: 'The ovules inside it become the seeds.',
       level: 5,
     },
+    {
+      id: 'rep-4',
+      ask: 'Which part of a flower makes pollen?',
+      kind: 'choice',
+      options: ['The stigma', 'The anther', 'The ovary'],
+      answer: 'The anther',
+      teach: 'Pollen is male, so it comes from the stamen, and the anther '
+        + 'is the top of the stamen. '
+        + 'The stigma only receives pollen; it does not make any.',
+      level: 2,
+    },
+    {
+      id: 'rep-5',
+      ask: 'Which parts together make up the carpel, the female part of a '
+        + 'flower?',
+      kind: 'choice',
+      options: [
+        'Stigma, style and ovary',
+        'Anther and filament',
+        'Petals and sepals',
+        'Stigma and anther',
+      ],
+      answer: 'Stigma, style and ovary',
+      teach: 'The anther and filament make the stamen, which is male. '
+        + 'The carpel is the stigma on a style, leading down to the ovary '
+        + 'with its ovules.',
+      level: 3,
+    },
+    {
+      id: 'rep-6',
+      ask: 'Pollen from one pawpaw plant is carried to the stigma of a '
+        + 'different pawpaw plant. What is this called?',
+      kind: 'choice',
+      options: [
+        'Self pollination',
+        'Cross pollination',
+        'Fertilisation',
+      ],
+      answer: 'Cross pollination',
+      teach: 'Self pollination stays within one flower or one plant. '
+        + 'Between two plants of the same kind it is cross pollination, and '
+        + 'it is still only transport, not fertilisation.',
+      level: 3,
+    },
+    {
+      id: 'rep-7',
+      ask: 'What happens after pollen lands on the stigma, so that '
+        + 'fertilisation can take place?',
+      kind: 'choice',
+      options: [
+        'The pollen grows a tube down the style to an ovule',
+        'The stigma becomes the seed at once',
+        'The petals carry the pollen to the ovary',
+      ],
+      answer: 'The pollen grows a tube down the style to an ovule',
+      teach: 'Landing on the stigma is pollination only. '
+        + 'A tube must grow down the style so a male nucleus can reach the '
+        + 'egg inside the ovule and join it.',
+      level: 4,
+    },
+    {
+      id: 'rep-8',
+      ask: 'A flower has large feathery stigmas hanging outside it and '
+        + 'makes huge amounts of light, dry pollen. How is it pollinated?',
+      kind: 'choice',
+      options: ['By insects', 'By wind', 'By water'],
+      answer: 'By wind',
+      teach: 'Decide the carrier first. '
+        + 'Wind has poor aim, so the flower throws out masses of light '
+        + 'pollen and spreads a big net to catch it, and needs no petals or '
+        + 'nectar.',
+      level: 4,
+    },
+    {
+      id: 'rep-9',
+      ask: 'After fertilisation, what does an ovule become?',
+      kind: 'choice',
+      options: ['The fruit', 'The seed', 'The pollen tube'],
+      answer: 'The seed',
+      teach: 'The ovule is inside the ovary. '
+        + 'The ovule becomes the seed and the ovary around it becomes the '
+        + 'fruit, so the fruit holds the seeds.',
+      level: 5,
+    },
   ],
 })
 
@@ -596,6 +680,98 @@ teach({
       answer: 'The thickened lining of the uterus',
       teach: 'It was prepared in case of a pregnancy, '
         + 'and is cleared when there is none.',
+      level: 5,
+    },
+    {
+      id: 'rph-4',
+      ask: 'Where are sperm made?',
+      kind: 'choice',
+      options: ['In the urethra', 'In the testes', 'In the sperm duct'],
+      answer: 'In the testes',
+      teach: 'The testes make sperm. '
+        + 'The sperm duct and urethra only carry it out of the body.',
+      level: 2,
+    },
+    {
+      id: 'rph-5',
+      ask: 'What is ovulation?',
+      kind: 'choice',
+      options: [
+        'An ovary releasing an egg',
+        'The lining of the uterus being shed',
+        'A sperm joining an egg',
+      ],
+      answer: 'An ovary releasing an egg',
+      teach: 'Ovulation is the release of the egg, at about the middle of '
+        + 'the cycle. '
+        + 'The shedding of the lining is the period, and the joining of '
+        + 'sperm and egg is fertilisation.',
+      level: 3,
+    },
+    {
+      id: 'rph-6',
+      ask: 'Which of these changes of puberty happens in BOTH boys and '
+        + 'girls?',
+      kind: 'choice',
+      options: [
+        'The voice deepens',
+        'Menstruation begins',
+        'A growth spurt',
+      ],
+      answer: 'A growth spurt',
+      teach: 'The voice deepening is a change in boys and menstruation is a '
+        + 'change in girls. '
+        + 'A growth spurt, and changes in skin and mood, happen in both.',
+      level: 3,
+    },
+    {
+      id: 'rph-7',
+      ask: 'What drives the changes of puberty?',
+      kind: 'choice',
+      options: [
+        'Hormones carried in the blood',
+        'Eating more food',
+        'The oviduct',
+      ],
+      answer: 'Hormones carried in the blood',
+      teach: 'Hormones are chemical messengers made inside the body and '
+        + 'carried in the blood. '
+        + 'They are what make the reproductive systems mature.',
+      level: 3,
+    },
+    {
+      id: 'rph-8',
+      ask: 'Put these in the order they happen when a pregnancy begins.',
+      kind: 'choice',
+      options: [
+        'Egg released, sperm meets egg in the oviduct, egg implants in the '
+          + 'uterus lining',
+        'Sperm meets egg in the uterus, egg released, egg implants',
+        'Egg implants in the uterus lining, egg released, sperm meets egg',
+      ],
+      answer: 'Egg released, sperm meets egg in the oviduct, egg implants '
+        + 'in the uterus lining',
+      teach: 'The egg must be released before a sperm can meet it, and '
+        + 'they meet in the oviduct, not the uterus. '
+        + 'Only the fertilised egg travels on to implant.',
+      level: 4,
+    },
+    {
+      id: 'rph-9',
+      ask: 'Adwoa is fourteen. Her cycle was 26 days last month and 31 '
+        + 'days this month. What does the lesson say about this?',
+      kind: 'choice',
+      options: [
+        'It is a sign of illness, because a cycle must be 28 days',
+        'Cycles vary between people and months, especially in the first '
+          + 'years',
+        'It means she has stopped ovulating',
+      ],
+      answer: 'Cycles vary between people and months, especially in the '
+        + 'first years',
+      teach: '28 days is an average, not a rule. '
+        + 'The cycle varies between people and between months, most of all '
+        + 'in the first years after puberty.',
       level: 5,
     },
   ],
@@ -890,6 +1066,93 @@ teach({
         + 'and it runs inside walls.',
       level: 5,
     },
+    {
+      id: 'dig-4',
+      ask: 'Which enzyme breaks down starch?',
+      kind: 'choice',
+      options: ['Lipase', 'Protease', 'Amylase'],
+      answer: 'Amylase',
+      teach: 'Pair each enzyme with its food: amylase with starch, protease '
+        + 'with protein, lipase with fat. '
+        + 'Amylase turns starch into sugar.',
+      level: 2,
+    },
+    {
+      id: 'dig-5',
+      ask: 'What does lipase break fat down into?',
+      kind: 'choice',
+      options: [
+        'Fatty acids and glycerol',
+        'Amino acids',
+        'Sugar',
+      ],
+      answer: 'Fatty acids and glycerol',
+      teach: 'Amino acids come from protein and sugar from starch. '
+        + 'Fat broken by lipase gives fatty acids and glycerol.',
+      level: 3,
+    },
+    {
+      id: 'dig-6',
+      ask: 'Which is the correct order that food passes through?',
+      kind: 'choice',
+      options: [
+        'Mouth, oesophagus, stomach, small intestine, large intestine',
+        'Mouth, stomach, oesophagus, large intestine, small intestine',
+        'Mouth, oesophagus, small intestine, stomach, large intestine',
+      ],
+      answer: 'Mouth, oesophagus, stomach, small intestine, large intestine',
+      teach: 'The oesophagus is the tube from the mouth to the stomach. '
+        + 'After the stomach comes the small intestine, where food is '
+        + 'absorbed, and the large intestine is last.',
+      level: 3,
+    },
+    {
+      id: 'dig-7',
+      ask: 'What is the main job of the large intestine?',
+      kind: 'choice',
+      options: [
+        'To take water back into the body',
+        'To absorb digested food',
+        'To make bile',
+      ],
+      answer: 'To take water back into the body',
+      teach: 'Digested food is absorbed in the small intestine. '
+        + 'By the large intestine, water is taken back and what remains '
+        + 'leaves as faeces.',
+      level: 3,
+    },
+    {
+      id: 'dig-8',
+      ask: 'What does bile do to fat?',
+      kind: 'choice',
+      options: [
+        'It digests fat into fatty acids',
+        'It breaks fat into small droplets',
+        'It turns fat into sugar',
+      ],
+      answer: 'It breaks fat into small droplets',
+      teach: 'Bile does not digest anything; lipase does. '
+        + 'Bile, made by the liver, breaks fat into droplets, giving lipase '
+        + 'a larger surface to work on.',
+      level: 4,
+    },
+    {
+      id: 'dig-9',
+      ask: 'Why is the inside of the small intestine covered in millions '
+        + 'of villi?',
+      kind: 'choice',
+      options: [
+        'To push food along faster',
+        'To make more enzymes',
+        'To increase the surface area for absorption',
+      ],
+      answer: 'To increase the surface area for absorption',
+      teach: 'Crossing a wall takes time, so more wall means more gets '
+        + 'across. '
+        + 'Pushing food is the work of peristalsis in the oesophagus, not '
+        + 'of villi.',
+      level: 5,
+    },
   ],
 })
 
@@ -1176,6 +1439,100 @@ teach({
         + 'and strong enough for the feet.',
       level: 5,
     },
+    {
+      id: 'crc-4',
+      ask: 'Which vessels carry blood back towards the heart?',
+      kind: 'choice',
+      options: ['Arteries', 'Veins', 'Capillaries'],
+      answer: 'Veins',
+      teach: 'Arteries carry blood away, and both words begin with A. '
+        + 'Veins bring it back to the heart.',
+      level: 2,
+    },
+    {
+      id: 'crc-5',
+      ask: 'Blood returning from the body first enters which chamber of '
+        + 'the heart?',
+      kind: 'choice',
+      options: [
+        'The right atrium',
+        'The left atrium',
+        'The left ventricle',
+      ],
+      answer: 'The right atrium',
+      teach: 'Atria receive and ventricles pump out. '
+        + 'The right side deals with the lungs journey, so blood from the '
+        + 'body arrives in the right atrium. The left atrium receives from '
+        + 'the lungs.',
+      level: 3,
+    },
+    {
+      id: 'crc-6',
+      ask: 'What does blood carry to the cells, and what does it carry '
+        + 'away?',
+      kind: 'choice',
+      options: [
+        'It carries oxygen and glucose to them, and carbon dioxide and '
+          + 'waste away',
+        'It carries carbon dioxide to them, and oxygen away',
+        'It carries waste to them, and glucose away',
+      ],
+      answer: 'It carries oxygen and glucose to them, and carbon dioxide '
+        + 'and waste away',
+      teach: 'Cells need fuel and oxygen, so those arrive. '
+        + 'What the cells make and do not want, carbon dioxide and waste, '
+        + 'is taken away.',
+      level: 3,
+    },
+    {
+      id: 'crc-7',
+      ask: 'Why do veins have valves?',
+      kind: 'choice',
+      options: [
+        'The pressure is low, so blood could flow backwards',
+        'The pressure is so high it must be slowed',
+        'To let oxygen pass through the wall',
+      ],
+      answer: 'The pressure is low, so blood could flow backwards',
+      teach: 'Veins are far from the pump, where the pressure has fallen. '
+        + 'Valves stop the blood sliding back. '
+        + 'Arteries meet high pressure and need no valves.',
+      level: 4,
+    },
+    {
+      id: 'crc-8',
+      ask: 'Which is the correct path of blood starting from the right '
+        + 'ventricle?',
+      kind: 'choice',
+      options: [
+        'Right ventricle, lungs, left atrium, left ventricle, body',
+        'Right ventricle, body, left atrium, left ventricle, lungs',
+        'Right ventricle, left ventricle, lungs, body',
+      ],
+      answer: 'Right ventricle, lungs, left atrium, left ventricle, body',
+      teach: 'The right side sends blood on the short trip to the lungs. '
+        + 'It comes back to the left atrium, and the strong left ventricle '
+        + 'sends it round the body. So it passes through the heart twice.',
+      level: 4,
+    },
+    {
+      id: 'crc-9',
+      ask: 'Which chamber of the heart has the thickest muscle wall, and '
+        + 'why?',
+      kind: 'choice',
+      options: [
+        'The right ventricle, because the lungs need high pressure',
+        'The left ventricle, because it pumps blood round the whole body',
+        'The left atrium, because it receives blood from the lungs',
+      ],
+      answer: 'The left ventricle, because it pumps blood round the whole '
+        + 'body',
+      teach: 'The lungs are close and delicate, so the right side pumps '
+        + 'gently. '
+        + 'The left ventricle must push blood as far as the feet, so it '
+        + 'needs the most muscle.',
+      level: 5,
+    },
   ],
 })
 
@@ -1458,6 +1815,80 @@ teach({
       ],
       answer: 'Diffusion is fast only over a short distance',
       teach: 'Thinness is the function, not a weakness.',
+      level: 5,
+    },
+    {
+      id: 'rsp-4',
+      ask: 'Which gas passes from the alveoli into the blood?',
+      kind: 'choice',
+      options: ['Carbon dioxide', 'Oxygen', 'Nitrogen'],
+      answer: 'Oxygen',
+      teach: 'Oxygen goes into the blood and carbon dioxide comes out of '
+        + 'it, both by diffusion.',
+      level: 2,
+    },
+    {
+      id: 'rsp-5',
+      ask: 'Which is the correct path air takes into the lungs?',
+      kind: 'choice',
+      options: [
+        'Nose, trachea, bronchi, bronchioles, alveoli',
+        'Nose, bronchi, trachea, alveoli, bronchioles',
+        'Nose, alveoli, bronchioles, bronchi, trachea',
+      ],
+      answer: 'Nose, trachea, bronchi, bronchioles, alveoli',
+      teach: 'The airways get smaller as they go. '
+        + 'The trachea divides into two bronchi, those divide into '
+        + 'bronchioles, and they end in the tiny air sacs, the alveoli.',
+      level: 3,
+    },
+    {
+      id: 'rsp-6',
+      ask: 'When you breathe in, what happens to the volume and the '
+        + 'pressure inside the chest?',
+      kind: 'choice',
+      options: [
+        'Volume goes up and pressure goes down',
+        'Volume goes down and pressure goes up',
+        'Both go up',
+      ],
+      answer: 'Volume goes up and pressure goes down',
+      teach: 'The diaphragm flattens and the ribs rise, so the chest gets '
+        + 'bigger. '
+        + 'More space means lower pressure, and air flows in from outside.',
+      level: 3,
+    },
+    {
+      id: 'rsp-7',
+      ask: 'What does respiration in a cell produce?',
+      kind: 'choice',
+      options: [
+        'Energy, carbon dioxide and water',
+        'Glucose and oxygen',
+        'Moving air',
+      ],
+      answer: 'Energy, carbon dioxide and water',
+      teach: 'Glucose and oxygen go into respiration; they are not made by '
+        + 'it. '
+        + 'Moving air is breathing, which is a different thing.',
+      level: 4,
+    },
+    {
+      id: 'rsp-8',
+      ask: 'Mensah says, "Respiration happens in the lungs when we breathe '
+        + 'in." What is wrong with this?',
+      kind: 'choice',
+      options: [
+        'Nothing; respiration and breathing are the same',
+        'Respiration is a chemical reaction in every cell; breathing only '
+          + 'moves air',
+        'Respiration happens only in the blood',
+      ],
+      answer: 'Respiration is a chemical reaction in every cell; breathing '
+        + 'only moves air',
+      teach: 'Breathing is mechanical and happens in the chest. '
+        + 'Respiration releases energy from glucose inside every cell, even '
+        + 'in your toes, and breathing exists to supply it.',
       level: 5,
     },
   ],
@@ -1783,6 +2214,103 @@ teach({
         + 'so chlorophyll is the only variable.',
       level: 5,
     },
+    {
+      id: 'pho-4',
+      ask: 'What are the raw materials of photosynthesis?',
+      kind: 'choice',
+      options: [
+        'Glucose and oxygen',
+        'Carbon dioxide and water',
+        'Light and chlorophyll',
+      ],
+      answer: 'Carbon dioxide and water',
+      teach: 'Glucose and oxygen are what is made. '
+        + 'Light and chlorophyll are needed but are not used up, so they '
+        + 'are written above the arrow, not as raw materials.',
+      level: 2,
+    },
+    {
+      id: 'pho-5',
+      ask: 'Through what does carbon dioxide enter a leaf?',
+      kind: 'choice',
+      options: ['The roots', 'The stomata', 'The chlorophyll'],
+      answer: 'The stomata',
+      teach: 'Water comes up from the roots, but carbon dioxide is a gas '
+        + 'from the air. '
+        + 'It enters through small holes in the leaf called stomata.',
+      level: 3,
+    },
+    {
+      id: 'pho-6',
+      ask: 'A leaf is tested with iodine and turns blue black. What does '
+        + 'that show?',
+      kind: 'choice',
+      options: [
+        'Starch is present',
+        'Oxygen is present',
+        'The leaf has no chlorophyll',
+      ],
+      answer: 'Starch is present',
+      teach: 'Iodine is the test for starch, and blue black means starch '
+        + 'is there. '
+        + 'Glucose made in photosynthesis is stored as starch, so starch is '
+        + 'the sign that the leaf made food.',
+      level: 3,
+    },
+    {
+      id: 'pho-7',
+      ask: 'Before a starch experiment, a plant is left in the dark for two '
+        + 'days. Why?',
+      kind: 'choice',
+      options: [
+        'To use up the starch already in its leaves',
+        'To make more chlorophyll',
+        'To let it absorb more water',
+      ],
+      answer: 'To use up the starch already in its leaves',
+      teach: 'Starch stored from before would turn iodine blue black '
+        + 'whatever the experiment did. '
+        + 'Destarching in the dark removes it, so any starch found later '
+        + 'was made during the test.',
+      level: 4,
+    },
+    {
+      id: 'pho-8',
+      ask: 'Yaw wants to show that carbon dioxide is needed. What should he '
+        + 'do to one plant?',
+      kind: 'choice',
+      options: [
+        'Seal it in a bag with soda lime, beside an identical plant sealed '
+          + 'without it',
+        'Put it in the dark and stop watering it',
+        'Remove all the air from its pot',
+      ],
+      answer: 'Seal it in a bag with soda lime, beside an identical plant '
+        + 'sealed without it',
+      teach: 'Soda lime takes out carbon dioxide and leaves the rest of the '
+        + 'air alone, so only one thing changes. '
+        + 'Darkness and no water together are two changes, so no conclusion '
+        + 'could be drawn.',
+      level: 5,
+    },
+    {
+      id: 'pho-9',
+      ask: 'Akosua puts one plant in the dark and one in the light, but she '
+        + 'also waters only the plant in the light. Why can she not '
+        + 'conclude that light is needed?',
+      kind: 'choice',
+      options: [
+        'She changed two things, so either could have caused the result',
+        'She did not use enough plants',
+        'Plants in the dark always die',
+      ],
+      answer: 'She changed two things, so either could have caused the '
+        + 'result',
+      teach: 'A fair test changes one thing only. '
+        + 'With light and water both different, the lack of starch could '
+        + 'come from either, so the test proves nothing.',
+      level: 5,
+    },
   ],
 })
 
@@ -2098,6 +2626,90 @@ teach({
       teach: 'A net blocks mosquitoes. '
         + 'Boiling blocks water. '
         + 'Neither blocks the other.',
+      level: 5,
+    },
+    {
+      id: 'dis-4',
+      ask: 'Which of these is non-communicable?',
+      kind: 'choice',
+      options: ['Cholera', 'Diabetes', 'Malaria'],
+      answer: 'Diabetes',
+      teach: 'Cholera and malaria are caused by organisms that travel '
+        + 'from person to person. '
+        + 'Diabetes cannot be caught from anybody.',
+      level: 2,
+    },
+    {
+      id: 'dis-5',
+      ask: 'How does cholera travel from one person to another?',
+      kind: 'choice',
+      options: [
+        'In water or food with faeces in it',
+        'Inside a mosquito',
+        'In droplets breathed out',
+      ],
+      answer: 'In water or food with faeces in it',
+      teach: 'The mosquito is the route for malaria and droplets are the '
+        + 'route for tuberculosis. '
+        + 'Cholera travels in water or food made dirty by faeces.',
+      level: 3,
+    },
+    {
+      id: 'dis-6',
+      ask: 'Which measure helps prevent tuberculosis?',
+      kind: 'choice',
+      options: [
+        'Sleeping under a treated net',
+        'Covering a cough and keeping rooms airy',
+        'Boiling the drinking water',
+      ],
+      answer: 'Covering a cough and keeping rooms airy',
+      teach: 'Tuberculosis travels in droplets breathed out, so the block '
+        + 'must stop droplets. '
+        + 'A net blocks mosquitoes and boiling blocks water, and neither is '
+        + 'its route.',
+      level: 3,
+    },
+    {
+      id: 'dis-7',
+      ask: 'Why does clearing standing water near a house help against '
+        + 'malaria?',
+      kind: 'choice',
+      options: [
+        'Mosquitoes breed in standing water',
+        'The malaria parasite lives in drinking water',
+        'It makes the air cleaner',
+      ],
+      answer: 'Mosquitoes breed in standing water',
+      teach: 'Malaria is not carried by drinking water. '
+        + 'The route is the mosquito, and removing the water where it '
+        + 'breeds means fewer mosquitoes.',
+      level: 4,
+    },
+    {
+      id: 'dis-8',
+      ask: 'Smoking raises the chance of cancer, but some smokers never get '
+        + 'it. So what is the right word for smoking?',
+      kind: 'choice',
+      options: ['A cause', 'A risk factor', 'A route'],
+      answer: 'A risk factor',
+      teach: 'A cause would give everybody the disease. '
+        + 'Smoking changes the chance, so it is a risk factor, and a route '
+        + 'belongs only to a communicable disease.',
+      level: 4,
+    },
+    {
+      id: 'dis-9',
+      ask: 'Sickle cell disease is inherited. What can be done about it?',
+      kind: 'choice',
+      options: [
+        'Prevent it with a mosquito net',
+        'Manage it, since the inheritance cannot be changed',
+        'Prevent it by boiling water',
+      ],
+      answer: 'Manage it, since the inheritance cannot be changed',
+      teach: 'An inherited condition has no route to block. '
+        + 'The risk cannot be changed, so management replaces prevention.',
       level: 5,
     },
   ],
@@ -2465,6 +3077,95 @@ teach({
       answer: 'By the time an animal is treated it has already lost '
         + 'production',
       teach: 'Some of that growth, milk or weight is never recovered.',
+      level: 5,
+    },
+    {
+      id: 'agr-4',
+      ask: 'Which operation comes first in growing a crop?',
+      kind: 'choice',
+      options: ['Weeding', 'Harvesting', 'Land preparation'],
+      answer: 'Land preparation',
+      teach: 'Each operation is only possible after the one before it. '
+        + 'The land is prepared before sowing, and weeding and harvesting '
+        + 'come later.',
+      level: 2,
+    },
+    {
+      id: 'agr-5',
+      ask: 'What is the difference between a pest and a disease of a '
+        + 'crop?',
+      kind: 'choice',
+      options: [
+        'A pest eats the crop; a disease makes it sick',
+        'They are the same thing',
+        'A pest makes the crop sick; a disease eats it',
+      ],
+      answer: 'A pest eats the crop; a disease makes it sick',
+      teach: 'The two words are not interchangeable. '
+        + 'A pest, such as an insect, eats the crop, while a disease makes '
+        + 'the plant sick.',
+      level: 3,
+    },
+    {
+      id: 'agr-6',
+      ask: 'Why is weeding early better than weeding when the weeds are '
+        + 'knee high?',
+      kind: 'choice',
+      options: [
+        'Young weeds have taken almost nothing yet',
+        'Tall weeds are easier to see',
+        'Weeds only compete when they flower',
+      ],
+      answer: 'Young weeds have taken almost nothing yet',
+      teach: 'A weed takes light, water and nutrients all the time it '
+        + 'grows. '
+        + 'Pulled early, it has taken little; left until it is tall, it has '
+        + 'already taken what the crop will not get back.',
+      level: 3,
+    },
+    {
+      id: 'agr-7',
+      ask: 'Kofi plants his maize much too far apart. What is the problem?',
+      kind: 'choice',
+      options: [
+        'The plants compete with each other',
+        'He wastes land and leaves room for weeds',
+        'The maize grows too tall',
+      ],
+      answer: 'He wastes land and leaves room for weeds',
+      teach: 'Spacing matters both ways. '
+        + 'Too close and the plants compete with each other; too far and '
+        + 'the land between them is wasted and weeds fill it.',
+      level: 4,
+    },
+    {
+      id: 'agr-8',
+      ask: 'Why should a poultry farmer keep written records?',
+      kind: 'choice',
+      options: [
+        'To notice a problem in week one instead of week four',
+        'Because records make the birds grow faster',
+        'Records are only needed when selling',
+      ],
+      answer: 'To notice a problem in week one instead of week four',
+      teach: 'A drop in feeding or laying is easy to miss without numbers '
+        + 'to compare. '
+        + 'Records show it early, before much is lost.',
+      level: 4,
+    },
+    {
+      id: 'agr-9',
+      ask: 'Why does crop rotation reduce pests?',
+      kind: 'choice',
+      options: [
+        'The pest of one crop finds nothing to eat the next year',
+        'Rotation adds fertiliser to the soil',
+        'Pests cannot live in rotated soil',
+      ],
+      answer: 'The pest of one crop finds nothing to eat the next year',
+      teach: 'Different crops suffer from different pests. '
+        + 'Change the crop and the pest that built up last year has no food, '
+        + 'and its numbers fall.',
       level: 5,
     },
   ],
